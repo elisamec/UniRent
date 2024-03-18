@@ -1,0 +1,44 @@
+App: UniRent
+
+Gruppo: Nadia Muzyka, Elisabetta Mecozzi, Matteo Maloni
+
+
+Descrizione sintetica:
+L’applicazione UniRent si propone di semplificare la ricerca di un alloggio e coinquilini per studenti fuorisede. Inoltre, si rivolge a proprietari che intendono affittare soltanto a studenti. Di fatto replica alcune funzionalità di note applicazioni come Booking o subito.it.  
+
+
+Tipologie di utenti:
+	Amministratore
+	Proprietario
+	Utente non registrato
+	Utente registrato (studente)
+
+
+Obiettivi degli utenti:
+
+Utente non registrato:
+Ha la possibilità di visualizzare commenti, valutazioni e offerte di alloggi; Ha la possibilità di registrarsi.
+Può effettuare le ricerche dell’appartamento in base al luogo (città, zona e distanza dal polo universitario) e periodo.
+
+Utente registrato (studente):
+Deve effettuare la registrazione con il ruolo di “studente” (opportunamente validato dall’amministratore).
+Tutte le funzionalità offerte all’utente non registrato.
+Può richiedere la visita dell’appartamento al proprietario contattandolo.
+Può proporsi come inquilino.
+Oltre alle funzionalità di ricerca dell’utente non registrato, ha la possibilità di filtrare in base a valutazioni date a: appartamento, proprietario e coinquilini.
+Può lasciare recensioni (voto e commenti), dopo o durante il soggiorno a: appartamento, proprietario e coinquilini.
+Eliminare il proprio account.
+
+Proprietario:
+Deve effettuare la registrazione con il ruolo di “proprietario”.
+Può inserire l’annuncio di affitto specificando caratteristiche riguardanti gli studenti.
+Può visualizzare i messaggi degli studenti e rispondere.
+Può accettare prenotazioni degli studenti ed eliminare precedenti inquilini.
+Può visualizzare i profili degli studenti con le relative valutazioni.
+Ha la possibilità di lasciare una valutazione allo studente dopo o durante un soggiorno. 
+Eliminare il proprio account.
+
+Amministratore:
+Validare l’account dello studente.
+Svolge il ruolo di moderatore (può cancellare commenti ritenuti non appropriati recapitando un avviso agli utenti). 
+Può sospendere e successivamente bandire utenti (studenti e proprietari) sulla base di regole prefissate.
