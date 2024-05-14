@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 14, 2024 alle 13:22
+-- Creato il: Mag 14, 2024 alle 15:45
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -41,7 +41,8 @@ CREATE TABLE `accomodation` (
   `man` tinyint(1) NOT NULL,
   `woman` tinyint(1) NOT NULL,
   `pets` tinyint(1) NOT NULL,
-  `smokers` tinyint(1) NOT NULL
+  `smokers` tinyint(1) NOT NULL,
+  `owner` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -154,7 +155,8 @@ ALTER TABLE `accomodation`
   ADD PRIMARY KEY (`id`),
   ADD KEY `photo` (`photo`),
   ADD KEY `address` (`address`),
-  ADD KEY `visitAvaiability` (`visitAvaiability`);
+  ADD KEY `visitAvaiability` (`visitAvaiability`),
+  ADD KEY `owner` (`owner`);
 
 --
 -- Indici per le tabelle `address`
@@ -271,7 +273,8 @@ ALTER TABLE `time`
 ALTER TABLE `accomodation`
   ADD CONSTRAINT `accomodation_ibfk_1` FOREIGN KEY (`photo`) REFERENCES `photo` (`id`),
   ADD CONSTRAINT `accomodation_ibfk_2` FOREIGN KEY (`address`) REFERENCES `address` (`id`),
-  ADD CONSTRAINT `accomodation_ibfk_3` FOREIGN KEY (`visitAvaiability`) REFERENCES `day` (`id`);
+  ADD CONSTRAINT `accomodation_ibfk_3` FOREIGN KEY (`visitAvaiability`) REFERENCES `day` (`id`),
+  ADD CONSTRAINT `accomodation_ibfk_4` FOREIGN KEY (`owner`) REFERENCES `owner` (`id`);
 
 --
 -- Limiti per la tabella `day`
