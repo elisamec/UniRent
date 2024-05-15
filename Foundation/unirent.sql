@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 14, 2024 alle 15:45
+-- Creato il: Mag 15, 2024 alle 17:49
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -130,7 +130,9 @@ CREATE TABLE `student` (
   `courseDuration` int(1) NOT NULL,
   `immatricolationYear` int(4) NOT NULL,
   `birthDate` date NOT NULL,
-  `sex` varchar(1) NOT NULL
+  `sex` varchar(1) NOT NULL,
+  `smoker` tinyint(1) NOT NULL,
+  `animals` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
