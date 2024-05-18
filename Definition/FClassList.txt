@@ -1,0 +1,10 @@
+- connect
+- PersistentManager
+- FUser
+  -- FAdmin
+  -- FStudent
+  -- FOwner
+- FReview
+- FAccomodation
+- FReservation
+- FVisit
