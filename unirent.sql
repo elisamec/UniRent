@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 21, 2024 at 02:51 PM
+-- Generation Time: May 21, 2024 at 04:14 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -284,6 +284,7 @@ CREATE TABLE `visit` (
 -- Indexes for table `accommodationreview`
 --
 ALTER TABLE `accommodationreview`
+  ADD PRIMARY KEY (`idReview`),
   ADD KEY `idAccommodation` (`idAccommodation`),
   ADD KEY `idAuthor` (`idAuthor`),
   ADD KEY `idReview` (`idReview`);
@@ -349,6 +350,7 @@ ALTER TABLE `owner`
 -- Indexes for table `ownerreview`
 --
 ALTER TABLE `ownerreview`
+  ADD PRIMARY KEY (`idReview`),
   ADD KEY `idAuthor` (`idAuthor`),
   ADD KEY `idOwner` (`idOwner`),
   ADD KEY `idReview` (`idReview`);
@@ -387,6 +389,7 @@ ALTER TABLE `student`
 -- Indexes for table `studentreview`
 --
 ALTER TABLE `studentreview`
+  ADD PRIMARY KEY (`idReview`),
   ADD KEY `idStudent` (`idStudent`),
   ADD KEY `idReview` (`idReview`),
   ADD KEY `authorStudent` (`authorStudent`),
