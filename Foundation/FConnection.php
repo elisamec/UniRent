@@ -1,28 +1,44 @@
 <?php
 
-
-
 /**
  * The class FConnection provide to connect to database.
  * @author Matteo Maloni ('UniRent')
  * @package Foundation
  */
 
+/**
+ * FConnection
+ */
 class FConnection
 {
-	/** connection */
+
+	/**
+	 * db
+	 *
+	 * @var mixed
+	 */
 	private $db;
+	private static $hostname ="localhost";
+    private static $username ="root";
+    private static $password ="pippo";
+    private static $dbname = "unirent";
 
 	private static $ClassItSelf=null;
-    
-    /**constuctor */
+    	
+	/**
+	 * __construct
+	 *
+	 * @return void
+	 */
 	private function __construct()
 	{
-		require '..\config.php';
-
+		$h=self::$hostname;
+        $d=self::$dbname;
+		$un=self::$username;
+		$pw=self::$password;
 		try
 		{
-            $this->db = new PDO ("mysql:host=$hostname;dbname=$dbname", $username, $password);
+            $this->db = new PDO ("mysql:host=$h;dbname=$d", $un, $pw);
         }
         catch ( PDOException $e) 
         {
@@ -31,10 +47,13 @@ class FConnection
         } 
 	}
 
-     /**
-    * This method provide to get the instance
-    */
-	public static function getInstance()
+	
+	/**
+	 * getInstance
+	 *
+	 * @return self
+	 */
+	public static function getInstance():self
 	{
 		if(self::$ClassItSelf==null)
 		{
@@ -44,16 +63,17 @@ class FConnection
 	}
     
     /**
-    * This method provide to get the database connection
-    */
-	public function getConnection()
+     * This method provide to get the database connection
+	 * getConnection
+	 *
+	 * @return PDO
+	 */
+	public function getConnection():PDO
 	{
 		return $this->db;
 	}
  
-     /**
-    * This method provide to close the connection to database
-    */
+
 	public static function close()
 	{
 		self::$db=null;
@@ -66,8 +86,11 @@ class FConnection
     /** avoid to deserialize the istance */
 	public function __wakeup(){}
 }
+/*
 $a=FConnection::getInstance();
 if(!is_null($a))
 {
 	echo "Tutto ok";
 }
+*/
+
