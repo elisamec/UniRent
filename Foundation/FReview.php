@@ -1,7 +1,7 @@
 <?php
 class FReview {
     private static $table="review";
-    private static $values="(NULL, :title,:valutation, :description, :photo, :type, :madeDate)";
+    private static $values="(NULL, :title, :valutation, :description, :photo, :type, :creationDate)";
     private static $key="idReview";
     public static function getTable(){
         return self::$table;

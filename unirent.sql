@@ -196,7 +196,7 @@ CREATE TABLE `review` (
   `description` varchar(500) DEFAULT NULL,
   `photo` int(11) NOT NULL,
   `type` enum('student','owner','accommodation') NOT NULL,
-  `madeDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `creationDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
