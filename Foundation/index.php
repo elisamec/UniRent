@@ -1,12 +1,9 @@
 <?php 
-require 'FOwner.php';
-$id =1;
-$FO=FOwner::getInstance();
-$risultato=$FO->exist($id);
-if($risultato==false)
-{
-    print 'Non Presente nel db';
-}
-else{
-    print 'Problema';
-}
+require 'FCreditCard.php';
+require '../Entity/ECreditCard.php';
+
+$number =1;
+$FCC=FCreditCard::getInstance();
+$risultato=$FCC->load($number);
+$stringa=$risultato->__toString();
+print $stringa;
