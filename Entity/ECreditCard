@@ -2,6 +2,11 @@
 
 /**
  * ECreditCard
+ * 
+ * This class depicts a Credit Card
+ * 
+ * @author Matteo Maloni <matteo.maloni.00@gmail.com>
+ * @package Entity
  */
 class ECreditCard
 {    
