@@ -15,7 +15,7 @@ class EReview
     private string $description;
     private EPhoto $photo;
     private Type $type;
-    private DateTime $madeDate;
+    private DateTime $creationDate;
 
     private static $entity = EReview::class;
 
@@ -31,7 +31,7 @@ class EReview
 
     private function setTime()
     {
-        $this->madeDate= new DateTime("now");
+        $this->creationDate= new DateTime("now");
     }
 
     public function getId() 
@@ -39,10 +39,36 @@ class EReview
         return $this->idReview;
     }
 
-    public function getTitle() {
+    public function getTitle() 
+    {
+        return $this->title;
+    }
 
+    public function getValutation()
+    {
+        return $this->valutation;
+    }
+
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    public function getCreationDate()
+    {
+        return $this->creationDate;
     }
 
 
+
+    public function setTitle($newTitle)
+    {
+        $this->title=$newTitle;
+    }
 
 }
