@@ -40,7 +40,7 @@ CREATE TABLE `accommodationreview` (
 --
 
 CREATE TABLE `accomodation` (
-  `id` int(11) NOT NULL,
+  `idAccommodation` int(11) NOT NULL,
   `photo` int(11) NOT NULL,
   `title` varchar(30) NOT NULL,
   `address` int(11) NOT NULL,
@@ -64,7 +64,7 @@ CREATE TABLE `accomodation` (
 --
 
 CREATE TABLE `address` (
-  `id` int(11) NOT NULL,
+  `idAddress` int(11) NOT NULL,
   `type` varchar(20) NOT NULL,
   `streetName` varchar(50) NOT NULL,
   `houseNumber` int(11) NOT NULL,
@@ -80,7 +80,7 @@ CREATE TABLE `address` (
 --
 
 CREATE TABLE `administrator` (
-  `id` int(11) NOT NULL,
+  `idAdministrator` int(11) NOT NULL,
   `username` varchar(40) NOT NULL,
   `password` varchar(40) NOT NULL,
   `email` varchar(40) NOT NULL
@@ -93,7 +93,7 @@ CREATE TABLE `administrator` (
 --
 
 CREATE TABLE `contract` (
-  `reservationId` int(11) NOT NULL,
+  `idReservation` int(11) NOT NULL,
   `status` enum('onGoing','future','finshed','') NOT NULL,
   `paymentDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `cardNumber` int(11) NOT NULL
@@ -111,7 +111,7 @@ CREATE TABLE `creditcard` (
   `surname` varchar(20) NOT NULL,
   `expiry` varchar(5) NOT NULL,
   `cvv` int(3) NOT NULL,
-  `studentId` int(11) NOT NULL
+  `idStudent` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -121,7 +121,7 @@ CREATE TABLE `creditcard` (
 --
 
 CREATE TABLE `day` (
-  `id` int(11) NOT NULL,
+  `idDay` int(11) NOT NULL,
   `day` varchar(20) NOT NULL,
   `time` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -133,7 +133,7 @@ CREATE TABLE `day` (
 --
 
 CREATE TABLE `owner` (
-  `id` int(11) NOT NULL,
+  `idOwner` int(11) NOT NULL,
   `username` varchar(40) NOT NULL,
   `password` varchar(40) NOT NULL,
   `name` varchar(20) NOT NULL,
@@ -163,7 +163,7 @@ CREATE TABLE `ownerreview` (
 --
 
 CREATE TABLE `photo` (
-  `id` int(11) NOT NULL,
+  `idPhoto` int(11) NOT NULL,
   `photo` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -174,13 +174,13 @@ CREATE TABLE `photo` (
 --
 
 CREATE TABLE `reservation` (
-  `id` int(11) NOT NULL,
+  `idReservation` int(11) NOT NULL,
   `fromDate` date NOT NULL,
   `toDate` date NOT NULL,
   `made` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `statusAccept` tinyint(1) NOT NULL,
-  `accommodationId` int(11) NOT NULL,
-  `studentId` int(11) NOT NULL
+  `idAccommodation` int(11) NOT NULL,
+  `idStudent` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -190,7 +190,7 @@ CREATE TABLE `reservation` (
 --
 
 CREATE TABLE `review` (
-  `id` int(11) NOT NULL,
+  `idReview` int(11) NOT NULL,
   `Title` varchar(40) NOT NULL,
   `valutation` int(1) NOT NULL,
   `description` varchar(500) DEFAULT NULL,
@@ -204,7 +204,7 @@ CREATE TABLE `review` (
 --
 
 CREATE TABLE `student` (
-  `id` int(11) NOT NULL,
+  `idStudent` int(11) NOT NULL,
   `username` varchar(40) NOT NULL,
   `password` varchar(40) NOT NULL,
   `name` varchar(20) NOT NULL,
@@ -240,11 +240,11 @@ CREATE TABLE `studentreview` (
 --
 
 CREATE TABLE `supportrequest` (
-  `id` int(11) NOT NULL,
+  `idSupportRequest` int(11) NOT NULL,
   `message` varchar(1000) NOT NULL,
   `topic` enum('registration','appUse','bug','') NOT NULL,
-  `studentId` int(11) DEFAULT NULL,
-  `ownerId` int(11) DEFAULT NULL,
+  `idStudent` int(11) DEFAULT NULL,
+  `idOwner` int(11) DEFAULT NULL,
   `authorType` enum('student','owner','','') NOT NULL,
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -256,7 +256,7 @@ CREATE TABLE `supportrequest` (
 --
 
 CREATE TABLE `time` (
-  `id` int(11) NOT NULL,
+  `idTime` int(11) NOT NULL,
   `hour` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -267,11 +267,11 @@ CREATE TABLE `time` (
 --
 
 CREATE TABLE `visit` (
-  `id` int(11) NOT NULL,
+  `idVisit` int(11) NOT NULL,
   `day` int(11) NOT NULL,
   `time` int(11) NOT NULL,
-  `studentId` int(11) NOT NULL,
-  `accommodationId` int(11) NOT NULL
+  `idStudent` int(11) NOT NULL,
+  `idAccommodation` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -290,7 +290,7 @@ ALTER TABLE `accommodationreview`
 -- Indici per le tabelle `accomodation`
 --
 ALTER TABLE `accomodation`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`idAccommodation`),
   ADD UNIQUE KEY `address` (`address`),
   ADD KEY `photo` (`photo`),
   ADD KEY `visitAvaiability` (`visitAvaiability`);
@@ -299,13 +299,13 @@ ALTER TABLE `accomodation`
 -- Indici per le tabelle `address`
 --
 ALTER TABLE `address`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`idAddress`);
 
 --
 -- Indici per le tabelle `administrator`
 --
 ALTER TABLE `administrator`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`idAdministrator`),
   ADD UNIQUE KEY `email` (`email`),
   ADD UNIQUE KEY `username` (`username`),
   ADD UNIQUE KEY `email_2` (`email`);
@@ -314,7 +314,7 @@ ALTER TABLE `administrator`
 -- Indici per le tabelle `contract`
 --
 ALTER TABLE `contract`
-  ADD KEY `reservationId` (`reservationId`),
+  ADD KEY `idReservation` (`idReservation`),
   ADD KEY `cardNumber` (`cardNumber`);
 
 --
@@ -322,13 +322,13 @@ ALTER TABLE `contract`
 --
 ALTER TABLE `creditcard`
   ADD PRIMARY KEY (`number`),
-  ADD KEY `studentId` (`studentId`);
+  ADD KEY `idStudent` (`idStudent`);
 
 --
 -- Indici per le tabelle `day`
 --
 ALTER TABLE `day`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`idDay`),
   ADD UNIQUE KEY `day` (`day`),
   ADD KEY `time` (`time`);
 
@@ -336,7 +336,7 @@ ALTER TABLE `day`
 -- Indici per le tabelle `owner`
 --
 ALTER TABLE `owner`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`idOwner`),
   ADD UNIQUE KEY `username` (`username`),
   ADD UNIQUE KEY `email` (`email`),
   ADD UNIQUE KEY `phoneNumber` (`phoneNumber`),
@@ -355,28 +355,28 @@ ALTER TABLE `ownerreview`
 -- Indici per le tabelle `photo`
 --
 ALTER TABLE `photo`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`idPhoto`);
 
 --
 -- Indici per le tabelle `reservation`
 --
 ALTER TABLE `reservation`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `accommodationId` (`accommodationId`),
-  ADD KEY `studentId` (`studentId`);
+  ADD PRIMARY KEY (`idReservation`),
+  ADD KEY `idAccommodation` (`idAccommodation`),
+  ADD KEY `idStudent` (`idStudent`);
 
 --
 -- Indici per le tabelle `review`
 --
 ALTER TABLE `review`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`idReview`),
   ADD KEY `photo` (`photo`);
 
 --
 -- Indici per le tabelle `student`
 --
 ALTER TABLE `student`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`idStudent`),
   ADD UNIQUE KEY `username` (`username`),
   ADD UNIQUE KEY `universityMail` (`universityMail`),
   ADD KEY `picture` (`picture`);
@@ -394,26 +394,26 @@ ALTER TABLE `studentreview`
 -- Indici per le tabelle `supportrequest`
 --
 ALTER TABLE `supportrequest`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `ownerId` (`ownerId`),
-  ADD KEY `studentId` (`studentId`);
+  ADD PRIMARY KEY (`idSupportRequest`),
+  ADD KEY `idOwner` (`idOwner`),
+  ADD KEY `idStudent` (`idStudent`);
 
 --
 -- Indici per le tabelle `time`
 --
 ALTER TABLE `time`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`idTime`),
   ADD UNIQUE KEY `hour` (`hour`);
 
 --
 -- Indici per le tabelle `visit`
 --
 ALTER TABLE `visit`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `accommodationId` (`accommodationId`),
+  ADD PRIMARY KEY (`idVisit`),
+  ADD KEY `idAccommodation` (`idAccommodation`),
   ADD KEY `day` (`day`),
   ADD KEY `time` (`time`),
-  ADD KEY `studentId` (`studentId`);
+  ADD KEY `idStudent` (`idStudent`);
 
 --
 -- AUTO_INCREMENT per le tabelle scaricate
@@ -423,73 +423,73 @@ ALTER TABLE `visit`
 -- AUTO_INCREMENT per la tabella `accomodation`
 --
 ALTER TABLE `accomodation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idAccommodation` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `address`
 --
 ALTER TABLE `address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idAddress` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `administrator`
 --
 ALTER TABLE `administrator`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idAdministrator` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `day`
 --
 ALTER TABLE `day`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idDay` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `owner`
 --
 ALTER TABLE `owner`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idOwner` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `photo`
 --
 ALTER TABLE `photo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPhoto` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idReservation` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `review`
 --
 ALTER TABLE `review`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idReview` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `student`
 --
 ALTER TABLE `student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idStudent` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `supportrequest`
 --
 ALTER TABLE `supportrequest`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idSupportRequest` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `time`
 --
 ALTER TABLE `time`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idTime` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `visit`
 --
 ALTER TABLE `visit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idVisit` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Limiti per le tabelle scaricate
@@ -587,9 +587,4 @@ ALTER TABLE `visit`
   ADD CONSTRAINT `visit_ibfk_1` FOREIGN KEY (`accommodationId`) REFERENCES `accomodation` (`id`),
   ADD CONSTRAINT `visit_ibfk_2` FOREIGN KEY (`day`) REFERENCES `day` (`id`),
   ADD CONSTRAINT `visit_ibfk_3` FOREIGN KEY (`time`) REFERENCES `time` (`id`),
-  ADD CONSTRAINT `visit_ibfk_4` FOREIGN KEY (`studentId`) REFERENCES `student` (`id`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+  ADD CONST
