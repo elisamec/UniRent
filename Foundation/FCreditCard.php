@@ -38,18 +38,18 @@ class FCreditCard
     }
 
     public function load(int $number): ECreditCard 
-    { 
+    {
         $db=FConnection::getInstance()->getConnection();
         $db->beginTransaction();
-      try
-        {  
+        try
+        {
             $q='SELECT * FROM creditcard WHERE number=:number';
             $db->exec('LOCK TABLES creditcard READ');
             $stm=$db->prepare($q);
             $stm->bindParam(':number',$number,PDO::PARAM_INT);
             $stm->execute();
-            $db->exec('UNLOCK TABLES');   
-        } 
+            $db->exec('UNLOCK TABLES');
+        }
 
         catch (PDOException $e)
         {
