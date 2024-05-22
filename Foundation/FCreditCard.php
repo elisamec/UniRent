@@ -38,27 +38,19 @@ class FCreditCard
     }
 
     public function load(int $number): ECreditCard 
-    {
-        try
-        {
-            print 'inizio try';
-            $q='SELECT * FROM creditcard WHERE number=$number';
-            print(' query scritta');
-            $db=FConnection::getInstance()->getConnection();
-            print( 'connessione al db raggiunta');
-            $db->beginTransaction();
-            print ('Transazione iniziata');
+    { 
+        $db=FConnection::getInstance()->getConnection();
+        $db->beginTransaction();
+      try
+        {  
+            $q='SELECT * FROM creditcard WHERE number=:number';
             $db->exec('LOCK TABLES creditcard READ');
-            print ('  Blocco tabella  ');
             $stm=$db->prepare($q);
-            print ('  query preparata  ');
-           # $stm->bindParam(':number',$number,PDO::PARAM_INT);
+            $stm->bindParam(':number',$number,PDO::PARAM_INT);
             $stm->execute();
-            print (' Query eseguita ');
-            $db->exec('UNLOCK TABLES');
-            $db->commit();
-            print (' Fine try ');
-        }
+            $db->exec('UNLOCK TABLES');   
+        } 
+
         catch (PDOException $e)
         {
             $db->rollBack();
@@ -68,7 +60,7 @@ class FCreditCard
         return $result;
     }
 
-#    public function store(EOwner $owner):bool {}
+ #   public function store(EOwner $owner):bool {}
 
  #   public function update(EOwner $owner):bool {}
 
