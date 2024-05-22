@@ -93,7 +93,7 @@ class ECreditCard
      *
      * @return string
      */
-    public function getSuranem():string
+    public function getSurname():string
     {
         return $this->surname;
     }    
@@ -153,7 +153,7 @@ class ECreditCard
      * @param  string $surname
      * @return void
      */
-    public function setSuranem(string $surname):void
+    public function setSurname(string $surname):void
     {
         $this->surname=$surname;
     }    
