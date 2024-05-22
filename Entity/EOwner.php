@@ -1,3 +1,4 @@
+<<<<<<< HEAD
  <?php
  /**
   * EOwner
@@ -247,3 +248,20 @@
     }
 
  }
+=======
+<?php
+
+class EOwner
+{
+    private int $idOwner;
+    private string $username;
+    private string $password;
+    private string $name;
+    private string $surname;
+    private EPhoto $photo;
+    private string $email;
+    private int $phoneNumber;
+    private string $iban;
+
+}
+>>>>>>> 638382a3e175c81b9ad00ef9a87fde8a9439f933

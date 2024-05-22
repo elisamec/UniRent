@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 21, 2024 at 02:51 PM
+-- Generation Time: May 21, 2024 at 04:14 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -98,7 +98,7 @@ CREATE TABLE `administrator` (
 
 CREATE TABLE `contract` (
   `idReservation` int(11) NOT NULL,
-  `status` enum('onGoing','future','finshed','') NOT NULL,
+  `status` enum('onGoing','future','finshed') NOT NULL,
   `paymentDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `cardNumber` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -200,7 +200,7 @@ CREATE TABLE `review` (
   `description` varchar(500) DEFAULT NULL,
   `photo` int(11) NOT NULL,
   `type` enum('student','owner','accommodation') NOT NULL,
-  `madeDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `creationDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -248,10 +248,10 @@ CREATE TABLE `studentreview` (
 CREATE TABLE `supportrequest` (
   `idSupportRequest` int(11) NOT NULL,
   `message` varchar(1000) NOT NULL,
-  `topic` enum('registration','appUse','bug','') NOT NULL,
+  `topic` enum('registration','appUse','bug') NOT NULL,
   `idStudent` int(11) DEFAULT NULL,
   `idOwner` int(11) DEFAULT NULL,
-  `authorType` enum('student','owner','','') NOT NULL,
+  `authorType` enum('student','owner') NOT NULL,
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -288,6 +288,7 @@ CREATE TABLE `visit` (
 -- Indexes for table `accommodationreview`
 --
 ALTER TABLE `accommodationreview`
+  ADD PRIMARY KEY (`idReview`),
   ADD KEY `idAccommodation` (`idAccommodation`),
   ADD KEY `idAuthor` (`idAuthor`),
   ADD KEY `idReview` (`idReview`);
@@ -353,6 +354,7 @@ ALTER TABLE `owner`
 -- Indexes for table `ownerreview`
 --
 ALTER TABLE `ownerreview`
+  ADD PRIMARY KEY (`idReview`),
   ADD KEY `idAuthor` (`idAuthor`),
   ADD KEY `idOwner` (`idOwner`),
   ADD KEY `idReview` (`idReview`);
@@ -391,6 +393,7 @@ ALTER TABLE `student`
 -- Indexes for table `studentreview`
 --
 ALTER TABLE `studentreview`
+  ADD PRIMARY KEY (`idReview`),
   ADD KEY `idStudent` (`idStudent`),
   ADD KEY `idReview` (`idReview`),
   ADD KEY `authorStudent` (`authorStudent`),

@@ -1,8 +1,7 @@
 <?php 
 
-require 'FConnection.php';
-require '../Entity/ECreditCard.php';
-
+require_once ('FConnection.php');
+require_once ('../Entity/ECreditCard.php');
 class FCreditCard
 {
     private static $instance=null;
@@ -42,15 +41,23 @@ class FCreditCard
     {
         try
         {
-            $q='SELECT * FROM creditcard WHERE number=:nubmer';
+            print 'inizio try';
+            $q='SELECT * FROM creditcard WHERE number=$number';
+            print(' query scritta');
             $db=FConnection::getInstance()->getConnection();
+            print( 'connessione al db raggiunta');
             $db->beginTransaction();
+            print ('Transazione iniziata');
             $db->exec('LOCK TABLES creditcard READ');
+            print ('  Blocco tabella  ');
             $stm=$db->prepare($q);
-            $stm->bindParam(':number',$number,PDO::PARAM_INT);
+            print ('  query preparata  ');
+           # $stm->bindParam(':number',$number,PDO::PARAM_INT);
             $stm->execute();
+            print (' Query eseguita ');
             $db->exec('UNLOCK TABLES');
             $db->commit();
+            print (' Fine try ');
         }
         catch (PDOException $e)
         {

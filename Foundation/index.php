@@ -1,6 +1,7 @@
 <?php 
-require 'FCreditCard.php';
-require '../Entity/ECreditCard.php';
+
+require_once ('FCreditCard.php');
+require_once ('../Entity/ECreditCard.php');
 
 $number =1;
 $FCC=FCreditCard::getInstance();

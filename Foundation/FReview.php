@@ -1,8 +1,8 @@
 <?php
 class FReview {
     private static $table="review";
-    private static $values="(NULL, :Title,:valutation, :description, :photo)";
-    private static $key="id";
+    private static $values="(NULL, :title, :valutation, :description, :photo, :type, :creationDate)";
+    private static $key="idReview";
     public static function getTable(){
         return self::$table;
     }
