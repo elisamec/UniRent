@@ -16,7 +16,6 @@ class EAccommodation
     private bool $woman;
     private bool $pets;
     private bool $smokers;
-    //Ci devo mettere i riferimento all'owner?
-    //Penso che l'owner doverebbe avere un array con tutti gli appartamenti...
+    private int $idOwner;
 
 }
