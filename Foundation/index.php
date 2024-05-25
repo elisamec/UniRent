@@ -1,11 +1,12 @@
 <?php 
 
-require_once ('FCreditCard.php');
-require_once ('../Entity/ECreditCard.php');
+#require_once ('FCreditCard.php');
+#require_once ('../Entity/ECreditCard.php');
+require_once('FStudent.php');
+require_once('../Entity/EStudent.php');
 
 
-
-$FCC=FCreditCard::getInstance();
+#$FCC=FCreditCard::getInstance();
 
 /* LOAD
 #$number =1;
@@ -48,3 +49,14 @@ else
     echo 'C\'è qualche problema!'; 
 }
 */
+
+$FS=FStudent::getInstance();
+$risultato_exist=$FS->exist(5);
+if($risultato_exist)
+{
+    echo 'Si lo studente è nel DataBase!';
+}
+else
+{
+    echo 'No non c\' è! ';
+}

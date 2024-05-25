@@ -38,7 +38,7 @@ class FCreditCard
      */
     public function exist(int $number):bool 
     {
-        $q='SELECT * FROM owner WHERE number=:number';
+        $q='SELECT * FROM creditcard WHERE number=:number';
         $connection= FConnection::getInstance();
         $db=$connection->getConnection();
         $db->beginTransaction();
@@ -118,7 +118,6 @@ class FCreditCard
     }      
     catch(PDOException $e)
     {
-        print 'Sono in Eccezione ';
         $db->rollBack();
         return false;
     }
