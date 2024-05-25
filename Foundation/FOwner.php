@@ -28,12 +28,12 @@ require 'FConnection.php';
 
     public function exist(int $id):bool 
     {
-        $q='SELECT * FROM owner WHERE id=:ID';
+        $q='SELECT * FROM owner WHERE idOwner=:idOwner';
         $connection= FConnection::getInstance();
         $db=$connection->getConnection();
         $db->beginTransaction();
         $stm=$db->prepare($q);
-        $stm->bindParam(':ID',$id,PDO::PARAM_INT);
+        $stm->bindParam(':idOwner',$id,PDO::PARAM_INT);
         $stm->execute();
         $db->commit();
         $result=$stm->rowCount();
