@@ -1,6 +1,8 @@
 <?php
 //Da rivedere
 class EPhoto {
+
+    /*
     private array $file; // Holds the uploaded file information
     private string $fileName; // Holds the name of the uploaded file
     private string $fileTmpName; // Holds the temporary path of the uploaded file
@@ -116,4 +118,5 @@ class EPhoto {
                 break;
         }
     }
+    */
 }
