@@ -6,7 +6,7 @@ class EPhoto {
     private $fileSize;
     private $fileType;
     private $fileError;
-    private $targetDir;
+    private $targetDir;  #cambiare nome metterlo in FPhoto
     private $allowedFileTypes = ['jpg', 'jpeg', 'png', 'gif'];
 
     public function __construct($file, $targetDir = "uploads/") {
