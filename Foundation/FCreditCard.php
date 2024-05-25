@@ -169,7 +169,7 @@ class FCreditCard
     public function delete(int $number): bool 
     {
         $db=FConnection::getInstance()->getConnection();
-        $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+       # $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);  Serve per il debug!
         try
         {  
             $db->exec('LOCK TABLES creditcard WRITE');
