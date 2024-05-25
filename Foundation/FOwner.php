@@ -1,6 +1,7 @@
 <?php 
 
-require 'FConnection.php';
+require_once ('FConnection.php');
+require_once ('../Entity/EOwner.php');
 /**
  * This class provide to make query to EOwner class
  * @author Matteo Maloni ('UniRent')

@@ -1,5 +1,6 @@
 <?php
 
+require_once ('EPhoto.php');
 enum Type 
 {
     case student;
