@@ -1,4 +1,6 @@
 <?php
+require_once ('FConnection.php');
+require_once ('../Entity/EReview.php');
 class FReview {
     private static $instance=null;
     /**Constructor */
