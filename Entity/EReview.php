@@ -19,19 +19,14 @@ class EReview
 
     private static $entity = EReview::class;
 
-    public function __construct($idReview, $title, $valutation, $description, $type) 
+    public function __construct($idReview, $title, $valutation, $description, $type, $creationDate) 
     {
         $this->idReview=$idReview;
         $this->title=$title;
         $this->valutation=$valutation;
         $this->description=$description;
         $this->type=$type;
-        $this->setTime();
-    }
-
-    private function setTime()
-    {
-        $this->creationDate= new DateTime("now");
+        $this->creationDate=$creationDate;
     }
 
     public function getId() 
@@ -71,4 +66,5 @@ class EReview
         $this->title=$newTitle;
     }
 
+    //public function uploadImage($Image) {}
 }
