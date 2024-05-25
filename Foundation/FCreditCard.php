@@ -99,7 +99,7 @@ class FCreditCard
     try
     {
         $q='INSERT INTO creditcard (number, name , surname, expiry, cvv, studentId)';
-        $q=' VALUES (:number, :name, :surname, :expiry, :cvv, :studentID)';
+        $q.=' VALUES (:number, :name, :surname, :expiry, :cvv, :studentID)';
         $db->exec('LOCK TABLES creditcard WRITE');
         $stm=$db->prepare($q);
         $stm->bindValue(':number',$CreditCard->getNumber(),PDO::PARAM_INT);
