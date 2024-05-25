@@ -17,7 +17,7 @@ class FReview {
     }
     public function exist(int $id):bool 
     {
-        $q='SELECT * FROM owner WHERE id=:ID';
+        $q='SELECT * FROM owner WHERE idReview=:idReview';
         $connection= FConnection::getInstance();
         $db=$connection->getConnection();
         $db->beginTransaction();
