@@ -1,5 +1,5 @@
 <?php
-
+//Da rivedere
 class EPhoto {
     private array $file; // Holds the uploaded file information
     private string $fileName; // Holds the name of the uploaded file
