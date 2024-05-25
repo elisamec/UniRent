@@ -65,14 +65,16 @@ class FCreditCard
     public function load(int $number): ECreditCard 
     {
         $db=FConnection::getInstance()->getConnection();
-        $db->beginTransaction();
+        
         try
         {
-            $q='SELECT * FROM creditcard WHERE number=:number';
             $db->exec('LOCK TABLES creditcard READ');
+            $db->beginTransaction();
+            $q='SELECT * FROM creditcard WHERE number=:number';    
             $stm=$db->prepare($q);
             $stm->bindParam(':number',$number,PDO::PARAM_INT);
             $stm->execute();
+            $db->commit();
             $db->exec('UNLOCK TABLES');
         }
 
@@ -94,13 +96,14 @@ class FCreditCard
   public function store(ECreditCard $CreditCard):bool 
   {
     $db=FConnection::getInstance()->getConnection();
-    $db->setAttribute(PDO::ATTR_AUTOCOMMIT,false);
-    $db->beginTransaction();
+    $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+    
     try
-    {
-        $q='INSERT INTO creditcard (number, name , surname, expiry, cvv, studentId)';
-        $q.=' VALUES (:number, :name, :surname, :expiry, :cvv, :studentID)';
+    { 
         $db->exec('LOCK TABLES creditcard WRITE');
+        $db->beginTransaction();
+        $q='INSERT INTO creditcard (number, name , surname, expiry, cvv, studentId)';
+        $q=$q.' VALUES (:number, :name, :surname, :expiry, :cvv, :studentId)';
         $stm=$db->prepare($q);
         $stm->bindValue(':number',$CreditCard->getNumber(),PDO::PARAM_INT);
         $stm->bindValue(':name',$CreditCard->getName(),PDO::PARAM_STR);
@@ -109,12 +112,13 @@ class FCreditCard
         $stm->bindValue(':cvv',$CreditCard->getCVV(),PDO::PARAM_INT);
         $stm->bindValue(':studentId',$CreditCard->getStudentID(),PDO::PARAM_INT);
         $stm->execute();
-        $db->exec('UNLOCK TABLES');
         $db->commit();
+        $db->exec('UNLOCK TABLES');
         return true;
-    }
+    }      
     catch(PDOException $e)
     {
+        print 'Sono in Eccezione ';
         $db->rollBack();
         return false;
     }
@@ -129,13 +133,12 @@ class FCreditCard
      */
     public function update(ECreditCard $CreditCard):bool 
     {
-        $db=FConnection::getInstance()->getConnection();
-        $db->setAttribute(PDO::ATTR_AUTOCOMMIT,false);
-        $db->beginTransaction();
+        $db=FConnection::getInstance()->getConnection();      
         try
         {
-            $q='UPDATE creditcard SET name = :name, surname = :surname, expiry = :expiry, cvv = :cvv, studentId = :studentId  WHERE number=:number';
             $db->exec('LOCK TABLES creditcard WRITE');
+            $db->beginTransaction();
+            $q='UPDATE creditcard SET name = :name, surname = :surname, expiry = :expiry, cvv = :cvv, studentId = :studentId  WHERE number=:number';
             $stm=$db->prepare($q);
             $stm->bindValue(':name',$CreditCard->getName(),PDO::PARAM_STR);
             $stm->bindValue(':surname',$CreditCard->getSurname(),PDO::PARAM_STR);
@@ -143,9 +146,10 @@ class FCreditCard
             $stm->bindValue(':cvv',$CreditCard->getCVV(),PDO::PARAM_INT);
             $stm->bindValue(':studentId',$CreditCard->getStudentID(),PDO::PARAM_INT);
             $stm->bindValue(':number',$CreditCard->getNumber(),PDO::PARAM_INT);
-            $stm->execute();
-            $db->exec('UNLOCK TABLES');
+            $stm->execute();           
             $db->commit();
+            $db->exec('UNLOCK TABLES');
+
             return true;
         }
         catch(PDOException $e)
@@ -165,17 +169,19 @@ class FCreditCard
     public function delete(int $number): bool 
     {
         $db=FConnection::getInstance()->getConnection();
-        $db->setAttribute(PDO::ATTR_AUTOCOMMIT,false);
-        $db->beginTransaction();
+        $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
         try
-        {
+        {  
+            $db->exec('LOCK TABLES creditcard WRITE');
+            $db->beginTransaction();
             $q='DELETE FROM creditcard WHERE number= :number';
-            $db->exec('BLOCK TABLES creditcard WRITE');
             $stm=$db->prepare($q);
             $stm->bindValue(':number',$number, PDO::PARAM_INT);
-            $stm->execute();
-            $db->exec('UNLOCK TABLES');
+            print ' BindValue eseguita !';
+            $stm->execute();    
             $db->commit();
+            $db->exec('UNLOCK TABLES');
+
             return true;
         }
         catch(PDOException $e)
