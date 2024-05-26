@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Creato il: Mag 26, 2024 alle 14:01
--- Versione del server: 10.4.32-MariaDB
--- Versione PHP: 8.2.12
+-- Host: localhost
+-- Generation Time: May 26, 2024 at 02:19 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,12 +24,11 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `accommodation`
+-- Table structure for table `accommodation`
 --
 
 CREATE TABLE `accommodation` (
   `id` int(11) NOT NULL,
-  `photo` int(11) NOT NULL,
   `title` varchar(30) NOT NULL,
   `address` int(11) NOT NULL,
   `price` double NOT NULL,
@@ -48,7 +47,7 @@ CREATE TABLE `accommodation` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `accommodationreview`
+-- Table structure for table `accommodationreview`
 --
 
 CREATE TABLE `accommodationreview` (
@@ -60,7 +59,7 @@ CREATE TABLE `accommodationreview` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `address`
+-- Table structure for table `address`
 --
 
 CREATE TABLE `address` (
@@ -76,7 +75,7 @@ CREATE TABLE `address` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `administrator`
+-- Table structure for table `administrator`
 --
 
 CREATE TABLE `administrator` (
@@ -89,7 +88,7 @@ CREATE TABLE `administrator` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `contract`
+-- Table structure for table `contract`
 --
 
 CREATE TABLE `contract` (
@@ -102,7 +101,7 @@ CREATE TABLE `contract` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `creditcard`
+-- Table structure for table `creditcard`
 --
 
 CREATE TABLE `creditcard` (
@@ -117,7 +116,7 @@ CREATE TABLE `creditcard` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `day`
+-- Table structure for table `day`
 --
 
 CREATE TABLE `day` (
@@ -129,7 +128,7 @@ CREATE TABLE `day` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `owner`
+-- Table structure for table `owner`
 --
 
 CREATE TABLE `owner` (
@@ -147,7 +146,7 @@ CREATE TABLE `owner` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `ownerreview`
+-- Table structure for table `ownerreview`
 --
 
 CREATE TABLE `ownerreview` (
@@ -159,18 +158,21 @@ CREATE TABLE `ownerreview` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `photo`
+-- Table structure for table `photo`
 --
 
 CREATE TABLE `photo` (
   `id` int(11) NOT NULL,
-  `photo` blob NOT NULL
+  `photo` blob NOT NULL,
+  `relativeTo` enum('review','accommodation','other') NOT NULL,
+  `idAccommodation` int(11) DEFAULT NULL,
+  `idReview` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `reservation`
+-- Table structure for table `reservation`
 --
 
 CREATE TABLE `reservation` (
@@ -186,21 +188,20 @@ CREATE TABLE `reservation` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `review`
+-- Table structure for table `review`
 --
 
 CREATE TABLE `review` (
   `id` int(11) NOT NULL,
   `title` varchar(40) NOT NULL,
   `valutation` int(1) NOT NULL,
-  `description` varchar(500) DEFAULT NULL,
-  `photo` int(11) NOT NULL
+  `description` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `student`
+-- Table structure for table `student`
 --
 
 CREATE TABLE `student` (
@@ -222,7 +223,7 @@ CREATE TABLE `student` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `studentreview`
+-- Table structure for table `studentreview`
 --
 
 CREATE TABLE `studentreview` (
@@ -236,7 +237,7 @@ CREATE TABLE `studentreview` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `supportrequest`
+-- Table structure for table `supportrequest`
 --
 
 CREATE TABLE `supportrequest` (
@@ -252,7 +253,7 @@ CREATE TABLE `supportrequest` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `time`
+-- Table structure for table `time`
 --
 
 CREATE TABLE `time` (
@@ -263,7 +264,7 @@ CREATE TABLE `time` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `visit`
+-- Table structure for table `visit`
 --
 
 CREATE TABLE `visit` (
@@ -274,20 +275,20 @@ CREATE TABLE `visit` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Indici per le tabelle scaricate
+-- Indexes for dumped tables
 --
 
 --
--- Indici per le tabelle `accommodation`
+-- Indexes for table `accommodation`
 --
 ALTER TABLE `accommodation`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `address` (`address`),
-  ADD KEY `photo` (`photo`),
-  ADD KEY `visitAvaiability` (`visitAvaiability`);
+  ADD KEY `visitAvaiability` (`visitAvaiability`),
+  ADD KEY `accommodation_ibfk_4` (`owner`);
 
 --
--- Indici per le tabelle `accommodationreview`
+-- Indexes for table `accommodationreview`
 --
 ALTER TABLE `accommodationreview`
   ADD KEY `idAccommodation` (`idAccommodation`),
@@ -295,13 +296,13 @@ ALTER TABLE `accommodationreview`
   ADD KEY `idReview` (`idReview`);
 
 --
--- Indici per le tabelle `address`
+-- Indexes for table `address`
 --
 ALTER TABLE `address`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indici per le tabelle `administrator`
+-- Indexes for table `administrator`
 --
 ALTER TABLE `administrator`
   ADD PRIMARY KEY (`id`),
@@ -310,21 +311,21 @@ ALTER TABLE `administrator`
   ADD UNIQUE KEY `email_2` (`email`);
 
 --
--- Indici per le tabelle `contract`
+-- Indexes for table `contract`
 --
 ALTER TABLE `contract`
   ADD KEY `reservationId` (`reservationId`),
   ADD KEY `cardNumber` (`cardNumber`);
 
 --
--- Indici per le tabelle `creditcard`
+-- Indexes for table `creditcard`
 --
 ALTER TABLE `creditcard`
   ADD PRIMARY KEY (`number`),
   ADD KEY `studentId` (`idStudent`);
 
 --
--- Indici per le tabelle `day`
+-- Indexes for table `day`
 --
 ALTER TABLE `day`
   ADD PRIMARY KEY (`id`),
@@ -332,7 +333,7 @@ ALTER TABLE `day`
   ADD KEY `time` (`time`);
 
 --
--- Indici per le tabelle `owner`
+-- Indexes for table `owner`
 --
 ALTER TABLE `owner`
   ADD PRIMARY KEY (`id`),
@@ -343,7 +344,7 @@ ALTER TABLE `owner`
   ADD KEY `picture` (`picture`);
 
 --
--- Indici per le tabelle `ownerreview`
+-- Indexes for table `ownerreview`
 --
 ALTER TABLE `ownerreview`
   ADD KEY `idAuthor` (`idAuthor`),
@@ -351,13 +352,15 @@ ALTER TABLE `ownerreview`
   ADD KEY `idReview` (`idReview`);
 
 --
--- Indici per le tabelle `photo`
+-- Indexes for table `photo`
 --
 ALTER TABLE `photo`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idAccommodation` (`idAccommodation`),
+  ADD KEY `idReview` (`idReview`);
 
 --
--- Indici per le tabelle `reservation`
+-- Indexes for table `reservation`
 --
 ALTER TABLE `reservation`
   ADD PRIMARY KEY (`id`),
@@ -365,14 +368,13 @@ ALTER TABLE `reservation`
   ADD KEY `studentId` (`idStudent`);
 
 --
--- Indici per le tabelle `review`
+-- Indexes for table `review`
 --
 ALTER TABLE `review`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `photo` (`photo`);
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indici per le tabelle `student`
+-- Indexes for table `student`
 --
 ALTER TABLE `student`
   ADD PRIMARY KEY (`id`),
@@ -381,7 +383,7 @@ ALTER TABLE `student`
   ADD KEY `picture` (`picture`);
 
 --
--- Indici per le tabelle `studentreview`
+-- Indexes for table `studentreview`
 --
 ALTER TABLE `studentreview`
   ADD KEY `idStudent` (`idStudent`),
@@ -390,7 +392,7 @@ ALTER TABLE `studentreview`
   ADD KEY `authorOwner` (`authorOwner`);
 
 --
--- Indici per le tabelle `supportrequest`
+-- Indexes for table `supportrequest`
 --
 ALTER TABLE `supportrequest`
   ADD PRIMARY KEY (`id`),
@@ -398,14 +400,14 @@ ALTER TABLE `supportrequest`
   ADD KEY `studentId` (`idStudent`);
 
 --
--- Indici per le tabelle `time`
+-- Indexes for table `time`
 --
 ALTER TABLE `time`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `hour` (`hour`);
 
 --
--- Indici per le tabelle `visit`
+-- Indexes for table `visit`
 --
 ALTER TABLE `visit`
   ADD PRIMARY KEY (`id`),
@@ -413,96 +415,95 @@ ALTER TABLE `visit`
   ADD KEY `accommodationId` (`accommodationId`);
 
 --
--- AUTO_INCREMENT per le tabelle scaricate
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT per la tabella `accommodation`
+-- AUTO_INCREMENT for table `accommodation`
 --
 ALTER TABLE `accommodation`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT per la tabella `address`
+-- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT per la tabella `administrator`
+-- AUTO_INCREMENT for table `administrator`
 --
 ALTER TABLE `administrator`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT per la tabella `day`
+-- AUTO_INCREMENT for table `day`
 --
 ALTER TABLE `day`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT per la tabella `owner`
+-- AUTO_INCREMENT for table `owner`
 --
 ALTER TABLE `owner`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT per la tabella `photo`
+-- AUTO_INCREMENT for table `photo`
 --
 ALTER TABLE `photo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT per la tabella `reservation`
+-- AUTO_INCREMENT for table `reservation`
 --
 ALTER TABLE `reservation`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT per la tabella `review`
+-- AUTO_INCREMENT for table `review`
 --
 ALTER TABLE `review`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT per la tabella `student`
+-- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT per la tabella `supportrequest`
+-- AUTO_INCREMENT for table `supportrequest`
 --
 ALTER TABLE `supportrequest`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT per la tabella `time`
+-- AUTO_INCREMENT for table `time`
 --
 ALTER TABLE `time`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT per la tabella `visit`
+-- AUTO_INCREMENT for table `visit`
 --
 ALTER TABLE `visit`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Limiti per le tabelle scaricate
+-- Constraints for dumped tables
 --
 
 --
--- Limiti per la tabella `accommodation`
+-- Constraints for table `accommodation`
 --
 ALTER TABLE `accommodation`
-  ADD CONSTRAINT `accommodation_ibfk_1` FOREIGN KEY (`photo`) REFERENCES `photo` (`id`),
   ADD CONSTRAINT `accommodation_ibfk_2` FOREIGN KEY (`address`) REFERENCES `address` (`id`),
   ADD CONSTRAINT `accommodation_ibfk_3` FOREIGN KEY (`visitAvaiability`) REFERENCES `day` (`id`),
   ADD CONSTRAINT `accommodation_ibfk_4` FOREIGN KEY (`owner`) REFERENCES `owner` (`id`);
 
 --
--- Limiti per la tabella `accommodationreview`
+-- Constraints for table `accommodationreview`
 --
 ALTER TABLE `accommodationreview`
   ADD CONSTRAINT `accommodationreview_ibfk_1` FOREIGN KEY (`idAccommodation`) REFERENCES `accommodation` (`id`),
@@ -510,32 +511,32 @@ ALTER TABLE `accommodationreview`
   ADD CONSTRAINT `accommodationreview_ibfk_3` FOREIGN KEY (`idReview`) REFERENCES `review` (`id`);
 
 --
--- Limiti per la tabella `contract`
+-- Constraints for table `contract`
 --
 ALTER TABLE `contract`
   ADD CONSTRAINT `contract_ibfk_1` FOREIGN KEY (`reservationId`) REFERENCES `reservation` (`id`),
   ADD CONSTRAINT `contract_ibfk_2` FOREIGN KEY (`cardNumber`) REFERENCES `creditcard` (`number`);
 
 --
--- Limiti per la tabella `creditcard`
+-- Constraints for table `creditcard`
 --
 ALTER TABLE `creditcard`
   ADD CONSTRAINT `creditcard_ibfk_1` FOREIGN KEY (`idStudent`) REFERENCES `student` (`id`);
 
 --
--- Limiti per la tabella `day`
+-- Constraints for table `day`
 --
 ALTER TABLE `day`
   ADD CONSTRAINT `day_ibfk_1` FOREIGN KEY (`time`) REFERENCES `time` (`id`);
 
 --
--- Limiti per la tabella `owner`
+-- Constraints for table `owner`
 --
 ALTER TABLE `owner`
   ADD CONSTRAINT `owner_ibfk_1` FOREIGN KEY (`picture`) REFERENCES `photo` (`id`);
 
 --
--- Limiti per la tabella `ownerreview`
+-- Constraints for table `ownerreview`
 --
 ALTER TABLE `ownerreview`
   ADD CONSTRAINT `ownerreview_ibfk_1` FOREIGN KEY (`idAuthor`) REFERENCES `student` (`id`),
@@ -543,26 +544,27 @@ ALTER TABLE `ownerreview`
   ADD CONSTRAINT `ownerreview_ibfk_3` FOREIGN KEY (`idReview`) REFERENCES `review` (`id`);
 
 --
--- Limiti per la tabella `reservation`
+-- Constraints for table `photo`
+--
+ALTER TABLE `photo`
+  ADD CONSTRAINT `photo_ibfk_1` FOREIGN KEY (`idAccommodation`) REFERENCES `accommodation` (`id`),
+  ADD CONSTRAINT `photo_ibfk_2` FOREIGN KEY (`idReview`) REFERENCES `review` (`id`);
+
+--
+-- Constraints for table `reservation`
 --
 ALTER TABLE `reservation`
   ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`accommodationId`) REFERENCES `accommodation` (`id`),
   ADD CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`idStudent`) REFERENCES `student` (`id`);
 
 --
--- Limiti per la tabella `review`
---
-ALTER TABLE `review`
-  ADD CONSTRAINT `review_ibfk_1` FOREIGN KEY (`photo`) REFERENCES `photo` (`id`);
-
---
--- Limiti per la tabella `student`
+-- Constraints for table `student`
 --
 ALTER TABLE `student`
   ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`picture`) REFERENCES `photo` (`id`);
 
 --
--- Limiti per la tabella `studentreview`
+-- Constraints for table `studentreview`
 --
 ALTER TABLE `studentreview`
   ADD CONSTRAINT `studentreview_ibfk_1` FOREIGN KEY (`idStudent`) REFERENCES `student` (`id`),
@@ -571,14 +573,14 @@ ALTER TABLE `studentreview`
   ADD CONSTRAINT `studentreview_ibfk_4` FOREIGN KEY (`authorOwner`) REFERENCES `owner` (`id`);
 
 --
--- Limiti per la tabella `supportrequest`
+-- Constraints for table `supportrequest`
 --
 ALTER TABLE `supportrequest`
   ADD CONSTRAINT `supportrequest_ibfk_1` FOREIGN KEY (`ownerId`) REFERENCES `owner` (`id`),
   ADD CONSTRAINT `supportrequest_ibfk_2` FOREIGN KEY (`idStudent`) REFERENCES `student` (`id`);
 
 --
--- Limiti per la tabella `visit`
+-- Constraints for table `visit`
 --
 ALTER TABLE `visit`
   ADD CONSTRAINT `visit_ibfk_1` FOREIGN KEY (`studentId`) REFERENCES `student` (`id`),
