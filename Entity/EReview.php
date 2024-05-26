@@ -1,11 +1,11 @@
 <?php
 
 require_once ('EPhoto.php');
-enum Type 
+enum Type: string
 {
-    case student;
-    case accommodation;
-    case owner;
+    case STUDENT = 'student';
+    case ACCOMMODATION = 'accommodation';
+    case OWNER = 'owner';
 }
 
 class EReview 
@@ -13,59 +13,95 @@ class EReview
     private int $idReview;
     private string $title;
     private int $valutation;
-    private string $description;
-    private EPhoto $photo;
-    private Type $type;
+    private ?string $description;
+    private array $photo;
+    private Type $recipientType;
     private DateTime $creationDate;
+    private Type $authorType;
+    private int $idAuthor;
+    private int $idRecipient;
 
     private static $entity = EReview::class;
 
-    public function __construct($idReview, $title, $valutation, $description, $type, $creationDate) 
+    public function __construct(int $idReview, string $title, int $valutation, ?string $description, Type $type, DateTime $creationDate, Type $authorType, int $idAuthor, int $idRecipient) 
     {
         $this->idReview=$idReview;
         $this->title=$title;
         $this->valutation=$valutation;
         $this->description=$description;
-        $this->type=$type;
+        $this->recipientType=$type;
         $this->creationDate=$creationDate;
+        $this->photo =[];
+        $this->authorType=$authorType;
+        $this->idAuthor=$idAuthor;
+        $this->idRecipient=$idRecipient;
+    }
+    
+    public function getEntity():string {
+        return $this->entity;
     }
 
-    public function getId() 
+    public function getId():int 
     {
         return $this->idReview;
     }
 
-    public function getTitle() 
+    public function getTitle():string 
     {
         return $this->title;
     }
 
-    public function getValutation()
+    public function getValutation():int
     {
         return $this->valutation;
     }
 
-    public function getDescription()
+    public function getDescription():string | null
     {
         return $this->description;
     }
-
-    public function getType()
+    public function getRecipientType():Type
     {
-        return $this->type;
+        return $this->recipientType;
+    }
+    public function getAuthorType():Type {
+        return $this->authorType;
+    }
+    public function getIDAuthor():int {
+        return $this->idAuthor;
+    }
+    public function getIDRecipient():int {
+        return $this->idRecipient;
     }
 
-    public function getCreationDate()
+    public function getCreationDate():DateTime
     {
         return $this->creationDate;
     }
-
-
-
-    public function setTitle($newTitle)
+    public function setTitle(string $newTitle):void
     {
         $this->title=$newTitle;
     }
+    public function setValutation(int $val):void
+    {
+        $this->valutation=$val;
+    }
+    public function setDescription(string $newDesc):void
+    {
+        $this->description=$newDesc;
+    }
 
-    //public function uploadImage($Image) {}
+    public function uploadPhoto(EPhoto $photo):void {
+        $this->photo[]=$photo;
+    }
+    public function getPhotos():array|null
+    {
+        $values = array_values($this->photo);
+        if (count($values)===0) {
+            return null;
+        }
+        else {
+            return array_values($this->photo);
+        }
+    }
 }
