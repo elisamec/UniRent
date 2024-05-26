@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 26, 2024 at 02:19 PM
+-- Generation Time: May 26, 2024 at 03:54 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -195,7 +195,9 @@ CREATE TABLE `review` (
   `id` int(11) NOT NULL,
   `title` varchar(40) NOT NULL,
   `valutation` int(1) NOT NULL,
-  `description` varchar(500) DEFAULT NULL
+  `description` varchar(500) DEFAULT NULL,
+  `type` enum('student','accommodation','owner') NOT NULL,
+  `creationDate` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

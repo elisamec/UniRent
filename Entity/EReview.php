@@ -5,7 +5,7 @@ require_once('../utility/Type.php');
 
 class EReview 
 {
-    private int $idReview;
+    private ?int $idReview;
     private string $title;
     private int $valutation;
     private ?string $description;
@@ -18,11 +18,11 @@ class EReview
 
     private static $entity = EReview::class;
 
-    public function __construct(int $idReview, string $title, int $valutation, ?string $description, Type $type, DateTime $creationDate, Type $authorType, int $idAuthor, int $idRecipient) 
+    public function __construct(?int $idReview, string $title, int $valutation, ?string $description, Type $type, DateTime $creationDate, Type $authorType, int $idAuthor, int $idRecipient) 
     {
         $this->idReview=$idReview;
         $this->title=$title;
-        $this->valutation=$valutation;
+        $this->setValutation($valutation);
         $this->description=$description;
         $this->recipientType=$type;
         $this->creationDate=$creationDate;
@@ -77,9 +77,12 @@ class EReview
     {
         $this->title=$newTitle;
     }
-    public function setValutation(int $val):void
+    public function setValutation(int $valutation):void
     {
-        $this->valutation=$val;
+        if ($valutation < 1 || $valutation > 5) {
+            throw new InvalidArgumentException('Valutation must be a number between 1 and 5.');
+        }
+        $this->valutation = $valutation;
     }
     public function setDescription(string $newDesc):void
     {

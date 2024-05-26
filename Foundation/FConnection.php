@@ -18,7 +18,7 @@ class FConnection
 	 * @var mixed
 	 */
 	private $db;
-	private static $hostname ="localhost";
+	private static $hostname ="127.0.0.1";
     private static $username ="root";
     private static $password ="pippo";
     private static $dbname = "unirent";
