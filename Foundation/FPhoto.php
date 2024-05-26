@@ -23,4 +23,8 @@ class FPhoto {
     {
         return true;
     }
+    public function delete(EPhoto $photo):bool
+    {
+        return true;
+    }
 }
