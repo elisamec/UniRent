@@ -9,11 +9,11 @@ class EVisit
 
     private static $entity = EVisit::class;
 
-    public function __construct(int $idVisit, DateTime $date, int $idStudent, int $idAccommodation){
-        $this->idVisit=$idVisit;
-        $this->date=$date;
-        $this->idStudent=$idStudent;
-        $this->idAccommodation=$idAccommodation;
+    public function __construct(int $idVisit, String $date, int $idStudent, int $idAccommodation){
+        $this->idVisit = $idVisit;
+        $this->date = new DateTime($date);
+        $this->idStudent = $idStudent;
+        $this->idAccommodation = $idAccommodation;
     }
 
     public function getEntity():string {
@@ -38,6 +38,12 @@ class EVisit
 
     public function setDate(DateTime $date) {
         $this->date = $date;
+    }
+
+    public function __toString():string
+    {
+        $day = $this->date->format('Y-m-d H:i:s');
+        return "ID: $this->idVisit  DATE: $day  STUDENT: $this->idStudent  ACCOMMODATION: $this->idAccommodation";
     }
 
 

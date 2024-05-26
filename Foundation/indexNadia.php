@@ -9,11 +9,13 @@
 
     $id = 4;
 
-    if($FV->exist($id))
-    {
+    /*if($FV->exist($id)){
         echo 'Esiste la visita';
-    }
-    else
-    {
+    }else{
         echo 'Non esiste la visita ';
-    }
+    }*/
+
+    $risultato=$FV->load($id);
+    $stringa=$risultato->__toString();
+    print $stringa;
+    
