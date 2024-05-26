@@ -36,7 +36,7 @@ class EReview
         return $this->entity;
     }
 
-    public function getId():int 
+    public function getId():?int 
     {
         return $this->idReview;
     }
@@ -88,6 +88,9 @@ class EReview
     {
         $this->description=$newDesc;
     }
+    public function setId(int $id):void {
+        $this->idReview=$id;
+    } 
 
     public function uploadPhoto(EPhoto $photo):void {
         $this->photo[]=$photo;
