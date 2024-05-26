@@ -43,11 +43,10 @@ class FReview {
     public function load(int $id, Type $recipientType): EReview 
     {
         $rowRev = FReview::loadReview($id);
-
         switch ($recipientType) {
-            case 'student':
+            case Type::STUDENT:
                 $rowSpecific = FReview::loadStudentReview($id);
-                if ($rowSpecific['authorStudent']!== null) {
+                if (array_key_exists('authorStudent', $rowSpecific)) {
                     $author = $rowSpecific['authorStudent'];
                 }
                 else {
@@ -55,14 +54,14 @@ class FReview {
                 }
                 $recipient = $rowSpecific['idStudent'];
                 break;
-            case 'owner':
+            case Type::OWNER:
                 $rowSpecific = FReview::loadOwnerReview($id);
                 $rowSpecific['authorType'] = 'student';
                 $author = $rowSpecific['idAuthor'];
                 $recipient = $rowSpecific['idOwner'];
                 break;
             
-            case 'accommodation':
+            case Type::ACCOMMODATION:
                 $rowSpecific = FReview::loadAccomReview($id);
                 $rowSpecific['authorType'] = 'student';
                 $author = $rowSpecific['idAuthor'];
@@ -184,19 +183,19 @@ class FReview {
     
     $type = $Review->getRecipientType();
     switch ($type) {
-        case 'student':
+        case Type::STUDENT:
             $storeSpec = FReview::storeStudentRev($Review);
             if ($storeSpec===false){
                 return false;
             }
             break;
-        case 'owner':
+        case Type::OWNER:
             $storeSpec = FReview::storeOwnerRev($Review);
             if ($storeSpec===false){
                 return false;
             }
             break;
-        case 'accommodation':
+        case Type::ACCOMMODATION:
             $storeSpec = FReview::storeAccommRev($Review);
             if ($storeSpec===false){
                 return false;
@@ -208,7 +207,7 @@ class FReview {
   private function storeReview(EReview $Review):bool 
   {
     $db=FConnection::getInstance()->getConnection();
-    //$db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+    $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
     try
     { 
         $db->exec('LOCK TABLES review WRITE');
@@ -229,6 +228,9 @@ class FReview {
         $stm->execute();
         $db->commit();
         $db->exec('UNLOCK TABLES');
+        $id=$db->lastInsertId();
+        $Review->setId($id);
+        echo $Review->getId();
         return true;
     }      
     catch(PDOException $e)
@@ -258,12 +260,15 @@ class FReview {
         $q='INSERT INTO studentreview (idStudent, idReview , authorType, authorStudent, authorOwner)';
         $q=$q.' VALUES (:idStud, :idRev, :type, :stud, :own)';
         $stm=$db->prepare($q);
+        echo 'Query Prepared';
         $stm->bindValue(':idStud',$Review->getIDRecipient(),PDO::PARAM_INT);
         $stm->bindValue(':idRev',$Review->getId(),PDO::PARAM_INT);
-        $stm->bindValue(':type',$authorType,PDO::PARAM_STR);
+        $stm->bindValue(':type',$authorType->value,PDO::PARAM_STR);
         $stm->bindValue($null,null,PDO::PARAM_NULL);
         $stm->bindValue($notnull,$author,PDO::PARAM_INT);
+        echo 'Bind';
         $stm->execute();
+        echo 'execute';
         $db->commit();
         $db->exec('UNLOCK TABLES');
         return true;
