@@ -243,40 +243,52 @@ class FReview {
     $db=FConnection::getInstance()->getConnection();
     $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
     $authorType=$Review->getAuthorType();
-    $author=$Review->getIDAuthor();
-    if ($authorType === 'student') {
-        $notnull = ':stud';
-        $null= ':own';
+    if ($authorType->value === 'student') {
+        try
+        { 
+            $db->exec('LOCK TABLES studentreview WRITE');
+            $db->beginTransaction();
+            $q='INSERT INTO studentreview (idStudent, idReview , authorType, authorStudent)';
+            $q=$q.' VALUES (:idStud, :idRev, :type, :stud)';
+            $stm=$db->prepare($q);
+            $stm->bindValue(':idStud',$Review->getIDRecipient(),PDO::PARAM_INT);
+            $stm->bindValue(':idRev',$Review->getId(),PDO::PARAM_INT);
+            $stm->bindValue(':type',$authorType->value,PDO::PARAM_STR);
+            $stm->bindValue(':stud',$Review->getIDAuthor(),PDO::PARAM_INT);
+            $stm->execute();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+            return true;
+        }      
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return false;
+        }
+
     }
     else {
-        $null = ':stud';
-        $notnull= ':own';
-    }
-    try
-    { 
-        $db->exec('LOCK TABLES studentreview WRITE');
-        $db->beginTransaction();
-        $q='INSERT INTO studentreview (idStudent, idReview , authorType, authorStudent, authorOwner)';
-        $q=$q.' VALUES (:idStud, :idRev, :type, :stud, :own)';
-        $stm=$db->prepare($q);
-        echo 'Query Prepared';
-        $stm->bindValue(':idStud',$Review->getIDRecipient(),PDO::PARAM_INT);
-        echo $Review->getId();
-        $stm->bindValue(':idRev',$Review->getId(),PDO::PARAM_INT);
-        $stm->bindValue(':type',$authorType->value,PDO::PARAM_STR);
-        $stm->bindValue($null,null,PDO::PARAM_NULL);
-        $stm->bindValue($notnull,$author,PDO::PARAM_INT);
-        echo 'Bind';
-        $stm->execute();
-        echo 'execute';
-        $db->commit();
-        $db->exec('UNLOCK TABLES');
-        return true;
-    }      
-    catch(PDOException $e)
-    {
-        $db->rollBack();
-        return false;
+        try
+        { 
+            $db->exec('LOCK TABLES studentreview WRITE');
+            $db->beginTransaction();
+            $q='INSERT INTO studentreview (idStudent, idReview , authorType, authorOwner)';
+            $q=$q.' VALUES (:idStud, :idRev, :type, :own)';
+            $stm=$db->prepare($q);
+            $stm->bindValue(':idStud',$Review->getIDRecipient(),PDO::PARAM_INT);
+            $stm->bindValue(':idRev',$Review->getId(),PDO::PARAM_INT);
+            $stm->bindValue(':type',$authorType->value,PDO::PARAM_STR);
+            $stm->bindValue(':own',$Review->getIDAuthor(),PDO::PARAM_INT);
+            $stm->execute();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+            return true;
+        }      
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return false;
+        }
     }
   }
   private function storeOwnerRev(EReview $Review):bool 

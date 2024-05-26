@@ -139,7 +139,7 @@ CREATE TABLE `owner` (
   `surname` varchar(20) NOT NULL,
   `picture` int(11) DEFAULT NULL,
   `email` varchar(40) NOT NULL,
-  `phoneNumber` int(15) NOT NULL,
+  `phoneNumber` varchar(15) NOT NULL,
   `iban` varchar(27) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
