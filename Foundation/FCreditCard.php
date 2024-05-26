@@ -132,31 +132,36 @@ class FCreditCard
      */
     public function update(ECreditCard $CreditCard):bool 
     {
-        $db=FConnection::getInstance()->getConnection();      
-        try
-        {
-            $db->exec('LOCK TABLES creditcard WRITE');
-            $db->beginTransaction();
-            $q='UPDATE creditcard SET name = :name, surname = :surname, expiry = :expiry, cvv = :cvv, studentId = :studentId  WHERE number=:number';
-            $stm=$db->prepare($q);
-            $stm->bindValue(':name',$CreditCard->getName(),PDO::PARAM_STR);
-            $stm->bindValue(':surname',$CreditCard->getSurname(),PDO::PARAM_STR);
-            $stm->bindValue(':expiry',$CreditCard->getExpiry(),PDO::PARAM_STR);
-            $stm->bindValue(':cvv',$CreditCard->getCVV(),PDO::PARAM_INT);
-            $stm->bindValue(':studentId',$CreditCard->getStudentID(),PDO::PARAM_INT);
-            $stm->bindValue(':number',$CreditCard->getNumber(),PDO::PARAM_INT);
-            $stm->execute();           
-            $db->commit();
-            $db->exec('UNLOCK TABLES');
-
-            return true;
+        $db=FConnection::getInstance()->getConnection(); 
+        if($this->exist($CreditCard->getNumber())) 
+        {    
+            try
+            {
+                $db->exec('LOCK TABLES creditcard WRITE');
+                $db->beginTransaction();
+                $q='UPDATE creditcard SET name = :name, surname = :surname, expiry = :expiry, cvv = :cvv, studentId = :studentId  WHERE number=:number';
+                $stm=$db->prepare($q);
+                $stm->bindValue(':name',$CreditCard->getName(),PDO::PARAM_STR);
+                $stm->bindValue(':surname',$CreditCard->getSurname(),PDO::PARAM_STR);
+                $stm->bindValue(':expiry',$CreditCard->getExpiry(),PDO::PARAM_STR);
+                $stm->bindValue(':cvv',$CreditCard->getCVV(),PDO::PARAM_INT);
+                $stm->bindValue(':studentId',$CreditCard->getStudentID(),PDO::PARAM_INT);
+                $stm->bindValue(':number',$CreditCard->getNumber(),PDO::PARAM_INT);
+                $stm->execute();           
+                $db->commit();
+                $db->exec('UNLOCK TABLES');
+                return true;
+            }
+            catch(PDOException $e)
+            {
+                $db->rollBack();
+                return false;
+            }
         }
-        catch(PDOException $e)
+        else
         {
-            $db->rollBack();
             return false;
         }
-
     }
     
     /**
