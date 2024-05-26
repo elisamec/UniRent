@@ -1,5 +1,25 @@
 <?php 
 
+
+#PARTE MATTEO
+/*
+    METTI QUI IL TUO CODICE
+*/
+
+#PARTE ELISABETTA
+/*
+    METTI QUI IL TUO CODICE
+*/
+
+#PARTE NADIA
+/*
+    METTI QUI IL TUO CODICE
+*/
+
+
+#CODICE DA SMISTARE NELLE RELATIVE PARTI:/*
+
+
 #require_once ('FCreditCard.php');
 #require_once ('../Entity/ECreditCard.php');
 require_once('FStudent.php');
@@ -50,7 +70,7 @@ else
 }
 */
 
-$FS=FStudent::getInstance();
+/*$FS=FStudent::getInstance();
 $risultato_exist=$FS->exist(5);
 if($risultato_exist)
 {
@@ -60,3 +80,7 @@ else
 {
     echo 'No non c\' è! ';
 }
+
+*/
+
+#FINE CODICE DA SMISTARE
