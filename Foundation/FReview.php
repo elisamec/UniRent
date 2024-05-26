@@ -74,6 +74,7 @@ class FReview {
         $result=new EReview($rowRev['idReview'],$rowRev['title'],$rowRev['valutation'],$rowRev['description'],$rowRev['type'],$rowRev['creationDate'], $rowSpecific['authorType'], $author, $recipient);
         return $result;
     }
+   
     private function loadReview(int $id):mixed {
         $db=FConnection::getInstance()->getConnection();
         
@@ -333,28 +334,6 @@ class FReview {
         if ($updatePhotos===false){
             return false;
         }
-    
-    $type = $Review->getRecipientType();
-    switch ($type) {
-        case 'student':
-            $updateSpec = FReview::updateStudentRev($Review);
-            if ($updateSpec===false){
-                return false;
-            }
-            break;
-        case 'owner':
-            $updateSpec = FReview::updateOwnerRev($Review);
-            if ($updateSpec===false){
-                return false;
-            }
-            break;
-        case 'accommodation':
-            $updateSpec = FReview::updateAccommRev($Review);
-            if ($updateSpec===false){
-                return false;
-            }
-            break;
-    }
     return true;
 
     }
@@ -400,9 +379,9 @@ class FReview {
         $db=FConnection::getInstance()->getConnection();      
         try
         {
-            $db->exec('LOCK TABLES Review WRITE');
+            $db->exec('LOCK TABLES review WRITE');
             $db->beginTransaction();
-            $q='UPDATE Review SET name = :name, surname = :surname, expiry = :expiry, cvv = :cvv, studentId = :studentId  WHERE id=:id';
+            $q='UPDATE review SET title = :title, surname = :surname, expiry = :expiry, cvv = :cvv, studentId = :studentId  WHERE id=:id';
             $stm=$db->prepare($q);
             $stm->bindValue(':name',$Review->getName(),PDO::PARAM_STR);
             $stm->bindValue(':surname',$Review->getSurname(),PDO::PARAM_STR);
@@ -421,15 +400,6 @@ class FReview {
             $db->rollBack();
             return false;
         }
-    }
-    private function updateStudentRev(EReview $Review):bool {
-
-    }
-    private function updateOwnerRev(EReview $Review):bool {
-
-    }
-    private function updateAccommRev(EReview $Review):bool {
-
     }
     
     /**
