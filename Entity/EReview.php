@@ -1,12 +1,7 @@
 <?php
 
 require_once ('EPhoto.php');
-enum Type: string
-{
-    case STUDENT = 'student';
-    case ACCOMMODATION = 'accommodation';
-    case OWNER = 'owner';
-}
+require_once('../utility/Type.php');
 
 class EReview 
 {

@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+  -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
@@ -45,7 +45,6 @@ CREATE TABLE `accommodationreview` (
 
 CREATE TABLE `accomodation` (
   `idAccommodation` int(11) NOT NULL,
-  `photo` int(11) NOT NULL,
   `title` varchar(30) NOT NULL,
   `address` int(11) NOT NULL,
   `price` double NOT NULL,
@@ -168,7 +167,10 @@ CREATE TABLE `ownerreview` (
 
 CREATE TABLE `photo` (
   `idPhoto` int(11) NOT NULL,
-  `photo` blob NOT NULL
+  `photo` blob NOT NULL,
+  'relativeTo' enum('accommodation','review','other') NOT NULL DEFAULT 'other',
+  'idAccommodation' int(11) DEFAULT NULL,
+  'idReview' int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -198,7 +200,6 @@ CREATE TABLE `review` (
   `title` varchar(40) NOT NULL,
   `valutation` int(1) NOT NULL,
   `description` varchar(500) DEFAULT NULL,
-  `photo` int(11) NOT NULL,
   `type` enum('student','owner','accommodation') NOT NULL,
   `creationDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -299,7 +300,6 @@ ALTER TABLE `accommodationreview`
 ALTER TABLE `accomodation`
   ADD PRIMARY KEY (`idAccommodation`),
   ADD UNIQUE KEY `address` (`address`),
-  ADD KEY `photo` (`photo`),
   ADD KEY `visitAvaiability` (`visitAvaiability`);
 
 --
@@ -364,6 +364,8 @@ ALTER TABLE `ownerreview`
 --
 ALTER TABLE `photo`
   ADD PRIMARY KEY (`idPhoto`);
+  ADD KEY 'idReview' ('idReview'),
+  ADD KEY `idAccommodation` (`idAccommodation`);
 
 --
 -- Indexes for table `reservation`
@@ -377,8 +379,7 @@ ALTER TABLE `reservation`
 -- Indexes for table `review`
 --
 ALTER TABLE `review`
-  ADD PRIMARY KEY (`idReview`),
-  ADD KEY `photo` (`photo`);
+  ADD PRIMARY KEY (`idReview`);
 
 --
 -- Indexes for table `student`
