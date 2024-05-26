@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 26, 2024 alle 13:51
+-- Creato il: Mag 26, 2024 alle 14:01
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -111,7 +111,7 @@ CREATE TABLE `creditcard` (
   `surname` varchar(20) NOT NULL,
   `expiry` varchar(5) NOT NULL,
   `cvv` int(3) NOT NULL,
-  `studentId` int(11) NOT NULL
+  `idStudent` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -180,7 +180,7 @@ CREATE TABLE `reservation` (
   `made` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `statusAccept` tinyint(1) NOT NULL,
   `accommodationId` int(11) NOT NULL,
-  `studentId` int(11) NOT NULL
+  `idStudent` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -243,7 +243,7 @@ CREATE TABLE `supportrequest` (
   `id` int(11) NOT NULL,
   `message` varchar(1000) NOT NULL,
   `topic` enum('registration','appUse','bug','') NOT NULL,
-  `studentId` int(11) DEFAULT NULL,
+  `idStudent` int(11) DEFAULT NULL,
   `ownerId` int(11) DEFAULT NULL,
   `authorType` enum('student','owner','','') NOT NULL,
   `status` tinyint(1) NOT NULL
@@ -321,7 +321,7 @@ ALTER TABLE `contract`
 --
 ALTER TABLE `creditcard`
   ADD PRIMARY KEY (`number`),
-  ADD KEY `studentId` (`studentId`);
+  ADD KEY `studentId` (`idStudent`);
 
 --
 -- Indici per le tabelle `day`
@@ -362,7 +362,7 @@ ALTER TABLE `photo`
 ALTER TABLE `reservation`
   ADD PRIMARY KEY (`id`),
   ADD KEY `accommodationId` (`accommodationId`),
-  ADD KEY `studentId` (`studentId`);
+  ADD KEY `studentId` (`idStudent`);
 
 --
 -- Indici per le tabelle `review`
@@ -395,7 +395,7 @@ ALTER TABLE `studentreview`
 ALTER TABLE `supportrequest`
   ADD PRIMARY KEY (`id`),
   ADD KEY `ownerId` (`ownerId`),
-  ADD KEY `studentId` (`studentId`);
+  ADD KEY `studentId` (`idStudent`);
 
 --
 -- Indici per le tabelle `time`
@@ -520,7 +520,7 @@ ALTER TABLE `contract`
 -- Limiti per la tabella `creditcard`
 --
 ALTER TABLE `creditcard`
-  ADD CONSTRAINT `creditcard_ibfk_1` FOREIGN KEY (`studentId`) REFERENCES `student` (`id`);
+  ADD CONSTRAINT `creditcard_ibfk_1` FOREIGN KEY (`idStudent`) REFERENCES `student` (`id`);
 
 --
 -- Limiti per la tabella `day`
@@ -547,7 +547,7 @@ ALTER TABLE `ownerreview`
 --
 ALTER TABLE `reservation`
   ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`accommodationId`) REFERENCES `accommodation` (`id`),
-  ADD CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`studentId`) REFERENCES `student` (`id`);
+  ADD CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`idStudent`) REFERENCES `student` (`id`);
 
 --
 -- Limiti per la tabella `review`
@@ -575,7 +575,7 @@ ALTER TABLE `studentreview`
 --
 ALTER TABLE `supportrequest`
   ADD CONSTRAINT `supportrequest_ibfk_1` FOREIGN KEY (`ownerId`) REFERENCES `owner` (`id`),
-  ADD CONSTRAINT `supportrequest_ibfk_2` FOREIGN KEY (`studentId`) REFERENCES `student` (`id`);
+  ADD CONSTRAINT `supportrequest_ibfk_2` FOREIGN KEY (`idStudent`) REFERENCES `student` (`id`);
 
 --
 -- Limiti per la tabella `visit`
