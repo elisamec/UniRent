@@ -226,11 +226,10 @@ class FReview {
         }
         $stm->bindValue(':type',$Review->getRecipientType()->value,PDO::PARAM_STR);
         $stm->execute();
+        $id=$db->lastInsertId();
         $db->commit();
         $db->exec('UNLOCK TABLES');
-        $id=$db->lastInsertId();
         $Review->setId($id);
-        echo $Review->getId();
         return true;
     }      
     catch(PDOException $e)
@@ -262,6 +261,7 @@ class FReview {
         $stm=$db->prepare($q);
         echo 'Query Prepared';
         $stm->bindValue(':idStud',$Review->getIDRecipient(),PDO::PARAM_INT);
+        echo $Review->getId();
         $stm->bindValue(':idRev',$Review->getId(),PDO::PARAM_INT);
         $stm->bindValue(':type',$authorType->value,PDO::PARAM_STR);
         $stm->bindValue($null,null,PDO::PARAM_NULL);
