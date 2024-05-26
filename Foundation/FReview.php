@@ -59,14 +59,14 @@ class FReview {
                 break;
             case Type::OWNER:
                 $rowSpecific = FReview::loadOwnerReview($id);
-                $rowSpecific['authorType'] = 'student';
+                $authType=Type::STUDENT;
                 $author = $rowSpecific['idAuthor'];
                 $recipient = $rowSpecific['idOwner'];
                 break;
             
             case Type::ACCOMMODATION:
                 $rowSpecific = FReview::loadAccomReview($id);
-                $rowSpecific['authorType'] = 'student';
+                $authType=Type::STUDENT;
                 $author = $rowSpecific['idAuthor'];
                 $recipient = $rowSpecific['idAccommodation'];
                 break;
@@ -128,7 +128,7 @@ class FReview {
         {
             $db->exec('LOCK TABLES ownerreview READ');
             $db->beginTransaction();
-            $q='SELECT * FROM ownerreview WHERE id=:id';    
+            $q='SELECT * FROM ownerreview WHERE idReview=:id';    
             $stm=$db->prepare($q);
             $stm->bindParam(':id',$id,PDO::PARAM_INT);
             $stm->execute();
@@ -150,7 +150,7 @@ class FReview {
         {
             $db->exec('LOCK TABLES accommodationreview READ');
             $db->beginTransaction();
-            $q='SELECT * FROM accommodationreview WHERE id=:id';    
+            $q='SELECT * FROM accommodationreview WHERE idReview=:id';    
             $stm=$db->prepare($q);
             $stm->bindParam(':id',$id,PDO::PARAM_INT);
             $stm->execute();
@@ -327,7 +327,7 @@ class FReview {
     { 
         $db->exec('LOCK TABLES accommodationreview WRITE');
         $db->beginTransaction();
-        $q='INSERT INTO review (idReview, idAccommodation , idAuthor)';
+        $q='INSERT INTO accommodationreview (idReview, idAccommodation , idAuthor)';
         $q=$q.' VALUES (:rev, :accom, :auth)';
         $stm=$db->prepare($q);
         $stm->bindValue(':rev',$Review->getId(),PDO::PARAM_INT);

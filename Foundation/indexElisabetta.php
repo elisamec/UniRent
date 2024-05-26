@@ -5,18 +5,35 @@ require_once('../utility/Type.php');
 
 $FRev=FReview::getInstance();
 
-$review=new EReview(7, 'Hello World', 3, null, Type::STUDENT, new DateTime("now"), Type::OWNER, 1, 1);
-//$store=FReview::getInstance()->store($review);
-/*
-$load=$FRev->load($review->getId(), Type::STUDENT);
-*/
-//$review->setTitle('Modified');
-//$new = $FRev->update($review);
-$delete=$FRev->delete($review);
-if ($delete) {
-    echo 'All good';
+$review=new EReview(null, 'Hello World', 3, null, Type::ACCOMMODATION, new DateTime("now"), Type::STUDENT, 1, 1);
+$store=FReview::getInstance()->store($review);
+if ($store) {
+    print 'Store: All good';
 }
 else {
-    echo 'Something went wrong';
+    print 'Store: Something went wrong';
+}
+
+$load=$FRev->load($review->getId(), $review->getRecipientType());
+if ($load) {
+    print 'Load: All good';
+}
+else {
+    print 'Load: Something went wrong';
+}
+$review->setTitle('Modified');
+$new = $FRev->update($review);
+if ($new) {
+    print 'Update: All good';
+}
+else {
+    print 'Update: Something went wrong';
+}
+$delete=$FRev->delete($review);
+if ($delete) {
+    print 'Delete: All good';
+}
+else {
+    print 'Delete: Something went wrong';
 }
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 26, 2024 at 07:17 PM
+-- Generation Time: May 26, 2024 at 07:42 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -36,7 +36,7 @@ CREATE TABLE `accommodation` (
   `description` varchar(500) NOT NULL,
   `deposit` double DEFAULT NULL,
   `visitAvaiability` int(11) NOT NULL,
-  `visitDuration` time NOT NULL,
+  `visitDuration` int(11) NOT NULL COMMENT 'minutes',
   `man` tinyint(1) NOT NULL,
   `woman` tinyint(1) NOT NULL,
   `pets` tinyint(1) NOT NULL,
@@ -71,6 +71,13 @@ CREATE TABLE `address` (
   `postalCode` int(11) NOT NULL,
   `city` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `address`
+--
+
+INSERT INTO `address` (`id`, `type`, `streetName`, `houseNumber`, `appartmentNumber`, `postalCode`, `city`) VALUES
+(1, 'via', 'dell\'esempio', 3, 5, 1234, 'SomeCity');
 
 -- --------------------------------------------------------
 
@@ -162,6 +169,16 @@ CREATE TABLE `ownerreview` (
   `idAuthor` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `ownerreview`
+--
+
+INSERT INTO `ownerreview` (`idOwner`, `idReview`, `idAuthor`) VALUES
+(1, 13, 1),
+(1, 14, 1),
+(1, 15, 1),
+(1, 21, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -222,7 +239,13 @@ INSERT INTO `review` (`id`, `title`, `valutation`, `description`, `type`, `creat
 (9, 'Hello World', 3, NULL, 'student', '2024-05-26 16:42:10'),
 (10, 'Modified', 3, NULL, 'student', '2024-05-26 16:55:35'),
 (11, 'Modified', 3, NULL, 'student', '2024-05-26 17:01:32'),
-(12, 'Modified', 3, NULL, 'student', '2024-05-26 17:02:30');
+(12, 'Modified', 3, NULL, 'student', '2024-05-26 17:02:30'),
+(13, 'Hello World', 3, NULL, 'owner', '2024-05-26 17:20:01'),
+(14, 'Hello World', 3, NULL, 'owner', '2024-05-26 17:21:16'),
+(15, 'Hello World', 3, NULL, 'owner', '2024-05-26 17:21:59'),
+(21, 'Hello World', 3, NULL, 'owner', '2024-05-26 17:25:02'),
+(22, 'Hello World', 3, NULL, 'accommodation', '2024-05-26 17:26:13'),
+(23, 'Hello World', 3, NULL, 'accommodation', '2024-05-26 17:28:12');
 
 -- --------------------------------------------------------
 
@@ -472,13 +495,13 @@ ALTER TABLE `visit`
 -- AUTO_INCREMENT for table `accommodation`
 --
 ALTER TABLE `accommodation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `administrator`
@@ -514,7 +537,7 @@ ALTER TABLE `reservation`
 -- AUTO_INCREMENT for table `review`
 --
 ALTER TABLE `review`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `student`
@@ -549,7 +572,8 @@ ALTER TABLE `visit`
 --
 ALTER TABLE `accommodation`
   ADD CONSTRAINT `accommodation_ibfk_2` FOREIGN KEY (`address`) REFERENCES `address` (`id`),
-  ADD CONSTRAINT `accommodation_ibfk_4` FOREIGN KEY (`owner`) REFERENCES `owner` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `accommodation_ibfk_4` FOREIGN KEY (`owner`) REFERENCES `owner` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `accommodation_ibfk_5` FOREIGN KEY (`visitAvaiability`) REFERENCES `day` (`id`);
 
 --
 -- Constraints for table `accommodationreview`
