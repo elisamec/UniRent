@@ -421,10 +421,12 @@ class FReview {
         try
         {   
             $photos = $Review->getPhotos();
-            foreach ($photos as $photo) {
-                $deleted= FPhoto::getInstance()->delete($photo->getId());
-                if ($deleted===false) {
-                    return false;
+            if ($photos!==null){
+                foreach ($photos as $photo) {
+                    $deleted= FPhoto::getInstance()->delete($photo->getId());
+                    if ($deleted===false) {
+                        return false;
+                    }
                 }
             }
             $db->exec('LOCK TABLES review WRITE');
