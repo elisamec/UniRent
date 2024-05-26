@@ -19,11 +19,20 @@ class FPhoto {
         return self::$instance;
     }
 
+    /* ELISABETTA:
+     * Mi per trovare quali sono le immagini che sono state eliminate attualmente e
+     * far partire il delete solo per gli oggetti per cui mi serve effettivamente.
+    */ 
+    public function loadCurrentPhotos(int $idReview):array {
+        $result=[];
+        return $result;
+    }
+
     public function store(EPhoto $photo):bool
     {
         return true;
     }
-    public function delete(EPhoto $photo):bool
+    public function delete(int $id):bool
     {
         return true;
     }

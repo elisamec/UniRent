@@ -1,7 +1,7 @@
 <?php 
 
 require_once ('FConnection.php');
-require_once ('../Entity/FVisit.php');
+require_once ('../Entity/EVisit.php');
 
 /**
  * FVisit

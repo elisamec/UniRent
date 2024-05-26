@@ -1,6 +1,11 @@
 <?php
 //Da rivedere
 class EPhoto {
+    private int $id;
+
+    public function getId():int {
+        return $this->id;
+    }
 
     /*
     private array $file; // Holds the uploaded file information

@@ -29,7 +29,7 @@ require_once ('../Entity/EOwner.php');
 
     public function exist(int $id):bool 
     {
-        $q='SELECT * FROM owner WHERE idOwner=:idOwner';
+        $q='SELECT * FROM owner WHERE id=:idOwner';
         $connection= FConnection::getInstance();
         $db=$connection->getConnection();
         $db->beginTransaction();
