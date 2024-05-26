@@ -1,6 +1,6 @@
 <?php
 
-class EAccommodation
+class EVisit
 {
     private int $idVisit;
     private DateTime $day;
