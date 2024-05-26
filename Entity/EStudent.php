@@ -105,7 +105,7 @@ class EStudent
      * @param  bool $animals
      * @return self
      */
-    public function __construct(int $id, string $username, string $password, string $name, string $surname, int $pictureID, string $universityMail, int $courseDuration, int $immatricolationYear, DateTime $birthDate, bool $sex, bool $smoker, bool $animals)
+    public function __construct(int $id, string $username, string $password, string $name, string $surname, int|null $pictureID, string $universityMail, int $courseDuration, int $immatricolationYear, DateTime $birthDate, bool $sex, bool $smoker, bool $animals)
     {
         $this->id=$id;
         $this->username=$username;
@@ -174,7 +174,7 @@ class EStudent
      *
      * @return int
      */
-    public function getPicture():int
+    public function getPicture():int|null
     {
         return $this->picture;
     }    

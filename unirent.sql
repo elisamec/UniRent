@@ -263,7 +263,7 @@ CREATE TABLE `student` (
   `universityMail` varchar(40) NOT NULL,
   `courseDuration` int(1) NOT NULL,
   `immatricolationYear` int(4) NOT NULL,
-  `birthDate` date NOT NULL,
+  `birthDate` datetime NOT NULL,
   `sex` varchar(1) NOT NULL,
   `smoker` tinyint(1) NOT NULL,
   `animals` tinyint(1) NOT NULL
