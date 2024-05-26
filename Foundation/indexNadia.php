@@ -7,7 +7,9 @@
 
     $FV=FVisit::getInstance();
 
-    if(1)
+    $id = 4;
+
+    if($FV->exist($id))
     {
         echo 'Esiste la visita';
     }

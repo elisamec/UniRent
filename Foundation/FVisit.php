@@ -1,7 +1,7 @@
 <?php 
 
 require_once ('FConnection.php');
-require_once ('../Entity/FVisit.php');
+require_once ('../Entity/EVisit.php');
 
 /**
  * FVisit
@@ -37,9 +37,9 @@ class FVisit
      * @param  int $number
      * @return bool
      */
-    public function exist(int $visitid):bool 
+    public function exist(int $visitId):bool 
     {
-        $q='SELECT * FROM visit WHERE id=$visitid';
+        $q="SELECT * FROM visit WHERE id=$visitId";
         $connection= FConnection::getInstance();
         $db=$connection->getConnection();
         $db->beginTransaction();
@@ -48,10 +48,7 @@ class FVisit
         $db->commit();
         $result=$stm->rowCount();
 
-        if ($result >0)
-        {
-            return true;
-        }
+        if ($result >0) return true;
         return false;
 
     }
