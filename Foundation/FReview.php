@@ -22,7 +22,7 @@ class FReview {
     }
     public function exist(int $id):bool 
     {
-        $q='SELECT * FROM owner WHERE idReview=:id';
+        $q='SELECT * FROM owner WHERE id=:id';
         $connection= FConnection::getInstance();
         $db=$connection->getConnection();
         $db->beginTransaction();
@@ -71,7 +71,7 @@ class FReview {
             
         }
 
-        $result=new EReview($rowRev['idReview'],$rowRev['title'],$rowRev['valutation'],$rowRev['description'],$rowRev['type'],$rowRev['creationDate'], $rowSpecific['authorType'], $author, $recipient);
+        $result=new EReview($rowRev['id'],$rowRev['title'],$rowRev['valutation'],$rowRev['description'],$rowRev['type'],$rowRev['creationDate'], $rowSpecific['authorType'], $author, $recipient);
         return $result;
     }
    
@@ -82,7 +82,7 @@ class FReview {
         {
             $db->exec('LOCK TABLES review READ');
             $db->beginTransaction();
-            $q='SELECT * FROM review WHERE idReview=:id';    
+            $q='SELECT * FROM review WHERE id=:id';    
             $stm=$db->prepare($q);
             $stm->bindParam(':id',$id,PDO::PARAM_INT);
             $stm->execute();
@@ -104,7 +104,7 @@ class FReview {
         {
             $db->exec('LOCK TABLES studentreview READ');
             $db->beginTransaction();
-            $q='SELECT * FROM review WHERE idReview=:id';    
+            $q='SELECT * FROM review WHERE id=:id';    
             $stm=$db->prepare($q);
             $stm->bindParam(':id',$id,PDO::PARAM_INT);
             $stm->execute();
@@ -126,7 +126,7 @@ class FReview {
         {
             $db->exec('LOCK TABLES ownerreview READ');
             $db->beginTransaction();
-            $q='SELECT * FROM review WHERE idReview=:id';    
+            $q='SELECT * FROM review WHERE id=:id';    
             $stm=$db->prepare($q);
             $stm->bindParam(':id',$id,PDO::PARAM_INT);
             $stm->execute();
@@ -148,7 +148,7 @@ class FReview {
         {
             $db->exec('LOCK TABLES accommodationreview READ');
             $db->beginTransaction();
-            $q='SELECT * FROM review WHERE idReview=:id';    
+            $q='SELECT * FROM review WHERE id=:id';    
             $stm=$db->prepare($q);
             $stm->bindParam(':id',$id,PDO::PARAM_INT);
             $stm->execute();
@@ -169,6 +169,9 @@ class FReview {
   {
     
     $storeRev = FReview::storeReview($Review);
+    if ($storeRev===false){
+        return false;
+    }
     $photos=$Review->getPhotos();
     if ($photos!==null) {
         foreach ($photos as $photo) {
@@ -205,20 +208,24 @@ class FReview {
   private function storeReview(EReview $Review):bool 
   {
     $db=FConnection::getInstance()->getConnection();
-    $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+    //$db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
     try
     { 
         $db->exec('LOCK TABLES review WRITE');
         $db->beginTransaction();
-        $q='INSERT INTO review (idReview, title , valutation, description, type, creationDate)';
-        $q=$q.' VALUES (:id, :title, :valutation, :description, :type, :creationDate)';
+        $q='INSERT INTO review (title , valutation, description, type)';
+        $q=$q.' VALUES (:title, :valutation, :description, :type)';
         $stm=$db->prepare($q);
-        $stm->bindValue(':id',$Review->getId(),PDO::PARAM_INT);
         $stm->bindValue(':title',$Review->getTitle(),PDO::PARAM_STR);
         $stm->bindValue(':valutation',$Review->getValutation(),PDO::PARAM_INT);
-        $stm->bindValue(':description',$Review->getDescription(),PDO::PARAM_STR);
+        $description = $Review->getDescription();
+        if ($description!==null) {
+            $stm->bindValue(':description',$description,PDO::PARAM_STR);
+        }
+        else {
+            $stm->bindValue(':description', $description, PDO::PARAM_NULL);
+        }
         $stm->bindValue(':type',$Review->getRecipientType(),PDO::PARAM_INT);
-        $stm->bindValue(':creationDate', $Review->getCreationDate()->format('Y-m-d H:i:s'), PDO::PARAM_STR);
         $stm->execute();
         $db->commit();
         $db->exec('UNLOCK TABLES');
@@ -365,7 +372,7 @@ class FReview {
             }
         }
         foreach ($toBeDeleted as $del) {
-            $updatedPictures=FPhoto::getInstance()->delete($del);
+            $updatedPictures=FPhoto::getInstance()->delete($del->getId());
             if ($updatedPictures===false){
                 return false;
             }
@@ -373,7 +380,8 @@ class FReview {
     }
 
     private function loadPhotos(EReview $Review):array {
-
+        $id=$Review->getId();
+        return FPhoto::getInstance()->loadCurrentPhotos($id);
     }
     private function updateReview(EReview $Review):bool {
         $db=FConnection::getInstance()->getConnection();      
@@ -381,14 +389,17 @@ class FReview {
         {
             $db->exec('LOCK TABLES review WRITE');
             $db->beginTransaction();
-            $q='UPDATE review SET title = :title, surname = :surname, expiry = :expiry, cvv = :cvv, studentId = :studentId  WHERE id=:id';
+            $q='UPDATE review SET title = :title, valutation = :valutation, description = :description WHERE id=:id';
             $stm=$db->prepare($q);
-            $stm->bindValue(':name',$Review->getName(),PDO::PARAM_STR);
-            $stm->bindValue(':surname',$Review->getSurname(),PDO::PARAM_STR);
-            $stm->bindValue(':expiry',$Review->getExpiry(),PDO::PARAM_STR);
-            $stm->bindValue(':cvv',$Review->getCVV(),PDO::PARAM_INT);
-            $stm->bindValue(':studentId',$Review->getStudentID(),PDO::PARAM_INT);
-            $stm->bindValue(':id',$Review->getid(),PDO::PARAM_INT);
+            $stm->bindValue(':title',$Review->getTitle(),PDO::PARAM_STR);
+            $stm->bindValue(':valutation',$Review->getValutation(),PDO::PARAM_INT);
+            $description = $Review->getDescription();
+            if ($description!==null) {
+                $stm->bindValue(':description',$description,PDO::PARAM_STR);
+            }
+            else {
+                $stm->bindValue(':description', $description, PDO::PARAM_NULL);
+            }
             $stm->execute();           
             $db->commit();
             $db->exec('UNLOCK TABLES');
@@ -402,24 +413,27 @@ class FReview {
         }
     }
     
-    /**
-     * delete
-     *
-     * @param  int $id
-     * @return bool
-     */
-    public function delete(int $id): bool 
+    
+    public function delete(EReview $Review): bool 
     {
         $db=FConnection::getInstance()->getConnection();
        # $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);  Serve per il debug!
         try
-        {  
-            $db->exec('LOCK TABLES Review WRITE');
+        {   
+            $photos = $Review->getPhotos();
+            if ($photos!==null){
+                foreach ($photos as $photo) {
+                    $deleted= FPhoto::getInstance()->delete($photo->getId());
+                    if ($deleted===false) {
+                        return false;
+                    }
+                }
+            }
+            $db->exec('LOCK TABLES review WRITE');
             $db->beginTransaction();
-            $q='DELETE FROM Review WHERE id= :id';
+            $q='DELETE FROM review WHERE id= :id';
             $stm=$db->prepare($q);
-            $stm->bindValue(':id',$id, PDO::PARAM_INT);
-            print ' BindValue eseguita !';
+            $stm->bindValue(':id',$Review->getId(), PDO::PARAM_INT);
             $stm->execute();    
             $db->commit();
             $db->exec('UNLOCK TABLES');
