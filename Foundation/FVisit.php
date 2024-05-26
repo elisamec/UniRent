@@ -104,8 +104,8 @@ class FVisit
 
             $stm=$db->prepare($q);
             $stm->bindValue(':day',$day,PDO::PARAM_STR);
-            $stm->bindValue(':idStudent',$idStudent,PDO::PARAM_STR);
-            $stm->bindValue(':idAccommodation',$idAccommodation,PDO::PARAM_STR);
+            $stm->bindValue(':idStudent',$idStudent,PDO::PARAM_INT);
+            $stm->bindValue(':idAccommodation',$idAccommodation,PDO::PARAM_INT);
             
             $stm->execute();
             $db->commit();
@@ -118,6 +118,82 @@ class FVisit
             return false;
         }
 
+    }
+
+    /**
+     * update
+     *
+     * @param  EVisit $visit
+     * @return bool
+     */
+    public function update(EVisit $visit):bool 
+    {
+        $db=FConnection::getInstance()->getConnection();
+        $FV=FVisit::getInstance();
+
+        $visitId = $visit->getIdVisit();
+
+        
+        if($FV->exist($visitId)){
+            try{
+                $db->exec('LOCK TABLES creditcard WRITE');
+                $db->beginTransaction();
+
+                $day = $visit->getDate()->format('Y-m-d H:i:s');
+                
+                $q='UPDATE visit SET visitDay = :day  WHERE id=:id';
+                $stm=$db->prepare($q);
+                $stm->bindValue(':day',$day,PDO::PARAM_STR);
+                $stm->bindValue(':id',$visitId,PDO::PARAM_INT);
+
+                $stm->execute();           
+                $db->commit();
+                $db->exec('UNLOCK TABLES');
+
+                return true;
+            }
+            catch(PDOException $e)
+            {
+                $db->rollBack();
+                return false;
+            }
+        } else return false;
+        
+    }
+
+    /**
+     * delete
+     *
+     * @param  int $idVisit
+     * @return bool
+     */
+    public function delete(int $idVisit): bool 
+    {
+        $db=FConnection::getInstance()->getConnection();
+        $FV=FVisit::getInstance();
+        
+        if($FV->exist($idVisit)){
+            try
+            {  
+                $db->exec('LOCK TABLES visit WRITE');
+                $db->beginTransaction();
+                $q='DELETE FROM visit WHERE id=:id';
+                $stm=$db->prepare($q);
+                $stm->bindValue(':id',$idVisit, PDO::PARAM_INT);
+                $stm->execute();    
+                $db->commit();
+                $db->exec('UNLOCK TABLES');
+
+                return true;
+            }
+            catch(PDOException $e)
+            {
+                $db->rollBack();
+                return false;
+            }
+
+        } else return false;
+        
     }
     
 

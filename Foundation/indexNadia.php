@@ -25,11 +25,11 @@
     //$date = new DateTime("2002-09-15");
     //$studente= new EStudent(2, "Pippo", "pass", "Pippo", "Pluto", 1, "pippo@pluto.it", 3, 2032, $date, false, false, false);
 
-    $visit = new EVisit(10, "2024-05-26", 1, 2);
-    $esito=$FV->store($visit);
+    //$visit = new EVisit(12);
+    $esito=$FV->delete(5);
     if($esito==true)
     {
-        echo 'Visita inserita nel DataBase! ';
+        echo 'Visita aggiornata ';
     }
     elseif($esito==false)
     {
