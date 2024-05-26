@@ -36,6 +36,10 @@ class EVisit
         return $this->idAccommodation;
     }
 
+    public function setIdVisit(int $idVisit) {
+        $this->idVisit = $idVisit;
+    }
+
     public function setDate(DateTime $date) {
         $this->date = $date;
     }

@@ -32,11 +32,11 @@ class FVisit
     }
     
     /**
-     * exist
-     *
-     * @param  int $visitId
-     * @return bool
-     */
+    * exist
+    *
+    * @param  int $visitId
+    * @return bool
+    */
     public function exist(int $visitId):bool 
     {
         $q="SELECT * FROM visit WHERE id=$visitId";
@@ -52,19 +52,19 @@ class FVisit
     }
 
     /**
-     * load
-     *
-     * @param  int $visitId
-     * @return EVisit
-     */
-    public function load(int $visitId): EVisit{
+    * load
+    *
+    * @param  int $idVisit
+    * @return EVisit
+    */
+    public function load(int $idVisit): EVisit{
 
         $db=FConnection::getInstance()->getConnection();
         
         try{
             $db->exec('LOCK TABLES visit READ');
             $db->beginTransaction();
-            $q="SELECT * FROM visit WHERE id=$visitId";    
+            $q="SELECT * FROM visit WHERE id=$idVisit";    
             $stm=$db->prepare($q);
             $stm->execute();
             $db->commit();
@@ -80,11 +80,11 @@ class FVisit
     }
 
     /**
-   * store
-   *
-   * @param  EVisit $visit
-   * @return bool
-   */
+    * store
+    *
+    * @param  EVisit $visit
+    * @return bool
+    */
     public function store(EVisit $visit):bool 
     {
         $db=FConnection::getInstance()->getConnection();
@@ -108,8 +108,10 @@ class FVisit
             $stm->bindValue(':idAccommodation',$idAccommodation,PDO::PARAM_INT);
             
             $stm->execute();
+            $id=$db->lastInsertId();
             $db->commit();
             $db->exec('UNLOCK TABLES');
+            $visit->setIdVisit($id);
             return true;
         }      
         catch(PDOException $e)
@@ -121,11 +123,11 @@ class FVisit
     }
 
     /**
-     * update
-     *
-     * @param  EVisit $visit
-     * @return bool
-     */
+    * update
+    *
+    * @param  EVisit $visit
+    * @return bool
+    */
     public function update(EVisit $visit):bool 
     {
         $db=FConnection::getInstance()->getConnection();
@@ -162,11 +164,11 @@ class FVisit
     }
 
     /**
-     * delete
-     *
-     * @param  int $idVisit
-     * @return bool
-     */
+    * delete
+    *
+    * @param  int $idVisit
+    * @return bool
+    */
     public function delete(int $idVisit): bool 
     {
         $db=FConnection::getInstance()->getConnection();
@@ -195,7 +197,4 @@ class FVisit
         } else return false;
         
     }
-    
-
-
 }
