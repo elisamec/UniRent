@@ -215,9 +215,7 @@ class FReview {
         $db->beginTransaction();
         $q='INSERT INTO review (title , valutation, description, type)';
         $q=$q.' VALUES (:title, :valutation, :description, :type)';
-        echo 'Query ready';
         $stm=$db->prepare($q);
-        echo 'Query prepared';
         $stm->bindValue(':title',$Review->getTitle(),PDO::PARAM_STR);
         $stm->bindValue(':valutation',$Review->getValutation(),PDO::PARAM_INT);
         $description = $Review->getDescription();
@@ -228,11 +226,8 @@ class FReview {
             $stm->bindValue(':description', $description, PDO::PARAM_NULL);
         }
         $stm->bindValue(':type',$Review->getRecipientType()->value,PDO::PARAM_STR);
-        echo 'All binded';
         $stm->execute();
-        echo 'Executed';
         $db->commit();
-        echo 'Committed';
         $db->exec('UNLOCK TABLES');
         return true;
     }      
