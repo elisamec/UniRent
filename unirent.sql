@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 26, 2024 at 03:54 PM
+-- Generation Time: May 26, 2024 at 07:17 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -143,6 +143,13 @@ CREATE TABLE `owner` (
   `iban` varchar(27) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `owner`
+--
+
+INSERT INTO `owner` (`id`, `username`, `password`, `name`, `surname`, `picture`, `email`, `phoneNumber`, `iban`) VALUES
+(1, 'owner1', 'owner1', 'Test', 'Owner', NULL, 'some.owner@domain.com', '123456789', 'IT0000000000000000000000000');
+
 -- --------------------------------------------------------
 
 --
@@ -200,6 +207,23 @@ CREATE TABLE `review` (
   `creationDate` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `review`
+--
+
+INSERT INTO `review` (`id`, `title`, `valutation`, `description`, `type`, `creationDate`) VALUES
+(1, 'Hello World', 3, NULL, 'student', '2024-05-26 16:20:56'),
+(2, 'Hello World', 3, NULL, 'student', '2024-05-26 16:24:54'),
+(3, 'Hello World', 3, NULL, 'student', '2024-05-26 16:28:10'),
+(4, 'Hello World', 3, NULL, 'student', '2024-05-26 16:31:25'),
+(5, 'Hello World', 3, NULL, 'student', '2024-05-26 16:33:04'),
+(6, 'Hello World', 3, NULL, 'student', '2024-05-26 16:34:01'),
+(8, 'Hello from Student', 3, NULL, 'student', '2024-05-26 16:38:47'),
+(9, 'Hello World', 3, NULL, 'student', '2024-05-26 16:42:10'),
+(10, 'Modified', 3, NULL, 'student', '2024-05-26 16:55:35'),
+(11, 'Modified', 3, NULL, 'student', '2024-05-26 17:01:32'),
+(12, 'Modified', 3, NULL, 'student', '2024-05-26 17:02:30');
+
 -- --------------------------------------------------------
 
 --
@@ -222,6 +246,13 @@ CREATE TABLE `student` (
   `animals` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `student`
+--
+
+INSERT INTO `student` (`id`, `username`, `password`, `name`, `surname`, `picture`, `universityMail`, `courseDuration`, `immatricolationYear`, `birthDate`, `sex`, `smoker`, `animals`) VALUES
+(1, 'student1', 'student1', 'Test', 'Student', NULL, 'some.student@university.it', 3, 2021, '2004-05-01', 'F', 0, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -235,6 +266,23 @@ CREATE TABLE `studentreview` (
   `authorStudent` int(11) DEFAULT NULL,
   `authorOwner` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `studentreview`
+--
+
+INSERT INTO `studentreview` (`idStudent`, `idReview`, `authorType`, `authorStudent`, `authorOwner`) VALUES
+(1, 1, 'owner', NULL, 1),
+(1, 2, 'owner', NULL, 1),
+(1, 3, 'owner', NULL, 1),
+(1, 4, 'owner', NULL, 1),
+(1, 5, 'owner', NULL, 1),
+(1, 6, 'owner', NULL, 1),
+(1, 8, 'student', 1, NULL),
+(1, 9, 'owner', NULL, 1),
+(1, 10, 'owner', NULL, 1),
+(1, 11, 'owner', NULL, 1),
+(1, 12, 'owner', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -358,8 +406,8 @@ ALTER TABLE `ownerreview`
 --
 ALTER TABLE `photo`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `idAccommodation` (`idAccommodation`),
-  ADD KEY `idReview` (`idReview`);
+  ADD KEY `photo_ibfk_1` (`idAccommodation`),
+  ADD KEY `photo_ibfk_2` (`idReview`);
 
 --
 -- Indexes for table `reservation`
@@ -448,7 +496,7 @@ ALTER TABLE `day`
 -- AUTO_INCREMENT for table `owner`
 --
 ALTER TABLE `owner`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `photo`
@@ -466,13 +514,13 @@ ALTER TABLE `reservation`
 -- AUTO_INCREMENT for table `review`
 --
 ALTER TABLE `review`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `supportrequest`
@@ -501,16 +549,15 @@ ALTER TABLE `visit`
 --
 ALTER TABLE `accommodation`
   ADD CONSTRAINT `accommodation_ibfk_2` FOREIGN KEY (`address`) REFERENCES `address` (`id`),
-  ADD CONSTRAINT `accommodation_ibfk_3` FOREIGN KEY (`visitAvaiability`) REFERENCES `day` (`id`),
-  ADD CONSTRAINT `accommodation_ibfk_4` FOREIGN KEY (`owner`) REFERENCES `owner` (`id`);
+  ADD CONSTRAINT `accommodation_ibfk_4` FOREIGN KEY (`owner`) REFERENCES `owner` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `accommodationreview`
 --
 ALTER TABLE `accommodationreview`
-  ADD CONSTRAINT `accommodationreview_ibfk_1` FOREIGN KEY (`idAccommodation`) REFERENCES `accommodation` (`id`),
-  ADD CONSTRAINT `accommodationreview_ibfk_2` FOREIGN KEY (`idAuthor`) REFERENCES `student` (`id`),
-  ADD CONSTRAINT `accommodationreview_ibfk_3` FOREIGN KEY (`idReview`) REFERENCES `review` (`id`);
+  ADD CONSTRAINT `accommodationreview_ibfk_1` FOREIGN KEY (`idAccommodation`) REFERENCES `accommodation` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `accommodationreview_ibfk_2` FOREIGN KEY (`idAuthor`) REFERENCES `student` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `accommodationreview_ibfk_3` FOREIGN KEY (`idReview`) REFERENCES `review` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `contract`
@@ -523,7 +570,7 @@ ALTER TABLE `contract`
 -- Constraints for table `creditcard`
 --
 ALTER TABLE `creditcard`
-  ADD CONSTRAINT `creditcard_ibfk_1` FOREIGN KEY (`idStudent`) REFERENCES `student` (`id`);
+  ADD CONSTRAINT `creditcard_ibfk_1` FOREIGN KEY (`idStudent`) REFERENCES `student` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `day`
@@ -535,58 +582,58 @@ ALTER TABLE `day`
 -- Constraints for table `owner`
 --
 ALTER TABLE `owner`
-  ADD CONSTRAINT `owner_ibfk_1` FOREIGN KEY (`picture`) REFERENCES `photo` (`id`);
+  ADD CONSTRAINT `owner_ibfk_1` FOREIGN KEY (`picture`) REFERENCES `photo` (`id`) ON DELETE SET NULL;
 
 --
 -- Constraints for table `ownerreview`
 --
 ALTER TABLE `ownerreview`
-  ADD CONSTRAINT `ownerreview_ibfk_1` FOREIGN KEY (`idAuthor`) REFERENCES `student` (`id`),
-  ADD CONSTRAINT `ownerreview_ibfk_2` FOREIGN KEY (`idOwner`) REFERENCES `owner` (`id`),
-  ADD CONSTRAINT `ownerreview_ibfk_3` FOREIGN KEY (`idReview`) REFERENCES `review` (`id`);
+  ADD CONSTRAINT `ownerreview_ibfk_1` FOREIGN KEY (`idAuthor`) REFERENCES `student` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `ownerreview_ibfk_2` FOREIGN KEY (`idOwner`) REFERENCES `owner` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `ownerreview_ibfk_3` FOREIGN KEY (`idReview`) REFERENCES `review` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `photo`
 --
 ALTER TABLE `photo`
-  ADD CONSTRAINT `photo_ibfk_1` FOREIGN KEY (`idAccommodation`) REFERENCES `accommodation` (`id`),
-  ADD CONSTRAINT `photo_ibfk_2` FOREIGN KEY (`idReview`) REFERENCES `review` (`id`);
+  ADD CONSTRAINT `photo_ibfk_1` FOREIGN KEY (`idAccommodation`) REFERENCES `accommodation` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `photo_ibfk_2` FOREIGN KEY (`idReview`) REFERENCES `review` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `reservation`
 --
 ALTER TABLE `reservation`
-  ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`accommodationId`) REFERENCES `accommodation` (`id`),
-  ADD CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`idStudent`) REFERENCES `student` (`id`);
+  ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`accommodationId`) REFERENCES `accommodation` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`idStudent`) REFERENCES `student` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `student`
 --
 ALTER TABLE `student`
-  ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`picture`) REFERENCES `photo` (`id`);
+  ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`picture`) REFERENCES `photo` (`id`) ON DELETE SET NULL;
 
 --
 -- Constraints for table `studentreview`
 --
 ALTER TABLE `studentreview`
-  ADD CONSTRAINT `studentreview_ibfk_1` FOREIGN KEY (`idStudent`) REFERENCES `student` (`id`),
-  ADD CONSTRAINT `studentreview_ibfk_2` FOREIGN KEY (`idReview`) REFERENCES `review` (`id`),
-  ADD CONSTRAINT `studentreview_ibfk_3` FOREIGN KEY (`authorStudent`) REFERENCES `student` (`id`),
-  ADD CONSTRAINT `studentreview_ibfk_4` FOREIGN KEY (`authorOwner`) REFERENCES `owner` (`id`);
+  ADD CONSTRAINT `studentreview_ibfk_1` FOREIGN KEY (`idStudent`) REFERENCES `student` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `studentreview_ibfk_2` FOREIGN KEY (`idReview`) REFERENCES `review` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `studentreview_ibfk_3` FOREIGN KEY (`authorStudent`) REFERENCES `student` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `studentreview_ibfk_4` FOREIGN KEY (`authorOwner`) REFERENCES `owner` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `supportrequest`
 --
 ALTER TABLE `supportrequest`
-  ADD CONSTRAINT `supportrequest_ibfk_1` FOREIGN KEY (`ownerId`) REFERENCES `owner` (`id`),
-  ADD CONSTRAINT `supportrequest_ibfk_2` FOREIGN KEY (`idStudent`) REFERENCES `student` (`id`);
+  ADD CONSTRAINT `supportrequest_ibfk_1` FOREIGN KEY (`ownerId`) REFERENCES `owner` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `supportrequest_ibfk_2` FOREIGN KEY (`idStudent`) REFERENCES `student` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `visit`
 --
 ALTER TABLE `visit`
-  ADD CONSTRAINT `visit_ibfk_1` FOREIGN KEY (`studentId`) REFERENCES `student` (`id`),
-  ADD CONSTRAINT `visit_ibfk_2` FOREIGN KEY (`accommodationId`) REFERENCES `accommodation` (`id`);
+  ADD CONSTRAINT `visit_ibfk_1` FOREIGN KEY (`studentId`) REFERENCES `student` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `visit_ibfk_2` FOREIGN KEY (`accommodationId`) REFERENCES `accommodation` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

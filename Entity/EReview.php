@@ -89,7 +89,9 @@ class EReview
         $this->description=$newDesc;
     }
     public function setId(int $id):void {
-        $this->idReview=$id;
+        if ($this->idReview===null) {
+            $this->idReview=$id;
+        }
     } 
 
     public function uploadPhoto(EPhoto $photo):void {
