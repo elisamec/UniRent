@@ -68,7 +68,8 @@ class FReview {
         $rowRev = FReview::loadReview($id);
         [$authType, $author, $recipient] = FReview::loadSpecificReview($id, $recipientType);
         $date=DateTime::createFromFormat('Y-m-d H:i:s',$rowRev['creationDate']);
-        $result=new EReview($rowRev['id'],$rowRev['title'],$rowRev['valutation'],$rowRev['description'],$recipientType,$date, $authType, $author, $recipient);
+        $photo= FReview::loadPhotos($id);
+        $result=new EReview($rowRev['id'],$rowRev['title'],$rowRev['valutation'],$rowRev['description'], $photo, $recipientType,$date, $authType, $author, $recipient);
         return $result;
     }
     /**
@@ -300,7 +301,7 @@ class FReview {
      */
     private function updatePhotos(EReview $Review):bool {
         $photos=$Review->getPhotos();
-        $photosDB = FReview::loadPhotos($Review);
+        $photosDB = FReview::loadPhotos($Review->getId());
         if ($photos===null) {
             if (count($photosDB)!==0){
                 foreach($photosDB as $d) {
@@ -351,8 +352,7 @@ class FReview {
      * @return array
      */
 
-    private function loadPhotos(EReview $Review):array {
-        $id=$Review->getId();
+    private function loadPhotos(int $id):array {
         return FPhoto::getInstance()->loadCurrentPhotos($id);
     }
     /**
