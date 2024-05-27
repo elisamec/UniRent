@@ -1,7 +1,13 @@
 # Check if apache module is loaded
 <IfModule mod_rewrite.c>
+
     # Enable rewriting
     RewriteEngine on
-    # Rewrite Rule: insert the regex followed with what it should be substituted with
+
+    # the rewrite rule at line 9 is subject to the following condition: 
+    # if the requested file does not exist, execute the following RewriteRule
+    RewriteCond %{REQUEST_FILENAME} !-f
+
+    # Rewrite Rule: insert the regex followed with what it should be substituted with.
     RewriteRule
 </IfModule>
