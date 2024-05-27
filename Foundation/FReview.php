@@ -3,15 +3,26 @@ require_once ('FConnection.php');
 require_once ('../Entity/EReview.php');
 require_once('../utility/Type.php');
 require_once('FPhoto.php');
-
+/**
+ * This class provide to make query to EOwner class
+ * @author Elisabetta Mecozzi ('UniRent')
+ * @package Foundation
+ */
 class FReview {
+    /**static attribute that contains the instance of the class */
     private static $instance=null;
-    /**Constructor */
+    /**
+     * __construct
+     *
+     * @return self
+     */
     private function __construct()
     {}
-    /**This static method gives the istance of this singleton class
-     * @return  
-    */
+    /**
+     * getInstance
+     *
+     * @return FReview
+     */
     public static function getInstance()
     {
         if(is_null(self::$instance))
@@ -20,9 +31,15 @@ class FReview {
         }
         return self::$instance;
     }
+    /**
+     * exist
+     *
+     * @param  int $id
+     * @return bool
+     */
     public function exist(int $id):bool 
     {
-        $q='SELECT * FROM owner WHERE id=:id';
+        $q='SELECT * FROM review WHERE id=:id';
         $connection= FConnection::getInstance();
         $db=$connection->getConnection();
         $db->beginTransaction();
@@ -39,47 +56,27 @@ class FReview {
         return false;
 
     }
-     
+    /**
+     * load
+     *
+     * @param  int $id
+     * @param Type $recipientType
+     * @return EReview
+     */
     public function load(int $id, Type $recipientType): EReview 
     {
         $rowRev = FReview::loadReview($id);
         [$authType, $author, $recipient] = FReview::loadSpecificReview($id, $recipientType);
-        /*
-        switch ($recipientType) {
-            case Type::STUDENT:
-                $rowSpecific = FReview::loadStudentReview($id);
-                echo 'Loaded';
-                if ($rowSpecific['authorStudent']!==null) {
-                    $authType = Type::STUDENT;
-                    $author = $rowSpecific['authorStudent'];
-                }
-                else {
-                    $authType = Type::OWNER;
-                    $author = $rowSpecific['authorOwner'];
-                }
-                $recipient = $rowSpecific['idStudent'];
-                break;
-            case Type::OWNER:
-                $rowSpecific = FReview::loadOwnerReview($id);
-                $authType=Type::STUDENT;
-                $author = $rowSpecific['idAuthor'];
-                $recipient = $rowSpecific['idOwner'];
-                break;
-            
-            case Type::ACCOMMODATION:
-                $rowSpecific = FReview::loadAccomReview($id);
-                $authType=Type::STUDENT;
-                $author = $rowSpecific['idAuthor'];
-                $recipient = $rowSpecific['idAccommodation'];
-                break;
-            
-        }
-        */
         $date=DateTime::createFromFormat('Y-m-d H:i:s',$rowRev['creationDate']);
         $result=new EReview($rowRev['id'],$rowRev['title'],$rowRev['valutation'],$rowRev['description'],$recipientType,$date, $authType, $author, $recipient);
         return $result;
     }
-   
+    /**
+     * loadReview
+     *
+     * @param  int $id
+     * @return mixed
+     */
     private function loadReview(int $id):mixed {
         $db=FConnection::getInstance()->getConnection();
         
@@ -102,6 +99,13 @@ class FReview {
         $row=$stm->fetch(PDO::FETCH_ASSOC);
         return $row;
     }
+    /**
+     * loadSpecificReview
+     *
+     * @param  int $id
+     * @param Type $recipientType
+     * @return array
+     */
     private function loadSpecificReview(int $id, Type $recipientType):array
     {
         $db=FConnection::getInstance()->getConnection();
@@ -125,6 +129,7 @@ class FReview {
         $row=$stm->fetch(PDO::FETCH_ASSOC);
         if ($recipientType===Type::STUDENT) {
             $authType = Type::tryFrom($row['authorType']);
+            $recipient=$row['idStudent'];
             if ($authType===Type::STUDENT) {
                 $author = $row['authorStudent'];
             }
@@ -145,74 +150,6 @@ class FReview {
         
         return [$authType, $author, $recipient];
     }
-    /*
-    private function loadStudentReview(int $id):mixed {
-        $db=FConnection::getInstance()->getConnection();
-        
-        try
-        {
-            $db->exec('LOCK TABLES studentreview READ');
-            $db->beginTransaction();
-            $q='SELECT * FROM studentreview WHERE idReview=:id';    
-            $stm=$db->prepare($q);
-            $stm->bindParam(':id',$id,PDO::PARAM_INT);
-            $stm->execute();
-            $db->commit();
-            $db->exec('UNLOCK TABLES');
-        }
-
-        catch (PDOException $e)
-        {
-            $db->rollBack();
-        }
-        $row=$stm->fetch(PDO::FETCH_ASSOC);
-        return $row;
-    }
-    private function loadOwnerReview(int $id):mixed {
-        $db=FConnection::getInstance()->getConnection();
-        
-        try
-        {
-            $db->exec('LOCK TABLES ownerreview READ');
-            $db->beginTransaction();
-            $q='SELECT * FROM ownerreview WHERE idReview=:id';    
-            $stm=$db->prepare($q);
-            $stm->bindParam(':id',$id,PDO::PARAM_INT);
-            $stm->execute();
-            $db->commit();
-            $db->exec('UNLOCK TABLES');
-        }
-
-        catch (PDOException $e)
-        {
-            $db->rollBack();
-        }
-        $row=$stm->fetch(PDO::FETCH_ASSOC);
-        return $row;
-    }
-    private function loadAccomReview(int $id):mixed {
-        $db=FConnection::getInstance()->getConnection();
-        
-        try
-        {
-            $db->exec('LOCK TABLES accommodationreview READ');
-            $db->beginTransaction();
-            $q='SELECT * FROM accommodationreview WHERE idReview=:id';    
-            $stm=$db->prepare($q);
-            $stm->bindParam(':id',$id,PDO::PARAM_INT);
-            $stm->execute();
-            $db->commit();
-            $db->exec('UNLOCK TABLES');
-        }
-
-        catch (PDOException $e)
-        {
-            $db->rollBack();
-        }
-        $row=$stm->fetch(PDO::FETCH_ASSOC);
-        return $row;
-    }
-    */
   
 
   public function store(EReview $Review):bool 
@@ -231,30 +168,12 @@ class FReview {
             return false;
         }
     }
-    
-    $type = $Review->getRecipientType();
-    switch ($type) {
-        case Type::STUDENT:
-            $storeSpec = FReview::storeStudentRev($Review);
-            if ($storeSpec===false){
-                return false;
-            }
-            break;
-        case Type::OWNER:
-            $storeSpec = FReview::storeOwnerRev($Review);
-            if ($storeSpec===false){
-                return false;
-            }
-            break;
-        case Type::ACCOMMODATION:
-            $storeSpec = FReview::storeAccommRev($Review);
-            if ($storeSpec===false){
-                return false;
-            }
-            break;
+    $storeSpec = FReview::storeSpecificReview($Review);
+    if ($storeSpec===false){
+        return false;
     }
     return true;
-  }
+}
   private function storeReview(EReview $Review):bool 
   {
     $db=FConnection::getInstance()->getConnection();
@@ -289,106 +208,50 @@ class FReview {
         return false;
     }
   }
-  private function storeStudentRev(EReview $Review):bool 
-  {
-    $db=FConnection::getInstance()->getConnection();
-    //$db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
-    $authorType=$Review->getAuthorType();
-    if ($authorType->value === 'student') {
-        try
-        { 
-            $db->exec('LOCK TABLES studentreview WRITE');
-            $db->beginTransaction();
-            $q='INSERT INTO studentreview (idStudent, idReview , authorType, authorStudent)';
-            $q=$q.' VALUES (:idStud, :idRev, :type, :stud)';
-            $stm=$db->prepare($q);
-            $stm->bindValue(':idStud',$Review->getIDRecipient(),PDO::PARAM_INT);
-            $stm->bindValue(':idRev',$Review->getId(),PDO::PARAM_INT);
-            $stm->bindValue(':type',$authorType->value,PDO::PARAM_STR);
-            $stm->bindValue(':stud',$Review->getIDAuthor(),PDO::PARAM_INT);
-            $stm->execute();
-            $db->commit();
-            $db->exec('UNLOCK TABLES');
-            return true;
-        }      
-        catch(PDOException $e)
-        {
-            $db->rollBack();
-            return false;
-        }
-
-    }
-    else {
-        try
-        { 
-            $db->exec('LOCK TABLES studentreview WRITE');
-            $db->beginTransaction();
-            $q='INSERT INTO studentreview (idStudent, idReview , authorType, authorOwner)';
-            $q=$q.' VALUES (:idStud, :idRev, :type, :own)';
-            $stm=$db->prepare($q);
-            $stm->bindValue(':idStud',$Review->getIDRecipient(),PDO::PARAM_INT);
-            $stm->bindValue(':idRev',$Review->getId(),PDO::PARAM_INT);
-            $stm->bindValue(':type',$authorType->value,PDO::PARAM_STR);
-            $stm->bindValue(':own',$Review->getIDAuthor(),PDO::PARAM_INT);
-            $stm->execute();
-            $db->commit();
-            $db->exec('UNLOCK TABLES');
-            return true;
-        }      
-        catch(PDOException $e)
-        {
-            $db->rollBack();
-            return false;
-        }
-    }
-  }
-  private function storeOwnerRev(EReview $Review):bool 
-  {
-    $db=FConnection::getInstance()->getConnection();
+  private function storeSpecificReview(EReview $Review): bool {
+    $db = FConnection::getInstance()->getConnection();
     $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
     try
-    { 
-        $db->exec('LOCK TABLES ownerreview WRITE');
+    {
+        $recipientType = $Review->getRecipientType()->value;
+        $table=$recipientType.'review';
+        $firstCol='id'. ucfirst($recipientType);
+        if ($recipientType==='student') {
+            $thirdCol = 'authorType, authorStudent, authorOwner';
+            $thirdVal = ':authType, :student, :owner';
+            $authType=$Review->getAuthorType()->value;
+            if ($authType==='student') {
+                $other='owner';
+            }
+            else {
+                $other = 'student';
+            }
+        }
+        else {
+            $thirdCol = 'idAuthor';
+            $thirdVal=':student';
+            $authType='student';
+        }
+        $db->exec('LOCK TABLES '.$table.' WRITE');
         $db->beginTransaction();
-        $q='INSERT INTO ownerreview (idOwner, idReview , idAuthor)';
-        $q=$q.' VALUES (:own, :rev, :auth)';
+        $q = 'INSERT INTO '.$table.' ('.$firstCol.', idReview, '.$thirdCol.')';
+        $q = $q.' VALUES (:idRec, :idRev, '.$thirdVal.')';
         $stm=$db->prepare($q);
-        $stm->bindValue(':own',$Review->getIDRecipient(),PDO::PARAM_INT);
-        $stm->bindValue(':rev',$Review->getId(),PDO::PARAM_INT);
-        $stm->bindValue(':auth',$Review->getIDAuthor(),PDO::PARAM_INT);
+        $stm->bindValue(':idRec', $Review->getIDRecipient(), PDO::PARAM_INT);
+        $stm->bindValue(':idRev', $Review->getId(), PDO::PARAM_INT);
+        if ($recipientType==='student') {
+            $stm->bindValue(':authType', $Review->getAuthorType()->value, PDO::PARAM_STR);
+            $stm->bindValue(':'.$other, null, PDO::PARAM_NULL);
+        }
+        $stm->bindValue(':'.$authType, $Review->getIDAuthor(), PDO::PARAM_INT);
         $stm->execute();
         $db->commit();
         $db->exec('UNLOCK TABLES');
         return true;
-    }      
-    catch(PDOException $e)
-    {
-        $db->rollBack();
-        return false;
     }
-  }
-  private function storeAccommRev(EReview $Review):bool 
-  {
-    $db=FConnection::getInstance()->getConnection();
-    $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
-    try
-    { 
-        $db->exec('LOCK TABLES accommodationreview WRITE');
-        $db->beginTransaction();
-        $q='INSERT INTO accommodationreview (idReview, idAccommodation , idAuthor)';
-        $q=$q.' VALUES (:rev, :accom, :auth)';
-        $stm=$db->prepare($q);
-        $stm->bindValue(':rev',$Review->getId(),PDO::PARAM_INT);
-        $stm->bindValue(':accom',$Review->getIDRecipient(),PDO::PARAM_INT);
-        $stm->bindValue(':auth',$Review->getIDAuthor(),PDO::PARAM_INT);
-        $stm->execute();
-        $db->commit();
-        $db->exec('UNLOCK TABLES');
-        return true;
-    }      
     catch(PDOException $e)
     {
-        $db->rollBack();
+       $db->rollBack();
         return false;
     }
   }
