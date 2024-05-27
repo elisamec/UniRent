@@ -1,5 +1,6 @@
 <?php
-enum Type: string
+interface TypeEnum extends \BackedEnum {}
+enum Type: string implements TypeEnum
 {
     case STUDENT = 'student';
     case ACCOMMODATION = 'accommodation';
