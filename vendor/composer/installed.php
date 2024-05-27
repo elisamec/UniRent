@@ -1,15 +1,24 @@
 <?php return array(
     'root' => array(
-        'name' => 'gruppo/unirent',
+        'name' => '__root__',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '3b207f101ae6e35e4e9fc26ffbe7035094c796b2',
-        'type' => 'project',
+        'reference' => '29c518b62090a3e4623841c3c0a95a30a3cb9592',
+        'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
+        '__root__' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '29c518b62090a3e4623841c3c0a95a30a3cb9592',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'commerceguys/addressing' => array(
             'pretty_version' => 'v2.2.0',
             'version' => '2.2.0.0',
@@ -34,15 +43,6 @@
             'reference' => 'dfbaa3c2d2e9a9df1118213f3b8b0c597bb99fab',
             'type' => 'library',
             'install_path' => __DIR__ . '/../doctrine/deprecations',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
-        'gruppo/unirent' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => '3b207f101ae6e35e4e9fc26ffbe7035094c796b2',
-            'type' => 'project',
-            'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
