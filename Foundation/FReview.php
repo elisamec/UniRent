@@ -43,6 +43,8 @@ class FReview {
     public function load(int $id, Type $recipientType): EReview 
     {
         $rowRev = FReview::loadReview($id);
+        [$authType, $author, $recipient] = FReview::loadSpecificReview($id, $recipientType);
+        /*
         switch ($recipientType) {
             case Type::STUDENT:
                 $rowSpecific = FReview::loadStudentReview($id);
@@ -72,6 +74,7 @@ class FReview {
                 break;
             
         }
+        */
         $date=DateTime::createFromFormat('Y-m-d H:i:s',$rowRev['creationDate']);
         $result=new EReview($rowRev['id'],$rowRev['title'],$rowRev['valutation'],$rowRev['description'],$recipientType,$date, $authType, $author, $recipient);
         return $result;
@@ -99,6 +102,50 @@ class FReview {
         $row=$stm->fetch(PDO::FETCH_ASSOC);
         return $row;
     }
+    private function loadSpecificReview(int $id, Type $recipientType):array
+    {
+        $db=FConnection::getInstance()->getConnection();
+
+        try
+        {
+            $db->exec('LOCK TABLES '.$recipientType->value.'review READ');
+            $db->beginTransaction();
+            $q='SELECT * FROM '.$recipientType->value.'review WHERE idReview=:id';    
+            $stm=$db->prepare($q);
+            $stm->bindParam(':id',$id,PDO::PARAM_INT);
+            $stm->execute();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+        }
+
+        catch (PDOException $e)
+        {
+            $db->rollBack();
+        }
+        $row=$stm->fetch(PDO::FETCH_ASSOC);
+        if ($recipientType===Type::STUDENT) {
+            $authType = Type::tryFrom($row['authorType']);
+            if ($authType===Type::STUDENT) {
+                $author = $row['authorStudent'];
+            }
+            else {
+                $author = $row['authorOwner'];
+            }
+        }
+        else {
+            $authType = Type::STUDENT;
+            $author = $row['idAuthor'];
+            if ($recipientType === Type::OWNER) {
+                $recipient = $row['idOwner'];
+            }
+            else {
+                $recipient = $row['idAccommodation'];
+            }
+        }
+        
+        return [$authType, $author, $recipient];
+    }
+    /*
     private function loadStudentReview(int $id):mixed {
         $db=FConnection::getInstance()->getConnection();
         
@@ -165,6 +212,7 @@ class FReview {
         $row=$stm->fetch(PDO::FETCH_ASSOC);
         return $row;
     }
+    */
   
 
   public function store(EReview $Review):bool 
