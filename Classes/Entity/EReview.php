@@ -22,7 +22,7 @@ class EReview
     {
         $this->idReview=$idReview;
         $this->title=$title;
-        $this->setValutation($valutation);
+        $this->$valutation;
         $this->description=$description;
         $this->recipientType=$type;
         $this->creationDate=$creationDate;
@@ -79,9 +79,6 @@ class EReview
     }
     public function setValutation(int $valutation):void
     {
-        if ($valutation < 1 || $valutation > 5) {
-            throw new InvalidArgumentException('Valutation must be a number between 1 and 5.');
-        }
         $this->valutation = $valutation;
     }
     public function setDescription(string $newDesc):void

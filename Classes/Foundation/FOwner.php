@@ -47,10 +47,25 @@ require_once('FPhoto.php');
         return false;
 
     }
-
+    
 #    public function load(int $id): EOwner {}
 
-#    public function store(EOwner $owner):bool {}
+#    public function store(EOwner $owner):bool {
+    /*
+    try {
+        $stmt = $pdo->prepare("INSERT INTO users (id, email) VALUES (?, ?)");
+        $stmt->execute([2, 'example@example.com']);
+    } catch (PDOException $e) {
+        // MySQL specific error code for duplicate entry is 1062
+        if ($e->getCode() == 23000) {
+            echo "Duplicate entry detected: " . $e->getMessage();
+        } else {
+            // Re-throw the exception if it's not a duplicate entry error
+            throw $e;
+        }
+    }
+}
+        */
 
  #   public function update(EOwner $owner):bool {}
 
