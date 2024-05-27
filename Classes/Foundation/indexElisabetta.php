@@ -5,7 +5,7 @@ require_once('../utility/Type.php');
 
 $FRev=FReview::getInstance();
 
-$review=new EReview(26, 'Hello World', 3, null, Type::STUDENT, new DateTime("now"), Type::STUDENT, 1, 1);
+$review=new EReview(26, 'Hello World', 3, null, null, Type::STUDENT, new DateTime("now"), Type::STUDENT, 1, 1);
 /*$store=FReview::getInstance()->store($review);
 if ($store) {
     print 'Store: All good';
