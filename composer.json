@@ -1,6 +1,4 @@
 {
-    "name": "gruppo/unirent",
-    "type": "project",
     "require": {
         "commerceguys/addressing": "^2.2"
     }
