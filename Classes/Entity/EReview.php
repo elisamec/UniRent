@@ -18,7 +18,7 @@ class EReview
 
     private static $entity = EReview::class;
 
-    public function __construct(?int $idReview, string $title, int $valutation, ?string $description, Type $type, DateTime $creationDate, Type $authorType, int $idAuthor, int $idRecipient) 
+    public function __construct(?int $idReview, string $title, int $valutation, ?string $description, ?array $photo, Type $type, DateTime $creationDate, Type $authorType, int $idAuthor, int $idRecipient) 
     {
         $this->idReview=$idReview;
         $this->title=$title;
@@ -26,7 +26,12 @@ class EReview
         $this->description=$description;
         $this->recipientType=$type;
         $this->creationDate=$creationDate;
-        $this->photo =[];
+        if ($photo===null) {
+            $this->photo =[];
+        }
+        else {
+            $this->photo = $photo;
+        }
         $this->authorType=$authorType;
         $this->idAuthor=$idAuthor;
         $this->idRecipient=$idRecipient;
