@@ -151,110 +151,127 @@ class FReview {
         return [$authType, $author, $recipient];
     }
   
-
-  public function store(EReview $Review):bool 
-  {
-    
-    $storeRev = FReview::storeReview($Review);
-    if ($storeRev===false){
-        return false;
-    }
-    $photos=$Review->getPhotos();
-    if ($photos!==null) {
-        foreach ($photos as $photo) {
-            $storePictures = FPhoto::getInstance()->store($photo);
+    /**
+     * store
+     *
+     * @param  EReview $Review
+     * @return bool
+     */
+    public function store(EReview $Review):bool 
+    {
+        
+        $storeRev = FReview::storeReview($Review);
+        if ($storeRev===false){
+            return false;
         }
-        if ($storePictures===false){
+        $photos=$Review->getPhotos();
+        if ($photos!==null) {
+            foreach ($photos as $photo) {
+                $storePictures = FPhoto::getInstance()->store($photo);
+            }
+            if ($storePictures===false){
+                return false;
+            }
+        }
+        $storeSpec = FReview::storeSpecificReview($Review);
+        if ($storeSpec===false){
+            return false;
+        }
+        return true;
+    }
+    /**
+     * storeReview
+     *
+     * @param  EReview $Review
+     * @return bool
+     */
+    private function storeReview(EReview $Review):bool 
+    {
+        $db=FConnection::getInstance()->getConnection();
+        //$db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+        try
+        { 
+            $db->exec('LOCK TABLES review WRITE');
+            $db->beginTransaction();
+            $q='INSERT INTO review (title , valutation, description, type)';
+            $q=$q.' VALUES (:title, :valutation, :description, :type)';
+            $stm=$db->prepare($q);
+            $stm->bindValue(':title',$Review->getTitle(),PDO::PARAM_STR);
+            $stm->bindValue(':valutation',$Review->getValutation(),PDO::PARAM_INT);
+            $description = $Review->getDescription();
+            if ($description!==null) {
+                $stm->bindValue(':description',$description,PDO::PARAM_STR);
+            }
+            else {
+                $stm->bindValue(':description', $description, PDO::PARAM_NULL);
+            }
+            $stm->bindValue(':type',$Review->getRecipientType()->value,PDO::PARAM_STR);
+            $stm->execute();
+            $id=$db->lastInsertId();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+            $Review->setId($id);
+            return true;
+        }      
+        catch(PDOException $e)
+        {
+            $db->rollBack();
             return false;
         }
     }
-    $storeSpec = FReview::storeSpecificReview($Review);
-    if ($storeSpec===false){
-        return false;
-    }
-    return true;
-}
-  private function storeReview(EReview $Review):bool 
-  {
-    $db=FConnection::getInstance()->getConnection();
-    //$db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
-    try
-    { 
-        $db->exec('LOCK TABLES review WRITE');
-        $db->beginTransaction();
-        $q='INSERT INTO review (title , valutation, description, type)';
-        $q=$q.' VALUES (:title, :valutation, :description, :type)';
-        $stm=$db->prepare($q);
-        $stm->bindValue(':title',$Review->getTitle(),PDO::PARAM_STR);
-        $stm->bindValue(':valutation',$Review->getValutation(),PDO::PARAM_INT);
-        $description = $Review->getDescription();
-        if ($description!==null) {
-            $stm->bindValue(':description',$description,PDO::PARAM_STR);
-        }
-        else {
-            $stm->bindValue(':description', $description, PDO::PARAM_NULL);
-        }
-        $stm->bindValue(':type',$Review->getRecipientType()->value,PDO::PARAM_STR);
-        $stm->execute();
-        $id=$db->lastInsertId();
-        $db->commit();
-        $db->exec('UNLOCK TABLES');
-        $Review->setId($id);
-        return true;
-    }      
-    catch(PDOException $e)
-    {
-        $db->rollBack();
-        return false;
-    }
-  }
-  private function storeSpecificReview(EReview $Review): bool {
-    $db = FConnection::getInstance()->getConnection();
-    $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
-    try
-    {
-        $recipientType = $Review->getRecipientType()->value;
-        $table=$recipientType.'review';
-        $firstCol='id'. ucfirst($recipientType);
-        if ($recipientType==='student') {
-            $thirdCol = 'authorType, authorStudent, authorOwner';
-            $thirdVal = ':authType, :student, :owner';
-            $authType=$Review->getAuthorType()->value;
-            if ($authType==='student') {
-                $other='owner';
+    /**
+     * storeSpecificReview
+     *
+     * @param  EReview $Review
+     * @return bool
+     */
+    private function storeSpecificReview(EReview $Review): bool {
+        $db = FConnection::getInstance()->getConnection();
+        $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+        try
+        {
+            $recipientType = $Review->getRecipientType()->value;
+            $table=$recipientType.'review';
+            $firstCol='id'. ucfirst($recipientType);
+            if ($recipientType==='student') {
+                $thirdCol = 'authorType, authorStudent, authorOwner';
+                $thirdVal = ':authType, :student, :owner';
+                $authType=$Review->getAuthorType()->value;
+                if ($authType==='student') {
+                    $other='owner';
+                }
+                else {
+                    $other = 'student';
+                }
             }
             else {
-                $other = 'student';
+                $thirdCol = 'idAuthor';
+                $thirdVal=':student';
+                $authType='student';
             }
+            $db->exec('LOCK TABLES '.$table.' WRITE');
+            $db->beginTransaction();
+            $q = 'INSERT INTO '.$table.' ('.$firstCol.', idReview, '.$thirdCol.')';
+            $q = $q.' VALUES (:idRec, :idRev, '.$thirdVal.')';
+            $stm=$db->prepare($q);
+            $stm->bindValue(':idRec', $Review->getIDRecipient(), PDO::PARAM_INT);
+            $stm->bindValue(':idRev', $Review->getId(), PDO::PARAM_INT);
+            if ($recipientType==='student') {
+                $stm->bindValue(':authType', $Review->getAuthorType()->value, PDO::PARAM_STR);
+                $stm->bindValue(':'.$other, null, PDO::PARAM_NULL);
+            }
+            $stm->bindValue(':'.$authType, $Review->getIDAuthor(), PDO::PARAM_INT);
+            $stm->execute();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+            return true;
         }
-        else {
-            $thirdCol = 'idAuthor';
-            $thirdVal=':student';
-            $authType='student';
+        catch(PDOException $e)
+        {
+        $db->rollBack();
+            return false;
         }
-        $db->exec('LOCK TABLES '.$table.' WRITE');
-        $db->beginTransaction();
-        $q = 'INSERT INTO '.$table.' ('.$firstCol.', idReview, '.$thirdCol.')';
-        $q = $q.' VALUES (:idRec, :idRev, '.$thirdVal.')';
-        $stm=$db->prepare($q);
-        $stm->bindValue(':idRec', $Review->getIDRecipient(), PDO::PARAM_INT);
-        $stm->bindValue(':idRev', $Review->getId(), PDO::PARAM_INT);
-        if ($recipientType==='student') {
-            $stm->bindValue(':authType', $Review->getAuthorType()->value, PDO::PARAM_STR);
-            $stm->bindValue(':'.$other, null, PDO::PARAM_NULL);
-        }
-        $stm->bindValue(':'.$authType, $Review->getIDAuthor(), PDO::PARAM_INT);
-        $stm->execute();
-        $db->commit();
-        $db->exec('UNLOCK TABLES');
-        return true;
     }
-    catch(PDOException $e)
-    {
-       $db->rollBack();
-        return false;
-    }
-  }
     
     /**
      * update
@@ -275,7 +292,13 @@ class FReview {
     return true;
 
     }
-    private function updatePhotos(EReview $Review) {
+    /**
+     * updatePhotos
+     *
+     * @param  EReview $Review
+     * @return bool
+     */
+    private function updatePhotos(EReview $Review):bool {
         $photos=$Review->getPhotos();
         $photosDB = FReview::loadPhotos($Review);
         if ($photos===null) {
@@ -319,12 +342,25 @@ class FReview {
                 return false;
             }
         }
+        return true;
     }
+    /**
+     * loadPhotos
+     *
+     * @param  EReview $Review
+     * @return array
+     */
 
     private function loadPhotos(EReview $Review):array {
         $id=$Review->getId();
         return FPhoto::getInstance()->loadCurrentPhotos($id);
     }
+    /**
+     * updateReview
+     *
+     * @param  EReview $Review
+     * @return bool
+     */
     private function updateReview(EReview $Review):bool {
         $db=FConnection::getInstance()->getConnection();      
         try
@@ -356,7 +392,12 @@ class FReview {
         }
     }
     
-    
+    /**
+     * delete
+     *
+     * @param  EReview $Review
+     * @return bool
+     */
     public function delete(EReview $Review): bool 
     {
         $db=FConnection::getInstance()->getConnection();
