@@ -1,0 +1,7 @@
+# Check if apache module is loaded
+<IfModule mod_rewrite.c>
+    # Enable rewriting
+    RewriteEngine on
+    # Rewrite Rule: insert the regex followed with what it should be substituted with
+    RewriteRule
+</IfModule>
