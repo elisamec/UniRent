@@ -3,19 +3,21 @@
 class EAccommodation
 {
     private int $idAccommodation;
-    // Array di foto
+    private array $photo;
     private string $title;
-    //Indirizzo di classe ?
+    private array $address;
     private int $price;
     private DateTime $start;
-    private String $Description;
+    private String $description;
     private float $deposit;
-    //Array con giorni e orari disponibili
-    //durata di tipo time
+    private array $visit;
     private bool $man;
     private bool $woman;
     private bool $pets;
     private bool $smokers;
     private int $idOwner;
 
+    private static $entity = EVisit::class;
+
+    
 }
