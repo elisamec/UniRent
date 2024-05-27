@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 26, 2024 at 07:42 PM
+-- Generation Time: May 27, 2024 at 07:03 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -51,8 +51,8 @@ CREATE TABLE `accommodation` (
 --
 
 CREATE TABLE `accommodationreview` (
-  `idReview` int(11) NOT NULL,
   `idAccommodation` int(11) NOT NULL,
+  `idReview` int(11) NOT NULL,
   `idAuthor` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -71,7 +71,6 @@ CREATE TABLE `address` (
   `postalCode` int(11) NOT NULL,
   `city` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 
 -- --------------------------------------------------------
 
@@ -201,7 +200,6 @@ CREATE TABLE `review` (
   `creationDate` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-
 -- --------------------------------------------------------
 
 --
@@ -218,12 +216,11 @@ CREATE TABLE `student` (
   `universityMail` varchar(40) NOT NULL,
   `courseDuration` int(1) NOT NULL,
   `immatricolationYear` int(4) NOT NULL,
-  `birthDate` datetime NOT NULL,
+  `birthDate` date NOT NULL,
   `sex` varchar(1) NOT NULL,
   `smoker` tinyint(1) NOT NULL,
   `animals` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 
 -- --------------------------------------------------------
 
@@ -238,8 +235,6 @@ CREATE TABLE `studentreview` (
   `authorStudent` int(11) DEFAULT NULL,
   `authorOwner` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-
 
 -- --------------------------------------------------------
 
