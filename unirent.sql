@@ -72,12 +72,6 @@ CREATE TABLE `address` (
   `city` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `address`
---
-
-INSERT INTO `address` (`id`, `type`, `streetName`, `houseNumber`, `appartmentNumber`, `postalCode`, `city`) VALUES
-(1, 'via', 'dell\'esempio', 3, 5, 1234, 'SomeCity');
 
 -- --------------------------------------------------------
 
@@ -150,13 +144,6 @@ CREATE TABLE `owner` (
   `iban` varchar(27) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `owner`
---
-
-INSERT INTO `owner` (`id`, `username`, `password`, `name`, `surname`, `picture`, `email`, `phoneNumber`, `iban`) VALUES
-(1, 'owner1', 'owner1', 'Test', 'Owner', NULL, 'some.owner@domain.com', '123456789', 'IT0000000000000000000000000');
-
 -- --------------------------------------------------------
 
 --
@@ -168,16 +155,6 @@ CREATE TABLE `ownerreview` (
   `idReview` int(11) NOT NULL,
   `idAuthor` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `ownerreview`
---
-
-INSERT INTO `ownerreview` (`idOwner`, `idReview`, `idAuthor`) VALUES
-(1, 13, 1),
-(1, 14, 1),
-(1, 15, 1),
-(1, 21, 1);
 
 -- --------------------------------------------------------
 
@@ -224,28 +201,6 @@ CREATE TABLE `review` (
   `creationDate` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `review`
---
-
-INSERT INTO `review` (`id`, `title`, `valutation`, `description`, `type`, `creationDate`) VALUES
-(1, 'Hello World', 3, NULL, 'student', '2024-05-26 16:20:56'),
-(2, 'Hello World', 3, NULL, 'student', '2024-05-26 16:24:54'),
-(3, 'Hello World', 3, NULL, 'student', '2024-05-26 16:28:10'),
-(4, 'Hello World', 3, NULL, 'student', '2024-05-26 16:31:25'),
-(5, 'Hello World', 3, NULL, 'student', '2024-05-26 16:33:04'),
-(6, 'Hello World', 3, NULL, 'student', '2024-05-26 16:34:01'),
-(8, 'Hello from Student', 3, NULL, 'student', '2024-05-26 16:38:47'),
-(9, 'Hello World', 3, NULL, 'student', '2024-05-26 16:42:10'),
-(10, 'Modified', 3, NULL, 'student', '2024-05-26 16:55:35'),
-(11, 'Modified', 3, NULL, 'student', '2024-05-26 17:01:32'),
-(12, 'Modified', 3, NULL, 'student', '2024-05-26 17:02:30'),
-(13, 'Hello World', 3, NULL, 'owner', '2024-05-26 17:20:01'),
-(14, 'Hello World', 3, NULL, 'owner', '2024-05-26 17:21:16'),
-(15, 'Hello World', 3, NULL, 'owner', '2024-05-26 17:21:59'),
-(21, 'Hello World', 3, NULL, 'owner', '2024-05-26 17:25:02'),
-(22, 'Hello World', 3, NULL, 'accommodation', '2024-05-26 17:26:13'),
-(23, 'Hello World', 3, NULL, 'accommodation', '2024-05-26 17:28:12');
 
 -- --------------------------------------------------------
 
@@ -269,12 +224,6 @@ CREATE TABLE `student` (
   `animals` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `student`
---
-
-INSERT INTO `student` (`id`, `username`, `password`, `name`, `surname`, `picture`, `universityMail`, `courseDuration`, `immatricolationYear`, `birthDate`, `sex`, `smoker`, `animals`) VALUES
-(1, 'student1', 'student1', 'Test', 'Student', NULL, 'some.student@university.it', 3, 2021, '2004-05-01', 'F', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -290,22 +239,7 @@ CREATE TABLE `studentreview` (
   `authorOwner` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `studentreview`
---
 
-INSERT INTO `studentreview` (`idStudent`, `idReview`, `authorType`, `authorStudent`, `authorOwner`) VALUES
-(1, 1, 'owner', NULL, 1),
-(1, 2, 'owner', NULL, 1),
-(1, 3, 'owner', NULL, 1),
-(1, 4, 'owner', NULL, 1),
-(1, 5, 'owner', NULL, 1),
-(1, 6, 'owner', NULL, 1),
-(1, 8, 'student', 1, NULL),
-(1, 9, 'owner', NULL, 1),
-(1, 10, 'owner', NULL, 1),
-(1, 11, 'owner', NULL, 1),
-(1, 12, 'owner', NULL, 1);
 
 -- --------------------------------------------------------
 
