@@ -28,6 +28,10 @@ class FPhoto {
         return $result;
     }
 
+    public function load(int $id):EPhoto
+    {
+        return new EPhoto();
+    }
     public function store(EPhoto $photo):bool
     {
         return true;

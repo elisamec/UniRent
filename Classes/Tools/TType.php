@@ -1,6 +1,6 @@
 <?php
 interface TypeEnum extends \BackedEnum {}
-enum Type: string implements TypeEnum
+enum TType: string implements TypeEnum
 {
     case STUDENT = 'student';
     case ACCOMMODATION = 'accommodation';

@@ -12,7 +12,7 @@ class EOwner
     private string $surname;
     private ?EPhoto $photo;
     private string $email;
-    private int $phoneNumber;
+    private string $phoneNumber;
     private string $iban;
     private static $entity = EOwner::class;
     
@@ -23,7 +23,8 @@ class EOwner
     public function __construct(?int $id, string $username, string $password, string $name, string $surname, ?EPhoto $photo, string $email, int $phonenumber, string $iban) {
         $this->id=$id;
         $this->username=$username;
-        $this->password=password_hash($password, PASSWORD_DEFAULT); //to verify if password is right in controller: password_verify()
+        $this->password=password_get_info($password)['algoName'] !== PASSWORD_DEFAULT ? password_hash($password, PASSWORD_DEFAULT) : $password;
+        //to verify if password is right in controller: password_verify()
         $this->name=ucfirst($name);
         $this->surname=ucfirst($surname);
         $this->photo = $photo;

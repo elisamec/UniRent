@@ -1,7 +1,7 @@
 <?php
 require_once ('FConnection.php');
 require_once ('../Entity/EReview.php');
-require_once('../utility/Type.php');
+require_once('../utility/TType.php');
 require_once('FPhoto.php');
 /**
  * This class provide to make query to EOwner class
@@ -60,10 +60,10 @@ class FReview {
      * load
      *
      * @param  int $id
-     * @param Type $recipientType
+     * @param TType $recipientType
      * @return EReview
      */
-    public function load(int $id, Type $recipientType): EReview 
+    public function load(int $id, TType $recipientType): EReview 
     {
         $rowRev = FReview::loadReview($id);
         [$authType, $author, $recipient] = FReview::loadSpecificReview($id, $recipientType);
@@ -104,10 +104,10 @@ class FReview {
      * loadSpecificReview
      *
      * @param  int $id
-     * @param Type $recipientType
+     * @param TType $recipientType
      * @return array
      */
-    private function loadSpecificReview(int $id, Type $recipientType):array
+    private function loadSpecificReview(int $id, TType $recipientType):array
     {
         $db=FConnection::getInstance()->getConnection();
 
@@ -128,10 +128,10 @@ class FReview {
             $db->rollBack();
         }
         $row=$stm->fetch(PDO::FETCH_ASSOC);
-        if ($recipientType===Type::STUDENT) {
-            $authType = Type::tryFrom($row['authorType']);
+        if ($recipientType===TType::STUDENT) {
+            $authType = TType::tryFrom($row['authorType']);
             $recipient=$row['idStudent'];
-            if ($authType===Type::STUDENT) {
+            if ($authType===TType::STUDENT) {
                 $author = $row['authorStudent'];
             }
             else {
@@ -139,9 +139,9 @@ class FReview {
             }
         }
         else {
-            $authType = Type::STUDENT;
+            $authType = TType::STUDENT;
             $author = $row['idAuthor'];
-            if ($recipientType === Type::OWNER) {
+            if ($recipientType === TType::OWNER) {
                 $recipient = $row['idOwner'];
             }
             else {

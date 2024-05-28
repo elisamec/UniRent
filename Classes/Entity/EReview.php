@@ -1,7 +1,7 @@
 <?php
 
 require_once ('EPhoto.php');
-require_once('../utility/Type.php');
+require_once('../utility/TType.php');
 
 class EReview 
 {
@@ -10,15 +10,15 @@ class EReview
     private int $valutation;
     private ?string $description;
     private array $photo;
-    private Type $recipientType;
+    private TType $recipientType;
     private DateTime $creationDate;
-    private Type $authorType;
+    private TType $authorType;
     private int $idAuthor;
     private int $idRecipient;
 
     private static $entity = EReview::class;
 
-    public function __construct(?int $idReview, string $title, int $valutation, ?string $description, array $photo, Type $type, DateTime $creationDate, Type $authorType, int $idAuthor, int $idRecipient) 
+    public function __construct(?int $idReview, string $title, int $valutation, ?string $description, array $photo, TType $type, DateTime $creationDate, TType $authorType, int $idAuthor, int $idRecipient) 
     {
         $this->idReview=$idReview;
         $this->title=$title;
@@ -55,11 +55,11 @@ class EReview
     {
         return $this->description;
     }
-    public function getRecipientType():Type
+    public function getRecipientType():TType
     {
         return $this->recipientType;
     }
-    public function getAuthorType():Type {
+    public function getAuthorType():TType {
         return $this->authorType;
     }
     public function getIDAuthor():int {
