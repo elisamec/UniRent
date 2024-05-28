@@ -54,7 +54,7 @@ class EReview
      * @param integer $idAuthor
      * @param integer $idRecipient
      */
-    public function __construct(?int $idReview=null, string $title, int $valutation, ?string $description, array $photo, TType $type, DateTime $creationDate, TType $authorType, int $idAuthor, int $idRecipient) 
+    public function __construct(?int $idReview, string $title, int $valutation, ?string $description, array $photo, TType $type, DateTime $creationDate, TType $authorType, int $idAuthor, int $idRecipient) 
     {
         $this->idReview=$idReview;
         $this->title=$title;

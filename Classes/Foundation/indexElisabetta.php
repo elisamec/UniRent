@@ -4,6 +4,8 @@ require_once('FReview.php');
 require_once('../Tools/TType.php');
 require_once('../Entity/EOwner.php');
 require_once('FOwner.php');
+require_once('../Entity/ESupportRequest.php');
+require_once('FSupportRequest.php');
 
 
 /*REVIEW
@@ -87,3 +89,44 @@ else {
     print 'Delete: Something went wrong';
 }
 */
+
+// SUPPORT REQUEST
+
+$FS=FSupportRequest::getInstance();
+
+$supreq=new ESupportRequest(1, 'random message', TRequestType::BUG, 1, TType::OWNER);
+/*
+$store=$FS->store($supreq);
+if ($store) {
+    print 'Store: All good';
+}
+else {
+    print 'Store: Something went wrong';
+}
+
+
+$load=$FS->load($supreq->getId());
+if ($load) {
+    print 'Load: All good';
+}
+else {
+    print 'Load: Something went wrong';
+}
+
+
+$supreq->setMessage('username');
+$new = $FS->update($supreq);
+if ($new) {
+    print 'Update: All good';
+}
+else {
+    print 'Update: Something went wrong';
+}
+*/
+$delete=$FS->delete($supreq);
+if ($delete) {
+    print 'Delete: All good';
+}
+else {
+    print 'Delete: Something went wrong';
+}
