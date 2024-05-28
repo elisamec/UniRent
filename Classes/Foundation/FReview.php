@@ -5,7 +5,7 @@ require_once('../Tools/TType.php');
 require_once('FPhoto.php');
 /**
  * This class provide to make query to EOwner class
- * @author Elisabetta Mecozzi ('UniRent')
+ * @author Elisabetta Mecozzi <elisabetta.mecozzi0@gmail.com>
  * @package Foundation
  */
 class FReview {
