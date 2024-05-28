@@ -50,7 +50,7 @@ else {
 */
 
 //OWNER
-
+/*
 $FOwn=FOwner::getInstance();
 
 $owner=new EOwner(12, 'testOwner', 'My_s3cr37_p4sswd', 'Gianni', 'Rossi', null, 'gianni.rossi@gmail.com', '3331234567', 'IT1234567890123456789012345');
@@ -69,7 +69,7 @@ if ($load) {
 else {
     print 'Load: Something went wrong';
 }
-*/
+
 $owner->setUsername('username');
 $new = $FOwn->update($owner);
 if ($new) {
@@ -86,3 +86,4 @@ if ($delete) {
 else {
     print 'Delete: Something went wrong';
 }
+*/
