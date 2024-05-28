@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/composer/vendor/autoload.php';
+require '../vendor/autoload.php';
 
 use CommerceGuys\Addressing\Address;
 use CommerceGuys\Addressing\AddressFormat\AddressFormatRepository;
