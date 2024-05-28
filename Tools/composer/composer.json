@@ -2,6 +2,7 @@
     "require": {
         "commerceguys/addressing": "^2.2",
         "smarty/smarty": "^5.1",
-        "egulias/email-validator": "^4.0"
+        "egulias/email-validator": "^4.0",
+        "globalcitizen/php-iban": "^4.2"
     }
 }
