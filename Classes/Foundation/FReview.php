@@ -228,7 +228,7 @@ class FReview {
      */
     private function storeSpecificReview(EReview $Review): bool {
         $db = FConnection::getInstance()->getConnection();
-        $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+        //$db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
         try
         {
             $recipientType = $Review->getRecipientType()->value;
@@ -401,18 +401,9 @@ class FReview {
     public function delete(EReview $Review): bool 
     {
         $db=FConnection::getInstance()->getConnection();
-        $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+        //$db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
         try
         {   
-            $photos = $Review->getPhotos();
-            if ($photos!==null){
-                foreach ($photos as $photo) {
-                    $deleted= FPhoto::getInstance()->delete($photo->getId());
-                    if ($deleted===false) {
-                        return false;
-                    }
-                }
-            }
             $db->exec('LOCK TABLES review WRITE');
             $db->beginTransaction();
             $q='DELETE FROM review WHERE id= :id';

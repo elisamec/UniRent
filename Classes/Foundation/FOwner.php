@@ -73,65 +73,134 @@ require_once('../Tools/TError.php');
     }
 
     public function store(EOwner $owner):bool {
-    $db=FConnection::getInstance()->getConnection();
-    try
-    {
-        $storePicture = FPhoto::getInstance()->store($owner->getPhoto());
-        if ($storePicture===false){
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $storePicture = FPhoto::getInstance()->store($owner->getPhoto());
+            if ($storePicture===false){
+                return false;
+            }
+            $db->exec('LOCK TABLES owner WRITE');
+            $db->beginTransaction();
+            $q='INSERT INTO owner (username, password, name, surname, picture, email, phonenumber, iban)';
+            $q=$q.'VALUES (:user, :pass, :name, :surname, :picture, :email, :phone, :iban)';
+            $stm = $db->prepare($q);
+            $stm->bindValue(':user', $owner->getUsername(), PDO::PARAM_STR);
+            $stm->bindValue(':pass', $owner->getPassword(), PDO::PARAM_STR);
+            $stm->bindValue(':name', $owner->getName(), PDO::PARAM_STR);
+            $stm->bindValue(':surname', $owner->getSurname(), PDO::PARAM_STR);
+            $stm->bindValue(':picture', $owner->getPhoto()->getId(), PDO::PARAM_INT);
+            $stm->bindValue(':email', $owner->getMail(), PDO::PARAM_STR);
+            $stm->bindValue(':phone', $owner->getPhoneNumber(), PDO::PARAM_STR);
+            $stm->bindValue(':iban', $owner->getIBAN(), PDO::PARAM_STR);
+            $stm->execute();
+            $id=$db->lastInsertId();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+            return true;
+            
+        }
+        catch (PDOException $e) {
+            $db->rollBack();
+            $errorType = TError::getInstance()->handleDuplicateError($e);
+            if ($errorType) {
+                echo "Error: " . $errorType . "\n"; //quando faremo view leghiamolo a view
+            } else {
+                echo "An unexpected error occurred: " . $e->getMessage() . "\n";
+            }
             return false;
         }
-        $db->exec('LOCK TABLES owner WRITE');
-        $db->beginTransaction();
-        $q='INSERT INTO owner (username, password, name, surname, picture, email, phonenumber, iban)';
-        $q=$q.'VALUES (:user, :pass, :name, :surname, :picture, :email, :phone, :iban)';
-        $stm = $db->prepare($q);
-        $stm->bindValue(':user', $owner->getUsername(), PDO::PARAM_STR);
-        $stm->bindValue(':pass', $owner->getPassword(), PDO::PARAM_STR);
-        $stm->bindValue(':name', $owner->getName(), PDO::PARAM_STR);
-        $stm->bindValue(':surname', $owner->getSurname(), PDO::PARAM_STR);
-        $stm->bindValue(':picture', $owner->getPhoto()->getId(), PDO::PARAM_INT);
-        $stm->bindValue(':email', $owner->getMail(), PDO::PARAM_STR);
-        $stm->bindValue(':phone', $owner->getPhoneNumber(), PDO::PARAM_STR);
-        $stm->bindValue(':iban', $owner->getIBAN(), PDO::PARAM_STR);
-        $stm->execute();
-        $id=$db->lastInsertId();
-        $db->commit();
-        $db->exec('UNLOCK TABLES');
-        $owner->setId($id);
-        return true;
-        
     }
-    catch (PDOException $e) {
-        $db->rollBack();
-        $errorType = TError::getInstance()->handleDuplicateError($e);
-        if ($errorType) {
-            echo "Error: " . $errorType . "\n"; //quando faremo view leghiamolo a view
-        } else {
-            echo "An unexpected error occurred: " . $e->getMessage() . "\n";
-        }
-        return false;
-    }
-}
-
-
-    /*
-        try {
-            $stmt = $pdo->prepare("INSERT INTO users (id, email) VALUES (?, ?)");
-            $stmt->execute([2, 'example@example.com']);
-        } catch (PDOException $e) {
-            // MySQL specific error code for duplicate entry is 1062
-            if ($e->getCode() == 23000) {
-                echo "Duplicate entry detected: " . $e->getMessage();
-            } else {
-                // Re-throw the exception if it's not a duplicate entry error
-                throw $e;
+    public static function update(EOwner $owner):bool {
+        $db=FConnection::getInstance()->getConnection();
+        try
+        { 
+            $currentPhotoID= FOwner::currentPhoto($owner->getId());
+            #potrebbe esserci un modo migliore per farlo
+            $FPh=FPhoto::getInstance();
+            $newPhID=$owner->getPhoto()->getId();
+            if ($currentPhotoID===$newPhID) {
+                $deletedPicture = true;
+                $updatePicture = true;
+            }  elseif ($currentPhotoID!== null and $newPhID!==null)  {
+                $deletedPicture = $FPh->delete($currentPhotoID);
+                $updatePicture = $FPh->store($owner->getPhoto());
+            } elseif ($currentPhotoID!== null and $newPhID===null) {
+                $deletedPicture = $FPh->delete($currentPhotoID);
             }
+            if ($updatePicture===false or $deletedPicture===false){
+                return false;
+            }
+            $db->exec('LOCK TABLES owner WRITE');
+            $db->beginTransaction();
+            $q='UPDATE owner SET username = :user, password = :pass, name = :name, surname = :surname, picture = :picture, email = :email, phonenumber = :phone, iban = :iban';
+            $stm = $db->prepare($q);
+            $stm->bindValue(':user', $owner->getUsername(), PDO::PARAM_STR);
+            $stm->bindValue(':pass', $owner->getPassword(), PDO::PARAM_STR);
+            $stm->bindValue(':name', $owner->getName(), PDO::PARAM_STR);
+            $stm->bindValue(':surname', $owner->getSurname(), PDO::PARAM_STR);
+            $stm->bindValue(':picture', $owner->getPhoto()->getId(), PDO::PARAM_INT);
+            $stm->bindValue(':email', $owner->getMail(), PDO::PARAM_STR);
+            $stm->bindValue(':phone', $owner->getPhoneNumber(), PDO::PARAM_STR);
+            $stm->bindValue(':iban', $owner->getIBAN(), PDO::PARAM_STR);
+            $stm->execute();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+            return true;
+            
+        }
+        catch (PDOException $e) {
+            $db->rollBack();
+            $errorType = TError::getInstance()->handleDuplicateError($e);
+            if ($errorType) {
+                echo "Error: " . $errorType . "\n"; //quando faremo view leghiamolo a view
+            } else {
+                echo "An unexpected error occurred: " . $e->getMessage() . "\n";
+            }
+            return false;
         }
     }
-        */
+    private static function currentPhoto(int $id): ?int {
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $db->exec('LOCK TABLES owner READ');
+            $db->beginTransaction();
+            $q='SELECT picture FROM owner WHERE id=:id';
+            $stm=$db->prepare($q);
+            $stm->bindparam(':id', $id, PDO::PARAM_INT);
+            $stm->execute();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+        }
+        catch (PDOException $e) 
+        {
+            $db->rollBack();
+        }
+        $photoID=$stm->fetch(PDO::FETCH_ASSOC);
+        return $photoID;
+    }
+    public function delete(EOwner $owner): bool {
+        $db=FConnection::getInstance()->getConnection();
+        //$db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+        try
+        {   
+            $db->exec('LOCK TABLES owner WRITE');
+            $db->beginTransaction();
+            $q='DELETE FROM owner WHERE id= :id';
+            $stm=$db->prepare($q);
+            $stm->bindValue(':id',$owner->getId(), PDO::PARAM_INT);
+            $stm->execute();    
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
 
- #   public function update(EOwner $owner):bool {}
-
- #   public function delete(int $id): bool {}
+            return true;
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return false;
+        }
+    }
 
  }
