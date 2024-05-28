@@ -1,7 +1,7 @@
 <?php
 
 require_once ('EPhoto.php');
-require_once('../utility/TType.php');
+require_once('../Tools/TType.php');
 
 class EReview 
 {

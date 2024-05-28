@@ -1,7 +1,7 @@
 <?php
 require_once ('FConnection.php');
 require_once ('../Entity/EReview.php');
-require_once('../utility/TType.php');
+require_once('../Tools/TType.php');
 require_once('FPhoto.php');
 /**
  * This class provide to make query to EOwner class
