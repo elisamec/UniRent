@@ -96,7 +96,6 @@ class FCreditCard
   public function store(ECreditCard $CreditCard):bool 
   {
     $db=FConnection::getInstance()->getConnection();
-    $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
     
     try
     { 

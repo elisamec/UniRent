@@ -44,8 +44,9 @@ class ECreditCard
      * studentID
      *
      * @var int
-     */
+     */    
     private $studentID;
+    private static $entity =ECreditCard::class;
     
     /**
      * __construct
@@ -70,6 +71,15 @@ class ECreditCard
 
     //GET methods
         
+    /**
+     * getEntity
+     *
+     * @return string
+     */
+    public function getEntity():string 
+    {
+        return $this->entity;
+    }
     /**
      * getNumber
      *
