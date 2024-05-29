@@ -67,18 +67,21 @@ require_once('../Tools/TError.php');
             $db->rollBack();
         }
         $row=$stm->fetch(PDO::FETCH_ASSOC);
-        $photo=FPhoto::getInstance()->load($row['picture']);
-        $result=new EOwner($row['id'],$row['username'], $row['password'], $row['name'], $row['surname'], $photo, $row['email'], $row['phonenumber'], $row['iban']);
+        $photoID=$row['picture'];
+        $photo= ($photoID!==null) ? FPhoto::getInstance()->load($photoID) : null;
+        $result=new EOwner($row['id'],$row['username'], $row['password'], $row['name'], $row['surname'], $photo, $row['email'], $row['phoneNumber'], $row['iban']);
         return $result;
     }
 
     public function store(EOwner $owner):bool {
         $db=FConnection::getInstance()->getConnection();
         try
-        {
-            $storePicture = FPhoto::getInstance()->store($owner->getPhoto());
-            if ($storePicture===false){
-                return false;
+        {   
+            if ($owner->getPhoto()!== null) {
+                $storePicture = FPhoto::getInstance()->store($owner->getPhoto());
+                if ($storePicture===false){
+                    return false;
+                }
             }
             $db->exec('LOCK TABLES owner WRITE');
             $db->beginTransaction();
@@ -89,7 +92,11 @@ require_once('../Tools/TError.php');
             $stm->bindValue(':pass', $owner->getPassword(), PDO::PARAM_STR);
             $stm->bindValue(':name', $owner->getName(), PDO::PARAM_STR);
             $stm->bindValue(':surname', $owner->getSurname(), PDO::PARAM_STR);
-            $stm->bindValue(':picture', $owner->getPhoto()->getId(), PDO::PARAM_INT);
+            if ($owner->getPhoto()!== null) {
+                $stm->bindValue(':picture', $owner->getPhoto()->getId(), PDO::PARAM_INT);
+            } else {
+                $stm->bindValue(':picture', null, PDO::PARAM_NULL);
+            }
             $stm->bindValue(':email', $owner->getMail(), PDO::PARAM_STR);
             $stm->bindValue(':phone', $owner->getPhoneNumber(), PDO::PARAM_STR);
             $stm->bindValue(':iban', $owner->getIBAN(), PDO::PARAM_STR);
@@ -97,6 +104,7 @@ require_once('../Tools/TError.php');
             $id=$db->lastInsertId();
             $db->commit();
             $db->exec('UNLOCK TABLES');
+            $owner->setID($id);
             return true;
             
         }
@@ -118,7 +126,11 @@ require_once('../Tools/TError.php');
             $currentPhotoID= FOwner::currentPhoto($owner->getId());
             #potrebbe esserci un modo migliore per farlo
             $FPh=FPhoto::getInstance();
-            $newPhID=$owner->getPhoto()->getId();
+            if ($owner->getPhoto()!==null) {
+                $newPhID=$owner->getPhoto()->getId();
+            } else {
+                $newPhID=null;
+            }
             if ($currentPhotoID===$newPhID) {
                 $deletedPicture = true;
                 $updatePicture = true;
@@ -139,7 +151,11 @@ require_once('../Tools/TError.php');
             $stm->bindValue(':pass', $owner->getPassword(), PDO::PARAM_STR);
             $stm->bindValue(':name', $owner->getName(), PDO::PARAM_STR);
             $stm->bindValue(':surname', $owner->getSurname(), PDO::PARAM_STR);
-            $stm->bindValue(':picture', $owner->getPhoto()->getId(), PDO::PARAM_INT);
+            if ($owner->getPhoto()!==null) {
+                $stm->bindValue(':picture', $owner->getPhoto()->getId(), PDO::PARAM_INT);
+            } else {
+                $stm->bindValue(':picture', null, PDO::PARAM_NULL);;
+            }
             $stm->bindValue(':email', $owner->getMail(), PDO::PARAM_STR);
             $stm->bindValue(':phone', $owner->getPhoneNumber(), PDO::PARAM_STR);
             $stm->bindValue(':iban', $owner->getIBAN(), PDO::PARAM_STR);
@@ -177,7 +193,7 @@ require_once('../Tools/TError.php');
         {
             $db->rollBack();
         }
-        $photoID=$stm->fetch(PDO::FETCH_ASSOC);
+        $photoID=$stm->fetch(PDO::FETCH_ASSOC)['picture'];
         return $photoID;
     }
     public function delete(EOwner $owner): bool {

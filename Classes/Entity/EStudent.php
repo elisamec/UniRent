@@ -1,5 +1,5 @@
 <?php 
-
+require_once ('EPhoto.php');
 /**
  * EStudent
  * @author Matteo Maloni (UniRent) <matteo.maloni.00@gmail.com>
@@ -13,79 +13,80 @@ class EStudent
      *
      * @var int
      */
-    private $id;    
+    private int $id;    
     /**
      * username
      *
      * @var string
      */
-    private $username;    
+    private string $username;    
     /**
      * password
      *
      * @var string
      */    
-    private $password;    
+    private string $password;    
     /**
      * name
      *
      * @var string
      */
-    private $name;    
+    private string $name;    
     /**
      * surname
      *
      * @var string
      */
-    private $surname;    
+    private string $surname;    
     /**
-     * picture ID
+     * picture 
      *
-     * @var int
+     * @var EPhoto
      */
-    private $picture;    
+    private EPhoto|null $picture;    
     /**
      * universityMail
      *
      * @var string
      */
-    private $universityMail;    
+    private string $universityMail;    
     /**
      * courseDuration
      *
      * @var int
      */
-    private $courseDuration;    
+    private int $courseDuration;    
     /**
      * immatricolationYear
      *
      * @var int
      */
-    private $immatricolationYear;    
+    private int $immatricolationYear;    
     /**
      * birthDate
      *
      * @var DateTime
      */
-    private $birthDate;    
+    private DateTime $birthDate;    
     /**
      * sex
      *
      * @var string
      */
-    private $sex;    
+    private string $sex;    
     /**
      * smoker
      *
      * @var bool
      */
-    private $smoker;    
+    private bool $smoker;    
     /**
      * animals
      *
      * @var bool
      */
-    private $animals;
+    private bool $animals;
+    private static $entity =EStudent::class;
     
     /**
      * __construct
@@ -95,7 +96,7 @@ class EStudent
      * @param  string $password
      * @param  string $name
      * @param  string $surname
-     * @param  int $pictureID
+     * @param  ?EPhoto $picture
      * @param  string $universityMail
      * @param  int $courseDuration
      * @param  int $immatricolationYear
@@ -105,14 +106,14 @@ class EStudent
      * @param  bool $animals
      * @return self
      */
-    public function __construct(int $id, string $username, string $password, string $name, string $surname, int|null $pictureID, string $universityMail, int $courseDuration, int $immatricolationYear, DateTime $birthDate, bool $sex, bool $smoker, bool $animals)
+    public function __construct(int $id, string $username, string $password, string $name, string $surname, EPhoto|null $picture, string $universityMail, int $courseDuration, int $immatricolationYear, DateTime $birthDate, bool $sex, bool $smoker, bool $animals)
     {
         $this->id=$id;
         $this->username=$username;
         $this->password=$password;
         $this->name=$name;
         $this->surname=$surname;
-        $this->picture=$pictureID;
+        $this->picture=$picture;
         $this->universityMail=$universityMail;
         $this->courseDuration=$courseDuration;
         $this->immatricolationYear=$immatricolationYear;
@@ -124,6 +125,15 @@ class EStudent
 
     // GET methods
     
+    /**
+     * getEntity
+     *
+     * @return string
+     */
+    public function getEntity():string
+    {
+        return $this->entity;
+    }
     /**
      * getID
      *
@@ -172,9 +182,9 @@ class EStudent
     /**
      * getPicture
      *
-     * @return int
+     * @return EPhoto|null
      */
-    public function getPicture():int|null
+    public function getPicture():EPhoto|null
     {
         return $this->picture;
     }    
@@ -297,12 +307,12 @@ class EStudent
     /**
      * setPicture
      *
-     * @param  int $pictureID
+     * @param  int $picture
      * @return void
      */
-    public function setPicture(int $pictureID)
+    public function setPicture(EPhoto|null $picture)
     {
-        $this->picture=$pictureID;
+        $this->picture=$picture;
     }    
     /**
      * setUniversityMail
@@ -384,7 +394,7 @@ class EStudent
      */
     public function __toString():string
     {
-        $result='ID:'.(string)$this->id.' USERNAME:'.$this->username.' PASSWORD:'.$this->password.' NAME:'.$this->name.' SURNAME:'.$this->surname.' PICTURE_ID:'.(string)$this->picture.' UNIVERSITY_MAIL:'.$this->universityMail.' COURSE_DURATION:'.(string)$this->courseDuration;
+        $result='ID:'.(string)$this->id.' USERNAME:'.$this->username.' PASSWORD:'.$this->password.' NAME:'.$this->name.' SURNAME:'.$this->surname.' UNIVERSITY_MAIL:'.$this->universityMail.' COURSE_DURATION:'.(string)$this->courseDuration;
         $result.=' IMMATRICOLATION_YEAR:'.(string)$this->immatricolationYear.' BIRTH_DATE:'.$this->birthDate->format('d/m/Y').' SEX:'.$this->sex.' SMOKER:'.(string)$this->smoker.' ANIMALS:'.(string)$this->animals;
         return $result;
     }

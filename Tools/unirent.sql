@@ -93,7 +93,7 @@ CREATE TABLE `administrator` (
 
 CREATE TABLE `contract` (
   `reservationId` int(11) NOT NULL,
-  `status` enum('onGoing','future','finshed','') NOT NULL,
+  `status` enum('onGoing','future','finshed') NOT NULL,
   `paymentDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `cardNumber` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -245,10 +245,10 @@ CREATE TABLE `studentreview` (
 CREATE TABLE `supportrequest` (
   `id` int(11) NOT NULL,
   `message` varchar(1000) NOT NULL,
-  `topic` enum('registration','appUse','bug','') NOT NULL,
+  `topic` enum('registration','appUse','bug') NOT NULL,
   `idStudent` int(11) DEFAULT NULL,
-  `ownerId` int(11) DEFAULT NULL,
-  `authorType` enum('student','owner','','') NOT NULL,
+  `idOwner` int(11) DEFAULT NULL,
+  `authorType` enum('student','owner') NOT NULL,
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -398,7 +398,7 @@ ALTER TABLE `studentreview`
 --
 ALTER TABLE `supportrequest`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `ownerId` (`ownerId`),
+  ADD KEY `idOwner` (`idOwner`),
   ADD KEY `studentId` (`idStudent`);
 
 --
@@ -578,7 +578,7 @@ ALTER TABLE `studentreview`
 -- Constraints for table `supportrequest`
 --
 ALTER TABLE `supportrequest`
-  ADD CONSTRAINT `supportrequest_ibfk_1` FOREIGN KEY (`ownerId`) REFERENCES `owner` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `supportrequest_ibfk_1` FOREIGN KEY (`idOwner`) REFERENCES `owner` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `supportrequest_ibfk_2` FOREIGN KEY (`idStudent`) REFERENCES `student` (`id`) ON DELETE CASCADE;
 
 --

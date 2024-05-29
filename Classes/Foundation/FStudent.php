@@ -1,5 +1,7 @@
 <?php 
 
+require_once('FPhoto.php');
+require_once('../Tools/TError.php');
 require_once('FConnection.php');
 require_once('../Entity/EStudent.php');
 class FStudent
@@ -56,7 +58,16 @@ class FStudent
             }
             $row=$stm->fetch(PDO::FETCH_ASSOC);
             $BIRTH= new DateTime($row['birthDate']);
-            $student = new EStudent($row['id'],$row['username'],$row['password'],$row['name'],$row['surname'],$row['picture'],$row['universityMail'],$row['courseDuration'],$row['immatricolationYear'],$BIRTH,$row['sex'],$row['smoker'],$row['animals']);
+            $photoID=$row['picture'];
+            if(is_null($photoID))
+            {
+                $student = new EStudent($row['id'],$row['username'],$row['password'],$row['name'],$row['surname'],$photoID,$row['universityMail'],$row['courseDuration'],$row['immatricolationYear'],$BIRTH,$row['sex'],$row['smoker'],$row['animals']);
+            }
+            else
+            {
+                $photo=FPhoto::getInstance()->load($photoID);
+                $student = new EStudent($row['id'],$row['username'],$row['password'],$row['name'],$row['surname'],$photo,$row['universityMail'],$row['courseDuration'],$row['immatricolationYear'],$BIRTH,$row['sex'],$row['smoker'],$row['animals']);
+            }
             return $student;
         }
         else
@@ -64,12 +75,98 @@ class FStudent
             return false;
         }
     }
-/*
     public function store(EStudent $student):bool
-    {}
-    public function delete(int $id):bool
-    {}
+    {
+        $db=FConnection::getInstance()->getConnection();
+        if($this->exist($student->getID()))
+        {
+            #already stored in database
+            return false;
+        }
+        else
+        {
+            try
+            {
+                $db->exec('LOCK TABLES student WRITE');
+                $q='INSERT INTO student (username,password,name,surname,picture,universityMail,courseDuration,immatricolationYear,birthDate,sex,smoker,animals)';
+                $q=$q.' VALUES (:username, :password, :name, :surname, :picture, :universityMail,:courseDuration,:immatricolationYear,:birthDate,:sex,:smoker,:animals)';
+                $db->beginTransaction();
+                $stm=$db->prepare($q);
+                $stm->bindValue(':username',$student->getUsername(),PDO::PARAM_STR);
+                $stm->bindValue(':password',$student->getPassword(),PDO::PARAM_STR);
+                $stm->bindValue(':name',$student->getName(),PDO::PARAM_STR);
+                $stm->bindValue(':surname',$student->getSurname(),PDO::PARAM_STR);
+                if(is_null($student->getPicture()))
+                {
+                    $stm->bindValue(':picture',$student->getPicture(),PDO::PARAM_NULL);
+                }
+                else
+                {
+                    $stm->bindValue(':picture',$student->getPicture()->getId(),PDO::PARAM_INT);
+                }
+                $stm->bindValue(':universityMail',$student->getUniversityMail(),PDO::PARAM_STR);
+                $stm->bindValue(':courseDuration',$student->getCourseDuration(),PDO::PARAM_INT);
+                $stm->bindValue(':immatricolationYear',$student->getImmatricolationYear(),PDO::PARAM_INT);
+                $stm->bindValue(':birthDate',$student->getBirthDate()->format('Y-m-d H:i:s'),PDO::PARAM_STR);
+                $stm->bindValue(':sex',$student->getSex(),PDO::PARAM_STR);
+                $stm->bindValue(':smoker',$student->getSmoker(),PDO::PARAM_BOOL);
+                $stm->bindValue(':animals',$student->getAnimals(),PDO::PARAM_BOOL);
+                $stm->execute();
+                $db->commit();
+                $db->exec('UNLOCK TABLES');
+                return true;
+            }
+            catch(PDOException $e)
+            {
+                $db->rollBack();
+                $errorType = TError::getInstance()->handleDuplicateError($e);
+                if ($errorType) 
+                {
+                    echo "Error: " . $errorType . "\n"; //quando faremo view leghiamolo a view
+                } else 
+                {
+                    echo "An unexpected error occurred: " . $e->getMessage() . "\n";
+                }
+                return false;
+            }
+        }
+    }
     public function update(EStudent $student):bool
-    {}
-*/
+    {
+        $db=FConnection::getInstance()->getConnection();
+        if($this->exist($student->getID()))
+        {
+            try
+            {
+                $db->exec('LOCK TABLES student, photo WRITE');
+                $db->beginTransaction();
+                $q='UPDATE student SET id=:id, username= :username, password= :password, name= :name, surname= :surname,picture= :picture,universityMail= :universityMail,courseDuration= :courseDuration,immatricolationYear= :immatricolationYear,birthDate= :birthDate,sex= :sex,smoker= :smoker,animals= :animals';
+                $stm=$db->prepare($q);
+                $stm->bindValue(':id',$student->getID(),PDO::PARAM_INT);
+                $stm->bindValue(':username',$student->getUsername(),PDO::PARAM_STR);
+                $stm->bindValue(':password',$student->getPassword(),PDO::PARAM_STR);
+                $stm->bindValue(':name',$student->getName(),PDO::PARAM_STR);
+                $stm->bindValue(':surname',$student->getSurname(),PDO::PARAM_STR);
+                $stm->bindValue(':id',$student->getID(),PDO::PARAM_INT);
+                $stm->bindValue(':id',$student->getID(),PDO::PARAM_INT);
+                $stm->bindValue(':id',$student->getID(),PDO::PARAM_INT);
+                $stm->bindValue(':id',$student->getID(),PDO::PARAM_INT);
+                $stm->bindValue(':birthDate',$student->getBirthDate()->format('Y-m-d H:i:s'),PDO::PARAM_STR);
+                $stm->bindValue(':sex',$student->getSex(),PDO::PARAM_STR);
+                $stm->bindValue(':smoker',$student->getSmoker(),PDO::PARAM_BOOL);
+                $stm->bindValue(':animals',$student->getAnimals(),PDO::PARAM_BOOL);
+            }
+            catch(PDOException $e)
+            {
+                $db->rollBack();
+                return false;
+            }
+            
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 }
