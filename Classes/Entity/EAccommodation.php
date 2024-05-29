@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/../../Tools/composer/vendor/autoload.php';
+require __DIR__ . '/../../vendor/autoload.php';
 
 use CommerceGuys\Addressing\Address;
 use CommerceGuys\Addressing\Formatter\DefaultFormatter;
@@ -164,10 +164,22 @@ class EAccommodation
 
     public function __toString():string{
         
-        $address = $this->address;
-        //$start = $this->start->format('Y-m-d');
-        return "ID: $this->idAccommodation  Address:";
+        $address = $this->address->getAddressLine1() . " " . $this->address->getLocality() . " " . $this->address->getAdministrativeArea() . " " . $this->address->getCountryCode() . " " . $this->address->getPostalCode();
+        $start = $this->start->format('Y-m-d');
+        return "ID: $this->idAccommodation  \n".
+                "Photo: $this->photo  \n".
+                "Title: $this->title  \n".
+                "Address: $address  \n".
+                "Price: $this->price  \n".
+                "Start: $start  \n".
+                "Description: $this->description  \n".
+                "Deposit: $this->deposit  \n".
+                "Visit: $this->visit  \n".
+                "Man: $this->man \n".
+                "Woman: $this->woman \n".
+                "Pets: $this->pets \n".
+                "Smokers: $this->smokers \n".
+                "ID Owner: $this->idOwner \n";
     }
-
-    
+  
 }
