@@ -40,7 +40,7 @@ class FPhoto {
         try{
             $db->exec('LOCK TABLES visit READ');
             $db->beginTransaction();
-            $q="SELECT * FROM photo WHERE relativeTo = 'review' AND idAccommodation = $idReview";    
+            $q="SELECT * FROM photo WHERE relativeTo = 'review' AND idReview = $idReview";    
             $stm=$db->prepare($q);
             $stm->execute();
             $db->commit();
