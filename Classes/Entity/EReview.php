@@ -153,4 +153,9 @@ class EReview
             return array_values($this->photo);
         }
     }
+    public function __toString():string
+    {
+        $description = ($this->description !== null) ? $this->description : 'No description set';
+        return 'ID: '. $this->idReview. ', Title: '. $this->title. ', Valutation: '. $this->valutation. ', Description: '. $description. ', RecipientType: '. $this->recipientType. ', AuthorType: '.$this->authorType.', IDAuthor: '. $this->idAuthor. ', IDRecipient: '.$this->idRecipient;
+    }
 }
