@@ -5,9 +5,11 @@ require_once ('../Entity/EVisit.php');
 
 /**
  * FVisit
+ * 
+ * @package Foundation
  */
 class FVisit
-{
+{   
     private static $instance=null;
     
     /**

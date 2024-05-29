@@ -3,10 +3,6 @@
 require __DIR__ . '/../../vendor/autoload.php';
 
 use CommerceGuys\Addressing\Address;
-use CommerceGuys\Addressing\Formatter\DefaultFormatter;
-use CommerceGuys\Addressing\Repository\AddressFormatRepository;
-use CommerceGuys\Addressing\Repository\SubdivisionRepository;
-use CommerceGuys\Addressing\Repository\CountryRepository;
 
 class EAccommodation
 {
