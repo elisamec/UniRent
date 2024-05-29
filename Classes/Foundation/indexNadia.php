@@ -30,6 +30,9 @@
     //Exist
 
     $risultato = $FP->loadAccommodation(2);
+    foreach ($risultato as $photo) {
+        echo $photo->__toString() . "\n";
+    }
 
     //print_r($risultato);
     //print $risultato[0]->getId();

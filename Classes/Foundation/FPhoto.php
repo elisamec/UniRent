@@ -28,7 +28,49 @@ class FPhoto {
         return $result;
     }
 
+    /**
+     * This method loads the photos of a review
+     * @param int $idReview
+     * @return array
+     */
+    public function loadReview(int $idReview):array
+    {
+        $db=FConnection::getInstance()->getConnection();
+        
+        try{
+            $db->exec('LOCK TABLES visit READ');
+            $db->beginTransaction();
+            $q="SELECT * FROM photo WHERE relativeTo = 'review' AND idAccommodation = $idReview";    
+            $stm=$db->prepare($q);
+            $stm->execute();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
 
+        }catch (PDOException $e){
+            $db->rollBack();
+        }
+
+        $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($rows as $row) {
+            $photo = new EPhoto(
+                $row['id'],
+                $row['photo'],
+                $row['relativeTo'],
+                $row['idAccommodation'],
+                $row['idReview']
+            );
+            $photos[] = $photo;
+        }
+
+        return $photos;
+    }
+
+    /**
+     * This method loads the photos of an accommodation
+     * @param int $idAccommodation
+     * @return array
+     */
     public function loadAccommodation(int $idAccommodation):array
     {
         $db=FConnection::getInstance()->getConnection();
@@ -36,7 +78,7 @@ class FPhoto {
         try{
             $db->exec('LOCK TABLES visit READ');
             $db->beginTransaction();
-            $q="SELECT * FROM photo WHERE idAccommodation = $idAccommodation";    
+            $q="SELECT * FROM photo WHERE relativeTo = 'accommodation' AND idAccommodation = $idAccommodation";    
             $stm=$db->prepare($q);
             $stm->execute();
             $db->commit();
@@ -59,8 +101,6 @@ class FPhoto {
             );
             $photos[] = $photo;
         }
-
-        print_r($photos);
 
         return $photos;
     }

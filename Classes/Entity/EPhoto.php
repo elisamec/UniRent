@@ -7,6 +7,14 @@ class EPhoto {
     private ?int $idAccommodation;
     private ?int $idReview;
 
+    public function __construct(int $id, $photo, string $relativeTo, ?int $idAccommodation, ?int $idReview) {
+        $this->id = $id;
+        $this->photo = $photo;
+        $this->relativeTo = $relativeTo;
+        $this->idAccommodation = $idAccommodation;
+        $this->idReview = $idReview;
+    }
+
     public function getId():int {
         return $this->id;
     }
@@ -131,6 +139,6 @@ class EPhoto {
 
     public function __toString():string{
         $photo = "photo";
-        return "Id: $this->id, $photo, RelativeTo: $this->relativeTo, IdAccommodation: $this->idAccommodation, IdReview: $this->idReview";
+        return "Id: $this->id, $photo, Relative To: $this->relativeTo, Id Accommodation: $this->idAccommodation, Id Review: $this->idReview";
     }
 }
