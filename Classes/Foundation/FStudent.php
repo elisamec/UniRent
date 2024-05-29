@@ -102,7 +102,16 @@ class FStudent
                 }
                 else
                 {
-                    $stm->bindValue(':picture',$student->getPicture()->getId(),PDO::PARAM_INT);
+                    $photo=$student->getPicture();
+                    $q2='INSERT INTO photo (photo,relativeTo,idAccomodation,idReview)';
+                    $q2.=" VALUES ('$photo',:relativeTo,:idAccomodation,:idReview)";
+                    $stm2=$db->prepare($q2);
+                    $stm2->bindValue(':relativeTo','other',PDO::PARAM_STR);
+                    $stm2->bindValue(':idAccomodation',null,PDO::PARAM_NULL);
+                    $stm2->bindValue('idReview',null,PDO::PARAM_NULL);
+                    $stm2->execute();
+                    $photoID=$db->lastInsertId();
+                    $stm->bindParam(':picture',$photoID,PDO::PARAM_INT);
                 }
                 $stm->bindValue(':universityMail',$student->getUniversityMail(),PDO::PARAM_STR);
                 $stm->bindValue(':courseDuration',$student->getCourseDuration(),PDO::PARAM_INT);
@@ -138,19 +147,35 @@ class FStudent
         {
             try
             {
-                $db->exec('LOCK TABLES student, photo WRITE');
+                $db->exec('LOCK TABLES student WRITE');
                 $db->beginTransaction();
-                $q='UPDATE student SET id=:id, username= :username, password= :password, name= :name, surname= :surname,picture= :picture,universityMail= :universityMail,courseDuration= :courseDuration,immatricolationYear= :immatricolationYear,birthDate= :birthDate,sex= :sex,smoker= :smoker,animals= :animals';
+                $q='UPDATE student SET username= :username, password= :password, name= :name, surname= :surname, picture= :picture, universityMail= :universityMail, courseDuration= :courseDuration, immatricolationYear= :immatricolationYear, birthDate= :birthDate, sex= :sex, smoker= :smoker, animals= :animals WHERE id=:id';
                 $stm=$db->prepare($q);
                 $stm->bindValue(':id',$student->getID(),PDO::PARAM_INT);
                 $stm->bindValue(':username',$student->getUsername(),PDO::PARAM_STR);
                 $stm->bindValue(':password',$student->getPassword(),PDO::PARAM_STR);
                 $stm->bindValue(':name',$student->getName(),PDO::PARAM_STR);
                 $stm->bindValue(':surname',$student->getSurname(),PDO::PARAM_STR);
+                if(is_null($student->getPicture()))
+                {
+                    $stm->bindValue(':picture',null,PDO::PARAM_NULL);
+                }
+                else
+                {
+                    $photo=$student->getPicture();
+                    $q2="UPDATE photo SET photo='$photo', relativeTo=:relativeTo, idAccomodation=:idAccomodation, idReview=:idReview WHERE id=:id";
+                    $stm2=$db->prepare($q2);
+                    $stm2->bindValue(':relativeTo','other',PDO::PARAM_STR);
+                    $stm2->bindValue(':idAccomodation',null,PDO::PARAM_NULL);
+                    $stm2->bindValue(':idReview',null,PDO::PARAM_NULL);
+                    $stm2->execute();
+
+                }
                 $stm->bindValue(':id',$student->getID(),PDO::PARAM_INT);
-                $stm->bindValue(':id',$student->getID(),PDO::PARAM_INT);
-                $stm->bindValue(':id',$student->getID(),PDO::PARAM_INT);
-                $stm->bindValue(':id',$student->getID(),PDO::PARAM_INT);
+
+                $stm->bindValue(':universityMail',$student->getUniversityMail(),PDO::PARAM_STR);
+                $stm->bindValue(':courseDuration',$student->getCourseDuration(),PDO::PARAM_INT);
+                $stm->bindValue(':immatricolationYear',$student->getImmatricolationYear(),PDO::PARAM_INT);
                 $stm->bindValue(':birthDate',$student->getBirthDate()->format('Y-m-d H:i:s'),PDO::PARAM_STR);
                 $stm->bindValue(':sex',$student->getSex(),PDO::PARAM_STR);
                 $stm->bindValue(':smoker',$student->getSmoker(),PDO::PARAM_BOOL);
@@ -167,6 +192,10 @@ class FStudent
         {
             return false;
         }
+    }
+    private function VerifyCourrentPhoto(EPhoto $photo):bool
+    {
+        
     }
 
 }
