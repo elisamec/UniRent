@@ -26,13 +26,13 @@
 
 
     $FP=FPhoto::getInstance();
+    $FA=FAccommodation::getInstance();
 
     //Exist
 
-    $risultato = $FP->loadAccommodation(2);
-    foreach ($risultato as $photo) {
-        echo $photo->__toString() . "\n";
-    }
+    $risultato = $FA->load(2);
+    //$address = $risultato->getAddressLine1() . ", " . $risultato->getLocality() . ", " . $risultato->getPostalCode();
+    print $risultato;
 
     //print_r($risultato);
     //print $risultato[0]->getId();

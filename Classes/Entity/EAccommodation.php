@@ -36,8 +36,8 @@ class EAccommodation
     private float $price;
     private DateTime $start;    //Per aggiungere un oggetto: new DateInterval('PT2H30M');
                                     //Per stampare: echo $interval->format('%H:%I:%S');
-    private ?String $description;
-    private float $deposit;
+    private String $description;
+    private ?float $deposit;
     private array $visit;
     private int $visitDuration;
     private bool $man;
@@ -71,7 +71,7 @@ class EAccommodation
      * @var int $idOwner The identifier of the owner of the accommodation.
      */
     public function __construct(?int $idAccommodation, array $photo, string $title, Address $address, float $price,
-                                DateTime $start, ?String $description, float $deposit, array $visit, int $visitDuration, 
+                                DateTime $start, ?String $description, ?float $deposit, array $visit, int $visitDuration, 
                                 bool $man, bool $woman, bool $pets, bool $smokers, int $idOwner){
 
         $this->idAccommodation = $idAccommodation;
@@ -393,8 +393,9 @@ class EAccommodation
      */
     public function __toString():string{
         
-        $address = $this->address->getAddressLine1() . " " . $this->address->getLocality() . " " . $this->address->getAdministrativeArea() . " " . $this->address->getCountryCode() . " " . $this->address->getPostalCode();
+        $address = $this->address->getAddressLine1() . ", " . $this->address->getLocality() . ", " . $this->address->getPostalCode();
         $start = $this->start->format('Y-m-d');
+
         return "ID: $this->idAccommodation  \n".
                 "Photo: $this->photo  \n".
                 "Title: $this->title  \n".
