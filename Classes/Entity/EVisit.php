@@ -9,9 +9,9 @@ class EVisit
 
     private static $entity = EVisit::class;
 
-    public function __construct(int $idVisit, String $date, int $idStudent, int $idAccommodation){
+    public function __construct(int $idVisit, DateTime $date, int $idStudent, int $idAccommodation){
         $this->idVisit = $idVisit;
-        $this->date = new DateTime($date);
+        $this->date = $date;
         $this->idStudent = $idStudent;
         $this->idAccommodation = $idAccommodation;
     }

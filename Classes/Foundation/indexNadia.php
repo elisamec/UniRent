@@ -2,59 +2,47 @@
 
     #PARTE NADIA
 
-    require __DIR__ . '../../Tools/composer/vendor/autoload.php';
+    require __DIR__ . '/../../Tools/composer/vendor/autoload.php';
 
-    require_once ('FVisit.php');
-    require_once ('../Entity/EVisit.php');  
-
-    $FV=FVisit::getInstance();
-
-    $id = 4;
-
-    //EXIST
-    /*if($FV->exist($id)){
-        echo 'Esiste la visita';
-    }else{
-        echo 'Non esiste la visita ';
-    }*/
-
-    //LOAD
-    /*$risultato=$FV->load($id);
-    $stringa=$risultato->__toString();
-    print $stringa;*/
-
-    // STORE 
-    //$date = new DateTime("2002-09-15");
-    //$studente= new EStudent(2, "Pippo", "pass", "Pippo", "Pluto", 1, "pippo@pluto.it", 3, 2032, $date, false, false, false);
-
-    /*$visit = new EVisit(0, "2024-09-15", 1, 2);
-    $esito=$FV->store($visit);
-    if($esito==true)
-    {
-        echo 'Visita salvata ';
-        print $visit->getIdVisit();
-    }
-    elseif($esito==false)
-    {
-        echo 'Non caricato sul db! ';
-    }
-    else
-    {
-        echo 'Qualcosa non và! ';
-    }*/
-    
-    
-
+    require_once ('FAccommodation.php');
+    require_once ('../Entity/EAccommodation.php');
     use CommerceGuys\Addressing\Address;
+    use CommerceGuys\Addressing\Formatter\DefaultFormatter;
     use CommerceGuys\Addressing\AddressFormat\AddressFormatRepository;
+    use CommerceGuys\Addressing\Country\CountryRepository;
+    use CommerceGuys\Addressing\Subdivision\SubdivisionRepository;
+ 
 
-    // Creazione di un oggetto Address
+
     $address = new Address();
-    $address = $address->withCountryCode('US')
-                    ->withAdministrativeArea('CA')
-                    ->withLocality('Los Angeles')
-                    ->withPostalCode('90001')
-                    ->withAddressLine1('123 Main St');
+    $address = $address
+        ->withCountryCode('IT')
+        ->withAdministrativeArea('AQ')
+        ->withLocality('Mountain View')
+        ->withAddressLine1('1098 Alta Ave');
 
-    echo $address->getCountryCode(); // Output: US
+    //$start = new DateTime('2024-09-15');
+    //$acc = new EAccommodation(1, [], "titolo", $address, 34, $start, null, 32, [], false, true, false, false, 1);
+
+    /* Output:
+    1098 Alta Ave
+    MOUNTAIN VIEW, CA 94043
+    ÉTATS-UNIS - UNITED STATES
+    */
+
+    // Creazione dei repository necessari
+    $addressFormatRepository = new AddressFormatRepository();
+    $countryRepository = new CountryRepository();
+    $subdivisionRepository = new SubdivisionRepository();
+    $formatter = new DefaultFormatter($addressFormatRepository, $countryRepository, $subdivisionRepository);
+
+    // Formattazione dell'indirizzo senza HTML
+    $formattedAddress = $formatter->format($address, ['html' => false]);
+
+    // Restituisce una stringa che rappresenta l'accommodation con il suo indirizzo
+    echo $formatter->format($address);
+
+
+
+    
     
