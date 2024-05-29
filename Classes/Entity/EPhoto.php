@@ -2,6 +2,10 @@
 //Da rivedere
 class EPhoto {
     private int $id;
+    private $photo;
+    private string $relativeTo;
+    private ?int $idAccommodation;
+    private ?int $idReview;
 
     public function getId():int {
         return $this->id;
@@ -124,4 +128,9 @@ class EPhoto {
         }
     }
     */
+
+    public function __toString():string{
+        $photo = "photo";
+        return "Id: $this->id, $photo, RelativeTo: $this->relativeTo, IdAccommodation: $this->idAccommodation, IdReview: $this->idReview";
+    }
 }

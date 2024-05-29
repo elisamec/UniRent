@@ -6,7 +6,11 @@
 
     require_once ('FAccommodation.php');
     require_once ('../Entity/EAccommodation.php');
-    use CommerceGuys\Addressing\Address;
+    require_once ('FVisit.php');
+    require_once ('../Entity/EVisit.php');
+    require_once ('FPhoto.php');
+    require_once ('../Entity/EPhoto.php');
+    /*use CommerceGuys\Addressing\Address;
 
     $address = new Address();
     $address = $address
@@ -18,11 +22,28 @@
     $start = new DateTime('2024-09-15');
     $acc = new EAccommodation(1, [], "titolo", $address, 34, $start, null, 32, [], false, true, false, false, 1);
 
-    print $acc;
+    print $acc;*/
 
 
-    // Restituisce una stringa che rappresenta l'accommodation con il suo indirizzo
-    //echo $formatter->format($address);
+    $FP=FPhoto::getInstance();
+
+    //Exist
+
+    $risultato = $FP->loadAccommodation(2);
+
+    //print_r($risultato);
+    //print $risultato[0]->getId();
+    
+    /*if($Risultato == [])
+    {
+        echo 'L\'alloggio è nel DataBase!';
+    }
+    else
+    {
+        echo 'L\'alloggio non è nel DataBase!';
+    }*/
+
+
 
 
 

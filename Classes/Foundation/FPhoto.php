@@ -28,10 +28,43 @@ class FPhoto {
         return $result;
     }
 
-    public function load(int $id):EPhoto
+
+    public function loadAccommodation(int $idAccommodation):array
     {
-        return new EPhoto();
+        $db=FConnection::getInstance()->getConnection();
+        
+        try{
+            $db->exec('LOCK TABLES visit READ');
+            $db->beginTransaction();
+            $q="SELECT * FROM photo WHERE idAccommodation = $idAccommodation";    
+            $stm=$db->prepare($q);
+            $stm->execute();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+
+        }catch (PDOException $e){
+            $db->rollBack();
+        }
+
+        $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+        // Iterate over each row and create an EAccommodation object
+        foreach ($rows as $row) {
+            $photo = new EPhoto(
+                $row['id'],
+                $row['photo'],
+                $row['relativeTo'],
+                $row['idAccommodation'],
+                $row['idReview']
+            );
+            $photos[] = $photo;
+        }
+
+        print_r($photos);
+
+        return $photos;
     }
+
     public function store(EPhoto $photo):bool
     {
         return true;
