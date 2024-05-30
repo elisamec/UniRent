@@ -5,13 +5,18 @@
 require_once('../Entity/EStudent.php');
 require_once('FStudent.php');
 
-$student=new EStudent('Fratmo','pippo','Lorenzo','Maloni',null,'lorenzo.maloni.02@gmail.com',3,2021,new DateTime('11/9/2002'),'M',0,0);
 $FS=FStudent::getInstance();
-$risultato=$FS->store($student);
+$student=$FS->load(3);
+echo $student->getName().' '.$student->getSurname();
+$student->setSurname('Maloni');
+
+
+
+$risultato=$FS->update($student);
 
 if($risultato!=false)
 {
-    echo 'Studente nel database';
+    echo 'Studente modificato nel db!';
 }
 else
 {

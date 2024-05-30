@@ -183,7 +183,7 @@ class EStudent
      *
      * @return EPhoto|null
      */
-    public function getPicture():EPhoto|null
+    public function getPicture():?EPhoto
     {
         return $this->picture;
     }    
