@@ -4,17 +4,17 @@ require_once('FPhoto.php');
 require_once('../Tools/TError.php');
 require_once('FConnection.php');
 require_once('../Entity/EStudent.php');
-class FStudent2
+class FStudent
 {
     private static $instance=null;
 
     private function __construct(){}
 
-    public static function getInstance():FStudent2
+    public static function getInstance():FStudent
     {
         if(is_null(self::$instance))
         {
-            self::$instance= new FStudent2();
+            self::$instance= new FStudent();
         }
         return self::$instance;
     }
