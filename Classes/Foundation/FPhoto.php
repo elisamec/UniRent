@@ -108,7 +108,7 @@ class FPhoto {
     /**
      * This method loads the photos of an owner or student
      * @param int $id
-     * @return array
+     * @return EPhoto
      */
     public function loadAvatar(int $id):EPhoto
     {

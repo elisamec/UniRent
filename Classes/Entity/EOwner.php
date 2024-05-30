@@ -90,5 +90,8 @@ class EOwner
     public function setIBAN(string $iban):void {
         $this->iban=$iban;
     }
-    
+    public function __toString():string
+    {
+        return 'ID: '. $this->id. ', Username: '. $this->username. ', Password: '. $this->password. ', Name: '. $this->name. ', Surname: '. $this->surname. ', E-Mail: '.$this->email.', Phone Number: '. $this->phoneNumber. ', IBAN: '.$this->iban;
+    }
 }
