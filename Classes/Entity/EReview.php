@@ -58,7 +58,7 @@ class EReview
     {
         $this->idReview=$idReview;
         $this->title=$title;
-        $this->$valutation;
+        $this->valutation=$valutation;
         $this->description=$description;
         $this->recipientType=$type;
         $this->creationDate=$creationDate;
@@ -156,6 +156,6 @@ class EReview
     public function __toString():string
     {
         $description = ($this->description !== null) ? $this->description : 'No description set';
-        return 'ID: '. $this->idReview. ', Title: '. $this->title. ', Valutation: '. $this->valutation. ', Description: '. $description. ', RecipientType: '. $this->recipientType. ', AuthorType: '.$this->authorType.', IDAuthor: '. $this->idAuthor. ', IDRecipient: '.$this->idRecipient;
+        return 'ID: '. $this->idReview. ', Title: '. $this->title. ', Valutation: '. $this->valutation. ', Description: '. $description. ', RecipientType: '. $this->recipientType->value. ', AuthorType: '.$this->authorType->value.', IDAuthor: '. $this->idAuthor. ', IDRecipient: '.$this->idRecipient;
     }
 }

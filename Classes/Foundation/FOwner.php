@@ -68,7 +68,7 @@ require_once('../Tools/TError.php');
         }
         $row=$stm->fetch(PDO::FETCH_ASSOC);
         $photoID=$row['picture'];
-        $photo= ($photoID!==null) ? FPhoto::getInstance()->load($photoID) : null;
+        $photo= ($photoID!==null) ? FPhoto::getInstance()->loadAvatar($photoID) : null;
         $result=new EOwner($row['id'],$row['username'], $row['password'], $row['name'], $row['surname'], $photo, $row['email'], $row['phoneNumber'], $row['iban']);
         return $result;
     }

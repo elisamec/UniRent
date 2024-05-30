@@ -69,45 +69,49 @@
             $FA=FAccommodation::getInstance();
             $db=FConnection::getInstance()->getConnection();
             
-            try{
-                $db->exec('LOCK TABLES visit READ');
-                $db->beginTransaction();
-                $q="SELECT * FROM accommodation WHERE id=$idAccommodation";    
-                $stm=$db->prepare($q);
-                $stm->execute();
-                $db->commit();
-                $db->exec('UNLOCK TABLES');
+            if($FA->exist($idAccommodation)){
+                try{
+                    $db->exec('LOCK TABLES accommodation READ');
+                    $db->beginTransaction();
+                    $q="SELECT * FROM accommodation WHERE id=$idAccommodation";    
+                    $stm=$db->prepare($q);
+                    $stm->execute();
+                    $db->commit();
+                    $db->exec('UNLOCK TABLES');
 
-            }catch (PDOException $e){
-                $db->rollBack();
+                }catch (PDOException $e){
+                    $db->rollBack();
+                }
+
+                $photos = $FP->loadAccommodation($idAccommodation);
+
+                $row=$stm->fetch(PDO::FETCH_ASSOC);
+                $address = new Address();
+                $address = $FA->loadAddress($row['address']);
+                $start = new DateTime($row['start']);
+                $visit = $FA->loadDays($idAccommodation);
+
+                $result=new EAccommodation(
+                    $row['id'],
+                    $photos,
+                    $row['title'],
+                    $address,
+                    $row['price'],
+                    $start,
+                    $row['description'],
+                    $row['deposit'],
+                    $visit, 
+                    $row['visitDuration'],
+                    $row['man'],
+                    $row['woman'],
+                    $row['pets'],
+                    $row['smokers'],
+                    $row['idOwner']
+                );
+                return $result;
+            }else{
+                return null;
             }
-
-            $photos = $FP->loadAccommodation($idAccommodation);
-
-            $row=$stm->fetch(PDO::FETCH_ASSOC);
-            $address = new Address();
-            $address = $FA->loadAddress($row['address']);
-            $start = new DateTime($row['start']);
-            $visit = $FA->loadDays($idAccommodation);
-
-            $result=new EAccommodation(
-                $row['id'],
-                $photos,
-                $row['title'],
-                $address,
-                $row['price'],
-                $start,
-                $row['description'],
-                $row['deposit'],
-                $visit, 
-                $row['visitDuration'],
-                $row['man'],
-                $row['woman'],
-                $row['pets'],
-                $row['smokers'],
-                $row['idOwner']
-            );
-            return $result;
         }
 
         /**
@@ -122,7 +126,7 @@
             $db=FConnection::getInstance()->getConnection();
         
             try{
-                $db->exec('LOCK TABLES visit READ');
+                $db->exec('LOCK TABLES address READ');
                 $db->beginTransaction();
                 $q="SELECT * FROM address WHERE id=$idAddress";    
                 $stm=$db->prepare($q);
@@ -153,7 +157,7 @@
             $db=FConnection::getInstance()->getConnection();
         
             try{
-                $db->exec('LOCK TABLES visit READ');
+                $db->exec('LOCK TABLES day READ');
                 $db->beginTransaction();
                 $q="SELECT * FROM day WHERE idAccommodation=$idAccommodation";    
                 $stm=$db->prepare($q);
@@ -188,7 +192,7 @@
             $db=FConnection::getInstance()->getConnection();
         
             try{
-                $db->exec('LOCK TABLES visit READ');
+                $db->exec('LOCK TABLES time READ');
                 $db->beginTransaction();
                 $q="SELECT * FROM time WHERE idDay=$idDay";    
                 $stm=$db->prepare($q);
