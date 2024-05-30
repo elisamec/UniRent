@@ -109,7 +109,7 @@ class EStudent
     public function __construct(string $username, string $password, string $name, string $surname, EPhoto|null $picture, string $universityMail, int $courseDuration, int $immatricolationYear, DateTime $birthDate, string $sex, bool $smoker, bool $animals)
     {
         $this->username=$username;
-        $this->password=$password;
+        $this->password=password_get_info($password)['algoName'] !== PASSWORD_DEFAULT ? password_hash($password, PASSWORD_DEFAULT) : $password;
         $this->name=$name;
         $this->surname=$surname;
         $this->picture=$picture;
@@ -281,7 +281,7 @@ class EStudent
      */
     public function setPassword(string $password)
     {
-        $this->password=$password;
+        $this->password=password_hash($password, PASSWORD_DEFAULT);
     }    
     /**
      * setName
@@ -394,7 +394,7 @@ class EStudent
     public function __toString():string
     {
         $result='ID:'.(string)$this->id.' USERNAME:'.$this->username.' PASSWORD:'.$this->password.' NAME:'.$this->name.' SURNAME:'.$this->surname.' UNIVERSITY_MAIL:'.$this->universityMail.' COURSE_DURATION:'.(string)$this->courseDuration;
-        $result.=' IMMATRICOLATION_YEAR:'.(string)$this->immatricolationYear.' BIRTH_DATE:'.$this->birthDate->format('d/m/Y').' SEX:'.$this->sex.' SMOKER:'.(string)$this->smoker.' ANIMALS:'.(string)$this->animals.' PICTURE: '.$this->getPicture()->getId();
+        $result.=' IMMATRICOLATION_YEAR:'.(string)$this->immatricolationYear.' BIRTH_DATE:'.$this->birthDate->format('d/m/Y').' SEX:'.$this->sex.' SMOKER:'.(string)$this->smoker.' ANIMALS:'.(string)$this->animals.' PICTURE: '.$this->getPicture();
         return $result;
     }
 

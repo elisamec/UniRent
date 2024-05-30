@@ -1,7 +1,7 @@
 <?php 
 
     #PARTE MATTEO
-
+/*
 require_once('../Entity/EStudent.php');
 require_once('FStudent.php');
 
@@ -39,3 +39,20 @@ else
     echo $amministratore->__toString();
 }
 */
+require_once('../Entity/EStudent.php');
+require_once('FStudent2.php');
+
+$FS=FStudent2::getInstance();
+$stu=$FS->load(2);
+#echo $stu->__toString();
+$stu->setName('MIKE');
+
+$result=$FS->update($stu);
+if($result)
+{
+    echo 'Tutto ok!';
+}
+else
+{
+    echo 'Qualcosa non funziona!';
+}

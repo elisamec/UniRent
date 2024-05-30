@@ -4,17 +4,17 @@ require_once('FPhoto.php');
 require_once('../Tools/TError.php');
 require_once('FConnection.php');
 require_once('../Entity/EStudent.php');
-class FStudent
+class FStudent2
 {
     private static $instance=null;
 
     private function __construct(){}
 
-    public static function getInstance():FStudent
+    public static function getInstance():FStudent2
     {
         if(is_null(self::$instance))
         {
-            self::$instance= new FStudent();
+            self::$instance= new FStudent2();
         }
         return self::$instance;
     }
@@ -133,84 +133,92 @@ class FStudent
                 return false;
             }
     }
-    public static function update(EStudent $student):bool 
-    {
+    public function update(EStudent $student):bool 
+    {      
         $db=FConnection::getInstance()->getConnection();
         $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
-        try
-        { 
-            $currentPhotoID= FStudent::currentPhoto($student->getID()); #id della foto vecchia nel db
-
-            $FPh=FPhoto::getInstance();
-            if ($student->getPicture()!==null) #se lo studente ha una foto nuova
+        if($this->exist($student->getID()))
+        {
+            try
             {
-                $newPhID=$student->getPicture()->getId(); 
-            } 
-            else  #altrimenti se null
-            {
-                $newPhID=null; #nel db dovro togliere la foto
+                $oldPhotoID=$this->currentPhoto($student->getID()); 
+                $newPhoto=$student->getPicture();
+                if(is_null($newPhoto))
+                {
+                    if(is_null($oldPhotoID)){}
+                    else
+                    {
+                        FPhoto::getInstance()->delete($oldPhotoID);
+                    }
+                } 
+                else
+                {
+                    if(is_null($oldPhotoID))
+                    {
+                        FPhoto::getInstance()->store($student->getPicture());
+                    }
+                    else
+                    {
+                        if($oldPhotoID===($newPhoto->getId())){}
+                        else
+                        {
+                            FPhoto::getInstance()->delete($oldPhotoID);
+                            FPhoto::getInstance()->store($student->getPicture());
+                        }
+                    }
+                }
+                $db->exec('LOCK TABLES student WRITE');
+                $db->beginTransaction();
+                $q='UPDATE student SET username = :user, password = :pass, name = :name, surname = :surname, picture = :picture, universityMail = :email, ';
+                $q.='courseDuration = :courseDuration, immatricolationYear = :immatricolationYear, birthDate = :birthDate, sex = :sex, smoker = :smoker, animals = :animals WHERE id=:id';
+                $stm=$db->prepare($q);
+                $stm->bindValue(':id',$student->getID());
+                $stm->bindValue(':user', $student->getUsername(), PDO::PARAM_STR);
+                $stm->bindValue(':pass', $student->getPassword(), PDO::PARAM_STR);
+                $stm->bindValue(':name', $student->getName(), PDO::PARAM_STR);
+                $stm->bindValue(':surname', $student->getSurname(), PDO::PARAM_STR);
+                $stm->bindValue(':email', $student->getUniversityMail(), PDO::PARAM_STR);
+                $stm->bindValue(':courseDuration', $student->getCourseDuration(), PDO::PARAM_INT);
+                $stm->bindValue(':immatricolationYear', $student->getImmatricolationYear(), PDO::PARAM_INT);
+                $stm->bindValue(':birthDate',$student->getBirthDate()->format('Y-m-d H:i:s'),PDO::PARAM_STR);
+                $stm->bindValue(':sex',$student->getSex(),PDO::PARAM_STR);
+                $stm->bindValue(':smoker',$student->getSmoker(),PDO::PARAM_BOOL);
+                $stm->bindValue(':animals',$student->getAnimals(),PDO::PARAM_BOOL);
+                if ($student->getPicture()!=null) 
+                {
+                    $stm->bindValue(':picture', $student->getPicture()->getId(), PDO::PARAM_INT);
+                } 
+                else 
+                {
+                    $stm->bindValue(':picture', null, PDO::PARAM_NULL);;
+                }
+                $stm->execute();
+                $db->commit();
+                $db->exec('UNLOCK TABLES');
+                return true;
             }
-            if ($currentPhotoID===$newPhID) #se gli id coincidono
+            catch(PDOException $e)
             {
-                $deletedPicture = true;
-                $updatePicture = true;
-            }  
-            elseif ($currentPhotoID!== null and $newPhID!==null)  
-            {
-                $deletedPicture = $FPh->delete($currentPhotoID);
-                $updatePicture = $FPh->store($student->getPicture());
-            } 
-            elseif ($currentPhotoID!== null and $newPhID===null) 
-            {
-                $deletedPicture = $FPh->delete($currentPhotoID);
-            }
-            if ($updatePicture===false or $deletedPicture===false)
-            {
+                $db->rollBack();
+                $errorType = TError::getInstance()->handleDuplicateError($e);
+                if ($errorType) 
+                {
+                    echo "Error: " . $errorType . "\n"; //quando faremo view leghiamolo a view
+                } 
+                else 
+                {
+                    echo "An unexpected error occurred: " . $e->getMessage() . "\n";
+                }
                 return false;
             }
-            $db->exec('LOCK TABLES student WRITE');
-            $db->beginTransaction();
-            $q='UPDATE student SET username = :user, password = :pass, name = :name, surname = :surname, picture = :picture, universityMail = :email, ';
-            $q.='courseDuration = :courseDuration, immatricolationYear = :immatricolationYear, birthDate = :birthDate, sex = :sex, smoker = :smoker, animals = :animals';
-            $stm = $db->prepare($q);
-            $stm->bindValue(':user', $student->getUsername(), PDO::PARAM_STR);
-            $stm->bindValue(':pass', $student->getPassword(), PDO::PARAM_STR);
-            $stm->bindValue(':name', $student->getName(), PDO::PARAM_STR);
-            $stm->bindValue(':surname', $student->getSurname(), PDO::PARAM_STR);
-            if ($student->getPicture()!==null) 
-            {
-                $stm->bindValue(':picture', $student->getPicture()->getId(), PDO::PARAM_INT);
-            } 
-            else 
-            {
-                $stm->bindValue(':picture', null, PDO::PARAM_NULL);;
-            }
-            $stm->bindValue(':email', $student->getUniversityMail(), PDO::PARAM_STR);
-            $stm->bindValue(':courseDuration', $student->getCourseDuration(), PDO::PARAM_INT);
-            $stm->bindValue(':immatricolationYear', $student->getImmatricolationYear(), PDO::PARAM_INT);
-            $stm->bindValue(':birthDate',$student->getBirthDate()->format('Y-m-d H:i:s'),PDO::PARAM_STR);
-            $stm->bindValue(':sex',$student->getSex(),PDO::PARAM_STR);
-            $stm->bindValue(':smoker',$student->getSmoker(),PDO::PARAM_BOOL);
-            $stm->bindValue(':animals',$student->getAnimals(),PDO::PARAM_BOOL);
-            $stm->execute();
-            $db->commit();
-            $db->exec('UNLOCK TABLES');
-            return true;
-            
-        }
-        catch (PDOException $e) 
+        } 
+        else
         {
-            $db->rollBack();
-            $errorType = TError::getInstance()->handleDuplicateError($e);
-            if ($errorType) {
-                echo "Error: " . $errorType . "\n"; //quando faremo view leghiamolo a view
-            } else {
-                echo "An unexpected error occurred: " . $e->getMessage() . "\n";
-            }
             return false;
         }
     }
-    private static function currentPhoto(int $id): ?int   #restituisce l'ID della foto del profilo dello studente corrente
+    
+    private function currentPhoto(int $id): ?int   #restituisce l'ID della foto del profilo dello studente corrente
     {
         $db=FConnection::getInstance()->getConnection();
         try
