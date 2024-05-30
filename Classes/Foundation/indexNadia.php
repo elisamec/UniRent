@@ -15,9 +15,10 @@
     $FP=FPhoto::getInstance();
     $FA=FAccommodation::getInstance();
 
-    $risultato = $FP->loadAvatar(4);
-    $risultato = new EPhoto(1, 'foto', 'other', null, null);
-    print $risultato->getPhoto();
+    $risultato = $FP->loadAvatar(1);
+
+    //$risultato = new EPhoto(1, 'foto', 'other', null, null);
+    print $risultato;
 
 
 

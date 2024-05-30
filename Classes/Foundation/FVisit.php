@@ -62,23 +62,28 @@ class FVisit
     public function load(int $idVisit): EVisit{
 
         $db=FConnection::getInstance()->getConnection();
+        $FV=FVisit::getInstance();
         
-        try{
-            $db->exec('LOCK TABLES visit READ');
-            $db->beginTransaction();
-            $q="SELECT * FROM visit WHERE id=$idVisit";    
-            $stm=$db->prepare($q);
-            $stm->execute();
-            $db->commit();
-            $db->exec('UNLOCK TABLES');
+        if($FV->exist($idVisit)){
+            try{
+                $db->exec('LOCK TABLES visit READ');
+                $db->beginTransaction();
+                $q="SELECT * FROM visit WHERE id=$idVisit";    
+                $stm=$db->prepare($q);
+                $stm->execute();
+                $db->commit();
+                $db->exec('UNLOCK TABLES');
 
-        }catch (PDOException $e){
-            $db->rollBack();
+            }catch (PDOException $e){
+                $db->rollBack();
+            }
+
+            $row=$stm->fetch(PDO::FETCH_ASSOC);
+            $result=new EVisit($row['id'],$row['visitDay'],$row['idStudent'],$row['idAccommodation']);
+            return $result;
+        }else{
+            return null;
         }
-
-        $row=$stm->fetch(PDO::FETCH_ASSOC);
-        $result=new EVisit($row['id'],$row['visitDay'],$row['idStudent'],$row['idAccommodation']);
-        return $result;
     }
 
     /**
@@ -94,7 +99,7 @@ class FVisit
         
         try
         { 
-            $db->exec('LOCK TABLES creditcard WRITE');
+            $db->exec('LOCK TABLES visit WRITE');
             $db->beginTransaction();
 
             $day = $visit->getDate()->format('Y-m-d H:i:s');
@@ -140,7 +145,7 @@ class FVisit
         
         if($FV->exist($visitId)){
             try{
-                $db->exec('LOCK TABLES creditcard WRITE');
+                $db->exec('LOCK TABLES visit WRITE');
                 $db->beginTransaction();
 
                 $day = $visit->getDate()->format('Y-m-d H:i:s');
