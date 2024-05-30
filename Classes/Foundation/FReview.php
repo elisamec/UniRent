@@ -68,7 +68,7 @@ class FReview {
         $rowRev = FReview::loadReview($id);
         [$authType, $author, $recipient] = FReview::loadSpecificReview($id, $recipientType);
         $date=DateTime::createFromFormat('Y-m-d H:i:s',$rowRev['creationDate']);
-        $photo= FReview::loadPhotos($id);
+        $photo= FPhoto::getInstance()->loadReview($id);;
         $result=new EReview($rowRev['id'],$rowRev['title'],$rowRev['valutation'],$rowRev['description'], $photo, $recipientType,$date, $authType, $author, $recipient);
         return $result;
     }
@@ -189,7 +189,7 @@ class FReview {
     private function storeReview(EReview $Review):bool 
     {
         $db=FConnection::getInstance()->getConnection();
-        //$db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+        $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
         try
         { 
             $db->exec('LOCK TABLES review WRITE');
@@ -301,7 +301,7 @@ class FReview {
      */
     private function updatePhotos(EReview $Review):bool {
         $photos=$Review->getPhotos();
-        $photosDB = FReview::loadPhotos($Review->getId());
+        $photosDB = FPhoto::getInstance()->loadReview($Review->getId());
         if ($photos===null) {
             if (count($photosDB)!==0){
                 foreach($photosDB as $d) {
@@ -344,16 +344,6 @@ class FReview {
             }
         }
         return true;
-    }
-    /**
-     * loadPhotos
-     *
-     * @param  EReview $Review
-     * @return array
-     */
-
-    private function loadPhotos(int $id):array {
-        return FPhoto::getInstance()->loadCurrentPhotos($id);
     }
     /**
      * updateReview
