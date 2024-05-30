@@ -6,7 +6,11 @@
     require __DIR__ . '/../../vendor/autoload.php';
 
     use CommerceGuys\Addressing\Address;
-
+    
+    /**
+     * FAccommodation
+     * 
+     */
     class FAccommodation{
 
         private static $instance=null;
@@ -53,7 +57,7 @@
         }
 
         /**
-         * load
+         * load Accommodation from db
          *  
          *  
          * @param  int $idAccommodation
@@ -84,6 +88,8 @@
             $address = new Address();
             $address = $FA->loadAddress($row['address']);
             $start = new DateTime($row['start']);
+            $visit = $FA->loadDays($idAccommodation);
+
             $result=new EAccommodation(
                 $row['id'],
                 $photos,
@@ -93,7 +99,7 @@
                 $start,
                 $row['description'],
                 $row['deposit'],
-                [], //Da modificare
+                $visit, 
                 $row['visitDuration'],
                 $row['man'],
                 $row['woman'],
@@ -104,7 +110,13 @@
             return $result;
         }
 
-
+        /**
+         * loadAddress
+         * private class that loads the address of an accommodation from db 
+         * 
+         * @param  int $idAddress
+         * @return Address
+         */
         private function loadAddress(int $idAddress):Address{
 
             $db=FConnection::getInstance()->getConnection();
@@ -126,6 +138,77 @@
             $address=new Address();
             $address = $address->withAddressLine1($row['addressLine'])->withPostalCode($row['postalCode'])->withLocality($row['city']);
             return $address;
+        }
+
+        /**
+         * loadDays
+         * private class that loads the days of visit of an accommodation from db 
+         * 
+         * @param  int $idAccommodation
+         * @return array
+         */
+        private function loadDays(int $idAccommodation):array{
+
+            $FA=FAccommodation::getInstance();
+            $db=FConnection::getInstance()->getConnection();
+        
+            try{
+                $db->exec('LOCK TABLES visit READ');
+                $db->beginTransaction();
+                $q="SELECT * FROM day WHERE idAccommodation=$idAccommodation";    
+                $stm=$db->prepare($q);
+                $stm->execute();
+                $db->commit();
+                $db->exec('UNLOCK TABLES');
+
+            }catch (PDOException $e){
+                $db->rollBack();
             }
+
+            $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($rows as $row) {
+                $times = $FA->loadTime($row['id']);
+                $days = [$row['day'] => $times];
+            }
+
+            return $days;
+            
+        }
+
+        /**
+         * loadTime
+         * private class that loads the times of visit of an accommodation from db 
+         * 
+         * @param  int $idDay
+         * @return array
+         */
+        private function loadTime(int $idDay):array{
+            
+            $db=FConnection::getInstance()->getConnection();
+        
+            try{
+                $db->exec('LOCK TABLES visit READ');
+                $db->beginTransaction();
+                $q="SELECT * FROM time WHERE idDay=$idDay";    
+                $stm=$db->prepare($q);
+                $stm->execute();
+                $db->commit();
+                $db->exec('UNLOCK TABLES');
+
+            }catch (PDOException $e){
+                $db->rollBack();
+            }
+
+            $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($rows as $row) {
+                $time = new DateTime($row['hour']);
+                $times[] = $time->format('H:i');
+            }
+
+            return $times;
+            
+        }
 
     }

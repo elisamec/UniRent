@@ -105,6 +105,36 @@ class FPhoto {
         return $photos;
     }
 
+    /**
+     * This method loads the photos of an owner or student
+     * @param int $id
+     * @return array
+     */
+    public function loadAvatar(int $id):EPhoto
+    {
+        $db=FConnection::getInstance()->getConnection();
+        
+        try{
+            $db->exec('LOCK TABLES visit READ');
+            $db->beginTransaction();
+            $q="SELECT * FROM photo WHERE id = $id AND relativeTo = 'other'";    
+            $stm=$db->prepare($q);
+            $stm->execute();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+
+        }catch (PDOException $e){
+            $db->rollBack();
+        }
+
+        $row = $stm->fetch(PDO::FETCH_ASSOC);
+
+
+        $photo = new EPhoto($row['id'], $row['photo'], $row['relativeTo'], $row['idAccommodation'], $row['idReview']);
+        return $photo;
+    }
+
+
     public function store(EPhoto $photo):bool
     {
         return true;
