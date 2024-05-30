@@ -106,9 +106,8 @@ class EStudent
      * @param  bool $animals
      * @return self
      */
-    public function __construct(int $id, string $username, string $password, string $name, string $surname, EPhoto|null $picture, string $universityMail, int $courseDuration, int $immatricolationYear, DateTime $birthDate, bool $sex, bool $smoker, bool $animals)
+    public function __construct(string $username, string $password, string $name, string $surname, EPhoto|null $picture, string $universityMail, int $courseDuration, int $immatricolationYear, DateTime $birthDate, string $sex, bool $smoker, bool $animals)
     {
-        $this->id=$id;
         $this->username=$username;
         $this->password=$password;
         $this->name=$name;
@@ -139,7 +138,7 @@ class EStudent
      *
      * @return int
      */
-    public function getID():int
+    public function getID():int 
     {
         return $this->id;
     }    
@@ -395,7 +394,7 @@ class EStudent
     public function __toString():string
     {
         $result='ID:'.(string)$this->id.' USERNAME:'.$this->username.' PASSWORD:'.$this->password.' NAME:'.$this->name.' SURNAME:'.$this->surname.' UNIVERSITY_MAIL:'.$this->universityMail.' COURSE_DURATION:'.(string)$this->courseDuration;
-        $result.=' IMMATRICOLATION_YEAR:'.(string)$this->immatricolationYear.' BIRTH_DATE:'.$this->birthDate->format('d/m/Y').' SEX:'.$this->sex.' SMOKER:'.(string)$this->smoker.' ANIMALS:'.(string)$this->animals;
+        $result.=' IMMATRICOLATION_YEAR:'.(string)$this->immatricolationYear.' BIRTH_DATE:'.$this->birthDate->format('d/m/Y').' SEX:'.$this->sex.' SMOKER:'.(string)$this->smoker.' ANIMALS:'.(string)$this->animals.' PICTURE: '.$this->getPicture()->getId();
         return $result;
     }
 
