@@ -1,7 +1,7 @@
 <?php 
 
     #PARTE MATTEO
-
+/*
 require_once('../Entity/EStudent.php');
 require_once('FStudent.php');
 
@@ -15,4 +15,20 @@ if($studente!=false)
 else
 {
     echo 'Qualcosa non và!';
+}
+*/
+
+require_once('../Entity/EAdministrator.php');
+require_once('FAdministrator.php');
+
+$id=2;
+$FA=FAdministrator::getInstance();
+$amministratore=$FA->load($id);
+if($amministratore==false)
+{
+    echo 'Questo amministratore non esiste! ';
+}
+else
+{
+    echo $amministratore->__toString();
 }

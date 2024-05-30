@@ -104,5 +104,10 @@ class EAdministrator
     {
         $this->email=$mail;
     }
+
+    public function __toString():string
+    {
+        return 'USERNAME:'.$this->username.' EMAIL:'.$this->email;
+    }
 }
 
