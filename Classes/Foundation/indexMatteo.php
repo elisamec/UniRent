@@ -1,23 +1,24 @@
 <?php 
 
     #PARTE MATTEO
-/*
+
 require_once('../Entity/EStudent.php');
 require_once('FStudent.php');
 
-$id=23;
-$studente=FStudent::getInstance()->load($id);
+$student=new EStudent('Fratmo','pippo','Lorenzo','Maloni',null,'lorenzo.maloni.02@gmail.com',3,2021,new DateTime('11/9/2002'),'M',0,0);
+$FS=FStudent::getInstance();
+$risultato=$FS->store($student);
 
-if($studente!=false)
+if($risultato!=false)
 {
-    echo $studente->__toString();
+    echo 'Studente nel database';
 }
 else
 {
     echo 'Qualcosa non và!';
 }
-*/
 
+/*
 require_once('../Entity/EAdministrator.php');
 require_once('FAdministrator.php');
 
@@ -32,3 +33,4 @@ else
 {
     echo $amministratore->__toString();
 }
+*/
