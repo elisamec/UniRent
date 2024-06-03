@@ -3,7 +3,7 @@
 /**
  * EReservation
  * @author Matteo Maloni (UniRent) <matteo.maloni@student.univaq.it>
- * @package Foundation
+ * @package Entity
  */
 class EReservation
 {    
