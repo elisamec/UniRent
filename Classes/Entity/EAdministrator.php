@@ -9,7 +9,7 @@ namespace Classes\Entity;
  */
 class EAdministrator
 {
-    private int $id;
+    private ?int $id=null;
     private string $username;
     private string $password;
     private string $email;
@@ -25,7 +25,7 @@ class EAdministrator
     public function __construct(string $username,string $password,string $email)
     {
         $this->username=$username;
-        $this->password=$password;
+        $this->password=password_get_info($password)['algoName'] !== PASSWORD_DEFAULT ? password_hash($password, PASSWORD_DEFAULT) : $password;
         $this->email=$email;
     }    
     /**
@@ -33,7 +33,7 @@ class EAdministrator
      *
      * @return int
      */
-    public function getID():int
+    public function getID():?int
     {
         return $this->id;
     }    
@@ -80,9 +80,9 @@ class EAdministrator
      * @param  string $psw
      * @return void
      */
-    public function setPassword(string $psw):void
+    public function setPassword(string $password):void
     {
-        $this->password=$psw;
+        $this->password=password_hash($password, PASSWORD_DEFAULT);
     }    
     /**
      * setUsername

@@ -2,6 +2,9 @@
 
     #PARTE MATTEO
 /*
+
+PROVA STUDENT
+
 require_once('../Entity/EStudent.php');
 require_once('FStudent.php');
 
@@ -24,9 +27,14 @@ else
 }
 */
 
+
+#PROVA ADMINISTRATOR
+
+use Classes\Entity\EAdministrator;
+
 require_once('../Entity/EAdministrator.php');
 require_once('FAdministrator.php');
-
+/*
 $id=2;
 $FA=FAdministrator::getInstance();
 $amministratore=$FA->load($id);
@@ -38,23 +46,26 @@ else
 {
     echo $amministratore->__toString();
 }
+*/
 
-/*
-require_once('../Entity/EStudent.php');
-require_once('FStudent2.php');
-
-$FS=FStudent2::getInstance();
-$stu=$FS->load(2);
-#echo $stu->__toString();
-$stu->setName('MIKE');
-
-$result=$FS->update($stu);
-if($result)
+$FA=FAdministrator::getInstance();
+$admin=$FA->load(1);
+if($admin==false)
 {
-    echo 'Tutto ok!';
+    echo 'NON ESISTE!';
 }
 else
 {
-    echo 'Qualcosa non funziona!';
+    echo $admin->__toString();
+    $admin->setEmail('asdrubale@gmail.com');
+    $result=$FA->update($admin);
+    if($result==true)
+    {
+        echo 'Tutto ok !';
+    }
+    else
+    {
+        echo 'Qualcosa non và';
+    }
 }
-*/
+
