@@ -47,7 +47,7 @@ else
     echo $amministratore->__toString();
 }
 */
-
+/*
 $FA=FAdministrator::getInstance();
 $admin=$FA->load(1);
 if($admin==false)
@@ -57,8 +57,7 @@ if($admin==false)
 else
 {
     echo $admin->__toString();
-    $admin->setEmail('asdrubale@gmail.com');
-    $result=$FA->update($admin);
+    $result=$FA->delete($admin->getID());
     if($result==true)
     {
         echo 'Tutto ok !';
@@ -68,4 +67,4 @@ else
         echo 'Qualcosa non và';
     }
 }
-
+*/

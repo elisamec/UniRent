@@ -137,7 +137,23 @@ class FAdministrator
         $db=FConnection::getInstance()->getConnection();
         if($this->exist($id))
         {
-
+            try
+            {
+                $db->exec('LOCK TABLES administrator WRITE');
+                $db->beginTransaction();
+                $q='DELETE FROM administrator WHERE id=:id';
+                $stm=$db->prepare($q);
+                $stm->bindValue(':id',$id, PDO::PARAM_INT);
+                $stm->execute();
+                $db->commit();
+                $db->exec('UNLOCK TABLES');
+                return true;
+            }
+            catch(PDOException $e)
+            {
+                $db->rollBack();
+                return false;
+            }
         }
         else
         {
