@@ -15,10 +15,13 @@
     $FP=FPhoto::getInstance();
     $FA=FAccommodation::getInstance();
 
-    $risultato = $FP->loadAvatar(1);
+    $ph1 = new EPhoto(13, 'o', 'accommodation', 2, null);
 
-    //$risultato = new EPhoto(1, 'foto', 'other', null, null);
-    print $risultato;
+    $ris = $FP->delete(6);
+
+    ($ris) ? print "Foto caricata con id:" : print "Errore nel caricamento della foto";
+
+    
 
 
 
