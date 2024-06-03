@@ -4,9 +4,10 @@ require_once('../Entity/EPhoto.php');
 
 class FPhoto {
     private static $instance=null;
+
     /**Constructor */
-    private function __construct()
-    {}
+    private function __construct(){}
+
     /**This static method gives the istance of this singleton class
      * @return  
     */
@@ -79,6 +80,7 @@ class FPhoto {
         return false;
     }
 
+    
     /**
      * This method loads the photos of a review
      * @param int $idReview
@@ -203,13 +205,180 @@ class FPhoto {
         }
     }
 
+    /**
+    * storeAvatar
+    * store user's or owner's avatar
+    *
+    * @param  EPhoto $EPhoto
+    * @return bool
+    */
+    public function storeAvatar(EPhoto $EPhoto):bool 
+    {
+        $db=FConnection::getInstance()->getConnection();
+        $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+        
+        try
+        { 
+            $db->exec('LOCK TABLES photo WRITE');
+            $db->beginTransaction();
 
-    public function store(EPhoto $photo):bool
-    {
-        return true;
+            $photo = $EPhoto->getPhoto();
+            $relative = $EPhoto->getRelativeTo();
+
+            $q='INSERT INTO photo ( photo, relativeTo, idAccommodation, idReview) ';
+            $q=$q.' VALUES (:photo, :relativeTo, :idAccommodation, :idReview)';
+
+            $stm=$db->prepare($q);
+            $stm->bindValue(':photo',$photo,PDO::PARAM_STR);
+            $stm->bindValue(':relativeTo',$relative,PDO::PARAM_STR);
+            $stm->bindValue(':idAccommodation',NULL,PDO::PARAM_INT);
+            $stm->bindValue(':idReview',NULL,PDO::PARAM_INT);
+            
+            $stm->execute();
+            $id=$db->lastInsertId();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+            $EPhoto->setId($id);
+            return true;
+        }      
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return false;
+        }
+
     }
-    public function delete(int $id):bool
+
+    /**
+    * store
+    * Store accommodation's or review's photos
+    *
+    * @param  array $EPhoto
+    * @return bool
+    */
+    public function store(array $EPhoto):bool {
+
+        $db=FConnection::getInstance()->getConnection();
+        $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+        
+        try{
+
+            foreach($EPhoto as $ph){
+
+                $db->exec('LOCK TABLES photo WRITE');
+                $db->beginTransaction();
+
+                $photo = $ph->getPhoto();
+                $relative = $ph->getRelativeTo();
+                //$id = $ph->getIdAccommodation();
+
+                $q='INSERT INTO photo (photo, relativeTo, idAccommodation, idReview) ';
+                $q=$q.' VALUES (:photo, :relativeTo, :idAccommodation, :idReview)';
+
+                $stm=$db->prepare($q);
+                $stm->bindValue(':photo',$photo,PDO::PARAM_STR);
+                $stm->bindValue(':relativeTo',$relative,PDO::PARAM_STR);
+
+                if($relative == 'accommodation'){
+                    $id = $ph->getIdAccommodation();
+                    $stm->bindValue(':idAccommodation',$id,PDO::PARAM_INT);
+                    $stm->bindValue(':idReview',NULL,PDO::PARAM_INT);
+                }else{
+                    $id = $ph->getIdReview();
+                    $stm->bindValue(':idAccommodation',NULL,PDO::PARAM_INT);
+                    $stm->bindValue(':idReview',$id,PDO::PARAM_INT);
+                }
+
+                $stm->execute();
+                $id=$db->lastInsertId();
+                $db->commit();
+                $db->exec('UNLOCK TABLES');
+                $ph->setId($id);
+                
+            }
+            return true;
+        }      
+        catch(PDOException $e){
+
+            $db->rollBack();
+            return false;
+        }
+
+    }
+
+
+    /**
+    * update
+    *
+    * @param  EPhoto $EPhoto
+    * @return bool
+    */
+    public function update(EPhoto $EPhoto):bool 
     {
-        return true;
+        $db=FConnection::getInstance()->getConnection();
+        $FP=FPhoto::getInstance();
+
+        $photoId = $EPhoto->getId();
+        
+        if($FP->exist($photoId)){
+            try{
+                $db->exec('LOCK TABLES photo WRITE');
+                $db->beginTransaction();
+
+                $photo = $EPhoto->getPhoto();
+                
+                $q='UPDATE photo SET photo = :photo  WHERE id=:id';
+                $stm=$db->prepare($q);
+                $stm->bindValue(':photo',$photo,PDO::PARAM_STR);
+                $stm->bindValue(':id',$photoId,PDO::PARAM_INT);
+
+                $stm->execute();           
+                $db->commit();
+                $db->exec('UNLOCK TABLES');
+
+                return true;
+            }
+            catch(PDOException $e)
+            {
+                $db->rollBack();
+                return false;
+            }
+        } else return false;
+        
+    }
+
+    /**
+    * delete
+    *
+    * @param  int $idPhoto
+    * @return bool
+    */
+    public function delete(int $idPhoto): bool 
+    {
+        $db=FConnection::getInstance()->getConnection();
+        $FP=FPhoto::getInstance();
+        
+        if($FP->exist($idPhoto)){
+            try
+            {  
+                $db->exec('LOCK TABLES photo WRITE');
+                $db->beginTransaction();
+                $q='DELETE FROM photo WHERE id=:id';
+                $stm=$db->prepare($q);
+                $stm->bindValue(':id',$idPhoto, PDO::PARAM_INT);
+                $stm->execute();    
+                $db->commit();
+                $db->exec('UNLOCK TABLES');
+
+                return true;
+            }
+            catch(PDOException $e)
+            {
+                $db->rollBack();
+                return false;
+            }
+
+        } else return false;
+        
     }
 }
