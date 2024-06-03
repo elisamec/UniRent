@@ -22,8 +22,8 @@ else
 {
     echo 'Qualcosa non và!';
 }
+*/
 
-/*
 require_once('../Entity/EAdministrator.php');
 require_once('FAdministrator.php');
 
@@ -38,7 +38,8 @@ else
 {
     echo $amministratore->__toString();
 }
-*/
+
+/*
 require_once('../Entity/EStudent.php');
 require_once('FStudent2.php');
 
@@ -56,3 +57,4 @@ else
 {
     echo 'Qualcosa non funziona!';
 }
+*/

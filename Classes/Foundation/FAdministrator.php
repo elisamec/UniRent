@@ -38,7 +38,7 @@ class FAdministrator
         return false;
 
     }
-    public function load(int $id):EAdministrator|false
+    public function load(int $id):EAdministrator|bool
     {
         $db=FConnection::getInstance()->getConnection();
         if($this->exist($id))
@@ -61,6 +61,10 @@ class FAdministrator
             }
             $row=$stm->fetch(PDO::FETCH_ASSOC);
             return new EAdministrator($row['username'],$row['password'],$row['email']);
+        }
+        else
+        {
+            return false;
         }
     }
 }
