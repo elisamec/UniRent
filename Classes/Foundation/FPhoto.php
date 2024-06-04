@@ -320,30 +320,30 @@ class FPhoto {
 
         $photoId = $EPhoto->getId();
         
-        if($FP->exist($photoId)){
-            try{
-                $db->exec('LOCK TABLES photo WRITE');
-                $db->beginTransaction();
 
-                $photo = $EPhoto->getPhoto();
-                
-                $q='UPDATE photo SET photo = :photo  WHERE id=:id';
-                $stm=$db->prepare($q);
-                $stm->bindValue(':photo',$photo,PDO::PARAM_STR);
-                $stm->bindValue(':id',$photoId,PDO::PARAM_INT);
+        try{
+            $db->exec('LOCK TABLES photo WRITE');
+            $db->beginTransaction();
 
-                $stm->execute();           
-                $db->commit();
-                $db->exec('UNLOCK TABLES');
+            $photo = $EPhoto->getPhoto();
+            
+            $q='UPDATE photo SET photo = :photo  WHERE id=:id';
+            $stm=$db->prepare($q);
+            $stm->bindValue(':photo',$photo,PDO::PARAM_STR);
+            $stm->bindValue(':id',$photoId,PDO::PARAM_INT);
 
-                return true;
-            }
-            catch(PDOException $e)
-            {
-                $db->rollBack();
-                return false;
-            }
-        } else return false;
+            $stm->execute();           
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+
+            return true;
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return false;
+        }
+
         
     }
 

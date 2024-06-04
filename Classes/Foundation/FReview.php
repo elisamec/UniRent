@@ -302,47 +302,29 @@ class FReview {
     private function updatePhotos(EReview $Review):bool {
         $photos=$Review->getPhotos();
         $photosDB = FPhoto::getInstance()->loadReview($Review->getId());
-        if ($photos===null) {
-            if (count($photosDB)!==0){
-                foreach($photosDB as $d) {
-                    $delete=FPhoto::getInstance()->delete($d->getId());
-                    if ($delete===false) {
-                        return false;
-                    }
-                }
+        foreach ($photosDB as $DB) {
+            $el=array_search($DB, $photos);
+            if ($el!==false) {
+                $complete=FPhoto::getInstance()->update($photos[$el]);
+            } else {
+                $complete=FPhoto::getInstance()->delete($DB->getId());
             }
-            return true;
-        }
-        $toBeAdded = [];
-        $toBeDeleted = [];
-        foreach ($photos as $photo) {
-            foreach ($photosDB as $DB) {
-                $countAdd=1;
-                $countDel=1;
-                if ($photo->getId()===$DB->getId()) {
-                    $countAdd-=1;
-                    $countDel-=1;
-                }
-                if ($countAdd===1) {
-                $toBeAdded[]= $photo;
-                }
-                if ($countDel === 1) {
-                $toBeDeleted[] = $DB;
-                }
-            }
-        }
-        foreach ($toBeAdded as $add) {
-            $updatedPictures=FPhoto::getInstance()->store($add);
-            if ($updatedPictures===false){
+            if ($complete===false) {
                 return false;
             }
         }
-        foreach ($toBeDeleted as $del) {
-            $updatedPictures=FPhoto::getInstance()->delete($del->getId());
-            if ($updatedPictures===false){
+        foreach ($photos as $ph) {
+            $el=array_search($ph, $photosDB);
+            $add=[];
+            if ($el===false) {
+                $add[]=$photos[$el];
+            }
+            $complete=FPhoto::getInstance()->store($add);
+            if ($complete===false) {
                 return false;
             }
         }
+        
         return true;
     }
     /**
