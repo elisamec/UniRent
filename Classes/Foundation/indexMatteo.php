@@ -70,6 +70,7 @@ else
 */
 
 # PROVA EXIST FReservation
+/*
 require_once('FReservation.php');
 
 $id=2;
@@ -84,3 +85,6 @@ else
 {
     echo 'Tutto ok!';
 }
+*/
+require_once('FAccomodation.php');
+require_once('../Entity')

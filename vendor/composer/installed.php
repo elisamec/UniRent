@@ -1,24 +1,15 @@
 <?php return array(
     'root' => array(
-        'name' => '__root__',
+        'name' => 'univaq/unirent',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '9230bc649c4571d90281d8cc2bb3540b71219d1f',
-        'type' => 'library',
+        'reference' => '8d80ed863d959df04968d54c22b853f7abefa75a',
+        'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
-        '__root__' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => '9230bc649c4571d90281d8cc2bb3540b71219d1f',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../../',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
         'commerceguys/addressing' => array(
             'pretty_version' => 'v2.2.0',
             'version' => '2.2.0.0',
@@ -115,6 +106,15 @@
             'reference' => '861391a8da9a04cbad2d232ddd9e4893220d6e25',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/polyfill-php72',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'univaq/unirent' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '8d80ed863d959df04968d54c22b853f7abefa75a',
+            'type' => 'project',
+            'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
             'dev_requirement' => false,
         ),

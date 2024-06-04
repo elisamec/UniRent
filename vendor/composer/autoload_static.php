@@ -17,6 +17,10 @@ class ComposerStaticInit4ae9f5a128d60c7a0d1288f5d7ac3a66
     );
 
     public static $prefixLengthsPsr4 = array (
+        'U' => 
+        array (
+            'Univaq\\Unirent\\' => 15,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Php72\\' => 23,
@@ -42,6 +46,10 @@ class ComposerStaticInit4ae9f5a128d60c7a0d1288f5d7ac3a66
     );
 
     public static $prefixDirsPsr4 = array (
+        'Univaq\\Unirent\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Classes',
+        ),
         'Symfony\\Polyfill\\Php72\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php72',
