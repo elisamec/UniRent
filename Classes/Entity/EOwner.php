@@ -79,7 +79,11 @@ class EOwner
         $this->surname=ucfirst($surname);
     }
     public function uploadPhoto(EPhoto $photo):void {
-        $this->photo=$photo;
+        if($this->photo===null) {
+            $this->photo=$photo;
+        } else {
+            $this->photo->setPhoto($photo->getPhoto());
+        }
     }
     public function setMail(string $mail):void {
         $this->email=$mail;
