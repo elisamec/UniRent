@@ -15,11 +15,8 @@
     $FP=FPhoto::getInstance();
     $FA=FAccommodation::getInstance();
 
-    $ph1 = new EPhoto(13, 'o', 'accommodation', 2, null);
-
-    $ris = $FP->delete(6);
-
-    ($ris) ? print "Foto caricata con id:" : print "Errore nel caricamento della foto";
+    $risultato=$FA->load(2);
+    print $risultato;
 
     
 

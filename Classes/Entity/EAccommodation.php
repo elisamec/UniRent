@@ -34,8 +34,7 @@ class EAccommodation
     private string $title;
     private Address $address;
     private float $price;
-    private DateTime $start;    //Per aggiungere un oggetto: new DateInterval('PT2H30M');
-                                    //Per stampare: echo $interval->format('%H:%I:%S');
+    private DateTime $start;    
     private String $description;
     private ?float $deposit;
     private array $visit;

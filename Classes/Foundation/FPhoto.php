@@ -135,7 +135,7 @@ class FPhoto {
         $db=FConnection::getInstance()->getConnection();
         $FP=FPhoto::getInstance();
         
-        if(!$FP->existAccommodation($idAccommodation)){
+        if($FP->existAccommodation($idAccommodation)){
         
             try{
                 $db->exec('LOCK TABLES photo READ');

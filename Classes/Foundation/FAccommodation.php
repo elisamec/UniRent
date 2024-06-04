@@ -68,8 +68,9 @@
             $FP=FPhoto::getInstance();
             $FA=FAccommodation::getInstance();
             $db=FConnection::getInstance()->getConnection();
-            
+
             if($FA->exist($idAccommodation)){
+              
                 try{
                     $db->exec('LOCK TABLES accommodation READ');
                     $db->beginTransaction();
@@ -84,7 +85,6 @@
                 }
 
                 $photos = $FP->loadAccommodation($idAccommodation);
-
                 $row=$stm->fetch(PDO::FETCH_ASSOC);
                 $address = new Address();
                 $address = $FA->loadAddress($row['address']);
@@ -212,6 +212,103 @@
             }
 
             return $times;
+            
+        }
+
+        /**
+         * store
+         *
+         * @param  EAccommodation $accommodation
+         * @return bool
+         */
+        public function store(EAccommodation $accommodation):bool 
+        {
+            $FP=FPhoto::getInstance();
+            $db=FConnection::getInstance()->getConnection();
+            $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+            
+            try{ 
+                $db->exec('LOCK TABLES accommodation WRITE');
+                $db->beginTransaction();
+
+                $photos = $accommodation->getPhoto();
+                $title = $accommodation->getTitle();
+                $start = $accommodation->getStart()->format('Y-m-d H:i:s');
+
+
+                $q='INSERT INTO accommodation ( title, address, idAccommodation)';
+                $q=$q.' VALUES (:title, :address, :idAccommodation)';
+
+                $stm=$db->prepare($q);
+
+                foreach($photos as $photo){
+                    $result = $FP->store($photo);
+                    if (!$result) {
+                        throw new PDOException("Database operation failed.");
+                        return false;
+                    }
+                }
+
+                $stm->bindValue(':title',$title,PDO::PARAM_STR);
+                //Indirizzo (chiave in acc. e tutto il restio in address)
+
+                
+                $stm->execute();
+                $id=$db->lastInsertId();
+                $db->commit();
+                $db->exec('UNLOCK TABLES');
+                $accommodation->setIdAccommodation($id);
+                return true;
+            }      
+            catch(PDOException $e)
+            {
+                $db->rollBack();
+                return false;
+            }
+
+        }
+
+        /**
+         * storeAddress
+         * private class that stores the address of an accommodation in db
+         * 
+         * @param  Address $address
+         * @return int
+         */
+        private function storeAddress(Address $address):int {
+
+            $db=FConnection::getInstance()->getConnection();
+            $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+            
+            try
+            { 
+                $db->exec('LOCK TABLES address WRITE');
+                $db->beginTransaction();
+
+                $addressLine = $address->getAddressLine1();
+                $postalCode = $address->getPostalCode();
+                $city = $address->getLocality();
+
+                $q='INSERT INTO address ( addressLine, postalCode, city)';
+                $q=$q.' VALUES (:addressLine, :postalCode, :city)';
+
+                $stm=$db->prepare($q);
+                $stm->bindValue(':addressLine',$addressLine,PDO::PARAM_STR);
+                $stm->bindValue(':postalCode',$postalCode,PDO::PARAM_STR);
+                $stm->bindValue(':city',$city,PDO::PARAM_STR);
+                
+                $stm->execute();
+                $id=$db->lastInsertId();
+                $db->commit();
+                $db->exec('UNLOCK TABLES');
+                $address->withSortingCode($id);
+                return $id;
+            }      
+            catch(PDOException $e)
+            {
+                $db->rollBack();
+                return null;
+            }
             
         }
 
