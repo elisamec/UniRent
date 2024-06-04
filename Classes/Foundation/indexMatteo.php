@@ -68,3 +68,19 @@ else
     }
 }
 */
+
+# PROVA EXIST FReservation
+require_once('FReservation.php');
+
+$id=2;
+$FR=FReservation::getInstance();
+$result=$FR->load($id);
+
+if($result==false)
+{
+    echo 'Non esiste questa reservation!';
+}
+else
+{
+    echo 'Tutto ok!';
+}

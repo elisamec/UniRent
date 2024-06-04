@@ -22,7 +22,7 @@ private ?int $id=null;
     /**
      * toData
      *
-     * @var DateTime $toData
+     * @var DateTime $toDate
      */
     private  DateTime $toData;    
     /**
@@ -62,7 +62,7 @@ private ?int $id=null;
     public function __construct(DateTime $from, DateTime $to, int $accomodationId, int $idStudent)
     {
         $this->fromDate=$from;
-        $this->toData=$$to;
+        $this->toDate=$to;
         $this->accomodationId=$accomodationId;
         $this->idStudent=$idStudent;
         $this->made=new DateTime('now');
@@ -94,7 +94,7 @@ private ?int $id=null;
      */
     public function getToDate():DateTime
     {
-        return $this->toData;
+        return $this->toDate;
     }    
     /**
      * getMade
@@ -202,5 +202,10 @@ private ?int $id=null;
     public function setIdStudent(?int $id):void
     {
         $this->idStudent=$id;
+    }
+
+    public function __toString():string
+    {
+        return 'ID:'.$this->id.' FROM:'.$this->fromDate->format('Y-m-d H:i:s').' TO:'.$this->toDate->format('Y-m-d H:i:s').' MADE:'.$this->made->format('Y-m-d H:i:s').' STATUS:'.$this->statusAccept.' ACCOMODATION_ID:'.$this->accomodationId.'STUDENT_ID:'.$this->idStudent;
     }
 }
