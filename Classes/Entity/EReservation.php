@@ -24,7 +24,7 @@ private ?int $id=null;
      *
      * @var DateTime $toDate
      */
-    private  DateTime $toData;    
+    private  DateTime $toDate;    
     /**
      * made
      *
@@ -161,7 +161,7 @@ private ?int $id=null;
      */
     public function setToDate(DateTime $d):void
     {
-        $this->toData=$d;
+        $this->toDate=$d;
     }    
     /**
      * setMade
