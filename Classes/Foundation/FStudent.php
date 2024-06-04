@@ -90,23 +90,7 @@ class FStudent
                 $stm->bindValue(':password',$student->getPassword(),PDO::PARAM_STR);
                 $stm->bindValue(':name',$student->getName(),PDO::PARAM_STR);
                 $stm->bindValue(':surname',$student->getSurname(),PDO::PARAM_STR);
-                if(is_null($student->getPicture()))
-                {
-                    $stm->bindValue(':picture',$student->getPicture(),PDO::PARAM_NULL);
-                }
-                else
-                {
-                    $photo=$student->getPicture();
-                    $q2='INSERT INTO photo (photo,relativeTo,idAccomodation,idReview)';
-                    $q2.=" VALUES ('$photo',:relativeTo,:idAccomodation,:idReview)";
-                    $stm2=$db->prepare($q2);
-                    $stm2->bindValue(':relativeTo','other',PDO::PARAM_STR);
-                    $stm2->bindValue(':idAccomodation',null,PDO::PARAM_NULL);
-                    $stm2->bindValue('idReview',null,PDO::PARAM_NULL);
-                    $stm2->execute();
-                    $photoID=$db->lastInsertId();
-                    $stm->bindParam(':picture',$photoID,PDO::PARAM_INT);
-                }
+                FPhoto::getInstance()->storeAvatar($student->getPicture());
                 $stm->bindValue(':universityMail',$student->getUniversityMail(),PDO::PARAM_STR);
                 $stm->bindValue(':courseDuration',$student->getCourseDuration(),PDO::PARAM_INT);
                 $stm->bindValue(':immatricolationYear',$student->getImmatricolationYear(),PDO::PARAM_INT);
