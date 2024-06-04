@@ -78,7 +78,7 @@ require_once('../Tools/TError.php');
         try
         {   
             if ($owner->getPhoto()!== null) {
-                $storePicture = FPhoto::getInstance()->store($owner->getPhoto());
+                $storePicture = FPhoto::getInstance()->storeAvatar($owner->getPhoto());
                 if ($storePicture===false){
                     return false;
                 }
@@ -121,26 +121,18 @@ require_once('../Tools/TError.php');
     }
     public static function update(EOwner $owner):bool {
         $db=FConnection::getInstance()->getConnection();
+        if (FOwner::getInstance()->exist($owner->getId())) {
         try
         { 
             $currentPhotoID= FOwner::currentPhoto($owner->getId());
             #potrebbe esserci un modo migliore per farlo
             $FPh=FPhoto::getInstance();
             if ($owner->getPhoto()!==null) {
-                $newPhID=$owner->getPhoto()->getId();
-            } else {
-                $newPhID=null;
+                $update=$FPh->update($owner->getPhoto());
+            } elseif ($currentPhotoID!==null and $owner->getPhoto()!==null) {
+                $update = $FPh->delete($owner->getPhoto()->getId());
             }
-            if ($currentPhotoID===$newPhID) {
-                $deletedPicture = true;
-                $updatePicture = true;
-            }  elseif ($currentPhotoID!== null and $newPhID!==null)  {
-                $deletedPicture = $FPh->delete($currentPhotoID);
-                $updatePicture = $FPh->store($owner->getPhoto());
-            } elseif ($currentPhotoID!== null and $newPhID===null) {
-                $deletedPicture = $FPh->delete($currentPhotoID);
-            }
-            if ($updatePicture===false or $deletedPicture===false){
+            if ($update===false) {
                 return false;
             }
             $db->exec('LOCK TABLES owner WRITE');
@@ -175,6 +167,7 @@ require_once('../Tools/TError.php');
             }
             return false;
         }
+    } else return false;
     }
     private static function currentPhoto(int $id): ?int {
         $db=FConnection::getInstance()->getConnection();

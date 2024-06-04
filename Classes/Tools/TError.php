@@ -20,13 +20,13 @@ class TError {
     public static function handleDuplicateError(PDOException $e): ?string {
         // Check the error code and message to determine the type of duplicate error
         if ($e->getCode() == 23000) { // 23000 is the SQLSTATE code for integrity constraint violation
-            if (strpos($e->getMessage(), 'for key \'username\'') !== false) { // Assuming 'users_username_unique' is the name of the unique index on the username column
+            if (strpos($e->getMessage(), 'for key \'username\'') !== false) { 
                 return TErrorDuplicate::USERNAME->value;
-            } elseif (strpos($e->getMessage(), 'for key \'email\'') !== false) { // Assuming 'users_email_unique' is the name of the unique index on the email column
+            } elseif (strpos($e->getMessage(), 'for key \'email\'') !== false) { 
                 return TErrorDuplicate::EMAIL->value;
-            } elseif (strpos($e->getMessage(), 'for key \'phonenumber\'') !== false) { // Assuming 'users_username_unique' is the name of the unique index on the username column
+            } elseif (strpos($e->getMessage(), 'for key \'phonenumber\'') !== false) {
                 return TErrorDuplicate::PHONENUMBER->value;
-            } elseif (strpos($e->getMessage(), 'for key \'iban\'') !== false) { // Assuming 'users_email_unique' is the name of the unique index on the email column
+            } elseif (strpos($e->getMessage(), 'for key \'iban\'') !== false) { 
                 return TErrorDuplicate::IBAN->value;
             }
         }
