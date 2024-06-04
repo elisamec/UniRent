@@ -69,49 +69,46 @@
             $FA=FAccommodation::getInstance();
             $db=FConnection::getInstance()->getConnection();
 
-            if($FA->exist($idAccommodation)){
-              
-                try{
-                    $db->exec('LOCK TABLES accommodation READ');
-                    $db->beginTransaction();
-                    $q="SELECT * FROM accommodation WHERE id=$idAccommodation";    
-                    $stm=$db->prepare($q);
-                    $stm->execute();
-                    $db->commit();
-                    $db->exec('UNLOCK TABLES');
+            try{
+                $db->exec('LOCK TABLES accommodation READ');
+                $db->beginTransaction();
+                $q="SELECT * FROM accommodation WHERE id=$idAccommodation";    
+                $stm=$db->prepare($q);
+                $stm->execute();
+                $db->commit();
+                $db->exec('UNLOCK TABLES');
 
-                }catch (PDOException $e){
-                    $db->rollBack();
-                }
-
-                $photos = $FP->loadAccommodation($idAccommodation);
-                $row=$stm->fetch(PDO::FETCH_ASSOC);
-                $address = new Address();
-                $address = $FA->loadAddress($row['address']);
-                $start = new DateTime($row['start']);
-                $visit = $FA->loadDays($idAccommodation);
-
-                $result=new EAccommodation(
-                    $row['id'],
-                    $photos,
-                    $row['title'],
-                    $address,
-                    $row['price'],
-                    $start,
-                    $row['description'],
-                    $row['deposit'],
-                    $visit, 
-                    $row['visitDuration'],
-                    $row['man'],
-                    $row['woman'],
-                    $row['pets'],
-                    $row['smokers'],
-                    $row['idOwner']
-                );
-                return $result;
-            }else{
+            }catch (PDOException $e){
+                $db->rollBack();        
                 return null;
             }
+
+            $photos = $FP->loadAccommodation($idAccommodation);
+            $row=$stm->fetch(PDO::FETCH_ASSOC);
+            $address = new Address();
+            $address = $FA->loadAddress($row['address']);
+            $start = new DateTime($row['start']);
+            $visit = $FA->loadDays($idAccommodation);
+
+            $result=new EAccommodation(
+                $row['id'],
+                $photos,
+                $row['title'],
+                $address,
+                $row['price'],
+                $start,
+                $row['description'],
+                $row['deposit'],
+                $visit, 
+                $row['visitDuration'],
+                $row['man'],
+                $row['woman'],
+                $row['pets'],
+                $row['smokers'],
+                $row['idOwner']
+            );
+            return $result;
+
         }
 
         /**
@@ -140,7 +137,7 @@
 
             $row=$stm->fetch(PDO::FETCH_ASSOC);
             $address=new Address();
-            $address = $address->withAddressLine1($row['addressLine'])->withPostalCode($row['postalCode'])->withLocality($row['city']);
+            $address = $address->withSortingCode($row['id'])->withAddressLine1($row['addressLine'])->withPostalCode($row['postalCode'])->withLocality($row['city']);
             return $address;
         }
 
@@ -224,6 +221,7 @@
         public function store(EAccommodation $accommodation):bool 
         {
             $FP=FPhoto::getInstance();
+            $FA=FAccommodation::getInstance();
             $db=FConnection::getInstance()->getConnection();
             $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
             
@@ -231,33 +229,43 @@
                 $db->exec('LOCK TABLES accommodation WRITE');
                 $db->beginTransaction();
 
-                $photos = $accommodation->getPhoto();
-                $title = $accommodation->getTitle();
-                $start = $accommodation->getStart()->format('Y-m-d H:i:s');
-
-
-                $q='INSERT INTO accommodation ( title, address, idAccommodation)';
-                $q=$q.' VALUES (:title, :address, :idAccommodation)';
+                $q='INSERT INTO accommodation (title, address, price, start, description, deposit, visitDuration, man, woman, pets, smokers, idOwner)';
+                $q=$q.' VALUES (:title, :address, :price, :start, :description, :deposit, :visitDuration, :man, :woman, :pets, :smokers, :idOwner)';
 
                 $stm=$db->prepare($q);
 
+                $address = $FA->storeAddress($accommodation->getAddress());
+
+                $stm->bindValue(':title',$accommodation->getTitle(),PDO::PARAM_STR);
+                $stm->bindValue(':address',$address,PDO::PARAM_INT);
+                $stm->bindValue(':price',$accommodation->getPrice(),PDO::PARAM_INT);
+                $stm->bindValue(':start',$accommodation->getStart()->format('Y-m-d H:i:s'),PDO::PARAM_STR);
+                $stm->bindValue(':description',$accommodation->getDescription(),PDO::PARAM_STR);
+                $stm->bindValue(':deposit',$accommodation->getDeposit(),PDO::PARAM_INT);
+                $stm->bindValue(':visitDuration',$accommodation->getVisitDuration(),PDO::PARAM_INT);
+                $stm->bindValue(':man',$accommodation->getMan(),PDO::PARAM_BOOL);
+                $stm->bindValue(':woman',$accommodation->getWoman(),PDO::PARAM_BOOL);
+                $stm->bindValue(':pets',$accommodation->getPets(),PDO::PARAM_BOOL);
+                $stm->bindValue(':smokers',$accommodation->getSmokers(),PDO::PARAM_BOOL);
+                $stm->bindValue(':idOwner',$accommodation->getIdOwner(),PDO::PARAM_INT);
+                
+                $stm->execute();
+                $id=$db->lastInsertId();
+                print "Prima commit \n";
+                $db->commit();
+                print "Dopo commit \n";
+                $db->exec('UNLOCK TABLES');
+                $accommodation->setIdAccommodation($id);
+
+                $photos = $accommodation->getPhoto();
                 foreach($photos as $photo){
+                    $photo = $photo->setIdAccommodation($id);
                     $result = $FP->store($photo);
                     if (!$result) {
                         throw new PDOException("Database operation failed.");
                         return false;
                     }
                 }
-
-                $stm->bindValue(':title',$title,PDO::PARAM_STR);
-                //Indirizzo (chiave in acc. e tutto il restio in address)
-
-                
-                $stm->execute();
-                $id=$db->lastInsertId();
-                $db->commit();
-                $db->exec('UNLOCK TABLES');
-                $accommodation->setIdAccommodation($id);
                 return true;
             }      
             catch(PDOException $e)
@@ -280,8 +288,7 @@
             $db=FConnection::getInstance()->getConnection();
             $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
             
-            try
-            { 
+            try { 
                 $db->exec('LOCK TABLES address WRITE');
                 $db->beginTransaction();
 
@@ -304,8 +311,7 @@
                 $address->withSortingCode($id);
                 return $id;
             }      
-            catch(PDOException $e)
-            {
+            catch(PDOException $e){
                 $db->rollBack();
                 return null;
             }

@@ -89,40 +89,37 @@ class FPhoto {
     public function loadReview(int $idReview):array
     {
         $db=FConnection::getInstance()->getConnection();
-        $FP=FPhoto::getInstance();
-        
-        if(!$FP->existReview($idReview)){
             
-            try{
-                $db->exec('LOCK TABLES photo READ');
-                $db->beginTransaction();
-                $q="SELECT * FROM photo WHERE relativeTo = 'review' AND idReview = $idReview";    
-                $stm=$db->prepare($q);
-                $stm->execute();
-                $db->commit();
-                $db->exec('UNLOCK TABLES');
+        try{
+            $db->exec('LOCK TABLES photo READ');
+            $db->beginTransaction();
+            $q="SELECT * FROM photo WHERE relativeTo = 'review' AND idReview = $idReview";    
+            $stm=$db->prepare($q);
+            $stm->execute();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+            
 
-            }catch (PDOException $e){
-                $db->rollBack();
-            }
-
-            $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
-
-            foreach ($rows as $row) {
-                $photo = new EPhoto(
-                    $row['id'],
-                    $row['photo'],
-                    $row['relativeTo'],
-                    $row['idAccommodation'],
-                    $row['idReview']
-                );
-                $photos[] = $photo;
-            }
-
-            return $photos;
-        }else{  
-            return null;
+        }catch (PDOException $e){
+            $db->rollBack();
+            return [];
         }
+
+        $photos = [];
+        $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($rows as $row) {
+            $photo = new EPhoto(
+                $row['id'],
+                $row['photo'],
+                $row['relativeTo'],
+                $row['idAccommodation'],
+                $row['idReview']
+            );
+            $photos[] = $photo;
+        }
+
+        return $photos;
     }
 
     /**
@@ -135,39 +132,36 @@ class FPhoto {
         $db=FConnection::getInstance()->getConnection();
         $FP=FPhoto::getInstance();
         
-        if($FP->existAccommodation($idAccommodation)){
-        
-            try{
-                $db->exec('LOCK TABLES photo READ');
-                $db->beginTransaction();
-                $q="SELECT * FROM photo WHERE relativeTo = 'accommodation' AND idAccommodation = $idAccommodation";    
-                $stm=$db->prepare($q);
-                $stm->execute();
-                $db->commit();
-                $db->exec('UNLOCK TABLES');
+        try{
+            $db->exec('LOCK TABLES photo READ');
+            $db->beginTransaction();
+            $q="SELECT * FROM photo WHERE relativeTo = 'accommodation' AND idAccommodation = $idAccommodation";    
+            $stm=$db->prepare($q);
+            $stm->execute();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
 
-            }catch (PDOException $e){
-                $db->rollBack();
-            }
-
-            $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
-
-            // Iterate over each row and create an EAccommodation object
-            foreach ($rows as $row) {
-                $photo = new EPhoto(
-                    $row['id'],
-                    $row['photo'],
-                    $row['relativeTo'],
-                    $row['idAccommodation'],
-                    $row['idReview']
-                );
-                $photos[] = $photo;
-            }
-
-            return $photos;
-        }else{  
-            return null;
+        }catch (PDOException $e){
+            $db->rollBack();
+            return [];
         }
+
+        $photos = [];
+        $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+        // Iterate over each row and create an EAccommodation object
+        foreach ($rows as $row) {
+            $photo = new EPhoto(
+                $row['id'],
+                $row['photo'],
+                $row['relativeTo'],
+                $row['idAccommodation'],
+                $row['idReview']
+            );
+            $photos[] = $photo;
+        }
+
+        return $photos;
     }
 
     /**

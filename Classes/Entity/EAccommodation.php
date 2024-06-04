@@ -392,12 +392,16 @@ class EAccommodation
      */
     public function __toString():string{
         
-        $address = $this->address->getAddressLine1() . ", " . $this->address->getLocality() . ", " . $this->address->getPostalCode();
+        $address = $this->address->getSortingCode() . ", " . $this->address->getAddressLine1() . ", " . $this->address->getLocality() . ", " . $this->address->getPostalCode();
         $start = $this->start->format('Y-m-d');
 
-        return "ID: $this->idAccommodation  \n".
-                "Photo: $this->photo  \n".
-                "Title: $this->title  \n".
+        $str = "ID: $this->idAccommodation  \n" . "Photos: \n";
+
+        foreach($this->photo as $photo){
+            $str = $str . "$photo  \n";
+        }
+
+        $str = $str . "Title: $this->title  \n".
                 "Address: $address  \n".
                 "Price: $this->price  \n".
                 "Start: $start  \n".
@@ -410,6 +414,8 @@ class EAccommodation
                 "Pets: $this->pets \n".
                 "Smokers: $this->smokers \n".
                 "ID Owner: $this->idOwner \n";
+
+        return $str;
     }
   
 }
