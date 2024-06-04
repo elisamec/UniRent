@@ -141,32 +141,9 @@ class FStudent
         {
             try
             {
-                $oldPhotoID=$this->currentPhoto($student->getID()); 
-                $newPhoto=$student->getPicture();
-                if(is_null($newPhoto))
-                {
-                    if(is_null($oldPhotoID)){}
-                    else
-                    {
-                        FPhoto::getInstance()->delete($oldPhotoID);
-                    }
-                } 
-                else
-                {
-                    if(is_null($oldPhotoID))
-                    {
-                        FPhoto::getInstance()->store($student->getPicture());
-                    }
-                    else
-                    {
-                        if($oldPhotoID===($newPhoto->getId())){}
-                        else
-                        {
-                            FPhoto::getInstance()->delete($oldPhotoID);
-                            FPhoto::getInstance()->store($student->getPicture());
-                        }
-                    }
-                }
+                
+                $CPhoto=$student->getPicture();
+                FPhoto::getInstance()->update($CPhoto);
                 $db->exec('LOCK TABLES student WRITE');
                 $db->beginTransaction();
                 $q='UPDATE student SET username = :user, password = :pass, name = :name, surname = :surname, picture = :picture, universityMail = :email, ';
