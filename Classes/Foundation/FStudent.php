@@ -91,6 +91,7 @@ class FStudent
                 $stm->bindValue(':name',$student->getName(),PDO::PARAM_STR);
                 $stm->bindValue(':surname',$student->getSurname(),PDO::PARAM_STR);
                 FPhoto::getInstance()->storeAvatar($student->getPicture());
+                $stm->bindValue(':picture',$student->getPicture()->getId(),PDO::PARAM_INT);
                 $stm->bindValue(':universityMail',$student->getUniversityMail(),PDO::PARAM_STR);
                 $stm->bindValue(':courseDuration',$student->getCourseDuration(),PDO::PARAM_INT);
                 $stm->bindValue(':immatricolationYear',$student->getImmatricolationYear(),PDO::PARAM_INT);
