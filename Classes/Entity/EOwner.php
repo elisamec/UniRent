@@ -63,7 +63,9 @@ class EOwner
     }
 
     public function setId(int $id):void {
-        $this->id = $id;
+        if ($this->id===null) {
+            $this->id=$id;
+        }
     }
     public function setUsername(string $username):void {
         $this->username=$username;
