@@ -224,10 +224,11 @@
             $FA=FAccommodation::getInstance();
             $db=FConnection::getInstance()->getConnection();
             $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+            $db->beginTransaction();
             
             try{ 
                 $db->exec('LOCK TABLES accommodation WRITE');
-                $db->beginTransaction();
+                
 
                 $q='INSERT INTO accommodation (title, address, price, start, description, deposit, visitDuration, man, woman, pets, smokers, idOwner)';
                 $q=$q.' VALUES (:title, :address, :price, :start, :description, :deposit, :visitDuration, :man, :woman, :pets, :smokers, :idOwner)';
@@ -251,21 +252,16 @@
                 
                 $stm->execute();
                 $id=$db->lastInsertId();
-                print "Prima commit \n";
                 $db->commit();
-                print "Dopo commit \n";
                 $db->exec('UNLOCK TABLES');
                 $accommodation->setIdAccommodation($id);
 
                 $photos = $accommodation->getPhoto();
                 foreach($photos as $photo){
                     $photo = $photo->setIdAccommodation($id);
-                    $result = $FP->store($photo);
-                    if (!$result) {
-                        throw new PDOException("Database operation failed.");
-                        return false;
-                    }
                 }
+
+                $FP->store($photos);
                 return true;
             }      
             catch(PDOException $e)
@@ -306,7 +302,6 @@
                 
                 $stm->execute();
                 $id=$db->lastInsertId();
-                $db->commit();
                 $db->exec('UNLOCK TABLES');
                 $address->withSortingCode($id);
                 return $id;
