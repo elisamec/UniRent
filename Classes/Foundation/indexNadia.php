@@ -11,6 +11,7 @@
     require_once ('FPhoto.php');
     require_once ('../Entity/EPhoto.php');
     use CommerceGuys\Addressing\Address;
+   
 
     $FP=FPhoto::getInstance();
     $FA=FAccommodation::getInstance();
