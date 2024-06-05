@@ -31,6 +31,7 @@ else
 #PROVA ADMINISTRATOR
 
 use Classes\Entity\EAdministrator;
+use CommerceGuys\Addressing\Address;
 
 require_once('../Entity/EAdministrator.php');
 require_once('FAdministrator.php');
@@ -86,5 +87,9 @@ else
     echo 'Tutto ok!';
 }
 */
-require_once('FAccomodation.php');
-require_once('../Entity');
+require __DIR__.'/../../vendor/autoload.php';
+
+$addres=new Address('Italy');
+$r=$addres->getCountryCode();
+
+echo $r;
