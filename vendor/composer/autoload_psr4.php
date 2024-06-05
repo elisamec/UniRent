@@ -7,4 +7,14 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Univaq\\Unirent\\' => array($baseDir . '/Classes'),
+    'Symfony\\Polyfill\\Php72\\' => array($vendorDir . '/symfony/polyfill-php72'),
+    'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
+    'Symfony\\Polyfill\\Intl\\Normalizer\\' => array($vendorDir . '/symfony/polyfill-intl-normalizer'),
+    'Symfony\\Polyfill\\Intl\\Idn\\' => array($vendorDir . '/symfony/polyfill-intl-idn'),
+    'Smarty\\' => array($vendorDir . '/smarty/smarty/src'),
+    'Egulias\\EmailValidator\\' => array($vendorDir . '/egulias/email-validator/src'),
+    'Doctrine\\Deprecations\\' => array($vendorDir . '/doctrine/deprecations/lib/Doctrine/Deprecations'),
+    'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/src'),
+    'Doctrine\\Common\\Collections\\' => array($vendorDir . '/doctrine/collections/src'),
+    'CommerceGuys\\Addressing\\' => array($vendorDir . '/commerceguys/addressing/src'),
 );
