@@ -15,6 +15,7 @@
 
     $FP=FPhoto::getInstance();
     $FA=FAccommodation::getInstance();
+
     $a = new Address();
     $a = $a->withAddressLine1('Via Anna, 1')->withPostalCode('00100')->withLocality('Milano');
     $st = new DateTime('2021-06-01');
@@ -23,11 +24,18 @@
     $ph2 = new EPhoto(null, "fo1", "accommodation", null, null);
     $photo = [$ph1, $ph2];
 
-    $acc = new EAccommodation(null, $photo, "Casa", $a, 100, $st, "casetta bellissima", 50, [], 30, false, true, true, false, 2);
+    $visit = ['moday' => ["10:30", "11:20"], 'thursday' => ["20:40"]];
+
+    /*$acc = new EAccommodation(null, $photo, "Casa", $a, 100, $st, "casetta bellissima", 50, $visit, 30, false, true, true, false, 2);
 
     $risultato = $FA->store($acc);
 
-    print $risultato;
+    $id = $acc->getIdAccommodation();*/
+
+    $risultato = $FA->load(32);
+
+    print($risultato);
+
 
     
 

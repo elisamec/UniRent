@@ -166,11 +166,12 @@
                 $db->rollBack();
             }
 
+            $days = [];
             $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
 
             foreach ($rows as $row) {
                 $times = $FA->loadTime($row['id']);
-                $days = [$row['day'] => $times];
+                $days[$row['day']] = $times;
             }
 
             return $days;
@@ -201,6 +202,7 @@
                 $db->rollBack();
             }
 
+            $times = [];
             $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
 
             foreach ($rows as $row) {
@@ -261,6 +263,18 @@
                     $photo = $photo->setIdAccommodation($id);
                 }
 
+                $visit = $accommodation->getVisit();
+                $days = array_keys($visit);
+
+                foreach($days as $day){
+
+                    $tmp = $FA -> storeDay($id, $day);
+
+                    foreach ($visit[$day] as $time){
+                        $result = $FA -> storeTime($tmp, $time);
+                    }
+                }
+
                 $FP->store($photos);
                 return true;
             }      
@@ -292,7 +306,7 @@
                 $postalCode = $address->getPostalCode();
                 $city = $address->getLocality();
 
-                $q='INSERT INTO address ( addressLine, postalCode, city)';
+                $q='INSERT INTO address (addressLine, postalCode, city)';
                 $q=$q.' VALUES (:addressLine, :postalCode, :city)';
 
                 $stm=$db->prepare($q);
@@ -312,5 +326,84 @@
             }
             
         }
+
+
+        /**
+         * storeDay
+         * private class that stores days of visit of an accommodation in db
+         * 
+         * @param  int $idAccommodation
+         * @param  String $day
+         * @return int
+         */
+        private function storeDay(int $idAccommodation, String $day):int {
+
+            $db=FConnection::getInstance()->getConnection();
+            $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+            
+            try { 
+
+                $db->exec('LOCK TABLES day WRITE');
+                $db->beginTransaction();
+
+                $q='INSERT INTO day (day, idAccommodation)';
+                $q=$q.' VALUES (:day, :idAccommodation)';
+
+                $stm=$db->prepare($q);
+                $stm->bindValue(':day',$day,PDO::PARAM_STR);
+                $stm->bindValue(':idAccommodation',$idAccommodation,PDO::PARAM_INT);
+                
+                $stm->execute();
+                $id=$db->lastInsertId();
+                $db->commit();
+                $db->exec('UNLOCK TABLES');
+                
+                return $id;
+            }      
+            catch(PDOException $e){
+                $db->rollBack();
+                return null;
+            }
+            
+        }
+
+        /**
+         * storeDay
+         * private class that stores days of visit of an accommodation in db
+         * 
+         * @param  int $idAccommodation
+         * @param  String $day
+         * @return int
+         */
+        private function storeTime(int $idDay, String $time):bool {
+
+            $db=FConnection::getInstance()->getConnection();
+            $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+            
+            try { 
+
+                $db->exec('LOCK TABLES time WRITE');
+                $db->beginTransaction();
+
+                $q='INSERT INTO time (hour, idDay)';
+                $q=$q.' VALUES (:hour, :idDay)';
+
+                $stm=$db->prepare($q);
+                $stm->bindValue(':hour',$time,PDO::PARAM_STR);
+                $stm->bindValue(':idDay',$idDay,PDO::PARAM_INT);
+                
+                $stm->execute();
+                $db->commit();
+                $db->exec('UNLOCK TABLES');
+                
+                return true;
+            }      
+            catch(PDOException $e){
+                $db->rollBack();
+                return null;
+            }
+            
+        }
+
 
     }

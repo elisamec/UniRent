@@ -87,4 +87,4 @@ else
 }
 */
 require_once('FAccomodation.php');
-require_once('../Entity')
+require_once('../Entity');

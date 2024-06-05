@@ -406,9 +406,23 @@ class EAccommodation
                 "Price: $this->price  \n".
                 "Start: $start  \n".
                 "Description: $this->description  \n".
-                "Deposit: $this->deposit  \n".
-                "Visit: $this->visit  \n".
-                "Visit Duration: $this->visitDuration  \n".
+                "Deposit: $this->deposit  \n" .
+                "Visit:  ";
+
+
+        $visit = $this->visit;
+        $days = array_keys($visit);
+
+        foreach($days as $day){
+
+            $str = $str . "\n    $day:  ";
+
+            foreach ($visit[$day] as $time){
+                $str = $str . " $time  ";
+            }
+        }
+
+        $str = $str . "\nVisit Duration: $this->visitDuration  \n".
                 "Man: $this->man \n".
                 "Woman: $this->woman \n".
                 "Pets: $this->pets \n".
