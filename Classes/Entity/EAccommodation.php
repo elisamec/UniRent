@@ -415,7 +415,7 @@ class EAccommodation
 
         foreach($days as $day){
 
-            $str = $str . "\n $day:  ";
+            $str = $str . "\n    $day:  ";
 
             foreach ($visit[$day] as $time){
                 $str = $str . " $time  ";

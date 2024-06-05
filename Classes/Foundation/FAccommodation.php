@@ -171,7 +171,7 @@
 
             foreach ($rows as $row) {
                 $times = $FA->loadTime($row['id']);
-                $days = [$row['day'] => $times];
+                $days[$row['day']] = $times;
             }
 
             return $days;
