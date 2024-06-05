@@ -3,7 +3,7 @@
         'name' => 'univaq/unirent',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '81b8a9314c0b80c63472dfff94bda8019f1725fa',
+        'reference' => '9e9a3e924872099519af8330dd5990bc4cf34d0c',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -112,7 +112,7 @@
         'univaq/unirent' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '81b8a9314c0b80c63472dfff94bda8019f1725fa',
+            'reference' => '9e9a3e924872099519af8330dd5990bc4cf34d0c',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
