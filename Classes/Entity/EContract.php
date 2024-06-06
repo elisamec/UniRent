@@ -34,14 +34,15 @@ class EContract extends EReservation
      * @param  TStatusContract $status
      * @param  int $cardNumber
      * @param  EReservation $reserv
+     * @param  DateTime $payment
      * @return self
      */
-    public function __construct(TStatusContract $status, int $cardNumber, EReservation $reserv)
+    public function __construct(TStatusContract $status, int $cardNumber, EReservation $reserv, DateTime $payment)
     {
         parent::__construct($reserv->getFromDate(),$reserv->getToDate(),$reserv->getAccomodationId(),$reserv->getIdStudent());
         $this->status=$status;
         $this->cardNumber=$cardNumber;
-        $this->paymentDate=new DateTime('now');
+        $this->paymentDate=$payment;
     }
     
     /**

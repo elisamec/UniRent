@@ -76,8 +76,11 @@ require_once('FReservation.php');
 require_once('../Entity/EReservation.php');
 
 $FR=FReservation::getInstance();
-$result=$FR->load(3);
+$result=$FR->load(4);
 echo $result->__toString();
+$result->setStatus(false);
+$FR->update($result);
+
 /*
 
 if($result===true)

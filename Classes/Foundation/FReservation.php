@@ -124,16 +124,82 @@ class FReservation
            }
            else
            {
+                $curStat=$this->getCourrentStatus($reserv);
+                if($curStat===true)
+                {
+                    $result=TError::getInstance()->modificationAfterAccept();
+                    return $result;
+                }
+                
                 $db=FConnection::getInstance()->getConnection();
                 try
                 {
                     $db->exec('LOCK TABLES reservation WRITE');
-                    $q='UPDATE reservation SET fromDate=:from,toDate=:to,statusAccept=:status WHERE id=:id';
+                    $q='UPDATE reservation SET fromDate=:from,toDate=:to WHERE id=:id';
                     $db->beginTransaction();
                     $stm=$db->prepare($q);
                     $stm->bindValue(':id',$reserv->getID(),PDO::PARAM_INT);
                     $stm->bindValue(':from',$reserv->getFromDate()->format('Y-m-d H:i:s'),PDO::PARAM_STR);
                     $stm->bindValue(':to',$reserv->getToDate()->format('Y-m-d H:i:s'),PDO::PARAM_STR);
+                    $stm->execute();
+                    $db->commit();
+                    $db->exec('UNLOCK TABLES');
+                    return true;
+                }
+                catch(PDOException $e)
+                {
+                    $db->rollBack();
+                    return false;
+                }
+           }
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private function getCourrentStatus(EReservation $res):?bool
+    {
+         $db=FConnection::getInstance()->getConnection();
+        try
+        {  
+            $q='SELECT statusAccept FROM reservation WHERE id=:id';
+            $db->exec('LOCK TABLES reservation READ');
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindValue(':id',$res->getID(),PDO::PARAM_INT);
+            $stm->execute();
+            $db->commit();
+            $row=$stm->fetch(PDO::FETCH_ASSOC);
+            return $row['statusAccept'];
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return null;
+        }
+    }
+
+    public function updateOwner(EReservation $reserv):bool
+    {
+        if($this->exist($reserv->getID()))
+        {
+           if(FContract::getInstance()->exist($reserv->getID()))
+           {
+                $result=TError::getInstance()->modificationReservationHendler();
+                return $result;
+           }
+           else
+           {
+                $db=FConnection::getInstance()->getConnection();
+                try
+                {
+                    $db->exec('LOCK TABLES reservation WRITE');
+                    $q='UPDATE reservation SET statusAccept=:status WHERE id=:id';
+                    $db->beginTransaction();
+                    $stm=$db->prepare($q);
+                    $stm->bindValue(':id',$reserv->getID(),PDO::PARAM_INT);
                     $stm->bindValue(':status',$reserv->getStatusAccept(),PDO::PARAM_BOOL);
                     $stm->execute();
                     $db->commit();
