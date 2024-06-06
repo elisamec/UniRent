@@ -70,17 +70,15 @@ else
 }
 */
 
-# PROVA Store FReservation
+# PROVA FReservation
 
 require_once('FReservation.php');
 require_once('../Entity/EReservation.php');
 
-$from= new DateTime('6/6/2024');
-$to= new DateTime('8/6/2024');
-
-$reserv= new EReservation($from,$to,5,2);
 $FR=FReservation::getInstance();
-$result=$FR->store($reserv);
+$result=$FR->load(3);
+echo $result->__toString();
+/*
 
 if($result===true)
 {
@@ -92,3 +90,22 @@ else
 }
 
 
+/*
+# PROVA EXIST FCONTRACT
+
+require_once('FContract.php');
+
+$FC= FContract::getInstance();
+$id=3;
+$result=$FC->exist($id);
+
+if($result)
+{
+    echo 'Il contratto esiste!';
+}
+else
+{
+    echo 'Il contratto non esiste!';
+}
+
+*/

@@ -5,11 +5,11 @@ class FContract
     private static $instance=null;
     public function __construct(){}
 
-    public static function getInstance():FCreditCard
+    public static function getInstance():FContract
     {
         if(is_null(self::$instance))
         {
-            self::$instance= new FCreditCard();
+            self::$instance= new FContract();
         }
         return self::$instance;
     }
