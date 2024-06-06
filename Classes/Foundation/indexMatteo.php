@@ -70,26 +70,25 @@ else
 }
 */
 
-# PROVA EXIST FReservation
-/*
+# PROVA Store FReservation
+
 require_once('FReservation.php');
+require_once('../Entity/EReservation.php');
 
-$id=2;
+$from= new DateTime('6/6/2024');
+$to= new DateTime('8/6/2024');
+
+$reserv= new EReservation($from,$to,5,2);
 $FR=FReservation::getInstance();
-$result=$FR->load($id);
+$result=$FR->store($reserv);
 
-if($result==false)
+if($result===true)
 {
-    echo 'Non esiste questa reservation!';
+    echo 'Reservation effettuata!';
 }
 else
 {
-    echo 'Tutto ok!';
+    echo 'Qualcosa no và!';
 }
-*/
-require __DIR__.'/../../vendor/autoload.php';
 
-$addres=new Address('Italy');
-$r=$addres->getCountryCode();
 
-echo $r;

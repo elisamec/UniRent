@@ -32,4 +32,16 @@ class TError {
         }
         return null;
     }
+
+    public static function modificationReservationHendler():bool
+    {
+        echo 'You can not modify the reservation becase a contract exists!';
+        return false;
+    }
+
+    public static function deleteReservationHendler():bool
+    {
+        echo 'You can not delete the reservation becase a contract exists!';
+        return false;
+    }
 }

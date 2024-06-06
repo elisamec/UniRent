@@ -2,6 +2,8 @@
 
 require_once('FConnection.php');
 require_once('../Entity/EReservation.php');
+require_once('FContract.php');
+require_once('../Tools/TError.php');
 
 class FReservation
 {
@@ -82,4 +84,114 @@ class FReservation
             return false;
         }
     }
+    public function store(EReservation $reserv):bool
+    {
+        $db=FConnection::getInstance()->getConnection();
+        $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+        try
+        {
+            $db->exec('LOCK TABLES reservation WRITE');
+            $q='INSERT INTO reservation (fromDate,toDate,made,statusAccept,accommodationId,idStudent)';
+            $q.=' VALUES (:from,:to,:made,:status,:accId,:stId)';
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindValue(':from',$reserv->getFromDate()->format('Y-m-d H:i:s'),PDO::PARAM_STR);
+            $stm->bindValue(':to',$reserv->getToDate()->format('Y-m-d H:i:s'),PDO::PARAM_STR);
+            $stm->bindValue(':made',$reserv->getMade()->format('Y-m-d H:i:s'),PDO::PARAM_STR);
+            $stm->bindValue(':status',$reserv->getStatusAccept(),PDO::PARAM_BOOL);
+            $stm->bindValue(':accId',$reserv->getAccomodationId(),PDO::PARAM_INT);
+            $stm->bindValue(':stId',$reserv->getIdStudent(),PDO::PARAM_INT);
+            $stm->execute();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+            return true;
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return false;
+        }
+    }
+
+    public function update(EReservation $reserv):bool
+    {
+        if($this->exist($reserv->getID()))
+        {
+           if(FContract::getInstance()->exist($reserv->getID()))
+           {
+                $result=TError::getInstance()->modificationReservationHendler();
+                return $result;
+           }
+           else
+           {
+                $db=FConnection::getInstance()->getConnection();
+                try
+                {
+                    $db->exec('LOCK TABLES reservation WRITE');
+                    $q='UPDATE reservation SET fromDate=:from,toDate=:to,statusAccept=:status WHERE id=:id';
+                    $db->beginTransaction();
+                    $stm=$db->prepare($q);
+                    $stm->bindValue(':id',$reserv->getID(),PDO::PARAM_INT);
+                    $stm->bindValue(':from',$reserv->getFromDate()->format('Y-m-d H:i:s'),PDO::PARAM_STR);
+                    $stm->bindValue(':to',$reserv->getToDate()->format('Y-m-d H:i:s'),PDO::PARAM_STR);
+                    $stm->bindValue(':status',$reserv->getStatusAccept(),PDO::PARAM_BOOL);
+                    $stm->execute();
+                    $db->commit();
+                    $db->exec('UNLOCK TABLES');
+                    return true;
+                }
+                catch(PDOException $e)
+                {
+                    $db->rollBack();
+                    return false;
+                }
+           }
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function Delete(int $id):bool
+    {
+        if($this->exist($id))
+        {
+           if(FContract::getInstance()->exist($id))
+           {
+                $result=TError::getInstance()->deleteReservationHendler();
+                return $result;
+           }
+           else
+           {
+                $db=FConnection::getInstance()->getConnection();
+                try
+                {
+                    $db->exec('LOCK TABLES reservation WRITE');
+                    $q='DELETE FROM reservation WHERE id=:id';
+                    $db->beginTransaction();
+                    $stm=$db->prepare($q);
+                    $stm->bindParam(':id',$id,PDO::PARAM_INT);
+                    $stm->execute();
+                    $db->commit();
+                    $db->exec('UNLOCK TABLES');
+                    return true;
+                }
+                catch(PDOException $e)
+                {
+                    $db->rollBack();
+                    return false;
+                }
+           }
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+
+
+     // getWaitingReservations(int $idProprietario), chiama il metodo relativo alla ricerca delle reservation in attesa di conferma relative a un proprietario, @return array<Reservation>
+    //getAcceptedReservations(int $idProprietario), chiama il metodo relativo alla ricerca delle reservation accettate e in attesa di pagamento relative a un proprietario, @return array<Reservation>
 }
