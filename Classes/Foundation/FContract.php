@@ -2,11 +2,31 @@
 
 require_once('FReservation.php');
 
+/**
+ * FContract
+ * @author Matteo Maloni <matteo.maloni@student.univaq.it>
+ * @package Foundation
+ */
 class FContract
-{
-    private static $instance=null;
+{    
+    /**
+     * instance
+     *
+     * @var static $instance
+     */
+    private static $instance=null;    
+    /**
+     * Method __construct
+     *
+     * @return void
+     */
     public function __construct(){}
-
+    
+    /**
+     * Method getInstance
+     *
+     * @return FContract
+     */
     public static function getInstance():FContract
     {
         if(is_null(self::$instance))
@@ -15,7 +35,14 @@ class FContract
         }
         return self::$instance;
     }
-
+    
+    /**
+     * Method exist
+     *
+     * @param int $reservID [Reservation id]
+     *
+     * @return bool
+     */
     public function exist(int $reservID):bool 
     {
         $q='SELECT * FROM contract WHERE reservationId=:reservID';
@@ -35,7 +62,14 @@ class FContract
         return false;
 
     }
-
+    
+    /**
+     * Method store
+     *
+     * @param EContract $con [contract]
+     *
+     * @return bool
+     */
     public function store(EContract $con):bool
     {
         if(FReservation::getInstance()->exist($con->getID())===false)  //if dose not exist the reservation
@@ -65,7 +99,14 @@ class FContract
             $db->rollBack();
             return false;
         }
-    }
+    }    
+    /**
+     * Method load
+     *
+     * @param int $id [reservation/contract id]
+     *
+     * @return Econtract
+     */
     public function load(int $id):Econtract |bool
     {
         $db=FConnection::getInstance()->getConnection();

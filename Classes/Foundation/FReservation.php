@@ -6,13 +6,33 @@ require_once('FContract.php');
 require_once('../Tools/TError.php');
 require_once('FOwner.php');
 
+/**
+ * FReservation
+ * @author Matteo Maloni (UniRent)
+ * @package Foundation
+ */
 class FReservation
-{
+{    
+    /**
+     * instance
+     *
+     * @var static $instance
+     */
     private static $instance=null;
-
+    
+    /**
+     * Method __construct
+     *
+     * @return self
+     */
     private function __construct() {}
 
-
+    
+    /**
+     * Method getInstance
+     *
+     * @return FReservation
+     */
     public static function getInstance():FReservation
     {
         if(is_null(self::$instance))
@@ -21,7 +41,14 @@ class FReservation
         }
         return self::$instance;
     }
-
+    
+    /**
+     * Method exist
+     *
+     * @param int $id [Reservation Id]
+     *
+     * @return bool
+     */
     public function exist(int $id):bool
     {
         $q='SELECT * FROM reservation WHERE id=:id';
@@ -50,7 +77,14 @@ class FReservation
         return false;
 
     }
-
+    
+    /**
+     * Method load
+     *
+     * @param int $id [Reservation id]
+     *
+     * @return EReservation
+     */
     public function load (int $id):EReservation|bool
     {
         $db=FConnection::getInstance()->getConnection();
@@ -84,7 +118,15 @@ class FReservation
         {
             return false;
         }
-    }
+        
+    }    
+    /**
+     * Method store
+     *
+     * @param EReservation $reserv [object Ereservation]
+     *
+     * @return bool
+     */
     public function store(EReservation $reserv):bool
     {
         $db=FConnection::getInstance()->getConnection();
@@ -113,7 +155,14 @@ class FReservation
             return false;
         }
     }
-
+    
+    /**
+     * Method update
+     *
+     * @param EReservation $reserv [object EReservation]
+     *
+     * @return bool
+     */
     public function update(EReservation $reserv):bool
     {
         if($this->exist($reserv->getID()))
@@ -159,7 +208,14 @@ class FReservation
             return false;
         }
     }
-
+    
+    /**
+     * Method getCourrentStatus
+     *
+     * @param EReservation $res [object EReservation]
+     *
+     * @return bool
+     */
     private function getCourrentStatus(EReservation $res):?bool
     {
          $db=FConnection::getInstance()->getConnection();
@@ -181,7 +237,14 @@ class FReservation
             return null;
         }
     }
-
+    
+    /**
+     * Method updateOwner
+     *
+     * @param EReservation $reserv [object EREservation]
+     *
+     * @return bool
+     */
     public function updateOwner(EReservation $reserv):bool
     {
         if($this->exist($reserv->getID()))
@@ -219,8 +282,15 @@ class FReservation
             return false;
         }
     }
-
-    public function Delete(int $id):bool
+    
+    /**
+     * Method delete
+     *
+     * @param int $id [Reservation id]
+     *
+     * @return bool
+     */
+    public function delete(int $id):bool
     {
         if($this->exist($id))
         {
@@ -256,7 +326,15 @@ class FReservation
             return true;
         }
     }
-
+    
+    /**
+     * Method getWaitingReservations
+     *
+     * This method return a EReservation array of waiting reservations
+     * @param int $id [Reservation id]
+     *
+     * @return array
+     */
     public function getWaitingReservations(int $id):?array
     {
         if(FOwner::getInstance()->exist($id))
@@ -303,7 +381,15 @@ class FReservation
             return null;
         }
     }
-
+    
+    /**
+     * Method getAcceptedReservations
+     * 
+     *This method return a EReservation array of resercations that have been accepted by the owner but not still paied by the student 
+     * @param int $id [Reservation id]
+     *
+     * @return array
+     */
     public function getAcceptedReservations(int $id):?array
     {
         if(FOwner::getInstance()->exist($id))
