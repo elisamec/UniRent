@@ -49,5 +49,10 @@ class TError {
         echo 'You can not modify the reservation becase the owner has accepted the reservation!';
         return false;
     }
+    public static function errorGettingReservations():array
+    {
+        echo 'Someting went wrong in getting reservations!';
+        return array();
+    }
 
 }
