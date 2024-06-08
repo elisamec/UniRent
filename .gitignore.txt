@@ -1,2 +1,2 @@
 #Ignore vendor folder
-/vendor/
+vendor
