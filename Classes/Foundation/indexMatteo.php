@@ -31,6 +31,7 @@ else
 #PROVA ADMINISTRATOR
 
 use Classes\Entity\EAdministrator;
+use CommerceGuys\Addressing\Address;
 
 require_once('../Entity/EAdministrator.php');
 require_once('FAdministrator.php');
@@ -69,22 +70,44 @@ else
 }
 */
 
-# PROVA EXIST FReservation
-/*
+# PROVA FReservation
+
 require_once('FReservation.php');
+require_once('../Entity/EReservation.php');
 
-$id=2;
 $FR=FReservation::getInstance();
-$result=$FR->load($id);
+$result=$FR->getWaitingReservations(2);
+print_r($result);
 
-if($result==false)
+
+/*
+
+if($result===true)
 {
-    echo 'Non esiste questa reservation!';
+    echo 'Reservation effettuata!';
 }
 else
 {
-    echo 'Tutto ok!';
+    echo 'Qualcosa no và!';
 }
+
+
+/*
+# PROVA EXIST FCONTRACT
+
+require_once('FContract.php');
+
+$FC= FContract::getInstance();
+$id=3;
+$result=$FC->exist($id);
+
+if($result)
+{
+    echo 'Il contratto esiste!';
+}
+else
+{
+    echo 'Il contratto non esiste!';
+}
+
 */
-require_once('FAccomodation.php');
-require_once('../Entity');

@@ -1,5 +1,5 @@
 <?php
-require_once('TErrorDuplicate.php');
+require_once('TErrorEnum.php');
 class TError {
     private static $instance=null;
     /**Constructor */
@@ -32,4 +32,27 @@ class TError {
         }
         return null;
     }
+
+    public static function modificationReservationHendler():bool
+    {
+        echo 'You can not modify the reservation becase a contract exists!';
+        return false;
+    }
+
+    public static function deleteReservationHendler():bool
+    {
+        echo 'You can not delete the reservation becase a contract exists!';
+        return false;
+    }
+    public static function modificationAfterAccept():bool
+    {
+        echo 'You can not modify the reservation becase the owner has accepted the reservation!';
+        return false;
+    }
+    public static function errorGettingReservations():array
+    {
+        echo 'Someting went wrong in getting reservations!';
+        return array();
+    }
+
 }
