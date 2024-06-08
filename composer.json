@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "commerceguys/addressing": "^2.2",
+        "commerceguys/addressing": "*",
         "smarty/smarty": "^5.3",
         "egulias/email-validator": "^4.0",
         "globalcitizen/php-iban": "^4.2"
