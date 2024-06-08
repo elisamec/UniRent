@@ -17,4 +17,5 @@ return array(
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/src'),
     'Doctrine\\Common\\Collections\\' => array($vendorDir . '/doctrine/collections/src'),
     'CommerceGuys\\Addressing\\' => array($vendorDir . '/commerceguys/addressing/src'),
+    'App\\' => array($baseDir . '/app'),
 );

@@ -43,6 +43,10 @@ class ComposerStaticInit4ae9f5a128d60c7a0d1288f5d7ac3a66
         array (
             'CommerceGuys\\Addressing\\' => 24,
         ),
+        'A' => 
+        array (
+            'App\\' => 4,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -89,6 +93,10 @@ class ComposerStaticInit4ae9f5a128d60c7a0d1288f5d7ac3a66
         'CommerceGuys\\Addressing\\' => 
         array (
             0 => __DIR__ . '/..' . '/commerceguys/addressing/src',
+        ),
+        'App\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app',
         ),
     );
 

@@ -4,6 +4,8 @@ require_once ('FConnection.php');
 require_once ('../Entity/ECreditCard.php');
 /**
  * FCreditCard
+ * @author Matteo Maloni (UniRent) <matteo.maloni@student.univaq.it>
+ * @package Foundation
  */
 class FCreditCard
 {

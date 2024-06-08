@@ -30,8 +30,7 @@ else
 
 #PROVA ADMINISTRATOR
 
-use Classes\Entity\EAdministrator;
-use CommerceGuys\Addressing\Address;
+
 
 require_once('../Entity/EAdministrator.php');
 require_once('FAdministrator.php');
@@ -71,7 +70,7 @@ else
 */
 
 # PROVA FReservation
-
+/*
 require_once('FReservation.php');
 require_once('../Entity/EReservation.php');
 
@@ -79,7 +78,7 @@ $FR=FReservation::getInstance();
 $result=$FR->getWaitingReservations(2);
 print_r($result);
 
-
+*/
 /*
 
 if($result===true)
@@ -111,3 +110,9 @@ else
 }
 
 */
+
+# prova uso di address
+require __DIR__ . '/../../vendor/autoload.php';
+use CommerceGuys\Addressing\Address;
+$address=new Address('Italy');
+echo $address->getCountryCode();
