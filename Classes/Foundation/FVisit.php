@@ -138,35 +138,31 @@ class FVisit
     public function update(EVisit $visit):bool 
     {
         $db=FConnection::getInstance()->getConnection();
-        $FV=FVisit::getInstance();
 
         $visitId = $visit->getIdVisit();
 
-        
-        if($FV->exist($visitId)){
-            try{
-                $db->exec('LOCK TABLES visit WRITE');
-                $db->beginTransaction();
+        try{
+            $db->exec('LOCK TABLES visit WRITE');
+            $db->beginTransaction();
 
-                $day = $visit->getDate()->format('Y-m-d H:i:s');
-                
-                $q='UPDATE visit SET visitDay = :day  WHERE id=:id';
-                $stm=$db->prepare($q);
-                $stm->bindValue(':day',$day,PDO::PARAM_STR);
-                $stm->bindValue(':id',$visitId,PDO::PARAM_INT);
+            $day = $visit->getDate()->format('Y-m-d H:i:s');
+            
+            $q='UPDATE visit SET visitDay = :day  WHERE id=:id';
+            $stm=$db->prepare($q);
+            $stm->bindValue(':day',$day,PDO::PARAM_STR);
+            $stm->bindValue(':id',$visitId,PDO::PARAM_INT);
 
-                $stm->execute();           
-                $db->commit();
-                $db->exec('UNLOCK TABLES');
+            $stm->execute();           
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
 
-                return true;
-            }
-            catch(PDOException $e)
-            {
-                $db->rollBack();
-                return false;
-            }
-        } else return false;
+            return true;
+        }
+        catch(PDOException $e){
+            $db->rollBack();
+            return false;
+        }
+
         
     }
 
