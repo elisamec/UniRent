@@ -4,10 +4,8 @@ require_once ('FAccommodation.php');
 require_once ('../Entity/EAccommodation.php');
 class FPersistentManager {
     private static $instance;
-    private function __construct()
-    {
-        
-    }
+    private function __construct(){}
+
     public static function getInstance()
     {
         if (!self::$instance) {
@@ -19,21 +17,19 @@ class FPersistentManager {
 
     /**
      * return an object specifying the id 
-     * @param String $Eclass Refers to the Entity class of the object
+     * @param String $EClass Refers to the Entity class of the object
      * @param int $id Refers to the id of the object
      * @return object
      */
-    public static function load(String $Eclass, int $id): object{
+    public static function load(String $EClass, int $id): object{
         
-        $foundClass = str_replace("E", "F", $Eclass);
+        $foundClass = str_replace("E", "F", $EClass);
 
         $F = $foundClass::getInstance();
-
         $result = $F->load($id);
 
         return $result;
     }
-
 
     //store(E($class)), salva l'oggetto nel DB, @return bool;
     //update(E($class)), aggiorna l'oggetto nel db, @return bool;
