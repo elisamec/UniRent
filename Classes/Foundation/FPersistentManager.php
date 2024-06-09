@@ -13,6 +13,7 @@ class FPersistentManager {
         }
         return self::$instance;
     }
+    
     //findAccommodation(DateTime fromDate, string place), chiede query a FAccommodation, @return array
 
     /**
