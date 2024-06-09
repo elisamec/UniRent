@@ -1,12 +1,16 @@
 <?php 
+namespace Classes\Foundation;
     require_once ('FConnection.php');
     require_once ('../Entity/EAccommodation.php');
     require_once ('FPhoto.php');
     require_once ('../Entity/EPhoto.php');
     require __DIR__ . '/../../vendor/autoload.php';
+    use Class
 
     use CommerceGuys\Addressing\Address;
-    
+use DateTime;
+use PDO;
+
     /**
      * FAccommodation
      * 

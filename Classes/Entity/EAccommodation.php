@@ -1,8 +1,10 @@
 <?php
-
+namespace Classes\Entity;
 require __DIR__ . '/../../vendor/autoload.php';
 
 use CommerceGuys\Addressing\Address;
+use DateTime;
+
 /**
  * Class EAccommodation
  * Entity class for Accommodation
