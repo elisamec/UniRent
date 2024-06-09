@@ -42,7 +42,8 @@
 
     //$risultato = $FP->load("EVisit", $visit->getIdVisit());
 
-    $risultato = $FP->store($visit);
+    $risultato = $FP->delete("EVisit", 12);
+    //$risultato = $FP->load("EVisit", $visit->getIdVisit());
 
     print($risultato);
 

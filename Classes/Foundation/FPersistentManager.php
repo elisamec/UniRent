@@ -24,7 +24,7 @@ class FPersistentManager {
      */
     public static function load(String $EClass, int $id): object{
         
-        $FClass = str_replace("E", "F", $EClass);
+        $FClass = str_replace("E", "Classes\Foundation\F", $EClass);
 
         $F = $FClass::getInstance();
         $result = $F->load($id);
@@ -57,7 +57,7 @@ class FPersistentManager {
      */
     public static function update(object $obj): bool{
         $EClass = get_class($obj); 
-        $FClass = str_replace("E", "F", $EClass);
+        $FClass = str_replace("Classes\Entity\E", "Classes\Foundation\F", $EClass);
 
         $F = $FClass::getInstance();
         $result = $F->update($obj);
@@ -75,7 +75,7 @@ class FPersistentManager {
      */
     public static function delete(String $EClass, int $id): bool{
 
-        $FClass = str_replace("E", "F", $EClass);
+        $FClass = str_replace("E", "Classes\Foundation\F", $EClass);
 
         $F = $FClass::getInstance();
         $result = $F->delete($id);
