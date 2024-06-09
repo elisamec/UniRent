@@ -2,16 +2,18 @@
 
     #PARTE NADIA
 
-    require __DIR__ . '/../../vendor/autoload.php';
+    namespace Classes\Foundation;
 
-    require_once ('FAccommodation.php');
-    require_once ('FPersistentManager.php');
-    require_once ('../Entity/EAccommodation.php');
-    require_once ('FVisit.php');
-    require_once ('../Entity/EVisit.php');
-    require_once ('FPhoto.php');
-    require_once ('../Entity/EPhoto.php');
+    require __DIR__ . '../../../vendor/autoload.php';
+
     use CommerceGuys\Addressing\Address;
+    use Classes\Foundation\FAccommodation;
+    use Classes\Foundation\FPersistentManager;
+    use Classes\Entity\EAccommodation;
+    use Classes\Foundation\FVisit;
+    use Classes\Entity\EVisit;
+    use Classes\Foundation\FPhoto;
+    use Classes\Entity\EPhoto;
    
 
     $FP=FPersistentManager::getInstance();

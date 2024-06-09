@@ -3,6 +3,8 @@ namespace Classes\Foundation;
 require __DIR__ .'../../../vendor/autoload.php';
 use Classes\Foundation;
 use Classes\Entity;
+use Classes\Foundation\FAccommodation;
+use Classes\Foundation\FVisit;
 
 class FPersistentManager {
     private static $instance;
