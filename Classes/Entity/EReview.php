@@ -1,7 +1,9 @@
 <?php
-
-require_once ('EPhoto.php');
-require_once('../Tools/TType.php');
+namespace Classes\Entity;
+require __DIR__ . '../../../vendor/autoload.php';
+use Classes\Entity\EPhoto;
+use Classes\Tools\TType;
+use DateTime;
 /**
  * EReview
  * 

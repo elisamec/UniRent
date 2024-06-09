@@ -1,9 +1,12 @@
 <?php 
-
-require_once ('FConnection.php');
-require_once ('../Entity/EOwner.php');
-require_once('FPhoto.php');
-require_once('../Tools/TError.php');
+namespace Classes\Foundation;
+require __DIR__.'../../../vendor/autoload.php';
+use Classes\Foundation\FConnection;
+use Classes\Entity\EOwner;
+use Classes\Foundation\FPhoto;
+use Classes\Tools\TError;
+use PDO;
+use PDOException;
 /**
  * This class provide to make query to EOwner class
  * @author Matteo Maloni ('UniRent')

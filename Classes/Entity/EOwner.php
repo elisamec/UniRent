@@ -1,6 +1,7 @@
 <?php
-
-require_once ('EPhoto.php');
+namespace Classes\Entity;
+require __DIR__ . '../../../vendor/autoload.php';
+use Classes\Entity\EPhoto;
 
 
 class EOwner

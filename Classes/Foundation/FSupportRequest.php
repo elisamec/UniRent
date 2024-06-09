@@ -1,9 +1,13 @@
 <?php
-require_once ('FConnection.php');
-require_once ('../Entity/ESupportRequest.php');
-require_once('../Tools/TType.php');
-require_once('../Tools/TRequestType.php');
-require_once('../Tools/TStatus.php');
+namespace Classes\Foundation;
+require __DIR__.'../../../vendor/autoload.php';
+use PDO;
+use PDOException;
+use Classes\Foundation\FConnection;
+use Classes\Entity\ESupportRequest;
+use Classes\Tools\TType;
+use Classes\Tools\TRequestType;
+use Classes\Tools\TStatus;
 
 class FSupportRequest {
     private static $instance=null;

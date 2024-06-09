@@ -1,7 +1,17 @@
 <?php
-require_once('../Tools/TType.php');
-require_once('../Tools/TRequestType.php');
-require_once('../Tools/TStatus.php');
+namespace Classes\Entity;
+require __DIR__ . '../../../vendor/autoload.php';
+use Classes\Tools\TType;
+use Classes\Tools\TStatusSupport;
+use Classes\Tools\TRequestType;
+
+/**
+ * ESupportRequest
+ * 
+ * This class depicts a Support Request
+ * 
+ * @package Entity
+ */
 
 class ESupportRequest {
     private ?int $id;
@@ -15,6 +25,7 @@ class ESupportRequest {
     public function getEntity():string {
         return $this->entity;
     }
+
     public function __construct(?int $id, string $message, TRequestType $topic, int $idAuthor, TType $authorType) 
     {
         $this->id=$id;
