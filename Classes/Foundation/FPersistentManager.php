@@ -89,6 +89,5 @@ class FPersistentManager {
     //findAccommodation(DateTime fromDate, string place), chiede query a FAccommodation, @return array
     //getWaitingReservations(int $idProprietario), chiama il metodo relativo alla ricerca delle reservation in attesa di conferma relative a un proprietario, @return array<Reservation>
     //getAcceptedReservations(int $idProprietario), chiama il metodo relativo alla ricerca delle reservation accettate e in attesa di pagamento relative a un proprietario, @return array<Reservation>
-    //
 
 }
