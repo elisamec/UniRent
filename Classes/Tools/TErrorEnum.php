@@ -1,4 +1,5 @@
 <?php
+namespace Classes\Tools;
 interface ErrorEnum extends \BackedEnum {}
 enum TErrorDuplicate:string implements ErrorEnum
 {

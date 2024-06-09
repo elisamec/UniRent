@@ -3,6 +3,7 @@ namespace Classes\Foundation;
 require __DIR__ .'/../../vendor/autoload.php';
 use Classes\Foundation;
 use Classes\Entity;
+use DateTime;
 
 class FPersistentManager {
     private static $instance;
@@ -83,8 +84,20 @@ class FPersistentManager {
         
     }
 
-    //findAccommodation(DateTime fromDate, string place), chiede query a FAccommodation, @return array
-    //getWaitingReservations(int $idProprietario), chiama il metodo relativo alla ricerca delle reservation in attesa di conferma relative a un proprietario, @return array<Reservation>
-    //getAcceptedReservations(int $idProprietario), chiama il metodo relativo alla ricerca delle reservation accettate e in attesa di pagamento relative a un proprietario, @return array<Reservation>
+    //public function findAccommodation(DateTime $date,DateTime $fromDate, string $place), chiede query a FAccommodation, @return array
+
+
+    public function getWaitingReservations(int $idProprietario):array
+    {
+        $FR= Foundation\FReservation::getInstance();
+        $result=$FR->getWaitingReservations($idProprietario);
+        return $result;
+    }
+    public function getAcceptedReservations(int $idProprietario):array
+    {
+        $FR= Foundation\FReservation::getInstance();
+        $result=$FR->getAcceptedReservations($idProprietario);
+        return $result;
+    }
 
 }

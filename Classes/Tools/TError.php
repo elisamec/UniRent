@@ -1,5 +1,9 @@
 <?php
-require_once('TErrorEnum.php');
+namespace Classes\Tools;
+require __DIR__.'../../../vendor/autoload.php';
+use Classes\Tools\ErrorEnum;
+use PDOException;
+
 class TError {
     private static $instance=null;
     /**Constructor */

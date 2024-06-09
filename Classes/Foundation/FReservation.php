@@ -1,10 +1,14 @@
 <?php 
-
-require_once('FConnection.php');
-require_once('../Entity/EReservation.php');
-require_once('FContract.php');
-require_once('../Tools/TError.php');
+namespace Classes\Foundation;
+require __DIR__.'../../../vendor/autoload.php';
 require_once('FOwner.php');
+use Classes\Tools\TError;
+use Classes\Foundation\FContract;
+use Classes\Foundation\FConnection;
+use Classes\Entity\EReservation;
+use DateTime;
+use PDO;
+use PDOException;
 
 /**
  * FReservation
