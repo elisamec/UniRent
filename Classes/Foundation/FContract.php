@@ -1,6 +1,11 @@
 <?php 
-
-require_once('FReservation.php');
+namespace Classes\Foundation;
+require __DIR__.'../../../vendor/autoload.php';
+use Classes\Foundation\FReservation;
+use Classes\Entity\EContract;
+use DateTime;
+use PDO;
+use PDOException;
 
 /**
  * FContract

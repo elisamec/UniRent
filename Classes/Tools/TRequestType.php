@@ -1,5 +1,6 @@
 <?php
-interface RequestType extends BackedEnum {}
+namespace Classes\Tools;
+interface RequestType extends \BackedEnum {}
 
 enum TRequestType:string implements RequestType 
 {

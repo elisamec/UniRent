@@ -7,7 +7,8 @@
             "Univaq\\Unirent\\": "Classes/",
             "Classes\\Entity\\": "Classes/Entity",
             "Classes\\Foundation\\": "Classes/Foundation",
-            "Classes\\Control\\" : "Classes/Control"
+            "Classes\\Control\\" : "Classes/Control",
+            "Classes\\Tools\\" : "Classes/Tools"
         }
 
     },
