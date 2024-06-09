@@ -3,8 +3,6 @@ namespace Classes\Foundation;
 require __DIR__ .'/../../vendor/autoload.php';
 use Classes\Foundation;
 use Classes\Entity;
-use Classes\Foundation\FAccommodation;
-use Classes\Foundation\FVisit;
 
 class FPersistentManager {
     private static $instance;
@@ -42,7 +40,7 @@ class FPersistentManager {
      */
     public static function store(object $obj): bool{
         $EClass = get_class($obj); 
-        $FClass = str_replace("E", "F", $EClass);
+        $FClass = str_replace("Classes\Entity\E", "Classes\Foundation\F", $EClass);
 
         $F = $FClass::getInstance();
         $result = $F->store($obj);

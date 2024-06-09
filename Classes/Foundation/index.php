@@ -1,13 +1,13 @@
 <?php 
 
 
+
 #CODICE DA SMISTARE NEI RELATIVI FILE
 
 
 #require_once ('FCreditCard.php');
 #require_once ('../Entity/ECreditCard.php');
-require_once('FStudent.php');
-require_once('../Entity/EStudent.php');
+
 
 
 #$FCC=FCreditCard::getInstance();
@@ -54,17 +54,12 @@ else
 }
 */
 
-$FS=FStudent::getInstance();
-$risultato_exist=$FS->exist(5);
-if($risultato_exist)
-{
-    echo 'Si lo studente è nel DataBase!';
-}
-else
-{
-    echo 'No non c\' è! ';
-}
+require __DIR__.'../../../vendor/autoload.php';
 
+use Classes\Entity\EStudent;
 
+$BIRTH=new DateTime('12/12/1269');
+$student= new EStudent('Dante','DivinaCommedia','Dante','Alighieri',null,'danteAlighieri@gmail.com',3,1300,$BIRTH,'M',false,false);
+echo $student::class;
 
 #FINE CODICE DA SMISTARE

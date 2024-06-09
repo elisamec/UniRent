@@ -120,7 +120,18 @@ echo $address->getCountryCode();
 */
 require __DIR__.'../../../vendor/autoload.php';
 use Classes\Foundation\FPersistentManager;
-use Classes\Foundation\FStudent;
+
+use Classes\Entity\EStudent;
+
+$BIRTH=new DateTime('12/12/1269');
 $PM= FPersistentManager::getInstance();
-$student=$PM::load(FStudent::class,3);
-echo $student->__toString();
+$student= new EStudent('Dante','DivinaCommedia','Dante','Alighieri',null,'danteAlighieri@gmail.com',3,1300,$BIRTH,'M',false,false);
+$result=$PM::store($student);
+if($result)
+{
+    echo 'Tutto ok!';
+}
+else
+{
+    echo 'Qualcosa non và!';
+}
