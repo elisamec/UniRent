@@ -16,8 +16,6 @@ class FPersistentManager {
         return self::$instance;
     }
 
-    //findAccommodation(DateTime fromDate, string place), chiede query a FAccommodation, @return array
-
     /**
      * return an object specifying the id 
      * @param string $EClass Refers to the Entity class of the object
@@ -85,7 +83,8 @@ class FPersistentManager {
         return $result;
         
     }
-    //delete(E($class)), cancella l'ogetto nel DB, @return bool;
+
+    //findAccommodation(DateTime fromDate, string place), chiede query a FAccommodation, @return array
     //getWaitingReservations(int $idProprietario), chiama il metodo relativo alla ricerca delle reservation in attesa di conferma relative a un proprietario, @return array<Reservation>
     //getAcceptedReservations(int $idProprietario), chiama il metodo relativo alla ricerca delle reservation accettate e in attesa di pagamento relative a un proprietario, @return array<Reservation>
     //
