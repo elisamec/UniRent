@@ -1,9 +1,15 @@
 <?php 
-
+namespace Classes\Foundation;
+require __DIR__.'../../../vendor/autoload.php';
 require_once('FPhoto.php');
 require_once('../Tools/TError.php');
-require_once('FConnection.php');
-require_once('../Entity/EStudent.php');
+
+use Classes\Entity\EStudent;
+use Classes\Foundation\FConnection;
+use DateTime;
+use PDO;
+use PDOException;
+
 class FStudent
 {
     private static $instance=null;

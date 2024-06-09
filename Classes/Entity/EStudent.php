@@ -1,5 +1,9 @@
 <?php 
-require_once ('EPhoto.php');
+namespace Classes\Entity;
+require __DIR__ . '../../../vendor/autoload.php';
+use Classes\Entity\EPhoto;
+use DateTime;
+
 /**
  * EStudent
  * @author Matteo Maloni (UniRent) <matteo.maloni.00@gmail.com>

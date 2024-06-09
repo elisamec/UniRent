@@ -118,10 +118,9 @@ use CommerceGuys\Addressing\Address;
 $address=new Address('Italy');
 echo $address->getCountryCode();
 */
-require_once('FPersistentManager.php');
-
-require_once('../Entity/EStudent.php');
-
+require __DIR__.'../../../vendor/autoload.php';
+use Classes\Foundation\FPersistentManager;
+use Classes\Foundation\FStudent;
 $PM= FPersistentManager::getInstance();
-$student=FPersistentManager::load(FStudent::class,3);
+$student=$PM::load(FStudent::class,3);
 echo $student->__toString();

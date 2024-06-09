@@ -1,7 +1,10 @@
 <?php  
-
-require_once('EReservation.php');
+namespace Classes\Entity;
+require __DIR__.'/../../vendor/autoload.php';
 require_once('../Tools/TStatus.php');
+use Classes\Entity\EReservation;
+use DateTime;
+
 /**
  * EContract
  * @author Matteo Maloni (UNiRent) <matteo.maloni@student.univaq.it>

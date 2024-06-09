@@ -5,8 +5,11 @@
     "autoload": {
         "psr-4": {
             "Univaq\\Unirent\\": "Classes/",
-            "App\\": "app/"
+            "Classes\\Entity\\": "Classes/Entity",
+            "Classes\\Foundation\\": "Classes/Foundation",
+            "Classes\\Control\\" : "Classes/Control"
         }
+
     },
     "authors": [
         {

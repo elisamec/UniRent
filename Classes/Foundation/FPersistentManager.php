@@ -1,6 +1,8 @@
 <?php
-require_once('../Entity/EStudent.php');
-require_once('FStudent.php');
+namespace Classes\Foundation;
+require __DIR__ .'../../../vendor/autoload.php';
+use Classes\Foundation;
+use Classes\Entity;
 
 class FPersistentManager {
     private static $instance;

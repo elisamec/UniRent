@@ -1,6 +1,10 @@
 <?php
-require_once('FConnection.php');
-require_once('../Entity/EPhoto.php');
+namespace Classes\Foundation;
+require __DIR__.'../../../vendor/autoload.php';
+use Classes\Foundation\FConnection;
+use Classes\Entity\EPhoto;
+use PDO;
+use PDOException;
 
 class FPhoto {
     private static $instance=null;

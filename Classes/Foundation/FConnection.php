@@ -1,4 +1,8 @@
 <?php
+namespace Classes\Foundation;
+
+use PDO;
+use PDOException;
 
 /**
  * The class FConnection provide to connect to database.

@@ -1,4 +1,7 @@
 <?php 
+namespace Classes\Entity;
+
+use DateTime;
 
 /**
  * EReservation

@@ -1,9 +1,10 @@
 <?php
-namespace App;
-require __DIR__ . '/../../vendor/autoload.php';
-use CommerceGuys\Addressing\Address;
 
-$addres=new Address('Italy');
-echo $addres->getCountryCode();
+require __DIR__ . '/vendor/autoload.php';
+use Classes\Entity\EAdministrator;
 
+
+
+$admin= new EAdministrator('Binotto','Luca','lucabinotto@gmail.com');
+echo $admin->getEmail();
 
