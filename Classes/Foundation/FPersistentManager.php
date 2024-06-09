@@ -23,15 +23,31 @@ class FPersistentManager {
      */
     public static function load(String $EClass, int $id): object{
         
-        $foundClass = str_replace("E", "F", $EClass);
+        $FClass = str_replace("E", "F", $EClass);
 
-        $F = $foundClass::getInstance();
+        $F = $FClass::getInstance();
         $result = $F->load($id);
 
         return $result;
     }
 
-    //store(E($class)), salva l'oggetto nel DB, @return bool;
+    /**
+     * store an object in the database
+     * 
+     * @param object $obj Refers to the object to be stored
+     * @return bool
+     */
+    public static function store(object $obj): bool{
+        $EClass = get_class($obj); 
+        $FClass = str_replace("E", "F", $EClass);
+
+        $F = $FClass::getInstance();
+        $result = $F->store($obj);
+
+        return $result;
+        
+    }
+
     //update(E($class)), aggiorna l'oggetto nel db, @return bool;
     //delete(E($class)), cancella l'ogetto nel DB, @return bool;
     //getWaitingReservations(int $idProprietario), chiama il metodo relativo alla ricerca delle reservation in attesa di conferma relative a un proprietario, @return array<Reservation>
