@@ -9,12 +9,12 @@
 class EVisit
 {
     /**
-     * @var int $idVisit The unique identifier of the visit itself.
+     * @var ?int $idVisit The unique identifier of the visit itself.
      * @var DateTime $date The date of the visit.
      * @var int $idStudent The identifier of the student who made the visit.
      * @var int $idAccommodation The identifier of the accommodation visited.
      */
-    private int $idVisit;
+    private ?int $idVisit;
     private DateTime $date;
     private int $idStudent;
     private int $idAccommodation;
@@ -33,7 +33,7 @@ class EVisit
      * @var int $idAccommodation The identifier of the accommodation visited.
      * 
      */
-    public function __construct(int $idVisit, DateTime $date, int $idStudent, int $idAccommodation){
+    public function __construct(?int $idVisit, DateTime $date, int $idStudent, int $idAccommodation){
         $this->idVisit = $idVisit;
         $this->date = $date;
         $this->idStudent = $idStudent;

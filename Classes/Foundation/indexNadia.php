@@ -27,13 +27,19 @@
 
     $visit = ['moday' => ["10:30", "11:20"], 'thursday' => ["20:40"]];
 
-    $acc = new EAccommodation(21, $photo, "Casa", $a, 100, $st, "casetta bellissima v2", 100, $visit, 30, false, true, true, false, 2);
+    $acc = new EAccommodation(null, $photo, "Casa", $a, 100, $st, "casetta bellissima v2", 100, $visit, 30, false, true, true, false, 2);
 
     //$risultato = $FA->update($acc);
 
     //$id = $acc->getIdAccommodation(); 
 
-    $risultato = $FP->load("EAccommodation", 21);
+    $visit = new EVisit(6, new DateTime("2024-01-01 15:30"), 1, 21);
+
+    //$risultato = $FP->update($visit);
+
+    //$risultato = $FP->load("EVisit", $visit->getIdVisit());
+
+    $risultato = $FP->delete("EVisit", 6);
 
     print($risultato);
 

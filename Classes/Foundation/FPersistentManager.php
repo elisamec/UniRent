@@ -13,6 +13,7 @@ class FPersistentManager {
         }
         return self::$instance;
     }
+
     //findAccommodation(DateTime fromDate, string place), chiede query a FAccommodation, @return array
 
     /**
@@ -23,16 +24,65 @@ class FPersistentManager {
      */
     public static function load(String $EClass, int $id): object{
         
-        $foundClass = str_replace("E", "F", $EClass);
+        $FClass = str_replace("E", "F", $EClass);
 
-        $F = $foundClass::getInstance();
+        $F = $FClass::getInstance();
         $result = $F->load($id);
 
         return $result;
     }
 
-    //store(E($class)), salva l'oggetto nel DB, @return bool;
-    //update(E($class)), aggiorna l'oggetto nel db, @return bool;
+    /**
+     * store an object in the database
+     * 
+     * @param object $obj Refers to the object to be stored
+     * @return bool
+     */
+    public static function store(object $obj): bool{
+        $EClass = get_class($obj); 
+        $FClass = str_replace("E", "F", $EClass);
+
+        $F = $FClass::getInstance();
+        $result = $F->store($obj);
+
+        return $result;
+        
+    }
+
+    /**
+     * update an object in the database
+     * 
+     * @param object $obj Refers to the object to be stored
+     * @return bool
+     */
+    public static function update(object $obj): bool{
+        $EClass = get_class($obj); 
+        $FClass = str_replace("E", "F", $EClass);
+
+        $F = $FClass::getInstance();
+        $result = $F->update($obj);
+
+        return $result;
+        
+    }
+
+    /**
+     * delete an object in the database
+     * 
+     * @param String $EClass Refers to the Entity class of the object
+     * @param int $id Refers to the object to be stored
+     * @return bool
+     */
+    public static function delete(String $EClass, int $id): bool{
+
+        $FClass = str_replace("E", "F", $EClass);
+
+        $F = $FClass::getInstance();
+        $result = $F->delete($id);
+
+        return $result;
+        
+    }
     //delete(E($class)), cancella l'ogetto nel DB, @return bool;
     //getWaitingReservations(int $idProprietario), chiama il metodo relativo alla ricerca delle reservation in attesa di conferma relative a un proprietario, @return array<Reservation>
     //getAcceptedReservations(int $idProprietario), chiama il metodo relativo alla ricerca delle reservation accettate e in attesa di pagamento relative a un proprietario, @return array<Reservation>

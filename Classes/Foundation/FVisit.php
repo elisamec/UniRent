@@ -79,7 +79,8 @@ class FVisit
             }
 
             $row=$stm->fetch(PDO::FETCH_ASSOC);
-            $result=new EVisit($row['id'],$row['visitDay'],$row['idStudent'],$row['idAccommodation']);
+            $visit = new DateTime($row['visitDay']);
+            $result=new EVisit($row['id'],$visit,$row['idStudent'],$row['idAccommodation']);
             return $result;
         }else{
             return null;
