@@ -1,7 +1,14 @@
 <?php 
 
-require_once ('FConnection.php');
-require_once ('../Entity/EVisit.php');
+namespace Classes\Foundation;
+
+require __DIR__ . '/../../vendor/autoload.php';
+
+use Classes\Foundation\FConnection;
+use Classes\Entity\EVisit;
+use PDO;
+use PDOException;
+use DateTime;
 
 /**
  * FVisit

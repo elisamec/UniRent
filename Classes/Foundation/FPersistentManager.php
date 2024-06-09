@@ -1,6 +1,6 @@
 <?php
 namespace Classes\Foundation;
-require __DIR__ .'../../../vendor/autoload.php';
+require __DIR__ .'/../../vendor/autoload.php';
 use Classes\Foundation;
 use Classes\Entity;
 use Classes\Foundation\FAccommodation;

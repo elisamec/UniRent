@@ -1,9 +1,15 @@
 <?php 
-    require_once ('FConnection.php');
-    require_once ('../Entity/EAccommodation.php');
-    require_once ('FPhoto.php');
-    require_once ('../Entity/EPhoto.php');
+
+    namespace Classes\Foundation;
     require __DIR__ . '/../../vendor/autoload.php';
+
+    use Classes\Foundation\FConnection;
+    use Classes\Foundation\FPhoto;
+    use Classes\Entity\EAccommodation;
+    use Classes\Entity\EPhoto;
+    use PDO;
+    use DateTime;
+    use PDOException;
 
     use CommerceGuys\Addressing\Address;
     

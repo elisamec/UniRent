@@ -1,5 +1,10 @@
 <?php
 
+namespace Classes\Entity;
+
+
+use DateTime;
+
 /**
  * Class EVisit
  * Entity class for Visit

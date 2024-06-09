@@ -4,7 +4,7 @@
 
     namespace Classes\Foundation;
 
-    require __DIR__ . '../../../vendor/autoload.php';
+    require __DIR__ . '/../../vendor/autoload.php';
 
     use CommerceGuys\Addressing\Address;
     use Classes\Foundation\FAccommodation;
@@ -14,6 +14,7 @@
     use Classes\Entity\EVisit;
     use Classes\Foundation\FPhoto;
     use Classes\Entity\EPhoto;
+    use DateTime;
    
 
     $FP=FPersistentManager::getInstance();
