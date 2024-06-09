@@ -31,10 +31,10 @@ else
 #PROVA ADMINISTRATOR
 
 
-
+/*
 require_once('../Entity/EAdministrator.php');
 require_once('FAdministrator.php');
-/*
+
 $id=2;
 $FA=FAdministrator::getInstance();
 $amministratore=$FA->load($id);
@@ -112,7 +112,16 @@ else
 */
 
 # prova uso di address
+/*
 require __DIR__ . '/../../vendor/autoload.php';
 use CommerceGuys\Addressing\Address;
 $address=new Address('Italy');
 echo $address->getCountryCode();
+*/
+require_once('FPersistentManager.php');
+
+require_once('../Entity/EStudent.php');
+
+$PM= FPersistentManager::getInstance();
+$student=FPersistentManager::load(FStudent::class,3);
+echo $student->__toString();

@@ -1,7 +1,7 @@
 <?php
+require_once('../Entity/EStudent.php');
+require_once('FStudent.php');
 
-require_once ('FAccommodation.php');
-require_once ('../Entity/EAccommodation.php');
 class FPersistentManager {
     private static $instance;
     private function __construct(){}
@@ -17,7 +17,7 @@ class FPersistentManager {
 
     /**
      * return an object specifying the id 
-     * @param String $EClass Refers to the Entity class of the object
+     * @param string $EClass Refers to the Entity class of the object
      * @param int $id Refers to the id of the object
      * @return object
      */
