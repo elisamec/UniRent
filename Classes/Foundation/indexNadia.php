@@ -33,9 +33,13 @@
 
     //$id = $acc->getIdAccommodation(); 
 
-    $risultato = $FP->store($acc);
+    $visit = new EVisit(6, new DateTime("2024-01-01 15:30"), 1, 21);
 
-    $risultato = $FP->load("EAccommodation", $acc->getIdAccommodation());
+    //$risultato = $FP->update($visit);
+
+    //$risultato = $FP->load("EVisit", $visit->getIdVisit());
+
+    $risultato = $FP->delete("EVisit", 6);
 
     print($risultato);
 
