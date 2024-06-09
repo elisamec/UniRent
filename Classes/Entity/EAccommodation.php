@@ -1,13 +1,8 @@
 <?php
 namespace Classes\Entity;
 
-namespace Classes\Entity;
 require __DIR__ . '/../../vendor/autoload.php';
 
-use Classes\Entity\EVisit;
-use DateTime;
-
-use Classes\Entity\EVisit;
 use CommerceGuys\Addressing\Address;
 use DateTime;
 
