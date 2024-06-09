@@ -5,6 +5,7 @@
     require __DIR__ . '/../../vendor/autoload.php';
 
     require_once ('FAccommodation.php');
+    require_once ('FPersistentManager.php');
     require_once ('../Entity/EAccommodation.php');
     require_once ('FVisit.php');
     require_once ('../Entity/EVisit.php');
@@ -13,7 +14,7 @@
     use CommerceGuys\Addressing\Address;
    
 
-    $FP=FPhoto::getInstance();
+    $FP=FPersistentManager::getInstance();
     $FA=FAccommodation::getInstance();
 
     $a = new Address();
@@ -28,11 +29,11 @@
 
     $acc = new EAccommodation(21, $photo, "Casa", $a, 100, $st, "casetta bellissima v2", 100, $visit, 30, false, true, true, false, 2);
 
-    $risultato = $FA->update($acc);
+    //$risultato = $FA->update($acc);
 
     //$id = $acc->getIdAccommodation(); 
 
-    $risultato = $FA->load(21);
+    $risultato = $FP->load("EAccommodation", 21);
 
     print($risultato);
 
