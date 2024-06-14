@@ -64,9 +64,9 @@ class FVisit
     * load
     *
     * @param  int $idVisit
-    * @return EVisit
+    * @return ?EVisit
     */
-    public function load(int $idVisit): EVisit{
+    public function load(int $idVisit): ?EVisit{
 
         $db=FConnection::getInstance()->getConnection();
         $FV=FVisit::getInstance();

@@ -20,9 +20,9 @@ class FPersistentManager {
      * return an object specifying the id 
      * @param string $EClass Refers to the Entity class of the object
      * @param int $id Refers to the id of the object
-     * @return object
+     * @return ?object
      */
-    public static function load(String $EClass, int $id): object{
+    public static function load(String $EClass, int $id): ?object{
         
         $FClass = str_replace("E", "Classes\Foundation\F", $EClass);
 
