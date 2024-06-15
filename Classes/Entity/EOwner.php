@@ -6,6 +6,7 @@ use Classes\Entity\EPhoto;
 
 class EOwner
 {
+    
     private ?int $id;
     private string $username;
     private string $password;
@@ -16,11 +17,27 @@ class EOwner
     private string $phoneNumber;
     private string $iban;
     private static $entity = EOwner::class;
-    
+    /**
+     * Undocumented function
+     *
+     * @return string
+     */
     public function getEntity():string {
         return $this->entity;
     }
-
+    /**
+     * Undocumented function
+     *
+     * @param integer|null $id
+     * @param string $username
+     * @param string $password
+     * @param string $name
+     * @param string $surname
+     * @param EPhoto|null $photo
+     * @param string $email
+     * @param integer $phonenumber
+     * @param string $iban
+     */
     public function __construct(?int $id, string $username, string $password, string $name, string $surname, ?EPhoto $photo, string $email, int $phonenumber, string $iban) {
         $this->id=$id;
         $this->username=$username;
@@ -33,17 +50,35 @@ class EOwner
         $this->phoneNumber=$phonenumber;
         $this->iban = $iban;
     }
-    
+    /**
+     * Undocumented function
+     *
+     * @return integer
+     */
     public function getId():int {
         return $this->id;
     }
+    /**
+     * Undocumented function
+     *
+     * @return string
+     */
     public function getUsername():string {
         return $this->username;
     }
-    
+    /**
+     * Undocumented function
+     *
+     * @return string
+     */
     public function getPassword():string {
         return $this->password;
     }
+    /**
+     * Undocumented function
+     *
+     * @return string
+     */
     public function getName():string {
         return $this->name;
     }
