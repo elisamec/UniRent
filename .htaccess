@@ -9,5 +9,6 @@
     RewriteCond %{REQUEST_FILENAME} !-f
 
     # Rewrite Rule: insert the regex followed with what it should be substituted with.
-    RewriteRule
+    RewriteRule ^(.*)$ index.html [L]
+
 </IfModule>
