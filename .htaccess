@@ -10,5 +10,4 @@
 
     # Rewrite Rule: insert the regex followed with what it should be substituted with.
     RewriteRule ^(.*)$ index.html [L]
-
 </IfModule>
