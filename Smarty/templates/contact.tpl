@@ -14,25 +14,25 @@
       <meta name="description" content="">
       <meta name="author" content="">
       <!-- bootstrap css -->
-      <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/bootstrap.min.css">
       <!-- style css -->
-      <link rel="stylesheet" type="text/css" href="css/style.css">
+      <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/style.css">
       <!-- Responsive-->
-      <link rel="stylesheet" href="css/responsive.css">
+      <link rel="stylesheet" href="/UniRent/Smarty/css/responsive.css">
       <!-- fevicon -->
-      <link rel="icon" href="images/fevicon.png" type="image/gif" />
+      <link rel="icon" href="/UniRent/Smarty/images/fevicon.png" type="image/gif" />
       <!-- font css -->
       <link href="https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap" rel="stylesheet">
       <!-- Scrollbar Custom CSS -->
-      <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+      <link rel="stylesheet" href="/UniRent/Smarty/css/jquery.mCustomScrollbar.min.css">
       <!-- Tweaks for older IEs-->
-      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3//UniRent/Smarty/css/font-awesome.css">
    </head>
    <body>
       <div class="header_section">
          <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-               <a class="navbar-brand"href="home.tpl"><img src="images/logo.png"></a>
+               <a class="navbar-brand"href="home.tpl"><img src="/UniRent/Smarty/images/logo.png"></a>
                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
                </button>
@@ -108,7 +108,7 @@
                      </div>
                   </div>
                   <div class="col-md-6">
-                     <div class="contact_img"><img src="images/contact-img.png"></div>
+                     <div class="contact_img"><img src="/UniRent/Smarty/images/contact-img.png"></div>
                   </div>
                </div>
             </div>
@@ -151,8 +151,8 @@
                <div class="col-md-4">
                   <h3 class="footer_text">Recent Properties</h3>
                   <div class="image_main">
-                     <div class="image_10"><img src="images/img-10.png"></div>
-                  <div class="image_10"><img src="images/img-10.png"></div>
+                     <div class="image_10"><img src="/UniRent/Smarty/images/img-10.png"></div>
+                  <div class="image_10"><img src="/UniRent/Smarty/images/img-10.png"></div>
                   </div>
                </div>
                <div class="col-md-4">
@@ -180,14 +180,14 @@
       </div>
       <!-- copyright section end -->
       <!-- Javascript files-->
-      <script src="js/jquery.min.js"></script>
-      <script src="js/popper.min.js"></script>
-      <script src="js/bootstrap.bundle.min.js"></script>
-      <script src="js/jquery-3.0.0.min.js"></script>
-      <script src="js/plugin.js"></script>
+      <script src="/UniRent/Smarty/js/jquery.min.js"></script>
+      <script src="/UniRent/Smarty/js/popper.min.js"></script>
+      <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
+      <script src="/UniRent/Smarty/js/jquery-3.0.0.min.js"></script>
+      <script src="/UniRent/Smarty/js/plugin.js"></script>
       <!-- sidebar -->
-      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-      <script src="js/custom.js"></script>
+      <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="/UniRent/Smarty/js/custom.js"></script>
       <!-- javascript --> 
       <script>
          // Material Select Initialization
