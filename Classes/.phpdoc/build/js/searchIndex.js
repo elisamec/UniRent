@@ -1,6 +1,26 @@
 Search.appendIndex(
     [
                 {
+            "fqsen": "\\CInsertAccommodation",
+            "name": "CInsertAccommodation",
+            "summary": "",
+            "url": "classes/CInsertAccommodation.html"
+        },                {
+            "fqsen": "\\CInsertAccommodation\u003A\u003AstartAddingAccommodatio\u0028\u0029",
+            "name": "startAddingAccommodatio",
+            "summary": "",
+            "url": "classes/CInsertAccommodation.html#method_startAddingAccommodatio"
+        },                {
+            "fqsen": "\\CInsertAccommodation\u003A\u003AnewAccommodation\u0028\u0029",
+            "name": "newAccommodation",
+            "summary": "",
+            "url": "classes/CInsertAccommodation.html#method_newAccommodation"
+        },                {
+            "fqsen": "\\CInsertAccommodation\u003A\u003AaddAccommodation\u0028\u0029",
+            "name": "addAccommodation",
+            "summary": "",
+            "url": "classes/CInsertAccommodation.html#method_addAccommodation"
+        },                {
             "fqsen": "\\COwner",
             "name": "COwner",
             "summary": "",
@@ -36,650 +56,1430 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/COwner.html#property_instance"
         },                {
-            "fqsen": "\\EAccommodation",
+            "fqsen": "\\Classes\\Entity\\EAccommodation",
             "name": "EAccommodation",
-            "summary": "",
-            "url": "classes/EAccommodation.html"
+            "summary": "Class\u0020EAccommodation\nEntity\u0020class\u0020for\u0020Accommodation",
+            "url": "classes/Classes-Entity-EAccommodation.html"
         },                {
-            "fqsen": "\\EAccommodation\u003A\u003A\u0024idAccommodation",
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "__construct\nConstructor\u0020for\u0020the\u0020EAccommodation\u0020class",
+            "url": "classes/Classes-Entity-EAccommodation.html#method___construct"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AgetEntity\u0028\u0029",
+            "name": "getEntity",
+            "summary": "getEntity\nReturns\u0020the\u0020entity\u0020class",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_getEntity"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AgetIdAccommodation\u0028\u0029",
+            "name": "getIdAccommodation",
+            "summary": "getIdAccommodation\nReturns\u0020the\u0020id\u0020of\u0020the\u0020accommodation",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_getIdAccommodation"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AgetPhoto\u0028\u0029",
+            "name": "getPhoto",
+            "summary": "getPhoto\nReturns\u0020the\u0020photos\u0020of\u0020the\u0020accommodation",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_getPhoto"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AgetTitle\u0028\u0029",
+            "name": "getTitle",
+            "summary": "getTitle\nReturns\u0020the\u0020title\u0020of\u0020the\u0020accommodation",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_getTitle"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AgetAddress\u0028\u0029",
+            "name": "getAddress",
+            "summary": "getAddress\nReturns\u0020the\u0020address\u0020of\u0020the\u0020accommodation",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_getAddress"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AgetPrice\u0028\u0029",
+            "name": "getPrice",
+            "summary": "getPrice\nReturns\u0020the\u0020price\u0020of\u0020the\u0020accommodation",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_getPrice"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AgetStart\u0028\u0029",
+            "name": "getStart",
+            "summary": "getStart\nReturns\u0020the\u0020start\u0020date\u0020of\u0020the\u0020accommodation",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_getStart"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "getDescription\nReturns\u0020the\u0020description\u0020of\u0020the\u0020accommodation",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_getDescription"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AgetDeposit\u0028\u0029",
+            "name": "getDeposit",
+            "summary": "getDeposit\nReturns\u0020the\u0020deposit\u0020of\u0020the\u0020accommodation",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_getDeposit"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AgetVisit\u0028\u0029",
+            "name": "getVisit",
+            "summary": "getVisit\nReturns\u0020the\u0020availability\u0020for\u0020visit",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_getVisit"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AgetVisitDuration\u0028\u0029",
+            "name": "getVisitDuration",
+            "summary": "getVisitDuration\nReturns\u0020the\u0020duration\u0020of\u0020the\u0020visit\u0020in\u0020minutes",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_getVisitDuration"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AgetMan\u0028\u0029",
+            "name": "getMan",
+            "summary": "getMan\nReturns\u0020true\u0020if\u0020only\u0020mens\u0020are\u0020required",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_getMan"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AgetWoman\u0028\u0029",
+            "name": "getWoman",
+            "summary": "getWoman\nReturns\u0020true\u0020if\u0020only\u0020womens\u0020are\u0020required",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_getWoman"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AgetPets\u0028\u0029",
+            "name": "getPets",
+            "summary": "getPets\nReturns\u0020true\u0020if\u0020pets\u0020are\u0020allowed",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_getPets"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AgetSmokers\u0028\u0029",
+            "name": "getSmokers",
+            "summary": "getSmokers\nReturns\u0020true\u0020if\u0020smokers\u0020are\u0020allowed",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_getSmokers"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AgetIdOwner\u0028\u0029",
+            "name": "getIdOwner",
+            "summary": "getIdOwner\nReturns\u0020the\u0020id\u0020of\u0020the\u0020owner\u0020of\u0020the\u0020accommodation",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_getIdOwner"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AsetIdAccommodation\u0028\u0029",
+            "name": "setIdAccommodation",
+            "summary": "setIdAccommodation\nSets\u0020the\u0020id\u0020of\u0020the\u0020accommodation",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_setIdAccommodation"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AsetPhoto\u0028\u0029",
+            "name": "setPhoto",
+            "summary": "setPhoto\nSets\u0020the\u0020photos\u0020of\u0020the\u0020accommodation",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_setPhoto"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AsetTitle\u0028\u0029",
+            "name": "setTitle",
+            "summary": "setTitle\nSets\u0020the\u0020title\u0020of\u0020the\u0020accommodation",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_setTitle"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AsetAddress\u0028\u0029",
+            "name": "setAddress",
+            "summary": "setAddress\nSets\u0020the\u0020address\u0020of\u0020the\u0020accommodation",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_setAddress"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AsetPrice\u0028\u0029",
+            "name": "setPrice",
+            "summary": "setPrice\nSets\u0020the\u0020price\u0020of\u0020the\u0020accommodation",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_setPrice"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AsetStart\u0028\u0029",
+            "name": "setStart",
+            "summary": "setStart\nSets\u0020the\u0020start\u0020date\u0020of\u0020the\u0020accommodation",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_setStart"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AsetDescription\u0028\u0029",
+            "name": "setDescription",
+            "summary": "setDescription\nSets\u0020the\u0020description\u0020of\u0020the\u0020accommodation",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_setDescription"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AsetDeposit\u0028\u0029",
+            "name": "setDeposit",
+            "summary": "setDeposit\nSets\u0020the\u0020deposit\u0020of\u0020the\u0020accommodation",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_setDeposit"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AsetVisit\u0028\u0029",
+            "name": "setVisit",
+            "summary": "setVisit\nSets\u0020the\u0020availability\u0020for\u0020visit",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_setVisit"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AsetVisitDuration\u0028\u0029",
+            "name": "setVisitDuration",
+            "summary": "setVisitDuration\nSets\u0020the\u0020duration\u0020of\u0020the\u0020visit\u0020in\u0020minutes",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_setVisitDuration"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AsetMan\u0028\u0029",
+            "name": "setMan",
+            "summary": "setMan\nSets\u0020true\u0020if\u0020only\u0020mens\u0020are\u0020required",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_setMan"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AsetWoman\u0028\u0029",
+            "name": "setWoman",
+            "summary": "setWoman\nSets\u0020true\u0020if\u0020only\u0020womens\u0020are\u0020required",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_setWoman"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AsetPets\u0028\u0029",
+            "name": "setPets",
+            "summary": "setPets\nSets\u0020true\u0020if\u0020pets\u0020are\u0020allowed",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_setPets"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AsetSmokers\u0028\u0029",
+            "name": "setSmokers",
+            "summary": "setSmokers\nSets\u0020true\u0020if\u0020smokers\u0020are\u0020allowed",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_setSmokers"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AsetIdOwner\u0028\u0029",
+            "name": "setIdOwner",
+            "summary": "setIdOwner\nSets\u0020the\u0020id\u0020of\u0020the\u0020owner\u0020of\u0020the\u0020accommodation",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_setIdOwner"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003A__toString\u0028\u0029",
+            "name": "__toString",
+            "summary": "__toString\nReturns\u0020a\u0020string\u0020that\u0020represents\u0020the\u0020accommodation",
+            "url": "classes/Classes-Entity-EAccommodation.html#method___toString"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003A\u0024idAccommodation",
             "name": "idAccommodation",
             "summary": "",
-            "url": "classes/EAccommodation.html#property_idAccommodation"
+            "url": "classes/Classes-Entity-EAccommodation.html#property_idAccommodation"
         },                {
-            "fqsen": "\\EAccommodation\u003A\u003A\u0024photo",
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003A\u0024photo",
             "name": "photo",
             "summary": "",
-            "url": "classes/EAccommodation.html#property_photo"
+            "url": "classes/Classes-Entity-EAccommodation.html#property_photo"
         },                {
-            "fqsen": "\\EAccommodation\u003A\u003A\u0024title",
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003A\u0024title",
             "name": "title",
             "summary": "",
-            "url": "classes/EAccommodation.html#property_title"
+            "url": "classes/Classes-Entity-EAccommodation.html#property_title"
         },                {
-            "fqsen": "\\EAccommodation\u003A\u003A\u0024address",
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003A\u0024address",
             "name": "address",
             "summary": "",
-            "url": "classes/EAccommodation.html#property_address"
+            "url": "classes/Classes-Entity-EAccommodation.html#property_address"
         },                {
-            "fqsen": "\\EAccommodation\u003A\u003A\u0024price",
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003A\u0024price",
             "name": "price",
             "summary": "",
-            "url": "classes/EAccommodation.html#property_price"
+            "url": "classes/Classes-Entity-EAccommodation.html#property_price"
         },                {
-            "fqsen": "\\EAccommodation\u003A\u003A\u0024start",
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003A\u0024start",
             "name": "start",
             "summary": "",
-            "url": "classes/EAccommodation.html#property_start"
+            "url": "classes/Classes-Entity-EAccommodation.html#property_start"
         },                {
-            "fqsen": "\\EAccommodation\u003A\u003A\u0024description",
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003A\u0024description",
             "name": "description",
             "summary": "",
-            "url": "classes/EAccommodation.html#property_description"
+            "url": "classes/Classes-Entity-EAccommodation.html#property_description"
         },                {
-            "fqsen": "\\EAccommodation\u003A\u003A\u0024deposit",
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003A\u0024deposit",
             "name": "deposit",
             "summary": "",
-            "url": "classes/EAccommodation.html#property_deposit"
+            "url": "classes/Classes-Entity-EAccommodation.html#property_deposit"
         },                {
-            "fqsen": "\\EAccommodation\u003A\u003A\u0024visit",
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003A\u0024visit",
             "name": "visit",
             "summary": "",
-            "url": "classes/EAccommodation.html#property_visit"
+            "url": "classes/Classes-Entity-EAccommodation.html#property_visit"
         },                {
-            "fqsen": "\\EAccommodation\u003A\u003A\u0024man",
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003A\u0024visitDuration",
+            "name": "visitDuration",
+            "summary": "",
+            "url": "classes/Classes-Entity-EAccommodation.html#property_visitDuration"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003A\u0024man",
             "name": "man",
             "summary": "",
-            "url": "classes/EAccommodation.html#property_man"
+            "url": "classes/Classes-Entity-EAccommodation.html#property_man"
         },                {
-            "fqsen": "\\EAccommodation\u003A\u003A\u0024woman",
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003A\u0024woman",
             "name": "woman",
             "summary": "",
-            "url": "classes/EAccommodation.html#property_woman"
+            "url": "classes/Classes-Entity-EAccommodation.html#property_woman"
         },                {
-            "fqsen": "\\EAccommodation\u003A\u003A\u0024pets",
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003A\u0024pets",
             "name": "pets",
             "summary": "",
-            "url": "classes/EAccommodation.html#property_pets"
+            "url": "classes/Classes-Entity-EAccommodation.html#property_pets"
         },                {
-            "fqsen": "\\EAccommodation\u003A\u003A\u0024smokers",
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003A\u0024smokers",
             "name": "smokers",
             "summary": "",
-            "url": "classes/EAccommodation.html#property_smokers"
+            "url": "classes/Classes-Entity-EAccommodation.html#property_smokers"
         },                {
-            "fqsen": "\\EAccommodation\u003A\u003A\u0024idOwner",
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003A\u0024idOwner",
             "name": "idOwner",
             "summary": "",
-            "url": "classes/EAccommodation.html#property_idOwner"
+            "url": "classes/Classes-Entity-EAccommodation.html#property_idOwner"
         },                {
-            "fqsen": "\\EAccommodation\u003A\u003A\u0024entity",
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003A\u0024entity",
             "name": "entity",
             "summary": "",
-            "url": "classes/EAccommodation.html#property_entity"
+            "url": "classes/Classes-Entity-EAccommodation.html#property_entity"
         },                {
-            "fqsen": "\\ECreditCard",
-            "name": "ECreditCard",
-            "summary": "ECreditCard",
-            "url": "classes/ECreditCard.html"
+            "fqsen": "\\Classes\\Entity\\EAdministrator",
+            "name": "EAdministrator",
+            "summary": "EAdministrator",
+            "url": "classes/Classes-Entity-EAdministrator.html"
         },                {
-            "fqsen": "\\ECreditCard\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Classes\\Entity\\EAdministrator\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "__construct",
-            "url": "classes/ECreditCard.html#method___construct"
+            "url": "classes/Classes-Entity-EAdministrator.html#method___construct"
         },                {
-            "fqsen": "\\ECreditCard\u003A\u003AgetNumber\u0028\u0029",
-            "name": "getNumber",
-            "summary": "getNumber",
-            "url": "classes/ECreditCard.html#method_getNumber"
+            "fqsen": "\\Classes\\Entity\\EAdministrator\u003A\u003AgetID\u0028\u0029",
+            "name": "getID",
+            "summary": "getID",
+            "url": "classes/Classes-Entity-EAdministrator.html#method_getID"
         },                {
-            "fqsen": "\\ECreditCard\u003A\u003AgetName\u0028\u0029",
-            "name": "getName",
-            "summary": "getName",
-            "url": "classes/ECreditCard.html#method_getName"
-        },                {
-            "fqsen": "\\ECreditCard\u003A\u003AgetSurname\u0028\u0029",
-            "name": "getSurname",
-            "summary": "getSuranem",
-            "url": "classes/ECreditCard.html#method_getSurname"
-        },                {
-            "fqsen": "\\ECreditCard\u003A\u003AgetExpiry\u0028\u0029",
-            "name": "getExpiry",
-            "summary": "getExpiry",
-            "url": "classes/ECreditCard.html#method_getExpiry"
-        },                {
-            "fqsen": "\\ECreditCard\u003A\u003AgetCVV\u0028\u0029",
-            "name": "getCVV",
-            "summary": "getCVV",
-            "url": "classes/ECreditCard.html#method_getCVV"
-        },                {
-            "fqsen": "\\ECreditCard\u003A\u003AgetStudentID\u0028\u0029",
-            "name": "getStudentID",
-            "summary": "getStudentID",
-            "url": "classes/ECreditCard.html#method_getStudentID"
-        },                {
-            "fqsen": "\\ECreditCard\u003A\u003AsetNumber\u0028\u0029",
-            "name": "setNumber",
-            "summary": "setNumber",
-            "url": "classes/ECreditCard.html#method_setNumber"
-        },                {
-            "fqsen": "\\ECreditCard\u003A\u003AsetName\u0028\u0029",
-            "name": "setName",
-            "summary": "setName",
-            "url": "classes/ECreditCard.html#method_setName"
-        },                {
-            "fqsen": "\\ECreditCard\u003A\u003AsetSurname\u0028\u0029",
-            "name": "setSurname",
-            "summary": "setSuranem",
-            "url": "classes/ECreditCard.html#method_setSurname"
-        },                {
-            "fqsen": "\\ECreditCard\u003A\u003AsetExpiry\u0028\u0029",
-            "name": "setExpiry",
-            "summary": "setExpiry",
-            "url": "classes/ECreditCard.html#method_setExpiry"
-        },                {
-            "fqsen": "\\ECreditCard\u003A\u003AsetCVV\u0028\u0029",
-            "name": "setCVV",
-            "summary": "setCVV",
-            "url": "classes/ECreditCard.html#method_setCVV"
-        },                {
-            "fqsen": "\\ECreditCard\u003A\u003AsetStudentID\u0028\u0029",
-            "name": "setStudentID",
-            "summary": "setStudentID",
-            "url": "classes/ECreditCard.html#method_setStudentID"
-        },                {
-            "fqsen": "\\ECreditCard\u003A\u003A__toString\u0028\u0029",
-            "name": "__toString",
-            "summary": "__toString",
-            "url": "classes/ECreditCard.html#method___toString"
-        },                {
-            "fqsen": "\\ECreditCard\u003A\u003A\u0024number",
-            "name": "number",
-            "summary": "number",
-            "url": "classes/ECreditCard.html#property_number"
-        },                {
-            "fqsen": "\\ECreditCard\u003A\u003A\u0024name",
-            "name": "name",
-            "summary": "name",
-            "url": "classes/ECreditCard.html#property_name"
-        },                {
-            "fqsen": "\\ECreditCard\u003A\u003A\u0024surname",
-            "name": "surname",
-            "summary": "surname",
-            "url": "classes/ECreditCard.html#property_surname"
-        },                {
-            "fqsen": "\\ECreditCard\u003A\u003A\u0024expiry",
-            "name": "expiry",
-            "summary": "expiry",
-            "url": "classes/ECreditCard.html#property_expiry"
-        },                {
-            "fqsen": "\\ECreditCard\u003A\u003A\u0024cvv",
-            "name": "cvv",
-            "summary": "cvv",
-            "url": "classes/ECreditCard.html#property_cvv"
-        },                {
-            "fqsen": "\\ECreditCard\u003A\u003A\u0024studentID",
-            "name": "studentID",
-            "summary": "studentID",
-            "url": "classes/ECreditCard.html#property_studentID"
-        },                {
-            "fqsen": "\\EOwner",
-            "name": "EOwner",
-            "summary": "",
-            "url": "classes/EOwner.html"
-        },                {
-            "fqsen": "\\EOwner\u003A\u003AgetEntity\u0028\u0029",
-            "name": "getEntity",
-            "summary": "",
-            "url": "classes/EOwner.html#method_getEntity"
-        },                {
-            "fqsen": "\\EOwner\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/EOwner.html#method___construct"
-        },                {
-            "fqsen": "\\EOwner\u003A\u003AgetId\u0028\u0029",
-            "name": "getId",
-            "summary": "",
-            "url": "classes/EOwner.html#method_getId"
-        },                {
-            "fqsen": "\\EOwner\u003A\u003AgetUsername\u0028\u0029",
+            "fqsen": "\\Classes\\Entity\\EAdministrator\u003A\u003AgetUsername\u0028\u0029",
             "name": "getUsername",
-            "summary": "",
-            "url": "classes/EOwner.html#method_getUsername"
+            "summary": "getUsername",
+            "url": "classes/Classes-Entity-EAdministrator.html#method_getUsername"
         },                {
-            "fqsen": "\\EOwner\u003A\u003AgetPassword\u0028\u0029",
+            "fqsen": "\\Classes\\Entity\\EAdministrator\u003A\u003AgetEmail\u0028\u0029",
+            "name": "getEmail",
+            "summary": "getEmail",
+            "url": "classes/Classes-Entity-EAdministrator.html#method_getEmail"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAdministrator\u003A\u003AgetPassword\u0028\u0029",
             "name": "getPassword",
-            "summary": "",
-            "url": "classes/EOwner.html#method_getPassword"
+            "summary": "getPassword",
+            "url": "classes/Classes-Entity-EAdministrator.html#method_getPassword"
         },                {
-            "fqsen": "\\EOwner\u003A\u003AgetName\u0028\u0029",
-            "name": "getName",
-            "summary": "",
-            "url": "classes/EOwner.html#method_getName"
+            "fqsen": "\\Classes\\Entity\\EAdministrator\u003A\u003AsetID\u0028\u0029",
+            "name": "setID",
+            "summary": "setID",
+            "url": "classes/Classes-Entity-EAdministrator.html#method_setID"
         },                {
-            "fqsen": "\\EOwner\u003A\u003AgetSurname\u0028\u0029",
-            "name": "getSurname",
-            "summary": "",
-            "url": "classes/EOwner.html#method_getSurname"
-        },                {
-            "fqsen": "\\EOwner\u003A\u003AgetPhoto\u0028\u0029",
-            "name": "getPhoto",
-            "summary": "",
-            "url": "classes/EOwner.html#method_getPhoto"
-        },                {
-            "fqsen": "\\EOwner\u003A\u003AgetMail\u0028\u0029",
-            "name": "getMail",
-            "summary": "",
-            "url": "classes/EOwner.html#method_getMail"
-        },                {
-            "fqsen": "\\EOwner\u003A\u003AgetPhoneNumber\u0028\u0029",
-            "name": "getPhoneNumber",
-            "summary": "",
-            "url": "classes/EOwner.html#method_getPhoneNumber"
-        },                {
-            "fqsen": "\\EOwner\u003A\u003AgetIBAN\u0028\u0029",
-            "name": "getIBAN",
-            "summary": "",
-            "url": "classes/EOwner.html#method_getIBAN"
-        },                {
-            "fqsen": "\\EOwner\u003A\u003AsetId\u0028\u0029",
-            "name": "setId",
-            "summary": "",
-            "url": "classes/EOwner.html#method_setId"
-        },                {
-            "fqsen": "\\EOwner\u003A\u003AsetUsername\u0028\u0029",
-            "name": "setUsername",
-            "summary": "",
-            "url": "classes/EOwner.html#method_setUsername"
-        },                {
-            "fqsen": "\\EOwner\u003A\u003AsetPassword\u0028\u0029",
+            "fqsen": "\\Classes\\Entity\\EAdministrator\u003A\u003AsetPassword\u0028\u0029",
             "name": "setPassword",
-            "summary": "",
-            "url": "classes/EOwner.html#method_setPassword"
+            "summary": "setPassword",
+            "url": "classes/Classes-Entity-EAdministrator.html#method_setPassword"
         },                {
-            "fqsen": "\\EOwner\u003A\u003AsetName\u0028\u0029",
-            "name": "setName",
-            "summary": "",
-            "url": "classes/EOwner.html#method_setName"
+            "fqsen": "\\Classes\\Entity\\EAdministrator\u003A\u003AsetUsername\u0028\u0029",
+            "name": "setUsername",
+            "summary": "setUsername",
+            "url": "classes/Classes-Entity-EAdministrator.html#method_setUsername"
         },                {
-            "fqsen": "\\EOwner\u003A\u003AsetSurname\u0028\u0029",
-            "name": "setSurname",
-            "summary": "",
-            "url": "classes/EOwner.html#method_setSurname"
+            "fqsen": "\\Classes\\Entity\\EAdministrator\u003A\u003AsetEmail\u0028\u0029",
+            "name": "setEmail",
+            "summary": "setEmail",
+            "url": "classes/Classes-Entity-EAdministrator.html#method_setEmail"
         },                {
-            "fqsen": "\\EOwner\u003A\u003AuploadPhoto\u0028\u0029",
-            "name": "uploadPhoto",
+            "fqsen": "\\Classes\\Entity\\EAdministrator\u003A\u003A__toString\u0028\u0029",
+            "name": "__toString",
             "summary": "",
-            "url": "classes/EOwner.html#method_uploadPhoto"
+            "url": "classes/Classes-Entity-EAdministrator.html#method___toString"
         },                {
-            "fqsen": "\\EOwner\u003A\u003AsetMail\u0028\u0029",
-            "name": "setMail",
-            "summary": "",
-            "url": "classes/EOwner.html#method_setMail"
-        },                {
-            "fqsen": "\\EOwner\u003A\u003AsetPhoneNumber\u0028\u0029",
-            "name": "setPhoneNumber",
-            "summary": "",
-            "url": "classes/EOwner.html#method_setPhoneNumber"
-        },                {
-            "fqsen": "\\EOwner\u003A\u003AsetIBAN\u0028\u0029",
-            "name": "setIBAN",
-            "summary": "",
-            "url": "classes/EOwner.html#method_setIBAN"
-        },                {
-            "fqsen": "\\EOwner\u003A\u003A\u0024id",
+            "fqsen": "\\Classes\\Entity\\EAdministrator\u003A\u003A\u0024id",
             "name": "id",
             "summary": "",
-            "url": "classes/EOwner.html#property_id"
+            "url": "classes/Classes-Entity-EAdministrator.html#property_id"
         },                {
-            "fqsen": "\\EOwner\u003A\u003A\u0024username",
+            "fqsen": "\\Classes\\Entity\\EAdministrator\u003A\u003A\u0024username",
             "name": "username",
             "summary": "",
-            "url": "classes/EOwner.html#property_username"
+            "url": "classes/Classes-Entity-EAdministrator.html#property_username"
         },                {
-            "fqsen": "\\EOwner\u003A\u003A\u0024password",
+            "fqsen": "\\Classes\\Entity\\EAdministrator\u003A\u003A\u0024password",
             "name": "password",
             "summary": "",
-            "url": "classes/EOwner.html#property_password"
+            "url": "classes/Classes-Entity-EAdministrator.html#property_password"
         },                {
-            "fqsen": "\\EOwner\u003A\u003A\u0024name",
-            "name": "name",
-            "summary": "",
-            "url": "classes/EOwner.html#property_name"
-        },                {
-            "fqsen": "\\EOwner\u003A\u003A\u0024surname",
-            "name": "surname",
-            "summary": "",
-            "url": "classes/EOwner.html#property_surname"
-        },                {
-            "fqsen": "\\EOwner\u003A\u003A\u0024photo",
-            "name": "photo",
-            "summary": "",
-            "url": "classes/EOwner.html#property_photo"
-        },                {
-            "fqsen": "\\EOwner\u003A\u003A\u0024email",
+            "fqsen": "\\Classes\\Entity\\EAdministrator\u003A\u003A\u0024email",
             "name": "email",
             "summary": "",
-            "url": "classes/EOwner.html#property_email"
+            "url": "classes/Classes-Entity-EAdministrator.html#property_email"
         },                {
-            "fqsen": "\\EOwner\u003A\u003A\u0024phoneNumber",
-            "name": "phoneNumber",
-            "summary": "",
-            "url": "classes/EOwner.html#property_phoneNumber"
+            "fqsen": "\\Classes\\Entity\\EContract",
+            "name": "EContract",
+            "summary": "EContract",
+            "url": "classes/Classes-Entity-EContract.html"
         },                {
-            "fqsen": "\\EOwner\u003A\u003A\u0024iban",
-            "name": "iban",
-            "summary": "",
-            "url": "classes/EOwner.html#property_iban"
-        },                {
-            "fqsen": "\\EOwner\u003A\u003A\u0024entity",
-            "name": "entity",
-            "summary": "",
-            "url": "classes/EOwner.html#property_entity"
-        },                {
-            "fqsen": "\\EPhoto",
-            "name": "EPhoto",
-            "summary": "",
-            "url": "classes/EPhoto.html"
-        },                {
-            "fqsen": "\\EPhoto\u003A\u003AgetId\u0028\u0029",
-            "name": "getId",
-            "summary": "",
-            "url": "classes/EPhoto.html#method_getId"
-        },                {
-            "fqsen": "\\EPhoto\u003A\u003A\u0024id",
-            "name": "id",
-            "summary": "",
-            "url": "classes/EPhoto.html#property_id"
-        },                {
-            "fqsen": "\\EReview",
-            "name": "EReview",
-            "summary": "",
-            "url": "classes/EReview.html"
-        },                {
-            "fqsen": "\\EReview\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/EReview.html#method___construct"
-        },                {
-            "fqsen": "\\EReview\u003A\u003AgetEntity\u0028\u0029",
-            "name": "getEntity",
-            "summary": "",
-            "url": "classes/EReview.html#method_getEntity"
-        },                {
-            "fqsen": "\\EReview\u003A\u003AgetId\u0028\u0029",
-            "name": "getId",
-            "summary": "",
-            "url": "classes/EReview.html#method_getId"
-        },                {
-            "fqsen": "\\EReview\u003A\u003AgetTitle\u0028\u0029",
-            "name": "getTitle",
-            "summary": "",
-            "url": "classes/EReview.html#method_getTitle"
-        },                {
-            "fqsen": "\\EReview\u003A\u003AgetValutation\u0028\u0029",
-            "name": "getValutation",
-            "summary": "",
-            "url": "classes/EReview.html#method_getValutation"
-        },                {
-            "fqsen": "\\EReview\u003A\u003AgetDescription\u0028\u0029",
-            "name": "getDescription",
-            "summary": "",
-            "url": "classes/EReview.html#method_getDescription"
-        },                {
-            "fqsen": "\\EReview\u003A\u003AgetRecipientType\u0028\u0029",
-            "name": "getRecipientType",
-            "summary": "",
-            "url": "classes/EReview.html#method_getRecipientType"
-        },                {
-            "fqsen": "\\EReview\u003A\u003AgetAuthorType\u0028\u0029",
-            "name": "getAuthorType",
-            "summary": "",
-            "url": "classes/EReview.html#method_getAuthorType"
-        },                {
-            "fqsen": "\\EReview\u003A\u003AgetIDAuthor\u0028\u0029",
-            "name": "getIDAuthor",
-            "summary": "",
-            "url": "classes/EReview.html#method_getIDAuthor"
-        },                {
-            "fqsen": "\\EReview\u003A\u003AgetIDRecipient\u0028\u0029",
-            "name": "getIDRecipient",
-            "summary": "",
-            "url": "classes/EReview.html#method_getIDRecipient"
-        },                {
-            "fqsen": "\\EReview\u003A\u003AgetCreationDate\u0028\u0029",
-            "name": "getCreationDate",
-            "summary": "",
-            "url": "classes/EReview.html#method_getCreationDate"
-        },                {
-            "fqsen": "\\EReview\u003A\u003AsetTitle\u0028\u0029",
-            "name": "setTitle",
-            "summary": "",
-            "url": "classes/EReview.html#method_setTitle"
-        },                {
-            "fqsen": "\\EReview\u003A\u003AsetValutation\u0028\u0029",
-            "name": "setValutation",
-            "summary": "",
-            "url": "classes/EReview.html#method_setValutation"
-        },                {
-            "fqsen": "\\EReview\u003A\u003AsetDescription\u0028\u0029",
-            "name": "setDescription",
-            "summary": "",
-            "url": "classes/EReview.html#method_setDescription"
-        },                {
-            "fqsen": "\\EReview\u003A\u003AsetId\u0028\u0029",
-            "name": "setId",
-            "summary": "",
-            "url": "classes/EReview.html#method_setId"
-        },                {
-            "fqsen": "\\EReview\u003A\u003AuploadPhoto\u0028\u0029",
-            "name": "uploadPhoto",
-            "summary": "",
-            "url": "classes/EReview.html#method_uploadPhoto"
-        },                {
-            "fqsen": "\\EReview\u003A\u003AgetPhotos\u0028\u0029",
-            "name": "getPhotos",
-            "summary": "",
-            "url": "classes/EReview.html#method_getPhotos"
-        },                {
-            "fqsen": "\\EReview\u003A\u003A\u0024idReview",
-            "name": "idReview",
-            "summary": "",
-            "url": "classes/EReview.html#property_idReview"
-        },                {
-            "fqsen": "\\EReview\u003A\u003A\u0024title",
-            "name": "title",
-            "summary": "",
-            "url": "classes/EReview.html#property_title"
-        },                {
-            "fqsen": "\\EReview\u003A\u003A\u0024valutation",
-            "name": "valutation",
-            "summary": "",
-            "url": "classes/EReview.html#property_valutation"
-        },                {
-            "fqsen": "\\EReview\u003A\u003A\u0024description",
-            "name": "description",
-            "summary": "",
-            "url": "classes/EReview.html#property_description"
-        },                {
-            "fqsen": "\\EReview\u003A\u003A\u0024photo",
-            "name": "photo",
-            "summary": "",
-            "url": "classes/EReview.html#property_photo"
-        },                {
-            "fqsen": "\\EReview\u003A\u003A\u0024recipientType",
-            "name": "recipientType",
-            "summary": "",
-            "url": "classes/EReview.html#property_recipientType"
-        },                {
-            "fqsen": "\\EReview\u003A\u003A\u0024creationDate",
-            "name": "creationDate",
-            "summary": "",
-            "url": "classes/EReview.html#property_creationDate"
-        },                {
-            "fqsen": "\\EReview\u003A\u003A\u0024authorType",
-            "name": "authorType",
-            "summary": "",
-            "url": "classes/EReview.html#property_authorType"
-        },                {
-            "fqsen": "\\EReview\u003A\u003A\u0024idAuthor",
-            "name": "idAuthor",
-            "summary": "",
-            "url": "classes/EReview.html#property_idAuthor"
-        },                {
-            "fqsen": "\\EReview\u003A\u003A\u0024idRecipient",
-            "name": "idRecipient",
-            "summary": "",
-            "url": "classes/EReview.html#property_idRecipient"
-        },                {
-            "fqsen": "\\EReview\u003A\u003A\u0024entity",
-            "name": "entity",
-            "summary": "",
-            "url": "classes/EReview.html#property_entity"
-        },                {
-            "fqsen": "\\ESupportRequest",
-            "name": "ESupportRequest",
-            "summary": "",
-            "url": "classes/ESupportRequest.html"
-        },                {
-            "fqsen": "\\EVisit",
-            "name": "EVisit",
-            "summary": "",
-            "url": "classes/EVisit.html"
-        },                {
-            "fqsen": "\\EVisit\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/EVisit.html#method___construct"
-        },                {
-            "fqsen": "\\EVisit\u003A\u003AgetEntity\u0028\u0029",
-            "name": "getEntity",
-            "summary": "",
-            "url": "classes/EVisit.html#method_getEntity"
-        },                {
-            "fqsen": "\\EVisit\u003A\u003AgetIdVisit\u0028\u0029",
-            "name": "getIdVisit",
-            "summary": "",
-            "url": "classes/EVisit.html#method_getIdVisit"
-        },                {
-            "fqsen": "\\EVisit\u003A\u003AgetDate\u0028\u0029",
-            "name": "getDate",
-            "summary": "",
-            "url": "classes/EVisit.html#method_getDate"
-        },                {
-            "fqsen": "\\EVisit\u003A\u003AgetIdStudent\u0028\u0029",
-            "name": "getIdStudent",
-            "summary": "",
-            "url": "classes/EVisit.html#method_getIdStudent"
-        },                {
-            "fqsen": "\\EVisit\u003A\u003AgetIdAccommodation\u0028\u0029",
-            "name": "getIdAccommodation",
-            "summary": "",
-            "url": "classes/EVisit.html#method_getIdAccommodation"
-        },                {
-            "fqsen": "\\EVisit\u003A\u003AsetIdVisit\u0028\u0029",
-            "name": "setIdVisit",
-            "summary": "",
-            "url": "classes/EVisit.html#method_setIdVisit"
-        },                {
-            "fqsen": "\\EVisit\u003A\u003AsetDate\u0028\u0029",
-            "name": "setDate",
-            "summary": "",
-            "url": "classes/EVisit.html#method_setDate"
-        },                {
-            "fqsen": "\\EVisit\u003A\u003A__toString\u0028\u0029",
-            "name": "__toString",
-            "summary": "",
-            "url": "classes/EVisit.html#method___toString"
-        },                {
-            "fqsen": "\\EVisit\u003A\u003A\u0024idVisit",
-            "name": "idVisit",
-            "summary": "",
-            "url": "classes/EVisit.html#property_idVisit"
-        },                {
-            "fqsen": "\\EVisit\u003A\u003A\u0024date",
-            "name": "date",
-            "summary": "",
-            "url": "classes/EVisit.html#property_date"
-        },                {
-            "fqsen": "\\EVisit\u003A\u003A\u0024idStudent",
-            "name": "idStudent",
-            "summary": "",
-            "url": "classes/EVisit.html#property_idStudent"
-        },                {
-            "fqsen": "\\EVisit\u003A\u003A\u0024idAccommodation",
-            "name": "idAccommodation",
-            "summary": "",
-            "url": "classes/EVisit.html#property_idAccommodation"
-        },                {
-            "fqsen": "\\EVisit\u003A\u003A\u0024entity",
-            "name": "entity",
-            "summary": "",
-            "url": "classes/EVisit.html#property_entity"
-        },                {
-            "fqsen": "\\FConnection",
-            "name": "FConnection",
-            "summary": "FConnection",
-            "url": "classes/FConnection.html"
-        },                {
-            "fqsen": "\\FConnection\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Classes\\Entity\\EContract\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "__construct",
-            "url": "classes/FConnection.html#method___construct"
+            "url": "classes/Classes-Entity-EContract.html#method___construct"
         },                {
-            "fqsen": "\\FConnection\u003A\u003AgetInstance\u0028\u0029",
-            "name": "getInstance",
-            "summary": "getInstance",
-            "url": "classes/FConnection.html#method_getInstance"
+            "fqsen": "\\Classes\\Entity\\EContract\u003A\u003AgetStatus\u0028\u0029",
+            "name": "getStatus",
+            "summary": "getStatus",
+            "url": "classes/Classes-Entity-EContract.html#method_getStatus"
         },                {
-            "fqsen": "\\FConnection\u003A\u003AgetConnection\u0028\u0029",
-            "name": "getConnection",
-            "summary": "This\u0020method\u0020provide\u0020to\u0020get\u0020the\u0020database\u0020connection\ngetConnection",
-            "url": "classes/FConnection.html#method_getConnection"
+            "fqsen": "\\Classes\\Entity\\EContract\u003A\u003AgetPaymentDate\u0028\u0029",
+            "name": "getPaymentDate",
+            "summary": "getPaymentDate",
+            "url": "classes/Classes-Entity-EContract.html#method_getPaymentDate"
         },                {
-            "fqsen": "\\FConnection\u003A\u003Aclose\u0028\u0029",
-            "name": "close",
+            "fqsen": "\\Classes\\Entity\\EContract\u003A\u003AgetCardNumber\u0028\u0029",
+            "name": "getCardNumber",
+            "summary": "getCardNumber",
+            "url": "classes/Classes-Entity-EContract.html#method_getCardNumber"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EContract\u003A\u003AsetContractStatus\u0028\u0029",
+            "name": "setContractStatus",
+            "summary": "setContractStatus",
+            "url": "classes/Classes-Entity-EContract.html#method_setContractStatus"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EContract\u003A\u003AsetCardNumber\u0028\u0029",
+            "name": "setCardNumber",
+            "summary": "setCardNumber",
+            "url": "classes/Classes-Entity-EContract.html#method_setCardNumber"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EContract\u003A\u003A\u0024status",
+            "name": "status",
+            "summary": "status",
+            "url": "classes/Classes-Entity-EContract.html#property_status"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EContract\u003A\u003A\u0024paymentDate",
+            "name": "paymentDate",
+            "summary": "paymentDate",
+            "url": "classes/Classes-Entity-EContract.html#property_paymentDate"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EContract\u003A\u003A\u0024cardNumber",
+            "name": "cardNumber",
+            "summary": "cardNumber",
+            "url": "classes/Classes-Entity-EContract.html#property_cardNumber"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ECreditCard",
+            "name": "ECreditCard",
+            "summary": "ECreditCard",
+            "url": "classes/Classes-Entity-ECreditCard.html"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "__construct",
+            "url": "classes/Classes-Entity-ECreditCard.html#method___construct"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003AgetEntity\u0028\u0029",
+            "name": "getEntity",
+            "summary": "getEntity",
+            "url": "classes/Classes-Entity-ECreditCard.html#method_getEntity"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003AgetNumber\u0028\u0029",
+            "name": "getNumber",
+            "summary": "getNumber",
+            "url": "classes/Classes-Entity-ECreditCard.html#method_getNumber"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003AgetName\u0028\u0029",
+            "name": "getName",
+            "summary": "getName",
+            "url": "classes/Classes-Entity-ECreditCard.html#method_getName"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003AgetSurname\u0028\u0029",
+            "name": "getSurname",
+            "summary": "getSuranem",
+            "url": "classes/Classes-Entity-ECreditCard.html#method_getSurname"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003AgetExpiry\u0028\u0029",
+            "name": "getExpiry",
+            "summary": "getExpiry",
+            "url": "classes/Classes-Entity-ECreditCard.html#method_getExpiry"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003AgetCVV\u0028\u0029",
+            "name": "getCVV",
+            "summary": "getCVV",
+            "url": "classes/Classes-Entity-ECreditCard.html#method_getCVV"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003AgetStudentID\u0028\u0029",
+            "name": "getStudentID",
+            "summary": "getStudentID",
+            "url": "classes/Classes-Entity-ECreditCard.html#method_getStudentID"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003AsetNumber\u0028\u0029",
+            "name": "setNumber",
+            "summary": "setNumber",
+            "url": "classes/Classes-Entity-ECreditCard.html#method_setNumber"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003AsetName\u0028\u0029",
+            "name": "setName",
+            "summary": "setName",
+            "url": "classes/Classes-Entity-ECreditCard.html#method_setName"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003AsetSurname\u0028\u0029",
+            "name": "setSurname",
+            "summary": "setSuranem",
+            "url": "classes/Classes-Entity-ECreditCard.html#method_setSurname"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003AsetExpiry\u0028\u0029",
+            "name": "setExpiry",
+            "summary": "setExpiry",
+            "url": "classes/Classes-Entity-ECreditCard.html#method_setExpiry"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003AsetCVV\u0028\u0029",
+            "name": "setCVV",
+            "summary": "setCVV",
+            "url": "classes/Classes-Entity-ECreditCard.html#method_setCVV"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003AsetStudentID\u0028\u0029",
+            "name": "setStudentID",
+            "summary": "setStudentID",
+            "url": "classes/Classes-Entity-ECreditCard.html#method_setStudentID"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003A__toString\u0028\u0029",
+            "name": "__toString",
+            "summary": "__toString",
+            "url": "classes/Classes-Entity-ECreditCard.html#method___toString"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003A\u0024number",
+            "name": "number",
+            "summary": "number",
+            "url": "classes/Classes-Entity-ECreditCard.html#property_number"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003A\u0024name",
+            "name": "name",
+            "summary": "name",
+            "url": "classes/Classes-Entity-ECreditCard.html#property_name"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003A\u0024surname",
+            "name": "surname",
+            "summary": "surname",
+            "url": "classes/Classes-Entity-ECreditCard.html#property_surname"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003A\u0024expiry",
+            "name": "expiry",
+            "summary": "expiry",
+            "url": "classes/Classes-Entity-ECreditCard.html#property_expiry"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003A\u0024cvv",
+            "name": "cvv",
+            "summary": "cvv",
+            "url": "classes/Classes-Entity-ECreditCard.html#property_cvv"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003A\u0024studentID",
+            "name": "studentID",
+            "summary": "studentID",
+            "url": "classes/Classes-Entity-ECreditCard.html#property_studentID"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003A\u0024entity",
+            "name": "entity",
             "summary": "",
-            "url": "classes/FConnection.html#method_close"
+            "url": "classes/Classes-Entity-ECreditCard.html#property_entity"
         },                {
-            "fqsen": "\\FConnection\u003A\u003A__clone\u0028\u0029",
-            "name": "__clone",
-            "summary": "avoid\u0020to\u0020clone\u0020the\u0020istance",
-            "url": "classes/FConnection.html#method___clone"
-        },                {
-            "fqsen": "\\FConnection\u003A\u003A__wakeup\u0028\u0029",
-            "name": "__wakeup",
-            "summary": "avoid\u0020to\u0020deserialize\u0020the\u0020istance",
-            "url": "classes/FConnection.html#method___wakeup"
-        },                {
-            "fqsen": "\\FConnection\u003A\u003A\u0024db",
-            "name": "db",
-            "summary": "db",
-            "url": "classes/FConnection.html#property_db"
-        },                {
-            "fqsen": "\\FConnection\u003A\u003A\u0024hostname",
-            "name": "hostname",
+            "fqsen": "\\Classes\\Entity\\EOwner",
+            "name": "EOwner",
             "summary": "",
-            "url": "classes/FConnection.html#property_hostname"
+            "url": "classes/Classes-Entity-EOwner.html"
         },                {
-            "fqsen": "\\FConnection\u003A\u003A\u0024username",
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AgetEntity\u0028\u0029",
+            "name": "getEntity",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#method_getEntity"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#method___construct"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AgetId\u0028\u0029",
+            "name": "getId",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#method_getId"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AgetUsername\u0028\u0029",
+            "name": "getUsername",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#method_getUsername"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AgetPassword\u0028\u0029",
+            "name": "getPassword",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#method_getPassword"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AgetName\u0028\u0029",
+            "name": "getName",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#method_getName"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AgetSurname\u0028\u0029",
+            "name": "getSurname",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#method_getSurname"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AgetPhoto\u0028\u0029",
+            "name": "getPhoto",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#method_getPhoto"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AgetMail\u0028\u0029",
+            "name": "getMail",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#method_getMail"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AgetPhoneNumber\u0028\u0029",
+            "name": "getPhoneNumber",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#method_getPhoneNumber"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AgetIBAN\u0028\u0029",
+            "name": "getIBAN",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#method_getIBAN"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AsetId\u0028\u0029",
+            "name": "setId",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#method_setId"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AsetUsername\u0028\u0029",
+            "name": "setUsername",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#method_setUsername"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AsetPassword\u0028\u0029",
+            "name": "setPassword",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#method_setPassword"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AsetName\u0028\u0029",
+            "name": "setName",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#method_setName"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AsetSurname\u0028\u0029",
+            "name": "setSurname",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#method_setSurname"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AuploadPhoto\u0028\u0029",
+            "name": "uploadPhoto",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#method_uploadPhoto"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AsetMail\u0028\u0029",
+            "name": "setMail",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#method_setMail"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AsetPhoneNumber\u0028\u0029",
+            "name": "setPhoneNumber",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#method_setPhoneNumber"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AsetIBAN\u0028\u0029",
+            "name": "setIBAN",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#method_setIBAN"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003A__toString\u0028\u0029",
+            "name": "__toString",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#method___toString"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003A\u0024id",
+            "name": "id",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#property_id"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003A\u0024username",
             "name": "username",
             "summary": "",
-            "url": "classes/FConnection.html#property_username"
+            "url": "classes/Classes-Entity-EOwner.html#property_username"
         },                {
-            "fqsen": "\\FConnection\u003A\u003A\u0024password",
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003A\u0024password",
             "name": "password",
             "summary": "",
-            "url": "classes/FConnection.html#property_password"
+            "url": "classes/Classes-Entity-EOwner.html#property_password"
         },                {
-            "fqsen": "\\FConnection\u003A\u003A\u0024dbname",
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003A\u0024name",
+            "name": "name",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#property_name"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003A\u0024surname",
+            "name": "surname",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#property_surname"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003A\u0024photo",
+            "name": "photo",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#property_photo"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003A\u0024email",
+            "name": "email",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#property_email"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003A\u0024phoneNumber",
+            "name": "phoneNumber",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#property_phoneNumber"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003A\u0024iban",
+            "name": "iban",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#property_iban"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003A\u0024entity",
+            "name": "entity",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#property_entity"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EPhoto",
+            "name": "EPhoto",
+            "summary": "EPhoto",
+            "url": "classes/Classes-Entity-EPhoto.html"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EPhoto\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "__construct\nConstructor\u0020for\u0020the\u0020EPhoto\u0020class",
+            "url": "classes/Classes-Entity-EPhoto.html#method___construct"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EPhoto\u003A\u003AgetId\u0028\u0029",
+            "name": "getId",
+            "summary": "getId\nReturns\u0020the\u0020id\u0020of\u0020the\u0020photo",
+            "url": "classes/Classes-Entity-EPhoto.html#method_getId"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EPhoto\u003A\u003AgetPhoto\u0028\u0029",
+            "name": "getPhoto",
+            "summary": "getPhoto\nReturns\u0020the\u0020photo\u0020itself",
+            "url": "classes/Classes-Entity-EPhoto.html#method_getPhoto"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EPhoto\u003A\u003AgetRelativeTo\u0028\u0029",
+            "name": "getRelativeTo",
+            "summary": "getRelativeTo\nReturns\u0020the\u0020entity\u0020to\u0020which\u0020the\u0020photo\u0020is\u0020related",
+            "url": "classes/Classes-Entity-EPhoto.html#method_getRelativeTo"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EPhoto\u003A\u003AgetIdAccommodation\u0028\u0029",
+            "name": "getIdAccommodation",
+            "summary": "getIdAccommodation\nReturns\u0020the\u0020id\u0020of\u0020the\u0020accommodation\u0020to\u0020which\u0020the\u0020photo\u0020is\u0020related",
+            "url": "classes/Classes-Entity-EPhoto.html#method_getIdAccommodation"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EPhoto\u003A\u003AgetIdReview\u0028\u0029",
+            "name": "getIdReview",
+            "summary": "getIdReview\nReturns\u0020the\u0020id\u0020of\u0020the\u0020review\u0020to\u0020which\u0020the\u0020photo\u0020is\u0020related",
+            "url": "classes/Classes-Entity-EPhoto.html#method_getIdReview"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EPhoto\u003A\u003AsetId\u0028\u0029",
+            "name": "setId",
+            "summary": "setId\nSets\u0020the\u0020id\u0020of\u0020the\u0020photo",
+            "url": "classes/Classes-Entity-EPhoto.html#method_setId"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EPhoto\u003A\u003AsetPhoto\u0028\u0029",
+            "name": "setPhoto",
+            "summary": "setPhoto\nSets\u0020the\u0020photo\u0020itself",
+            "url": "classes/Classes-Entity-EPhoto.html#method_setPhoto"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EPhoto\u003A\u003AsetRelativeTo\u0028\u0029",
+            "name": "setRelativeTo",
+            "summary": "setRelativeTo\nSets\u0020the\u0020entity\u0020to\u0020which\u0020the\u0020photo\u0020is\u0020related",
+            "url": "classes/Classes-Entity-EPhoto.html#method_setRelativeTo"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EPhoto\u003A\u003AsetIdAccommodation\u0028\u0029",
+            "name": "setIdAccommodation",
+            "summary": "setIdAccommodation\nSets\u0020the\u0020id\u0020of\u0020the\u0020accommodation\u0020to\u0020which\u0020the\u0020photo\u0020is\u0020related",
+            "url": "classes/Classes-Entity-EPhoto.html#method_setIdAccommodation"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EPhoto\u003A\u003AsetIdReview\u0028\u0029",
+            "name": "setIdReview",
+            "summary": "setIdReview\nSets\u0020the\u0020id\u0020of\u0020the\u0020review\u0020to\u0020which\u0020the\u0020photo\u0020is\u0020related",
+            "url": "classes/Classes-Entity-EPhoto.html#method_setIdReview"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EPhoto\u003A\u003A__toString\u0028\u0029",
+            "name": "__toString",
+            "summary": "__toString\nConverts\u0020the\u0020object\u0020to\u0020string",
+            "url": "classes/Classes-Entity-EPhoto.html#method___toString"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EPhoto\u003A\u003A\u0024id",
+            "name": "id",
+            "summary": "",
+            "url": "classes/Classes-Entity-EPhoto.html#property_id"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EPhoto\u003A\u003A\u0024photo",
+            "name": "photo",
+            "summary": "",
+            "url": "classes/Classes-Entity-EPhoto.html#property_photo"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EPhoto\u003A\u003A\u0024relativeTo",
+            "name": "relativeTo",
+            "summary": "",
+            "url": "classes/Classes-Entity-EPhoto.html#property_relativeTo"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EPhoto\u003A\u003A\u0024idAccommodation",
+            "name": "idAccommodation",
+            "summary": "",
+            "url": "classes/Classes-Entity-EPhoto.html#property_idAccommodation"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EPhoto\u003A\u003A\u0024idReview",
+            "name": "idReview",
+            "summary": "",
+            "url": "classes/Classes-Entity-EPhoto.html#property_idReview"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReservation",
+            "name": "EReservation",
+            "summary": "EReservation",
+            "url": "classes/Classes-Entity-EReservation.html"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReservation\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "__construct",
+            "url": "classes/Classes-Entity-EReservation.html#method___construct"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReservation\u003A\u003AgetID\u0028\u0029",
+            "name": "getID",
+            "summary": "getID",
+            "url": "classes/Classes-Entity-EReservation.html#method_getID"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReservation\u003A\u003AgetFromDate\u0028\u0029",
+            "name": "getFromDate",
+            "summary": "getFromDate",
+            "url": "classes/Classes-Entity-EReservation.html#method_getFromDate"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReservation\u003A\u003AgetToDate\u0028\u0029",
+            "name": "getToDate",
+            "summary": "getToDate",
+            "url": "classes/Classes-Entity-EReservation.html#method_getToDate"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReservation\u003A\u003AgetMade\u0028\u0029",
+            "name": "getMade",
+            "summary": "getMade",
+            "url": "classes/Classes-Entity-EReservation.html#method_getMade"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReservation\u003A\u003AgetStatusAccept\u0028\u0029",
+            "name": "getStatusAccept",
+            "summary": "getStatusAccept",
+            "url": "classes/Classes-Entity-EReservation.html#method_getStatusAccept"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReservation\u003A\u003AgetAccomodationId\u0028\u0029",
+            "name": "getAccomodationId",
+            "summary": "getAccomodationId",
+            "url": "classes/Classes-Entity-EReservation.html#method_getAccomodationId"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReservation\u003A\u003AgetIdStudent\u0028\u0029",
+            "name": "getIdStudent",
+            "summary": "getIdStudent",
+            "url": "classes/Classes-Entity-EReservation.html#method_getIdStudent"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReservation\u003A\u003AsetID\u0028\u0029",
+            "name": "setID",
+            "summary": "setID",
+            "url": "classes/Classes-Entity-EReservation.html#method_setID"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReservation\u003A\u003AsetFromDate\u0028\u0029",
+            "name": "setFromDate",
+            "summary": "setFromDate",
+            "url": "classes/Classes-Entity-EReservation.html#method_setFromDate"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReservation\u003A\u003AsetToDate\u0028\u0029",
+            "name": "setToDate",
+            "summary": "setToDate",
+            "url": "classes/Classes-Entity-EReservation.html#method_setToDate"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReservation\u003A\u003AsetMade\u0028\u0029",
+            "name": "setMade",
+            "summary": "setMade",
+            "url": "classes/Classes-Entity-EReservation.html#method_setMade"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReservation\u003A\u003AsetStatus\u0028\u0029",
+            "name": "setStatus",
+            "summary": "setStatus",
+            "url": "classes/Classes-Entity-EReservation.html#method_setStatus"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReservation\u003A\u003AsetAccomodationId\u0028\u0029",
+            "name": "setAccomodationId",
+            "summary": "setAccomodationId",
+            "url": "classes/Classes-Entity-EReservation.html#method_setAccomodationId"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReservation\u003A\u003AsetIdStudent\u0028\u0029",
+            "name": "setIdStudent",
+            "summary": "setIdStudent",
+            "url": "classes/Classes-Entity-EReservation.html#method_setIdStudent"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReservation\u003A\u003A__toString\u0028\u0029",
+            "name": "__toString",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReservation.html#method___toString"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReservation\u003A\u003A\u0024id",
+            "name": "id",
+            "summary": "id",
+            "url": "classes/Classes-Entity-EReservation.html#property_id"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReservation\u003A\u003A\u0024fromDate",
+            "name": "fromDate",
+            "summary": "fromDate",
+            "url": "classes/Classes-Entity-EReservation.html#property_fromDate"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReservation\u003A\u003A\u0024toDate",
+            "name": "toDate",
+            "summary": "toData",
+            "url": "classes/Classes-Entity-EReservation.html#property_toDate"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReservation\u003A\u003A\u0024made",
+            "name": "made",
+            "summary": "made",
+            "url": "classes/Classes-Entity-EReservation.html#property_made"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReservation\u003A\u003A\u0024statusAccept",
+            "name": "statusAccept",
+            "summary": "statusAccept",
+            "url": "classes/Classes-Entity-EReservation.html#property_statusAccept"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReservation\u003A\u003A\u0024accomodationId",
+            "name": "accomodationId",
+            "summary": "accomodationId",
+            "url": "classes/Classes-Entity-EReservation.html#property_accomodationId"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReservation\u003A\u003A\u0024idStudent",
+            "name": "idStudent",
+            "summary": "idStudent",
+            "url": "classes/Classes-Entity-EReservation.html#property_idStudent"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview",
+            "name": "EReview",
+            "summary": "EReview",
+            "url": "classes/Classes-Entity-EReview.html"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "__construct",
+            "url": "classes/Classes-Entity-EReview.html#method___construct"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AgetEntity\u0028\u0029",
+            "name": "getEntity",
+            "summary": "getEntity\u0028\u0029",
+            "url": "classes/Classes-Entity-EReview.html#method_getEntity"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AgetId\u0028\u0029",
+            "name": "getId",
+            "summary": "getId\u0028\u0029",
+            "url": "classes/Classes-Entity-EReview.html#method_getId"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AgetTitle\u0028\u0029",
+            "name": "getTitle",
+            "summary": "getTitle\u0028\u0029",
+            "url": "classes/Classes-Entity-EReview.html#method_getTitle"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AgetValutation\u0028\u0029",
+            "name": "getValutation",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReview.html#method_getValutation"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReview.html#method_getDescription"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AgetRecipientType\u0028\u0029",
+            "name": "getRecipientType",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReview.html#method_getRecipientType"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AgetAuthorType\u0028\u0029",
+            "name": "getAuthorType",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReview.html#method_getAuthorType"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AgetIDAuthor\u0028\u0029",
+            "name": "getIDAuthor",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReview.html#method_getIDAuthor"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AgetIDRecipient\u0028\u0029",
+            "name": "getIDRecipient",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReview.html#method_getIDRecipient"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AgetCreationDate\u0028\u0029",
+            "name": "getCreationDate",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReview.html#method_getCreationDate"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AsetTitle\u0028\u0029",
+            "name": "setTitle",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReview.html#method_setTitle"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AsetValutation\u0028\u0029",
+            "name": "setValutation",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReview.html#method_setValutation"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AsetDescription\u0028\u0029",
+            "name": "setDescription",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReview.html#method_setDescription"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AsetId\u0028\u0029",
+            "name": "setId",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReview.html#method_setId"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AuploadPhoto\u0028\u0029",
+            "name": "uploadPhoto",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReview.html#method_uploadPhoto"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AgetPhotos\u0028\u0029",
+            "name": "getPhotos",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReview.html#method_getPhotos"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003A__toString\u0028\u0029",
+            "name": "__toString",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReview.html#method___toString"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003A\u0024idReview",
+            "name": "idReview",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReview.html#property_idReview"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003A\u0024title",
+            "name": "title",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReview.html#property_title"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003A\u0024valutation",
+            "name": "valutation",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReview.html#property_valutation"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003A\u0024description",
+            "name": "description",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReview.html#property_description"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003A\u0024photo",
+            "name": "photo",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReview.html#property_photo"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003A\u0024recipientType",
+            "name": "recipientType",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReview.html#property_recipientType"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003A\u0024creationDate",
+            "name": "creationDate",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReview.html#property_creationDate"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003A\u0024authorType",
+            "name": "authorType",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReview.html#property_authorType"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003A\u0024idAuthor",
+            "name": "idAuthor",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReview.html#property_idAuthor"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003A\u0024idRecipient",
+            "name": "idRecipient",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReview.html#property_idRecipient"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003A\u0024entity",
+            "name": "entity",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReview.html#property_entity"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ESupportRequest",
+            "name": "ESupportRequest",
+            "summary": "ESupportRequest",
+            "url": "classes/Classes-Entity-ESupportRequest.html"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003AgetEntity\u0028\u0029",
+            "name": "getEntity",
+            "summary": "",
+            "url": "classes/Classes-Entity-ESupportRequest.html#method_getEntity"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Classes-Entity-ESupportRequest.html#method___construct"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003AgetId\u0028\u0029",
+            "name": "getId",
+            "summary": "",
+            "url": "classes/Classes-Entity-ESupportRequest.html#method_getId"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003AgetMessage\u0028\u0029",
+            "name": "getMessage",
+            "summary": "",
+            "url": "classes/Classes-Entity-ESupportRequest.html#method_getMessage"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003AgetTopic\u0028\u0029",
+            "name": "getTopic",
+            "summary": "",
+            "url": "classes/Classes-Entity-ESupportRequest.html#method_getTopic"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003AgetAuthorID\u0028\u0029",
+            "name": "getAuthorID",
+            "summary": "",
+            "url": "classes/Classes-Entity-ESupportRequest.html#method_getAuthorID"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003AgetAuthorType\u0028\u0029",
+            "name": "getAuthorType",
+            "summary": "",
+            "url": "classes/Classes-Entity-ESupportRequest.html#method_getAuthorType"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003AgetStatus\u0028\u0029",
+            "name": "getStatus",
+            "summary": "",
+            "url": "classes/Classes-Entity-ESupportRequest.html#method_getStatus"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003AsetId\u0028\u0029",
+            "name": "setId",
+            "summary": "",
+            "url": "classes/Classes-Entity-ESupportRequest.html#method_setId"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003AsetMessage\u0028\u0029",
+            "name": "setMessage",
+            "summary": "",
+            "url": "classes/Classes-Entity-ESupportRequest.html#method_setMessage"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003AsetTopic\u0028\u0029",
+            "name": "setTopic",
+            "summary": "",
+            "url": "classes/Classes-Entity-ESupportRequest.html#method_setTopic"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003AsetAuthorID\u0028\u0029",
+            "name": "setAuthorID",
+            "summary": "",
+            "url": "classes/Classes-Entity-ESupportRequest.html#method_setAuthorID"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003AsetAuthorType\u0028\u0029",
+            "name": "setAuthorType",
+            "summary": "",
+            "url": "classes/Classes-Entity-ESupportRequest.html#method_setAuthorType"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003AsetStatus\u0028\u0029",
+            "name": "setStatus",
+            "summary": "",
+            "url": "classes/Classes-Entity-ESupportRequest.html#method_setStatus"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003A\u0024id",
+            "name": "id",
+            "summary": "",
+            "url": "classes/Classes-Entity-ESupportRequest.html#property_id"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003A\u0024message",
+            "name": "message",
+            "summary": "",
+            "url": "classes/Classes-Entity-ESupportRequest.html#property_message"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003A\u0024topic",
+            "name": "topic",
+            "summary": "",
+            "url": "classes/Classes-Entity-ESupportRequest.html#property_topic"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003A\u0024idAuthor",
+            "name": "idAuthor",
+            "summary": "",
+            "url": "classes/Classes-Entity-ESupportRequest.html#property_idAuthor"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003A\u0024authorType",
+            "name": "authorType",
+            "summary": "",
+            "url": "classes/Classes-Entity-ESupportRequest.html#property_authorType"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003A\u0024status",
+            "name": "status",
+            "summary": "",
+            "url": "classes/Classes-Entity-ESupportRequest.html#property_status"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003A\u0024entity",
+            "name": "entity",
+            "summary": "",
+            "url": "classes/Classes-Entity-ESupportRequest.html#property_entity"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EVisit",
+            "name": "EVisit",
+            "summary": "Class\u0020EVisit\nEntity\u0020class\u0020for\u0020Visit",
+            "url": "classes/Classes-Entity-EVisit.html"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EVisit\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "__construct\nConstructor\u0020for\u0020the\u0020EVisit\u0020class",
+            "url": "classes/Classes-Entity-EVisit.html#method___construct"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EVisit\u003A\u003AgetEntity\u0028\u0029",
+            "name": "getEntity",
+            "summary": "getEntity\nReturns\u0020the\u0020entity\u0020class",
+            "url": "classes/Classes-Entity-EVisit.html#method_getEntity"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EVisit\u003A\u003AgetIdVisit\u0028\u0029",
+            "name": "getIdVisit",
+            "summary": "getIdVisit\nReturns\u0020the\u0020id\u0020of\u0020the\u0020visit",
+            "url": "classes/Classes-Entity-EVisit.html#method_getIdVisit"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EVisit\u003A\u003AgetDate\u0028\u0029",
+            "name": "getDate",
+            "summary": "getDate\nReturns\u0020the\u0020date\u0020of\u0020the\u0020visit",
+            "url": "classes/Classes-Entity-EVisit.html#method_getDate"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EVisit\u003A\u003AgetIdStudent\u0028\u0029",
+            "name": "getIdStudent",
+            "summary": "getIdStudent\nReturns\u0020the\u0020id\u0020of\u0020the\u0020student\u0020who\u0020made\u0020the\u0020visit",
+            "url": "classes/Classes-Entity-EVisit.html#method_getIdStudent"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EVisit\u003A\u003AgetIdAccommodation\u0028\u0029",
+            "name": "getIdAccommodation",
+            "summary": "getIdAccommodation\nReturns\u0020the\u0020id\u0020of\u0020the\u0020accommodation\u0020visited",
+            "url": "classes/Classes-Entity-EVisit.html#method_getIdAccommodation"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EVisit\u003A\u003AsetIdVisit\u0028\u0029",
+            "name": "setIdVisit",
+            "summary": "setIdVisit\nSets\u0020the\u0020id\u0020of\u0020the\u0020visit",
+            "url": "classes/Classes-Entity-EVisit.html#method_setIdVisit"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EVisit\u003A\u003AsetDate\u0028\u0029",
+            "name": "setDate",
+            "summary": "setDate\nSets\u0020the\u0020date\u0020of\u0020the\u0020visit",
+            "url": "classes/Classes-Entity-EVisit.html#method_setDate"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EVisit\u003A\u003AsetIdStudent\u0028\u0029",
+            "name": "setIdStudent",
+            "summary": "setIdStudent\nSets\u0020the\u0020id\u0020of\u0020the\u0020student\u0020who\u0020made\u0020the\u0020visit",
+            "url": "classes/Classes-Entity-EVisit.html#method_setIdStudent"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EVisit\u003A\u003AsetIdAccommodation\u0028\u0029",
+            "name": "setIdAccommodation",
+            "summary": "setIdAccommodation\nSets\u0020the\u0020id\u0020of\u0020the\u0020accommodation\u0020visited",
+            "url": "classes/Classes-Entity-EVisit.html#method_setIdAccommodation"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EVisit\u003A\u003A__toString\u0028\u0029",
+            "name": "__toString",
+            "summary": "__toString\nReturns\u0020a\u0020string\u0020that\u0020represents\u0020the\u0020visit",
+            "url": "classes/Classes-Entity-EVisit.html#method___toString"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EVisit\u003A\u003A\u0024idVisit",
+            "name": "idVisit",
+            "summary": "",
+            "url": "classes/Classes-Entity-EVisit.html#property_idVisit"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EVisit\u003A\u003A\u0024date",
+            "name": "date",
+            "summary": "",
+            "url": "classes/Classes-Entity-EVisit.html#property_date"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EVisit\u003A\u003A\u0024idStudent",
+            "name": "idStudent",
+            "summary": "",
+            "url": "classes/Classes-Entity-EVisit.html#property_idStudent"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EVisit\u003A\u003A\u0024idAccommodation",
+            "name": "idAccommodation",
+            "summary": "",
+            "url": "classes/Classes-Entity-EVisit.html#property_idAccommodation"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EVisit\u003A\u003A\u0024entity",
+            "name": "entity",
+            "summary": "",
+            "url": "classes/Classes-Entity-EVisit.html#property_entity"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation",
+            "name": "FAccommodation",
+            "summary": "FAccommodation",
+            "url": "classes/Classes-Foundation-FAccommodation.html"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "__construct",
+            "url": "classes/Classes-Foundation-FAccommodation.html#method___construct"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003AgetInstance\u0028\u0029",
+            "name": "getInstance",
+            "summary": "getInstance",
+            "url": "classes/Classes-Foundation-FAccommodation.html#method_getInstance"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003Aexist\u0028\u0029",
+            "name": "exist",
+            "summary": "exist",
+            "url": "classes/Classes-Foundation-FAccommodation.html#method_exist"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003Aload\u0028\u0029",
+            "name": "load",
+            "summary": "load\u0020Accommodation\u0020from\u0020db",
+            "url": "classes/Classes-Foundation-FAccommodation.html#method_load"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003AloadAddress\u0028\u0029",
+            "name": "loadAddress",
+            "summary": "loadAddress\nprivate\u0020class\u0020that\u0020loads\u0020the\u0020address\u0020of\u0020an\u0020accommodation\u0020from\u0020db",
+            "url": "classes/Classes-Foundation-FAccommodation.html#method_loadAddress"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003AloadDays\u0028\u0029",
+            "name": "loadDays",
+            "summary": "loadDays\nprivate\u0020class\u0020that\u0020loads\u0020the\u0020days\u0020of\u0020visit\u0020of\u0020an\u0020accommodation\u0020from\u0020db",
+            "url": "classes/Classes-Foundation-FAccommodation.html#method_loadDays"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003AloadTime\u0028\u0029",
+            "name": "loadTime",
+            "summary": "loadTime\nprivate\u0020class\u0020that\u0020loads\u0020the\u0020times\u0020of\u0020visit\u0020of\u0020an\u0020accommodation\u0020from\u0020db",
+            "url": "classes/Classes-Foundation-FAccommodation.html#method_loadTime"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003Astore\u0028\u0029",
+            "name": "store",
+            "summary": "store",
+            "url": "classes/Classes-Foundation-FAccommodation.html#method_store"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003AstoreAddress\u0028\u0029",
+            "name": "storeAddress",
+            "summary": "storeAddress\nprivate\u0020class\u0020that\u0020stores\u0020the\u0020address\u0020of\u0020an\u0020accommodation\u0020in\u0020db",
+            "url": "classes/Classes-Foundation-FAccommodation.html#method_storeAddress"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003AstoreDay\u0028\u0029",
+            "name": "storeDay",
+            "summary": "storeDay\nprivate\u0020class\u0020that\u0020stores\u0020days\u0020of\u0020visit\u0020of\u0020an\u0020accommodation\u0020in\u0020db",
+            "url": "classes/Classes-Foundation-FAccommodation.html#method_storeDay"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003AstoreTime\u0028\u0029",
+            "name": "storeTime",
+            "summary": "storeDay\nprivate\u0020class\u0020that\u0020stores\u0020days\u0020of\u0020visit\u0020of\u0020an\u0020accommodation\u0020in\u0020db",
+            "url": "classes/Classes-Foundation-FAccommodation.html#method_storeTime"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003Aupdate\u0028\u0029",
+            "name": "update",
+            "summary": "update",
+            "url": "classes/Classes-Foundation-FAccommodation.html#method_update"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003AupdateAddress\u0028\u0029",
+            "name": "updateAddress",
+            "summary": "updateAddress\nprivate\u0020class\u0020that\u0020updates\u0020the\u0020address\u0020of\u0020an\u0020accommodation\u0020in\u0020db",
+            "url": "classes/Classes-Foundation-FAccommodation.html#method_updateAddress"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003A\u0024instance",
+            "name": "instance",
+            "summary": "",
+            "url": "classes/Classes-Foundation-FAccommodation.html#property_instance"
+        },                {
+            "fqsen": "\\FAdministrator",
+            "name": "FAdministrator",
+            "summary": "",
+            "url": "classes/FAdministrator.html"
+        },                {
+            "fqsen": "\\FAdministrator\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/FAdministrator.html#method___construct"
+        },                {
+            "fqsen": "\\FAdministrator\u003A\u003AgetInstance\u0028\u0029",
+            "name": "getInstance",
+            "summary": "",
+            "url": "classes/FAdministrator.html#method_getInstance"
+        },                {
+            "fqsen": "\\FAdministrator\u003A\u003Aexist\u0028\u0029",
+            "name": "exist",
+            "summary": "",
+            "url": "classes/FAdministrator.html#method_exist"
+        },                {
+            "fqsen": "\\FAdministrator\u003A\u003Aload\u0028\u0029",
+            "name": "load",
+            "summary": "",
+            "url": "classes/FAdministrator.html#method_load"
+        },                {
+            "fqsen": "\\FAdministrator\u003A\u003Astore\u0028\u0029",
+            "name": "store",
+            "summary": "",
+            "url": "classes/FAdministrator.html#method_store"
+        },                {
+            "fqsen": "\\FAdministrator\u003A\u003Aupdate\u0028\u0029",
+            "name": "update",
+            "summary": "",
+            "url": "classes/FAdministrator.html#method_update"
+        },                {
+            "fqsen": "\\FAdministrator\u003A\u003Adelete\u0028\u0029",
+            "name": "delete",
+            "summary": "",
+            "url": "classes/FAdministrator.html#method_delete"
+        },                {
+            "fqsen": "\\FAdministrator\u003A\u003A\u0024instance",
+            "name": "instance",
+            "summary": "",
+            "url": "classes/FAdministrator.html#property_instance"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FConnection",
+            "name": "FConnection",
+            "summary": "FConnection",
+            "url": "classes/Classes-Foundation-FConnection.html"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FConnection\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "__construct",
+            "url": "classes/Classes-Foundation-FConnection.html#method___construct"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FConnection\u003A\u003AgetInstance\u0028\u0029",
+            "name": "getInstance",
+            "summary": "getInstance",
+            "url": "classes/Classes-Foundation-FConnection.html#method_getInstance"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FConnection\u003A\u003AgetConnection\u0028\u0029",
+            "name": "getConnection",
+            "summary": "This\u0020method\u0020provide\u0020to\u0020get\u0020the\u0020database\u0020connection\ngetConnection",
+            "url": "classes/Classes-Foundation-FConnection.html#method_getConnection"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FConnection\u003A\u003Aclose\u0028\u0029",
+            "name": "close",
+            "summary": "",
+            "url": "classes/Classes-Foundation-FConnection.html#method_close"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FConnection\u003A\u003A__clone\u0028\u0029",
+            "name": "__clone",
+            "summary": "avoid\u0020to\u0020clone\u0020the\u0020istance",
+            "url": "classes/Classes-Foundation-FConnection.html#method___clone"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FConnection\u003A\u003A__wakeup\u0028\u0029",
+            "name": "__wakeup",
+            "summary": "avoid\u0020to\u0020deserialize\u0020the\u0020istance",
+            "url": "classes/Classes-Foundation-FConnection.html#method___wakeup"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FConnection\u003A\u003A\u0024db",
+            "name": "db",
+            "summary": "db",
+            "url": "classes/Classes-Foundation-FConnection.html#property_db"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FConnection\u003A\u003A\u0024hostname",
+            "name": "hostname",
+            "summary": "",
+            "url": "classes/Classes-Foundation-FConnection.html#property_hostname"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FConnection\u003A\u003A\u0024username",
+            "name": "username",
+            "summary": "",
+            "url": "classes/Classes-Foundation-FConnection.html#property_username"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FConnection\u003A\u003A\u0024password",
+            "name": "password",
+            "summary": "",
+            "url": "classes/Classes-Foundation-FConnection.html#property_password"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FConnection\u003A\u003A\u0024dbname",
             "name": "dbname",
             "summary": "",
-            "url": "classes/FConnection.html#property_dbname"
+            "url": "classes/Classes-Foundation-FConnection.html#property_dbname"
         },                {
-            "fqsen": "\\FConnection\u003A\u003A\u0024ClassItSelf",
+            "fqsen": "\\Classes\\Foundation\\FConnection\u003A\u003A\u0024ClassItSelf",
             "name": "ClassItSelf",
             "summary": "",
-            "url": "classes/FConnection.html#property_ClassItSelf"
+            "url": "classes/Classes-Foundation-FConnection.html#property_ClassItSelf"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FContract",
+            "name": "FContract",
+            "summary": "FContract",
+            "url": "classes/Classes-Foundation-FContract.html"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FContract\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Method\u0020__construct",
+            "url": "classes/Classes-Foundation-FContract.html#method___construct"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FContract\u003A\u003AgetInstance\u0028\u0029",
+            "name": "getInstance",
+            "summary": "Method\u0020getInstance",
+            "url": "classes/Classes-Foundation-FContract.html#method_getInstance"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FContract\u003A\u003Aexist\u0028\u0029",
+            "name": "exist",
+            "summary": "Method\u0020exist",
+            "url": "classes/Classes-Foundation-FContract.html#method_exist"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FContract\u003A\u003Astore\u0028\u0029",
+            "name": "store",
+            "summary": "Method\u0020store",
+            "url": "classes/Classes-Foundation-FContract.html#method_store"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FContract\u003A\u003Aload\u0028\u0029",
+            "name": "load",
+            "summary": "Method\u0020load",
+            "url": "classes/Classes-Foundation-FContract.html#method_load"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FContract\u003A\u003A\u0024instance",
+            "name": "instance",
+            "summary": "instance",
+            "url": "classes/Classes-Foundation-FContract.html#property_instance"
         },                {
             "fqsen": "\\FCreditCard",
             "name": "FCreditCard",
@@ -726,270 +1526,455 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/FCreditCard.html#property_instance"
         },                {
-            "fqsen": "\\FOwner",
+            "fqsen": "\\Classes\\Foundation\\FOwner",
             "name": "FOwner",
             "summary": "This\u0020class\u0020provide\u0020to\u0020make\u0020query\u0020to\u0020EOwner\u0020class",
-            "url": "classes/FOwner.html"
+            "url": "classes/Classes-Foundation-FOwner.html"
         },                {
-            "fqsen": "\\FOwner\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/FOwner.html#method___construct"
+            "url": "classes/Classes-Foundation-FOwner.html#method___construct"
         },                {
-            "fqsen": "\\FOwner\u003A\u003AgetInstance\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003AgetInstance\u0028\u0029",
             "name": "getInstance",
             "summary": "",
-            "url": "classes/FOwner.html#method_getInstance"
+            "url": "classes/Classes-Foundation-FOwner.html#method_getInstance"
         },                {
-            "fqsen": "\\FOwner\u003A\u003Aexist\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003Aexist\u0028\u0029",
             "name": "exist",
             "summary": "",
-            "url": "classes/FOwner.html#method_exist"
+            "url": "classes/Classes-Foundation-FOwner.html#method_exist"
         },                {
-            "fqsen": "\\FOwner\u003A\u003Aload\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003Aload\u0028\u0029",
             "name": "load",
             "summary": "",
-            "url": "classes/FOwner.html#method_load"
+            "url": "classes/Classes-Foundation-FOwner.html#method_load"
         },                {
-            "fqsen": "\\FOwner\u003A\u003Astore\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003Astore\u0028\u0029",
             "name": "store",
             "summary": "",
-            "url": "classes/FOwner.html#method_store"
+            "url": "classes/Classes-Foundation-FOwner.html#method_store"
         },                {
-            "fqsen": "\\FOwner\u003A\u003Aupdate\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003Aupdate\u0028\u0029",
             "name": "update",
             "summary": "",
-            "url": "classes/FOwner.html#method_update"
+            "url": "classes/Classes-Foundation-FOwner.html#method_update"
         },                {
-            "fqsen": "\\FOwner\u003A\u003AcurrentPhoto\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003AcurrentPhoto\u0028\u0029",
             "name": "currentPhoto",
             "summary": "",
-            "url": "classes/FOwner.html#method_currentPhoto"
+            "url": "classes/Classes-Foundation-FOwner.html#method_currentPhoto"
         },                {
-            "fqsen": "\\FOwner\u003A\u003Adelete\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003Adelete\u0028\u0029",
             "name": "delete",
             "summary": "",
-            "url": "classes/FOwner.html#method_delete"
+            "url": "classes/Classes-Foundation-FOwner.html#method_delete"
         },                {
-            "fqsen": "\\FOwner\u003A\u003A\u0024instance",
+            "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003A\u0024instance",
             "name": "instance",
             "summary": "",
-            "url": "classes/FOwner.html#property_instance"
+            "url": "classes/Classes-Foundation-FOwner.html#property_instance"
         },                {
-            "fqsen": "\\FPhoto",
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager",
+            "name": "FPersistentManager",
+            "summary": "",
+            "url": "classes/Classes-Foundation-FPersistentManager.html"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method___construct"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetInstance\u0028\u0029",
+            "name": "getInstance",
+            "summary": "",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getInstance"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003Aload\u0028\u0029",
+            "name": "load",
+            "summary": "return\u0020an\u0020object\u0020specifying\u0020the\u0020id",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_load"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003Astore\u0028\u0029",
+            "name": "store",
+            "summary": "store\u0020an\u0020object\u0020in\u0020the\u0020database",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_store"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003Aupdate\u0028\u0029",
+            "name": "update",
+            "summary": "update\u0020an\u0020object\u0020in\u0020the\u0020database",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_update"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003Adelete\u0028\u0029",
+            "name": "delete",
+            "summary": "delete\u0020an\u0020object\u0020in\u0020the\u0020database",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_delete"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetWaitingReservations\u0028\u0029",
+            "name": "getWaitingReservations",
+            "summary": "",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getWaitingReservations"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetAcceptedReservations\u0028\u0029",
+            "name": "getAcceptedReservations",
+            "summary": "",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getAcceptedReservations"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003A\u0024instance",
+            "name": "instance",
+            "summary": "",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#property_instance"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPhoto",
             "name": "FPhoto",
             "summary": "",
-            "url": "classes/FPhoto.html"
+            "url": "classes/Classes-Foundation-FPhoto.html"
         },                {
-            "fqsen": "\\FPhoto\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FPhoto\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/FPhoto.html#method___construct"
+            "url": "classes/Classes-Foundation-FPhoto.html#method___construct"
         },                {
-            "fqsen": "\\FPhoto\u003A\u003AgetInstance\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FPhoto\u003A\u003AgetInstance\u0028\u0029",
             "name": "getInstance",
             "summary": "",
-            "url": "classes/FPhoto.html#method_getInstance"
+            "url": "classes/Classes-Foundation-FPhoto.html#method_getInstance"
         },                {
-            "fqsen": "\\FPhoto\u003A\u003AloadCurrentPhotos\u0028\u0029",
-            "name": "loadCurrentPhotos",
-            "summary": "",
-            "url": "classes/FPhoto.html#method_loadCurrentPhotos"
+            "fqsen": "\\Classes\\Foundation\\FPhoto\u003A\u003Aexist\u0028\u0029",
+            "name": "exist",
+            "summary": "exist",
+            "url": "classes/Classes-Foundation-FPhoto.html#method_exist"
         },                {
-            "fqsen": "\\FPhoto\u003A\u003Aload\u0028\u0029",
-            "name": "load",
-            "summary": "",
-            "url": "classes/FPhoto.html#method_load"
+            "fqsen": "\\Classes\\Foundation\\FPhoto\u003A\u003AexistReview\u0028\u0029",
+            "name": "existReview",
+            "summary": "exist\u0020photo\u0020refered\u0020to\u0020review",
+            "url": "classes/Classes-Foundation-FPhoto.html#method_existReview"
         },                {
-            "fqsen": "\\FPhoto\u003A\u003Astore\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FPhoto\u003A\u003AexistAccommodation\u0028\u0029",
+            "name": "existAccommodation",
+            "summary": "exist\u0020photo\u0020refered\u0020to\u0020accommodation",
+            "url": "classes/Classes-Foundation-FPhoto.html#method_existAccommodation"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPhoto\u003A\u003AloadReview\u0028\u0029",
+            "name": "loadReview",
+            "summary": "This\u0020method\u0020loads\u0020the\u0020photos\u0020of\u0020a\u0020review",
+            "url": "classes/Classes-Foundation-FPhoto.html#method_loadReview"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPhoto\u003A\u003AloadAccommodation\u0028\u0029",
+            "name": "loadAccommodation",
+            "summary": "This\u0020method\u0020loads\u0020the\u0020photos\u0020of\u0020an\u0020accommodation",
+            "url": "classes/Classes-Foundation-FPhoto.html#method_loadAccommodation"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPhoto\u003A\u003AloadAvatar\u0028\u0029",
+            "name": "loadAvatar",
+            "summary": "This\u0020method\u0020loads\u0020the\u0020photos\u0020of\u0020an\u0020owner\u0020or\u0020student",
+            "url": "classes/Classes-Foundation-FPhoto.html#method_loadAvatar"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPhoto\u003A\u003AstoreAvatar\u0028\u0029",
+            "name": "storeAvatar",
+            "summary": "storeAvatar\nstore\u0020user\u0027s\u0020or\u0020owner\u0027s\u0020avatar",
+            "url": "classes/Classes-Foundation-FPhoto.html#method_storeAvatar"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPhoto\u003A\u003Astore\u0028\u0029",
             "name": "store",
-            "summary": "",
-            "url": "classes/FPhoto.html#method_store"
+            "summary": "store\nStore\u0020accommodation\u0027s\u0020or\u0020review\u0027s\u0020photos",
+            "url": "classes/Classes-Foundation-FPhoto.html#method_store"
         },                {
-            "fqsen": "\\FPhoto\u003A\u003Adelete\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FPhoto\u003A\u003Aupdate\u0028\u0029",
+            "name": "update",
+            "summary": "update",
+            "url": "classes/Classes-Foundation-FPhoto.html#method_update"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPhoto\u003A\u003Adelete\u0028\u0029",
             "name": "delete",
-            "summary": "",
-            "url": "classes/FPhoto.html#method_delete"
+            "summary": "delete",
+            "url": "classes/Classes-Foundation-FPhoto.html#method_delete"
         },                {
-            "fqsen": "\\FPhoto\u003A\u003A\u0024instance",
+            "fqsen": "\\Classes\\Foundation\\FPhoto\u003A\u003A\u0024instance",
             "name": "instance",
             "summary": "",
-            "url": "classes/FPhoto.html#property_instance"
+            "url": "classes/Classes-Foundation-FPhoto.html#property_instance"
         },                {
-            "fqsen": "\\FReview",
+            "fqsen": "\\Classes\\Foundation\\FReservation",
+            "name": "FReservation",
+            "summary": "FReservation",
+            "url": "classes/Classes-Foundation-FReservation.html"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReservation\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Method\u0020__construct",
+            "url": "classes/Classes-Foundation-FReservation.html#method___construct"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReservation\u003A\u003AgetInstance\u0028\u0029",
+            "name": "getInstance",
+            "summary": "Method\u0020getInstance",
+            "url": "classes/Classes-Foundation-FReservation.html#method_getInstance"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReservation\u003A\u003Aexist\u0028\u0029",
+            "name": "exist",
+            "summary": "Method\u0020exist",
+            "url": "classes/Classes-Foundation-FReservation.html#method_exist"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReservation\u003A\u003Aload\u0028\u0029",
+            "name": "load",
+            "summary": "Method\u0020load",
+            "url": "classes/Classes-Foundation-FReservation.html#method_load"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReservation\u003A\u003Astore\u0028\u0029",
+            "name": "store",
+            "summary": "Method\u0020store",
+            "url": "classes/Classes-Foundation-FReservation.html#method_store"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReservation\u003A\u003Aupdate\u0028\u0029",
+            "name": "update",
+            "summary": "Method\u0020update",
+            "url": "classes/Classes-Foundation-FReservation.html#method_update"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReservation\u003A\u003AgetCourrentStatus\u0028\u0029",
+            "name": "getCourrentStatus",
+            "summary": "Method\u0020getCourrentStatus",
+            "url": "classes/Classes-Foundation-FReservation.html#method_getCourrentStatus"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReservation\u003A\u003AupdateOwner\u0028\u0029",
+            "name": "updateOwner",
+            "summary": "Method\u0020updateOwner",
+            "url": "classes/Classes-Foundation-FReservation.html#method_updateOwner"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReservation\u003A\u003Adelete\u0028\u0029",
+            "name": "delete",
+            "summary": "Method\u0020delete",
+            "url": "classes/Classes-Foundation-FReservation.html#method_delete"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReservation\u003A\u003AgetWaitingReservations\u0028\u0029",
+            "name": "getWaitingReservations",
+            "summary": "Method\u0020getWaitingReservations",
+            "url": "classes/Classes-Foundation-FReservation.html#method_getWaitingReservations"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReservation\u003A\u003AgetAcceptedReservations\u0028\u0029",
+            "name": "getAcceptedReservations",
+            "summary": "Method\u0020getAcceptedReservations",
+            "url": "classes/Classes-Foundation-FReservation.html#method_getAcceptedReservations"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReservation\u003A\u003A\u0024instance",
+            "name": "instance",
+            "summary": "instance",
+            "url": "classes/Classes-Foundation-FReservation.html#property_instance"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReview",
             "name": "FReview",
             "summary": "This\u0020class\u0020provide\u0020to\u0020make\u0020query\u0020to\u0020EOwner\u0020class",
-            "url": "classes/FReview.html"
+            "url": "classes/Classes-Foundation-FReview.html"
         },                {
-            "fqsen": "\\FReview\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FReview\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "__construct",
-            "url": "classes/FReview.html#method___construct"
+            "url": "classes/Classes-Foundation-FReview.html#method___construct"
         },                {
-            "fqsen": "\\FReview\u003A\u003AgetInstance\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FReview\u003A\u003AgetInstance\u0028\u0029",
             "name": "getInstance",
             "summary": "getInstance",
-            "url": "classes/FReview.html#method_getInstance"
+            "url": "classes/Classes-Foundation-FReview.html#method_getInstance"
         },                {
-            "fqsen": "\\FReview\u003A\u003Aexist\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FReview\u003A\u003Aexist\u0028\u0029",
             "name": "exist",
             "summary": "exist",
-            "url": "classes/FReview.html#method_exist"
+            "url": "classes/Classes-Foundation-FReview.html#method_exist"
         },                {
-            "fqsen": "\\FReview\u003A\u003Aload\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FReview\u003A\u003Aload\u0028\u0029",
             "name": "load",
             "summary": "load",
-            "url": "classes/FReview.html#method_load"
+            "url": "classes/Classes-Foundation-FReview.html#method_load"
         },                {
-            "fqsen": "\\FReview\u003A\u003AloadReview\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FReview\u003A\u003AloadReview\u0028\u0029",
             "name": "loadReview",
             "summary": "loadReview",
-            "url": "classes/FReview.html#method_loadReview"
+            "url": "classes/Classes-Foundation-FReview.html#method_loadReview"
         },                {
-            "fqsen": "\\FReview\u003A\u003AloadSpecificReview\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FReview\u003A\u003AloadSpecificReview\u0028\u0029",
             "name": "loadSpecificReview",
             "summary": "loadSpecificReview",
-            "url": "classes/FReview.html#method_loadSpecificReview"
+            "url": "classes/Classes-Foundation-FReview.html#method_loadSpecificReview"
         },                {
-            "fqsen": "\\FReview\u003A\u003Astore\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FReview\u003A\u003Astore\u0028\u0029",
             "name": "store",
             "summary": "store",
-            "url": "classes/FReview.html#method_store"
+            "url": "classes/Classes-Foundation-FReview.html#method_store"
         },                {
-            "fqsen": "\\FReview\u003A\u003AstoreReview\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FReview\u003A\u003AstoreReview\u0028\u0029",
             "name": "storeReview",
             "summary": "storeReview",
-            "url": "classes/FReview.html#method_storeReview"
+            "url": "classes/Classes-Foundation-FReview.html#method_storeReview"
         },                {
-            "fqsen": "\\FReview\u003A\u003AstoreSpecificReview\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FReview\u003A\u003AstoreSpecificReview\u0028\u0029",
             "name": "storeSpecificReview",
             "summary": "storeSpecificReview",
-            "url": "classes/FReview.html#method_storeSpecificReview"
+            "url": "classes/Classes-Foundation-FReview.html#method_storeSpecificReview"
         },                {
-            "fqsen": "\\FReview\u003A\u003Aupdate\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FReview\u003A\u003Aupdate\u0028\u0029",
             "name": "update",
             "summary": "update",
-            "url": "classes/FReview.html#method_update"
+            "url": "classes/Classes-Foundation-FReview.html#method_update"
         },                {
-            "fqsen": "\\FReview\u003A\u003AupdatePhotos\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FReview\u003A\u003AupdatePhotos\u0028\u0029",
             "name": "updatePhotos",
             "summary": "updatePhotos",
-            "url": "classes/FReview.html#method_updatePhotos"
+            "url": "classes/Classes-Foundation-FReview.html#method_updatePhotos"
         },                {
-            "fqsen": "\\FReview\u003A\u003AloadPhotos\u0028\u0029",
-            "name": "loadPhotos",
-            "summary": "loadPhotos",
-            "url": "classes/FReview.html#method_loadPhotos"
-        },                {
-            "fqsen": "\\FReview\u003A\u003AupdateReview\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FReview\u003A\u003AupdateReview\u0028\u0029",
             "name": "updateReview",
             "summary": "updateReview",
-            "url": "classes/FReview.html#method_updateReview"
+            "url": "classes/Classes-Foundation-FReview.html#method_updateReview"
         },                {
-            "fqsen": "\\FReview\u003A\u003Adelete\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FReview\u003A\u003Adelete\u0028\u0029",
             "name": "delete",
             "summary": "delete",
-            "url": "classes/FReview.html#method_delete"
+            "url": "classes/Classes-Foundation-FReview.html#method_delete"
         },                {
-            "fqsen": "\\FReview\u003A\u003A\u0024instance",
+            "fqsen": "\\Classes\\Foundation\\FReview\u003A\u003A\u0024instance",
             "name": "instance",
             "summary": "",
-            "url": "classes/FReview.html#property_instance"
+            "url": "classes/Classes-Foundation-FReview.html#property_instance"
         },                {
-            "fqsen": "\\FStudent",
+            "fqsen": "\\Classes\\Foundation\\FStudent",
             "name": "FStudent",
             "summary": "",
-            "url": "classes/FStudent.html"
+            "url": "classes/Classes-Foundation-FStudent.html"
         },                {
-            "fqsen": "\\FStudent\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FStudent\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/FStudent.html#method___construct"
+            "url": "classes/Classes-Foundation-FStudent.html#method___construct"
         },                {
-            "fqsen": "\\FStudent\u003A\u003AgetInstance\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FStudent\u003A\u003AgetInstance\u0028\u0029",
             "name": "getInstance",
             "summary": "",
-            "url": "classes/FStudent.html#method_getInstance"
+            "url": "classes/Classes-Foundation-FStudent.html#method_getInstance"
         },                {
-            "fqsen": "\\FStudent\u003A\u003Aexist\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FStudent\u003A\u003Aexist\u0028\u0029",
             "name": "exist",
             "summary": "",
-            "url": "classes/FStudent.html#method_exist"
+            "url": "classes/Classes-Foundation-FStudent.html#method_exist"
         },                {
-            "fqsen": "\\FStudent\u003A\u003Aload\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FStudent\u003A\u003Aload\u0028\u0029",
             "name": "load",
             "summary": "",
-            "url": "classes/FStudent.html#method_load"
+            "url": "classes/Classes-Foundation-FStudent.html#method_load"
         },                {
-            "fqsen": "\\FStudent\u003A\u003A\u0024instance",
+            "fqsen": "\\Classes\\Foundation\\FStudent\u003A\u003Astore\u0028\u0029",
+            "name": "store",
+            "summary": "",
+            "url": "classes/Classes-Foundation-FStudent.html#method_store"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FStudent\u003A\u003Aupdate\u0028\u0029",
+            "name": "update",
+            "summary": "",
+            "url": "classes/Classes-Foundation-FStudent.html#method_update"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FStudent\u003A\u003AcurrentPhoto\u0028\u0029",
+            "name": "currentPhoto",
+            "summary": "",
+            "url": "classes/Classes-Foundation-FStudent.html#method_currentPhoto"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FStudent\u003A\u003Adelete\u0028\u0029",
+            "name": "delete",
+            "summary": "",
+            "url": "classes/Classes-Foundation-FStudent.html#method_delete"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FStudent\u003A\u003A\u0024instance",
             "name": "instance",
             "summary": "",
-            "url": "classes/FStudent.html#property_instance"
+            "url": "classes/Classes-Foundation-FStudent.html#property_instance"
         },                {
-            "fqsen": "\\FSupportRequest",
+            "fqsen": "\\Classes\\Foundation\\FSupportRequest",
             "name": "FSupportRequest",
             "summary": "",
-            "url": "classes/FSupportRequest.html"
+            "url": "classes/Classes-Foundation-FSupportRequest.html"
         },                {
-            "fqsen": "\\FSupportRequest\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FSupportRequest\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/FSupportRequest.html#method___construct"
+            "url": "classes/Classes-Foundation-FSupportRequest.html#method___construct"
         },                {
-            "fqsen": "\\FSupportRequest\u003A\u003AgetInstance\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FSupportRequest\u003A\u003AgetInstance\u0028\u0029",
             "name": "getInstance",
             "summary": "",
-            "url": "classes/FSupportRequest.html#method_getInstance"
+            "url": "classes/Classes-Foundation-FSupportRequest.html#method_getInstance"
         },                {
-            "fqsen": "\\FSupportRequest\u003A\u003A\u0024instance",
+            "fqsen": "\\Classes\\Foundation\\FSupportRequest\u003A\u003Aexist\u0028\u0029",
+            "name": "exist",
+            "summary": "",
+            "url": "classes/Classes-Foundation-FSupportRequest.html#method_exist"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FSupportRequest\u003A\u003Aload\u0028\u0029",
+            "name": "load",
+            "summary": "",
+            "url": "classes/Classes-Foundation-FSupportRequest.html#method_load"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FSupportRequest\u003A\u003Astore\u0028\u0029",
+            "name": "store",
+            "summary": "",
+            "url": "classes/Classes-Foundation-FSupportRequest.html#method_store"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FSupportRequest\u003A\u003Aupdate\u0028\u0029",
+            "name": "update",
+            "summary": "",
+            "url": "classes/Classes-Foundation-FSupportRequest.html#method_update"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FSupportRequest\u003A\u003Adelete\u0028\u0029",
+            "name": "delete",
+            "summary": "",
+            "url": "classes/Classes-Foundation-FSupportRequest.html#method_delete"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FSupportRequest\u003A\u003A\u0024instance",
             "name": "instance",
             "summary": "",
-            "url": "classes/FSupportRequest.html#property_instance"
+            "url": "classes/Classes-Foundation-FSupportRequest.html#property_instance"
         },                {
-            "fqsen": "\\FVisit",
+            "fqsen": "\\Classes\\Foundation\\FVisit",
             "name": "FVisit",
             "summary": "FVisit",
-            "url": "classes/FVisit.html"
+            "url": "classes/Classes-Foundation-FVisit.html"
         },                {
-            "fqsen": "\\FVisit\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FVisit\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "__construct",
-            "url": "classes/FVisit.html#method___construct"
+            "url": "classes/Classes-Foundation-FVisit.html#method___construct"
         },                {
-            "fqsen": "\\FVisit\u003A\u003AgetInstance\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FVisit\u003A\u003AgetInstance\u0028\u0029",
             "name": "getInstance",
             "summary": "getInstance",
-            "url": "classes/FVisit.html#method_getInstance"
+            "url": "classes/Classes-Foundation-FVisit.html#method_getInstance"
         },                {
-            "fqsen": "\\FVisit\u003A\u003Aexist\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FVisit\u003A\u003Aexist\u0028\u0029",
             "name": "exist",
             "summary": "exist",
-            "url": "classes/FVisit.html#method_exist"
+            "url": "classes/Classes-Foundation-FVisit.html#method_exist"
         },                {
-            "fqsen": "\\FVisit\u003A\u003Aload\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FVisit\u003A\u003Aload\u0028\u0029",
             "name": "load",
             "summary": "load",
-            "url": "classes/FVisit.html#method_load"
+            "url": "classes/Classes-Foundation-FVisit.html#method_load"
         },                {
-            "fqsen": "\\FVisit\u003A\u003Astore\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FVisit\u003A\u003Astore\u0028\u0029",
             "name": "store",
             "summary": "store",
-            "url": "classes/FVisit.html#method_store"
+            "url": "classes/Classes-Foundation-FVisit.html#method_store"
         },                {
-            "fqsen": "\\FVisit\u003A\u003Aupdate\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FVisit\u003A\u003Aupdate\u0028\u0029",
             "name": "update",
             "summary": "update",
-            "url": "classes/FVisit.html#method_update"
+            "url": "classes/Classes-Foundation-FVisit.html#method_update"
         },                {
-            "fqsen": "\\FVisit\u003A\u003Adelete\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FVisit\u003A\u003Adelete\u0028\u0029",
             "name": "delete",
             "summary": "delete",
-            "url": "classes/FVisit.html#method_delete"
+            "url": "classes/Classes-Foundation-FVisit.html#method_delete"
         },                {
-            "fqsen": "\\FVisit\u003A\u003A\u0024instance",
+            "fqsen": "\\Classes\\Foundation\\FVisit\u003A\u003A\u0024instance",
             "name": "instance",
             "summary": "",
-            "url": "classes/FVisit.html#property_instance"
+            "url": "classes/Classes-Foundation-FVisit.html#property_instance"
         },                {
             "fqsen": "\\StartSmarty",
             "name": "StartSmarty",
@@ -1001,85 +1986,170 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/StartSmarty.html#method_configuration"
         },                {
-            "fqsen": "\\TError",
+            "fqsen": "\\Classes\\Tools\\TError",
             "name": "TError",
             "summary": "",
-            "url": "classes/TError.html"
+            "url": "classes/Classes-Tools-TError.html"
         },                {
-            "fqsen": "\\TError\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Classes\\Tools\\TError\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/TError.html#method___construct"
+            "url": "classes/Classes-Tools-TError.html#method___construct"
         },                {
-            "fqsen": "\\TError\u003A\u003AgetInstance\u0028\u0029",
+            "fqsen": "\\Classes\\Tools\\TError\u003A\u003AgetInstance\u0028\u0029",
             "name": "getInstance",
             "summary": "",
-            "url": "classes/TError.html#method_getInstance"
+            "url": "classes/Classes-Tools-TError.html#method_getInstance"
         },                {
-            "fqsen": "\\TError\u003A\u003AhandleDuplicateError\u0028\u0029",
+            "fqsen": "\\Classes\\Tools\\TError\u003A\u003AhandleDuplicateError\u0028\u0029",
             "name": "handleDuplicateError",
             "summary": "",
-            "url": "classes/TError.html#method_handleDuplicateError"
+            "url": "classes/Classes-Tools-TError.html#method_handleDuplicateError"
         },                {
-            "fqsen": "\\TError\u003A\u003A\u0024instance",
+            "fqsen": "\\Classes\\Tools\\TError\u003A\u003AmodificationReservationHendler\u0028\u0029",
+            "name": "modificationReservationHendler",
+            "summary": "",
+            "url": "classes/Classes-Tools-TError.html#method_modificationReservationHendler"
+        },                {
+            "fqsen": "\\Classes\\Tools\\TError\u003A\u003AdeleteReservationHendler\u0028\u0029",
+            "name": "deleteReservationHendler",
+            "summary": "",
+            "url": "classes/Classes-Tools-TError.html#method_deleteReservationHendler"
+        },                {
+            "fqsen": "\\Classes\\Tools\\TError\u003A\u003AmodificationAfterAccept\u0028\u0029",
+            "name": "modificationAfterAccept",
+            "summary": "",
+            "url": "classes/Classes-Tools-TError.html#method_modificationAfterAccept"
+        },                {
+            "fqsen": "\\Classes\\Tools\\TError\u003A\u003AerrorGettingReservations\u0028\u0029",
+            "name": "errorGettingReservations",
+            "summary": "",
+            "url": "classes/Classes-Tools-TError.html#method_errorGettingReservations"
+        },                {
+            "fqsen": "\\Classes\\Tools\\TError\u003A\u003A\u0024instance",
             "name": "instance",
             "summary": "",
-            "url": "classes/TError.html#property_instance"
+            "url": "classes/Classes-Tools-TError.html#property_instance"
         },                {
-            "fqsen": "\\ErrorEnum",
+            "fqsen": "\\Classes\\Tools\\ErrorEnum",
             "name": "ErrorEnum",
             "summary": "",
-            "url": "classes/ErrorEnum.html"
+            "url": "classes/Classes-Tools-ErrorEnum.html"
         },                {
-            "fqsen": "\\TErrorDuplicate",
+            "fqsen": "\\Classes\\Tools\\TErrorDuplicate",
             "name": "TErrorDuplicate",
             "summary": "",
-            "url": "classes/TErrorDuplicate.html"
+            "url": "classes/Classes-Tools-TErrorDuplicate.html"
         },                {
-            "fqsen": "\\TErrorDuplicate\u003A\u003AUSERNAME",
+            "fqsen": "\\Classes\\Tools\\TErrorDuplicate\u003A\u003AUSERNAME",
             "name": "USERNAME",
             "summary": "",
-            "url": "classes/TErrorDuplicate.html#enumcase_USERNAME"
+            "url": "classes/Classes-Tools-TErrorDuplicate.html#enumcase_USERNAME"
         },                {
-            "fqsen": "\\TErrorDuplicate\u003A\u003AEMAIL",
+            "fqsen": "\\Classes\\Tools\\TErrorDuplicate\u003A\u003AEMAIL",
             "name": "EMAIL",
             "summary": "",
-            "url": "classes/TErrorDuplicate.html#enumcase_EMAIL"
+            "url": "classes/Classes-Tools-TErrorDuplicate.html#enumcase_EMAIL"
         },                {
-            "fqsen": "\\TErrorDuplicate\u003A\u003AIBAN",
+            "fqsen": "\\Classes\\Tools\\TErrorDuplicate\u003A\u003AIBAN",
             "name": "IBAN",
             "summary": "",
-            "url": "classes/TErrorDuplicate.html#enumcase_IBAN"
+            "url": "classes/Classes-Tools-TErrorDuplicate.html#enumcase_IBAN"
         },                {
-            "fqsen": "\\TErrorDuplicate\u003A\u003APHONENUMBER",
+            "fqsen": "\\Classes\\Tools\\TErrorDuplicate\u003A\u003APHONENUMBER",
             "name": "PHONENUMBER",
             "summary": "",
-            "url": "classes/TErrorDuplicate.html#enumcase_PHONENUMBER"
+            "url": "classes/Classes-Tools-TErrorDuplicate.html#enumcase_PHONENUMBER"
         },                {
-            "fqsen": "\\TypeEnum",
+            "fqsen": "\\Classes\\Tools\\RequestType",
+            "name": "RequestType",
+            "summary": "",
+            "url": "classes/Classes-Tools-RequestType.html"
+        },                {
+            "fqsen": "\\Classes\\Tools\\TRequestType",
+            "name": "TRequestType",
+            "summary": "",
+            "url": "classes/Classes-Tools-TRequestType.html"
+        },                {
+            "fqsen": "\\Classes\\Tools\\TRequestType\u003A\u003AREGISTRATION",
+            "name": "REGISTRATION",
+            "summary": "",
+            "url": "classes/Classes-Tools-TRequestType.html#enumcase_REGISTRATION"
+        },                {
+            "fqsen": "\\Classes\\Tools\\TRequestType\u003A\u003AUSAGE",
+            "name": "USAGE",
+            "summary": "",
+            "url": "classes/Classes-Tools-TRequestType.html#enumcase_USAGE"
+        },                {
+            "fqsen": "\\Classes\\Tools\\TRequestType\u003A\u003ABUG",
+            "name": "BUG",
+            "summary": "",
+            "url": "classes/Classes-Tools-TRequestType.html#enumcase_BUG"
+        },                {
+            "fqsen": "\\Classes\\Tools\\StatusEnum",
+            "name": "StatusEnum",
+            "summary": "",
+            "url": "classes/Classes-Tools-StatusEnum.html"
+        },                {
+            "fqsen": "\\Classes\\Tools\\TStatusContract",
+            "name": "TStatusContract",
+            "summary": "",
+            "url": "classes/Classes-Tools-TStatusContract.html"
+        },                {
+            "fqsen": "\\Classes\\Tools\\TStatusContract\u003A\u003AFUTURE",
+            "name": "FUTURE",
+            "summary": "",
+            "url": "classes/Classes-Tools-TStatusContract.html#enumcase_FUTURE"
+        },                {
+            "fqsen": "\\Classes\\Tools\\TStatusContract\u003A\u003AONGOING",
+            "name": "ONGOING",
+            "summary": "",
+            "url": "classes/Classes-Tools-TStatusContract.html#enumcase_ONGOING"
+        },                {
+            "fqsen": "\\Classes\\Tools\\TStatusContract\u003A\u003AFINISHED",
+            "name": "FINISHED",
+            "summary": "",
+            "url": "classes/Classes-Tools-TStatusContract.html#enumcase_FINISHED"
+        },                {
+            "fqsen": "\\Classes\\Tools\\TStatusSupport",
+            "name": "TStatusSupport",
+            "summary": "",
+            "url": "classes/Classes-Tools-TStatusSupport.html"
+        },                {
+            "fqsen": "\\Classes\\Tools\\TStatusSupport\u003A\u003AWAITING",
+            "name": "WAITING",
+            "summary": "",
+            "url": "classes/Classes-Tools-TStatusSupport.html#enumcase_WAITING"
+        },                {
+            "fqsen": "\\Classes\\Tools\\TStatusSupport\u003A\u003ARESOLVED",
+            "name": "RESOLVED",
+            "summary": "",
+            "url": "classes/Classes-Tools-TStatusSupport.html#enumcase_RESOLVED"
+        },                {
+            "fqsen": "\\Classes\\Tools\\TypeEnum",
             "name": "TypeEnum",
             "summary": "",
-            "url": "classes/TypeEnum.html"
+            "url": "classes/Classes-Tools-TypeEnum.html"
         },                {
-            "fqsen": "\\TType",
+            "fqsen": "\\Classes\\Tools\\TType",
             "name": "TType",
             "summary": "",
-            "url": "classes/TType.html"
+            "url": "classes/Classes-Tools-TType.html"
         },                {
-            "fqsen": "\\TType\u003A\u003ASTUDENT",
+            "fqsen": "\\Classes\\Tools\\TType\u003A\u003ASTUDENT",
             "name": "STUDENT",
             "summary": "",
-            "url": "classes/TType.html#enumcase_STUDENT"
+            "url": "classes/Classes-Tools-TType.html#enumcase_STUDENT"
         },                {
-            "fqsen": "\\TType\u003A\u003AACCOMMODATION",
+            "fqsen": "\\Classes\\Tools\\TType\u003A\u003AACCOMMODATION",
             "name": "ACCOMMODATION",
             "summary": "",
-            "url": "classes/TType.html#enumcase_ACCOMMODATION"
+            "url": "classes/Classes-Tools-TType.html#enumcase_ACCOMMODATION"
         },                {
-            "fqsen": "\\TType\u003A\u003AOWNER",
+            "fqsen": "\\Classes\\Tools\\TType\u003A\u003AOWNER",
             "name": "OWNER",
             "summary": "",
-            "url": "classes/TType.html#enumcase_OWNER"
+            "url": "classes/Classes-Tools-TType.html#enumcase_OWNER"
         },                {
             "fqsen": "\\VOwner",
             "name": "VOwner",
@@ -1100,5 +2170,25 @@ Search.appendIndex(
             "name": "\\",
             "summary": "",
             "url": "namespaces/default.html"
+        },                {
+            "fqsen": "\\Classes\\Entity",
+            "name": "Entity",
+            "summary": "",
+            "url": "namespaces/classes-entity.html"
+        },                {
+            "fqsen": "\\Classes",
+            "name": "Classes",
+            "summary": "",
+            "url": "namespaces/classes.html"
+        },                {
+            "fqsen": "\\Classes\\Foundation",
+            "name": "Foundation",
+            "summary": "",
+            "url": "namespaces/classes-foundation.html"
+        },                {
+            "fqsen": "\\Classes\\Tools",
+            "name": "Tools",
+            "summary": "",
+            "url": "namespaces/classes-tools.html"
         }            ]
 );
