@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.5.3, created on 2024-06-15 15:06:44
+/* Smarty version 4.5.3, created on 2024-06-15 15:48:33
   from 'C:\xampp\htdocs\UniRent\Smarty\templates\home.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.5.3',
-  'unifunc' => 'content_666d91e47b09e9_13040939',
+  'unifunc' => 'content_666d9bb1924b69_09518484',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '84ab26ef3f672ca7d8625700d253c3b7ddbb4101' => 
     array (
       0 => 'C:\\xampp\\htdocs\\UniRent\\Smarty\\templates\\home.tpl',
-      1 => 1718456801,
+      1 => 1718459303,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_666d91e47b09e9_13040939 (Smarty_Internal_Template $_smarty_tpl) {
+function content_666d9bb1924b69_09518484 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html>
    <head>
@@ -55,29 +55,29 @@ function content_666d91e47b09e9_13040939 (Smarty_Internal_Template $_smarty_tpl)
       <div class="header_section">
          <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-               <a class="navbar-brand"href="home.tpl"><img src="/UniRent/Smarty/images/logo.png"></a>
+               <a class="navbar-brand"href="/UniRent/Smarty/templates/home.tpl"><img src="/UniRent/Smarty/images/logo.png"></a>
                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
                </button>
                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav ml-auto">
                      <li class="nav-item active">
-                        <a class="nav-link" href="home.tpl">Home</a>
+                        <a class="nav-link" href="/UniRent/Smarty/templates/home.tpl">Home</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="about.tpl">About</a>
+                        <a class="nav-link" href="/UniRent/Smarty/templates/about.tpl">About</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="property.tpl">Property</a>
+                        <a class="nav-link" href="/UniRent/Smarty/templates/property.tpl">Property</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="testimonial.tpl">Testimonial</a>
+                        <a class="nav-link" href="/UniRent/Smarty/templates/testimonial.tpl">Testimonial</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="blog.tpl">Blog</a>
+                        <a class="nav-link" href="/UniRent/Smarty/templates/blog.tpl">Blog</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="contact.tpl">Contact Us</a>
+                        <a class="nav-link" href="/UniRent/Smarty/templates/contact.tpl">Contact Us</a>
                      </li>
                   </ul>
                   <form class="form-inline my-2 my-lg-0">
@@ -644,12 +644,12 @@ function content_666d91e47b09e9_13040939 (Smarty_Internal_Template $_smarty_tpl)
                   <h3 class="footer_text">Useful Links</h3>
                   <div class="footer_menu">
                      <ul>
-                        <li class="active"><a href="home.tpl">Home</a></li>
-                        <li><a href="about.tpl">About</a></li>
-                        <li><a href="blog.tpl">Blog</a></li>
-                        <li><a href="property.tpl">Property</a></li>
-                        <li><a href="testimonial.tpl">Testimonial</a></li>
-                        <li><a href="contact.tpl">Contact Us</a></li>
+                        <li class="active"><a href="/UniRent/Smarty/templates/home.tpl">Home</a></li>
+                        <li><a href="/UniRent/Smarty/templates/about.tpl">About</a></li>
+                        <li><a href="/UniRent/Smarty/templates/blog.tpl">Blog</a></li>
+                        <li><a href="/UniRent/Smarty/templates/property.tpl">Property</a></li>
+                        <li><a href="/UniRent/Smarty/templates/testimonial.tpl">Testimonial</a></li>
+                        <li><a href="/UniRent/Smarty/templates/contact.tpl">Contact Us</a></li>
                      </ul>
                   </div>
                </div>

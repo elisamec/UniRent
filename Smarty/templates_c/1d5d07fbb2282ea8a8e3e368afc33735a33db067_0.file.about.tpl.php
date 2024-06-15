@@ -1,4 +1,27 @@
-<!DOCTYPE html>
+<?php
+/* Smarty version 4.5.3, created on 2024-06-15 15:38:28
+  from 'C:\xampp\htdocs\UniRent\Smarty\templates\about.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '4.5.3',
+  'unifunc' => 'content_666d99547af5e1_16096162',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '1d5d07fbb2282ea8a8e3e368afc33735a33db067' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\UniRent\\Smarty\\templates\\about.tpl',
+      1 => 1718458291,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_666d99547af5e1_16096162 (Smarty_Internal_Template $_smarty_tpl) {
+?><!DOCTYPE html>
 <html>
    <head>
       <!-- basic -->
@@ -32,29 +55,29 @@
       <div class="header_section">
          <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-               <a class="navbar-brand"href="/UniRent/Smarty/templates/home.tpl"><img src="/UniRent/Smarty/images/logo.png"></a>
+               <a class="navbar-brand"href="home.tpl"><img src="/UniRent/Smarty/images/logo.png"></a>
                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
                </button>
                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav ml-auto">
                      <li class="nav-item">
-                        <a class="nav-link" href="/UniRent/Smarty/templates/home.tpl">Home</a>
+                        <a class="nav-link" href="home.tpl">Home</a>
                      </li>
                      <li class="nav-item active">
-                        <a class="nav-link" href="/UniRent/Smarty/templates/about.tpl">About</a>
+                        <a class="nav-link" href="about.tpl">About</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="/UniRent/Smarty/templates/property.tpl">Property</a>
+                        <a class="nav-link" href="property.tpl">Property</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="/UniRent/Smarty/templates/testimonial.tpl">Testimonial</a>
+                        <a class="nav-link" href="testimonial.tpl">Testimonial</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="/UniRent/Smarty/templates/blog.tpl">Blog</a>
+                        <a class="nav-link" href="blog.tpl">Blog</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="/UniRent/Smarty/templates/contact.tpl">Contact Us</a>
+                        <a class="nav-link" href="contact.tpl">Contact Us</a>
                      </li>
                   </ul>
                   <form class="form-inline my-2 my-lg-0">
@@ -247,12 +270,12 @@
                   <h3 class="footer_text">Useful Links</h3>
                   <div class="footer_menu">
                      <ul>
-                        <li><a href="/UniRent/Smarty/templates/home.tpl">Home</a></li>
-                        <li class="active"><a href="/UniRent/Smarty/templates/about.tpl">About</a></li>
-                        <li><a href="/UniRent/Smarty/templates/blog.tpl">Blog</a></li>
-                        <li><a href="/UniRent/Smarty/templates/property.tpl">Property</a></li>
-                        <li><a href="/UniRent/Smarty/templates/testimonial.tpl">Testimonial</a></li>
-                        <li><a href="/UniRent/Smarty/templates/contact.tpl">Contact Us</a></li>
+                        <li><a href="home.tpl">Home</a></li>
+                        <li class="active"><a href="about.tpl">About</a></li>
+                        <li><a href="blog.tpl">Blog</a></li>
+                        <li><a href="property.tpl">Property</a></li>
+                        <li><a href="testimonial.tpl">Testimonial</a></li>
+                        <li><a href="contact.tpl">Contact Us</a></li>
                      </ul>
                   </div>
                </div>
@@ -268,16 +291,31 @@
       </div>
       <!-- copyright section end -->
       <!-- Javascript files-->
-      <script src="/UniRent/Smarty/js/jquery.min.js"></script>
-      <script src="/UniRent/Smarty/js/popper.min.js"></script>
-      <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
-      <script src="/UniRent/Smarty/js/jquery-3.0.0.min.js"></script>
-      <script src="/UniRent/Smarty/js/plugin.js"></script>
+      <?php echo '<script'; ?>
+ src="/UniRent/Smarty/js/jquery.min.js"><?php echo '</script'; ?>
+>
+      <?php echo '<script'; ?>
+ src="/UniRent/Smarty/js/popper.min.js"><?php echo '</script'; ?>
+>
+      <?php echo '<script'; ?>
+ src="/UniRent/Smarty/js/bootstrap.bundle.min.js"><?php echo '</script'; ?>
+>
+      <?php echo '<script'; ?>
+ src="/UniRent/Smarty/js/jquery-3.0.0.min.js"><?php echo '</script'; ?>
+>
+      <?php echo '<script'; ?>
+ src="/UniRent/Smarty/js/plugin.js"><?php echo '</script'; ?>
+>
       <!-- sidebar -->
-      <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
-      <script src="/UniRent/Smarty/js/custom.js"></script>
+      <?php echo '<script'; ?>
+ src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"><?php echo '</script'; ?>
+>
+      <?php echo '<script'; ?>
+ src="/UniRent/Smarty/js/custom.js"><?php echo '</script'; ?>
+>
       <!-- javascript --> 
-      <script>
+      <?php echo '<script'; ?>
+>
          // Material Select Initialization
          $(document).ready(function() {
          $('.mdb-select').materialSelect();
@@ -286,6 +324,8 @@
          $(this).closest('.select-outline').find('.caret').toggleClass('active');
          });
          });
-      </script>
+      <?php echo '</script'; ?>
+>
    </body>
-</html>
+</html><?php }
+}
