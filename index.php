@@ -6,4 +6,4 @@ require('StartSmarty.php');
 
 $smarty = StartSmarty::configuration();
 
-$smarty->display('svuota.tpl');
+$smarty->display('home.tpl');
