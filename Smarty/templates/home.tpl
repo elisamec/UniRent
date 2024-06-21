@@ -50,6 +50,7 @@
                            <a class="dropdown-item" href="#">Action</a>
                            <a class="dropdown-item" href="#">Another action</a>
                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="/UniRent/Smarty/templates/property.tpl">Property</a>
