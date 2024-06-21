@@ -1,0 +1,8 @@
+<?php
+
+
+class CStudent{
+    public function test(){
+        echo "Test";
+    }
+}
