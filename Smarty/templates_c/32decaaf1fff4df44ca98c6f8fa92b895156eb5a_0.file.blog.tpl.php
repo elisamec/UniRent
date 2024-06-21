@@ -1,4 +1,27 @@
-<!DOCTYPE html>
+<?php
+/* Smarty version 4.5.3, created on 2024-06-21 14:51:09
+  from 'C:\xampp\htdocs\UniRent\Smarty\templates\blog.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '4.5.3',
+  'unifunc' => 'content_6675773da2f169_94392956',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '32decaaf1fff4df44ca98c6f8fa92b895156eb5a' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\UniRent\\Smarty\\templates\\blog.tpl',
+      1 => 1718962721,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_6675773da2f169_94392956 (Smarty_Internal_Template $_smarty_tpl) {
+?><!DOCTYPE html>
 <html>
    <head>
       <!-- basic -->
@@ -9,7 +32,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>Testimonial</title>
+      <title>Blog</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -27,6 +50,11 @@
       <link rel="stylesheet" href="/UniRent/Smarty/css/jquery.mCustomScrollbar.min.css">
       <!-- Tweaks for older IEs-->
       <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3//UniRent/Smarty/css/font-awesome.css">
+      <!-- submenus.js -->
+      <?php echo '<script'; ?>
+ src="/UniRent/Smarty/js/submenus.js"><?php echo '</script'; ?>
+>
+      <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/submenus.css">
    </head>
    <body>
       <div class="header_section">
@@ -44,13 +72,21 @@
                      <li class="nav-item">
                         <a class="nav-link" href="/UniRent/Smarty/templates/about.tpl">About</a>
                      </li>
+                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                        <div class="dropdown-menu">
+                              <a class="dropdown-item" href="#">Submenu Item 1</a>
+                              <a class="dropdown-item" href="#">Submenu Item 2</a>
+                              <a class="dropdown-item" href="#">Submenu Item 3</a>
+                        </div>
+                     </li>
                      <li class="nav-item">
                         <a class="nav-link" href="/UniRent/Smarty/templates/property.tpl">Property</a>
                      </li>
-                     <li class="nav-item active">
+                     <li class="nav-item">
                         <a class="nav-link" href="/UniRent/Smarty/templates/testimonial.tpl">Testimonial</a>
                      </li>
-                     <li class="nav-item">
+                     <li class="nav-item active">
                         <a class="nav-link" href="/UniRent/Smarty/templates/blog.tpl">Blog</a>
                      </li>
                      <li class="nav-item">
@@ -70,95 +106,37 @@
          </div>
       </div>
       <!-- header section end -->
-      <!-- customers section start -->
-      <div class="customer_section layout_padding">
+      <!-- blog section start -->
+      <div class="blog_section layout_padding">
          <div class="container">
             <div class="row">
                <div class="col-sm-12">
-                  <div class="customer_taital_main">
-                     <h1 class="customer_taital">SATISFIED CLIENT Says</h1>
-                     <hr class="customer_border_main">
+                  <div class="blog_taital_main">
+                     <h1 class="blog_taital">Book Now Property</h1>
+                     <hr class="blog_border_main">
                   </div>
                </div>
             </div>
          </div>
-         <div id="my_slider" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-               <div class="carousel-item active">
-                  <div class="customer_section_2">
-                     <div class="container">
-                        <div class="row">
-                           <div class="col-md-12">
-                              <div class="box_main">
-                                 <div class="customer_main">
-                                    <div class="customer_left">
-                                       <div class="customer_img"><img src="/UniRent/Smarty/images/customer-img.png"></div>
-                                    </div>
-                                    <div class="customer_right">
-                                       <h3 class="customer_name">DenoMark <span class="quick_icon"><img src="/UniRent/Smarty/images/quick-icon.png"></span></h3>
-                                       <p class="enim_text">anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internetanything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet</p>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
+         <div class="blog_section_2">
+            <div class="container-fluid">
+                <div class="row">
+                   <div class="col-md-6">
+                     <div class="blog_text_main">
+                        <p class="blog_text">Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web</p>
+                        <div class="readmore_bt"><a href="#">Read More</a></div>
                      </div>
                   </div>
-               </div>
-               <div class="carousel-item">
-                  <div class="customer_section_2">
-                     <div class="container">
-                        <div class="row">
-                           <div class="col-md-12">
-                              <div class="box_main">
-                                 <div class="customer_main">
-                                    <div class="customer_left">
-                                       <div class="customer_img"><img src="/UniRent/Smarty/images/customer-img.png"></div>
-                                    </div>
-                                    <div class="customer_right">
-                                       <h3 class="customer_name">DenoMark <span class="quick_icon"><img src="/UniRent/Smarty/images/quick-icon.png"></span></h3>
-                                       <p class="enim_text">anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internetanything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet</p>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="carousel-item">
-                  <div class="customer_section_2">
-                     <div class="container">
-                        <div class="row">
-                           <div class="col-md-12">
-                              <div class="box_main">
-                                 <div class="customer_main">
-                                    <div class="customer_left">
-                                       <div class="customer_img"><img src="/UniRent/Smarty/images/customer-img.png"></div>
-                                    </div>
-                                    <div class="customer_right">
-                                       <h3 class="customer_name">DenoMark <span class="quick_icon"><img src="/UniRent/Smarty/images/quick-icon.png"></span></h3>
-                                       <p class="enim_text">anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internetanything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet</p>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
+                  <div class="col-md-6">
+                     <div class="blog_img"><img src="/UniRent/Smarty/images/blog-img.png"></div>
                   </div>
                </div>
             </div>
-            <a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
-              <i class="fa fa-arrow-left"></i>
-            </a>
-            <a class="carousel-control-next" href="#my_slider" role="button" data-slide="next">
-              <i class="fa fa-arrow-right"></i>
-            </a>
          </div>
       </div>
-      <!-- customers section end -->
+      <!-- blog section end -->
       <!-- footer section start -->
-      <div class="footer_section layout_padding margin_top90">
+      <div class="footer_section layout_padding">
          <div class="container">
             <div class="row">
                <div class="col-md-12">
@@ -202,9 +180,9 @@
                      <ul>
                         <li><a href="/UniRent/Smarty/templates/home.tpl">Home</a></li>
                         <li><a href="/UniRent/Smarty/templates/about.tpl">About</a></li>
-                        <li><a href="/UniRent/Smarty/templates/blog.tpl">Blog</a></li>
+                        <li class="active"><a href="/UniRent/Smarty/templates/blog.tpl">Blog</a></li>
                         <li><a href="/UniRent/Smarty/templates/property.tpl">Property</a></li>
-                        <li class="active"><a href="/UniRent/Smarty/templates/testimonial.tpl">Testimonial</a></li>
+                        <li><a href="/UniRent/Smarty/templates/testimonial.tpl">Testimonial</a></li>
                         <li><a href="/UniRent/Smarty/templates/contact.tpl">Contact Us</a></li>
                      </ul>
                   </div>
@@ -221,16 +199,31 @@
       </div>
       <!-- copyright section end -->
       <!-- Javascript files-->
-      <script src="/UniRent/Smarty/js/jquery.min.js"></script>
-      <script src="/UniRent/Smarty/js/popper.min.js"></script>
-      <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
-      <script src="/UniRent/Smarty/js/jquery-3.0.0.min.js"></script>
-      <script src="/UniRent/Smarty/js/plugin.js"></script>
+      <?php echo '<script'; ?>
+ src="/UniRent/Smarty/js/jquery.min.js"><?php echo '</script'; ?>
+>
+      <?php echo '<script'; ?>
+ src="/UniRent/Smarty/js/popper.min.js"><?php echo '</script'; ?>
+>
+      <?php echo '<script'; ?>
+ src="/UniRent/Smarty/js/bootstrap.bundle.min.js"><?php echo '</script'; ?>
+>
+      <?php echo '<script'; ?>
+ src="/UniRent/Smarty/js/jquery-3.0.0.min.js"><?php echo '</script'; ?>
+>
+      <?php echo '<script'; ?>
+ src="/UniRent/Smarty/js/plugin.js"><?php echo '</script'; ?>
+>
       <!-- sidebar -->
-      <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
-      <script src="/UniRent/Smarty/js/custom.js"></script>
+      <?php echo '<script'; ?>
+ src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"><?php echo '</script'; ?>
+>
+      <?php echo '<script'; ?>
+ src="/UniRent/Smarty/js/custom.js"><?php echo '</script'; ?>
+>
       <!-- javascript --> 
-      <script>
+      <?php echo '<script'; ?>
+>
          // Material Select Initialization
          $(document).ready(function() {
          $('.mdb-select').materialSelect();
@@ -239,6 +232,8 @@
          $(this).closest('.select-outline').find('.caret').toggleClass('active');
          });
          });
-      </script>
+      <?php echo '</script'; ?>
+>
    </body>
-</html>
+</html><?php }
+}
