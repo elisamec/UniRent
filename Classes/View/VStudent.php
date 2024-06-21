@@ -5,7 +5,7 @@ require __DIR__.'/../../vendor/autoload.php';
 
 use StartSmarty;
 
-class VTest{
+class VStudent{
     private $smarty;
 
     public function __construct(){
@@ -15,6 +15,6 @@ class VTest{
 
     public function home(){
 
-        $this->smarty->display('blog.tpl');
+        $this->smarty->display('home.tpl');
     }
 }
