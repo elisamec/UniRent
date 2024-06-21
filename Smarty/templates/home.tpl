@@ -29,38 +29,6 @@
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css">
       <!-- Include Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script>
-                     var subjectObject = {
-                     "Option 1": [
-                        "Uni 1.1",
-                        "Uni 1.2",
-                        "Uni 1.3"
-                     ],
-                     "Option 2": [
-                        "Uni 2.1",
-                        "Uni 2.2"
-                     ],
-                     "Option 3": [
-                        "Uni 3.1",
-                        "Uni 3.2"
-                     ]
-                     }
-                     window.onload = function() {
-                     var citySel = document.getElementById("citySelect");
-                     var uniSel = document.getElementById("universitySelect");
-                     for (var x in subjectObject) {
-                        citySel.options[citySel.options.length] = new Option(x, x);
-                     }
-                     citySel.onchange = function() {
-                        //empty Chapters- and Topics- dropdowns
-                        uniSel.length = 1;
-                        //display correct values
-                        for (var y in subjectObject[this.value]) {
-                           uniSel.options[uniSel.options.length] = new Option(y, y);
-                        }
-                     }
-                     }
-                     </script>
    </head>
    <body>
       <div class="header_section">
@@ -77,6 +45,9 @@
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="/UniRent/Smarty/templates/about.tpl">About Us</a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="/UniRent/Smarty/templates/contact.tpl">Contact Us</a>
                      </li>
                   </ul>
                   <form class="form-inline my-2 my-lg-0">
@@ -100,7 +71,7 @@
                         <div class="col-sm-12">
                            <h1 class="banner_taital">Find an Accommodation</h1>
                            <p class="banner_text">Search among thousands of different accommodations the one that works best for you!</p>
-                           <div class="started_text"><a href="#">Contact Us</a></div>
+                           <div class="started_text"><a href="/UniRent/Smarty/templates/contact.tpl">Contact Us</a></div>
                         </div>
                      </div>
                   </div>
@@ -109,7 +80,7 @@
                         <div class="col-sm-12">
                            <h1 class="banner_taital">Choose your city</h1>
                            <p class="banner_text">You can search basing on your city of interest, to find what's best for you!</p>
-                           <div class="started_text"><a href="#">Contact Us</a></div>
+                           <div class="started_text"><a href="/UniRent/Smarty/templates/contact.tpl">Contact Us</a></div>
                         </div>
                      </div>
                   </div>
@@ -118,7 +89,7 @@
                         <div class="col-sm-12">
                            <h1 class="banner_taital">Made for Students</h1>
                            <p class="banner_text">Through this app we aim to help students look for accommodations reserved to them and owners to rent to students only.</p>
-                           <div class="started_text"><a href="#">Contact Us</a></div>
+                           <div class="started_text"><a href="/UniRent/Smarty/templates/contact.tpl">Contact Us</a></div>
                         </div>
                      </div>
                   </div>
@@ -136,26 +107,24 @@
                <h1 class="find_text">Find an Accommodation</h1>
                <div class="row">
                   <div class="col-lg-3 select-outline">
-                     <select id="citySelect" class="mdb-select md-form md-outline colorful-select dropdown-primary">
-                        <option value="" disabled selected>City</option>
-                        <option value="1">Option 1</option>
-                        <option value="2">Option 2</option>
-                        <option value="3">Option 3</option>
+                     <select name="city" id="city" class="mdb-select md-form md-outline colorful-select dropdown-primary">
+                     <option value="" disabled selected>Select a city</option>
+                     <option value="City 1">City 1</option>
+                     <option value="City 2">City 1</option>
+                     </select>
+
                      </select>
                      </div>
-
                      <div class="col-lg-3 select-outline">
-                     <select id="universitySelect" class="mdb-select md-form md-outline colorful-select dropdown-primary">
+                     <select name="university" id="university" class="mdb-select md-form md-outline colorful-select dropdown-primary">
                         <option value="" disabled selected>Select a university</option>
                      </select>
                      </div>
 
                      
-                  <div class="col-lg-3 select-outline">
-                     <form>
-                        <label for="dateInput">Select a date:</label>
-                        <input type="date" id="dateInput" name="date">
-                     </form>
+                  <div class="col-lg-3 form-outline datepicker" data-mdb-inline="true" data-mdb-minDate>
+                     <input type="text" class="form-control" id="exampleDatepicker1" data-mdb-toggle="datepicker">
+                     <label for="exampleDatepicker1" class="form-label">Select a date:</label>
                   </div>
                   <div class="col-lg-3 select-outline">
                      <div class="find_btn"><a href="#">Find Now</a></div>
@@ -165,146 +134,131 @@
          </div>
       </div>
       <!-- feature section start -->
-      <div class="feature_section layout_padding">
+      <div class="Properties_section layout_padding">
          <div class="container">
             <div class="row">
                <div class="col-sm-12">
-                  <div class="feature_taital_main">
-                     <h1 class="feature_taital">FEATURED</h1>
+                  <div class="Properties_taital_main">
+                     <h1 class="Properties_taital">New Properties In Milan</h1>
                      <hr class="border_main">
                   </div>
                </div>
             </div>
-         </div>
-         <div class="container-fluid">
-            <div id="main_slider" class="carousel slide" data-ride="carousel">
-               <div class="carousel-inner">
-                  <div class="carousel-item active">
-                     <div class="feature_section_2">
-                        <div class="row">
-                           <div class="col-md-4">
-                              <div class="container_main">
-                                 <img src="/UniRent/Smarty/images/img-1.png" alt="" class="image">
-                                 <div class="overlay">
-                                    <div class="text">
-                                       <div class="some_text"><a href="#">See More</a></div>
-                                    </div>
-                                 </div>
-                              </div>
+            <div class="Properties_section_2">
+               <div class="row">
+                  <div class="col-lg-4 col-md-6col-lg-4 col-md-6">
+                     <div class="blog_img"><img src="/UniRent/Smarty/images/img-4.png"></div>
+                     <div class="image_box">
+                        <div class="left_box">
+                           <h1 class="road_text">2186 Lohariya Road</h1>
+                           <div class="area_main">
+                              <h3 class="area_text active"><a href="#">Area:<br>240m2</a></h3>
+                              <h3 class="area_text"><a href="#">Beds:<br>3</a></h3>
+                              <h3 class="area_text"><a href="#">Baths:<br>1</a></h3>
+                              <h3 class="area_text"><a href="#">Garages:<br>1</a></h3>
                            </div>
-                           <div class="col-md-4">
-                              <div class="container_main">
-                                 <img src="/UniRent/Smarty/images/img-2.png" alt="" class="image">
-                                 <div class="overlay">
-                                    <div class="text">
-                                       <div class="some_text"><a href="#">See More</a></div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="col-md-4">
-                              <div class="container_main">
-                                 <img src="/UniRent/Smarty/images/img-3.png" alt="" class="image">
-                                 <div class="overlay">
-                                    <div class="text">
-                                       <div class="some_text"><a href="#">See More</a></div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
+                        </div>
+                        <div class="right_box">
+                           <div class="rate_text">$14000</div>
                         </div>
                      </div>
                   </div>
-                  <div class="carousel-item">
-                     <div class="feature_section_2">
-                        <div class="row">
-                           <div class="col-md-4">
-                              <div class="container_main">
-                                 <img src="/UniRent/Smarty/images/img-1.png" alt="" class="image">
-                                 <div class="overlay">
-                                    <div class="text">
-                                       <div class="some_text"><a href="#">See More</a></div>
-                                    </div>
-                                 </div>
-                              </div>
+                  <div class="col-lg-4 col-md-6">
+                     <div class="blog_img"><img src="/UniRent/Smarty/images/img-5.png"></div>
+                     <div class="image_box">
+                        <div class="left_box">
+                           <h1 class="road_text">2186 Lohariya Road</h1>
+                           <div class="area_main">
+                              <h3 class="area_text active"><a href="#">Area:<br>240m2</a></h3>
+                              <h3 class="area_text"><a href="#">Beds:<br>3</a></h3>
+                              <h3 class="area_text"><a href="#">Baths:<br>1</a></h3>
+                              <h3 class="area_text"><a href="#">Garages:<br>1</a></h3>
                            </div>
-                           <div class="col-md-4">
-                              <div class="container_main">
-                                 <img src="/UniRent/Smarty/images/img-2.png" alt="" class="image">
-                                 <div class="overlay">
-                                    <div class="text">
-                                       <div class="some_text"><a href="#">See More</a></div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="col-md-4">
-                              <div class="container_main">
-                                 <img src="/UniRent/Smarty/images/img-3.png" alt="" class="image">
-                                 <div class="overlay">
-                                    <div class="text">
-                                       <div class="some_text"><a href="#">See More</a></div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
+                        </div>
+                        <div class="right_box">
+                           <div class="rate_text">$14000</div>
                         </div>
                      </div>
                   </div>
-                  <div class="carousel-item">
-                     <div class="feature_section_2">
-                        <div class="row">
-                           <div class="col-md-4">
-                              <div class="container_main">
-                                 <img src="/UniRent/Smarty/images/img-1.png" alt="" class="image">
-                                 <div class="overlay">
-                                    <div class="text">
-                                       <div class="some_text"><a href="#">See More</a></div>
-                                    </div>
-                                 </div>
-                              </div>
+                  <div class="col-lg-4 col-md-6">
+                     <div class="blog_img"><img src="/UniRent/Smarty/images/img-6.png"></div>
+                     <div class="image_box">
+                        <div class="left_box">
+                           <h1 class="road_text">2186 Lohariya Road</h1>
+                           <div class="area_main">
+                              <h3 class="area_text active"><a href="#">Area:<br>240m2</a></h3>
+                              <h3 class="area_text"><a href="#">Beds:<br>3</a></h3>
+                              <h3 class="area_text"><a href="#">Baths:<br>1</a></h3>
+                              <h3 class="area_text"><a href="#">Garages:<br>1</a></h3>
                            </div>
-                           <div class="col-md-4">
-                              <div class="container_main">
-                                 <img src="/UniRent/Smarty/images/img-2.png" alt="" class="image">
-                                 <div class="overlay">
-                                    <div class="text">
-                                       <div class="some_text"><a href="#">See More</a></div>
-                                    </div>
-                                 </div>
-                              </div>
+                        </div>
+                        <div class="right_box">
+                           <div class="rate_text">$14000</div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6">
+                     <div class="blog_img"><img src="/UniRent/Smarty/images/img-7.png"></div>
+                     <div class="image_box">
+                        <div class="left_box">
+                           <h1 class="road_text">2186 Lohariya Road</h1>
+                           <div class="area_main">
+                              <h3 class="area_text active"><a href="#">Area:<br>240m2</a></h3>
+                              <h3 class="area_text"><a href="#">Beds:<br>3</a></h3>
+                              <h3 class="area_text"><a href="#">Baths:<br>1</a></h3>
+                              <h3 class="area_text"><a href="#">Garages:<br>1</a></h3>
                            </div>
-                           <div class="col-md-4">
-                              <div class="container_main">
-                                 <img src="/UniRent/Smarty/images/img-3.png" alt="" class="image">
-                                 <div class="overlay">
-                                    <div class="text">
-                                       <div class="some_text"><a href="#">See More</a></div>
-                                    </div>
-                                 </div>
-                              </div>
+                        </div>
+                        <div class="right_box">
+                           <div class="rate_text">$14000</div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6">
+                     <div class="blog_img"><img src="/UniRent/Smarty/images/img-8.png"></div>
+                     <div class="image_box">
+                        <div class="left_box">
+                           <h1 class="road_text">2186 Lohariya Road</h1>
+                           <div class="area_main">
+                              <h3 class="area_text active"><a href="#">Area:<br>240m2</a></h3>
+                              <h3 class="area_text"><a href="#">Beds:<br>3</a></h3>
+                              <h3 class="area_text"><a href="#">Baths:<br>1</a></h3>
+                              <h3 class="area_text"><a href="#">Garages:<br>1</a></h3>
                            </div>
+                        </div>
+                        <div class="right_box">
+                           <div class="rate_text">$14000</div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6">
+                     <div class="blog_img"><img src="/UniRent/Smarty/images/img-9.png"></div>
+                     <div class="image_box">
+                        <div class="left_box">
+                           <h1 class="road_text">2186 Lohariya Road</h1>
+                           <div class="area_main">
+                              <h3 class="area_text active"><a href="#">Area:<br>240m2</a></h3>
+                              <h3 class="area_text"><a href="#">Beds:<br>3</a></h3>
+                              <h3 class="area_text"><a href="#">Baths:<br>1</a></h3>
+                              <h3 class="area_text"><a href="#">Garages:<br>1</a></h3>
+                           </div>
+                        </div>
+                        <div class="right_box">
+                           <div class="rate_text">$14000</div>
                         </div>
                      </div>
                   </div>
                </div>
-                <a class="carousel-control-prev" href="#main_slider" role="button" data-slide="prev">
-                <i class="fa fa-angle-left"></i>
-                </a>
-                <a class="carousel-control-next" href="#main_slider" role="button" data-slide="next">
-                <i class="fa fa-angle-right"></i>
-                </a>
             </div>
          </div>
       </div>
-      <!-- feature section end -->
       <!-- Properties section start -->
       <div class="Properties_section layout_padding">
          <div class="container">
             <div class="row">
                <div class="col-sm-12">
                   <div class="Properties_taital_main">
-                     <h1 class="Properties_taital">New Properties for You</h1>
+                     <h1 class="Properties_taital">New Properties In Rome</h1>
                      <hr class="border_main">
                   </div>
                </div>
@@ -418,53 +372,6 @@
          </div>
       </div>
       <!-- Properties section end -->
-      <!-- blog section start -->
-      <div class="blog_section layout_padding">
-         <div class="container">
-            <div class="row">
-               <div class="col-sm-12">
-                  <div class="blog_taital_main">
-                     <h1 class="blog_taital">Book Now Property</h1>
-                     <hr class="blog_border_main">
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="blog_section_2">
-            <div class="container-fluid">
-                <div class="row">
-                   <div class="col-md-6">
-                     <div class="blog_text_main">
-                        <p class="blog_text">Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web</p>
-                        <div class="readmore_bt"><a href="#">Read More</a></div>
-                     </div>
-                  </div>
-                  <div class="col-md-6">
-                     <div class="blog_img"><img src="/UniRent/Smarty/images/blog-img.png"></div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- blog section end -->
-      <!-- newsletter section start -->
-      <div class="newsletter_section layout_padding">
-         <div class="container">
-            <div class="row">
-               <div class="col-sm-12">
-                  <div class="newsletter_taital_main">
-                     <h1 class="newsletter_taital">subscribe Our newsletter</h1>
-                     <hr class="newsletter_border_main">
-                  </div>
-               </div>
-            </div>
-            <form action="">
-               <textarea class="email_bt" placeholder="Enter Your Email" rows="5" id="comment" name="Massage"></textarea>
-               <div class="subscribe_bt"><a href="#">Subscribe</a></div>
-            </form>
-         </div>
-      </div>
-      <!-- newsletter section end -->
       <!-- customers section start -->
       <div class="customer_section layout_padding">
          <div class="container">
@@ -642,10 +549,7 @@
                   <div class="footer_menu">
                      <ul>
                         <li class="active"><a href="/UniRent/Student/home">Home</a></li>
-                        <li><a href="/UniRent/Smarty/templates/about.tpl">About</a></li>
-                        <li><a href="/UniRent/Test/test">Blog</a></li>
-                        <li><a href="/UniRent/Smarty/templates/property.tpl">Property</a></li>
-                        <li><a href="/UniRent/Smarty/templates/testimonial.tpl">Testimonial</a></li>
+                        <li><a href="/UniRent/Smarty/templates/about.tpl">About Us</a></li>
                         <li><a href="/UniRent/Smarty/templates/contact.tpl">Contact Us</a></li>
                      </ul>
                   </div>
@@ -680,6 +584,25 @@
          $(this).closest('.select-outline').find('.caret').toggleClass('active');
          });
          });
+      </script>
+      <script>
+         var universities = {
+            'City 1': ['Uni 1.1', 'Uni 1.2', 'Uni 1.3'],
+            'City 2': ['Uni 2.1', 'Uni 2.2'],
+            'City 3': ['Uni 3.1', 'Uni 3.2']
+            // Add other cities and universities as needed
+        };
+
+        var $universities = $('#university');
+        $('#city').change(function() {
+            var city = $(this).val();
+            var universityList = universities[city] || [];
+
+            var html = $.map(universityList, function(university) {
+                return '<option value="' + university + '">' + university + '</option>';
+            }).join('');
+            $universities.html(html);
+        });
       </script>
    </body>
 </html>
