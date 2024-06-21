@@ -47,10 +47,11 @@
                      </li>
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                        <div class="dropdown-menu">
-                              <a class="dropdown-item" href="#">Submenu Item 1</a>
-                              <a class="dropdown-item" href="#">Submenu Item 2</a>
-                              <a class="dropdown-item" href="#">Submenu Item 3</a>
+
+                        <div class="drpdwn-menu">
+                              <a class="drpdwn-item" href="#">Submenu Item 1</a>
+                              <a class="drpdwn-item" href="#">Submenu Item 2</a>
+                              <a class="drpdwn-item" href="#">Submenu Item 3</a>
                         </div>
                      </li>
                      <li class="nav-item">
