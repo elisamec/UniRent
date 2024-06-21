@@ -32,10 +32,11 @@ class FPhoto {
     */
     public function exist(int $idPhoto):bool 
     {
-        $q="SELECT * FROM photo WHERE id=$idPhoto";
+        $q="SELECT * FROM photo WHERE id=:idPhoto";
         $db=FConnection::getInstance()->getConnection();
         $db->beginTransaction();
         $stm=$db->prepare($q);
+        $stm->bindParam(':id',$id,PDO::PARAM_INT);
         $stm->execute();
         $db->commit();
         $result=$stm->rowCount();
@@ -52,10 +53,11 @@ class FPhoto {
     */
     public function existReview(int $idReview):bool 
     {
-        $q="SELECT * FROM photo WHERE idReview=$idReview";
+        $q="SELECT * FROM photo WHERE idReview=:id";
         $db=FConnection::getInstance()->getConnection();
         $db->beginTransaction();
         $stm=$db->prepare($q);
+        $stm->bindParam(':id',$idReview,PDO::PARAM_INT);
         $stm->execute();
         $db->commit();
         $result=$stm->rowCount();
@@ -72,10 +74,11 @@ class FPhoto {
     */
     public function existAccommodation(int $idAccommodation):bool 
     {
-        $q="SELECT * FROM photo WHERE idAccommodation=$idAccommodation";
+        $q="SELECT * FROM photo WHERE idAccommodation=:id";
         $db=FConnection::getInstance()->getConnection();
         $db->beginTransaction();
         $stm=$db->prepare($q);
+        $stm->bindParam(':id',$idAccommodation,PDO::PARAM_INT);
         $stm->execute();
         $db->commit();
         $result=$stm->rowCount();
@@ -97,8 +100,9 @@ class FPhoto {
         try{
             $db->exec('LOCK TABLES photo READ');
             $db->beginTransaction();
-            $q="SELECT * FROM photo WHERE relativeTo = 'review' AND idReview = $idReview";    
+            $q="SELECT * FROM photo WHERE relativeTo = 'review' AND idReview = :id";    
             $stm=$db->prepare($q);
+            $stm->bindParam(':id',$idReview,PDO::PARAM_INT);
             $stm->execute();
             $db->commit();
             $db->exec('UNLOCK TABLES');
@@ -139,8 +143,9 @@ class FPhoto {
         try{
             $db->exec('LOCK TABLES photo READ');
             $db->beginTransaction();
-            $q="SELECT * FROM photo WHERE relativeTo = 'accommodation' AND idAccommodation = $idAccommodation";    
+            $q="SELECT * FROM photo WHERE relativeTo = 'accommodation' AND idAccommodation = :id";    
             $stm=$db->prepare($q);
+            $stm->bindParam(':id',$idAccommodation,PDO::PARAM_INT);
             $stm->execute();
             $db->commit();
             $db->exec('UNLOCK TABLES');
@@ -183,8 +188,9 @@ class FPhoto {
             try{
                 $db->exec('LOCK TABLES photo READ');
                 $db->beginTransaction();
-                $q="SELECT * FROM photo WHERE id = $id AND relativeTo = 'other'";    
+                $q="SELECT * FROM photo WHERE id = :id AND relativeTo = 'other'";    
                 $stm=$db->prepare($q);
+                $stm->bindParam(':id',$id,PDO::PARAM_INT);
                 $stm->execute();
                 $db->commit();
                 $db->exec('UNLOCK TABLES');

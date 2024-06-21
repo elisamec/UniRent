@@ -43,7 +43,7 @@
     //$risultato = $FP->store($visit);
 
     //$risultato = $FP->delete("EVisit", 12);
-    $risultato = $FP->load("EVisit", 1);
+    $risultato = $FP->load("EAccommodation", 21);
 
     print($risultato);
 

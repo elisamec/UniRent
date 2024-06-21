@@ -48,10 +48,11 @@ class FVisit
     */
     public function exist(int $visitId):bool 
     {
-        $q="SELECT * FROM visit WHERE id=$visitId";
+        $q="SELECT * FROM visit WHERE id=:id";
         $db=FConnection::getInstance()->getConnection();
         $db->beginTransaction();
         $stm=$db->prepare($q);
+        $stm->bindParam(':id',$visitId,PDO::PARAM_INT);
         $stm->execute();
         $db->commit();
         $result=$stm->rowCount();
@@ -75,8 +76,9 @@ class FVisit
             try{
                 $db->exec('LOCK TABLES visit READ');
                 $db->beginTransaction();
-                $q="SELECT * FROM visit WHERE id=$idVisit";    
+                $q="SELECT * FROM visit WHERE id=:id";    
                 $stm=$db->prepare($q);
+                $stm->bindParam(':id',$idVisit,PDO::PARAM_INT);
                 $stm->execute();
                 $db->commit();
                 $db->exec('UNLOCK TABLES');

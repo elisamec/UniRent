@@ -50,10 +50,11 @@
         */
         public function exist(int $accommodatioId):bool 
         {
-            $q="SELECT * FROM visit WHERE id=$accommodatioId";
+            $q="SELECT * FROM visit WHERE id=:id";
             $db=FConnection::getInstance()->getConnection();
             $db->beginTransaction();
             $stm=$db->prepare($q);
+            $stm->bindParam(':id',$accommodatioId,PDO::PARAM_INT);
             $stm->execute();
             $db->commit();
             $result=$stm->rowCount();
@@ -78,8 +79,9 @@
             try{
                 $db->exec('LOCK TABLES accommodation READ');
                 $db->beginTransaction();
-                $q="SELECT * FROM accommodation WHERE id=$idAccommodation";    
+                $q="SELECT * FROM accommodation WHERE id=:id";    
                 $stm=$db->prepare($q);
+                $stm->bindParam(':id',$idAccommodation,PDO::PARAM_INT);
                 $stm->execute();
                 $db->commit();
                 $db->exec('UNLOCK TABLES');
@@ -131,8 +133,9 @@
             try{
                 $db->exec('LOCK TABLES address READ');
                 $db->beginTransaction();
-                $q="SELECT * FROM address WHERE id=$idAddress";    
+                $q="SELECT * FROM address WHERE id=:id";    
                 $stm=$db->prepare($q);
+                $stm->bindParam(':id',$idAddress,PDO::PARAM_INT);
                 $stm->execute();
                 $db->commit();
                 $db->exec('UNLOCK TABLES');
@@ -162,8 +165,9 @@
             try{
                 $db->exec('LOCK TABLES day READ');
                 $db->beginTransaction();
-                $q="SELECT * FROM day WHERE idAccommodation=$idAccommodation";    
+                $q="SELECT * FROM day WHERE idAccommodation=:id";    
                 $stm=$db->prepare($q);
+                $stm->bindParam(':id',$idAccommodation,PDO::PARAM_INT);
                 $stm->execute();
                 $db->commit();
                 $db->exec('UNLOCK TABLES');
@@ -198,8 +202,9 @@
             try{
                 $db->exec('LOCK TABLES time READ');
                 $db->beginTransaction();
-                $q="SELECT * FROM time WHERE idDay=$idDay";    
+                $q="SELECT * FROM time WHERE idDay=:id";    
                 $stm=$db->prepare($q);
+                $stm->bindParam(':id',$idDay,PDO::PARAM_INT);
                 $stm->execute();
                 $db->commit();
                 $db->exec('UNLOCK TABLES');
