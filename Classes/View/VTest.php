@@ -15,6 +15,6 @@ class VTest{
 
     public function home(){
 
-        $this->smarty->display('homeStudent.tpl');
+        $this->smarty->display('login.tpl');
     }
 }
