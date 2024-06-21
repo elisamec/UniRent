@@ -5,6 +5,7 @@
     "autoload": {
         "psr-4": {
             "Univaq\\Unirent\\": "Classes/",
+            "Classes\\View\\": "Classes/View",
             "Classes\\Entity\\": "Classes/Entity",
             "Classes\\Foundation\\": "Classes/Foundation",
             "Classes\\Control\\" : "Classes/Control",
