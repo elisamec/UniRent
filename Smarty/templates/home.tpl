@@ -30,27 +30,26 @@
       <!-- Include Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script>
-                     var subjectObject = {
-                     "Option 1": ["Uni 1.1", "Uni 1.2", "Uni 1.3"],
-                     "Option 2": ["Uni 2.1","Uni 2.2"],
-                     "Option 3": ["Uni 3.1","Uni 3.2"]
-                     }
-                     window.onload = function() {
-                     var citySel = document.getElementById("citySelect");
-                     var uniSel = document.getElementById("universitySelect");
-                     for (var x in subjectObject) {
-                        citySel.options[citySel.options.length] = new Option(x, x);
-                     }
-                     citySel.onchange = function() {
-                        //empty Chapters- and Topics- dropdowns
-                        uniSel.length = 1;
-                        //display correct values
-                        for (var y in subjectObject[this.value]) {
-                           uniSel.options[uniSel.options.length] = new Option(y, y);
-                        }
-                     }
-                     }
-                     </script>
+        jQuery(function($) {
+         var universities = {
+            'City 1': ['Uni 1.1', 'Uni 1.2', 'Uni 1.3'],
+            'City 2': ['Uni 2.1', 'Uni 2.2'],
+            'City 3': ['Uni 3.1', 'Uni 3.2']
+            // Add other cities and universities as needed
+        };
+
+        var $universities = $('#university');
+        $('#city').change(function() {
+            var city = $(this).val();
+            var universityList = universities[city] || [];
+
+            var html = $.map(universityList, function(university) {
+                return '<option value="' + university + '">' + university + '</option>';
+            }).join('');
+            $universities.html(html);
+        });
+        });
+      </script>
    </head>
    <body>
       <div class="header_section">
@@ -126,12 +125,16 @@
                <h1 class="find_text">Find an Accommodation</h1>
                <div class="row">
                   <div class="col-lg-3 select-outline">
-                     <select id="citySelect" class="mdb-select md-form md-outline colorful-select dropdown-primary">
-                        <option value="" disabled selected>City</option>
+                     <select name="city" id="city" class="mdb-select md-form md-outline colorful-select dropdown-primary">
+                     <option value="" disabled selected>Select a city</option>
+                     <option value="City 1">City 1</option>
+                     <option value="City 2">City 1</option>
+                     </select>
+
                      </select>
                      </div>
                      <div class="col-lg-3 select-outline">
-                     <select id="universitySelect" class="mdb-select md-form md-outline colorful-select dropdown-primary">
+                     <select name="university" id="university" class="mdb-select md-form md-outline colorful-select dropdown-primary">
                         <option value="" disabled selected>Select a university</option>
                      </select>
                      </div>
