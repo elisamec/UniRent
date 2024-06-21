@@ -26,10 +26,7 @@
       <!-- Scrollbar Custom CSS -->
       <link rel="stylesheet" href="/UniRent/Smarty/css/jquery.mCustomScrollbar.min.css">
       <!-- Tweaks for older IEs-->
-      <link rel="stylesheet" href="/UniRent/Smarty/css/font-awesome.css">
-      <!-- submenus.js -->
-      <script src="/UniRent/Smarty/js/submenus.js"></script>
-      <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/submenus.css">
+      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3//UniRent/Smarty/css/font-awesome.css">
    </head>
    <body>
       <div class="header_section">
@@ -46,14 +43,6 @@
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="/UniRent/Smarty/templates/about.tpl">About</a>
-                     </li>
-                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                        <div class="dropdown-menu">
-                              <a class="dropdown-item" href="#">Submenu Item 1</a>
-                              <a class="dropdown-item" href="#">Submenu Item 2</a>
-                              <a class="dropdown-item" href="#">Submenu Item 3</a>
-                        </div>
                      </li>
                      <li class="nav-item active">
                         <a class="nav-link" href="/UniRent/Smarty/templates/property.tpl">Property</a>
