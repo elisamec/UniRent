@@ -1,78 +1,44 @@
 <?php
-namespace Classes\Control;
-use InvalidArgumentException;
 
-class CFrontController implements CFrontControllerInterface
-{
-    const DEFAULT_CONTROLLER = "IndexController";
-    const DEFAULT_ACTION     = "index";
+class CFrontController{
     
-    protected $controller    = self::DEFAULT_CONTROLLER;
-    protected $action        = self::DEFAULT_ACTION;
-    protected $params        = array();
-    protected $basePath      = "mybasepath/";
-    
-    public function __construct(array $options = array()) {
-        if (empty($options)) {
-           $this->parseUri();
-        }
-        else {
-            if (isset($options["controller"])) {
-                $this->setController($options["controller"]);
+    public function run($requestUri){
+        // Parse the request URI
+        echo $requestUri;
+        
+
+        $requestUri = trim($requestUri, '/');
+        $uriParts = explode('/', $requestUri);
+
+        array_shift($uriParts);
+        // var_dump($uriParts);
+
+        // Extract controller and method names
+        $controllerName = !empty($uriParts[0]) ? ucfirst($uriParts[0]) : 'User';
+        // var_dump($controllerName);
+        $methodName = !empty($uriParts[1]) ? $uriParts[1] : 'login';
+
+        // Load the controller class
+        $controllerClass = 'C' . $controllerName;
+        // var_dump($controllerClass);
+        $controllerFile = __DIR__ . "/{$controllerClass}.php";
+        // var_dump($controllerFile);
+
+        if (file_exists($controllerFile)) {
+            require_once $controllerFile;
+
+            // Check if the method exists in the controller
+            if (method_exists($controllerClass, $methodName)) {
+                // Call the method
+                $params = array_slice($uriParts, 2); // Get optional parameters
+                call_user_func_array([$controllerClass, $methodName], $params);
+            } else {
+                // Method not found, handle appropriately (e.g., show 404 page)
+                header('Location: /UniRent/User/home');
             }
-            if (isset($options["action"])) {
-                $this->setAction($options["action"]);     
-            }
-            if (isset($options["params"])) {
-                $this->setParams($options["params"]);
-            }
+        } else {
+            // Controller not found, handle appropriately (e.g., show 404 page)
+            header('Location: /UniRent/User/home');
         }
-    }
-    
-    protected function parseUri() {
-        $path = trim(parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH), "/");
-        $path = preg_replace('/[^a-zA-Z0-9]//', "", $path);
-        if (strpos($path, $this->basePath) === 0) {
-            $path = substr($path, strlen($this->basePath));
-        }
-        @list($controller, $action, $params) = explode("/", $path, 3);
-        if (isset($controller)) {
-            $this->setController($controller);
-        }
-        if (isset($action)) {
-            $this->setAction($action);
-        }
-        if (isset($params)) {
-            $this->setParams(explode("/", $params));
-        }
-    }
-    
-    public function setController($controller) {
-        $controller = ucfirst(strtolower($controller)) . "Controller";
-        if (!class_exists($controller)) {
-            throw new InvalidArgumentException(
-                "The action controller '$controller' has not been defined.");
-        }
-        $this->controller = $controller;
-        return $this;
-    }
-    
-    public function setAction($action) {
-        $reflector = new ReflectionClass($this->controller);
-        if (!$reflector->hasMethod($action)) {
-            throw new InvalidArgumentException(
-                "The controller action '$action' has been not defined.");
-        }
-        $this->action = $action;
-        return $this;
-    }
-    
-    public function setParams(array $params) {
-        $this->params = $params;
-        return $this;
-    }
-    
-    public function run() {
-        call_user_func_array(array(new $this->controller, $this->action), $this->params);
     }
 }

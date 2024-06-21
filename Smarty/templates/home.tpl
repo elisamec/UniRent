@@ -44,16 +44,16 @@
                         <a class="nav-link" href="/UniRent/Smarty/templates/home.tpl">Home</a>
                      </li>
                      <li class="nav-item">
-        <a class="nav-link" href="/UniRent/Smarty/templates/about.tpl">About</a>
-    </li>
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-        <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Submenu Item 1</a>
-            <a class="dropdown-item" href="#">Submenu Item 2</a>
-            <a class="dropdown-item" href="#">Submenu Item 3</a>
-        </div>
-    </li>
+                        <a class="nav-link" href="location.href='/UniRent/Test/test'">About</a>
+                     </li>
+                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                        <div class="dropdown-menu">
+                              <a class="dropdown-item" href="#">Submenu Item 1</a>
+                              <a class="dropdown-item" href="#">Submenu Item 2</a>
+                              <a class="dropdown-item" href="#">Submenu Item 3</a>
+                        </div>
+                     </li>
                      <li class="nav-item">
                         <a class="nav-link" href="/UniRent/Smarty/templates/property.tpl">Property</a>
                      </li>
