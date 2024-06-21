@@ -1,5 +1,5 @@
 <?php
-namespace Classes\Control;
+namespace Classes\Foundation;
 /**
  * class to access to $_COOKIE superglobal array, You must use this class and not directly the _COOKIE array
  */
