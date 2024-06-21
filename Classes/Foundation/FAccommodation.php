@@ -501,4 +501,150 @@
             }
         }
 
+        /**
+         * updateDay
+         * private class that updates the days of visit of an accommodation in db
+         * 
+         * @param  int $idAccommodation
+         * @param  String $day
+         * @return bool
+         */
+        public function updateDay(int $idAccommodation, String $day):bool 
+        {
+            $db=FConnection::getInstance()->getConnection();
+            $FA = FAccommodation::getInstance();
+
+            try{
+                $db->exec('LOCK TABLES day WRITE');
+                $db->beginTransaction();
+                
+                $FA->deleteDay($idAccommodation);
+                
+                $db->exec('UNLOCK TABLES');
+
+                return true;
+            }
+            catch(PDOException $e){
+                $db->rollBack();
+                return false;
+            }
+            
+        }
+
+        public function updateTime(int $idDay, array $times):bool 
+        {
+            $db=FConnection::getInstance()->getConnection();
+            $FA = FAccommodation::getInstance();
+
+            try{
+                $db->exec('LOCK TABLES time WRITE');
+                $db->beginTransaction();
+                
+                $FA->deleteTime($idDay);
+
+                foreach($times as $time){
+                    $FA->storeTime($idDay, $time);
+                }
+
+                $db->exec('UNLOCK TABLES');
+
+                return true;
+            }
+            catch(PDOException $e){
+                $db->rollBack();
+                return false;
+            }
+            
+        }
+
+        public function deleteDay(int $idAccommodation):bool 
+        {
+            $db=FConnection::getInstance()->getConnection();
+            $FA = FAccommodation::getInstance();
+
+            try{
+                $db->exec('LOCK TABLES day WRITE');
+                $db->beginTransaction();
+
+                $days = $FA->retriveDayId($idAccommodation);
+                foreach($days as $day){
+                    $FA->deleteTime($day);
+                }
+                
+                $q='DELETE FROM day WHERE idAccommodation=:idAccommodation';
+                $stm=$db->prepare($q);
+                $stm->bindValue(':idAccommodation',$idAccommodation,PDO::PARAM_INT);
+                $stm->execute();           
+                print "transazione iniziata";
+                $db->commit();
+                $db->exec('UNLOCK TABLES');
+
+                return true;
+            }
+            catch(PDOException $e){
+                $db->rollBack();
+                return false;
+            }
+            
+        }
+
+        public function retriveDayId(int $idAccommodation):array 
+        {
+            $db=FConnection::getInstance()->getConnection();
+
+            try{
+                $db->exec('LOCK TABLES day WRITE');
+                $db->beginTransaction();
+                
+                $q='SELECT id FROM day WHERE idAccommodation=:idAccommodation';
+                $stm=$db->prepare($q);
+                $stm->bindValue(':idAccommodation',$idAccommodation,PDO::PARAM_INT);
+                $stm->execute();           
+
+
+                $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+                $days = [];
+                foreach($result as $row){
+                    $days[] = $row['id'];
+                }
+
+                return $days;
+            }
+            catch(PDOException $e){
+                $db->rollBack();
+                return [];
+            }
+            
+        }
+
+        /**
+         * deleteTime   
+         * private class that deletes the times of visit of an accommodation in db
+         * 
+         * @param  int $idDay
+         * @return bool
+         * 
+         */
+        public function deleteTime(int $idDay):bool 
+        {
+            $db=FConnection::getInstance()->getConnection();
+
+            try{
+                $db->exec('LOCK TABLES time WRITE');
+                $db->beginTransaction();
+                
+                $q='DELETE FROM time WHERE idDay=:idDay';
+                $stm=$db->prepare($q);
+                $stm->bindValue(':idDay',$idDay,PDO::PARAM_INT);
+                $stm->execute();           
+
+                return true;
+            }
+            catch(PDOException $e){
+                $db->rollBack();
+                return false;
+            }
+            
+        }
+
     }

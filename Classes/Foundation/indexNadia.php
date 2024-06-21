@@ -20,32 +20,36 @@
     $FP=FPersistentManager::getInstance();
     $FA=FAccommodation::getInstance();
 
-    $a = new Address();
-    $a = $a->withSortingCode(25)->withAddressLine1('Via Anna, 1')->withPostalCode('55555')->withLocality('Milano');
-    $st = new DateTime('2021-06-01');
+    //$a = new Address();
+    //$a = $a->withSortingCode(25)->withAddressLine1('Via Anna, 1')->withPostalCode('55555')->withLocality('Milano');
+    //$st = new DateTime('2021-06-01');
 
-    $ph1 = new EPhoto(null, "foto1", "accommodation", null, null);
-    $ph2 = new EPhoto(null, "fo1", "accommodation", null, null);
-    $photo = [$ph1, $ph2];
+    //$ph1 = new EPhoto(null, "foto1", "accommodation", null, null);
+    //$ph2 = new EPhoto(null, "fo1", "accommodation", null, null);
+    //$photo = [$ph1, $ph2];
 
-    $visit = ['moday' => ["10:30", "11:20"], 'thursday' => ["20:40"]];
+    //$visit = ['moday' => ["10:30", "11:20"], 'thursday' => ["20:40"]];
 
-    $acc = new EAccommodation(null, $photo, "Casa", $a, 100, $st, "casetta bellissima v2", 100, $visit, 30, false, true, true, false, 2);
+    //$acc = new EAccommodation(null, $photo, "Casa", $a, 100, $st, "casetta bellissima v2", 100, $visit, 30, false, true, true, false, 2);
 
     //$risultato = $FA->update($acc);
 
     //$id = $acc->getIdAccommodation(); 
 
-    $visit = new EVisit(6, new DateTime("2024-01-01 15:30"), 1, 21);
+    //$visit = new EVisit(6, new DateTime("2024-01-01 15:30"), 1, 21);
 
     //$risultato = $FP->update($visit);
 
     //$risultato = $FP->store($visit);
 
     //$risultato = $FP->delete("EVisit", 12);
-    $risultato = $FP->load("EAccommodation", 21);
+    //$risultato = $FP->load("EAccommodation", 21);
 
-    print($risultato);
+    $times = ["11:30", "14:00"];
+
+    $risultato = $FA->deleteDay(33);
+
+    print_r($risultato);
 
 
 
