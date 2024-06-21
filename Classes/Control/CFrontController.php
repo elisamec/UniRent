@@ -1,5 +1,7 @@
 <?php
 
+namespace Classes\Control;
+
 class CFrontController{
     
     public function run($requestUri){
@@ -7,7 +9,7 @@ class CFrontController{
         echo $requestUri;
         
 
-        $requestUri = trim($requestUri, '/');
+        /*$requestUri = trim($requestUri, '/');
         $uriParts = explode('/', $requestUri);
 
         array_shift($uriParts);
@@ -39,6 +41,6 @@ class CFrontController{
         } else {
             // Controller not found, handle appropriately (e.g., show 404 page)
             header('Location: /UniRent/User/home');
-        }
+        }*/
     }
 }
