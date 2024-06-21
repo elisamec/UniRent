@@ -6,10 +6,10 @@ require('StartSmarty.php');
 
 $smarty = StartSmarty::configuration();
 
-$smarty->display('home.tpl');
+//$smarty->display('home.tpl');
 
 
-//$fc = new CFrontController();
-
-//$fc->run("/UniRent/Test/test");
+$fc = new CFrontController();
+print "Sono in index";
+$fc->run("/UniRent/Test/test");
 //$fc->run($_SERVER['REQUEST_URI']);

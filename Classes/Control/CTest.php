@@ -8,7 +8,7 @@ class CTest{
     public static function test(){
         echo "sono in CTest";
         $view = new VTest();
-        //$view->home();
+        $view->home();
     }
 }
 

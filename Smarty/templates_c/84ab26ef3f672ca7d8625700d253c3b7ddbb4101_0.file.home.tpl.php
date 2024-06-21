@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.5.3, created on 2024-06-21 11:47:41
+/* Smarty version 4.5.3, created on 2024-06-21 14:33:52
   from 'C:\xampp\htdocs\UniRent\Smarty\templates\home.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.5.3',
-  'unifunc' => 'content_66754c3dcf44c8_74340237',
+  'unifunc' => 'content_667573303e5e33_65551662',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '84ab26ef3f672ca7d8625700d253c3b7ddbb4101' => 
     array (
       0 => 'C:\\xampp\\htdocs\\UniRent\\Smarty\\templates\\home.tpl',
-      1 => 1718963248,
+      1 => 1718972772,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_66754c3dcf44c8_74340237 (Smarty_Internal_Template $_smarty_tpl) {
+function content_667573303e5e33_65551662 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html>
    <head>
@@ -70,10 +70,11 @@ function content_66754c3dcf44c8_74340237 (Smarty_Internal_Template $_smarty_tpl)
                      </li>
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                        <div class="dropdown-menu">
-                              <a class="dropdown-item" href="#">Submenu Item 1</a>
-                              <a class="dropdown-item" href="#">Submenu Item 2</a>
-                              <a class="dropdown-item" href="#">Submenu Item 3</a>
+
+                        <div class="drpdwn-menu">
+                              <a class="drpdwn-item" href="#">Submenu Item 1</a>
+                              <a class="drpdwn-item" href="#">Submenu Item 2</a>
+                              <a class="drpdwn-item" href="#">Submenu Item 3</a>
                         </div>
                      </li>
                      <li class="nav-item">
