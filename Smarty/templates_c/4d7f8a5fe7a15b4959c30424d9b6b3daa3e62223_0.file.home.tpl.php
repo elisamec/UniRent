@@ -1,4 +1,27 @@
-<!DOCTYPE html>
+<?php
+/* Smarty version 4.5.3, created on 2024-06-21 11:35:18
+  from '/Applications/XAMPP/xamppfiles/htdocs/UniRent/Smarty/templates/home.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '4.5.3',
+  'unifunc' => 'content_667549560ae557_49367883',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '4d7f8a5fe7a15b4959c30424d9b6b3daa3e62223' => 
+    array (
+      0 => '/Applications/XAMPP/xamppfiles/htdocs/UniRent/Smarty/templates/home.tpl',
+      1 => 1718962503,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_667549560ae557_49367883 (Smarty_Internal_Template $_smarty_tpl) {
+?><!DOCTYPE html>
 <html>
    <head>
       <!-- basic -->
@@ -43,16 +66,6 @@
                         <a class="nav-link" href="/UniRent/Smarty/templates/home.tpl">Home</a>
                      </li>
                      <li class="nav-item">
-<<<<<<< Updated upstream
-                        <a class="nav-link" href="location.href='/UniRent/Test/test'">About</a>
-                     </li>
-                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                        <div class="dropdown-menu">
-                              <a class="dropdown-item" href="#">Submenu Item 1</a>
-                              <a class="dropdown-item" href="#">Submenu Item 2</a>
-                              <a class="dropdown-item" href="#">Submenu Item 3</a>
-=======
                         <a class="nav-link" href="/UniRent/Smarty/templates/about.tpl">About</a>
                      </li>
                      <li class="dropdown">
@@ -63,7 +76,6 @@
                            <a href="#" class="dropdown-item">Item 3</a>
                            <div class="dropdown-divider"></div>
                            <a href="#" class="dropdown-item">Separated Link</a>
->>>>>>> Stashed changes
                         </div>
                      </li>
                      <li class="nav-item">
@@ -664,16 +676,31 @@
       </div>
       <!-- copyright section end -->
       <!-- Javascript files-->
-      <script src="/UniRent/Smarty/js/jquery.min.js"></script>
-      <script src="/UniRent/Smarty/js/popper.min.js"></script>
-      <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
-      <script src="/UniRent/Smarty/js/jquery-3.0.0.min.js"></script>
-      <script src="/UniRent/Smarty/js/plugin.js"></script>
+      <?php echo '<script'; ?>
+ src="/UniRent/Smarty/js/jquery.min.js"><?php echo '</script'; ?>
+>
+      <?php echo '<script'; ?>
+ src="/UniRent/Smarty/js/popper.min.js"><?php echo '</script'; ?>
+>
+      <?php echo '<script'; ?>
+ src="/UniRent/Smarty/js/bootstrap.bundle.min.js"><?php echo '</script'; ?>
+>
+      <?php echo '<script'; ?>
+ src="/UniRent/Smarty/js/jquery-3.0.0.min.js"><?php echo '</script'; ?>
+>
+      <?php echo '<script'; ?>
+ src="/UniRent/Smarty/js/plugin.js"><?php echo '</script'; ?>
+>
       <!-- sidebar -->
-      <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
-      <script src="/UniRent/Smarty/js/custom.js"></script>
+      <?php echo '<script'; ?>
+ src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"><?php echo '</script'; ?>
+>
+      <?php echo '<script'; ?>
+ src="/UniRent/Smarty/js/custom.js"><?php echo '</script'; ?>
+>
       <!-- javascript --> 
-      <script>
+      <?php echo '<script'; ?>
+>
          // Material Select Initialization
          $(document).ready(function() {
          $('.mdb-select').materialSelect();
@@ -682,6 +709,8 @@
          $(this).closest('.select-outline').find('.caret').toggleClass('active');
          });
          });
-      </script>
+      <?php echo '</script'; ?>
+>
    </body>
-</html>
+</html><?php }
+}

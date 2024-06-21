@@ -18,9 +18,10 @@
 }
 
 /* Hover and focus styles for dropdown items */
+/*
 .nav-tabs .dropdown-menu .dropdown-item:hover,
 .nav-tabs .dropdown-menu .dropdown-item:focus {
-    background-color: #007bff; /* Darker blue background on hover/focus */
-    color: #fff; /* White text color on hover/focus */
-    border-color: #007bff; /* Darker blue border on hover/focus */
+    border: 2px solid #ffffff; /* White border on hover/focus
+    padding: 8px; /* Padding to create space around the text
 }
+*/
