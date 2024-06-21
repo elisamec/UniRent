@@ -1,4 +1,27 @@
-<!DOCTYPE html>
+<?php
+/* Smarty version 4.5.3, created on 2024-06-21 10:35:09
+  from '/Applications/XAMPP/xamppfiles/htdocs/UniRent/Smarty/templates/home.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '4.5.3',
+  'unifunc' => 'content_66753b3d9f6191_60988740',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '4d7f8a5fe7a15b4959c30424d9b6b3daa3e62223' => 
+    array (
+      0 => '/Applications/XAMPP/xamppfiles/htdocs/UniRent/Smarty/templates/home.tpl',
+      1 => 1718958904,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_66753b3d9f6191_60988740 (Smarty_Internal_Template $_smarty_tpl) {
+?><!DOCTYPE html>
 <html>
    <head>
       <!-- basic -->
@@ -26,9 +49,11 @@
       <!-- Scrollbar Custom CSS -->
       <link rel="stylesheet" href="/UniRent/Smarty/css/jquery.mCustomScrollbar.min.css">
       <!-- Tweaks for older IEs-->
-      <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/font-awesome.css">
+      <link rel="stylesheet" href="/UniRent/Smarty/css/font-awesome.css">
       <!-- submenus.js -->
-      <script src="/UniRent/Smarty/js/submenus.js"></script>
+      <?php echo '<script'; ?>
+ src="/UniRent/Smarty/js/submenus.js"><?php echo '</script'; ?>
+>
    </head>
    <body>
       <div class="header_section">
@@ -652,16 +677,31 @@
       </div>
       <!-- copyright section end -->
       <!-- Javascript files-->
-      <script src="/UniRent/Smarty/js/jquery.min.js"></script>
-      <script src="/UniRent/Smarty/js/popper.min.js"></script>
-      <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
-      <script src="/UniRent/Smarty/js/jquery-3.0.0.min.js"></script>
-      <script src="/UniRent/Smarty/js/plugin.js"></script>
+      <?php echo '<script'; ?>
+ src="/UniRent/Smarty/js/jquery.min.js"><?php echo '</script'; ?>
+>
+      <?php echo '<script'; ?>
+ src="/UniRent/Smarty/js/popper.min.js"><?php echo '</script'; ?>
+>
+      <?php echo '<script'; ?>
+ src="/UniRent/Smarty/js/bootstrap.bundle.min.js"><?php echo '</script'; ?>
+>
+      <?php echo '<script'; ?>
+ src="/UniRent/Smarty/js/jquery-3.0.0.min.js"><?php echo '</script'; ?>
+>
+      <?php echo '<script'; ?>
+ src="/UniRent/Smarty/js/plugin.js"><?php echo '</script'; ?>
+>
       <!-- sidebar -->
-      <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
-      <script src="/UniRent/Smarty/js/custom.js"></script>
+      <?php echo '<script'; ?>
+ src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"><?php echo '</script'; ?>
+>
+      <?php echo '<script'; ?>
+ src="/UniRent/Smarty/js/custom.js"><?php echo '</script'; ?>
+>
       <!-- javascript --> 
-      <script>
+      <?php echo '<script'; ?>
+>
          // Material Select Initialization
          $(document).ready(function() {
          $('.mdb-select').materialSelect();
@@ -670,6 +710,8 @@
          $(this).closest('.select-outline').find('.caret').toggleClass('active');
          });
          });
-      </script>
+      <?php echo '</script'; ?>
+>
    </body>
-</html>
+</html><?php }
+}
