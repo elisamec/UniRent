@@ -19,4 +19,8 @@
     RewriteCond %{HTTPS} off
     RewriteCond %{HTTP:X-Forwarded-Proto} !https
     RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+<<<<<<< HEAD
+=======
+
+>>>>>>> d32ef24ace77548d3c62fd3f20a97e993f7c20e6
 </IfModule>

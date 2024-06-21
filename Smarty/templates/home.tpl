@@ -45,8 +45,8 @@
                      <li class="nav-item">
                         <a class="nav-link" href="location.href='/UniRent/Test/test'">About</a>
                      </li>
-                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                     <li class="nav-item.drpdwn">
+                        <a class="nav-link drpdwn-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
 
                         <div class="drpdwn-menu">
                               <a class="drpdwn-item" href="#">Submenu Item 1</a>

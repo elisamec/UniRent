@@ -10,12 +10,12 @@ class VTest{
 
     public function __construct(){
 
-        //$this->smarty = StartSmarty::configuration();
+        $this->smarty = StartSmarty::configuration();
     }
 
     public function home(){
         print "Sono nella view";
 
-        //$this->smarty->display('home.tpl');
+        $this->smarty->display('home.tpl');
     }
 }
