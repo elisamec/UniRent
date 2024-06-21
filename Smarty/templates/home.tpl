@@ -31,19 +31,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script>
                      var subjectObject = {
-                     "Option 1": [
-                        "Uni 1.1",
-                        "Uni 1.2",
-                        "Uni 1.3"
-                     ],
-                     "Option 2": [
-                        "Uni 2.1",
-                        "Uni 2.2"
-                     ],
-                     "Option 3": [
-                        "Uni 3.1",
-                        "Uni 3.2"
-                     ]
+                     "Option 1": ["Uni 1.1", "Uni 1.2", "Uni 1.3"],
+                     "Option 2": ["Uni 2.1","Uni 2.2"],
+                     "Option 3": ["Uni 3.1","Uni 3.2"]
                      }
                      window.onload = function() {
                      var citySel = document.getElementById("citySelect");
@@ -138,12 +128,8 @@
                   <div class="col-lg-3 select-outline">
                      <select id="citySelect" class="mdb-select md-form md-outline colorful-select dropdown-primary">
                         <option value="" disabled selected>City</option>
-                        <option value="1">Option 1</option>
-                        <option value="2">Option 2</option>
-                        <option value="3">Option 3</option>
                      </select>
                      </div>
-
                      <div class="col-lg-3 select-outline">
                      <select id="universitySelect" class="mdb-select md-form md-outline colorful-select dropdown-primary">
                         <option value="" disabled selected>Select a university</option>
