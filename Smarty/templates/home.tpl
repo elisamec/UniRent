@@ -43,7 +43,6 @@
                         <a class="nav-link" href="/UniRent/Smarty/templates/home.tpl">Home</a>
                      </li>
                      <li class="nav-item">
-<<<<<<< Updated upstream
                         <a class="nav-link" href="location.href='/UniRent/Test/test'">About</a>
                      </li>
                      <li class="nav-item dropdown">
@@ -52,18 +51,6 @@
                               <a class="dropdown-item" href="#">Submenu Item 1</a>
                               <a class="dropdown-item" href="#">Submenu Item 2</a>
                               <a class="dropdown-item" href="#">Submenu Item 3</a>
-=======
-                        <a class="nav-link" href="/UniRent/Smarty/templates/about.tpl">About</a>
-                     </li>
-                     <li class="dropdown">
-                        <button class="dropdown-toggle">Dropdown Toggle</button>
-                        <div class="dropdown-menu">
-                           <a href="#" class="dropdown-item">Item 1</a>
-                           <a href="#" class="dropdown-item">Item 2</a>
-                           <a href="#" class="dropdown-item">Item 3</a>
-                           <div class="dropdown-divider"></div>
-                           <a href="#" class="dropdown-item">Separated Link</a>
->>>>>>> Stashed changes
                         </div>
                      </li>
                      <li class="nav-item">

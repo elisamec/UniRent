@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.5.3, created on 2024-06-21 11:22:50
+/* Smarty version 4.5.3, created on 2024-06-21 11:47:41
   from 'C:\xampp\htdocs\UniRent\Smarty\templates\home.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.5.3',
-  'unifunc' => 'content_6675466a38ae43_10173634',
+  'unifunc' => 'content_66754c3dcf44c8_74340237',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '84ab26ef3f672ca7d8625700d253c3b7ddbb4101' => 
     array (
       0 => 'C:\\xampp\\htdocs\\UniRent\\Smarty\\templates\\home.tpl',
-      1 => 1718959481,
+      1 => 1718963248,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6675466a38ae43_10173634 (Smarty_Internal_Template $_smarty_tpl) {
+function content_66754c3dcf44c8_74340237 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html>
    <head>
@@ -49,11 +49,8 @@ function content_6675466a38ae43_10173634 (Smarty_Internal_Template $_smarty_tpl)
       <!-- Scrollbar Custom CSS -->
       <link rel="stylesheet" href="/UniRent/Smarty/css/jquery.mCustomScrollbar.min.css">
       <!-- Tweaks for older IEs-->
-      <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/font-awesome.css">
-      <!-- submenus.js -->
-      <?php echo '<script'; ?>
- src="/UniRent/Smarty/js/submenus.js"><?php echo '</script'; ?>
->
+      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3//UniRent/Smarty/css/font-awesome.css">
+      <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/submenus.css">
    </head>
    <body>
       <div class="header_section">
@@ -65,20 +62,20 @@ function content_6675466a38ae43_10173634 (Smarty_Internal_Template $_smarty_tpl)
                </button>
                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav ml-auto">
-                     <li class="nav-item active">
+                     <li class="nav-item">
                         <a class="nav-link" href="/UniRent/Smarty/templates/home.tpl">Home</a>
                      </li>
                      <li class="nav-item">
-        <a class="nav-link" href="/UniRent/Smarty/templates/about.tpl">About</a>
-    </li>
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-        <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Submenu Item 1</a>
-            <a class="dropdown-item" href="#">Submenu Item 2</a>
-            <a class="dropdown-item" href="#">Submenu Item 3</a>
-        </div>
-    </li>
+                        <a class="nav-link" href="location.href='/UniRent/Test/test'">About</a>
+                     </li>
+                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                        <div class="dropdown-menu">
+                              <a class="dropdown-item" href="#">Submenu Item 1</a>
+                              <a class="dropdown-item" href="#">Submenu Item 2</a>
+                              <a class="dropdown-item" href="#">Submenu Item 3</a>
+                        </div>
+                     </li>
                      <li class="nav-item">
                         <a class="nav-link" href="/UniRent/Smarty/templates/property.tpl">Property</a>
                      </li>
