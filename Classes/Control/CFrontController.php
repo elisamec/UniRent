@@ -39,11 +39,11 @@ class CFrontController{
                 call_user_func_array(["Classes\Control\\".$controllerClass, $methodName], $params);
             } else {
                 // Method not found, handle appropriately (e.g., show 404 page)
-                header('Location: /UniRent/CStudent/home');
+                header('Location: /UniRent/Test/test');
             }
         } else {
             // Controller not found, handle appropriately (e.g., show 404 page)
-            header('Location: /UniRent/CStudent/home');
+            header('Location: /UniRent/Test/test');
         }
     }
 }
