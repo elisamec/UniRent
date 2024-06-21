@@ -6,7 +6,7 @@ class CFrontController{
     
     public function run($requestUri){
         // Parse the request URI
-        echo $requestUri;
+        print "funziono";
         
 
         /*$requestUri = trim($requestUri, '/');
