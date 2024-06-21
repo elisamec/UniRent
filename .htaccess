@@ -3,11 +3,20 @@
 
     # Enable rewriting
     RewriteEngine on
+    #RewriteBase /UniRent
 
-    # the rewrite rule at line 9 is subject to the following condition: 
+    # the rewrite rule at line 9 is subject to the following condition:
+    #rewrite if the file does not exist
+    RewriteCond %{REQUEST_FILENAME} !-f 
+    #rewrite if the directory does not exist
+    RewriteCond %{REQUEST_FILENAME} !-d
     # if the requested file does not exist, execute the following RewriteRule
-    RewriteCond %{REQUEST_FILENAME} !-f
+    
 
     # Rewrite Rule: insert the regex followed with what it should be substituted with.
-    RewriteRule ^(.*)$ index.html [L]
+    RewriteRule ^(.*)$ index.php [QSA,L]
+
+    RewriteCond %{HTTPS} off
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 </IfModule>
