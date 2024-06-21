@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>UniRent</title>
+      <title>Upside</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -29,38 +29,6 @@
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css">
       <!-- Include Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script>
-                     var subjectObject = {
-                     "Option 1": [
-                        "Uni 1.1",
-                        "Uni 1.2",
-                        "Uni 1.3"
-                     ],
-                     "Option 2": [
-                        "Uni 2.1",
-                        "Uni 2.2"
-                     ],
-                     "Option 3": [
-                        "Uni 3.1",
-                        "Uni 3.2"
-                     ]
-                     }
-                     window.onload = function() {
-                     var citySel = document.getElementById("citySelect");
-                     var uniSel = document.getElementById("universitySelect");
-                     for (var x in subjectObject) {
-                        citySel.options[citySel.options.length] = new Option(x, x);
-                     }
-                     citySel.onchange = function() {
-                        //empty Chapters- and Topics- dropdowns
-                        uniSel.length = 1;
-                        //display correct values
-                        for (var y in subjectObject[this.value]) {
-                           uniSel.options[uniSel.options.length] = new Option(y, y);
-                        }
-                     }
-                     }
-                     </script>
    </head>
    <body>
       <div class="header_section">
@@ -76,7 +44,27 @@
                         <a class="nav-link" href="/UniRent/Student/home">Home</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="/UniRent/Smarty/templates/about.tpl">About Us</a>
+                        <a class="nav-link" href="/UniRent/Smarty/templates/about.tpl">About</a>
+                     </li>
+                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                           <a class="dropdown-item" href="#">Action</a>
+                           <a class="dropdown-item" href="#">Another action</a>
+                           <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="/UniRent/Smarty/templates/property.tpl">Property</a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="/UniRent/Smarty/templates/testimonial.tpl">Testimonial</a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href = "/UniRent/Test/test">Blog</a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="/UniRent/Smarty/templates/contact.tpl">Contact Us</a>
                      </li>
                   </ul>
                   <form class="form-inline my-2 my-lg-0">
@@ -98,8 +86,8 @@
                   <div class="carousel-item active">
                      <div class="row">
                         <div class="col-sm-12">
-                           <h1 class="banner_taital">Find an Accommodation</h1>
-                           <p class="banner_text">Search among thousands of different accommodations the one that works best for you!</p>
+                           <h1 class="banner_taital">Find A Property</h1>
+                           <p class="banner_text">page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to</p>
                            <div class="started_text"><a href="#">Contact Us</a></div>
                         </div>
                      </div>
@@ -107,8 +95,8 @@
                   <div class="carousel-item">
                      <div class="row">
                         <div class="col-sm-12">
-                           <h1 class="banner_taital">Choose your city</h1>
-                           <p class="banner_text">You can search basing on your city of interest, to find what's best for you!</p>
+                           <h1 class="banner_taital">Find A Property</h1>
+                           <p class="banner_text">page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to</p>
                            <div class="started_text"><a href="#">Contact Us</a></div>
                         </div>
                      </div>
@@ -116,8 +104,8 @@
                   <div class="carousel-item">
                      <div class="row">
                         <div class="col-sm-12">
-                           <h1 class="banner_taital">Made for Students</h1>
-                           <p class="banner_text">Through this app we aim to help students look for accommodations reserved to them and owners to rent to students only.</p>
+                           <h1 class="banner_taital">Find A Property</h1>
+                           <p class="banner_text">page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to</p>
                            <div class="started_text"><a href="#">Contact Us</a></div>
                         </div>
                      </div>
@@ -133,29 +121,31 @@
       <div class="container">
          <div class="select_box_section">
             <div class="select_box_main">
-               <h1 class="find_text">Find an Accommodation</h1>
+               <h1 class="find_text">Find Property</h1>
                <div class="row">
                   <div class="col-lg-3 select-outline">
-                     <select id="citySelect" class="mdb-select md-form md-outline colorful-select dropdown-primary">
-                        <option value="" disabled selected>City</option>
-                        <option value="1">Option 1</option>
-                        <option value="2">Option 2</option>
-                        <option value="3">Option 3</option>
+                     <select class="mdb-select md-form md-outline colorful-select dropdown-primary">
+                       <option value="" disabled selected>City</option>
+                       <option value="1">Option 1</option>
+                       <option value="2">Option 2</option>
+                       <option value="3">Option 3</option>
                      </select>
-                     </div>
-
-                     <div class="col-lg-3 select-outline">
-                     <select id="universitySelect" class="mdb-select md-form md-outline colorful-select dropdown-primary">
-                        <option value="" disabled selected>Select a university</option>
-                     </select>
-                     </div>
-
-                     
+                  </div>
                   <div class="col-lg-3 select-outline">
-                     <form>
-                        <label for="dateInput">Select a date:</label>
-                        <input type="date" id="dateInput" name="date">
-                     </form>
+                     <select class="mdb-select md-form md-outline colorful-select dropdown-primary">
+                       <option value="" disabled selected>Austin</option>
+                       <option value="1">Option 1</option>
+                       <option value="2">Option 2</option>
+                       <option value="3">Option 3</option>
+                     </select>
+                  </div>
+                  <div class="col-lg-3 select-outline">
+                     <select class="mdb-select md-form md-outline colorful-select dropdown-primary">
+                       <option value="" disabled selected>Street</option>
+                       <option value="1">Option 1</option>
+                       <option value="2">Option 2</option>
+                       <option value="3">Option 3</option>
+                     </select>
                   </div>
                   <div class="col-lg-3 select-outline">
                      <div class="find_btn"><a href="#">Find Now</a></div>

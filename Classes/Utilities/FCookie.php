@@ -1,9 +1,9 @@
 <?php
-namespace Classes\Foundation;
+namespace Classes\Utilities;
 /**
  * class to access to $_COOKIE superglobal array, You must use this class and not directly the _COOKIE array
  */
-class FCookie
+class UCookie
 {
     /**
      * check if is set the specific id in the COOKIE

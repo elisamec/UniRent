@@ -1,10 +1,10 @@
 <?php
-namespace Classes\Foundation;
+namespace Classes\Utilities;
 require __DIR__ . '/../../vendor/autoload.php';
 /**
  * class to access to the $_SESSION superglobal array, you Must use this class instead of using directly the array
  */
-class FSession
+class USession
 {
     /**
      * singleton class
@@ -23,7 +23,7 @@ class FSession
     {
         if (self::$instance == null) 
         {
-            self::$instance = new FSession();
+            self::$instance = new USession();
         }
  
         return self::$instance;
