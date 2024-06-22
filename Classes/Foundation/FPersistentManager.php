@@ -3,6 +3,7 @@ namespace Classes\Foundation;
 require __DIR__ .'/../../vendor/autoload.php';
 use Classes\Foundation;
 use Classes\Entity;
+use Classes\Utilities\UAccessUniversityFile;
 use DateTime;
 
 class FPersistentManager {
@@ -98,6 +99,28 @@ class FPersistentManager {
         $FR= Foundation\FReservation::getInstance();
         $result=$FR->getAcceptedReservations($idProprietario);
         return $result;
+    }
+    
+    /**
+     * Method verifyStudentEmail
+     * 
+     * This method verify if the email is a student email
+     * @param string $email
+     *
+     * @return bool
+     */
+    public function verifyStudentEmail(string $email):bool
+    {
+        $AUF=UAccessUniversityFile::getInstance();
+        $mail_domain=strrchr($email, "@");
+        if(in_array($mail_domain,$AUF->getUniversityEmailList()))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 }
