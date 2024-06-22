@@ -111,18 +111,12 @@
                   <h3 class="footer_text">About Us</h3>
                   <p class="lorem_text">Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web</p>
                </div>
-               <div class="col-md-4">
-                  <h3 class="footer_text">Recent Properties</h3>
-                  <div class="image_main">
-                     <div class="image_10"><img src="/UniRent/Smarty/images/img-10.png"></div>
-                  <div class="image_10"><img src="/UniRent/Smarty/images/img-10.png"></div>
-                  </div>
-               </div>
+               <hr></hr>
                <div class="col-md-4">
                   <h3 class="footer_text">Useful Links</h3>
                   <div class="footer_menu">
                      <ul>
-                        <li class="active"><a href="/UniRent/Student/home">Home</a></li>
+                        <li class="active"><a href="/UniRent/User/home">Home</a></li>
                         <li><a href="/UniRent/Smarty/templates/about.tpl">About Us</a></li>
                         <li><a href="/UniRent/Smarty/templates/contact.tpl">Contact Us</a></li>
                      </ul>
