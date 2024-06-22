@@ -123,7 +123,7 @@
 
                      
                   <div class="col-lg-3 form-outline datepicker" data-mdb-inline="true" data-mdb-minDate>
-                     <input type="text" class="form-control" id="exampleDatepicker1" data-mdb-toggle="datepicker">
+                     <input type="date" class="form-control" id="exampleDatepicker1" data-mdb-toggle="datepicker">
                      <label for="exampleDatepicker1" class="form-label">Select a date:</label>
                   </div>
                   <div class="col-lg-3 select-outline">
