@@ -81,7 +81,7 @@
               <input class="login-button" type="submit" onclick="location.href='/UniRent/User/checkLogin'" value="Log In">
             </form>
             <div class="subheading">You don't have an account?</div>
-            <form action="/UniRent/User/checkLogin" class="form">
+            <form class="form">
               <button class="login-button" type="button" onclick="location.href='/UniRent/User/register'">Sign Up</button>
             </form>
           </div>
