@@ -5,7 +5,7 @@ require __DIR__.'/../../vendor/autoload.php';
 use Classes\View\VTest; 
 
 class CTest{
-    public static function test(){
+    public function test(){
         $view = new VTest();
         $view->home();
     }

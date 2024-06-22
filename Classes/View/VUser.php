@@ -5,7 +5,7 @@ require __DIR__.'/../../vendor/autoload.php';
 
 use StartSmarty;
 
-class VStudent{
+class VUser{
     private $smarty;
 
     public function __construct(){
@@ -15,6 +15,11 @@ class VStudent{
 
     public function home(){
 
-        $this->smarty->display('homeStudent.tpl');
+        $this->smarty->display('home.tpl');
+    }
+
+    public function login(){
+
+        $this->smarty->display('login.tpl');
     }
 }
