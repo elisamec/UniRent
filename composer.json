@@ -29,6 +29,7 @@
     "require": {
         "commerceguys/addressing": "*",
         "egulias/email-validator": "^4.0",
-        "globalcitizen/php-iban": "^4.2"
+        "globalcitizen/php-iban": "^4.2",
+        "phpmailer/phpmailer": "^6.9"
     }
 }
