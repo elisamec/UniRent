@@ -7,9 +7,7 @@
       <span class="forgot-password"><a href="#">Forgot Password ?</a></span>
       <input class="login-button" type="submit" value="Sign In">
     </form>
-    <div class="social-account-container">
-        <span class="title">Or</span>
-    </div>
+    <div class="subheading">You don't have an account?</div>
     <form action="" class="form">
       <input class="login-button" type="submit" onclick="location.href='#'" value="Sign Up">
     </form>

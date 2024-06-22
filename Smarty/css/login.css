@@ -29,6 +29,13 @@ html, body {
   color: rgb(16, 137, 211);
 }
 
+.subheading {
+  text-align: center;
+  font-weight: 900;
+  font-size: 20px;
+  color: rgb(16, 137, 211);
+}
+
 .social-account-container .error {
   display: block;
   text-align: center;
