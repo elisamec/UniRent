@@ -67,12 +67,14 @@
             <form action="/UniRent/User/checkLogin" class="form">
               <input required="" class="input" type="email" name="email" id="email" placeholder="E-mail">
               <input required="" class="input" type="password" name="password" id="password" placeholder="Password">
-              <div class="radio-container">
-              <div class="radio-group">
-              <label><input required="" class="input" type="radio" name="userType" id="userType" value="Student" checked="checked">Student</label>
-              <label><input required="" class="input" type="radio" name="userType" id="userType" value="Owner">Owner</label>
+              <fieldset>
+               <div class="some-class">
+               <input required="" class="radio" type="radio" name="userType" id="userType" value="Student" checked="checked">
+              <label class="customlabel" for="Student">Student</label>
+              <input required="" class="radio" type="radio" name="userType" id="userType" value="Owner" checked="checked">
+              <label class="customlabel" for="Owner">Owner</label>
               </div>
-              </div>
+              </fieldset>
               <span class="forgot-password"><a href="#">Forgot Password ?</a></span>
               <input class="login-button" type="submit" onclick="location.href='/UniRent/User/register'" value="Log In">
             </form>

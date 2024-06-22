@@ -25,15 +25,29 @@ html, body {
   position: relative;
   transform: translateX(50%)
 }
-.radio-container {
-  display: flex;
-  margin-right: 15px;
+fieldset {
+  overflow: hidden
 }
 
-.radio-group {
-  display: flex;
-  justify-content: end;
-  flex-direction: column;
+.some-class {
+  float: left;
+  clear: none;
+}
+
+.customlabel {
+  float: left;
+  clear: none;
+  display: block;
+  padding: 42px 0px 0px 20px;
+  font-size: 16px;
+}
+
+input[type=radio],
+input.radio {
+  float: left;
+  clear: none;
+  transform: scale(1.2);
+  margin: 50px 0px 0px 55px;
 }
 
 .heading {
