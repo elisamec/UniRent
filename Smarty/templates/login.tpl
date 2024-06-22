@@ -76,11 +76,11 @@
               </div>
               </fieldset>
               <span class="forgot-password"><a href="#">Forgot Password ?</a></span>
-              <input class="login-button" type="submit" onclick="location.href='/UniRent/User/register'" value="Log In">
+              <input class="login-button" type="submit" value="Log In">
             </form>
             <div class="subheading">You don't have an account?</div>
-            <form action="" class="form">
-              <input class="login-button" type="submit" onclick="location.href='/UniRent/User/register'" value="Sign Up">
+            <form action="" class="form" action="/UniRent/User/register">
+              <input class="login-button" type="submit" onclick="location.href='/UniRent/User/checkLogin'" value="Sign Up">
             </form>
           </div>
         </div>
