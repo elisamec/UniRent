@@ -30,7 +30,6 @@
       <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/login.css">
 </head>
 <body>
-
          <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                <a class="navbar-brand"href="/UniRent/User/home"><img src="/UniRent/Smarty/images/logo.png"></a>
@@ -63,27 +62,37 @@
       <div class="layout_padding">
         <div class="container">
           <div class="Logcontainer">
-            <div class="heading">Log In</div>
-            <form action="/UniRent/User/checkLogin" class="form">
-              <input required="" class="input" type="email" name="email" id="email" placeholder="E-mail">
-              <input required="" class="input" type="password" name="password" id="password" placeholder="Password">
+            <div class="heading">Student Sign Up</div>
+            <form action="/UniRent/User/checkRegisterStudent" class="form">
+              <input required="" class="input" type="number" name="courseDuration" id="courseDuration" placeholder="Course Duration" min="1" max="6">
+              <input required="" class="input" type="number" name="immatricolationYear" id="immatricolationYear" placeholder="Immatricolation Year" min="2018" max="2099">
+              <input required="" class="input" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="birthDate" id="birthDate" placeholder="Date of Birth">
+              <legend class="customlabel">Enter your sex:</legend>
               <div class="row">
               <div class="col-sm-6">
-               <input required="" class="radio" type="radio" name="userType" id="userType" value="Student" checked="checked">
-              <label class="customlabel" for="Student">Student</label>
+            <input required="" class="radio" type="radio" name="sex" id="sex" value="F" checked="checked">
+              <label class="customlabel" for="F">Female</label>
               </div>
                <div class="col-sm-6">
-              <input required="" class="radio" type="radio" name="userType" id="userType" value="Owner">
-              <label class="customlabel" for="Owner">Owner</label>
+              <input required="" class="radio" type="radio" name="sex" id="sex" value="M">
+              <label class="customlabel" for="Male">Male</label>
               </div>
                </div>
-              <span class="forgot-password"><a href="#">Forgot Password ?</a></span>
-              <input class="login-button" type="submit" onclick="location.href='/UniRent/User/checkLogin'" value="Log In">
+               <legend class="customlabel">Personal Information*:</legend>
+              <div class="row">
+              <div class="col-sm-6">
+              <input class="checkbox" type="checkbox" name="smoker" id="smorker">
+              <label class="customlabel">smoker</label>
+              </div>
+               <div class="col-sm-6">
+              <input class="checkbox" type="checkbox" name="animals" id="animals">
+              <label class="customlabel">animals</label>
+              </div>
+               </div> 
+              <input class="login-button" type="submit" value="Sign Up">
             </form>
-            <div class="subheading">You don't have an account?</div>
-            <form class="form">
-              <button class="login-button" type="button" onclick="location.href='/UniRent/User/register'">Sign Up</button>
-            </form>
+            <div class="notes-container">
+            <span class="title">*These informations are used to determine your accommodation matches, therefore they will not be shown.</span>
           </div>
         </div>
       </div>

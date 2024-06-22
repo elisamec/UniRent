@@ -3,15 +3,16 @@
     background-color: #ffffff;
     box-shadow: 0px 2px 16px 0px #eaeaea !important;
     border: none;
-    padding: 0;
+    padding: 5px;
     margin: 0;
     box-sizing: border-box;
     color: #d0d1d2;
     height: 50px; /* Adjust this value incrementally */
     position: relative;
+    align-items: center;
 }
 
-input[type="date"] {
+input[type="text1"] {
     width: 100%;
     background-color: transparent;
     border: none;
@@ -25,4 +26,8 @@ input[type="date"] {
     -moz-appearance: none;
     appearance: none;
     position: relative;
+    align-items: center;
+}
+.form-control {
+    border: none;
 }

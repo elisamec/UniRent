@@ -63,7 +63,7 @@
       <div class="layout_padding">
         <div class="container">
           <div class="Logcontainer">
-            <div class="heading">Register</div>
+            <div class="heading">Sign Up</div>
             <form action="/UniRent/User/checkRegister" class="form">
             <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
             <input class="input" type="file" id="img" name="img" accept="image/*" hidden>
@@ -74,7 +74,7 @@
               <label class="customlabel" for="Student">Student</label>
               </div>
                <div class="col-sm-6">
-              <input required="" class="radio" type="radio" name="userType" id="userType" value="Owner" checked="checked">
+              <input required="" class="radio" type="radio" name="userType" id="userType" value="Owner">
               <label class="customlabel" for="Owner">Owner</label>
               </div>
                </div>
@@ -83,7 +83,6 @@
                <input required="" class="input" type="text" name="username" id="username" placeholder="Username"> 
               <input required="" class="input" type="email" name="email" id="email" placeholder="E-mail">
               <input required="" class="input" type="password" name="password" id="password" placeholder="Password">
-              
               <input class="login-button" type="submit" value="Next">
             </form>
           </div>

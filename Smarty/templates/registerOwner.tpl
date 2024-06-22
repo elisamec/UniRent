@@ -30,7 +30,6 @@
       <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/login.css">
 </head>
 <body>
-
          <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                <a class="navbar-brand"href="/UniRent/User/home"><img src="/UniRent/Smarty/images/logo.png"></a>
@@ -63,26 +62,11 @@
       <div class="layout_padding">
         <div class="container">
           <div class="Logcontainer">
-            <div class="heading">Log In</div>
-            <form action="/UniRent/User/checkLogin" class="form">
-              <input required="" class="input" type="email" name="email" id="email" placeholder="E-mail">
-              <input required="" class="input" type="password" name="password" id="password" placeholder="Password">
-              <div class="row">
-              <div class="col-sm-6">
-               <input required="" class="radio" type="radio" name="userType" id="userType" value="Student" checked="checked">
-              <label class="customlabel" for="Student">Student</label>
-              </div>
-               <div class="col-sm-6">
-              <input required="" class="radio" type="radio" name="userType" id="userType" value="Owner">
-              <label class="customlabel" for="Owner">Owner</label>
-              </div>
-               </div>
-              <span class="forgot-password"><a href="#">Forgot Password ?</a></span>
-              <input class="login-button" type="submit" onclick="location.href='/UniRent/User/checkLogin'" value="Log In">
-            </form>
-            <div class="subheading">You don't have an account?</div>
-            <form class="form">
-              <button class="login-button" type="button" onclick="location.href='/UniRent/User/register'">Sign Up</button>
+            <div class="heading">Owner Sign Up</div>
+            <form action="/UniRent/User/checkRegisterOwner" class="form">
+              <input required="" class="input" type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number" pattern="((00|\+)39[\. ]??)??3\d{2}[\. ]??\d{6,7}">
+              <input required="" class="input" type="text" name="iban" id="iban" placeholder="IBAN" pattern="(it|IT)[0-9]{2}[A-Za-z][0-9]{10}[0-9A-Za-z]{12}">
+              <input class="login-button" type="submit" value="Sign Up">
             </form>
           </div>
         </div>
