@@ -3,7 +3,7 @@ require '../../vendor/autoload.php';
 use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\RFCValidation;
 class COwner {
-    private static $instance=null;
+    /*private static $instance=null;
 
     private function __construct()
     {}
@@ -23,5 +23,5 @@ class COwner {
     }
     private static function ValidateIban(string $iban):bool {
         return verify_iban($iban);
-    }
+    }*/
 }

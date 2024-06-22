@@ -26,6 +26,7 @@ class CUser
     {
         $view= new VUser();
         $PM=FPersistentManager::getInstance();
+
         if($PM->verifyUserEmail(USuperGlobalAccess::getPost('email')) && $PM->verifyUserUsername(USuperGlobalAccess::getPost('username')))
         {
             $session=USession::getInstance();
@@ -35,12 +36,12 @@ class CUser
             $session::setSessionElement('name',USuperGlobalAccess::getPost('name'));
             $session::setSessionElement('surname',USuperGlobalAccess::getPost('surname'));
             $session::setSessionElement('picture',serialize(USuperGlobalAccess::getPost('picture')));
-            if(USuperGlobalAccess::getPost('studente/owner')==='student')
+            if(USuperGlobalAccess::getPost('student/owner')==='student')
             {
                $view->showStudentRegistration();
             }
             else
-            {
+            {   
                 $view->showOwnerRegistration();
             }
         }  
@@ -52,18 +53,20 @@ class CUser
 
     public static function checkLogin(){
         $view = new VUser();
-        $username = FPersistentManager::getInstance()->verifyUserUsername(UHTTPMethods::post('username'));                                            
-        if($username){
-            $user = FPersistentManager::getInstance()->retriveUserOnUsername(UHTTPMethods::post('username'));
-            if(password_verify(UHTTPMethods::post('password'), $user->getPassword())){
-                if($user->isBanned()){
-                    $view->loginBan();
+        $type = USuperGlobalAccess::getPost('student/owner');
 
-                }elseif(USession::getSessionStatus() == PHP_SESSION_NONE){
+        $username = FPersistentManager::getInstance()->verifyUsername(USuperGlobalAccess::getPost('username'), $type); 
+
+        if($username){
+            $user = FPersistentManager::getInstance()->retriveUserOnUsername(USuperGlobalAccess::getPost('username'), $type);
+            if(password_verify(USuperGlobalAccess::getPost('password'), $user->getPassword())){
+
+                if(USession::getSessionStatus() == PHP_SESSION_NONE){
                     USession::getInstance();
-                    USession::setSessionElement('user', $user->getId());
-                    header('Location: /Agora/User/home');
+                    USession::setSessionElement("$type", $user->getId());
+                    $type === 'student' ? $view->showStudentHome() : $view->showOwnerHome();
                 }
+
             }else{
                 $view->loginError();
             }
@@ -71,5 +74,19 @@ class CUser
             $view->loginError();
         }
 
+    }
+
+    private function checkLoginUscer(string $username, string $password):bool{
+        $user = FPersistentManager::getInstance()->retriveUserOnUsername($username);
+        if(password_verify($password, $user->getPassword())){
+            if($user->isBanned()){
+                return false;
+            }elseif(USession::getSessionStatus() == PHP_SESSION_NONE){
+                USession::getInstance();
+                USession::setSessionElement('user', $user->getId());
+                return true;
+            }
+        }
+        return false;
     }
 }
