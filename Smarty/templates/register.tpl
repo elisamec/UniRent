@@ -74,7 +74,7 @@
               <label class="customlabel" for="Student">Student</label>
               </div>
                <div class="col-sm-6">
-              <input required="" class="radio" type="radio" name="userType" id="userType" value="Owner" checked="checked">
+              <input required="" class="radio" type="radio" name="userType" id="userType" value="Owner">
               <label class="customlabel" for="Owner">Owner</label>
               </div>
                </div>
