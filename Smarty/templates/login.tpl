@@ -77,7 +77,7 @@
         </div>
         </div>
         </div>
-      </div>
+</div>
       <!-- banner section end -->
 
 <script src="/UniRent/Smarty/js/jquery.min.js"></script>
