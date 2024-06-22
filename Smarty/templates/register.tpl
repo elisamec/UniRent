@@ -63,7 +63,7 @@
       <div class="layout_padding">
         <div class="container">
           <div class="Logcontainer">
-            <div class="heading">Log In</div>
+            <div class="heading">Register</div>
             <form action="/UniRent/User/checkRegister" class="form">
               <input required="" class="input" type="text" name="name" id="name" placeholder="Name">
               <input required="" class="input" type="text" name="surname" id="surname" placeholder="Surname">

@@ -74,7 +74,7 @@
               </div>
               </div>
               <span class="forgot-password"><a href="#">Forgot Password ?</a></span>
-              <input class="login-button" type="submit" onclick="location.href='/UniRent/User/checkLogin'" value="Log In">
+              <input class="login-button" type="submit" onclick="location.href='/UniRent/User/register'" value="Log In">
             </form>
             <div class="subheading">You don't have an account?</div>
             <form action="" class="form">
