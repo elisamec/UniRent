@@ -17,8 +17,7 @@ class UAccessUniversityFile
         foreach($università as $key=>$value)
         {
             $domain = substr(strrchr($università[$key][12], "www"), 1);
-            $domain ='@student'.$domain;
-            if($domain!='@student')
+            if($domain!='')
             {
                 $indirizzi_web[]=$domain;
             }   
