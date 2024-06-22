@@ -30,7 +30,7 @@
       <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/login.css">
 </head>
 <body>
-<div class="header_section">
+
          <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                <a class="navbar-brand"href="/UniRent/User/home"><img src="/UniRent/Smarty/images/logo.png"></a>
@@ -61,25 +61,77 @@
          </div>
       <!-- banner section start --> 
       <div class="layout_padding">
-      <div class="container">
-        <div class="Logcontainer">
-          <div class="heading">Log In</div>
-          <form action="" class="form">
-            <input required="" class="input" type="email" name="email" id="email" placeholder="E-mail">
-            <input required="" class="input" type="password" name="password" id="password" placeholder="Password">
-            <span class="forgot-password"><a href="#">Forgot Password ?</a></span>
-            <input class="login-button" type="submit" value="Sign In">
-          </form>
-          <div class="subheading">You don't have an account?</div>
-          <form action="" class="form">
-            <input class="login-button" type="submit" onclick="location.href='#'" value="Sign Up">
-          </form>
+        <div class="container">
+          <div class="Logcontainer">
+            <div class="heading">Log In</div>
+            <form action="" class="form">
+              <input required="" class="input" type="email" name="email" id="email" placeholder="E-mail">
+              <input required="" class="input" type="password" name="password" id="password" placeholder="Password">
+              <span class="forgot-password"><a href="#">Forgot Password ?</a></span>
+              <input class="login-button" type="submit" value="Sign In">
+            </form>
+            <div class="subheading">You don't have an account?</div>
+            <form action="" class="form">
+              <input class="login-button" type="submit" onclick="location.href='#'" value="Sign Up">
+            </form>
+          </div>
         </div>
-        </div>
-        </div>
-</div>
-      <!-- banner section end -->
+      </div>
+<br></br>
 
+      <!-- banner section end -->
+<div class="footer_section layout_padding">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="location_text">
+                     <ul>
+                        <li>
+                           <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i></a>
+                        </li>
+                        <li>
+                           <a href="#"><i class="fa fa-phone" aria-hidden="true"></i></a>
+                        </li>
+                        <li>
+                           <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+               <div class="social_icon">
+                     <ul>
+                        <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+                     </ul>
+                </div>
+            </div>
+            <div class="row">
+               <div class="col-md-4">
+                  <h3 class="footer_text">About Us</h3>
+                  <p class="lorem_text">Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web</p>
+               </div>
+               <div class="col-md-4">
+                  <h3 class="footer_text">Recent Properties</h3>
+                  <div class="image_main">
+                     <div class="image_10"><img src="/UniRent/Smarty/images/img-10.png"></div>
+                  <div class="image_10"><img src="/UniRent/Smarty/images/img-10.png"></div>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <h3 class="footer_text">Useful Links</h3>
+                  <div class="footer_menu">
+                     <ul>
+                        <li class="active"><a href="/UniRent/Student/home">Home</a></li>
+                        <li><a href="/UniRent/Smarty/templates/about.tpl">About Us</a></li>
+                        <li><a href="/UniRent/Smarty/templates/contact.tpl">Contact Us</a></li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- footer section end -->
 <script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>
       <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
