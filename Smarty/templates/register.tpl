@@ -63,7 +63,7 @@
       <div class="layout_padding">
         <div class="container">
           <div class="Logcontainer">
-            <div class="heading">Register</div>
+            <div class="heading">Sign Up</div>
             <form action="/UniRent/User/checkRegister" class="form">
             <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
             <input class="input" type="file" id="img" name="img" accept="image/*" hidden>
