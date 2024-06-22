@@ -27,7 +27,7 @@ class CUser
     }
 
 
-    /*public static function showRegistration()
+    public static function showRegistration()
     {
         $view= new VUser();
         $PM=FPersistentManager::getInstance();
@@ -93,5 +93,5 @@ class CUser
             }
         }
         return false;
-    }*/
+    }
 }
