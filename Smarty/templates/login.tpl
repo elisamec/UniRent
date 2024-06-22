@@ -68,11 +68,11 @@
               <input required="" class="input" type="email" name="email" id="email" placeholder="E-mail">
               <input required="" class="input" type="password" name="password" id="password" placeholder="Password">
               <span class="forgot-password"><a href="#">Forgot Password ?</a></span>
-              <input class="login-button" type="submit" value="Sign In">
+              <input class="login-button" type="submit" onclick="location.href='/UniRent/User/checkLogin'" value="Sign In">
             </form>
             <div class="subheading">You don't have an account?</div>
             <form action="" class="form">
-              <input class="login-button" type="submit" onclick="location.href='/UniRent/User/Register'" value="Sign Up">
+              <input class="login-button" type="submit" onclick="location.href='/UniRent/User/register'" value="Sign Up">
             </form>
           </div>
         </div>
