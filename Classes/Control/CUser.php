@@ -21,6 +21,7 @@ class CUser
         $view->login();
     }
 
+
     public static function registration()
     {
         $view= new VUser();
@@ -47,5 +48,28 @@ class CUser
         {
             $view->reggistrationError();
         }   
+    }
+
+    public static function checkLogin(){
+        $view = new VUser();
+        $username = FPersistentManager::getInstance()->verifyUserUsername(UHTTPMethods::post('username'));                                            
+        if($username){
+            $user = FPersistentManager::getInstance()->retriveUserOnUsername(UHTTPMethods::post('username'));
+            if(password_verify(UHTTPMethods::post('password'), $user->getPassword())){
+                if($user->isBanned()){
+                    $view->loginBan();
+
+                }elseif(USession::getSessionStatus() == PHP_SESSION_NONE){
+                    USession::getInstance();
+                    USession::setSessionElement('user', $user->getId());
+                    header('Location: /Agora/User/home');
+                }
+            }else{
+                $view->loginError();
+            }
+        }else{
+            $view->loginError();
+        }
+
     }
 }

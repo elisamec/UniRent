@@ -18,7 +18,7 @@
       <!-- Responsive-->
       <link rel="stylesheet" href="/UniRent/Smarty/css/responsive.css">
       <!-- fevicon -->
-      <link rel="icon" href="/UniRent/Smarty/images/fevicon.png" type="image/gif" />
+      <link rel="icon" href="/UniRent/Smarty/images/favicon.png" type="image/gif">
       <!-- font css -->
       <link href="https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap" rel="stylesheet">
       <!-- Scrollbar Custom CSS -->
@@ -43,10 +43,10 @@
                         <a class="nav-link" href="/UniRent/User/home">Home</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="/UniRent/Smarty/templates/about.tpl">About Us</a>
+                        <a class="nav-link" href="#">About Us</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="/UniRent/Smarty/templates/contact.tpl">Contact Us</a>
+                        <a class="nav-link" href="#">Contact Us</a>
                      </li>
                   </ul>
                   <form class="form-inline my-2 my-lg-0">
@@ -64,15 +64,15 @@
         <div class="container">
           <div class="Logcontainer">
             <div class="heading">Log In</div>
-            <form action="" class="form">
+            <form action="/UniRent/User/checkLogin" class="form">
               <input required="" class="input" type="email" name="email" id="email" placeholder="E-mail">
               <input required="" class="input" type="password" name="password" id="password" placeholder="Password">
               <span class="forgot-password"><a href="#">Forgot Password ?</a></span>
-              <input class="login-button" type="submit" value="Sign In">
+              <input class="login-button" type="submit" onclick="location.href='/UniRent/User/checkLogin'" value="Sign In">
             </form>
             <div class="subheading">You don't have an account?</div>
             <form action="" class="form">
-              <input class="login-button" type="submit" onclick="location.href='#'" value="Sign Up">
+              <input class="login-button" type="submit" onclick="location.href='/UniRent/User/register'" value="Sign Up">
             </form>
           </div>
         </div>
@@ -117,8 +117,8 @@
                   <div class="footer_menu">
                      <ul>
                         <li class="active"><a href="/UniRent/User/home">Home</a></li>
-                        <li><a href="/UniRent/Smarty/templates/about.tpl">About Us</a></li>
-                        <li><a href="/UniRent/Smarty/templates/contact.tpl">Contact Us</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact Us</a></li>
                      </ul>
                   </div>
                </div>

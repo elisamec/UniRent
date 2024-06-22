@@ -45,10 +45,10 @@
                         <a class="nav-link" href="/UniRent/User/home">Home</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="/UniRent/Smarty/templates/about.tpl">About Us</a>
+                        <a class="nav-link" href="#">About Us</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="/UniRent/Smarty/templates/contact.tpl">Contact Us</a>
+                        <a class="nav-link" href="#">Contact Us</a>
                      </li>
                   </ul>
                   <form class="form-inline my-2 my-lg-0">
@@ -543,8 +543,8 @@
                   <div class="footer_menu">
                      <ul>
                         <li class="active"><a href="/UniRent/User/home">Home</a></li>
-                        <li><a href="/UniRent/Smarty/templates/about.tpl">About Us</a></li>
-                        <li><a href="/UniRent/Smarty/templates/contact.tpl">Contact Us</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact Us</a></li>
                      </ul>
                   </div>
                </div>
