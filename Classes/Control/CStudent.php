@@ -36,7 +36,14 @@ class CStudent{
         $session=USession::getInstance();
         if($PM->verifyStudentEmail($session::getSessionElement('email'))==true)
         {
-            $photo = new EPhoto(null, unserialize($session::getSessionElement('picture')),'student',null,null );
+            if($session->getSessionElement('picture')!=null)
+            {
+                $photo = new EPhoto(null, unserialize($session::getSessionElement('picture')),'student',null,null );
+            }
+            else
+            {
+                $photo = null;
+            }
             $student=new EStudent($session->getSessionElement('username'),
                                   $session->getSessionElement('password'),
                                   $session->getSessionElement('name'),
