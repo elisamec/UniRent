@@ -25,6 +25,16 @@ html, body {
   position: relative;
   transform: translateX(50%)
 }
+.radio-container {
+  display: flex;
+  margin-right: 15px;
+}
+
+.radio-group {
+  display: flex;
+  justify-content: end;
+  flex-direction: column;
+}
 
 .heading {
   text-align: center;

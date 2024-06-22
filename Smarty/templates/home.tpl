@@ -112,8 +112,6 @@
                      <option value="City 1">City 1</option>
                      <option value="City 2">City 1</option>
                      </select>
-
-                     </select>
                      </div>
                      <div class="col-lg-3 select-outline">
                      <select name="university" id="university" class="mdb-select md-form md-outline colorful-select dropdown-primary">
