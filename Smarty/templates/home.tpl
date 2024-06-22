@@ -119,8 +119,8 @@
                         <option value="" disabled selected>Select a university</option>
                      </select>
                      </div>
-                     <div class="col-lg-3 datepicker" data-mdb-inline="true">
-                     <input type="date" class="form-control" id="exampleDatepicker1" data-mdb-toggle="datepicker">
+                     <div class="col-lg-3 select-outline datepicker" data-mdb-inline="true">
+                     <input type="text1" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Select a Date" class="form-control" id="exampleDatepicker1" data-mdb-toggle="datepicker" data-mdb-mindate='moment()' >
                   </div>
                   <div class="col-lg-3 select-outline">
                      <div class="find_btn"><a href="#">Find Now</a></div>

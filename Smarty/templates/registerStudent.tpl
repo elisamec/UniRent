@@ -30,7 +30,6 @@
       <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/login.css">
 </head>
 <body>
-
          <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                <a class="navbar-brand"href="/UniRent/User/home"><img src="/UniRent/Smarty/images/logo.png"></a>
@@ -63,24 +62,11 @@
       <div class="layout_padding">
         <div class="container">
           <div class="Logcontainer">
-            <div class="heading">Register</div>
+            <div class="heading">You are registering as Student</div>
             <form action="/UniRent/User/checkRegister" class="form">
-            <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
-            <input class="input" type="file" id="img" name="img" accept="image/*" hidden>
-              <label for="img" class="label-button">Upload Profile Picture</label>
-            <div class="row">
-              <div class="col-sm-6">
-               <input required="" class="radio" type="radio" name="userType" id="userType" value="Student" checked="checked">
-              <label class="customlabel" for="Student">Student</label>
-              </div>
-               <div class="col-sm-6">
-              <input required="" class="radio" type="radio" name="userType" id="userType" value="Owner" checked="checked">
-              <label class="customlabel" for="Owner">Owner</label>
-              </div>
-               </div>
-              <input required="" class="input" type="text" name="name" id="name" placeholder="Name">
-              <input required="" class="input" type="text" name="surname" id="surname" placeholder="Surname">
-               <input required="" class="input" type="text" name="username" id="username" placeholder="Username"> 
+              <input required="" class="input" type="number" name="courseDuration" id="courseDuration" placeholder="Course Duration" min="1" max="6">
+              <input required="" class="input" type="number" name="immatricolationYear" id="immatricolationYear" placeholder="Immatricolation Year" min="2018" max="2099">
+              <input required="" class="input" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="birthDate" id="birthDate" placeholder="Date of Birth"> 
               <input required="" class="input" type="email" name="email" id="email" placeholder="E-mail">
               <input required="" class="input" type="password" name="password" id="password" placeholder="Password">
               <input class="login-button" type="submit" value="Next">
