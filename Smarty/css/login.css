@@ -25,14 +25,6 @@ html, body {
   position: relative;
   transform: translateX(50%)
 }
-fieldset {
-  overflow: hidden
-}
-
-.some-class {
-  float: left;
-  clear: none;
-}
 
 .customlabel {
   float: left;

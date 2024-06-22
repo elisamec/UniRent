@@ -30,6 +30,7 @@
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css">
       <!-- Include Font Awesome -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+      <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/home.css">
    </head>
    <body>
       <div class="header_section">
@@ -118,11 +119,8 @@
                         <option value="" disabled selected>Select a university</option>
                      </select>
                      </div>
-
-                     
-                  <div class="col-lg-3 form-outline datepicker" data-mdb-inline="true" data-mdb-minDate>
+                     <div class="col-lg-3 datepicker" data-mdb-inline="true">
                      <input type="date" class="form-control" id="exampleDatepicker1" data-mdb-toggle="datepicker">
-                     <label for="exampleDatepicker1" class="form-label">Select a date:</label>
                   </div>
                   <div class="col-lg-3 select-outline">
                      <div class="find_btn"><a href="#">Find Now</a></div>
