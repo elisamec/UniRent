@@ -1,5 +1,5 @@
 <?php
-
+namespace Classes\View;
 class VOwner {
     private $smarty;
 
