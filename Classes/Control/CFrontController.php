@@ -28,7 +28,7 @@ class CFrontController{
 
         // Extract controller and method names
         $controllerName = !empty($uriParts[0]) ? ucfirst($uriParts[0]) : 'User';
-        $methodName = !empty($uriParts[1]) ? $uriParts[1] : 'login';
+        $methodName = !empty($uriParts[1]) ? $uriParts[1] : 'home';
 
         // Load the controller class
         $controllerClass = 'C' . $controllerName;
