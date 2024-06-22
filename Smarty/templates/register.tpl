@@ -65,6 +65,9 @@
           <div class="Logcontainer">
             <div class="heading">Register</div>
             <form action="/UniRent/User/checkRegister" class="form">
+            <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
+            <input class="input" type="file" id="img" name="img" accept="image/*" hidden>
+              <label for="img" class="label-button">Upload Profile Picture</label>
             <div class="row">
               <div class="col-sm-6">
                <input required="" class="radio" type="radio" name="userType" id="userType" value="Student" checked="checked">
@@ -76,15 +79,12 @@
               </div>
                </div>
               <input required="" class="input" type="text" name="name" id="name" placeholder="Name">
-              <input required="" class="input" type="text" name="surname" id="surname" placeholder="Surname"> 
+              <input required="" class="input" type="text" name="surname" id="surname" placeholder="Surname">
+               <input required="" class="input" type="text" name="username" id="username" placeholder="Username"> 
               <input required="" class="input" type="email" name="email" id="email" placeholder="E-mail">
               <input required="" class="input" type="password" name="password" id="password" placeholder="Password">
-              <span class="forgot-password"><a href="#">Forgot Password ?</a></span>
-              <input class="login-button" type="submit" value="Sign In">
-            </form>
-            <div class="subheading">You don't have an account?</div>
-            <form action="" class="form">
-              <input class="login-button" type="submit" onclick="location.href='/UniRent/User/Register'" value="Sign Up">
+              
+              <input class="login-button" type="submit" value="Next">
             </form>
           </div>
         </div>
