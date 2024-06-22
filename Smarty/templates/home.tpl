@@ -71,7 +71,7 @@
                         <div class="col-sm-12">
                            <h1 class="banner_taital">Find an Accommodation</h1>
                            <p class="banner_text">Search among thousands of different accommodations the one that works best for you!</p>
-                           <div class="started_text"><a href="/UniRent/Smarty/templates/contact.tpl">Contact Us</a></div>
+         
                         </div>
                      </div>
                   </div>
@@ -79,8 +79,8 @@
                      <div class="row">
                         <div class="col-sm-12">
                            <h1 class="banner_taital">Choose your city</h1>
-                           <p class="banner_text">You can search basing on your city of interest, to find what's best for you!</p>
-                           <div class="started_text"><a href="/UniRent/Smarty/templates/contact.tpl">Contact Us</a></div>
+                           <p class="banner_text">Search basing on your city of interest, to find what's best for you!</p>
+                           
                         </div>
                      </div>
                   </div>
@@ -88,8 +88,8 @@
                      <div class="row">
                         <div class="col-sm-12">
                            <h1 class="banner_taital">Made for Students</h1>
-                           <p class="banner_text">Through this app we aim to help students look for accommodations reserved to them and owners to rent to students only.</p>
-                           <div class="started_text"><a href="/UniRent/Smarty/templates/contact.tpl">Contact Us</a></div>
+                           <p class="banner_text">We help students find accommodations and owners to rent to students only.</p>
+                           
                         </div>
                      </div>
                   </div>
