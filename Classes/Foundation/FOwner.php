@@ -215,4 +215,46 @@ use PDOException;
         }
     }
 
+    public function verifyEmail(string $email):bool
+    {
+        $q='SELECT * FROM owner WHERE email=:email';
+        $connection= FConnection::getInstance();
+        $db=$connection->getConnection();
+        $db->exec('LOCK TABLES owner READ');
+        $db->beginTransaction();
+        $stm=$db->prepare($q);
+        $stm->bindParam(':email',$email,PDO::PARAM_STR);
+        $stm->execute();
+        $db->commit();
+        $db->exec('UNLOCK TABLES');
+        $result=$stm->rowCount();
+
+        if ($result >0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public function verifyUsername(string $username):bool
+    {
+        $q='SELECT * FROM owner WHERE username=:username';
+        $connection= FConnection::getInstance();
+        $db=$connection->getConnection();
+        $db->exec('LOCK TABLES owner READ');
+        $db->beginTransaction();
+        $stm=$db->prepare($q);
+        $stm->bindParam(':username',$username,PDO::PARAM_STR);
+        $stm->execute();
+        $db->commit();
+        $db->exec('UNLOCK TABLES');
+        $result=$stm->rowCount();
+
+        if ($result >0)
+        {
+            return true;
+        }
+        return false;
+    }
+
  }

@@ -70,7 +70,7 @@ class FPersistentManager {
     /**
      * delete an object in the database
      * 
-     * @param String $EClass Refers to the Entity class of the object
+     * @param string $EClass Refers to the Entity class of the object
      * @param int $id Refers to the object to be stored
      * @return bool
      */

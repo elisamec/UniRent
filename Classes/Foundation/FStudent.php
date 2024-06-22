@@ -1,14 +1,15 @@
 <?php 
 namespace Classes\Foundation;
+
 require __DIR__.'../../../vendor/autoload.php';
-require_once('FPhoto.php');
-require_once('../Tools/TError.php');
+
 
 use Classes\Entity\EStudent;
 use Classes\Foundation\FConnection;
 use DateTime;
 use PDO;
 use PDOException;
+use Classes\Tools\TError;
 
 class FStudent
 {
@@ -236,6 +237,46 @@ class FStudent
             $db->rollBack();
             return false;
         }
+    }
+
+    public function verifyEmail(string $email):bool
+    {
+        $q='SELECT * FROM student WHERE universityMail=:email';
+        $connection= FConnection::getInstance();
+        $db=$connection->getConnection();
+        $db->exec('LOCK TABLES student READ');
+        $db->beginTransaction();
+        $stm=$db->prepare($q);
+        $stm->bindParam(':email',$email,PDO::PARAM_STR);
+        $stm->execute();
+        $db->commit();
+        $db->exec('UNLOCK TABLES');
+        $result=$stm->rowCount();
+        if ($result >0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public function verifyUsername(string $username):bool
+    {
+        $q='SELECT * FROM student WHERE username=:username';
+        $connection= FConnection::getInstance();
+        $db=$connection->getConnection();
+        $db->exec('LOCK TABLES student READ');
+        $db->beginTransaction();
+        $stm=$db->prepare($q);
+        $stm->bindParam(':username',$username,PDO::PARAM_STR);
+        $stm->execute();
+        $db->commit();
+        $db->exec('UNLOCK TABLES');
+        $result=$stm->rowCount();
+        if ($result >0)
+        {
+            return true;
+        }
+        return false;
     }
 
 }
