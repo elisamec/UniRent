@@ -21,8 +21,13 @@ class CUser
         $view->login();
     }
 
+    public static function register(){
+        $view = new VUser();
+        $view->register();
+    }
 
-    public static function registration()
+
+    /*public static function showRegistration()
     {
         $view= new VUser();
         $PM=FPersistentManager::getInstance();
@@ -88,5 +93,5 @@ class CUser
             }
         }
         return false;
-    }
+    }*/
 }

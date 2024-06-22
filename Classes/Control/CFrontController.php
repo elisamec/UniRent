@@ -19,7 +19,6 @@ class CFrontController{
      * 
      */
     public function run($requestUri){
-        
 
         $requestUri = trim($requestUri, '/');
         $uriParts = explode('/', $requestUri);
@@ -29,6 +28,7 @@ class CFrontController{
         // Extract controller and method names
         $controllerName = !empty($uriParts[0]) ? ucfirst($uriParts[0]) : 'User';
         $methodName = !empty($uriParts[1]) ? $uriParts[1] : 'home';
+        
 
         // Load the controller class
         $controllerClass = 'C' . $controllerName;
@@ -37,6 +37,7 @@ class CFrontController{
 
         if (file_exists($controllerFile)) {
             require_once $controllerFile;
+
 
             // Check if the method exists in the controller
             if (method_exists("Classes\Control\\".$controllerClass, $methodName)) {

@@ -22,4 +22,9 @@ class VUser{
 
         $this->smarty->display('login.tpl');
     }
+
+    public function register(){
+
+        $this->smarty->display('register.tpl');
+    }
 }

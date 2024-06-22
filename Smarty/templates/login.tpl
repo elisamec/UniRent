@@ -67,18 +67,22 @@
             <form action="/UniRent/User/checkLogin" class="form">
               <input required="" class="input" type="email" name="email" id="email" placeholder="E-mail">
               <input required="" class="input" type="password" name="password" id="password" placeholder="Password">
-              <div class="radio-container">
-              <div class="radio-group">
-              <label><input required="" class="input" type="radio" name="userType" id="userType" value="Student" checked="checked">Student</label>
-              <label><input required="" class="input" type="radio" name="userType" id="userType" value="Owner">Owner</label>
+              <div class="row">
+              <div class="col-sm-6">
+               <input required="" class="radio" type="radio" name="userType" id="userType" value="Student" checked="checked">
+              <label class="customlabel" for="Student">Student</label>
               </div>
+               <div class="col-sm-6">
+              <input required="" class="radio" type="radio" name="userType" id="userType" value="Owner" checked="checked">
+              <label class="customlabel" for="Owner">Owner</label>
               </div>
+               </div>
               <span class="forgot-password"><a href="#">Forgot Password ?</a></span>
-              <input class="login-button" type="submit" onclick="location.href='/UniRent/User/checkLogin'" value="Log In">
+              <input class="login-button" type="submit" value="Log In">
             </form>
             <div class="subheading">You don't have an account?</div>
-            <form action="" class="form">
-              <input class="login-button" type="submit" onclick="location.href='/UniRent/User/register'" value="Sign Up">
+            <form action="" class="form" action="/UniRent/User/register">
+              <input class="login-button" type="submit" onclick="location.href='/UniRent/User/checkLogin'" value="Sign Up">
             </form>
           </div>
         </div>
