@@ -1,24 +1,8 @@
-html, body {
-  height: 100%;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: url('/UniRent/Smarty/images/banner-bg.png'); /* Aggiungi questa linea */
-  background-size: cover; /* Adatta l'immagine per coprire l'intero schermo */
-  background-position: center; /* Centra l'immagine */
-  background-repeat: no-repeat; /* Non ripete l'immagine */
-}
 
-.center {
-  margin: auto;
-  width: 50%;
-  border: 3px solid green;
-  padding: 10px;
-}
 
-.container {
-  max-width: 350px;
+.Logcontainer {
+  width:50%;
+  max-width: 50%;
   background: #F8F9FD;
   background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(244, 247, 251) 100%);
   border-radius: 40px;
@@ -26,6 +10,8 @@ html, body {
   border: 5px solid rgb(255, 255, 255);
   box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 30px 30px -20px;
   margin: 20px;
+  position: relative;
+  transform: translateX(50%)
 }
 
 .heading {
@@ -40,13 +26,6 @@ html, body {
   font-weight: 900;
   font-size: 20px;
   color: rgb(16, 137, 211);
-}
-
-.social-account-container .error {
-  display: block;
-  text-align: center;
-  font-size: 20px;
-  color: rgb(255, 0, 0);
 }
 
 .form {
