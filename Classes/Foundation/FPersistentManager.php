@@ -112,8 +112,40 @@ class FPersistentManager {
     public function verifyStudentEmail(string $email):bool
     {
         $AUF=UAccessUniversityFile::getInstance();
-        $mail_domain=strrchr($email, "@");
+        $mail_domain=substr(strrchr($email,"@"),1);
         if(in_array($mail_domain,$AUF->getUniversityEmailList()))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function verifyUserEmail(string $email):bool
+    {
+        $FO=Foundation\FOwner::getInstance();
+        $FS=Foundation\FStudent::getInstance();
+        $resultS=$FS->verifyEmail($email);
+        $resultO=$FO->verifyEmail($email);
+        if($resultS==true || $resultO==true)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    public function verifyUserUsername(string $username):bool
+    {
+        $FO=Foundation\FOwner::getInstance();
+        $FS=Foundation\FStudent::getInstance();
+        $resultS=$FS->verifyUsername($username);
+        $resultO=$FO->verifyUsername($username);
+        if($resultS==true || $resultO==true)
         {
             return true;
         }
