@@ -1,16 +1,22 @@
 html, body {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('/UniRent/Smarty/images/banner-bg.png'); /* Aggiungi questa linea */
+  background-size: cover; /* Adatta l'immagine per coprire l'intero schermo */
+  background-position: center; /* Centra l'immagine */
+  background-repeat: no-repeat; /* Non ripete l'immagine */
 }
+
 .center {
-    margin: auto;
-    width: 50%;
-    border: 3px solid green;
-    padding: 10px;
-  }
+  margin: auto;
+  width: 50%;
+  border: 3px solid green;
+  padding: 10px;
+}
+
 .container {
   max-width: 350px;
   background: #F8F9FD;
