@@ -2,6 +2,12 @@
 
 namespace Classes\Control;
 require __DIR__.'/../../vendor/autoload.php';
+
+use Classes\Entity\EPhoto;
+use Classes\Foundation\FPersistentManager;
+use Classes\Entity\EStudent;
+use Classes\Utilities\USession;
+use Classes\Utilities\USuperGlobalAccess;
 use Classes\View\VStudent; 
 
 /**
@@ -22,4 +28,40 @@ class CStudent{
         $view = new VStudent();
         $view->home();
     }
+
+    public static function studentRegistration()
+    {
+        $view= new VStudent();
+        $PM=FPersistentManager::getInstance();
+        $session=USession::getInstance();
+        if($PM->verifyStudentEmail($session::getSessionElement('email'))==true)
+        {
+            $photo = new EPhoto(null, unserialize($session::getSessionElement('picture')),'student',null,null );
+            $student=new EStudent($session->getSessionElement('username'),
+                                  $session->getSessionElement('password'),
+                                  $session->getSessionElement('name'),
+                                  $session->getSessionElement('surname'),
+                                  $photo,
+                                  $session->getSessionElement('email'),
+                                  USuperGlobalAccess::getPost('courseDuration'),
+                                  USuperGlobalAccess::getPost('immatricolationYear'),
+                                  USuperGlobalAccess::getPost('birthDate'),
+                                  USuperGlobalAccess::getPost('sex'),
+                                  USuperGlobalAccess::getPost('smoker'),
+                                  USuperGlobalAccess::getPost('animal'));
+            $PM->store($student);
+            $session->setSessionElement('courseDuration', USuperGlobalAccess::getPost('courseDuration'));
+            $session->setSessionElement('immatricolationYear', USuperGlobalAccess::getPost('immatricolationYear'));
+            $session->setSessionElement('birthDate', USuperGlobalAccess::getPost('birthDate'));
+            $session->setSessionElement('sex', USuperGlobalAccess::getPost('sex'));
+            $session->setSessionElement('smoker', USuperGlobalAccess::getPost('smoker'));
+            $session->setSessionElement('animal', USuperGlobalAccess::getPost('animal'));
+            header('Location:/UniRent/Student/home');
+        }
+        else
+        {
+            $view->registrationError();
+        }
+    }
+        
 }
