@@ -67,14 +67,16 @@
             <form action="/UniRent/User/checkLogin" class="form">
               <input required="" class="input" type="email" name="email" id="email" placeholder="E-mail">
               <input required="" class="input" type="password" name="password" id="password" placeholder="Password">
-              <fieldset>
-               <div class="some-class">
+              <div class="row">
+              <div class="col-sm-6">
                <input required="" class="radio" type="radio" name="userType" id="userType" value="Student" checked="checked">
               <label class="customlabel" for="Student">Student</label>
+              </div>
+               <div class="col-sm-6">
               <input required="" class="radio" type="radio" name="userType" id="userType" value="Owner" checked="checked">
               <label class="customlabel" for="Owner">Owner</label>
               </div>
-              </fieldset>
+               </div>
               <span class="forgot-password"><a href="#">Forgot Password ?</a></span>
               <input class="login-button" type="submit" value="Log In">
             </form>

@@ -26,28 +26,25 @@ html, body {
   transform: translateX(50%)
 }
 fieldset {
-  overflow: hidden;
+  overflow: hidden
 }
 
 .some-class {
   float: left;
   clear: none;
-  justify-content: center;
-  align-items: center;
 }
 
 .customlabel {
+  float: left;
   clear: none;
-  display: inline-block;
+  display: block;
   padding: 40px 0px 0px 20px;
   font-size: 16px;
-  vertical-align: top;
 }
 
 input[type=radio],
 input.radio {
-  vertical-align: top;
-  display: inline-block;
+  float: left;
   clear: none;
   transform: scale(1.2);
   margin: 50px 0px 0px 55px;
