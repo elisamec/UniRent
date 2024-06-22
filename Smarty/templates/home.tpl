@@ -10,6 +10,7 @@
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
       <title>UniRent</title>
+      <link rel="icon" href="/UniRent/Smarty/images/favicon.png" type="image/png">
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
