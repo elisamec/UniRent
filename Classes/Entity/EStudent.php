@@ -113,7 +113,7 @@ class EStudent
     public function __construct(string $username, string $password, string $name, string $surname, EPhoto|null $picture, string $universityMail, int $courseDuration, int $immatricolationYear, DateTime $birthDate, string $sex, bool $smoker, bool $animals)
     {
         $this->username=$username;
-        $this->password=password_get_info($password)['algoName'] !== PASSWORD_DEFAULT ? password_hash($password, PASSWORD_DEFAULT) : $password;
+        $this->password=EStudent::isPasswordHashed($password) ? $password : password_hash($password, PASSWORD_DEFAULT);
         $this->name=$name;
         $this->surname=$surname;
         $this->picture=$picture;
@@ -124,6 +124,11 @@ class EStudent
         $this->sex=$sex;
         $this->smoker=$smoker;
         $this->animals=$animals;
+    }
+    private static function isPasswordHashed($password) {
+        // The cost parameter of bcrypt is stored in the first 7 characters of the hash
+        $isHashed = substr($password, 0, 7) == '$2y$10$';
+        return $isHashed;
     }
 
     // GET methods
