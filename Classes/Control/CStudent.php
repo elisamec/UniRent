@@ -36,6 +36,7 @@ class CStudent{
         $session=USession::getInstance();
         if($PM->verifyStudentEmail($session::getSessionElement('email'))==true)
         {
+            print "Email presa dalla sessione";
             if($session->getSessionElement('picture')!=null)
             {
                 $photo = new EPhoto(null, unserialize($session::getSessionElement('picture')),'student',null,null );
@@ -67,7 +68,7 @@ class CStudent{
         }
         else
         {
-            print "Email non valida per uno studente";
+            print "Email non stava in sessione";
             //$view->registrationError();
         }
     }
