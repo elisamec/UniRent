@@ -17,6 +17,10 @@ class VStudent{
 
         $this->smarty->display('homeStudent.tpl');
     }
+    public function profile(){
+
+        $this->smarty->display('profileStudent.tpl');
+    }
 
     //Mostra la seconda parte della registrazione studente
     public function showStudentRegistration(){
