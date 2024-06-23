@@ -1,7 +1,7 @@
 <?php
 namespace Classes\Tools;
 require __DIR__.'../../../vendor/autoload.php';
-use Classes\Tools\ErrorEnum;
+use Classes\Tools\ErrorDuplicate;
 use PDOException;
 
 class TError {

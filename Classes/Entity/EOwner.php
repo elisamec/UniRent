@@ -41,7 +41,7 @@ class EOwner
     public function __construct(?int $id, string $username, string $password, string $name, string $surname, ?EPhoto $photo, string $email, int $phonenumber, string $iban) {
         $this->id=$id;
         $this->username=$username;
-        $this->password=password_get_info($password)['algoName'] !== PASSWORD_DEFAULT ? password_hash($password, PASSWORD_DEFAULT) : $password;
+        $this->password=EOwner::isPasswordHashed($password) ? $password : password_hash($password, PASSWORD_DEFAULT);
         //to verify if password is right in controller: password_verify()
         $this->name=ucfirst($name);
         $this->surname=ucfirst($surname);
@@ -50,6 +50,12 @@ class EOwner
         $this->phoneNumber=$phonenumber;
         $this->iban = $iban;
     }
+    private static function isPasswordHashed($password) {
+        // The cost parameter of bcrypt is stored in the first 7 characters of the hash
+        $isHashed = substr($password, 0, 7) == '$2y$10$';
+        return $isHashed;
+    }
+    
     /**
      * Undocumented function
      *

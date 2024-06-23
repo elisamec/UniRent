@@ -65,7 +65,7 @@
           <div class="Logcontainer">
             <div class="heading">Log In</div>
             <form action="/UniRent/User/checkLogin" class="form" method="post">
-              <input required="" class="input" type="email" name="email" id="email" placeholder="E-mail">
+              <input required="" class="input" type="text" name="username" id="username" placeholder="Userame">
               <input required="" class="input" type="password" name="password" id="password" placeholder="Password">
               <div class="row">
               <div class="col-sm-6">

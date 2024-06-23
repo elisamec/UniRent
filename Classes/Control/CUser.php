@@ -46,7 +46,7 @@ class CUser
             $session::setSessionElement('name',USuperGlobalAccess::getPost('name'));
             $session::setSessionElement('surname',USuperGlobalAccess::getPost('surname'));
             $session::setSessionElement('picture',serialize(USuperGlobalAccess::getPost('img')));
-            if(USuperGlobalAccess::getPost('userType')==='Student')
+            if($type==='Student')
             {
                 $viewStudent->showStudentRegistration();
             }
@@ -57,8 +57,8 @@ class CUser
             }
         }  
         else
-        {
-            $view->reggistrationError();
+        {   print "Utente con tale email o username già registrato";
+            //$view->reggistrationError();
         }   
     }
 
@@ -76,27 +76,30 @@ class CUser
             $userId = $PM->verifyUserUsername(USuperGlobalAccess::getPost('username')); 
         }
 
-        //If the id is not false, get the user and check the password
+        //If user exist, get the user and check the password
         if($userId != false){
 
             //Type can be Student or Owner
-            $user = $PM->load($type, $userId);
+            $user = $PM->load("E$type", $userId);
 
             if(password_verify(USuperGlobalAccess::getPost('password'), $user->getPassword())){
 
                 if(USession::getSessionStatus() == PHP_SESSION_NONE){
                     USession::getInstance();
                     USession::setSessionElement("$type", $userId);
-                    if($type === 'Student') $viewStudent->home();
-                    else $viewOwner->home();
+                    if($type === 'Student')header('Location:/UniRent/Student/home');
+                    else print "Proprietario autenticato";// header('Location:/UniRent/Owner/home');
+                    //else $viewOwner->home();
                 }
 
             }else{
-                $view->loginError();
+                print "Password non corretta"; 
+                //$view->loginError();
             }
 
         }else{
-            $view->loginError();
+            print "Username non corretto";
+            //$view->loginError();
         }
 
     }
