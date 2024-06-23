@@ -64,7 +64,7 @@
         <div class="container">
           <div class="Logcontainer">
             <div class="heading">Sign Up</div>
-            <form action="/UniRent/User/checkRegister" class="form">
+            <form action="/UniRent/User/showRegistration" class="form">
             <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
             <input class="input" type="file" id="img" name="img" accept="image/*" hidden>
               <label for="img" class="label-button">Upload Profile Picture</label>

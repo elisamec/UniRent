@@ -34,6 +34,8 @@ class CFrontController{
         $controllerClass = 'C' . $controllerName;
         $controllerFile = __DIR__ . "/$controllerClass.php";
 
+        print "sono nel controllore";
+
 
         if (file_exists($controllerFile)) {
             require_once $controllerFile;
@@ -48,11 +50,11 @@ class CFrontController{
 
             } else {
                 // Method not found, handle appropriately (e.g., show 404 page)
-                header('Location: /UniRent/User/home');
+                //header('Location: /UniRent/User/home');
             }
         } else {
             // Controller not found, handle appropriately (e.g., show 404 page)
-            header('Location: /UniRent/User/home');
+            //header('Location: /UniRent/User/home');
         }
     }
 }

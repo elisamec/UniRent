@@ -31,6 +31,7 @@ class CUser
 
     public static function showRegistration()
     {
+        print "sono in showRegistation";
         $view= new VUser();
         $viewStudent = new VStudent();
         $viewOwner = new VOwner();
@@ -44,8 +45,8 @@ class CUser
             $session::setSessionElement('password',USuperGlobalAccess::getPost('password'));
             $session::setSessionElement('name',USuperGlobalAccess::getPost('name'));
             $session::setSessionElement('surname',USuperGlobalAccess::getPost('surname'));
-            $session::setSessionElement('picture',serialize(USuperGlobalAccess::getPost('picture')));
-            if(USuperGlobalAccess::getPost('student/owner')==='Student')
+            $session::setSessionElement('picture',serialize(USuperGlobalAccess::getPost('img')));
+            if(USuperGlobalAccess::getPost('Type')==='Student')
             {
                 $viewStudent->showStudentRegistration();
             }
@@ -65,7 +66,7 @@ class CUser
         $view = new VUser();
         $viewStudent = new VStudent();
         $viewOwner = new VOwner();
-        $type = USuperGlobalAccess::getPost('student/owner');
+        $type = USuperGlobalAccess::getPost('Type');
         $PM = FPersistentManager::getInstance();
         $userId = false;
 
