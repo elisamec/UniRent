@@ -14,7 +14,8 @@
     use Classes\Entity\EVisit;
     use Classes\Foundation\FPhoto;
     use Classes\Entity\EPhoto;
-    use DateTime;
+use Classes\Entity\EStudent;
+use DateTime;
    
 
     $FP=FPersistentManager::getInstance();
@@ -45,11 +46,13 @@
     //$risultato = $FP->delete("EVisit", 12);
     //$risultato = $FP->load("EAccommodation", 21);
 
-    $times = ["11:30", "14:00"];
+    //$times = ["11:30", "14:00"];
 
-    $risultato = $FA->deleteDay(33);
+    $student = new EStudent("nadia1", "Nadia123)", "Nadia", "Muzyka", null, "nadiam@student.univaq.it", 3, 2021, new DateTime("1999-06-01"), "F", false, false);
 
-    print_r($risultato);
+    $risultato = $FP->store($student);
+
+    print($risultato);
 
 
 

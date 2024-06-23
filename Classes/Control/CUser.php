@@ -46,7 +46,7 @@ class CUser
             $session::setSessionElement('name',USuperGlobalAccess::getPost('name'));
             $session::setSessionElement('surname',USuperGlobalAccess::getPost('surname'));
             $session::setSessionElement('picture',serialize(USuperGlobalAccess::getPost('img')));
-            if(USuperGlobalAccess::getPost('userType')==='Student')
+            if($type==='Student')
             {
                 $viewStudent->showStudentRegistration();
             }
@@ -80,23 +80,30 @@ class CUser
         if($userId != false){
 
             //Type can be Student or Owner
-            $user = $PM->load($type, $userId);
+            $user = $PM->load("E$type", $userId);
+
+            //print USuperGlobalAccess::getPost('password');
+            echo password_hash(USuperGlobalAccess::getPost('password'), PASSWORD_DEFAULT);
+            print " |||";
+            print $user->getPassword();
 
             if(password_verify(USuperGlobalAccess::getPost('password'), $user->getPassword())){
 
                 if(USession::getSessionStatus() == PHP_SESSION_NONE){
                     USession::getInstance();
                     USession::setSessionElement("$type", $userId);
-                    if($type === 'Student') $viewStudent->home();
-                    else $viewOwner->home();
+                    if($type === 'Student') print "Studente autenticato";//$viewStudent->home();
+                    else "Proprietario autenticato";//$viewOwner->home();
                 }
 
             }else{
-                $view->loginError();
+                print "Password non corretta"; 
+                //$view->loginError();
             }
 
         }else{
-            $view->loginError();
+            print "Username non corretto";
+            //$view->loginError();
         }
 
     }
