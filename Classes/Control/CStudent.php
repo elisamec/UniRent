@@ -67,7 +67,7 @@ class CStudent{
         }
         else
         {
-            $view->registrationError();
+            //$view->registrationError();
         }
     }
         
