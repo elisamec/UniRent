@@ -367,8 +367,30 @@ button {
     position: absolute;
     top: -75px;
 }
+.search_box_section {
+    width: 100%;
+    float: left;
+    position: relative;
+    margin-bottom: 100px;
+    margin-top: 10px;
+}
+
+.search_box_main {
+    width: 30%;
+    background-color: #ffffff;
+    height: auto;
+    padding: 40px 20px;
+    border-radius: 20px;
+    box-shadow: 0px 9px 9px 0px #eaeaea !important;
+    position: absolute;
+}
 
 .find_text {
+    width: 100%;
+    font-size: 24px;
+    color: #000000;
+}
+.rating_text {
     width: 100%;
     font-size: 24px;
     color: #000000;
@@ -479,6 +501,43 @@ z-index: 2 !important;
 
 /* about section end */
 
+.rating {
+    padding-left: 14px
+}
+.rating:not(:checked) > input {
+    position: absolute;
+    appearance: none;
+  }
+  
+  .rating:not(:checked) > label {
+    float: right;
+    cursor: pointer;
+    font-size: 30px;
+    fill: #666;
+  }
+  
+  .rating:not(:checked) > label > svg {
+    fill: #666; /* Set default color for SVG */
+    transition: fill 0.3s ease; /* Add a transition effect */
+  }
+  
+  .rating > input:checked + label:hover,
+  .rating > input:checked + label:hover ~ label,
+  .rating > input:checked ~ label:hover,
+  .rating > input:checked ~ label:hover ~ label,
+  .rating > label:hover ~ input:checked ~ label {
+    fill: #e58e09;
+  }
+  
+  .rating:not(:checked) > label:hover,
+  .rating:not(:checked) > label:hover ~ label {
+    fill: #ff9e0b;
+  }
+  
+  .rating > input:checked ~ label > svg {
+    fill: #ffa723; /* Set color for selected stars */
+  }
+  
 
 /* feature section start */
 
@@ -636,6 +695,19 @@ hr.border_main {
     width: 100%;
     float: left;
     padding-top: 20px;
+}
+.Findcontainer {
+    width: 100%;
+    float: left;
+    margin-bottom: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
+
+}
+.Searchcontainer {
+    float: right;
+    width: 60%;
+    margin-right: 50px;
 }
 
 .image_box{

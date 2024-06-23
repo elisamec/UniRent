@@ -115,7 +115,7 @@ INSERT INTO `address` (`id`, `addressLine`, `postalCode`, `city`) VALUES
 CREATE TABLE `administrator` (
   `id` int(11) NOT NULL,
   `username` varchar(40) NOT NULL,
-  `password` varchar(40) NOT NULL,
+  `password` varchar(60) NOT NULL,
   `email` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -180,7 +180,7 @@ INSERT INTO `day` (`id`, `day`, `idAccommodation`) VALUES
 CREATE TABLE `owner` (
   `id` int(11) NOT NULL,
   `username` varchar(40) NOT NULL,
-  `password` varchar(40) NOT NULL,
+  `password` varchar(60) NOT NULL,
   `name` varchar(20) NOT NULL,
   `surname` varchar(20) NOT NULL,
   `picture` int(11) DEFAULT NULL,
@@ -280,7 +280,7 @@ CREATE TABLE `review` (
 CREATE TABLE `student` (
   `id` int(11) NOT NULL,
   `username` varchar(40) NOT NULL,
-  `password` varchar(40) NOT NULL,
+  `password` varchar(60) NOT NULL,
   `name` varchar(20) NOT NULL,
   `surname` varchar(20) NOT NULL,
   `picture` int(11) DEFAULT NULL,
