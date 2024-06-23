@@ -67,6 +67,7 @@ class CStudent{
         }
         else
         {
+            print "Email non valida per uno studente";
             //$view->registrationError();
         }
     }

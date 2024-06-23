@@ -12,6 +12,7 @@
     use Classes\Entity\EAccommodation;
     use Classes\Foundation\FVisit;
     use Classes\Entity\EVisit;
+    use Classes\Entity\EOwner;
     use Classes\Foundation\FPhoto;
     use Classes\Entity\EPhoto;
 use Classes\Entity\EStudent;
@@ -50,7 +51,8 @@ use DateTime;
 
     $student = new EStudent("nadia1", "Nadia123)", "Nadia", "Muzyka", null, "nadiam@student.univaq.it", 3, 2021, new DateTime("1999-06-01"), "F", false, false);
 
-    $risultato = $FP->store($student);
+    $owner = new EOwner(null, "nadia1", "Nadia123)", "Nadia", "Muzyka", null, "muzykanadia0@gmail.com", "3333333333", "IT60X0542811101000000123456");
+    $risultato = $FP->store($owner);
 
     print($risultato);
 

@@ -57,8 +57,8 @@ class CUser
             }
         }  
         else
-        {
-            $view->reggistrationError();
+        {   print "Utente con tale email o username già registrato";
+            //$view->reggistrationError();
         }   
     }
 
@@ -76,26 +76,20 @@ class CUser
             $userId = $PM->verifyUserUsername(USuperGlobalAccess::getPost('username')); 
         }
 
-        //If the id is not false, get the user and check the password
+        //If user exist, get the user and check the password
         if($userId != false){
 
             //Type can be Student or Owner
             $user = $PM->load("E$type", $userId);
-
-            print "---La password appena inserita è: ";
-            print USuperGlobalAccess::getPost('password');
-            print "---La password recuperata è: ";
-            print $user->getPassword();
-
-            print "---Esito verifica: ";
 
             if(password_verify(USuperGlobalAccess::getPost('password'), $user->getPassword())){
 
                 if(USession::getSessionStatus() == PHP_SESSION_NONE){
                     USession::getInstance();
                     USession::setSessionElement("$type", $userId);
-                    if($type === 'Student') print "Studente autenticato";//$viewStudent->home();
-                    else "Proprietario autenticato";//$viewOwner->home();
+                    if($type === 'Student')header('Location:/UniRent/Student/home');
+                    else print "Proprietario autenticato";// header('Location:/UniRent/Owner/home');
+                    //else $viewOwner->home();
                 }
 
             }else{
