@@ -28,6 +28,10 @@ class CStudent{
         $view = new VStudent();
         $view->home();
     }
+    public static function profile(){
+        $view = new VStudent();
+        $view->profile();
+    }
 
     public static function studentRegistration()
     {
