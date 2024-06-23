@@ -31,6 +31,7 @@ class CStudent{
 
     public static function studentRegistration()
     {
+        print 'inizio';
         $view= new VStudent();
         $PM=FPersistentManager::getInstance();
         $session=USession::getInstance();
@@ -63,6 +64,7 @@ class CStudent{
             $session->setSessionElement('sex', USuperGlobalAccess::getPost('sex'));
             $session->setSessionElement('smoker', USuperGlobalAccess::getPost('smoker'));
             $session->setSessionElement('animal', USuperGlobalAccess::getPost('animal'));
+            print 'ok';
             header('Location:/UniRent/Student/home');
         }
         else

@@ -89,7 +89,7 @@
               <label class="customlabel">animals</label>
               </div>
                </div> 
-              <input class="login-button" type="submit" value="Sign Up">
+              <input class="login-button" type="submit" onclick="location.href='/UniRent/Student/studentRegistration'" value="Sign Up">
             </form>
             <div class="notes-container">
             <span class="title">*These informations are used to determine your accommodation matches, therefore they will not be shown.</span>
