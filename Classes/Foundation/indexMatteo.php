@@ -24,17 +24,23 @@ foreach($università as $key=>$value)
 print_r($indirizzi_web);
 */
 
+
 $email = new PHPMailer(true);
 $email->isSMTP();
-$email->setFrom('matteo.maloni.00@gmail.com','Matteo Maloni');
-$email->addReplyTo('matteo.maloni.00@gmail.com', 'Matteo Maloni');
-$email->addAddress('matteo.maloni.00@gamil.com','Matteo Maloni');
+$email->Host = '127.0.0.1'; // Indirizzo del server SMTP di Mercury
+$email->SMTPAuth = false; // Di solito, Mercury non richiede autenticazione
+$email->Port = 25; // Porta standard SMTP
+
+#$email->setFrom('matteo.maloni.00@gmail.com', 'Matteo Maloni');
+#$email->addReplyTo('matteo.maloni.00@gmail.com', 'Matteo Maloni');
+$email->addAddress('matteo.maloni.00@gmail.com', 'Matteo Maloni');
 $email->Subject = 'PHPMailer mail() test';
-#$mail->msgHTML(file_get_contents('contents.html'), __DIR__);
-$email->Body='<b>Ciao Matteo!</b>';
+$email->Body = '<b>Ciao Matteo!</b>';
 $email->isHTML(true);
-if (!$email->send()) {
-    echo 'Mailer Error: ' . $email->ErrorInfo;
-} else {
+
+try {
+    $email->send();
     echo 'Message sent!';
+} catch (Exception $e) {
+    echo 'Mailer Error: ' . $email->ErrorInfo;
 }
