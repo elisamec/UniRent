@@ -562,6 +562,7 @@
       </div>
       <!-- copyright section end -->
       <!-- Javascript files-->
+      
       <script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>
       <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
