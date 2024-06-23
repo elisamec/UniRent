@@ -234,9 +234,9 @@ use PDOException;
             return true;
         }
         return false;
-    }
+    } 
 
-    public function verifyUsername(string $username):bool
+    public function verifyUsername(string $username):bool|int
     {
         $q='SELECT * FROM owner WHERE username=:username';
         $connection= FConnection::getInstance();
@@ -249,10 +249,11 @@ use PDOException;
         $db->commit();
         $db->exec('UNLOCK TABLES');
         $result=$stm->rowCount();
+        $row=$stm->fetch(PDO::FETCH_ASSOC);
 
         if ($result >0)
         {
-            return true;
+            return $row['id'];
         }
         return false;
     }

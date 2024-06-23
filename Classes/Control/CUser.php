@@ -61,20 +61,22 @@ class CUser
     }
 
     public static function checkLogin(){
+
         $view = new VUser();
         $type = USuperGlobalAccess::getPost('student/owner');
         $PM = FPersistentManager::getInstance();
 
         $username = $PM->verifyUserUsername(USuperGlobalAccess::getPost('username')); 
 
-        if($username){
-            $user = $PM->retriveUserOnUsername(USuperGlobalAccess::getPost('username'), $type);
+        if($username != false){
+            
+            $user = $PM->load($type, $username);
             if(password_verify(USuperGlobalAccess::getPost('password'), $user->getPassword())){
 
                 if(USession::getSessionStatus() == PHP_SESSION_NONE){
                     USession::getInstance();
                     USession::setSessionElement("$type", $user->getId());
-                    $type === 'student' ? $view->showStudentHome() : $view->showOwnerHome();
+                    $type === 'Student' ? $view->showStudentHome() : $view->showOwnerHome();
                 }
 
             }else{

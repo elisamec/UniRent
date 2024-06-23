@@ -139,16 +139,22 @@ class FPersistentManager {
         }
     }
     
-    public function verifyUserUsername(string $username):bool
+    public function verifyUserUsername(string $username):bool|int
     {
         $FO=Foundation\FOwner::getInstance();
         $FS=Foundation\FStudent::getInstance();
         $resultS=$FS->verifyUsername($username);
         $resultO=$FO->verifyUsername($username);
-        if($resultS==true || $resultO==true){
-            return true;
+
+        if($resultS != false){
+            return $resultS;
         }
-        else{
+        elseif ($resultO != false){
+
+            return $resultO;
+
+        }else{
+
             return false;
         }
     }
