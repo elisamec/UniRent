@@ -28,6 +28,7 @@
       <!-- Include Font Awesome -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
       <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/login.css">
+
 </head>
 <body>
          <div class="container-fluid">
@@ -81,11 +82,13 @@
                <legend class="customlabel">Personal Information*:</legend>
               <div class="row">
               <div class="col-sm-6">
-              <input class="checkbox" type="checkbox" name="smoker" id="smorker">
+              <input class="checkbox" type="checkbox" name="smoker" id="smoker">
+              <input type="hidden" id="hiddenSmoker" name="smoker" value="false">
               <label class="customlabel">smoker</label>
               </div>
                <div class="col-sm-6">
               <input class="checkbox" type="checkbox" name="animals" id="animals">
+              <input type="hidden" id="hiddenAnimals" name="animals" value="false">
               <label class="customlabel">animals</label>
               </div>
                </div> 
@@ -153,5 +156,26 @@
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
+      <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Assicurati che gli ID corrispondano ai tuoi elementi HTML
+    var smokerCheckbox = document.getElementById('smoker');
+    var animalsCheckbox = document.getElementById('animals');
+    var hiddenSmoker = document.getElementById('hiddenSmoker');
+    var hiddenAnimals = document.getElementById('hiddenAnimals');
+
+    if(smokerCheckbox && hiddenSmoker) {
+        smokerCheckbox.onclick = function() {
+            hiddenSmoker.value = this.checked ? 'true' : 'false';
+        };
+    }
+
+    if(animalsCheckbox && hiddenAnimals) {
+        animalsCheckbox.onclick = function() {
+            hiddenAnimals.value = this.checked ? 'true' : 'false';
+        };
+    }
+});
+</script>
   </body>
   

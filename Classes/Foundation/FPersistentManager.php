@@ -112,7 +112,7 @@ class FPersistentManager {
     public function verifyStudentEmail(string $email):bool
     {
         $AUF=UAccessUniversityFile::getInstance();
-        $mail_domain=substr(strrchr($email,"@"),1);
+        $mail_domain=substr(strrchr($email,"@student"),8);
         if(in_array($mail_domain,$AUF->getUniversityEmailList()))
         {
             return true;

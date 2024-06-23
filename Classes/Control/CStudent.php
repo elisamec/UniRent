@@ -9,7 +9,7 @@ use Classes\Entity\EStudent;
 use Classes\Utilities\USession;
 use Classes\Utilities\USuperGlobalAccess;
 use Classes\View\VStudent; 
-
+use DateTime;
 /**
  * Student controller class
  *
@@ -32,12 +32,15 @@ class CStudent{
     public static function studentRegistration()
     {
         print 'inizio';
+        $animals=USuperGlobalAccess::getPost('animals');
+        $smoker=USuperGlobalAccess::getPost('smoker');
         $view= new VStudent();
         $PM=FPersistentManager::getInstance();
         $session=USession::getInstance();
         if($PM->verifyStudentEmail($session::getSessionElement('email'))==true)
         {
             print "Email presa dalla sessione";
+           
             if($session->getSessionElement('picture')!=null)
             {
                 $photo = new EPhoto(null, unserialize($session::getSessionElement('picture')),'student',null,null );
@@ -46,6 +49,7 @@ class CStudent{
             {
                 $photo = null;
             }
+            $birthDate= new DateTime(USuperGlobalAccess::getPost('birthDate'));
             $student=new EStudent($session->getSessionElement('username'),
                                   $session->getSessionElement('password'),
                                   $session->getSessionElement('name'),
@@ -54,10 +58,10 @@ class CStudent{
                                   $session->getSessionElement('email'),
                                   USuperGlobalAccess::getPost('courseDuration'),
                                   USuperGlobalAccess::getPost('immatricolationYear'),
-                                  USuperGlobalAccess::getPost('birthDate'),
+                                  $birthDate,
                                   USuperGlobalAccess::getPost('sex'),
-                                  USuperGlobalAccess::getPost('smoker'),
-                                  USuperGlobalAccess::getPost('animal'));
+                                  $smoker,
+                                  $animals);
             $PM->store($student);
             $session->setSessionElement('courseDuration', USuperGlobalAccess::getPost('courseDuration'));
             $session->setSessionElement('immatricolationYear', USuperGlobalAccess::getPost('immatricolationYear'));

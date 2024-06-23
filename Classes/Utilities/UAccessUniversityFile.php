@@ -9,7 +9,7 @@ class UAccessUniversityFile
 
     private function __construct()
     {
-        $path='UniIta.json';
+        $path=__DIR__.'/UniIta.json';
         $json=file_get_contents($path);
         $myarray=json_decode($json,true);
         $università=$myarray['records'];

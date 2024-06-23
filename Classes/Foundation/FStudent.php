@@ -86,6 +86,7 @@ class FStudent
     public function store(EStudent $student):bool
     {
         $db=FConnection::getInstance()->getConnection();
+        $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
             try
             {
                 $db->exec('LOCK TABLES student WRITE');
@@ -114,12 +115,15 @@ class FStudent
                 $stm->bindValue(':smoker',$student->getSmoker(),PDO::PARAM_BOOL);
                 $stm->bindValue(':animals',$student->getAnimals(),PDO::PARAM_BOOL);
                 $stm->execute();
+                print 'sono in FStudent';
                 $db->commit();
+                print 'commit eseguita';
                 $db->exec('UNLOCK TABLES');
                 return true;
             }
             catch(PDOException $e)
             {
+                print ' commit ha lanciato la exception!';
                 $db->rollBack();
                 $errorType = TError::getInstance()->handleDuplicateError($e);
                 if ($errorType) 
