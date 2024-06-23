@@ -13,7 +13,7 @@
     use Classes\Foundation\FVisit;
     use Classes\Entity\EVisit;
     use Classes\Entity\EOwner;
-    use Classes\Foundation\FPhoto;
+    use Classes\Foundation\FOwner;
     use Classes\Entity\EPhoto;
 use Classes\Entity\EStudent;
 use DateTime;
@@ -53,6 +53,10 @@ use DateTime;
 
     $owner = new EOwner(null, "nadia1", "Nadia123)", "Nadia", "Muzyka", null, "muzykanadia0@gmail.com", "3333333333", "IT60X0542811101000000123456");
     $risultato = $FP->store($owner);
+
+    $id = $owner->getId();
+
+    $risultato = $FP->load("EOwner", $id);
 
     print($risultato);
 

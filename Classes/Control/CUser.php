@@ -88,7 +88,7 @@ class CUser
                     USession::getInstance();
                     USession::setSessionElement("$type", $userId);
                     if($type === 'Student')header('Location:/UniRent/Student/home');
-                    else print "Proprietario autenticato";// header('Location:/UniRent/Owner/home');
+                    else print  header('Location:/UniRent/Owner/home');
                     //else $viewOwner->home();
                 }
 

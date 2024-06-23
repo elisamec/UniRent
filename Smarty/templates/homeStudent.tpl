@@ -66,6 +66,9 @@
                      <li class="nav-item">
                         <a class="nav-link" href = "#">Visits</a>
                      </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href = "/UniRent/User/logout">Logout</a>
+                     </li>
                   </ul>
                   <form class="form-inline my-2 my-lg-0">
                      <div class="login_bt">
