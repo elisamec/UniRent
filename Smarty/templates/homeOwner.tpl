@@ -45,13 +45,16 @@
                      <li class="nav-item active">
                         <a class="nav-link" href="/UniRent/Student/home">Home</a>
                      </li>
-                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reservations</a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="#">Accepted</a>
-                           <a class="dropdown-item" href="#">Waiting</a>
-                        </div>
+                     <li class="nav-item">
+                        <a class="nav-link" href="#">Reservations</a>
                      </li>
+                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Tenants</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                           <a class="dropdown-item" href="#">Current</a>
+                           <a class="dropdown-item" href="#">Past</a>
+                           <a class="dropdown-item" href="#">Future</a>
+                        </div>
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contracts</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -140,8 +143,8 @@
                      <div class="col-lg-3 select-outline">
                      <select name="date" id="date" class="mdb-select md-form md-outline colorful-select dropdown-primary">
                         <option value="" disabled selected>Select a period</option>
-                        <option value="september">September to June</option>
-                        <option value="october">October to July</option>
+                        <option value="september">September</option>
+                        <option value="october">October</option>
                      </select>
                      </div>
                   <div class="col-lg-3 select-outline">
@@ -157,7 +160,7 @@
             <div class="row">
                <div class="col-sm-12">
                   <div class="Properties_taital_main">
-                     <h1 class="Properties_taital">New Properties For You</h1>
+                     <h1 class="Properties_taital">New Properties In Milan</h1>
                      <hr class="border_main">
                   </div>
                </div>
@@ -276,7 +279,7 @@
             <div class="row">
                <div class="col-sm-12">
                   <div class="Properties_taital_main">
-                     <h1 class="Properties_taital">Your Last Searches</h1>
+                     <h1 class="Properties_taital">New Properties In Rome</h1>
                      <hr class="border_main">
                   </div>
                </div>
@@ -390,6 +393,138 @@
          </div>
       </div>
       <!-- Properties section end -->
+      <!-- customers section start -->
+      <div class="customer_section layout_padding">
+         <div class="container">
+            <div class="row">
+               <div class="col-sm-12">
+                  <div class="customer_taital_main">
+                     <h1 class="customer_taital">SATISFIED CLIENT Says</h1>
+                     <hr class="customer_border_main">
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div id="my_slider" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+               <div class="carousel-item active">
+                  <div class="customer_section_2">
+                     <div class="container">
+                        <div class="row">
+                           <div class="col-md-12">
+                              <div class="box_main">
+                                 <div class="customer_main">
+                                    <div class="customer_left">
+                                       <div class="customer_img"><img src="/UniRent/Smarty/images/customer-img.png"></div>
+                                    </div>
+                                    <div class="customer_right">
+                                       <h3 class="customer_name">DenoMark <span class="quick_icon"><img src="/UniRent/Smarty/images/quick-icon.png"></span></h3>
+                                       <p class="enim_text">anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internetanything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet</p>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="carousel-item">
+                  <div class="customer_section_2">
+                     <div class="container">
+                        <div class="row">
+                           <div class="col-md-12">
+                              <div class="box_main">
+                                 <div class="customer_main">
+                                    <div class="customer_left">
+                                       <div class="customer_img"><img src="/UniRent/Smarty/images/customer-img.png"></div>
+                                    </div>
+                                    <div class="customer_right">
+                                       <h3 class="customer_name">DenoMark <span class="quick_icon"><img src="/UniRent/Smarty/images/quick-icon.png"></span></h3>
+                                       <p class="enim_text">anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internetanything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet</p>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="carousel-item">
+                  <div class="customer_section_2">
+                     <div class="container">
+                        <div class="row">
+                           <div class="col-md-12">
+                              <div class="box_main">
+                                 <div class="customer_main">
+                                    <div class="customer_left">
+                                       <div class="customer_img"><img src="/UniRent/Smarty/images/customer-img.png"></div>
+                                    </div>
+                                    <div class="customer_right">
+                                       <h3 class="customer_name">DenoMark <span class="quick_icon"><img src="/UniRent/Smarty/images/quick-icon.png"></span></h3>
+                                       <p class="enim_text">anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internetanything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet</p>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
+              <i class="fa fa-arrow-left"></i>
+            </a>
+            <a class="carousel-control-next" href="#my_slider" role="button" data-slide="next">
+              <i class="fa fa-arrow-right"></i>
+            </a>
+         </div>
+      </div>
+      <!-- customers section end -->
+      <!-- contact section start -->
+      <div class="contact_section layout_padding">
+         <div class="container">
+            <div class="row">
+               <div class="col-sm-12">
+                  <div class="contact_taital_main">
+                     <h1 class="contact_taital">Requeste A Call Back</h1>
+                     <hr class="contact_border_main">
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="container-fluid">
+            <div class="contact_section_2">
+               <div class="row">
+                  <div class="col-md-6">
+                     <div class="mail_section map_form_container">
+                        <form action="">
+                        <input type="text" class="mail_text" placeholder="Name" name="Name">
+                        <input type="text" class="mail_text" placeholder="Phone Number" name="Phone Number"> 
+                        <input type="text" class="mail_text" placeholder="Email" name="Email">
+                        <textarea class="massage-bt" placeholder="Massage" rows="5" id="comment" name="Massage"></textarea>
+                        <div class="btn_main">
+                           <div class="send_bt active"><a href="#">Send Now</a></div>
+                           <div class="map_bt"><a href="#" id="showMap">Map</a></div>
+                        </div>
+                        </form>
+                        <div class="map_main map_container">
+                           <div class="map-responsive">
+                              <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&amp;q=Eiffel+Tower+Paris+France" width="600" height="368" frameborder="0" style="border:0; width: 100%;" allowfullscreen=""></iframe>
+                               <div class="btn_main">
+                                 <div class="map_bt d-flex justify-content-center w-100 map_center"><a href="#" id="showForm">Form</a></div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="contact_img"><img src="/UniRent/Smarty/images/contact-img.png"></div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- contact section end -->
       
       <!-- footer section start -->
       <div class="footer_section layout_padding">

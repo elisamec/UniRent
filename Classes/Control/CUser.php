@@ -51,7 +51,8 @@ class CUser
                 $viewStudent->showStudentRegistration();
             }
             else
-            {   
+            {  
+ 
                 $viewOwner->showOwnerRegistration();
             }
         }  
