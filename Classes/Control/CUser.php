@@ -82,12 +82,12 @@ class CUser
             //Type can be Student or Owner
             $user = $PM->load("E$type", $userId);
 
-            print "La password appena inserita è: ";
+            print "---La password appena inserita è: ";
             print USuperGlobalAccess::getPost('password');
-            print "La password recuperata è: ";
+            print "---La password recuperata è: ";
             print $user->getPassword();
 
-            print "Esito verifica: ";
+            print "---Esito verifica: ";
 
             if(password_verify(USuperGlobalAccess::getPost('password'), $user->getPassword())){
 
