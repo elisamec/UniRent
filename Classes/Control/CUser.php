@@ -31,7 +31,6 @@ class CUser
 
     public static function showRegistration()
     {
-        print "sono in showRegistation";
         $view= new VUser();
         $viewStudent = new VStudent();
         $viewOwner = new VOwner();

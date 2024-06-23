@@ -15,7 +15,8 @@ class USession
 
     private function __construct() 
     {
-        session_set_cookie_params(COOKIE_EXP_TIME); //set the duration of the session cookie
+        session_set_cookie_params(2592000); //set the duration of the session cookie
+        //session_set_cookie_params(COOKIE_EXP_TIME); //set the duration of the session cookie
         session_start(); //start the session
     }
  
