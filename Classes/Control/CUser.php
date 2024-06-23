@@ -36,7 +36,7 @@ class CUser
         $viewOwner = new VOwner();
         $PM=FPersistentManager::getInstance();
 
-        if($PM->verifyUserEmail(USuperGlobalAccess::getPost('email')) && $PM->verifyUserUsername(USuperGlobalAccess::getPost('username')))
+        if($PM->verifyUserEmail(USuperGlobalAccess::getPost('email'))==false && $PM->verifyUserUsername(USuperGlobalAccess::getPost('username'))==false)
         {
             $session=USession::getInstance();
             $session::setSessionElement('email',USuperGlobalAccess::getPost('email'));
@@ -60,14 +60,15 @@ class CUser
         }   
     }
 
-    /*public static function checkLogin(){
+    public static function checkLogin(){
         $view = new VUser();
         $type = USuperGlobalAccess::getPost('student/owner');
+        $PM = FPersistentManager::getInstance();
 
-        $username = FPersistentManager::getInstance()->verifyUsername(USuperGlobalAccess::getPost('username'), $type); 
+        $username = $PM->verifyUserUsername(USuperGlobalAccess::getPost('username')); 
 
         if($username){
-            $user = FPersistentManager::getInstance()->retriveUserOnUsername(USuperGlobalAccess::getPost('username'), $type);
+            $user = $PM->retriveUserOnUsername(USuperGlobalAccess::getPost('username'), $type);
             if(password_verify(USuperGlobalAccess::getPost('password'), $user->getPassword())){
 
                 if(USession::getSessionStatus() == PHP_SESSION_NONE){
@@ -85,17 +86,4 @@ class CUser
 
     }
 
-    private function checkLoginUscer(string $username, string $password):bool{
-        $user = FPersistentManager::getInstance()->retriveUserOnUsername($username);
-        if(password_verify($password, $user->getPassword())){
-            if($user->isBanned()){
-                return false;
-            }elseif(USession::getSessionStatus() == PHP_SESSION_NONE){
-                USession::getInstance();
-                USession::setSessionElement('user', $user->getId());
-                return true;
-            }
-        }
-        return false;
-    }*/
 }

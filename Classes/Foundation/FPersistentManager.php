@@ -145,12 +145,10 @@ class FPersistentManager {
         $FS=Foundation\FStudent::getInstance();
         $resultS=$FS->verifyUsername($username);
         $resultO=$FO->verifyUsername($username);
-        if($resultS==true || $resultO==true)
-        {
+        if($resultS==true || $resultO==true){
             return true;
         }
-        else
-        {
+        else{
             return false;
         }
     }
