@@ -31,6 +31,7 @@ class CUser
 
     public static function showRegistration()
     {
+        print 'Sono in showRegistration';
         $view= new VUser();
         $viewStudent = new VStudent();
         $viewOwner = new VOwner();
@@ -48,15 +49,18 @@ class CUser
             $session::setSessionElement('picture',serialize(USuperGlobalAccess::getPost('img')));
             if(USuperGlobalAccess::getPost('userType')==='Student')
             {
+                print 'sono uno studente';
                 $viewStudent->showStudentRegistration();
             }
             else
-            {   
+            {  
+                print 'sono un proprietario'; 
                 $viewOwner->showOwnerRegistration();
             }
         }  
         else
         {
+            print 'fallimento';
             $view->reggistrationError();
         }   
     }
