@@ -104,4 +104,15 @@ class CUser
 
     }
 
+    /**
+     * this method can logout the User, unsetting all the session element and destroing the session. Return the user to the Login Page
+     * @return void
+     */
+    public static function logout(){
+        USession::getInstance();
+        USession::unsetSession();
+        USession::destroySession();
+        header('Location: /UniRent/User/login');
+    }
+
 }
