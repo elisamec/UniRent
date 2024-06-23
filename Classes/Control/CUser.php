@@ -31,10 +31,12 @@ class CUser
 
     public static function showRegistration()
     {
+        print "Sono in showReg";
         $view= new VUser();
         $viewStudent = new VStudent();
         $viewOwner = new VOwner();
         $PM=FPersistentManager::getInstance();
+        $type = USuperGlobalAccess::getPost('userType');
 
         if($PM->verifyUserEmail(USuperGlobalAccess::getPost('email'))==false && $PM->verifyUserUsername(USuperGlobalAccess::getPost('username'))==false)
         {
@@ -45,7 +47,7 @@ class CUser
             $session::setSessionElement('name',USuperGlobalAccess::getPost('name'));
             $session::setSessionElement('surname',USuperGlobalAccess::getPost('surname'));
             $session::setSessionElement('picture',serialize(USuperGlobalAccess::getPost('img')));
-            if(USuperGlobalAccess::getPost('Type')==='Student')
+            if(USuperGlobalAccess::getPost('userType')==='Student')
             {
                 $viewStudent->showStudentRegistration();
             }
