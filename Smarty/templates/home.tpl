@@ -117,11 +117,17 @@
                      <div class="col-lg-3 select-outline">
                      <select name="university" id="university" class="mdb-select md-form md-outline colorful-select dropdown-primary">
                         <option value="" disabled selected>Select a university</option>
+                        <option value="University 1">University 1</option>
+                        <option value="University 2">University 2</option>
                      </select>
                      </div>
-                     <div class="col-lg-3 select-outline datepicker" data-mdb-inline="true">
-                     <input type="text1" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Select a Date" class="form-control" id="exampleDatepicker1" data-mdb-toggle="datepicker" data-mdb-mindate='moment()' >
-                  </div>
+                     <div class="col-lg-3 select-outline">
+                     <select name="date" id="date" class="mdb-select md-form md-outline colorful-select dropdown-primary">
+                        <option value="" disabled selected>Select a period</option>
+                        <option value="september">September to June</option>
+                        <option value="october">October to July</option>
+                     </select>
+                     </div>
                   <div class="col-lg-3 select-outline">
                      <div class="find_btn"><a href="#">Find Now</a></div>
                   </div>
@@ -574,25 +580,6 @@
          $(this).closest('.select-outline').find('.caret').toggleClass('active');
          });
          });
-      </script>
-      <script>
-         var universities = {
-            'City 1': ['Uni 1.1', 'Uni 1.2', 'Uni 1.3'],
-            'City 2': ['Uni 2.1', 'Uni 2.2'],
-            'City 3': ['Uni 3.1', 'Uni 3.2']
-            // Add other cities and universities as needed
-        };
-
-        var $universities = $('#university');
-        $('#city').change(function() {
-            var city = $(this).val();
-            var universityList = universities[city] || [];
-
-            var html = $.map(universityList, function(university) {
-                return '<option value="' + university + '">' + university + '</option>';
-            }).join('');
-            $universities.html(html);
-        });
       </script>
    </body>
 </html>

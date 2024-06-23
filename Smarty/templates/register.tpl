@@ -66,8 +66,8 @@
             <div class="heading">Sign Up</div>
             <form action="/UniRent/User/showRegistration" class="form">
             <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
-            <input class="input" type="file" id="img" name="img" accept="image/*" hidden>
-              <label for="img" class="label-button">Upload Profile Picture</label>
+            <input class="file-upload" type="file" id="img" name="img" accept="image/*" hidden>
+              <label class="label-button">Upload Profile Picture</label>
             <div class="row">
               <div class="col-sm-6">
                <input required="" class="radio" type="radio" name="userType" id="userType" value="Student" checked="checked">
@@ -145,5 +145,31 @@
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
+      <script>
+      $(document).ready(function() {
+
+      
+      var readURL = function(input) {
+         if (input.files && input.files[0]) {
+               var reader = new FileReader();
+
+               reader.onload = function (e) {
+                  $('.imageIcon').attr('src', e.target.result);
+               }
+      
+               reader.readAsDataURL(input.files[0]);
+         }
+      }
+      
+
+      $(".file-upload").on('change', function(){
+         readURL(this);
+      });
+      
+      $(".label-button").on('click', function() {
+         $(".file-upload").click();
+      });
+   });
+      </script>
   </body>
   
