@@ -62,8 +62,8 @@
       <div class="layout_padding">
         <div class="container">
           <div class="Logcontainer">
-            <div class="heading">Student Sign Up</div>
-            <form action="/UniRent/User/checkRegisterStudent" class="form">
+            <div class="heading">Student Sign Up</div><
+            <form action="/UniRent/Student/studentRegistration" class="form" methodmethod="post">
               <input required="" class="input" type="number" name="courseDuration" id="courseDuration" placeholder="Course Duration" min="1" max="6">
               <input required="" class="input" type="number" name="immatricolationYear" id="immatricolationYear" placeholder="Immatricolation Year" min="2018" max="2099">
               <input required="" class="input" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="birthDate" id="birthDate" placeholder="Date of Birth">

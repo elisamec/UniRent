@@ -67,7 +67,7 @@ class CUser
         $view = new VUser();
         $viewStudent = new VStudent();
         $viewOwner = new VOwner();
-        $type = USuperGlobalAccess::getPost('Type');
+        $type = USuperGlobalAccess::getPost('userType');
         $PM = FPersistentManager::getInstance();
         $userId = false;
 
