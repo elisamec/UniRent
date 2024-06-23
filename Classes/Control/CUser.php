@@ -45,7 +45,7 @@ class CUser
             $session::setSessionElement('name',USuperGlobalAccess::getPost('name'));
             $session::setSessionElement('surname',USuperGlobalAccess::getPost('surname'));
             $session::setSessionElement('picture',serialize(USuperGlobalAccess::getPost('picture')));
-            if(USuperGlobalAccess::getPost('student/owner')==='student')
+            if(USuperGlobalAccess::getPost('student/owner')==='Student')
             {
                 $viewStudent->showStudentRegistration();
             }
@@ -92,7 +92,7 @@ class CUser
             }else{
                 $view->loginError();
             }
-            
+
         }else{
             $view->loginError();
         }

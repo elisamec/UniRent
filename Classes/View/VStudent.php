@@ -20,7 +20,7 @@ class VStudent{
 
     //Mostra la seconda parte della registrazione studente
     public function showStudentRegistration(){
-    
+        $this->smarty->display('registerStudent.tpl');
     }
 
 }

@@ -83,7 +83,7 @@
                <input required="" class="input" type="text" name="username" id="username" placeholder="Username"> 
               <input required="" class="input" type="email" name="email" id="email" placeholder="E-mail">
               <input required="" class="input" type="password" name="password" id="password" placeholder="Password">
-              <input class="login-button" type="submit" value="Next">
+              <input class="login-button" type="submit" onclick="location.href='/UniRent/User/showRegistration'" value="Next">
             </form>
           </div>
         </div>

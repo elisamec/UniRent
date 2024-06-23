@@ -19,7 +19,7 @@ class VOwner {
 
     //Mostra la seconda parte della registrazione proprietario
     public function showOwnerRegistration(){
-        $this->smarty->display();
+        $this->smarty->display('registerOwner.tpl');
     }
     
 }
