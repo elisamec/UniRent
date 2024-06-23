@@ -34,15 +34,13 @@ class CFrontController{
         $controllerClass = 'C' . $controllerName;
         $controllerFile = __DIR__ . "/$controllerClass.php";
 
-        print "sono nel controllore";
-
 
         if (file_exists($controllerFile)) {
             require_once $controllerFile;
 
-
             // Check if the method exists in the controller
             if (method_exists("Classes\Control\\".$controllerClass, $methodName)) {
+
 
                 // Call the method
                 $params = array_slice($uriParts, 2); // Get optional parameters
