@@ -63,25 +63,36 @@ class CUser
     public static function checkLogin(){
 
         $view = new VUser();
+        $viewStudent = new VStudent();
+        $viewOwner = new VOwner();
         $type = USuperGlobalAccess::getPost('student/owner');
         $PM = FPersistentManager::getInstance();
+        $userId = false;
 
-        $username = $PM->verifyUserUsername(USuperGlobalAccess::getPost('username')); 
+        //Get id of user based on him username
+        if($type === 'Student' || $type === 'Owner') {
+            $userId = $PM->verifyUserUsername(USuperGlobalAccess::getPost('username')); 
+        }
 
-        if($username != false){
-            
-            $user = $PM->load($type, $username);
+        //If the id is not false, get the user and check the password
+        if($userId != false){
+
+            //Type can be Student or Owner
+            $user = $PM->load($type, $userId);
+
             if(password_verify(USuperGlobalAccess::getPost('password'), $user->getPassword())){
 
                 if(USession::getSessionStatus() == PHP_SESSION_NONE){
                     USession::getInstance();
-                    USession::setSessionElement("$type", $user->getId());
-                    $type === 'Student' ? $view->showStudentHome() : $view->showOwnerHome();
+                    USession::setSessionElement("$type", $userId);
+                    if($type === 'Student') $viewStudent->home();
+                    else $viewOwner->home();
                 }
 
             }else{
                 $view->loginError();
             }
+            
         }else{
             $view->loginError();
         }

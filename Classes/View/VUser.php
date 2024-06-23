@@ -32,4 +32,10 @@ class VUser{
     //L'errore potrebbe essere dovuto a username o email già presenti nel database
     public function reggistrationError(){
     }
+
+    //Deve rimandare alla home dicendo che c'è stato un errore nel login
+    //"Username or password not correct"
+    public function loginError(){
+
+    }
 }

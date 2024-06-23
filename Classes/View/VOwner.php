@@ -12,9 +12,14 @@ class VOwner {
         $this->smarty = StartSmarty::configuration();
     }
 
+    //Mostra la home del proprietario
+    public function home() {
+        $this->smarty->display();
+    }
+
     //Mostra la seconda parte della registrazione proprietario
     public function showOwnerRegistration(){
-    
+        $this->smarty->display();
     }
     
 }
