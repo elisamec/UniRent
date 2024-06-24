@@ -64,7 +64,7 @@
         <div class="container">
           <div class="Logcontainer">
             <div class="heading">Sign Up</div>
-            <form action="/UniRent/User/showRegistration" class="form" method="post" id="profileForm">
+            <form action="/UniRent/User/showRegistration" class="form" method="post" id="profileForm" enctype="multipart/form-data">
             <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
             <input class="file-upload" type="file" id="img" name="img" accept="image/*" hidden>
               <label class="label-button">Upload Profile Picture</label>
@@ -171,6 +171,7 @@
       });
    });
       </script>
+   <!--
       <script>
     document.getElementById('profileForm').addEventListener('submit', function(event) {
         var fileInput = document.getElementById('img');
@@ -179,5 +180,6 @@
         }
     });
    </script>
+   -->
   </body>
   
