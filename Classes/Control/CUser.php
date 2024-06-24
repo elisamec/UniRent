@@ -38,10 +38,11 @@ class CUser
         $type = USuperGlobalAccess::getPost('userType');
 
         //$PM->verifyUserEmail(USuperGlobalAccess::getPost('email'))==false && $PM->verifyUserUsername(USuperGlobalAccess::getPost('username'))==false
-        if(1)
+        if($PM->verifyUserEmail(USuperGlobalAccess::getPost('email'))==false && $PM->verifyUserUsername(USuperGlobalAccess::getPost('username'))==false)
         {
             $session=USession::getInstance();
-            $session::setSessionElement('email',USuperGlobalAccess::getPost('email'));
+            //$session::setSessionElement('email',USuperGlobalAccess::getPost('email'));
+            $session::setSessionElement('email', "nadia@student.univaq.it");
             $session::setSessionElement('username',USuperGlobalAccess::getPost('username'));
             $session::setSessionElement('password',USuperGlobalAccess::getPost('password'));
             $session::setSessionElement('name',USuperGlobalAccess::getPost('name'));

@@ -51,8 +51,8 @@ class CStudent{
         $PM=FPersistentManager::getInstance();
         $session=USession::getInstance();
         print $session::getSessionElement('email');
-        //$PM->verifyStudentEmail($session::getSessionElement('email'))==true
-        if(1){
+        
+        if($PM->verifyStudentEmail($session::getSessionElement('email'))==true){
 
             print "Email presa dalla sessione";
            
@@ -91,7 +91,7 @@ class CStudent{
             $session->setSessionElement('smoker', false);
             $session->setSessionElement('animal', false);
             print 'ok';
-            #header('Location:/UniRent/Student/home');
+            header('Location:/UniRent/Student/home');
         }
         else
         {

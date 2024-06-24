@@ -116,7 +116,7 @@ class FStudent
                 $stm->bindValue(':animals',$student->getAnimals(),PDO::PARAM_BOOL);
                 $stm->execute();
                 print ' sono in FStudent';
-                $db->commit();
+                //$db->commit();
                 print ' commit eseguita';
                 $db->exec('UNLOCK TABLES');
                 return true;
