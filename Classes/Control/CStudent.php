@@ -85,8 +85,8 @@ class CStudent{
                                   $immatricolation,
                                   $birthDate,
                                   $sex,
-                                  $smoker,
-                                  $animals);
+                                  $smok,
+                                  $anim);
             $PM->store($student);
             $session->setSessionElement('courseDuration', $duration);
             $session->setSessionElement('immatricolationYear', $immatricolation);
