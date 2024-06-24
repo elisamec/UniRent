@@ -83,7 +83,7 @@ class CStudent{
             $session->setSessionElement('smoker', USuperGlobalAccess::getPost('smoker'));
             $session->setSessionElement('animal', USuperGlobalAccess::getPost('animal'));
             print 'ok';
-            header('Location:/UniRent/Student/home');
+            #header('Location:/UniRent/Student/home');
         }
         else
         {
