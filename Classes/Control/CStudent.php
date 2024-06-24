@@ -45,35 +45,37 @@ class CStudent{
         print 'inizio';
         $animals=USuperGlobalAccess::getPost('animals');
         $smoker=USuperGlobalAccess::getPost('smoker');
+        $duration = USuperGlobalAccess::getPost('courseDuration');
+        print USuperGlobalAccess::getPost('immatricolationYear');
         $view= new VStudent();
         $PM=FPersistentManager::getInstance();
         $session=USession::getInstance();
-        if($PM->verifyStudentEmail($session::getSessionElement('email'))==true)
-        {
+        if($PM->verifyStudentEmail($session::getSessionElement('email'))==true){
+
             print "Email presa dalla sessione";
            
-            if($session->getSessionElement('picture')!=null)
-            {
+            if($session->getSessionElement('picture')!=null){
+
                 $photo = new EPhoto(null, unserialize($session::getSessionElement('picture')),'student',null,null );
             }
-            else
-            {
+            else{
                 $photo = null;
             }
             $birthDate= new DateTime(USuperGlobalAccess::getPost('birthDate'));
+            
             $student=new EStudent($session->getSessionElement('username'),
                                   $session->getSessionElement('password'),
                                   $session->getSessionElement('name'),
                                   $session->getSessionElement('surname'),
                                   $photo,
                                   $session->getSessionElement('email'),
-                                  USuperGlobalAccess::getPost('courseDuration'),
+                                  $duration,
                                   USuperGlobalAccess::getPost('immatricolationYear'),
                                   $birthDate,
                                   USuperGlobalAccess::getPost('sex'),
                                   $smoker,
                                   $animals);
-            $PM->store($student);
+            //$PM->store($student);
             $session->setSessionElement('courseDuration', USuperGlobalAccess::getPost('courseDuration'));
             $session->setSessionElement('immatricolationYear', USuperGlobalAccess::getPost('immatricolationYear'));
             $session->setSessionElement('birthDate', USuperGlobalAccess::getPost('birthDate'));
