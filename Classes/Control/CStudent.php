@@ -71,13 +71,13 @@ class CStudent{
                                   $session->getSessionElement('surname'),
                                   $photo,
                                   $session->getSessionElement('email'),
-                                  /*$duration,
-                                  USuperGlobalAccess::getPost('immatricolationYear'),
+                                  $duration,
+                                  /*USuperGlobalAccess::getPost('immatricolationYear'),
                                   $birthDate,
                                   USuperGlobalAccess::getPost('sex'),
                                   $smoker,
-                                  $animals*/
-                                  3,
+                                  $animals,
+                                  3,*/
                                   2021,
                                   new DateTime('1999-06-01'),
                                   'F',
@@ -86,7 +86,7 @@ class CStudent{
             $PM->store($student);
             $session->setSessionElement('courseDuration', 3);
             $session->setSessionElement('immatricolationYear', 2021);
-            $session->setSessionElement('birthDate', '1999-06-01');
+            $session->setSessionElement('birthDate', new DateTime(1999-06-01));
             $session->setSessionElement('sex', 'F');
             $session->setSessionElement('smoker', false);
             $session->setSessionElement('animal', false);
