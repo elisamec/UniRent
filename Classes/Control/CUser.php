@@ -37,7 +37,8 @@ class CUser
         $PM=FPersistentManager::getInstance();
         $type = USuperGlobalAccess::getPost('userType');
 
-        if($PM->verifyUserEmail(USuperGlobalAccess::getPost('email'))==false && $PM->verifyUserUsername(USuperGlobalAccess::getPost('username'))==false)
+        //$PM->verifyUserEmail(USuperGlobalAccess::getPost('email'))==false && $PM->verifyUserUsername(USuperGlobalAccess::getPost('username'))==false
+        if(1)
         {
             $session=USession::getInstance();
             $session::setSessionElement('email',USuperGlobalAccess::getPost('email'));
@@ -46,12 +47,10 @@ class CUser
             $session::setSessionElement('name',USuperGlobalAccess::getPost('name'));
             $session::setSessionElement('surname',USuperGlobalAccess::getPost('surname'));
             $session::setSessionElement('picture',serialize(USuperGlobalAccess::getPost('img')));
-            if($type==='Student')
-            {
+            if($type==='Student'){
+
                 $viewStudent->showStudentRegistration();
-            }
-            else
-            {  
+            }else{  
  
                 $viewOwner->showOwnerRegistration();
             }
