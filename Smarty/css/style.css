@@ -1483,9 +1483,14 @@ textarea#comment::placeholder {
 }
 
 /* profile */
+.profile {
+    padding-bottom:20px;
+}
 .profile_pic {
     width: 100%;
-    float: left;
+    float: right;
+    display: flex;
+    justify-content: center;
     padding: 20px 0px;
 }
 .profile_info {
@@ -1494,14 +1499,29 @@ textarea#comment::placeholder {
     padding: 20px 0px;
     text-align: left;
 }
+.profile_info p {
+    font-size: 18px;
+}
+.sidebar {
+    float: left;
+    width:100%;
+    height: 92%;
+    background: #F8F9FD;
+    background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(244, 247, 251) 100%);
+    border-radius: 40px;
+    padding: 0px 15px 20px;
+    border: 5px solid rgb(255, 255, 255);
+    box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 30px 30px -20px;
+    margin: 20px 30px;
+    position: relative;
+}
 .sidebar_but {
-    width: 100%;
+    width: auto;
     float: left;
 }
 
 .sidebar_but a {
-    width: 100%;
-    text-align: center;
+    width: auto;
     font-size: 18px;
     color: #000000;
     padding: 10px;
@@ -1509,6 +1529,7 @@ textarea#comment::placeholder {
     margin-top: 30px;
     display: block;
     border-radius: 5px;
+    text-align: left;
 }
 
 .sidebar_but a:hover {
@@ -1519,4 +1540,27 @@ textarea#comment::placeholder {
 }
 .sidebar_but.log a:hover {
     color: #f91919;
+}
+.profile_head {
+    width: 100%;
+    float: left;
+    padding: 20px 0px 20px 15px;
+    text-align: left;
+    width: 100%;
+    font-size: 24px;
+    color: #000000;
+}
+.form label.change_btn {
+    width: 100%;
+    float: left;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #f9bc19;
+    padding: 10px;
+    text-align: center;
+}
+.form label.change_btn:hover{
+    color: #d0d1d2;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 16px 0px #eaeaea !important;
 }

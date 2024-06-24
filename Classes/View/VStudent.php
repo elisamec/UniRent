@@ -20,7 +20,7 @@ class VStudent{
     }
     public function profile(EStudent $student){
         $this->smarty->assign('student', $student);
-        $this->smarty->display('profileStudent.tpl');
+        $this->smarty->display('personalProfileStudent.tpl');
     }
 
     //Mostra la seconda parte della registrazione studente

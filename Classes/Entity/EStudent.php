@@ -231,7 +231,11 @@ class EStudent
     public function getBirthDate():DateTime
     {
         return $this->birthDate;
-    }    
+    }
+    public function getBirthDateString():string
+    {
+        return $this->birthDate->format('d/m/Y');
+    }
     /**
      * getSex
      *
