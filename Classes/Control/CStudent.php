@@ -46,7 +46,7 @@ class CStudent{
         $animals=USuperGlobalAccess::getPost('animals');
         $smoker=USuperGlobalAccess::getPost('smoker');
         $duration = USuperGlobalAccess::getPost('courseDuration');
-        print USuperGlobalAccess::getPost('immatricolationYear');
+        $immatricolation = USuperGlobalAccess::getPost('immatricolationYear');
         $view= new VStudent();
         $PM=FPersistentManager::getInstance();
         $session=USession::getInstance();
@@ -72,14 +72,13 @@ class CStudent{
                                   $session->getSessionElement('surname'),
                                   $photo,
                                   $session->getSessionElement('email'),
-                                  3,
+                                  $duration,
+                                  $immatricolation,
                                   /*USuperGlobalAccess::getPost('immatricolationYear'),
                                   $birthDate,
                                   USuperGlobalAccess::getPost('sex'),
                                   $smoker,
-                                  $animals,
-                                  3,*/
-                                  2021,
+                                  $animals*/
                                   new DateTime('1999-06-01'),
                                   'F',
                                   false,
@@ -91,8 +90,8 @@ class CStudent{
             $session->setSessionElement('sex', 'F');
             $session->setSessionElement('smoker', false);
             $session->setSessionElement('animal', false);
-            print 'ok';
-            header('Location:/UniRent/Student/home');
+            print 'Immaginati di stare nella home dello studente';
+            //header('Location:/UniRent/Student/home');
         }
         else
         {
