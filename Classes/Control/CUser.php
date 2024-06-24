@@ -46,7 +46,9 @@ class CUser
             $session::setSessionElement('password',USuperGlobalAccess::getPost('password'));
             $session::setSessionElement('name',USuperGlobalAccess::getPost('name'));
             $session::setSessionElement('surname',USuperGlobalAccess::getPost('surname'));
-            $session::setSessionElement('picture',serialize(USuperGlobalAccess::getFiles('img')));
+            $session::setSessionElement('picture',USuperGlobalAccess::getFiles('img'));
+
+
             if($type==='Student'){
 
                 $viewStudent->showStudentRegistration();

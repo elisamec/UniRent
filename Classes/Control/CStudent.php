@@ -41,39 +41,29 @@ class CStudent{
 
 
     public static function studentRegistration()
-    {
-        print 'inizio';
-        $animals=USuperGlobalAccess::getPost('animals');
-        $smoker=USuperGlobalAccess::getPost('smoker');
-        print $smoker.'  '.$animals;
-        $smok=filter_var($smoker,FILTER_VALIDATE_BOOLEAN);
-        $anim=filter_var($animals, FILTER_VALIDATE_BOOLEAN);
-        $duration = USuperGlobalAccess::getPost('courseDuration');
-        $immatricolation = USuperGlobalAccess::getPost('immatricolationYear');
-        $sex = USuperGlobalAccess::getPost('sex');
+    {   
         $view= new VStudent();
         $PM=FPersistentManager::getInstance();
         $session=USession::getInstance();
         
-        print $session::getSessionElement('email');
-        
         if($PM->verifyStudentEmail($session::getSessionElement('email'))==true){
 
-            print "Email presa dalla sessione";
-            $picture = $session->getSessionElement('picture');
-            print "<br>Foto: $picture";
-           
-            if($picture===null){
+            if ($session->getSessionElement('picture')===null) {
+                $photo = null;
+            }
+            else {
+                $photo = null;
+            }            
 
-                print "<br>Foto non inserita<br>";
-                $photo = null;
-                //$photo = new EPhoto(null, unserialize($session::getSessionElement('picture')),'student',null,null );
-            }
-            else{
-                print "<br>Foto  inserita<br>";
-                $photo = null;
-            }
+            $duration = USuperGlobalAccess::getPost('courseDuration');
+            $immatricolation = USuperGlobalAccess::getPost('immatricolationYear');
             $birthDate= new DateTime(USuperGlobalAccess::getPost('birthDate'));
+            $sex = USuperGlobalAccess::getPost('sex');
+            $animals=USuperGlobalAccess::getPost('animals');
+            $smoker=USuperGlobalAccess::getPost('smoker');
+            $smok=filter_var($smoker,FILTER_VALIDATE_BOOLEAN);
+            $anim=filter_var($animals, FILTER_VALIDATE_BOOLEAN);
+            
             
             $student=new EStudent($session->getSessionElement('username'),
                                   $session->getSessionElement('password'),
@@ -87,6 +77,7 @@ class CStudent{
                                   $sex,
                                   $smok,
                                   $anim);
+
             $PM->store($student);
             $session->setSessionElement('courseDuration', $duration);
             $session->setSessionElement('immatricolationYear', $immatricolation);
@@ -94,12 +85,11 @@ class CStudent{
             $session->setSessionElement('sex', $sex);
             $session->setSessionElement('smoker', $smoker);
             $session->setSessionElement('animal', $animals);
-            print 'Immaginati di stare nella home dello studente';
-            //header('Location:/UniRent/Student/home');
+            header('Location:/UniRent/Student/home');
         }
         else
         {
-            print "Email non stava in sessione";
+            print "Email non valida";
             //$view->registrationError();
         }
     }
