@@ -64,7 +64,7 @@
         <div class="container">
           <div class="Logcontainer">
             <div class="heading">Sign Up</div>
-            <form action="/UniRent/User/showRegistration" class="form" method="post">
+            <form action="/UniRent/User/showRegistration" class="form" method="post" id="profileForm">
             <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
             <input class="file-upload" type="file" id="img" name="img" accept="image/*" hidden>
               <label class="label-button">Upload Profile Picture</label>
@@ -172,13 +172,17 @@
    });
       </script>
       <script>
-      document.getElementById('img').onchange = function() {
-    if(this.files.length == 0) {
-        this.name = null;
-    } else {
-        this.name = 'img';
-    }
-};
-      </script>
+    document.getElementById('profileForm').addEventListener('submit', function(event) {
+        var fileInput = document.getElementById('img');
+        if (!fileInput.files.length) {
+            fileInput.value = null;
+        }
+    });
+    
+    // Optional: Show file dialog when clicking the label
+    document.querySelector('.label-button').addEventListener('click', function() {
+        document.getElementById('img').click();
+    });
+   </script>
   </body>
   
