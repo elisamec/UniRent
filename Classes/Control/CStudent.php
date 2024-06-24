@@ -91,7 +91,7 @@ class CStudent{
             $session->setSessionElement('smoker', false);
             $session->setSessionElement('animal', false);
             print 'ok';
-            //header('Location:/UniRent/Student/home');
+            #header('Location:/UniRent/Student/home');
         }
         else
         {
