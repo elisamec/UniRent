@@ -58,11 +58,12 @@ class CStudent{
            
             if($session->getSessionElement('picture')!=null){
 
-                print "Foto presa dalla sessione";
+                print "Foto inserita";
                 $photo = null;
                 //$photo = new EPhoto(null, unserialize($session::getSessionElement('picture')),'student',null,null );
             }
             else{
+                print "Foto non inserita";
                 $photo = null;
             }
             $birthDate= new DateTime(USuperGlobalAccess::getPost('birthDate'));
@@ -87,7 +88,7 @@ class CStudent{
             $session->setSessionElement('smoker', false);
             $session->setSessionElement('animal', false);
             print 'Immaginati di stare nella home dello studente';
-            header('Location:/UniRent/Student/home');
+            //header('Location:/UniRent/Student/home');
         }
         else
         {
