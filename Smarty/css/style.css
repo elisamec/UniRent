@@ -1483,9 +1483,14 @@ textarea#comment::placeholder {
 }
 
 /* profile */
+.profile {
+    padding-bottom:20px;
+}
 .profile_pic {
     width: 100%;
-    float: left;
+    float: right;
+    display: flex;
+    justify-content: center;
     padding: 20px 0px;
 }
 .profile_info {
@@ -1494,14 +1499,29 @@ textarea#comment::placeholder {
     padding: 20px 0px;
     text-align: left;
 }
+.profile_info p {
+    font-size: 18px;
+}
+.sidebar {
+    float: left;
+    width:100%;
+    height: 92%;
+    background: #F8F9FD;
+    background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(244, 247, 251) 100%);
+    border-radius: 40px;
+    padding: 0px 15px 20px;
+    border: 5px solid rgb(255, 255, 255);
+    box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 30px 30px -20px;
+    margin: 20px 30px;
+    position: relative;
+}
 .sidebar_but {
-    width: 100%;
+    width: auto;
     float: left;
 }
 
 .sidebar_but a {
-    width: 100%;
-    text-align: center;
+    width: auto;
     font-size: 18px;
     color: #000000;
     padding: 10px;
@@ -1509,6 +1529,7 @@ textarea#comment::placeholder {
     margin-top: 30px;
     display: block;
     border-radius: 5px;
+    text-align: left;
 }
 
 .sidebar_but a:hover {
@@ -1517,3 +1538,88 @@ textarea#comment::placeholder {
 .sidebar_but.active a {
     color: #f9bc19;
 }
+.sidebar_but.log a:hover {
+    color: #f91919;
+}
+.profile_head {
+    width: 100%;
+    float: left;
+    padding: 20px 0px 20px 15px;
+    text-align: left;
+    width: 100%;
+    font-size: 24px;
+    color: #000000;
+}
+.form label.change_btn {
+    width: 100%;
+    float: left;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #f9bc19;
+    padding: 10px;
+    text-align: center;
+}
+.form label.change_btn:hover{
+    color: #d0d1d2;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 16px 0px #eaeaea !important;
+}
+.profile-input {
+    width: 100%;
+    height: 60%;
+    float: left;
+    margin-top: 15px;
+    padding: 10px 5px;
+}
+.parent {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(11, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 20px;
+    margin-bottom: 20px;
+    }
+    
+    .div1 { grid-area: 1 / 1 / 2 / 2; }
+    .div2 { grid-area: 1 / 2 / 2 / 3; }
+    .div3 { grid-area: 2 / 1 / 3 / 2; }
+    .div4 { grid-area: 2 / 2 / 3 / 3; }
+    .div5 { grid-area: 3 / 1 / 4 / 2; }
+    .div6 { grid-area: 3 / 2 / 4 / 3; }
+    .div7 { grid-area: 4 / 1 / 5 / 2; }
+    .div8 { grid-area: 4 / 2 / 5 / 3; }
+    .div9 { grid-area: 5 / 1 / 6 / 2; }
+    .div10 { grid-area: 5 / 2 / 6 / 3; }
+    .div11 { grid-area: 6 / 1 / 7 / 2; }
+    .div12 { grid-area: 6 / 2 / 7 / 3; }
+    .div13 { grid-area: 7 / 1 / 8 / 2; }
+    .div14 { grid-area: 7 / 2 / 8 / 3; }
+    .div15 { grid-area: 8 / 1 / 9 / 2; }
+    .div16 { grid-area: 8 / 2 / 9 / 3; }
+    .div17 { grid-area: 9 / 1 / 10 / 2; }
+    .div18 { grid-area: 9 / 2 / 10 / 3; }
+    .div19 { grid-area: 10 / 1 / 11 / 2; }
+    .div20 { grid-area: 10 / 2 / 11 / 3; }
+    .div21 { grid-area: 11 / 1 / 12 / 2; }
+    .div22 { grid-area: 11 / 2 / 12 / 3; }
+
+    .profile_info .delete_btn{
+        width: 100%;
+        float: left;
+    }
+    
+    .profile_info .delete_btn a{
+        width: 100%;
+        float: left;
+        font-size: 16px;
+        color: #ffffff;
+        background-color: #f91919;
+        padding: 10px;
+        text-align: center;
+    }
+    
+    .profile_info .delete_btn a:hover{
+        color: #d0d1d2;
+        background-color: #ffffff;
+        box-shadow: 0px 2px 16px 0px #eaeaea !important;
+    }
