@@ -17,6 +17,10 @@ class CUser
         $view = new VUser();
         $view->home();
     }
+    public static function about(){
+        $view = new VUser();
+        $view->about();
+    }
 
     public static function login(){
         $view = new VUser();
