@@ -53,9 +53,9 @@ $PM=FPersistentManager::getInstance();
 $result=$PM::store($student);
 if($result)
 {
-    print 'nessun problema!';
+    print ' nessun problema!';
 }
 else
 {
-    echo 'qualcosa non và!';
+    echo ' qualcosa non và!';
 }
