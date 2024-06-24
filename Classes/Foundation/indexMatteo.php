@@ -1,6 +1,8 @@
 <?php 
 require __DIR__.'../../../vendor/autoload.php';
 
+use Classes\Entity\EStudent;
+use Classes\Foundation\FPersistentManager;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 # PARTE MATTEO cancellato materiale precedente 22/06/2024
@@ -24,7 +26,7 @@ foreach($università as $key=>$value)
 print_r($indirizzi_web);
 */
 
-
+/* PARTE MAIL
 $email = new PHPMailer(true);
 $email->isSMTP();
 $email->Host = '127.0.0.1'; // Indirizzo del server SMTP di Mercury
@@ -43,4 +45,17 @@ try {
     echo 'Message sent!';
 } catch (Exception $e) {
     echo 'Mailer Error: ' . $email->ErrorInfo;
+}
+
+*/
+$student= new EStudent('jojo','pippo','Giovanni','Filone',null,'giovanni.filone@student.univaq.it',3,2023,new DateTime('now'),'M',true,true);
+$PM=FPersistentManager::getInstance();
+$result=$PM::store($student);
+if($result)
+{
+    print 'nessun problema!';
+}
+else
+{
+    echo 'qualcosa non và!';
 }
