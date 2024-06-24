@@ -1517,3 +1517,6 @@ textarea#comment::placeholder {
 .sidebar_but.active a {
     color: #f9bc19;
 }
+.sidebar_but.log a:hover {
+    color: #f91919;
+}

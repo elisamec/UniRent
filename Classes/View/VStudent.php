@@ -4,6 +4,7 @@ namespace Classes\View;
 require __DIR__.'/../../vendor/autoload.php';
 
 use StartSmarty;
+use Classes\Entity\EStudent;
 
 class VStudent{
     private $smarty;
@@ -17,8 +18,8 @@ class VStudent{
 
         $this->smarty->display('homeStudent.tpl');
     }
-    public function profile(){
-
+    public function profile(EStudent $student){
+        $this->smarty->assign('student', $student);
         $this->smarty->display('profileStudent.tpl');
     }
 

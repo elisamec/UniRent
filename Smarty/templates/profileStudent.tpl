@@ -82,8 +82,11 @@
          <div class="row">
          <div class="col-md-2">
          <div class="sidebar">
-            <div class="sidebar_but"><a href="#">Profile</a></div>
+            <div class="sidebar_but active"><a href="/UniRent/Student/profile">Profile</a></div>
+            <div class="sidebar_but"><a href="#">Settings</a></div>
+            <div class="sidebar_but log"><a href="#">Logout</a></div>
          </div>
+         
          </div>
             <div class="col-md-2">
                <div class="profile">
@@ -95,7 +98,7 @@
             <div class="col-md-6">
                <div class="profile">
                   <div class="profile_info">
-                     <h2 class="find_text">Student Name</h2>
+                     <h2 class="find_text">Hello, {$student->getUsername()}</h2>
                      <p>Student Email</p>
                      <p>Student Phone</p>
                      <p>Student Address</p>

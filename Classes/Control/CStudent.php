@@ -30,7 +30,8 @@ class CStudent{
     }
     public static function profile(){
         $view = new VStudent();
-        $view->profile();
+        $student = new EStudent('elisa', 'password', 'Elisa', 'Bianchi', null,'elisa.bianchi@univaq.it', 3, 2018, new DateTime('1998-05-12'), 'F', false, false);
+        $view->profile($student);
     }
 
     public static function studentRegistration()
