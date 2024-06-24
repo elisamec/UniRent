@@ -83,7 +83,7 @@
                <input required="" class="input" type="text" name="username" id="username" placeholder="Username"> 
               <input required="" class="input" type="email" name="email" id="email" placeholder="E-mail">
               <input required="" class="input" type="password" name="password" id="password" placeholder="Password">
-              <input class="login-button" type="submit" value="Next">
+              <button class="login-button" type="submit">Next</button>
             </form>
           </div>
         </div>
@@ -177,11 +177,6 @@
         if (!fileInput.files.length) {
             fileInput.value = null;
         }
-    });
-    
-    // Optional: Show file dialog when clicking the label
-    document.querySelector('.label-button').addEventListener('click', function() {
-        document.getElementById('img').click();
     });
    </script>
   </body>

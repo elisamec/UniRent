@@ -50,22 +50,27 @@ class CStudent{
         $anim=filter_var($animals, FILTER_VALIDATE_BOOLEAN);
         $duration = USuperGlobalAccess::getPost('courseDuration');
         $immatricolation = USuperGlobalAccess::getPost('immatricolationYear');
+        $sex = USuperGlobalAccess::getPost('sex');
         $view= new VStudent();
         $PM=FPersistentManager::getInstance();
         $session=USession::getInstance();
+        
         print $session::getSessionElement('email');
         
         if($PM->verifyStudentEmail($session::getSessionElement('email'))==true){
 
             print "Email presa dalla sessione";
+            $picture = $session->getSessionElement('picture');
+            print "<br>Foto: $picture";
            
-            if($session->getSessionElement('picture')!=null){
+            if($picture===null){
 
-                print "Foto presa dalla sessione";
+                print "<br>Foto non inserita<br>";
                 $photo = null;
                 //$photo = new EPhoto(null, unserialize($session::getSessionElement('picture')),'student',null,null );
             }
             else{
+                print "<br>Foto  inserita<br>";
                 $photo = null;
             }
             $birthDate= new DateTime(USuperGlobalAccess::getPost('birthDate'));
@@ -79,18 +84,18 @@ class CStudent{
                                   $duration,
                                   $immatricolation,
                                   $birthDate,
-                                  USuperGlobalAccess::getPost('sex'),
-                                  $smok,
-                                  $anim);
+                                  $sex,
+                                  $smoker,
+                                  $animals);
             $PM->store($student);
-            $session->setSessionElement('courseDuration', 3);
-            $session->setSessionElement('immatricolationYear', 2021);
-            $session->setSessionElement('birthDate', new DateTime(1999-06-01));
-            $session->setSessionElement('sex', 'F');
+            $session->setSessionElement('courseDuration', $duration);
+            $session->setSessionElement('immatricolationYear', $immatricolation);
+            $session->setSessionElement('birthDate', $birthDate);
+            $session->setSessionElement('sex', $sex);
             $session->setSessionElement('smoker', $smoker);
             $session->setSessionElement('animal', $animals);
             print 'Immaginati di stare nella home dello studente';
-            header('Location:/UniRent/Student/home');
+            //header('Location:/UniRent/Student/home');
         }
         else
         {
