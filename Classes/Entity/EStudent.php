@@ -236,6 +236,7 @@ class EStudent
     {
         return $this->birthDate->format('d/m/Y');
     }
+    
     /**
      * getSex
      *

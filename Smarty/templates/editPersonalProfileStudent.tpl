@@ -99,47 +99,120 @@
          </div>
             <div class="col-md-6">
                   <div class="profile_info">
-                     <h2 class="profile_head">Hello, {$student->getName()} {$student->getSurname()}</h2>
-                     <p>Your Username: {$student->getUsername()}</p>
-                     <p>Your Email: {$student->getUniversityMail()}</p>
-                     {if $student->getSex() === "M"}
-                     <p>Sex: Male</p>
-                     {else}
-                     <p>Sex: Female</p>
-                     {/if}
-                     <p>Your course is {$student->getCourseDuration()} years long and you started in {$student->getImmatricolationYear()}.</p>
-                     <p>Your birth date is {$student->getBirthDateString()}.</p>
-                     
-                     {if $student->getSmoker() && $student->getAnimals()}
-                     <p>You said you are a smoker and you have animals.</p>
-                     {elseif $student->getSmoker() && !$student->getAnimals()}
-                     <p>You said you are a smoker, but you don't have animals.</p>
-                     {elseif !$student->getSmoker() && $student->getAnimals()}
-                     <p>You said you are not a smoker, but you have animals.</p>
-                     {else}
-                     <p>You said you are not a smoker and you don't have animals.</p>
-                     {/if}
+                  <form action="/UniRent/Student/editProfile" class="form" method="post" id="yourFormId">
+                     <div class="parent">
+                        <div class="div1"><p>Name: </p></div>
+                        <div class="div2">
+                           <input class="profile-input" type="text" name="name" id="name" value="{$student->getName()}" required>
+                        </div>
+                        <div class="div3"><p>Surname: </p></div>
+                        <div class="div4">
+                           <input class="profile-input" type="text" name="surname" id="surname" value="{$student->getSurname()}" required>
+                        </div>
+                        <div class="div5"><p>Username: </p></div>
+                        <div class="div6">
+                           <input class="profile-input" type="text" name="username" id="username" value="{$student->getUsername()}" required>
+                        </div>
+                        <div class="div7"><p>Email: </p></div>
+                        <div class="div8">
+                           <input class="profile-input" type="text" name="email" id="email" value="{$student->getUniversityMail()}" required>
+                        </div>
+                        <div class="div9"><p>Sex: </p></div>
+                        <div class="div10">
+                        {if $student->getSex() === "F"}
+                        <div class="col-sm-6">
+                           <input required class="radio" type="radio" name="sex" id="sex" value="F" checked="checked">
+                           <label class="customlabel" for="F">Female</label>
+                        </div>
+                        <div class="col-sm-6">
+                        <input required="" class="radio" type="radio" name="sex" id="sex" value="M">
+                        <label class="customlabel" for="M">Male</label>
+                        </div>
+                        {else}
+                        <div class="col-sm-6">
+                           <input required class="radio" type="radio" name="sex" id="sex" value="F">
+                           <label class="customlabel" for="F">Female</label>
+                        </div>
+                        <div class="col-sm-6">
+                        <input required="" class="radio" type="radio" name="sex" id="sex" value="M" checked="checked">
+                        <label class="customlabel" for="M">Male</label>
+                        </div>
+                        {/if}
+                        </div>
+                        <div class="div11"><p>Course Duration: </p></div>
+                        <div class="div12">
+                           <input class="profile-input" type="number" name="courseDuration" id="courseDuration" value="{$student->getCourseDuration()}" min="1" max="6" required>
+                        </div>
+                        <div class="div13"><p>Immatricolation Year: </p></div>
+                        <div class="div14">
+                           <input class="profile-input" type="number" name="immatricolationYear" id="immatricolationYear" value="{$student->getImmatricolationYear()}" min="2018" max="2099" required>
+                        </div>
+                        <div class="div15"><p>Date of Birth: </p></div>
+                        <div class="div16">
+                           <input class="profile-input" type="date" name="birthDate" id="birthDate" required>
+                        </div>
+                        <div class="div17"><p>Personal Information: </p></div>
+                        <div class="div18">
+                           {if $student->getSmoker() && $student->getAnimals()}
+                           <div class="col-sm-6">
+                           <input required class="checkbox" type="checkbox" name="smoker" id="smoker" checked>
+                           <label class="customlabel" for="smoker">Smoker</label>
+                           </div>
+                           <div class="col-sm-6">
+                           <input required="" class="checkbox" type="checkbox" name="animals" id="animals" checked>
+                           <label class="customlabel" for="animals">Animals</label>
+                           </div>
+                           {elseif $student->getSmoker() && !$student->getAnimals()}
+                           <div class="col-sm-6">
+                           <input required class="checkbox" type="checkbox" name="smoker" id="smoker" checked>
+                           <label class="customlabel" for="smoker">Smoker</label>
+                           </div>
+                           <div class="col-sm-6">
+                           <input required="" class="checkbox" type="checkbox" name="animals" id="animals">
+                           <label class="customlabel" for="animals">Animals</label>
+                           </div>
+                           {elseif !$student->getSmoker() && $student->getAnimals()}
+                           <div class="col-sm-6">
+                           <input required class="checkbox" type="checkbox" name="smoker" id="smoker">
+                           <label class="customlabel" for="smoker">Smoker</label>
+                           </div>
+                           <div class="col-sm-6">
+                           <input required="" class="checkbox" type="checkbox" name="animals" id="animals" checked>
+                           <label class="customlabel" for="animals">Animals</label>
+                           </div>
+                           {else}
+                           <div class="col-sm-6">
+                           <input required class="checkbox" type="checkbox" name="smoker" id="smoker">
+                           <label class="customlabel" for="smoker">Smoker</label>
+                           </div>
+                           <div class="col-sm-6">
+                           <input required="" class="checkbox" type="checkbox" name="animals" id="animals">
+                           <label class="customlabel" for="animals">Animals</label>
+                           </div>
+                           {/if}
+                        </div>
+                        <div class="div19"><p>Password: </p></div>
+                        <div class="div20">
+                           <input class="profile-input" type="password" name="password" id="password">
+                        </div>
+                     </form>
+                     <div class="div21"><p>Delete Profile: </p></div>
+                     <div class="div22">
+                        <div class="delete_btn"><a href="/UniRent/Student/deleteProfile">Delete</a></div>
+                  </div>
+               </div>
+               <div class="container">
+                  <div class="row">
                      <div class="col-md-4">
-                     <div  class="find_btn" ><a href="/UniRent/Student/editProfile">Edit Profile</a></div>
+                     <div  class="find_btn"><a href="/UniRent/Student/profile" id="yourLinkId">Confirm</a></div>
                      </div>
-                  
+                     <div class="col-md-4">
+                     <div  class="find_btn"><a href="/UniRent/Student/profile">Cancel</a></div>
+                     </div>
+                  </div>
+               </div>
                </div>
                
-            </div>
-            <div class="col-md-2">
-               <div class="container">
-                  <div class="profile_pic">
-                  {if $student->getPicture() === null}
-                     <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
-                  {else}
-                     <img src="{$student->getPicture()}"">
-                  {/if}
-                  </div>
-                  <form action="/UniRent/Student/changePicture" class="form" method="post">
-                     <input class="file-upload" type="file" id="img" name="img" accept="image/*" hidden>
-                     <label class="change_btn" for="img">Upload Profile Picture</label>
-                  </form>
-               </div>
             </div>
          </div>
       </div>
@@ -198,10 +271,6 @@
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
-<script>
-document.getElementById("file").onchange = function() {
-    document.getElementById("form").submit();
-};
 </script>
 
          <script>
@@ -230,3 +299,20 @@ document.getElementById("file").onchange = function() {
       });
    });
       </script>
+      <script>
+                           var birthDateString = '{$student->getBirthDateString()}';
+                           
+                           if (birthDateString) {
+                              var parts = birthDateString.split('/');
+                              if (parts.length === 3) {
+                                    var formattedDate = parts[2] + '-' + parts[0].padStart(2, '0') + '-' + parts[1].padStart(2, '0');
+                                    document.getElementById('birthDate').value = formattedDate;
+                              }
+                           }
+                        </script>
+      <script>
+      document.getElementById("yourLinkId").onclick = function() {
+    document.getElementById("yourFormId").submit();
+}
+      </script>
+   </body>
