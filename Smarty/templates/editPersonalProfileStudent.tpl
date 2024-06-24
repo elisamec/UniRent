@@ -93,7 +93,7 @@
             </div>
             
             <div class="col-md-3">
-            <div class="sidebar_but log"><a href="/UniRent/Student/logout">Logout</a></div>
+            <div class="sidebar_but log"><a href="/UniRent/User/logout">Logout</a></div>
             </div>
          </div>
          </div>
