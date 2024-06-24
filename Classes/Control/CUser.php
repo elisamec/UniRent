@@ -36,13 +36,12 @@ class CUser
         $viewOwner = new VOwner();
         $PM=FPersistentManager::getInstance();
         $type = USuperGlobalAccess::getPost('userType');
+        $mail = USuperGlobalAccess::getPost('email');
 
-        //$PM->verifyUserEmail(USuperGlobalAccess::getPost('email'))==false && $PM->verifyUserUsername(USuperGlobalAccess::getPost('username'))==false
-        if($PM->verifyUserEmail(USuperGlobalAccess::getPost('email'))==false && $PM->verifyUserUsername(USuperGlobalAccess::getPost('username'))==false)
+        if($PM->verifyUserEmail($mail)==false && $PM->verifyUserUsername(USuperGlobalAccess::getPost('username'))==false)
         {
             $session=USession::getInstance();
-            //$session::setSessionElement('email',USuperGlobalAccess::getPost('email'));
-            $session::setSessionElement('email', "nadia@student.univaq.it");
+            $session::setSessionElement('email', $mail);
             $session::setSessionElement('username',USuperGlobalAccess::getPost('username'));
             $session::setSessionElement('password',USuperGlobalAccess::getPost('password'));
             $session::setSessionElement('name',USuperGlobalAccess::getPost('name'));

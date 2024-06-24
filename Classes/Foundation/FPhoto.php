@@ -240,8 +240,8 @@ class FPhoto {
             
             $stm->execute();
             $id=$db->lastInsertId();
-            $db->commit();
-            $db->exec('UNLOCK TABLES');
+            //$db->commit();
+            //$db->exec('UNLOCK TABLES');
             $EPhoto->setId($id);
             return true;
         }      

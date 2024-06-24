@@ -58,6 +58,7 @@ class CStudent{
            
             if($session->getSessionElement('picture')!=null){
 
+                print "Foto presa dalla sessione";
                 $photo = new EPhoto(null, unserialize($session::getSessionElement('picture')),'student',null,null );
             }
             else{
@@ -71,7 +72,7 @@ class CStudent{
                                   $session->getSessionElement('surname'),
                                   $photo,
                                   $session->getSessionElement('email'),
-                                  $duration,
+                                  3,
                                   /*USuperGlobalAccess::getPost('immatricolationYear'),
                                   $birthDate,
                                   USuperGlobalAccess::getPost('sex'),
