@@ -69,4 +69,21 @@ class USuperGlobalAccess {
         }
     }
 
+    /**
+      *Get a value from the $_SERVER superglobal array.
+      *@param string $key The key of the value to retrieve.
+      *@return mixed The value associated with the key, or null if the key does not exist.
+      */ 
+      public static function getFiles($key) 
+      {
+          if (isset($_FILES[$key])) 
+          {
+              return $_FILES[$key];
+          } 
+          else 
+          {
+              return null;
+          }
+      }
+
 }
