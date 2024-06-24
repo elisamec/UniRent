@@ -111,7 +111,7 @@ class CUser
         USession::getInstance();
         USession::unsetSession();
         USession::destroySession();
-        header('Location: /UniRent/User/login');
+        header('Location: /UniRent/User/home');
     }
 
 }

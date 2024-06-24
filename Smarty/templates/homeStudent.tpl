@@ -66,9 +66,6 @@
                      <li class="nav-item">
                         <a class="nav-link" href = "#">Visits</a>
                      </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href = "/UniRent/User/logout">Logout</a>
-                     </li>
                   </ul>
                   <form class="form-inline my-2 my-lg-0">
                      <div class="login_bt">
@@ -438,13 +435,6 @@
          </div>
       </div>
       <!-- footer section end -->
-      <!-- copyright section start -->
-      <div class="copyright_section">
-         <div class="container">
-            <p class="copyright_text">2020 All Rights Reserved. Design by <a href="https://html.design">Free Html Templates</a></p>
-         </div>
-      </div>
-      <!-- copyright section end -->
       <!-- Javascript files-->
       <script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>
