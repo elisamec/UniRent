@@ -50,6 +50,7 @@ class CStudent{
         $view= new VStudent();
         $PM=FPersistentManager::getInstance();
         $session=USession::getInstance();
+        print $session::getSessionElement('email');
         if($PM->verifyStudentEmail($session::getSessionElement('email'))==true){
 
             print "Email presa dalla sessione";
@@ -69,19 +70,25 @@ class CStudent{
                                   $session->getSessionElement('surname'),
                                   $photo,
                                   $session->getSessionElement('email'),
-                                  $duration,
+                                  /*$duration,
                                   USuperGlobalAccess::getPost('immatricolationYear'),
                                   $birthDate,
                                   USuperGlobalAccess::getPost('sex'),
                                   $smoker,
-                                  $animals);
-            //$PM->store($student);
-            $session->setSessionElement('courseDuration', USuperGlobalAccess::getPost('courseDuration'));
-            $session->setSessionElement('immatricolationYear', USuperGlobalAccess::getPost('immatricolationYear'));
-            $session->setSessionElement('birthDate', USuperGlobalAccess::getPost('birthDate'));
-            $session->setSessionElement('sex', USuperGlobalAccess::getPost('sex'));
-            $session->setSessionElement('smoker', USuperGlobalAccess::getPost('smoker'));
-            $session->setSessionElement('animal', USuperGlobalAccess::getPost('animal'));
+                                  $animals*/
+                                  3,
+                                  2021,
+                                  new DateTime('1999-06-01'),
+                                  'F',
+                                  false,
+                                false);
+            $PM->store($student);
+            $session->setSessionElement('courseDuration', 3);
+            $session->setSessionElement('immatricolationYear', 2021);
+            $session->setSessionElement('birthDate', '1999-06-01');
+            $session->setSessionElement('sex', 'F');
+            $session->setSessionElement('smoker', false);
+            $session->setSessionElement('animal', false);
             print 'ok';
             #header('Location:/UniRent/Student/home');
         }
