@@ -63,7 +63,7 @@
       <div class="layout_padding">
         <div class="container">
           <div class="Logcontainer">
-            <div class="heading">Student Sign Up</div><
+            <div class="heading">Student Sign Up</div>
             <form action="/UniRent/Student/studentRegistration" class="form" method="post">
               <input required="" class="input" type="number" name="courseDuration" id="courseDuration" placeholder="Course Duration (years)" min="1" max="6">
               <input required="" class="input" type="number" name="immatricolationYear" id="immatricolationYear" placeholder="Immatricolation Year" min="2018" max="2099">

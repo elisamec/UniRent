@@ -171,5 +171,14 @@
       });
    });
       </script>
+      <script>
+      document.getElementById('img').onchange = function() {
+    if(this.files.length == 0) {
+        this.name = null;
+    } else {
+        this.name = 'img';
+    }
+};
+      </script>
   </body>
   
