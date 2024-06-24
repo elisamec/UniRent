@@ -15,7 +15,7 @@ class VUser{
 
     public function home(){
 
-        $this->smarty->display('home.tpl');
+        $this->smarty->display('personalProfileStudent.tpl');
     }
 
     public function login(){
