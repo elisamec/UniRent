@@ -284,13 +284,7 @@ class FStudent
         return false;
     }
     
-    /**
-     * Method getStudentByUsername
-     * This method return the student object from db if it is present
-     * @param $user $user [student username]
-     *
-     * @return ?EStudent
-     */
+  
     public function getSBU($user):?EStudent
     {
         $db=FConnection::getInstance()->getConnection();

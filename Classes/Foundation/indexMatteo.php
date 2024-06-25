@@ -3,6 +3,7 @@ require __DIR__.'../../../vendor/autoload.php';
 
 use Classes\Entity\EStudent;
 use Classes\Foundation\FPersistentManager;
+use Classes\Foundation\FStudent;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 # PARTE MATTEO cancellato materiale precedente 22/06/2024
@@ -61,7 +62,7 @@ else
     echo ' qualcosa non và!';
 }
     */
-$PM=FPersistentManager::getInstance();
+$PM= FPersistentManager::getInstance();
 $user='Fratmo';
-$Student=$PM->getSBU($user);
+$Student=$PM->A($user);
 print $Student->__toString();

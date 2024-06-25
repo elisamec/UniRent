@@ -3,6 +3,7 @@ namespace Classes\Foundation;
 require __DIR__ .'/../../vendor/autoload.php';
 use Classes\Foundation;
 use Classes\Entity;
+use Classes\Entity\EStudent;
 use Classes\Utilities\UAccessUniversityFile;
 use DateTime;
 
@@ -157,6 +158,13 @@ class FPersistentManager {
 
             return false;
         }
+    }
+    
+    public function A($user)
+    {
+        $FS=FStudent::getInstance();
+        $student=$FS->getSBU($user);
+        return $student;
     }
 
 }
