@@ -10,6 +10,7 @@ use DateTime;
 use PDO;
 use PDOException;
 use Classes\Tools\TError;
+use Classes\Utilities\USession;
 
 class FStudent
 {
@@ -281,6 +282,55 @@ class FStudent
             return $row['id'];
         }
         return false;
+    }
+    
+    /**
+     * Method getStudentByUsername
+     * This method return the student object from db if it is present
+     * @param $user $user [student username]
+     *
+     * @return ?EStudent
+     */
+    public function getSBU($user):?EStudent
+    {
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $q='SELECT * FROM student WHERE username= :user';
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindParam(':user',$user,PDO::PARAM_STR);
+            $stm->execute();
+            $db->commit();
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return null;
+        }
+        $result_array=$stm->fetch(PDO::FETCH_ASSOC);
+        $username=$result_array['username'];
+        $password=$result_array['password'];
+        $name=$result_array['name'];
+        $surname=$result_array['surname'];
+        $email=$result_array['universityMail'];
+        $courseDuration=$result_array['courseDuration'];
+        $immatricolation=$result_array['immatricolationYear'];
+        $sex=$result_array['sex'];
+        $smoker=$result_array['smoker'];
+        $animals=$result_array['animals'];
+        $birth=new DateTime($result_array['birthDate']);
+        if(is_null($result_array['picture']))
+        {
+            $photo=null;
+        }
+        else
+        {
+            $photo=FPhoto::getInstance()->loadAvatar($result_array['picture']);
+        }
+        $student= new EStudent($username,$password,$name,$surname,$photo,$email,$courseDuration,$immatricolation,$birth,$sex,$smoker,$animals);
+        $student->setID($result_array['id']);
+        return $student;
     }
 
 }

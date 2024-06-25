@@ -61,13 +61,7 @@ else
     echo ' qualcosa non và!';
 }
     */
-$id='';
-if($id==1)
-{
-    $id=true;
-}
-elseif($id==''or $id==null)
-{
-    $id=false;
-}
-print $id;
+$PM=FPersistentManager::getInstance();
+$user='Fratmo';
+$Student=$PM->getSBU($user);
+print $Student->__toString();

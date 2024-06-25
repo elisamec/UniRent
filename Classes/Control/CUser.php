@@ -113,6 +113,8 @@ class CUser
                 if(USession::getSessionStatus() == PHP_SESSION_NONE){
                     USession::getInstance();
                     USession::setSessionElement("$type", $userId);
+                    USession::setSessionElement('username',USuperGlobalAccess::getPost('username'));
+                    USession::setSessionElement('password',USuperGlobalAccess::getPost('password'));
                     if($type === 'Student')header('Location:/UniRent/Student/home');
                     else print  header('Location:/UniRent/Owner/home');
                     //else $viewOwner->home();
