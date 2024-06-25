@@ -96,4 +96,16 @@ class USession
             return false;
         }
     }
+
+    public static function booleanSolver($value)
+    {
+        if($value===1 || $value===true || $value==='true')
+        {
+            return true;
+        }
+        elseif($value===0 || $value===false || $value==='false' || $value==='' || $value===null)
+        {
+            return false;
+        }
+    }
 }

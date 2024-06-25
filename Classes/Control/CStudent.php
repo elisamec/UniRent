@@ -30,22 +30,24 @@ class CStudent{
     }
     public static function profile(){
         $view = new VStudent();
-        /*$session=USession::getInstance();
+        $session=USession::getInstance();
         $user = $session->getSessionElement('username');
         $password = $session->getSessionElement('password');
         $name = $session->getSessionElement('name');
+        #print $user.' '.$password.' '.$name;
         $surname = $session->getSessionElement('surname');
         //$photo
         $email = $session->getSessionElement('email');
         $duration = $session->getSessionElement('courseDuration');
         $immatricolation = $session->getSessionElement('immatricolationYear');
-        $birthDate = new DateTime($session->getSessionElement('birthDate'));
+        $birthDate = $session->getSessionElement('birthDate');
         $sex = $session->getSessionElement('sex');
-        $smoker = $session->getSessionElement('smoker');
-        $animals = $session->getSessionElement('animal');
-        
+        $smoker =USession::booleanSolver($session->getSessionElement('smoker')) ;
+        $animals = USession::booleanSolver($session->getSessionElement('animal'));
+        #print $user.' '.$password.' '.$name.' '.$surname.' '.$email.' '.$duration.' '.$immatricolation.' '.$sex.' '.$smoker.' '.$animals;
         $student = new EStudent($user, $password, $name, $surname, null, $email, $duration, $immatricolation, $birthDate, $sex, $smoker, $animals);
-        */$student = new EStudent('elisa', 'password', 'Elisa', 'Bianchi', null,'elisa.bianchi@univaq.it', 3, 2018, new DateTime('1998-05-12'), 'F', false, false);
+        #print $student->__toString();
+        #$student = new EStudent('elisa', 'password', 'Elisa', 'Bianchi', null,'elisa.bianchi@univaq.it', 3, 2018, new DateTime('1998-05-12'), 'F', false, false);
         $view->profile($student);
     }
     

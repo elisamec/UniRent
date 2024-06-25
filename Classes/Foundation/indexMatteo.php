@@ -48,6 +48,7 @@ try {
 }
 
 */
+/*
 $student= new EStudent('jojo','pippo','Giovanni','Filone',null,'giovanni.filone@student.univaq.it',3,2023,new DateTime('now'),'M',true,true);
 $PM=FPersistentManager::getInstance();
 $result=$PM::store($student);
@@ -59,3 +60,14 @@ else
 {
     echo ' qualcosa non và!';
 }
+    */
+$id='';
+if($id==1)
+{
+    $id=true;
+}
+elseif($id==''or $id==null)
+{
+    $id=false;
+}
+print $id;
