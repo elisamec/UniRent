@@ -26,6 +26,10 @@ class VUser{
 
         $this->smarty->display('about.tpl');
     }
+    public function contact(){
+
+        $this->smarty->display('contact.tpl');
+    }
 
     public function register(){
 

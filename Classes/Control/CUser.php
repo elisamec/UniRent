@@ -40,6 +40,10 @@ class CUser
         $view = new VUser();
         $view->register();
     }
+    public static function contact(){
+        $view = new VUser();
+        $view->contact();
+    }
 
 
     public static function showRegistration()

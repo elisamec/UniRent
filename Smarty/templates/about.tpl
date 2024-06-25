@@ -50,7 +50,7 @@
                         <a class="nav-link active" href="/UniRent/User/about">About Us</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="#">Contact Us</a>
+                        <a class="nav-link" href="/UniRent/User/contact">Contact Us</a>
                      </li>
                   </ul>
                   <form class="form-inline my-2 my-lg-0">
@@ -111,8 +111,8 @@
                   <div class="footer_menu">
                      <ul>
                         <li><a href="/UniRent/User/home">Home</a></li>
-                        <liclass="active"><a href="/UniRent/User/about">About Us</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li class="active"><a href="/UniRent/User/about">About Us</a></li>
+                        <li><a href="/UniRent/User/contact">Contact Us</a></li>
                      </ul>
                   </div>
                </div>

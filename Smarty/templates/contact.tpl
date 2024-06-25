@@ -34,36 +34,26 @@
       <div class="header_section">
          <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-               <a class="navbar-brand"href="/UniRent/Student/home"><img src="/UniRent/Smarty/images/logo.png"></a>
+               <a class="navbar-brand"href="/UniRent/User/home"><img src="/UniRent/Smarty/images/logo.png"></a>
                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
                </button>
                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav ml-auto">
                      <li class="nav-item">
-                        <a class="nav-link" href="/UniRent/Student/home">Home</a>
+                        <a class="nav-link" href="/UniRent/User/home">Home</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="/UniRent/Smarty/templates/about.tpl">About</a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="/UniRent/Smarty/templates/property.tpl">Property</a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="/UniRent/Smarty/templates/testimonial.tpl">Testimonial</a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="/UniRent/Test/test">Blog</a>
+                        <a class="nav-link" href="/UniRent/User/about">About Us</a>
                      </li>
                      <li class="nav-item active">
-                        <a class="nav-link" href="/UniRent/Smarty/templates/contact.tpl">Contact Us</a>
+                        <a class="nav-link" href="/UniRent/User/contact">Contact Us</a>
                      </li>
                   </ul>
                   <form class="form-inline my-2 my-lg-0">
                      <div class="login_bt">
                         <ul>
-                           <li><a href="#"><span class="user_icon"><i class="fa fa-user" aria-hidden="true"></i></span>Login</a></li>
-                           <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                           <li><a href="/UniRent/User/login"><span class="user_icon"><i class="fa fa-user" aria-hidden="true"></i></span>Login</a></li>
                         </ul>
                      </div>
                   </form>
@@ -139,9 +129,9 @@
                </div>
                <div class="social_icon">
                      <ul>
-                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
                      </ul>
                   </div>
             </div>
@@ -150,23 +140,14 @@
                   <h3 class="footer_text">About Us</h3>
                   <p class="lorem_text">Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web</p>
                </div>
-               <div class="col-md-4">
-                  <h3 class="footer_text">Recent Properties</h3>
-                  <div class="image_main">
-                     <div class="image_10"><img src="/UniRent/Smarty/images/img-10.png"></div>
-                  <div class="image_10"><img src="/UniRent/Smarty/images/img-10.png"></div>
-                  </div>
-               </div>
+               <hr></hr>
                <div class="col-md-4">
                   <h3 class="footer_text">Useful Links</h3>
                   <div class="footer_menu">
                      <ul>
-                        <li><a href="/UniRent/Student/home">Home</a></li>
-                        <li><a href="/UniRent/Smarty/templates/about.tpl">About</a></li>
-                        <li><a href="/UniRent/Test/test">Blog</a></li>
-                        <li><a href="/UniRent/Smarty/templates/property.tpl">Property</a></li>
-                        <li><a href="/UniRent/Smarty/templates/testimonial.tpl">Testimonial</a></li>
-                        <li class="active"><a href="/UniRent/Smarty/templates/contact.tpl">Contact Us</a></li>
+                        <li><a href="/UniRent/User/home">Home</a></li>
+                        <li><a href="/UniRent/User/about">About Us</a></li>
+                        <li class="active"><a href="/UniRent/User/contact">Contact Us</a></li>
                      </ul>
                   </div>
                </div>
@@ -174,13 +155,6 @@
          </div>
       </div>
       <!-- footer section end -->
-      <!-- copyright section start -->
-      <div class="copyright_section">
-         <div class="container">
-            <p class="copyright_text">2020 All Rights Reserved. Design by <a href="https://html.design">Free Html Templates</a></p>
-         </div>
-      </div>
-      <!-- copyright section end -->
       <!-- Javascript files-->
       <script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>
