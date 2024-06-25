@@ -15,29 +15,29 @@ class VUser{
 
     public function home(){
 
-        $this->smarty->display('home.tpl');
+        $this->smarty->display('User/home.tpl');
     }
 
     public function login(){
 
-        $this->smarty->display('login.tpl');
+        $this->smarty->display('User/login.tpl');
     }
     public function about(){
 
-        $this->smarty->display('about.tpl');
+        $this->smarty->display('User/about.tpl');
     }
     public function contact(){
 
-        $this->smarty->display('contact.tpl');
+        $this->smarty->display('User/contact.tpl');
     }
     public function findAccommodation(){
 
-        $this->smarty->display('searchUser.tpl');
+        $this->smarty->display('User/searchUser.tpl');
     }
 
     public function register(){
 
-        $this->smarty->display('register.tpl');
+        $this->smarty->display('User/register.tpl');
     }
 
     //Deve rimandare alla home dicendo che c'è stato un errore

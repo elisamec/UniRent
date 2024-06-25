@@ -806,6 +806,7 @@ hr.border_main {
     float: right;
     width: 60%;
     margin-right: 50px;
+    min-height: 900.18px;
 }
 
 .image_box{
@@ -1217,7 +1218,7 @@ textarea#comment::placeholder {
 }
 
 .btn_main {
-    width: 70%;
+    width: 100%;
     margin: 0 auto;
     text-align: center;
 }
@@ -1253,6 +1254,7 @@ textarea#comment::placeholder {
 .send_bt {
     width: 160px;
     float: left;
+    transform: translateX(200%);
 }
 
 .send_bt a {
