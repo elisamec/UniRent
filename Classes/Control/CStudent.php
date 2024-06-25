@@ -36,6 +36,10 @@ class CStudent{
         $view = new VStudent();
         $view->about();
     }
+    public static function search(){
+        $view = new VStudent();
+        $view->search();
+    }
     public static function profile(){
         $view = new VStudent();
         /*$session=USession::getInstance();

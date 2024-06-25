@@ -806,6 +806,7 @@ hr.border_main {
     float: right;
     width: 60%;
     margin-right: 50px;
+    min-height: 900.18px;
 }
 
 .image_box{

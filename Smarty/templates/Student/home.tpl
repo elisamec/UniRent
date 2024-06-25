@@ -119,35 +119,39 @@
       <!-- header section end -->
       <!-- select box section start -->
       <div class="container">
+         <form action="/UniRent/Student/findAccommodation" method="post" id="yourFormId">
          <div class="select_box_section">
             <div class="select_box_main">
                <h1 class="find_text">Find an Accommodation</h1>
                <div class="row">
                   <div class="col-lg-3 select-outline">
                      <select name="city" id="city" class="mdb-select md-form md-outline colorful-select dropdown-primary">
-                     <option value="" disabled selected>Select a city</option>
-                     <option value="City 1">City 1</option>
-                     <option value="City 2">City 1</option>
+                        <option value="" disabled selected>Select a city</option>
+                        <option value="City 1">City 1</option>
+                        <option value="City 2">City 1</option>
                      </select>
-                     </div>
-                     <div class="col-lg-3 select-outline">
+                  </div>
+                  <div class="col-lg-3 select-outline">
                      <select name="university" id="university" class="mdb-select md-form md-outline colorful-select dropdown-primary">
                         <option value="" disabled selected>Select a university</option>
+                        <option value="University 1">University 1</option>
+                        <option value="University 2">University 2</option>
                      </select>
-                     </div>
-                     <div class="col-lg-3 select-outline">
+                  </div>
+                  <div class="col-lg-3 select-outline">
                      <select name="date" id="date" class="mdb-select md-form md-outline colorful-select dropdown-primary">
                         <option value="" disabled selected>Select a period</option>
                         <option value="september">September to June</option>
                         <option value="october">October to July</option>
                      </select>
-                     </div>
+                  </div>
                   <div class="col-lg-3 select-outline">
-                     <div class="find_btn"><a href="#">Find Now</a></div>
+                     <div class="find_btn"><a href=""id="yourLinkId">Find Now</a></div>
                   </div>
                </div>
             </div>
          </div>
+         </form>
       </div>
       <!-- feature section start -->
       <div class="Properties_section layout_padding">
@@ -393,30 +397,6 @@
       <div class="footer_section layout_padding">
          <div class="container">
             <div class="row">
-               <div class="col-md-12">
-                  <div class="location_text">
-                     <ul>
-                        <li>
-                           <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i></a>
-                        </li>
-                        <li>
-                           <a href="#"><i class="fa fa-phone" aria-hidden="true"></i></a>
-                        </li>
-                        <li>
-                           <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a>
-                        </li>
-                     </ul>
-                  </div>
-               </div>
-               <div class="social_icon">
-                     <ul>
-                        <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
-                     </ul>
-                  </div>
-            </div>
-            <div class="row">
                <div class="col-md-4">
                   <h3 class="footer_text">About Us</h3>
                   <p class="lorem_text">Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web</p>
@@ -426,9 +406,9 @@
                   <h3 class="footer_text">Useful Links</h3>
                   <div class="footer_menu">
                      <ul>
-                        <li class="active"><a href="/UniRent/User/home">Home</a></li>
-                        <li><a href="/UniRent/User/about">About Us</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li class="active"><a href="/UniRent/Student/home">Home</a></li>
+                        <li><a href="/UniRent/Student/about">About Us</a></li>
+                        <li><a href="/UniRent/Student/contact">Contact Us</a></li>
                      </ul>
                   </div>
                </div>
@@ -446,35 +426,6 @@
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
       <!-- javascript --> 
-      <script>
-         // Material Select Initialization
-         $(document).ready(function() {
-         $('.mdb-select').materialSelect();
-         $('.select-wrapper.md-form.md-outline input.select-dropdown').bind('focus blur', function () {
-         $(this).closest('.select-outline').find('label').toggleClass('active');
-         $(this).closest('.select-outline').find('.caret').toggleClass('active');
-         });
-         });
-      </script>
-      <script>
-         var universities = {
-            'City 1': ['Uni 1.1', 'Uni 1.2', 'Uni 1.3'],
-            'City 2': ['Uni 2.1', 'Uni 2.2'],
-            'City 3': ['Uni 3.1', 'Uni 3.2']
-            // Add other cities and universities as needed
-        };
-
-        var $universities = $('#university');
-        $('#city').change(function() {
-            var city = $(this).val();
-            var universityList = universities[city] || [];
-
-            var html = $.map(universityList, function(university) {
-                return '<option value="' + university + '">' + university + '</option>';
-            }).join('');
-            $universities.html(html);
-        });
-      </script>
       <div class="modal" id="myModal">
       <div class"container-fluid">
       <div class="card">
@@ -494,5 +445,10 @@
                document.getElementById("myModal").style.display = "none";
                }
          </script>
+         <script>
+      document.getElementById("yourLinkId").onclick = function() {
+    document.getElementById("yourFormId").submit();
+}
+      </script>
    </body>
 </html>
