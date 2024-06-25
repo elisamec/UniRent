@@ -23,13 +23,14 @@ class COwner
         $view = new VOwner();
         $PM = FPersistentManager::getInstance();
         $session = USession::getInstance();
-        if(USession::getSessionElement('picture')==null)
-        {
+        if($session->getSessionElement('picture')===null){
+
             $photo = null;
-        }
-        else
-        {
-            $photo = new EPhoto(null, unserialize($session::getSessionElement('picture')),'owner',null,null );
+
+        }else{
+
+            $photo = null;
+            //$photo = new EPhoto(null, unserialize($session::getSessionElement('picture')),'owner',null,null );
         }
         $owner = new EOwner(null,
                             $session->getSessionElement('username'),
