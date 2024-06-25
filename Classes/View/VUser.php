@@ -34,6 +34,10 @@ class VUser{
 
         $this->smarty->display('User/searchUser.tpl');
     }
+    public function findAccommodation(){
+
+        $this->smarty->display('searchUser.tpl');
+    }
 
     public function register(){
 
