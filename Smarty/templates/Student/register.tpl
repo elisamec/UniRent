@@ -47,7 +47,7 @@
                         <a class="nav-link" href="/UniRent/User/about">About Us</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="#">Contact Us</a>
+                        <a class="nav-link" href="/UniRent/User/contact">Contact Us</a>
                      </li>
                   </ul>
                   <form class="form-inline my-2 my-lg-0">
@@ -106,30 +106,6 @@
 <div class="footer_section layout_padding">
          <div class="container">
             <div class="row">
-               <div class="col-md-12">
-                  <div class="location_text">
-                     <ul>
-                        <li>
-                           <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i></a>
-                        </li>
-                        <li>
-                           <a href="#"><i class="fa fa-phone" aria-hidden="true"></i></a>
-                        </li>
-                        <li>
-                           <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a>
-                        </li>
-                     </ul>
-                  </div>
-               </div>
-               <div class="social_icon">
-                     <ul>
-                        <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
-                     </ul>
-                </div>
-            </div>
-            <div class="row">
                <div class="col-md-4">
                   <h3 class="footer_text">About Us</h3>
                   <p class="lorem_text">Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web</p>
@@ -141,7 +117,7 @@
                      <ul>
                         <li><a href="/UniRent/User/home">Home</a></li>
                         <li><a href="/UniRent/User/about">About Us</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="/UniRent/User/contact">Contact Us</a></li>
                      </ul>
                   </div>
                </div>
