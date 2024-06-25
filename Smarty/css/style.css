@@ -1629,3 +1629,64 @@ textarea#comment::placeholder {
     .about p {
         text-align: justify;
     }
+
+    .card {
+        width: 350px;
+        height: 100%;
+        background-color: rgb(255, 255, 255);
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px 30px;
+        gap: 13px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.062);
+      }
+      
+      #cookieSvg {
+        width: 50px;
+      }
+      
+      #cookieSvg g path {
+        fill: rgb(97, 81, 81);
+      }
+      
+      .cookieHeading {
+        font-size: 2.0em;
+        font-weight: 800;
+        color: rgb(26, 26, 26);
+      }
+      
+      .cookieDescription {
+        text-align: center;
+        font-size: 1em;
+        font-weight: 600;
+        color: rgb(99, 99, 99);
+      }
+      
+      .cookieDescription a {
+        --tw-text-opacity: 1;
+        color: rgb(59 130 246);
+      }
+      
+      .cookieDescription a:hover {
+        -webkit-text-decoration-line: underline;
+        text-decoration-line: underline;
+      }
+      .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        justify-content: center;
+        align-items: center;
+      }
