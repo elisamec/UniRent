@@ -254,7 +254,7 @@
                   <div class="footer_menu">
                      <ul>
                         <li><a href="/UniRent/User/home">Home</a></li>
-                        <li><a href="#">About Us</a></li>
+                        <li><a href="/UniRent/User/about">About Us</a></li>
                         <li><a href="#">Contact Us</a></li>
                      </ul>
                   </div>
