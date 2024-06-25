@@ -16,20 +16,20 @@ class VStudent{
 
     public function home(){
 
-        $this->smarty->display('homeStudent.tpl');
+        $this->smarty->display('Student/homeStudent.tpl');
     }
     public function profile(EStudent $student){
         $this->smarty->assign('student', $student);
-        $this->smarty->display('personalProfileStudent.tpl');
+        $this->smarty->display('Student/personalProfileStudent.tpl');
     }
     public function editProfile(EStudent $student){
         $this->smarty->assign('student', $student);
-        $this->smarty->display('editPersonalProfileStudent.tpl');
+        $this->smarty->display('Student/editPersonalProfileStudent.tpl');
     }
 
     //Mostra la seconda parte della registrazione studente
     public function showStudentRegistration(){
-        $this->smarty->display('registerStudent.tpl');
+        $this->smarty->display('Student/registerStudent.tpl');
     }
 
 }
