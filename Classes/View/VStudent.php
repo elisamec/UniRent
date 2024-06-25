@@ -3,6 +3,7 @@
 namespace Classes\View;
 require __DIR__.'/../../vendor/autoload.php';
 
+use Classes\Entity\EAccommodation;
 use StartSmarty;
 use Classes\Entity\EStudent;
 
@@ -39,6 +40,11 @@ class VStudent{
     }
     public function search(){
         $this->smarty->display('Student/search.tpl');
+    }
+    public function accommodation(EAccommodation $accomm){
+        $photos=$accomm->getPhoto();
+        $this->smarty->assign('images', $photos);
+        $this->smarty->display('Student/personalProfile.tpl');
     }
 
 }
