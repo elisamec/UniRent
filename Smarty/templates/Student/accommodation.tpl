@@ -83,25 +83,33 @@
       </div>
     <!-- header section end -->
     <!-- accommodation section start -->
-    <div class="container-fluid">
-    <div class="swiper-container">
-        <div class="swiper-wrapper" id="swiper-wrapper">
-            <!-- Slides will be inserted here dynamically -->
-        </div>
-        <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
-        <!-- Add Navigation -->
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-    </div>
+   
         <div class="row">
             <div class="col-md-12">
-                <div class="accommodation_section">
-                    <!-- You should find a way to insert the images here -->
-                    <h1 class="accommodation_text">{$accommodation->getTitle()}</h1>
+                <div class="profile_pic">
+                 <div class="container-fluid">
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper" id="swiper-wrapper">
+                              <!-- Slides will be inserted here dynamically -->
+                        </div>
+                        <!-- Add Pagination -->
+                        <div class="swiper-pagination"></div>
+                        <!-- Add Navigation -->
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                     </div>
                 </div>
             </div>
         </div>
+      </div>
+      <div class="container-fluid">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="profile_text">
+             <h1 class="accommodation_text">{$accommodation->getTitle()}</h1>
+            </div>
+         </div>
+      </div>
 
 
 
@@ -194,7 +202,8 @@ document.getElementById("file").onchange = function() {
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             // Smarty variable embedded into JavaScript
-            var images = {$images|json_encode nofilter};
+            var images = {$images};
+            console.log(images);
 
             // Reference to the swiper wrapper
             var swiperWrapper = document.getElementById('swiper-wrapper');
@@ -221,10 +230,10 @@ document.getElementById("file").onchange = function() {
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
                 },
-                autoplay: {
-                    delay: 3000,
-                    disableOnInteraction: false,
-                },
+                autoplay: false,
+                slidesPerView: 1, // Ensure only one slide is visible at a time
+spaceBetween: 10, // Adjust space between slides if needed
+
             });
         });
     </script>

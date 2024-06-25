@@ -133,5 +133,10 @@ class CStudent{
         header('Location:/UniRent/Student/home');
 
     }
+    public static function accommodation() {
+        $view = new VStudent();
+        $accomm = FPersistentManager::getInstance()->load('EAccommodation', 2);
+        $view->accommodation($accomm);
+    }
         
 }

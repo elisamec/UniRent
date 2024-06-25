@@ -42,9 +42,10 @@ class VStudent{
         $this->smarty->display('Student/search.tpl');
     }
     public function accommodation(EAccommodation $accomm){
-        $photos=$accomm->getPhoto();
+        $photos=json_encode($accomm->getPhoto());
         $this->smarty->assign('images', $photos);
-        $this->smarty->display('Student/personalProfile.tpl');
+        $this->smarty->assign('accommodation', $accomm);
+        $this->smarty->display('Student/accommodation.tpl');
     }
 
 }

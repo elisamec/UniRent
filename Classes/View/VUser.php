@@ -34,7 +34,7 @@ class VUser{
 
         $this->smarty->display('User/searchUser.tpl');
     }
-   
+
     public function register(){
 
         $this->smarty->display('User/register.tpl');
