@@ -34,5 +34,8 @@ class VStudent{
     public function contact(){
         $this->smarty->display('Student/contact.tpl');
     }
+    public function about(){
+        $this->smarty->display('Student/about.tpl');
+    }
 
 }
