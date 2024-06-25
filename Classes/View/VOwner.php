@@ -13,12 +13,12 @@ class VOwner {
 
     //Mostra la home del proprietario
     public function home() {
-        $this->smarty->display('Owner/homeOwner.tpl');
+        $this->smarty->display('Owner/home.tpl');
     }
 
     //Mostra la seconda parte della registrazione proprietario
     public function showOwnerRegistration(){
-        $this->smarty->display('Owner/registerOwner.tpl');
+        $this->smarty->display('Owner/register.tpl');
     }
     
 }
