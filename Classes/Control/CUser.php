@@ -135,10 +135,10 @@ class CUser
      * @return void
      */
     public static function logout(){
-        //!!!!Distruggere il cookie!!!!
         USession::getInstance();
         USession::unsetSession();
         USession::destroySession();
+        setcookie('PHPSESSID','',time()-3600);
         header('Location: /UniRent/User/home');
     }
 
