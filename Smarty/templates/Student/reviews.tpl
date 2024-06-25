@@ -84,63 +84,31 @@
          <div class="col-md-3">
          <div class="sidebar">
          <div class="col-md-3">
-            <div class="sidebar_but active"><a href="/UniRent/Student/profile">Profile</a></div>
+            <div class="sidebar_but"><a href="/UniRent/Student/profile">Profile</a></div>
             </div>
             <div class="col-md-3">
-            <div class="sidebar_but"><a href="/UniRent/Student/reviews">Reviews</a></div>
+            <div class="sidebar_but active"><a href="/UniRent/Student/reviews">Reviews</a></div>
             </div>
-            
             <div class="col-md-3">
             <div class="sidebar_but log"><a href="/UniRent/User/logout">Logout</a></div>
             </div>
          </div>
          </div>
-            <div class="col-md-6">
-                  <div class="profile_info">
-                     <h2 class="profile_head">Hello, {$student->getName()} {$student->getSurname()}</h2>
-                     <p>Your Username: {$student->getUsername()}</p>
-                     <p>Your Email: {$student->getUniversityMail()}</p>
-                     {if $student->getSex() === "M"}
-                     <p>Sex: Male</p>
-                     {else}
-                     <p>Sex: Female</p>
-                     {/if}
-                     <p>Your course is {$student->getCourseDuration()} years long and you started in {$student->getImmatricolationYear()}.</p>
-                     <p>Your birth date is {$student->getBirthDateString()}.</p>
-                     
-                     {if $student->getSmoker() && $student->getAnimals()}
-                     <p>You said you are a smoker and you have animals.</p>
-                     {elseif $student->getSmoker() && !$student->getAnimals()}
-                     <p>You said you are a smoker, but you don't have animals.</p>
-                     {elseif !$student->getSmoker() && $student->getAnimals()}
-                     <p>You said you are not a smoker, but you have animals.</p>
-                     {else}
-                     <p>You said you are not a smoker and you don't have animals.</p>
-                     {/if}
-                     <div class="col-md-4">
-                     <div  class="find_btn" ><a href="/UniRent/Student/editProfile">Edit Profile</a></div>
-                     </div>
-                  
-               </div>
-               
+         <div class="col-md-9">
+            <div class="container">
+            <div class="review">
+                <h1>Review Title</h1>
+                <div class="row">
+                <div class="userIcon">
+                <img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture">
+                </div>
+                
+                <p>Review Description</p>
+                </div>
             </div>
-            <div class="col-md-2">
-               <div class="container">
-                  <div class="profile_pic">
-                  {if $student->getPicture() === null}
-                     <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
-                  {else}
-                     <img src="{$student->getPicture()}"">
-                  {/if}
-                  </div>
-                  <form action="/UniRent/Student/changePicture" class="form" method="post">
-                     <input class="file-upload" type="file" id="img" name="img" accept="image/png" hidden>
-                     <label class="change_btn" for="img">Upload Profile Picture</label>
-                  </form>
-               </div>
             </div>
-         </div>
-      </div>
+            </div>
+            
 
 <!-- footer section start -->
       <div class="footer_section layout_padding">

@@ -138,5 +138,9 @@ class CStudent{
         $accomm = FPersistentManager::getInstance()->load('EAccommodation', 2);
         $view->accommodation($accomm);
     }
+    public static function reviews() {
+        $view = new VStudent();
+        $view->reviews();
+    }
         
 }
