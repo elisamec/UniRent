@@ -30,6 +30,10 @@ class VUser{
 
         $this->smarty->display('contact.tpl');
     }
+    public function findAccommodation(){
+
+        $this->smarty->display('searchUser.tpl');
+    }
 
     public function register(){
 

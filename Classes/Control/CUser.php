@@ -44,6 +44,10 @@ class CUser
         $view = new VUser();
         $view->contact();
     }
+    public static function findAccommodation(){
+        $view = new VUser();
+        $view->findAccommodation();
+    }
 
 
     public static function showRegistration()

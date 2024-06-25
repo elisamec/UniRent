@@ -120,38 +120,39 @@
 
 
       <div class="container">
-      
+      <form action="/UniRent/User/findAccommodation" method="post" id="yourFormId">
          <div class="select_box_section">
             <div class="select_box_main">
                <h1 class="find_text">Find an Accommodation</h1>
                <div class="row">
                   <div class="col-lg-3 select-outline">
                      <select name="city" id="city" class="mdb-select md-form md-outline colorful-select dropdown-primary">
-                     <option value="" disabled selected>Select a city</option>
-                     <option value="City 1">City 1</option>
-                     <option value="City 2">City 1</option>
+                        <option value="" disabled selected>Select a city</option>
+                        <option value="City 1">City 1</option>
+                        <option value="City 2">City 1</option>
                      </select>
-                     </div>
-                     <div class="col-lg-3 select-outline">
+                  </div>
+                  <div class="col-lg-3 select-outline">
                      <select name="university" id="university" class="mdb-select md-form md-outline colorful-select dropdown-primary">
                         <option value="" disabled selected>Select a university</option>
                         <option value="University 1">University 1</option>
                         <option value="University 2">University 2</option>
                      </select>
-                     </div>
-                     <div class="col-lg-3 select-outline">
+                  </div>
+                  <div class="col-lg-3 select-outline">
                      <select name="date" id="date" class="mdb-select md-form md-outline colorful-select dropdown-primary">
                         <option value="" disabled selected>Select a period</option>
                         <option value="september">September to June</option>
                         <option value="october">October to July</option>
                      </select>
-                     </div>
+                  </div>
                   <div class="col-lg-3 select-outline">
-                     <div class="find_btn"><a href="#">Find Now</a></div>
+                     <div class="find_btn"><a id="yourLinkId">Find Now</a></div>
                   </div>
                </div>
             </div>
          </div>
+         </form>
       </div>
       <!-- feature section start -->
       <div class="Properties_section layout_padding">
@@ -397,30 +398,6 @@
       <div class="footer_section layout_padding">
          <div class="container">
             <div class="row">
-               <div class="col-md-12">
-                  <div class="location_text">
-                     <ul>
-                        <li>
-                           <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i></a>
-                        </li>
-                        <li>
-                           <a href="#"><i class="fa fa-phone" aria-hidden="true"></i></a>
-                        </li>
-                        <li>
-                           <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a>
-                        </li>
-                     </ul>
-                  </div>
-               </div>
-               <div class="social_icon">
-                     <ul>
-                        <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
-                     </ul>
-                  </div>
-            </div>
-            <div class="row">
                <div class="col-md-4">
                   <h3 class="footer_text">About Us</h3>
                   <p class="lorem_text">Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web</p>
@@ -481,5 +458,10 @@
             }
             }
          </script>
+         <script>
+      document.getElementById("yourLinkId").onclick = function() {
+    document.getElementById("yourFormId").submit();
+}
+      </script>
    </body>
 </html>
