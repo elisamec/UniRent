@@ -30,68 +30,81 @@ class CStudent{
     }
     public static function profile(){
         $view = new VStudent();
-        $student = new EStudent('elisa', 'password', 'Elisa', 'Bianchi', null,'elisa.bianchi@univaq.it', 3, 2018, new DateTime('1998-05-12'), 'F', false, false);
+        $session=USession::getInstance();
+        $user = $session->getSessionElement('username');
+        $password = $session->getSessionElement('password');
+        $name = $session->getSessionElement('name');
+        $surname = $session->getSessionElement('surname');
+        //$photo
+        $email = $session->getSessionElement('email');
+        $duration = $session->getSessionElement('courseDuration');
+        $immatricolation = $session->getSessionElement('immatricolationYear');
+        $birthDate = new DateTime($session->getSessionElement('birthDate'));
+        $sex = $session->getSessionElement('sex');
+        $smoker = $session->getSessionElement('smoker');
+        $animals = $session->getSessionElement('animal');
+        
+        $student = new EStudent($user, $password, $name, $surname, null, $email, $duration, $immatricolation, $birthDate, $sex, $smoker, $animals);
         $view->profile($student);
     }
+    
     public static function editProfile(){
         $view = new VStudent();
         $student = new EStudent('elisa', 'password', 'Elisa', 'Bianchi', null,'elisa.bianchi@univaq.it', 3, 2018, new DateTime('1998-05-12'), 'F', false, false);
         $view->editProfile($student);
     }
 
-
+    /**
+     * Display the student registration page
+     * 
+     * 
+     */
     public static function studentRegistration()
     {   
-        $view= new VStudent();
         $PM=FPersistentManager::getInstance();
         $session=USession::getInstance();
         
-        if($PM->verifyStudentEmail($session::getSessionElement('email'))==true){
+        if ($session->getSessionElement('picture')===null) {
 
-            if ($session->getSessionElement('picture')===null) {
-                $photo = null;
-            }
-            else {
-                $photo = null;
-            }            
+            $photo = null;
 
-            $duration = USuperGlobalAccess::getPost('courseDuration');
-            $immatricolation = USuperGlobalAccess::getPost('immatricolationYear');
-            $birthDate= new DateTime(USuperGlobalAccess::getPost('birthDate'));
-            $sex = USuperGlobalAccess::getPost('sex');
-            $animals=USuperGlobalAccess::getPost('animals');
-            $smoker=USuperGlobalAccess::getPost('smoker');
-            $smok=filter_var($smoker,FILTER_VALIDATE_BOOLEAN);
-            $anim=filter_var($animals, FILTER_VALIDATE_BOOLEAN);
+        }else {
             
-            
-            $student=new EStudent($session->getSessionElement('username'),
-                                  $session->getSessionElement('password'),
-                                  $session->getSessionElement('name'),
-                                  $session->getSessionElement('surname'),
-                                  $photo,
-                                  $session->getSessionElement('email'),
-                                  $duration,
-                                  $immatricolation,
-                                  $birthDate,
-                                  $sex,
-                                  $smok,
-                                  $anim);
+            $photo = null;
+        }            
 
-            $PM->store($student);
-            $session->setSessionElement('courseDuration', $duration);
-            $session->setSessionElement('immatricolationYear', $immatricolation);
-            $session->setSessionElement('birthDate', $birthDate);
-            $session->setSessionElement('sex', $sex);
-            $session->setSessionElement('smoker', $smoker);
-            $session->setSessionElement('animal', $animals);
-            header('Location:/UniRent/Student/home');
-        }
-        else
-        {
-            print "Email non valida";
-            //$view->registrationError();
-        }
+        $duration = USuperGlobalAccess::getPost('courseDuration');
+        $immatricolation = USuperGlobalAccess::getPost('immatricolationYear');
+        $birthDate= new DateTime(USuperGlobalAccess::getPost('birthDate'));
+        $sex = USuperGlobalAccess::getPost('sex');
+        $animals=USuperGlobalAccess::getPost('animals');
+        $smoker=USuperGlobalAccess::getPost('smoker');
+        $smok=filter_var($smoker,FILTER_VALIDATE_BOOLEAN);
+        $anim=filter_var($animals, FILTER_VALIDATE_BOOLEAN);
+        
+        
+        $student=new EStudent($session->getSessionElement('username'),
+                                $session->getSessionElement('password'),
+                                $session->getSessionElement('name'),
+                                $session->getSessionElement('surname'),
+                                $photo,
+                                $session->getSessionElement('email'),
+                                $duration,
+                                $immatricolation,
+                                $birthDate,
+                                $sex,
+                                $smok,
+                                $anim);
+
+        $PM->store($student);
+        $session->setSessionElement('courseDuration', $duration);
+        $session->setSessionElement('immatricolationYear', $immatricolation);
+        $session->setSessionElement('birthDate', $birthDate);
+        $session->setSessionElement('sex', $sex);
+        $session->setSessionElement('smoker', $smok);
+        $session->setSessionElement('animal', $anim);
+        header('Location:/UniRent/Student/home');
+
     }
         
 }

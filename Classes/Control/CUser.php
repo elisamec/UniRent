@@ -9,6 +9,7 @@ use Classes\View\VUser;
 use Classes\View\VStudent;
 use Classes\View\VOwner;
 use Classes\Utilities\USuperGlobalAccess;
+use Classes\Utilities\UCookie;
 
 class CUser
 {
@@ -19,6 +20,14 @@ class CUser
     }
 
     public static function login(){
+        if(UCookie::isSet('PHPSESSID')){
+            if(session_status() == PHP_SESSION_NONE){
+                USession::getInstance();
+            }
+        }
+        /*if(USession::isSetSessionElement('username')){
+            header('Location: /UniRent/Student/home');
+        }*/
         $view = new VUser();
         $view->login();
     }
@@ -48,10 +57,14 @@ class CUser
             $session::setSessionElement('surname',USuperGlobalAccess::getPost('surname'));
             $session::setSessionElement('picture',USuperGlobalAccess::getFiles('img'));
 
-
             if($type==='Student'){
+                if($PM->verifyStudentEmail($session::getSessionElement('email'))==true){
 
-                $viewStudent->showStudentRegistration();
+                    $viewStudent->showStudentRegistration();
+
+                }else{
+                    print "Email non valida";
+                }
             }else{  
  
                 $viewOwner->showOwnerRegistration();
@@ -110,6 +123,7 @@ class CUser
      * @return void
      */
     public static function logout(){
+        //!!!!Distruggere il cookie!!!!
         USession::getInstance();
         USession::unsetSession();
         USession::destroySession();
