@@ -40,6 +40,7 @@
          </div> 
       </div>
       </div>
+      </div>
          <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                <a class="navbar-brand"href="/UniRent/User/home"><img src="/UniRent/Smarty/images/logo.png"></a>

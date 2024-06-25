@@ -43,6 +43,7 @@
          </div> 
       </div>
       </div>
+   </div>
       <div class="header_section">
          <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -75,6 +76,7 @@
         </div>
       <!-- header section end -->
       <!-- select box section start -->
+   <form action="/UniRent/User/findAccommodation" method="post" class="yourFormId">
       <div class="container-fluid">
          <div class="search_box_section">
             <div class="search_box_main">
@@ -346,13 +348,15 @@
                <div class="row">
                <div class="Findcontainer">
                   <div class="select-outline">
-                     <div class="find_btn"><a href="#">Find Now</a></div>
+                     <div class="find_btn"><a href="#" class="yourLinkId">Find Now</a></div>
                   </div>
                </div>
                </div>
             </div>
          </div>
       </div>
+   </div>
+   </form>
       <!-- feature section start -->
       <div class="Properties_section">
          <div class="Searchcontainer">
@@ -569,6 +573,11 @@ rangeInput.forEach((input) => {
                document.getElementById("myModal").style.display = "none";
                }
          </script>
+         <script>
+      document.getElementById("yourLinkId").onclick = function() {
+    document.getElementById("yourFormId").submit();
+}
+      </script>
       
    </body>
 </html>

@@ -89,24 +89,13 @@
                <div class="row">
                   <div class="col-md-6">
                      <div class="mail_section map_form_container">
-                        <form action="">
+                        <form action="" method="post" class="yourFormId">
                         <input type="text" class="mail_text" placeholder="Name" name="Name">
-                        <input type="text" class="mail_text" placeholder="Phone Number" name="Phone Number"> 
                         <input type="text" class="mail_text" placeholder="Email" name="Email">
                         <textarea class="massage-bt" placeholder="Massage" rows="5" id="comment" name="Massage"></textarea>
-                        <div class="btn_main">
-                           <div class="send_bt active"><a href="#">Send Now</a></div>
-                           <div class="map_bt"><a href="#" id="showMap">Map</a></div>
-                        </div>
+                        
+                           <div class="send_bt"><a href="#" class="yourLinkId">Send Now</a></div>
                         </form>
-                        <div class="map_main map_container">
-                           <div class="map-responsive">
-                              <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&amp;q=Eiffel+Tower+Paris+France" width="600" height="368" frameborder="0" style="border:0; width: 100%;" allowfullscreen=""></iframe>
-                               <div class="btn_main">
-                                 <div class="map_bt d-flex justify-content-center w-100 map_center"><a href="#" id="showForm">Form</a></div>
-                              </div>
-                           </div>
-                        </div>
                      </div>
                   </div>
                   <div class="col-md-6">
@@ -171,5 +160,10 @@
                document.getElementById("myModal").style.display = "none";
                }
          </script>
+         <script>
+      document.getElementById("yourLinkId").onclick = function() {
+    document.getElementById("yourFormId").submit();
+}
+      </script>
    </body>
 </html>
