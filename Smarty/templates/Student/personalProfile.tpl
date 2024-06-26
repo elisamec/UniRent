@@ -130,7 +130,7 @@
                   {if $student->getPicture() === null}
                      <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
                   {else}
-                     <img src="{$student->getPicture()}"">
+                     <img src="{$student->getPicture()}">
                   {/if}
                   </div>
                   <form action="/UniRent/Student/changePicture" class="form" method="post">

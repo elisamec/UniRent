@@ -1772,6 +1772,7 @@ textarea#comment::placeholder {
         display: inline-block; /* Ensure it displays inline with other content */
         border: 2px solid #ccc; /* Optional: Add a border for a polished look */
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+        transition: border-color 0.3s ease;
     }
     
     .userIcon img {
@@ -1803,4 +1804,13 @@ textarea#comment::placeholder {
     .layout {
         padding-top: 30px;
         padding-left: 30px;
+    }
+    .username a:hover {
+        color: #f9bc19;
+    }
+    .userIcon a {
+        display: block; /* Ensures the <a> tag takes full space of .userIcon for hover effect */
+    }
+    .userIcon a:hover {
+        border-color: #f9bc19;
     }
