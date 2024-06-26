@@ -97,7 +97,7 @@
          </div>
             <div class="col-md-6">
                   <div class="profile_info">
-                  <form action="/UniRent/Student/editProfile" class="form" method="post" id="yourFormId">
+                  <form action="/UniRent/Student/modifyProfile" class="form" method="post" id="yourFormId">
                      <div class="parent">
                         <div class="div1"><p>Name: </p></div>
                         <div class="div2">
@@ -247,33 +247,6 @@
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
 </script>
-
-         <script>
-      $(document).ready(function() {
-
-      
-      var readURL = function(input) {
-         if (input.files && input.files[0]) {
-               var reader = new FileReader();
-
-               reader.onload = function (e) {
-                  $('.imageIcon').attr('src', e.target.result);
-               }
-      
-               reader.readAsDataURL(input.files[0]);
-         }
-      }
-      
-
-      $(".file-upload").on('change', function(){
-         readURL(this);
-      });
-      
-      $(".label-button").on('click', function() {
-         $(".file-upload").click();
-      });
-   });
-      </script>
       <script>
                            var birthDateString = '{$student->getBirthDateString()}';
                            
