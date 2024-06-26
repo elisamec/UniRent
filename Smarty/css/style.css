@@ -541,6 +541,7 @@ header p {
   text-align: center;
   border: 1px solid #999;
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
@@ -579,6 +580,7 @@ input[type="number"]::-webkit-inner-spin-button {
   pointer-events: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+  appearance: none;
 }
 input[type="range"]::-webkit-slider-thumb {
   height: 17px;
@@ -1745,7 +1747,7 @@ textarea#comment::placeholder {
 
     .review {
         float: right;
-        width:100%;
+        width: 95%;
         height: auto;
         background: #F8F9FD;
         background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(244, 247, 251) 100%);
@@ -1756,16 +1758,20 @@ textarea#comment::placeholder {
         margin: 20px 30px;
         position: relative;
     }
+    
+    .userSection {
+        text-align: center;
+        margin-left: 10px;
+    }
+    
     .userIcon {
         width: 50px; /* Set the width of the icon */
         height: 50px; /* Set the height of the icon */
         border-radius: 50%; /* Make the icon circular */
         overflow: hidden; /* Hide any overflow */
         display: inline-block; /* Ensure it displays inline with other content */
-        vertical-align: middle; /* Align it vertically in the middle */
         border: 2px solid #ccc; /* Optional: Add a border for a polished look */
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
-        margin-left: 10px
     }
     
     .userIcon img {
@@ -1775,3 +1781,22 @@ textarea#comment::placeholder {
         display: block; /* Remove any extra spacing */
     }
     
+    .username {
+        margin-top: 5px; /* Space between image and username */
+        font-size: 14px; /* Set font size */
+        color: #333; /* Set font color */
+    }
+    
+    .stars {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 20px;
+    }
+    
+    .or {
+        color: orange;
+    }
+    .ReviewTitle {
+        padding-left: 95px;
+        padding-top: 20px;
+    }    
