@@ -7,7 +7,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <!-- mobile metas -->
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <meta name="viewport" content="initial-scale=1, eimum-scale=1">
       <!-- site metas -->
       <title>UniRent</title>
       <link rel="icon" href="/UniRent/Smarty/images/favicon.png" type="image/png">
@@ -117,11 +117,11 @@
             </div>
         </div>
     </div>
-    <!-- When I finish developping the FReview::loadByRecipient() method, I will test this -->
     <div id="reviewsContainer"></div>
+</div>
     <script>
-        // Passing the PHP data to JavaScript
-        const reviews = {$reviewsData|json_encode|raw};
+        {if isset($reviewsData)}
+        const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
 
         // Function to generate stars based on the rating
         function generateStars(stars) {
@@ -140,40 +140,41 @@
         function displayReviews(reviews) {
             const container = document.getElementById('reviewsContainer');
 
-            reviews.forEach(review => {
-                const reviewElement = document.createElement('div');
-                reviewElement.className = 'review';
+            if (container) {
+                reviews.forEach(review => {
+                    const reviewElement = document.createElement('div');
+                    reviewElement.className = 'review';
 
-                reviewElement.innerHTML = `
-                    <h1 class="ReviewTitle">${review.title}</h1>
-                    <div class="row">
-                        <div class="userSection">
-                            <div class="userIcon">
-                                <img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture">
+                    // Insert the names of the elements of the review array
+                    reviewElement.innerHTML = `
+                        <h1 class="ReviewTitle">` + review.title + `</h1> <!-- Title of the review -->
+                        <div class="row">
+                            <div class="userSection">
+                                <div class="userIcon">
+                                    <img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture">
+                                </div>
+                                <div class="username">` + review.username + `</div> <!-- Username of the reviewer -->
                             </div>
-                            <div class="username">${review.username}</div>
-                        </div>
-                        <div class="col-md-11">
-                            <div class="stars">
-                                ${generateStars(review.stars)}
+                            <div class="col-md-11">
+                                <div class="stars">
+                                    ` + generateStars(review.stars) + ` <!-- Star rating -->
+                                </div>
+                                <p>` + review.content + `</p> <!-- Content of the review -->
                             </div>
-                            <p>${review.content}</p>
                         </div>
-                    </div>
-                `;
+                    `;
 
-                container.appendChild(reviewElement);
-            });
+                    container.appendChild(reviewElement);
+                });
+            } else {
+                console.error("Container not found!"); // Debugging: Error if container is not found
+            }
         }
 
         // Call the function to display reviews
         displayReviews(reviews);
+        {/if}
     </script>
-</div>
-
-
-            
-
 <!-- footer section start -->
       <div class="footer_section layout_padding">
          <div class="container">

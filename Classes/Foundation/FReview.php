@@ -78,16 +78,39 @@ class FReview {
         return $result;
     }
     //DA SISTEMARE
-    /*
+    
     public function loadByRecipient(int $idRec, TType $recipientType): array
     {
         
-        [$authType, $author, $idReview] = FReview::loadSpecificReviewByRec($idRec, $recipientType);
-        foreach ()
-        $rowRev = FReview::loadReview($idReview);
-        $date=DateTime::createFromFormat('Y-m-d H:i:s',$rowRev['creationDate']);
-        $photo= FPhoto::getInstance()->loadReview($idReview);
-        $result=new EReview($idReview,$rowRev['title'],$rowRev['valutation'],$rowRev['description'], $photo, $recipientType,$date, $authType, $author, $idRec);
+        $reviews= FReview::loadSpecificReviewByRec($idRec, $recipientType);
+        $result=[];
+        if ($recipientType===TType::STUDENT) {
+            foreach ($reviews as $rev) {
+                $idReview = $rev['idReview'];
+                $rowRev = FReview::loadReview($idReview);
+                $date=DateTime::createFromFormat('Y-m-d H:i:s',$rowRev['creationDate']);
+                $photo= FPhoto::getInstance()->loadReview($idReview);
+                $authType = TType::tryFrom($rev['authorType']);
+                if ($authType===TType::STUDENT) {
+                    $author = $rev['authorStudent'];
+                }
+                else {
+                    $author = $rev['authorOwner'];
+                }
+                $result[]=new EReview($idReview,$rowRev['title'],$rowRev['valutation'],$rowRev['description'], $photo, $recipientType, $date, $authType, $author, $idRec);
+            }
+        }
+        else {
+            foreach ($reviews as $rev) {
+                $idReview = $rev['idReview'];
+                $rowRev = FReview::loadReview($idReview);
+                $date=DateTime::createFromFormat('Y-m-d H:i:s',$rowRev['creationDate']);
+                $photo= FPhoto::getInstance()->loadReview($idReview);
+                $authType = TType::STUDENT;
+                $author = $rev['idAuthor'];
+                $result[]=new EReview($idReview,$rowRev['title'],$rowRev['valutation'],$rowRev['description'], $photo, $recipientType, $date, $authType, $author, $idRec);
+            }
+        }
         return $result;
     }
     private function loadSpecificReviewByRec(int $idRec, TType $recipientType):array
@@ -98,7 +121,7 @@ class FReview {
         {
             $db->exec('LOCK TABLES '.$recipientType->value.'review READ');
             $db->beginTransaction();
-            $q='SELECT * FROM '.$recipientType->value.'review WHERE id'.$recipientType->value.'=:idRec';    
+            $q='SELECT * FROM '.$recipientType->value.'review WHERE id'.ucfirst($recipientType->value).'=:idRec';    
             $stm=$db->prepare($q);
             $stm->bindParam(':idRec',$idRec,PDO::PARAM_INT);
             $stm->execute();
@@ -110,24 +133,10 @@ class FReview {
         {
             $db->rollBack();
         }
-        $row=$stm->fetch(PDO::FETCH_ASSOC);
-        if ($recipientType===TType::STUDENT) {
-            $authType = TType::tryFrom($row['authorType']);
-            if ($authType===TType::STUDENT) {
-                $author = $row['authorStudent'];
-            }
-            else {
-                $author = $row['authorOwner'];
-            }
-        }
-        else {
-            $authType = TType::STUDENT;
-            $author = $row['idAuthor'];
-        }
-        $idReview = $row['idReview'];
-        return [$authType, $author, $idReview];
+
+        $row=$stm->fetchall(PDO::FETCH_ASSOC);
+        return $row;
     }
-        */
     /**
      * loadReview
      *

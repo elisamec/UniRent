@@ -47,7 +47,8 @@ class VStudent{
         $this->smarty->assign('accommodation', $accomm);
         $this->smarty->display('Student/accommodation.tpl');
     }
-    public function reviews(){
+    public function reviews(array $reviewsData){
+        $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->display('Student/reviews.tpl');
     }
 }
