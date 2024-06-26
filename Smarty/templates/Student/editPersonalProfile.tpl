@@ -154,37 +154,45 @@
                            {if $student->getSmoker() && $student->getAnimals()}
                            <div class="col-sm-6">
                            <input class="checkbox" type="checkbox" name="smoker" id="smoker" checked>
+                           <input type="hidden" id="hiddenSmoker" name="smoker" value="false">
                            <label class="customlabel" for="smoker">Smoker</label>
                            </div>
                            <div class="col-sm-6">
                            <input class="checkbox" type="checkbox" name="animals" id="animals" checked>
+                           <input type="hidden" id="hiddenAnimals" name="animals" value="false">
                            <label class="customlabel" for="animals">Animals</label>
                            </div>
                            {elseif $student->getSmoker() && !$student->getAnimals()}
                            <div class="col-sm-6">
                            <input class="checkbox" type="checkbox" name="smoker" id="smoker" checked>
+                           <input type="hidden" id="hiddenSmoker" name="smoker" value="false">
                            <label class="customlabel" for="smoker">Smoker</label>
                            </div>
                            <div class="col-sm-6">
                            <input class="checkbox" type="checkbox" name="animals" id="animals">
+                           <input type="hidden" id="hiddenAnimals" name="animals" value="false">
                            <label class="customlabel" for="animals">Animals</label>
                            </div>
                            {elseif !$student->getSmoker() && $student->getAnimals()}
                            <div class="col-sm-6">
                            <input class="checkbox" type="checkbox" name="smoker" id="smoker">
+                           <input type="hidden" id="hiddenSmoker" name="smoker" value="false">
                            <label class="customlabel" for="smoker">Smoker</label>
                            </div>
                            <div class="col-sm-6">
                            <input class="checkbox" type="checkbox" name="animals" id="animals" checked>
+                           <input type="hidden" id="hiddenAnimals" name="animals" value="false">
                            <label class="customlabel" for="animals">Animals</label>
                            </div>
                            {else}
                            <div class="col-sm-6">
                            <input class="checkbox" type="checkbox" name="smoker" id="smoker">
+                           <input type="hidden" id="hiddenSmoker" name="smoker" value="false">
                            <label class="customlabel" for="smoker">Smoker</label>
                            </div>
                            <div class="col-sm-6">
                            <input class="checkbox" type="checkbox" name="animals" id="animals">
+                           <input type="hidden" id="hiddenAnimals" name="animals" value="false">
                            <label class="customlabel" for="animals">Animals</label>
                            </div>
                            {/if}
@@ -202,7 +210,7 @@
                <div class="container">
                   <div class="row">
                      <div class="col-md-4">
-                     <div  class="find_btn"><a href="/UniRent/Student/modifyProfile" id="yourLinkId">Confirm</a></div>
+                     <div  class="find_btn"><a href="/UniRent/Student/modifyProf" id="yourLinkId">Confirm</a></div>
                      </div>
                      <div class="col-md-4">
                      <div  class="find_btn"><a href="/UniRent/Student/profile">Cancel</a></div>
@@ -285,4 +293,26 @@
                document.getElementById("myModal").style.display = "none";
                }
          </script>
+
+               <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Assicurati che gli ID corrispondano ai tuoi elementi HTML
+    var smokerCheckbox = document.getElementById('smoker');
+    var animalsCheckbox = document.getElementById('animals');
+    var hiddenSmoker = document.getElementById('hiddenSmoker');
+    var hiddenAnimals = document.getElementById('hiddenAnimals');
+
+    if(smokerCheckbox && hiddenSmoker) {
+        smokerCheckbox.onclick = function() {
+            hiddenSmoker.value = this.checked ? 'true' : 'false';
+        };
+    }
+
+    if(animalsCheckbox && hiddenAnimals) {
+        animalsCheckbox.onclick = function() {
+            hiddenAnimals.value = this.checked ? 'true' : 'false';
+        };
+    }
+});
+</script>
    </body>
