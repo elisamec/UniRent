@@ -94,34 +94,18 @@
             </div>
          </div>
          </div>
+
          <div class="col-md-9">
-    <div class="review">
-        <h1 class="ReviewTitle">Review Title</h1>
-        <div class="row">
-            <div class="userSection">
-                <div class="userIcon">
-                    <img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture">
-                </div>
-                <div class="username">Username</div>
-            </div>
-            <div class="col-md-11">
-                <div class="stars">
-                    <span class="fa fa-star or"></span>
-                    <span class="fa fa-star or"></span>
-                    <span class="fa fa-star or"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum risus sed augue sodales, eu porta quam laoreet. Nunc fermentum dui eros, non facilisis lacus pharetra quis. Duis augue sem, vestibulum vel est at, tempus feugiat turpis. Integer vel eros vel purus sodales gravida ut nec dolor. Integer ullamcorper augue lorem, eu tincidunt orci consequat molestie. Curabitur commodo magna non velit efficitur, non condimentum lorem eleifend. Phasellus ut ex id felis euismod rhoncus eget eu mi. Praesent iaculis vehicula arcu id sagittis. Suspendisse tempor lobortis tortor, eu tincidunt magna accumsan quis. Aliquam erat volutpat. Cras scelerisque massa eu lorem mattis, sit amet gravida velit feugiat. Praesent quis augue nec leo viverra bibendum. Integer nec enim at ante facilisis dignissim ac a nulla. Nullam id lacinia sapien, quis finibus velit.</p>
-      
-            </div>
-        </div>
-    </div>
+         <div class="Properties_taital_main layout">
+         <h1 class="Properties_taital">What others think of you</h1>
+         <hr class="border_main">
+         </div>
     <div id="reviewsContainer"></div>
 </div>
     <script>
         {if isset($reviewsData)}
         const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
+        console.log(reviews);
 
         // Function to generate stars based on the rating
         function generateStars(stars) {
