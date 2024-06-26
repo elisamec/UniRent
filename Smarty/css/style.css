@@ -1797,6 +1797,10 @@ textarea#comment::placeholder {
         color: orange;
     }
     .ReviewTitle {
-        padding-left: 98px;
+        padding-left: 80px;
         padding-top: 20px;
-    }    
+    }
+    .layout {
+        padding-top: 30px;
+        padding-left: 30px;
+    }

@@ -153,38 +153,38 @@
                         <div class="div18">
                            {if $student->getSmoker() && $student->getAnimals()}
                            <div class="col-sm-6">
-                           <input required class="checkbox" type="checkbox" name="smoker" id="smoker" checked>
+                           <input class="checkbox" type="checkbox" name="smoker" id="smoker" checked>
                            <label class="customlabel" for="smoker">Smoker</label>
                            </div>
                            <div class="col-sm-6">
-                           <input required="" class="checkbox" type="checkbox" name="animals" id="animals" checked>
+                           <input class="checkbox" type="checkbox" name="animals" id="animals" checked>
                            <label class="customlabel" for="animals">Animals</label>
                            </div>
                            {elseif $student->getSmoker() && !$student->getAnimals()}
                            <div class="col-sm-6">
-                           <input required class="checkbox" type="checkbox" name="smoker" id="smoker" checked>
+                           <input class="checkbox" type="checkbox" name="smoker" id="smoker" checked>
                            <label class="customlabel" for="smoker">Smoker</label>
                            </div>
                            <div class="col-sm-6">
-                           <input required="" class="checkbox" type="checkbox" name="animals" id="animals">
+                           <input class="checkbox" type="checkbox" name="animals" id="animals">
                            <label class="customlabel" for="animals">Animals</label>
                            </div>
                            {elseif !$student->getSmoker() && $student->getAnimals()}
                            <div class="col-sm-6">
-                           <input required class="checkbox" type="checkbox" name="smoker" id="smoker">
+                           <input class="checkbox" type="checkbox" name="smoker" id="smoker">
                            <label class="customlabel" for="smoker">Smoker</label>
                            </div>
                            <div class="col-sm-6">
-                           <input required="" class="checkbox" type="checkbox" name="animals" id="animals" checked>
+                           <input class="checkbox" type="checkbox" name="animals" id="animals" checked>
                            <label class="customlabel" for="animals">Animals</label>
                            </div>
                            {else}
                            <div class="col-sm-6">
-                           <input required class="checkbox" type="checkbox" name="smoker" id="smoker">
+                           <input class="checkbox" type="checkbox" name="smoker" id="smoker">
                            <label class="customlabel" for="smoker">Smoker</label>
                            </div>
                            <div class="col-sm-6">
-                           <input required="" class="checkbox" type="checkbox" name="animals" id="animals">
+                           <input class="checkbox" type="checkbox" name="animals" id="animals">
                            <label class="customlabel" for="animals">Animals</label>
                            </div>
                            {/if}
