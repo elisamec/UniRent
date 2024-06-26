@@ -160,11 +160,25 @@ class FPersistentManager {
         }
     }
     
-    public function A($user)
+    public function getStudentByUsername($user)
     {
         $FS=FStudent::getInstance();
-        $student=$FS->getSBU($user);
+        $student=$FS->getStudentByUsername($user);
         return $student;
+    }
+
+    public function getOwnerByUsername($user)
+    {
+        $FO=FOwner::getInstance();
+        $owner=$FO->getOwnerByUsername($user);
+        return $owner;
+    }
+
+    public function d($user):bool
+    {
+        $FS=FStudent::getInstance();
+        $result=$FS->deleteStudentByUsername($user);
+        return $result;
     }
 
 }

@@ -63,6 +63,6 @@ else
 }
     */
 $PM= FPersistentManager::getInstance();
-$user='Fratmo';
-$Student=$PM->A($user);
+$user='Lupo';
+$Student=$PM->getOwnerByUsername($user);
 print $Student->__toString();

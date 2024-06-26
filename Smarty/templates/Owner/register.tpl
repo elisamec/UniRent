@@ -64,7 +64,7 @@
         <div class="container">
           <div class="Logcontainer">
             <div class="heading">Owner Sign Up</div>
-            <form action="/UniRent/User/checkRegisterOwner" class="form" method="post">
+            <form action="/UniRent/Owner/ownerRegistration" class="form" method="post">
             {literal}
               <input required="required" class="input" type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number" pattern="((00|\+)39[\. ]??)??3\d{2}[\. ]??\d{6,7}">
               <input required="required" class="input" type="text" name="iban" id="iban" placeholder="IBAN" pattern="(it|IT)[0-9]{2}[A-Za-z][0-9]{10}[0-9A-Za-z]{12}">

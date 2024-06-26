@@ -39,14 +39,18 @@ class CStudent{
     public static function search(){
         $view = new VStudent();
         $view->search();
-    }
+    }    
+    /**
+     * Method profile
+     * This method shows the student's profile
+     * @return void
+     */
     public static function profile(){
         $view = new VStudent();
         $session=USession::getInstance();
         $user = $session->getSessionElement('username');
-        print $user;
         $PM=FPersistentManager::getInstance();
-        $student=$PM->A($user);
+        $student=$PM->getStudentByUsername($user);
         if(is_null($student))
         {
             print '<b>500 : SERVER ERROR </b>';
@@ -55,30 +59,31 @@ class CStudent{
         {
             $view->profile($student);
         }
-    /*
-        $password = $session->getSessionElement('password');
-        $name = $session->getSessionElement('name');
-        #print $user.' '.$password.' '.$name;
-        $surname = $session->getSessionElement('surname');
-        //$photo
-        $email = $session->getSessionElement('email');
-        $duration = $session->getSessionElement('courseDuration');
-        $immatricolation = $session->getSessionElement('immatricolationYear');
-        $birthDate = $session->getSessionElement('birthDate');
-        $sex = $session->getSessionElement('sex');
-        $smoker =USession::booleanSolver($session->getSessionElement('smoker')) ;
-        $animals = USession::booleanSolver($session->getSessionElement('animal'));
-        #print $user.' '.$password.' '.$name.' '.$surname.' '.$email.' '.$duration.' '.$immatricolation.' '.$sex.' '.$smoker.' '.$animals;
-        $student = new EStudent($user, $password, $name, $surname, null, $email, $duration, $immatricolation, $birthDate, $sex, $smoker, $animals);
-        #print $student->__toString();
-        #$student = new EStudent('elisa', 'password', 'Elisa', 'Bianchi', null,'elisa.bianchi@univaq.it', 3, 2018, new DateTime('1998-05-12'), 'F', false, false);
-    */  
     }
     
     public static function editProfile(){
         $view = new VStudent();
-        $student = new EStudent('elisa', 'password', 'Elisa', 'Bianchi', null,'elisa.bianchi@univaq.it', 3, 2018, new DateTime('1998-05-12'), 'F', false, false);
+        $student =FPersistentManager::getInstance()->getStudentByUsername(USession::getInstance()::getSessionElement('username'));
         $view->editProfile($student);
+    }
+
+    public static function deleteProfile()
+    {
+        $PM=FPersistentManager::getInstance();
+        $user=USession::getInstance()::getSessionElement('username');
+        $result=$PM->d($user);
+        if($result)
+        {
+            $session=USession::getInstance();
+            $session::unsetSession();
+            $session::destroySession();
+            setcookie('PHPSESSID','',time()-3600);
+            header('Location:/UniRent/User/home');
+        }
+        else
+        {
+            print 'Spiacenti non puoi andartene ;)';
+        }
     }
 
     /**

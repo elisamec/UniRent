@@ -285,7 +285,7 @@ class FStudent
     }
     
   
-    public function getSBU($user):?EStudent
+    public function getStudentByUsername($user):?EStudent
     {
         $db=FConnection::getInstance()->getConnection();
         try
@@ -326,7 +326,34 @@ class FStudent
         $student->setID($result_array['id']);
         return $student;
     }
-
+    
+    /**
+     * Method deleteStudentByUsername
+     * 
+     * This method remove from the db the student with username given
+     * @param $user $user [student's username]
+     *
+     * @return bool
+     */
+    public function deleteStudentByUsername($user):bool
+    {
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $q='DELETE FROM student WHERE username = :user';
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindParam(':user',$user,PDO::PARAM_STR);
+            $stm->execute();
+            $db->commit();
+            return true;
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return false;
+        }
+    }
 }
   
 

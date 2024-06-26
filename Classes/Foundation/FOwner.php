@@ -257,5 +257,50 @@ use PDOException;
         }
         return false;
     }
+    
+    /**
+     * Method getOwnerByUsername
+     * This method return the EOwner class from the db by the username
+     * @param $user $user [owner's username]
+     *
+     * @return ?EOwner
+     */
+    public function getOwnerByUsername($user):?EOwner
+    {
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $q='SELECT * FROM owner WHERE username= :user';
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindParam(':user',$user,PDO::PARAM_STR);
+            $stm->execute();
+            $db->commit();
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return null;
+        }
+        $result_array=$stm->fetch(PDO::FETCH_ASSOC);
+        $username=$result_array['username'];
+        $password=$result_array['password'];
+        $name=$result_array['name'];
+        $surname=$result_array['surname'];
+        $email=$result_array['email'];
+        $phone=$result_array['phoneNumber'];
+        $IBAN=$result_array['iban'];
+        if(is_null($result_array['picture']))
+        {
+            $photo=null;
+        }
+        else
+        {
+            $photo=FPhoto::getInstance()->loadAvatar($result_array['picture']);
+        }
+        $owner= new EOwner(null,$username,$password,$name,$surname,$photo,$email,$phone,$IBAN);
+        $owner->setID($result_array['id']);
+        return $owner;
+    }
 
  }

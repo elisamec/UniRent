@@ -16,6 +16,8 @@ class COwner
     {
         $view = new VOwner();
         $view->home();
+        print USession::getSessionElement('username');
+        print USession::getSessionElement('password');
     }
 
     public static function ownerRegistration()
@@ -45,5 +47,27 @@ class COwner
         $session->setSessionElement('phoneNumber', USuperGlobalAccess::getPost('phoneNumber'));
         $session->setSessionElement('iban', USuperGlobalAccess::getPost('iban'));
         header('Location:/UniRent/Owner/home');
+    }
+    
+    /**
+     * Method profile
+     * This method call a view to show the owner profile from db
+     * @return void
+     */
+    public static function profile()
+    {
+        $view = new VOwner();
+        $session=USession::getInstance();
+        $user = $session->getSessionElement('username');
+        $PM=FPersistentManager::getInstance();
+        $owner=$PM->getOwnerByUsername($user);
+        if(is_null($owner))
+        {
+            print '<b>500 : SERVER ERROR </b>';
+        }
+        else
+        {
+            $view->profile($owner);
+        }
     }
 }

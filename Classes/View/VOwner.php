@@ -2,6 +2,8 @@
 
 namespace Classes\View;
 require __DIR__.'/../../vendor/autoload.php';
+
+use Classes\Entity\EOwner;
 use StartSmarty;
 
 class VOwner {
@@ -19,6 +21,15 @@ class VOwner {
     //Mostra la seconda parte della registrazione proprietario
     public function showOwnerRegistration(){
         $this->smarty->display('Owner/register.tpl');
+    }
+
+    //Mostra il profilo del proprietarion
+    public function profile(EOwner $owner){
+        print 'Ciao '.$owner->getName().'!';
+        /*
+        $this->smarty->assign('owner', $owner);
+        $this->smarty->display('Owner/personalProfile.tpl');
+        */
     }
     
 }
