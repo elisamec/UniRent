@@ -6,6 +6,9 @@ require __DIR__.'/../../vendor/autoload.php';
 use Classes\Entity\EPhoto;
 use Classes\Foundation\FPersistentManager;
 use Classes\Entity\EStudent;
+use Classes\Foundation\FReview;
+use Classes\Foundation\FStudent;
+use Classes\Tools\TType;
 use Classes\Utilities\USession;
 use Classes\Utilities\USuperGlobalAccess;
 use Classes\View\VStudent; 
@@ -145,7 +148,17 @@ class CStudent{
     }
     public static function reviews() {
         $view = new VStudent();
-        $view->reviews();
+        $reviews = FReview::getInstance()->loadByRecipient(1, TType::STUDENT);
+        $reviewsData = [];
+        foreach ($reviews as $review) {
+            $reviewsData[] = [
+                'title' => $review->getTitle(),
+                'username' => FStudent::getInstance()->load($review->getIdAuthor())->getUsername(),
+                'stars' => $review->getValutation(),
+                'content' => $review->getDescription()
+            ];
+        }
+        $view->reviews($reviewsData);
     }
         
 }

@@ -32,7 +32,7 @@ class VUser{
     }
     public function findAccommodation(){
 
-        $this->smarty->display('User/searchUser.tpl');
+        $this->smarty->display('User/search.tpl');
     }
 
     public function register(){

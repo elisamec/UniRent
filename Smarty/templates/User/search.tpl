@@ -358,17 +358,6 @@
    </div>
    </form>
       <!-- feature section start -->
-      <div class="Properties_section">
-         <div class="Searchcontainer">
-            <div class="row">
-               <div class="col-sm-12">
-                  <div class="Properties_taital_main">
-                     <h1 class="Properties_taital">Search Results</h1>
-                     <hr class="border_main">
-                  </div>
-               </div>
-            </div>
-            <div class="Properties_section">
          <div class="Searchcontainer">
             <div class="row">
                <div class="col-sm-12">
