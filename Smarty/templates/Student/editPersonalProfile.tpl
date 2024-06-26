@@ -210,7 +210,7 @@
                <div class="container">
                   <div class="row">
                      <div class="col-md-4">
-                     <div  class="find_btn"><a href="/UniRent/Student/modifyProf" id="yourLinkId">Confirm</a></div>
+                     <div  class="find_btn"><a href="/UniRent/Student/modifyStudentProfile" id="yourLinkId">Confirm</a></div>
                      </div>
                      <div class="col-md-4">
                      <div  class="find_btn"><a href="/UniRent/Student/profile">Cancel</a></div>

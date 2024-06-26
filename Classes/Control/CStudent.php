@@ -160,5 +160,10 @@ class CStudent{
         }
         $view->reviews($reviewsData);
     }
+
+    public static function modifyStudentProfile()
+    {
+        print USession::getInstance()::getSessionElement('username');
+    }
         
 }
