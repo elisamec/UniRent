@@ -77,6 +77,57 @@ class FReview {
         $result=new EReview($rowRev['id'],$rowRev['title'],$rowRev['valutation'],$rowRev['description'], $photo, $recipientType,$date, $authType, $author, $recipient);
         return $result;
     }
+    //DA SISTEMARE
+    /*
+    public function loadByRecipient(int $idRec, TType $recipientType): array
+    {
+        
+        [$authType, $author, $idReview] = FReview::loadSpecificReviewByRec($idRec, $recipientType);
+        foreach ()
+        $rowRev = FReview::loadReview($idReview);
+        $date=DateTime::createFromFormat('Y-m-d H:i:s',$rowRev['creationDate']);
+        $photo= FPhoto::getInstance()->loadReview($idReview);
+        $result=new EReview($idReview,$rowRev['title'],$rowRev['valutation'],$rowRev['description'], $photo, $recipientType,$date, $authType, $author, $idRec);
+        return $result;
+    }
+    private function loadSpecificReviewByRec(int $idRec, TType $recipientType):array
+    {
+        $db=FConnection::getInstance()->getConnection();
+
+        try
+        {
+            $db->exec('LOCK TABLES '.$recipientType->value.'review READ');
+            $db->beginTransaction();
+            $q='SELECT * FROM '.$recipientType->value.'review WHERE id'.$recipientType->value.'=:idRec';    
+            $stm=$db->prepare($q);
+            $stm->bindParam(':idRec',$idRec,PDO::PARAM_INT);
+            $stm->execute();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+        }
+
+        catch (PDOException $e)
+        {
+            $db->rollBack();
+        }
+        $row=$stm->fetch(PDO::FETCH_ASSOC);
+        if ($recipientType===TType::STUDENT) {
+            $authType = TType::tryFrom($row['authorType']);
+            if ($authType===TType::STUDENT) {
+                $author = $row['authorStudent'];
+            }
+            else {
+                $author = $row['authorOwner'];
+            }
+        }
+        else {
+            $authType = TType::STUDENT;
+            $author = $row['idAuthor'];
+        }
+        $idReview = $row['idReview'];
+        return [$authType, $author, $idReview];
+    }
+        */
     /**
      * loadReview
      *
@@ -105,6 +156,7 @@ class FReview {
         $row=$stm->fetch(PDO::FETCH_ASSOC);
         return $row;
     }
+    
     /**
      * loadSpecificReview
      *
