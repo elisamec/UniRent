@@ -180,4 +180,10 @@ class CStudent{
         }
     }
         
+    public static function publicProfileStudent()
+    {
+        $view = new VStudent();
+        $student = FPersistentManager::getInstance()->load('EStudent', 3);
+        $view->publicProfileStudent($student);
+    }
 }

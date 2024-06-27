@@ -79,6 +79,9 @@
             </nav>
          </div>
       </div>
+      <div class="path">
+            <p><a href="/UniRent/Student/home">Home</a> / <a href="/UniRent/Student/profile">Profile</a> / Reviews </p>
+      </div>
       <div class="profile">
          <div class="row">
          <div class="col-md-3">
@@ -141,7 +144,7 @@ function displayReviews(reviews) {
                             <div class="userIcon">
                                 <a href="#"><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
                             </div>
-                            <div class="username"><a href="UniRent">` + review.username + `</a></div> <!-- Username of the reviewer -->
+                            <div class="username"><a href="/UniRent/Student/publicProfileStudent">` + review.username + `</a></div> <!-- Username of the reviewer -->
                         </div>
                         <div class="col-md-11">
                             <div class="stars">
