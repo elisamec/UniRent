@@ -164,6 +164,7 @@ class CStudent{
     public static function modifyStudentProfile()
     {
         print USession::getInstance()::getSessionElement('username');
+        print USuperGlobalAccess::getPost('name');
     }
         
 }
