@@ -169,15 +169,17 @@ class CStudent{
 
     public static function modifyStudentProfile()
     {
-        $r=USuperGlobalAccess::getPost('name');
-        if(is_null($r))
-        {
-            print 'è nullo';
-        }
-        else 
-        {
-            print 'ora è ok';
-        }
+        $name=USuperGlobalAccess::getPost('name');
+        $surname=USuperGlobalAccess::getPost('surname');
+        $password=USuperGlobalAccess::getPost('password');
+        $email=USuperGlobalAccess::getPost('email');
+        $sex=USuperGlobalAccess::getPost('sex');
+        $courseDuration=USuperGlobalAccess::getPost('courseDuration');
+        $immatricolationYear=USuperGlobalAccess::getPost('immatricolationYear');
+        $birthDate= new DateTime(USuperGlobalAccess::getPost('birthDate'));
+        $smoker=USuperGlobalAccess::getPost('smoker');
+        $animals=USuperGlobalAccess::getPost('animals');
+        print $birthDate->format('Y-m-d');
     }
         
 }
