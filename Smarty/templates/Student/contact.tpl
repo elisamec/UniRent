@@ -87,58 +87,9 @@
          </div>
       </div>
       <!-- contact section start -->
-     <div class="path">
-    <p id="breadcrumb"></p>
-</div>
-
-<script>
-    window.onload = function() {
-        var breadcrumb = document.getElementById('breadcrumb');
-        var prevUrl = document.referrer; // get the previous URL
-        var currentPath = window.location.pathname; // get the current path
-
-        // Check if there's a breadcrumb path stored in the session storage
-        var breadcrumbPath = sessionStorage.getItem('breadcrumbPath');
-
-        if (!breadcrumbPath || breadcrumbPath.trim() === '') {
-            breadcrumbPath = 'Home';
-        } else {
-            if (prevUrl.includes('UniRent/Student/home')) {
-                breadcrumbPath = 'Home';
-            } else if (prevUrl.includes('UniRent/Student/profile')) {
-                breadcrumbPath = breadcrumbPath + ' / Profile';
-            }
-        }
-
-        // Append the current page to the breadcrumb path
-        if (currentPath.includes('UniRent/Student/reviews')) {
-            breadcrumbPath = breadcrumbPath + ' / Reviews';
-        } else if (currentPath.includes('UniRent/Student/contact')) {
-            breadcrumbPath = breadcrumbPath + ' / Contact Us';
-        }
-         else if (currentPath.includes('UniRent/Student/about')) {
-            breadcrumbPath = breadcrumbPath + ' / About Us';
-        }
-
-        // Store the updated breadcrumb path in the session storage
-        sessionStorage.setItem('breadcrumbPath', breadcrumbPath);
-
-        // Update the breadcrumb path in the HTML
-        var crumbs = breadcrumbPath.split(' / ');
-        var breadcrumbHTML = '';
-        for (var i = 0; i < crumbs.length; i++) {
-            var crumb = crumbs[i];
-            if (i < crumbs.length - 1) {
-                // Make the crumb clickable by wrapping it in an <a> tag
-                breadcrumbHTML += '<a href="/UniRent/Student/' + crumb.toLowerCase() + '">' + crumb + '</a> / ';
-            } else {
-                // The last crumb is the current page, so don't make it clickable
-                breadcrumbHTML += crumb;
-            }
-        }
-        breadcrumb.innerHTML = breadcrumbHTML;
-    };
-</script>
+    <div class="path">
+            <p><a href="/UniRent/Student/home">Home</a> / Contact Us</p>
+      </div>
 
 
 

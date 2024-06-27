@@ -1844,6 +1844,7 @@ textarea#comment::placeholder {
     .noRev {
         padding-left: 80px;
         padding-top: 20px;
+        padding-bottom: 40px;
     }
 .containerProf {
         height: 100%;
