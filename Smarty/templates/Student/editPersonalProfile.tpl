@@ -213,7 +213,7 @@
                <div class="container">
                   <div class="row">
                      <div class="col-md-4">
-                       <div class="find_btn"><button type="submit" id="yourLinkId">Confirm</button></div>
+                       <div class="find_btn"><button type="submit">Confirm</button></div>
                      </div>
                      <div class="col-md-4">
                      <div  class="find_btn"><a href="/UniRent/Student/profile">Cancel</a></div>
@@ -269,11 +269,6 @@
                               }
                            }
                         </script>
-      <script>
-      document.getElementById("yourLinkId").onclick = function() {
-    document.getElementById("yourFormId").submit();
-}
-      </script>
 
  
 </script>
