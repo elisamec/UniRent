@@ -7,7 +7,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <!-- mobile metas -->
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="viewport" content="initial-scale=1, eimum-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
       <title>UniRent</title>
       <link rel="icon" href="/UniRent/Smarty/images/favicon.png" type="image/png">
@@ -37,22 +37,25 @@
       <div class="header_section">
         <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-               <a class="navbar-brand"href="/UniRent/Student/home"><img src="/UniRent/Smarty/images/logo.png"></a>
+               <a class="navbar-brand"href="/UniRent/Owner/home"><img src="/UniRent/Smarty/images/logo.png"></a>
                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
                </button>
                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav ml-auto">
                      <li class="nav-item">
-                        <a class="nav-link" href="/UniRent/Student/home">Home</a>
+                        <a class="nav-link" href="/UniRent/Owner/home">Home</a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="#">Reservations</a>
                      </li>
                      <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reservations</a>
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Tenants</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="#">Accepted</a>
-                           <a class="dropdown-item" href="#">Waiting</a>
+                           <a class="dropdown-item" href="#">Current</a>
+                           <a class="dropdown-item" href="#">Past</a>
+                           <a class="dropdown-item" href="#">Future</a>
                         </div>
-                     </li>
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contracts</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -71,7 +74,7 @@
                   <form class="form-inline my-2 my-lg-0">
                      <div class="login_bt">
                         <ul>
-                           <li><a href="/UniRent/Student/profile" class="active"><span class="user_icon"><i class="fa fa-user" aria-hidden="true"></i></span>Profile</a></li>
+                           <li><a href="/UniRent/Owner/profile" class="active"><span class="user_icon"><i class="fa fa-user" aria-hidden="true"></i></span>Profile</a></li>
                         </ul>
                      </div>
                   </form>
@@ -84,85 +87,49 @@
          <div class="col-md-3">
          <div class="sidebar">
          <div class="col-md-3">
-            <div class="sidebar_but"><a href="/UniRent/Student/profile">Profile</a></div>
+            <div class="sidebar_but active"><a href="/UniRent/Owner/profile">Profile</a></div>
             </div>
             <div class="col-md-3">
-            <div class="sidebar_but active"><a href="/UniRent/Student/reviews">Reviews</a></div>
+            <div class="sidebar_but"><a href="/UniRent/Owner/reviews">Reviews</a></div>
             </div>
+            
             <div class="col-md-3">
             <div class="sidebar_but log"><a href="/UniRent/User/logout">Logout</a></div>
             </div>
          </div>
          </div>
-
-         <div class="col-md-9">
-         <div class="Properties_taital_main layout">
-         <h1 class="Properties_taital">What others think of you</h1>
-         <hr class="border_main">
+            <div class="col-md-6">
+                  <div class="profile_info">
+                     <h2 class="profile_head">Hello, {$owner->getName()} {$owner->getSurname()}</h2>
+                     <p>Your Username: {$owner->getUsername()}</p>
+                     <p>Your Email: {$owner->getMail()}</p>
+                     <p>Your phone number is {$owner->getPhoneNumber()} and your IBAN is {$owner->getIBAN()}.</p>
+                     <p> You published n <!--$owner->getNumberOfAccom()--> accommodation advertisements.</p>
+                     <div class="col-md-4">
+                     <div  class="find_btn" ><a href="/UniRent/Owner/editProfile">Edit Profile</a></div>
+                     </div>
+                  
+               </div>
+               
+            </div>
+            <div class="col-md-2">
+               <div class="container">
+                  <div class="profile_pic">
+                  {if $owner->getPhoto() === null}
+                     <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
+                  {else}
+                     <img src="{$owner->getPicture()}">
+                  {/if}
+                  </div>
+                  <form action="/UniRent/Owner/changePicture" class="form" method="post">
+                     <input class="file-upload" type="file" id="img" name="img" accept="image/png" hidden>
+                     <label class="change_btn" for="img">Upload Profile Picture</label>
+                  </form>
+               </div>
+            </div>
          </div>
-    <div id="reviewsContainer"></div>
-</div>
-     <script>
-    {if isset($reviewsData)}
-    const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
-    console.log(reviews);
+      </div>
 
-    // Function to generate stars based on the rating
-    function generateStars(stars) {
-        let starElements = '';
-        for (let i = 0; i < 5; i++) {
-            if (i < stars) {
-                starElements += '<span class="fa fa-star or"></span>';
-            } else {
-                starElements += '<span class="fa fa-star"></span>';
-            }
-        }
-        return starElements;
-    }
-
-    // Function to create and append reviews to the container
-    function displayReviews(reviews) {
-        const container = document.getElementById('reviewsContainer');
-
-        if (container) {
-            if (reviews.length === 0) {
-                container.innerHTML = '<div class="container"><h1 class="noRev">You have no reviews yet!</h1></div>';
-            } else {
-                reviews.forEach(review => {
-                    const reviewElement = document.createElement('div');
-                    reviewElement.className = 'review';
-
-                    // Insert the names of the elements of the review array
-                    reviewElement.innerHTML = `
-                        <h1 class="ReviewTitle">` + review.title + `</h1> <!-- Title of the review -->
-                        <div class="row">
-                            <div class="userSection">
-                                <div class="userIcon">
-                                    <a href="#"><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
-                                </div>
-                                <div class="username"><a href="#">` + review.username + `</a></div> <!-- Username of the reviewer -->
-                            </div>
-                            <div class="col-md-11">
-                                <div class="stars">
-                                    ` + generateStars(review.stars) + ` <!-- Star rating -->
-                                </div>
-                                <p>` + review.content + `</p> <!-- Content of the review -->
-                            </div>
-                        </div>
-                    `;
-
-                    container.appendChild(reviewElement);
-                });
-            }
-        } else {
-            console.error("Container not found!"); // Debugging: Error if container is not found
-        }
-    }
-
-    // Call the function to display reviews
-    displayReviews(reviews);
-    {/if}
-</script>
 <!-- footer section start -->
       <div class="footer_section layout_padding">
          <div class="container">
@@ -176,9 +143,9 @@
                   <h3 class="footer_text">Useful Links</h3>
                   <div class="footer_menu">
                      <ul>
-                        <li><a href="/UniRent/Student/home">Home</a></li>
-                        <li><a href="/UniRent/Student/about">About Us</a></li>
-                        <li><a href="/UniRent/Student/contact">Contact Us</a></li>
+                        <li><a href="/UniRent/Owner/home">Home</a></li>
+                        <li><a href="/UniRent/Owner/about">About Us</a></li>
+                        <li><a href="/UniRent/Owner/contact">Contact Us</a></li>
                      </ul>
                   </div>
                </div>

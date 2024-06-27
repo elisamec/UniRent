@@ -25,11 +25,22 @@ class VOwner {
 
     //Mostra il profilo del proprietarion
     public function profile(EOwner $owner){
-        print 'Ciao '.$owner->getName().'!';
-        /*
         $this->smarty->assign('owner', $owner);
         $this->smarty->display('Owner/personalProfile.tpl');
-        */
+    }
+    public function editProfile(EOwner $owner){
+        $this->smarty->assign('owner', $owner);
+        $this->smarty->display('Owner/editPersonalProfile.tpl');
+    }
+    public function contact(){
+        $this->smarty->display('Owner/contact.tpl');
+    }
+    public function about(){
+        $this->smarty->display('Owner/about.tpl');
+    }
+    public function reviews(array $reviewsData){
+        $this->smarty->assign('reviewsData', $reviewsData);
+        $this->smarty->display('Owner/reviews.tpl');
     }
     
 }
