@@ -4,6 +4,7 @@ namespace Classes\View;
 require __DIR__.'/../../vendor/autoload.php';
 
 use Classes\Entity\EAccommodation;
+use Classes\Entity\EOwner;
 use StartSmarty;
 use Classes\Entity\EStudent;
 
@@ -51,9 +52,9 @@ class VStudent{
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->display('Student/reviews.tpl');
     }
-    public function publicProfileStudent(EStudent $student, array $reviewsData){
-        $this->smarty->assign('student', $student);
+    public function publicProfileStudent(EOwner $student, array $reviewsData){
+        $this->smarty->assign('owner', $student);
         $this->smarty->assign('reviewsData', $reviewsData);
-        $this->smarty->display('Student/publicProfileStudent.tpl');
+        $this->smarty->display('Student/publicProfileOwner.tpl');
     }
 }
