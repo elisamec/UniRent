@@ -85,6 +85,10 @@
       
       <div class="addAccom">
       <div class="container">
+      <div class="Properties_taital_main">
+                     <h1 class="Properties_taital">Add Accommodation</h1>
+                     <hr class="border_main">
+                  </div>
                     <form action="/UniRent/Owner/addAccommodation" class="form" method="post" id="yourFormId">
                         <div id="cssportal-grid">
                             <div id="div1">
@@ -94,18 +98,40 @@
                                 </div>
                             </div>
                             <div id="div2">
-                                <div class="input-group inline">
+                                <div class="input-group">
                                     <input required="" type="text" name="text" autocomplete="off" class="input-spec">
-                                    <label class="user-label">First Name</label>
-                                </div>
-                                <div class="input-group inline">
-                                    <input required="" type="text" name="text" autocomplete="off" class="input-spec">
-                                    <label class="user-label">First Name</label>
+                                    <label class="user-label">Title</label>
                                 </div>
                             </div>
-                            <div id="div3">div3</div>
-                            <div id="div4">div4</div>
-                            <div id="div5">div5</div>
+                            <div id="div3">
+                            <div class="input-group">
+                                    <input required="" type="number" name="text" autocomplete="off" class="input-spec">
+                                    <label class="user-label">Price (€)</label>
+                                </div>
+                            </div>
+                            <div id="div4">
+                                <div class="input-group">
+                                    <input required="" type="number" name="text" autocomplete="off" class="input-spec">
+                                    <label class="user-label">Deposit (€)</label>
+                                </div>
+                            </div>
+                            <div id="div5">
+                            <div class="input-group">
+                            <!-- to fix, need to set start and end date -->
+                                    <input id="Date" required="" type="text" name="text" autocomplete="off" class="input-spec">
+                                    <label class="user-label">Period</label>
+                                </div>
+                            </div>
+                            <div id="div6">div6</div>
+                            <div id="div7">div7</div>
+                            <div id="div8">div8</div>
+                            <div id="div9">div9</div>
+                            <div id="div10">div10</div>
+                            <div id="div11">div11</div>
+                            <div id="div12">div12</div>
+                            <div id="div13">div13</div>
+                            <div id="div14">div14</div>
+                            <div id="div15">div15</div>
                         </div>
                     </form>
                     
@@ -197,6 +223,15 @@ document.addEventListener('DOMContentLoaded', function() {
             hiddenAnimals.value = this.checked ? 'true' : 'false';
         };
     }
+});
+</script>
+<script>
+document.querySelector('#Date').addEventListener('focus', function (e) {
+    this.type = 'date';
+});
+
+document.querySelector('#Date').addEventListener('blur', function (e) {
+    this.type = 'text';
 });
 </script>
    </body>
