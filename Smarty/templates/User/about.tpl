@@ -65,6 +65,9 @@
             </nav>
          </div>
       </div>
+      <div class="path">
+            <p><a href="/UniRent/User/home">Home</a> / About Us</p>
+      </div>
       <div class="about">
       <h2 class="search_text">About Us</h2>
       <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum risus sed augue sodales, eu porta quam laoreet. Nunc fermentum dui eros, non facilisis lacus pharetra quis. Duis augue sem, vestibulum vel est at, tempus feugiat turpis. Integer vel eros vel purus sodales gravida ut nec dolor. Integer ullamcorper augue lorem, eu tincidunt orci consequat molestie. Curabitur commodo magna non velit efficitur, non condimentum lorem eleifend. Phasellus ut ex id felis euismod rhoncus eget eu mi. Praesent iaculis vehicula arcu id sagittis. Suspendisse tempor lobortis tortor, eu tincidunt magna accumsan quis. Aliquam erat volutpat. Cras scelerisque massa eu lorem mattis, sit amet gravida velit feugiat. Praesent quis augue nec leo viverra bibendum. Integer nec enim at ante facilisis dignissim ac a nulla. Nullam id lacinia sapien, quis finibus velit.</p>

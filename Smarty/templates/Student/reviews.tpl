@@ -102,29 +102,32 @@
          </div>
     <div id="reviewsContainer"></div>
 </div>
-    <script>
-        {if isset($reviewsData)}
-        const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
-        console.log(reviews);
+     <script>
+    {if isset($reviewsData)}
+    const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
+    console.log(reviews);
 
-        // Function to generate stars based on the rating
-        function generateStars(stars) {
-            let starElements = '';
-            for (let i = 0; i < 5; i++) {
-                if (i < stars) {
-                    starElements += '<span class="fa fa-star or"></span>';
-                } else {
-                    starElements += '<span class="fa fa-star"></span>';
-                }
+    // Function to generate stars based on the rating
+    function generateStars(stars) {
+        let starElements = '';
+        for (let i = 0; i < 5; i++) {
+            if (i < stars) {
+                starElements += '<span class="fa fa-star or"></span>';
+            } else {
+                starElements += '<span class="fa fa-star"></span>';
             }
-            return starElements;
         }
+        return starElements;
+    }
 
-        // Function to create and append reviews to the container
-        function displayReviews(reviews) {
-            const container = document.getElementById('reviewsContainer');
+    // Function to create and append reviews to the container
+    function displayReviews(reviews) {
+        const container = document.getElementById('reviewsContainer');
 
-            if (container) {
+        if (container) {
+            if (reviews.length === 0) {
+                container.innerHTML = '<div class="container"><h1 class="noRev">You have no reviews yet!</h1></div>';
+            } else {
                 reviews.forEach(review => {
                     const reviewElement = document.createElement('div');
                     reviewElement.className = 'review';
@@ -135,9 +138,9 @@
                         <div class="row">
                             <div class="userSection">
                                 <div class="userIcon">
-                                    <img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture">
+                                    <a href="#"><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
                                 </div>
-                                <div class="username">` + review.username + `</div> <!-- Username of the reviewer -->
+                                <div class="username"><a href="#">` + review.username + `</a></div> <!-- Username of the reviewer -->
                             </div>
                             <div class="col-md-11">
                                 <div class="stars">
@@ -150,15 +153,16 @@
 
                     container.appendChild(reviewElement);
                 });
-            } else {
-                console.error("Container not found!"); // Debugging: Error if container is not found
             }
+        } else {
+            console.error("Container not found!"); // Debugging: Error if container is not found
         }
+    }
 
-        // Call the function to display reviews
-        displayReviews(reviews);
-        {/if}
-    </script>
+    // Call the function to display reviews
+    displayReviews(reviews);
+    {/if}
+</script>
 <!-- footer section start -->
       <div class="footer_section layout_padding">
          <div class="container">

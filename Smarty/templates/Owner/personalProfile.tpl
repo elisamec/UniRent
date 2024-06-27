@@ -31,19 +31,19 @@
       <!-- Include Font Awesome -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
       <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/home.css">
-      <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/cookie.css">
+      <link\ rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/cookie.css">
    </head>
    <body onload="on()">
       <div class="header_section">
         <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-               <a class="navbar-brand"href="/UniRent/Student/home"><img src="/UniRent/Smarty/images/logo.png"></a>
+               <a class="navbar-brand"href="/UniRent/Owner/home"><img src="/UniRent/Smarty/images/logo.png"></a>
                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
                </button>
                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav ml-auto">
-                     <li class="nav-item active">
+                     <li class="nav-item">
                         <a class="nav-link" href="/UniRent/Owner/home">Home</a>
                      </li>
                      <li class="nav-item">
@@ -74,7 +74,7 @@
                   <form class="form-inline my-2 my-lg-0">
                      <div class="login_bt">
                         <ul>
-                           <li><a href="/UniRent/Owner/profile"><span class="user_icon"><i class="fa fa-user" aria-hidden="true"></i></span>Profile</a></li>
+                           <li><a href="/UniRent/Owner/profile" class="active"><span class="user_icon"><i class="fa fa-user" aria-hidden="true"></i></span>Profile</a></li>
                         </ul>
                      </div>
                   </form>
@@ -82,107 +82,55 @@
             </nav>
          </div>
       </div>
-      <!-- header section end -->
-      <!-- feature section start -->
-      <div class="container">
-      <div class="new_bt"><a href="#">Add a new Accommodation</a></div>
-      </div>
-      <div class="Properties_section layout_padding">
-         <div class="container">
-            <div class="row">
-               <div class="col-sm-12">
-                  <div class="Properties_taital_main">
-                     <h1 class="Properties_taital">Your Proprieties</h1>
-                     <hr class="border_main">
-                  </div>
-               </div>
+      <div class="profile">
+         <div class="row">
+         <div class="col-md-3">
+         <div class="sidebar">
+         <div class="col-md-3">
+            <div class="sidebar_but active"><a href="/UniRent/Owner/profile">Profile</a></div>
             </div>
-            <div class="Properties_section_2">
-               <div class="row">
-                  <div class="col-lg-4 col-md-6col-lg-4 col-md-6">
-                     <div class="blog_img">
-                     <div class="container_main">
-                                 <img src="/UniRent/Smarty/images/img-4.png" alt="">
-                                 <div class="overlay">
-                                    <div class="text">
-                                       <div class="some_text"><a href="#">Edit</a></div>
-                                    </div>
-                                 </div>
-                              </div>
-                        </div>
-                     <div class="image_box">
-                        <div class="left_box">
-                           <h1 class="road_text"><a href="#">2186 Lohariya Road</a></h1>
-                           <div class="area_main">
-                              <h3 class="area_text"><a>Area:<br>240m2</a></h3>
-                              <h3 class="area_text"><a>Beds:<br>3</a></h3>
-                              <h3 class="area_text"><a>Baths:<br>1</a></h3>
-                              <h3 class="area_text"><a>Garages:<br>1</a></h3>
-                           </div>
-                        </div>
-                        <div class="right_box">
-                           <div class="rate_text">$14000</div>
-                        </div>
+            <div class="col-md-3">
+            <div class="sidebar_but"><a href="/UniRent/Owner/reviews">Reviews</a></div>
+            </div>
+            
+            <div class="col-md-3">
+            <div class="sidebar_but log"><a href="/UniRent/User/logout">Logout</a></div>
+            </div>
+         </div>
+         </div>
+            <div class="col-md-6">
+                  <div class="profile_info">
+                     <h2 class="profile_head">Hello, {$owner->getName()} {$owner->getSurname()}</h2>
+                     <p>Your Username: {$owner->getUsername()}</p>
+                     <p>Your Email: {$owner->getMail()}</p>
+                     <p>Your phone number is {$owner->getPhoneNumber()} and your IBAN is {$owner->getIBAN()}.</p>
+                     <p> You published n <!--$owner->getNumberOfAccom()--> accommodation advertisements.</p>
+                     <div class="col-md-4">
+                     <div  class="find_btn" ><a href="/UniRent/Owner/editProfile">Edit Profile</a></div>
                      </div>
+                  
+               </div>
+               
+            </div>
+            <div class="col-md-2">
+               <div class="container">
+                  <div class="profile_pic">
+                  {if $owner->getPhoto() === null}
+                     <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
+                  {else}
+                     <img src="{$owner->getPicture()}">
+                  {/if}
                   </div>
-                  <div class="col-lg-4 col-md-6">
-                     <div class="blog_img">
-                     <div class="container_main">
-                                 <img src="/UniRent/Smarty/images/img-5.png" alt="">
-                                 <div class="overlay">
-                                    <div class="text">
-                                       <div class="some_text"><a href="#">Edit</a></div>
-                                    </div>
-                                 </div>
-                              </div>
-                        </div>
-                     <div class="image_box">
-                        <div class="left_box">
-                           <h1 class="road_text"><a href="#">2186 Lohariya Road</a></h1>
-                           <div class="area_main">
-                              <h3 class="area_text"><a>Area:<br>240m2</a></h3>
-                              <h3 class="area_text"><a>Beds:<br>3</a></h3>
-                              <h3 class="area_text"><a>Baths:<br>1</a></h3>
-                              <h3 class="area_text"><a>Garages:<br>1</a></h3>
-                           </div>
-                        </div>
-                        <div class="right_box">
-                           <div class="rate_text">$14000</div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-4 col-md-6">
-                     <div class="blog_img">
-                     <div class="container_main">
-                                 <img src="/UniRent/Smarty/images/img-6.png" alt="">
-                                 <div class="overlay">
-                                    <div class="text">
-                                       <div class="some_text"><a href="#">Edit</a></div>
-                                    </div>
-                                 </div>
-                              </div>
-                        </div>
-                     <div class="image_box">
-                        <div class="left_box">
-                           <h1 class="road_text"><a href="#">2186 Lohariya Road</a></h1>
-                           <div class="area_main">
-                              <h3 class="area_text"><a>Area:<br>240m2</a></h3>
-                              <h3 class="area_text"><a>Beds:<br>3</a></h3>
-                              <h3 class="area_text"><a>Baths:<br>1</a></h3>
-                              <h3 class="area_text"><a>Garages:<br>1</a></h3>
-                           </div>
-                        </div>
-                        <div class="right_box">
-                           <div class="rate_text">$14000</div>
-                        </div>
-                     </div>
-                  </div>
+                  <form action="/UniRent/Owner/changePicture" class="form" method="post">
+                     <input class="file-upload" type="file" id="img" name="img" accept="image/png" hidden>
+                     <label class="change_btn" for="img">Upload Profile Picture</label>
+                  </form>
                </div>
             </div>
          </div>
       </div>
-      
-      <!-- footer section start -->
+
+<!-- footer section start -->
       <div class="footer_section layout_padding">
          <div class="container">
             <div class="row">
@@ -195,7 +143,7 @@
                   <h3 class="footer_text">Useful Links</h3>
                   <div class="footer_menu">
                      <ul>
-                        <li class="active"><a href="/UniRent/Owner/home">Home</a></li>
+                        <li><a href="/UniRent/Owner/home">Home</a></li>
                         <li><a href="/UniRent/Owner/about">About Us</a></li>
                         <li><a href="/UniRent/Owner/contact">Contact Us</a></li>
                      </ul>
@@ -205,9 +153,7 @@
          </div>
       </div>
       <!-- footer section end -->
-      
-      <!-- Javascript files-->
-      <script src="/UniRent/Smarty/js/jquery.min.js"></script>
+<script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>
       <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
       <script src="/UniRent/Smarty/js/jquery-3.0.0.min.js"></script>
@@ -215,35 +161,37 @@
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
-      <!-- javascript --> 
-      <script>
-         // Material Select Initialization
-         $(document).ready(function() {
-         $('.mdb-select').materialSelect();
-         $('.select-wrapper.md-form.md-outline input.select-dropdown').bind('focus blur', function () {
-         $(this).closest('.select-outline').find('label').toggleClass('active');
-         $(this).closest('.select-outline').find('.caret').toggleClass('active');
-         });
-         });
-      </script>
-      <script>
-         var universities = {
-            'City 1': ['Uni 1.1', 'Uni 1.2', 'Uni 1.3'],
-            'City 2': ['Uni 2.1', 'Uni 2.2'],
-            'City 3': ['Uni 3.1', 'Uni 3.2']
-            // Add other cities and universities as needed
-        };
+<script>
+document.getElementById("file").onchange = function() {
+    document.getElementById("form").submit();
+};
+</script>
 
-        var $universities = $('#university');
-        $('#city').change(function() {
-            var city = $(this).val();
-            var universityList = universities[city] || [];
+         <script>
+      $(document).ready(function() {
 
-            var html = $.map(universityList, function(university) {
-                return '<option value="' + university + '">' + university + '</option>';
-            }).join('');
-            $universities.html(html);
-        });
+      
+      var readURL = function(input) {
+         if (input.files && input.files[0]) {
+               var reader = new FileReader();
+
+               reader.onload = function (e) {
+                  $('.imageIcon').attr('src', e.target.result);
+               }
+      
+               reader.readAsDataURL(input.files[0]);
+         }
+      }
+      
+
+      $(".file-upload").on('change', function(){
+         readURL(this);
+      });
+      
+      $(".label-button").on('click', function() {
+         $(".file-upload").click();
+      });
+   });
       </script>
       <div class="modal" id="myModal">
       <div class"container-fluid">
@@ -265,4 +213,3 @@
                }
          </script>
    </body>
-</html>
