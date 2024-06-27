@@ -114,10 +114,10 @@
                         <div class="left_box">
                            <h1 class="road_text"><a href="#">2186 Lohariya Road</a></h1>
                            <div class="area_main">
-                              <h3 class="area_text active"><a href="#">Area:<br>240m2</a></h3>
-                              <h3 class="area_text"><a href="#">Beds:<br>3</a></h3>
-                              <h3 class="area_text"><a href="#">Baths:<br>1</a></h3>
-                              <h3 class="area_text"><a href="#">Garages:<br>1</a></h3>
+                              <h3 class="area_text"><a>Area:<br>240m2</a></h3>
+                              <h3 class="area_text"><a>Beds:<br>3</a></h3>
+                              <h3 class="area_text"><a>Baths:<br>1</a></h3>
+                              <h3 class="area_text"><a>Garages:<br>1</a></h3>
                            </div>
                         </div>
                         <div class="right_box">
@@ -140,10 +140,10 @@
                         <div class="left_box">
                            <h1 class="road_text"><a href="#">2186 Lohariya Road</a></h1>
                            <div class="area_main">
-                              <h3 class="area_text active"><a href="#">Area:<br>240m2</a></h3>
-                              <h3 class="area_text"><a href="#">Beds:<br>3</a></h3>
-                              <h3 class="area_text"><a href="#">Baths:<br>1</a></h3>
-                              <h3 class="area_text"><a href="#">Garages:<br>1</a></h3>
+                              <h3 class="area_text"><a>Area:<br>240m2</a></h3>
+                              <h3 class="area_text"><a>Beds:<br>3</a></h3>
+                              <h3 class="area_text"><a>Baths:<br>1</a></h3>
+                              <h3 class="area_text"><a>Garages:<br>1</a></h3>
                            </div>
                         </div>
                         <div class="right_box">
@@ -166,10 +166,10 @@
                         <div class="left_box">
                            <h1 class="road_text"><a href="#">2186 Lohariya Road</a></h1>
                            <div class="area_main">
-                              <h3 class="area_text active"><a href="#">Area:<br>240m2</a></h3>
-                              <h3 class="area_text"><a href="#">Beds:<br>3</a></h3>
-                              <h3 class="area_text"><a href="#">Baths:<br>1</a></h3>
-                              <h3 class="area_text"><a href="#">Garages:<br>1</a></h3>
+                              <h3 class="area_text"><a>Area:<br>240m2</a></h3>
+                              <h3 class="area_text"><a>Beds:<br>3</a></h3>
+                              <h3 class="area_text"><a>Baths:<br>1</a></h3>
+                              <h3 class="area_text"><a>Garages:<br>1</a></h3>
                            </div>
                         </div>
                         <div class="right_box">
@@ -195,9 +195,9 @@
                   <h3 class="footer_text">Useful Links</h3>
                   <div class="footer_menu">
                      <ul>
-                        <li class="active"><a href="/UniRent/User/home">Home</a></li>
-                        <li><a href="/UniRent/User/about">About Us</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li class="active"><a href="/UniRent/Owner/home">Home</a></li>
+                        <li><a href="/UniRent/Owner/about">About Us</a></li>
+                        <li><a href="/UniRent/Owner/contact">Contact Us</a></li>
                      </ul>
                   </div>
                </div>
