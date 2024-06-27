@@ -236,6 +236,10 @@ class EStudent
     {
         return $this->birthDate->format('d/m/Y');
     }
+    public function getAge():int
+    {
+        return $this->birthDate->diff(new DateTime('today'))->y;
+    }
     
     /**
      * getSex
