@@ -169,8 +169,15 @@ class CStudent{
 
     public static function modifyStudentProfile()
     {
-        print USession::getInstance()::getSessionElement('username');
-        print USuperGlobalAccess::getPost('name');
+        $r=USuperGlobalAccess::getPost('name');
+        if(is_null($r))
+        {
+            print 'è nullo';
+        }
+        else 
+        {
+            print 'ora è ok';
+        }
     }
         
 }

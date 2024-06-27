@@ -97,7 +97,7 @@
          </div>
             <div class="col-md-6">
                   <div class="profile_info">
-                  <form action="/UniRent/Student/modifyProfile" class="form" method="post" id="yourFormId">
+                  <form action="/UniRent/Student/modifyStudentProfile" class="form" method="POST" id="yourFormId">
                      <div class="parent">
                         <div class="div1"><p>Name: </p></div>
                         <div class="div2">
@@ -210,6 +210,7 @@
                <div class="container">
                   <div class="row">
                      <div class="col-md-4">
+                       <button type="submit" class="find_btn" id="yourLinkId">Conf</button>
                      <div  class="find_btn"><a href="/UniRent/Student/modifyStudentProfile" id="yourLinkId">Confirm</a></div>
                      </div>
                      <div class="col-md-4">
