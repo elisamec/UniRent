@@ -3,6 +3,7 @@ namespace Classes\Foundation;
 require __DIR__ .'/../../vendor/autoload.php';
 use Classes\Foundation;
 use Classes\Entity;
+use Classes\Entity\EPhoto;
 use Classes\Entity\EStudent;
 use Classes\Utilities\UAccessUniversityFile;
 use DateTime;
@@ -189,12 +190,34 @@ class FPersistentManager {
      * @param $user $user [student's username]
      *
      * @return int
-     */
-    public function getStudentIdByUsername($user):int
+     */    
+    public function getStudentIdByUsername($user):int|bool
     {
         $FS=FStudent::getInstance();
         $id=$FS->getIdByUsername($user);
         return $id;
+    }
+
+    public function getStudentPhotoById(int $id):?EPhoto
+    {
+        $FP=FPhoto::getInstance();
+        $photo=$FP->loadAvatar($id);
+        return $photo;
+    }
+    
+    /**
+     * Method getStudentEmailByUsername
+     * 
+     * This method take the student's email and passes it to the control method modifyProfile of CStudent class
+     * @param $user $user [student's username]
+     *
+     * @return string|bool
+     */
+    public function getStudentEmailByUsername($user):string|bool
+    {
+        $FS=FStudent::getInstance();
+        $email=$FS->getEmailByUsername($user);
+        return $email;
     }
 
 }

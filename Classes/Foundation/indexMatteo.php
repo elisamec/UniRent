@@ -6,6 +6,7 @@ use Classes\Foundation\FPersistentManager;
 use Classes\Foundation\FStudent;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
+use Classes\Foundation\FOwner;
 # PARTE MATTEO cancellato materiale precedente 22/06/2024
 /*
 $path='UniIta.json';
@@ -62,7 +63,53 @@ else
     echo ' qualcosa non và!';
 }
     */
+
+    /*
 $PM= FPersistentManager::getInstance();
-$user='Lupo';
-$Student=$PM->getOwnerByUsername($user);
-print $Student->__toString();
+$oldEmail='lorenzo.maloni@gmail.com';
+$newEmail='lorenzo.maloni@student.unito.it';
+if($oldEmail===$newEmail)
+{
+    print 'La mail non è cambiata';
+}
+else
+{
+    print 'le mail sono diverse';
+}
+if($PM->verifyUserEmail($newEmail)==false)
+{
+    print ' la mail nuova non è in uso';
+}
+else
+{
+    print ' la mail nuova è già in uso';
+}
+if($PM->verifyStudentEmail($newEmail))
+{
+    print ' La nuova mail è una mail universitaria';
+}
+else
+{
+    print ' La nuva mail non è una mail universitaria';
+}
+
+//Se la nuova mail è uguale a quella vecchia allora stampa vero
+if($newEmail===$oldEmail)
+{
+    print '  true';
+}
+else
+{
+    print '  false';
+}
+
+if((($PM->verifyUserEmail($newEmail)==false)&&($PM->verifyStudentEmail($newEmail)))||($oldEmail===$newEmail))
+{
+    print '       OPERAZIONI IN CORSO!';
+}
+
+*/
+
+$PM=FPersistentManager::getInstance();
+$mail=$PM->getStudentEmailByUsername('Fratmo');
+print $mail;

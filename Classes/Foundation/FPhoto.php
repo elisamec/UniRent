@@ -36,7 +36,7 @@ class FPhoto {
         $db=FConnection::getInstance()->getConnection();
         $db->beginTransaction();
         $stm=$db->prepare($q);
-        $stm->bindParam(':id',$id,PDO::PARAM_INT);
+        $stm->bindParam(':idPhoto',$id,PDO::PARAM_INT);
         $stm->execute();
         $db->commit();
         $result=$stm->rowCount();
@@ -178,7 +178,7 @@ class FPhoto {
      * @param int $id
      * @return EPhoto
      */
-    public function loadAvatar(int $id):EPhoto
+    public function loadAvatar(int $id):?EPhoto
     {
         $db=FConnection::getInstance()->getConnection();
         $FP=FPhoto::getInstance();
@@ -382,7 +382,6 @@ class FPhoto {
                 return false;
             }
 
-        } else return false;
-        
-    }
+        } else return false;  
+    }    
 }

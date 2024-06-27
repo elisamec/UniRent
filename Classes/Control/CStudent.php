@@ -172,14 +172,48 @@ class CStudent{
         $name=USuperGlobalAccess::getPost('name');
         $surname=USuperGlobalAccess::getPost('surname');
         $password=USuperGlobalAccess::getPost('password');
-        $email=USuperGlobalAccess::getPost('email');
+        $newEmail=USuperGlobalAccess::getPost('email');
         $sex=USuperGlobalAccess::getPost('sex');
         $courseDuration=USuperGlobalAccess::getPost('courseDuration');
         $immatricolationYear=USuperGlobalAccess::getPost('immatricolationYear');
         $birthDate= new DateTime(USuperGlobalAccess::getPost('birthDate'));
-        $smoker=USuperGlobalAccess::getPost('smoker');
-        $animals=USuperGlobalAccess::getPost('animals');
-        print $birthDate->format('Y-m-d');
+        $smoker=USession::getInstance()::booleanSolver(USuperGlobalAccess::getPost('smoker'));
+        $animals=USession::getInstance()::booleanSolver(USuperGlobalAccess::getPost('animals'));
+        #print $smoker.'  '.$animals;
+        $oldUsername=USession::getInstance()::getSessionElement('username');
+        $newUsername=USuperGlobalAccess::getPost('username');
+        $PM=FPersistentManager::getInstance();
+        $oldEmail=$PM::getInstance()->getStudentEmailByUsername($oldUsername);
+
+        if((($PM->verifyUserEmail($newEmail)==false)&&($PM->verifyStudentEmail($newEmail)))||($oldEmail===$newEmail)) #se la mail non è in uso ed è una mail universitaria oppure se non l'hai modificata
+        {
+            if(($PM->verifyUserUsername($newUsername)==false)||($oldUsername===$newUsername)) #se il nuovo username non è già in uso o non l'hai modificato
+            {
+                $studentID=$PM->getStudentIdByUsername($oldUsername);
+                $photo=$PM->getStudentPhotoById($studentID);
+                $student=new EStudent($newUsername,$password,$name,$surname,$photo,$newEmail,$courseDuration,$immatricolationYear,$birthDate,$sex,$smoker,$animals);
+                $student->setID($studentID);
+                $result=$PM->update($student);
+                if($result)
+                {
+                    header('Location:/UniRent/Student/profile');
+                }
+                else
+                {
+                    print '<h1><b>500 SERVER ERROR!</b></h1>';
+                }
+            }
+            else
+            {
+                print '<b>Username già preso</b>';
+                #header('Location:/UniRent/Student/profile');
+            }
+        }
+        else
+        {
+            print '<b>mail già in uso o mail non universitaria</b>';
+            #header('Location:/UniRent/Student/profile');
+        }  
     }
         
     public static function publicProfileStudent()

@@ -143,9 +143,11 @@ class FStudent
         {
             try
             {
-                
                 $CPhoto=$student->getPicture();
-                FPhoto::getInstance()->update($CPhoto);
+                if(!is_null($CPhoto))  #se non ha inserito una foto 
+                {
+                    FPhoto::getInstance()->update($CPhoto);
+                }
                 $db->exec('LOCK TABLES student WRITE');
                 $db->beginTransaction();
                 $q='UPDATE student SET username = :user, password = :pass, name = :name, surname = :surname, picture = :picture, universityMail = :email, ';
@@ -354,7 +356,15 @@ class FStudent
             return false;
         }
     }
-
+    
+    /**
+     * Method getIdByUsername
+     *
+     * This method returns the id of the student with the username given
+     * @param $user $user [student's username]
+     *
+     * @return int|bool
+     */
     public function getIdByUsername($user):int|bool
     { 
         $db=FConnection::getInstance()->getConnection();
@@ -372,7 +382,36 @@ class FStudent
             $db->rollBack();
             return false;
         }
-        $
+        return $stm->fetch(PDO::FETCH_ASSOC)['id'];
+    }
+    
+    /**
+     * Method getEmailByUsername
+     *
+     * This method return the student's mail from the db using the given username
+     * @param $user $user [student's username]
+     *
+     * @return string|bool
+     */
+    public function getEmailByUsername($user):string|bool
+    {
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $q='SELECT universityMail FROM student WHERE username = :user';
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindParam(':user',$user);
+            $stm->execute();
+            $db->commit();
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return false;
+        }
+        $result_array=$stm->fetch(PDO::FETCH_ASSOC);
+        return $result_array['universityMail'];
     }
 }
   

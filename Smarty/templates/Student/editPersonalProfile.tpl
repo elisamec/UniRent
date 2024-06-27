@@ -157,18 +157,18 @@
                            {if $student->getSmoker() && $student->getAnimals()}
                            <div class="col-sm-6">
                            <input class="checkbox" type="checkbox" name="smoker" id="smoker" checked>
-                           <input type="hidden" id="hiddenSmoker" name="smoker" value="false">
+                           <input type="hidden" id="hiddenSmoker" name="smoker" value="true">
                            <label class="customlabel" for="smoker">Smoker</label>
                            </div>
                            <div class="col-sm-6">
                            <input class="checkbox" type="checkbox" name="animals" id="animals" checked>
-                           <input type="hidden" id="hiddenAnimals" name="animals" value="false">
+                           <input type="hidden" id="hiddenAnimals" name="animals" value="true">
                            <label class="customlabel" for="animals">Animals</label>
                            </div>
                            {elseif $student->getSmoker() && !$student->getAnimals()}
                            <div class="col-sm-6">
                            <input class="checkbox" type="checkbox" name="smoker" id="smoker" checked>
-                           <input type="hidden" id="hiddenSmoker" name="smoker" value="false">
+                           <input type="hidden" id="hiddenSmoker" name="smoker" value="true">
                            <label class="customlabel" for="smoker">Smoker</label>
                            </div>
                            <div class="col-sm-6">
@@ -184,7 +184,7 @@
                            </div>
                            <div class="col-sm-6">
                            <input class="checkbox" type="checkbox" name="animals" id="animals" checked>
-                           <input type="hidden" id="hiddenAnimals" name="animals" value="false">
+                           <input type="hidden" id="hiddenAnimals" name="animals" value="true">
                            <label class="customlabel" for="animals">Animals</label>
                            </div>
                            {else}
