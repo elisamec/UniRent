@@ -1851,3 +1851,137 @@ textarea#comment::placeholder {
         padding-left: 40px;
         padding-right: 40px;
     }
+
+    .input-group {
+        position: relative;
+       }
+       
+       .input-spec {
+        margin-top: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+        width: 100%;
+        border: solid 1.5px #9e9e9e;
+        border-radius: 1rem;
+        background: none;
+        padding: 1rem;
+        font-size: 1rem;
+        color: #000000;
+        transition: border 150ms cubic-bezier(0.4,0,0.2,1);
+       }
+       
+       .user-label {
+        margin-top: 10px;
+        margin-left: 10px;
+        position: absolute;
+        left: 15px;
+        color: #000000;
+        pointer-events: none;
+        transform: translateY(1rem);
+        transition: 150ms cubic-bezier(0.4,0,0.2,1);
+       }
+       
+       .input-spec:focus, .input-spec:valid {
+        outline: none;
+        border: 1.5px solid #1a73e8;
+       }
+       
+       .input-spec:focus ~ label, .input-spec:valid ~ label {
+        transform: translateY(-50%) scale(0.8);
+        background-color: #ffffff;
+        padding: 0 .2em;
+        color: #2196f3;
+       }
+    #cssportal-grid {
+        display: grid;
+        grid-template-rows: repeat(8, 1fr);
+        grid-template-columns: repeat(6, 1fr);
+        gap: 0;
+        width: 100%;
+        height: 700px;
+        padding-top: 10px;
+        
+    }
+    #div1 {
+        grid-area: 1 / 1 / 3 / 3;
+    }
+    #div2 {
+        grid-area: 1 / 3 / 2 / 7;
+    }
+    #div3 {
+        grid-area: 2 / 3 / 3 / 5;
+    }
+    #div4 {
+        grid-area: 2 / 5 / 3 / 7;
+    }
+    #div5 {
+        grid-area: 3 / 1 / 4 / 3;
+    }
+    #div6 {
+        grid-area: 3 / 3 / 6 / 4;
+        background-color: rgba(123,151,28, 0.5);
+    }
+    #div7 {
+        grid-area: 3 / 4 / 4 / 7;
+        background-color: rgba(228,83,238, 0.5);
+    }
+    #div8 {
+        grid-area: 4 / 1 / 6 / 3;
+        background-color: rgba(109,112,127, 0.5);
+    }
+    #div9 {
+        grid-area: 4 / 4 / 5 / 6;
+        background-color: rgba(20,157,246, 0.5);
+    }
+    #div10 {
+        grid-area: 4 / 6 / 6 / 7;
+        background-color: rgba(204,222,197, 0.5);
+    }
+    #div11 {
+        grid-area: 5 / 4 / 6 / 6;
+        background-color: rgba(109,21,138, 0.5);
+    }
+    #div12 {
+        grid-area: 6 / 1 / 8 / 4;
+        background-color: rgba(12,5,220, 0.5);
+    }
+    #div13 {
+        grid-area: 6 / 4 / 8 / 6;
+        background-color: rgba(73,163,60, 0.5);
+    }
+    #div14 {
+        grid-area: 6 / 6 / 8 / 7;
+        background-color: rgba(218,154,39, 0.5);
+    }
+    #div15 {
+        grid-area: 8 / 1 / 9 / 7;
+        background-color: rgba(22,13,156, 0.5);
+    }
+    .pictures {
+        padding: 10px 10px 10px 10px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: solid 1.5px #9e9e9e;
+        border-radius: 1rem;
+    }
+    .pictures label.picture_btn {
+        width: 50%;
+        float: left; /* or right, depending on your layout */
+        font-size: 16px;
+        color: #ffffff;
+        background-color: #f9bc19;
+        padding: 10px;
+        text-align: center;
+    }
+    
+    .pictures label.picture_btn:hover{
+        color: #d0d1d2;
+        background-color: #ffffff;
+        box-shadow: 0px 2px 16px 0px #eaeaea !important;
+    }
+    .addAccom {
+        padding-top: 150px;
+    }
