@@ -386,7 +386,7 @@ button {
     width: 30%;
     background-color: #ffffff;
     height: auto;
-    padding: 40px 20px;
+    padding: 10px 20px;
     border-radius: 20px;
     box-shadow: 0px 9px 9px 0px #eaeaea !important;
     position: absolute;
@@ -1637,10 +1637,13 @@ textarea#comment::placeholder {
         box-shadow: 0px 2px 16px 0px #eaeaea !important;
     }
     .about {
-        padding: 150px 50px 50px 50px;
+        padding: 0px 50px 50px 50px;
     }
     .about p {
         text-align: justify;
+    }
+    .path {
+        padding-top: 100px;
     }
 
     .card {
