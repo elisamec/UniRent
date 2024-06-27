@@ -354,6 +354,26 @@ class FStudent
             return false;
         }
     }
+
+    public function getIdByUsername($user):int|bool
+    { 
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $q='SELECT id FROM student WHERE username = :user';
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindParam(':user',$user,PDO::PARAM_STR);
+            $stm->execute();
+            $db->commit();
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return false;
+        }
+        $
+    }
 }
   
 

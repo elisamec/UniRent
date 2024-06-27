@@ -180,5 +180,22 @@ class FPersistentManager {
         $result=$FS->deleteStudentByUsername($user);
         return $result;
     }
+    
+    /**
+     * Method getStudentIdByUsername
+     *
+     * This method return the id of a student in a database by username given
+     * 
+     * @param $user $user [student's username]
+     *
+     * @return int
+     */
+    public function getStudentIdByUsername($user):int
+    {
+        $FS=FStudent::getInstance();
+        $id=$FS->getIdByUsername($user);
+        return $id;
+    }
 
 }
+
