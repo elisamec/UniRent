@@ -79,6 +79,9 @@
             </nav>
          </div>
       </div>
+      <div class="path">
+            <p><a href="/UniRent/Student/home">Home</a> / Profile</p>
+      </div>
       <div class="profile">
          <div class="row">
          <div class="col-md-3">
@@ -210,8 +213,7 @@
                <div class="container">
                   <div class="row">
                      <div class="col-md-4">
-                       <button type="submit" class="find_btn" id="yourLinkId">Conf</button>
-                     <div  class="find_btn"><a href="/UniRent/Student/modifyStudentProfile" id="yourLinkId">Confirm</a></div>
+                       <div class="find_btn"><button type="submit" id="yourLinkId">Confirm</button></div>
                      </div>
                      <div class="col-md-4">
                      <div  class="find_btn"><a href="/UniRent/Student/profile">Cancel</a></div>
