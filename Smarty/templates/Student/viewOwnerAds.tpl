@@ -80,106 +80,77 @@
          </div>
       </div>
 
-      <div class="profile">
-      <div class="containerProf">
-         <div class="row">
-            <div class="col-md-10">
-                  <div class="profile_info">
-                     <h2 class="profile_head">{$student->getName()} {$student->getSurname()}</h2>
-                     <p>@{$student->getUsername()}</p>
-                     {if $student->getSex() === "M"}
-                     <p>Sex: Male</p>
-                     {else}
-                     <p>Sex: Female</p>
-                     {/if}
-                     <p>Age: {$student->getAge()}.</p>
-                     <p> Average Rating: n <!--$student->getRating()-->.</p>
-                  
-               </div>
-               </div>
-            <div class="col-md-2">
-               <div class="container">
-                  <div class="profile_pic">
-                  {if $student->getPicture() === null}
-                     <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
-                  {else}
-                     <img src="{$student->getPicture()}">
-                  {/if}
+<div class="Properties_section layout_padding">
+         <div class="container">
+            <div class="row">
+               <div class="col-sm-12">
+                  <div class="Properties_taital_main">
+                     <h1 class="Properties_taital">@{$owner->getUsername()} Proprieties</h1>
+                     <hr class="border_main">
                   </div>
+               </div>
+            </div>
+            <div class="Properties_section_2">
+               <div class="row">
+                  <div class="col-lg-4 col-md-6col-lg-4 col-md-6">
+                     <div class="blog_img">
+                     <div class="container_main">
+                                 <img src="/UniRent/Smarty/images/img-4.png" alt="">
+                                 <div class="overlay">
+                                    <div class="text">
+                                       <div class="some_text"><a href="#">See More</a></div>
+                                    </div>
+                                 </div>
+                              </div>
+                        </div>
+                     <div class="image_box">
+                        <div class="left_box">
+                           <h1 class="road_text"><a href="#">2186 Lohariya Road</a></h1>
+                           <div class="area_main">
+                              <h3 class="area_text"><a>Area:<br>240m2</a></h3>
+                              <h3 class="area_text"><a>Beds:<br>3</a></h3>
+                              <h3 class="area_text"><a>Baths:<br>1</a></h3>
+                              <h3 class="area_text"><a>Garages:<br>1</a></h3>
+                           </div>
+                        </div>
+                        <div class="right_box">
+                           <div class="rate_text">$14000</div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6">
+                     <div class="blog_img">
+                     <div class="container_main">
+                                 <img src="/UniRent/Smarty/images/img-5.png" alt="">
+                                 <div class="overlay">
+                                    <div class="text">
+                                       <div class="some_text"><a href="#">See More</a></div>
+                                    </div>
+                                 </div>
+                              </div>
+                        </div>
+                     <div class="image_box">
+                        <div class="left_box">
+                           <h1 class="road_text"><a href="#">2186 Lohariya Road</a></h1>
+                           <div class="area_main">
+                              <h3 class="area_text"><a>Area:<br>240m2</a></h3>
+                              <h3 class="area_text"><a>Beds:<br>3</a></h3>
+                              <h3 class="area_text"><a>Baths:<br>1</a></h3>
+                              <h3 class="area_text"><a>Garages:<br>1</a></h3>
+                           </div>
+                        </div>
+                        <div class="right_box">
+                           <div class="rate_text">$14000</div>
+                        </div>
+                     </div>
+                  </div>
+                  <div id="propertiesContainer"></div>
+
                </div>
             </div>
          </div>
       </div>
-      </div>
-      <div class="col-md-9">
-         <div class="Properties_taital_main layout">
-         <h2 class="profile_head">Reviews</h2>
-         </div>
-    <div id="reviewsContainer"></div>
-</div>
-     <script>
-    {if isset($reviewsData)}
-    const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
-    console.log(reviews);
-
-    // Function to generate stars based on the rating
-    function generateStars(stars) {
-        let starElements = '';
-        for (let i = 0; i < 5; i++) {
-            if (i < stars) {
-                starElements += '<span class="fa fa-star or"></span>';
-            } else {
-                starElements += '<span class="fa fa-star"></span>';
-            }
-        }
-        return starElements;
-    }
-
-    // Function to create and append reviews to the container
-    function displayReviews(reviews) {
-        const container = document.getElementById('reviewsContainer');
-
-        if (container) {
-            if (reviews.length === 0) {
-                container.innerHTML = '<div class="container"><h1 class="noRev">There are no reviews yet!</h1></div>';
-            } else {
-                reviews.forEach(review => {
-                    const reviewElement = document.createElement('div');
-                    reviewElement.className = 'review';
-
-                    // Insert the names of the elements of the review array
-                    reviewElement.innerHTML = `
-                        <h1 class="ReviewTitle">` + review.title + `</h1> <!-- Title of the review -->
-                        <div class="row">
-                            <div class="userSection">
-                                <div class="userIcon">
-                                    <a href="#"><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
-                                </div>
-                                <div class="username"><a href="#">` + review.username + `</a></div> <!-- Username of the reviewer -->
-                            </div>
-                            <div class="col-md-11">
-                                <div class="stars">
-                                    ` + generateStars(review.stars) + ` <!-- Star rating -->
-                                </div>
-                                <p>` + review.content + `</p> <!-- Content of the review -->
-                            </div>
-                        </div>
-                    `;
-
-                    container.appendChild(reviewElement);
-                });
-            }
-        } else {
-            console.error("Container not found!"); // Debugging: Error if container is not found
-        }
-    }
-
-    // Call the function to display reviews
-    displayReviews(reviews);
-    {/if}
-</script>
-
-<!-- footer section start -->
+      <!-- footer section start -->
       <div class="footer_section layout_padding">
          <div class="container">
             <div class="row">
@@ -262,3 +233,4 @@ document.getElementById("file").onchange = function() {
                }
          </script>
    </body>
+</html>
