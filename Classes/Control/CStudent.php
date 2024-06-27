@@ -184,6 +184,22 @@ class CStudent{
     {
         $view = new VStudent();
         $student = FPersistentManager::getInstance()->load('EStudent', 3);
-        $view->publicProfileStudent($student);
+        $reviews = FReview::getInstance()->loadByRecipient($student->getId(), TType::STUDENT);
+        $reviewsData = [];
+        
+        foreach ($reviews as $review) {
+            $profilePic = FStudent::getInstance()->load($review->getIdAuthor())->getPicture();
+            if ($profilePic === null) {
+                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+            }
+            $reviewsData[] = [
+                'title' => $review->getTitle(),
+                'username' => FStudent::getInstance()->load($review->getIdAuthor())->getUsername(),
+                'stars' => $review->getValutation(),
+                'content' => $review->getDescription(),
+                'userPicture' => $profilePic,
+            ];
+        }
+        $view->publicProfileStudent($student, $reviewsData);
     }
 }

@@ -51,8 +51,9 @@ class VStudent{
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->display('Student/reviews.tpl');
     }
-    public function publicProfileStudent(EStudent $student){
+    public function publicProfileStudent(EStudent $student, array $reviewsData){
         $this->smarty->assign('student', $student);
+        $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->display('Student/publicProfileStudent.tpl');
     }
 }

@@ -141,7 +141,7 @@
 
         if (container) {
             if (reviews.length === 0) {
-                container.innerHTML = '<div class="container"><h1 class="noRev">You have no reviews yet!</h1></div>';
+                container.innerHTML = '<div class="container"><h1 class="noRev">There are no reviews yet!</h1></div>';
             } else {
                 reviews.forEach(review => {
                     const reviewElement = document.createElement('div');
