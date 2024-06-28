@@ -120,7 +120,7 @@
                         </div>
                         <div class="div9"><p>Phone Number: </p></div>
                         <div class="div10">
-                              <input required class="input" type="tel" name="phoneNumber" id="phoneNumber" value="{$owner->getPhoneNumber()}" pattern="^((00|\+)39[\. ]??)?3\d{2}[\. ]??\d{6}{7}$">
+                              <input required class="input" type="tel" name="phoneNumber" id="phoneNumber" value="{$owner->getPhoneNumber()}" pattern="^((00|\+)39[\. ]??)?3\d{2}[\. ]??\d{6}$">
                         </div>
                         <div class="div11"><p>IBAN: </p></div>
                         <div class="div12">

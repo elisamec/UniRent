@@ -55,6 +55,11 @@ class EOwner
         $isHashed = substr($password, 0, 7) == '$2y$10$';
         return $isHashed;
     }
+
+    public static function formatPhoneNumber(string $phone):int
+    {
+        if()
+    }
     
     /**
      * Undocumented function

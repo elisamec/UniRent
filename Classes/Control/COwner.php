@@ -134,7 +134,7 @@ class COwner
         $newemail=USuperGlobalAccess::getPost('email');
         $newUsername=USuperGlobalAccess::getPost('username');
         $newPassword=USuperGlobalAccess::getPost('password');
-        $newPhoneNumber=USuperGlobalAccess::getPost('phoneNumber');
+        $newPhoneNumber=EOwner::formatPhoneNumber(USuperGlobalAccess::getPost('phoneNumber'));
         $newIBAN=USuperGlobalAccess::getPost('iban');
         #print $name.' '.$surname.' '.$newemail.' '.$newUsername.' '.$newPassword.' '.$newPhoneNumber.' '.$newIBAN;
         $ownerId=$PM->getOwnerIdByUsername(USession::getInstance()::getSessionElement('username'));
@@ -228,5 +228,10 @@ class COwner
             ];
         }
         $view->reviews($reviewsData);
+    }
+
+    public static function changePicture()
+    {
+        
     }
 }
