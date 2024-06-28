@@ -331,4 +331,25 @@ use PDOException;
         return true;
     }
 
+    public function getOwnerIdByUsername($user):?EOwner
+    {
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $q='SELECT id FROM owner WHERE username= :user';
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindParam(':user',$user,PDO::PARAM_STR);
+            $stm->execute();
+            $db->commit();
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return null;
+        }
+        $result_array=$stm->fetch(PDO::FETCH_ASSOC);
+        return $result_array['id'];
+    }
+
  }

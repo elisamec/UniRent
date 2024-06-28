@@ -235,5 +235,12 @@ class FPersistentManager {
         return $result;
     }
 
+    public function getOwnerIdByUsername($user)
+    {
+        $FO=FOwner::getInstance();
+        $owner=$FO->getOwnerIdByUsername($user);
+        return $owner;
+    }
+
 }
 
