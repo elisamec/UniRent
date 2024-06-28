@@ -70,7 +70,14 @@ class USession
      */
     public static function getSessionElement($id)
     {
-        return $_SESSION[$id];
+        if(isset($_SESSION[$id]))
+        {
+            return $_SESSION[$id];
+        }  
+        else
+        {
+            return null;
+        }  
     }
 
     /**
