@@ -135,7 +135,7 @@
                            </div>
                            <div id="div8">
                               <div class="button-group">
-                                 <button type="button" class="button-spec"  onclick="openPopup()">
+                                 <button type="button" class="button-spec" onclick="openModal()">
                                  Visit Availability
                                  </button>
                               </div>
@@ -203,28 +203,58 @@
                         </form>
 
 <!-- Visit availability pop-up -->
-<div id="popup" class="popup">
+<div id="popup" class="avModal">
+  <div class="avModal-content">
     <form id="visitAvailabilityForm">
-        <h2>Disponibilità visite</h2>
-        <label for="duration">Durata della visita:</label>
-        <input type="text" id="duration" name="duration">
-        <label for="startTime">Inizio della visita:</label>
-        <input type="text" id="startTime" name="startTime">
-        <label for="dayOfWeek">Giorno della settimana:</label>
-        <input type="text" id="dayOfWeek" name="dayOfWeek">
-        <button type="submit">Conferma</button>
-        <button type="button" onclick="closePopup()">Annulla</button>
+        <h2 class="avModal-head">Disponibilità visite</h2>
+        <div id="availabilityContainer">
+            <div class="availability">
+                <label for="duration">Durata della visita:</label>
+                <input type="text" id="duration" name="duration">
+                <label for="day">Giorno della settimana:</label>
+                <input type="text" id="day" name="day">
+                <label for="time">Ora:</label>
+                <input type="time" id="time" name="time">
+                <button type="button" onclick="removeAvailability(this)" class="button-spec little">-</button>
+            </div>
+        </div>
+        <div class="col-md-6">
+        <button type="button" onclick="addAvailability()" class="button-spec">+</button>
+        <button type="submit" class="button-spec final">Conferma</button>
+        
+        <button type="button" onclick="closeModal()" class="button-spec final">Annulla</button>
+        </div>
     </form>
+  </div>
 </div>
                     <script>
-                     // Open the pop-up
-function openPopup() {
-    document.getElementById('popup').style.display = 'block';
+// Get the modal
+var avModal = document.getElementById("popup");
+function openModal() {
+  avModal.style.display = "block";
 }
 
-// Close the pop-up and save data in sessionStorage
-function closePopup() {
-    document.getElementById('popup').style.display = 'none';
+// Add more availability input fields
+function addAvailability() {
+    let container = document.getElementById('availabilityContainer');
+    let availability = document.createElement('div');
+    availability.className = 'availability';
+    availability.innerHTML = `
+        <label for="duration">Durata della visita:</label>
+        <input type="text" id="duration" name="duration">
+        <label for="day">Giorno della settimana:</label>
+        <input type="text" id="day" name="day">
+        <label for="time">Ora:</label>
+        <input type="time" id="time" name="time">
+        <button type="button" onclick="removeAvailability(this)">-</button>
+    `;
+    container.appendChild(availability);
+}
+
+// Remove an availability input field
+function removeAvailability(button) {
+    let availability = button.parentNode;
+    availability.parentNode.removeChild(availability);
 }
 
 // Save visit availability data in sessionStorage when the pop-up form is submitted
@@ -232,34 +262,23 @@ let form = document.getElementById('visitAvailabilityForm');
 form.addEventListener('submit', function(event) {
     event.preventDefault();
 
-    let duration = form.elements['duration'].value;
-    let startTime = form.elements['startTime'].value;
-    let dayOfWeek = form.elements['dayOfWeek'].value;
+    let availabilities = document.getElementsByClassName('availability');
+    let data = [];
+    for (let i = 0; i < availabilities.length; i++) {
+        let duration = availabilities[i].elements['duration'].value;
+        let day = availabilities[i].elements['day'].value;
+        let time = availabilities[i].elements['time'].value;
+        data.push({duration, day, time});
+    }
 
-    sessionStorage.setItem('duration', duration);
-    sessionStorage.setItem('startTime', startTime);
-    sessionStorage.setItem('dayOfWeek', dayOfWeek);
+    sessionStorage.setItem('availabilities', JSON.stringify(data));
 
-    closePopup();
+    closeModal();
 });
-
-// Set the values of the hidden fields and submit the main form
-let mainForm = document.getElementById('yourFormId');
-mainForm.addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    let duration = sessionStorage.getItem('duration');
-    let startTime = sessionStorage.getItem('startTime');
-    let dayOfWeek = sessionStorage.getItem('dayOfWeek');
-
-    document.getElementById('durationHidden').value = duration;
-    document.getElementById('startTimeHidden').value = startTime;
-    document.getElementById('dayOfWeekHidden').value = dayOfWeek;
-
-    mainForm.submit();
-});
-
-                    </script>
+function closeModal() {
+    avModal.style.display = "none";
+}
+</script>
 
                </div>
                
