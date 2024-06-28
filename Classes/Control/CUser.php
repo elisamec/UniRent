@@ -66,7 +66,7 @@ class CUser
             print("Mail e username ci sono");
         }
         
-        if($PM->verifyUserEmail($mail)==false && $PM->verifyUserUsername($username==false))
+        if($PM->verifyUserEmail($mail)==false && $PM->verifyUserUsername($username)==false)
         {
             $session=USession::getInstance();
             $session::setSessionElement('email', $mail);
