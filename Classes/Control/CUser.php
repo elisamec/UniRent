@@ -58,9 +58,15 @@ class CUser
         $PM=FPersistentManager::getInstance();
         $type = USuperGlobalAccess::getPost('userType');
         $mail = USuperGlobalAccess::getPost('email');
-        
+        $username = USuperGlobalAccess::getPost('username');
 
-        if($PM->verifyUserEmail($mail)==false && $PM->verifyUserUsername(USuperGlobalAccess::getPost('username'))==false)
+        if ($mail === null || $username === null) {
+            print('Email or Username must be provided.');
+        }else{
+            print("Mail e username ci sono");
+        }
+        
+        if($PM->verifyUserEmail($mail)==false && $PM->verifyUserUsername($username==false))
         {
             $session=USession::getInstance();
             $session::setSessionElement('email', $mail);
@@ -74,14 +80,14 @@ class CUser
             if($type==='Student'){
                 if($PM->verifyStudentEmail($session::getSessionElement('email'))==true){
 
-                    $viewStudent->showStudentRegistration();
+                    //$viewStudent->showStudentRegistration();
 
                 }else{
                     print "Email non valida";
                 }
             }else{  
  
-                $viewOwner->showOwnerRegistration();
+                //$viewOwner->showOwnerRegistration();
             }
         }  
         else
