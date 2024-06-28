@@ -135,13 +135,20 @@ use PDOException;
             } elseif ($currentPhotoID!==null and $owner->getPhoto()!==null) {
                 $update = $FPh->delete($owner->getPhoto()->getId());
             }
+
+            else
+            {
+                $update=true;
+            }
+
             if ($update===false) {
                 return false;
             }
             $db->exec('LOCK TABLES owner WRITE');
             $db->beginTransaction();
-            $q='UPDATE owner SET username = :user, password = :pass, name = :name, surname = :surname, picture = :picture, email = :email, phonenumber = :phone, iban = :iban';
+            $q='UPDATE owner SET username = :user, password = :pass, name = :name, surname = :surname, picture = :picture, email = :email, phonenumber = :phone, iban = :iban WHERE id = :id';
             $stm = $db->prepare($q);
+            $stm->bindValue(':id', $owner->getId(), PDO::PARAM_INT);
             $stm->bindValue(':user', $owner->getUsername(), PDO::PARAM_STR);
             $stm->bindValue(':pass', $owner->getPassword(), PDO::PARAM_STR);
             $stm->bindValue(':name', $owner->getName(), PDO::PARAM_STR);
@@ -154,8 +161,11 @@ use PDOException;
             $stm->bindValue(':email', $owner->getMail(), PDO::PARAM_STR);
             $stm->bindValue(':phone', $owner->getPhoneNumber(), PDO::PARAM_STR);
             $stm->bindValue(':iban', $owner->getIBAN(), PDO::PARAM_STR);
+            print 'prima di execute';
             $stm->execute();
+            print 'dopo execute';
             $db->commit();
+            print 'dopo commit';
             $db->exec('UNLOCK TABLES');
             return true;
             
@@ -164,7 +174,8 @@ use PDOException;
             $db->rollBack();
             $errorType = TError::getInstance()->handleDuplicateError($e);
             if ($errorType) {
-                echo "Error: " . $errorType . "\n"; //quando faremo view leghiamolo a view
+                echo "Error: " . $errorType . "\n";
+                 //quando faremo view leghiamolo a view
             } else {
                 echo "An unexpected error occurred: " . $e->getMessage() . "\n";
             }
@@ -375,6 +386,7 @@ use PDOException;
         try
         {
             $q='SELECT * FROM owner WHERE phoneNumber = :phone';
+            $db->beginTransaction();
             $stm=$db->prepare($q);
             $stm->bindParam(':phone',$phone,PDO::PARAM_INT);
             $stm->execute();
@@ -410,6 +422,7 @@ use PDOException;
         try
         {
             $q='SELECT * FROM owner WHERE iban = :iban';
+            $db->beginTransaction();
             $stm=$db->prepare($q);
             $stm->bindParam(':iban',$phone,PDO::PARAM_STR);
             $stm->execute();

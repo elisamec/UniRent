@@ -129,7 +129,6 @@ class COwner
     public static function modifyOwnerProfile()
     {
         $PM=FPersistentManager::getInstance();
-        print 'Qui arriva';
         $name=USuperGlobalAccess::getPost('name');
         $surname=USuperGlobalAccess::getPost('surname');
         $newemail=USuperGlobalAccess::getPost('email');
@@ -161,7 +160,7 @@ class COwner
                             $owner->setPassword($newPassword);
                             $owner->setPhoneNumber($newPhoneNumber);
                             $owner->setIban($newIBAN);
-                            $result=$PM->update($owner);
+                            $result=$PM::update($owner);
                             if($result)
                             {
                                 $session=USession::getInstance();
