@@ -32,8 +32,8 @@ class COwner
         print '  '.USession::getInstance()::getSessionElement('surname');
         print '  '.USession::getInstance()::getSessionElement('email');
         print '  '.USession::getInstance()::getSessionElement('password');
-        print '  '.USession::getInstance()::getSessionElement('userType');*/
-    
+        print '  '.USession::getInstance()::getSessionElement('userType');
+        */
         $view = new VOwner();
         $PM = FPersistentManager::getInstance();
         $session = USession::getInstance();
@@ -57,16 +57,23 @@ class COwner
                             $session->getSessionElement('email'),
                             USuperGlobalAccess::getPost('phoneNumber'),
                             USuperGlobalAccess::getPost('iban'));
-        $PM->store($owner);
-        $session->setSessionElement('phoneNumber', USuperGlobalAccess::getPost('phoneNumber'));
-        $session->setSessionElement('iban', USuperGlobalAccess::getPost('iban'));
-        header('Location:/UniRent/Owner/home');
+        $result=$PM->store($owner);
+        if($result)
+        {
+            $session->setSessionElement('phoneNumber', USuperGlobalAccess::getPost('phoneNumber'));
+            $session->setSessionElement('iban', USuperGlobalAccess::getPost('iban'));
+            header('Location:/UniRent/Owner/home');
+        }
+        else
+        {
+            print 'Spiacenti non sei stato registrato';
+        }
+        
     }
     
     /**
      * Method profile
-     * This method call a view to show the owner profile from db
-     * @return void
+     * Thisrn void
      */
     public static function profile()
     {
