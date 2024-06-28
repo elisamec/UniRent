@@ -173,8 +173,12 @@ class CStudent{
         $view->reviews($reviewsData);
     }
 
-    public static function modifyStudentProfile()
-    {
+    public static function modifyStudentProfile(){
+
+        $session=USession::getInstance();
+
+        //reed the data from the form
+        $newUsername=USuperGlobalAccess::getPost('username');
         $name=USuperGlobalAccess::getPost('name');
         $surname=USuperGlobalAccess::getPost('surname');
         $password=USuperGlobalAccess::getPost('password');
@@ -183,11 +187,11 @@ class CStudent{
         $courseDuration=USuperGlobalAccess::getPost('courseDuration');
         $immatricolationYear=USuperGlobalAccess::getPost('immatricolationYear');
         $birthDate= new DateTime(USuperGlobalAccess::getPost('birthDate'));
-        $smoker=USession::getInstance()::booleanSolver(USuperGlobalAccess::getPost('smoker'));
-        $animals=USession::getInstance()::booleanSolver(USuperGlobalAccess::getPost('animals'));
+        $smoker=$session::booleanSolver(USuperGlobalAccess::getPost('smoker'));
+        $animals=$session::booleanSolver(USuperGlobalAccess::getPost('animals'));
         #print $smoker.'  '.$animals;
-        $oldUsername=USession::getInstance()::getSessionElement('username');
-        $newUsername=USuperGlobalAccess::getPost('username');
+
+        $oldUsername=$session::getSessionElement('username');
         $PM=FPersistentManager::getInstance();
         $oldEmail=$PM::getInstance()->getStudentEmailByUsername($oldUsername);
 
