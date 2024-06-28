@@ -91,60 +91,176 @@
                   </div>
                     <form action="/UniRent/Owner/addAccommodation" class="form" method="post" id="yourFormId">
                         <div id="cssportal-grid">
-                            <div id="div1">
-                                <div class="pictures">
-                                    <input class="file-upload" type="file" id="img" name="img" accept="image/png" multiple="multiple" hidden>
-                                    <label class="picture_btn" for="img">Upload Pictures</label>
-                                </div>
-                            </div>
-                            <div id="div2">
-                                <div class="input-group">
-                                    <input required="" type="text" name="text" autocomplete="off" class="input-spec">
-                                    <label class="user-label">Title</label>
-                                </div>
-                            </div>
-                            <div id="div3">
+                           <div id="div1">
+                              <div class="pictures">
+                                 <input class="file-upload" type="file" id="img" name="img" accept="image/png" multiple hidden>
+                                 <label class="picture_btn" for="img">Upload Pictures</label>
+                              </div>
+                           </div>
+                           <div id="div2">
+                              <div class="input-group">
+                                 <input required="" type="text" name="title" autocomplete="off" class="input-spec">
+                                 <label class="user-label">Title</label>
+                              </div>
+                           </div>
+                           <div id="div3">
+                              <div class="input-group">
+                                 <input required="" type="number" name="price" autocomplete="off" class="input-spec">
+                                 <label class="user-label">Price (€)</label>
+                              </div>
+                           </div>
+                           <div id="div4">
+                              <div class="input-group">
+                                 <input required="" type="number" name="deposit" autocomplete="off" class="input-spec">
+                                 <label class="user-label">Deposit (€)</label>
+                              </div>
+                           </div>
+                           <div id="div5">
+                              <div class="input-group">
+                                 <input id="Date" required="" type="text" name="startDate" autocomplete="off" class="input-spec">
+                                 <label class="user-label">Start date</label>
+                              </div>
+                           </div>
+                           <div id="div6">
+                              <div class="input-group">
+                                 <input id="Date2" required="" type="text" name="endDate" autocomplete="off" class="input-spec">
+                                 <label class="user-label">End date</label>
+                              </div>
+                           </div>
+                           <div id="div7">
+                              <div class="input-group">
+                                 <input required="" type="text" name="address" autocomplete="off" class="input-spec">
+                                 <label class="user-label">Address</label>
+                              </div>
+                           </div>
+                           <div id="div8">
+                              <div class="button-group">
+                                 <button type="button" class="button-spec"  onclick="openPopup()">
+                                 Visit Availability
+                                 </button>
+                              </div>
+                           </div>
+                           <div id="div9">
+                           <div class="input-group">
+                                 <input required="" type="text" name="city" autocomplete="off" class="input-spec">
+                                 <label class="user-label">City</label>
+                              </div>
+                           </div>
+                            <div id="div10">
                             <div class="input-group">
-                                    <input required="" type="number" name="text" autocomplete="off" class="input-spec">
-                                    <label class="user-label">Price (€)</label>
-                                </div>
-                            </div>
-                            <div id="div4">
-                                <div class="input-group">
-                                    <input required="" type="number" name="text" autocomplete="off" class="input-spec">
-                                    <label class="user-label">Deposit (€)</label>
-                                </div>
-                            </div>
-                            <div id="div5">
+                                 <input required="" type="number" name="postalCode" autocomplete="off" class="input-spec">
+                                 <label class="user-label">Postal Code</label>
+                              </div>
+                           </div>
+                            <div id="div12"> 
                             <div class="input-group">
-                            <!-- to fix, need to set start and end date -->
-                                    <input id="Date" required="" type="text" name="text" autocomplete="off" class="input-spec">
-                                    <label class="user-label">Period</label>
-                                </div>
+    <textarea class="textarea-spec" rows="5" id="comment" name="Message" required></textarea>
+    <label class="textarea-label" for="comment">Description</label>
+</div>
+</div>
+                            <div id="div13">
+                            <div class="checkbox-container">
+                            <label class="checkbox-label">Requirements:</label>
+                            <label>
+                                 <input type="checkbox" name="men"> Men
+                           </label>
+                              <label>
+                                 <input type="checkbox" name="women" > Women
+                              </label>
+                              <label>
+                                 <input type="checkbox" name="animals"> Animals
+                              </label>
+                              <label>
+                                 <input type="checkbox" name="smokers"> Smokers
+                              </label>
+                              </div>
                             </div>
-                            <div id="div6">div6</div>
-                            <div id="div7">div7</div>
-                            <div id="div8">div8</div>
-                            <div id="div9">div9</div>
-                            <div id="div10">div10</div>
-                            <div id="div11">div11</div>
-                            <div id="div12">div12</div>
-                            <div id="div13">div13</div>
-                            <div id="div14">div14</div>
-                            <div id="div15">div15</div>
+                            <div id="div14">
+                            <div class="input-group">
+    <textarea class="textarea1-spec" rows="5" id="comment" name="Message" placeholder=" "></textarea>
+    <label class="textarea-label" for="comment">Notes</label>
+</div>
+
+                            </div>
+                            <div id="div15">
+                              <input type="hidden" id="durationHidden" name="duration">
+                              <input type="hidden" id="startTimeHidden" name="startTime">
+                              <input type="hidden" id="dayOfWeekHidden" name="dayOfWeek">
+
+                           <div class="button-group">
+                              <div class="row">
+                                 <div class="col-md-6">
+                                  <button class="button-spec final" type="submit">Submit</button>
+                                 </div>
+                                 <div class="col-md-6">
+                                 <button type="button" class="button-spec final" onclick="window.location.href='/UniRent/Owner/home'">Cancel</button>
+                                 </div>
+                              </div>
+                           </div>
+                           </div>
+                           </div>
                         </div>
-                    </form>
-                    
-               <div class="container">
-                  <div class="row">
-                     <div class="col-md-4">
-                     <div  class="find_btn"><a href="/UniRent/Owner/modifyOwnerProfile" id="yourLinkId">Confirm</a></div>
-                     </div>
-                     <div class="col-md-4">
-                     <div  class="find_btn"><a href="/UniRent/Owner/profile">Cancel</a></div>
-                     </div>
-                  </div>
-               </div>
+                        </form>
+
+<!-- Visit availability pop-up -->
+<div id="popup" class="popup">
+    <form id="visitAvailabilityForm">
+        <h2>Disponibilità visite</h2>
+        <label for="duration">Durata della visita:</label>
+        <input type="text" id="duration" name="duration">
+        <label for="startTime">Inizio della visita:</label>
+        <input type="text" id="startTime" name="startTime">
+        <label for="dayOfWeek">Giorno della settimana:</label>
+        <input type="text" id="dayOfWeek" name="dayOfWeek">
+        <button type="submit">Conferma</button>
+        <button type="button" onclick="closePopup()">Annulla</button>
+    </form>
+</div>
+                    <script>
+                     // Open the pop-up
+function openPopup() {
+    document.getElementById('popup').style.display = 'block';
+}
+
+// Close the pop-up and save data in sessionStorage
+function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+}
+
+// Save visit availability data in sessionStorage when the pop-up form is submitted
+let form = document.getElementById('visitAvailabilityForm');
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    let duration = form.elements['duration'].value;
+    let startTime = form.elements['startTime'].value;
+    let dayOfWeek = form.elements['dayOfWeek'].value;
+
+    sessionStorage.setItem('duration', duration);
+    sessionStorage.setItem('startTime', startTime);
+    sessionStorage.setItem('dayOfWeek', dayOfWeek);
+
+    closePopup();
+});
+
+// Set the values of the hidden fields and submit the main form
+let mainForm = document.getElementById('yourFormId');
+mainForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    let duration = sessionStorage.getItem('duration');
+    let startTime = sessionStorage.getItem('startTime');
+    let dayOfWeek = sessionStorage.getItem('dayOfWeek');
+
+    document.getElementById('durationHidden').value = duration;
+    document.getElementById('startTimeHidden').value = startTime;
+    document.getElementById('dayOfWeekHidden').value = dayOfWeek;
+
+    mainForm.submit();
+});
+
+                    </script>
+
                </div>
                
             </div>
@@ -231,6 +347,13 @@ document.querySelector('#Date').addEventListener('focus', function (e) {
 });
 
 document.querySelector('#Date').addEventListener('blur', function (e) {
+    this.type = 'text';
+});
+document.querySelector('#Date2').addEventListener('focus', function (e) {
+    this.type = 'date';
+});
+
+document.querySelector('#Date2').addEventListener('blur', function (e) {
     this.type = 'text';
 });
 </script>
