@@ -58,8 +58,7 @@ class CUser
         $PM=FPersistentManager::getInstance();
         $type = USuperGlobalAccess::getPost('userType');
         $mail = USuperGlobalAccess::getPost('email');
-        
-
+    
         if($PM->verifyUserEmail($mail)==false && $PM->verifyUserUsername(USuperGlobalAccess::getPost('username'))==false)
         {
             $session=USession::getInstance();
