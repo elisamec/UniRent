@@ -68,8 +68,16 @@ class USession
     /**
      * get element in the _SESSION superglobal
      */
-    public static function getSessionElement($id){
-        return $_SESSION[$id];
+    public static function getSessionElement($id)
+    {
+        if(isset($_SESSION[$id]))
+        {
+            return $_SESSION[$id];
+        }  
+        else
+        {
+            return null;
+        }  
     }
 
     /**

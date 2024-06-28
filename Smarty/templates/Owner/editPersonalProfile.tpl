@@ -186,8 +186,11 @@
 </script>
       
 
- 
-</script>
+ <script>
+      document.getElementById("yourLinkId").onclick = function() {
+    document.getElementById("yourFormId").submit();
+}
+   </script>
       <div class="modal" id="myModal">
       <div class"container-fluid">
       <div class="card">
