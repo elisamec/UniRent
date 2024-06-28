@@ -28,15 +28,11 @@ class COwner
         $PM = FPersistentManager::getInstance();
         $session = USession::getInstance();
 
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-
         if ($session->getSessionElement('picture')===null) {
 
             $photo = null;
 
-        }else {
+        } else {
             
             $photo = null;
         } 
@@ -143,7 +139,7 @@ class COwner
         $newIBAN=USuperGlobalAccess::getPost('iban');
         #print $name.' '.$surname.' '.$newemail.' '.$newUsername.' '.$newPassword.' '.$newPhoneNumber.' '.$newIBAN;
         $ownerId=$PM->getOwnerIdByUsername(USession::getInstance()::getSessionElement('username'));
-        $owner=$PM->load($ownerId);
+        $owner=$PM->load("EOwner", $ownerId);
     }
 
     public static function contact()
