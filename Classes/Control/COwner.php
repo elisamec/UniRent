@@ -37,17 +37,18 @@ class COwner
         $view = new VOwner();
         $PM = FPersistentManager::getInstance();
         $session = USession::getInstance();
-        if($session->getSessionElement('picture')===null){
+        if ($session->getSessionElement('picture')===null) {
 
             $photo = null;
 
-        }
-        else
-        {
-
+        }else {
+            
             $photo = null;
-            //$photo = new EPhoto(null, unserialize($session::getSessionElement('picture')),'owner',null,null );
-        }
+        } 
+
+        $phone = USuperGlobalAccess::getPost('phoneNumber');
+        $iban = USuperGlobalAccess::getPost('iban');
+
         $owner = new EOwner(null,
                             $session->getSessionElement('username'),
                             $session->getSessionElement('password'),
