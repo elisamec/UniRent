@@ -302,5 +302,33 @@ use PDOException;
         $owner->setID($result_array['id']);
         return $owner;
     }
+    
+    /**
+     * Method deleteOwnerByUsername
+     *
+     * this method delete from db an owner using given username
+     * @param $user $user [owner's username]
+     *
+     * @return bool
+     */
+    public function deleteOwnerByUsername($user):bool
+    {
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $q="DELETE FROM owner WHERE username = :user";
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindParam(':user',$user,PDO::PARAM_STR);
+            $stm->execute();
+            $db->commit();
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return false;
+        }
+        return true;
+    }
 
  }
