@@ -129,7 +129,6 @@ class COwner
     public static function modifyOwnerProfile()
     {
         $PM=FPersistentManager::getInstance();
-        print 'Qui arriva';
         $name=USuperGlobalAccess::getPost('name');
         $surname=USuperGlobalAccess::getPost('surname');
         $newemail=USuperGlobalAccess::getPost('email');
@@ -139,7 +138,65 @@ class COwner
         $newIBAN=USuperGlobalAccess::getPost('iban');
         #print $name.' '.$surname.' '.$newemail.' '.$newUsername.' '.$newPassword.' '.$newPhoneNumber.' '.$newIBAN;
         $ownerId=$PM->getOwnerIdByUsername(USession::getInstance()::getSessionElement('username'));
-        $owner=$PM->load("EOwner", $ownerId);
+        if($ownerId===null)
+        {
+            print 'Spiacenti non sei un owner';
+        }
+        else
+        {
+            $owner=$PM->load("EOwner", $ownerId);
+            if(($newemail===$owner->getMail())||($PM->verifyUserEmail($newemail)===false))
+            {
+                if(($newUsername===$owner->getUsername())||($PM->verifyUserUsername($newUsername)===false))
+                {
+                    if(($newPhoneNumber===$owner->getPhoneNumber())||($PM->verifyPhoneNumber($newPhoneNumber)===false))
+                    {
+                        if(($newIBAN===$owner->getIban())||($PM->verifyIBAN($newIBAN)===false))
+                        {
+                            $owner->setName($name);
+                            $owner->setSurname($surname);
+                            $owner->setMail($newemail);
+                            $owner->setUsername($newUsername);
+                            $owner->setPassword($newPassword);
+                            $owner->setPhoneNumber($newPhoneNumber);
+                            $owner->setIban($newIBAN);
+                            $result=$PM::update($owner);
+                            if($result)
+                            {
+                                $session=USession::getInstance();
+                                $session::setSessionElement('username', $newUsername);
+                                $session::setSessionElement('password',$newPassword);
+                                header("Location:/UniRent/Owner/profile");
+                            }
+                            else
+                            {
+                                print '<b>500 : SERVER ERROR!</b>';
+                            }
+                        }
+                        else
+                        {
+                            print 'IBAN già in uso';
+                            #header('Location:/UniRent/Owner/profile');
+                        }
+                    }
+                    else
+                    {
+                        print 'Numero di telefono già in uso';
+                        #header('Location:/UniRent/Owner/profile');
+                    }
+                }
+                else
+                {
+                    print 'Username già in uso';
+                    #header('Location:/UniRent/Owner/profile');
+                }
+            }
+            else
+            {
+                print 'Email già in uso';
+                #header('Location:/UniRent/Owner/profile');
+            }
+        }
     }
 
     public static function contact()

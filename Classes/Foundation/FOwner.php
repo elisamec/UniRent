@@ -135,13 +135,20 @@ use PDOException;
             } elseif ($currentPhotoID!==null and $owner->getPhoto()!==null) {
                 $update = $FPh->delete($owner->getPhoto()->getId());
             }
+
+            else
+            {
+                $update=true;
+            }
+
             if ($update===false) {
                 return false;
             }
             $db->exec('LOCK TABLES owner WRITE');
             $db->beginTransaction();
-            $q='UPDATE owner SET username = :user, password = :pass, name = :name, surname = :surname, picture = :picture, email = :email, phonenumber = :phone, iban = :iban';
+            $q='UPDATE owner SET username = :user, password = :pass, name = :name, surname = :surname, picture = :picture, email = :email, phonenumber = :phone, iban = :iban WHERE id = :id';
             $stm = $db->prepare($q);
+            $stm->bindValue(':id', $owner->getId(), PDO::PARAM_INT);
             $stm->bindValue(':user', $owner->getUsername(), PDO::PARAM_STR);
             $stm->bindValue(':pass', $owner->getPassword(), PDO::PARAM_STR);
             $stm->bindValue(':name', $owner->getName(), PDO::PARAM_STR);
@@ -154,8 +161,11 @@ use PDOException;
             $stm->bindValue(':email', $owner->getMail(), PDO::PARAM_STR);
             $stm->bindValue(':phone', $owner->getPhoneNumber(), PDO::PARAM_STR);
             $stm->bindValue(':iban', $owner->getIBAN(), PDO::PARAM_STR);
+            print 'prima di execute';
             $stm->execute();
+            print 'dopo execute';
             $db->commit();
+            print 'dopo commit';
             $db->exec('UNLOCK TABLES');
             return true;
             
@@ -164,7 +174,8 @@ use PDOException;
             $db->rollBack();
             $errorType = TError::getInstance()->handleDuplicateError($e);
             if ($errorType) {
-                echo "Error: " . $errorType . "\n"; //quando faremo view leghiamolo a view
+                echo "Error: " . $errorType . "\n";
+                 //quando faremo view leghiamolo a view
             } else {
                 echo "An unexpected error occurred: " . $e->getMessage() . "\n";
             }
@@ -330,8 +341,17 @@ use PDOException;
         }
         return true;
     }
-
-    public function getOwnerIdByUsername($user):?EOwner
+    
+    
+    /**
+     * Method getOwnerIdByUsername
+     *
+     * this method return the owner's id in the db ,if present, using the owner's username
+     * @param $user $user [owner's username]
+     *
+     * @return int
+     */
+    public function getOwnerIdByUsername($user):?int
     {
         $db=FConnection::getInstance()->getConnection();
         try
@@ -351,5 +371,76 @@ use PDOException;
         $result_array=$stm->fetch(PDO::FETCH_ASSOC);
         return $result_array['id'];
     }
-
+    
+    /**
+     * Method verifyPhoneNumber
+     * 
+     * this method return true if the given phone number is already in use, false viceversa
+     * @param $phone $phone [owner's phone number]
+     *
+     * @return bool
+     */
+    public function verifyPhoneNumber($phone):bool
+    {
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $q='SELECT * FROM owner WHERE phoneNumber = :phone';
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindParam(':phone',$phone,PDO::PARAM_INT);
+            $stm->execute();
+            $db->commit();
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return true;
+        }
+        $result=$stm->rowCount();
+        if($result>0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    /**
+     * Method verifyIBAN
+     *
+     * this method verify if the iban is already in use
+     * @param $iban $iban [owner's iban]
+     *
+     * @return bool
+     */
+    public function verifyIBAN($iban):bool
+    {
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $q='SELECT * FROM owner WHERE iban = :iban';
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindParam(':iban',$phone,PDO::PARAM_STR);
+            $stm->execute();
+            $db->commit();
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return true;
+        }
+        $result=$stm->rowCount();
+        if($result>0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
  }
