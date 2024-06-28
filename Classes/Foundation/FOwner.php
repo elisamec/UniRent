@@ -330,8 +330,17 @@ use PDOException;
         }
         return true;
     }
-
-    public function getOwnerIdByUsername($user):?EOwner
+    
+    
+    /**
+     * Method getOwnerIdByUsername
+     *
+     * this method return the owner's id in the db ,if present, using the owner's username
+     * @param $user $user [owner's username]
+     *
+     * @return int
+     */
+    public function getOwnerIdByUsername($user):?int
     {
         $db=FConnection::getInstance()->getConnection();
         try
@@ -351,5 +360,74 @@ use PDOException;
         $result_array=$stm->fetch(PDO::FETCH_ASSOC);
         return $result_array['id'];
     }
-
+    
+    /**
+     * Method verifyPhoneNumber
+     * 
+     * this method return true if the given phone number is already in use, false viceversa
+     * @param $phone $phone [owner's phone number]
+     *
+     * @return bool
+     */
+    public function verifyPhoneNumber($phone):bool
+    {
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $q='SELECT * FROM owner WHERE phoneNumber = :phone';
+            $stm=$db->prepare($q);
+            $stm->bindParam(':phone',$phone,PDO::PARAM_INT);
+            $stm->execute();
+            $db->commit();
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return true;
+        }
+        $result=$stm->rowCount();
+        if($result>0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    /**
+     * Method verifyIBAN
+     *
+     * this method verify if the iban is already in use
+     * @param $iban $iban [owner's iban]
+     *
+     * @return bool
+     */
+    public function verifyIBAN($iban):bool
+    {
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $q='SELECT * FROM owner WHERE iban = :iban';
+            $stm=$db->prepare($q);
+            $stm->bindParam(':iban',$phone,PDO::PARAM_STR);
+            $stm->execute();
+            $db->commit();
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return true;
+        }
+        $result=$stm->rowCount();
+        if($result>0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
  }

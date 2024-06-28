@@ -234,12 +234,52 @@ class FPersistentManager {
         $result=$FO->deleteOwnerByUsername($user);
         return $result;
     }
-
-    public function getOwnerIdByUsername($user)
+    
+    /**
+     * Method getOwnerIdByUsername
+     *
+     * this method return the owner id from the db using the given username
+     * @param $user $user [owner's username]
+     *
+     * @return ?int
+     */
+    public function getOwnerIdByUsername($user):?int
     {
         $FO=FOwner::getInstance();
         $owner=$FO->getOwnerIdByUsername($user);
         return $owner;
+    }
+
+        
+    /**
+     * Method verifyPhoneNumber
+     *
+     * this method call the FOwner class to verify if the phone number given is already in use and return the answare to COwner class
+     * @param $phone $phone [owner's phone number]
+     *
+     * @return bool
+     */
+    public function verifyPhoneNumber($phone):bool
+    {
+        $FO=FOwner::getInstance();
+        $result=$FO->verifyPhoneNumber($phone);
+        return $result;
+    }
+
+        
+    /**
+     * Method verifyIBAN
+     * 
+     * this method call the FOwner class to verify if the IBAN given is already in use and return the answare to COwner class
+     * @param $iban $iban [owner's new iban]
+     *
+     * @return bool
+     */
+    public function verifyIBAN($iban):bool
+    {
+        $FO=FOwner::getInstance();
+        $result=$FO->verifyIBAN($iban);
+        return $result;
     }
 
 }
