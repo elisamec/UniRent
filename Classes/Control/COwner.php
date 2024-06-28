@@ -28,15 +28,11 @@ class COwner
         $PM = FPersistentManager::getInstance();
         $session = USession::getInstance();
 
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-
         if ($session->getSessionElement('picture')===null) {
 
             $photo = null;
 
-        }else {
+        } else {
             
             $photo = null;
         } 
