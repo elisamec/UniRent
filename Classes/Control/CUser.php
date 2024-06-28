@@ -26,11 +26,11 @@ class CUser
     public static function login(){
         if(UCookie::isSet('PHPSESSID')){
             if(session_status() == PHP_SESSION_NONE){
-                USession::getInstance();
+                $session = USession::getInstance();
             }
         }
-        /*if(USession::isSetSessionElement('username')){
-            header('Location: /UniRent/Student/home');
+        /*if($session::isSetSessionElement('userType')){
+            header('Location: /Agora/Student/home');
         }*/
         $view = new VUser();
         $view->login();
@@ -57,19 +57,13 @@ class CUser
         $viewOwner = new VOwner();
         $PM=FPersistentManager::getInstance();
         $type = USuperGlobalAccess::getPost('userType');
-        $mail = USuperGlobalAccess::getPost('email');
+        $email = USuperGlobalAccess::getPost('email');
         $username = USuperGlobalAccess::getPost('username');
-
-        if ($mail === null || $username === null) {
-            print('Email or Username must be provided.');
-        }else{
-            print("Mail e username ci sono");
-        }
         
-        if($PM->verifyUserEmail($mail)==false && $PM->verifyUserUsername($username)==false)
+        if(($PM->verifyUserEmail($email))==false && ($PM->verifyUserUsername($username))==false)
         {
             $session=USession::getInstance();
-            $session::setSessionElement('email', $mail);
+            $session::setSessionElement('email', $email);
             $session::setSessionElement('username',USuperGlobalAccess::getPost('username'));
             $session::setSessionElement('password',USuperGlobalAccess::getPost('password'));
             $session::setSessionElement('name',USuperGlobalAccess::getPost('name'));
@@ -80,14 +74,14 @@ class CUser
             if($type==='Student'){
                 if($PM->verifyStudentEmail($session::getSessionElement('email'))==true){
 
-                    //$viewStudent->showStudentRegistration();
+                    $viewStudent->showStudentRegistration();
 
                 }else{
                     print "Email non valida";
                 }
             }else{  
  
-                //$viewOwner->showOwnerRegistration();
+                $viewOwner->showOwnerRegistration();
             }
         }  
         else
@@ -118,11 +112,13 @@ class CUser
 
             if(password_verify(USuperGlobalAccess::getPost('password'), $user->getPassword())){
 
-                if(USession::getSessionStatus() == PHP_SESSION_NONE){
-                    USession::getInstance();
-                    USession::setSessionElement("$type", $userId);
-                    USession::setSessionElement('username',USuperGlobalAccess::getPost('username'));
-                    USession::setSessionElement('password',USuperGlobalAccess::getPost('password'));
+                $session = USession::getInstance();
+                if($session::getSessionStatus() == PHP_SESSION_NONE){
+                    $session = USession::getInstance();
+                    $session::setSessionElement("id", $userId);
+                    $session::setSessionElement("userType", $type);
+                    $session::setSessionElement('username',USuperGlobalAccess::getPost('username'));
+                    $session::setSessionElement('password',USuperGlobalAccess::getPost('password'));
                     if($type === 'Student')header('Location:/UniRent/Student/home');
                     else print  header('Location:/UniRent/Owner/home');
                     //else $viewOwner->home();
