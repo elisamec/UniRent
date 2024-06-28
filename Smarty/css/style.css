@@ -1963,6 +1963,7 @@ textarea#comment::placeholder {
         background-color: #f9bc19;
         padding: 10px;
         text-align: center;
+        border-radius: 1rem;
     }
     
     .pictures label.picture_btn:hover{
@@ -1994,9 +1995,11 @@ textarea#comment::placeholder {
         box-sizing: border-box;
     }
     .final{
+        color: #ffffff;
         border: none;
         background: fixed;
         background-color: #f9bc19;
+        display: inline-block
     }
     
        .popup {
@@ -2119,3 +2122,53 @@ textarea#comment::placeholder {
     resize: none; /* Prevent manual resizing */
     overflow: hidden; /* Hide the scroll bar */
 }
+
+.avModal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+  }
+  
+  .avModal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    height:80%;
+    display: flex;
+  }
+  .avModal-head {
+    margin-bottom:20px;
+  }
+  #availabilityContainer {
+    margin: 20px 20px 20px 20px;
+  }
+  
+  .avClose {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .avClose:hover,
+  .avClose:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .little {
+    width: 10%;
+  }
+  .availability {
+    display: inline-block;
+  }

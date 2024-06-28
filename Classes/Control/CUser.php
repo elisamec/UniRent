@@ -73,14 +73,14 @@ class CUser
             if($type==='Student'){
                 if($PM->verifyStudentEmail($session::getSessionElement('email'))==true){
 
-                    $viewStudent->showStudentRegistration();
+                    //$viewStudent->showStudentRegistration();
 
                 }else{
                     print "Email non valida";
                 }
             }else{  
  
-                $viewOwner->showOwnerRegistration();
+                //$viewOwner->showOwnerRegistration();
             }
         }  
         else

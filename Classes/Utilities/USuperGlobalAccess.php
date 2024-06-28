@@ -42,8 +42,8 @@ class USuperGlobalAccess {
      */
     public static function getPost($key) 
     {
-        if (isset($_POST[$key])) 
-        {
+        if (isset($_POST[$key])) {
+            
             return $_POST[$key];
         } 
         else 
