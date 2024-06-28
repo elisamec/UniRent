@@ -100,7 +100,7 @@
          </div>
             <div class="col-md-6">
                   <div class="profile_info">
-                  <form action="/UniRent/Owner/modifyProfile" class="form" method="post" id="yourFormId">
+                  <form class="form"  action="/UniRent/Owner/modifyOwnerProfile"  method="POST" id="yourFormId">
                      <div class="parentOW">
                         <div class="div1"><p>Name: </p></div>
                         <div class="div2">
@@ -139,7 +139,7 @@
                <div class="container">
                   <div class="row">
                      <div class="col-md-4">
-                     <div  class="find_btn"><a href="/UniRent/Owner/modifyOwnerProfile" id="yourLinkId">Confirm</a></div>
+                     <div class="find_btn"><button type="submit" id="yourLinkId">Confirm</button></div>
                      </div>
                      <div class="col-md-4">
                      <div  class="find_btn"><a href="/UniRent/Owner/profile">Cancel</a></div>

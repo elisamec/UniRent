@@ -219,6 +219,21 @@ class FPersistentManager {
         $email=$FS->getEmailByUsername($user);
         return $email;
     }
+    
+    /**
+     * Method deleteOwner
+     * 
+     * this method call the omonim function in FOwner and return the result to COwner class
+     * @param $user $user [owner'username]
+     *
+     * @return void
+     */
+    public function deleteOwner($user):bool
+    {
+        $FO=FOwner::getInstance();
+        $result=$FO->deleteOwnerByUsername($user);
+        return $result;
+    }
 
 }
 

@@ -25,7 +25,15 @@ class COwner
     }
 
     public static function ownerRegistration()
-    {
+    { 
+        /*
+        print USession::getInstance()::getSessionElement('username');
+        print '  '.USession::getInstance()::getSessionElement('name');
+        print '  '.USession::getInstance()::getSessionElement('surname');
+        print '  '.USession::getInstance()::getSessionElement('email');
+        print '  '.USession::getInstance()::getSessionElement('password');
+        print '  '.USession::getInstance()::getSessionElement('userType');*/
+    
         $view = new VOwner();
         $PM = FPersistentManager::getInstance();
         $session = USession::getInstance();
@@ -93,6 +101,45 @@ class COwner
             $view->editProfile($owner);
         }
     }
+    
+    /**
+     * Method deleteProfile
+     *
+     * this method deletes the owner profile
+     * @return void
+     */
+    public static function deleteProfile()
+    {
+        $PM=FPersistentManager::getInstance();
+        $user=USession::getInstance()::getSessionElement('username');
+        $result=$PM->deleteOwner($user);
+        if($result)
+        {
+            $session=USession::getInstance();
+            $session::unsetSession();
+            $session::destroySession();
+            setcookie('PHPSESSID','',time()-3600);
+            header('Location:/UniRent/User/home');
+        }
+        else
+        {
+            print 'Spiacenti non puoi andartene ;)';
+        }
+    }
+
+    public static function modifyOwnerProfile()
+    {
+        print 'Qui arriva';
+        $name=USuperGlobalAccess::getPost('name');
+        $surname=USuperGlobalAccess::getPost('surname');
+        $newemail=USuperGlobalAccess::getPost('email');
+        $newUsername=USuperGlobalAccess::getPost('username');
+        $newPassword=USuperGlobalAccess::getPost('password');
+        $newPhoneNumber=USuperGlobalAccess::getPost('phoneNumber');
+        $newIBAN=USuperGlobalAccess::getPost('iban');
+        print $name.' '.$surname.' '.$newemail.' '.$newUsername.' '.$newPassword.' '.$newPhoneNumber.' '.$newIBAN;
+    }
+
     public static function contact()
     {
         $view = new VOwner();

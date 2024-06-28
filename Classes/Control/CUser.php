@@ -68,6 +68,7 @@ class CUser
             $session::setSessionElement('name',USuperGlobalAccess::getPost('name'));
             $session::setSessionElement('surname',USuperGlobalAccess::getPost('surname'));
             $session::setSessionElement('picture',USuperGlobalAccess::getFiles('img'));
+            $session::setSessionElement('userType',USuperGlobalAccess::getPost('userType'));
 
             if($type==='Student'){
                 if($PM->verifyStudentEmail($session::getSessionElement('email'))==true){
