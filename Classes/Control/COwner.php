@@ -139,7 +139,7 @@ class COwner
         $newIBAN=USuperGlobalAccess::getPost('iban');
         #print $name.' '.$surname.' '.$newemail.' '.$newUsername.' '.$newPassword.' '.$newPhoneNumber.' '.$newIBAN;
         $ownerId=$PM->getOwnerIdByUsername(USession::getInstance()::getSessionElement('username'));
-        $owner=$PM->load($ownerId);
+        $owner=$PM->load("EOwner", $ownerId);
     }
 
     public static function contact()
