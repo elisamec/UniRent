@@ -110,6 +110,10 @@ if((($PM->verifyUserEmail($newEmail)==false)&&($PM->verifyStudentEmail($newEmail
 
 */
 
-$PM=FPersistentManager::getInstance();
-$mail=$PM->getStudentEmailByUsername('Fratmo');
-print $mail;
+$password='pippo';
+$password_h=password_hash($password,PASSWORD_DEFAULT);
+print $password_h;
+if(password_verify($password,$password_h))
+{
+    print '   Tutto ok!';
+}

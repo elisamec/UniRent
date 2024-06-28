@@ -24,8 +24,10 @@ class CUser
     }
 
     public static function login(){
-        if(UCookie::isSet('PHPSESSID')){
-            if(session_status() == PHP_SESSION_NONE){
+        if(UCookie::isSet('PHPSESSID'))
+        {
+            if(session_status() == PHP_SESSION_NONE)
+            {
                 $session = USession::getInstance();
             }
         }
@@ -89,7 +91,8 @@ class CUser
         }   
     }
 
-    public static function checkLogin(){
+    public static function checkLogin()
+    {
 
         $view = new VUser();
         $viewStudent = new VStudent();
@@ -99,36 +102,52 @@ class CUser
         $userId = false;
 
         //Get id of user based on him username
-        if($type === 'Student' || $type === 'Owner') {
-            $userId = $PM->verifyUserUsername(USuperGlobalAccess::getPost('username')); 
+        if($type === 'Student' || $type === 'Owner')
+        {
+            $userId = $PM->verifyUserUsername(USuperGlobalAccess::getPost('username'));
         }
 
         //If user exist, get the user and check the password
-        if($userId != false){
-
+        if($userId != false)
+        {
+             
             //Type can be Student or Owner
             $user = $PM->load("E$type", $userId);
-
-            if(password_verify(USuperGlobalAccess::getPost('password'), $user->getPassword())){
-
+            
+            $passwordIn=USuperGlobalAccess::getPost('password');
+            if(password_verify($passwordIn, $user->getPassword()))
+            {
+                
                 $session = USession::getInstance();
-                if($session::getSessionStatus() == PHP_SESSION_NONE){
+                print $session::getSessionStatus();
+                
+                #if($session::getSessionStatus() === PHP_SESSION_ACTIVE){
+                    
                     $session = USession::getInstance();
                     $session::setSessionElement("id", $userId);
                     $session::setSessionElement("userType", $type);
                     $session::setSessionElement('username',USuperGlobalAccess::getPost('username'));
                     $session::setSessionElement('password',USuperGlobalAccess::getPost('password'));
-                    if($type === 'Student')header('Location:/UniRent/Student/home');
-                    else print  header('Location:/UniRent/Owner/home');
+                    if($type === 'Student')
+                    {
+                        header('Location:/UniRent/Student/home');
+                    }
+                    else 
+                    {
+                        header('Location:/UniRent/Owner/home');
+                    }
                     //else $viewOwner->home();
-                }
-
-            }else{
+               # }
+            }
+            else
+            {
                 print "Password non corretta"; 
                 //$view->loginError();
             }
 
-        }else{
+        }
+        else
+        {
             print "Username non corretto";
             //$view->loginError();
         }

@@ -206,6 +206,8 @@ class CStudent{
                 $result=$PM->update($student);
                 if($result)
                 {
+                    $session->setSessionElement('username',$newUsername);
+                    $session->setSessionElement('password',$password);
                     header('Location:/UniRent/Student/profile');
                 }
                 else
