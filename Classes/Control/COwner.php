@@ -22,19 +22,16 @@ class COwner
         $view->home();
     }
 
-    public static function ownerRegistration()
-    { 
-        /*
-        print USession::getInstance()::getSessionElement('username');
-        print '  '.USession::getInstance()::getSessionElement('name');
-        print '  '.USession::getInstance()::getSessionElement('surname');
-        print '  '.USession::getInstance()::getSessionElement('email');
-        print '  '.USession::getInstance()::getSessionElement('password');
-        print '  '.USession::getInstance()::getSessionElement('userType');
-        */
+    public static function ownerRegistration(){
+
         $view = new VOwner();
         $PM = FPersistentManager::getInstance();
         $session = USession::getInstance();
+
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
         if ($session->getSessionElement('picture')===null) {
 
             $photo = null;
@@ -54,17 +51,18 @@ class COwner
                             $session->getSessionElement('surname'),
                             $photo,
                             $session->getSessionElement('email'),
-                            USuperGlobalAccess::getPost('phoneNumber'),
-                            USuperGlobalAccess::getPost('iban'));
+                            $phone,
+                            $iban);
         $result=$PM->store($owner);
-        if($result)
-        {
-            $session->setSessionElement('phoneNumber', USuperGlobalAccess::getPost('phoneNumber'));
-            $session->setSessionElement('iban', USuperGlobalAccess::getPost('iban'));
+        if($result){
+
+            $session->setSessionElement('phoneNumber', $phone);
+            $session->setSessionElement('iban', $iban);
+            
             header('Location:/UniRent/Owner/home');
-        }
-        else
-        {
+
+        }else{
+
             print 'Spiacenti non sei stato registrato';
         }
         

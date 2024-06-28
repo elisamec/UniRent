@@ -131,14 +131,20 @@ class CStudent{
                                 $smok,
                                 $anim);
 
-        $PM->store($student);
-        $session->setSessionElement('courseDuration', $duration);
-        $session->setSessionElement('immatricolationYear', $immatricolation);
-        $session->setSessionElement('birthDate', $birthDate);
-        $session->setSessionElement('sex', $sex);
-        $session->setSessionElement('smoker', $smok);
-        $session->setSessionElement('animal', $anim);
-        header('Location:/UniRent/Student/home');
+        $result = $PM->store($student);
+        if ($result){
+            $session->setSessionElement('courseDuration', $duration);
+            $session->setSessionElement('immatricolationYear', $immatricolation);
+            $session->setSessionElement('birthDate', $birthDate);
+            $session->setSessionElement('sex', $sex);
+            $session->setSessionElement('smoker', $smok);
+            $session->setSessionElement('animal', $anim);
+            header('Location:/UniRent/Student/home');
+        }
+        else{
+            print 'Spiacenti non sei stato registrato';
+        }
+        
 
     }
     public static function accommodation() {
