@@ -139,9 +139,9 @@ class CUser
      * @return void
      */
     public static function logout(){
-        USession::getInstance();
-        USession::unsetSession();
-        USession::destroySession();
+        $session=USession::getInstance();
+        $session::unsetSession();
+        $session::destroySession();
         setcookie('PHPSESSID','',time()-3600);
         header('Location: /UniRent/User/home');
     }
