@@ -88,7 +88,7 @@ class USuperGlobalAccess {
                 $fileExtension = strtolower(end($fileNameCmps));
         
                 // Verifica l'estensione del file
-                /*$allowedfileExtensions = array('jpg', 'gif', 'png', 'jpeg');
+               /* $allowedfileExtensions = array('jpg', 'gif', 'png', 'jpeg');
                 if (in_array($fileExtension, $allowedfileExtensions)) {
                     // Carica il file
                     $uploadFileDir = './uploaded_files/';
