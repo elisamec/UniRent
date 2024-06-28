@@ -20,8 +20,6 @@ class COwner
     {
         $view = new VOwner();
         $view->home();
-        print USession::getSessionElement('username');
-        print USession::getSessionElement('password');
     }
 
     public static function ownerRegistration()
@@ -136,6 +134,7 @@ class COwner
 
     public static function modifyOwnerProfile()
     {
+        $PM=FPersistentManager::getInstance();
         print 'Qui arriva';
         $name=USuperGlobalAccess::getPost('name');
         $surname=USuperGlobalAccess::getPost('surname');
@@ -144,7 +143,9 @@ class COwner
         $newPassword=USuperGlobalAccess::getPost('password');
         $newPhoneNumber=USuperGlobalAccess::getPost('phoneNumber');
         $newIBAN=USuperGlobalAccess::getPost('iban');
-        print $name.' '.$surname.' '.$newemail.' '.$newUsername.' '.$newPassword.' '.$newPhoneNumber.' '.$newIBAN;
+        #print $name.' '.$surname.' '.$newemail.' '.$newUsername.' '.$newPassword.' '.$newPhoneNumber.' '.$newIBAN;
+        $ownerId=$PM->getOwnerIdByUsername(USession::getInstance()::getSessionElement('username'));
+        $owner=$PM->load($ownerId);
     }
 
     public static function contact()
