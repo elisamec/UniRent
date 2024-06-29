@@ -113,7 +113,7 @@
                            </div>
                            <div id="div4">
                               <div class="input-group">
-                                 <input required="" type="number" name="deposit" autocomplete="off" class="input-spec">
+                                 <input required="" type="number" name="deposit" autocomplete="off" class="input-spec" title="This field is required. Put zero if you don't require a deposit.">
                                  <label class="user-label">Deposit (€)</label>
                               </div>
                            </div>
@@ -156,8 +156,8 @@
                            </div>
                             <div id="div12"> 
                             <div class="input-group">
-    <textarea class="textarea-spec" rows="5" id="comment" name="Message" required></textarea>
-    <label class="textarea-label" for="comment">Description</label>
+    <textarea class="textarea-spec" rows="5" id="notes" name="Message" required></textarea>
+    <label class="textarea-label" for="notes">Description</label>
 </div>
 </div>
                             <div id="div13">
