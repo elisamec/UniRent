@@ -42,5 +42,11 @@ class VOwner {
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->display('Owner/reviews.tpl');
     }
+
+    public function addAccomodation()
+    {
+        print 'ciao';
+        #$this->smarty->display('Owner/addAccomodation.tpl');
+    }
     
 }
