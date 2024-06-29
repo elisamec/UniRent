@@ -65,10 +65,14 @@
           <div class="Logcontainer">
             <div class="heading">Owner Sign Up</div>
             <form action="/UniRent/Owner/ownerRegistration" class="form" method="post">
-            {literal}
-              <input required="required" class="input" type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number: 1234567890" pattern="((00|\+)39[\. ]??)??3\d{2}[\. ]??\d{6,7}">
-              <input required="required" class="input" type="text" name="iban" id="iban" placeholder="IBAN" pattern="(it|IT)[0-9]{2}[A-Za-z][0-9]{10}[0-9A-Za-z]{12}">
-            {/literal}
+            {if $phoneError === true}
+            <p class="error">Please, enter a valid italian phone number</p>
+            {/if}
+              <input required="required" class="input" type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number: 1234567890">
+              {if $ibanError === true}
+            <p class="error">Please, enter a valid italian IBAN number</p>
+            {/if}
+              <input required="required" class="input" type="text" name="iban" id="iban" placeholder="IBAN">
               <input class="login-button" type="submit" value="Sign Up">
             </form>
           </div>

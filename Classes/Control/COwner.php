@@ -40,11 +40,11 @@ class COwner
         $phone = USuperGlobalAccess::getPost('phoneNumber');
         $iban = USuperGlobalAccess::getPost('iban');
 
-        if (preg_match('/^(it|IT)[0-9]{2}[A-Za-z][0-9]{10}[0-9A-Za-z]{12}$/',$iban) && preg_match('/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/',$phone) {
+        if (!verify_iban($iban) && !preg_match('/^((00|\+)39[\. ]??)??3\d{2}[\. ]??\d{6,7}$/',$phone)) {
             $view->registrationError(true, true);
-        } elseif (preg_match('/^(it|IT)[0-9]{2}[A-Za-z][0-9]{10}[0-9A-Za-z]{12}$/',$iban) {
+        } elseif (!verify_iban($iban)) {
             $view->registrationError(false, true);
-        } elseif (preg_match('/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/',$phone) {
+        } elseif (!preg_match('/^((00|\+)39[\. ]??)??3\d{2}[\. ]??\d{6,7}$/',$phone)) {
             $view->registrationError(true, false);
         } else {
             $view->registrationError(false, false);
