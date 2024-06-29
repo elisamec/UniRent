@@ -209,6 +209,7 @@
   <div class="avModal-content">
     <form id="visitAvailabilityForm">
         <h2 class="avModal-head">Disponibilità visite</h2>
+        <p> Insert the visit duration, the day for which the availability is set, and the start and end time of the availability. Based on the duration, the appointments will be calculated inside the time window you are indicating. </p>
         <div id="availabilityContainer">
             <div class="availability">
                 
