@@ -224,6 +224,7 @@
     </form>
   </div>
 </div>
+{literal}
                     <script>
 // Get the modal
 var avModal = document.getElementById("popup");
@@ -290,6 +291,7 @@ function closeModal() {
     avModal.style.display = "none";
 }
 </script>
+{/literal}
 
                </div>
                
