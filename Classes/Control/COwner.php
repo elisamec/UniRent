@@ -135,7 +135,7 @@ class COwner
             print 'Spiacenti non puoi andartene ;)';
         }
     }
-/*   FINIRE PRIMA formatPhoneNumber
+
     public static function modifyOwnerProfile()
     {
         $PM=FPersistentManager::getInstance();
@@ -207,7 +207,7 @@ class COwner
                 #header('Location:/UniRent/Owner/profile');
             }
         }
-    }*/
+    }
 
     public static function contact()
     {
