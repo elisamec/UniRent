@@ -67,7 +67,7 @@ class CUser
             $session=USession::getInstance();
             $session::setSessionElement('email', $mail);
             $session::setSessionElement('username',USuperGlobalAccess::getPost('username'));
-            if (!preg_match('/^(?=.* [a-z])(?=.* [A-Z])(?=.* \d)(?=.* [@$!%* ?&])[A-Za-z\d@$!%*?&]{8,}$/' , $password)) {
+            if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/' , $password)) {
                 $view->registrationError(false, false, false, true);
             }
             $session::setSessionElement('password',USuperGlobalAccess::getPost('password'));
