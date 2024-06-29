@@ -19,7 +19,9 @@ class VUser{
     }
 
     public function login(){
-
+        $this->smarty->assign('usernameError', false);
+        $this->smarty->assign('passwordError', false);
+        $this->smarty->assign('usernameBanned', false);
         $this->smarty->display('User/login.tpl');
     }
     public function about(){
@@ -52,10 +54,19 @@ class VUser{
 
     //Deve rimandare alla home dicendo che c'è stato un errore nel login
     //"Username or password not correct"
-    public function loginError(bool $passwordError, bool $usernameError, bool $usernameBanned){
+    public function loginError(bool $passwordError, bool $usernameError, bool $usernameBanned, string $usernameRight, string $type){
         $this->smarty->assign('usernameError', $usernameError);
         $this->smarty->assign('passwordError', $passwordError);
         $this->smarty->assign('usernameBanned', $usernameBanned);
+        $this->smarty->assign('usernameRight', $usernameRight);
+        $this->smarty->assign('type', $type);
+        $this->smarty->display('User/login.tpl');
+    }
+    public function loginUsernameError(bool $passwordError, bool $usernameError, bool $usernameBanned, string $type){
+        $this->smarty->assign('usernameError', $usernameError);
+        $this->smarty->assign('passwordError', $passwordError);
+        $this->smarty->assign('usernameBanned', $usernameBanned);
+        $this->smarty->assign('type', $type);
         $this->smarty->display('User/login.tpl');
     }
 }

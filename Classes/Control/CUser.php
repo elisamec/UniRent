@@ -114,7 +114,7 @@ class CUser
         {
             $userId = $PM->verifyUserUsername(USuperGlobalAccess::getPost('username'));
         }
-
+        print $userId;
         //If user exist, get the user and check the password
         if($userId != false)
         {
@@ -122,6 +122,7 @@ class CUser
             //Type can be Student or Owner
             $user = $PM->load("E$type", $userId);
             
+            $username =USuperGlobalAccess::getPost('username');
             $passwordIn=USuperGlobalAccess::getPost('password');
             if(password_verify($passwordIn, $user->getPassword()))
             {
@@ -134,7 +135,7 @@ class CUser
                     $session = USession::getInstance();
                     $session::setSessionElement("id", $userId);
                     $session::setSessionElement("userType", $type);
-                    $session::setSessionElement('username',USuperGlobalAccess::getPost('username'));
+                    $session::setSessionElement('username', $username);
                     $session::setSessionElement('password',USuperGlobalAccess::getPost('password'));
                     if($type === 'Student')
                     {
@@ -149,13 +150,13 @@ class CUser
             }
             else
             {
-                $view->loginError(true, false, false);
+                $view->loginError(true, false, false, $username, $type);
             }
 
         }
         else
         {
-            $view->loginError(false, true, false);
+            $view->loginUsernameError(false, true, false, $type);
         }
 
     }

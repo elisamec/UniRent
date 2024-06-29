@@ -75,10 +75,13 @@
           <div class="Logcontainer">
             <div class="heading">Log In</div>
             <form action="/UniRent/User/checkLogin" class="form" method="post">
-            
+               {if $usernameError === false and isset($usernameRight) === false}
               <input required="" class="input" type="text" name="username" id="username" placeholder="Userame">
-              {if $usernameError === true}
+              {elseif $usernameError === true}
+              <input required="" class="input" type="text" name="username" id="username" placeholder="Userame">
             <p class="error">This username does not exist</p>
+            {elseif $usernameError === false and isset($usernameRight) === true}
+               <input required="" class="input" type="text" name="username" id="username" placeholder="Userame" value="{$usernameRight}">
             {/if}
             {if $usernameBanned === true}
             <p class="error">This user is banned</p>
@@ -87,9 +90,10 @@
               {if $passwordError === true}
             <p class="error">Password is incorrect</p>
             {/if}
+            {if !isset($type) || (isset($type) && $type === "Student")}
               <div class="row">
               <div class="col-sm-6">
-               <input required="" class="radio" type="radio" name="userType" id="userType" value="Student" checked="checked">
+               <input required="" class="radio" type="radio" name="userType" id="userType" value="Student" checked>
               <label class="customlabel" for="Student">Student</label>
               </div>
                <div class="col-sm-6">
@@ -97,6 +101,18 @@
               <label class="customlabel" for="Owner">Owner</label>
               </div>
                </div>
+               {else}
+               <div class="row">
+              <div class="col-sm-6">
+               <input required="" class="radio" type="radio" name="userType" id="userType" value="Student" >
+              <label class="customlabel" for="Student">Student</label>
+              </div>
+               <div class="col-sm-6">
+              <input required="" class="radio" type="radio" name="userType" id="userType" value="Owner" checked>
+              <label class="customlabel" for="Owner">Owner</label>
+              </div>
+               </div>
+               {/if}
               <span class="forgot-password"><a href="#">Forgot Password ?</a></span>
               <input class="login-button" type="submit" onclick="location.href='/UniRent/User/checkLogin'" value="Log In">
             </form>
