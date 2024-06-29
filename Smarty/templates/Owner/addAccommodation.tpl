@@ -208,18 +208,10 @@
 <div id="popup" class="avModal">
   <div class="avModal-content">
     <form id="visitAvailabilityForm">
-        <h2 class="avModal-head">Disponibilità visite</h2>
+        <h2 class="avModal-head">Visit Availability</h2>
+        <p> Insert the visit duration, the day for which the availability is set, and the start and end time of the availability. Based on the duration, the appointments will be calculated inside the time window you are indicating. </p>
         <div id="availabilityContainer">
             <div class="availability">
-            <button type="button" onclick="removeAvailability(this)" class="button-spec little">-</button>
-                <label for="duration">Visit Duration (minutes):</label>
-                <input type="number" id="duration" name="duration" title="Please enter a number">
-                <label for="dayOfWeek">Weekday:</label>
-                <input type="text" pattern="(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)" title="Please enter a valid day of the week">
-                <label for="time">Availability start:</label>
-                <input type="time" id="start" name="start">
-                <label for="time">Availability end:</label>
-                <input type="time" id="end" name="end">
                 
             </div>
         </div>
@@ -279,6 +271,17 @@ form.addEventListener('submit', function(event) {
     }
 
     sessionStorage.setItem('availabilities', JSON.stringify(data));
+
+    fetch('/your-server-endpoint', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => console.log('Success:', data))
+    .catch((error) => console.error('Error:', error));
 
     closeModal();
 });
