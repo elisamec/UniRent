@@ -246,3 +246,9 @@ img {
   transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
   color: #999;
 }
+p.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+  margin-left: 10px;
+}

@@ -75,8 +75,18 @@
           <div class="Logcontainer">
             <div class="heading">Log In</div>
             <form action="/UniRent/User/checkLogin" class="form" method="post">
+            
               <input required="" class="input" type="text" name="username" id="username" placeholder="Userame">
+              {if $usernameError === true}
+            <p class="error">This username does not exist</p>
+            {/if}
+            {if $usernameBanned === true}
+            <p class="error">This user is banned</p>
+            {/if}
               <input required="" class="input" type="password" name="password" id="password" placeholder="Password">
+              {if $passwordError === true}
+            <p class="error">Password is incorrect</p>
+            {/if}
               <div class="row">
               <div class="col-sm-6">
                <input required="" class="radio" type="radio" name="userType" id="userType" value="Student" checked="checked">

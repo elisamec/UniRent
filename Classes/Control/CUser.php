@@ -59,8 +59,11 @@ class CUser
         $viewOwner = new VOwner();
         $PM=FPersistentManager::getInstance();
         $type = USuperGlobalAccess::getPost('userType');
+        $password = USuperGlobalAccess::getPost('password');
         $mail = USuperGlobalAccess::getPost('email');
-    
+        if (!preg_match('/^(?=.* [a-z])(?=.* [A-Z])(?=.* \d)(?=.* [@$!%* ?&])[A-Za-z\d@$!%*?&]{8,}$/' , $password)) {
+            $view->registrationError(false, false, false, true);
+        }
         if($PM->verifyUserEmail($mail)==false && $PM->verifyUserUsername(USuperGlobalAccess::getPost('username'))==false)
         {
             $session=USession::getInstance();
@@ -79,16 +82,20 @@ class CUser
 
                 }else{
                     print "Email non valida";
+                    $view->registrationError(false, false, true, false);
                 }
             }else{  
  
                 $viewOwner->showOwnerRegistration();
             }
         }  
-        else
-        {   print "Utente con tale email o username già registrato";
-            //$view->reggistrationError();
-        }   
+        elseif ($PM->verifyUserEmail($mail)==true) {
+            $view->registrationError(true, false, false, false);
+        } elseif ($PM->verifyUserUsername(USuperGlobalAccess::getPost('username'))==true) {
+            $view->registrationError(false, true, false, false);
+        } else {
+            $view->registrationError(true, true, false, false);
+        }
     }
 
     public static function checkLogin()
@@ -141,15 +148,13 @@ class CUser
             }
             else
             {
-                print "Password non corretta"; 
-                //$view->loginError();
+                $view->loginError(true, false, false);
             }
 
         }
         else
         {
-            print "Username non corretto";
-            //$view->loginError();
+            $view->loginError(false, true, false);
         }
 
     }

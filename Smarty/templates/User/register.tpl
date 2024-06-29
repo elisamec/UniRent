@@ -81,9 +81,22 @@
                </div>
               <input required="" class="input" type="text" name="name" id="name" placeholder="Name">
               <input required="" class="input" type="text" name="surname" id="surname" placeholder="Surname">
-               <input required="" class="input" type="text" name="username" id="username" placeholder="Username"> 
+               
+               <input required="" class="input" type="text" name="username" id="username" placeholder="Username">
+               {if $userDuplicateError === true}
+               <p class="error">This username is already taken</p>
+               {/if}
               <input required="" class="input" type="email" name="email" id="email" placeholder="E-mail">
+              {if $studentMailError === true}
+               <p class="error">You need to insert a university mail.</p>
+               {/if}
+               {if $mailDuplicateError === true}
+               <p class="error">This e-mail is already in use.</p>
+               {/if}
               <input required="" class="input" type="password" name="password" id="password" placeholder="Password">
+              {if $passwordFormatError === true}
+               <p class="error"> The password needs to be at least 8 characters long, with 1 special caracter, 1 number, 1 uppercase and 1 lowercase character</p>
+               {/if} 
               <button class="login-button" type="submit">Next</button>
             </form>
           </div>
