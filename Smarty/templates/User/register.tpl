@@ -69,9 +69,10 @@
             <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
             <input class="file-upload" type="file" id="img" name="img" accept="image/png" hidden>
               <label class="label-button">Upload Profile Picture</label>
-            <div class="row">
+            {if !isset($type) || (isset($type) && $type === "Student")}
+              <div class="row">
               <div class="col-sm-6">
-               <input required="" class="radio" type="radio" name="userType" id="userType" value="Student" checked="checked">
+               <input required="" class="radio" type="radio" name="userType" id="userType" value="Student" checked>
               <label class="customlabel" for="Student">Student</label>
               </div>
                <div class="col-sm-6">
@@ -79,20 +80,56 @@
               <label class="customlabel" for="Owner">Owner</label>
               </div>
                </div>
+               {else}
+               <div class="row">
+              <div class="col-sm-6">
+               <input required="" class="radio" type="radio" name="userType" id="userType" value="Student" >
+              <label class="customlabel" for="Student">Student</label>
+              </div>
+               <div class="col-sm-6">
+              <input required="" class="radio" type="radio" name="userType" id="userType" value="Owner" checked>
+              <label class="customlabel" for="Owner">Owner</label>
+              </div>
+               </div>
+               {/if}
+               {if isset($name) && $name !== ""}
+              <input required="" class="input" type="text" name="name" id="name" placeholder="Name" value="{$name}">
+              {else}
               <input required="" class="input" type="text" name="name" id="name" placeholder="Name">
+              {/if}
+
+              {if isset($surname) && $surname !== ""}
+              <input required="" class="input" type="text" name="surname" id="surname" placeholder="Surname" value="{$surname}">
+              {else}
               <input required="" class="input" type="text" name="surname" id="surname" placeholder="Surname">
+              {/if}
                
-               <input required="" class="input" type="text" name="username" id="username" placeholder="Username">
+               
                {if $userDuplicateError === true}
+               <input required="" class="input" type="text" name="username" id="username" placeholder="Username">
                <p class="error">This username is already taken</p>
+               {else}
+               {if isset($username) && $username !== ""}
+               <input required="" class="input" type="text" name="username" id="username" placeholder="Username" value="{$username}">
+               {else}
+               <input required="" class="input" type="text" name="username" id="username" placeholder="Username">
                {/if}
-              <input required="" class="input" type="email" name="email" id="email" placeholder="E-mail">
+               {/if}
+              
               {if $studentMailError === true}
+              <input required="" class="input" type="email" name="email" id="email" placeholder="E-mail">
                <p class="error">You need to insert a university mail.</p>
-               {/if}
-               {if $mailDuplicateError === true}
+               {elseif $mailDuplicateError === true}
+               <input required="" class="input" type="email" name="email" id="email" placeholder="E-mail">
                <p class="error">This e-mail is already in use.</p>
+               {else}
+               {if isset($email) && $email !== ""}
+               <input required="" class="input" type="email" name="email" id="email" placeholder="E-mail" value="{$email}">
+               {else}
+               <input required="" class="input" type="email" name="email" id="email" placeholder="E-mail">
                {/if}
+               {/if}
+
               <input required="" class="input" type="password" name="password" id="password" placeholder="Password">
               {if $passwordFormatError === true}
                <p class="error"> The password needs to be at least 8 characters long, with 1 special caracter, 1 number, 1 uppercase and 1 lowercase character</p>

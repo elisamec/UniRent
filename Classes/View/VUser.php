@@ -44,11 +44,16 @@ class VUser{
 
     //Deve rimandare alla home dicendo che c'è stato un errore
     //L'errore potrebbe essere dovuto a username o email già presenti nel database
-    public function registrationError(bool $mailDuplicateError, bool $userDuplicateError, bool $studentMailError, bool $passwordFormatError){
+    public function registrationError(bool $mailDuplicateError, bool $userDuplicateError, bool $studentMailError, bool $passwordFormatError, string $username, string $email, string $name, string $surname, string $type){
         $this->smarty->assign('userDuplicateError', $userDuplicateError);
         $this->smarty->assign('studentMailError', $studentMailError);
         $this->smarty->assign('passwordFormatError', $passwordFormatError);
         $this->smarty->assign('mailDuplicateError', $mailDuplicateError);
+        $this->smarty->assign('username', $username);
+        $this->smarty->assign('email', $email);
+        $this->smarty->assign('name', $name);
+        $this->smarty->assign('surname', $surname);
+        $this->smarty->assign('type', $type);
         $this->smarty->display('User/register.tpl');
     }
 
