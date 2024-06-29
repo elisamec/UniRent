@@ -32,6 +32,8 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
       <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/home.css">
       <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/cookie.css">
+      <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
    </head>
    <body onload="on()">
       <div class="header_section">
@@ -209,21 +211,23 @@
         <h2 class="avModal-head">Disponibilità visite</h2>
         <div id="availabilityContainer">
             <div class="availability">
-                <label for="duration">Durata della visita:</label>
-                <input type="text" id="duration" name="duration">
-                <label for="day">Giorno della settimana:</label>
-                <input type="text" id="day" name="day">
-                <label for="time">Ora:</label>
-                <input type="time" id="time" name="time">
-                <button type="button" onclick="removeAvailability(this)" class="button-spec little">-</button>
+            <button type="button" onclick="removeAvailability(this)" class="button-spec little">-</button>
+                <label for="duration">Visit Duration (minutes):</label>
+                <input type="number" id="duration" name="duration" title="Please enter a number">
+                <label for="dayOfWeek">Weekday:</label>
+                <input type="text" pattern="(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)" title="Please enter a valid day of the week">
+                <label for="time">Availability start:</label>
+                <input type="time" id="start" name="start">
+                <label for="time">Availability end:</label>
+                <input type="time" id="end" name="end">
+                
             </div>
         </div>
-        <div class="col-md-6">
-        <button type="button" onclick="addAvailability()" class="button-spec">+</button>
+        <button type="button" onclick="addAvailability()" class="button-spec little1">+</button>
+        <div class="column">
         <button type="submit" class="button-spec final">Conferma</button>
-        
         <button type="button" onclick="closeModal()" class="button-spec final">Annulla</button>
-        </div>
+         </div>
     </form>
   </div>
 </div>
@@ -240,13 +244,16 @@ function addAvailability() {
     let availability = document.createElement('div');
     availability.className = 'availability';
     availability.innerHTML = `
-        <label for="duration">Durata della visita:</label>
-        <input type="text" id="duration" name="duration">
-        <label for="day">Giorno della settimana:</label>
-        <input type="text" id="day" name="day">
-        <label for="time">Ora:</label>
-        <input type="time" id="time" name="time">
-        <button type="button" onclick="removeAvailability(this)">-</button>
+         <button type="button" onclick="removeAvailability(this)" class="button-spec little">-</button>
+                <label for="duration">Visit Duration (minutes):</label>
+                <input type="number" id="duration" name="duration" title="Please enter a number">
+                <label for="dayOfWeek">Weekday:</label>
+                <input type="text" pattern="(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)" title="Please enter a valid day of the week">
+                <label for="time">Availability start:</label>
+                <input type="time" id="start" name="start">
+                <label for="time">Availability end:</label>
+                <input type="time" id="end" name="end">
+                
     `;
     container.appendChild(availability);
 }
@@ -314,8 +321,6 @@ function closeModal() {
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
-</script>
-      
 
  
 </script>
@@ -376,4 +381,18 @@ document.querySelector('#Date2').addEventListener('blur', function (e) {
     this.type = 'text';
 });
 </script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+
+<script>
+$(function() {
+    var daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    $("#dayOfWeek").autocomplete({
+        source: daysOfWeek
+    });
+});
+</script>
+
    </body>
