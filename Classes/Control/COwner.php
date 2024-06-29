@@ -40,6 +40,16 @@ class COwner
         $phone = USuperGlobalAccess::getPost('phoneNumber');
         $iban = USuperGlobalAccess::getPost('iban');
 
+        if (preg_match('/^(it|IT)[0-9]{2}[A-Za-z][0-9]{10}[0-9A-Za-z]{12}$/',$iban) && preg_match('/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/',$phone) {
+            $view->registrationError(true, true);
+        } elseif (preg_match('/^(it|IT)[0-9]{2}[A-Za-z][0-9]{10}[0-9A-Za-z]{12}$/',$iban) {
+            $view->registrationError(false, true);
+        } elseif (preg_match('/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/',$phone) {
+            $view->registrationError(true, false);
+        } else {
+            $view->registrationError(false, false);
+        }
+
         $owner = new EOwner(null,
                             $session->getSessionElement('username'),
                             $session->getSessionElement('password'),
