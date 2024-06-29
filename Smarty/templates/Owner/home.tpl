@@ -85,7 +85,7 @@
       <!-- header section end -->
       <!-- feature section start -->
       <div class="container">
-      <div class="new_bt"><a href="/UniRent/Owner/addAccomodation">Add a new Accommodation</a></div>
+      <div class="new_bt"><a href="/UniRent/Owner/addAccommodation">Add a new Accommodation</a></div>
       </div>
       <div class="Properties_section layout_padding">
          <div class="container">

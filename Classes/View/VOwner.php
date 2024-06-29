@@ -43,10 +43,9 @@ class VOwner {
         $this->smarty->display('Owner/reviews.tpl');
     }
 
-    public function addAccomodation()
+    public function addAccommodation()
     {
         print 'ciao';
-        #$this->smarty->display('Owner/addAccomodation.tpl');
-    }
-    
+        $this->smarty->display('Owner/addAccomodation.tpl');
+    }  
 }
