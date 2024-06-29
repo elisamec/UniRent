@@ -217,8 +217,8 @@
         </div>
         <button type="button" onclick="addAvailability()" class="button-spec little1">+</button>
         <div class="column">
-        <button type="submit" class="button-spec final">Conferma</button>
-        <button type="button" onclick="closeModal()" class="button-spec final">Annulla</button>
+        <button type="submit" class="button-spec final">Submit</button>
+        <button type="button" onclick="closeModal()" class="button-spec final">Cancel</button>
          </div>
     </form>
   </div>
