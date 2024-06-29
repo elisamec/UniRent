@@ -237,7 +237,6 @@ class COwner
 
     public static function addAccommodation()
     {
-        print 'sono qui';
         $view=new VOwner();
         $view->addAccommodation();
     }

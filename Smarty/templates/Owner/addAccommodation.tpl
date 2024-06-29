@@ -101,38 +101,37 @@
                            </div>
                            <div id="div2">
                               <div class="input-group">
-                                 <input required="" type="text" name="title" autocomplete="off" class="input-spec">
+                                 <input title=" " required="" type="text" name="title" autocomplete="off" class="input-spec">
                                  <label class="user-label">Title</label>
                               </div>
                            </div>
                            <div id="div3">
                               <div class="input-group">
-                                 <input required="" type="number" name="price" autocomplete="off" class="input-spec">
+                                 <input title=" " required="" type="number" name="price" autocomplete="off" class="input-spec">
                                  <label class="user-label">Monthly Price (€)</label>
                               </div>
                            </div>
                            <div id="div4">
                               <div class="input-group">
-                                 <input required="" type="number" name="deposit" autocomplete="off" class="input-spec" oninvalid="this.setCustomValidity('Enter 0 if no deposit is required')"
-       oninput="this.setCustomValidity('')">
+                                 <input required="" type="number" name="deposit" autocomplete="off" class="input-spec" title=" " oninvalid="this.setCustomValidity('Enter 0 if no deposit is required')">
                                  <label class="user-label">Deposit (€)</label>
                               </div>
                            </div>
                            <div id="div5">
                               <div class="input-group">
-                                 <input id="Date" required="" type="text" name="startDate" autocomplete="off" class="input-spec">
+                                 <input title=" " id="Date" required="" type="text" name="startDate" autocomplete="off" class="input-spec">
                                  <label class="user-label">Start date</label>
                               </div>
                            </div>
                            <div id="div6">
                               <div class="input-group">
-                                 <input id="Date2" required="" type="text" name="endDate" autocomplete="off" class="input-spec">
+                                 <input title=" " id="Date2" required="" type="text" name="endDate" autocomplete="off" class="input-spec">
                                  <label class="user-label">End date</label>
                               </div>
                            </div>
                            <div id="div7">
                               <div class="input-group">
-                                 <input required="" type="text" name="address" autocomplete="off" class="input-spec">
+                                 <input title=" " required="" type="text" name="address" autocomplete="off" class="input-spec">
                                  <label class="user-label">Address</label>
                               </div>
                            </div>
@@ -145,19 +144,19 @@
                            </div>
                            <div id="div9">
                            <div class="input-group">
-                                 <input required="" type="text" name="city" autocomplete="off" class="input-spec">
+                                 <input title=" " required="" type="text" name="city" autocomplete="off" class="input-spec">
                                  <label class="user-label">City</label>
                               </div>
                            </div>
                             <div id="div10">
                             <div class="input-group">
-                                 <input required="" type="number" name="postalCode" autocomplete="off" class="input-spec">
+                                 <input title=" " required="" type="number" name="postalCode" autocomplete="off" class="input-spec">
                                  <label class="user-label">Postal Code</label>
                               </div>
                            </div>
                             <div id="div12"> 
                             <div class="input-group">
-    <textarea class="textarea-spec" rows="5" id="notes" name="Message" required></textarea>
+    <textarea title=" " class="textarea-spec" rows="5" id="notes" name="Message" required></textarea>
     <label class="textarea-label" for="notes">Description</label>
 </div>
 </div>
