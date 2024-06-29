@@ -108,12 +108,13 @@
                            <div id="div3">
                               <div class="input-group">
                                  <input required="" type="number" name="price" autocomplete="off" class="input-spec">
-                                 <label class="user-label">Price (€)</label>
+                                 <label class="user-label">Monthly Price (€)</label>
                               </div>
                            </div>
                            <div id="div4">
                               <div class="input-group">
-                                 <input required="" type="number" name="deposit" autocomplete="off" class="input-spec" title="This field is required. Put zero if you don't require a deposit.">
+                                 <input required="" type="number" name="deposit" autocomplete="off" class="input-spec" oninvalid="this.setCustomValidity('Enter 0 if no deposit is required')"
+       oninput="this.setCustomValidity('')">
                                  <label class="user-label">Deposit (€)</label>
                               </div>
                            </div>
