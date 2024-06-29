@@ -61,14 +61,15 @@ class CUser
         $type = USuperGlobalAccess::getPost('userType');
         $password = USuperGlobalAccess::getPost('password');
         $mail = USuperGlobalAccess::getPost('email');
-        if (!preg_match('/^(?=.* [a-z])(?=.* [A-Z])(?=.* \d)(?=.* [@$!%* ?&])[A-Za-z\d@$!%*?&]{8,}$/' , $password)) {
-            $view->registrationError(false, false, false, true);
-        }
+        
         if($PM->verifyUserEmail($mail)==false && $PM->verifyUserUsername(USuperGlobalAccess::getPost('username'))==false)
         {
             $session=USession::getInstance();
             $session::setSessionElement('email', $mail);
             $session::setSessionElement('username',USuperGlobalAccess::getPost('username'));
+            if (!preg_match('/^(?=.* [a-z])(?=.* [A-Z])(?=.* \d)(?=.* [@$!%* ?&])[A-Za-z\d@$!%*?&]{8,}$/' , $password)) {
+                $view->registrationError(false, false, false, true);
+            }
             $session::setSessionElement('password',USuperGlobalAccess::getPost('password'));
             $session::setSessionElement('name',USuperGlobalAccess::getPost('name'));
             $session::setSessionElement('surname',USuperGlobalAccess::getPost('surname'));
@@ -88,13 +89,13 @@ class CUser
  
                 $viewOwner->showOwnerRegistration();
             }
-        }  
+        } elseif ($PM->verifyUserUsername(USuperGlobalAccess::getPost('username'))==true && $PM->verifyUserEmail($mail)==true) {
+            $view->registrationError(true, true, false, false);
+        }
         elseif ($PM->verifyUserEmail($mail)==true) {
             $view->registrationError(true, false, false, false);
-        } elseif ($PM->verifyUserUsername(USuperGlobalAccess::getPost('username'))==true) {
+        }  else {
             $view->registrationError(false, true, false, false);
-        } else {
-            $view->registrationError(true, true, false, false);
         }
     }
 
