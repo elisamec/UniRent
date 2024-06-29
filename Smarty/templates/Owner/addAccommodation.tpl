@@ -108,12 +108,13 @@
                            <div id="div3">
                               <div class="input-group">
                                  <input required="" type="number" name="price" autocomplete="off" class="input-spec">
-                                 <label class="user-label">Price (€)</label>
+                                 <label class="user-label">Monthly Price (€)</label>
                               </div>
                            </div>
                            <div id="div4">
                               <div class="input-group">
-                                 <input required="" type="number" name="deposit" autocomplete="off" class="input-spec">
+                                 <input required="" type="number" name="deposit" autocomplete="off" class="input-spec" oninvalid="this.setCustomValidity('Enter 0 if no deposit is required')"
+       oninput="this.setCustomValidity('')">
                                  <label class="user-label">Deposit (€)</label>
                               </div>
                            </div>
@@ -156,8 +157,8 @@
                            </div>
                             <div id="div12"> 
                             <div class="input-group">
-    <textarea class="textarea-spec" rows="5" id="comment" name="Message" required></textarea>
-    <label class="textarea-label" for="comment">Description</label>
+    <textarea class="textarea-spec" rows="5" id="notes" name="Message" required></textarea>
+    <label class="textarea-label" for="notes">Description</label>
 </div>
 </div>
                             <div id="div13">
@@ -217,8 +218,8 @@
         </div>
         <button type="button" onclick="addAvailability()" class="button-spec little1">+</button>
         <div class="column">
-        <button type="submit" class="button-spec final">Conferma</button>
-        <button type="button" onclick="closeModal()" class="button-spec final">Annulla</button>
+        <button type="submit" class="button-spec final">Submit</button>
+        <button type="button" onclick="closeModal()" class="button-spec final">Cancel</button>
          </div>
     </form>
   </div>
