@@ -41,13 +41,11 @@ class COwner
         $iban = USuperGlobalAccess::getPost('iban');
 
         if (!verify_iban($iban) && !preg_match('/^((00|\+)39[\. ]??)??3\d{2}[\. ]??\d{6,7}$/',$phone)) {
-            $view->registrationError(true, true);
+            $view->registrationError(true, true, "", "");
         } elseif (!verify_iban($iban)) {
-            $view->registrationError(false, true);
+            $view->registrationError(false, true, $phone, "");
         } elseif (!preg_match('/^((00|\+)39[\. ]??)??3\d{2}[\. ]??\d{6,7}$/',$phone)) {
-            $view->registrationError(true, false);
-        } else {
-            $view->registrationError(false, false);
+            $view->registrationError(true, false, "", $iban);
         }
 
         $owner = new EOwner(null,

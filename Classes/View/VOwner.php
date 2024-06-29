@@ -22,9 +22,11 @@ class VOwner {
     public function showOwnerRegistration(){
         $this->smarty->display('Owner/register.tpl');
     }
-    public function registrationError(bool $phoneError, bool $ibanError){
+    public function registrationError(bool $phoneError, bool $ibanError, string $phone, string $iban){
         $this->smarty->assign('phoneError', $phoneError);
         $this->smarty->assign('ibanError', $ibanError);
+        $this->smarty->assign('phone', $phone);
+        $this->smarty->assign('iban', $iban);
         $this->smarty->display('Owner/register.tpl');
     }
 

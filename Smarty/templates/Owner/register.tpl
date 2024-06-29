@@ -66,13 +66,27 @@
             <div class="heading">Owner Sign Up</div>
             <form action="/UniRent/Owner/ownerRegistration" class="form" method="post">
             {if $phoneError === true}
+            <input required="required" class="input" type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number: 1234567890">
             <p class="error">Please, enter a valid italian phone number</p>
-            {/if}
+            {else}
+            {if (isset($phone) && $phone !== "") || !isset($phone)}
               <input required="required" class="input" type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number: 1234567890">
-              {if $ibanError === true}
-            <p class="error">Please, enter a valid italian IBAN number</p>
+            {else}
+               <input required="required" class="input" type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number: 1234567890" value="{$phone}">
             {/if}
-              <input required="required" class="input" type="text" name="iban" id="iban" placeholder="IBAN">
+            {/if}
+              
+              {if $ibanError === true}
+               <input required="required" class="input" type="text" name="iban" id="iban" placeholder="IBAN">
+               <p class="error">Please, enter a valid IBAN number</p>
+               {else}
+               {if (isset($iban) && $iban !== "") || !isset($iban)}
+               <input required="required" class="input" type="text" name="iban" id="iban" placeholder="IBAN">
+               {else}
+               <input required="required" class="input" type="text" name="iban" id="iban" placeholder="IBAN" value="{$iban}">
+               {/if}
+            {/if}
+             
               <input class="login-button" type="submit" value="Sign Up">
             </form>
           </div>
