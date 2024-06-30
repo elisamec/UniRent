@@ -28,6 +28,7 @@
       <!-- Include Font Awesome -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
       <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/login.css">
+      <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/adminLog.css">
       <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/cookie.css">
 </head>
 <body onload="on()">
@@ -42,9 +43,9 @@
       </div>
       </div>
       <!-- banner section start --> 
-      <div class="layout_padding">
+      <div class="admin">
         <div class="container">
-          <div class="Logcontainer">
+          <div class="LogcontainerAdmin">
             <div class="heading">Log In</div>
             {if $usernameError === true}
                <h1 class="error">Username incorrect</h1>
@@ -59,7 +60,6 @@
           </div>
         </div>
       </div>
-      <!-- footer section end -->
 <script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>
       <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
