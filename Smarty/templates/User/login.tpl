@@ -81,10 +81,10 @@
                <h1 class="error">This user has been banned</h1>
             {/if}
             <form action="/UniRent/User/checkLogin" class="form" method="post">
-              <input required="" class="input" type="text" name="username" id="username" placeholder="Userame">
+              <input required class="input" type="text" name="username" id="username" placeholder="Userame">
               
             
-              <input required="" class="input" type="password" name="password" id="password" placeholder="Password">
+              <input required class="input" type="password" name="password" id="password" placeholder="Password">
             {if !isset($type) || (isset($type) && $type === "Student") || (isset($type) && $type === "")}
               <div class="row">
               <div class="col-sm-6">
@@ -109,7 +109,7 @@
                </div>
                {/if}
               <span class="forgot-password"><a href="#">Forgot Password ?</a></span>
-              <input class="login-button" type="submit" onclick="location.href='/UniRent/User/checkLogin'" value="Log In">
+              <input class="login-button" type="submit" value="Log In">
             </form>
             <div class="subheading">You don't have an account?</div>
             <form class="form">
