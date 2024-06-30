@@ -257,3 +257,8 @@ h1.error {
   text-align: center;
   margin-top: 5px;
 }
+p.center {
+  text-align: center;
+  margin-top: 0px;
+  margin-left: 0px;
+}

@@ -76,7 +76,7 @@
             <div class="heading">Log In</div>
             {if $usernameError === true || $passwordError === true}
                <h1 class="error">Username or password are incorrect</h1>
-               <p class="error">Note: you could have selected the wrong user type.</p>
+               <p class="error center">Note: you may have selected the wrong user type.</p>
             {elseif $usernameBanned === true}
                <h1 class="error">This user has been banned</h1>
             {/if}
