@@ -74,18 +74,15 @@
         <div class="container">
           <div class="Logcontainer">
             <div class="heading">Log In</div>
+            {if $usernameError === true || $passwordError === true}
+               <h1 class="error">Username or password are incorrect</h1>
+            {elseif $usernameBanned === true}
+               <h1 class="error">This user has been banned</h1>
+            {/if}
             <form action="/UniRent/User/checkLogin" class="form" method="post">
-               {if $usernameError === false and isset($usernameRight) === false}
               <input required="" class="input" type="text" name="username" id="username" placeholder="Userame">
-              {elseif $usernameError === true}
-              <input required="" class="input" type="text" name="username" id="username" placeholder="Userame">
-            <p class="error">This username does not exist</p>
-            {elseif $usernameError === false and isset($usernameRight) and $usernameRight !== ""}
-               <input required="" class="input" type="text" name="username" id="username" placeholder="Userame" value="{$usernameRight}">
-            {/if}
-            {if $usernameBanned === true}
-            <p class="error">This user is banned</p>
-            {/if}
+              
+            
               <input required="" class="input" type="password" name="password" id="password" placeholder="Password">
               {if $passwordError === true}
             <p class="error">Password is incorrect</p>
