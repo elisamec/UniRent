@@ -108,35 +108,26 @@ class CUser
         $view = new VUser();
         $viewStudent = new VStudent();
         $viewOwner = new VOwner();
+        $username=USuperGlobalAccess::getPost('username');
         $type = USuperGlobalAccess::getPost('userType');
         $PM = FPersistentManager::getInstance();
-        $userId = false;
-
-        //Get id of user based on him username
-        if($type === 'Student' || $type === 'Owner')
-        {
-            $userId = $PM->verifyUserUsername(USuperGlobalAccess::getPost('username'));
-        }
-        print $userId;
+        $result_username_array = $PM->verifyUserUsername($username);
+        
         //If user exist, get the user and check the password
-        if($userId != false)
+        if($result_username_array != false)
         {
-             
-            //Type can be Student or Owner
-            $user = $PM->load("E$type", $userId);
-            
-            $username =USuperGlobalAccess::getPost('username');
-            $passwordIn=USuperGlobalAccess::getPost('password');
-            if(password_verify($passwordIn, $user->getPassword()))
+
+            if($result_username_array['type']==$type) #if exist an username for that tipe
             {
-                
-                $session = USession::getInstance();
-                print $session::getSessionStatus();
-                
-                #if($session::getSessionStatus() === PHP_SESSION_ACTIVE){
-                    
+                $user = $PM->load("E$type", $result_username_array['id']);
+                $passwordIn=USuperGlobalAccess::getPost('password');
+
+                if(password_verify($passwordIn, $user->getPassword()))
+                {
+                    print 'La password è corretta!';
+                   
                     $session = USession::getInstance();
-                    $session::setSessionElement("id", $userId);
+                    $session::setSessionElement("id", $result_username_array['id']);
                     $session::setSessionElement("userType", $type);
                     $session::setSessionElement('username', $username);
                     $session::setSessionElement('password',USuperGlobalAccess::getPost('password'));
@@ -147,28 +138,31 @@ class CUser
                     else 
                     {
                         header('Location:/UniRent/Owner/home');
-                    }
-                    //else $viewOwner->home();
-               # }
+                    }  
+                }
+                else  #password is not correct
+                {
+                    $view->loginError(true, false, false, $username, $type);
+                }
             }
-            else
+            else  #dose not exist an username for that type
             {
-                $view->loginError(true, false, false, $username, $type);
+                $view->loginError(false, true, false, $username, $type);
             }
 
         }
-        else
+        else  #user dose not exist
         {
-            $view->loginUsernameError(false, true, false, $type);
+           $view->loginUsernameError(false, true, false, $type);
         }
-
     }
 
     /**
      * this method can logout the User, unsetting all the session element and destroing the session. Return the user to the Login Page
      * @return void
      */
-    public static function logout(){
+    public static function logout()
+    {
         $session=USession::getInstance();
         $session::unsetSession();
         $session::destroySession();

@@ -140,23 +140,36 @@ class FPersistentManager {
             return false;
         }
     }
-    
-    public function verifyUserUsername(string $username):bool|int
+        
+    /**
+     * Method verifyUserUsername
+     *
+     * this method return the type of the user and his id in the db
+     * @param string $username [user's username]
+     *
+     * @return array|bool
+     */
+    public function verifyUserUsername(string $username):array|bool
     {
+        $result=array();
         $FO=Foundation\FOwner::getInstance();
         $FS=Foundation\FStudent::getInstance();
         $resultS=$FS->verifyUsername($username);
         $resultO=$FO->verifyUsername($username);
-
-        if($resultS != false){
-            return $resultS;
+        if($resultS!=false)
+        {
+            $result['type']='Student';
+            $result['id']=$resultS;
+            return $result;
         }
-        elseif ($resultO != false){
-
-            return $resultO;
-
-        }else{
-
+        elseif($resultO!=false)
+        {
+            $result['type']='Owner';
+            $result['id']=$resultO;
+            return $result;
+        }
+        else
+        {
             return false;
         }
     }
