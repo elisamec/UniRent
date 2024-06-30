@@ -44,7 +44,7 @@ class FStudent
         }
         return false;
     }
-    public function load(int $id):EStudent |bool
+    public function load(int $id):?EStudent
     {
         $db=FConnection::getInstance()->getConnection();
         if($this->exist($id))
@@ -81,7 +81,7 @@ class FStudent
         }
         else
         {
-            return false;
+            return null;
         }
     }
     public function store(EStudent $student):bool

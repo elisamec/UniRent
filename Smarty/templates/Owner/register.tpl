@@ -66,24 +66,24 @@
             <div class="heading">Owner Sign Up</div>
             <form action="/UniRent/Owner/ownerRegistration" class="form" method="post">
             {if $phoneError === true}
-            <input required="required" class="input" type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number: 1234567890">
+            <input required="required" class="input" type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number: 1234567890" pattern="^((00|\+)39\s?)?3\d&#123;2&#125;\s?\d&#123;3&#125;\s?\d&#123;4&#125;$">
             <p class="error">Please, enter a valid italian phone number</p>
             {else}
             {if (isset($phone) && $phone !== "") || !isset($phone)}
-              <input required="required" class="input" type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number: 1234567890">
+              <input required="required" class="input" type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number: 1234567890" pattern="^((00|\+)39\s?)?3\d&#123;2&#125;\s?\d&#123;3&#125;\s?\d&#123;4&#125;$">
             {else}
-               <input required="required" class="input" type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number: 1234567890" value="{$phone}">
+               <input required="required" class="input" type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number: 1234567890" value="{$phone}" pattern="^((00|\+)39\s?)?3\d&#123;2&#125;\s?\d&#123;3&#125;\s?\d&#123;4&#125;$">
             {/if}
             {/if}
               
               {if $ibanError === true}
-               <input required="required" class="input" type="text" name="iban" id="iban" placeholder="IBAN">
+               <input required="required" class="input" type="text" name="iban" id="iban" placeholder="IBAN" pattern="(it|IT)&#91;0-9&#93;&#123;2&#125;[A-Za-z][0-9]&#123;10&#125;[0-9A-Za-z]&#123;12&#125;$">
                <p class="error">Please, enter a valid IBAN number</p>
                {else}
                {if (isset($iban) && $iban !== "") || !isset($iban)}
-               <input required="required" class="input" type="text" name="iban" id="iban" placeholder="IBAN">
+               <input required="required" class="input" type="text" name="iban" id="iban" placeholder="IBAN" pattern="(it|IT)&#91;0-9&#93;&#123;2&#125;[A-Za-z][0-9]&#123;10&#125;[0-9A-Za-z]&#123;12&#125;$">
                {else}
-               <input required="required" class="input" type="text" name="iban" id="iban" placeholder="IBAN" value="{$iban}">
+               <input required="required" class="input" type="text" name="iban" id="iban" placeholder="IBAN"  value="{$iban}" pattern="(it|IT)&#91;0-9&#93;&#123;2&#125;[A-Za-z][0-9]&#123;10&#125;[0-9A-Za-z]&#123;12&#125;$">
                {/if}
             {/if}
              

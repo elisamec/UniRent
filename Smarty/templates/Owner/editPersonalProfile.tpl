@@ -88,18 +88,18 @@
          <div class="sidebar">
          <div class="col-md-3">
             <div class="sidebar_but active"><a href="/UniRent/Owner/profile">Profile</a></div>
-            </div>
-            <div class="col-md-3">
+         </div>
+         <div class="col-md-3">
             <div class="sidebar_but"><a href="/UniRent/Owner/reviews">Reviews</a></div>
-            </div>
+         </div>
             
-            <div class="col-md-3">
+         <div class="col-md-3">
             <div class="sidebar_but log"><a href="/UniRent/User/logout">Logout</a></div>
-            </div>
+         </div>
          </div>
          </div>
             <div class="col-md-6">
-                  <div class="profile_info">
+               <div class="profile_info">
                   <form class="form"  action="/UniRent/Owner/modifyOwnerProfile"  method="POST" id="yourFormId">
                      <div class="parentOW">
                         <div class="div1"><p>Name: </p></div>
@@ -120,33 +120,33 @@
                         </div>
                         <div class="div9"><p>Phone Number: </p></div>
                         <div class="div10">
-                              <input required class="input" type="tel" name="phoneNumber" id="phoneNumber" value="{$owner->getPhoneNumber()}" pattern="^((00|\+)39[\. ]??)?3\d{2}[\. ]??\d{6}$">
+                              <input required="required" class="input" type="text" name="phoneNumber" id="phoneNumber" value="{$owner->getPhoneNumber()}" pattern="^((00|\+)39\s?)?3\d&#123;2&#125;\s?\d&#123;3&#125;\s?\d&#123;4&#125;$">
                         </div>
                         <div class="div11"><p>IBAN: </p></div>
                         <div class="div12">
-                           <input required="required" class="input" type="text" name="iban" id="iban" value="{$owner->getIBAN()}" pattern="(it|IT)[0-9]{2}[A-Za-z][0-9]{10}[0-9A-Za-z]{12}">
+                           <input required="required" class="input" type="text" name="iban" id="iban" value="{$owner->getIBAN()}" pattern="(it|IT)&#91;0-9&#93;&#123;2&#125;[A-Za-z][0-9]&#123;10&#125;[0-9A-Za-z]&#123;12&#125;$">
                         </div>
                         <div class="div13"><p>Password: </p></div>
                         <div class="div14">
                            <input class="profile-input" type="password" name="password" id="password">
                         </div>
-                     </form>
+                  
                      <div class="div15"><p>Delete Profile: </p></div>
                      <div class="div16">
                         <div class="delete_btn"><a href="/UniRent/Owner/deleteProfile">Delete</a></div>
-                  </div>
+                     </div>
                </div>
                <div class="container">
                   <div class="row">
                      <div class="col-md-4">
-                     <div class="find_btn"><button type="submit" id="yourLinkId">Confirm</button></div>
+                     <div class="find_btn"><button type="submit" id="yourLink">Confirm</button></div>
                      </div>
                      <div class="col-md-4">
                      <div  class="find_btn"><a href="/UniRent/Owner/profile">Cancel</a></div>
-                     </div>
                   </div>
                </div>
-               </div>
+            </div></form>
+         </div>
                
             </div>
          </div>
@@ -185,12 +185,6 @@
       <script src="/UniRent/Smarty/js/custom.js"></script>
 </script>
       
-
- <script>
-      document.getElementById("yourLinkId").onclick = function() {
-    document.getElementById("yourFormId").submit();
-}
-   </script>
       <div class="modal" id="myModal">
       <div class"container-fluid">
       <div class="card">

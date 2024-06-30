@@ -37,17 +37,21 @@ class COwner
             $photo = null;
         } 
 
-        $phone = USuperGlobalAccess::getPost('phoneNumber');
+        $phone = EOwner::formatPhoneNumber(USuperGlobalAccess::getPost('phoneNumber'));
         $iban = USuperGlobalAccess::getPost('iban');
-
-        if (!verify_iban($iban) && !preg_match('/^((00|\+)39[\. ]??)??3\d{2}[\. ]??\d{6,7}$/',$phone)) {
+        $verifyIBAN=$PM->verifyIBAN($iban);   #da true se l'iban è presente
+        $verifyPhoneNumber=$PM->verifyPhoneNumber($phone); #da true se il numero di telefono è presente
+        #print 'phone prima:'.$phone;
+        #print '  phone dopo:'.EOwner::formatPhoneNumber($phone);
+        
+        if ($verifyIBAN && $verifyPhoneNumber) {    # c'è già un utente con lo stesso iban e lo stesso numero di telefono
             $view->registrationError(true, true, "", "");
-        } elseif (!verify_iban($iban)) {
+        } elseif ($verifyIBAN) {  # se solo l'iban è già presente
             $view->registrationError(false, true, $phone, "");
-        } elseif (!preg_match('/^((00|\+)39[\. ]??)??3\d{2}[\. ]??\d{6,7}$/',$phone)) {
+        } elseif ($verifyPhoneNumber) {  # se solo il numero di telefono è già presente
             $view->registrationError(true, false, "", $iban);
         }
-
+        // in alternativa tutto è valido quindi creo il nuovo owner per fare store
         $owner = new EOwner(null,
                             $session->getSessionElement('username'),
                             $session->getSessionElement('password'),
@@ -152,12 +156,13 @@ class COwner
         }
         else
         {
-            $owner=$PM->load("EOwner", $ownerId);
+            $owner=$PM->load("EOwner", $ownerId);    
+            
             if(($newemail===$owner->getMail())||($PM->verifyUserEmail($newemail)===false))
             {
                 if(($newUsername===$owner->getUsername())||($PM->verifyUserUsername($newUsername)===false))
                 {
-                    if(($newPhoneNumber===$owner->getPhoneNumber())||($PM->verifyPhoneNumber($newPhoneNumber)===false))
+                    if(($newPhoneNumber==$owner->getPhoneNumber())||($PM->verifyPhoneNumber($newPhoneNumber)===false))
                     {
                         if(($newIBAN===$owner->getIban())||($PM->verifyIBAN($newIBAN)===false))
                         {
