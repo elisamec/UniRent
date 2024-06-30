@@ -80,7 +80,7 @@
               {elseif $usernameError === true}
               <input required="" class="input" type="text" name="username" id="username" placeholder="Userame">
             <p class="error">This username does not exist</p>
-            {elseif $usernameError === false and isset($usernameRight) === true}
+            {elseif $usernameError === false and isset($usernameRight) and $usernameRight !== ""}
                <input required="" class="input" type="text" name="username" id="username" placeholder="Userame" value="{$usernameRight}">
             {/if}
             {if $usernameBanned === true}
@@ -90,7 +90,7 @@
               {if $passwordError === true}
             <p class="error">Password is incorrect</p>
             {/if}
-            {if !isset($type) || (isset($type) && $type === "Student")}
+            {if !isset($type) || (isset($type) && $type === "Student") || (isset($type) && $type === "")}
               <div class="row">
               <div class="col-sm-6">
                <input required="" class="radio" type="radio" name="userType" id="userType" value="Student" checked>

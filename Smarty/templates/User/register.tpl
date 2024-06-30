@@ -69,7 +69,7 @@
             <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
             <input class="file-upload" type="file" id="img" name="img" accept="image/png" hidden>
               <label class="label-button">Upload Profile Picture</label>
-            {if !isset($type) || (isset($type) && $type === "Student")}
+            {if !isset($type) || (isset($type) && $type === "Student") || (isset($type) && $type === "")}
               <div class="row">
               <div class="col-sm-6">
                <input required="" class="radio" type="radio" name="userType" id="userType" value="Student" checked>

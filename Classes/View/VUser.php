@@ -22,6 +22,7 @@ class VUser{
         $this->smarty->assign('usernameError', false);
         $this->smarty->assign('passwordError', false);
         $this->smarty->assign('usernameBanned', false);
+        $this->smarty->assign('usernameRight', '');
         $this->smarty->display('User/login.tpl');
     }
     public function about(){
@@ -38,7 +39,15 @@ class VUser{
     }
 
     public function register(){
-
+        $this->smarty->assign('userDuplicateError', false);
+        $this->smarty->assign('studentMailError', false);
+        $this->smarty->assign('passwordFormatError', false);
+        $this->smarty->assign('mailDuplicateError', false);
+        $this->smarty->assign('username', '');
+        $this->smarty->assign('email', '');
+        $this->smarty->assign('name', '');
+        $this->smarty->assign('surname', '');
+        $this->smarty->assign('type', '');
         $this->smarty->display('User/register.tpl');
     }
 
