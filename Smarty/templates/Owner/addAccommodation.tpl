@@ -125,7 +125,7 @@
                            </div>
                            <div id="div6">
                               <div class="input-group">
-                                 <input title=" " id="Date2" required="" type="text" name="endDate" autocomplete="off" class="input-spec">
+                                 <input title=" " id="Date2" required="" type="text" name="endDate" autocomplete="off" class="input-spec" disabled>
                                  <label class="user-label">End date</label>
                               </div>
                            </div>
@@ -291,7 +291,39 @@ function closeModal() {
 }
 </script>
 {/literal}
+{literal}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const startDateInput = document.getElementById('Date');
+    const endDateInput = document.getElementById('Date2');
 
+    startDateInput.addEventListener('input', () => {
+        const startDate = new Date(startDateInput.value);
+        if (isValidDate(startDate)) {
+            const endDate = new Date(startDate);
+            endDate.setMonth(endDate.getMonth() + 10);
+            endDateInput.value = formatDate(endDate);
+        } else {
+            endDateInput.value = '';
+        }
+    });
+
+    function isValidDate(date) {
+        if (isNaN(date)) return false;
+        const month = date.getMonth(); // getMonth returns 0-based month index
+        return month === 8 || month === 9; // 8 = September, 9 = October
+    }
+
+    function formatDate(date) {
+        const year = date.getFullYear();
+        const month = ('0' + (date.getMonth() + 1)).slice(-2);
+        const day = ('0' + date.getDate()).slice(-2);
+        return `${year}-${month}-${day}`;
+    }
+});
+
+</script>
+{/literal}
                </div>
                
             </div>
