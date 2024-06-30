@@ -2269,3 +2269,19 @@ textarea#comment::placeholder {
     object-fit: cover;
     border-radius: 10px;
 }
+.Accomcontainer {
+    float: left;
+    width: 60%;
+    padding-left: 80px;
+
+}
+.accom_img {
+    width: auto;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 10px 10px 10px 10px;
+}
+.accommodation_text {
+    padding: 20px;
+    font-size: 50px;
+}

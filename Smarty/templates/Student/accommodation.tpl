@@ -94,8 +94,8 @@
       <div class="accImg">
       <div class="row">
       <div class="col-lg-4 col-md-6col-lg-4 col-md-6">
-                     <div class="blog_img">
-                     <div class="container_main">
+                     <div class="accom_img">
+                     <! Change ewith the first one from the array once we learned how to handle image display -->
                                  <img src="/UniRent/Smarty/images/img-4.png" alt="">
                                  <div class="overlay">
                                     <div class="text">
@@ -103,9 +103,43 @@
                                     </div>
                                  </div>
                               </div>
-                        </div>
                      </div>
+                     <div class="Accomcontainer">
+                        <h1>Accommodation Details</h1>
+                        <h2> Description:</h2>
+                        <p>{$accommodation->getDescription()}</p>
+                        <h2>Monthly Price: {$accommodation->getPrice()}€</h2>
+                        {if $accommodation->getDeposit() !== null}
+                        <h2>Deposit: {$accommodation->getDeposit()}€</h2>
+                        {/if}
+                         <div id="reviewsContainer">
+                   <div class="review">
+                   <h1 class="ReviewTitle"> Title </h1> <!-- Title of the review -->
+                        <div class="row">
+                            <div class="userSection">
+                                <div class="userIcon">
+                                    <a href="#"><img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture"></a>
+                                </div>
+                                <div class="username"><a href="#">eli1</a></div> <!-- Username of the reviewer -->
+                            </div>
+                            <div class="col-md-11">
+                                <div class="stars">
+                                    <span class="fa fa-star or"></span>
+                                    <span class="fa fa-star or"></span>
+                                    <span class="fa fa-star or"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span> <!-- Star rating -->
+                                </div>
+                                <p>Content</p> <!-- Content of the review -->
+                            </div>
+                        </div>
+                   </div>
+                   </div>
+                     </div>
+                     
                   </div>
+                  
+      
       </div>
 
 
@@ -222,4 +256,65 @@
 
 </script>
 {/literal}
+ <script>
+    {if isset($reviewsData)}
+    const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
+    console.log(reviews);
+
+    // Function to generate stars based on the rating
+    function generateStars(stars) {
+        let starElements = '';
+        for (let i = 0; i < 5; i++) {
+            if (i < stars) {
+                starElements += '<span class="fa fa-star or"></span>';
+            } else {
+                starElements += '<span class="fa fa-star"></span>';
+            }
+        }
+        return starElements;
+    }
+
+    // Function to create and append reviews to the container
+    function displayReviews(reviews) {
+        const container = document.getElementById('reviewsContainer');
+
+        if (container) {
+            if (reviews.length === 0) {
+                container.innerHTML = '<div class="container"><h1 class="noRev">There are no reviews yet!</h1></div>';
+            } else {
+                reviews.forEach(review => {
+                    const reviewElement = document.createElement('div');
+                    reviewElement.className = 'review';
+
+                    // Insert the names of the elements of the review array
+                    reviewElement.innerHTML = `
+                        <h1 class="ReviewTitle">` + review.title + `</h1> <!-- Title of the review -->
+                        <div class="row">
+                            <div class="userSection">
+                                <div class="userIcon">
+                                    <a href="#"><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
+                                </div>
+                                <div class="username"><a href="#">` + review.username + `</a></div> <!-- Username of the reviewer -->
+                            </div>
+                            <div class="col-md-11">
+                                <div class="stars">
+                                    ` + generateStars(review.stars) + ` <!-- Star rating -->
+                                </div>
+                                <p>` + review.content + `</p> <!-- Content of the review -->
+                            </div>
+                        </div>
+                    `;
+
+                    container.appendChild(reviewElement);
+                });
+            }
+        } else {
+            console.error("Container not found!"); // Debugging: Error if container is not found
+        }
+    }
+
+    // Call the function to display reviews
+    displayReviews(reviews);
+    {/if}
+</script>
    </body>
