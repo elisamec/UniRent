@@ -83,25 +83,6 @@
       </div>
     <!-- header section end -->
     <!-- accommodation section start -->
-   
-        <div class="row">
-            <div class="col-md-12">
-                <div class="profile_pic">
-                 <div class="container-fluid">
-                    <div class="swiper-container">
-                        <div class="swiper-wrapper" id="swiper-wrapper">
-                              <!-- Slides will be inserted here dynamically -->
-                        </div>
-                        <!-- Add Pagination -->
-                        <div class="swiper-pagination"></div>
-                        <!-- Add Navigation -->
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
-                     </div>
-                </div>
-            </div>
-        </div>
-      </div>
       <div class="container-fluid">
       <div class="row">
          <div class="col-md-12">
@@ -110,6 +91,34 @@
             </div>
          </div>
       </div>
+      <div class="accImg">
+      <div class="row">
+      <div class="col-lg-4 col-md-6col-lg-4 col-md-6">
+                     <div class="blog_img">
+                     <div class="container_main">
+                                 <img src="/UniRent/Smarty/images/img-4.png" alt="">
+                                 <div class="overlay">
+                                    <div class="text">
+                                       <div class="some_text"><a href="#" id="openSlider">View Pictures</a></div>
+                                    </div>
+                                 </div>
+                              </div>
+                        </div>
+                     </div>
+                  </div>
+      </div>
+
+
+      <div id="sliderContainer" class="hidden">
+        <div id="slider">
+            <span id="closeSlider">&times;</span>
+            <div class="slider-content">
+                <!-- Images will be inserted here dynamically -->
+            </div>
+            <a class="prev">&#10094;</a>
+            <a class="next">&#10095;</a>
+        </div>
+    </div>
 
 
 
@@ -144,38 +153,8 @@
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
-<script>
-document.getElementById("file").onchange = function() {
-    document.getElementById("form").submit();
-};
-</script>
 
-         <script>
-      $(document).ready(function() {
 
-      
-      var readURL = function(input) {
-         if (input.files && input.files[0]) {
-               var reader = new FileReader();
-
-               reader.onload = function (e) {
-                  $('.imageIcon').attr('src', e.target.result);
-               }
-      
-               reader.readAsDataURL(input.files[0]);
-         }
-      }
-      
-
-      $(".file-upload").on('change', function(){
-         readURL(this);
-      });
-      
-      $(".label-button").on('click', function() {
-         $(".file-upload").click();
-      });
-   });
-      </script>
       <div class="modal" id="myModal">
       <div class"container-fluid">
       <div class="card">
@@ -195,46 +174,52 @@ document.getElementById("file").onchange = function() {
                document.getElementById("myModal").style.display = "none";
                }
          </script>
-         <!-- Swiper JS -->
-     <!-- Swiper JS -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <!-- Embed Smarty Variable into JavaScript -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Smarty variable embedded into JavaScript
-            var images = {$images};
-            console.log(images);
-
-            // Reference to the swiper wrapper
-            var swiperWrapper = document.getElementById('swiper-wrapper');
-
-            // Create slides dynamically
-            images.forEach(function(image) {
-                var slide = document.createElement('div');
-                slide.classList.add('swiper-slide');
-                var img = document.createElement('img');
-                img.src = image;
-                img.alt = 'Image';
-                slide.appendChild(img);
-                swiperWrapper.appendChild(slide);
-            });
-
-            // Initialize Swiper
-            var swiper = new Swiper('.swiper-container', {
-                loop: true,
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                },
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-                autoplay: false,
-                slidesPerView: 1, // Ensure only one slide is visible at a time
-spaceBetween: 10, // Adjust space between slides if needed
-
-            });
-        });
+         <script>
+        // Assign the JSON data to a JavaScript variable
+        const images = {$imagesJson|escape:'javascript'};
     </script>
+    {literal}
+   <script>
+   document.addEventListener('DOMContentLoaded', () => {
+    const openSliderLink = document.getElementById('openSlider');
+    const sliderContainer = document.getElementById('sliderContainer');
+    const closeSliderBtn = document.getElementById('closeSlider');
+    const sliderContent = document.querySelector('.slider-content');
+    let currentIndex = 0;
+
+    // Ensure the images array is defined and has elements
+    if (typeof images === 'undefined' || !Array.isArray(images) || images.length === 0) {
+        console.error('No images available');
+        return;
+    }
+
+    openSliderLink.addEventListener('click', (event) => {
+        event.preventDefault();  // Prevent the default anchor behavior
+        if (images.length > 0) {
+            sliderContainer.classList.remove('hidden');
+            showImage(currentIndex);
+        }
+    });
+
+    closeSliderBtn.addEventListener('click', () => {
+        sliderContainer.classList.add('hidden');
+    });
+
+    document.querySelector('.prev').addEventListener('click', () => {
+        currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
+        showImage(currentIndex);
+    });
+
+    document.querySelector('.next').addEventListener('click', () => {
+        currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+        showImage(currentIndex);
+    });
+
+    function showImage(index) {
+        sliderContent.innerHTML = `<img src="${images[index]}" alt="Image ${index + 1}">`;
+    }
+});
+
+</script>
+{/literal}
    </body>

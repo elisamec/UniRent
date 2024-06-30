@@ -1729,48 +1729,6 @@ textarea#comment::placeholder {
         top: 10px; /* Adjust the top position */
         left: 10px; /* Adjust the left position */
     }
-    
-    .swiper-slide {
-        text-align: center;
-        font-size: 18px;
-        background: #fff;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        -webkit-justify-content: center;
-        justify-content: center;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        -webkit-align-items: center;
-        align-items: center;
-    }
-    .accommodation_session {
-        width: 100%;
-        height: 300 px;
-        float: left;
-        padding-bottom: 90px;
-    }
-    .swiper-slide img {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-
-        flex: 1;
-    }
-    .swiper-pagination {
-        position: absolute;
-        bottom: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    .swiper-wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
 
     .review {
         float: right;
@@ -1892,6 +1850,7 @@ textarea#comment::placeholder {
         padding: 0 .2em;
         color: #2196f3;
        }
+
        #cssportal-grid {
         display: grid;
         grid-template-rows: repeat(8, 1fr);
@@ -2240,6 +2199,73 @@ textarea#comment::placeholder {
 #duration {
     margin-right: 10px;
 }
+.hidden {
+    display: none;
+}
 
+#sliderContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+}
 
+#slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
 
+#closeSlider {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+    color: white;
+    cursor: pointer;
+}
+
+.slider-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.slider-content img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    user-select: none;
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
+}
+
+.accImg {
+    width: 100%;
+    max-width: 1000px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}

@@ -44,7 +44,7 @@ class VStudent{
     }
     public function accommodation(EAccommodation $accomm){
         $photos=json_encode($accomm->getPhoto());
-        $this->smarty->assign('images', $photos);
+        $this->smarty->assign('imagesJson', $photos);
         $this->smarty->assign('accommodation', $accomm);
         $this->smarty->display('Student/accommodation.tpl');
     }
