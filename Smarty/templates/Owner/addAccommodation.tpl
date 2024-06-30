@@ -91,6 +91,13 @@
                      <h1 class="Properties_taital">Add Accommodation</h1>
                      <hr class="border_main">
                   </div>
+                  <p>Fill in the form below to add a new accommodation to your list. You can upload pictures,
+                   set the monthly price and deposit (It is required, but you can insert 0 if you don't want one), 
+                   the address, the city, the postal code, your visit availability, and your preferences for the tenants. 
+                   You can also add a description (required) and notes for the tenants to read for the accommodation.
+                   Regarding the start date you need to insert the day of the month and the month (Sep/Oct) for the start 
+                   of the rental relationship. The end date is calculated based on the start date, giving always a 10 month rental period.
+                   </p>
                     <form action="/UniRent/Owner/addAccommodation" class="form" method="post" id="yourFormId">
                         <div id="cssportal-grid">
                            <div id="div1">
@@ -107,26 +114,26 @@
                            </div>
                            <div id="div3">
                               <div class="input-group">
-                                 <input title=" " required="" type="number" name="price" autocomplete="off" class="input-spec">
+                                 <input title=" " required="" type="number" name="price" autocomplete="off" class="input-spec" min=0 max=1000>
                                  <label class="user-label">Monthly Price (€)</label>
                               </div>
                            </div>
                            <div id="div4">
                               <div class="input-group">
-                                 <input required="" type="number" name="deposit" autocomplete="off" class="input-spec" title=" " oninvalid="this.setCustomValidity('Enter 0 if no deposit is required')">
+                                 <input required="" type="number" name="deposit" autocomplete="off" class="input-spec" title=" " min=0 max=1000>
                                  <label class="user-label">Deposit (€)</label>
                               </div>
                            </div>
                            <div id="div5">
                               <div class="input-group">
-                                 <input title=" " id="Date" required="" type="text" name="startDate" autocomplete="off" class="input-spec">
-                                 <label class="user-label">Start date</label>
+                                 <input title=" " id="Date" required="" type="number" name="startDate" autocomplete="off" class="input-spec" min=1 max=31>
+                                 <label class="user-label">Start day</label>
                               </div>
                            </div>
                            <div id="div6">
                               <div class="input-group">
-                                 <input title=" " id="Date2" required="" type="text" name="endDate" autocomplete="off" class="input-spec" disabled>
-                                 <label class="user-label">End date</label>
+                                 <input title=" " id="Date2" required="" type="text" name="endDate" autocomplete="off" class="input-spec">
+                                 <label class="user-label" style="font-size: 13px; margin-top:12px">Start month (Sep/Oct)</label>
                               </div>
                            </div>
                            <div id="div7">
@@ -162,7 +169,7 @@
 </div>
                             <div id="div13">
                             <div class="checkbox-container">
-                            <label class="checkbox-label">Requirements:</label>
+                            <label class="checkbox-label">Tenants preferences:</label>
                             <label>
                                  <input type="checkbox" name="men"> Men
                            </label>
@@ -291,39 +298,6 @@ function closeModal() {
 }
 </script>
 {/literal}
-{literal}
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const startDateInput = document.getElementById('Date');
-    const endDateInput = document.getElementById('Date2');
-
-    startDateInput.addEventListener('input', () => {
-        const startDate = new Date(startDateInput.value);
-        if (isValidDate(startDate)) {
-            const endDate = new Date(startDate);
-            endDate.setMonth(endDate.getMonth() + 10);
-            endDateInput.value = formatDate(endDate);
-        } else {
-            endDateInput.value = '';
-        }
-    });
-
-    function isValidDate(date) {
-        if (isNaN(date)) return false;
-        const month = date.getMonth(); // getMonth returns 0-based month index
-        return month === 8 || month === 9; // 8 = September, 9 = October
-    }
-
-    function formatDate(date) {
-        const year = date.getFullYear();
-        const month = ('0' + (date.getMonth() + 1)).slice(-2);
-        const day = ('0' + date.getDate()).slice(-2);
-        return `${year}-${month}-${day}`;
-    }
-});
-
-</script>
-{/literal}
                </div>
                
             </div>
@@ -402,34 +376,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
-<script>
-document.querySelector('#Date').addEventListener('focus', function (e) {
-    this.type = 'date';
-});
-
-document.querySelector('#Date').addEventListener('blur', function (e) {
-    this.type = 'text';
-});
-document.querySelector('#Date2').addEventListener('focus', function (e) {
-    this.type = 'date';
-});
-
-document.querySelector('#Date2').addEventListener('blur', function (e) {
-    this.type = 'text';
-});
-</script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-
-
-<script>
-$(function() {
-    var daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-    $("#dayOfWeek").autocomplete({
-        source: daysOfWeek
-    });
-});
-</script>
 
    </body>
