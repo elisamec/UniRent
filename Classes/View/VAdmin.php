@@ -1,0 +1,32 @@
+<?php
+
+namespace Classes\View;
+require __DIR__.'/../../vendor/autoload.php';
+
+use StartSmarty;
+
+class VAdmin
+{
+    private $smarty;
+
+    public function __construct(){
+
+        $this->smarty = StartSmarty::configuration();
+    }
+
+    public function home(){
+
+        $this->smarty->display('Admin/home.tpl');
+    }
+
+    public function login(){
+        $this->smarty->assign('usernameError', false);
+        $this->smarty->assign('passwordError', false);
+        $this->smarty->display('Admin/login.tpl');
+    }
+    public function loginError(bool $usernameError, bool $passwordError){
+        $this->smarty->assign('usernameError', $usernameError);
+        $this->smarty->assign('passwordError', $passwordError);
+        $this->smarty->display('Admin/login.tpl');
+    }
+}
