@@ -64,10 +64,6 @@ class CStudent{
         }
         else
         {   
-
-            //$ph = $student->getPicture();
-
-            //print $student->getPicture()->getPhoto();
             $view->profile($student);
         }
     }

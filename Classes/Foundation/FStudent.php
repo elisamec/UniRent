@@ -305,17 +305,22 @@ class FStudent
             return null;
         }
         $result_array=$stm->fetch(PDO::FETCH_ASSOC);
-        $username=$result_array['username'];
-        $password=$result_array['password'];
-        $name=$result_array['name'];
-        $surname=$result_array['surname'];
-        $email=$result_array['universityMail'];
-        $courseDuration=$result_array['courseDuration'];
-        $immatricolation=$result_array['immatricolationYear'];
-        $sex=$result_array['sex'];
-        $smoker=$result_array['smoker'];
-        $animals=$result_array['animals'];
-        $birth=new DateTime($result_array['birthDate']);
+        if($result_array>0){
+            $username=$result_array['username'];
+            $password=$result_array['password'];
+            $name=$result_array['name'];
+            $surname=$result_array['surname'];
+            $email=$result_array['universityMail'];
+            $courseDuration=$result_array['courseDuration'];
+            $immatricolation=$result_array['immatricolationYear'];
+            $sex=$result_array['sex'];
+            $smoker=$result_array['smoker'];
+            $animals=$result_array['animals'];
+            $birth=new DateTime($result_array['birthDate']);
+        } else {
+            return null;
+        }
+        
         if(is_null($result_array['picture']))
         {
             $photo=null;
