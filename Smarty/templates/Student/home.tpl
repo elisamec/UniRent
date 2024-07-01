@@ -146,7 +146,7 @@
                      </select>
                   </div>
                   <div class="col-lg-3 select-outline">
-                     <div class="find_btn"><a href=""id="yourLinkId">Find Now</a></div>
+                     <div class="find_btn"><button type="submit" id="yourLinkId">Find Now</button></div>
                   </div>
                </div>
             </div>

@@ -35,6 +35,10 @@ class CStudent{
         $view = new VStudent();
         $view->contact();
     }
+    public static function findAccommodation(){
+        $view = new VStudent();
+        $view->findAccommodation();
+    }
     public static function about(){
         $view = new VStudent();
         $view->about();
@@ -149,8 +153,10 @@ class CStudent{
     }
     public static function accommodation() {
         $view = new VStudent();
-        $accomm = FPersistentManager::getInstance()->load('EAccommodation', 2);
-        $view->accommodation($accomm);
+        $accomm = FPersistentManager::getInstance()->load('EAccommodation', 5);
+        $owner = FPersistentManager::getInstance()->load('EOwner', 4);
+        USession::getInstance()->setSessionElement('owner', $owner->getUsername());
+        $view->accommodation($accomm, $owner);
     }
     public static function reviews() {
         $view = new VStudent();
@@ -231,8 +237,8 @@ class CStudent{
     public static function publicProfileStudent()
     {
         $view = new VStudent();
-        $student = FPersistentManager::getInstance()->load('EOwner', 4);
-        $reviews = FReview::getInstance()->loadByRecipient($student->getId(), TType::OWNER);
+        $student = FPersistentManager::getInstance()->load('EStudent', 4);
+        $reviews = FReview::getInstance()->loadByRecipient($student->getId(), TType::STUDENT);
         $reviewsData = [];
         
         foreach ($reviews as $review) {

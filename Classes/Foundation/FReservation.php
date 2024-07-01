@@ -113,7 +113,7 @@ class FReservation
             $row=$stm->fetch(PDO::FETCH_ASSOC);
             $FROM= new DateTime($row['fromDate']);
             $TO= new DateTime($row['toDate']);
-            $result=new EReservation($FROM,$TO,$row['accommodationId'],$row['idStudent']);
+            $result=new EReservation($FROM,$TO,$row['idAccommodation'],$row['idStudent']);
             $result->setID($row['id']);
             $result->setStatus($row['statusAccept']);
             return $result;
@@ -138,7 +138,7 @@ class FReservation
         try
         {
             $db->exec('LOCK TABLES reservation WRITE');
-            $q='INSERT INTO reservation (fromDate,toDate,made,statusAccept,accommodationId,idStudent)';
+            $q='INSERT INTO reservation (fromDate,toDate,made,statusAccept,idAccommodation,idStudent)';
             $q.=' VALUES (:from,:to,:made,:status,:accId,:stId)';
             $db->beginTransaction();
             $stm=$db->prepare($q);
@@ -348,7 +348,7 @@ class FReservation
             try
             {
                 $q='SELECT *
-                    FROM reservation r INNER JOIN accommodation a ON a.id=r.accommodationId
+                    FROM reservation r INNER JOIN accommodation a ON a.id=r.idAccommodation
                     INNER JOIN owner o ON o.id=a.owner
                     WHERE o.id=:id AND r.statusAccept=false';
                 $db->exec('LOCK TABLES reservation READ');
@@ -372,7 +372,7 @@ class FReservation
             {
                 $FROM= new DateTime($row['fromDate']);
                 $TO= new DateTime($row['toDate']);
-                $r=new EReservation($FROM,$TO,$row['accommodationId'],$row['idStudent']);
+                $r=new EReservation($FROM,$TO,$row['idAccommodation'],$row['idStudent']);
                 $r->setID($row['id']);
                 $r->setStatus($row['statusAccept']);
                 $result[]=$r;
@@ -403,12 +403,12 @@ class FReservation
             try
             {
                 $q='  SELECT *';
-                $q.=' FROM reservation r INNER JOIN accommodation a ON a.id=r.accommodationId';
+                $q.=' FROM reservation r INNER JOIN accommodation a ON a.id=r.idAccommodation';
                 $q.=' INNER JOIN owner o ON o.id=a.owner';
                 $q.=' WHERE r.statusAccept=TRUE AND o.id=:id AND r.id NOT IN (';
 
                 $q.=' SELECT DISTINCT r.id';
-                $q.=' FROM reservation r INNER JOIN contract c ON c.reservationId=r.id )';
+                $q.=' FROM reservation r INNER JOIN contract c ON c.idReservation=r.id )';
 
                 $db->exec('LOCK TABLES reservation READ, owner READ , accommodation READ');
                 $db->beginTransaction();
@@ -432,7 +432,7 @@ class FReservation
             {
                 $FROM= new DateTime($row['fromDate']);
                 $TO= new DateTime($row['toDate']);
-                $r=new EReservation($FROM,$TO,$row['accommodationId'],$row['idStudent']);
+                $r=new EReservation($FROM,$TO,$row['idAccommodation'],$row['idStudent']);
                 $r->setID($row['id']);
                 $r->setStatus($row['statusAccept']);
                 $result[]=$r;

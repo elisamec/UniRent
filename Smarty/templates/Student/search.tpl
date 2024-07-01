@@ -378,7 +378,7 @@
                                  <img src="/UniRent/Smarty/images/img-4.png" alt="">
                                  <div class="overlay">
                                     <div class="text">
-                                       <div class="some_text"><a href="#">See More</a></div>
+                                       <div class="some_text"><a href="/UniRent/Student/accommodation">See More</a></div>
                                     </div>
                                  </div>
                               </div>

@@ -124,53 +124,46 @@
     }
 
     // Function to create and append reviews to the container
-    // Function to create and append reviews to the container
-function displayReviews(reviews) {
-    const container = document.getElementById('reviewsContainer');
+    function displayReviews(reviews) {
+        const container = document.getElementById('reviewsContainer');
 
-    if (container) {
-        if (reviews.length === 0) {
-            container.innerHTML = '<div class="container"><h1 class="noRev">You have no reviews yet!</h1></div>';
-        } else {
-            reviews.forEach(review => {
-                const reviewElement = document.createElement('div');
-                reviewElement.className = 'review';
+        if (container) {
+            if (reviews.length === 0) {
+                container.innerHTML = '<div class="container"><h1 class="noRev">There are no reviews yet!</h1></div>';
+            } else {
+                reviews.forEach(review => {
+                    const reviewElement = document.createElement('div');
+                    reviewElement.className = 'review';
 
-                // Insert the names of the elements of the review array
-                reviewElement.innerHTML = `
-                    <h1 class="ReviewTitle">` + review.title + `</h1> <!-- Title of the review -->
-                    <div class="row">
-                        <div class="userSection">
-                            <div class="userIcon">
-                                <a href="#"><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
+                    // Insert the names of the elements of the review array
+                    reviewElement.innerHTML = `
+                        <h1 class="ReviewTitle">` + review.title + `</h1> <!-- Title of the review -->
+                        <div class="row">
+                            <div class="userSection">
+                                <div class="userIcon">
+                                    <a href="#"><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
+                                </div>
+                                <div class="username"><a href="#" id="username" name="username" value="` + review.username + `">` + review.username + `</a></div> <!-- Username of the reviewer -->
                             </div>
-                            <div class="username"><a href="/UniRent/Student/publicProfileStudent">` + review.username + `</a></div> <!-- Username of the reviewer -->
-                        </div>
-                        <div class="col-md-11">
-                            <div class="stars">
-                                ` + generateStars(review.stars) + ` <!-- Star rating -->
+                            <div class="col-md-11">
+                                <div class="stars">
+                                    ` + generateStars(review.stars) + ` <!-- Star rating -->
+                                </div>
+                                <p>` + review.content + `</p> <!-- Content of the review -->
                             </div>
-                            <p>` + review.content + `</p> <!-- Content of the review -->
                         </div>
-                    </div>
-                `;
+                    `;
 
-                container.appendChild(reviewElement);
-
-                // Add event listener to username
-                reviewElement.querySelector('.username a').addEventListener('click', function() {
-                    sessionStorage.setItem('username', review.username);
+                    container.appendChild(reviewElement);
                 });
-            });
+            }
+        } else {
+            console.error("Container not found!"); // Debugging: Error if container is not found
         }
-    } else {
-        console.error("Container not found!"); // Debugging: Error if container is not found
     }
-}
 
-// Call the function to display reviews
-displayReviews(reviews);
-
+    // Call the function to display reviews
+    displayReviews(reviews);
     {/if}
 </script>
 <!-- footer section start -->
