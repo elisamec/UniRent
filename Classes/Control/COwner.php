@@ -4,6 +4,7 @@ namespace Classes\Control;
 
 require __DIR__.'../../../vendor/autoload.php';
 
+use Classes\Entity\EAccommodation;
 use Classes\Utilities\USession;
 use Classes\Utilities\USuperGlobalAccess;
 use Classes\View\VOwner;
@@ -13,6 +14,7 @@ use Classes\Entity\EPhoto;
 use Classes\Foundation\FOwner;
 use Classes\Foundation\FReview;
 use Classes\Tools\TType;
+use CommerceGuys\Addressing\Address;
 
 class COwner 
 {
@@ -253,4 +255,25 @@ class COwner
         $view=new VOwner();
         $view->addAccommodation();
     }
+
+    public static function addAccommodationOperations()
+    {
+        $title=USuperGlobalAccess::getPost('title');
+        $price=USuperGlobalAccess::getPost('price');
+        $deposit=USuperGlobalAccess::getPost('deposit');
+        $startDate=USuperGlobalAccess::getPost('startDate');
+        $month=USuperGlobalAccess::getPost('endDate');
+        $address=USuperGlobalAccess::getPost('address');
+        $city=USuperGlobalAccess::getPost('city');
+        $postalCode=USuperGlobalAccess::getPost('postalCode');
+        $description=USuperGlobalAccess::getPost('description');
+        $notes=USuperGlobalAccess::getPost('comment');
+        #print $title.' '.$price.' '.' '.$deposit.' '.$startDate.' '.$month.' '.$address.' '.$city.' '.$postalCode.' '.$description.' '.$notes;
+        $PM=FPersistentManager::getInstance();
+        $addressObj= new Address('IT', '',$city,'',$postalCode);
+        
+
+        //Da fare....
+    }
+
 }

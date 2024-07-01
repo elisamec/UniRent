@@ -83,25 +83,6 @@
       </div>
     <!-- header section end -->
     <!-- accommodation section start -->
-   
-        <div class="row">
-            <div class="col-md-12">
-                <div class="profile_pic">
-                 <div class="container-fluid">
-                    <div class="swiper-container">
-                        <div class="swiper-wrapper" id="swiper-wrapper">
-                              <!-- Slides will be inserted here dynamically -->
-                        </div>
-                        <!-- Add Pagination -->
-                        <div class="swiper-pagination"></div>
-                        <!-- Add Navigation -->
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
-                     </div>
-                </div>
-            </div>
-        </div>
-      </div>
       <div class="container-fluid">
       <div class="row">
          <div class="col-md-12">
@@ -110,7 +91,157 @@
             </div>
          </div>
       </div>
+      <div class="accImg">
+      <div class="row">
+      <div class="col-lg-4 col-md-6col-lg-4 col-md-6">
+                     <div class="accom_img">
+                     <div class="container_main">
+                     <! Change ewith the first one from the array once we learned how to handle image display -->
+                                 <img src="/UniRent/Smarty/images/img-4.png" alt="">
+                                 <div class="overlay">
+                                    <div class="text">
+                                       <div class="some_text"><a href="#" id="openSlider">View Pictures</a></div>
+                                    </div>
+                                 </div>
+                              </div>
 
+                     <div class="reserve_btn"><a href="#" >Reserve</a></div>
+                      <div class="reserve_btn"><a href="#" >Visit</a></div>
+                      <div class="ownerSect">
+                      <div class="row">
+                      <h1 class="titleOwn">Owner:</h1>
+                        <div class="userSection">
+                                <div class="userIcon">
+                                    <a href="#"><img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture"></a>
+                                </div>
+                                <div class="username"><a href="#">elisamec</a></div> <!-- Username of the reviewer -->
+                            </div>
+                        </div>
+                        </div>
+                        <div class="reserve_btn" id="contactBtn"><a href="#" >Owner Contacts</a></div>
+                     </div>
+                    </div>
+                     <div class="col-lg-8 col-md-10 col-lg-8 col-md-10">
+                     <div class="Accomcontainer">
+                        <h1 class="title">Accommodation Details</h1>
+                        <h2> Description:</h2>
+                        <p>{$accommodation->getDescription()}</p>
+                        <h2>Monthly Price: {$accommodation->getPrice()}€</h2>
+                        {if $accommodation->getDeposit() !== null}
+                        <h2>Deposit: {$accommodation->getDeposit()}€</h2>
+                        {/if}
+                        <h1 class="title">Current Tenants</h1>
+                        <div class="row">
+                        <div class="col-md-4">
+                        <div class="userSection">
+                                <div class="userIcon">
+                                    <a href="#"><img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture"></a>
+                                </div>
+                                <div class="username"><a href="#">eli1</a></div> <!-- Username of the reviewer -->
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                        <div class="userSection">
+                                <div class="userIcon">
+                                    <a href="#"><img src="/UniRent/Smarty/images/FreeBadge.png" alt="User Profile Picture"></a>
+                                </div>
+                                <div class="username"></div> <!-- Username of the reviewer -->
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                        <div class="userSection">
+                                <div class="userIcon">
+                                    <a href="#"><img src="/UniRent/Smarty/images/FreeBadge.png" alt="User Profile Picture"></a>
+                                </div>
+                                <div class="username"></div> <!-- Username of the reviewer -->
+                            </div>
+                        </div>
+                        </div>
+
+                        <h1 class="title"> Reviews</h1>
+                         <div id="reviewsContainer">
+                   <div class="review">
+                   <h1 class="ReviewTitle"> Title </h1> <!-- Title of the review -->
+                        <div class="row">
+                            <div class="userSection">
+                                <div class="userIcon">
+                                    <a href="#"><img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture"></a>
+                                </div>
+                                <div class="username"><a href="#">eli1</a></div> <!-- Username of the reviewer -->
+                            </div>
+                            <div class="col-md-9">
+                                <div class="stars">
+                                    <span class="fa fa-star or"></span>
+                                    <span class="fa fa-star or"></span>
+                                    <span class="fa fa-star or"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span> <!-- Star rating -->
+                                </div>
+                                <p>Content</p> <!-- Content of the review -->
+                            </div>
+                        </div>
+                   </div>
+                   </div>
+                     </div>
+                     
+                  </div>
+                  </div>
+                    <div class="col-lg-4 col-md-6col-lg-4 col-md-6">
+                    
+                    </div>
+      </div>
+
+
+      <div id="sliderContainer" class="hidden">
+        <div id="slider">
+            <span id="closeSlider">&times;</span>
+            <div class="slider-content">
+                <!-- Images will be inserted here dynamically -->
+            </div>
+            <a class="prev">&#10094;</a>
+            <a class="next">&#10095;</a>
+        </div>
+    </div>
+
+<div id="contactModal" class="resModal">
+  <div class="resModal-content">
+  <div class="row">
+    <span class="resClose">&times;</span>
+    <h2 class="resModal-head">Owner Contacts</h2>
+    </div>
+    <p>Phone: (123) 456-7890</p>
+    <p>Email: owner@example.com</p>
+  </div>
+</div>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("contactModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("contactBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("resClose")[0];
+
+    // When the user clicks the button, open the modal 
+    btn.onclick = function(event) {
+        event.preventDefault();
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
 
 
 <!-- footer section start -->
@@ -144,38 +275,8 @@
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
-<script>
-document.getElementById("file").onchange = function() {
-    document.getElementById("form").submit();
-};
-</script>
 
-         <script>
-      $(document).ready(function() {
 
-      
-      var readURL = function(input) {
-         if (input.files && input.files[0]) {
-               var reader = new FileReader();
-
-               reader.onload = function (e) {
-                  $('.imageIcon').attr('src', e.target.result);
-               }
-      
-               reader.readAsDataURL(input.files[0]);
-         }
-      }
-      
-
-      $(".file-upload").on('change', function(){
-         readURL(this);
-      });
-      
-      $(".label-button").on('click', function() {
-         $(".file-upload").click();
-      });
-   });
-      </script>
       <div class="modal" id="myModal">
       <div class"container-fluid">
       <div class="card">
@@ -195,46 +296,113 @@ document.getElementById("file").onchange = function() {
                document.getElementById("myModal").style.display = "none";
                }
          </script>
-         <!-- Swiper JS -->
-     <!-- Swiper JS -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <!-- Embed Smarty Variable into JavaScript -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Smarty variable embedded into JavaScript
-            var images = {$images};
-            console.log(images);
-
-            // Reference to the swiper wrapper
-            var swiperWrapper = document.getElementById('swiper-wrapper');
-
-            // Create slides dynamically
-            images.forEach(function(image) {
-                var slide = document.createElement('div');
-                slide.classList.add('swiper-slide');
-                var img = document.createElement('img');
-                img.src = image;
-                img.alt = 'Image';
-                slide.appendChild(img);
-                swiperWrapper.appendChild(slide);
-            });
-
-            // Initialize Swiper
-            var swiper = new Swiper('.swiper-container', {
-                loop: true,
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                },
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-                autoplay: false,
-                slidesPerView: 1, // Ensure only one slide is visible at a time
-spaceBetween: 10, // Adjust space between slides if needed
-
-            });
-        });
+         <script>
+        // Assign the JSON data to a JavaScript variable
+        const images = {$imagesJson|escape:'javascript'};
     </script>
+    {literal}
+   <script>
+   document.addEventListener('DOMContentLoaded', () => {
+    const openSliderLink = document.getElementById('openSlider');
+    const sliderContainer = document.getElementById('sliderContainer');
+    const closeSliderBtn = document.getElementById('closeSlider');
+    const sliderContent = document.querySelector('.slider-content');
+    let currentIndex = 0;
+
+    // Ensure the images array is defined and has elements
+    if (typeof images === 'undefined' || !Array.isArray(images) || images.length === 0) {
+        console.error('No images available');
+        return;
+    }
+
+    openSliderLink.addEventListener('click', (event) => {
+        event.preventDefault();  // Prevent the default anchor behavior
+        if (images.length > 0) {
+            sliderContainer.classList.remove('hidden');
+            showImage(currentIndex);
+        }
+    });
+
+    closeSliderBtn.addEventListener('click', () => {
+        sliderContainer.classList.add('hidden');
+    });
+
+    document.querySelector('.prev').addEventListener('click', () => {
+        currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
+        showImage(currentIndex);
+    });
+
+    document.querySelector('.next').addEventListener('click', () => {
+        currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+        showImage(currentIndex);
+    });
+
+    function showImage(index) {
+        sliderContent.innerHTML = `<img src="${images[index]}" alt="Image ${index + 1}">`;
+    }
+});
+
+</script>
+{/literal}
+ <script>
+    {if isset($reviewsData)}
+    const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
+    console.log(reviews);
+
+    // Function to generate stars based on the rating
+    function generateStars(stars) {
+        let starElements = '';
+        for (let i = 0; i < 5; i++) {
+            if (i < stars) {
+                starElements += '<span class="fa fa-star or"></span>';
+            } else {
+                starElements += '<span class="fa fa-star"></span>';
+            }
+        }
+        return starElements;
+    }
+
+    // Function to create and append reviews to the container
+    function displayReviews(reviews) {
+        const container = document.getElementById('reviewsContainer');
+
+        if (container) {
+            if (reviews.length === 0) {
+                container.innerHTML = '<div class="container"><h1 class="noRev">There are no reviews yet!</h1></div>';
+            } else {
+                reviews.forEach(review => {
+                    const reviewElement = document.createElement('div');
+                    reviewElement.className = 'review';
+
+                    // Insert the names of the elements of the review array
+                    reviewElement.innerHTML = `
+                        <h1 class="ReviewTitle">` + review.title + `</h1> <!-- Title of the review -->
+                        <div class="row">
+                            <div class="userSection">
+                                <div class="userIcon">
+                                    <a href="#"><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
+                                </div>
+                                <div class="username"><a href="#">` + review.username + `</a></div> <!-- Username of the reviewer -->
+                            </div>
+                            <div class="col-md-9">
+                                <div class="stars">
+                                    ` + generateStars(review.stars) + ` <!-- Star rating -->
+                                </div>
+                                <p>` + review.content + `</p> <!-- Content of the review -->
+                            </div>
+                        </div>
+                    `;
+
+                    container.appendChild(reviewElement);
+                });
+            }
+        } else {
+            console.error("Container not found!"); // Debugging: Error if container is not found
+        }
+    }
+
+    // Call the function to display reviews
+    displayReviews(reviews);
+    {/if}
+</script>
    </body>

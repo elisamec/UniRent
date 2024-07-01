@@ -170,7 +170,7 @@ class EAccommodation
      * Returns the deposit of the accommodation
      * @return float
      */
-    public function getDeposit(): float{
+    public function getDeposit(): ?float{
         return $this->deposit;
     }   
 

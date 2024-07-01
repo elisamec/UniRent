@@ -111,6 +111,7 @@ class CUser
         $username=USuperGlobalAccess::getPost('username');
         $type = USuperGlobalAccess::getPost('userType');
         $PM = FPersistentManager::getInstance();
+
         $result_username_array = $PM->verifyUserUsername($username);
         
         //If user exist, get the user and check the password

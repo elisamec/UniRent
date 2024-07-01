@@ -28,6 +28,7 @@
       <!-- Include Font Awesome -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
       <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/login.css">
+      <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/adminLog.css">
       <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/cookie.css">
 </head>
 <body onload="on()">
@@ -41,109 +42,24 @@
       </div>
       </div>
       </div>
-         <div class="container-fluid">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-               <a class="navbar-brand"href="/UniRent/User/home"><img src="/UniRent/Smarty/images/logo.png"></a>
-               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-               <span class="navbar-toggler-icon"></span>
-               </button>
-               <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav ml-auto">
-                     <li class="nav-item">
-                        <a class="nav-link" href="/UniRent/User/home">Home</a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="/UniRent/User/about">About Us</a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact Us</a>
-                     </li>
-                  </ul>
-                  <form class="form-inline my-2 my-lg-0">
-                     <div class="login_bt">
-                        <ul>
-                           <li><a href="/UniRent/User/login" class="active"><span class="user_icon"><i class="fa fa-user" aria-hidden="true"></i></span>Login</a></li>
-                        </ul>
-                     </div>
-                  </form>
-               </div>
-            </nav>
-         </div>
       <!-- banner section start --> 
-      <div class="layout_padding">
+      <div class="admin">
         <div class="container">
-          <div class="Logcontainer">
+          <div class="LogcontainerAdmin">
             <div class="heading">Log In</div>
-            {if $usernameError === true || $passwordError === true}
-               <h1 class="error">Username or password are incorrect</h1>
-               <p class="error center">Note: you may have selected the wrong user type.</p>
-            {elseif $usernameBanned === true}
-               <h1 class="error">This user has been banned</h1>
+            {if $usernameError === true}
+               <h1 class="error">Username incorrect</h1>
+            {elseif $passwordError === true}
+                <h1 class="error">Password incorrect</h1>
             {/if}
-            <form action="/UniRent/User/checkLogin" class="form" method="post">
-              <input required class="input" type="text" name="username" id="username" placeholder="Userame">
-              
-            
-              <input required class="input" type="password" name="password" id="password" placeholder="Password">
-            {if !isset($type) || (isset($type) && $type === "Student") || (isset($type) && $type === "")}
-              <div class="row">
-              <div class="col-sm-6">
-               <input required="" class="radio" type="radio" name="userType" id="userType" value="Student" checked>
-              <label class="customlabel" for="Student">Student</label>
-              </div>
-               <div class="col-sm-6">
-              <input required="" class="radio" type="radio" name="userType" id="userType" value="Owner">
-              <label class="customlabel" for="Owner">Owner</label>
-              </div>
-               </div>
-               {else}
-               <div class="row">
-              <div class="col-sm-6">
-               <input required="" class="radio" type="radio" name="userType" id="userType" value="Student" >
-              <label class="customlabel" for="Student">Student</label>
-              </div>
-               <div class="col-sm-6">
-              <input required="" class="radio" type="radio" name="userType" id="userType" value="Owner" checked>
-              <label class="customlabel" for="Owner">Owner</label>
-              </div>
-               </div>
-               {/if}
-              <span class="forgot-password"><a href="#">Forgot Password ?</a></span>
-              <input class="login-button" type="submit" value="Log In">
-            </form>
-            <div class="subheading">You don't have an account?</div>
-            <form class="form">
-              <button class="login-button" type="button" onclick="location.href='/UniRent/User/register'">Sign Up</button>
+            <form action="/UniRent/Admin/checkLogin" class="form" method="post">
+              <input required="" class="input" type="text" name="username" id="username" placeholder="Userame">
+              <input required="" class="input" type="password" name="password" id="password" placeholder="Password">
+              <input class="login-button" type="submit" onclick="location.href='/UniRent/Admin/checkLogin'" value="Log In">
             </form>
           </div>
         </div>
       </div>
-<br></br>
-
-      <!-- banner section end -->
-<!-- footer section start -->
-      <div class="footer_section layout_padding">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-4">
-                  <h3 class="footer_text">About Us</h3>
-                  <p class="lorem_text">Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web</p>
-               </div>
-               <hr></hr>
-               <div class="col-md-4">
-                  <h3 class="footer_text">Useful Links</h3>
-                  <div class="footer_menu">
-                     <ul>
-                        <li class="active"><a href="/UniRent/User/home">Home</a></li>
-                        <li><a href="/UniRent/User/about">About Us</a></li>
-                        <li><a href="/UniRent/User/contact">Contact Us</a></li>
-                     </ul>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- footer section end -->
 <script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>
       <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>

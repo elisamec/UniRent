@@ -91,7 +91,14 @@
                      <h1 class="Properties_taital">Add Accommodation</h1>
                      <hr class="border_main">
                   </div>
-                    <form action="/UniRent/Owner/addAccommodation" class="form" method="post" id="yourFormId">
+                  <p>Fill in the form below to add a new accommodation to your list. You can upload pictures,
+                   set the monthly price and deposit (It is required, but you can insert 0 if you don't want one), 
+                   the address, the city, the postal code, your visit availability, and your preferences for the tenants. 
+                   You can also add a description (required) and notes for the tenants to read for the accommodation.
+                   Regarding the start date you need to insert the day of the month and the month (Sep/Oct) for the start 
+                   of the rental relationship. The end date is calculated based on the start date, giving always a 10 month rental period.
+                   </p>
+                    <form action="/UniRent/Owner/addAccommodationOperations" class="form" method="post" id="yourFormId">
                         <div id="cssportal-grid">
                            <div id="div1">
                               <div class="pictures">
@@ -107,26 +114,26 @@
                            </div>
                            <div id="div3">
                               <div class="input-group">
-                                 <input title=" " required="" type="number" name="price" autocomplete="off" class="input-spec">
+                                 <input title=" " required="" type="number" name="price" autocomplete="off" class="input-spec" min=0 max=1000>
                                  <label class="user-label">Monthly Price (€)</label>
                               </div>
                            </div>
                            <div id="div4">
                               <div class="input-group">
-                                 <input required="" type="number" name="deposit" autocomplete="off" class="input-spec" title=" " oninvalid="this.setCustomValidity('Enter 0 if no deposit is required')">
+                                 <input required="" type="number" name="deposit" autocomplete="off" class="input-spec" title=" " min=0 max=1000>
                                  <label class="user-label">Deposit (€)</label>
                               </div>
                            </div>
                            <div id="div5">
                               <div class="input-group">
-                                 <input title=" " id="Date" required="" type="text" name="startDate" autocomplete="off" class="input-spec">
-                                 <label class="user-label">Start date</label>
+                                 <input title=" " id="Date" required="" type="number" name="startDate" autocomplete="off" class="input-spec" min=1 max=31>
+                                 <label class="user-label">Start day</label>
                               </div>
                            </div>
                            <div id="div6">
                               <div class="input-group">
-                                 <input title=" " id="Date2" required="" type="text" name="endDate" autocomplete="off" class="input-spec">
-                                 <label class="user-label">End date</label>
+                                 <input title=" " id="month" required="" type="text" name="month" autocomplete="off" class="input-spec">
+                                 <label class="user-label" style="font-size: 13px; margin-top:12px">Start month (Sep/Oct)</label>
                               </div>
                            </div>
                            <div id="div7">
@@ -156,13 +163,13 @@
                            </div>
                             <div id="div12"> 
                             <div class="input-group">
-    <textarea title=" " class="textarea-spec" rows="5" id="notes" name="Message" required></textarea>
+    <textarea title=" " class="textarea-spec" rows="5" id="notes" name="description" required></textarea>
     <label class="textarea-label" for="notes">Description</label>
 </div>
 </div>
                             <div id="div13">
                             <div class="checkbox-container">
-                            <label class="checkbox-label">Requirements:</label>
+                            <label class="checkbox-label">Tenants preferences:</label>
                             <label>
                                  <input type="checkbox" name="men"> Men
                            </label>
@@ -179,7 +186,7 @@
                             </div>
                             <div id="div14">
                             <div class="input-group">
-    <textarea class="textarea1-spec" rows="5" id="comment" name="Message" placeholder=" "></textarea>
+    <textarea class="textarea1-spec" rows="5" id="comment" name="comment" placeholder=" "></textarea>
     <label class="textarea-label" for="comment">Notes</label>
 </div>
 
@@ -291,7 +298,6 @@ function closeModal() {
 }
 </script>
 {/literal}
-
                </div>
                
             </div>
@@ -370,34 +376,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
-<script>
-document.querySelector('#Date').addEventListener('focus', function (e) {
-    this.type = 'date';
-});
-
-document.querySelector('#Date').addEventListener('blur', function (e) {
-    this.type = 'text';
-});
-document.querySelector('#Date2').addEventListener('focus', function (e) {
-    this.type = 'date';
-});
-
-document.querySelector('#Date2').addEventListener('blur', function (e) {
-    this.type = 'text';
-});
-</script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-
-
-<script>
-$(function() {
-    var daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-    $("#dayOfWeek").autocomplete({
-        source: daysOfWeek
-    });
-});
-</script>
 
    </body>
