@@ -35,6 +35,10 @@ class CStudent{
         $view = new VStudent();
         $view->contact();
     }
+    public static function findAccommodation(){
+        $view = new VStudent();
+        $view->findAccommodation();
+    }
     public static function about(){
         $view = new VStudent();
         $view->about();

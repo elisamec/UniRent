@@ -58,4 +58,7 @@ class VStudent{
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->display('Student/publicProfileOwner.tpl');
     }
+    public function findAccommodation(){
+        $this->smarty->display('Student/search.tpl');
+    }
 }
