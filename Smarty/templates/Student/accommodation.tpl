@@ -147,7 +147,7 @@
                         <div class="col-md-4">
                         <div class="userSection">
                                 <div class="userIcon">
-                                    <a href="#"><img src="/UniRent/Smarty/images/FreeBadge.png" alt="User Profile Picture" disabled></a>
+                                    <a><img src="/UniRent/Smarty/images/FreeBadge.png" alt="User Profile Picture"></a>
                                 </div>
                                 <div class="username"></div> <!-- Username of the reviewer -->
                             </div>
@@ -155,7 +155,7 @@
                         <div class="col-md-4">
                         <div class="userSection">
                                 <div class="userIcon">
-                                    <a href="#"><img src="/UniRent/Smarty/images/FreeBadge.png" alt="User Profile Picture" disabled></a>
+                                    <a><img src="/UniRent/Smarty/images/FreeBadge.png" alt="User Profile Picture"></a>
                                 </div>
                                 <div class="username"></div> <!-- Username of the reviewer -->
                             </div>
