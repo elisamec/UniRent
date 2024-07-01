@@ -95,6 +95,7 @@
       <div class="row">
       <div class="col-lg-4 col-md-6col-lg-4 col-md-6">
                      <div class="accom_img">
+                     <div class="container_main">
                      <! Change ewith the first one from the array once we learned how to handle image display -->
                                  <img src="/UniRent/Smarty/images/img-4.png" alt="">
                                  <div class="overlay">
@@ -103,15 +104,61 @@
                                     </div>
                                  </div>
                               </div>
+
+                     <div class="reserve_btn"><a href="#" >Reserve</a></div>
+                      <div class="reserve_btn"><a href="#" >Visit</a></div>
+                      <div class="ownerSect">
+                      <div class="row">
+                      <h1 class="titleOwn">Owner:</h1>
+                        <div class="userSection">
+                                <div class="userIcon">
+                                    <a href="#"><img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture"></a>
+                                </div>
+                                <div class="username"><a href="#">elisamec</a></div> <!-- Username of the reviewer -->
+                            </div>
+                        </div>
+                        </div>
+                        <div class="reserve_btn" id="contactBtn"><a href="#" >Owner Contacts</a></div>
                      </div>
+                    </div>
+                     <div class="col-lg-8 col-md-10 col-lg-8 col-md-10">
                      <div class="Accomcontainer">
-                        <h1>Accommodation Details</h1>
+                        <h1 class="title">Accommodation Details</h1>
                         <h2> Description:</h2>
                         <p>{$accommodation->getDescription()}</p>
                         <h2>Monthly Price: {$accommodation->getPrice()}€</h2>
                         {if $accommodation->getDeposit() !== null}
                         <h2>Deposit: {$accommodation->getDeposit()}€</h2>
                         {/if}
+                        <h1 class="title">Current Tenants</h1>
+                        <div class="row">
+                        <div class="col-md-4">
+                        <div class="userSection">
+                                <div class="userIcon">
+                                    <a href="#"><img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture"></a>
+                                </div>
+                                <div class="username"><a href="#">eli1</a></div> <!-- Username of the reviewer -->
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                        <div class="userSection">
+                                <div class="userIcon">
+                                    <a href="#"><img src="/UniRent/Smarty/images/FreeBadge.png" alt="User Profile Picture"></a>
+                                </div>
+                                <div class="username"></div> <!-- Username of the reviewer -->
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                        <div class="userSection">
+                                <div class="userIcon">
+                                    <a href="#"><img src="/UniRent/Smarty/images/FreeBadge.png" alt="User Profile Picture"></a>
+                                </div>
+                                <div class="username"></div> <!-- Username of the reviewer -->
+                            </div>
+                        </div>
+                        </div>
+
+                        <h1 class="title"> Reviews</h1>
                          <div id="reviewsContainer">
                    <div class="review">
                    <h1 class="ReviewTitle"> Title </h1> <!-- Title of the review -->
@@ -122,7 +169,7 @@
                                 </div>
                                 <div class="username"><a href="#">eli1</a></div> <!-- Username of the reviewer -->
                             </div>
-                            <div class="col-md-11">
+                            <div class="col-md-9">
                                 <div class="stars">
                                     <span class="fa fa-star or"></span>
                                     <span class="fa fa-star or"></span>
@@ -138,8 +185,10 @@
                      </div>
                      
                   </div>
-                  
-      
+                  </div>
+                    <div class="col-lg-4 col-md-6col-lg-4 col-md-6">
+                    
+                    </div>
       </div>
 
 
@@ -154,6 +203,45 @@
         </div>
     </div>
 
+<div id="contactModal" class="resModal">
+  <div class="resModal-content">
+  <div class="row">
+    <span class="resClose">&times;</span>
+    <h2 class="resModal-head">Owner Contacts</h2>
+    </div>
+    <p>Phone: (123) 456-7890</p>
+    <p>Email: owner@example.com</p>
+  </div>
+</div>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("contactModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("contactBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("resClose")[0];
+
+    // When the user clicks the button, open the modal 
+    btn.onclick = function(event) {
+        event.preventDefault();
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
 
 
 <!-- footer section start -->
@@ -296,7 +384,7 @@
                                 </div>
                                 <div class="username"><a href="#">` + review.username + `</a></div> <!-- Username of the reviewer -->
                             </div>
-                            <div class="col-md-11">
+                            <div class="col-md-9">
                                 <div class="stars">
                                     ` + generateStars(review.stars) + ` <!-- Star rating -->
                                 </div>
