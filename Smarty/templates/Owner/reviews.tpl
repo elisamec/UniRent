@@ -105,7 +105,7 @@
          </div>
     <div id="reviewsContainer"></div>
 </div>
-    <script>
+   <script>
     {if isset($reviewsData)}
     const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
     console.log(reviews);
@@ -129,7 +129,7 @@
 
         if (container) {
             if (reviews.length === 0) {
-                container.innerHTML = '<div class="container"><h1 class="noRev">You have no reviews yet!</h1></div>';
+                container.innerHTML = '<div class="container"><h1 class="noRev">There are no reviews yet!</h1></div>';
             } else {
                 reviews.forEach(review => {
                     const reviewElement = document.createElement('div');
@@ -141,9 +141,9 @@
                         <div class="row">
                             <div class="userSection">
                                 <div class="userIcon">
-                                    <a href="#"><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
+                                    <a href="/UniRent/Student/publicProfile" id="username" name="username" value="` + review.username + `"><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
                                 </div>
-                                <div class="username"><a href="#">` + review.username + `</a></div> <!-- Username of the reviewer -->
+                                <div class="username"><a href="/UniRent/Student/publicProfile" id="username" name="username" value="` + review.username + `">` + review.username + `</a></div> <!-- Username of the reviewer -->
                             </div>
                             <div class="col-md-11">
                                 <div class="stars">
