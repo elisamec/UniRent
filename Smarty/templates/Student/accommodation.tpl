@@ -112,9 +112,13 @@
                       <h1 class="titleOwn">Owner:</h1>
                         <div class="userSection">
                                 <div class="userIcon">
-                                    <a href="#"><img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture"></a>
+                                    {if $owner->getPhoto() === null}
+                                        <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
+                                    {else}
+                                    <img src="{$owner->getPicture()}">
+                                    {/if}
                                 </div>
-                                <div class="username"><a href="#">elisamec</a></div> <!-- Username of the reviewer -->
+                                <div class="username"><a href="#">{$owner->getUsername()}</a></div> <!-- Username of the owner -->
                             </div>
                         </div>
                         </div>
@@ -126,9 +130,9 @@
                         <h1 class="title">Accommodation Details</h1>
                         <h2> Description:</h2>
                         <p>{$accommodation->getDescription()}</p>
-                        <h2>Monthly Price: {$accommodation->getPrice()}€</h2>
+                        <h2>Monthly Price: {$accommodation->getPrice()} €</h2>
                         {if $accommodation->getDeposit() !== null}
-                        <h2>Deposit: {$accommodation->getDeposit()}€</h2>
+                        <h2>Deposit: {$accommodation->getDeposit()} €</h2>
                         {/if}
                         <h1 class="title">Current Tenants</h1>
                         <div class="row">
@@ -167,7 +171,7 @@
                                 <div class="userIcon">
                                     <a href="#"><img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture"></a>
                                 </div>
-                                <div class="username"><a href="#">eli1</a></div> <!-- Username of the reviewer -->
+                                <div class="username"><a href="#">eli1</a></div> <!-- Username of the tenant -->
                             </div>
                             <div class="col-md-9">
                                 <div class="stars">
@@ -209,8 +213,8 @@
     <span class="resClose">&times;</span>
     <h2 class="resModal-head">Owner Contacts</h2>
     </div>
-    <p>Phone: (123) 456-7890</p>
-    <p>Email: owner@example.com</p>
+    <p>Phone: {$owner->getPhoneNumber()}</p>
+    <p>Email: {$owner->getMail()}</p>
   </div>
 </div>
 
