@@ -94,7 +94,7 @@ INSERT INTO `address` (`id`, `addressLine`, `postalCode`, `city`) VALUES
 --
 
 CREATE TABLE `contract` (
-  `reservationId` int(11) NOT NULL,
+  `idReservation` int(11) NOT NULL,
   `status` enum('onGoing','future','finshed') NOT NULL,
   `paymentDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `cardNumber` int(11) NOT NULL
@@ -104,7 +104,7 @@ CREATE TABLE `contract` (
 -- Dump dei dati per la tabella `contract`
 --
 
-INSERT INTO `contract` (`reservationId`, `status`, `paymentDate`, `cardNumber`) VALUES
+INSERT INTO `contract` (`idReservation`, `status`, `paymentDate`, `cardNumber`) VALUES
 (3, 'future', '2024-06-06 15:58:05', 1192002);
 
 -- --------------------------------------------------------
@@ -357,7 +357,7 @@ ALTER TABLE `address`
 -- Indici per le tabelle `contract`
 --
 ALTER TABLE `contract`
-  ADD KEY `reservationId` (`reservationId`),
+  ADD KEY `idReservation` (`idReservation`),
   ADD KEY `cardNumber` (`cardNumber`);
 
 --
@@ -550,7 +550,7 @@ ALTER TABLE `accommodationreview`
 -- Limiti per la tabella `contract`
 --
 ALTER TABLE `contract`
-  ADD CONSTRAINT `contract_ibfk_1` FOREIGN KEY (`reservationId`) REFERENCES `reservation` (`id`),
+  ADD CONSTRAINT `contract_ibfk_1` FOREIGN KEY (`idReservation`) REFERENCES `reservation` (`id`),
   ADD CONSTRAINT `contract_ibfk_2` FOREIGN KEY (`cardNumber`) REFERENCES `creditcard` (`number`);
 
 --
