@@ -256,7 +256,7 @@ class CStudent{
         }
         $view->publicProfileStudent($student, $reviewsData);
     }
-    public static function publicProfileOwner($username)
+    public static function publicProfileOwner()
     {
         $view = new VStudent();
         $PM=FPersistentManager::getInstance();
