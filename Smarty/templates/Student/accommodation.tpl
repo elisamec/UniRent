@@ -169,7 +169,7 @@
                         <div class="row">
                             <div class="userSection">
                                 <div class="userIcon">
-                                    <a href="#"><img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture"></a>
+                                    <a href="/UniRent/Student/publicProfile/Matthew"><img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture"></a>
                                 </div>
                                 <div class="username"><a href="/UniRent/Student/publicProfile/Matthew">Matthew</a></div> <!-- Username of the tenant -->
                             </div>
