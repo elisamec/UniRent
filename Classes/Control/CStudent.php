@@ -237,7 +237,7 @@ class CStudent{
     public static function publicProfileStudent()
     {
         $view = new VStudent();
-        $student = FPersistentManager::getInstance()->load('EStudent', 4);
+        $student = FPersistentManager::getInstance()->load('EStudent', 5);
         $reviews = FReview::getInstance()->loadByRecipient($student->getId(), TType::STUDENT);
         $reviewsData = [];
         
