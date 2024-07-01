@@ -147,7 +147,7 @@
                         <div class="col-md-4">
                         <div class="userSection">
                                 <div class="userIcon">
-                                    <a href="#"><img src="/UniRent/Smarty/images/FreeBadge.png" alt="User Profile Picture"></a>
+                                    <a href="#"><img src="/UniRent/Smarty/images/FreeBadge.png" alt="User Profile Picture" disabled></a>
                                 </div>
                                 <div class="username"></div> <!-- Username of the reviewer -->
                             </div>
@@ -155,7 +155,7 @@
                         <div class="col-md-4">
                         <div class="userSection">
                                 <div class="userIcon">
-                                    <a href="#"><img src="/UniRent/Smarty/images/FreeBadge.png" alt="User Profile Picture"></a>
+                                    <a href="#"><img src="/UniRent/Smarty/images/FreeBadge.png" alt="User Profile Picture" disabled></a>
                                 </div>
                                 <div class="username"></div> <!-- Username of the reviewer -->
                             </div>
@@ -169,9 +169,9 @@
                         <div class="row">
                             <div class="userSection">
                                 <div class="userIcon">
-                                    <a href="/UniRent/Student/publicProfile/Matthew"><img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture"></a>
+                                    <a href="/UniRent/Student/publicProfile/Dante"><img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture"></a>
                                 </div>
-                                <div class="username"><a href="/UniRent/Student/publicProfile/Matthew">Matthew</a></div> <!-- Username of the tenant -->
+                                <div class="username"><a href="/UniRent/Student/publicProfile/Dante">MatthDanteew</a></div> <!-- Username of the tenant -->
                             </div>
                             <div class="col-md-9">
                                 <div class="stars">
