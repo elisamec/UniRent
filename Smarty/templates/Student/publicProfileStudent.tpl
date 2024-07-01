@@ -117,7 +117,7 @@
          </div>
     <div id="reviewsContainer"></div>
 </div>
-      <script>
+       <script>
     {if isset($reviewsData)}
     const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
     console.log(reviews);

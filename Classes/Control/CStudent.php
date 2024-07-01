@@ -154,9 +154,25 @@ class CStudent{
     public static function accommodation() {
         $view = new VStudent();
         $accomm = FPersistentManager::getInstance()->load('EAccommodation', 5);
-        $owner = FPersistentManager::getInstance()->load('EOwner', 4);
+        $owner = FPersistentManager::getInstance()->load('EOwner', $accomm->getIdOwner());
         USession::getInstance()->setSessionElement('owner', $owner->getUsername());
-        $view->accommodation($accomm, $owner);
+        $reviews = FReview::getInstance()->loadByRecipient($accomm->getIdAccommodation(), TType::ACCOMMODATION);
+        $reviewsData = [];
+        
+        foreach ($reviews as $review) {
+            $profilePic = FStudent::getInstance()->load($review->getIdAuthor())->getPicture();
+            if ($profilePic === null) {
+                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+            }
+            $reviewsData[] = [
+                'title' => $review->getTitle(),
+                'username' => FStudent::getInstance()->load($review->getIdAuthor())->getUsername(),
+                'stars' => $review->getValutation(),
+                'content' => $review->getDescription(),
+                'userPicture' => $profilePic,
+            ];
+        }
+        $view->accommodation($accomm, $owner, $reviewsData);
     }
     public static function reviews() {
         $view = new VStudent();

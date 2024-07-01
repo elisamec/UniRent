@@ -164,27 +164,6 @@
 
                         <h1 class="title"> Reviews</h1>
                          <div id="reviewsContainer">
-                   <div class="review">
-                   <h1 class="ReviewTitle"> Title </h1> <!-- Title of the review -->
-                        <div class="row">
-                            <div class="userSection">
-                                <div class="userIcon">
-                                    <a href="/UniRent/Student/publicProfile/Dante"><img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture"></a>
-                                </div>
-                                <div class="username"><a href="/UniRent/Student/publicProfile/Dante">Dante</a></div> <!-- Username of the tenant -->
-                            </div>
-                            <div class="col-md-9">
-                                <div class="stars">
-                                    <span class="fa fa-star or"></span>
-                                    <span class="fa fa-star or"></span>
-                                    <span class="fa fa-star or"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span> <!-- Star rating -->
-                                </div>
-                                <p>Content</p> <!-- Content of the review -->
-                            </div>
-                        </div>
-                   </div>
                    </div>
                      </div>
                      
