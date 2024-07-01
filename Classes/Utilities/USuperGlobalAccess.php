@@ -74,13 +74,13 @@ class USuperGlobalAccess {
       *@param string $key The key of the value to retrieve.
       *@return mixed The value associated with the key, or null if the key does not exist.
       */ 
-      public static function getFiles($key) 
-      { 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') 
-        {
+      public static function getFiles($key) {
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
             // Verifica se il campo del file esiste e se è stato caricato un file
-            if (isset($_FILES['img']) && $_FILES['img']['error'] == UPLOAD_ERR_OK) 
-            {
+            if (isset($_FILES['img']) && $_FILES['img']['error'] == UPLOAD_ERR_OK) {
+
                 // Un file è stato caricato
                 $fileTmpPath = $_FILES['img']['tmp_name'];
                 $fileName = $_FILES['img']['name'];
@@ -91,28 +91,27 @@ class USuperGlobalAccess {
         
                 // Verifica l'estensione del file
                 $allowedfileExtensions = array('jpg', 'gif', 'png', 'jpeg');
-                if (in_array($fileExtension, $allowedfileExtensions)) 
-                {
-// Carica il file
-                    $uploadFileDir = './uploaded_files/';
+                if (in_array($fileExtension, $allowedfileExtensions)) {
+
+                    // Carica il file
+                    $uploadFileDir = '../../';
                     $dest_path = $uploadFileDir . $fileName;
         
-                    if(move_uploaded_file($fileTmpPath, $dest_path)) 
-                    {
+                    if(move_uploaded_file($fileTmpPath, $dest_path)) {
+
                         $message ='File is successfully uploaded.';
-                    } 
-                    else
-                    {
+
+                    } else {
+
                         $message = 'There was some error moving the file to upload directory. Please make sure the upload directory is writable by web server.';
                     }
-                } 
-                else 
-                {
+
+                } else {
+
                     $message = 'Upload failed. Allowed file types: ' . implode(',', $allowedfileExtensions);
                 }
-            } 
-            else 
-            {
+            } else {
+
                 // Nessun file caricato
                 return null;
             }
@@ -148,12 +147,12 @@ class USuperGlobalAccess {
             else
             {
                 $type = $_FILES[$key]['type'];
-                $nome = $_FILES[$key]['name'];
+                $name = $_FILES[$key]['name'];
                 $immagine = file_get_contents($_FILES[$key]['tmp_name']);
                 $immagine = addslashes ($immagine);
                 $result=array();
                 $result['type']=$type;
-                $result['name']=$nome;
+                $result['name']=$name;
                 $result['img']=$immagine;
                 return $result;
             }
