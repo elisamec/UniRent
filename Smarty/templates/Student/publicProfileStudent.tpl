@@ -117,7 +117,7 @@
          </div>
     <div id="reviewsContainer"></div>
 </div>
-     <script>
+      <script>
     {if isset($reviewsData)}
     const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
     console.log(reviews);
@@ -153,9 +153,9 @@
                         <div class="row">
                             <div class="userSection">
                                 <div class="userIcon">
-                                    <a href="/UniRent/Student/publicProfile" id="username" name="username" value="` + review.username + `"><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
+                                    <a href="/UniRent/Student/publicProfile/` + review.username + `"><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
                                 </div>
-                                <div class="username"><a href="/UniRent/Student/publicProfile" id="username" name="username" value="` + review.username + `">` + review.username + `</a></div> <!-- Username of the reviewer -->
+                                <div class="username"><a href="/UniRent/Student/publicProfile/` + review.username + `">` + review.username + `</a></div> <!-- Username of the reviewer -->
                             </div>
                             <div class="col-md-11">
                                 <div class="stars">

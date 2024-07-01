@@ -139,9 +139,9 @@
                         <div class="col-md-4">
                         <div class="userSection">
                                 <div class="userIcon">
-                                    <a href="#"><img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture"></a>
+                                    <a href="/UniRent/Student/publicProfileStudent/eli1"><img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture"></a>
                                 </div>
-                                <div class="username"><a href="#">eli1</a></div> <!-- Username of the reviewer -->
+                                <div class="username"><a href="/UniRent/Student/publicProfileStudent/eli1">eli1</a></div> <!-- Username of the reviewer -->
                             </div>
                         </div>
                         <div class="col-md-4">
