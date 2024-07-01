@@ -408,7 +408,7 @@ class FReservation
                 $q.=' WHERE r.statusAccept=TRUE AND o.id=:id AND r.id NOT IN (';
 
                 $q.=' SELECT DISTINCT r.id';
-                $q.=' FROM reservation r INNER JOIN contract c ON c.reservationId=r.id )';
+                $q.=' FROM reservation r INNER JOIN contract c ON c.idReservation=r.id )';
 
                 $db->exec('LOCK TABLES reservation READ, owner READ , accommodation READ');
                 $db->beginTransaction();

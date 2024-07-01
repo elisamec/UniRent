@@ -50,7 +50,7 @@ class FContract
      */
     public function exist(int $reservID):bool 
     {
-        $q='SELECT * FROM contract WHERE reservationId=:reservID';
+        $q='SELECT * FROM contract WHERE idReservation=:reservID';
         $connection= FConnection::getInstance();
         $db=$connection->getConnection();
         $db->beginTransaction();
@@ -86,7 +86,7 @@ class FContract
         try
         {
             $db->exec('LOCK TABLES contract WRITE');
-            $q='INSERT INTO contract (reservationId,status,paymentDate,cardNumber)';
+            $q='INSERT INTO contract (idReservation,status,paymentDate,cardNumber)';
             $q.=' VALUES (:RID,:ST,:PD,:CN)';
             $db->beginTransaction();
             $stm=$db->prepare($q);
@@ -119,7 +119,7 @@ class FContract
         {
             try
             {
-                $q='SELECT * FROM contract WHERE reservationId=:id';
+                $q='SELECT * FROM contract WHERE idReservation=:id';
                 $db->exec('LOCK TABLES contract READ');
                 $db->beginTransaction();
                 $stm=$db->prepare($q);
