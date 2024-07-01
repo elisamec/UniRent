@@ -149,7 +149,7 @@ class CStudent{
     }
     public static function accommodation() {
         $view = new VStudent();
-        $accomm = FPersistentManager::getInstance()->load('EAccommodation', 2);
+        $accomm = FPersistentManager::getInstance()->load('EAccommodation', 5);
         $view->accommodation($accomm);
     }
     public static function reviews() {
