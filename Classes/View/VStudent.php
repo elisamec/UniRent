@@ -56,7 +56,7 @@ class VStudent{
     public function publicProfileStudent(EOwner $student, array $reviewsData){
         $this->smarty->assign('owner', $student);
         $this->smarty->assign('reviewsData', $reviewsData);
-        $this->smarty->display('Student/publicProfileOwner.tpl');
+        $this->smarty->display('Student/publicProfileStudent.tpl');
     }
     public function findAccommodation(){
         $this->smarty->display('Student/search.tpl');
