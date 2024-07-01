@@ -85,7 +85,7 @@ class FCreditCard
             $db->rollBack();
         }
         $row=$stm->fetch(PDO::FETCH_ASSOC);
-        $result=new ECreditCard($row['number'],$row['name'],$row['surname'],$row['expiry'],$row['cvv'],$row['studentId']);
+        $result=new ECreditCard($row['number'],$row['name'],$row['surname'],$row['expiry'],$row['cvv'],$row['idStudent']);
         return $result;
     }
   
@@ -103,15 +103,15 @@ class FCreditCard
     { 
         $db->exec('LOCK TABLES creditcard WRITE');
         $db->beginTransaction();
-        $q='INSERT INTO creditcard (number, name , surname, expiry, cvv, studentId)';
-        $q=$q.' VALUES (:number, :name, :surname, :expiry, :cvv, :studentId)';
+        $q='INSERT INTO creditcard (number, name , surname, expiry, cvv, idStudent)';
+        $q=$q.' VALUES (:number, :name, :surname, :expiry, :cvv, :idStudent)';
         $stm=$db->prepare($q);
         $stm->bindValue(':number',$CreditCard->getNumber(),PDO::PARAM_INT);
         $stm->bindValue(':name',$CreditCard->getName(),PDO::PARAM_STR);
         $stm->bindValue(':surname',$CreditCard->getSurname(),PDO::PARAM_STR);
         $stm->bindValue(':expiry',$CreditCard->getExpiry(),PDO::PARAM_STR);
         $stm->bindValue(':cvv',$CreditCard->getCVV(),PDO::PARAM_INT);
-        $stm->bindValue(':studentId',$CreditCard->getStudentID(),PDO::PARAM_INT);
+        $stm->bindValue(':idStudent',$CreditCard->getStudentID(),PDO::PARAM_INT);
         $stm->execute();
         $db->commit();
         $db->exec('UNLOCK TABLES');
@@ -140,13 +140,13 @@ class FCreditCard
             {
                 $db->exec('LOCK TABLES creditcard WRITE');
                 $db->beginTransaction();
-                $q='UPDATE creditcard SET name = :name, surname = :surname, expiry = :expiry, cvv = :cvv, studentId = :studentId  WHERE number=:number';
+                $q='UPDATE creditcard SET name = :name, surname = :surname, expiry = :expiry, cvv = :cvv, idStudent = :idStudent  WHERE number=:number';
                 $stm=$db->prepare($q);
                 $stm->bindValue(':name',$CreditCard->getName(),PDO::PARAM_STR);
                 $stm->bindValue(':surname',$CreditCard->getSurname(),PDO::PARAM_STR);
                 $stm->bindValue(':expiry',$CreditCard->getExpiry(),PDO::PARAM_STR);
                 $stm->bindValue(':cvv',$CreditCard->getCVV(),PDO::PARAM_INT);
-                $stm->bindValue(':studentId',$CreditCard->getStudentID(),PDO::PARAM_INT);
+                $stm->bindValue(':idStudent',$CreditCard->getStudentID(),PDO::PARAM_INT);
                 $stm->bindValue(':number',$CreditCard->getNumber(),PDO::PARAM_INT);
                 $stm->execute();           
                 $db->commit();
