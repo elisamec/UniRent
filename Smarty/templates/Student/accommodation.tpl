@@ -118,7 +118,7 @@
                                     <a href="#"><img src="{$owner->getPicture()}"></a>
                                     {/if}
                                 </div>
-                                <div class="username"><a href="#">{$owner->getUsername()}</a></div> <!-- Username of the owner -->
+                                <div class="username"><a href="/UniRent/Student/publicProfileOwner" name="username" value="{$owner->getUsername}">{$owner->getUsername()}</a></div> <!-- Username of the owner -->
                             </div>
                         </div>
                         </div>

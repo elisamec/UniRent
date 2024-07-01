@@ -256,4 +256,26 @@ class CStudent{
         }
         $view->publicProfileStudent($student, $reviewsData);
     }
+    public static function publicProfileOwner()
+    {
+        $view = new VStudent();
+        $owner = FPersistentManager::getInstance()->load('EOwner', 4);
+        $reviews = FReview::getInstance()->loadByRecipient($owner->getId(), TType::OWNER);
+        $reviewsData = [];
+        
+        foreach ($reviews as $review) {
+            $profilePic = FStudent::getInstance()->load($review->getIdAuthor())->getPicture();
+            if ($profilePic === null) {
+                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+            }
+            $reviewsData[] = [
+                'title' => $review->getTitle(),
+                'username' => FStudent::getInstance()->load($review->getIdAuthor())->getUsername(),
+                'stars' => $review->getValutation(),
+                'content' => $review->getDescription(),
+                'userPicture' => $profilePic,
+            ];
+        }
+        $view->publicProfileOwner($owner, $reviewsData);
+    }
 }
