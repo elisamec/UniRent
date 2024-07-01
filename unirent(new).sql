@@ -88,24 +88,6 @@ INSERT INTO `address` (`id`, `addressLine`, `postalCode`, `city`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `administrator`
---
-
-CREATE TABLE `administrator` (
-  `id` int(11) NOT NULL,
-  `username` varchar(40) NOT NULL,
-  `password` varchar(40) NOT NULL,
-  `email` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dump dei dati per la tabella `administrator`
---
-
-INSERT INTO `administrator` (`id`, `username`, `password`, `email`) VALUES
-(2, 'Lory', '$2y$10$ugXeOJq..mDhiKfSb3lifeaEehcC9j/x7', 'lorenzo.maloni.02@gmail.com');
-
--- --------------------------------------------------------
 
 --
 -- Struttura della tabella `contract`
@@ -370,14 +352,6 @@ ALTER TABLE `accommodationreview`
 ALTER TABLE `address`
   ADD PRIMARY KEY (`id`);
 
---
--- Indici per le tabelle `administrator`
---
-ALTER TABLE `administrator`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `username` (`username`),
-  ADD UNIQUE KEY `email_2` (`email`);
 
 --
 -- Indici per le tabelle `contract`
@@ -498,11 +472,6 @@ ALTER TABLE `accommodation`
 ALTER TABLE `address`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
---
--- AUTO_INCREMENT per la tabella `administrator`
---
-ALTER TABLE `administrator`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT per la tabella `day`
