@@ -113,12 +113,12 @@
                         <div class="userSection">
                                 <div class="userIcon">
                                     {if $owner->getPhoto() === null}
-                                        <a href="#"><img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon"></a>
+                                        <a href="/UniRent/Student/publicProfileOwner/{$owner->getUsername()}"><img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon"></a>
                                     {else}
-                                    <a href="#"><img src="{$owner->getPicture()}"></a>
+                                    <a href="/UniRent/Student/publicProfileOwnerr/{$owner->getUsername()}"><img src="{$owner->getPicture()}"></a>
                                     {/if}
                                 </div>
-                                <div class="username"><a href="#">{$owner->getUsername()}</a></div> <!-- Username of the owner -->
+                                <div class="username"><a href="/UniRent/Student/publicProfileOwner/{$owner->getUsername()}">{$owner->getUsername()}</a></div> <!-- Username of the owner -->
                             </div>
                         </div>
                         </div>
@@ -139,15 +139,15 @@
                         <div class="col-md-4">
                         <div class="userSection">
                                 <div class="userIcon">
-                                    <a href="#"><img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture"></a>
+                                    <a href="/UniRent/Student/publicProfileStudent/eli1"><img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture"></a>
                                 </div>
-                                <div class="username"><a href="#">eli1</a></div> <!-- Username of the reviewer -->
+                                <div class="username"><a href="/UniRent/Student/publicProfileStudent/eli1">eli1</a></div> <!-- Username of the reviewer -->
                             </div>
                         </div>
                         <div class="col-md-4">
                         <div class="userSection">
                                 <div class="userIcon">
-                                    <a href="#"><img src="/UniRent/Smarty/images/FreeBadge.png" alt="User Profile Picture"></a>
+                                    <a><img src="/UniRent/Smarty/images/FreeBadge.png" alt="User Profile Picture"></a>
                                 </div>
                                 <div class="username"></div> <!-- Username of the reviewer -->
                             </div>
@@ -155,7 +155,7 @@
                         <div class="col-md-4">
                         <div class="userSection">
                                 <div class="userIcon">
-                                    <a href="#"><img src="/UniRent/Smarty/images/FreeBadge.png" alt="User Profile Picture"></a>
+                                    <a><img src="/UniRent/Smarty/images/FreeBadge.png" alt="User Profile Picture"></a>
                                 </div>
                                 <div class="username"></div> <!-- Username of the reviewer -->
                             </div>
@@ -164,27 +164,6 @@
 
                         <h1 class="title"> Reviews</h1>
                          <div id="reviewsContainer">
-                   <div class="review">
-                   <h1 class="ReviewTitle"> Title </h1> <!-- Title of the review -->
-                        <div class="row">
-                            <div class="userSection">
-                                <div class="userIcon">
-                                    <a href="#"><img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture"></a>
-                                </div>
-                                <div class="username"><a href="#">eli1</a></div> <!-- Username of the tenant -->
-                            </div>
-                            <div class="col-md-9">
-                                <div class="stars">
-                                    <span class="fa fa-star or"></span>
-                                    <span class="fa fa-star or"></span>
-                                    <span class="fa fa-star or"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span> <!-- Star rating -->
-                                </div>
-                                <p>Content</p> <!-- Content of the review -->
-                            </div>
-                        </div>
-                   </div>
                    </div>
                      </div>
                      
@@ -384,11 +363,11 @@
                         <div class="row">
                             <div class="userSection">
                                 <div class="userIcon">
-                                    <a href="#"><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
+                                    <a href="/UniRent/Student/publicProfile/` + review.username + `"><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
                                 </div>
-                                <div class="username"><a href="#">` + review.username + `</a></div> <!-- Username of the reviewer -->
+                                <div class="username"><a href="/UniRent/Student/publicProfile/` + review.username + `">` + review.username + `</a></div> <!-- Username of the reviewer -->
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-11">
                                 <div class="stars">
                                     ` + generateStars(review.stars) + ` <!-- Star rating -->
                                 </div>

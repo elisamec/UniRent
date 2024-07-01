@@ -156,12 +156,28 @@ class CStudent{
         
 
     }
-    public static function accommodation() {
+    public static function accommodation(int $idAccommodation) {
         $view = new VStudent();
-        $accomm = FPersistentManager::getInstance()->load('EAccommodation', 5);
-        $owner = FPersistentManager::getInstance()->load('EOwner', 4);
+        $accomm = FPersistentManager::getInstance()->load('EAccommodation', $idAccommodation);
+        $owner = FPersistentManager::getInstance()->load('EOwner', $accomm->getIdOwner());
         USession::getInstance()->setSessionElement('owner', $owner->getUsername());
-        $view->accommodation($accomm, $owner);
+        $reviews = FReview::getInstance()->loadByRecipient($accomm->getIdAccommodation(), TType::ACCOMMODATION);
+        $reviewsData = [];
+        
+        foreach ($reviews as $review) {
+            $profilePic = FStudent::getInstance()->load($review->getIdAuthor())->getPicture();
+            if ($profilePic === null) {
+                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+            }
+            $reviewsData[] = [
+                'title' => $review->getTitle(),
+                'username' => FStudent::getInstance()->load($review->getIdAuthor())->getUsername(),
+                'stars' => $review->getValutation(),
+                'content' => $review->getDescription(),
+                'userPicture' => $profilePic,
+            ];
+        }
+        $view->accommodation($accomm, $owner, $reviewsData);
     }
     public static function reviews() {
         $view = new VStudent();
@@ -238,11 +254,25 @@ class CStudent{
             #header('Location:/UniRent/Student/profile');
         }  
     }
+
+    public static function publicProfile(string $username) {
+        $PM=FPersistentManager::getInstance();
+        $user=$PM->verifyUserUsername($username);
+        if($user['type']==='Student')
+        {
+            self::publicProfileStudent($username);
+        }
+        else
+        {
+            self::publicProfileOwner($username);
+        }
+    }
         
-    public static function publicProfileStudent()
+    public static function publicProfileStudent(string $username)
     {
         $view = new VStudent();
-        $student = FPersistentManager::getInstance()->load('EStudent', 4);
+        $PM=FPersistentManager::getInstance();
+        $student=$PM->getStudentByUsername($username);
         $reviews = FReview::getInstance()->loadByRecipient($student->getId(), TType::STUDENT);
         $reviewsData = [];
         
@@ -260,5 +290,30 @@ class CStudent{
             ];
         }
         $view->publicProfileStudent($student, $reviewsData);
+    }
+    public static function publicProfileOwner(string $username)
+    {
+        $view = new VStudent();
+        $PM=FPersistentManager::getInstance();
+        $owner=$PM->getOwnerByUsername($username);
+
+
+        $reviews = FReview::getInstance()->loadByRecipient($owner->getId(), TType::OWNER);
+        $reviewsData = [];
+        
+        foreach ($reviews as $review) {
+            $profilePic = FStudent::getInstance()->load($review->getIdAuthor())->getPicture();
+            if ($profilePic === null) {
+                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+            }
+            $reviewsData[] = [
+                'title' => $review->getTitle(),
+                'username' => FStudent::getInstance()->load($review->getIdAuthor())->getUsername(),
+                'stars' => $review->getValutation(),
+                'content' => $review->getDescription(),
+                'userPicture' => $profilePic,
+            ];
+        }
+        $view->publicProfileOwner($owner, $reviewsData);
     }
 }
