@@ -70,7 +70,7 @@
          * @param  int $idAccommodation
          * @return EAccommodation
          */
-        public function load(int $idAccommodation): EAccommodation{
+        public function load(int $idAccommodation): ?EAccommodation{
             
             $FP=FPhoto::getInstance();
             $FA=FAccommodation::getInstance();
@@ -304,7 +304,7 @@
          * @param  Address $address
          * @return int
          */
-        private function storeAddress(Address $address):int {
+        private function storeAddress(Address $address):?int {
 
             $db=FConnection::getInstance()->getConnection();
             $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
@@ -344,10 +344,10 @@
          * private class that stores days of visit of an accommodation in db
          * 
          * @param  int $idAccommodation
-         * @param  String $day
+         * @param  string $day
          * @return int
          */
-        private function storeDay(int $idAccommodation, String $day):int {
+        private function storeDay(int $idAccommodation, String $day):?int {
 
             $db=FConnection::getInstance()->getConnection();
             $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
@@ -383,10 +383,10 @@
          * private class that stores days of visit of an accommodation in db
          * 
          * @param  int $idAccommodation
-         * @param  String $day
+         * @param  string $day
          * @return int
          */
-        private function storeTime(int $idDay, String $time):bool {
+        private function storeTime(int $idDay, String $time):?bool {
 
             $db=FConnection::getInstance()->getConnection();
             $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
@@ -506,7 +506,7 @@
          * private class that updates the days of visit of an accommodation in db
          * 
          * @param  int $idAccommodation
-         * @param  String $day
+         * @param  string $day
          * @return bool
          */
         public function updateDay(int $idAccommodation, String $day):bool 

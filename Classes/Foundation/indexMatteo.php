@@ -7,6 +7,8 @@ use Classes\Foundation\FStudent;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use Classes\Foundation\FOwner;
+use Classes\Utilities\UAccessUniversityFile;
+
 # PARTE MATTEO cancellato materiale precedente 22/06/2024
 /*
 $path='UniIta.json';
@@ -118,26 +120,6 @@ if(password_verify($password,$password_h))
     print '   Tutto ok!';
 }*/
 
-$phone=' 331 123 000';
-
-
-$result_39=strncmp($phone,'+39',3);
-$result_0039=strncmp($phone,'0039',4);
-if($result_39===0)   #se inizia con +39
-{
-    $phone=substr($phone,3);
-    $phone=str_replace(' ','',$phone);
-}
-else
-{
-    if($result_0039===0) #se inizia con 0039
-    {
-        $phone=substr($phone,4);
-        $phone=str_replace(' ','',$phone);
-    }
-    else # altrimenti è senza prefisso
-    {
-        $phone=str_replace(' ','',$phone);
-    }
-}
-print $phone;
+$UAU=UAccessUniversityFile::getInstance();
+$università=$UAU->getUniversityByCity('L\'Aquila');
+print_r($università);
