@@ -171,7 +171,7 @@
                                 <div class="userIcon">
                                     <a href="#"><img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture"></a>
                                 </div>
-                                <div class="username"><a href="#">eli1</a></div> <!-- Username of the tenant -->
+                                <div class="username"><a href="/UniRent/Student/publicProfile/Matthew">Matthew</a></div> <!-- Username of the tenant -->
                             </div>
                             <div class="col-md-9">
                                 <div class="stars">
