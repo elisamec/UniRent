@@ -102,15 +102,16 @@ class CStudent{
     {   
         $PM=FPersistentManager::getInstance();
         $session=USession::getInstance();
+        $picture = $session->getSessionElement('picture');
         
-        if ($session->getSessionElement('picture')===null) {
+        if ($picture['img']===null) {
 
             $photo = null;
 
-        }else {
+        } else {
             
-            $photo = null;
-        }            
+            $photo = new EPhoto(null, $picture['img'], 'other', null, null);
+        }   
 
         $duration = USuperGlobalAccess::getPost('courseDuration');
         $immatricolation = USuperGlobalAccess::getPost('immatricolationYear');
@@ -136,6 +137,10 @@ class CStudent{
                                 $anim);
 
         $result = $PM->store($student);
+
+        /*header ("Content-type: ". $picture['type']);
+        print $picture['img'];
+        $result = 1;*/
         if ($result){
             $session->setSessionElement('courseDuration', $duration);
             $session->setSessionElement('immatricolationYear', $immatricolation);

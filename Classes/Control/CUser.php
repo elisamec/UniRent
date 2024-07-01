@@ -64,6 +64,7 @@ class CUser
         $username = USuperGlobalAccess::getPost('username');
         $name = USuperGlobalAccess::getPost('name');
         $surname = USuperGlobalAccess::getPost('surname');
+        $picture = USuperGlobalAccess::getPhoto('img');
 
         
         if($PM->verifyUserEmail($mail)==false && $PM->verifyUserUsername(USuperGlobalAccess::getPost('username'))==false)
@@ -77,7 +78,7 @@ class CUser
             $session::setSessionElement('password',USuperGlobalAccess::getPost('password'));
             $session::setSessionElement('name',$name);
             $session::setSessionElement('surname',$surname);
-            $session::setSessionElement('picture',USuperGlobalAccess::getFiles('img'));
+            $session::setSessionElement('picture',$picture);
             $session::setSessionElement('userType',$type);
 
             if($type==='Student'){

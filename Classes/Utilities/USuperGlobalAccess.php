@@ -70,49 +70,43 @@ class USuperGlobalAccess {
     }
 
     /**
-      *Get a value from the $_FILES superglobal array.
-      *@param string $key The key of the value to retrieve.
-      *@return mixed The value associated with the key, or null if the key does not exist.
-      */ 
-      public static function getFiles($key) {
+     *Get a value from the $_FILES superglobal array.
+     *
+     *@param string $key The key of the value to retrieve.
+     *@return mixed The value associated with the key, or null if the key does not exist.
+     */ 
+    public static function getPhoto($key): ?array {
+
+        $max_size=300000;
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            // Verifica se il campo del file esiste e se è stato caricato un file
-            if (isset($_FILES['img']) && $_FILES['img']['error'] == UPLOAD_ERR_OK) {
+            // verify if an image has been uploaded without errors
+            if (isset($_FILES[$key]) && $_FILES[$key]['error'] == UPLOAD_ERR_OK) {
 
-                // Un file è stato caricato
-                $fileTmpPath = $_FILES['img']['tmp_name'];
-                $fileName = $_FILES['img']['name'];
-                $fileSize = $_FILES['img']['size'];
-                $fileType = $_FILES['img']['type'];
+                // Get photo info
+                $fileTmpPath = $_FILES[$key]['tmp_name'];
+                $fileName = $_FILES[$key]['name'];
+                $fileSize = $_FILES[$key]['size'];
                 $fileNameCmps = explode(".", $fileName);
                 $fileExtension = strtolower(end($fileNameCmps));
         
-                // Verifica l'estensione del file
+                // Verify file extension
                 $allowedfileExtensions = array('jpg', 'gif', 'png', 'jpeg');
-                if (in_array($fileExtension, $allowedfileExtensions)) {
+                if (in_array($fileExtension, $allowedfileExtensions) && $fileSize < $max_size) {
 
-                    // Carica il file
-                    $uploadFileDir = '../../';
-                    $dest_path = $uploadFileDir . $fileName;
-        
-                    if(move_uploaded_file($fileTmpPath, $dest_path)) {
-
-                        $message ='File is successfully uploaded.';
-
-                    } else {
-
-                        $message = 'There was some error moving the file to upload directory. Please make sure the upload directory is writable by web server.';
-                    }
-
+                    $img = file_get_contents($fileTmpPath);
+                    $result = array();
+                    $result['type'] = $_FILES[$key]['type'];
+                    $result['img'] = $img;
+                    return $result;
+                    
                 } else {
 
-                    $message = 'Upload failed. Allowed file types: ' . implode(',', $allowedfileExtensions);
+                    return null;
                 }
             } else {
 
-                // Nessun file caricato
                 return null;
             }
         } else return null;
@@ -127,7 +121,7 @@ class USuperGlobalAccess {
      *
      * @return ?array
      */
-    public static function getPhoto($key):?array
+    /*public static function getPhoto($key):?array
     {
         $max_size=300000;
         $result=false;
@@ -157,6 +151,6 @@ class USuperGlobalAccess {
                 return $result;
             }
         }
-    }
+    }*/
 
 }
