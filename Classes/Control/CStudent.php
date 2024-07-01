@@ -155,6 +155,7 @@ class CStudent{
         $view = new VStudent();
         $accomm = FPersistentManager::getInstance()->load('EAccommodation', 5);
         $owner = FPersistentManager::getInstance()->load('EOwner', 4);
+        USession::getInstance()->setSessionElement('owner', $owner->getUsername());
         $view->accommodation($accomm, $owner);
     }
     public static function reviews() {
