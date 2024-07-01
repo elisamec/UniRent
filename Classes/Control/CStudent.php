@@ -233,11 +233,25 @@ class CStudent{
             #header('Location:/UniRent/Student/profile');
         }  
     }
+
+    public static function publicProfile(string $username) {
+        $PM=FPersistentManager::getInstance();
+        $user=$PM->verifyUserUsername($username);
+        if($user['type']==='Student')
+        {
+            self::publicProfileStudent($username);
+        }
+        else
+        {
+            self::publicProfileOwner($username);
+        }
+    }
         
-    public static function publicProfileStudent()
+    public static function publicProfileStudent(string $username)
     {
         $view = new VStudent();
-        $student = FPersistentManager::getInstance()->load('EStudent', 5);
+        $PM=FPersistentManager::getInstance();
+        $student=$PM->getStudentByUsername($username);
         $reviews = FReview::getInstance()->loadByRecipient($student->getId(), TType::STUDENT);
         $reviewsData = [];
         
@@ -256,14 +270,11 @@ class CStudent{
         }
         $view->publicProfileStudent($student, $reviewsData);
     }
-    public static function publicProfileOwner($username)
+    public static function publicProfileOwner(string $username)
     {
         $view = new VStudent();
         $PM=FPersistentManager::getInstance();
-        print $username;
         $owner=$PM->getOwnerByUsername($username);
-        print $owner->__toString();
-        $owner = FPersistentManager::getInstance()->load('EOwner', (int)$ownerID);
         $reviews = FReview::getInstance()->loadByRecipient($owner->getId(), TType::OWNER);
         $reviewsData = [];
         
@@ -280,6 +291,6 @@ class CStudent{
                 'userPicture' => $profilePic,
             ];
         }
-        $view->publicProfileOwner($owner, $reviewsData);*/
+        $view->publicProfileOwner($owner, $reviewsData);
     }
 }
