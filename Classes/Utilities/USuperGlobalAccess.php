@@ -76,9 +76,11 @@ class USuperGlobalAccess {
       */ 
       public static function getFiles($key) 
       { 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') 
+        {
             // Verifica se il campo del file esiste e se è stato caricato un file
-            if (isset($_FILES['img']) && $_FILES['img']['error'] == UPLOAD_ERR_OK) {
+            if (isset($_FILES['img']) && $_FILES['img']['error'] == UPLOAD_ERR_OK) 
+            {
                 // Un file è stato caricato
                 $fileTmpPath = $_FILES['img']['tmp_name'];
                 $fileName = $_FILES['img']['name'];
@@ -88,25 +90,74 @@ class USuperGlobalAccess {
                 $fileExtension = strtolower(end($fileNameCmps));
         
                 // Verifica l'estensione del file
-               /* $allowedfileExtensions = array('jpg', 'gif', 'png', 'jpeg');
-                if (in_array($fileExtension, $allowedfileExtensions)) {
-                    // Carica il file
+                $allowedfileExtensions = array('jpg', 'gif', 'png', 'jpeg');
+                if (in_array($fileExtension, $allowedfileExtensions)) 
+                {
+// Carica il file
                     $uploadFileDir = './uploaded_files/';
                     $dest_path = $uploadFileDir . $fileName;
         
-                    if(move_uploaded_file($fileTmpPath, $dest_path)) {
+                    if(move_uploaded_file($fileTmpPath, $dest_path)) 
+                    {
                         $message ='File is successfully uploaded.';
-                    } else {
+                    } 
+                    else
+                    {
                         $message = 'There was some error moving the file to upload directory. Please make sure the upload directory is writable by web server.';
                     }
-                } else {
+                } 
+                else 
+                {
                     $message = 'Upload failed. Allowed file types: ' . implode(',', $allowedfileExtensions);
-                }*/
-            } else {
+                }
+            } 
+            else 
+            {
                 // Nessun file caricato
                 return null;
             }
         } else return null;
-      }
+    }
+    
+    /**
+     * Method getPhoto
+     * 
+     * this method allow to get the photo from $_FILES
+     *
+     * @param $key 
+     *
+     * @return ?array
+     */
+    public static function getPhoto($key):?array
+    {
+        $max_size=300000;
+        $result=false;
+        $result=is_uploaded_file($_FILES[$key]['tmp_name']);
+
+        if(!$result)# no photos uploded
+        {
+            return null;
+        }
+        else
+        {
+            $size=$_FILES[$key]['size'];
+            if($size>$max_size)  #too big photo
+            {
+                return null;
+            }
+            else
+            {
+                $type = $_FILES[$key]['type'];
+                $nome = $_FILES[$key]['name'];
+                $immagine = file_get_contents($_FILES[$key]['tmp_name']);
+                $immagine = addslashes ($immagine);
+                $result=array();
+                $result['type']=$type;
+                $result['name']=$nome;
+                $result['img']=$immagine;
+                return $result;
+            }
+        }
+    }
 
 }

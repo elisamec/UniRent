@@ -98,7 +98,7 @@
                    Regarding the start date you need to insert the day of the month and the month (Sep/Oct) for the start 
                    of the rental relationship. The end date is calculated based on the start date, giving always a 10 month rental period.
                    </p>
-                    <form action="/UniRent/Owner/addAccommodation" class="form" method="post" id="yourFormId">
+                    <form action="/UniRent/Owner/addAccommodationOperations" class="form" method="post" id="yourFormId">
                         <div id="cssportal-grid">
                            <div id="div1">
                               <div class="pictures">
@@ -132,7 +132,7 @@
                            </div>
                            <div id="div6">
                               <div class="input-group">
-                                 <input title=" " id="Date2" required="" type="text" name="endDate" autocomplete="off" class="input-spec">
+                                 <input title=" " id="month" required="" type="text" name="month" autocomplete="off" class="input-spec">
                                  <label class="user-label" style="font-size: 13px; margin-top:12px">Start month (Sep/Oct)</label>
                               </div>
                            </div>
@@ -163,7 +163,7 @@
                            </div>
                             <div id="div12"> 
                             <div class="input-group">
-    <textarea title=" " class="textarea-spec" rows="5" id="notes" name="Message" required></textarea>
+    <textarea title=" " class="textarea-spec" rows="5" id="notes" name="description" required></textarea>
     <label class="textarea-label" for="notes">Description</label>
 </div>
 </div>
@@ -186,7 +186,7 @@
                             </div>
                             <div id="div14">
                             <div class="input-group">
-    <textarea class="textarea1-spec" rows="5" id="comment" name="Message" placeholder=" "></textarea>
+    <textarea class="textarea1-spec" rows="5" id="comment" name="comment" placeholder=" "></textarea>
     <label class="textarea-label" for="comment">Notes</label>
 </div>
 
