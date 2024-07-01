@@ -256,11 +256,12 @@ class CStudent{
         }
         $view->publicProfileStudent($student, $reviewsData);
     }
-    public static function publicProfileOwner()
+    public static function publicProfileOwner($username)
     {
         $view = new VStudent();
-        $username=USuperGlobalAccess::get('username');
         $PM=FPersistentManager::getInstance();
+        print $username;
+        /*
         $ownerID=$PM->getOwnerByUsername($username);
         $owner = FPersistentManager::getInstance()->load('EOwner', (int)$ownerID);
         $reviews = FReview::getInstance()->loadByRecipient($owner->getId(), TType::OWNER);
@@ -279,6 +280,6 @@ class CStudent{
                 'userPicture' => $profilePic,
             ];
         }
-        $view->publicProfileOwner($owner, $reviewsData);
+        $view->publicProfileOwner($owner, $reviewsData);*/
     }
 }
