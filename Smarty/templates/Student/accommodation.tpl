@@ -113,9 +113,9 @@
                         <div class="userSection">
                                 <div class="userIcon">
                                     {if $owner->getPhoto() === null}
-                                        <a href="#"><img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon"></a>
+                                        <a href="/UniRent/Student/publicProfileOwner" name="username" value="{$owner->getUsername}"><img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon"></a>
                                     {else}
-                                    <a href="#"><img src="{$owner->getPicture()}"></a>
+                                    <a href="/UniRent/Student/publicProfileOwner" name="username" value="{$owner->getUsername}"><img src="{$owner->getPicture()}"></a>
                                     {/if}
                                 </div>
                                 <div class="username"><a href="/UniRent/Student/publicProfileOwner" name="username" value="{$owner->getUsername}">{$owner->getUsername()}</a></div> <!-- Username of the owner -->
