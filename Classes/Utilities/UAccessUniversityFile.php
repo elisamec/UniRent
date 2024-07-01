@@ -78,7 +78,7 @@ class UAccessUniversityFile
      *
      * @return string
      */
-    public function getCitybyUniversityName(string $university):string
+    public function getCityByUniversityName(string $university):string
     {
         $result=array();
         $json=file_get_contents(self::$path);
