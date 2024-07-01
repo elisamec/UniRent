@@ -36,7 +36,7 @@ class FPhoto {
         $db=FConnection::getInstance()->getConnection();
         $db->beginTransaction();
         $stm=$db->prepare($q);
-        $stm->bindParam(':idPhoto',$id,PDO::PARAM_INT);
+        $stm->bindParam(':idPhoto',$idPhoto,PDO::PARAM_INT);
         $stm->execute();
         $db->commit();
         $result=$stm->rowCount();
@@ -203,8 +203,11 @@ class FPhoto {
 
 
             $photo = new EPhoto($row['id'], $row['photo'], $row['relativeTo'], $row['idAccommodation'], $row['idReview']);
+
             return $photo;
+            
         }else{  
+
             return null;
         }
     }
