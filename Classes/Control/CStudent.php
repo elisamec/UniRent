@@ -259,7 +259,10 @@ class CStudent{
     public static function publicProfileOwner()
     {
         $view = new VStudent();
-        $owner = FPersistentManager::getInstance()->load('EOwner', 4);
+        $username=USuperGlobalAccess::get('username');
+        $PM=FPersistentManager::getInstance();
+        $ownerID=$PM->getOwnerByUsername($username);
+        $owner = FPersistentManager::getInstance()->load('EOwner', (int)$ownerID);
         $reviews = FReview::getInstance()->loadByRecipient($owner->getId(), TType::OWNER);
         $reviewsData = [];
         
