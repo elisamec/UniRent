@@ -256,10 +256,9 @@ class CStudent{
         }
         $view->publicProfileStudent($student, $reviewsData);
     }
-    public static function publicProfileOwner()
+    public static function publicProfileOwner(string $username)
     {
         $view = new VStudent();
-        $username=USuperGlobalAccess::get('username');
         $PM=FPersistentManager::getInstance();
         $ownerID=$PM->getOwnerByUsername($username);
         $owner = FPersistentManager::getInstance()->load('EOwner', (int)$ownerID);
