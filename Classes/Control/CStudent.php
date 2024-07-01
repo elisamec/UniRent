@@ -151,9 +151,9 @@ class CStudent{
         
 
     }
-    public static function accommodation() {
+    public static function accommodation(int $idAccommodation) {
         $view = new VStudent();
-        $accomm = FPersistentManager::getInstance()->load('EAccommodation', 5);
+        $accomm = FPersistentManager::getInstance()->load('EAccommodation', $idAccommodation);
         $owner = FPersistentManager::getInstance()->load('EOwner', $accomm->getIdOwner());
         USession::getInstance()->setSessionElement('owner', $owner->getUsername());
         $reviews = FReview::getInstance()->loadByRecipient($accomm->getIdAccommodation(), TType::ACCOMMODATION);
