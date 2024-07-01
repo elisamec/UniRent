@@ -57,8 +57,8 @@ class CStudent{
         $session=USession::getInstance();
         $user = $session->getSessionElement('username');
         $PM=FPersistentManager::getInstance();
-        $student=$PM->getStudentByUsername('nadm');
-        //$student=$PM->getStudentByUsername($user);
+        //$student=$PM->getStudentByUsername('nadm');
+        $student=$PM->getStudentByUsername($user);
         if(is_null($student)){
             print '<b>500 : SERVER ERROR </b>';
         }

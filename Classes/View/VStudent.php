@@ -21,12 +21,16 @@ class VStudent{
         $this->smarty->display('Student/home.tpl');
     }
     public function profile(EStudent $student){
-        $ph = $student->getPicture()->getPhoto();
-
-        $base64 = base64_encode($ph);
-        $imageSrc = "data:" . 'image/jpeg' . ";base64," . $base64;
+       
+        $ph = $student->getPicture();
+        if(!is_null($ph))  #if the user has a photo
+        {
+            $ph=$ph->getPhoto();
+            $base64 = base64_encode($ph);
+            $imageSrc = "data:" . 'image/jpeg' . ";base64," . $base64;
+            $this->smarty->assign('photo', $imageSrc);
+        }
         $this->smarty->assign('student', $student);
-        $this->smarty->assign('photo', $imageSrc);
         $this->smarty->display('Student/personalProfile.tpl');
     }
     public function editProfile(EStudent $student){
