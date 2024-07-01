@@ -256,13 +256,13 @@ class CStudent{
         }
         $view->publicProfileStudent($student, $reviewsData);
     }
-    public static function publicProfileOwner()
+    public static function publicProfileOwner($username)
     {
         $view = new VStudent();
         $PM=FPersistentManager::getInstance();
         print $username;
-        /*
-        $ownerID=$PM->getOwnerByUsername($username);
+        $owner=$PM->getOwnerByUsername($username);
+        print $owner->__toString();
         $owner = FPersistentManager::getInstance()->load('EOwner', (int)$ownerID);
         $reviews = FReview::getInstance()->loadByRecipient($owner->getId(), TType::OWNER);
         $reviewsData = [];
