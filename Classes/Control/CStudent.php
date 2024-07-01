@@ -260,10 +260,8 @@ class CStudent{
     {
         $view = new VStudent();
         $PM=FPersistentManager::getInstance();
-        print $username;
         $owner=$PM->getOwnerByUsername($username);
-        print $owner->__toString();
-        $owner = FPersistentManager::getInstance()->load('EOwner', (int)$ownerID);
+        $owner = FPersistentManager::getInstance()->load('EOwner',$owner->getId());
         $reviews = FReview::getInstance()->loadByRecipient($owner->getId(), TType::OWNER);
         $reviewsData = [];
         
@@ -280,6 +278,6 @@ class CStudent{
                 'userPicture' => $profilePic,
             ];
         }
-        $view->publicProfileOwner($owner, $reviewsData);*/
+        $view->publicProfileOwner($owner, $reviewsData);
     }
 }
