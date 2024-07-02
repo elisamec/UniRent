@@ -15,6 +15,7 @@ use Classes\Foundation\FOwner;
 use Classes\Foundation\FReview;
 use Classes\Tools\TType;
 use CommerceGuys\Addressing\Address;
+use DateTime;
 
 class COwner 
 {
@@ -270,20 +271,37 @@ class COwner
     {
         $title=USuperGlobalAccess::getPost('title');
         $price=USuperGlobalAccess::getPost('price');
-        $deposit=USuperGlobalAccess::getPost('deposit');
-        $startDate=USuperGlobalAccess::getPost('startDate');
-        $month=USuperGlobalAccess::getPost('endDate');
+        $deposit=(float)USuperGlobalAccess::getPost('deposit');
+        $startDate=(int) USuperGlobalAccess::getPost('startDate');
+        $month=USuperGlobalAccess::getPost('month');
+        if($month=='Sep')
+        {
+            $month=9;
+        }
+        else
+        {
+            $month=10;
+        }
+
         $address=USuperGlobalAccess::getPost('address');
         $city=USuperGlobalAccess::getPost('city');
         $postalCode=USuperGlobalAccess::getPost('postalCode');
         $description=USuperGlobalAccess::getPost('description');
-        $notes=USuperGlobalAccess::getPost('comment');
-        #print $title.' '.$price.' '.' '.$deposit.' '.$startDate.' '.$month.' '.$address.' '.$city.' '.$postalCode.' '.$description.' '.$notes;
+
+        $json=USession::getInstance()::getSessionElement('availabilities');
+        if(isset($_POST['availabilities'])){print 'si c\' è';}
+
+        $date= new DateTime('now');
+        $year=(int)$date->format('Y');
+        $date=$date->setDate($year,$month,$startDate);
+
         $PM=FPersistentManager::getInstance();
-        $addressObj= new Address('IT', '',$city,'',$postalCode);
+        $addressObj= new Address();
+        $addressObj=$addressObj->withAddressLine1($address)->withPostalcode($postalCode)->withLocality($city);
+        #print $addressObj->getAddressLine1().' '.$addressObj->getPostalCode().' '.$addressObj->getLocality();
+        #$accomodation = new EAccommodation(null,array(),$title,$addressObj,$price,$date,$description,$deposit,);
         
 
-        //Da fare....
     }
     public static function publicProfileOwner(string $username)
     {

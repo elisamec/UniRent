@@ -132,7 +132,7 @@
                            </div>
                            <div id="div6">
                               <div class="input-group">
-                                 <input title=" " id="month" required="" type="text" name="month" autocomplete="off" class="input-spec">
+                                 <input title=" " id="month" required="" type="text" name="month" autocomplete="off" class="input-spec" pattern="^(Sep|Oct)$"">
                                  <label class="user-label" style="font-size: 13px; margin-top:12px">Start month (Sep/Oct)</label>
                               </div>
                            </div>
@@ -239,7 +239,7 @@ function openModal() {
 }
 
 // Add more availability input fields
-function addAvailability() {
+
     let container = document.getElementById('availabilityContainer');
     let availability = document.createElement('div');
     availability.className = 'availability';
@@ -248,7 +248,7 @@ function addAvailability() {
                 <label for="duration">Visit Duration (minutes):</label>
                 <input type="number" id="duration" name="duration" title="Please enter a number">
                 <label for="dayOfWeek">Weekday:</label>
-                <input type="text" pattern="(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)" title="Please enter a valid day of the week">
+                <input type="text" pattern="(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)" title="Please enter a valid day of the week" id="day", name="day">
                 <label for="time">Availability start:</label>
                 <input type="time" id="start" name="start">
                 <label for="time">Availability end:</label>
@@ -265,34 +265,42 @@ function removeAvailability(button) {
 }
 
 // Save visit availability data in sessionStorage when the pop-up form is submitted
-let form = document.getElementById('visitAvailabilityForm');
-form.addEventListener('submit', function(event) {
-    event.preventDefault();
 
-    let availabilities = document.getElementsByClassName('availability');
-    let data = [];
-    for (let i = 0; i < availabilities.length; i++) {
-        let duration = availabilities[i].elements['duration'].value;
-        let day = availabilities[i].elements['day'].value;
-        let time = availabilities[i].elements['time'].value;
-        data.push({duration, day, time});
-    }
+   let form = document.getElementById('visitAvailabilityForm');
+   form.addEventListener('submit', function(event) 
+   {
+      event.preventDefault();
 
-    sessionStorage.setItem('availabilities', JSON.stringify(data));
+      let availabilities = document.getElementsByClassName('availability');
+      let data = [];
+       for (let i = 0; i < availabilities.length; i++)
+      {
+         let duration = availabilities[i].elements['duration'].value;
+         let day = availabilities[i].elements['day'].value;
+         let time = availabilities[i].elements['time'].value;
+         data.push({duration, day, time});
+      }
 
-    fetch('/your-server-endpoint', {
+      sessionStorage.setItem('availabilities', JSON.stringify(data));
+
+      fetch('/your-server-endpoint', 
+      {
         method: 'POST',
-        headers: {
+        headers: 
+        {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
-    })
-    .then(response => response.json())
-    .then(data => console.log('Success:', data))
-    .catch((error) => console.error('Error:', error));
+         body: JSON.stringify(data),
+      }
+      )
+      .then(response => response.json())
+      .then(data => console.log('Success:', data))
+      .catch((error) => console.error('Error:', error));
 
     closeModal();
-});
+   }
+   );
+
 function closeModal() {
     avModal.style.display = "none";
 }
