@@ -96,8 +96,7 @@
       <div class="col-lg-4 col-md-6col-lg-4 col-md-6">
                      <div class="accom_img">
                      <div class="container_main">
-                     <! Change ewith the first one from the array once we learned how to handle image display -->
-                                 <img src="/UniRent/Smarty/images/img-4.png" alt="">
+                                 <img src="/UniRent/Smarty/images/img-4.png" id="mainImage"alt="">
                                  <div class="overlay">
                                     <div class="text">
                                        <div class="some_text"><a href="#" id="openSlider">View Pictures</a></div>
@@ -281,49 +280,55 @@
          </script>
          <script>
         // Assign the JSON data to a JavaScript variable
-        const images = {$imagesJson|escape:'javascript'};
+        const images = {$imagesJson};
     </script>
     {literal}
    <script>
    document.addEventListener('DOMContentLoaded', () => {
-    const openSliderLink = document.getElementById('openSlider');
-    const sliderContainer = document.getElementById('sliderContainer');
-    const closeSliderBtn = document.getElementById('closeSlider');
-    const sliderContent = document.querySelector('.slider-content');
-    let currentIndex = 0;
+            const openSliderLink = document.getElementById('openSlider');
+            const sliderContainer = document.getElementById('sliderContainer');
+            const closeSliderBtn = document.getElementById('closeSlider');
+            const sliderContent = document.querySelector('.slider-content');
+            const mainImage = document.getElementById('mainImage');
+            const overlay = document.querySelector('.overlay');
+            let currentIndex = 0;
 
-    // Ensure the images array is defined and has elements
-    if (typeof images === 'undefined' || !Array.isArray(images) || images.length === 0) {
-        console.error('No images available');
-        return;
-    }
+            // Display the first image in the first container if available
+            if (images.length > 0) {
+                mainImage.src = images[0];
+            } else {
+                // Hide the overlay if no images are available
+                overlay.style.display = 'none';
+                // Set the default image
+                mainImage.src = '/UniRent/Smarty/images/noPic.png';
+            }
 
-    openSliderLink.addEventListener('click', (event) => {
-        event.preventDefault();  // Prevent the default anchor behavior
-        if (images.length > 0) {
-            sliderContainer.classList.remove('hidden');
-            showImage(currentIndex);
-        }
-    });
+            openSliderLink.addEventListener('click', (event) => {
+                event.preventDefault();  // Prevent the default anchor behavior
+                if (images.length > 0) {
+                    sliderContainer.classList.remove('hidden');
+                    showImage(currentIndex);
+                }
+            });
 
-    closeSliderBtn.addEventListener('click', () => {
-        sliderContainer.classList.add('hidden');
-    });
+            closeSliderBtn.addEventListener('click', () => {
+                sliderContainer.classList.add('hidden');
+            });
 
-    document.querySelector('.prev').addEventListener('click', () => {
-        currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
-        showImage(currentIndex);
-    });
+            document.querySelector('.prev').addEventListener('click', () => {
+                currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
+                showImage(currentIndex);
+            });
 
-    document.querySelector('.next').addEventListener('click', () => {
-        currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
-        showImage(currentIndex);
-    });
+            document.querySelector('.next').addEventListener('click', () => {
+                currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+                showImage(currentIndex);
+            });
 
-    function showImage(index) {
-        sliderContent.innerHTML = `<img src="${images[index]}" alt="Image ${index + 1}">`;
-    }
-});
+            function showImage(index) {
+                sliderContent.innerHTML = `<img src="${images[index]}" alt="Image ${index + 1}">`;
+            }
+        });
 
 </script>
 {/literal}
