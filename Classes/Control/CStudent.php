@@ -75,11 +75,12 @@ class CStudent{
             if(!is_null($ph)) {
 
                 $ph=$ph->getPhoto();
+
+                $session->setSessionElement('photo', $ph);
+
                 $base64 = base64_encode($ph);
                 $ph = "data:" . 'image/jpeg' . ";base64," . $base64;
             }
-
-            $session->setSessionElement('photo', $ph);
 
             $view->profile($student, $ph);
         }
@@ -89,6 +90,9 @@ class CStudent{
         $view = new VStudent();
         $student =FPersistentManager::getInstance()->getStudentByUsername(USession::getInstance()::getSessionElement('username'));
         $photo = USession::getInstance()::getSessionElement('photo');
+
+        $base64 = base64_encode($photo);
+        $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
 
         $view->editProfile($student, $photo);
     }
@@ -240,30 +244,38 @@ class CStudent{
         $PM=FPersistentManager::getInstance();
         $oldEmail=$PM::getInstance()->getStudentEmailByUsername($oldUsername);
 
-        if((($PM->verifyUserEmail($newEmail)==false)&&($PM->verifyStudentEmail($newEmail)))||($oldEmail===$newEmail)) #se la mail non è in uso ed è una mail universitaria oppure se non l'hai modificata
-        {
-            if(($PM->verifyUserUsername($newUsername)==false)||($oldUsername===$newUsername)) #se il nuovo username non è già in uso o non l'hai modificato
-            {
+        if((($PM->verifyUserEmail($newEmail)==false)&&($PM->verifyStudentEmail($newEmail)))||($oldEmail===$newEmail)) { #se la mail non è in uso ed è una mail universitaria oppure se non l'hai modificata
+        
+            if(($PM->verifyUserUsername($newUsername)==false)||($oldUsername===$newUsername)) { #se il nuovo username non è già in uso o non l'hai modificato
+            
 
                 $studentID=$PM->getStudentIdByUsername($oldUsername);
 
                 $oldPhoto = $session::getSessionElement('photo');
 
                 if(!is_null($oldPhoto)){
-                    $photoId=$PM::getInstance()->getStudentPhotoId($oldUsername);
-                } else {
-                    $photoId = null;
-                }
-                
-                //$photo=$PM->getStudentPhotoById($studentID);
-                if ($picture['img']===null) {
-
-                    $photo = null;
-        
-                } else {
                     
-                    $photo = new EPhoto($photoId, $picture['img'], 'other', null, null);
-                }   
+                    $photoId=$PM::getInstance()->getStudentPhotoId($oldUsername);
+
+                    is_null($picture) ? $photo = new EPhoto($photoId, $oldPhoto, 'other', null, null)
+                                      : $photo = new EPhoto($photoId, $picture['img'], 'other', null, null);
+
+                } else {
+
+                    if(is_null($picture)) {
+
+                        $photo = null;
+
+                    } else {
+
+                        $photo = new EPhoto(null, $picture['img'], 'other', null, null);
+                        $risultato = $PM::getInstance()->storeAvatar($photo);
+                        if(!$risultato){
+                            print '<b>500 SERVER ERROR!</b>';
+                        }
+                    }
+                }
+
                 $student=new EStudent($newUsername,$password,$name,$surname,$photo,$newEmail,$courseDuration,$immatricolationYear,$birthDate,$sex,$smoker,$animals);
                 $student->setID($studentID);
                 $result=$PM->update($student);
@@ -292,11 +304,6 @@ class CStudent{
         }  
     }
 
-    public static function changePicture(){
-
-        print "Here i am";
-
-    }
 
     public static function publicProfile(string $username) {
         $PM=FPersistentManager::getInstance();

@@ -310,5 +310,11 @@ class FPersistentManager {
         return $result;
     }
 
+    public function storeAvatar(EPhoto $photo) :bool {
+        $FP=FPhoto::getInstance();
+        $result=$FP->storeAvatar($photo);
+        return $result;
+    }
+
 }
 
