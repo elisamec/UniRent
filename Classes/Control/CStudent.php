@@ -289,6 +289,7 @@ class CStudent{
         $view = new VStudent();
         $PM=FPersistentManager::getInstance();
         $student=$PM->getStudentByUsername($username);
+        print $student;
         $reviews = FReview::getInstance()->loadByRecipient($student->getId(), TType::STUDENT);
         $reviewsData = [];
         

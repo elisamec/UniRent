@@ -112,12 +112,12 @@
                         <div class="userSection">
                                 <div class="userIcon">
                                     {if $owner->getPhoto() === null}
-                                        <a href="/UniRent/Student/publicProfileOwner/{$owner->getUsername()}"><img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon"></a>
+                                        <a href="/UniRent/Student/publicProfile/{$owner->getUsername()}"><img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon"></a>
                                     {else}
-                                    <a href="/UniRent/Student/publicProfileOwnerr/{$owner->getUsername()}"><img src="{$owner->getPicture()}"></a>
+                                    <a href="/UniRent/Student/publicProfiler/{$owner->getUsername()}"><img src="{$owner->getPicture()}"></a>
                                     {/if}
                                 </div>
-                                <div class="username"><a href="/UniRent/Student/publicProfileOwner/{$owner->getUsername()}">{$owner->getUsername()}</a></div> <!-- Username of the owner -->
+                                <div class="username"><a href="/UniRent/Student/publicProfile/{$owner->getUsername()}">{$owner->getUsername()}</a></div> <!-- Username of the owner -->
                             </div>
                         </div>
                         </div>
@@ -138,9 +138,9 @@
                         <div class="col-md-4">
                         <div class="userSection">
                                 <div class="userIcon">
-                                    <a href="/UniRent/Student/publicProfileStudent/eli1"><img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture"></a>
+                                    <a href="/UniRent/Student/publicProfile/eli1"><img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture"></a>
                                 </div>
-                                <div class="username"><a href="/UniRent/Student/publicProfileStudent/eli1">eli1</a></div> <!-- Username of the reviewer -->
+                                <div class="username"><a href="/UniRent/Student/publicProfile/eli1">eli1</a></div> <!-- Username of the reviewer -->
                             </div>
                         </div>
                         <div class="col-md-4">
