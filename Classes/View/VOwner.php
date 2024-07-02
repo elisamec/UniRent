@@ -20,6 +20,10 @@ class VOwner {
 
     //Mostra la seconda parte della registrazione proprietario
     public function showOwnerRegistration(){
+        $this->smarty->assign('phoneError', false);
+        $this->smarty->assign('ibanError', false);
+        $this->smarty->assign('phone', '');
+        $this->smarty->assign('iban', '');
         $this->smarty->display('Owner/register.tpl');
     }
     
