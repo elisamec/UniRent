@@ -317,6 +317,12 @@ class CStudent{
         }  
     }
 
+    public static function changePicture(){
+
+        print "Here i am";
+
+    }
+
     public static function publicProfile(string $username) {
         $PM=FPersistentManager::getInstance();
         $user=$PM->verifyUserUsername($username);
