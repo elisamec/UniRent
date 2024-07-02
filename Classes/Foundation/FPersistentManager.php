@@ -232,6 +232,21 @@ class FPersistentManager {
         $email=$FS->getEmailByUsername($user);
         return $email;
     }
+
+    /**
+     * Method getStudentPhotoId
+     * 
+     * This method take the student's photo id 
+     * @param $user student's username
+     *
+     * @return int|bool
+     */
+    public function getStudentPhotoId($user):?int
+    {
+        $FS=FStudent::getInstance();
+        $photoId=$FS->getPhotoIdByUsername($user);
+        return $photoId;
+    }
     
     /**
      * Method deleteOwner

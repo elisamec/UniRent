@@ -61,9 +61,11 @@ class CStudent{
         $user = $session->getSessionElement('username');
         $PM=FPersistentManager::getInstance();
         $student=$PM->getStudentByUsername($user);
+        $ph = null;
 
         if(is_null($student)){
-            
+
+            $session->setSessionElement('photo', $ph);
             print '<b>500 : SERVER ERROR </b>';
 
         } else {   
@@ -77,6 +79,8 @@ class CStudent{
                 $ph = "data:" . 'image/jpeg' . ";base64," . $base64;
             }
 
+            $session->setSessionElement('photo', $ph);
+
             $view->profile($student, $ph);
         }
     }
@@ -84,7 +88,9 @@ class CStudent{
     public static function editProfile(){
         $view = new VStudent();
         $student =FPersistentManager::getInstance()->getStudentByUsername(USession::getInstance()::getSessionElement('username'));
-        $view->editProfile($student);
+        $photo = USession::getInstance()::getSessionElement('photo');
+
+        $view->editProfile($student, $photo);
     }
 
     public static function deleteProfile()
@@ -189,6 +195,8 @@ class CStudent{
         }
         $view->accommodation($accomm, $owner, $reviewsData);
     }
+
+
     public static function reviews() {
         $view = new VStudent();
         $reviews = FReview::getInstance()->loadByRecipient(1, TType::STUDENT);
@@ -218,6 +226,7 @@ class CStudent{
         $newUsername=USuperGlobalAccess::getPost('username');
         $name=USuperGlobalAccess::getPost('name');
         $surname=USuperGlobalAccess::getPost('surname');
+        $picture = USuperGlobalAccess::getPhoto('img');
         $password=USuperGlobalAccess::getPost('password');
         $newEmail=USuperGlobalAccess::getPost('email');
         $sex=USuperGlobalAccess::getPost('sex');
@@ -226,7 +235,6 @@ class CStudent{
         $birthDate= new DateTime(USuperGlobalAccess::getPost('birthDate'));
         $smoker=$session::booleanSolver(USuperGlobalAccess::getPost('smoker'));
         $animals=$session::booleanSolver(USuperGlobalAccess::getPost('animals'));
-        #print $smoker.'  '.$animals;
 
         $oldUsername=$session::getSessionElement('username');
         $PM=FPersistentManager::getInstance();
@@ -236,11 +244,30 @@ class CStudent{
         {
             if(($PM->verifyUserUsername($newUsername)==false)||($oldUsername===$newUsername)) #se il nuovo username non è già in uso o non l'hai modificato
             {
+
                 $studentID=$PM->getStudentIdByUsername($oldUsername);
-                $photo=$PM->getStudentPhotoById($studentID);
+
+                $oldPhoto = $session::getSessionElement('photo');
+
+                if(!is_null($oldPhoto)){
+                    $photoId=$PM::getInstance()->getStudentPhotoId($oldUsername);
+                } else {
+                    $photoId = null;
+                }
+                
+                //$photo=$PM->getStudentPhotoById($studentID);
+                if ($picture['img']===null) {
+
+                    $photo = null;
+        
+                } else {
+                    
+                    $photo = new EPhoto($photoId, $picture['img'], 'other', null, null);
+                }   
                 $student=new EStudent($newUsername,$password,$name,$surname,$photo,$newEmail,$courseDuration,$immatricolationYear,$birthDate,$sex,$smoker,$animals);
                 $student->setID($studentID);
                 $result=$PM->update($student);
+                
                 if($result)
                 {
                     $session->setSessionElement('username',$newUsername);

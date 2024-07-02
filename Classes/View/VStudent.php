@@ -27,15 +27,24 @@ class VStudent{
      * 
      * @param EStudent $student The student's profile to display
      * @param string|null $photo The student's profile photo
+     * @return void
      */
-    public function profile(EStudent $student, ?string $photo){
+    public function profile(EStudent $student, ?string $photo) :void {
 
         $this->smarty->assign('photo', $photo);
         $this->smarty->assign('student', $student);
         $this->smarty->display('Student/personalProfile.tpl');
     }
 
-    public function editProfile(EStudent $student){
+    /**
+     * Show form for editing the student's profile
+     * 
+     * @param EStudent $student The student's profile to edit
+     * @param string|null $photo The student's profile photo
+     * @return void
+     */
+    public function editProfile(EStudent $student, ?string $photo) :void {
+        $this->smarty->assign('photo', $photo);
         $this->smarty->assign('student', $student);
         $this->smarty->display('Student/editPersonalProfile.tpl');
     }

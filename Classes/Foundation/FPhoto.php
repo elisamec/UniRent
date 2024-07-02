@@ -205,7 +205,7 @@ class FPhoto {
             $photo = new EPhoto($row['id'], $row['photo'], $row['relativeTo'], $row['idAccommodation'], $row['idReview']);
 
             return $photo;
-            
+
         }else{  
 
             return null;
@@ -327,7 +327,6 @@ class FPhoto {
 
         $photoId = $EPhoto->getId();
         
-
         try{
             $db->exec('LOCK TABLES photo WRITE');
             $db->beginTransaction();
