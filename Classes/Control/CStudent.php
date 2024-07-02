@@ -26,28 +26,53 @@ class CStudent{
     /**
      * Display the home page
      * 
+     * @return void
      */
-    public static function home(){
+    public static function home(): void{
         $view = new VStudent();
         $view->home();
     }
-    public static function contact(){
+
+    /**
+     * Display the student registration page
+     * 
+     * @return void
+     */
+    public static function contact(): void{
         $view = new VStudent();
         $view->contact();
     }
-    public static function findAccommodation(){
+
+    /**
+     * Display the find accommodation page
+     * 
+     * @return void
+     */
+    public static function findAccommodation(): void{
         $view = new VStudent();
         $view->findAccommodation();
     }
-    public static function about(){
+
+    /**
+     * Display the about page
+     * 
+     * @return void
+     */
+    public static function about(): void{
         $view = new VStudent();
         $view->about();
     }
-    public static function search(){
+
+    /**
+     * Display the search page
+     * 
+     * @return void
+     */
+    public static function search(): void{
         $view = new VStudent();
         $view->search();
     }    
-    
+
     /**
      * Method profile
      * This method shows the student's profile
@@ -81,14 +106,25 @@ class CStudent{
         }
     }
     
-    public static function editProfile(){
+    /**
+     * Method editProfile
+     * This method shows the student's profile edit page
+     * 
+     * @return void
+     */
+    public static function editProfile(): void{
         $view = new VStudent();
         $student =FPersistentManager::getInstance()->getStudentByUsername(USession::getInstance()::getSessionElement('username'));
         $view->editProfile($student);
     }
 
-    public static function deleteProfile()
-    {
+    /**
+     * Method deleteProfile
+     * This method deletes the student's profile
+     * 
+     * @return void
+     */
+    public static function deleteProfile() :void{
         $PM=FPersistentManager::getInstance();
         $user=USession::getInstance()::getSessionElement('username');
         $result=$PM->d($user);
@@ -109,10 +145,9 @@ class CStudent{
     /**
      * Display the student registration page
      * 
-     * 
+     * @return void
      */
-    public static function studentRegistration()
-    {   
+    public static function studentRegistration() :void {   
         $PM=FPersistentManager::getInstance();
         $session=USession::getInstance();
         $picture = $session->getSessionElement('picture');
@@ -166,7 +201,13 @@ class CStudent{
         
 
     }
-    public static function accommodation(int $idAccommodation) {
+
+    /**
+     * Display accommodation
+     * 
+     * @return void
+     */
+    public static function accommodation(int $idAccommodation) :void {
         $view = new VStudent();
         $accomm = FPersistentManager::getInstance()->load('EAccommodation', $idAccommodation);
         $owner = FPersistentManager::getInstance()->load('EOwner', $accomm->getIdOwner());
@@ -189,7 +230,13 @@ class CStudent{
         }
         $view->accommodation($accomm, $owner, $reviewsData);
     }
-    public static function reviews() {
+
+    /**
+     * Display the add review page
+     * 
+     * @return void
+     */
+    public static function reviews() :void {
         $view = new VStudent();
         $reviews = FReview::getInstance()->loadByRecipient(1, TType::STUDENT);
         $reviewsData = [];
@@ -210,7 +257,12 @@ class CStudent{
         $view->reviews($reviewsData);
     }
 
-    public static function modifyStudentProfile(){
+    /**
+     * Modify student profile
+     * 
+     * @return void
+     */
+    public static function modifyStudentProfile() :void {
 
         $session=USession::getInstance();
 
