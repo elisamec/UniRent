@@ -2,7 +2,6 @@
 
 namespace Classes\View;
 require __DIR__.'/../../vendor/autoload.php';
-
 use Classes\Entity\EOwner;
 use StartSmarty;
 
@@ -66,5 +65,10 @@ class VOwner {
     public function addAccommodation()
     {
         $this->smarty->display('Owner/addAccommodation.tpl');
-    }  
+    }
+    public function publicProfileOwner(EOwner $owner, array $reviewsData){
+        $this->smarty->assign('owner', $owner);
+        $this->smarty->assign('reviewsData', $reviewsData);
+        $this->smarty->display('Owner/publicProfileOwner.tpl');
+    }
 }
