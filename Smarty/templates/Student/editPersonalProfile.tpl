@@ -101,6 +101,7 @@
             <div class="col-md-6">
                   <div class="profile_info">
                   <form action="/UniRent/Student/modifyStudentProfile" class="form" method="POST" id="yourFormId">
+                     
                      <div class="parent">
                         <div class="div1"><p>Name: </p></div>
                         <div class="div2">
@@ -209,7 +210,18 @@
                      <div class="div22">
                         <div class="delete_btn"><a href="/UniRent/Student/deleteProfile">Delete</a></div>
                   </div>
+                  <div class="container">
+                  
+                  {if $student->getPicture() === null}
+                     <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
+                  {else}
+                     <img src="{$photo}">
+                  {/if}
+                     <input class="file-upload" type="file" id="img" name="img" accept="image/png" hidden>
+                     <label class="change_btn" for="img">Upload New Profile Picture</label>
                </div>
+               </div>
+               
                <div class="container">
                   <div class="row">
                      <div class="col-md-4">
@@ -318,4 +330,30 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+<script>
+      $(document).ready(function() {
+
+      
+      var readURL = function(input) {
+         if (input.files && input.files[0]) {
+               var reader = new FileReader();
+
+               reader.onload = function (e) {
+                  $('.imageIcon').attr('src', e.target.result);
+               }
+      
+               reader.readAsDataURL(input.files[0]);
+         }
+      }
+      
+
+      $(".file-upload").on('change', function(){
+         readURL(this);
+      });
+      
+      $(".label-button").on('click', function() {
+         $(".file-upload").click();
+      });
+   });
+      </script>
    </body>
