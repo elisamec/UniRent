@@ -100,7 +100,7 @@
          </div>
             <div class="col-md-6">
                   <div class="profile_info">
-                  <form action="/UniRent/Student/modifyStudentProfile" class="form" method="POST" id="yourFormId">
+                  <form action="/UniRent/Student/modifyStudentProfile" class="form" method="POST" id="yourFormId" enctype="multipart/form-data">
                      
                      <div class="parent">
                         <div class="div1"><p>Name: </p></div>

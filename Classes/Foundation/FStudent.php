@@ -418,6 +418,36 @@ class FStudent
         $result_array=$stm->fetch(PDO::FETCH_ASSOC);
         return $result_array['universityMail'];
     }
+
+    /**
+     * Method getEmailByUsername
+     *
+     * This method return the student's mail from the db using the given username
+     * @param $user $user [student's username]
+     *
+     * @return int|bool
+     */
+    public function getPhotoIdByUsername($user):int|bool|null
+    {
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $q='SELECT picture FROM student WHERE username = :user';
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindParam(':user',$user);
+            $stm->execute();
+            $db->commit();
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return false;
+        }
+
+        $result_array=$stm->fetch(PDO::FETCH_ASSOC);        
+        return $result_array['picture'];
+    }
 }
   
 
