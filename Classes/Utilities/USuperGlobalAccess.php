@@ -93,7 +93,7 @@ class USuperGlobalAccess {
         
                 // Verify file extension
                 $allowedfileExtensions = array('jpg', 'gif', 'png', 'jpeg');
-                if (in_array($fileExtension, $allowedfileExtensions) && $fileSize < $max_size) {
+                if (in_array($fileExtension, $allowedfileExtensions) ) {
 
                     $img = file_get_contents($fileTmpPath);
                     $result = array();
