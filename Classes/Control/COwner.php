@@ -29,15 +29,16 @@ class COwner
         $view = new VOwner();
         $PM = FPersistentManager::getInstance();
         $session = USession::getInstance();
-
-        if ($session->getSessionElement('picture')===null) {
+        $picture = $session->getSessionElement('picture');
+        
+        if ($picture['img']===null) {
 
             $photo = null;
 
         } else {
             
-            $photo = null;
-        } 
+            $photo = new EPhoto(null, $picture['img'], 'other', null, null);
+        }
 
         $phone = EOwner::formatPhoneNumber(USuperGlobalAccess::getPost('phoneNumber'));
         $iban = USuperGlobalAccess::getPost('iban');
@@ -79,23 +80,32 @@ class COwner
     }
     
     /**
-     * Method profile
-     * Thisrn void
+     * This method shows the owner's profile
+     * 
+     * @return void
      */
-    public static function profile()
-    {
+    public static function profile(): void {
         $view = new VOwner();
         $session=USession::getInstance();
         $user = $session->getSessionElement('username');
         $PM=FPersistentManager::getInstance();
         $owner=$PM->getOwnerByUsername($user);
-        if(is_null($owner))
-        {
+
+        if(is_null($owner)){
+
             print '<b>500 : SERVER ERROR </b>';
-        }
-        else
-        {
-            $view->profile($owner);
+        } else {
+
+            $ph = $owner->getPhoto();
+            
+            if(!is_null($ph)) {
+
+                $ph=$ph->getPhoto();
+                $base64 = base64_encode($ph);
+                $ph = "data:" . 'image/jpeg' . ";base64," . $base64;
+            }
+
+            $view->profile($owner, $ph);
         }
     }
     public static function editProfile()

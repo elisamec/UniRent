@@ -118,7 +118,7 @@
                   {if $owner->getPhoto() === null}
                      <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
                   {else}
-                     <img src="{$owner->getPicture()}">
+                     <img src="{$photo}">
                   {/if}
                   </div>
                   <form action="/UniRent/Owner/changePicture" class="form" method="post">

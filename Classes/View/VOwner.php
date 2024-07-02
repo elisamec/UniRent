@@ -22,6 +22,7 @@ class VOwner {
     public function showOwnerRegistration(){
         $this->smarty->display('Owner/register.tpl');
     }
+    
     public function registrationError(bool $phoneError, bool $ibanError, string $phone, string $iban){
         $this->smarty->assign('phoneError', $phoneError);
         $this->smarty->assign('ibanError', $ibanError);
@@ -30,11 +31,19 @@ class VOwner {
         $this->smarty->display('Owner/register.tpl');
     }
 
-    //Mostra il profilo del proprietarion
-    public function profile(EOwner $owner){
+    /**
+     * Show the owner's profile
+     * 
+     * @param EOwner $owner The owner's profile to display
+     * @param string|null $photo The owner's profile photo
+     */
+    public function profile(EOwner $owner, ?string $photo){
+
+        $this->smarty->assign('photo', $photo);
         $this->smarty->assign('owner', $owner);
         $this->smarty->display('Owner/personalProfile.tpl');
     }
+
     public function editProfile(EOwner $owner){
         $this->smarty->assign('owner', $owner);
         $this->smarty->display('Owner/editPersonalProfile.tpl');

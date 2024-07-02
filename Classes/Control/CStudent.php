@@ -47,24 +47,37 @@ class CStudent{
         $view = new VStudent();
         $view->search();
     }    
+    
     /**
      * Method profile
      * This method shows the student's profile
+     * 
      * @return void
      */
-    public static function profile(){
+    public static function profile(): void{
+
         $view = new VStudent();
         $session=USession::getInstance();
         $user = $session->getSessionElement('username');
         $PM=FPersistentManager::getInstance();
-        //$student=$PM->getStudentByUsername('nadm');
         $student=$PM->getStudentByUsername($user);
+
         if(is_null($student)){
+            
             print '<b>500 : SERVER ERROR </b>';
-        }
-        else
-        {   
-            $view->profile($student);
+
+        } else {   
+
+            $ph = $student->getPicture();
+            
+            if(!is_null($ph)) {
+
+                $ph=$ph->getPhoto();
+                $base64 = base64_encode($ph);
+                $ph = "data:" . 'image/jpeg' . ";base64," . $base64;
+            }
+
+            $view->profile($student, $ph);
         }
     }
     
@@ -138,9 +151,6 @@ class CStudent{
 
         $result = $PM->store($student);
 
-        /*header ("Content-type: ". $picture['type']);
-        print $picture['img'];
-        $result = 1;*/
         if ($result){
             $session->setSessionElement('courseDuration', $duration);
             $session->setSessionElement('immatricolationYear', $immatricolation);
