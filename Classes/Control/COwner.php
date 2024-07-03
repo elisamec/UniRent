@@ -318,6 +318,8 @@ class COwner
         $deposit=(float)USuperGlobalAccess::getPost('deposit');
         $startDate=(int) USuperGlobalAccess::getPost('startDate');
         $month=USuperGlobalAccess::getPost('month');
+        $picture=USuperGlobalAccess::getPhoto('img');
+        if(isset($picture)){print 'foto presa';}
         if($month=='Sep')
         {
             $month=9;
