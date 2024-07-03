@@ -234,8 +234,11 @@
     </form>
   </div>
 </div>
+
+
 {literal}
-                    <script>
+
+<script>
 // Get the modal
 var avModal = document.getElementById("popup");
 function openModal() {
@@ -260,7 +263,7 @@ function openModal() {
                 
     `;
     container.appendChild(availability);
-}
+
 
 // Remove an availability input field
 function removeAvailability(button) {
@@ -272,29 +275,28 @@ function removeAvailability(button) {
 
    let form = document.getElementById('visitAvailabilityForm');
    form.addEventListener('submit', function(event) 
-   {
+{
       event.preventDefault();
 
       let availabilities = document.getElementsByClassName('availability');
       let data = [];
-       for (let i = 0; i < availabilities.length; i++)
+      for (let i = 0; i < availabilities.length; i++)
       {
          let duration = availabilities[i].elements['duration'].value;
          let day = availabilities[i].elements['day'].value;
          let time = availabilities[i].elements['time'].value;
          data.push({duration, day, time});
       }
-
       sessionStorage.setItem('availabilities', JSON.stringify(data));
 
       fetch('/your-server-endpoint', 
       {
-        method: 'POST',
-        headers: 
-        {
-            'Content-Type': 'application/json',
-        },
-         body: JSON.stringify(data),
+      method: 'POST',
+      headers: 
+      {
+         'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
       }
       )
       .then(response => response.json())
@@ -302,7 +304,7 @@ function removeAvailability(button) {
       .catch((error) => console.error('Error:', error));
 
     closeModal();
-   }
+}
    );
 
 function closeModal() {
@@ -381,8 +383,9 @@ document.addEventListener("DOMContentLoaded", function() {
     updateHiddenInput('women', 'hiddenWomen');
     updateHiddenInput('animals', 'hiddenAnimals');
     updateHiddenInput('smokers', 'hiddenSmokers');
-}); // Assicurati che questa parentesi chiuda correttamente il blocco di codice
+});
 </script>
+
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
