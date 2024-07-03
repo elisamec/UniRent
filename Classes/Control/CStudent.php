@@ -97,7 +97,7 @@ class CStudent{
             $base64 = base64_encode($photo);
             $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
 
-            $view->editProfile($student, $photo);
+            $view->editProfile($student, $photo, false, false, false, false);
         }
         
     }
@@ -230,6 +230,7 @@ class CStudent{
     public static function modifyStudentProfile(){
 
         $session=USession::getInstance();
+        $view = new VStudent();
 
         //reed the data from the form
         $newUsername=USuperGlobalAccess::getPost('username');
@@ -255,6 +256,11 @@ class CStudent{
             
 
                 $studentID=$PM->getStudentIdByUsername($oldUsername);
+
+                if($password===''){
+
+                    $password=$session::getSessionElement('password');
+                }
 
                 $oldPhoto = $session::getSessionElement('photo');
 
@@ -298,13 +304,13 @@ class CStudent{
             }
             else
             {
-                print '<b>Username già preso</b>';
+                $view->editProfile($student, $photo, false, true, false, false);
                 #header('Location:/UniRent/Student/profile');
             }
         }
         else
         {
-            print '<b>mail già in uso o mail non universitaria</b>';
+            $view->editProfile($student, $photo, false, false, true, false);
             #header('Location:/UniRent/Student/profile');
         }  
     }
