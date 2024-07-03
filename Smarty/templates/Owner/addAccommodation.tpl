@@ -246,21 +246,20 @@ function openModal() {
 }
 
 // Add more availability input fields
-
+function addAvailability() {
     let container = document.getElementById('availabilityContainer');
     let availability = document.createElement('div');
     availability.className = 'availability';
     availability.innerHTML = `
-         <button type="button" onclick="removeAvailability(this)" class="button-spec little">-</button>
-                <label for="duration">Visit Duration (minutes):</label>
-                <input type="number" id="duration" name="duration" title="Please enter a number">
-                <label for="dayOfWeek">Weekday:</label>
-                <input type="text" pattern="(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)" title="Please enter a valid day of the week" id="day", name="day">
-                <label for="time">Availability start:</label>
-                <input type="time" id="start" name="start">
-                <label for="time">Availability end:</label>
-                <input type="time" id="end" name="end">
-                
+        <button type="button" onclick="removeAvailability(this)" class="button-spec little">-</button>
+        <label for="duration">Visit Duration (minutes):</label>
+        <input type="number" id="duration" name="duration" title="Please enter a number">
+        <label for="dayOfWeek">Weekday:</label>
+        <input type="text" pattern="(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)" title="Please enter a valid day of the week" id="day" name="day">
+        <label for="start">Availability start:</label>
+        <input type="time" id="start" name="start">
+        <label for="end">Availability end:</label>
+        <input type="time" id="end" name="end">
     `;
     container.appendChild(availability);
 
@@ -279,17 +278,30 @@ function removeAvailability(button) {
       event.preventDefault();
 
       let availabilities = document.getElementsByClassName('availability');
-      let data = [];
-      for (let i = 0; i < availabilities.length; i++)
-      {
-         let duration = availabilities[i].elements['duration'].value;
-         let day = availabilities[i].elements['day'].value;
-         let time = availabilities[i].elements['time'].value;
-         data.push({duration, day, time});
-      }
+      let data= [];
+for (let i = 0; i < availabilities.length; i++) {
+    let durationInput = availabilities[i].querySelector('input[name="duration"]');
+    let dayInput = availabilities[i].querySelector('input[name="day"]');
+    let startInput = availabilities[i].querySelector('input[name="start"]');
+    let endInput = availabilities[i].querySelector('input[name="end"]');
+
+    // Check if inputs are found before accessing their values
+    if (durationInput && dayInput && startInput && endInput) {
+        let duration = durationInput.value;
+        let day = dayInput.value;
+        let start = startInput.value;
+        let end = endInput.value;
+        data.push({ duration, day, start, end });
+    } else {
+        console.error("One or more input fields not found in availability element:", availabilities[i]);
+    }
+}
+
+
+   console.log('Data to be submitted:', data);
       sessionStorage.setItem('availabilities', JSON.stringify(data));
 
-      fetch('/your-server-endpoint', 
+      fetch('/UniRent/Owner/addAccommodationOperations', 
       {
       method: 'POST',
       headers: 
