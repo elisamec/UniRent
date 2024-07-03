@@ -215,15 +215,16 @@ class CStudent{
         $view = new VStudent();
         $reviews = FReview::getInstance()->loadByRecipient(1, TType::STUDENT);
         $reviewsData = [];
+        $PM=FPersistentManager::getInstance();
         
         foreach ($reviews as $review) {
-            $profilePic = FStudent::getInstance()->load($review->getIdAuthor())->getPhoto();
+            $profilePic = $PM->load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor())->getPhoto();
             if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
-                'username' => FStudent::getInstance()->load($review->getIdAuthor())->getUsername(),
+                'username' => $PM->load( 'E' . $review->getAuthorType()->value, ->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,
