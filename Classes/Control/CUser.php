@@ -125,7 +125,7 @@ class CUser
                 $passwordIn=USuperGlobalAccess::getPost('password');
                 if(password_verify($passwordIn, $user->getPassword()))
                 {
-                    print 'La password è corretta!';
+                    //print 'La password è corretta!';
                    
                     $session = USession::getInstance();
                     $session::setSessionElement("id", $result_username_array['id']);
@@ -143,13 +143,12 @@ class CUser
                 }
                 else  #password is not correct
                 {
-                    print "<br>Password is not correct!";
                     $view->loginError(true, false, false, $username, $type);
                 }
             }
             else  #dose not exist an username for that type
             {   
-                print "dose not exist an username for that type";
+
                 $view->loginError(false, true, false, $username, $type);
             }
 
