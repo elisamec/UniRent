@@ -196,9 +196,7 @@
 
                             </div>
                             <div id="div15">
-                              <input type="hidden" id="durationHidden" name="duration">
-                              <input type="hidden" id="startTimeHidden" name="startTime">
-                              <input type="hidden" id="dayOfWeekHidden" name="dayOfWeek">
+                              <input type="hidden" id="visitAvailabilityData" name="visitAvailabilityData">
 
                            <div class="button-group">
                               <div class="row">
@@ -239,8 +237,9 @@
                     <script>
 // Get the modal
 var avModal = document.getElementById("popup");
+
 function openModal() {
-  avModal.style.display = "block";
+    avModal.style.display = "block";
 }
 
 // Add more availability input fields
@@ -269,58 +268,45 @@ function removeAvailability(button) {
 }
 
 // Save visit availability data in sessionStorage when the pop-up form is submitted
+let form = document.getElementById('visitAvailabilityForm');
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
 
-   let form = document.getElementById('visitAvailabilityForm');
-   form.addEventListener('submit', function(event) 
-   {
-      event.preventDefault();
+    let availabilities = document.getElementsByClassName('availability');
+    let data = [];
+    for (let i = 0; i < availabilities.length; i++) {
+        let durationInput = availabilities[i].querySelector('input[name="duration"]');
+        let dayInput = availabilities[i].querySelector('input[name="day"]');
+        let startInput = availabilities[i].querySelector('input[name="start"]');
+        let endInput = availabilities[i].querySelector('input[name="end"]');
 
-      let availabilities = document.getElementsByClassName('availability');
-      let data= [];
-for (let i = 0; i < availabilities.length; i++) {
-    let durationInput = availabilities[i].querySelector('input[name="duration"]');
-    let dayInput = availabilities[i].querySelector('input[name="day"]');
-    let startInput = availabilities[i].querySelector('input[name="start"]');
-    let endInput = availabilities[i].querySelector('input[name="end"]');
-
-    // Check if inputs are found before accessing their values
-    if (durationInput && dayInput && startInput && endInput) {
-        let duration = durationInput.value;
-        let day = dayInput.value;
-        let start = startInput.value;
-        let end = endInput.value;
-        data.push({ duration, day, start, end });
-    } else {
-        console.error("One or more input fields not found in availability element:", availabilities[i]);
+        // Check if inputs are found before accessing their values
+        if (durationInput && dayInput && startInput && endInput) {
+            let duration = durationInput.value;
+            let day = dayInput.value;
+            let start = startInput.value;
+            let end = endInput.value;
+            data.push({ duration, day, start, end });
+        } else {
+            console.error("One or more input fields not found in availability element:", availabilities[i]);
+        }
     }
-}
 
+    console.log('Data to be submitted:', data);
+    sessionStorage.setItem('availabilities', JSON.stringify(data));
 
-   console.log('Data to be submitted:', data);
-      sessionStorage.setItem('availabilities', JSON.stringify(data));
-
-      fetch('/UniRent/Owner/addAccommodationOperations', 
-      {
-        method: 'POST',
-        headers: 
-        {
-            'Content-Type': 'application/json',
-        },
-         body: JSON.stringify(data),
-      }
-      )
-      .then(response => response.json())
-      .then(data => console.log('Success:', data))
-      .catch((error) => console.error('Error:', error));
+    // Store the JSON data in the hidden input field in the main form
+    let visitAvailabilityData = document.getElementById('visitAvailabilityData');
+    visitAvailabilityData.value = JSON.stringify(data);
 
     closeModal();
-   }
-   );
+});
 
 function closeModal() {
     avModal.style.display = "none";
 }
 </script>
+
 {/literal}
                </div>
                
