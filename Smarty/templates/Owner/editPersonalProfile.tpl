@@ -128,7 +128,12 @@
                         </div>
                         <div class="div13"><p>Password: </p></div>
                         <div class="div14">
+                           {if $passwordError === true}
                            <input class="profile-input" type="password" name="password" id="password">
+                           <p class="error">The password needs to be at least 8 characters long, with 1 special caracter, 1 number, 1 uppercase and 1 lowercase character</p>
+                        {else}
+                           <input class="profile-input" type="password" name="password" id="password">
+                        {/if}
                         </div>
                   
                      <div class="div15"><p>Delete Profile: </p></div>
