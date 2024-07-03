@@ -124,6 +124,10 @@ class CUser
                 $user = $PM->load("E$type", $result_username_array['id']);
                 $passwordIn=USuperGlobalAccess::getPost('password');
 
+                print $passwordIn;
+                print "<br>";
+                print $user->getPassword();
+
                 if(password_verify($passwordIn, $user->getPassword()))
                 {
                     print 'La password è corretta!';
@@ -144,11 +148,13 @@ class CUser
                 }
                 else  #password is not correct
                 {
+                    print "<br>Password is not correct!";
                     $view->loginError(true, false, false, $username, $type);
                 }
             }
             else  #dose not exist an username for that type
-            {
+            {   
+                print "dose not exist an username for that type";
                 $view->loginError(false, true, false, $username, $type);
             }
 
