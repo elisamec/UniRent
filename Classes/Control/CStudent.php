@@ -97,7 +97,7 @@ class CStudent{
             $base64 = base64_encode($photo);
             $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
 
-            $view->editProfile($student, $photo, false, false, false);
+            $view->editProfile($student, $photo, false, false, false, false);
         }
         
     }
@@ -304,13 +304,13 @@ class CStudent{
             }
             else
             {
-                $view->editProfile($student, $photo, false, true, false);
+                $view->editProfile($student, $photo, false, true, false, false);
                 #header('Location:/UniRent/Student/profile');
             }
         }
         else
         {
-            $view->editProfile($student, $photo, false, false, true);
+            $view->editProfile($student, $photo, false, false, true, false);
             #header('Location:/UniRent/Student/profile');
         }  
     }

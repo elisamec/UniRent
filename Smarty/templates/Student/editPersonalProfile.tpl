@@ -211,13 +211,22 @@
                            </div>
                            {/if}
                         </div>
-                        <div class="div19"><p>Password: </p></div>
+                        <div class="divA"><p>Old Password: </p></div>
+                        <div class="div20">
+                        {if $oldPasswordError === true}
+                           <input class="profile-input" type="password" name="oldPassword" id="oldPassword">
+                           <p class="error">Password Incorrect</p>
+                        {else}
+                           <input class="profile-input" type="password" name="oldPassword" id="oldPassword">
+                        {/if}
+                        </div>
+                        <div class="div19"><p>New Password: </p></div>
                         <div class="div20">
                         {if $passwordError === true}
-                           <input class="profile-input" type="password" name="password" id="password">
+                           <input class="profile-input" type="password" name="newPassword" id="newPassword">
                            <p class="error">The password needs to be at least 8 characters long, with 1 special caracter, 1 number, 1 uppercase and 1 lowercase character</p>
                         {else}
-                           <input class="profile-input" type="password" name="password" id="password">
+                           <input class="profile-input" type="password" name="newPassword" id="newPassword">
                         {/if}
                         </div>
                   <div class="div21">
