@@ -192,7 +192,12 @@ class COwner
                     if(($newPhoneNumber==$owner->getPhoneNumber())||($PM->verifyPhoneNumber($newPhoneNumber)===false))
                     {
                         if(($newIBAN===$owner->getIban())||($PM->verifyIBAN($newIBAN)===false))
-                        {
+                        {   
+                            if($newPassword===''){
+
+                                $newPassword=$session::getSessionElement('password');
+                            }
+                            
                             $oldPhoto = $session::getSessionElement('photo');
 
                             if(!is_null($oldPhoto)){

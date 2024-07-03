@@ -256,6 +256,11 @@ class CStudent{
 
                 $studentID=$PM->getStudentIdByUsername($oldUsername);
 
+                if($password===''){
+
+                    $password=$session::getSessionElement('password');
+                }
+
                 $oldPhoto = $session::getSessionElement('photo');
 
                 if(!is_null($oldPhoto)){
