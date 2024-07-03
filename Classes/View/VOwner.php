@@ -47,9 +47,15 @@ class VOwner {
         $this->smarty->display('Owner/personalProfile.tpl');
     }
 
-    public function editProfile(EOwner $owner, ?string $photo){
+    public function editProfile(EOwner $owner, ?string $photo, bool $usernameDuplicate, bool $emailDuplicate, bool $phoneError, bool $ibanError, bool $oldPasswordError, bool $passwordError){
         $this->smarty->assign('photo', $photo);
         $this->smarty->assign('owner', $owner);
+        $this->smarty->assign('usernameDuplicate', $usernameDuplicate);
+        $this->smarty->assign('emailDuplicate', $emailDuplicate);
+        $this->smarty->assign('phoneError', $phoneError);
+        $this->smarty->assign('ibanError', $ibanError);
+        $this->smarty->assign('oldPasswordError', $oldPasswordError);
+        $this->smarty->assign('passwordError', $passwordError);
         $this->smarty->display('Owner/editPersonalProfile.tpl');
     }
     public function contact(){

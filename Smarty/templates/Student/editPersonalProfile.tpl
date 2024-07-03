@@ -241,7 +241,7 @@
                      <label class="change_btn" for="img">Upload New Profile Picture</label>
                   </div>
                   <div class="div23">
-                     <div class="delete_btn"><a href="#">DeletePhoto</a></div>
+                     <div class="delete_btn"><a href="#">Delete Photo</a></div>
                   </div>
                      </form>
                      <div class="div24">
