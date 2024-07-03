@@ -310,13 +310,13 @@ class CStudent{
             }
             else
             {
-                $view->editProfile($oldStudent, $oldPhoto, false, true, false);
+                $view->editProfile($oldStudent, $oldPhoto, false, true, false, false);
                 #header('Location:/UniRent/Student/profile');
             }
         }
         else
         {
-            $view->editProfile($oldStudent, $oldPhoto, false, false, true);
+            $view->editProfile($oldStudent, $oldPhoto, false, false, false, true);
             #header('Location:/UniRent/Student/profile');
         }  
     }
