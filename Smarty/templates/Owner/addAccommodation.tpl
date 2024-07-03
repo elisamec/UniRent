@@ -235,10 +235,8 @@
   </div>
 </div>
 
-
 {literal}
-
-<script>
+                    <script>
 // Get the modal
 var avModal = document.getElementById("popup");
 function openModal() {
@@ -262,7 +260,7 @@ function addAvailability() {
         <input type="time" id="end" name="end">
     `;
     container.appendChild(availability);
-
+}
 
 // Remove an availability input field
 function removeAvailability(button) {
@@ -274,7 +272,7 @@ function removeAvailability(button) {
 
    let form = document.getElementById('visitAvailabilityForm');
    form.addEventListener('submit', function(event) 
-{
+   {
       event.preventDefault();
 
       let availabilities = document.getElementsByClassName('availability');
@@ -303,12 +301,12 @@ for (let i = 0; i < availabilities.length; i++) {
 
       fetch('/UniRent/Owner/addAccommodationOperations', 
       {
-      method: 'POST',
-      headers: 
-      {
-         'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
+        method: 'POST',
+        headers: 
+        {
+            'Content-Type': 'application/json',
+        },
+         body: JSON.stringify(data),
       }
       )
       .then(response => response.json())
@@ -316,7 +314,7 @@ for (let i = 0; i < availabilities.length; i++) {
       .catch((error) => console.error('Error:', error));
 
     closeModal();
-}
+   }
    );
 
 function closeModal() {
