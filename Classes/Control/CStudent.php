@@ -269,7 +269,7 @@ class CStudent{
                 
                 
                 if($newPassword===''){
-                    //Se non ho inserito nessuna nuova password, allora essa rimane invariata
+                    //Se non ho inserito nessuna nuova password, allora essa rimane
                     $password=$session::getSessionElement('password');
                 } else {
                     
