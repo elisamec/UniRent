@@ -449,6 +449,41 @@ class EAccommodation
             $value['number_of_visits']=(int)($value['diff']/(int)$value['duration']);
             $result[$key]=$value;
         }
-        print_r($result);
+        #print_r($result);
+        $result_2=array();
+        foreach($result as $key=>$value)
+        {
+            if($value['number_of_visits']===0){}   //se il numero delle visite è 0 (o hai sbagliato a mettere gli orari o la durata della visita)
+            else
+            {
+                $start_in_minutes=EAccommodation::stringInMinutes($value['start']); #trasforma l'orario in minuti dalla mezzanotte
+                $ap=array(); #array di appoggio
+                for($i=0;$i<$value['number_of_visits'];$i++)
+                {
+                    $y=$start_in_minutes+ $i*$value['duration']; #somma gli intervalli delle visite 
+                    $ap[]=EAccommodation::mitutesToString($y); #trasforma i minuti in stringhe e mettile nell'array di appoggio
+                }
+                $app=array(); #ulteriore array di appoggio
+                $app['day']=$value['day']; 
+                $app['times']=$ap;
+                $result_2[$key]=$app; #ancora necessario perchè potrei inserire due o più periodi per la visita in un solo giorno
+            }    
+        }
+        print_r($result_2);
+    }
+
+    private static function stringInMinutes(string $s):int
+    {
+        list($hour,$minute)=explode(":",$s);
+        $tot_minutes = $hour*60 + $minute;
+        return (int)$tot_minutes;
+    }
+
+    private static function mitutesToString(int $min):string
+    {
+        $hours = intdiv($min, 60); // Ottiene le ore
+        $minutes = $min % 60; // Ottiene i minuti residui
+        // Format string like hh:mm
+        return sprintf("%02d:%02d", $hours, $minutes);
     }
 }

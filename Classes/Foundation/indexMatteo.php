@@ -1,6 +1,7 @@
 <?php 
 require __DIR__.'../../../vendor/autoload.php';
 
+use Classes\Entity\EAccommodation;
 use Classes\Entity\EStudent;
 use Classes\Foundation\FPersistentManager;
 use Classes\Foundation\FStudent;
@@ -142,3 +143,7 @@ if ($difference->invert == 1) {
 }
 
 print $totalMinutes;
+
+// Parte 2 di creazione array visite
+
+#print EAccommodation::stringInMinutes('03:00');
