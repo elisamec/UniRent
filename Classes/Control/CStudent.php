@@ -233,12 +233,12 @@ class CStudent{
         $view = new VStudent();
 
         //reed the data from the form
-        $newUsername=USuperGlobalAccess::getPost('username');
+        $username=USuperGlobalAccess::getPost('username');
         $name=USuperGlobalAccess::getPost('name');
         $surname=USuperGlobalAccess::getPost('surname');
         $picture = USuperGlobalAccess::getPhoto('img');
         $password=USuperGlobalAccess::getPost('password');
-        $newEmail=USuperGlobalAccess::getPost('email');
+        $email=USuperGlobalAccess::getPost('email');
         $sex=USuperGlobalAccess::getPost('sex');
         $courseDuration=USuperGlobalAccess::getPost('courseDuration');
         $immatricolationYear=USuperGlobalAccess::getPost('immatricolationYear');
@@ -248,25 +248,30 @@ class CStudent{
 
         $oldUsername=$session::getSessionElement('username');
         $PM=FPersistentManager::getInstance();
-        $oldEmail=$PM::getInstance()->getStudentEmailByUsername($oldUsername);
+        //$oldEmail=$PM::getInstance()->getStudentEmailByUsername($oldUsername);
 
-        if((($PM->verifyUserEmail($newEmail)==false)&&($PM->verifyStudentEmail($newEmail)))||($oldEmail===$newEmail)) { #se la mail non è in uso ed è una mail universitaria oppure se non l'hai modificata
-        
-            if(($PM->verifyUserUsername($newUsername)==false)||($oldUsername===$newUsername)) { #se il nuovo username non è già in uso o non l'hai modificato
+        $studentID=$PM->getStudentIdByUsername($oldUsername);
+
+        $oldStudent = $PM->load('EStudent', $studentID);
+        $oldEmail = $oldStudent->getEmail();
+        $oldPhoto = $session::getSessionElement('photo');
+
+        //if the new email is not already in use and it's an student's email or you haven't changed it
+        if((($PM->verifyUserEmail($email)==false)&&($PM->verifyStudentEmail($email)))||($oldEmail===$email)) { 
             
-
-                $studentID=$PM->getStudentIdByUsername($oldUsername);
-
+            //if the new username is not already in use or you haven't changed it
+            if(($PM->verifyUserUsername($username)==false)||($oldUsername===$username)) { #se il nuovo username non è già in uso o non l'hai modificato
+            
                 if($password===''){
 
                     $password=$session::getSessionElement('password');
                 }
 
-                $oldPhoto = $session::getSessionElement('photo');
+                
 
                 if(!is_null($oldPhoto)){
                     
-                    $photoId=$PM::getInstance()->getStudentPhotoId($oldUsername);
+                    $photoId=$oldStudent->getPicture()->getId();
 
                     is_null($picture) ? $photo = new EPhoto($photoId, $oldPhoto, 'other', null, null)
                                       : $photo = new EPhoto($photoId, $picture['img'], 'other', null, null);
@@ -280,37 +285,38 @@ class CStudent{
                     } else {
 
                         $photo = new EPhoto(null, $picture['img'], 'other', null, null);
-                        $risultato = $PM::getInstance()->storeAvatar($photo);
+                        $risultato = $PM->storeAvatar($photo);
+
                         if(!$risultato){
                             print '<b>500 SERVER ERROR!</b>';
                         }
                     }
                 }
 
-                $student=new EStudent($newUsername,$password,$name,$surname,$photo,$newEmail,$courseDuration,$immatricolationYear,$birthDate,$sex,$smoker,$animals);
+                $student=new EStudent($username,$password,$name,$surname,$photo,$email,$courseDuration,$immatricolationYear,$birthDate,$sex,$smoker,$animals);
                 $student->setID($studentID);
+
                 $result=$PM->update($student);
                 
-                if($result)
-                {
-                    $session->setSessionElement('username',$newUsername);
+                if($result){
+
+                    $session->setSessionElement('username',$username);
                     $session->setSessionElement('password',$password);
                     header('Location:/UniRent/Student/profile');
-                }
-                else
-                {
+                } else { 
+
                     print '<h1><b>500 SERVER ERROR!</b></h1>';
                 }
             }
             else
             {
-                $view->editProfile($student, $photo, false, true, false);
+                $view->editProfile($oldStudent, $oldPhoto, false, true, false);
                 #header('Location:/UniRent/Student/profile');
             }
         }
         else
         {
-            $view->editProfile($student, $photo, false, false, true);
+            $view->editProfile($oldStudent, $oldPhoto, false, false, true);
             #header('Location:/UniRent/Student/profile');
         }  
     }
