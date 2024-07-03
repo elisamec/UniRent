@@ -361,11 +361,14 @@ document.addEventListener('DOMContentLoaded', function() {
     var hiddenSmoker = document.getElementById('hiddenSmoker');
     var hiddenAnimals = document.getElementById('hiddenAnimals');
 
-    if(smokerCheckbox && hiddenSmoker) {
-        smokerCheckbox.onclick = function() {
-            hiddenSmoker.value = this.checked ? 'true' : 'false';
-        };
-    }
+       
+    if(smokerCheckbox && hiddenSmoker) 
+   {
+      smokerCheckbox.onclick = function() 
+      {
+         hiddenSmoker.value = this.checked ? 'true' : 'false';
+      };
+   }
 
     if(animalsCheckbox && hiddenAnimals) {
         animalsCheckbox.onclick = function() {

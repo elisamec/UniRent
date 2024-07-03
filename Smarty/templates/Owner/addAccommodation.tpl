@@ -171,16 +171,20 @@
                             <div class="checkbox-container">
                             <label class="checkbox-label">Tenants preferences:</label>
                             <label>
-                                 <input type="checkbox" name="men"> Men
+                                 <input type="checkbox" name="men" id="men"> Men
+                                 <input type="hidden" id="hiddenMen" name="men" value="false">
                            </label>
                               <label>
-                                 <input type="checkbox" name="women" > Women
+                                 <input type="checkbox" name="women" id="women"> Women
+                                 <input type="hidden" id="hiddenWomen" name="women" value="false">
                               </label>
                               <label>
-                                 <input type="checkbox" name="animals"> Animals
+                                 <input type="checkbox" name="animals" id="animals"> Animals
+                                 <input type="hidden" id="hiddenAnimals" name="animals" value="false">
                               </label>
                               <label>
-                                 <input type="checkbox" name="smokers"> Smokers
+                                 <input type="checkbox" name="smokers" id="smokers"> Smokers
+                                 <input type="hidden" id="hiddenSmokers" name="smokers" value="false">
                               </label>
                               </div>
                             </div>
@@ -363,26 +367,21 @@ function closeModal() {
                }
          </script>
 
-               <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Assicurati che gli ID corrispondano ai tuoi elementi HTML
-    var smokerCheckbox = document.getElementById('smoker');
-    var animalsCheckbox = document.getElementById('animals');
-    var hiddenSmoker = document.getElementById('hiddenSmoker');
-    var hiddenAnimals = document.getElementById('hiddenAnimals');
-
-    if(smokerCheckbox && hiddenSmoker) {
-        smokerCheckbox.onclick = function() {
-            hiddenSmoker.value = this.checked ? 'true' : 'false';
-        };
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    function updateHiddenInput(checkboxId, hiddenInputId) {
+        var checkbox = document.getElementById(checkboxId);
+        var hiddenInput = document.getElementById(hiddenInputId);
+        checkbox.addEventListener('change', function() {
+            hiddenInput.value = this.checked ? 'true' : 'false';
+        });
     }
 
-    if(animalsCheckbox && hiddenAnimals) {
-        animalsCheckbox.onclick = function() {
-            hiddenAnimals.value = this.checked ? 'true' : 'false';
-        };
-    }
-});
+    updateHiddenInput('men', 'hiddenMen');
+    updateHiddenInput('women', 'hiddenWomen');
+    updateHiddenInput('animals', 'hiddenAnimals');
+    updateHiddenInput('smokers', 'hiddenSmokers');
+}); // Assicurati che questa parentesi chiuda correttamente il blocco di codice
 </script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

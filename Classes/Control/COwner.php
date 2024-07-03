@@ -327,6 +327,12 @@ class COwner
         $postalCode=USuperGlobalAccess::getPost('postalCode');
         $description=USuperGlobalAccess::getPost('description');
 
+        $men=USuperGlobalAccess::getPost('men');
+        $women=USuperGlobalAccess::getPost('women');
+        $smokers=USuperGlobalAccess::getPost('smokers');
+        $animals=USuperGlobalAccess::getPost('animals');
+
+
         $json=USession::getInstance()::getSessionElement('availabilities');
         if(isset($_POST['availabilities'])){print 'si c\' è';}
 
