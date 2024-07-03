@@ -224,7 +224,7 @@ class CStudent{
             }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
-                'username' => $PM->load( 'E' . $review->getAuthorType()->value, ->getUsername(),
+                'username' => $PM->load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor())->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,
