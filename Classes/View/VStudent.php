@@ -43,13 +43,12 @@ class VStudent{
      * @param string|null $photo The student's profile photo
      * @return void
      */
-    public function editProfile(EStudent $student, ?string $photo, bool $passwordError, bool $usernameDuplicate, bool $emailDuplicate, bool $universityMailError) :void {
+    public function editProfile(EStudent $student, ?string $photo, bool $passwordError, bool $usernameDuplicate, bool $emailError) :void {
         $this->smarty->assign('photo', $photo);
         $this->smarty->assign('student', $student);
         $this->smarty->assign('passwordError', $passwordError);
         $this->smarty->assign('usernameDuplicate', $usernameDuplicate);
-        $this->smarty->assign('emailDuplicate', $emailDuplicate);
-        $this->smarty->assign('universityMailError', $universityMailError);
+        $this->smarty->assign('emailError', $emailError);
         $this->smarty->display('Student/editPersonalProfile.tpl');
     }
 
