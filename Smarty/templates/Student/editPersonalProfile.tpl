@@ -122,7 +122,7 @@
                         </div>
                         <div class="div7"><p>Email: </p></div>
                         <div class="div8">
-                        {if $emailDuplicate === true}
+                        {if $emailError === true}
                            <input class="profile-input" type="text" name="email" id="email" value="{$student->getUniversityMail()}" required>
                            <p class="error">Email already in use or not an university mail</p>
                         {else}
