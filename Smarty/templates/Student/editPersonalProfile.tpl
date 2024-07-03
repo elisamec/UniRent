@@ -113,11 +113,26 @@
                         </div>
                         <div class="div5"><p>Username: </p></div>
                         <div class="div6">
+                        {if $usernameDuplicate === true}
                            <input class="profile-input" type="text" name="username" id="username" value="{$student->getUsername()}" required>
+                           <p class="error">Username already in use</p>
+                        {else}
+                           <input class="profile-input" type="text" name="username" id="username" value="{$student->getUsername()}" required>
+                        {/if}
                         </div>
                         <div class="div7"><p>Email: </p></div>
                         <div class="div8">
+                        {if $emailDuplicate === true}
                            <input class="profile-input" type="text" name="email" id="email" value="{$student->getUniversityMail()}" required>
+                           <p class="error">Email already in use</p>
+                        {else}
+                           {if $universityMailError === true}
+                           <input class="profile-input" type="text" name="email" id="email" value="{$student->getUniversityMail()}" required>
+                           <p class="error">Invalid email: must be a university mail</p>
+                           {else}
+                           <input class="profile-input" type="text" name="email" id="email" value="{$student->getUniversityMail()}" required>
+                           {/if}
+                        {/if}
                         </div>
                         <div class="div9"><p>Sex: </p></div>
                         <div class="div10">
@@ -203,25 +218,54 @@
                         </div>
                         <div class="div19"><p>Password: </p></div>
                         <div class="div20">
+                        {if $passwordError === true}
                            <input class="profile-input" type="password" name="password" id="password">
+                           <p class="error">The password needs to be at least 8 characters long, with 1 special caracter, 1 number, 1 uppercase and 1 lowercase character</p>
+                        {else}
+                           <input class="profile-input" type="password" name="password" id="password">
+                        {/if}
                         </div>
-                     </form>
-                     <div class="div21"><p>Delete Profile: </p></div>
-                     <div class="div22">
-                        <div class="delete_btn"><a href="/UniRent/Student/deleteProfile">Delete</a></div>
-                  </div>
-                  <div class="container">
-                  
+                  <div class="div21">
                   {if $student->getPicture() === null}
-                     <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
+                     <img src="/UniRent/Smarty/images/ImageIcon.png" class="small">
                   {else}
-                     <img src="{$photo}">
+                     <img src="{$photo}" class="small">
                   {/if}
+                  </div>
+                  <div class="div22">
                      <input class="file-upload" type="file" id="img" name="img" accept="image/png" hidden>
                      <label class="change_btn" for="img">Upload New Profile Picture</label>
-               </div>
+                  </div>
+                  <div class="div23">
+                     <div class="delete_btn"><a href="#">DeletePhoto</a></div>
+                  </div>
+                     </form>
+                     <div class="div24">
+   <p>Delete Profile: </p>
+</div>
+<div class="div25">
+   <div class="delete_btn">
+      <a href="#" id="deleteLink">Delete</a>
+   </div>
+</div>
+                 
                </div>
                
+<!-- Confirmation Modal -->
+<div id="confirmModal" class="resModal">
+   <div class="resModal-content">
+      <span class="resClose">&times;</span>
+      <p>Are you sure you want to delete your profile?</p>
+      <div class="btn-cont">
+      <button id="confirmDelete">Yes</button>
+      <button id="cancelDelete">No</button>
+      </div>
+   </div>
+</div>
+
+               
+               
+               </div>
                <div class="container">
                   <div class="row">
                      <div class="col-md-4">
@@ -339,7 +383,7 @@ document.addEventListener('DOMContentLoaded', function() {
                var reader = new FileReader();
 
                reader.onload = function (e) {
-                  $('.imageIcon').attr('src', e.target.result);
+                  $('.small').attr('src', e.target.result);
                }
       
                reader.readAsDataURL(input.files[0]);
@@ -355,5 +399,50 @@ document.addEventListener('DOMContentLoaded', function() {
          $(".file-upload").click();
       });
    });
+      </script>
+      <script>
+      $(document).ready(function() {
+   // Get the modal
+   var modal = document.getElementById("confirmModal");
+
+   // Get the button that opens the modal
+   var btn = document.getElementById("deleteLink");
+
+   // Get the <span> element that closes the modal
+   var span = document.getElementsByClassName("resClose")[0];
+
+   // Get the confirm and cancel buttons
+   var confirmBtn = document.getElementById("confirmDelete");
+   var cancelBtn = document.getElementById("cancelDelete");
+
+   // When the user clicks the button, open the modal 
+   btn.onclick = function(event) {
+      event.preventDefault(); // Prevent the default action (navigation)
+      modal.style.display = "block";
+   }
+
+   // When the user clicks on <span> (x), close the modal
+   span.onclick = function() {
+      modal.style.display = "none";
+   }
+
+   // When the user clicks on the confirm button, proceed to delete
+   confirmBtn.onclick = function() {
+      window.location.href = "/UniRent/Student/deleteProfile";
+   }
+
+   // When the user clicks on the cancel button, close the modal
+   cancelBtn.onclick = function() {
+      modal.style.display = "none";
+   }
+
+   // When the user clicks anywhere outside of the modal, close it
+   window.onclick = function(event) {
+      if (event.target == modal) {
+         modal.style.display = "none";
+      }
+   }
+});
+
       </script>
    </body>
