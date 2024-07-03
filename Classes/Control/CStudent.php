@@ -12,6 +12,7 @@ use Classes\Tools\TType;
 use Classes\Utilities\USession;
 use Classes\Utilities\USuperGlobalAccess;
 use Classes\View\VStudent; 
+use Classes\Control; 
 use DateTime;
 /**
  * Student controller class
@@ -238,7 +239,8 @@ class CStudent{
         $name=USuperGlobalAccess::getPost('name');
         $surname=USuperGlobalAccess::getPost('surname');
         $picture = USuperGlobalAccess::getPhoto('img');
-        $password=USuperGlobalAccess::getPost('password');
+        $oldPassword=USuperGlobalAccess::getPost('oldPassword');
+        $newPassword=USuperGlobalAccess::getPost('newPassword');
         $email=USuperGlobalAccess::getPost('email');
         $sex=USuperGlobalAccess::getPost('sex');
         $courseDuration=USuperGlobalAccess::getPost('courseDuration');
@@ -266,36 +268,12 @@ class CStudent{
             if(($PM->verifyUserUsername($username)==false)||($oldUsername===$username)) { #se il nuovo username non è già in uso o non l'hai modificato
                 
                 
-                if($password===null){
+                if($newPassword===''){
                     
                     $password=$session::getSessionElement('password');
                 }
 
-                
-
-                if(!is_null($oldPhoto)){
-                    
-                    $photoId=$oldStudent->getPicture()->getId();
-
-                    is_null($picture) ? $photo = new EPhoto($photoId, $oldPhoto, 'other', null, null)
-                                      : $photo = new EPhoto($photoId, $picture['img'], 'other', null, null);
-
-                } else {
-
-                    if(is_null($picture)) {
-
-                        $photo = null;
-
-                    } else {
-
-                        $photo = new EPhoto(null, $picture['img'], 'other', null, null);
-                        $risultato = $PM->storeAvatar($photo);
-
-                        if(!$risultato){
-                            print '<b>500 SERVER ERROR!</b>';
-                        }
-                    }
-                }
+                $photo = CStudent::changePhoto($oldPhoto, $picture, $oldStudent);                
 
                 $student=new EStudent($username,$password,$name,$surname,$photo,$email,$courseDuration,$immatricolationYear,$birthDate,$sex,$smoker,$animals);
                 $student->setID($studentID);
@@ -314,15 +292,48 @@ class CStudent{
             }
             else
             {
+                //Username error
                 $view->editProfile($oldStudent, $photoError, false, true, false, false);
                 #header('Location:/UniRent/Student/profile');s
             }
         }
         else
         {
+            //Email error
             $view->editProfile($oldStudent, $photoError, false, false, false, true);
             #header('Location:/UniRent/Student/profile');
         }  
+    }
+
+    public static function changePhoto(?string $oldPhoto, ?array $picture, EStudent $oldStudent) : ?EPhoto{
+
+        $PM=FPersistentManager::getInstance();
+
+        if(!is_null($oldPhoto)){
+                    
+            $photoId=$oldStudent->getPicture()->getId();
+
+            is_null($picture) ? $photo = new EPhoto($photoId, $oldPhoto, 'other', null, null)
+                              : $photo = new EPhoto($photoId, $picture['img'], 'other', null, null);
+
+        } else {
+
+            if(is_null($picture)) {
+
+                $photo = null;
+
+            } else {
+
+                $photo = new EPhoto(null, $picture['img'], 'other', null, null);
+                $risultato = $PM->storeAvatar($photo);
+
+                if(!$risultato){
+                    header("HTTP/1.1 500 Internal Server Error");
+                }
+            }
+        }
+
+        return $photo;
     }
 
 
