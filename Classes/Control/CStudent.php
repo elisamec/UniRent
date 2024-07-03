@@ -439,7 +439,7 @@ class CStudent{
     public static function paymentMethods()
     {
         $view = new VStudent();
-        $cards = FCreditCard::getInstance()->loadByRecipient(1, TType::STUDENT);
+        $cards = FCreditCard::getInstance()->loadByStudent(1, TType::STUDENT);
         $cardsData = [];
         
         foreach ($cards as $card) {
