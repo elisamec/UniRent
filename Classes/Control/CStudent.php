@@ -278,7 +278,7 @@ class CStudent{
                         $password=$newPassword;
                     } else {
 
-                        print "La password vecchia è errata!";
+                        $view->editProfile($oldStudent, $photoError, false, false, false, true);
 
                     }
                 }
