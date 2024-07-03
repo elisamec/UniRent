@@ -193,44 +193,44 @@ class COwner
                     {
                         if(($newIBAN===$owner->getIban())||($PM->verifyIBAN($newIBAN)===false))
                         {   
-                            if($newPassword===''){
-
+                            if($newPassword==='')
+                            {
                                 $newPassword=$session::getSessionElement('password');
                             }
                             
                             $oldPhoto = $session::getSessionElement('photo');
 
-                            if(!is_null($oldPhoto)){
-                    
+                            if(!is_null($oldPhoto))
+                            {
                                 $photoId=$PM::getInstance()->getOwnerPhotoId($oldUsername);
             
                                 is_null($picture) ? $photo = new EPhoto($photoId, $oldPhoto, 'other', null, null)
-                                                  : $photo = new EPhoto($photoId, $picture['img'], 'other', null, null);
-            
-                            } else {
-            
-                                if(is_null($picture)) {
-            
+                                                  : $photo = new EPhoto($photoId, $picture['img'], 'other', null, null);                            }
+                            else 
+                            {
+                                if(is_null($picture)) 
+                                {
                                     $photo = null;
-            
-                                } else {
-            
+                                } 
+                                else 
+                                {
                                     $photo = new EPhoto(null, $picture['img'], 'other', null, null);
                                     $risultato = $PM::getInstance()->storeAvatar($photo);
-                                    if(!$risultato){
+                                    if(!$risultato)
+                                    {
                                         print '<b>500 SERVER ERROR!</b>';
                                     }
                                 }
                             }
-                            /*$owner->setName($name);
+                            $owner->setName($name);
                             $owner->setSurname($surname);
                             $owner->setPhoto($photo);
                             $owner->setMail($newemail);
                             $owner->setUsername($newUsername);
                             $owner->setPassword($newPassword);
                             $owner->setPhoneNumber($newPhoneNumber);
-                            $owner->setIban($newIBAN);*/
-                            $owner = new EOwner($ownerId, $newUsername, $newPassword, $name, $surname, $photo, $newemail, $newPhoneNumber, $newIBAN);
+                            $owner->setIban($newIBAN);
+                            #$owner = new EOwner($ownerId, $newUsername, $newPassword, $name, $surname, $photo, $newemail, $newPhoneNumber, $newIBAN);
                             $result=$PM::update($owner);
                             if($result)
                             {
