@@ -116,45 +116,34 @@ class CUser
         $result_username_array = $PM->verifyUserUsername($username);
         
         //If user exist, get the user and check the password
-        if($result_username_array != false)
-        {
+        if($result_username_array != false){
 
-            if($result_username_array['type']==$type) #if exist an username for that tipe
-            {
+            if($result_username_array['type']==$type) { //if exist an username for that type
+            
                 $user = $PM->load("E$type", $result_username_array['id']);
                 $passwordIn=USuperGlobalAccess::getPost('password');
-                if(password_verify($passwordIn, $user->getPassword()))
-                {
-                    //print 'La password è corretta!';
+                if(password_verify($passwordIn, $user->getPassword())){
                    
                     $session = USession::getInstance();
                     $session::setSessionElement("id", $result_username_array['id']);
                     $session::setSessionElement("userType", $type);
                     $session::setSessionElement('username', $username);
-                    $session::setSessionElement('password',USuperGlobalAccess::getPost('password'));
-                    if($type === 'Student')
-                    {
-                        header('Location:/UniRent/Student/home');
-                    }
-                    else 
-                    {
-                        header('Location:/UniRent/Owner/home');
-                    }  
-                }
-                else  #password is not correct
-                {
+                    $session::setSessionElement('password', $passwordIn);
+    
+                    $type === 'Student' ? header('Location:/UniRent/Student/home') : header('Location:/UniRent/Owner/home');
+  
+                } else { //password is not correct
+                
                     $view->loginError(true, false, false, $username, $type);
                 }
-            }
-            else  #dose not exist an username for that type
-            {   
-
+                
+            } else  { //doesn't exist an username for that type
+               
                 $view->loginError(false, true, false, $username, $type);
             }
 
-        }
-        else  #user dose not exist
-        {
+        } else {#user dose not exist
+        
            $view->loginUsernameError(false, true, false, $type);
         }
     }

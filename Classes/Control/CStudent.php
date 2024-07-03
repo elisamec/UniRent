@@ -58,6 +58,7 @@ class CStudent{
 
         $view = new VStudent();
         $session=USession::getInstance();
+
         $user = $session->getSessionElement('username');
         $PM=FPersistentManager::getInstance();
         $student=$PM->getStudentByUsername($user);
@@ -248,22 +249,25 @@ class CStudent{
 
         $oldUsername=$session::getSessionElement('username');
         $PM=FPersistentManager::getInstance();
-        //$oldEmail=$PM::getInstance()->getStudentEmailByUsername($oldUsername);
 
         $studentID=$PM->getStudentIdByUsername($oldUsername);
 
         $oldStudent = $PM->load('EStudent', $studentID);
-        $oldEmail = $oldStudent->getEmail();
+        $oldEmail = $oldStudent->getUniversityMail();
         $oldPhoto = $session::getSessionElement('photo');
+
+        $base64 = base64_encode($oldPhoto);
+        $photoError = "data:" . 'image/jpeg' . ";base64," . $base64;
 
         //if the new email is not already in use and it's an student's email or you haven't changed it
         if((($PM->verifyUserEmail($email)==false)&&($PM->verifyStudentEmail($email)))||($oldEmail===$email)) { 
             
             //if the new username is not already in use or you haven't changed it
             if(($PM->verifyUserUsername($username)==false)||($oldUsername===$username)) { #se il nuovo username non è già in uso o non l'hai modificato
-            
-                if($password===''){
-
+                
+                
+                if($password===null){
+                    
                     $password=$session::getSessionElement('password');
                 }
 
@@ -310,13 +314,13 @@ class CStudent{
             }
             else
             {
-                $view->editProfile($oldStudent, $oldPhoto, false, true, false, false);
-                #header('Location:/UniRent/Student/profile');
+                $view->editProfile($oldStudent, $photoError, false, true, false, false);
+                #header('Location:/UniRent/Student/profile');s
             }
         }
         else
         {
-            $view->editProfile($oldStudent, $oldPhoto, false, false, false, true);
+            $view->editProfile($oldStudent, $photoError, false, false, false, true);
             #header('Location:/UniRent/Student/profile');
         }  
     }
