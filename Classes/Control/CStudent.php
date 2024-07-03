@@ -436,11 +436,11 @@ class CStudent{
         }
         $view->publicProfileStudent($student, $reviewsData);
     }
-    //ANCHE QUI SESSIONE
+
     public static function paymentMethods()
     {
         $view = new VStudent();
-        $cards = FCreditCard::getInstance()->loadByStudent(1, TType::STUDENT);
+        $cards = FCreditCard::getInstance()->loadByStudent(1);
         $cardsData = [];
         
         foreach ($cards as $card) {
