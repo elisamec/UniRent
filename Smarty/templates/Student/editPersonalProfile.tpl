@@ -124,14 +124,9 @@
                         <div class="div8">
                         {if $emailDuplicate === true}
                            <input class="profile-input" type="text" name="email" id="email" value="{$student->getUniversityMail()}" required>
-                           <p class="error">Email already in use</p>
+                           <p class="error">Email already in use or not an university mail</p>
                         {else}
-                           {if $universityMailError === true}
                            <input class="profile-input" type="text" name="email" id="email" value="{$student->getUniversityMail()}" required>
-                           <p class="error">Invalid email: must be a university mail</p>
-                           {else}
-                           <input class="profile-input" type="text" name="email" id="email" value="{$student->getUniversityMail()}" required>
-                           {/if}
                         {/if}
                         </div>
                         <div class="div9"><p>Sex: </p></div>
