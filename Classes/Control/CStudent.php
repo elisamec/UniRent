@@ -321,7 +321,7 @@ class CStudent{
 
                     $error = 1;
                     $password=$session::getSessionElement('password');
-                    print "Password non rispetta il formato";
+                    $view->editProfile($oldStudent, $photoError, true, false, false, false);
 
                 } else $password=$newPassword;
                 
