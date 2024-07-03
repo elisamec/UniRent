@@ -146,30 +146,42 @@
                            <input required="required" class="input" type="text" name="iban" id="iban" value="{$owner->getIBAN()}" pattern="(it|IT)&#91;0-9&#93;&#123;2&#125;[A-Za-z][0-9]&#123;10&#125;[0-9A-Za-z]&#123;12&#125;$" title="Please enter an italian IBAN number">
                         {/if}
                         </div>
-                        <div class="div13"><p>Password: </p></div>
+                        <div class="div13"><p>Old Password: </p></div>
                         <div class="div14">
-                           {if $passwordError === true}
+                           {if $oldPasswordError === true}
+                           <input class="profile-input" type="password" name="oldPassword" id="oldPassword">
+                           <p class="error">Password Incorrect</p>
+                        {else}
+                           <input class="profile-input" type="password" name="oldPassword" id="oldPassword">
+                        {/if}
+                        </div> 
+                        <div class="div15"><p>New Password: </p></div>
+                        <div class="div16">
+                        {if $passwordError === true}
                            <input class="profile-input" type="password" name="password" id="password">
                            <p class="error">The password needs to be at least 8 characters long, with 1 special caracter, 1 number, 1 uppercase and 1 lowercase character</p>
                         {else}
                            <input class="profile-input" type="password" name="password" id="password">
                         {/if}
                         </div>
-                  
-                     <div class="div15"><p>Delete Profile: </p></div>
-                     <div class="div16">
+                        <div class="divOW1">
+                           {if $owner->getPhoto() === null}
+                              <img src="/UniRent/Smarty/images/ImageIcon.png" class="small">
+                           {else}
+                              <img src="{$photo}" class="small">
+                           {/if}
+                           </div>
+                           <div class="div18">
+                              <input class="file-upload" type="file" id="img" name="img" accept="image/png" hidden>
+                              <label class="change_btn" for="img">Upload New Profile Picture</label>
+                           </div>
+                           <div class="divB">
+                     <div class="delete_btn"><a href="#">Delete Photo</a></div>
+                  </div>
+                     <div class="div19"><p>Delete Profile: </p></div>
+                     <div class="div20">
                         <div class="delete_btn"><a href="/UniRent/Owner/deleteProfile">Delete</a></div>
                      </div>
-                     <div class="container">
-                  
-                  {if $owner->getPhoto() === null}
-                     <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
-                  {else}
-                     <img src="{$photo}">
-                  {/if}
-                     <input class="file-upload" type="file" id="img" name="img" accept="image/png" hidden>
-                     <label class="change_btn" for="img">Upload New Profile Picture</label>
-               </div>
                </div>
                <div class="container">
                   <div class="row">

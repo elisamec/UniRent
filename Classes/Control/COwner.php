@@ -132,7 +132,7 @@ class COwner
             $base64 = base64_encode($photo);
             $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
 
-            $view->editProfile($owner, $photo);
+            $view->editProfile($owner, $photo, false, false, false, false, false, false);
 
         }
     }
@@ -164,6 +164,7 @@ class COwner
 
     public static function modifyOwnerProfile()
     {
+        $view = new VOwner();
         $session=USession::getInstance();
         $PM=FPersistentManager::getInstance();
         $name=USuperGlobalAccess::getPost('name');
@@ -245,25 +246,25 @@ class COwner
                         }
                         else
                         {
-                            print 'IBAN già in uso';
+                            $view->editProfile($owner, $photo, false, false, false, true, false, false); //Iban already in use
                             #header('Location:/UniRent/Owner/profile');
                         }
                     }
                     else
                     {
-                        print 'Numero di telefono già in uso';
+                        $view->editProfile($owner, $photo, false, false, true, false, false, false); //phone already in use
                         #header('Location:/UniRent/Owner/profile');
                     }
                 }
                 else
-                {
-                    print 'Username già in uso';
+                {   
+                    $view->editProfile($owner, $photo, true, false, false, false, false, false); //Username already in use
                     #header('Location:/UniRent/Owner/profile');
                 }
             }
             else
-            {
-                print 'Email già in uso';
+            {   
+                $view->editProfile($owner, $photo, false, true, false, false, false, false); //Email already in use
                 #header('Location:/UniRent/Owner/profile');
             }
         }

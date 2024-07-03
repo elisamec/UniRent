@@ -100,10 +100,10 @@
             <div class="col-md-2">
                <div class="container">
                   <div class="profile_pic">
-                  {if $student->getPicture() === null}
+                  {if $student->getPhoto() === null}
                      <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
                   {else}
-                     <img src="{$student->getPicture()}">
+                     <img src="{$student->getPhoto()}">
                   {/if}
                   </div>
                </div>

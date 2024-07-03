@@ -92,7 +92,9 @@
             <div class="col-md-3">
             <div class="sidebar_but"><a href="/UniRent/Student/reviews">Reviews</a></div>
             </div>
-            
+            <div class="col-md-3">
+            <div class="sidebar_but"><a href="/UniRent/Student/paymentMethods">Payment Methods</a></div>
+            </div>
             <div class="col-md-3">
             <div class="sidebar_but log"><a href="/UniRent/User/logout">Logout</a></div>
             </div>
@@ -122,7 +124,7 @@
                         </div>
                         <div class="div7"><p>Email: </p></div>
                         <div class="div8">
-                        {if $emailDuplicate === true}
+                        {if $emailError === true}
                            <input class="profile-input" type="text" name="email" id="email" value="{$student->getUniversityMail()}" required>
                            <p class="error">Email already in use or not an university mail</p>
                         {else}
@@ -230,7 +232,7 @@
                         {/if}
                         </div>
                   <div class="div21">
-                  {if $student->getPicture() === null}
+                  {if $student->getPhoto() === null}
                      <img src="/UniRent/Smarty/images/ImageIcon.png" class="small">
                   {else}
                      <img src="{$photo}" class="small">
@@ -241,7 +243,7 @@
                      <label class="change_btn" for="img">Upload New Profile Picture</label>
                   </div>
                   <div class="div23">
-                     <div class="delete_btn"><a href="#">DeletePhoto</a></div>
+                     <div class="delete_btn"><a href="/UniRent/Student/deletePhoto">Delete Photo</a></div>
                   </div>
                      </form>
                      <div class="div24">

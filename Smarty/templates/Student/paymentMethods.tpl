@@ -7,7 +7,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <!-- mobile metas -->
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <meta name="viewport" content="initial-scale=1, eimum-scale=1">
       <!-- site metas -->
       <title>UniRent</title>
       <link rel="icon" href="/UniRent/Smarty/images/favicon.png" type="image/png">
@@ -37,25 +37,22 @@
       <div class="header_section">
         <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-               <a class="navbar-brand"href="/UniRent/Owner/home"><img src="/UniRent/Smarty/images/logo.png"></a>
+               <a class="navbar-brand"href="/UniRent/Student/home"><img src="/UniRent/Smarty/images/logo.png"></a>
                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
                </button>
                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav ml-auto">
                      <li class="nav-item">
-                        <a class="nav-link" href="/UniRent/Owner/home">Home</a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="#">Reservations</a>
+                        <a class="nav-link" href="/UniRent/Student/home">Home</a>
                      </li>
                      <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Tenants</a>
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reservations</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="#">Current</a>
-                           <a class="dropdown-item" href="#">Past</a>
-                           <a class="dropdown-item" href="#">Future</a>
+                           <a class="dropdown-item" href="#">Accepted</a>
+                           <a class="dropdown-item" href="#">Waiting</a>
                         </div>
+                     </li>
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contracts</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -74,7 +71,7 @@
                   <form class="form-inline my-2 my-lg-0">
                      <div class="login_bt">
                         <ul>
-                           <li><a href="/UniRent/Owner/profile" class="active"><span class="user_icon"><i class="fa fa-user" aria-hidden="true"></i></span>Profile</a></li>
+                           <li><a href="/UniRent/Student/profile" class="active"><span class="user_icon"><i class="fa fa-user" aria-hidden="true"></i></span>Profile</a></li>
                         </ul>
                      </div>
                   </form>
@@ -82,49 +79,88 @@
             </nav>
          </div>
       </div>
+      <div class="path">
+            <p><a href="/UniRent/Student/home">Home</a> / <a href="/UniRent/Student/profile">Profile</a> / Payment Methods </p>
+      </div>
       <div class="profile">
          <div class="row">
          <div class="col-md-3">
          <div class="sidebar">
          <div class="col-md-3">
-            <div class="sidebar_but active"><a href="/UniRent/Owner/profile">Profile</a></div>
+            <div class="sidebar_but"><a href="/UniRent/Student/profile">Profile</a></div>
             </div>
             <div class="col-md-3">
-            <div class="sidebar_but"><a href="/UniRent/Owner/reviews">Reviews</a></div>
+            <div class="sidebar_but"><a href="/UniRent/Student/reviews">Reviews</a></div>
+            </div>
+            <div class="col-md-3">
+            <div class="sidebar_but active"><a href="/UniRent/Student/paymentMethods">Payment Methods</a></div>
             </div>
             <div class="col-md-3">
             <div class="sidebar_but log"><a href="/UniRent/User/logout">Logout</a></div>
             </div>
          </div>
          </div>
-            <div class="col-md-6">
-                  <div class="profile_info">
-                     <h2 class="profile_head">Hello, {$owner->getName()} {$owner->getSurname()}</h2>
-                     <p>Your Username: {$owner->getUsername()}</p>
-                     <p>Your Email: {$owner->getMail()}</p>
-                     <p>Your phone number is {$owner->getPhoneNumber()} and your IBAN is {$owner->getIBAN()}.</p>
-                     <p> You published n <!--$owner->getNumberOfAccom()--> accommodation advertisements.</p>
-                     <div class="col-md-4">
-                     <div  class="find_btn" ><a href="/UniRent/Owner/editProfile">Edit Profile</a></div>
-                     </div>
-                  
-               </div>
-               
+
+         <div class="col-md-9">
+            <div class="Properties_taital_main layout">
+               <h1 class="Properties_taital">Your Payment Methods</h1>
+               <hr class="border_main">
             </div>
-            <div class="col-md-2">
-               <div class="container">
-                  <div class="profile_pic">
-                  {if $owner->getPhoto() === null}
-                     <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
-                  {else}
-                     <img src="{$photo}">
-                  {/if}
-                  </div>
-                  
-               </div>
-            </div>
+            <div id="cardsContainer"></div>
          </div>
-      </div>
+         <script>
+    const cards = {$cardsData|json_encode|escape:"javascript"};
+</script>
+{literal}
+<script>
+    // Function to create and append card information to the container
+    function displayCards(cards) {
+        const container = document.getElementById('cardsContainer');
+
+        if (container) {
+            if (cards.length === 0) {
+                container.innerHTML = '<div class="container"><h1 class="noCards">You don\'t have any credit cards memorized</h1></div>';
+            } else {
+                cards.forEach(card => {
+                    const cardElement = document.createElement('div');
+                    cardElement.className = 'card';
+
+                    let buttonHTML = '';
+                    if (card.isMain) {
+                        buttonHTML = `<h2> Main </h2>`;
+                    } else {
+                        buttonHTML = `<button class="button-spec" href="/UniRent/Student/makeMain/${card.number}"> Make Main </button>`;
+                    }
+
+                    cardElement.innerHTML = `
+                        <h1 class="paymentTitle"> ${card.title} </h1> <!-- Title of the card -->
+                        <div class="paymentGrid">
+                            <div class="divPAY1">
+                                <p> Credit Card Information</p>
+                                <p> Card Number: ${card.number}</p>
+                                <p> Expiry Date: ${card.expiryDate}</p>
+                                <p> CVV: ${card.cvv}</p>
+                                <p> Name on Card: ${card.name} ${card.surname}</p>
+                            </div>
+                            <div class="divPAY2">
+                                ${buttonHTML}
+                            </div>
+                        </div>
+                    `;
+
+                    container.appendChild(cardElement);
+                });
+            }
+        } else {
+            console.error("Container not found!"); // Debugging: Error if container is not found
+        }
+    }
+
+    // Call the function to display cards
+    displayCards(cards);
+</script>
+{/literal}
+
 
 <!-- footer section start -->
       <div class="footer_section layout_padding">
@@ -139,15 +175,17 @@
                   <h3 class="footer_text">Useful Links</h3>
                   <div class="footer_menu">
                      <ul>
-                        <li><a href="/UniRent/Owner/home">Home</a></li>
-                        <li><a href="/UniRent/Owner/about">About Us</a></li>
-                        <li><a href="/UniRent/Owner/contact">Contact Us</a></li>
+                        <li><a href="/UniRent/Student/home">Home</a></li>
+                        <li><a href="/UniRent/Student/about">About Us</a></li>
+                        <li><a href="/UniRent/Student/contact">Contact Us</a></li>
                      </ul>
                   </div>
                </div>
             </div>
          </div>
       </div>
+      </div>
+
       <!-- footer section end -->
 <script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>
@@ -157,38 +195,6 @@
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
-<script>
-document.getElementById("file").onchange = function() {
-    document.getElementById("form").submit();
-};
-</script>
-
-         <script>
-      $(document).ready(function() {
-
-      
-      var readURL = function(input) {
-         if (input.files && input.files[0]) {
-               var reader = new FileReader();
-
-               reader.onload = function (e) {
-                  $('.imageIcon').attr('src', e.target.result);
-               }
-      
-               reader.readAsDataURL(input.files[0]);
-         }
-      }
-      
-
-      $(".file-upload").on('change', function(){
-         readURL(this);
-      });
-      
-      $(".label-button").on('click', function() {
-         $(".file-upload").click();
-      });
-   });
-      </script>
       <div class="modal" id="myModal">
       <div class"container-fluid">
       <div class="card">

@@ -14,6 +14,8 @@ use Classes\Utilities\USuperGlobalAccess;
 use Classes\View\VStudent; 
 use Classes\Control; 
 use DateTime;
+use FCreditCard;
+
 /**
  * Student controller class
  *
@@ -72,7 +74,7 @@ class CStudent{
 
         } else {   
 
-            $ph = $student->getPicture();
+            $ph = $student->getPhoto();
             
             if(!is_null($ph)) {
 
@@ -192,7 +194,7 @@ class CStudent{
         $reviewsData = [];
         
         foreach ($reviews as $review) {
-            $profilePic = FStudent::getInstance()->load($review->getIdAuthor())->getPicture();
+            $profilePic = FStudent::getInstance()->load($review->getIdAuthor())->getPhoto();
             if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
@@ -208,19 +210,21 @@ class CStudent{
     }
 
 
+    //DA AGGIUSTARE PER LA SESSIONE
     public static function reviews() {
         $view = new VStudent();
         $reviews = FReview::getInstance()->loadByRecipient(1, TType::STUDENT);
         $reviewsData = [];
+        $PM=FPersistentManager::getInstance();
         
         foreach ($reviews as $review) {
-            $profilePic = FStudent::getInstance()->load($review->getIdAuthor())->getPicture();
+            $profilePic = $PM->load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor())->getPhoto();
             if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
-                'username' => FStudent::getInstance()->load($review->getIdAuthor())->getUsername(),
+                'username' => $PM->load( 'E' . $review->getAuthorType()->value, ->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,
@@ -233,6 +237,7 @@ class CStudent{
 
         $session=USession::getInstance();
         $view = new VStudent();
+        $error = 0;
 
         //reed the data from the form
         $username=USuperGlobalAccess::getPost('username');
@@ -267,28 +272,34 @@ class CStudent{
             //if the new username is not already in use or you haven't changed it
             if(($PM->verifyUserUsername($username)==false)||($oldUsername===$username)) { #se il nuovo username non è già in uso o non l'hai modificato
                 
-                
-                if($newPassword===''){
-                    
-                    $password=$session::getSessionElement('password');
-                }
+                $passChange = CStudent::changePassword($oldPassword, $newPassword, $oldStudent, $photoError);
 
-                $photo = CStudent::changePhoto($oldPhoto, $picture, $oldStudent);                
+                $password = $passChange[0];
+                $error = $passChange[1];
+
+
+                $photo = CStudent::changePhoto($oldPhoto, $picture, $oldStudent);      
+                
 
                 $student=new EStudent($username,$password,$name,$surname,$photo,$email,$courseDuration,$immatricolationYear,$birthDate,$sex,$smoker,$animals);
                 $student->setID($studentID);
 
+                print "Sto per aggionare lo studente <br>";
+
                 $result=$PM->update($student);
+
+                print "Studente aggiornato <br>";
                 
-                if($result){
+                if($result && !$error){
 
                     $session->setSessionElement('username',$username);
                     $session->setSessionElement('password',$password);
                     header('Location:/UniRent/Student/profile');
-                } else { 
-
-                    print '<h1><b>500 SERVER ERROR!</b></h1>';
-                }
+                } elseif (!$result) {
+                    
+                    header("HTTP/1.1 500 Internal Server Error");
+                    
+                } 
             }
             else
             {
@@ -305,13 +316,43 @@ class CStudent{
         }  
     }
 
-    public static function changePhoto(?string $oldPhoto, ?array $picture, EStudent $oldStudent) : ?EPhoto{
+    private static function changePassword($oldPassword, $newPassword, $oldStudent, $photoError):array{
+
+        $session=USession::getInstance();
+        $view = new VStudent();
+        $error = 0;
+
+        if($newPassword===''){
+            //If i don't have any new password, i'll use the old one
+            $password=$session::getSessionElement('password');
+        } else {
+            
+            if($oldPassword===$session::getSessionElement('password')){
+                if(!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()])[A-Za-z\d@$!%*?&()]{8,}$/' , $newPassword)){
+
+                    $error = 1;
+                    $password=$session::getSessionElement('password');
+                    $view->editProfile($oldStudent, $photoError, true, false, false, false);
+
+                } else $password=$newPassword;
+                
+            } else {
+                $error = 1;
+                $view->editProfile($oldStudent, $photoError, false, false, false, true);
+                $password=$session::getSessionElement('password');
+            }
+        }
+
+        return [$password, $error];
+    }
+
+    private static function changePhoto(?string $oldPhoto, ?array $picture, EStudent $oldStudent) : ?EPhoto{
 
         $PM=FPersistentManager::getInstance();
 
         if(!is_null($oldPhoto)){
                     
-            $photoId=$oldStudent->getPicture()->getId();
+            $photoId=$oldStudent->getPhoto()->getId();
 
             is_null($picture) ? $photo = new EPhoto($photoId, $oldPhoto, 'other', null, null)
                               : $photo = new EPhoto($photoId, $picture['img'], 'other', null, null);
@@ -336,6 +377,28 @@ class CStudent{
         return $photo;
     }
 
+    public static function deletePhoto(){
+
+        $PM=FPersistentManager::getInstance();
+        $session=USession::getInstance();
+        $username=$session::getSessionElement('username');
+        $studentID=$PM->getStudentIdByUsername($username);
+        $photo = $PM -> load('EStudent', $studentID) -> getPhoto();
+
+        if(is_null($photo)){
+
+            print "Non hai nessuna foto da eliminare";
+
+        } else {
+            $photoID = $photo->getId();
+        }
+
+        $result = $PM->delete('EPhoto', $photoID);
+
+        $result > 0 ? print "Foto eliminata <br>" : print "Errore nell'eliminazione della foto <br>";
+
+    }
+
 
     public static function publicProfile(string $username) {
         $PM=FPersistentManager::getInstance();
@@ -355,23 +418,42 @@ class CStudent{
         $view = new VStudent();
         $PM=FPersistentManager::getInstance();
         $student=$PM->getStudentByUsername($username);
-        print $student;
-        $reviews = FReview::getInstance()->loadByRecipient($student->getId(), TType::STUDENT);
+        $reviews = FReview::getInstance()->loadByRecipient($student->getId(), TType::STUDENT); //va fatto il metodo nel PM
         $reviewsData = [];
         
         foreach ($reviews as $review) {
-            $profilePic = FStudent::getInstance()->load($review->getIdAuthor())->getPicture();
+            $profilePic = $PM->load('E'. $review->getAuthorType()->value, $review->getIdAuthor())->getPhoto();
             if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
-                'username' => FStudent::getInstance()->load($review->getIdAuthor())->getUsername(),
+                'username' => $PM->load('E'. $review->getAuthorType()->value, $review->getIdAuthor())->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,
             ];
         }
         $view->publicProfileStudent($student, $reviewsData);
+    }
+
+    public static function paymentMethods()
+    {
+        $view = new VStudent();
+        $cards = FCreditCard::getInstance()->loadByStudent(1);
+        $cardsData = [];
+        
+        foreach ($cards as $card) {
+            $cardsData[] = [
+                'title' => $card->getTitle(),
+                'number' => $card->getNumber(),
+                'expiryDate' => $card->getExpiryDate(),
+                'cvv' => $card->getCVV(),
+                'name' => $card->getName(),
+                'surname' => $card->getSurname(),
+                'isMain' => $card->getIsMain(),
+            ];
+        }
+        $view->paymentMethods($cardsData);
     }
 }
