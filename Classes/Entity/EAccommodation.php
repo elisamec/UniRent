@@ -446,7 +446,7 @@ class EAccommodation
             $difference=date_diff(date_create($value['start']),date_create($value['end']));
             $totalMinutes = $difference->h * 60 + $difference->i;
             $value['diff']=(int)$totalMinutes;
-            $value['number_of_visits']=$value['diff']/(int)$value['duration'];
+            $value['number_of_visits']=(int)($value['diff']/(int)$value['duration']);
             $result[$key]=$value;
         }
         print_r($result);
