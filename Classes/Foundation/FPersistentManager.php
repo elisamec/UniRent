@@ -247,6 +247,21 @@ class FPersistentManager {
         $photoId=$FS->getPhotoIdByUsername($user);
         return $photoId;
     }
+
+    /**
+     * Method getStudentPhotoId
+     * 
+     * This method take the student's photo id 
+     * @param $user student's username
+     *
+     * @return int|bool
+     */
+    public function getOwnerPhotoId($user):?int
+    {
+        $FO=FOwner::getInstance();
+        $photoId=$FO->getPhotoIdByUsername($user);
+        return $photoId;
+    }
     
     /**
      * Method deleteOwner

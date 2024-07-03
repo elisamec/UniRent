@@ -47,7 +47,8 @@ class VOwner {
         $this->smarty->display('Owner/personalProfile.tpl');
     }
 
-    public function editProfile(EOwner $owner){
+    public function editProfile(EOwner $owner, ?string $photo){
+        $this->smarty->assign('photo', $photo);
         $this->smarty->assign('owner', $owner);
         $this->smarty->display('Owner/editPersonalProfile.tpl');
     }

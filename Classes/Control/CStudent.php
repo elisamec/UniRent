@@ -91,10 +91,15 @@ class CStudent{
         $student =FPersistentManager::getInstance()->getStudentByUsername(USession::getInstance()::getSessionElement('username'));
         $photo = USession::getInstance()::getSessionElement('photo');
 
-        $base64 = base64_encode($photo);
-        $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
+        if(is_null($student)) {
+            print '<b>500 : SERVER ERROR </b>';
+        }else{
+            $base64 = base64_encode($photo);
+            $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
 
-        $view->editProfile($student, $photo);
+            $view->editProfile($student, $photo);
+        }
+        
     }
 
     public static function deleteProfile()

@@ -135,6 +135,16 @@
                      <div class="div16">
                         <div class="delete_btn"><a href="/UniRent/Owner/deleteProfile">Delete</a></div>
                      </div>
+                     <div class="container">
+                  
+                  {if $owner->getPhoto() === null}
+                     <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
+                  {else}
+                     <img src="{$photo}">
+                  {/if}
+                     <input class="file-upload" type="file" id="img" name="img" accept="image/png" hidden>
+                     <label class="change_btn" for="img">Upload New Profile Picture</label>
+               </div>
                </div>
                <div class="container">
                   <div class="row">

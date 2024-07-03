@@ -420,9 +420,9 @@ class FStudent
     }
 
     /**
-     * Method getEmailByUsername
+     * Method getPhotoByUsername
      *
-     * This method return the student's mail from the db using the given username
+     * This method return the student's photo
      * @param $user $user [student's username]
      *
      * @return int|bool

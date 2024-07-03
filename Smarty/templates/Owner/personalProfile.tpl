@@ -121,10 +121,7 @@
                      <img src="{$photo}">
                   {/if}
                   </div>
-                  <form action="/UniRent/Owner/changePicture" class="form" method="post">
-                     <input class="file-upload" type="file" id="img" name="img" accept="image/png" hidden>
-                     <label class="change_btn" for="img">Upload Profile Picture</label>
-                  </form>
+                  
                </div>
             </div>
          </div>
