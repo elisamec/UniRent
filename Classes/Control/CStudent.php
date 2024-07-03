@@ -269,8 +269,18 @@ class CStudent{
                 
                 
                 if($newPassword===''){
-                    
+                    //Se non ho inserito nessuna nuova password, allora essa rimane invariata
                     $password=$session::getSessionElement('password');
+                } else {
+                    
+                    if($oldPassword===$session::getSessionElement('password')){
+
+                        $password=$newPassword;
+                    } else {
+
+                        print "La password vecchia è errata!";
+
+                    }
                 }
 
                 $photo = CStudent::changePhoto($oldPhoto, $picture, $oldStudent);                
