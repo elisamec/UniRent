@@ -212,7 +212,7 @@
                            {/if}
                         </div>
                         <div class="divA"><p>Old Password: </p></div>
-                        <div class="div20">
+                        <div class="divB">
                         {if $oldPasswordError === true}
                            <input class="profile-input" type="password" name="oldPassword" id="oldPassword">
                            <p class="error">Password Incorrect</p>
