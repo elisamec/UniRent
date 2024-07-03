@@ -102,8 +102,7 @@
                         <div id="cssportal-grid">
                            <div id="div1">
                               <div class="pictures">
-                                 <input class="file-upload" type="file" id="img" name="img" accept="image/png" multiple hidden>
-                                 <label class="picture_btn" for="img">Upload Pictures</label>
+                                 <button type="button" class="picture_btn" onclick="openImageModal()">Upload Pictures</button>
                               </div>
                            </div>
                            <div id="div2">
@@ -197,7 +196,7 @@
                             </div>
                             <div id="div15">
                               <input type="hidden" id="visitAvailabilityData" name="visitAvailabilityData">
-
+                              <input type="hidden" id="uploadedImagesData" name="uploadedImagesData">
                            <div class="button-group">
                               <div class="row">
                                  <div class="col-md-6">
@@ -227,19 +226,45 @@
         <button type="button" onclick="addAvailability()" class="button-spec little1">+</button>
         <div class="column">
         <button type="submit" class="button-spec final">Submit</button>
-        <button type="button" onclick="closeModal()" class="button-spec final">Cancel</button>
+        <button type="button" onclick="cancelVisitModal()" class="button-spec final">Cancel</button>
          </div>
     </form>
   </div>
 </div>
 
+<div id="imagePopup" class="avModal">
+    <div class="avModal-content">
+        <h2 class="avModal-head">Upload Pictures</h2>
+        <input class="file-upload" type="file" id="img" name="img" accept="image/*" multiple hidden>
+        <label class="picture_btn" for="img">Upload Pictures</label>
+         <div id="imageContainer"></div>
+        <div class="column">
+            <button type="button" class="button-spec final" onclick="confirmImages()">Confirm</button>
+            <button type="button" class="button-spec final" onclick="cancelImageModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
 {literal}
                     <script>
-// Get the modal
+// Get the visit availability modal
 var avModal = document.getElementById("popup");
+var initialVisitData = [];
 
+// Open modal and store initial data
 function openModal() {
     avModal.style.display = "block";
+    initialVisitData = JSON.parse(JSON.stringify(getVisitData()));
+}
+
+// Close modal without saving
+function cancelVisitModal() {
+    setVisitData(initialVisitData);
+    closeModal();
+}
+
+function closeModal() {
+    avModal.style.display = "none";
 }
 
 // Add more availability input fields
@@ -267,11 +292,8 @@ function removeAvailability(button) {
     availability.parentNode.removeChild(availability);
 }
 
-// Save visit availability data in sessionStorage when the pop-up form is submitted
-let form = document.getElementById('visitAvailabilityForm');
-form.addEventListener('submit', function(event) {
-    event.preventDefault();
-
+// Get current visit data from the form
+function getVisitData() {
     let availabilities = document.getElementsByClassName('availability');
     let data = [];
     for (let i = 0; i < availabilities.length; i++) {
@@ -291,7 +313,37 @@ form.addEventListener('submit', function(event) {
             console.error("One or more input fields not found in availability element:", availabilities[i]);
         }
     }
+    return data;
+}
 
+// Set visit data in the form
+function setVisitData(data) {
+    let container = document.getElementById('availabilityContainer');
+    container.innerHTML = '';
+    for (let i = 0; i < data.length; i++) {
+        let availability = document.createElement('div');
+        availability.className = 'availability';
+        availability.innerHTML = `
+            <button type="button" onclick="removeAvailability(this)" class="button-spec little">-</button>
+            <label for="duration">Visit Duration (minutes):</label>
+            <input type="number" id="duration" name="duration" title="Please enter a number" value="${data[i].duration}">
+            <label for="dayOfWeek">Weekday:</label>
+            <input type="text" pattern="(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)" title="Please enter a valid day of the week" id="day" name="day" value="${data[i].day}">
+            <label for="start">Availability start:</label>
+            <input type="time" id="start" name="start" value="${data[i].start}">
+            <label for="end">Availability end:</label>
+            <input type="time" id="end" name="end" value="${data[i].end}">
+        `;
+        container.appendChild(availability);
+    }
+}
+
+// Save visit availability data when the pop-up form is submitted
+let visitForm = document.getElementById('visitAvailabilityForm');
+visitForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    let data = getVisitData();
     console.log('Data to be submitted:', data);
     sessionStorage.setItem('availabilities', JSON.stringify(data));
 
@@ -301,9 +353,74 @@ form.addEventListener('submit', function(event) {
 
     closeModal();
 });
+</script>
 
-function closeModal() {
-    avModal.style.display = "none";
+
+{/literal}
+{literal}
+<script>
+// Get the image upload modal
+var imageModal = document.getElementById("imagePopup");
+var initialImagesData = [];
+
+// Open modal and store initial data
+function openImageModal() {
+    imageModal.style.display = "block";
+    initialImagesData = JSON.parse(JSON.stringify(imagesData));
+}
+
+// Close modal without saving
+function cancelImageModal() {
+    imagesData = JSON.parse(JSON.stringify(initialImagesData));
+    displayImages();
+    closeImageModal();
+}
+
+function closeImageModal() {
+    imageModal.style.display = "none";
+}
+
+// Image upload handling
+let imageInput = document.getElementById('img');
+let imageContainer = document.getElementById('imageContainer');
+let imagesData = [];
+
+imageInput.addEventListener('change', function(event) {
+    let files = event.target.files;
+    for (let i = 0; i < files.length; i++) {
+        let file = files[i];
+        let reader = new FileReader();
+        reader.onload = function(e) {
+            let imgData = e.target.result;
+            imagesData.push(imgData);
+            displayImages();
+        }
+        reader.readAsDataURL(file);
+    }
+});
+
+function displayImages() {
+    imageContainer.innerHTML = '';
+    for (let i = 0; i < imagesData.length; i++) {
+        let imgWrapper = document.createElement('div');
+        imgWrapper.className = 'image-wrapper';
+        imgWrapper.innerHTML = `
+            <img src="${imagesData[i]}" class="uploaded-image">
+            <button type="button" onclick="removeImage(${i})" class="button-spec little">-</button>
+        `;
+        imageContainer.appendChild(imgWrapper);
+    }
+}
+
+function removeImage(index) {
+    imagesData.splice(index, 1);
+    displayImages();
+}
+
+function confirmImages() {
+    let uploadedImagesData = document.getElementById('uploadedImagesData');
+    uploadedImagesData.value = JSON.stringify(imagesData);
+    closeImageModal();
 }
 </script>
 
