@@ -318,8 +318,12 @@ class COwner
         $deposit=(float)USuperGlobalAccess::getPost('deposit');
         $startDate=(int) USuperGlobalAccess::getPost('startDate');
         $month=USuperGlobalAccess::getPost('month');
-        $picture=USuperGlobalAccess::getPhoto('img');
-        if(isset($picture)){print 'foto presa';}
+        #$pictures=USuperGlobalAccess::getPost();
+        $visits=USuperGlobalAccess::getPost('visitAvailabilityData');
+        $photos=USuperGlobalAccess::getPost('uploadedImagesData');
+        EAccommodation::fromJsonToArrayOfVisit($visits);
+       # print_r($_POST);
+      
         if($month=='Sep')
         {
             $month=9;
@@ -338,10 +342,6 @@ class COwner
         $women=USuperGlobalAccess::getPost('women');
         $smokers=USuperGlobalAccess::getPost('smokers');
         $animals=USuperGlobalAccess::getPost('animals');
-
-
-        $json=USession::getInstance()::getSessionElement('availabilities');
-        if(isset($_POST['availabilities'])){print 'si c\' è';}
 
         $date= new DateTime('now');
         $year=(int)$date->format('Y');

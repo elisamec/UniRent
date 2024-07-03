@@ -119,7 +119,26 @@ if(password_verify($password,$password_h))
 {
     print '   Tutto ok!';
 }*/
-
+/*
 $UAU=UAccessUniversityFile::getInstance();
 $università=$UAU->getUniversityByCity('L\'Aquila');
 print_r($università);
+*/
+
+# LAVORAZIONE DELLE VISITE
+
+
+
+$time_start = '17:00';
+$time_end = '17:23';
+$difference = date_diff(date_create($time_start), date_create($time_end));
+
+// Calcola la differenza totale in minuti
+$totalMinutes = $difference->h * 60 + $difference->i;
+
+// Se invert è 1, rendi la differenza negativa
+if ($difference->invert == 1) {
+    $totalMinutes = -$totalMinutes;
+}
+
+print $totalMinutes;

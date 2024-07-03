@@ -434,5 +434,15 @@ class EAccommodation
 
         return $str;
     }
+
+    public static function fromJsonToArrayOfVisit($json)  // ["DAY"=>'time']
+    {
+        $result=array();
+        $myarray=json_decode($json,true);
+        print_r($myarray);
+        foreach($myarray as $key=>$value)
+        {
+            $difference=date_diff(date_create($value['start']),date_create($value['end']));
+        }
   
-}
+    }
