@@ -112,19 +112,39 @@
                         </div>
                         <div class="div5"><p>Username: </p></div>
                         <div class="div6">
+                        {if $usernameDuplicate === true}
                            <input class="profile-input" type="text" name="username" id="username" value="{$owner->getUsername()}" required>
+                           <p class="error">Username already in use</p>
+                        {else}
+                           <input class="profile-input" type="text" name="username" id="username" value="{$owner->getUsername()}" required>
+                        {/if}
                         </div>
                         <div class="div7"><p>Email: </p></div>
                         <div class="div8">
+                        {if $emailDuplicate === true}
                            <input class="profile-input" type="text" name="email" id="email" value="{$owner->getMail()}" required>
+                           <p class="error">Email already in use</p>
+                        {else}
+                           <input class="profile-input" type="text" name="email" id="email" value="{$owner->getMail()}" required>
+                        {/if}
                         </div>
                         <div class="div9"><p>Phone Number: </p></div>
                         <div class="div10">
-                              <input required="required" class="input" type="text" name="phoneNumber" id="phoneNumber" value="{$owner->getPhoneNumber()}" pattern="^((00|\+)39\s?)?3\d&#123;2&#125;\s?\d&#123;3&#125;\s?\d&#123;4&#125;$">
+                        {if $phoneError === true}
+                        <input required="required" class="input" type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number: 1234567890" pattern="^((00|\+)39\s?)?3\d&#123;2&#125;\s?\d&#123;3&#125;\s?\d&#123;4&#125;$" title="Please enter an italian phone number">
+                        <p class="error">Phone Number already in use</p>
+                        {else}
+                              <input required="required" class="input" type="text" name="phoneNumber" id="phoneNumber" value="{$owner->getPhoneNumber()}" pattern="^((00|\+)39\s?)?3\d&#123;2&#125;\s?\d&#123;3&#125;\s?\d&#123;4&#125;$" title="Please enter an italian phone number">
+                        {/if}
                         </div>
                         <div class="div11"><p>IBAN: </p></div>
                         <div class="div12">
-                           <input required="required" class="input" type="text" name="iban" id="iban" value="{$owner->getIBAN()}" pattern="(it|IT)&#91;0-9&#93;&#123;2&#125;[A-Za-z][0-9]&#123;10&#125;[0-9A-Za-z]&#123;12&#125;$">
+                        {if $ibanError === true}
+                           <input required="required" class="input" type="text" name="iban" id="iban" value="{$owner->getIBAN()}" pattern="(it|IT)&#91;0-9&#93;&#123;2&#125;[A-Za-z][0-9]&#123;10&#125;[0-9A-Za-z]&#123;12&#125;$" title="Please enter an italian IBAN number">
+                           <p class="error">IBAN already in use</p>
+                        {else}
+                           <input required="required" class="input" type="text" name="iban" id="iban" value="{$owner->getIBAN()}" pattern="(it|IT)&#91;0-9&#93;&#123;2&#125;[A-Za-z][0-9]&#123;10&#125;[0-9A-Za-z]&#123;12&#125;$" title="Please enter an italian IBAN number">
+                        {/if}
                         </div>
                         <div class="div13"><p>Password: </p></div>
                         <div class="div14">

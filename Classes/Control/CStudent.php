@@ -97,7 +97,7 @@ class CStudent{
             $base64 = base64_encode($photo);
             $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
 
-            $view->editProfile($student, $photo);
+            $view->editProfile($student, $photo, false, false, false, false);
         }
         
     }
