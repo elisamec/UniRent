@@ -92,7 +92,9 @@
             <div class="col-md-3">
             <div class="sidebar_but"><a href="/UniRent/Student/reviews">Reviews</a></div>
             </div>
-            
+            <div class="col-md-3">
+            <div class="sidebar_but"><a href="/UniRent/Student/paymentMethods">Payment Methods</a></div>
+            </div>
             <div class="col-md-3">
             <div class="sidebar_but log"><a href="/UniRent/User/logout">Logout</a></div>
             </div>
@@ -230,7 +232,7 @@
                         {/if}
                         </div>
                   <div class="div21">
-                  {if $student->getPicture() === null}
+                  {if $student->getPhoto() === null}
                      <img src="/UniRent/Smarty/images/ImageIcon.png" class="small">
                   {else}
                      <img src="{$photo}" class="small">

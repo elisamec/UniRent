@@ -14,6 +14,8 @@ use Classes\Utilities\USuperGlobalAccess;
 use Classes\View\VStudent; 
 use Classes\Control; 
 use DateTime;
+use FCreditCard;
+
 /**
  * Student controller class
  *
@@ -72,7 +74,7 @@ class CStudent{
 
         } else {   
 
-            $ph = $student->getPicture();
+            $ph = $student->getPhoto();
             
             if(!is_null($ph)) {
 
@@ -192,7 +194,7 @@ class CStudent{
         $reviewsData = [];
         
         foreach ($reviews as $review) {
-            $profilePic = FStudent::getInstance()->load($review->getIdAuthor())->getPicture();
+            $profilePic = FStudent::getInstance()->load($review->getIdAuthor())->getPhoto();
             if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
@@ -208,13 +210,14 @@ class CStudent{
     }
 
 
+    //DA AGGIUSTARE PER LA SESSIONE
     public static function reviews() {
         $view = new VStudent();
         $reviews = FReview::getInstance()->loadByRecipient(1, TType::STUDENT);
         $reviewsData = [];
         
         foreach ($reviews as $review) {
-            $profilePic = FStudent::getInstance()->load($review->getIdAuthor())->getPicture();
+            $profilePic = FStudent::getInstance()->load($review->getIdAuthor())->getPhoto();
             if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
@@ -348,7 +351,7 @@ class CStudent{
 
         if(!is_null($oldPhoto)){
                     
-            $photoId=$oldStudent->getPicture()->getId();
+            $photoId=$oldStudent->getPhoto()->getId();
 
             is_null($picture) ? $photo = new EPhoto($photoId, $oldPhoto, 'other', null, null)
                               : $photo = new EPhoto($photoId, $picture['img'], 'other', null, null);
@@ -379,7 +382,7 @@ class CStudent{
         $session=USession::getInstance();
         $username=$session::getSessionElement('username');
         $studentID=$PM->getStudentIdByUsername($username);
-        $photo = $PM -> load('EStudent', $studentID) -> getPicture();
+        $photo = $PM -> load('EStudent', $studentID) -> getPhoto();
 
         if(is_null($photo)){
 
@@ -414,23 +417,42 @@ class CStudent{
         $view = new VStudent();
         $PM=FPersistentManager::getInstance();
         $student=$PM->getStudentByUsername($username);
-        print $student;
-        $reviews = FReview::getInstance()->loadByRecipient($student->getId(), TType::STUDENT);
+        $reviews = FReview::getInstance()->loadByRecipient($student->getId(), TType::STUDENT); //va fatto il metodo nel PM
         $reviewsData = [];
         
         foreach ($reviews as $review) {
-            $profilePic = FStudent::getInstance()->load($review->getIdAuthor())->getPicture();
+            $profilePic = $PM->load('E'. $review->getAuthorType()->value, $review->getIdAuthor())->getPhoto();
             if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
-                'username' => FStudent::getInstance()->load($review->getIdAuthor())->getUsername(),
+                'username' => $PM->load('E'. $review->getAuthorType()->value, $review->getIdAuthor())->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,
             ];
         }
         $view->publicProfileStudent($student, $reviewsData);
+    }
+    //ANCHE QUI SESSIONE
+    public static function paymentMethods()
+    {
+        $view = new VStudent();
+        $cards = FCreditCard::getInstance()->loadByRecipient(1, TType::STUDENT);
+        $cardsData = [];
+        
+        foreach ($cards as $card) {
+            $cardsData[] = [
+                'title' => $card->getTitle(),
+                'number' => $card->getNumber(),
+                'expiryDate' => $card->getExpiryDate(),
+                'cvv' => $card->getCVV(),
+                'name' => $card->getName(),
+                'surname' => $card->getSurname(),
+                'isMain' => $card->getIsMain(),
+            ];
+        }
+        $view->paymentMethods($cardsData);
     }
 }

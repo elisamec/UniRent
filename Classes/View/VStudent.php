@@ -86,4 +86,8 @@ class VStudent{
     public function findAccommodation(){
         $this->smarty->display('Student/search.tpl');
     }
+    public function paymentMethods(array $cardsData){
+        $this->smarty->assign('cardsData', $cardsData);
+        $this->smarty->display('Student/paymentMethods.tpl');
+    }
 }
