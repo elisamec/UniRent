@@ -123,7 +123,6 @@ class CUser
             {
                 $user = $PM->load("E$type", $result_username_array['id']);
                 $passwordIn=USuperGlobalAccess::getPost('password');
-
                 if(password_verify($passwordIn, $user->getPassword()))
                 {
                     print 'La password è corretta!';
