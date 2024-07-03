@@ -59,6 +59,8 @@ class FPersistentManager {
      * @return bool
      */
     public static function update(object $obj): bool{
+
+        print "Sto nel PM";
         $EClass = get_class($obj); 
         $FClass = str_replace("Classes\Entity\E", "Classes\Foundation\F", $EClass);
 

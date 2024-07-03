@@ -137,10 +137,12 @@ class FStudent
     }
     public function update(EStudent $student):bool 
     {      
+        print "Sto in update<br>";
         $db=FConnection::getInstance()->getConnection();
         $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
-        if($this->exist($student->getID()))
-        {
+        if($this->exist($student->getID())){
+
+            print "Lo studente da aggiornare esiste<br>";
             try
             {
                 $CPhoto=$student->getPicture();
@@ -149,7 +151,7 @@ class FStudent
                     FPhoto::getInstance()->update($CPhoto);
                 }
                 $db->exec('LOCK TABLES student WRITE');
-                $db->beginTransaction();
+                //$db->beginTransaction();
                 $q='UPDATE student SET username = :user, password = :pass, name = :name, surname = :surname, picture = :picture, universityMail = :email, ';
                 $q.='courseDuration = :courseDuration, immatricolationYear = :immatricolationYear, birthDate = :birthDate, sex = :sex, smoker = :smoker, animals = :animals WHERE id=:id';
                 $stm=$db->prepare($q);

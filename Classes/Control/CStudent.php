@@ -273,12 +273,18 @@ class CStudent{
                 $password = $passChange[0];
                 $error = $passChange[1];
 
-                $photo = CStudent::changePhoto($oldPhoto, $picture, $oldStudent);                
+
+                $photo = CStudent::changePhoto($oldPhoto, $picture, $oldStudent);      
+                
 
                 $student=new EStudent($username,$password,$name,$surname,$photo,$email,$courseDuration,$immatricolationYear,$birthDate,$sex,$smoker,$animals);
                 $student->setID($studentID);
 
+                print "Sto per aggionare lo studente <br>";
+
                 $result=$PM->update($student);
+
+                print "Studente aggiornato <br>";
                 
                 if($result && !$error){
 
@@ -310,6 +316,7 @@ class CStudent{
 
         $session=USession::getInstance();
         $view = new VStudent();
+        $error = 0;
 
         if($newPassword===''){
             //If i don't have any new password, i'll use the old one
@@ -364,6 +371,28 @@ class CStudent{
         }
 
         return $photo;
+    }
+
+    public static function deletePhoto(){
+
+        $PM=FPersistentManager::getInstance();
+        $session=USession::getInstance();
+        $username=$session::getSessionElement('username');
+        $studentID=$PM->getStudentIdByUsername($username);
+        $photo = $PM -> load('EStudent', $studentID) -> getPicture();
+
+        if(is_null($photo)){
+
+            print "Non hai nessuna foto da eliminare";
+
+        } else {
+            $photoID = $photo->getId();
+        }
+
+        $result = $PM->delete('EPhoto', $photoID);
+
+        $result > 0 ? print "Foto eliminata <br>" : print "Errore nell'eliminazione della foto <br>";
+
     }
 
 
