@@ -1,7 +1,12 @@
 <?php 
 
-require_once ('FConnection.php');
-require_once ('../Entity/ECreditCard.php');
+namespace Classes\Foundation;
+
+use Classes\Entity\ECreditCard;
+use PDO;
+use PDOException;
+
+require __DIR__.'/../../vendor/autoload.php';
 /**
  * FCreditCard
  * @author Matteo Maloni (UniRent) <matteo.maloni@student.univaq.it>
@@ -85,7 +90,7 @@ class FCreditCard
             $db->rollBack();
         }
         $row=$stm->fetch(PDO::FETCH_ASSOC);
-        $result=new ECreditCard($row['number'],$row['name'],$row['surname'],$row['expiry'],$row['cvv'],$row['idStudent']);
+        $result=new ECreditCard($row['number'],$row['name'],$row['surname'],$row['expiry'],$row['cvv'],$row['idStudent'],$row['main']);
         return $result;
     }
   
@@ -194,6 +199,27 @@ class FCreditCard
             $db->rollBack();
             return false;
         }
+    }
+
+    public function isMain(int $studentID, int $number):bool
+    {
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $db->exec('LOCK TABLES creditcard WRITE');
+            $q='SELECT number FROM creditcard WHERE idStudent = :id AND main = true';
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindParam(':id',$studentID,PDO::PARAM_INT);
+            $stm->execute();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+        }
+        $row=$stm->fetch(PDO::FETCH_ASSOC);
     }
 
 

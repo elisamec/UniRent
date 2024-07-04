@@ -46,6 +46,13 @@ class ECreditCard
      * @var int
      */    
     private $studentID;
+    
+    /**
+     * main
+     *
+     * @var bool
+     */
+    private $main;
     private static $entity =ECreditCard::class;
     
     /**
@@ -57,9 +64,10 @@ class ECreditCard
      * @param  string $expiry
      * @param  int $cvv
      * @param  int $studentID
+     * @param  bool $main
      * @return void
      */
-    public function __construct(int $number,string $name,string $surname,string $expiry, int $cvv, int $studentID)
+    public function __construct(int $number,string $name,string $surname,string $expiry, int $cvv, int $studentID, bool $main)
     {
         $this->number=$number;
         $this->name=$name;
@@ -67,6 +75,7 @@ class ECreditCard
         $this->expiry=$expiry;
         $this->cvv=$cvv;
         $this->studentID=$studentID;
+        $this->main=$main;
     }
 
     //GET methods
@@ -134,6 +143,16 @@ class ECreditCard
     {
         return $this->studentID;
     }
+    
+    /**
+     * Method getMain
+     *
+     * @return bool
+     */
+    public function getMain():bool
+    {
+        return $this->main;
+    }
 
     //SET methods
     
@@ -196,6 +215,18 @@ class ECreditCard
     public function setStudentID(int $studentID):void
     {
         $this->studentID=$studentID;
+    }
+    
+    /**
+     * Method setMain
+     *
+     * @param bool $x [if is the main credit card]
+     *
+     * @return void
+     */
+    public function setMain(bool $x):void
+    {
+        $this->main=$x;
     }
     
     /**
