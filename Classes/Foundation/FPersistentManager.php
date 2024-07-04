@@ -333,5 +333,12 @@ class FPersistentManager {
         return $result;
     }
 
+    public function loadByRecipient(int $id , $type):array
+    {
+        $FR=FReview::getInstance();
+        $review=$FR->loadByRecipient($id,$type);
+        return $review;
+    }
+
 }
 

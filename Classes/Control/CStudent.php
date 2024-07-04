@@ -213,9 +213,13 @@ class CStudent{
     //DA AGGIUSTARE PER LA SESSIONE
     public static function reviews() {
         $view = new VStudent();
-        $reviews = FReview::getInstance()->loadByRecipient(1, TType::STUDENT);
-        $reviewsData = [];
+        $session=USession::getInstance();
+        $studentUsername=$session::getSessionElement('username');
         $PM=FPersistentManager::getInstance();
+        $studentId=$PM->getStudentIdByUsername($studentUsername);
+        $reviews=$PM->loadByRecipient($studentId, TType::STUDENT);
+       #$reviews = FReview::getInstance()->loadByRecipient($studentId, TType::STUDENT);
+        $reviewsData = [];
         
         foreach ($reviews as $review) {
             $profilePic = $PM->load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor())->getPhoto();
