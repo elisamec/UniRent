@@ -469,7 +469,31 @@ class EAccommodation
                 $result_2[$key]=$app; #ancora necessario perchè potrei inserire due o più periodi per la visita in un solo giorno
             }    
         }
-        print_r($result_2);
+        
+        $final_result=array();
+        foreach($result_2 as $key=>$value)
+        {
+            print $value['day'];
+            if(in_array($value['day'],$final_result))
+            {
+                print '   c\' è questo giorno ';
+                /*
+                foreach($value['times'] as $time)
+                {
+                    if(in_array($time,$final_result['times'])){}
+                    else
+                    {
+                        $final_result[$value['day']][]=$time;
+                    }
+                }*/
+            }
+            else
+            {
+                print '  questo giorno non c\' è';
+                $final_result[$value['day']]=$value['times'];
+            }
+        }
+        print_r($final_result);
     }
 
     private static function stringInMinutes(string $s):int
