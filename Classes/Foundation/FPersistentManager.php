@@ -7,6 +7,7 @@ use Classes\Entity\EPhoto;
 use Classes\Entity\EStudent;
 use Classes\Utilities\UAccessUniversityFile;
 use DateTime;
+use FCreditCard;
 
 class FPersistentManager {
     private static $instance;
@@ -338,6 +339,21 @@ class FPersistentManager {
         $FR=FReview::getInstance();
         $review=$FR->loadByRecipient($id,$type);
         return $review;
+    }
+    
+    /**
+     * Method loadStudentCards
+     *
+     * this method retrive an array of ECreditCard of the student with given id from DB
+     * @param int $id [student's ID]
+     *
+     * @return array
+     */
+    public function loadStudentCards(int $id):array
+    {
+        $FC=FCreditCard::getInstance();
+        $cards=$FC->loadStudentCards($id);
+        return $cards;
     }
 
 }

@@ -444,7 +444,11 @@ class CStudent{
     public static function paymentMethods()
     {
         $view = new VStudent();
-        //$cards = FCreditCard::getInstance()->loadByStudent(1);
+        $session=USession::getInstance();
+        $username=$session::getSessionElement('username');
+        $PM=FPersistentManager::getInstance();
+        $studentId=$PM->getStudentIdByUsername($username);
+        $cards =$PM->loadStudentCards($studentId);
         $cardsData = [ 
             [
                 'title' => 'Card 1',
