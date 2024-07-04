@@ -393,8 +393,8 @@ function updatePaymentMethod() {
     // Function to add a payment method
     function addPaymentMethod() {
         const cardTitle = document.getElementById('cardTitle').value;
-        const cardNumber = document.getElementById('cardNumber').value;
-        const expiryDate = document.getElementById('expiryDate').value;
+        const cardNumber = document.getElementById('cardnumber').value;
+        const expiryDate = document.getElementById('expirydate').value;
         const cvv = document.getElementById('cvv').value;
         const name = document.getElementById('name').value;
         const surname = document.getElementById('surname').value;
