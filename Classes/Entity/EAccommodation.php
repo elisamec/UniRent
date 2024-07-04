@@ -474,10 +474,8 @@ class EAccommodation
         foreach($result_2 as $key=>$value)
         {
             print $value['day'];
-            if(in_array($value['day'],$final_result))
+            if(in_array($value['day'],array_keys($final_result)))
             {
-                print '   c\' è questo giorno ';
-                /*
                 foreach($value['times'] as $time)
                 {
                     if(in_array($time,$final_result['times'])){}
@@ -485,11 +483,10 @@ class EAccommodation
                     {
                         $final_result[$value['day']][]=$time;
                     }
-                }*/
+                }
             }
             else
             {
-                print '  questo giorno non c\' è';
                 $final_result[$value['day']]=$value['times'];
             }
         }
