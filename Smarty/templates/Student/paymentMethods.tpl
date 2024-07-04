@@ -106,30 +106,13 @@
                <h1 class="Properties_taital">Your Payment Methods</h1>
                <hr class="border_main">
             </div>
-            <div id="cardsContainer">
-            <div class="review">
-            <h1 class="paymentTitle"> Card 1 </h1> <!-- Title of the card -->
-                        <div class="paymentGrid">
-                            <div class="divPAY1">
-                                <p> Credit Card Information</p>
-                                <p> Card Number: 1234 1234 1234 1234</p>
-                                <p> Expiry Date: 12/25</p>
-                                <p> CVV: 122</p>
-                                <p> Name on Card: John Doe</p>
-                            </div>
-                            <div class="divPAY2">
-                                <h2>Main</h2>
-                            </div>
-                        </div>
-                        <button class="button-spec little button-delete" onclick="openConfirmModal('${cardNumber}')">-</button>
-                        </div>
-                        </div>
+            <div id="cardsContainer"></div>
                         <div class="container">
             <div class="row">
                <div class="col-md-12">
                   <div class="button_main">
                      <button class="button-spec final pay" onclick="openModal()">Add Payment Method</button>
-                  </div><!--/UniRent/Student/addPaymentMethod -->
+                  </div>
                </div>
             </div>
          </div>
@@ -191,11 +174,12 @@
     </div>
 </div>
 <script>
-    const cards = {$cardsData|json_encode|escape:"javascript"};
-</script>
-{literal}
-<script>
-    // Function to create and append card information to the container
+   {literal}
+    // Define cardsData as a JavaScript variable
+    const cards = {/literal}{$cardsData}{literal};
+    console.log(cards);
+    console.log(Array.isArray(cards));
+
     function displayCards(cards) {
         const container = document.getElementById('cardsContainer');
 
@@ -335,8 +319,10 @@
 
     // Call the function to display cards
     displayCards(cards);
+   {/literal}
+
 </script>
-{/literal}
+
 
 
 <!-- footer section start -->
