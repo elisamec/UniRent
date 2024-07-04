@@ -264,7 +264,7 @@
       <p>Are you sure you want to delete your profile?</p>
       <div class="btn-cont">
       <button id="confirmDelete">Yes</button>
-      <button id="cancelDelete">No</button>
+      <button id="cancelDelete">Cancel</button>
       </div>
    </div>
 </div>

@@ -1986,12 +1986,17 @@ textarea#comment::placeholder {
         padding-top: 50px;
         padding-left: 50px;
     }
-    .final{
+    .button-spec.final{
         color: #ffffff;
         border: none;
         background: fixed;
         background-color: #f9bc19;
         display: inline-block
+    }
+    .button-spec.final:hover{
+        color: #d0d1d2;
+        background-color: #ffffff;
+        box-shadow: 0px 2px 16px 0px #eaeaea !important;
     }
     
     
@@ -2476,3 +2481,47 @@ textarea#comment::placeholder {
             align-items: center;
             justify-content: center;
             display: flex;}
+.button-delete {
+    position: absolute;
+    top: 10px; /* Adjust as necessary */
+    right: 10px; /* Adjust as necessary */
+}
+.button-spec.final.pay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+}
+/* Grid for the form */
+.form-grid {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 10px;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+}
+
+.form-row label {
+    margin-right: 10px;
+    width: 100px; /* Adjust as needed */
+}
+
+.form-row input {
+    flex: 1;
+    padding: 8px;
+    margin-right: 10px;
+}
+.form-row.full-width button {
+    padding: 8px;
+    width:100%;
+    margin-left:0px;
+}
+.form-row.full-width {
+    grid-column: span 2; /* Make this row span across two columns */
+}
+#paymentForm {
+    margin: 10px 10px 10px 10px;
+}
