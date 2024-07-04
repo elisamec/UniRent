@@ -13,7 +13,7 @@ class ECreditCard
     /**
      * number
      *
-     * @var int
+     * @var string
      */
     private $number;    
     /**
@@ -53,12 +53,19 @@ class ECreditCard
      * @var bool
      */
     private $main;
+    
+    /**
+     * title
+     *
+     * @var string
+     */
+    private $title;
     private static $entity =ECreditCard::class;
     
     /**
      * __construct
      *
-     * @param  int $number
+     * @param  string $number
      * @param  string $name
      * @param  string $surname
      * @param  string $expiry
@@ -67,7 +74,7 @@ class ECreditCard
      * @param  bool $main
      * @return void
      */
-    public function __construct(int $number,string $name,string $surname,string $expiry, int $cvv, int $studentID, bool $main)
+    public function __construct(string $number,string $name,string $surname,string $expiry, int $cvv, int $studentID, bool $main, string $title)
     {
         $this->number=$number;
         $this->name=$name;
@@ -76,6 +83,7 @@ class ECreditCard
         $this->cvv=$cvv;
         $this->studentID=$studentID;
         $this->main=$main;
+        $this->title=$title;
     }
 
     //GET methods
@@ -94,7 +102,7 @@ class ECreditCard
      *
      * @return int
      */
-    public function getNumber():int
+    public function getNumber():string
     {
         return $this->number;
     }    
@@ -153,6 +161,16 @@ class ECreditCard
     {
         return $this->main;
     }
+    
+    /**
+     * Method getTitle
+     *
+     * @return string
+     */
+    public function getTitle():string
+    {
+        return $this->title;
+    }
 
     //SET methods
     
@@ -162,7 +180,7 @@ class ECreditCard
      * @param  int $number
      * @return void
      */
-    public function setNumber(int $number):void
+    public function setNumber(string $number):void
     {
         $this->number=$number;
     }    
@@ -230,12 +248,24 @@ class ECreditCard
     }
     
     /**
+     * Method setTitle
+     *
+     * @param string $title [title of the card]
+     *
+     * @return void
+     */
+    public function setTitle(string $title):void
+    {
+        $this->title=$title;
+    }
+    
+    /**
      * __toString
      *
      * @return string
      */
     public function __toString():string
     {
-        return 'NUMBER:'.$this->number.'  NAME:'.$this->name.'  SURNAME:'.$this->surname.'  EXPIRY:'.$this->expiry.'  CVV:'.$this->cvv.'  STUDENT_ID:'.$this->studentID;
+        return 'TITLE:'.$this->title.'  NUMBER:'.$this->number.'  NAME:'.$this->name.'  SURNAME:'.$this->surname.'  EXPIRY:'.$this->expiry.'  CVV:'.$this->cvv.'  STUDENT_ID:'.$this->studentID;
     }
 }

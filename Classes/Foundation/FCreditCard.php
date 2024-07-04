@@ -43,14 +43,14 @@ class FCreditCard
      * @param  int $number
      * @return bool
      */
-    public function exist(int $number):bool 
+    public function exist(string $number):bool 
     {
         $q='SELECT * FROM creditcard WHERE number=:number';
         $connection= FConnection::getInstance();
         $db=$connection->getConnection();
         $db->beginTransaction();
         $stm=$db->prepare($q);
-        $stm->bindParam(':number',$number,PDO::PARAM_INT);
+        $stm->bindParam(':number',$number,PDO::PARAM_STR);
         $stm->execute();
         $db->commit();
         $result=$stm->rowCount();
@@ -69,7 +69,7 @@ class FCreditCard
      * @param  int $number
      * @return ECreditCard
      */
-    public function load(int $number): ECreditCard 
+    public function load(string $number): ECreditCard 
     {
         $db=FConnection::getInstance()->getConnection();
         
@@ -79,7 +79,7 @@ class FCreditCard
             $db->beginTransaction();
             $q='SELECT * FROM creditcard WHERE number=:number';    
             $stm=$db->prepare($q);
-            $stm->bindParam(':number',$number,PDO::PARAM_INT);
+            $stm->bindParam(':number',$number,PDO::PARAM_STR);
             $stm->execute();
             $db->commit();
             $db->exec('UNLOCK TABLES');
@@ -90,7 +90,7 @@ class FCreditCard
             $db->rollBack();
         }
         $row=$stm->fetch(PDO::FETCH_ASSOC);
-        $result=new ECreditCard($row['number'],$row['name'],$row['surname'],$row['expiry'],$row['cvv'],$row['idStudent'],$row['main']);
+        $result=new ECreditCard($row['number'],$row['name'],$row['surname'],$row['expiry'],$row['cvv'],$row['idStudent'],$row['main'],$row['title']);
         return $result;
     }
   
@@ -108,16 +108,17 @@ class FCreditCard
     { 
         $db->exec('LOCK TABLES creditcard WRITE');
         $db->beginTransaction();
-        $q='INSERT INTO creditcard (number, name , surname, expiry, cvv, idStudent, main)';
-        $q=$q.' VALUES (:number, :name, :surname, :expiry, :cvv, :idStudent, :main)';
+        $q='INSERT INTO creditcard (number, name , surname, expiry, cvv, idStudent, main, title)';
+        $q=$q.' VALUES (:number, :name, :surname, :expiry, :cvv, :idStudent, :main, :title)';
         $stm=$db->prepare($q);
-        $stm->bindValue(':number',$CreditCard->getNumber(),PDO::PARAM_INT);
+        $stm->bindValue(':number',$CreditCard->getNumber(),PDO::PARAM_STR);
         $stm->bindValue(':name',$CreditCard->getName(),PDO::PARAM_STR);
         $stm->bindValue(':surname',$CreditCard->getSurname(),PDO::PARAM_STR);
         $stm->bindValue(':expiry',$CreditCard->getExpiry(),PDO::PARAM_STR);
         $stm->bindValue(':cvv',$CreditCard->getCVV(),PDO::PARAM_INT);
         $stm->bindValue(':idStudent',$CreditCard->getStudentID(),PDO::PARAM_INT);
         $stm->bindValue(':main',$CreditCard->getMain(),PDO::PARAM_BOOL);
+        $stm->bindValue(':title',$CreditCard->getTitle(),PDO::PARAM_STR);
         $stm->execute();
         $db->commit();
         $db->exec('UNLOCK TABLES');
@@ -146,15 +147,16 @@ class FCreditCard
             {
                 $db->exec('LOCK TABLES creditcard WRITE');
                 $db->beginTransaction();
-                $q='UPDATE creditcard SET name = :name, surname = :surname, expiry = :expiry, cvv = :cvv, idStudent = :idStudent, main = :main  WHERE number=:number';
+                $q='UPDATE creditcard SET name = :name, surname = :surname, expiry = :expiry, cvv = :cvv, idStudent = :idStudent, main = :main, title = :title  WHERE number=:number';
                 $stm=$db->prepare($q);
                 $stm->bindValue(':name',$CreditCard->getName(),PDO::PARAM_STR);
                 $stm->bindValue(':surname',$CreditCard->getSurname(),PDO::PARAM_STR);
                 $stm->bindValue(':expiry',$CreditCard->getExpiry(),PDO::PARAM_STR);
                 $stm->bindValue(':cvv',$CreditCard->getCVV(),PDO::PARAM_INT);
                 $stm->bindValue(':idStudent',$CreditCard->getStudentID(),PDO::PARAM_INT);
-                $stm->bindValue(':number',$CreditCard->getNumber(),PDO::PARAM_INT);
+                $stm->bindValue(':number',$CreditCard->getNumber(),PDO::PARAM_STR);
                 $stm->bindValue(':main',$CreditCard->getMain(),PDO::PARAM_BOOL);
+                $stm->bindValue(':title',$CreditCard->getTitle(),PDO::PARAM_STR);
                 $stm->execute();           
                 $db->commit();
                 $db->exec('UNLOCK TABLES');
@@ -178,7 +180,7 @@ class FCreditCard
      * @param  int $number
      * @return bool
      */
-    public function delete(int $number): bool 
+    public function delete(string $number): bool 
     {
         $db=FConnection::getInstance()->getConnection();
        # $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);  Serve per il debug!
@@ -188,7 +190,7 @@ class FCreditCard
             $db->beginTransaction();
             $q='DELETE FROM creditcard WHERE number= :number';
             $stm=$db->prepare($q);
-            $stm->bindValue(':number',$number, PDO::PARAM_INT);
+            $stm->bindValue(':number',$number, PDO::PARAM_STR);
             $stm->execute();    
             $db->commit();
             $db->exec('UNLOCK TABLES');
@@ -211,7 +213,7 @@ class FCreditCard
      *
      * @return bool
      */
-    public function isMain(int $studentID, int $number):bool
+    public function isMain(int $studentID, string $number):bool
     {
         $db=FConnection::getInstance()->getConnection();
         try
@@ -264,7 +266,7 @@ class FCreditCard
         $cards=$stm->fetchAll(PDO::FETCH_ASSOC);
         foreach($cards as $card)
         {
-            $cc= new ECreditCard($card['number'],$card['name'],$card['surname'],$card['expiry'],$card['cvv'],$card['idStudent'],$card['main']);
+            $cc= new ECreditCard($card['number'],$card['name'],$card['surname'],$card['expiry'],$card['cvv'],$card['idStudent'],$card['main'],$card['title']);
             $result[]=$cc;
         }
         return $result;

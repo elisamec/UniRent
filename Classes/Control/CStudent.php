@@ -448,7 +448,7 @@ class CStudent{
         $username=$session::getSessionElement('username');
         $PM=FPersistentManager::getInstance();
         $studentId=$PM->getStudentIdByUsername($username);
-        $cards =$PM->loadStudentCards(2);
+        $cards =$PM->loadStudentCards($studentId);
         $cardsData = [];
            /* [
                 'title' => 'Card 1',
@@ -478,10 +478,9 @@ class CStudent{
             ]
         ];*/
         
-        $i=1;
         foreach ($cards as $card) {
             $cardsData[] = [
-                'title' => 'Card '.$i ,
+                'title' => $card->getTitle() ,
                 'number' => $card->getNumber(),
                 'expiryDate' => $card->getExpiry(),
                 'cvv' => $card->getCVV(),
@@ -489,9 +488,8 @@ class CStudent{
                 'surname' => $card->getSurname(),
                 'isMain' => $card->getMain(),
             ];
-            $i++;
         }
-        print_r($cardsData);
-        #$view->paymentMethods($cardsData);
+        #print_r($cardsData);
+        $view->paymentMethods($cardsData);
     }
 }

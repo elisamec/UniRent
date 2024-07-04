@@ -93,7 +93,7 @@ class FContract
             $stm->bindValue(':RID',$con->getID(),PDO::PARAM_INT);
             $stm->bindValue(':ST',$con->getStatus(),PDO::PARAM_STR);
             $stm->bindValue(':PD',$con->getPaymentDate()->format('Y-m-d H:i:s'),PDO::PARAM_STR);
-            $stm->bindValue(':CN',$con->getCardNumber(),PDO::PARAM_INT);
+            $stm->bindValue(':CN',$con->getCardNumber(),PDO::PARAM_STR);
             $stm->execute();
             $db->commit();
             $db->exec('UNLOCK TABLES');
