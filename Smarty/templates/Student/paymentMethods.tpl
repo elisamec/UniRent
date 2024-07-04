@@ -126,7 +126,7 @@
       </div>
 <div id="paymentModal" class="resModal">
     <div class="resModal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
+        <span class="reClose" onclick="closeModal()">&times;</span>
         <h2 class="resModal-head">Add Payment Method</h2>
         <form id="paymentForm" action="/UniRent/Student/addCreditCard" class="form" method="POST" enctype="multipart/form-data">
     <div class="form-grid">
@@ -135,16 +135,16 @@
             <input type="text" id="cardTitle" name="cardTitle" required>
         </div>
         <div class="form-row">
-            <label for="cardNumber">Card Number:</label>
-            <input type="text" id="cardNumber" name="cardNumber" required>
+            <label for="cardnumber">Enter Credit Card Number:</label>
+  <input id="cardnumber" type="text" name="cardnumber" data-inputmask="'mask': '9999 9999 9999 9999'" placeholder="____ ____ ____ ____">
         </div>
         <div class="form-row">
             <label for="expiryDate">Expiry Date:</label>
-            <input type="text" id="expiryDate" name="expiryDate" required>
+            <input id="expirydate" name="expirydate" type="text" data-inputmask="'mask': '99/99'" placeholder="mm/yy">
         </div>
         <div class="form-row">
-            <label for="cvv">CVV:</label>
-            <input type="text" id="cvv" name="cvv" required>
+            <label for="cvv">CVV (Security Code):</label>
+            <input type="text" pattern="[0-9]*" inputmode="numeric" maxlength="4" id="cvv" name="cvv" required>
         </div>
         <div class="form-row">
             <label for="name">Name on Card:</label>
@@ -159,10 +159,106 @@
         </div>
     </div>
 </form>
-
-
     </div>
 </div>
+
+
+   <div id="paymentUpdateModal" class="resModal">
+            <div class="resModal-content">
+                <span class="resClose" onclick="closeEditModal()">&times;</span>
+                <h2 class="resModal-head">Edit Payment Method</h2>
+                <form id="paymentUpdateForm" action="/UniRent/Student/editCreditCard" class="form" method="POST" enctype="multipart/form-data">
+                    <div class="form-grid">
+                        <div class="form-row">
+                            <label for="cardTitle1">Card Title:</label>
+                            <input type="text" id="cardTitle1" name="cardTitle1" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="cardnumber1">Enter Credit Card Number:</label>
+                            <input id="cardnumber1" name="cardnumber1" type="text" data-inputmask="'mask': '9999 9999 9999 9999'" placeholder="____ ____ ____ ____">
+                        </div>
+                        <div class="form-row">
+                            <label for="expirydate1">Expiry Date:</label>
+                            <input id="expirydate1" name="expirydate1" type="text" data-inputmask="'mask': '99/99'" placeholder="mm/yy">
+                        </div>
+                        <div class="form-row">
+                            <label for="cvv1">CVV (Security Code):</label>
+                            <input type="text" pattern="[0-9]*" inputmode="numeric" maxlength="4" id="cvv1" name="cvv1" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="name1">Name on Card:</label>
+                            <input type="text" id="name1" name="name1" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="surname1">Surname on Card:</label>
+                            <input type="text" id="surname1" name="surname1" required>
+                        </div>
+                        <div class="form-row full-width">
+                            <button class="button-spec final" type="button" onclick="updatePaymentMethod()">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+</div>
+<script>
+// Function to open the payment form with pre-filled values
+function openEditForm(cardTitle, cardNumber, expiryDate, CVV, Name, Surname) {
+    
+    document.getElementById('cardTitle1').value = cardTitle;
+    document.getElementById('cardnumber1').value = cardNumber;
+    document.getElementById('expirydate1').value = expiryDate;
+    document.getElementById('cvv1').value = CVV;
+    document.getElementById('name1').value = Name;
+    document.getElementById('surname1').value = Surname;
+
+    // Display the modal
+    document.getElementById('paymentUpdateModal').style.display = 'block';
+}
+
+// Function to close the modal
+function closeEditModal() {
+    // Hide the modal
+    document.getElementById('paymentUpdateModal').style.display = 'none';
+}
+    // Function to handle updating the payment method
+function updatePaymentMethod() {
+    // Get values from the form
+    let cardTitle = document.getElementById('cardTitle1').value;
+    let cardNumber = document.getElementById('cardnumber1').value.replace(/\s+/g, ''); // Remove spaces
+    let expiryDate = document.getElementById('expirydate1').value;
+    let cvv = document.getElementById('cvv1').value;
+    let name = document.getElementById('name1').value;
+    let surname = document.getElementById('surname1').value;
+    
+    // Find the corresponding card in the array by cardNumber
+    let index = cards.findIndex(card => card.number === cardNumber);
+    
+    if (index !== -1) {
+        // Update the card in the array
+        cards[index] = {
+            number: cardNumber,
+            cardTitle: cardTitle,
+            expiryDate: expiryDate,
+            cvv: cvv,
+            name: name,
+            surname: surname
+        };
+        
+        // For demonstration, log the updated card
+        console.log('Updated Card:', cards[index]);
+        
+        // Optionally, you can submit the form or perform other actions here
+        // document.getElementById('paymentUpdateForm').submit();
+        
+        // Close the modal or perform any other UI update
+        closeEditModal();
+    } else {
+        console.error('Card not found in array.');
+    }
+}
+</script>
+
 <div id="confirmModal" class="resModal">
     <div class="resModal-content">
         <span class="resClose" onclick="closeConfirmModal()">&times;</span>
@@ -213,7 +309,7 @@
 
                     let buttonHTML = '';
                     if (card.isMain) {
-                        buttonHTML = `<h2> Main </h2>`;
+                        buttonHTML = `<h2 class="paymentMain"> Main </h2>`;
                     } else {
                         buttonHTML = `<button class="button-spec" onclick="makeMain('${card.number}')"> Make Main </button>`;
                     }
@@ -251,9 +347,6 @@
                         </div>
                         <p>${card.cvv}</p>
                     </div>
-                    <div class="row1 signature">
-                        <p>CUSTOMER SIGNATURE</p>
-                    </div>
                 </div>
             </div>
         </div>
@@ -261,6 +354,7 @@
                             </div>
                             <div class="divPAY2">
                                 ${buttonHTML}
+                                <button class="button-spec" onclick="openEditForm('${card.title}', '${card.number}', '${card.expiryDate}', '${card.cvv}', '${card.name}', '${card.surname}')">Edit</button>
                             </div>
                         </div>
                         <button class="button-spec little button-delete" onclick="openConfirmModal('${card.number}')">-</button>
@@ -430,6 +524,31 @@
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+<script>
+    // Initialize inputmask for credit card number and expiry date fields
+    $(document).ready(function() {
+      $('#cardnumber').inputmask({
+        mask: '9999 9999 9999 9999',
+        placeholder: ''
+      });
+
+      $('#expirydate').inputmask({
+        mask: '99/99',
+        placeholder: ''
+      });
+      $('#cardnumber1').inputmask({
+        mask: '9999 9999 9999 9999',
+        placeholder: ''
+      });
+
+      $('#expirydate1').inputmask({
+        mask: '99/99',
+        placeholder: ''
+      });
+    });
+  </script>
+
       <div class="modal" id="myModal">
       <div class"container-fluid">
       <div class="card">

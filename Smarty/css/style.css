@@ -2527,6 +2527,9 @@ textarea#comment::placeholder {
 #paymentForm {
     margin: 10px 10px 10px 10px;
 }
+#paymentUpdateForm {
+    margin: 10px 10px 10px 10px;
+}
 
 @import url('https://fonts.googleapis.com/css2?family=josefin+Sans:wght@400;500;600;700&display=swap');
 
@@ -2641,4 +2644,19 @@ textarea#comment::placeholder {
 
 .card1:hover .card-inner {
     transform: rotateY(-180deg);
+}
+.paymentMain {
+    margin-top: 10px;
+        margin-left: 10px;
+        width: 95%;
+        border: solid 1.5px none;
+        border-radius: 1rem;
+        background: none;
+        padding: 1rem;
+        font-size: 24px;
+        color: #000000;
+        position: relative; /* Changed from absolute to relative */
+        pointer-events: none; /* Changed from none to auto */
+        transform: none; /* Removed translateY transform */
+        box-sizing: border-box;
 }
