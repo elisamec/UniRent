@@ -2,7 +2,9 @@
 require __DIR__.'../../../vendor/autoload.php';
 
 use Classes\Entity\EAccommodation;
+use Classes\Entity\ECreditCard;
 use Classes\Entity\EStudent;
+use Classes\Foundation\FCreditCard;
 use Classes\Foundation\FPersistentManager;
 use Classes\Foundation\FStudent;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -128,7 +130,7 @@ print_r($università);
 
 # LAVORAZIONE DELLE VISITE
 
-
+/*
 
 $time_start = '17:00';
 $time_end = '17:23';
@@ -143,7 +145,11 @@ if ($difference->invert == 1) {
 }
 
 print $totalMinutes;
-
+*/
 // Parte 2 di creazione array visite
 
 #print EAccommodation::stringInMinutes('03:00');
+
+$FC=FCreditCard::getInstance();
+$cards=$FC->loadStudentCards(0);
+print_r($cards);

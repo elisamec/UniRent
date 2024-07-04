@@ -440,7 +440,7 @@ class CStudent{
         }
         $view->publicProfileStudent($student, $reviewsData);
     }
-
+      
     public static function paymentMethods()
     {
         $view = new VStudent();
@@ -448,9 +448,9 @@ class CStudent{
         $username=$session::getSessionElement('username');
         $PM=FPersistentManager::getInstance();
         $studentId=$PM->getStudentIdByUsername($username);
-        $cards =$PM->loadStudentCards($studentId);
-        $cardsData = [ 
-            [
+        $cards =$PM->loadStudentCards(2);
+        $cardsData = [];
+           /* [
                 'title' => 'Card 1',
                 'number' => '1234 4321 1234 1234',
                 'expiryDate' => '12/25',
@@ -476,21 +476,22 @@ class CStudent{
                 'surname' => 'Doe',
                 'isMain' => false,
             ]
-        ];
-        /*
-
+        ];*/
+        
+        $i=1;
         foreach ($cards as $card) {
             $cardsData[] = [
-                'title' => $card->getTitle(),
+                'title' => 'Card '.$i ,
                 'number' => $card->getNumber(),
-                'expiryDate' => $card->getExpiryDate(),
+                'expiryDate' => $card->getExpiry(),
                 'cvv' => $card->getCVV(),
                 'name' => $card->getName(),
                 'surname' => $card->getSurname(),
-                'isMain' => $card->getIsMain(),
+                'isMain' => $card->getMain(),
             ];
+            $i++;
         }
-        */
-        $view->paymentMethods($cardsData);
+        print_r($cardsData);
+        #$view->paymentMethods($cardsData);
     }
 }

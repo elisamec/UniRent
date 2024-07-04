@@ -7,7 +7,7 @@ use Classes\Entity\EPhoto;
 use Classes\Entity\EStudent;
 use Classes\Utilities\UAccessUniversityFile;
 use DateTime;
-use FCreditCard;
+
 
 class FPersistentManager {
     private static $instance;
