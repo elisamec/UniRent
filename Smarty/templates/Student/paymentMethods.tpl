@@ -135,16 +135,16 @@
             <input type="text" id="cardTitle" name="cardTitle" required>
         </div>
         <div class="form-row">
-            <label for="cardNumber">Card Number:</label>
-            <input type="text" id="cardNumber" name="cardNumber" required>
+            <label for="cardnumber">Enter Credit Card Number:</label>
+  <input id="cardnumber" type="text" data-inputmask="'mask': '9999 9999 9999 9999'" placeholder="____ ____ ____ ____">
         </div>
         <div class="form-row">
             <label for="expiryDate">Expiry Date:</label>
-            <input type="text" id="expiryDate" name="expiryDate" required>
+            <input id="expirydate" type="text" data-inputmask="'mask': '99/99'" placeholder="mm/yy">
         </div>
         <div class="form-row">
-            <label for="cvv">CVV:</label>
-            <input type="text" id="cvv" name="cvv" required>
+            <label for="cvv">CVV (Security Code):</label>
+            <input type="text" pattern="[0-9]*" inputmode="numeric" maxlength="4" id="cvv" name="cvv" required>
         </div>
         <div class="form-row">
             <label for="name">Name on Card:</label>
@@ -250,9 +250,6 @@
                             <img src="https://i.ibb.co/S6JG8px/pattern.png">
                         </div>
                         <p>${card.cvv}</p>
-                    </div>
-                    <div class="row1 signature">
-                        <p>CUSTOMER SIGNATURE</p>
                     </div>
                 </div>
             </div>
@@ -430,6 +427,22 @@
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+<script>
+    // Initialize inputmask for credit card number and expiry date fields
+    $(document).ready(function() {
+      $('#cardnumber').inputmask({
+        mask: '9999 9999 9999 9999',
+        placeholder: ''
+      });
+
+      $('#expirydate').inputmask({
+        mask: '99/99',
+        placeholder: ''
+      });
+    });
+  </script>
+
       <div class="modal" id="myModal">
       <div class"container-fluid">
       <div class="card">
