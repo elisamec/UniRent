@@ -203,6 +203,13 @@
                 cards.forEach(card => {
                     const cardElement = document.createElement('div');
                     cardElement.className = 'review';
+                    let cardNumber = card.number.replace(/\s/g, '');
+                     let groups = cardNumber.match(/.{1,4}/g);
+                     let result = "";
+
+                     for(let i = 0; i < groups.length; i++) {
+                         result += `<p>${groups[i]}</p>\n`;
+                        }
 
                     let buttonHTML = '';
                     if (card.isMain) {
@@ -215,11 +222,42 @@
                         <h1 class="paymentTitle"> ${card.title} </h1> <!-- Title of the card -->
                         <div class="paymentGrid">
                             <div class="divPAY1">
-                                <p> Credit Card Information</p>
-                                <p> Card Number: ${card.number}</p>
-                                <p> Expiry Date: ${card.expiryDate}</p>
-                                <p> CVV: ${card.cvv}</p>
-                                <p> Name on Card: ${card.name} ${card.surname}</p>
+                            <div class="container1">
+        <div class="card1">
+            <div class="card-inner">
+                <div class="front">
+                    <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
+                    <div class="row1">
+                        <img src="https://i.ibb.co/G9pDnYJ/chip.png" width="60px">
+                    </div>
+                    <div class="row1 card-no">
+                        ${result}
+                    </div>
+                    <div class="row1 card-holder">
+                        <p>CARD HOLDER</p>
+                        <p>VALID TILL</p>
+                    </div>
+                    <div class="row1 name">
+                        <p>${card.name} ${card.surname}</p>
+                        <p>${card.expiryDate}</p>
+                    </div>
+                </div>
+                <div class="back">
+                    <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
+                    <div class="bar"></div>
+                    <div class="row1 card-cvv">
+                        <div>
+                            <img src="https://i.ibb.co/S6JG8px/pattern.png">
+                        </div>
+                        <p>${card.cvv}</p>
+                    </div>
+                    <div class="row1 signature">
+                        <p>CUSTOMER SIGNATURE</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
                             </div>
                             <div class="divPAY2">
                                 ${buttonHTML}
@@ -227,6 +265,7 @@
                         </div>
                         <button class="button-spec little button-delete" onclick="openConfirmModal('${card.number}')">-</button>
                     `;
+                                
 
                     container.appendChild(cardElement);
                 });
