@@ -174,11 +174,23 @@
     </div>
 </div>
 <script>
-   {literal}
+    {literal}
     // Define cardsData as a JavaScript variable
-    const cards = {/literal}{$cardsData}{literal};
-    console.log(cards);
-    console.log(Array.isArray(cards));
+    let cardsData = {/literal}{$cardsData}{literal};
+    console.log('Raw cardsData:', cardsData);
+
+    // Check if cardsData is already an array, if not, wrap it in an array
+    let cards = [];
+    if (Array.isArray(cardsData)) {
+        cards = cardsData;
+    } else if (cardsData && typeof cardsData === 'object') {
+        cards = [cardsData]; // Wrap the single object in an array
+    } else {
+        console.error('Invalid cardsData format:', cardsData);
+    }
+
+    console.log('Parsed cards:', cards);
+    console.log('Is cards an array?', Array.isArray(cards));
 
     function displayCards(cards) {
         const container = document.getElementById('cardsContainer');
@@ -187,6 +199,7 @@
             if (cards.length === 0) {
                 container.innerHTML = '<div class="container"><h1 class="noCards">You don\'t have any credit cards memorized</h1></div>';
             } else {
+                container.innerHTML = ''; // Clear container before adding new cards
                 cards.forEach(card => {
                     const cardElement = document.createElement('div');
                     cardElement.className = 'review';
@@ -195,7 +208,7 @@
                     if (card.isMain) {
                         buttonHTML = `<h2> Main </h2>`;
                     } else {
-                        buttonHTML = `<button class="button-spec" href="/UniRent/Student/makeMain/${card.number}"> Make Main </button>`;
+                        buttonHTML = `<button class="button-spec" onclick="makeMain('${card.number}')"> Make Main </button>`;
                     }
 
                     cardElement.innerHTML = `
@@ -212,7 +225,7 @@
                                 ${buttonHTML}
                             </div>
                         </div>
-                        <button class="button-spec little button-delete" onclick="openConfirmModal('${cardNumber}')">-</button>
+                        <button class="button-spec little button-delete" onclick="openConfirmModal('${card.number}')">-</button>
                     `;
 
                     container.appendChild(cardElement);
@@ -222,6 +235,7 @@
             console.error("Container not found!"); // Debugging: Error if container is not found
         }
     }
+
     function openModal() {
         document.getElementById('paymentModal').style.display = "block";
     }
@@ -253,31 +267,22 @@
         const surname = document.getElementById('surname').value;
 
         // Logic to handle the new card information (e.g., make an API call to save the card)
+        const newCard = {
+            title: cardTitle,
+            number: cardNumber,
+            expiryDate: expiryDate,
+            cvv: cvv,
+            name: name,
+            surname: surname,
+            isMain: false
+        };
+
+        // Update the cards array and re-display
+        cards.push(newCard);
+        displayCards(cards);
 
         // Close the modal after submitting the form
         closeModal();
-
-        // Optionally, you can update the UI with the new card information
-        const container = document.getElementById('cardsContainer');
-        const cardElement = document.createElement('div');
-        cardElement.className = 'review';
-        cardElement.innerHTML = `
-            <h1 class="paymentTitle"> ${card.title} </h1> <!-- Title of the card -->
-                        <div class="paymentGrid">
-                            <div class="divPAY1">
-                                <p> Credit Card Information</p>
-                                <p> Card Number: ${card.number}</p>
-                                <p> Expiry Date: ${card.expiryDate}</p>
-                                <p> CVV: ${card.cvv}</p>
-                                <p> Name on Card: ${card.name} ${card.surname}</p>
-                            </div>
-                            <div class="divPAY2">
-                                ${buttonHTML}
-                                <button class="button-delete" onclick="openConfirmModal('${card.number}')"> Delete </button>
-                            </div>
-                        </div>
-        `;
-        container.appendChild(cardElement);
     }
 
     // Function to delete a card
@@ -288,19 +293,40 @@
         })
         .then(response => {
             if (response.ok) {
-                // Remove the card element from the DOM
-                const cardElements = document.querySelectorAll('.review');
-                cardElements.forEach(cardElement => {
-                    if (cardElement.innerHTML.includes(cardNumber)) {
-                        cardElement.remove();
-                    }
-                });
+                // Remove the card from the array and update the UI
+                const updatedCards = cards.filter(card => card.number !== cardNumber);
+                displayCards(updatedCards);
                 closeConfirmModal();
             } else {
                 // Handle error
                 console.error('Failed to delete card');
             }
         });
+    }
+
+    // Function to make a card the main card
+    function makeMain(cardNumber) {
+        let mainCard = null;
+        const otherCards = [];
+        
+        cards.forEach(card => {
+            if (card.number === cardNumber) {
+                card.isMain = true;
+                mainCard = card;
+            } else {
+                card.isMain = false;
+                otherCards.push(card);
+            }
+        });
+
+        if (mainCard) {
+            cards = [mainCard, ...otherCards];
+        } else {
+            console.error('Card not found:', cardNumber);
+        }
+        
+        console.log('Updated cards:', cards);
+        displayCards(cards);
     }
 
     // Event listener for the confirmation button
@@ -317,11 +343,17 @@
         }
     }
 
-    // Call the function to display cards
-    displayCards(cards);
-   {/literal}
-
+    // Call the function to display cards if cards is an array
+    if (Array.isArray(cards)) {
+        displayCards(cards);
+    } else {
+        console.error('cards is not an array:', cards);
+    }
+    {/literal}
 </script>
+
+
+
 
 
 

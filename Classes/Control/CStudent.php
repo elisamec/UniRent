@@ -441,14 +441,33 @@ class CStudent{
     {
         $view = new VStudent();
         //$cards = FCreditCard::getInstance()->loadByStudent(1);
-        $cardsData = [
-            'title' => 'Card 1',
+        $cardsData = [ 
+            [
+                'title' => 'Card 1',
                 'number' => '1234 1234 1234 1234',
                 'expiryDate' => '12/25',
                 'cvv' => '122',
                 'name' => 'John',
                 'surname' => 'Doe',
                 'isMain' => true,
+            ],
+            [
+                'title' => 'Card 2',
+                'number' => '1234 1234 1234 1234',
+                'expiryDate' => '12/25',
+                'cvv' => '122',
+                'name' => 'John',
+                'surname' => 'Doe',
+                'isMain' => false,
+            ],
+            ['title' => 'Card 13',
+                'number' => '1234 1234 1234 1234',
+                'expiryDate' => '12/25',
+                'cvv' => '122',
+                'name' => 'John',
+                'surname' => 'Doe',
+                'isMain' => false,
+            ]
         ];
         /*
 
