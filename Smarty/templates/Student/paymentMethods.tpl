@@ -400,15 +400,28 @@ function updatePaymentMethod() {
         const surname = document.getElementById('surname').value;
 
         // Logic to handle the new card information (e.g., make an API call to save the card)
-        const newCard = {
-            title: cardTitle,
-            number: cardNumber,
-            expiryDate: expiryDate,
-            cvv: cvv,
-            name: name,
-            surname: surname,
-            isMain: false
-        };
+        if (cards.length === 0) {
+            // If there are no cards, make the new card the main card
+            cards.push({
+                number: cardNumber,
+                title: cardTitle,
+                expiryDate: expiryDate,
+                cvv: cvv,
+                name: name,
+                surname: surname,
+                isMain: true
+            });
+        } else {
+            cards.push({
+                number: cardNumber,
+                title: cardTitle,
+                expiryDate: expiryDate,
+                cvv: cvv,
+                name: name,
+                surname: surname,
+                isMain: false
+            });
+        }
 
         // Update the cards array and re-display
         cards.push(newCard);
