@@ -106,9 +106,91 @@
                <h1 class="Properties_taital">Your Payment Methods</h1>
                <hr class="border_main">
             </div>
-            <div id="cardsContainer"></div>
+            <div id="cardsContainer">
+            <div class="review">
+            <h1 class="paymentTitle"> Card 1 </h1> <!-- Title of the card -->
+                        <div class="paymentGrid">
+                            <div class="divPAY1">
+                                <p> Credit Card Information</p>
+                                <p> Card Number: 1234 1234 1234 1234</p>
+                                <p> Expiry Date: 12/25</p>
+                                <p> CVV: 122</p>
+                                <p> Name on Card: John Doe</p>
+                            </div>
+                            <div class="divPAY2">
+                                <h2>Main</h2>
+                            </div>
+                        </div>
+                        <button class="button-spec little button-delete" onclick="openConfirmModal('${cardNumber}')">-</button>
+                        </div>
+                        </div>
+                        <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="button_main">
+                     <button class="button-spec final pay" onclick="openModal()">Add Payment Method</button>
+                  </div><!--/UniRent/Student/addPaymentMethod -->
+               </div>
+            </div>
          </div>
-         <script>
+            </div>
+            
+            </div>
+            
+         
+         </div>
+      </div>
+      </div>
+<div id="paymentModal" class="resModal">
+    <div class="resModal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 class="resModal-head">Add Payment Method</h2>
+        <form id="paymentForm" action="/UniRent/Student/addCreditCard" class="form" method="POST" enctype="multipart/form-data">
+    <div class="form-grid">
+        <div class="form-row">
+            <label for="cardTitle">Card Title:</label>
+            <input type="text" id="cardTitle" name="cardTitle" required>
+        </div>
+        <div class="form-row">
+            <label for="cardNumber">Card Number:</label>
+            <input type="text" id="cardNumber" name="cardNumber" required>
+        </div>
+        <div class="form-row">
+            <label for="expiryDate">Expiry Date:</label>
+            <input type="text" id="expiryDate" name="expiryDate" required>
+        </div>
+        <div class="form-row">
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" name="cvv" required>
+        </div>
+        <div class="form-row">
+            <label for="name">Name on Card:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-row">
+            <label for="surname">Surname on Card:</label>
+            <input type="text" id="surname" name="surname" required>
+        </div>
+        <div class="form-row full-width">
+            <button class="button-spec final" type="button" onclick="addPaymentMethod()">Submit</button>
+        </div>
+    </div>
+</form>
+
+
+    </div>
+</div>
+<div id="confirmModal" class="resModal">
+    <div class="resModal-content">
+        <span class="resClose" onclick="closeConfirmModal()">&times;</span>
+        <p>Are you sure you want to delete this card?</p>
+        <div class="btn-cont">
+        <button id="confirmDelete" type="button">Yes</button>
+        <button id="cancelDelete" type="button" onclick="closeConfirmModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+<script>
     const cards = {$cardsData|json_encode|escape:"javascript"};
 </script>
 {literal}
@@ -123,7 +205,7 @@
             } else {
                 cards.forEach(card => {
                     const cardElement = document.createElement('div');
-                    cardElement.className = 'card';
+                    cardElement.className = 'review';
 
                     let buttonHTML = '';
                     if (card.isMain) {
@@ -146,6 +228,7 @@
                                 ${buttonHTML}
                             </div>
                         </div>
+                        <button class="button-spec little button-delete" onclick="openConfirmModal('${cardNumber}')">-</button>
                     `;
 
                     container.appendChild(cardElement);
@@ -153,6 +236,100 @@
             }
         } else {
             console.error("Container not found!"); // Debugging: Error if container is not found
+        }
+    }
+    function openModal() {
+        document.getElementById('paymentModal').style.display = "block";
+    }
+
+    // Function to close the add payment modal
+    function closeModal() {
+        document.getElementById('paymentModal').style.display = "none";
+    }
+
+    // Function to open the confirm deletion modal
+    function openConfirmModal(cardNumber) {
+        const confirmYesButton = document.getElementById('confirmDelete');
+        confirmYesButton.setAttribute('data-card-number', cardNumber);
+        document.getElementById('confirmModal').style.display = "block";
+    }
+
+    // Function to close the confirm deletion modal
+    function closeConfirmModal() {
+        document.getElementById('confirmModal').style.display = "none";
+    }
+
+    // Function to add a payment method
+    function addPaymentMethod() {
+        const cardTitle = document.getElementById('cardTitle').value;
+        const cardNumber = document.getElementById('cardNumber').value;
+        const expiryDate = document.getElementById('expiryDate').value;
+        const cvv = document.getElementById('cvv').value;
+        const name = document.getElementById('name').value;
+        const surname = document.getElementById('surname').value;
+
+        // Logic to handle the new card information (e.g., make an API call to save the card)
+
+        // Close the modal after submitting the form
+        closeModal();
+
+        // Optionally, you can update the UI with the new card information
+        const container = document.getElementById('cardsContainer');
+        const cardElement = document.createElement('div');
+        cardElement.className = 'review';
+        cardElement.innerHTML = `
+            <h1 class="paymentTitle"> ${card.title} </h1> <!-- Title of the card -->
+                        <div class="paymentGrid">
+                            <div class="divPAY1">
+                                <p> Credit Card Information</p>
+                                <p> Card Number: ${card.number}</p>
+                                <p> Expiry Date: ${card.expiryDate}</p>
+                                <p> CVV: ${card.cvv}</p>
+                                <p> Name on Card: ${card.name} ${card.surname}</p>
+                            </div>
+                            <div class="divPAY2">
+                                ${buttonHTML}
+                                <button class="button-delete" onclick="openConfirmModal('${card.number}')"> Delete </button>
+                            </div>
+                        </div>
+        `;
+        container.appendChild(cardElement);
+    }
+
+    // Function to delete a card
+    function deleteCard(cardNumber) {
+        // Send a request to the server to delete the card
+        fetch(`/UniRent/Student/deleteCreditCard/${cardNumber}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (response.ok) {
+                // Remove the card element from the DOM
+                const cardElements = document.querySelectorAll('.review');
+                cardElements.forEach(cardElement => {
+                    if (cardElement.innerHTML.includes(cardNumber)) {
+                        cardElement.remove();
+                    }
+                });
+                closeConfirmModal();
+            } else {
+                // Handle error
+                console.error('Failed to delete card');
+            }
+        });
+    }
+
+    // Event listener for the confirmation button
+    document.getElementById('confirmDelete').addEventListener('click', function() {
+        const cardNumber = this.getAttribute('data-card-number');
+        deleteCard(cardNumber);
+    });
+
+    // Close the modal when the user clicks outside of the modal
+    window.onclick = function(event) {
+        if (event.target.classList.contains('modal')) {
+            closeModal();
+            closeConfirmModal();
         }
     }
 
