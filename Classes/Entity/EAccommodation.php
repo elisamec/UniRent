@@ -434,8 +434,15 @@ class EAccommodation
 
         return $str;
     }
-
-    public static function fromJsonToArrayOfVisit($json)  // ["DAY"=>'time']
+    
+    /**
+     * Method fromJsonToArrayOfVisit
+     *
+     * @param $json
+     *
+     * @return array
+     */
+    public static function fromJsonToArrayOfVisit($json):array
     {
         $result=array();
         $myarray=json_decode($json,true);
@@ -478,7 +485,7 @@ class EAccommodation
             {
                 foreach($value['times'] as $time)
                 {
-                    if(in_array($time,$final_result['times'])){}
+                    if(in_array($time,$final_result[$value['day']])){}
                     else
                     {
                         $final_result[$value['day']][]=$time;
@@ -490,7 +497,7 @@ class EAccommodation
                 $final_result[$value['day']]=$value['times'];
             }
         }
-        print_r($final_result);
+        return $final_result;
     }
 
     private static function stringInMinutes(string $s):int
