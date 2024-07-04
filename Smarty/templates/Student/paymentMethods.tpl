@@ -174,11 +174,12 @@
     </div>
 </div>
 <script>
-    const cards = {$cardsData|json_encode|escape:"javascript"};
-</script>
-{literal}
-<script>
-    // Function to create and append card information to the container
+   {literal}
+    // Define cardsData as a JavaScript variable
+    const cards = {/literal}{$cardsData}{literal};
+    console.log(cards);
+    console.log(Array.isArray(cards));
+
     function displayCards(cards) {
         const container = document.getElementById('cardsContainer');
 
@@ -318,8 +319,10 @@
 
     // Call the function to display cards
     displayCards(cards);
+   {/literal}
+
 </script>
-{/literal}
+
 
 
 <!-- footer section start -->

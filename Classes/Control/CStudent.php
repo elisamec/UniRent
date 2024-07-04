@@ -440,9 +440,17 @@ class CStudent{
     public static function paymentMethods()
     {
         $view = new VStudent();
-        $cards = FCreditCard::getInstance()->loadByStudent(1);
-        $cardsData = [];
-        
+        //$cards = FCreditCard::getInstance()->loadByStudent(1);
+        $cardsData = [
+            'title' => 'Card 1',
+                'number' => '1234 1234 1234 1234',
+                'expiryDate' => '12/25',
+                'cvv' => '122',
+                'name' => 'John',
+                'surname' => 'Doe',
+                'isMain' => true,
+        ];
+        /*
         foreach ($cards as $card) {
             $cardsData[] = [
                 'title' => $card->getTitle(),
@@ -454,6 +462,7 @@ class CStudent{
                 'isMain' => $card->getIsMain(),
             ];
         }
+        */
         $view->paymentMethods($cardsData);
     }
 }
