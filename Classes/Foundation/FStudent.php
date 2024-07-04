@@ -99,10 +99,10 @@ class FStudent
                 $stm->bindValue(':password',$student->getPassword(),PDO::PARAM_STR);
                 $stm->bindValue(':name',$student->getName(),PDO::PARAM_STR);
                 $stm->bindValue(':surname',$student->getSurname(),PDO::PARAM_STR);
-                if(!is_null($student->getPicture()))
+                if(!is_null($student->getPhoto()))
                 {
-                    FPhoto::getInstance()->storeAvatar($student->getPicture());
-                    $stm->bindValue(':picture',$student->getPicture()->getId(),PDO::PARAM_INT);
+                    FPhoto::getInstance()->storeAvatar($student->getPhoto());
+                    $stm->bindValue(':picture',$student->getPhoto()->getId(),PDO::PARAM_INT);
                 } 
                 else
                 {      
@@ -145,7 +145,7 @@ class FStudent
             print "Lo studente da aggiornare esiste<br>";
             try
             {
-                $CPhoto=$student->getPicture();
+                $CPhoto=$student->getPhoto();
                 if(!is_null($CPhoto))  #se non ha inserito una foto 
                 {
                     FPhoto::getInstance()->update($CPhoto);
@@ -167,9 +167,9 @@ class FStudent
                 $stm->bindValue(':sex',$student->getSex(),PDO::PARAM_STR);
                 $stm->bindValue(':smoker',$student->getSmoker(),PDO::PARAM_BOOL);
                 $stm->bindValue(':animals',$student->getAnimals(),PDO::PARAM_BOOL);
-                if ($student->getPicture()!=null) 
+                if ($student->getPhoto()!=null) 
                 {
-                    $stm->bindValue(':picture', $student->getPicture()->getId(), PDO::PARAM_INT);
+                    $stm->bindValue(':picture', $student->getPhoto()->getId(), PDO::PARAM_INT);
                 } 
                 else 
                 {

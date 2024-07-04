@@ -144,7 +144,7 @@
         </div>
         <div class="form-row">
             <label for="cvv">CVV (Security Code):</label>
-            <input type="text" pattern="[0-9]*" inputmode="numeric" maxlength="4" id="cvv" name="cvv" required>
+            <input type="text" pattern="[0-9]*" inputmode="numeric" maxlength="3" id="cvv" name="cvv" required>
         </div>
         <div class="form-row">
             <label for="name">Name on Card:</label>
@@ -183,7 +183,7 @@
                         </div>
                         <div class="form-row">
                             <label for="cvv1">CVV (Security Code):</label>
-                            <input type="text" pattern="[0-9]*" inputmode="numeric" maxlength="4" id="cvv1" name="cvv1" required>
+                            <input type="text" pattern="[0-9]*" inputmode="numeric" maxlength="3" id="cvv1" name="cvv1" required>
                         </div>
                         <div class="form-row">
                             <label for="name1">Name on Card:</label>
