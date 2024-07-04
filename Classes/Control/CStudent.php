@@ -444,7 +444,7 @@ class CStudent{
         $cardsData = [ 
             [
                 'title' => 'Card 1',
-                'number' => '1234 1234 1234 1234',
+                'number' => '1234 4321 1234 1234',
                 'expiryDate' => '12/25',
                 'cvv' => '122',
                 'name' => 'John',
@@ -453,7 +453,7 @@ class CStudent{
             ],
             [
                 'title' => 'Card 2',
-                'number' => '1234 1234 1234 1234',
+                'number' => '1234 1234 4321 1234',
                 'expiryDate' => '12/25',
                 'cvv' => '122',
                 'name' => 'John',

@@ -318,7 +318,8 @@
                 otherCards.push(card);
             }
         });
-
+         console.log('Main card:', mainCard);
+console.log('Other card:', otherCards);
         if (mainCard) {
             cards = [mainCard, ...otherCards];
         } else {
