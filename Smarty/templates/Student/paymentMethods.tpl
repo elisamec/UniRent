@@ -289,85 +289,88 @@ function updatePaymentMethod() {
     console.log('Is cards an array?', Array.isArray(cards));
 
     function displayCards(cards) {
-        const container = document.getElementById('cardsContainer');
+    const container = document.getElementById('cardsContainer');
 
-        if (container) {
-            if (cards.length === 0) {
-                container.innerHTML = '<div class="container"><h1 class="noCards">You don\'t have any credit cards memorized</h1></div>';
-            } else {
-                container.innerHTML = ''; // Clear container before adding new cards
-                cards.forEach(card => {
-                    const cardElement = document.createElement('div');
-                    cardElement.className = 'review';
-                    let cardNumber = card.number.replace(/\s/g, '');
-                     let groups = cardNumber.match(/.{1,4}/g);
-                     let result = "";
+    if (container) {
+        // Sort cards to ensure the main card is first
+        cards.sort((a, b) => b.isMain - a.isMain);
 
-                     for(let i = 0; i < groups.length; i++) {
-                         result += `<p>${groups[i]}</p>\n`;
-                        }
-
-                    let buttonHTML = '';
-                    if (card.isMain) {
-                        buttonHTML = `<h2 class="paymentMain"> Main </h2>`;
-                    } else {
-                        buttonHTML = `<button class="button-spec" onclick="makeMain('${card.number}')"> Make Main </button>`;
-                    }
-
-                    cardElement.innerHTML = `
-                        <h1 class="paymentTitle"> ${card.title} </h1> <!-- Title of the card -->
-                        <div class="paymentGrid">
-                            <div class="divPAY1">
-                            <div class="container1">
-        <div class="card1">
-            <div class="card-inner">
-                <div class="front">
-                    <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
-                    <div class="row1">
-                        <img src="https://i.ibb.co/G9pDnYJ/chip.png" width="60px">
-                    </div>
-                    <div class="row1 card-no">
-                        ${result}
-                    </div>
-                    <div class="row1 card-holder">
-                        <p>CARD HOLDER</p>
-                        <p>VALID TILL</p>
-                    </div>
-                    <div class="row1 name">
-                        <p>${card.name} ${card.surname}</p>
-                        <p>${card.expiryDate}</p>
-                    </div>
-                </div>
-                <div class="back">
-                    <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
-                    <div class="bar"></div>
-                    <div class="row1 card-cvv">
-                        <div>
-                            <img src="https://i.ibb.co/S6JG8px/pattern.png">
-                        </div>
-                        <p>${card.cvv}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-                            </div>
-                            <div class="divPAY2">
-                                ${buttonHTML}
-                                <button class="button-spec" onclick="openEditForm('${card.title}', '${card.number}', '${card.expiryDate}', '${card.cvv}', '${card.name}', '${card.surname}')">Edit</button>
-                            </div>
-                        </div>
-                        <button class="button-spec little button-delete" onclick="openConfirmModal('${card.number}')">-</button>
-                    `;
-                                
-
-                    container.appendChild(cardElement);
-                });
-            }
+        if (cards.length === 0) {
+            container.innerHTML = '<div class="container"><h1 class="noCards">You don\'t have any credit cards memorized</h1></div>';
         } else {
-            console.error("Container not found!"); // Debugging: Error if container is not found
+            container.innerHTML = ''; // Clear container before adding new cards
+            cards.forEach(card => {
+                const cardElement = document.createElement('div');
+                cardElement.className = 'review';
+                let cardNumber = card.number.replace(/\s/g, '');
+                let groups = cardNumber.match(/.{1,4}/g);
+                let result = "";
+
+                for(let i = 0; i < groups.length; i++) {
+                    result += `<p>${groups[i]}</p>\n`;
+                }
+
+                let buttonHTML = '';
+                if (card.isMain) {
+                    buttonHTML = `<h2 class="paymentMain"> Main </h2>`;
+                } else {
+                    buttonHTML = `<button class="button-spec" onclick="makeMain('${card.number}')"> Make Main </button>`;
+                }
+
+                cardElement.innerHTML = `
+                    <div class="paymentGrid">
+                        <div class="divPAY1">
+                            <div class="container1">
+                                <div class="card1">
+                                    <div class="card-inner">
+                                        <div class="front">
+                                            <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
+                                            <div class="row1">
+                                                <img src="https://i.ibb.co/G9pDnYJ/chip.png" width="60px">
+                                                <h1 class="paymentTitle"> ${card.title} </h1>
+                                            </div>
+                                            <div class="row1 card-no">
+                                                ${result}
+                                            </div>
+                                            <div class="row1 card-holder">
+                                                <p>CARD HOLDER</p>
+                                                <p>VALID TILL</p>
+                                            </div>
+                                            <div class="row1 name">
+                                                <p>${card.name} ${card.surname}</p>
+                                                <p>${card.expiryDate}</p>
+                                            </div>
+                                        </div>
+                                        <div class="back">
+                                            <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
+                                            <div class="bar"></div>
+                                            <div class="row1 card-cvv">
+                                                <div>
+                                                    <img src="https://i.ibb.co/S6JG8px/pattern.png">
+                                                </div>
+                                                <p>${card.cvv}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="divPAY2">
+                            ${buttonHTML}
+                            <button class="button-spec" onclick="openEditForm('${card.title}', '${card.number}', '${card.expiryDate}', '${card.cvv}', '${card.name}', '${card.surname}')">Edit</button>
+                        </div>
+                    </div>
+                    <button class="button-spec little button-delete" onclick="openConfirmModal('${card.number}')">-</button>
+                `;
+
+                container.appendChild(cardElement);
+            });
         }
+    } else {
+        console.error("Container not found!"); // Debugging: Error if container is not found
     }
+}
+
 
     function openModal() {
         document.getElementById('paymentModal').style.display = "block";

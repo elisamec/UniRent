@@ -2467,12 +2467,15 @@ textarea#comment::placeholder {
 }
 .paymentTitle {
     padding-top: 20px;
-    padding-left: 20px;
     padding-bottom: 20px;
+    padding-right: 20px;
+    font-size:26px;
+    font-family:'Josefin Sans', sans-serif;
+    color: #ffffff;
 }
 .paymentGrid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 280px);
     grid-template-rows: repeat(1, 1fr); /* Increased to accommodate divA and divB */
     grid-column-gap: 10px;
 }
@@ -2537,7 +2540,7 @@ textarea#comment::placeholder {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
