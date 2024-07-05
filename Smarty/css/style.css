@@ -2663,3 +2663,16 @@ textarea#comment::placeholder {
         transform: none; /* Removed translateY transform */
         box-sizing: border-box;
 }
+.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+#reportReason {
+    width:100%;
+}
+#reportForm {
+    padding: 10px;
+}
+#reportOwn {
+    padding-top: 10px;
+}

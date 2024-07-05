@@ -85,26 +85,30 @@
          <div class="row">
             <div class="col-md-10">
                   <div class="profile_info">
-                     <h2 class="profile_head">{$owner->getName()} {$owner->getSurname()}</h2>
-                     <p>@{$owner->getUsername()}</p>
-                     <p>Phone Number: {$owner->getPhoneNumber()}.</p>
-                     <p> Average Rating: n <!--$owner->getRating()-->.</p>
-                     <p> Number of Ads: n <!--$owner->getNumberOfAds()-->.</p>
-                     <div class="col-md-3">
-                     <div class="find_btn"><a href="/UniRent/Student/viewOwnerAds"> View Ads</a></div>
+                     <h2 class="profile_head">{$student->getName()} {$student->getSurname()}</h2>
+                     <p>@{$student->getUsername()}</p>
+                     {if $student->getSex() === "M"}
+                     <p>Sex: Male</p>
+                     {else}
+                     <p>Sex: Female</p>
+                     {/if}
+                     <p>Age: {$student->getAge()}.</p>
+                     <p> Average Rating: n <!--$student->getRating()-->.</p>
+                     <div class="col-md-2">
+                        <div class="delete_btn"><a href="#" onclick="openReportModal()">Report User</a></div>
                      </div>
+                  
                </div>
                </div>
             <div class="col-md-2">
                <div class="container">
                   <div class="profile_pic">
-                  {if $owner->getPhoto() === null}
+                  {if $student->getPhoto() === null}
                      <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
                   {else}
-                     <img src="{$owner->getPhoto()}">
+                     <img src="{$student->getPhoto()}">
                   {/if}
                   </div>
-                  
                </div>
             </div>
          </div>
@@ -116,7 +120,7 @@
          </div>
     <div id="reviewsContainer"></div>
 </div>
-    <script>
+       <script>
     {if isset($reviewsData)}
     const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
     console.log(reviews);
@@ -176,6 +180,84 @@
     // Call the function to display reviews
     displayReviews(reviews);
     {/if}
+</script>
+<div id="reportModal" class="resModal">
+
+    <!-- Modal content -->
+    <div class="resModal-content">
+        <span class="resClose" onclick="closeReportModal()">&times;</span>
+        <h2>Report User</h2>
+        <form id="reportForm" action="/UniRent/Student/report" class="form" method="POST" enctype="multipart/form-data">
+            <label for="reportReason">Reason for report:</label><br>
+            <textarea id="reportReason" name="reportReason" rows="4" cols="50" oninput="checkInput()"></textarea><br><br>
+            <div class="btn-cont">
+            <button type="submit" id="confirmDelete" class="disabled" onclick="submitReport()" disabled>Submit</button>
+            <button type="button" id="cancelDelete" onclick="cancelReport()">Cancel</button>
+            </div>
+    </div>
+
+</div>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("reportModal");
+
+    // Get the button that opens the modal
+    var btn = document.querySelector(".delete_btn a");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("resClose")[0];
+
+    // Get the textarea and submit button
+    var textarea = document.getElementById("reportReason");
+    var submitBtn = document.getElementById("confirmDelete");
+
+    // Open the modal
+    function openReportModal() {
+        modal.style.display = "block";
+    }
+
+    // Close the modal
+    function closeReportModal() {
+        modal.style.display = "none";
+    }
+
+    // Check input and enable/disable submit button
+    function checkInput() {
+        if (textarea.value.trim() !== "") {
+            submitBtn.disabled = false;
+            submitBtn.classList.remove("disabled");
+        } else {
+            submitBtn.disabled = true;
+            submitBtn.classList.add("disabled");
+        }
+    }
+
+    // Submit the report
+    function submitReport() {
+        if (textarea.value.trim() !== "") {
+            // Implement your submit logic here
+            alert("Report submitted: " + textarea.value.trim());
+            // Close the modal after submission
+            closeReportModal();
+        }
+    }
+    function cancelReport() {
+        // Clear the textarea
+        textarea.value = '';
+        // Disable the submit button
+        submitBtn.disabled = true;
+        submitBtn.classList.add("disabled");
+        // Close the modal
+        closeReportModal();
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 </script>
 
 <!-- footer section start -->

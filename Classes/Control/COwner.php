@@ -356,7 +356,7 @@ class COwner
         
 
     }
-    public static function publicProfileOwner(string $username)
+    public static function publicProfileFromOwner(string $username)
     {
         $view = new VOwner();
         $PM=FPersistentManager::getInstance();
@@ -379,7 +379,13 @@ class COwner
                 'userPicture' => $profilePic,
             ];
         }
-        $view->publicProfileOwner($owner, $reviewsData);
+        $view->publicProfileFromOwner($owner, $reviewsData);
+    }
+    public static function publicProfile(string $username) {
+        $PM=FPersistentManager::getInstance();
+        $user=$PM->verifyUserUsername($username);
+        $location='/UniRent/'.$user['type'].'/publicProfileFromOwner/'.$username;
+        header('Location:'.$location);
     }
 
 }
