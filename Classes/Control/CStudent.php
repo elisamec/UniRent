@@ -381,7 +381,7 @@ class CStudent{
         return $photo;
     }
 
-    public static function deletePhoto(){
+    /*public static function deletePhoto(){
 
         $PM=FPersistentManager::getInstance();
         $session=USession::getInstance();
@@ -401,7 +401,7 @@ class CStudent{
 
         $result > 0 ? print "Foto eliminata <br>" : print "Errore nell'eliminazione della foto <br>";
 
-    }
+    }*/
 
 
     public static function publicProfile(string $username) {

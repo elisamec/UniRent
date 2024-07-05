@@ -140,9 +140,14 @@ class FStudent
         print "Sto in update<br>";
         $db=FConnection::getInstance()->getConnection();
         $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+
+        
+        $verifica = $this->exist($student->getID());
+
+        $verifica ? print "Lo studente da aggiornare esiste<br>" : print "Lo studente da aggiornare non esiste<br>";
         if($this->exist($student->getID())){
 
-            print "Lo studente da aggiornare esiste<br>";
+            print "Sono dentro l'if<br>";
             try
             {
                 $CPhoto=$student->getPhoto();
@@ -167,6 +172,7 @@ class FStudent
                 $stm->bindValue(':sex',$student->getSex(),PDO::PARAM_STR);
                 $stm->bindValue(':smoker',$student->getSmoker(),PDO::PARAM_BOOL);
                 $stm->bindValue(':animals',$student->getAnimals(),PDO::PARAM_BOOL);
+
                 if ($student->getPhoto()!=null) 
                 {
                     $stm->bindValue(':picture', $student->getPhoto()->getId(), PDO::PARAM_INT);
@@ -175,9 +181,14 @@ class FStudent
                 {
                     $stm->bindValue(':picture', null, PDO::PARAM_NULL);;
                 }
+
+                print "Ho preparato tutti i dati <br>";
                 $stm->execute();
-                $db->commit();
+                print "Ho eseguito la query <br>";
+                //$db->commit();
+                print "Ho fatto il commit <br>";
                 $db->exec('UNLOCK TABLES');
+                print "Ho sbloccato le tabelle <br>";
                 return true;
             }
             catch(PDOException $e)
