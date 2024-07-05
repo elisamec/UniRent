@@ -434,6 +434,29 @@ class CStudent{
         }
         $view->publicProfileFromStudent($student, $reviewsData);
     }
+    public static function publicProfileFromOwner(string $username)
+    {
+        $view = new VStudent();
+        $PM=FPersistentManager::getInstance();
+        $student=$PM->getStudentByUsername($username);
+        $reviews = FReview::getInstance()->loadByRecipient($student->getId(), TType::STUDENT); //va fatto il metodo nel PM
+        $reviewsData = [];
+        
+        foreach ($reviews as $review) {
+            $profilePic = $PM->load('E'. $review->getAuthorType()->value, $review->getIdAuthor())->getPhoto();
+            if ($profilePic === null) {
+                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+            }
+            $reviewsData[] = [
+                'title' => $review->getTitle(),
+                'username' => $PM->load('E'. $review->getAuthorType()->value, $review->getIdAuthor())->getUsername(),
+                'stars' => $review->getValutation(),
+                'content' => $review->getDescription(),
+                'userPicture' => $profilePic,
+            ];
+        }
+        $view->publicProfileFromOwner($student, $reviewsData);
+    }
       
     public static function paymentMethods()
     {

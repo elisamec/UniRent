@@ -66,24 +66,24 @@
             <div class="heading">Owner Sign Up</div>
             <form action="/UniRent/Owner/ownerRegistration" class="form" method="post">
             {if $phoneError === true}
-            <input required="required" class="input" type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number: 1234567890" pattern="^((00|\+)39\s?)?3\d&#123;2&#125;\s?\d&#123;3&#125;\s?\d&#123;4&#125;$" title="Please enter an italian phone number">
+            <input required="required" data-inputmask="'mask': '999 9999999'" class="input" type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number: 1234567890" pattern="^((00|\+)39[\. ]??)??3\d{2}[\. ]??\d{6,7}$" title="Please enter an italian phone number">
             <p class="error">Phone Number already in use</p>
             {else}
             {if (isset($phone) && $phone !== "") || !isset($phone)}
-              <input required="required" class="input" type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number: 1234567890" pattern="^((00|\+)39\s?)?3\d&#123;2&#125;\s?\d&#123;3&#125;\s?\d&#123;4&#125;$" title="Please enter an italian phone number">
+              <input required="required" data-inputmask="'mask': '999 9999999'" class="input" type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number: 1234567890" pattern="^((00|\+)39[\. ]??)??3\d{2}[\. ]??\d{6,7}$" title="Please enter an italian phone number">
             {else}
-               <input required="required" class="input" type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number: 1234567890" value="{$phone}" pattern="^((00|\+)39\s?)?3\d&#123;2&#125;\s?\d&#123;3&#125;\s?\d&#123;4&#125;$" title="Please enter an italian phone number">
+               <input required="required" data-inputmask="'mask': '999 9999999'" class="input" type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number: 1234567890" value="{$phone}" pattern="^((00|\+)39[\. ]??)??3\d{2}[\. ]??\d{6,7}$" title="Please enter an italian phone number">
             {/if}
             {/if}
               
               {if $ibanError === true}
-               <input required="required" class="input" type="text" name="iban" id="iban" placeholder="IBAN" pattern="(it|IT)&#91;0-9&#93;&#123;2&#125;[A-Za-z][0-9]&#123;10&#125;[0-9A-Za-z]&#123;12&#125;$" title="Please enter an italian IBAN number">
+               <input required="required" class="input" type="text" name="iban" id="iban" placeholder="IBAN" maxlength="27" pattern="(it|IT)&#91;0-9&#93;&#123;2&#125;[A-Za-z][0-9]&#123;10&#125;[0-9A-Za-z]&#123;12&#125;$" title="Please enter an italian IBAN number">
                <p class="error">IBAN already in use</p>
                {else}
                {if (isset($iban) && $iban !== "") || !isset($iban)}
-               <input required="required" class="input" type="text" name="iban" id="iban" placeholder="IBAN" pattern="(it|IT)&#91;0-9&#93;&#123;2&#125;[A-Za-z][0-9]&#123;10&#125;[0-9A-Za-z]&#123;12&#125;$" title="Please enter an italian IBAN number">
+               <input required="required" class="input" type="text" name="iban" id="iban" placeholder="IBAN" maxlength="27" pattern="(it|IT)&#91;0-9&#93;&#123;2&#125;[A-Za-z][0-9]&#123;10&#125;[0-9A-Za-z]&#123;12&#125;$" title="Please enter an italian IBAN number">
                {else}
-               <input required="required" class="input" type="text" name="iban" id="iban" placeholder="IBAN"  value="{$iban}" pattern="(it|IT)&#91;0-9&#93;&#123;2&#125;[A-Za-z][0-9]&#123;10&#125;[0-9A-Za-z]&#123;12&#125;$" title="Please enter an italian IBAN number">
+               <input required="required" class="input" type="text" name="iban" id="iban" placeholder="IBAN" maxlength="27"  value="{$iban}" pattern="(it|IT)&#91;0-9&#93;&#123;2&#125;[A-Za-z][0-9]&#123;10&#125;[0-9A-Za-z]&#123;12&#125;$" title="Please enter an italian IBAN number">
                {/if}
             {/if}
              
@@ -93,6 +93,15 @@
         </div>
       </div>
 <br></br>
+<script>
+    // Initialize inputmask for credit card number and expiry date fields
+    $(document).ready(function() {
+      $('#phonenumber').inputmask({
+        mask: '9999999999',
+        placeholder: ''
+      });
+    });
+  </script>
 
       <!-- banner section end -->
 <div class="footer_section layout_padding">

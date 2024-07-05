@@ -381,6 +381,31 @@ class COwner
         }
         $view->publicProfileFromOwner($owner, $reviewsData);
     }
+    public static function publicProfileFromStudent(string $username)
+    {
+        $view = new VOwner();
+        $PM=FPersistentManager::getInstance();
+        $owner=$PM->getOwnerByUsername($username);
+
+
+        $reviews = FReview::getInstance()->loadByRecipient($owner->getId(), TType::OWNER);
+        $reviewsData = [];
+        
+        foreach ($reviews as $review) {
+            $profilePic = FOwner::getInstance()->load($review->getIdAuthor())->getPhoto();
+            if ($profilePic === null) {
+                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+            }
+            $reviewsData[] = [
+                'title' => $review->getTitle(),
+                'username' => FOwner::getInstance()->load($review->getIdAuthor())->getUsername(),
+                'stars' => $review->getValutation(),
+                'content' => $review->getDescription(),
+                'userPicture' => $profilePic,
+            ];
+        }
+        $view->publicProfileFromStudent($owner, $reviewsData);
+    }
     public static function publicProfile(string $username) {
         $PM=FPersistentManager::getInstance();
         $user=$PM->verifyUserUsername($username);
