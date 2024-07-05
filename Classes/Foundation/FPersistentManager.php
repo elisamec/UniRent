@@ -378,5 +378,12 @@ class FPersistentManager {
         return $result;
     }
 
+    public function isMainCard(int $studentId, string $number):bool
+    {
+        $FC=FCreditCard::getInstance();
+        $result=$FC->isMain($studentId,$number);
+        return $result;
+    }
+
 }
 

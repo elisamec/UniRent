@@ -271,7 +271,7 @@ class CStudent{
         $base64 = base64_encode($oldPhoto);
         $photoError = "data:" . 'image/jpeg' . ";base64," . $base64;
 
-        //if the new email is not already in use and it's an student's email or you haven't changed it
+        //if the new email is not already in use and it's a student's email or you haven't changed it
         if((($PM->verifyUserEmail($email)==false)&&($PM->verifyStudentEmail($email)))||($oldEmail===$email)) { 
             
             //if the new username is not already in use or you haven't changed it
@@ -569,5 +569,46 @@ class CStudent{
         {
             http_response_code(500);   # server error
         }
+    }
+
+    public static function editCreditCard()
+    {
+        $title=USuperGlobalAccess::getPost('cardTitle1');
+        #$number=USuperGlobalAccess::getPost('cardnumber1');
+        $expiry=USuperGlobalAccess::getPost('expirydate1');
+        $cvv=USuperGlobalAccess::getPost('cvv1');
+        $name=USuperGlobalAccess::getPost('name1');
+        $surname=USuperGlobalAccess::getPost('surname1');
+        $oldNumber=USuperGlobalAccess::getPost('hiddenOldCard');
+        $username=USession::getInstance()::getSessionElement('username');
+        $studentId=FPersistentManager::getInstance()->getStudentIdByUsername($username);
+        #print $title.' '.$number.' '.$expiry.' '.$cvv.' '.$name.' '.$surname.' '.$oldNumber;
+        $PM=FPersistentManager::getInstance();
+        if($PM->isMainCard($studentId,$oldNumber))
+        {
+            $c= new ECreditCard($oldNumber,$name,$surname,$expiry,$cvv,$studentId,true,$title);
+            $result=$PM::update($c);
+            if($result)
+            {
+                header('Location:/UniRent/Student/paymentMethods');
+            }
+            else
+            {
+                print '500 : SERVER ERROR';
+            }
+        }
+        else
+        {
+            $c= new ECreditCard($oldNumber,$name,$surname,$expiry,$cvv,$studentId,false,$title);
+            $result=$PM::update($c);
+            if($result)
+            {
+               header('Location:/UniRent/student/paymentMethods');
+            }
+            else
+            {
+                print '500 : SERVER ERROR';
+            }
+        }  
     }
 }

@@ -176,6 +176,7 @@
                         <div class="form-row">
                             <label for="cardnumber1">Enter Credit Card Number:</label>
                             <input id="cardnumber1" name="cardnumber1" type="text" data-inputmask="'mask': '9999 9999 9999 9999'" placeholder="____ ____ ____ ____">
+                            <input id="hiddenOldCard" name="hiddenOldCard" type="hidden">
                         </div>
                         <div class="form-row">
                             <label for="expirydate1">Expiry Date:</label>
@@ -194,7 +195,7 @@
                             <input type="text" id="surname1" name="surname1" required>
                         </div>
                         <div class="form-row full-width">
-                            <button class="button-spec final" type="button" onclick="updatePaymentMethod()">Submit</button>
+                            <button class="button-spec final" type="submit">Submit</button>
                         </div>
                     </div>
                 </form>
@@ -211,6 +212,7 @@ function openEditForm(cardTitle, cardNumber, expiryDate, CVV, Name, Surname) {
     document.getElementById('cvv1').value = CVV;
     document.getElementById('name1').value = Name;
     document.getElementById('surname1').value = Surname;
+    document.getElementById('hiddenOldCard').value = cardNumber;
 
     // Display the modal
     document.getElementById('paymentUpdateModal').style.display = 'block';
