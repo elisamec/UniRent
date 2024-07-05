@@ -155,7 +155,7 @@
             <input type="text" id="surname" name="surname" required>
         </div>
         <div class="form-row full-width">
-            <button class="button-spec final" type="button" onclick="addPaymentMethod()">Submit</button>
+            <button class="button-spec final" type="submit">Submit</button>
         </div>
     </div>
 </form>

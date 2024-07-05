@@ -355,6 +355,28 @@ class FPersistentManager {
         $cards=$FC->loadStudentCards($id);
         return $cards;
     }
+    
+    /**
+     * Method existsTheCard
+     *
+     * this method return if the card is already in DB
+     * @param string $number [card number to verify]
+     *
+     * @return bool
+     */
+    public function existsTheCard(string $number):bool
+    {
+        $FC=FCreditCard::getInstance();
+        $result=$FC->exist($number);
+        return $result;
+    }
+
+    public function deleteCreditCard(string $number):bool
+    {
+        $FC=FCreditCard::getInstance();
+        $result=$FC->delete($number);
+        return $result;
+    }
 
 }
 

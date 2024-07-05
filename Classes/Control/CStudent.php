@@ -3,6 +3,7 @@
 namespace Classes\Control;
 require __DIR__.'/../../vendor/autoload.php';
 
+use Classes\Entity\ECreditCard;
 use Classes\Entity\EPhoto;
 use Classes\Foundation\FPersistentManager;
 use Classes\Entity\EStudent;
@@ -485,5 +486,65 @@ class CStudent{
         }
         #print_r($cardsData);
         $view->paymentMethods($cardsData);
+    }
+
+    public static function addCreditCard()
+    {
+        $title=USuperGlobalAccess::getPost('cardTitle');
+        $number=USuperGlobalAccess::getPost('cardnumber');
+        $expiry=USuperGlobalAccess::getPost('expirydate');
+        $cvv=USuperGlobalAccess::getPost('cvv');
+        $name=USuperGlobalAccess::getPost('name');
+        $surname=USuperGlobalAccess::getPost('surname');
+        $username=USession::getInstance()::getSessionElement('username');
+        $studentId=FPersistentManager::getInstance()->getStudentIdByUsername($username);
+        if(FPersistentManager::getInstance()->existsTheCard($number))
+        {
+            print 'This credit card already exists!';
+        }
+        else
+        {
+            if(count(FPersistentManager::getInstance()->loadStudentCards($studentId))>0)
+            {
+                $card = new ECreditCard($number,$name,$surname,$expiry,(int)$cvv,(int)$studentId,false,$title);
+                $result=FPersistentManager::getInstance()::store($card);
+                if($result)
+                {
+                    header('Location:/UniRent/Student/paymentMethods');
+                }
+                else
+                {
+                    print '500: SERVER ERROR!';
+                }
+            }
+            else
+            {
+                $card = new ECreditCard($number,$name,$surname,$expiry,(int)$cvv,(int)$studentId,true,$title);
+                $result=FPersistentManager::getInstance()::store($card);
+                if($result)
+                {
+                    header('Location:/UniRent/Student/paymentMethods');
+                }
+                else
+                {
+                    print '500: SERVER ERROR!';
+                }
+            }
+        }
+    }
+
+    public static function deleteCreditCard(string $creditCard)
+    {
+        $number=urldecode($creditCard);  #siccome usuamo url autodescrittive il php non decodifica i parametri automaticamente ma bisogna farlo a mano
+        $PM=FPersistentManager::getInstance();
+        $result=$PM->deleteCreditCard($number);
+        if($result)
+        {
+            http_response_code(200);  # ok
+        }
+        else
+        {
+            http_response_code(500);   # server error
+        }
     }
 }
