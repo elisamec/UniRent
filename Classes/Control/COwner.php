@@ -246,25 +246,25 @@ class COwner
                         }
                         else
                         {
-                            $view->editProfile($owner, $photo, false, false, false, true, false, false); //Iban already in use
+                            $view->editProfile($owner, $picture, false, false, false, true, false, false); //Iban already in use
                             #header('Location:/UniRent/Owner/profile');
                         }
                     }
                     else
                     {
-                        $view->editProfile($owner, $photo, false, false, true, false, false, false); //phone already in use
+                        $view->editProfile($owner, $picture, false, false, true, false, false, false); //phone already in use
                         #header('Location:/UniRent/Owner/profile');
                     }
                 }
                 else
                 {   
-                    $view->editProfile($owner, $photo, true, false, false, false, false, false); //Username already in use
+                    $view->editProfile($owner, $picture, true, false, false, false, false, false); //Username already in use
                     #header('Location:/UniRent/Owner/profile');
                 }
             }
             else
             {   
-                $view->editProfile($owner, $photo, false, true, false, false, false, false); //Email already in use
+                $view->editProfile($owner, $picture, false, true, false, false, false, false); //Email already in use
                 #header('Location:/UniRent/Owner/profile');
             }
         }

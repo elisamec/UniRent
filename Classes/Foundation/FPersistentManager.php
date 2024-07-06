@@ -3,6 +3,7 @@ namespace Classes\Foundation;
 require __DIR__ .'/../../vendor/autoload.php';
 use Classes\Foundation;
 use Classes\Entity;
+use Classes\Entity\ECreditCard;
 use Classes\Entity\EPhoto;
 use Classes\Entity\EStudent;
 use Classes\Utilities\UAccessUniversityFile;
@@ -382,6 +383,35 @@ class FPersistentManager {
     {
         $FC=FCreditCard::getInstance();
         $result=$FC->isMain($studentId,$number);
+        return $result;
+    }
+    
+    /**
+     * Method loadCreditCard
+     *
+     * this method load by the DB a ECreditCard object
+     * @param string $number [credit card's number]
+     *
+     * @return ECreditCard
+     */
+    public function loadCreditCard(string $number):ECreditCard
+    {
+        $FC=FCreditCard::getInstance();
+        $result=$FC->load($number);
+        return $result;
+    }
+    
+    /**
+     * Method getStudentMainCard
+     *
+     * @param int $studentId [explicite description]
+     *
+     * @return ECreditCard
+     */
+    public function getStudentMainCard(int $studentId):?ECreditCard
+    {
+        $FC=FCreditCard::getInstance();
+        $result=$FC->getMainCard($studentId);
         return $result;
     }
 

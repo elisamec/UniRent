@@ -611,4 +611,43 @@ class CStudent{
             }
         }  
     }
+
+    public static function makeMainCreditCard(string $number)
+    {
+        $n=urldecode($number);
+        $session=USession::getInstance();
+        $username=$session::getSessionElement('username');
+        $PM=FPersistentManager::getInstance();
+        $studentId=$PM->getStudentIdByUsername($username);
+        $actualcard=$PM->loadCreditCard($n);
+        $actualMain=$PM->getStudentMainCard($studentId);
+        if(is_null($actualMain))
+        {
+            $actualcard->setMain(true);
+            $PM::update($actualcard);
+            http_response_code(200);
+        }
+        else
+        {
+            $actualMain->setMain(false);
+            $res_1=$PM::update($actualMain);
+            if($res_1)
+            {
+                $actualcard->setMain(true);
+                $res_2=$PM::update($actualcard);
+                if($res_2)
+                {
+                    http_response_code(200);
+                }
+                else
+                {
+                    http_response_code(500);
+                }
+            }
+            else
+            {
+                http_response_code(500);
+            }
+        }
+    }
 }

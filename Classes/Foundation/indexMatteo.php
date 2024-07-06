@@ -151,12 +151,5 @@ print $totalMinutes;
 #print EAccommodation::stringInMinutes('03:00');
 
 $PM=FPersistentManager::getInstance();
-$result=$PM->deleteCreditCard('1233 3333 1231 1234');
-if(!$result)
-{
-    print 'Cancellazione avvenuta con successo!';
-}
-else
-{
-    print 'Cancellazione non avvenuta!';
-}
+$r=$PM->loadCreditCard('1111 1111 1111 1111');
+print $r->__toString();
