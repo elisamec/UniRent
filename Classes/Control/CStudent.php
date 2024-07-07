@@ -3,6 +3,7 @@
 namespace Classes\Control;
 require __DIR__.'/../../vendor/autoload.php';
 
+use Classes\Entity\ECreditCard;
 use Classes\Entity\EPhoto;
 use Classes\Foundation\FPersistentManager;
 use Classes\Entity\EStudent;
@@ -270,7 +271,7 @@ class CStudent{
         $base64 = base64_encode($oldPhoto);
         $photoError = "data:" . 'image/jpeg' . ";base64," . $base64;
 
-        //if the new email is not already in use and it's an student's email or you haven't changed it
+        //if the new email is not already in use and it's a student's email or you haven't changed it
         if((($PM->verifyUserEmail($email)==false)&&($PM->verifyStudentEmail($email)))||($oldEmail===$email)) { 
             
             //if the new username is not already in use or you haven't changed it
@@ -419,17 +420,11 @@ class CStudent{
     public static function publicProfile(string $username) {
         $PM=FPersistentManager::getInstance();
         $user=$PM->verifyUserUsername($username);
-        if($user['type']==='Student')
-        {
-            header('Location:/UniRent/Student/publicProfileStudent/'.$username);
-        }
-        else
-        {
-            header('Location:/UniRent/Owner/publicProfileOwner/'.$username);
-        }
+        $location='/UniRent/'.$user['type'].'/publicProfileFromStudent/'.$username;
+        header('Location:'.$location);
     }
         
-    public static function publicProfileStudent(string $username)
+    public static function publicProfileFromStudent(string $username)
     {
         $view = new VStudent();
         $PM=FPersistentManager::getInstance();
@@ -450,7 +445,30 @@ class CStudent{
                 'userPicture' => $profilePic,
             ];
         }
-        $view->publicProfileStudent($student, $reviewsData);
+        $view->publicProfileFromStudent($student, $reviewsData);
+    }
+    public static function publicProfileFromOwner(string $username)
+    {
+        $view = new VStudent();
+        $PM=FPersistentManager::getInstance();
+        $student=$PM->getStudentByUsername($username);
+        $reviews = FReview::getInstance()->loadByRecipient($student->getId(), TType::STUDENT); //va fatto il metodo nel PM
+        $reviewsData = [];
+        
+        foreach ($reviews as $review) {
+            $profilePic = $PM->load('E'. $review->getAuthorType()->value, $review->getIdAuthor())->getPhoto();
+            if ($profilePic === null) {
+                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+            }
+            $reviewsData[] = [
+                'title' => $review->getTitle(),
+                'username' => $PM->load('E'. $review->getAuthorType()->value, $review->getIdAuthor())->getUsername(),
+                'stars' => $review->getValutation(),
+                'content' => $review->getDescription(),
+                'userPicture' => $profilePic,
+            ];
+        }
+        $view->publicProfileFromOwner($student, $reviewsData);
     }
       
     public static function paymentMethods()
@@ -503,5 +521,145 @@ class CStudent{
         }
         #print_r($cardsData);
         $view->paymentMethods($cardsData);
+    }
+
+    public static function addCreditCard()
+    {
+        $title=USuperGlobalAccess::getPost('cardTitle');
+        $number=USuperGlobalAccess::getPost('cardnumber');
+        $expiry=USuperGlobalAccess::getPost('expirydate');
+        $cvv=USuperGlobalAccess::getPost('cvv');
+        $name=USuperGlobalAccess::getPost('name');
+        $surname=USuperGlobalAccess::getPost('surname');
+        $username=USession::getInstance()::getSessionElement('username');
+        $studentId=FPersistentManager::getInstance()->getStudentIdByUsername($username);
+        if(FPersistentManager::getInstance()->existsTheCard($number))
+        {
+            print 'This credit card already exists!';
+        }
+        else
+        {
+            if(count(FPersistentManager::getInstance()->loadStudentCards($studentId))>0)
+            {
+                $card = new ECreditCard($number,$name,$surname,$expiry,(int)$cvv,(int)$studentId,false,$title);
+                $result=FPersistentManager::getInstance()::store($card);
+                if($result)
+                {
+                    header('Location:/UniRent/Student/paymentMethods');
+                }
+                else
+                {
+                    print '500: SERVER ERROR!';
+                }
+            }
+            else
+            {
+                $card = new ECreditCard($number,$name,$surname,$expiry,(int)$cvv,(int)$studentId,true,$title);
+                $result=FPersistentManager::getInstance()::store($card);
+                if($result)
+                {
+                    header('Location:/UniRent/Student/paymentMethods');
+                }
+                else
+                {
+                    print '500: SERVER ERROR!';
+                }
+            }
+        }
+    }
+
+    public static function deleteCreditCard(string $creditCard)
+    {
+        $number=urldecode($creditCard);  #siccome usuamo url autodescrittive il php non decodifica i parametri automaticamente ma bisogna farlo a mano
+        $PM=FPersistentManager::getInstance();
+        $result=$PM->deleteCreditCard($number);
+        if($result)
+        {
+            http_response_code(200);  # ok
+        }
+        else
+        {
+            http_response_code(500);   # server error
+        }
+    }
+
+    public static function editCreditCard()
+    {
+        $title=USuperGlobalAccess::getPost('cardTitle1');
+        #$number=USuperGlobalAccess::getPost('cardnumber1');
+        $expiry=USuperGlobalAccess::getPost('expirydate1');
+        $cvv=USuperGlobalAccess::getPost('cvv1');
+        $name=USuperGlobalAccess::getPost('name1');
+        $surname=USuperGlobalAccess::getPost('surname1');
+        $oldNumber=USuperGlobalAccess::getPost('hiddenOldCard');
+        $username=USession::getInstance()::getSessionElement('username');
+        $studentId=FPersistentManager::getInstance()->getStudentIdByUsername($username);
+        #print $title.' '.$number.' '.$expiry.' '.$cvv.' '.$name.' '.$surname.' '.$oldNumber;
+        $PM=FPersistentManager::getInstance();
+        if($PM->isMainCard($studentId,$oldNumber))
+        {
+            $c= new ECreditCard($oldNumber,$name,$surname,$expiry,$cvv,$studentId,true,$title);
+            $result=$PM::update($c);
+            if($result)
+            {
+                header('Location:/UniRent/Student/paymentMethods');
+            }
+            else
+            {
+                print '500 : SERVER ERROR';
+            }
+        }
+        else
+        {
+            $c= new ECreditCard($oldNumber,$name,$surname,$expiry,$cvv,$studentId,false,$title);
+            $result=$PM::update($c);
+            if($result)
+            {
+               header('Location:/UniRent/student/paymentMethods');
+            }
+            else
+            {
+                print '500 : SERVER ERROR';
+            }
+        }  
+    }
+
+    public static function makeMainCreditCard(string $number)
+    {
+        $n=urldecode($number);
+        $session=USession::getInstance();
+        $username=$session::getSessionElement('username');
+        $PM=FPersistentManager::getInstance();
+        $studentId=$PM->getStudentIdByUsername($username);
+        $actualcard=$PM->loadCreditCard($n);
+        $actualMain=$PM->getStudentMainCard($studentId);
+        if(is_null($actualMain))
+        {
+            $actualcard->setMain(true);
+            $PM::update($actualcard);
+            http_response_code(200);
+        }
+        else
+        {
+            $actualMain->setMain(false);
+            $res_1=$PM::update($actualMain);
+            if($res_1)
+            {
+                $actualcard->setMain(true);
+                $res_2=$PM::update($actualcard);
+                if($res_2)
+                {
+                    http_response_code(200);
+                }
+                else
+                {
+                    http_response_code(500);
+                }
+            }
+            else
+            {
+                http_response_code(500);
+            }
+        }
     }
 }

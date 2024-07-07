@@ -155,7 +155,7 @@
             <input type="text" id="surname" name="surname" required>
         </div>
         <div class="form-row full-width">
-            <button class="button-spec final" type="button" onclick="addPaymentMethod()">Submit</button>
+            <button class="button-spec final" type="submit">Submit</button>
         </div>
     </div>
 </form>
@@ -176,6 +176,7 @@
                         <div class="form-row">
                             <label for="cardnumber1">Enter Credit Card Number:</label>
                             <input id="cardnumber1" name="cardnumber1" type="text" data-inputmask="'mask': '9999 9999 9999 9999'" placeholder="____ ____ ____ ____">
+                            <input id="hiddenOldCard" name="hiddenOldCard" type="hidden">
                         </div>
                         <div class="form-row">
                             <label for="expirydate1">Expiry Date:</label>
@@ -194,7 +195,7 @@
                             <input type="text" id="surname1" name="surname1" required>
                         </div>
                         <div class="form-row full-width">
-                            <button class="button-spec final" type="button" onclick="updatePaymentMethod()">Submit</button>
+                            <button class="button-spec final" type="submit">Submit</button>
                         </div>
                     </div>
                 </form>
@@ -211,6 +212,7 @@ function openEditForm(cardTitle, cardNumber, expiryDate, CVV, Name, Surname) {
     document.getElementById('cvv1').value = CVV;
     document.getElementById('name1').value = Name;
     document.getElementById('surname1').value = Surname;
+    document.getElementById('hiddenOldCard').value = cardNumber;
 
     // Display the modal
     document.getElementById('paymentUpdateModal').style.display = 'block';
@@ -314,7 +316,7 @@ function updatePaymentMethod() {
                 if (card.isMain) {
                     buttonHTML = `<h2 class="paymentMain"> Main </h2>`;
                 } else {
-                    buttonHTML = `<button class="button-spec" onclick="makeMain('${card.number}')"> Make Main </button>`;
+                    buttonHTML = `<button class="button-spec" onclick="fallaMain('${card.number}')"> Make Main </button>`;
                 }
 
                 cardElement.innerHTML = `
@@ -453,30 +455,67 @@ function updatePaymentMethod() {
         });
     }
 
-    // Function to make a card the main card
-    function makeMain(cardNumber) {
-        let mainCard = null;
-        const otherCards = [];
+    // Function to make a card the main card   (per il momento non riesco a usarla Eli, mi servirebbe metterci una fetch per attendere la risposta del server, ci ho provato ma non sono riuscito :-(  ))
+    // sarebbe bello fare come qui sopra in deleteCard
+    function makeMain(cardNumber) {   
+
+            
+                let mainCard = null;
+                const otherCards = [];
         
-        cards.forEach(card => {
-            if (card.number === cardNumber) {
-                card.isMain = true;
-                mainCard = card;
-            } else {
-                card.isMain = false;
-                otherCards.push(card);
+                cards.forEach(card => {
+                if (card.number === cardNumber) 
+                {
+                    card.isMain = true;
+                    mainCard = card;
+                } 
+                else 
+                {
+                    card.isMain = false;
+                    otherCards.push(card);
+                }
+                });
+                console.log('Main card:', mainCard);
+                console.log('Other card:', otherCards);
+                if (mainCard) {
+                cards = [mainCard, ...otherCards];
+                } else {
+                     console.error('Card not found:', cardNumber);
+                }
+        
+                console.log('Updated cards:', cards);
+                displayCards(cards);      
+    }
+
+    function fallaMain(cardNumber)
+    {
+        // mando la richiesta al server
+  
+        fetch(`/UniRent/Student/makeMainCreditCard/${cardNumber}`, {
+            method: "GET"
+        })
+        .then(response=>{
+            if(response.ok)
+            {
+                makeMain(cardNumber);
             }
-        });
-         console.log('Main card:', mainCard);
-         console.log('Other card:', otherCards);
-        if (mainCard) {
-            cards = [mainCard, ...otherCards];
-        } else {
-            console.error('Card not found:', cardNumber);
-        }
-        
-        console.log('Updated cards:', cards);
-        displayCards(cards);
+            if (response.status >= 100 && response.status < 200) 
+            {
+                console.log("Informazioni per il client");
+            }
+            if (response.status >= 300 && response.status < 399) 
+            {
+                console.log("Redirezione");
+            }
+            if (response.status >= 400 && response.status < 499) 
+            {
+                console.log("Richiesta errata");
+            }
+            if (response.status >= 500 && response.status < 599) 
+            {
+              console.log("Errore sul server");
+            }
+        })
     }
 
     // Event listener for the confirmation button

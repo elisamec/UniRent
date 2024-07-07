@@ -19,7 +19,6 @@ class CFrontController{
      * 
      */
     public function run($requestUri){
-
         $requestUri = trim($requestUri, '/');
         $uriParts = explode('/', $requestUri);
 
@@ -37,15 +36,13 @@ class CFrontController{
 
         if (file_exists($controllerFile)) {
             require_once $controllerFile;
-
             // Check if the method exists in the controller
             if (method_exists("Classes\Control\\".$controllerClass, $methodName)) {
-
+                
 
                 // Call the method
                 $params = array_slice($uriParts, 2); // Get optional parameters
                 call_user_func_array(["Classes\Control\\".$controllerClass, $methodName], $params);
-
             } else {
                 // Method not found, handle appropriately (e.g., show 404 page)
                 header('Location: /UniRent/User/home');

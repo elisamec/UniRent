@@ -241,7 +241,15 @@ class FCreditCard
             return false;
         }
     }
-
+    
+    /**
+     * Method loadStudentCards
+     *
+     * this method retun all the student's credit cards
+     * @param $idStudent $idStudent [student's ID]
+     *
+     * @return array
+     */
     public function loadStudentCards($idStudent):array
     {
         $result=array();
@@ -271,6 +279,39 @@ class FCreditCard
         }
         return $result;
 
+    }
+    
+    /**
+     * Method getMainCard
+     *
+     * this method return the main card of a student with given id
+     * @param string $studentId [student' ID]
+     *
+     * @return ?ECreditCard
+     */
+    public function getMainCard(string $studentId):?ECreditCard
+    {
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $q='SELECT * FROM creditcard WHERE idStudent = :id AND main = true';
+            $db->exec('LOCK TABLES creditcard READ');
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindParam(':id',$studentId);
+            $stm->execute();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return null;
+        }
+
+        $row=$stm->fetch(PDO::FETCH_ASSOC);
+        $c= new ECreditCard($row['number'],$row['name'],$row['surname'],$row['expiry'],(int)$row['cvv'],(int)$row['idStudent'],true,$row['title']);
+        return $c;
     }
 
 

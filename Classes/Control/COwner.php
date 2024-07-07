@@ -246,25 +246,25 @@ class COwner
                         }
                         else
                         {
-                            $view->editProfile($owner, $photo, false, false, false, true, false, false); //Iban already in use
+                            $view->editProfile($owner, $picture, false, false, false, true, false, false); //Iban already in use
                             #header('Location:/UniRent/Owner/profile');
                         }
                     }
                     else
                     {
-                        $view->editProfile($owner, $photo, false, false, true, false, false, false); //phone already in use
+                        $view->editProfile($owner, $picture, false, false, true, false, false, false); //phone already in use
                         #header('Location:/UniRent/Owner/profile');
                     }
                 }
                 else
                 {   
-                    $view->editProfile($owner, $photo, true, false, false, false, false, false); //Username already in use
+                    $view->editProfile($owner, $picture, true, false, false, false, false, false); //Username already in use
                     #header('Location:/UniRent/Owner/profile');
                 }
             }
             else
             {   
-                $view->editProfile($owner, $photo, false, true, false, false, false, false); //Email already in use
+                $view->editProfile($owner, $picture, false, true, false, false, false, false); //Email already in use
                 #header('Location:/UniRent/Owner/profile');
             }
         }
@@ -356,7 +356,7 @@ class COwner
         
 
     }
-    public static function publicProfileOwner(string $username)
+    public static function publicProfileFromOwner(string $username)
     {
         $view = new VOwner();
         $PM=FPersistentManager::getInstance();
@@ -379,7 +379,38 @@ class COwner
                 'userPicture' => $profilePic,
             ];
         }
-        $view->publicProfileOwner($owner, $reviewsData);
+        $view->publicProfileFromOwner($owner, $reviewsData);
+    }
+    public static function publicProfileFromStudent(string $username)
+    {
+        $view = new VOwner();
+        $PM=FPersistentManager::getInstance();
+        $owner=$PM->getOwnerByUsername($username);
+
+
+        $reviews = FReview::getInstance()->loadByRecipient($owner->getId(), TType::OWNER);
+        $reviewsData = [];
+        
+        foreach ($reviews as $review) {
+            $profilePic = FOwner::getInstance()->load($review->getIdAuthor())->getPhoto();
+            if ($profilePic === null) {
+                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+            }
+            $reviewsData[] = [
+                'title' => $review->getTitle(),
+                'username' => FOwner::getInstance()->load($review->getIdAuthor())->getUsername(),
+                'stars' => $review->getValutation(),
+                'content' => $review->getDescription(),
+                'userPicture' => $profilePic,
+            ];
+        }
+        $view->publicProfileFromStudent($owner, $reviewsData);
+    }
+    public static function publicProfile(string $username) {
+        $PM=FPersistentManager::getInstance();
+        $user=$PM->verifyUserUsername($username);
+        $location='/UniRent/'.$user['type'].'/publicProfileFromOwner/'.$username;
+        header('Location:'.$location);
     }
 
 }

@@ -151,5 +151,5 @@ print $totalMinutes;
 #print EAccommodation::stringInMinutes('03:00');
 
 $PM=FPersistentManager::getInstance();
-$cards=$PM->loadStudentCards(2);
-print_r($cards);
+$r=$PM->loadCreditCard('1111 1111 1111 1111');
+print $r->__toString();

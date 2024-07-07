@@ -1814,7 +1814,6 @@ textarea#comment::placeholder {
         padding-bottom: 40px;
     }
 .containerProf {
-        height: 100%;
         padding-left: 40px;
         padding-right: 40px;
     }
@@ -2662,4 +2661,17 @@ textarea#comment::placeholder {
         pointer-events: none; /* Changed from none to auto */
         transform: none; /* Removed translateY transform */
         box-sizing: border-box;
+}
+.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+#reportReason {
+    width:100%;
+}
+#reportForm {
+    padding: 10px;
+}
+#reportOwn {
+    padding-top: 10px;
 }
