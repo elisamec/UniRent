@@ -35,7 +35,7 @@ class FStudent
         $stm=$db->prepare($q);
         $stm->bindParam(':id',$id,PDO::PARAM_INT);
         $stm->execute();
-        $db->commit();
+        //$db->commit();
         $result=$stm->rowCount();
 
         if ($result >0)
@@ -142,10 +142,10 @@ class FStudent
         $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
 
         
-        $verifica = $this->exist($student->getID());
+        //$verifica = $this->exist($student->getID());
 
-        $verifica ? print "Lo studente da aggiornare esiste<br>" : print "Lo studente da aggiornare non esiste<br>";
-        if($this->exist($student->getID())){
+        //$verifica ? print "Lo studente da aggiornare esiste<br>" : print "Lo studente da aggiornare non esiste<br>";
+        //if($this->exist($student->getID())){
 
             print "Sono dentro l'if<br>";
             try
@@ -205,11 +205,11 @@ class FStudent
                 }
                 return false;
             }
-        } 
+        /*} 
         else
         {
             return false;
-        }
+        }*/
     }
     
     private function currentPhoto(int $id): ?int   #restituisce l'ID della foto del profilo dello studente corrente

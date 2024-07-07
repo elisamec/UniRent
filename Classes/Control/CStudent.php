@@ -296,8 +296,10 @@ class CStudent{
                 
                 if($result && !$error){
 
+                    $ph = $photo->getPhoto();
                     $session->setSessionElement('username',$username);
                     $session->setSessionElement('password',$password);
+                    $session->setSessionElement('photo',$ph);
                     header('Location:/UniRent/Student/profile');
                 } elseif (!$result) {
                     
@@ -355,6 +357,8 @@ class CStudent{
         $PM=FPersistentManager::getInstance();
 
         if(!is_null($oldPhoto)){
+
+            print "La vecchia foto non è null<br>";
                     
             $photoId=$oldStudent->getPhoto()->getId();
 
@@ -362,6 +366,8 @@ class CStudent{
                               : $photo = new EPhoto($photoId, $picture['img'], 'other', null, null);
 
         } else {
+
+            print "La vecchia foto è null";
 
             if(is_null($picture)) {
 
@@ -381,7 +387,7 @@ class CStudent{
         return $photo;
     }
 
-    /*public static function deletePhoto(){
+    public static function deletePhoto(){
 
         $PM=FPersistentManager::getInstance();
         $session=USession::getInstance();
@@ -392,16 +398,22 @@ class CStudent{
         if(is_null($photo)){
 
             print "Non hai nessuna foto da eliminare";
+            $result = 0;
 
         } else {
             $photoID = $photo->getId();
+            $result = $PM->delete('EPhoto', $photoID);
         }
 
-        $result = $PM->delete('EPhoto', $photoID);
+        
 
-        $result > 0 ? print "Foto eliminata <br>" : print "Errore nell'eliminazione della foto <br>";
+        if ($result > 0) {
+            $photo = null;
+            $session->setSessionElement('photo',$photo);
+            header('Location:/UniRent/Student/profile');
+        }  else print "Errore nell'eliminazione della foto <br>";
 
-    }*/
+    }
 
 
     public static function publicProfile(string $username) {
