@@ -66,13 +66,19 @@
             <div class="heading">Owner Sign Up</div>
             <form action="/UniRent/Owner/ownerRegistration" class="form" method="post">
             {if $phoneError === true}
+            {literal}
             <input required="required" data-inputmask="'mask': '999 9999999'" class="input" type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number: 1234567890" pattern="^((00|\+)39[\. ]??)??3\d{2}[\. ]??\d{6,7}$" title="Please enter an italian phone number">
+            {/literal}
             <p class="error">Phone Number already in use</p>
             {else}
             {if (isset($phone) && $phone !== "") || !isset($phone)}
+            {literal}
               <input required="required" data-inputmask="'mask': '999 9999999'" class="input" type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number: 1234567890" pattern="^((00|\+)39[\. ]??)??3\d{2}[\. ]??\d{6,7}$" title="Please enter an italian phone number">
+            {/literal}
             {else}
+            {literal}
                <input required="required" data-inputmask="'mask': '999 9999999'" class="input" type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number: 1234567890" value="{$phone}" pattern="^((00|\+)39[\. ]??)??3\d{2}[\. ]??\d{6,7}$" title="Please enter an italian phone number">
+            {/literal}
             {/if}
             {/if}
               

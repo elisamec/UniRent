@@ -41,7 +41,7 @@ use PDOException;
         $stm=$db->prepare($q);
         $stm->bindParam(':idOwner',$id,PDO::PARAM_INT);
         $stm->execute();
-        $db->commit();
+        //$db->commit();
         $result=$stm->rowCount();
 
         if ($result >0)
@@ -124,7 +124,7 @@ use PDOException;
     }
     public static function update(EOwner $owner):bool {
         $db=FConnection::getInstance()->getConnection();
-        if (FOwner::getInstance()->exist($owner->getId())) {
+        //if (FOwner::getInstance()->exist($owner->getId())) {
         try
         { 
             $currentPhotoID= FOwner::currentPhoto($owner->getId());
@@ -145,7 +145,7 @@ use PDOException;
                 return false;
             }
             $db->exec('LOCK TABLES owner WRITE');
-            $db->beginTransaction();
+            //$db->beginTransaction();
             $q='UPDATE owner SET username = :user, password = :pass, name = :name, surname = :surname, picture = :picture, email = :email, phonenumber = :phone, iban = :iban WHERE id = :id';
             $stm = $db->prepare($q);
             $stm->bindValue(':id', $owner->getId(), PDO::PARAM_INT);
@@ -164,7 +164,7 @@ use PDOException;
             print 'prima di execute';
             $stm->execute();
             print 'dopo execute';
-            $db->commit();
+            //$db->commit();
             print 'dopo commit';
             $db->exec('UNLOCK TABLES');
             return true;
@@ -181,7 +181,7 @@ use PDOException;
             }
             return false;
         }
-    } else return false;
+    //} else return false;
     }
     private static function currentPhoto(int $id): ?int {
         $db=FConnection::getInstance()->getConnection();

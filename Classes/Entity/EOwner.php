@@ -155,6 +155,10 @@ class EOwner
     public function setSurname(string $surname):void {
         $this->surname=ucfirst($surname);
     }
+
+    public function setPhoto(?EPhoto $photo):void {
+        $this->photo=$photo;
+    }
     public function uploadPhoto(EPhoto $photo):void {
         if($this->photo===null) {
             $this->photo=$photo;

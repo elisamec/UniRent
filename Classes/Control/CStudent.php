@@ -93,7 +93,8 @@ class CStudent{
     
     public static function editProfile(){
         $view = new VStudent();
-        $student =FPersistentManager::getInstance()->getStudentByUsername(USession::getInstance()::getSessionElement('username'));
+        $PM = FPersistentManager::getInstance();
+        $student = $PM->getStudentByUsername(USession::getInstance()::getSessionElement('username'));
         $photo = USession::getInstance()::getSessionElement('photo');
 
         if(is_null($student)) {

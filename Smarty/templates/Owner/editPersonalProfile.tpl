@@ -100,7 +100,7 @@
          </div>
             <div class="col-md-6">
                <div class="profile_info">
-                  <form class="form"  action="/UniRent/Owner/modifyOwnerProfile"  method="POST" id="yourFormId">
+                  <form class="form"  action="/UniRent/Owner/modifyOwnerProfile"  method="POST" id="yourFormId" enctype="multipart/form-data">
                      <div class="parentOW">
                         <div class="div1"><p>Name: </p></div>
                         <div class="div2">
@@ -176,7 +176,7 @@
                               <label class="change_btn" for="img">Upload New Profile Picture</label>
                            </div>
                            <div class="divB">
-                     <div class="delete_btn"><a href="#">Delete Photo</a></div>
+                     <div class="delete_btn"><a href="/UniRent/Owner/deletePhoto">Delete Photo</a></div>
                   </div>
                      <div class="div19"><p>Delete Profile: </p></div>
                      <div class="div20">

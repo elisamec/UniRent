@@ -66,8 +66,9 @@ class COwner
                             $phone,
                             $iban);
         $result=$PM->store($owner);
+        $ownerId = $owner->getId();
         if($result){
-
+            $session->setSessionElement('id', $ownerId);
             $session->setSessionElement('phoneNumber', $phone);
             $session->setSessionElement('iban', $iban);
             
@@ -88,9 +89,11 @@ class COwner
     public static function profile(): void {
         $view = new VOwner();
         $session=USession::getInstance();
-        $user = $session->getSessionElement('username');
+        //$user = $session->getSessionElement('username');
         $PM=FPersistentManager::getInstance();
-        $owner=$PM->getOwnerByUsername($user);
+        //$owner=$PM->getOwnerByUsername($user);
+        $id = $session->getSessionElement('id');
+        $owner=$PM->load("EOwner", $id);
         $ph = null;
 
         if(is_null($owner)){
@@ -121,7 +124,8 @@ class COwner
         $user = $session->getSessionElement('username');
         
         $PM=FPersistentManager::getInstance();
-        $owner=$PM->getOwnerByUsername($user);
+        $id = $session->getSessionElement('id');
+        $owner=$PM->load("EOwner", $id);
         if(is_null($owner)){
 
             print '<b>500 : SERVER ERROR </b>';
@@ -164,9 +168,13 @@ class COwner
 
     public static function modifyOwnerProfile()
     {
+
         $view = new VOwner();
         $session=USession::getInstance();
+        $error = 0;
         $PM=FPersistentManager::getInstance();
+
+        //Reed the data from the form
         $name=USuperGlobalAccess::getPost('name');
         $surname=USuperGlobalAccess::getPost('surname');
         $picture = USuperGlobalAccess::getPhoto('img');
@@ -175,9 +183,15 @@ class COwner
         $newPassword=USuperGlobalAccess::getPost('password');
         $newPhoneNumber=EOwner::formatPhoneNumber(USuperGlobalAccess::getPost('phoneNumber'));
         $newIBAN=USuperGlobalAccess::getPost('iban');
-        #print $name.' '.$surname.' '.$newemail.' '.$newUsername.' '.$newPassword.' '.$newPhoneNumber.' '.$newIBAN;
         $oldUsername=$session::getSessionElement('username');
-        $ownerId=$PM->getOwnerIdByUsername($oldUsername);
+
+        $ownerId=$session::getSessionElement('id');
+        $oldPassword=USuperGlobalAccess::getPost('oldPassword');
+
+        $oldPhoto = $session::getSessionElement('photo');
+        $base64 = base64_encode($oldPhoto);
+        $photoError = "data:" . 'image/jpeg' . ";base64," . $base64;
+
         if($ownerId===null)
         {
             print 'Spiacenti non sei un owner';
@@ -194,35 +208,14 @@ class COwner
                     {
                         if(($newIBAN===$owner->getIban())||($PM->verifyIBAN($newIBAN)===false))
                         {   
-                            if($newPassword==='')
-                            {
-                                $newPassword=$session::getSessionElement('password');
-                            }
-                            
-                            $oldPhoto = $session::getSessionElement('photo');
+                            $passChange = COwner::changePassword($oldPassword, $newPassword, $owner, $photoError);
 
-                            if(!is_null($oldPhoto))
-                            {
-                                $photoId=$PM::getInstance()->getOwnerPhotoId($oldUsername);
-            
-                                is_null($picture) ? $photo = new EPhoto($photoId, $oldPhoto, 'other', null, null)
-                                                  : $photo = new EPhoto($photoId, $picture['img'], 'other', null, null);                            }
-                            else 
-                            {
-                                if(is_null($picture)) 
-                                {
-                                    $photo = null;
-                                } 
-                                else 
-                                {
-                                    $photo = new EPhoto(null, $picture['img'], 'other', null, null);
-                                    $risultato = $PM::getInstance()->storeAvatar($photo);
-                                    if(!$risultato)
-                                    {
-                                        print '<b>500 SERVER ERROR!</b>';
-                                    }
-                                }
-                            }
+                            $newPassword = $passChange[0];
+                            $error = $passChange[1];
+                            
+                            $photo = COwner::changePhoto($oldPhoto, $picture, $owner);
+
+
                             $owner->setName($name);
                             $owner->setSurname($surname);
                             $owner->setPhoto($photo);
@@ -233,15 +226,19 @@ class COwner
                             $owner->setIban($newIBAN);
                             #$owner = new EOwner($ownerId, $newUsername, $newPassword, $name, $surname, $photo, $newemail, $newPhoneNumber, $newIBAN);
                             $result=$PM::update($owner);
-                            if($result)
-                            {
+                            if($result  && !$error)
+                            {   
+                                $ph = $photo->getPhoto();
+                                if (is_null($ph)) $ph = null;
                                 $session::setSessionElement('username', $newUsername);
                                 $session::setSessionElement('password',$newPassword);
+                                $session->setSessionElement('photo',$ph);
                                 header("Location:/UniRent/Owner/profile");
                             }
-                            else
-                            {
-                                print '<b>500 : SERVER ERROR!</b>';
+                            elseif (!$result) {
+                    
+                                header("HTTP/1.1 500 Internal Server Error");
+                                
                             }
                         }
                         else
@@ -268,6 +265,102 @@ class COwner
                 #header('Location:/UniRent/Owner/profile');
             }
         }
+    }
+
+    private static function changePhoto(?string $oldPhoto, ?array $picture, EOwner $oldOwner) : ?EPhoto{
+
+        $PM=FPersistentManager::getInstance();
+
+        if(!is_null($oldPhoto)){
+
+            print "La vecchia foto non è null<br>";
+                    
+            $photoId=$oldOwner->getPhoto()->getId();
+
+            is_null($picture) ? $photo = new EPhoto($photoId, $oldPhoto, 'other', null, null)
+                              : $photo = new EPhoto($photoId, $picture['img'], 'other', null, null);
+
+        } else {
+
+            print "La vecchia foto è null";
+
+            if(is_null($picture)) {
+
+                print "La nuova foto è null<br>";
+                $photo = null;
+
+            } else {
+
+                print "La nuova foto non è null<br>";
+                $photo = new EPhoto(null, $picture['img'], 'other', null, null);
+                $risultato = $PM->storeAvatar($photo);
+
+                if(!$risultato){
+                    header("HTTP/1.1 500 Internal Server Error");
+                }
+            }
+        }
+
+        return $photo;
+    }
+
+    private static function changePassword($oldPassword, $newPassword, $oldStudent, $photoError):array{
+
+        $session=USession::getInstance();
+        $view = new VOwner();
+        $error = 0;
+
+        if($newPassword===''){
+            //If i don't have any new password, i'll use the old one
+            $password=$session::getSessionElement('password');
+        } else {
+            
+            if($oldPassword===$session::getSessionElement('password')){
+                if(!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()])[A-Za-z\d@$!%*?&()]{8,}$/' , $newPassword)){
+
+                    $error = 1;
+                    $password=$session::getSessionElement('password');
+                    print "La password non rispetta i requisiti minimi<br>";
+                    //$view->editProfile($oldStudent, $photoError, true, false, false, false);
+
+                } else $password=$newPassword;
+                
+            } else {
+                $error = 1;
+                print "La vecchia password non corrisponde<br>";
+                //$view->editProfile($oldStudent, $photoError, false, false, false, true);
+                $password=$session::getSessionElement('password');
+            }
+        }
+
+        return [$password, $error];
+    }
+
+    public static function deletePhoto(){
+
+        $PM=FPersistentManager::getInstance();
+        $session=USession::getInstance();
+        $ownerId=$session::getSessionElement('id');
+        $photo = $PM -> load('EOwner', $ownerId) -> getPhoto();
+
+        if(is_null($photo)){
+
+            print "Non hai nessuna foto da eliminare";
+            $result = 0;
+
+        } else {
+            $photoID = $photo->getId();
+            $result = $PM->delete('EPhoto', $photoID);
+        }
+
+        
+
+        if ($result > 0) {
+            $photo = null;
+            $session->setSessionElement('photo',$photo);
+            header('Location:/UniRent/Owner/profile');
+        }  else print "Errore nell'eliminazione della foto <br>";
+
     }
 
     public static function contact()
