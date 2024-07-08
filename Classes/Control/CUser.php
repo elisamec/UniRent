@@ -52,6 +52,8 @@ class CUser
             0 => [
                 'title' => 'Appartamento in centro',
                 'price' => '500',
+                'photo' => null,
+                'address' => 'Via Roma 1, Milano',
             ]
         ];
         $view->findAccommodation($searchResult);

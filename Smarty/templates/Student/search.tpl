@@ -62,7 +62,7 @@
                         </div>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="#">Posted Reviews</a>
+                        <a class="nav-link" href="/UniRent/Student/postedReview">Posted Reviews</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href = "#">Visits</a>
@@ -364,85 +364,7 @@
                </div>
             </div>
             <div class="Properties_section_2">
-               <div class="row">
-                  <div class="col-lg-4 col-md-6col-lg-4 col-md-6">
-                     <div class="blog_img">
-                     <div class="container_main">
-                                 <img src="/UniRent/Smarty/images/img-4.png" alt="">
-                                 <div class="overlay">
-                                    <div class="text">
-                                       <div class="some_text"><a href="/UniRent/Student/accommodation/5">See More</a></div>
-                                    </div>
-                                 </div>
-                              </div>
-                        </div>
-                     <div class="image_box">
-                        <div class="left_box">
-                           <h1 class="road_text"><a>2186 Lohariya Road</a></h1>
-                           <div class="area_main">
-                              <h3 class="area_text"><a >Area:<br>240m2</a></h3>
-                              <h3 class="area_text"><a>Beds:<br>3</a></h3>
-                              <h3 class="area_text"><a>Baths:<br>1</a></h3>
-                              <h3 class="area_text"><a>Garages:<br>1</a></h3>
-                           </div>
-                        </div>
-                        <div class="right_box">
-                           <div class="rate_text">$14000</div>
-                        </div>
-                     </div>
-                  </div>
-                   <div class="col-lg-4 col-md-6col-lg-4 col-md-6">
-                     <div class="blog_img">
-                     <div class="container_main">
-                                 <img src="/UniRent/Smarty/images/img-5.png" alt="">
-                                 <div class="overlay">
-                                    <div class="text">
-                                       <div class="some_text"><a href="#">See More</a></div>
-                                    </div>
-                                 </div>
-                              </div>
-                        </div>
-                     <div class="image_box">
-                        <div class="left_box">
-                           <h1 class="road_text"><a>2186 Lohariya Road</a></h1>
-                           <div class="area_main">
-                              <h3 class="area_text"><a>Area:<br>240m2</a></h3>
-                              <h3 class="area_text"><a>Beds:<br>3</a></h3>
-                              <h3 class="area_text"><a>Baths:<br>1</a></h3>
-                              <h3 class="area_text"><a>Garages:<br>1</a></h3>
-                           </div>
-                        </div>
-                        <div class="right_box">
-                           <div class="rate_text">$14000</div>
-                        </div>
-                     </div>
-                  </div>
-                   <div class="col-lg-4 col-md-6col-lg-4 col-md-6">
-                     <div class="blog_img">
-                     <div class="container_main">
-                                 <img src="/UniRent/Smarty/images/img-6.png" alt="">
-                                 <div class="overlay">
-                                    <div class="text">
-                                       <div class="some_text"><a href="#">See More</a></div>
-                                    </div>
-                                 </div>
-                              </div>
-                        </div>
-                     <div class="image_box">
-                        <div class="left_box">
-                           <h1 class="road_text"><a>2186 Lohariya Road</a></h1>
-                           <div class="area_main">
-                              <h3 class="area_text"><a>Area:<br>240m2</a></h3>
-                              <h3 class="area_text"><a>Beds:<br>3</a></h3>
-                              <h3 class="area_text"><a>Baths:<br>1</a></h3>
-                              <h3 class="area_text"><a>Garages:<br>1</a></h3>
-                           </div>
-                        </div>
-                        <div class="right_box">
-                           <div class="rate_text">$14000</div>
-                        </div>
-                     </div>
-                  </div>
+               <div class="row" id="resultContainer">
                </div>
             </div>
          </div>
@@ -510,6 +432,62 @@
                document.getElementById("myModal").style.display = "none";
                }
          </script>
+         {literal}
+<script>
+    const results = {/literal}{$searchResult}{literal};
+    console.log(results);
+
+    // Function to create and append reviews to the container
+    function displayResults(results) {
+        const container = document.getElementById('resultContainer');
+
+        if (container) {
+            if (results.length === 0) {
+                container.innerHTML = '<div class="container"><h1 class="noRev">The search gave no result!</h1></div>';
+            } else {
+                results.forEach(result => {
+                    if (result.photo == null) {
+                        result.photo = "/UniRent/Smarty/images/noPic.png";
+                    }
+                    const resultElement = document.createElement('div');
+                    resultElement.className = 'col-lg-4 col-md-6col-lg-4 col-md-6';
+
+                    // Insert the names of the elements of the result array
+                    resultElement.innerHTML = `
+                        <div class="blog_img">
+                            <div class="container_main">
+                                <img src="${result.photo}" alt="">
+                                <div class="overlay">
+                                    <div class="text">
+                                        <div class="some_text"><a href="/UniRent/Student/accommodation/${result.id}">See More</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="image_box">
+                            <div class="left_box">
+                                <h1 class="road_text">${result.title}</h1>
+                                <p>${result.address}</p>
+                            </div>
+                            <div class="right_box">
+                                <div class="rate_text">${result.price} €</div>
+                            </div>
+                        </div>
+                    `;
+
+                    // Append the created element to the container
+                    container.appendChild(resultElement); // Corrected: resultElement instead of reviewElement
+                });
+            }
+        } else {
+            console.error("Container not found!"); // Debugging: Error if container is not found
+        }
+    }
+
+    // Call the function to display reviews
+    displayResults(results);
+</script>
+{/literal}
       
    </body>
 </html>

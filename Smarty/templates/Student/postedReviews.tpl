@@ -62,7 +62,7 @@
                         </div>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="/UniRent/Student/postedReview">Posted Reviews</a>
+                        <a class="nav-link active" href="/UniRent/Student/postedReview">Posted Reviews</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href = "#">Visits</a>
@@ -71,7 +71,7 @@
                   <form class="form-inline my-2 my-lg-0">
                      <div class="login_bt">
                         <ul>
-                           <li><a href="/UniRent/Student/profile" class="active"><span class="user_icon"><i class="fa fa-user" aria-hidden="true"></i></span>Profile</a></li>
+                           <li><a href="/UniRent/Student/profile"><span class="user_icon"><i class="fa fa-user" aria-hidden="true"></i></span>Profile</a></li>
                         </ul>
                      </div>
                   </form>
@@ -80,34 +80,14 @@
          </div>
       </div>
       <div class="path">
-            <p><a href="/UniRent/Student/home">Home</a> / <a href="/UniRent/Student/profile">Profile</a> / Reviews </p>
+            <p><a href="/UniRent/Student/home">Home</a> / Posted Reviews </p>
       </div>
-      <div class="profile">
-         <div class="row">
-         <div class="col-md-3">
-         <div class="sidebar">
-         <div class="col-md-3">
-            <div class="sidebar_but"><a href="/UniRent/Student/profile">Profile</a></div>
-            </div>
-            <div class="col-md-3">
-            <div class="sidebar_but active"><a href="/UniRent/Student/reviews">Reviews</a></div>
-            </div>
-            <div class="col-md-3">
-            <div class="sidebar_but"><a href="/UniRent/Student/paymentMethods">Payment Methods</a></div>
-            </div>
-            <div class="col-md-3">
-            <div class="sidebar_but log"><a href="/UniRent/User/logout">Logout</a></div>
-            </div>
-         </div>
-         </div>
-
-         <div class="col-md-9">
+      
          <div class="Properties_taital_main layout">
-         <h1 class="Properties_taital">What others think of you</h1>
+         <h1 class="Properties_taital">What you think of others:</h1>
          <hr class="border_main">
          </div>
     <div id="reviewsContainer"></div>
-</div>
       <script>
     {if isset($reviewsData)}
     const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
@@ -143,6 +123,7 @@
                         <h1 class="ReviewTitle">` + review.title + `</h1> <!-- Title of the review -->
                         <div class="row">
                             <div class="userSection">
+                            <p> To: </p>
                                 <div class="userIcon">
                                     <a href="/UniRent/Student/publicProfile/` + review.username + `"><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
                                 </div>

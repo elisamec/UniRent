@@ -503,7 +503,7 @@
                         <div class="image_box">
                             <div class="left_box">
                                 <h1 class="road_text">${result.title}</h1>
-                                
+                                <p>${result.address}</p>
                             </div>
                             <div class="right_box">
                                 <div class="rate_text">${result.price} €</div>
