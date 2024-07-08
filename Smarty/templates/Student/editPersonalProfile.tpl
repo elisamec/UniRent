@@ -319,7 +319,6 @@
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
-</script>
       <script>
                            var birthDateString = '{$student->getBirthDateString()}';
                            
