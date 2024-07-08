@@ -151,5 +151,4 @@ print $totalMinutes;
 #print EAccommodation::stringInMinutes('03:00');
 
 $PM=FPersistentManager::getInstance();
-$r=$PM->loadCreditCard('1111 1111 1111 1111');
-print $r->__toString();
+$r=$PM->findAccommodations('L\'Aquila', 'Sep');

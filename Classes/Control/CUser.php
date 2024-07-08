@@ -48,14 +48,18 @@ class CUser
     }
     public static function findAccommodation(){
         $view = new VUser();
-        $searchResult= [
+        $city=USuperGlobalAccess::getPost('city');
+        $date=USuperGlobalAccess::getPost('date');
+        $PM=FPersistentManager::getInstance();
+        $searchResult=$PM->findAccommodations($city,$date);
+        /*$searchResult= [
             0 => [
                 'title' => 'Appartamento in centro',
                 'price' => '500',
                 'photo' => null,
                 'address' => 'Via Roma 1, Milano',
             ]
-        ];
+        ];*/
         $view->findAccommodation($searchResult);
     }
 
@@ -169,6 +173,8 @@ class CUser
         header('Location: /UniRent/User/home');
     }
 
+
+    /*
     public static function findAccommodationOPP()
     {
         $view= new VUser();
@@ -178,6 +184,6 @@ class CUser
         $PM=FPersistentManager::getInstance();
         $Accommodations=$PM->findAccommodations($city,$date);
         #$view->showAccommodationUser($Accommodations);
-    }
+    }*/
 
 }

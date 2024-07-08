@@ -646,19 +646,50 @@
             }     
         }
 
-        public function findAccommodationByCityAndDate(string $city, $date):array
+        public function findAccommodationsByCityAndDate(string $city, $date)
         {
             $result=array();
             $db=FConnection::getInstance()->getConnection();
+            $date==='Sep' ? $date=9 : $date=10 ;
             try
             {
-
+                $q ='SELECT a.id ';
+                $q.=' FROM accommodation a INNER JOIN address adr ON a.address=adr.id';
+                $q.=' WHERE MONTH(a.start)= :date  AND adr.city = :city';
+                $db->exec('LOCK TABLES accommodation READ , address READ');
+                $db->beginTransaction();
+                $stm=$db->prepare($q);
+                $stm->bindParam(':city',$city,PDO::PARAM_STR);
+                $stm->bindParam(':date',$date,PDO::PARAM_INT);
+                $stm->execute();
+                $db->commit();
+                $db->exec('UNLOCK TABLES');
             }
             catch(PDOException $e)
             {
                 $db->rollBack();
                 return $result;
             }
+            $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
+            foreach($rows as $row)
+            {
+                $r=$this->load($row['id']);
+                $ap=array();
+                $ap['title'] = $r->getTitle();
+                $ap['id'] = $r->getIdAccommodation();
+                $ap['price'] = $r->getPrice();
+                $ap['address'] = $r->getAddress()->getAddressLine1().' , '.$r->getAddress()->getLocality();
+                if(count($r->getPhoto())==0)
+                {
+                    $ap['photo']=null;
+                }
+                else
+                {
+                   $ap['photo']=(($r->getPhoto())[0])->getPhoto();
+                }
+                $result[]=$ap;
+            }
+            return $result;
         }
 
     }
