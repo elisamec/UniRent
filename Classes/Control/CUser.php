@@ -48,7 +48,14 @@ class CUser
     }
     public static function findAccommodation(){
         $view = new VUser();
-        $view->findAccommodation();
+        $searchResult= [
+            0 => [
+                'title' => 'Appartamento in centro',
+                'description' => 'Appartamento in centro a Milano, vicino alla fermata della metro',
+                'price' => '500€',
+            ]
+        ];
+        $view->findAccommodation($searchResult);
     }
 
 

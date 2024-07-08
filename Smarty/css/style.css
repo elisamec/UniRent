@@ -824,6 +824,7 @@ hr.border_main {
     width: 60%;
     margin-right: 50px;
     min-height: 900.18px;
+    height: auto;
 }
 
 .image_box{
@@ -832,6 +833,7 @@ hr.border_main {
     background-color: #ffffff;
     height: auto;
     padding: 20px 10px;
+    margin-bottom:20px;
     box-shadow: 0px 9px 9px 0px #eaeaea !important;
 }
 .left_box{
