@@ -319,9 +319,9 @@
                      </div>
                </div>
                </div>
-               <h1 class="find_text">Price Range:</h1>
                <div class="row">
                <div class="Findcontainer">
+               <h1 class="find_text">Price Range:</h1>
                <div class="d-flex">
                   <div class="wrapper">
                      <header>
