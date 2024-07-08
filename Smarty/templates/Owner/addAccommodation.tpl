@@ -587,6 +587,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // Function to calculate the nearest future date
             function calculateNearestFutureDate() {
+               if (dayInput.value === "") {
+                    hiddenDateInput.value = "";
+                    console.log(`Day input is empty. Cleared the date.`);
+                } else {
+                
                 const day = parseInt(dayInput.value, 10)+1;
                 const month = document.querySelector("input[name='month']:checked").value;
 
@@ -612,6 +617,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 hiddenDateInput.value = selectedDate.toISOString().split('T')[0];
                 console.log(`Calculated nearest future date: ${hiddenDateInput.value}`);
+            }
             }
 
             // Event listeners
