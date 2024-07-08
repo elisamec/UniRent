@@ -138,6 +138,7 @@
                                  <input title=" " id="month" required="" type="radio" name="month" value="october"> October
                                  </div>
                               </div>
+                              <input type="date" id="date" name="date" hidden>
                            </div>
                            <div id="div7">
                               <div class="input-group">
