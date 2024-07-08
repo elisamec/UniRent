@@ -104,8 +104,8 @@
                                  </div>
                               </div>
 
-                     <div class="reserve_btn"><a href="#" >Reserve</a></div>
-                      <div class="reserve_btn"><a href="#" >Visit</a></div>
+                     <div class="reserve_btn" id="reserveBtn"><a href="#" >Reserve</a></div>
+                      <div class="reserve_btn" id="visitBtn"><a href="#" >Visit</a></div>
                       <div class="ownerSect">
                       <div class="row">
                       <h1 class="titleOwn">Owner:</h1>
@@ -214,6 +214,69 @@
 
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+<div id="reserveModal" class="resModal">
+  <div class="resModal-content">
+  <div class="row">
+    <span class="resClose" id="reserveClose">&times;</span>
+    <h2 class="resModal-head">Reserve this accommodation</h2>
+    </div>
+    <form action="/UniRent/Student/reserveAccommodation" class="form" method="POST" enctype="multipart/form-data">
+    <div class="row">
+        <p>Period:</p>
+        <div class="col-lg-6 select-outline">
+            <select name="date" id="date" class="mdb-select md-form md-outline colorful-select dropdown-primary">
+                        {if $period === "september"}
+                        <option value="september" selected>September to June</option>
+                        <option value="october">October to July</option>
+                        {else}
+                        <option value="september">September to June</option>
+                        <option value="october" selected>October to July</option>
+                        {/if}
+            </select>
+         </div>
+    </div>
+     <div class="btn-cont">
+        <button id="reserve" type="submit">Reserve</button>
+        <button id="cancelReserve" type="button">Cancel</button>
+    </div>
+    </form>
+  </div>
+</div>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("reserveModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("reserveBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementById("reserveClose");
+
+    var cancelBtn = document.getElementById("cancelReserve");
+
+    // When the user clicks the button, open the modal 
+    btn.onclick = function(event) {
+        event.preventDefault();
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+    cancelBtn.onclick = function() {
         modal.style.display = "none";
     }
 

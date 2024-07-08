@@ -2428,7 +2428,7 @@ textarea#comment::placeholder {
     margin-top: 20px;
 }
 
-#cancelDelete, #confirmDelete {
+#cancelDelete, #confirmDelete, #reserve, #cancelReserve {
     padding: 10px 20px;
     font-size: 16px;
     color: #ffffff;
@@ -2436,15 +2436,15 @@ textarea#comment::placeholder {
     border-radius: 1rem;
 }
 
-#cancelDelete {
+#cancelDelete, #reserve {
     background-color: #f9bc19;
 }
 
-#confirmDelete {
+#confirmDelete, #cancelReserve {
     background-color: #f91919;
 }
 
-#cancelDelete:hover, #confirmDelete:hover {
+#cancelDelete:hover, #confirmDelete:hover, #reserve:hover, #cancelReserve:hover {
     color: #d0d1d2;
     background-color: #ffffff;
     box-shadow: 0px 2px 16px 0px #eaeaea !important;
@@ -2678,7 +2678,7 @@ textarea#comment::placeholder {
 input:read-only {
     background-color: #e9ecef; /* Light grey background */
     color: #6c757d;           /* Grey text color */
-    border-color: #ced4da;    /* Light grey border */
+    border: 1px solid #ced4da; /* Grey border */
     cursor: not-allowed;      /* Cursor style to indicate it's not editable */
 }
 .expired-card {

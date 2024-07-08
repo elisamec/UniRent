@@ -66,12 +66,13 @@ class VStudent{
     public function search(){
         $this->smarty->display('Student/search.tpl');
     }
-    public function accommodation(EAccommodation $accomm, EOwner $owner, array $reviewsData){
+    public function accommodation(EAccommodation $accomm, EOwner $owner, array $reviewsData, string $period){
         $photos=json_encode($accomm->getPhoto());
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->assign('imagesJson', $photos);
         $this->smarty->assign('accommodation', $accomm);
         $this->smarty->assign('owner', $owner);
+        $this->smarty->assign('period', $period);
         $this->smarty->display('Student/accommodation.tpl');
     }
     public function reviews(array $reviewsData){

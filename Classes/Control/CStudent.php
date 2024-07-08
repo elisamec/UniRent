@@ -208,7 +208,8 @@ class CStudent{
                 'userPicture' => $profilePic,
             ];
         }
-        $view->accommodation($accomm, $owner, $reviewsData);
+        $period="september"; //È il periodo con cui si fa la ricerca, va cambiato
+        $view->accommodation($accomm, $owner, $reviewsData, $period);
     }
 
 
