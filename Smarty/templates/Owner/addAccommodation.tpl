@@ -130,9 +130,13 @@
                               </div>
                            </div>
                            <div id="div6">
-                              <div class="input-group">
-                                 <input title=" " id="month" required="" type="text" name="month" autocomplete="off" class="input-spec" pattern="^(Sep|Oct)$"">
-                                 <label class="user-label" style="font-size: 13px; margin-top:12px">Start month (Sep/Oct)</label>
+                              <div class="col-md-12">
+                              <div class="row" id="input-radio">
+                                 <input title=" " id="month" required="" type="radio" name="month" value="september" checked> September
+                                 </div>
+                                 <div class="row">
+                                 <input title=" " id="month" required="" type="radio" name="month" value="october"> October
+                                 </div>
                               </div>
                            </div>
                            <div id="div7">
@@ -269,38 +273,55 @@ function closeModal() {
 
 // Add more availability input fields
 function addAvailability() {
-        let container = document.getElementById('availabilityContainer');
-        let availability = document.createElement('div');
-        availability.className = 'availability';
-        availability.innerHTML = `
-            <button type="button" onclick="removeAvailability(this)" class="button-spec little">-</button>
-            <label for="duration">Visit Duration (minutes):</label>
-            <input type="number" id="duration" name="duration" title="Please enter a number">
-            <label for="dayOfWeek">Weekday:</label>
-            <input type="text" pattern="(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)" title="Please enter a valid day of the week" id="day" name="day">
-            <label for="start">Availability start:</label>
-            <input type="time" id="start" name="start">
-            <label for="end">Availability end:</label>
-            <input type="time" id="end" name="end">
-        `;
-        container.appendChild(availability);
+    let container = document.getElementById('availabilityContainer');
+    let availability = document.createElement('div');
+    availability.className = 'availability';
+    availability.innerHTML = `
+        <button type="button" onclick="removeAvailability(this)" class="button-spec little">-</button>
+        <label for="duration">Visit Duration (minutes):</label>
+        <input type="number" id="duration" name="duration" title="Please enter a number">
+        <label for="dayOfWeek">Weekday:</label>
+        <input type="text" pattern="(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)" title="Please enter a valid day of the week" id="day" name="day">
+        <label for="start">Availability start:</label>
+        <input type="time" id="start" name="start">
+        <label for="end">Availability end:</label>
+        <input type="time" id="end" name="end">
+    `;
+    container.appendChild(availability);
 
-        // Add event listeners to start and end time inputs
-        const startInput = availability.querySelector('#start');
-        const endInput = availability.querySelector('#end');
+    // Add event listeners to start and end time inputs
+    const startInput = availability.querySelector('#start');
+    const endInput = availability.querySelector('#end');
 
-        startInput.addEventListener('change', function() {
-            if (endInput.value && startInput.value > endInput.value) {
-                endInput.value = startInput.value;
+    startInput.addEventListener('change', function() {
+        if (endInput.value && startInput.value > endInput.value) {
+            endInput.value = startInput.value;
+        }
+    });
+
+    endInput.addEventListener('change', function() {
+        if (startInput.value && endInput.value < startInput.value) {
+            endInput.value = startInput.value;
+        }
+    });
+
+// Get all duration inputs
+let durationInputs = document.querySelectorAll('#duration');
+
+// Add event listener to each duration input
+durationInputs.forEach(function(input) {
+    input.addEventListener('change', function() {
+        // Update all other duration inputs
+        durationInputs.forEach(function(otherInput) {
+            if (otherInput !== input) {
+                otherInput.value = input.value;
             }
         });
+    });
+});
 
-        endInput.addEventListener('change', function() {
-            if (startInput.value && endInput.value < startInput.value) {
-                endInput.value = startInput.value;
-            }
-        });
-    }
+}
+
 
 
 // Remove an availability input field

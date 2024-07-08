@@ -2704,3 +2704,10 @@ textarea#comment::placeholder {
 .padding-reserve {
     padding-top: 20px;
 }
+#input-radio {
+    margin-top: 20px;
+}
+#month {
+    margin-right: 10px;
+    margin-left:20px
+}
