@@ -415,5 +415,12 @@ class FPersistentManager {
         return $result;
     }
 
+    public function findAccommodations(string $city, string $date):array
+    {
+        $FA=FAccommodation::getInstance();
+        $result=$FA->findAccommodationsByCityAndDate($city,$date);
+        return $result;
+    }
+
 }
 

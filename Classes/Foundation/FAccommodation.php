@@ -643,8 +643,22 @@
             catch(PDOException $e){
                 $db->rollBack();
                 return false;
+            }     
+        }
+
+        public function findAccommodationByCityAndDate(string $city, $date):array
+        {
+            $result=array();
+            $db=FConnection::getInstance()->getConnection();
+            try
+            {
+
             }
-            
+            catch(PDOException $e)
+            {
+                $db->rollBack();
+                return $result;
+            }
         }
 
     }

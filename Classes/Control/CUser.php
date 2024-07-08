@@ -46,7 +46,7 @@ class CUser
         $view = new VUser();
         $view->contact();
     }
-    public static function findAccommodation(){
+    public static function findAccommodationShow(){
         $view = new VUser();
         $view->findAccommodation();
     }
@@ -159,6 +159,17 @@ class CUser
         $session::destroySession();
         setcookie('PHPSESSID','',time()-3600,'/','',isset($_SERVER["HTTPS"]),true);
         header('Location: /UniRent/User/home');
+    }
+
+    public static function findAccommodation()
+    {
+        $view= new VUser();
+        $city=USuperGlobalAccess::getPost('city');
+        $university=USuperGlobalAccess::getPost('university');
+        $date=USuperGlobalAccess::getPost('date');
+        $PM=FPersistentManager::getInstance();
+        $Accommodations=$PM->findAccommodations($city,$date);
+        #$view->showAccommodationUser($Accommodations);
     }
 
 }
