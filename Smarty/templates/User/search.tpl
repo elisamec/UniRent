@@ -337,13 +337,6 @@
                         <input type="number" class="input-max" value="7500">
                      </div>
                      </div>
-                     <div class="slider">
-                     <div class="progress"></div>
-                     </div>
-                     <div class="range-input">
-                     <input type="range" class="range-min" min="0" max="10000" value="2500" step="100">
-                     <input type="range" class="range-max" min="0" max="10000" value="7500" step="100">
-                     </div>
                   </div>
                </div>
                </div>
@@ -378,7 +371,7 @@
                                  <img src="/UniRent/Smarty/images/img-4.png" alt="">
                                  <div class="overlay">
                                     <div class="text">
-                                       <div class="some_text"><a href="#">See More</a></div>
+                                       <div class="some_text"><a href="#" onclick="showModal(event)">See More</a></div>
                                     </div>
                                  </div>
                               </div>
@@ -456,7 +449,18 @@
       </div>
          </div>
       </div>
-      
+<div id="loginModal" class="resModal">
+    <div class="resModal-content">
+        <span class="resClose" id="loginClose">&times;</span>
+        <p>Please, login to continue: </p>
+        <div class="btn-cont">
+       <div class="login-required"><a href="/UniRent/User/login">Login</a></div>
+        <div class="login-required"> <a href="/UniRent/User/register">Sign Up</a></div>
+        </div>
+    </div>
+</div>
+   
+
       <!-- footer section start -->
       <div class="footer_section layout_padding">
          <div class="container">
@@ -481,49 +485,7 @@
       </div>
       <!-- footer section end -->
       <!-- Javascript files-->
-      <script>
-      const rangeInput = document.querySelectorAll(".range-input input"),
-      priceInput = document.querySelectorAll(".price-input input"),
-      range = document.querySelector(".slider .progress");
-      let priceGap = 1000;
-
-      priceInput.forEach((input) => {
-      input.addEventListener("input", (e) => {
-      let minPrice = parseInt(priceInput[0].value),
-      maxPrice = parseInt(priceInput[1].value);
-
-         if (maxPrice - minPrice >= priceGap && maxPrice <= rangeInput[1].max) {
-            if (e.target.className === "input-min") {
-            rangeInput[0].value = minPrice;
-            range.style.left = (minPrice / rangeInput[0].max) * 100 + "%";
-            } else {
-            rangeInput[1].value = maxPrice;
-            range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
-            }
-         }
-      });
-      });
-
-      rangeInput.forEach((input) => {
-      input.addEventListener("input", (e) => {
-         let minVal = parseInt(rangeInput[0].value),
-            maxVal = parseInt(rangeInput[1].value);
-
-         if (maxVal - minVal < priceGap) {
-            if (e.target.className === "range-min") {
-            rangeInput[0].value = maxVal - priceGap;
-            } else {
-            rangeInput[1].value = minVal + priceGap;
-            }
-         } else {
-            priceInput[0].value = minVal;
-            priceInput[1].value = maxVal;
-            range.style.left = (minVal / rangeInput[0].max) * 100 + "%";
-            range.style.right = 100 - (maxVal / rangeInput[1].max) * 100 + "%";
-         }
-      });
-      });
-      </script>
+      
       <script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>
       <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
@@ -558,6 +520,31 @@
     document.getElementById("yourFormId").submit();
 }
       </script>
+      <script>
+    // Get the modal
+    var modal = document.getElementById("loginModal");
+    // Get the <span> element that closes the modal
+    var span = document.getElementById("loginClose");
+
+
+    // When the user clicks the button, open the modal 
+    function showModal(event) {
+        event.preventDefault();
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
       
    </body>
 </html>
