@@ -633,7 +633,7 @@ input[type="range"]::-moz-range-thumb {
   
   .rating:not(:checked) > label > svg {
     fill: #666; /* Set default color for SVG */
-    transition: fill 0.3s ease; /* Add a transition effect */
+    transition: fill 0.02s ease; /* Add a transition effect */
   }
   
   .rating > input:checked + label:hover,
@@ -2692,7 +2692,7 @@ textarea#comment::placeholder {
 #reportOwn {
     padding-top: 10px;
 }
-input:read-only {
+.read-only {
     background-color: #e9ecef; /* Light grey background */
     color: #6c757d;           /* Grey text color */
     border: 1px solid #ced4da; /* Grey border */
@@ -2703,4 +2703,11 @@ input:read-only {
 }
 .padding-reserve {
     padding-top: 20px;
+}
+#input-radio {
+    margin-top: 20px;
+}
+#month {
+    margin-right: 10px;
+    margin-left:20px
 }
