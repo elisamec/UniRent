@@ -48,7 +48,13 @@ class CUser
     }
     public static function findAccommodationShow(){
         $view = new VUser();
-        $view->findAccommodation();
+        $searchResult= [
+            0 => [
+                'title' => 'Appartamento in centro',
+                'price' => '500€',
+            ]
+        ];
+        $view->findAccommodation($searchResult);
     }
 
 
