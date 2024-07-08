@@ -175,7 +175,7 @@
                         </div>
                         <div class="form-row">
                             <label for="cardnumber1">Enter Credit Card Number:</label>
-                            <input id="cardnumber1" name="cardnumber1" type="text" data-inputmask="'mask': '9999 9999 9999 9999'" placeholder="____ ____ ____ ____" readonly>
+                            <input class="readonly" id="cardnumber1" name="cardnumber1" type="text" data-inputmask="'mask': '9999 9999 9999 9999'" placeholder="____ ____ ____ ____" readonly>
                         </div>
                         <div class="form-row">
                             <label for="expirydate1">Expiry Date:</label>
