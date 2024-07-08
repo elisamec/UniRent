@@ -127,6 +127,11 @@
                      <div class="col-lg-8 col-md-10 col-lg-8 col-md-10">
                      <div class="Accomcontainer">
                         <h1 class="title">Accommodation Details</h1>
+                        {if $accommodation->getAddress() !== null}
+                        <p> {$accommodation->getAddress()}</p>
+                        {else}
+                        <p>Address not available</p>
+                        {/if}
                         <h2> Description:</h2>
                         <p>{$accommodation->getDescription()}</p>
                         <h2>Monthly Price: {$accommodation->getPrice()} €</h2>

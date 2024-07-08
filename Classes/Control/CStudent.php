@@ -41,7 +41,16 @@ class CStudent{
     }
     public static function findAccommodation(){
         $view = new VStudent();
-        $view->findAccommodation();
+        $searchResult= [
+            0 => [
+                'title' => 'Casa Rosada',
+                'id' => '5',
+                'price' => '230.7',
+                'address' => 'Via Roma 1, Milano',
+                'photo' => null,
+            ]
+        ];
+        $view->findAccommodation($searchResult);
     }
     public static function about(){
         $view = new VStudent();
