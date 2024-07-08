@@ -480,7 +480,7 @@ class EAccommodation
         $final_result=array();
         foreach($result_2 as $key=>$value)
         {
-            print $value['day'];
+            #print $value['day'];
             if(in_array($value['day'],array_keys($final_result)))
             {
                 foreach($value['times'] as $time)

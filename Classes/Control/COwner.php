@@ -415,8 +415,8 @@ class COwner
         #$pictures=USuperGlobalAccess::getPost();
         $visits=USuperGlobalAccess::getPost('visitAvailabilityData');
         $photos=USuperGlobalAccess::getPost('uploadedImagesData');
-        EAccommodation::fromJsonToArrayOfVisit($visits);
-       # print_r($_POST);
+        $array_visit=EAccommodation::fromJsonToArrayOfVisit($visits);
+        print_r($array_visit);
       
         if($month=='Sep')
         {
