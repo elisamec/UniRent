@@ -92,4 +92,18 @@ class UAccessUniversityFile
             }
         }  
     }
+
+    public function getCities()
+    {
+        $result=array();
+        $json=file_get_contents(self::$path);
+        $myarray=json_decode($json,true);
+        $università=$myarray['records'];
+        foreach($università as $key=>$value)
+        {
+            if(!in_array($università[$key][8],$result))
+            $result[]=$università[$key][8];
+        }
+        return $result;
+    }
 }

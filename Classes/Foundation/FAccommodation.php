@@ -650,7 +650,7 @@
         {
             $result=array();
             $db=FConnection::getInstance()->getConnection();
-            $date==='Sep' ? $date=9 : $date=10 ;
+            $date==='september' ? $date=9 : $date=10 ;
             try
             {
                 $q ='SELECT a.id ';

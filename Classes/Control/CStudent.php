@@ -41,6 +41,11 @@ class CStudent{
     }
     public static function findAccommodation(){
         $view = new VStudent();
+        $city=USuperGlobalAccess::getPost('city');
+        $date=USuperGlobalAccess::getPost('date');
+        $PM=FPersistentManager::getInstance();
+        $searchResult=$PM->findAccommodations($city,$date);
+        /*
         $searchResult= [
             0 => [
                 'title' => 'Casa Rosada',
@@ -49,7 +54,7 @@ class CStudent{
                 'address' => 'Via Roma 1, Milano',
                 'photo' => null,
             ]
-        ];
+        ];*/
         $view->findAccommodation($searchResult);
     }
     public static function about(){

@@ -127,8 +127,7 @@
                   <div class="col-lg-3 select-outline">
                      <select name="city" id="city" class="mdb-select md-form md-outline colorful-select dropdown-primary">
                         <option value="" disabled selected>Select a city</option>
-                        <option value="City 1">City 1</option>
-                        <option value="City 2">City 1</option>
+                        
                      </select>
                   </div>
                   <div class="col-lg-3 select-outline">
@@ -400,7 +399,27 @@
          <script>
       document.getElementById("yourLinkId").onclick = function() {
     document.getElementById("yourFormId").submit();
-}
+      }
       </script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    fetch("/UniRent/User/getCities")
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        const citySelect = document.getElementById("city");
+        data.forEach(cityName => {
+            let option = new Option(cityName, cityName);
+            citySelect.add(option);
+        });
+    })
+    .catch(error => console.error('Error:', error));
+});
+</script>
    </body>
 </html>

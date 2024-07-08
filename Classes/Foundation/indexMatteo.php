@@ -150,5 +150,5 @@ print $totalMinutes;
 
 #print EAccommodation::stringInMinutes('03:00');
 
-$PM=FPersistentManager::getInstance();
-$r=$PM->findAccommodations('L\'Aquila', 'Sep');
+$u=UAccessUniversityFile::getInstance();
+print_r($u->getCities());

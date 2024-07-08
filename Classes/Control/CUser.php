@@ -4,6 +4,7 @@ namespace Classes\Control;
 require __DIR__.'/../../vendor/autoload.php';
 
 use Classes\Foundation\FPersistentManager;
+use Classes\Utilities\UAccessUniversityFile;
 use Classes\Utilities\USession;
 use Classes\View\VUser; 
 use Classes\View\VStudent;
@@ -61,6 +62,14 @@ class CUser
             ]
         ];*/
         $view->findAccommodation($searchResult);
+    }
+
+    public static function getCities()
+    {
+        $UF=UAccessUniversityFile::getInstance();
+        $result=$UF->getCities();
+        header('Content-Type: application/json');
+        echo json_encode($result);
     }
 
 
@@ -172,18 +181,4 @@ class CUser
         setcookie('PHPSESSID','',time()-3600,'/','',isset($_SERVER["HTTPS"]),true);
         header('Location: /UniRent/User/home');
     }
-
-
-    /*
-    public static function findAccommodationOPP()
-    {
-        $view= new VUser();
-        $city=USuperGlobalAccess::getPost('city');
-        $university=USuperGlobalAccess::getPost('university');
-        $date=USuperGlobalAccess::getPost('date');
-        $PM=FPersistentManager::getInstance();
-        $Accommodations=$PM->findAccommodations($city,$date);
-        #$view->showAccommodationUser($Accommodations);
-    }*/
-
 }
