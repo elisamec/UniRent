@@ -280,19 +280,19 @@ function addAvailability() {
     availability.innerHTML = `
         <button type="button" onclick="removeAvailability(this)" class="button-spec little">-</button>
         <label for="duration">Visit Duration (minutes):</label>
-        <input type="number" id="duration" name="duration" title="Please enter a number">
+        <input type="number" class="duration" name="duration" title="Please enter a number">
         <label for="dayOfWeek">Weekday:</label>
-        <input type="text" pattern="(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)" title="Please enter a valid day of the week" id="day" name="day">
+        <input type="text" pattern="(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)" title="Please enter a valid day of the week" class="day" name="day">
         <label for="start">Availability start:</label>
-        <input type="time" id="start" name="start">
+        <input type="time" class="start" name="start">
         <label for="end">Availability end:</label>
-        <input type="time" id="end" name="end">
+        <input type="time" class="end" name="end">
     `;
     container.appendChild(availability);
 
     // Add event listeners to start and end time inputs
-    const startInput = availability.querySelector('#start');
-    const endInput = availability.querySelector('#end');
+    const startInput = availability.querySelector('.start');
+    const endInput = availability.querySelector('.end');
 
     startInput.addEventListener('change', function() {
         if (endInput.value && startInput.value > endInput.value) {
@@ -306,22 +306,47 @@ function addAvailability() {
         }
     });
 
-// Get all duration inputs
-let durationInputs = document.querySelectorAll('#duration');
+    // Ensure new duration input inherits the current duration value
+    const durationInput = availability.querySelector('.duration');
+    const currentDurationValue = getCurrentDurationValue();
+    if (currentDurationValue !== null) {
+        durationInput.value = currentDurationValue;
+    }
 
-// Add event listener to each duration input
-durationInputs.forEach(function(input) {
-    input.addEventListener('change', function() {
-        // Update all other duration inputs
-        durationInputs.forEach(function(otherInput) {
-            if (otherInput !== input) {
-                otherInput.value = input.value;
-            }
+    // Update duration inputs synchronization
+    updateDurationSynchronization();
+}
+
+// Function to get the current duration value
+function getCurrentDurationValue() {
+    let durationInputs = document.querySelectorAll('.duration');
+    if (durationInputs.length > 0) {
+        return durationInputs[0].value || null;
+    }
+    return null;
+}
+
+// Function to update synchronization of duration inputs
+function updateDurationSynchronization() {
+    // Get all duration inputs
+    let durationInputs = document.querySelectorAll('.duration');
+
+    // Add event listener to each duration input
+    durationInputs.forEach(function(input) {
+        input.addEventListener('input', function() {
+            // Update all other duration inputs
+            durationInputs.forEach(function(otherInput) {
+                if (otherInput !== input) {
+                    otherInput.value = input.value;
+                }
+            });
         });
     });
-});
-
 }
+
+// Initial call to ensure synchronization for existing elements
+updateDurationSynchronization();
+
 
 
 
