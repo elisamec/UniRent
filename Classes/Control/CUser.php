@@ -46,7 +46,7 @@ class CUser
         $view = new VUser();
         $view->contact();
     }
-    public static function findAccommodationShow(){
+    public static function findAccommodation(){
         $view = new VUser();
         $searchResult= [
             0 => [
@@ -167,7 +167,7 @@ class CUser
         header('Location: /UniRent/User/home');
     }
 
-    public static function findAccommodation()
+    public static function findAccommodationOPP()
     {
         $view= new VUser();
         $city=USuperGlobalAccess::getPost('city');
