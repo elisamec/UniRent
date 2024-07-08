@@ -64,7 +64,7 @@
                         </div>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="#">Posted Reviews</a>
+                        <a class="nav-link" href="/UniRent/Student/postedReview">Posted Reviews</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href = "#">Visits</a>
@@ -127,8 +127,8 @@
                      <div class="col-lg-8 col-md-10 col-lg-8 col-md-10">
                      <div class="Accomcontainer">
                         <h1 class="title">Accommodation Details</h1>
-                        {if $accommodation->getAddress() !== null}
-                        <p> {$accommodation->getAddress()}</p>
+                        {if $accommodation->getAddress()->getAddressLine1() !== null && $accommodation->getAddress()->getLocality() !== null}
+                        <p> {$accommodation->getAddress()->getAddressLine1()}, {$accommodation->getAddress()->getLocality()}</p>
                         {else}
                         <p>Address not available</p>
                         {/if}
