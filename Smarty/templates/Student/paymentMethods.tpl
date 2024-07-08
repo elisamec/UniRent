@@ -126,7 +126,7 @@
       </div>
 <div id="paymentModal" class="resModal">
     <div class="resModal-content">
-        <span class="reClose" onclick="closeModal()">&times;</span>
+        <span class="resClose" onclick="closeModal()">&times;</span>
         <h2 class="resModal-head">Add Payment Method</h2>
         <form id="paymentForm" action="/UniRent/Student/addCreditCard" class="form" method="POST" enctype="multipart/form-data">
     <div class="form-grid">
@@ -175,8 +175,7 @@
                         </div>
                         <div class="form-row">
                             <label for="cardnumber1">Enter Credit Card Number:</label>
-                            <input id="cardnumber1" name="cardnumber1" type="text" data-inputmask="'mask': '9999 9999 9999 9999'" placeholder="____ ____ ____ ____">
-                            <input id="hiddenOldCard" name="hiddenOldCard" type="hidden">
+                            <input id="cardnumber1" name="cardnumber1" type="text" data-inputmask="'mask': '9999 9999 9999 9999'" placeholder="____ ____ ____ ____" readonly>
                         </div>
                         <div class="form-row">
                             <label for="expirydate1">Expiry Date:</label>
@@ -212,7 +211,6 @@ function openEditForm(cardTitle, cardNumber, expiryDate, CVV, Name, Surname) {
     document.getElementById('cvv1').value = CVV;
     document.getElementById('name1').value = Name;
     document.getElementById('surname1').value = Surname;
-    document.getElementById('hiddenOldCard').value = cardNumber;
 
     // Display the modal
     document.getElementById('paymentUpdateModal').style.display = 'block';
@@ -301,35 +299,64 @@ function updatePaymentMethod() {
             container.innerHTML = '<div class="container"><h1 class="noCards">You don\'t have any credit cards memorized</h1></div>';
         } else {
             container.innerHTML = ''; // Clear container before adding new cards
+            let foundNewMain = false;
+
             cards.forEach(card => {
                 const cardElement = document.createElement('div');
                 cardElement.className = 'review';
+
+                // Check if the card is expired
+                let isExpired = false;
+                const currentDate = new Date();
+                const [expMonth, expYear] = card.expiryDate.split('/').map(Number);
+                const expDate = new Date(`20${expYear}`, expMonth - 1, 1);
+
+                if (expDate < currentDate) {
+                    isExpired = true;
+                }
+
                 let cardNumber = card.number.replace(/\s/g, '');
                 let groups = cardNumber.match(/.{1,4}/g);
                 let result = "";
 
-                for(let i = 0; i < groups.length; i++) {
+                for (let i = 0; i < groups.length; i++) {
                     result += `<p>${groups[i]}</p>\n`;
                 }
 
                 let buttonHTML = '';
                 if (card.isMain) {
+                    if (isExpired) {
+                        card.isMain = false; // Remove main status from expired card
+                    } else {
+                        buttonHTML = `<h2 class="paymentMain"> Main </h2>`;
+                        foundNewMain = true;
+                    }
+                }
+
+                if (!card.isMain && !isExpired && !foundNewMain) {
+                    // Make the first non-expired card the main card if no main card is set
+                    card.isMain = true;
                     buttonHTML = `<h2 class="paymentMain"> Main </h2>`;
-                } else {
-                    buttonHTML = `<button class="button-spec" onclick="fallaMain('${card.number}')"> Make Main </button>`;
+                    foundNewMain = true;
+                } else if (!card.isMain) {
+                    if (isExpired) {
+                        buttonHTML = `<button class="button-spec" disabled style="opacity: 0.5; cursor: not-allowed;"> Make Main </button>`;
+                    } else {
+                        buttonHTML = `<button class="button-spec" onclick="fallaMain('${card.number}')"> Make Main </button>`;
+                    }
                 }
 
                 cardElement.innerHTML = `
                     <div class="paymentGrid">
                         <div class="divPAY1">
-                            <div class="container1">
+                            <div class="container1 ${isExpired ? 'expired-card' : ''}">
                                 <div class="card1">
                                     <div class="card-inner">
                                         <div class="front">
                                             <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
                                             <div class="row1">
                                                 <img src="https://i.ibb.co/G9pDnYJ/chip.png" width="60px">
-                                                <h1 class="paymentTitle"> ${card.title} </h1>
+                                                <h1 class="paymentTitle"> ${card.title} ${isExpired ? '(expired)' : ''} </h1>
                                             </div>
                                             <div class="row1 card-no">
                                                 ${result}
@@ -367,11 +394,21 @@ function updatePaymentMethod() {
 
                 container.appendChild(cardElement);
             });
+
+            // If no main card was found, set the first non-expired card as main
+            if (!foundNewMain) {
+                const firstNonExpiredCard = cards.find(card => !card.isExpired);
+                if (firstNonExpiredCard) {
+                    firstNonExpiredCard.isMain = true;
+                    displayCards(cards); // Re-display cards with the updated main card
+                }
+            }
         }
     } else {
         console.error("Container not found!"); // Debugging: Error if container is not found
     }
 }
+
 
 
     function openModal() {
