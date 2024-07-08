@@ -232,7 +232,7 @@
     <h2 class="resModal-head">Reserve this accommodation</h2>
     </div>
     <form action="/UniRent/Student/reserveAccommodation" class="form" method="POST" enctype="multipart/form-data">
-    <div class="row">
+    <div class="row padding-reserve">
         <p>Period:</p>
         <div class="col-lg-6 select-outline">
             <select name="date" id="date" class="mdb-select md-form md-outline colorful-select dropdown-primary">
@@ -253,7 +253,7 @@
     </form>
   </div>
 </div>
-
+</div>
 <script>
     // Get the modal
     var modal = document.getElementById("reserveModal");

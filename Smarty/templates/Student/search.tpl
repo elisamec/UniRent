@@ -83,9 +83,9 @@
       <!-- select box section start -->
       <div class="container-fluid">
          <div class="search_box_section">
-            <div class="search_box_main">
+            <div class="search_box_main padding-reserve">
                <h1 class="find_text">Find an Accommodation</h1>
-               <div class="row">
+               <div class="row padding-reserve">
                <div class="Findcontainer">
                   <div class="select-outline">
                      <select name="city" id="city" class="mdb-select md-form md-outline colorful-select dropdown-primary">
@@ -116,7 +116,7 @@
                   </div>
                </div>
                </div>
-               <h1 class="find_text">Ratings: </h1>
+               <h1 class="find_text padding-reserve">Ratings: </h1>
                
                <div class="Findcontainer">
                <div class="row">
@@ -319,9 +319,9 @@
                      </div>
                </div>
                </div>
-               <h1 class="find_text">Price Range:</h1>
                <div class="row">
                <div class="Findcontainer">
+               <h1 class="find_text">Price Range:</h1>
                <div class="d-flex">
                   <div class="wrapper">
                      <header>
@@ -337,13 +337,6 @@
                         <span>Max</span>
                         <input type="number" class="input-max" value="7500">
                      </div>
-                     </div>
-                     <div class="slider">
-                     <div class="progress"></div>
-                     </div>
-                     <div class="range-input">
-                     <input type="range" class="range-min" min="0" max="10000" value="2500" step="100">
-                     <input type="range" class="range-max" min="0" max="10000" value="7500" step="100">
                      </div>
                   </div>
                </div>
@@ -479,49 +472,6 @@
       </div>
       <!-- footer section end -->
       <!-- Javascript files-->
-      <script>
-      const rangeInput = document.querySelectorAll(".range-input input"),
-  priceInput = document.querySelectorAll(".price-input input"),
-  range = document.querySelector(".slider .progress");
-let priceGap = 1000;
-
-priceInput.forEach((input) => {
-  input.addEventListener("input", (e) => {
-    let minPrice = parseInt(priceInput[0].value),
-      maxPrice = parseInt(priceInput[1].value);
-
-    if (maxPrice - minPrice >= priceGap && maxPrice <= rangeInput[1].max) {
-      if (e.target.className === "input-min") {
-        rangeInput[0].value = minPrice;
-        range.style.left = (minPrice / rangeInput[0].max) * 100 + "%";
-      } else {
-        rangeInput[1].value = maxPrice;
-        range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
-      }
-    }
-  });
-});
-
-rangeInput.forEach((input) => {
-  input.addEventListener("input", (e) => {
-    let minVal = parseInt(rangeInput[0].value),
-      maxVal = parseInt(rangeInput[1].value);
-
-    if (maxVal - minVal < priceGap) {
-      if (e.target.className === "range-min") {
-        rangeInput[0].value = maxVal - priceGap;
-      } else {
-        rangeInput[1].value = minVal + priceGap;
-      }
-    } else {
-      priceInput[0].value = minVal;
-      priceInput[1].value = maxVal;
-      range.style.left = (minVal / rangeInput[0].max) * 100 + "%";
-      range.style.right = 100 - (maxVal / rangeInput[1].max) * 100 + "%";
-    }
-  });
-});
-      </script>
       <script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>
       <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>

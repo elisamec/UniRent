@@ -85,242 +85,241 @@
             <div class="search_box_main">
                <h1 class="find_text">Find an Accommodation</h1>
                <div class="row">
-               <div class="Findcontainer">
-                  <div class="select-outline">
-                     <select name="city" id="city" class="mdb-select md-form md-outline colorful-select dropdown-primary">
-                        <option value="" disabled selected>Select a city</option>
-                        <option value="City 1">City 1</option>
-                        <option value="City 2">City 1</option>
-                     </select>
+                  <div class="Findcontainer">
+                     <div class="select-outline">
+                        <select name="city" id="city" class="mdb-select md-form md-outline colorful-select dropdown-primary">
+                           <option value="" disabled selected>Select a city</option>
+                           <option value="City 1">City 1</option>
+                           <option value="City 2">City 1</option>
+                        </select>
+                     </div>
                   </div>
-               </div>
                </div>
                <div class="row">
-               <div class="Findcontainer">
-                  <div class="select-outline">
-                     <select name="university" id="university" class="mdb-select md-form md-outline colorful-select dropdown-primary">
-                        <option value="" disabled selected>Select a university</option>
-                     </select>
+                  <div class="Findcontainer">
+                     <div class="select-outline">
+                        <select name="university" id="university" class="mdb-select md-form md-outline colorful-select dropdown-primary">
+                           <option value="" disabled selected>Select a university</option>
+                        </select>
+                     </div>
                   </div>
-               </div>
                </div>
                <div class="row">
-               <div class="Findcontainer">
-                  <div class="select-outline">
-                     <select name="date" id="date" class="mdb-select md-form md-outline colorful-select dropdown-primary">
-                        <option value="" disabled selected>Select a period</option>
-                        <option value="september">September to June</option>
-                        <option value="october">October to July</option>
-                     </select>
+                  <div class="Findcontainer">
+                     <div class="select-outline">
+                        <select name="date" id="date" class="mdb-select md-form md-outline colorful-select dropdown-primary">
+                           <option value="" disabled selected>Select a period</option>
+                           <option value="september">September to June</option>
+                           <option value="october">October to July</option>
+                        </select>
+                     </div>
                   </div>
-               </div>
                </div>
                <h1 class="find_text">Ratings: </h1>
-               
                <div class="Findcontainer">
-               <div class="row">
-               <h1 class="rating_text">Owner: </h1>
-                  <div class="rating">
-                     <input type="radio" id="star5O" name="rateO" value="5" />
-                     <label for="star5O" title="text"
-                        ><svg
-                           viewBox="0 0 576 512"
-                           height="1em"
-                           xmlns="http://www.w3.org/2000/svg"
-                           class="star-solid"
-                        >
-                           <path
-                           d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                           ></path></svg
-                     ></label>
-                     <input type="radio" id="star4O" name="rateO" value="4" />
-                     <label for="star4O" title="text"
-                        ><svg
-                           viewBox="0 0 576 512"
-                           height="1em"
-                           xmlns="http://www.w3.org/2000/svg"
-                           class="star-solid"
-                        >
-                           <path
-                           d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                           ></path></svg
-                     ></label>
-                     <input checked="" type="radio" id="star3O" name="rateO" value="3" />
-                     <label for="star3O" title="text"
-                        ><svg
-                           viewBox="0 0 576 512"
-                           height="1em"
-                           xmlns="http://www.w3.org/2000/svg"
-                           class="star-solid"
-                        >
-                           <path
-                           d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                           ></path></svg
-                     ></label>
-                     <input type="radio" id="star2O" name="rateO" value="2" />
-                     <label for="star2O" title="text"
-                        ><svg
-                           viewBox="0 0 576 512"
-                           height="1em"
-                           xmlns="http://www.w3.org/2000/svg"
-                           class="star-solid"
-                        >
-                           <path
-                           d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                           ></path></svg
-                     ></label>
-                     <input type="radio" id="star1O" name="rateO" value="1" />
-                     <label for="star1O" title="text"
-                        ><svg
-                           viewBox="0 0 576 512"
-                           height="1em"
-                           xmlns="http://www.w3.org/2000/svg"
-                           class="star-solid"
-                        >
-                           <path
-                           d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                           ></path></svg
-                     ></label>
+                  <div class="row">
+                     <h1 class="rating_text">Owner: </h1>
+                     <div class="rating">
+                        <input type="radio" id="star5O" name="rateO" value="5" />
+                        <label for="star5O" title="text"
+                           ><svg
+                              viewBox="0 0 576 512"
+                              height="1em"
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="star-solid"
+                           >
+                              <path
+                              d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
+                              ></path></svg
+                        ></label>
+                        <input type="radio" id="star4O" name="rateO" value="4" />
+                        <label for="star4O" title="text"
+                           ><svg
+                              viewBox="0 0 576 512"
+                              height="1em"
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="star-solid"
+                           >
+                              <path
+                              d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
+                              ></path></svg
+                        ></label>
+                        <input checked="" type="radio" id="star3O" name="rateO" value="3" />
+                        <label for="star3O" title="text"
+                           ><svg
+                              viewBox="0 0 576 512"
+                              height="1em"
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="star-solid"
+                           >
+                              <path
+                              d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
+                              ></path></svg
+                        ></label>
+                        <input type="radio" id="star2O" name="rateO" value="2" />
+                        <label for="star2O" title="text"
+                           ><svg
+                              viewBox="0 0 576 512"
+                              height="1em"
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="star-solid"
+                           >
+                              <path
+                              d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
+                              ></path></svg
+                        ></label>
+                        <input type="radio" id="star1O" name="rateO" value="1" />
+                        <label for="star1O" title="text"
+                           ><svg
+                              viewBox="0 0 576 512"
+                              height="1em"
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="star-solid"
+                           >
+                              <path
+                              d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
+                              ></path></svg
+                        ></label>
                      </div>
-               </div>
-               </div>
-               <div class="Findcontainer">
-               <div class="row">
-               <h1 class="rating_text">Student: </h1>
-                  <div class="rating">
-                     <input type="radio" id="star5S" name="rateS" value="5" />
-                     <label for="star5S" title="text"
-                        ><svg
-                           viewBox="0 0 576 512"
-                           height="1em"
-                           xmlns="http://www.w3.org/2000/svg"
-                           class="star-solid"
-                        >
-                           <path
-                           d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                           ></path></svg
-                     ></label>
-                     <input type="radio" id="star4S" name="rateS" value="4" />
-                     <label for="star4S" title="text"
-                        ><svg
-                           viewBox="0 0 576 512"
-                           height="1em"
-                           xmlns="http://www.w3.org/2000/svg"
-                           class="star-solid"
-                        >
-                           <path
-                           d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                           ></path></svg
-                     ></label>
-                     <input checked="" type="radio" id="star3S" name="rateS" value="3" />
-                     <label for="star3S" title="text"
-                        ><svg
-                           viewBox="0 0 576 512"
-                           height="1em"
-                           xmlns="http://www.w3.org/2000/svg"
-                           class="star-solid"
-                        >
-                           <path
-                           d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                           ></path></svg
-                     ></label>
-                     <input type="radio" id="star2S" name="rateS" value="2" />
-                     <label for="star2S" title="text"
-                        ><svg
-                           viewBox="0 0 576 512"
-                           height="1em"
-                           xmlns="http://www.w3.org/2000/svg"
-                           class="star-solid"
-                        >
-                           <path
-                           d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                           ></path></svg
-                     ></label>
-                     <input type="radio" id="star1S" name="rateS" value="1" />
-                     <label for="star1S" title="text"
-                        ><svg
-                           viewBox="0 0 576 512"
-                           height="1em"
-                           xmlns="http://www.w3.org/2000/svg"
-                           class="star-solid"
-                        >
-                           <path
-                           d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                           ></path></svg
-                     ></label>
-                     </div>
-               </div>
+                  </div>
                </div>
                <div class="Findcontainer">
-               <div class="row">
-               <h1 class="rating_text">Accommodation: </h1>
-                  <div class="rating">
-                     <input type="radio" id="star5A" name="rateA" value="5" />
-                     <label for="star5A" title="text"
-                        ><svg
-                           viewBox="0 0 576 512"
-                           height="1em"
-                           xmlns="http://www.w3.org/2000/svg"
-                           class="star-solid"
-                        >
-                           <path
-                           d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                           ></path></svg
-                     ></label>
-                     <input type="radio" id="star4A" name="rateA" value="4" />
-                     <label for="star4A" title="text"
-                        ><svg
-                           viewBox="0 0 576 512"
-                           height="1em"
-                           xmlns="http://www.w3.org/2000/svg"
-                           class="star-solid"
-                        >
-                           <path
-                           d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                           ></path></svg
-                     ></label>
-                     <input checked="" type="radio" id="star3A" name="rateA" value="3" />
-                     <label for="star3A" title="text"
-                        ><svg
-                           viewBox="0 0 576 512"
-                           height="1em"
-                           xmlns="http://www.w3.org/2000/svg"
-                           class="star-solid"
-                        >
-                           <path
-                           d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                           ></path></svg
-                     ></label>
-                     <input type="radio" id="star2A" name="rateA" value="2" />
-                     <label for="star2A" title="text"
-                        ><svg
-                           viewBox="0 0 576 512"
-                           height="1em"
-                           xmlns="http://www.w3.org/2000/svg"
-                           class="star-solid"
-                        >
-                           <path
-                           d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                           ></path></svg
-                     ></label>
-                     <input type="radio" id="star1A" name="rateA" value="1" />
-                     <label for="star1A" title="text"
-                        ><svg
-                           viewBox="0 0 576 512"
-                           height="1em"
-                           xmlns="http://www.w3.org/2000/svg"
-                           class="star-solid"
-                        >
-                           <path
-                           d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
-                           ></path></svg
-                     ></label>
+                  <div class="row">
+                     <h1 class="rating_text">Student: </h1>
+                     <div class="rating">
+                        <input type="radio" id="star5S" name="rateS" value="5" />
+                        <label for="star5S" title="text"
+                           ><svg
+                              viewBox="0 0 576 512"
+                              height="1em"
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="star-solid"
+                           >
+                              <path
+                              d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
+                              ></path></svg
+                        ></label>
+                        <input type="radio" id="star4S" name="rateS" value="4" />
+                        <label for="star4S" title="text"
+                           ><svg
+                              viewBox="0 0 576 512"
+                              height="1em"
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="star-solid"
+                           >
+                              <path
+                              d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
+                              ></path></svg
+                        ></label>
+                        <input checked="" type="radio" id="star3S" name="rateS" value="3" />
+                        <label for="star3S" title="text"
+                           ><svg
+                              viewBox="0 0 576 512"
+                              height="1em"
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="star-solid"
+                           >
+                              <path
+                              d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
+                              ></path></svg
+                        ></label>
+                        <input type="radio" id="star2S" name="rateS" value="2" />
+                        <label for="star2S" title="text"
+                           ><svg
+                              viewBox="0 0 576 512"
+                              height="1em"
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="star-solid"
+                           >
+                              <path
+                              d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
+                              ></path></svg
+                        ></label>
+                        <input type="radio" id="star1S" name="rateS" value="1" />
+                        <label for="star1S" title="text"
+                           ><svg
+                              viewBox="0 0 576 512"
+                              height="1em"
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="star-solid"
+                           >
+                              <path
+                              d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
+                              ></path></svg
+                        ></label>
                      </div>
+                  </div>
                </div>
+               <div class="Findcontainer">
+                  <div class="row">
+                     <h1 class="rating_text">Accommodation: </h1>
+                     <div class="rating">
+                        <input type="radio" id="star5A" name="rateA" value="5" />
+                        <label for="star5A" title="text"
+                           ><svg
+                              viewBox="0 0 576 512"
+                              height="1em"
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="star-solid"
+                           >
+                              <path
+                              d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
+                              ></path></svg
+                        ></label>
+                        <input type="radio" id="star4A" name="rateA" value="4" />
+                        <label for="star4A" title="text"
+                           ><svg
+                              viewBox="0 0 576 512"
+                              height="1em"
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="star-solid"
+                           >
+                              <path
+                              d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
+                              ></path></svg
+                        ></label>
+                        <input checked="" type="radio" id="star3A" name="rateA" value="3" />
+                        <label for="star3A" title="text"
+                           ><svg
+                              viewBox="0 0 576 512"
+                              height="1em"
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="star-solid"
+                           >
+                              <path
+                              d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
+                              ></path></svg
+                        ></label>
+                        <input type="radio" id="star2A" name="rateA" value="2" />
+                        <label for="star2A" title="text"
+                           ><svg
+                              viewBox="0 0 576 512"
+                              height="1em"
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="star-solid"
+                           >
+                              <path
+                              d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
+                              ></path></svg
+                        ></label>
+                        <input type="radio" id="star1A" name="rateA" value="1" />
+                        <label for="star1A" title="text"
+                           ><svg
+                              viewBox="0 0 576 512"
+                              height="1em"
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="star-solid"
+                           >
+                              <path
+                              d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"
+                              ></path></svg
+                        ></label>
+                     </div>
+                  </div>
                </div>
+               <div class="row">
+               <div class="Findcontainer">
                <h1 class="find_text">Price Range:</h1>
-               <div class="row">
-               <div class="Findcontainer">
                <div class="d-flex">
                   <div class="wrapper">
                      <header>
@@ -336,13 +335,6 @@
                         <span>Max</span>
                         <input type="number" class="input-max" value="7500">
                      </div>
-                     </div>
-                     <div class="slider">
-                     <div class="progress"></div>
-                     </div>
-                     <div class="range-input">
-                     <input type="range" class="range-min" min="0" max="10000" value="2500" step="100">
-                     <input type="range" class="range-max" min="0" max="10000" value="7500" step="100">
                      </div>
                   </div>
                </div>
@@ -378,7 +370,7 @@
                                  <img src="/UniRent/Smarty/images/img-4.png" alt="">
                                  <div class="overlay">
                                     <div class="text">
-                                       <div class="some_text"><a href="#">See More</a></div>
+                                       <div class="some_text"><a href="#" onclick="showModal(event)">See More</a></div>
                                     </div>
                                  </div>
                               </div>
@@ -456,7 +448,18 @@
       </div>
          </div>
       </div>
-      
+<div id="loginModal" class="resModal">
+    <div class="resModal-content">
+        <span class="resClose" id="loginClose">&times;</span>
+        <p>Please, login to continue: </p>
+        <div class="btn-cont">
+       <div class="login-required"><a href="/UniRent/User/login">Login</a></div>
+        <div class="login-required"> <a href="/UniRent/User/register">Sign Up</a></div>
+        </div>
+    </div>
+</div>
+   
+
       <!-- footer section start -->
       <div class="footer_section layout_padding">
          <div class="container">
@@ -481,49 +484,7 @@
       </div>
       <!-- footer section end -->
       <!-- Javascript files-->
-      <script>
-      const rangeInput = document.querySelectorAll(".range-input input"),
-      priceInput = document.querySelectorAll(".price-input input"),
-      range = document.querySelector(".slider .progress");
-      let priceGap = 1000;
-
-      priceInput.forEach((input) => {
-      input.addEventListener("input", (e) => {
-      let minPrice = parseInt(priceInput[0].value),
-      maxPrice = parseInt(priceInput[1].value);
-
-         if (maxPrice - minPrice >= priceGap && maxPrice <= rangeInput[1].max) {
-            if (e.target.className === "input-min") {
-            rangeInput[0].value = minPrice;
-            range.style.left = (minPrice / rangeInput[0].max) * 100 + "%";
-            } else {
-            rangeInput[1].value = maxPrice;
-            range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
-            }
-         }
-      });
-      });
-
-      rangeInput.forEach((input) => {
-      input.addEventListener("input", (e) => {
-         let minVal = parseInt(rangeInput[0].value),
-            maxVal = parseInt(rangeInput[1].value);
-
-         if (maxVal - minVal < priceGap) {
-            if (e.target.className === "range-min") {
-            rangeInput[0].value = maxVal - priceGap;
-            } else {
-            rangeInput[1].value = minVal + priceGap;
-            }
-         } else {
-            priceInput[0].value = minVal;
-            priceInput[1].value = maxVal;
-            range.style.left = (minVal / rangeInput[0].max) * 100 + "%";
-            range.style.right = 100 - (maxVal / rangeInput[1].max) * 100 + "%";
-         }
-      });
-      });
-      </script>
+      
       <script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>
       <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
@@ -558,6 +519,31 @@
     document.getElementById("yourFormId").submit();
 }
       </script>
+      <script>
+    // Get the modal
+    var modal = document.getElementById("loginModal");
+    // Get the <span> element that closes the modal
+    var span = document.getElementById("loginClose");
+
+
+    // When the user clicks the button, open the modal 
+    function showModal(event) {
+        event.preventDefault();
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
       
    </body>
 </html>
