@@ -51,7 +51,7 @@ class CUser
         $searchResult= [
             0 => [
                 'title' => 'Appartamento in centro',
-                'price' => '500€',
+                'price' => '500',
             ]
         ];
         $view->findAccommodation($searchResult);
