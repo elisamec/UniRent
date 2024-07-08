@@ -586,19 +586,18 @@ class CStudent{
     public static function editCreditCard()
     {
         $title=USuperGlobalAccess::getPost('cardTitle1');
-        #$number=USuperGlobalAccess::getPost('cardnumber1');
+        $number=USuperGlobalAccess::getPost('cardnumber1');
         $expiry=USuperGlobalAccess::getPost('expirydate1');
         $cvv=USuperGlobalAccess::getPost('cvv1');
         $name=USuperGlobalAccess::getPost('name1');
         $surname=USuperGlobalAccess::getPost('surname1');
-        $oldNumber=USuperGlobalAccess::getPost('hiddenOldCard');
         $username=USession::getInstance()::getSessionElement('username');
         $studentId=FPersistentManager::getInstance()->getStudentIdByUsername($username);
         #print $title.' '.$number.' '.$expiry.' '.$cvv.' '.$name.' '.$surname.' '.$oldNumber;
         $PM=FPersistentManager::getInstance();
-        if($PM->isMainCard($studentId,$oldNumber))
+        if($PM->isMainCard($studentId,$number))
         {
-            $c= new ECreditCard($oldNumber,$name,$surname,$expiry,$cvv,$studentId,true,$title);
+            $c= new ECreditCard($number,$name,$surname,$expiry,$cvv,$studentId,true,$title);
             $result=$PM::update($c);
             if($result)
             {
@@ -611,7 +610,7 @@ class CStudent{
         }
         else
         {
-            $c= new ECreditCard($oldNumber,$name,$surname,$expiry,$cvv,$studentId,false,$title);
+            $c= new ECreditCard($number,$name,$surname,$expiry,$cvv,$studentId,false,$title);
             $result=$PM::update($c);
             if($result)
             {
