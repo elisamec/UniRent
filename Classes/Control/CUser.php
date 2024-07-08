@@ -51,7 +51,6 @@ class CUser
         $searchResult= [
             0 => [
                 'title' => 'Appartamento in centro',
-                'description' => 'Appartamento in centro a Milano, vicino alla fermata della metro',
                 'price' => '500€',
             ]
         ];
