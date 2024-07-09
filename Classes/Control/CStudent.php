@@ -56,7 +56,7 @@ class CStudent{
                 'photo' => null,
             ]
         ];*/
-        $view->findAccommodation($city,$university,$searchResult);
+        $view->findAccommodation($city,$university,$searchResult,$date);
     }
     public static function about(){
         $view = new VStudent();

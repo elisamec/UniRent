@@ -62,7 +62,7 @@ class CUser
                 'address' => 'Via Roma 1, Milano',
             ]
         ];*/
-        $view->findAccommodation($city,$university,$searchResult);
+        $view->findAccommodation($city,$university,$searchResult,$date);
     }
 
     public static function getCities()
