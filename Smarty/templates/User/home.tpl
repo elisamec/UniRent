@@ -123,21 +123,17 @@
                <h1 class="find_text">Find an Accommodation</h1>
                <div class="row">
                   <div class="col-lg-3 select-outline">
-                     <select name="city" id="city" class="mdb-select md-form md-outline colorful-select dropdown-primary">
+                     <select name="city" id="citySelect" class="nice-select mdb-select md-form md-outline colorful-select dropdown-primary">
                         <option value="" disabled selected>Select a city</option>
-                        <option value="City 1">City 1</option>
-                        <option value="City 2">City 1</option>
                      </select>
                   </div>
                   <div class="col-lg-3 select-outline">
-                     <select name="university" id="university" class="mdb-select md-form md-outline colorful-select dropdown-primary">
+                     <select name="university" id="universitySelect" class="nice-select mdb-select md-form md-outline colorful-select dropdown-primary">
                         <option value="" disabled selected>Select a university</option>
-                        <option value="University 1">University 1</option>
-                        <option value="University 2">University 2</option>
                      </select>
                   </div>
                   <div class="col-lg-3 select-outline">
-                     <select name="date" id="date" class="mdb-select md-form md-outline colorful-select dropdown-primary">
+                     <select name="date" id="date" class="nice-select mdb-select md-form md-outline colorful-select dropdown-primary">
                         <option value="" disabled selected>Select a period</option>
                         <option value="september">September to June</option>
                         <option value="october">October to July</option>
@@ -403,5 +399,43 @@
     document.getElementById("yourFormId").submit();
 }
       </script>
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const citySelect = document.getElementById("citySelect");
+            const uniSelect = document.getElementById("universitySelect");
+
+            fetch("/UniRent/User/getCities")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(subjectObject => {
+                // Populate city dropdown
+                for (let city in subjectObject) {
+                    let option = new Option(city, city);
+                    citySelect.add(option);
+                }
+
+                // Add event listener for city dropdown change
+                citySelect.onchange = function() {
+                    const selectedCity = citySelect.value;
+
+                    // Clear the university dropdown
+                    uniSelect.length = 1;
+
+                    if (selectedCity && subjectObject[selectedCity]) {
+                        // Populate university dropdown
+                        subjectObject[selectedCity].forEach(uniName => {
+                            let option = new Option(uniName, uniName);
+                            uniSelect.add(option);
+                        });
+                    }
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
    </body>
 </html>
