@@ -2185,10 +2185,12 @@ textarea#comment::placeholder {
 
 .availability label {
     margin-right: 10px;
+    padding-left: 10px;
 }
 
 .availability input[type="text"],
-.availability input[type="time"] {
+.availability input[type="time"],
+.availability select[id="day"] {
     margin-right: 10px;
     flex: 1;
 }
@@ -2710,4 +2712,10 @@ textarea#comment::placeholder {
 #month {
     margin-right: 10px;
     margin-left:20px
+}
+
+#day {
+    margin-right: 10px;
+    padding: 5px;
+    height: 35px;
 }
