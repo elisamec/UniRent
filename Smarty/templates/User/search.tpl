@@ -490,8 +490,7 @@ rangeInput.forEach((input) => {
     const uniSelect = document.getElementById("universitySelect");
     const dateSelect = document.getElementById("date");
 
-    // Initialize nice-select on page load
-    $('select').niceSelect();
+    console.log('Document loaded');
 
     fetch("/UniRent/User/getCities")
     .then(response => {
@@ -501,54 +500,68 @@ rangeInput.forEach((input) => {
         return response.json();
     })
     .then(subjectObject => {
+        console.log('Data fetched:', subjectObject); // Log fetched data
+
         // Populate city dropdown
         for (let city in subjectObject) {
             let option = new Option(city, city);
             citySelect.add(option);
         }
-
-        // Update nice-select after adding options
-        $('select').niceSelect('update');
+        console.log('City dropdown populated');
 
         // Add event listener for city dropdown change
         citySelect.onchange = function() {
             const selectedCity = citySelect.value;
 
-            // Clear the university dropdown
-            uniSelect.length = 1;
+            console.log('Selected city:', selectedCity);
+
+            // Clear and populate university dropdown based on selected city
+            uniSelect.length = 1; // Clear all options except the default one
 
             if (selectedCity && subjectObject[selectedCity]) {
-                // Populate university dropdown
                 subjectObject[selectedCity].forEach(uniName => {
                     let option = new Option(uniName, uniName);
                     uniSelect.add(option);
                 });
 
-                // Update nice-select after adding options
+                console.log('Universities populated for', selectedCity);
+
+                // Trigger NiceSelect update after adding options
                 $('select').niceSelect('update');
             }
-        }
+        };
 
-        // Set the selected value from the previous page
-        const selectedCity = {/literal}"{$selectedCity}"{literal}; // replace with your Smarty placeholder
-        const selectedUni = {/literal}"{$selectedUni}"{literal};
-        const selectedDate = {/literal}"{$selectedDate}"{literal}; // replace with your Smarty placeholder
+        // Set selected values from the previous page
+        const selectedCity = "{/literal}{$selectedCity}{literal}"; // Replace with your Smarty placeholder
+        const selectedUni = "{/literal}{$selectedUni}{literal}"; // Replace with your Smarty placeholder
+        const selectedDate = "{/literal}{$selectedDate}{literal}"; // Replace with your Smarty placeholder
+
+        console.log('Selected values:', selectedCity, selectedUni, selectedDate);
 
         if (selectedCity) {
             citySelect.value = selectedCity;
-            $('select').niceSelect('update');
+            console.log('Set selected city:', selectedCity);
         }
         if (selectedUni) {
             uniSelect.value = selectedUni;
-            $('select').niceSelect('update');
+            console.log('Set selected university:', selectedUni);
         }
         if (selectedDate) {
             dateSelect.value = selectedDate;
-            $('select').niceSelect('update');
+            console.log('Set selected date:', selectedDate);
         }
+
+        // Update NiceSelect after setting selected values
+        $('select').niceSelect('update');
+        console.log('NiceSelect updated');
+
+        // Initialize NiceSelect after everything is loaded and processed
+        $('select').niceSelect();
+        console.log('NiceSelect initialized');
     })
     .catch(error => console.error('Error:', error));
 });
+
     </script>
     {/literal}
     <script>
