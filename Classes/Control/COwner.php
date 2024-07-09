@@ -414,11 +414,19 @@ class COwner
         $month=USuperGlobalAccess::getPost('month');
         #$pictures=USuperGlobalAccess::getPost();
         $visits=USuperGlobalAccess::getPost('visitAvailabilityData');  #json in arrivo dal post
+        $duration=EAccommodation::DurationOfVisit($visits);
 
-        $array_visit=EAccommodation::fromJsonToArrayOfVisit($visits);
-      
-       
-        print_r(json_decode($visits));
+        if(!is_null($duration))  #se la durata delle visite è zero non ci saranno visite
+        {
+            $array_visit=EAccommodation::fromJsonToArrayOfVisit($visits);
+        }
+        else
+        {
+            $array_visit=array();
+        }
+        
+        print($duration);
+        print_r($array_visit);
       
         if($month=='Sep')
         {

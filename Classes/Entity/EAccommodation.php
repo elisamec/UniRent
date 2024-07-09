@@ -453,14 +453,26 @@ class EAccommodation
             $difference=date_diff(date_create($value['start']),date_create($value['end']));
             $totalMinutes = $difference->h * 60 + $difference->i;
             $value['diff']=(int)$totalMinutes;
-            $value['number_of_visits']=(int)($value['diff']/(int)$value['duration']);
-            $result[$key]=$value;
+            if($value['diff']<=0){continue;}
+            else
+            {
+                if(empty($value['duration']) || !is_numeric($value['duration']) || (int)$value['duration'] <= 0)
+                {
+                    continue; // Salta questa iterazione se duration non è valido
+                }
+                else
+                {
+                    $value['number_of_visits']=(int)($value['diff']/(int)$value['duration']);
+                    $result[$key]=$value;
+                }
+            }  
         }
+        
         #print_r($result);
         $result_2=array();
         foreach($result as $key=>$value)
         {
-            if($value['number_of_visits']===0){}   //se il numero delle visite è 0 (o hai sbagliato a mettere gli orari o la durata della visita)
+            if($value['number_of_visits']<=0){}   //se il numero delle visite è 0 (o hai sbagliato a mettere gli orari o la durata della visita)
             else
             {
                 $start_in_minutes=EAccommodation::stringInMinutes($value['start']); #trasforma l'orario in minuti dalla mezzanotte
@@ -508,12 +520,11 @@ class EAccommodation
      *
      * @return ?int
      */
-    public static function DurationOfVisit($json)
+    public static function DurationOfVisit($json):?int
     {
         $myarray=json_decode($json,true);
         $result=array();
-        print_r($myarray);
-        /*
+        
         foreach($myarray as $key=>$value)
         {
             $result[]=(int)$value['duration'];
@@ -525,7 +536,7 @@ class EAccommodation
         else
         {
             return null;
-        }*/
+        }
     }
 
     private static function stringInMinutes(string $s):int
