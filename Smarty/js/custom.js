@@ -60,8 +60,8 @@ $(function () {
 	/*
 	$(document).ready(function() {
 		$('select').niceSelect();
-	});	*/
-		
+	});	
+		*/
 	/* Scroll to Top
 	-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
 	
