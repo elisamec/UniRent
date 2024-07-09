@@ -222,7 +222,7 @@
   <div class="avModal-content">
     <form id="visitAvailabilityForm">
         <h2 class="avModal-head">Visit Availability</h2>
-        <p> Insert the visit duration, the day for which the availability is set, and the start and end time of the availability. Based on the duration, the appointments will be calculated inside the time window you are indicating. </p>
+        <p> Insert the visit duration, the day for which the availability is set, and the start and end time of the availability. Based on the duration, the appointments will be calculated inside the time window you are indicating. Please note that the duration needs to be the same for each day, therefore if you intend to change the duration for one availability option you will consequently be changing the duration of all of them. </p>
         <div id="availabilityContainer">
             <div class="availability">
                 
@@ -251,7 +251,7 @@
 </div>
 
 {literal}
-                    <script>
+<script>
 // Get the visit availability modal
 var avModal = document.getElementById("popup");
 var initialVisitData = [];
@@ -280,8 +280,8 @@ function addAvailability() {
     availability.innerHTML = `
         <button type="button" onclick="removeAvailability(this)" class="button-spec little">-</button>
         <label for="duration">Visit Duration (minutes):</label>
-        <input type="number" class="duration" name="duration" title="Please enter a number">
-        <label for="dayOfWeek">Weekday:</label>
+        <input type="number" class="duration" name="duration" title="Please enter a number" min="1">
+        <label for="day">Weekday:</label>
             <select id="day" name="day">
                 <option value="" disabled selected>Select a weekday</option>
                 <option value="Monday">Monday</option>
@@ -399,8 +399,8 @@ function setVisitData(data) {
         availability.innerHTML = `
             <button type="button" onclick="removeAvailability(this)" class="button-spec little">-</button>
             <label for="duration">Visit Duration (minutes):</label>
-            <input type="number" id="duration" name="duration" title="Please enter a number" value="${data[i].duration}">
-            <label for="dayOfWeek">Weekday:</label>
+            <input type="number" id="duration" name="duration" title="Please enter a number" value="${data[i].duration}" min="1">
+            <label for="day">Weekday:</label>
             <select id="day" name="day">
                 <option value="" disabled>Select a weekday</option>
                 <option value="Monday" ${data[i].day === 'Monday' ? 'selected' : ''}>Monday</option>
