@@ -97,4 +97,8 @@ class VStudent{
         $this->smarty->assign('cardsData', json_encode($cardsData));
         $this->smarty->display('Student/paymentMethods.tpl');
     }
+    public function postedReview(array $reviewsData){
+        $this->smarty->assign('reviewsData', $reviewsData);
+        $this->smarty->display('Student/postedReviews.tpl');
+    }
 }
