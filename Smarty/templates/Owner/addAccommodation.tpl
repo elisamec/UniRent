@@ -416,7 +416,6 @@ function setVisitData(data) {
             <label for="end">Availability end:</label>
             <input type="time" id="end" name="end" value="${data[i].end}">
         `;
-        console.log(data[i].day);
         container.appendChild(availability);
     }
 }
