@@ -47,7 +47,7 @@ class CUser
         $view = new VUser();
         $view->contact();
     }
-    public static function search(){
+    public static function findAccommodation(){
         $view = new VUser();
         $city=USuperGlobalAccess::getPost('city');
         $date=USuperGlobalAccess::getPost('date');
@@ -62,7 +62,7 @@ class CUser
                 'address' => 'Via Roma 1, Milano',
             ]
         ];*/
-        $view->search($city,$university,$searchResult);
+        $view->findAccommodation($city,$university,$searchResult);
     }
 
     public static function getCities()
