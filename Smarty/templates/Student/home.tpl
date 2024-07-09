@@ -401,41 +401,51 @@
 
 <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const citySelect = document.getElementById("citySelect");
-            const uniSelect = document.getElementById("universitySelect");
+        const citySelect = document.getElementById("citySelect");
+        const uniSelect = document.getElementById("universitySelect");
 
-            fetch("/UniRent/User/getCities")
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
+        // Initialize nice-select on page load
+        $('select').niceSelect();
+
+        fetch("/UniRent/User/getCities")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(subjectObject => {
+            // Populate city dropdown
+            for (let city in subjectObject) {
+                let option = new Option(city, city);
+                citySelect.add(option);
+            }
+
+            // Update nice-select after adding options
+            $('select').niceSelect('update');
+
+            // Add event listener for city dropdown change
+            citySelect.onchange = function() {
+                const selectedCity = citySelect.value;
+
+                // Clear the university dropdown
+                uniSelect.length = 1;
+
+                if (selectedCity && subjectObject[selectedCity]) {
+                    // Populate university dropdown
+                    subjectObject[selectedCity].forEach(uniName => {
+                        let option = new Option(uniName, uniName);
+                        uniSelect.add(option);
+                    });
+
+                    // Update nice-select after adding options
+                    $('select').niceSelect('update');
                 }
-                return response.json();
-            })
-            .then(subjectObject => {
-                // Populate city dropdown
-                for (let city in subjectObject) {
-                    let option = new Option(city, city);
-                    citySelect.add(option);
-                }
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
 
-                // Add event listener for city dropdown change
-                citySelect.onchange = function() {
-                    const selectedCity = citySelect.value;
-
-                    // Clear the university dropdown
-                    uniSelect.length = 1;
-
-                    if (selectedCity && subjectObject[selectedCity]) {
-                        // Populate university dropdown
-                        subjectObject[selectedCity].forEach(uniName => {
-                            let option = new Option(uniName, uniName);
-                            uniSelect.add(option);
-                        });
-                    }
-                }
-            })
-            .catch(error => console.error('Error:', error));
-        });
     </script>
    </body>
 </html>
