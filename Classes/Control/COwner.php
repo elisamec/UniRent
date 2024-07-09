@@ -416,18 +416,16 @@ class COwner
         $visits=USuperGlobalAccess::getPost('visitAvailabilityData');  #json in arrivo dal post
         $duration=EAccommodation::DurationOfVisit($visits);
 
-        if(!is_null($duration))  #se la durata delle visite è zero non ci saranno visite
+        if(!is_null($duration) and $duration>0)  #se la durata delle visite è zero non ci saranno visite
         {
             $array_visit=EAccommodation::fromJsonToArrayOfVisit($visits);
         }
         else
         {
             $array_visit=array();
+            $duration=0;
         }
-        
-        print($duration);
-        print_r($array_visit);
-      
+ 
         if($month=='Sep')
         {
             $month=9;
@@ -441,21 +439,31 @@ class COwner
         $city=USuperGlobalAccess::getPost('city');
         $postalCode=USuperGlobalAccess::getPost('postalCode');
         $description=USuperGlobalAccess::getPost('description');
-
-        $men=USuperGlobalAccess::getPost('men');
-        $women=USuperGlobalAccess::getPost('women');
-        $smokers=USuperGlobalAccess::getPost('smokers');
-        $animals=USuperGlobalAccess::getPost('animals');
+        $men=USession::booleanSolver(USuperGlobalAccess::getPost('men'));
+        $women=USession::booleanSolver(USuperGlobalAccess::getPost('women'));
+        $smokers=USession::booleanSolver(USuperGlobalAccess::getPost('smokers'));
+        $animals=USession::booleanSolver(USuperGlobalAccess::getPost('animals'));
 
         $date= new DateTime('now');
         $year=(int)$date->format('Y');
         $date=$date->setDate($year,$month,$startDate);
 
         $PM=FPersistentManager::getInstance();
+        
+        $idOwner=$PM->getOwnerIdByUsername(USession::getInstance()::getSessionElement('username'));
         $addressObj= new Address();
         $addressObj=$addressObj->withAddressLine1($address)->withPostalcode($postalCode)->withLocality($city);
         #print $addressObj->getAddressLine1().' '.$addressObj->getPostalCode().' '.$addressObj->getLocality();
-        #$accomodation = new EAccommodation(null,array(),$title,$addressObj,$price,$date,$description,$deposit,$array_visit,);
+        $accomodation = new EAccommodation(null,array(),$title,$addressObj,$price,$date,$description,$deposit,$array_visit,$duration,$men,$women,$animals,$smokers,$idOwner);
+        $result=$PM::store($accomodation);
+        if($result)
+        {
+            header('Location:/UniRent/Owner/home');
+        }
+        else
+        {
+            print '500 : SERVER ERROR';
+        }
         
     }
     public static function publicProfileFromOwner(string $username)
