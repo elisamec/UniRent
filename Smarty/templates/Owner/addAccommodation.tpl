@@ -280,7 +280,7 @@ function addAvailability() {
     availability.innerHTML = `
         <button type="button" onclick="removeAvailability(this)" class="button-spec little">-</button>
         <label for="duration">Visit Duration (minutes):</label>
-        <input type="number" class="duration" name="duration" title="Please enter a number">
+        <input type="number" class="duration" name="duration" title="Please enter a number" min="1">
         <label for="day">Weekday:</label>
             <select id="day" name="day">
                 <option value="" disabled selected>Select a weekday</option>
@@ -399,7 +399,7 @@ function setVisitData(data) {
         availability.innerHTML = `
             <button type="button" onclick="removeAvailability(this)" class="button-spec little">-</button>
             <label for="duration">Visit Duration (minutes):</label>
-            <input type="number" id="duration" name="duration" title="Please enter a number" value="${data[i].duration}">
+            <input type="number" id="duration" name="duration" title="Please enter a number" value="${data[i].duration}" min="1">
             <label for="day">Weekday:</label>
             <select id="day" name="day">
                 <option value="" disabled>Select a weekday</option>
