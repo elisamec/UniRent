@@ -84,6 +84,7 @@
       <div class="container-fluid">
          <div class="search_box_section">
             <div class="search_box_main padding-reserve">
+            <form action="/UniRent/User/findAccommodation" method="post" id="yourFormId">
                <h1 class="find_text">Find an Accommodation</h1>
                <div class="row padding-reserve">
                <div class="Findcontainer">
@@ -266,12 +267,13 @@
                <div class="row">
                <div class="Findcontainer">
                   <div class="select-outline">
-                     <div class="find_btn"><a href="#">Find Now</a></div>
+                     <div class="find_btn"><a href="#" id="yourLinkId">Find Now</a></div>
                   </div>
                </div>
                </div>
             </div>
          </div>
+         </form>
       </div>
       <!-- feature section start -->
       <div class="Properties_section">

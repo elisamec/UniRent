@@ -63,7 +63,7 @@ class VStudent{
     public function about(){
         $this->smarty->display('Student/about.tpl');
     }
-    public function search(string $selectedCity, string $selectedUni, array $searchResult){
+    public function findAccommodation(string $selectedCity, string $selectedUni, array $searchResult){
         $this->smarty->assign('selectedCity', $selectedCity);
         $this->smarty->assign('selectedUni', $selectedUni);
         $this->smarty->assign('searchResult', json_encode($searchResult));
@@ -91,10 +91,6 @@ class VStudent{
         $this->smarty->assign('student', $student);
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->display('Student/publicProfileFromOwner.tpl');
-    }
-    public function findAccommodation(array $searchResult){
-        $this->smarty->assign('searchResult', json_encode($searchResult));
-        $this->smarty->display('Student/search.tpl');
     }
     public function paymentMethods(array $cardsData){
         $this->smarty->assign('cardsData', json_encode($cardsData));
