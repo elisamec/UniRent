@@ -125,17 +125,17 @@
                <h1 class="find_text">Find an Accommodation</h1>
                <div class="row">
                   <div class="col-lg-3 select-outline">
-                     <select name="city" id="citySelect" class="mdb-select md-form md-outline colorful-select dropdown-primary">
+                     <select name="city" id="citySelect" class="nice-select mdb-select md-form md-outline colorful-select dropdown-primary">
                         <option value="" disabled selected>Select a city</option>
                      </select>
                   </div>
                   <div class="col-lg-3 select-outline">
-                     <select name="university" id="universitySelect" class="mdb-select md-form md-outline colorful-select dropdown-primary">
+                     <select name="university" id="universitySelect" class="nice-select mdb-select md-form md-outline colorful-select dropdown-primary">
                         <option value="" disabled selected>Select a university</option>
                      </select>
                   </div>
                   <div class="col-lg-3 select-outline">
-                     <select name="date" id="date" class="mdb-select md-form md-outline colorful-select dropdown-primary">
+                     <select name="date" id="date" class="nice-select mdb-select md-form md-outline colorful-select dropdown-primary">
                         <option value="" disabled selected>Select a period</option>
                         <option value="september">September to June</option>
                         <option value="october">October to July</option>
