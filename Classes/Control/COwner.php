@@ -413,10 +413,12 @@ class COwner
         $startDate=(int) USuperGlobalAccess::getPost('startDate');
         $month=USuperGlobalAccess::getPost('month');
         #$pictures=USuperGlobalAccess::getPost();
-        $visits=USuperGlobalAccess::getPost('visitAvailabilityData');
-        $photos=USuperGlobalAccess::getPost('uploadedImagesData');
+        $visits=USuperGlobalAccess::getPost('visitAvailabilityData');  #json in arrivo dal post
+
         $array_visit=EAccommodation::fromJsonToArrayOfVisit($visits);
-        print_r($array_visit);
+      
+       
+        print_r(json_decode($visits));
       
         if($month=='Sep')
         {
@@ -445,9 +447,8 @@ class COwner
         $addressObj= new Address();
         $addressObj=$addressObj->withAddressLine1($address)->withPostalcode($postalCode)->withLocality($city);
         #print $addressObj->getAddressLine1().' '.$addressObj->getPostalCode().' '.$addressObj->getLocality();
-        #$accomodation = new EAccommodation(null,array(),$title,$addressObj,$price,$date,$description,$deposit,);
+        #$accomodation = new EAccommodation(null,array(),$title,$addressObj,$price,$date,$description,$deposit,$array_visit,);
         
-
     }
     public static function publicProfileFromOwner(string $username)
     {

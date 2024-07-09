@@ -499,6 +499,34 @@ class EAccommodation
         }
         return $final_result;
     }
+    
+    /**
+     * Method DurationOfVisit
+     *
+     * return the duration of a visit from JSON file created by JS in visitAvailabilities
+     * @param $json 
+     *
+     * @return ?int
+     */
+    public static function DurationOfVisit($json)
+    {
+        $myarray=json_decode($json,true);
+        $result=array();
+        print_r($myarray);
+        /*
+        foreach($myarray as $key=>$value)
+        {
+            $result[]=(int)$value['duration'];
+        }
+        if(count($result)>0) 
+        {
+            return $result[0];
+        }
+        else
+        {
+            return null;
+        }*/
+    }
 
     private static function stringInMinutes(string $s):int
     {
