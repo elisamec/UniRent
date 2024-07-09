@@ -43,6 +43,7 @@ class CStudent{
         $view = new VStudent();
         $city=USuperGlobalAccess::getPost('city');
         $date=USuperGlobalAccess::getPost('date');
+        $university=USuperGlobalAccess::getPost('university');
         $PM=FPersistentManager::getInstance();
         $searchResult=$PM->findAccommodations($city,$date);
         /*
@@ -55,7 +56,7 @@ class CStudent{
                 'photo' => null,
             ]
         ];*/
-        $view->findAccommodation($searchResult);
+        $view->search($city,$university,$searchResult);
     }
     public static function about(){
         $view = new VStudent();

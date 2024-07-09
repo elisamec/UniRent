@@ -51,6 +51,7 @@ class CUser
         $view = new VUser();
         $city=USuperGlobalAccess::getPost('city');
         $date=USuperGlobalAccess::getPost('date');
+        $university=USuperGlobalAccess::getPost('university');
         $PM=FPersistentManager::getInstance();
         $searchResult=$PM->findAccommodations($city,$date);
         /*$searchResult= [
@@ -61,7 +62,7 @@ class CUser
                 'address' => 'Via Roma 1, Milano',
             ]
         ];*/
-        $view->search($searchResult);
+        $view->search($city,$university,$searchResult);
     }
 
     public static function getCities()
