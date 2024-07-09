@@ -91,7 +91,6 @@
       <script>
     {if isset($reviewsData)}
     const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
-    console.log(reviews);
 
     // Function to generate stars based on the rating
     function generateStars(stars) {
@@ -112,7 +111,7 @@
 
         if (container) {
             if (reviews.length === 0) {
-                container.innerHTML = '<div class="container"><h1 class="noRev">There are no reviews yet!</h1></div>';
+                container.innerHTML = '<h1 class="noRev">There are no reviews yet!</h1>';
             } else {
                 reviews.forEach(review => {
                     const reviewElement = document.createElement('div');

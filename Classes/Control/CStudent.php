@@ -203,10 +203,11 @@ class CStudent{
     }
     public static function accommodation(int $idAccommodation) {
         $view = new VStudent();
-        $accomm = FPersistentManager::getInstance()->load('EAccommodation', $idAccommodation);
-        $owner = FPersistentManager::getInstance()->load('EOwner', $accomm->getIdOwner());
+        $PM = FPersistentManager::getInstance();
+        $accomm = $PM->load('EAccommodation', $idAccommodation);
+        $owner = $PM->load('EOwner', $accomm->getIdOwner());
         USession::getInstance()->setSessionElement('owner', $owner->getUsername());
-        $reviews = FReview::getInstance()->loadByRecipient($accomm->getIdAccommodation(), TType::ACCOMMODATION);
+        $reviews = $PM->loadByRecipient($accomm->getIdAccommodation(), TType::ACCOMMODATION);
         $reviewsData = [];
         
         foreach ($reviews as $review) {
@@ -235,7 +236,6 @@ class CStudent{
         $PM=FPersistentManager::getInstance();
         $studentId=$PM->getStudentIdByUsername($studentUsername);
         $reviews=$PM->loadByRecipient($studentId, TType::STUDENT);
-       #$reviews = FReview::getInstance()->loadByRecipient($studentId, TType::STUDENT);
         $reviewsData = [];
         
         foreach ($reviews as $review) {
@@ -445,7 +445,7 @@ class CStudent{
         $view = new VStudent();
         $PM=FPersistentManager::getInstance();
         $student=$PM->getStudentByUsername($username);
-        $reviews = FReview::getInstance()->loadByRecipient($student->getId(), TType::STUDENT); //va fatto il metodo nel PM
+        $reviews = $PM->loadByRecipient($student->getId(), TType::STUDENT); //va fatto il metodo nel PM
         $reviewsData = [];
         
         foreach ($reviews as $review) {
@@ -468,7 +468,7 @@ class CStudent{
         $view = new VStudent();
         $PM=FPersistentManager::getInstance();
         $student=$PM->getStudentByUsername($username);
-        $reviews = FReview::getInstance()->loadByRecipient($student->getId(), TType::STUDENT); //va fatto il metodo nel PM
+        $reviews = $PM->loadByRecipient($student->getId(), TType::STUDENT); //va fatto il metodo nel PM
         $reviewsData = [];
         
         foreach ($reviews as $review) {
@@ -676,5 +676,29 @@ class CStudent{
                 http_response_code(500);
             }
         }
+    }
+    public static function postedReview() {
+        $view = new VStudent();
+        $session=USession::getInstance();
+        $username=$session::getSessionElement('username');
+        $PM=FPersistentManager::getInstance();
+        $studentId=$PM->getStudentIdByUsername($username);
+        $reviews = $PM->loadReviewsByAuthor($studentId, TType::STUDENT);
+        $reviewsData = [];
+
+        foreach ($reviews as $review) {
+            $profilePic = $PM->load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor())->getPhoto();
+            if ($profilePic === null) {
+                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+            }
+            $reviewsData[] = [
+                'title' => $review->getTitle(),
+                'username' => $PM->load( 'E' . $review->getRecipientType()->value, $review->getIDRecipient())->getUsername(),
+                'stars' => $review->getValutation(),
+                'content' => $review->getDescription(),
+                'userPicture' => $profilePic,
+            ];
+        }
+        $view->postedReview($reviewsData);
     }
 }

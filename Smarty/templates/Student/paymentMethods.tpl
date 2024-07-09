@@ -246,7 +246,6 @@ function updatePaymentMethod() {
         };
         
         // For demonstration, log the updated card
-        console.log('Updated Card:', cards[index]);
         
         // Optionally, you can submit the form or perform other actions here
         // document.getElementById('paymentUpdateForm').submit();
@@ -273,7 +272,6 @@ function updatePaymentMethod() {
     {literal}
     // Define cardsData as a JavaScript variable
     let cardsData = {/literal}{$cardsData}{literal};
-    console.log('Raw cardsData:', cardsData);
 
     // Check if cardsData is already an array, if not, wrap it in an array
     let cards = [];
@@ -284,9 +282,6 @@ function updatePaymentMethod() {
     } else {
         console.error('Invalid cardsData format:', cardsData);
     }
-
-    console.log('Parsed cards:', cards);
-    console.log('Is cards an array?', Array.isArray(cards));
 
     function displayCards(cards) {
     const container = document.getElementById('cardsContainer');
@@ -512,15 +507,12 @@ function updatePaymentMethod() {
                     otherCards.push(card);
                 }
                 });
-                console.log('Main card:', mainCard);
-                console.log('Other card:', otherCards);
                 if (mainCard) {
                 cards = [mainCard, ...otherCards];
                 } else {
                      console.error('Card not found:', cardNumber);
                 }
         
-                console.log('Updated cards:', cards);
                 displayCards(cards);      
     }
 

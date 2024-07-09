@@ -6,6 +6,7 @@ use Classes\Entity;
 use Classes\Entity\ECreditCard;
 use Classes\Entity\EPhoto;
 use Classes\Entity\EStudent;
+use Classes\Tools\TType;
 use Classes\Utilities\UAccessUniversityFile;
 use DateTime;
 
@@ -94,7 +95,7 @@ class FPersistentManager {
     //public function findAccommodation(DateTime $date,DateTime $fromDate, string $place), chiede query a FAccommodation, @return array
 
 
-    public function getWaitingReservations(int $idProprietario):array
+    public  function getWaitingReservations(int $idProprietario):array
     {
         $FR= Foundation\FReservation::getInstance();
         $result=$FR->getWaitingReservations($idProprietario);
@@ -420,6 +421,11 @@ class FPersistentManager {
         $FA=FAccommodation::getInstance();
         $result=$FA->findAccommodationsByCityAndDate($city,$date);
         return $result;
+    }
+    public function loadReviewsByAuthor(int $idAuthor, TType $type): array {
+        $FReview = FReview::getInstance();
+        $reviews = $FReview->loadByAuthor($idAuthor, $type);
+        return $reviews;
     }
 
 }

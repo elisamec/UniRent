@@ -478,7 +478,6 @@
 {literal}
 <script>
     const results = {/literal}{$searchResult}{literal};
-    console.log(results);
 
     // Function to create and append reviews to the container
     function displayResults(results) {

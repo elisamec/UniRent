@@ -90,12 +90,13 @@ class FReview {
                 $rowRev = FReview::loadReview($idReview);
                 $date=DateTime::createFromFormat('Y-m-d H:i:s',$rowRev['creationDate']);
                 $photo= FPhoto::getInstance()->loadReview($idReview);
-                $authType = TType::tryFrom($rev['authorType']);
-                if ($authType===TType::STUDENT) {
+                if ($rev['authorStudent']!==null) {
                     $author = $rev['authorStudent'];
+                    $authType = TType::STUDENT;
                 }
                 else {
                     $author = $rev['authorOwner'];
+                    $authType = TType::OWNER;
                 }
                 $result[]=new EReview($idReview,$rowRev['title'],$rowRev['valutation'],$rowRev['description'], $photo, $recipientType, $date, $authType, $author, $idRec);
             }
@@ -195,13 +196,14 @@ class FReview {
         }
         $row=$stm->fetch(PDO::FETCH_ASSOC);
         if ($recipientType===TType::STUDENT) {
-            $authType = TType::tryFrom($row['authorType']);
             $recipient=$row['idStudent'];
-            if ($authType===TType::STUDENT) {
+            if ($row['authorStudent']!==null) {
                 $author = $row['authorStudent'];
+                $authType = TType::STUDENT;
             }
             else {
                 $author = $row['authorOwner'];
+                $authType = TType::OWNER;
             }
         }
         else {
@@ -459,6 +461,110 @@ class FReview {
             return false;
         }
     }
+
+    public function loadByAuthor(int $idAuth, TType $authorType): array
+    {   
+        $result=[];
+        $studentReviews= FReview::loadStudentReviewByAuth($idAuth, $authorType);
+        if ($authorType===TType::STUDENT) {
+            $ownerReviews= FReview::loadOwnerReviewByAuth($idAuth);
+            $accommodationReviews= FReview::loadAccommodationReviewByAuth($idAuth);
+            foreach ($ownerReviews as $oRev) {
+                $idReview = $oRev['idReview'];
+                $rowRev = FReview::loadReview($idReview);
+                $date=DateTime::createFromFormat('Y-m-d H:i:s',$rowRev['creationDate']);
+                $photo= FPhoto::getInstance()->loadReview($idReview);
+                $result[]=new EReview($idReview,$rowRev['title'],$rowRev['valutation'],$rowRev['description'], $photo, TType::OWNER, $date, $authorType, $idAuth, $oRev['idOwner']);
+            }
+            foreach ($accommodationReviews as $aRev) {
+                $idReview = $aRev['idReview'];
+                $rowRev = FReview::loadReview($idReview);
+                $date=DateTime::createFromFormat('Y-m-d H:i:s',$rowRev['creationDate']);
+                $photo= FPhoto::getInstance()->loadReview($idReview);
+                $result[]=new EReview($idReview,$rowRev['title'],$rowRev['valutation'],$rowRev['description'], $photo, TType::ACCOMMODATION, $date, $authorType, $idAuth, $aRev['idAccommodation']);
+            }
+        }
+        foreach ($studentReviews as $sRev) {
+            $idReview = $sRev['idReview'];
+            $rowRev = FReview::loadReview($idReview);
+            $date=DateTime::createFromFormat('Y-m-d H:i:s',$rowRev['creationDate']);
+            $photo= FPhoto::getInstance()->loadReview($idReview);
+            $result[]=new EReview($idReview,$rowRev['title'],$rowRev['valutation'],$rowRev['description'], $photo, TType::STUDENT, $date, $authorType, $idAuth, $sRev['idStudent']);
+        }
+        return $result;
+    }
+    private static function loadStudentReviewByAuth(int $idAuth, TType $authorType):array
+    {
+        $db=FConnection::getInstance()->getConnection();
+
+        try
+        {
+            $db->exec('LOCK TABLES studentreview READ');
+            $db->beginTransaction();
+            $q='SELECT * FROM studentreview WHERE author'.ucfirst($authorType->value).'=:idAuth';    
+            $stm=$db->prepare($q);
+            $stm->bindParam(':idAuth',$idAuth,PDO::PARAM_INT);
+            $stm->execute();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+        }
+
+        catch (PDOException $e)
+        {
+            $db->rollBack();
+        }
+
+        $row=$stm->fetchall(PDO::FETCH_ASSOC);
+        return $row;
+    }
+    private static function loadOwnerReviewByAuth(int $idAuth):array
+    {
+        $db=FConnection::getInstance()->getConnection();
+
+        try
+        {
+            $db->exec('LOCK TABLES ownerreview READ');
+            $db->beginTransaction();
+            $q='SELECT * FROM ownerreview WHERE idAuthor=:idAuth';    
+            $stm=$db->prepare($q);
+            $stm->bindParam(':idAuth',$idAuth,PDO::PARAM_INT);
+            $stm->execute();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+        }
+
+        catch (PDOException $e)
+        {
+            $db->rollBack();
+        }
+
+        $row=$stm->fetchall(PDO::FETCH_ASSOC);
+        return $row;
+    }
+    private static function loadAccommodationReviewByAuth(int $idAuth):array
+    {
+        $db=FConnection::getInstance()->getConnection();
+
+        try
+        {
+            $db->exec('LOCK TABLES accommodationreview READ');
+            $db->beginTransaction();
+            $q='SELECT * FROM accommodationreview WHERE idAuthor=:idAuth';    
+            $stm=$db->prepare($q);
+            $stm->bindParam(':idAuth',$idAuth,PDO::PARAM_INT);
+            $stm->execute();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+        }
+
+        catch (PDOException $e)
+        {
+            $db->rollBack();
+        }
+
+        $row=$stm->fetchall(PDO::FETCH_ASSOC);
+        return $row;
+    } 
 
 
 }
