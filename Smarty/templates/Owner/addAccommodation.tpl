@@ -408,7 +408,6 @@ visitForm.addEventListener('submit', function(event) {
     event.preventDefault();
 
     let data = getVisitData();
-    console.log('Data to be submitted:', data);
     sessionStorage.setItem('availabilities', JSON.stringify(data));
 
     // Store the JSON data in the hidden input field in the main form
@@ -582,14 +581,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (dayInput.value > dayInput.max) {
                     dayInput.value = dayInput.max;
                 }
-                console.log(`Updated max days for ${selectedMonth}: ${dayInput.max}`);
             }
 
             // Function to calculate the nearest future date
             function calculateNearestFutureDate() {
                if (dayInput.value === "") {
                     hiddenDateInput.value = "";
-                    console.log(`Day input is empty. Cleared the date.`);
                 } else {
                 
                 const day = parseInt(dayInput.value, 10)+1;
@@ -616,18 +613,15 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
 
                 hiddenDateInput.value = selectedDate.toISOString().split('T')[0];
-                console.log(`Calculated nearest future date: ${hiddenDateInput.value}`);
             }
             }
 
             // Event listeners
             dayInput.addEventListener("input", function() {
-                console.log(`Day input changed: ${dayInput.value}`);
                 calculateNearestFutureDate();
             });
 
             monthInputs.forEach(input => input.addEventListener("change", function() {
-                console.log(`Month changed: ${input.value}`);
                 updateMaxDays();
                 calculateNearestFutureDate();
             }));

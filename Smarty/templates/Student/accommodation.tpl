@@ -403,7 +403,6 @@
  <script>
     {if isset($reviewsData)}
     const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
-    console.log(reviews);
 
     // Function to generate stars based on the rating
     function generateStars(stars) {
