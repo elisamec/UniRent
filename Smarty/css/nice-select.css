@@ -29,6 +29,11 @@
   white-space: nowrap;
   font-weight: 300;
 }
+span.current {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 .nice-select:after {
   border-bottom: 2px solid #999;
