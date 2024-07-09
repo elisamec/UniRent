@@ -251,7 +251,7 @@
 </div>
 
 {literal}
-                    <script>
+<script>
 // Get the visit availability modal
 var avModal = document.getElementById("popup");
 var initialVisitData = [];
@@ -281,7 +281,7 @@ function addAvailability() {
         <button type="button" onclick="removeAvailability(this)" class="button-spec little">-</button>
         <label for="duration">Visit Duration (minutes):</label>
         <input type="number" class="duration" name="duration" title="Please enter a number">
-        <label for="dayOfWeek">Weekday:</label>
+        <label for="day">Weekday:</label>
             <select id="day" name="day">
                 <option value="" disabled selected>Select a weekday</option>
                 <option value="Monday">Monday</option>
@@ -400,7 +400,7 @@ function setVisitData(data) {
             <button type="button" onclick="removeAvailability(this)" class="button-spec little">-</button>
             <label for="duration">Visit Duration (minutes):</label>
             <input type="number" id="duration" name="duration" title="Please enter a number" value="${data[i].duration}">
-            <label for="dayOfWeek">Weekday:</label>
+            <label for="day">Weekday:</label>
             <select id="day" name="day">
                 <option value="" disabled>Select a weekday</option>
                 <option value="Monday" ${data[i].day === 'Monday' ? 'selected' : ''}>Monday</option>
