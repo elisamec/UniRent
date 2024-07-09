@@ -495,8 +495,9 @@ rangeInput.forEach((input) => {
         }
 
         // Set the selected value from the previous page
-        const selectedCity = {/literal}{$selectedCity}{literal}; // replace with your Smarty placeholder
-        const selectedUni = {/literal}{$selectedUni}{literal}; // replace with your Smarty placeholder
+        const selectedCity = {/literal}"{$selectedCity}"{literal}; // replace with your Smarty placeholder
+        const selectedUni = {/literal}"{$selectedUni}"{literal};
+        const selectedDate = {/literal}"{$selectedDate}"{literal}; // replace with your Smarty placeholder
 
         if (selectedCity) {
             citySelect.value = selectedCity;

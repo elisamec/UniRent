@@ -63,9 +63,10 @@ class VStudent{
     public function about(){
         $this->smarty->display('Student/about.tpl');
     }
-    public function findAccommodation(string $selectedCity, string $selectedUni, array $searchResult){
+    public function findAccommodation(string $selectedCity, string $selectedUni, array $searchResult, string $date){
         $this->smarty->assign('selectedCity', $selectedCity);
         $this->smarty->assign('selectedUni', $selectedUni);
+        $this->smarty->assign('selectedDate', $date);
         $this->smarty->assign('searchResult', json_encode($searchResult));
         $this->smarty->display('Student/search.tpl');
     }
