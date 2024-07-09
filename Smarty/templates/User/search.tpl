@@ -81,10 +81,10 @@
       </div>
    <form action="/UniRent/User/findAccommodation" method="post" class="yourFormId">
       <div class="container-fluid">
-         <div class="search_box_section">
+         <div class="search_box_section padding-reserve">
             <div class="search_box_main">
                <h1 class="find_text">Find an Accommodation</h1>
-               <div class="row padding-reserve">
+               <div class="row">
                   <div class="Findcontainer">
                      <div class="select-outline">
                         <select name="city" id="citySelect" class="nice-select mdb-select md-form md-outline colorful-select dropdown-primary">
