@@ -63,7 +63,10 @@ class VStudent{
     public function about(){
         $this->smarty->display('Student/about.tpl');
     }
-    public function search(){
+    public function search(string $selectedCity, string $selectedUni, array $searchResult){
+        $this->smarty->assign('selectedCity', $selectedCity);
+        $this->smarty->assign('selectedUni', $selectedUni);
+        $this->smarty->assign('searchResult', json_encode($searchResult));
         $this->smarty->display('Student/search.tpl');
     }
     public function accommodation(EAccommodation $accomm, EOwner $owner, array $reviewsData, string $period){

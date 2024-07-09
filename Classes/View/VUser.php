@@ -33,7 +33,9 @@ class VUser{
 
         $this->smarty->display('User/contact.tpl');
     }
-    public function findAccommodation(array $searchResult){
+    public function search(string $selectedCity, string $selectedUni, array $searchResult){
+        $this->smarty->assign('selectedCity', $selectedCity);
+        $this->smarty->assign('selectedUni', $selectedUni);
         $this->smarty->assign('searchResult', json_encode($searchResult));
         $this->smarty->display('User/search.tpl');
     }
