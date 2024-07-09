@@ -3,6 +3,7 @@
 ---------------------------------------------------------------------*/
 
 .nice-select {
+  max-width: 423px;
   background-color: #f6f6f6;
   border-radius: 0;
   box-sizing: border-box;
