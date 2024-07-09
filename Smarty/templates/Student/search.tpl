@@ -454,6 +454,7 @@ rangeInput.forEach((input) => {
         document.addEventListener("DOMContentLoaded", function() {
     const citySelect = document.getElementById("citySelect");
     const uniSelect = document.getElementById("universitySelect");
+    const dateSelect = document.getElementById("date");
 
     // Initialize nice-select on page load
     $('select').niceSelect();
@@ -505,6 +506,10 @@ rangeInput.forEach((input) => {
         }
         if (selectedUni) {
             uniSelect.value = selectedUni;
+            $('select').niceSelect('update');
+        }
+        if (selectedDate) {
+            dateSelect.value = selectedDate;
             $('select').niceSelect('update');
         }
     })
