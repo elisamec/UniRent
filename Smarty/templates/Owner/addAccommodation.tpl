@@ -282,7 +282,16 @@ function addAvailability() {
         <label for="duration">Visit Duration (minutes):</label>
         <input type="number" class="duration" name="duration" title="Please enter a number">
         <label for="dayOfWeek">Weekday:</label>
-        <input type="text" pattern="(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)" title="Please enter a valid day of the week" class="day" name="day">
+            <select id="day" name="day">
+                <option value="" disabled selected>Select a weekday</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
+            </select>
         <label for="start">Availability start:</label>
         <input type="time" class="start" name="start">
         <label for="end">Availability end:</label>
@@ -392,7 +401,16 @@ function setVisitData(data) {
             <label for="duration">Visit Duration (minutes):</label>
             <input type="number" id="duration" name="duration" title="Please enter a number" value="${data[i].duration}">
             <label for="dayOfWeek">Weekday:</label>
-            <input type="text" pattern="(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)" title="Please enter a valid day of the week" id="day" name="day" value="${data[i].day}">
+            <select id="day" name="day">
+                <option value="" disabled>Select a weekday</option>
+                <option value="Monday" ${data[i].day === 'Monday' ? 'selected' : ''}>Monday</option>
+                <option value="Tuesday" ${data[i].day === 'Tuesday' ? 'selected' : ''}>Tuesday</option>
+                <option value="Wednesday" ${data[i].day === 'Wednesday' ? 'selected' : ''}>Wednesday</option>
+                <option value="Thursday" ${data[i].day === 'Thursday' ? 'selected' : ''}>Thursday</option>
+                <option value="Friday" ${data[i].day === 'Friday' ? 'selected' : ''}>Friday</option>
+                <option value="Saturday" ${data[i].day === 'Saturday' ? 'selected' : ''}>Saturday</option>
+                <option value="Sunday" ${data[i].day === 'Sunday' ? 'selected' : ''}>Sunday</option>
+            </select>
             <label for="start">Availability start:</label>
             <input type="time" id="start" name="start" value="${data[i].start}">
             <label for="end">Availability end:</label>
