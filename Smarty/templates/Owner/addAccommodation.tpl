@@ -280,7 +280,7 @@ function addAvailability() {
     availability.innerHTML = `
         <button type="button" onclick="removeAvailability(this)" class="button-spec little">-</button>
         <label for="duration">Visit Duration (minutes):</label>
-        <input type="number" class="duration" name="duration" title="Please enter a number" min="1">
+        <input type="number" class="duration" name="duration" title="Please enter a number" min="10" value="10">
         <label for="day">Weekday:</label>
             <select id="day" name="day">
                 <option value="" disabled selected>Select a weekday</option>
@@ -303,17 +303,9 @@ function addAvailability() {
     const startInput = availability.querySelector('.start');
     const endInput = availability.querySelector('.end');
 
-    startInput.addEventListener('change', function() {
-        if (endInput.value && startInput.value > endInput.value) {
-            endInput.value = startInput.value;
-        }
-    });
+    
 
-    endInput.addEventListener('change', function() {
-        if (startInput.value && endInput.value < startInput.value) {
-            endInput.value = startInput.value;
-        }
-    });
+
 
     // Ensure new duration input inherits the current duration value
     const durationInput = availability.querySelector('.duration');
@@ -324,6 +316,28 @@ function addAvailability() {
 
     // Update duration inputs synchronization
     updateDurationSynchronization();
+
+    function adjustEndTime() {
+        let duration = durationInput.value ? parseInt(durationInput.value) : 10;
+        let newEndTime = new Date('1970-01-01T' + startInput.value + ':00');
+        newEndTime.setHours(newEndTime.getHours()+1);
+        newEndTime.setMinutes(newEndTime.getMinutes() + duration);
+        endInput.value = newEndTime.toISOString().slice(11, 16);
+    }
+
+    startInput.addEventListener('change', function() {
+        if (endInput.value && startInput.value > endInput.value) {
+            adjustEndTime();
+        }
+    });
+
+    endInput.addEventListener('change', function() {
+        if (startInput.value && endInput.value < startInput.value) {
+            adjustEndTime();
+        }
+    });
+
+    durationInput.addEventListener('change', adjustEndTime);
 }
 
 // Function to get the current duration value
@@ -399,7 +413,7 @@ function setVisitData(data) {
         availability.innerHTML = `
             <button type="button" onclick="removeAvailability(this)" class="button-spec little">-</button>
             <label for="duration">Visit Duration (minutes):</label>
-            <input type="number" id="duration" name="duration" title="Please enter a number" value="${data[i].duration}" min="1">
+            <input type="number" id="duration" name="duration" title="Please enter a number" value="${data[i].duration}" min="10">
             <label for="day">Weekday:</label>
             <select id="day" name="day">
                 <option value="" disabled>Select a weekday</option>
