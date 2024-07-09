@@ -407,16 +407,15 @@ class COwner
 
     public static function addAccommodationOperations()
     {
-        $pictures=USuperGlobalAccess::getPhoto('uploadedImagesData');
+        $pictures=USuperGlobalAccess::getPost('uploadedImagesData');
         $myarray=json_decode($pictures,true);
-        print(count($_POST['uploadedImagesData']));
-        /*
+        $array_photos=EPhoto::fromJsonToPhotos($myarray);
+
         $title=USuperGlobalAccess::getPost('title');
         $price=USuperGlobalAccess::getPost('price');
         $deposit=(float)USuperGlobalAccess::getPost('deposit');
         $startDate=(int) USuperGlobalAccess::getPost('startDate');
         $month=USuperGlobalAccess::getPost('month');
-        #$pictures=USuperGlobalAccess::getPost();
         $visits=USuperGlobalAccess::getPost('visitAvailabilityData');  #json in arrivo dal post
         $duration=EAccommodation::DurationOfVisit($visits);
 
@@ -458,7 +457,7 @@ class COwner
         $addressObj= new Address();
         $addressObj=$addressObj->withAddressLine1($address)->withPostalcode($postalCode)->withLocality($city);
         #print $addressObj->getAddressLine1().' '.$addressObj->getPostalCode().' '.$addressObj->getLocality();
-        $accomodation = new EAccommodation(null,array(),$title,$addressObj,$price,$date,$description,$deposit,$array_visit,$duration,$men,$women,$animals,$smokers,$idOwner);
+        $accomodation = new EAccommodation(null,$array_photos,$title,$addressObj,$price,$date,$description,$deposit,$array_visit,$duration,$men,$women,$animals,$smokers,$idOwner);
         $result=$PM::store($accomodation);
         if($result)
         {
@@ -468,7 +467,6 @@ class COwner
         {
             print '500 : SERVER ERROR';
         }
-        */
     }
     public static function publicProfileFromOwner(string $username)
     {

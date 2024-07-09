@@ -141,4 +141,29 @@ class EPhoto {
         $photo = "photo";
         return "Id: $this->id, $photo, Relative To: $this->relativeTo, Id Accommodation: $this->idAccommodation, Id Review: $this->idReview";
     }
+    
+    /**
+     * Method fromJsonToPhotos
+     *
+     * this method is used by the owner to add an accommodation. JS send a JSON file where are presents
+     * the photos, create an array of EPhoto  class and retrive it.
+     * @param $array $array [explicite description]
+     *
+     * @return array
+     */
+    public static function fromJsonToPhotos($array):array
+    {
+        $result=array();
+        foreach($array as $p)
+        {
+            if(is_null($p)){}
+            else
+            {
+                $binaryPhoto=file_get_contents($p);
+                $np= new EPhoto(null,$binaryPhoto,'accommodation',null,null);
+                $result[]=$np;
+            }
+        }
+        return $result;
+    }
 }
