@@ -65,7 +65,7 @@
                         </div>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="#">Posted Reviews</a>
+                        <a class="nav-link" href="/UniRent/Owner/postedReview">Posted Reviews</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href = "#">Visits</a>

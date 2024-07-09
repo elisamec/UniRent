@@ -83,4 +83,8 @@ class VOwner {
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->display('Owner/publicProfileFromStudent.tpl');
     }
+    public function postedReview(array $reviewsData){
+        $this->smarty->assign('reviewsData', $reviewsData);
+        $this->smarty->display('Student/postedReviews.tpl');
+    }
 }
