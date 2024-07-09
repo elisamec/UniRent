@@ -371,7 +371,7 @@ function getVisitData() {
     let data = [];
     for (let i = 0; i < availabilities.length; i++) {
         let durationInput = availabilities[i].querySelector('input[name="duration"]');
-        let dayInput = availabilities[i].querySelector('input[name="day"]');
+        let dayInput = availabilities[i].querySelector('select[name="day"]');
         let startInput = availabilities[i].querySelector('input[name="start"]');
         let endInput = availabilities[i].querySelector('input[name="end"]');
 
@@ -416,6 +416,7 @@ function setVisitData(data) {
             <label for="end">Availability end:</label>
             <input type="time" id="end" name="end" value="${data[i].end}">
         `;
+        console.log(data[i].day);
         container.appendChild(availability);
     }
 }
