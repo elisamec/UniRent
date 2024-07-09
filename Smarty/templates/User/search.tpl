@@ -96,7 +96,7 @@
                <div class="row">
                   <div class="Findcontainer">
                      <div class="select-outline">
-                        <select name="university" id="universitySelect" class=" nice-selectmdb-select md-form md-outline colorful-select dropdown-primary">
+                        <select name="university" id="universitySelect" class=" nice-select mdb-select md-form md-outline colorful-select dropdown-primary">
                            <option value="" disabled selected>Select a university</option>
                         </select>
                      </div>
@@ -529,8 +529,8 @@ rangeInput.forEach((input) => {
         }
 
         // Set the selected value from the previous page
-        const selectedCity = {/literal}{$selectedCity}{literal}; // replace with your Smarty placeholder
-        const selectedUni = {/literal}{$selectedUni}{literal}; // replace with your Smarty placeholder
+        const selectedCity = {/literal}"{$selectedCity}"{literal}; // replace with your Smarty placeholder
+        const selectedUni = {/literal}"{$selectedUni}"{literal}; // replace with your Smarty placeholder
 
         if (selectedCity) {
             citySelect.value = selectedCity;
@@ -543,9 +543,6 @@ rangeInput.forEach((input) => {
     })
     .catch(error => console.error('Error:', error));
 });
-
-    
-
     </script>
     {/literal}
     <script>
