@@ -117,7 +117,7 @@
 
 
       <div class="container">
-      <form action="/UniRent/User/findAccommodation" method="post" id="yourFormId">
+      <form action="/UniRent/User/search" method="post" id="yourFormId">
          <div class="select_box_section">
             <div class="select_box_main">
                <h1 class="find_text">Find an Accommodation</h1>
