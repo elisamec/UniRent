@@ -65,7 +65,7 @@
                         </div>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="/UniRent/Owner/postedReview">Posted Reviews</a>
+                        <a class="nav-link active" href="/UniRent/Owner/postedReview">Posted Reviews</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href = "#">Visits</a>
@@ -82,30 +82,16 @@
             </nav>
          </div>
       </div>
-      <div class="profile">
-         <div class="row">
-         <div class="col-md-3">
-         <div class="sidebar">
-         <div class="col-md-3">
-            <div class="sidebar_but"><a href="/UniRent/Owner/profile">Profile</a></div>
-            </div>
-            <div class="col-md-3">
-            <div class="sidebar_but active"><a href="/UniRent/Owner/reviews">Reviews</a></div>
-            </div>
-            <div class="col-md-3">
-            <div class="sidebar_but log"><a href="/UniRent/User/logout">Logout</a></div>
-            </div>
-         </div>
-         </div>
-
-         <div class="col-md-9">
+      <div class="path">
+            <p><a href="/UniRent/Student/home">Home</a> / Posted Reviews </p>
+      </div>
+      
          <div class="Properties_taital_main layout">
-         <h1 class="Properties_taital">What others think of you</h1>
+         <h1 class="Properties_taital">What you think of others:</h1>
          <hr class="border_main">
          </div>
     <div id="reviewsContainer"></div>
-</div>
-   <script>
+      <script>
     {if isset($reviewsData)}
     const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
 
@@ -128,7 +114,7 @@
 
         if (container) {
             if (reviews.length === 0) {
-                container.innerHTML = '<div class="container"><h1 class="noRev">There are no reviews yet!</h1></div>';
+                container.innerHTML = '<h1 class="noRev">There are no reviews yet!</h1>';
             } else {
                 reviews.forEach(review => {
                     const reviewElement = document.createElement('div');
@@ -139,10 +125,11 @@
                         <h1 class="ReviewTitle">` + review.title + `</h1> <!-- Title of the review -->
                         <div class="row">
                             <div class="userSection">
+                            <p> To: </p>
                                 <div class="userIcon">
-                                    <a href="/UniRent/Student/publicProfile" id="username" name="username" value="` + review.username + `"><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
+                                    <a href="/UniRent/Student/publicProfile/` + review.username + `"><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
                                 </div>
-                                <div class="username"><a href="/UniRent/Student/publicProfile" id="username" name="username" value="` + review.username + `">` + review.username + `</a></div> <!-- Username of the reviewer -->
+                                <div class="username"><a href="/UniRent/Student/publicProfile/` + review.username + `">` + review.username + `</a></div> <!-- Username of the reviewer -->
                             </div>
                             <div class="col-md-11">
                                 <div class="stars">
@@ -165,7 +152,6 @@
     displayReviews(reviews);
     {/if}
 </script>
-
 <!-- footer section start -->
       <div class="footer_section layout_padding">
          <div class="container">
@@ -179,9 +165,9 @@
                   <h3 class="footer_text">Useful Links</h3>
                   <div class="footer_menu">
                      <ul>
-                        <li><a href="/UniRent/Owner/home">Home</a></li>
-                        <li><a href="/UniRent/Owner/about">About Us</a></li>
-                        <li><a href="/UniRent/Owner/contact">Contact Us</a></li>
+                        <li><a href="/UniRent/Student/home">Home</a></li>
+                        <li><a href="/UniRent/Student/about">About Us</a></li>
+                        <li><a href="/UniRent/Student/contact">Contact Us</a></li>
                      </ul>
                   </div>
                </div>
@@ -197,38 +183,7 @@
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
-<script>
-document.getElementById("file").onchange = function() {
-    document.getElementById("form").submit();
-};
-</script>
 
-         <script>
-      $(document).ready(function() {
-
-      
-      var readURL = function(input) {
-         if (input.files && input.files[0]) {
-               var reader = new FileReader();
-
-               reader.onload = function (e) {
-                  $('.imageIcon').attr('src', e.target.result);
-               }
-      
-               reader.readAsDataURL(input.files[0]);
-         }
-      }
-      
-
-      $(".file-upload").on('change', function(){
-         readURL(this);
-      });
-      
-      $(".label-button").on('click', function() {
-         $(".file-upload").click();
-      });
-   });
-      </script>
       <div class="modal" id="myModal">
       <div class"container-fluid">
       <div class="card">

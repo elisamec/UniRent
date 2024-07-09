@@ -506,5 +506,29 @@ class COwner
         $location='/UniRent/'.$user['type'].'/publicProfileFromOwner/'.$username;
         header('Location:'.$location);
     }
+    public static function postedReview() {
+        $view = new VOwner();
+        $session=USession::getInstance();
+        $username=$session::getSessionElement('username');
+        $PM=FPersistentManager::getInstance();
+        $ownerId=$PM->getOwnerIdByUsername($username);
+        $reviews = $PM->loadReviewsByAuthor($ownerId, TType::OWNER);
+        $reviewsData = [];
+
+        foreach ($reviews as $review) {
+            $profilePic = $PM->load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor())->getPhoto();
+            if ($profilePic === null) {
+                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+            }
+            $reviewsData[] = [
+                'title' => $review->getTitle(),
+                'username' => $PM->load( 'E' . $review->getRecipientType()->value, $review->getIDRecipient())->getUsername(),
+                'stars' => $review->getValutation(),
+                'content' => $review->getDescription(),
+                'userPicture' => $profilePic,
+            ];
+        }
+        $view->postedReview($reviewsData);
+    }
 
 }
