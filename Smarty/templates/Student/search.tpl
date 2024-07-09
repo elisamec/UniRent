@@ -447,55 +447,71 @@ rangeInput.forEach((input) => {
   });
 });
       </script>
+      {literal}
       <script>
         document.addEventListener("DOMContentLoaded", function() {
-        const citySelect = document.getElementById("citySelect");
-        const uniSelect = document.getElementById("universitySelect");
+    const citySelect = document.getElementById("citySelect");
+    const uniSelect = document.getElementById("universitySelect");
 
-        // Initialize nice-select on page load
-        $('select').niceSelect();
+    // Initialize nice-select on page load
+    $('select').niceSelect();
 
-        fetch("/UniRent/User/getCities")
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+    fetch("/UniRent/User/getCities")
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(subjectObject => {
+        // Populate city dropdown
+        for (let city in subjectObject) {
+            let option = new Option(city, city);
+            citySelect.add(option);
+        }
+
+        // Update nice-select after adding options
+        $('select').niceSelect('update');
+
+        // Add event listener for city dropdown change
+        citySelect.onchange = function() {
+            const selectedCity = citySelect.value;
+
+            // Clear the university dropdown
+            uniSelect.length = 1;
+
+            if (selectedCity && subjectObject[selectedCity]) {
+                // Populate university dropdown
+                subjectObject[selectedCity].forEach(uniName => {
+                    let option = new Option(uniName, uniName);
+                    uniSelect.add(option);
+                });
+
+                // Update nice-select after adding options
+                $('select').niceSelect('update');
             }
-            return response.json();
-        })
-        .then(subjectObject => {
-            // Populate city dropdown
-            for (let city in subjectObject) {
-                let option = new Option(city, city);
-                citySelect.add(option);
-            }
+        }
 
-            // Update nice-select after adding options
+        // Set the selected value from the previous page
+        const selectedCity = {/literal}{$selectedCity}{literal}; // replace with your Smarty placeholder
+        const selectedUni = {/literal}{$selectedUni}{literal}; // replace with your Smarty placeholder
+
+        if (selectedCity) {
+            citySelect.value = selectedCity;
             $('select').niceSelect('update');
+        }
+        if (selectedUni) {
+            uniSelect.value = selectedUni;
+            $('select').niceSelect('update');
+        }
+    })
+    .catch(error => console.error('Error:', error));
+});
 
-            // Add event listener for city dropdown change
-            citySelect.onchange = function() {
-                const selectedCity = citySelect.value;
-
-                // Clear the university dropdown
-                uniSelect.length = 1;
-
-                if (selectedCity && subjectObject[selectedCity]) {
-                    // Populate university dropdown
-                    subjectObject[selectedCity].forEach(uniName => {
-                        let option = new Option(uniName, uniName);
-                        uniSelect.add(option);
-                    });
-
-                    // Update nice-select after adding options
-                    $('select').niceSelect('update');
-                }
-            }
-        })
-        .catch(error => console.error('Error:', error));
-    });
     
 
     </script>
+    {/literal}
     <script>
       function clearRatingO() {
     document.getElementById('star0O').checked = true;
