@@ -407,6 +407,10 @@ class COwner
 
     public static function addAccommodationOperations()
     {
+        $pictures=USuperGlobalAccess::getPhoto('uploadedImagesData');
+        $myarray=json_decode($pictures,true);
+        print(count($_POST['uploadedImagesData']));
+        /*
         $title=USuperGlobalAccess::getPost('title');
         $price=USuperGlobalAccess::getPost('price');
         $deposit=(float)USuperGlobalAccess::getPost('deposit');
@@ -464,7 +468,7 @@ class COwner
         {
             print '500 : SERVER ERROR';
         }
-        
+        */
     }
     public static function publicProfileFromOwner(string $username)
     {
