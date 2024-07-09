@@ -101,8 +101,15 @@ class UAccessUniversityFile
         $università=$myarray['records'];
         foreach($università as $key=>$value)
         {
-            if(!in_array($università[$key][8],$result))
-            $result[]=$università[$key][8];
+            if(!array_key_exists($università[$key][8],$result))
+            {
+                $result[$università[$key][8]]=array();
+                $result[$università[$key][8]][]=$università[$key][2];
+            }
+            else
+            {
+                $result[$università[$key][8]][]=$università[$key][2];
+            }
         }
         return $result;
     }
