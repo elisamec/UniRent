@@ -4,6 +4,7 @@ require __DIR__.'../../../vendor/autoload.php';
 use Classes\Entity\EAccommodation;
 use Classes\Entity\ECreditCard;
 use Classes\Entity\EStudent;
+use Classes\Foundation\FAccommodation;
 use Classes\Foundation\FCreditCard;
 use Classes\Foundation\FPersistentManager;
 use Classes\Foundation\FStudent;
@@ -150,5 +151,9 @@ print $totalMinutes;
 
 #print EAccommodation::stringInMinutes('03:00');
 
-$u=UAccessUniversityFile::getInstance();
-print_r($u->getCities());
+$FA=FAccommodation::getInstance();
+$result=$FA->findAccommodationsByCityAndDate('Teramo','september');
+$base64 = base64_encode($result[0]['photo']);
+$photo = "data:" . 'image/jpeg' . ";base64," . $base64;
+$result[0]['photo']=$photo;
+print_r($result);
