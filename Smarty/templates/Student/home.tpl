@@ -119,30 +119,30 @@
       <!-- header section end -->
       <!-- select box section start -->
       <div class="container">
-         <form action="/UniRent/Student/findAccommodation" method="post" id="yourFormId">
+         <form action="/UniRent/Student/findAccommodation" method="post">
          <div class="select_box_section">
             <div class="select_box_main">
                <h1 class="find_text">Find an Accommodation</h1>
                <div class="row">
                   <div class="col-lg-3 select-outline">
-                     <select name="city" id="citySelect" class="nice-select mdb-select md-form md-outline colorful-select dropdown-primary">
+                     <select name="city" id="citySelect" class="nice-select mdb-select md-form md-outline colorful-select dropdown-primary" required>
                         <option value="" disabled selected>Select a city</option>
                      </select>
                   </div>
                   <div class="col-lg-3 select-outline">
-                     <select name="university" id="universitySelect" class="nice-select mdb-select md-form md-outline colorful-select dropdown-primary">
+                     <select name="university" id="universitySelect" class="nice-select mdb-select md-form md-outline colorful-select dropdown-primary" required>
                         <option value="" disabled selected>Select a university</option>
                      </select>
                   </div>
                   <div class="col-lg-3 select-outline">
-                     <select name="date" id="date" class="nice-select mdb-select md-form md-outline colorful-select dropdown-primary">
+                     <select name="date" id="date" class="nice-select mdb-select md-form md-outline colorful-select dropdown-primary" required>
                         <option value="" disabled selected>Select a period</option>
                         <option value="september">September to June</option>
                         <option value="october">October to July</option>
                      </select>
                   </div>
                   <div class="col-lg-3 select-outline">
-                     <div class="find_btn"><button type="submit" id="yourLinkId">Find Now</button></div>
+                     <div class="find_btn"><button type="submit">Find Now</button></div>
                   </div>
                </div>
             </div>
@@ -393,12 +393,6 @@
                document.getElementById("myModal").style.display = "none";
                }
          </script>
-         <script>
-      document.getElementById("yourLinkId").onclick = function() {
-    document.getElementById("yourFormId").submit();
-      }
-      </script>
-
 <script>
         document.addEventListener("DOMContentLoaded", function() {
         const citySelect = document.getElementById("citySelect");
