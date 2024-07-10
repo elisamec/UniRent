@@ -415,8 +415,16 @@ class FPersistentManager {
         $result=$FC->getMainCard($studentId);
         return $result;
     }
-
-    public function findAccommodations(string $city, string $date)
+    
+    /**
+     * Method findAccommodations
+     *
+     * @param string $city [explicite description]
+     * @param string $date [explicite description]
+     *
+     * @return array
+     */
+    public function findAccommodations($city,$date):array
     {
         $FA=FAccommodation::getInstance();
         $result=$FA->findAccommodationsByCityAndDate($city,$date);

@@ -646,7 +646,7 @@
             }     
         }
 
-        public function findAccommodationsByCityAndDate(string $city, $date)
+        public function findAccommodationsByCityAndDate($city, $date)
         {
             $result=array();
             $db=FConnection::getInstance()->getConnection();
