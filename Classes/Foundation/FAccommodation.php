@@ -686,8 +686,6 @@
                 else
                 {
                    $ap['photo']=(($r->getPhoto())[0])->getPhoto();
-                   $photo = "data:" . 'image/jpeg' . ";base64," . $ap['photo'];
-                   $ap['photo']=$photo;
                 }
                 $result[]=$ap;
             }
