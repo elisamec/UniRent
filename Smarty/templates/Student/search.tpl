@@ -449,9 +449,8 @@ rangeInput.forEach((input) => {
   });
 });
       </script>
-      {literal}
       <script>
-        document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() {
     const citySelect = document.getElementById("citySelect");
     const uniSelect = document.getElementById("universitySelect");
     const dateSelect = document.getElementById("date");
@@ -467,6 +466,8 @@ rangeInput.forEach((input) => {
         return response.json();
     })
     .then(subjectObject => {
+        console.log("Fetched cities:", subjectObject); // Debug log
+
         // Populate city dropdown
         for (let city in subjectObject) {
             let option = new Option(city, city);
@@ -475,13 +476,16 @@ rangeInput.forEach((input) => {
 
         // Update nice-select after adding options
         $('select').niceSelect('update');
+        
 
         // Add event listener for city dropdown change
-        citySelect.onchange = function() {
+        citySelect.addEventListener('change', function() {
+         console.log("In listener"); // Debug log
             const selectedCity = citySelect.value;
+            console.log("Selected city:", selectedCity); // Debug log
 
             // Clear the university dropdown
-            uniSelect.length = 1;
+            uniSelect.length = 1; // Keep the placeholder option
 
             if (selectedCity && subjectObject[selectedCity]) {
                 // Populate university dropdown
@@ -493,33 +497,59 @@ rangeInput.forEach((input) => {
                 // Update nice-select after adding options
                 $('select').niceSelect('update');
             }
-        }
+        });
+        // Check if session variables exist
+        const sessionCity = sessionStorage.getItem("selectedCity");
+        const sessionUni = sessionStorage.getItem("selectedUni");
+        const sessionDate = sessionStorage.getItem("selectedDate");
 
-        // Set the selected value from the previous page
-        const selectedCity = {/literal}"{$selectedCity}"{literal}; // replace with your Smarty placeholder
-        const selectedUni = {/literal}"{$selectedUni}"{literal};
-        const selectedDate = {/literal}"{$selectedDate}"{literal}; // replace with your Smarty placeholder
+        const firstLoad = !sessionCity && !sessionUni && !sessionDate;
+
+        // Get PHP session variables for first load
+        const selectedCitySession = firstLoad ? "{$selectedCity}" : null;
+        const selectedUniSession = firstLoad ? "{$selectedUni}" : null;
+        const selectedDateSession = firstLoad ? "{$selectedDate}" : null;
+
+        // Set the selected values from the session
+        const selectedCity = firstLoad ? selectedCitySession : sessionCity;
+        const selectedUni = firstLoad ? selectedUniSession : sessionUni;
+        const selectedDate = firstLoad ? selectedDateSession : sessionDate;
+
+        console.log("Setting city:", selectedCity); // Debug log
+        console.log("Setting university:", selectedUni); // Debug log
+        console.log("Setting date:", selectedDate); // Debug log
 
         if (selectedCity) {
             citySelect.value = selectedCity;
             $('select').niceSelect('update');
+            citySelect.dispatchEvent(new Event('change')); // Trigger the change event to populate the university dropdown
         }
+
+        // Set the selected university after universities are populated
         if (selectedUni) {
             uniSelect.value = selectedUni;
             $('select').niceSelect('update');
         }
+
         if (selectedDate) {
             dateSelect.value = selectedDate;
             $('select').niceSelect('update');
         }
-    })
+
+        // Store the selected values in sessionStorage
+        if (firstLoad) {
+            sessionStorage.setItem("selectedCity", selectedCitySession);
+            sessionStorage.setItem("selectedUni", selectedUniSession);
+            sessionStorage.setItem("selectedDate", selectedDateSession);
+        }
+
+    }) 
     .catch(error => console.error('Error:', error));
 });
 
-    
+</script>
 
-    </script>
-    {/literal}
+
     <script>
       function clearRatingO() {
     document.getElementById('star0O').checked = true;
