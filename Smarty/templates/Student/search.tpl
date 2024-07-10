@@ -450,104 +450,101 @@ rangeInput.forEach((input) => {
 });
       </script>
       <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const citySelect = document.getElementById("citySelect");
-    const uniSelect = document.getElementById("universitySelect");
-    const dateSelect = document.getElementById("date");
+    document.addEventListener("DOMContentLoaded", function() {
+        const citySelect = document.getElementById("citySelect");
+        const uniSelect = document.getElementById("universitySelect");
+        const periodSelect = document.getElementById("date");
 
-    // Initialize nice-select on page load
-    $('select').niceSelect();
+        // Initialize nice-select on page load
+        $('select').niceSelect();
 
-    fetch("/UniRent/User/getCities")
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(subjectObject => {
-        console.log("Fetched cities:", subjectObject); // Debug log
+        // Get the default values from Smarty (assuming they are stored in PHP session variables)
+        const defaultCity = "{$selectedCity}"; // Replace with your actual session variable name
+        const defaultUniversity = "{$selectedUni}"; // Replace with your actual session variable name
+        const defaultPeriod = "{$selectedDate}"; // Replace with your actual session variable name
 
-        // Populate city dropdown
-        for (let city in subjectObject) {
-            let option = new Option(city, city);
-            citySelect.add(option);
-        }
+        fetch("/UniRent/User/getCities")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(subjectObject => {
+            // Populate city dropdown
+            for (let city in subjectObject) {
+                let option = new Option(city, city);
+                citySelect.add(option);
+            }
 
-        // Update nice-select after adding options
-        $('select').niceSelect('update');
-        
+            // Update nice-select after adding options
+            $('select').niceSelect('update');
 
-        // Add event listener for city dropdown change
-        citySelect.addEventListener('change', function() {
-         console.log("In listener"); // Debug log
-            const selectedCity = citySelect.value;
-            console.log("Selected city:", selectedCity); // Debug log
+            // Set default selected option for city dropdown
+            if (defaultCity && subjectObject[defaultCity]) {
+                citySelect.value = defaultCity;
 
-            // Clear the university dropdown
-            uniSelect.length = 1; // Keep the placeholder option
-
-            if (selectedCity && subjectObject[selectedCity]) {
-                // Populate university dropdown
-                subjectObject[selectedCity].forEach(uniName => {
+                // Populate university dropdown based on default city
+                subjectObject[defaultCity].forEach(uniName => {
                     let option = new Option(uniName, uniName);
                     uniSelect.add(option);
                 });
 
                 // Update nice-select after adding options
                 $('select').niceSelect('update');
+
+                // Set default selected option for university dropdown
+                if (defaultUniversity && subjectObject[defaultCity].includes(defaultUniversity)) {
+                    uniSelect.value = defaultUniversity;
+                }
             }
-        });
-        // Check if session variables exist
-        const sessionCity = sessionStorage.getItem("selectedCity");
-        const sessionUni = sessionStorage.getItem("selectedUni");
-        const sessionDate = sessionStorage.getItem("selectedDate");
 
-        const firstLoad = !sessionCity && !sessionUni && !sessionDate;
+            // Add event listener for city dropdown change
+            citySelect.onchange = function() {
+                const selectedCity = citySelect.value;
 
-        // Get PHP session variables for first load
-        const selectedCitySession = firstLoad ? "{$selectedCity}" : null;
-        const selectedUniSession = firstLoad ? "{$selectedUni}" : null;
-        const selectedDateSession = firstLoad ? "{$selectedDate}" : null;
+                // Clear the university dropdown
+                uniSelect.length = 1;
 
-        // Set the selected values from the session
-        const selectedCity = firstLoad ? selectedCitySession : sessionCity;
-        const selectedUni = firstLoad ? selectedUniSession : sessionUni;
-        const selectedDate = firstLoad ? selectedDateSession : sessionDate;
+                if (selectedCity && subjectObject[selectedCity]) {
+                    // Populate university dropdown
+                    subjectObject[selectedCity].forEach(uniName => {
+                        let option = new Option(uniName, uniName);
+                        uniSelect.add(option);
+                    });
 
-        console.log("Setting city:", selectedCity); // Debug log
-        console.log("Setting university:", selectedUni); // Debug log
-        console.log("Setting date:", selectedDate); // Debug log
+                    // Update nice-select after adding options
+                    $('select').niceSelect('update');
 
-        if (selectedCity) {
-            citySelect.value = selectedCity;
+                    // Set default selected option for university dropdown if applicable
+                    if (defaultUniversity && subjectObject[selectedCity].includes(defaultUniversity)) {
+                        uniSelect.value = defaultUniversity;
+                    }
+                }
+            }
+
+            // Simulate fetching period options (adjust this according to your actual implementation)
+            const periodOptions = ["First Semester", "Second Semester", "Summer Term"];
+
+            // Populate period dropdown
+            periodOptions.forEach(period => {
+                let option = new Option(period, period);
+                periodSelect.add(option);
+            });
+
+            // Update nice-select after adding options
             $('select').niceSelect('update');
-            citySelect.dispatchEvent(new Event('change')); // Trigger the change event to populate the university dropdown
-        }
 
-        // Set the selected university after universities are populated
-        if (selectedUni) {
-            uniSelect.value = selectedUni;
-            $('select').niceSelect('update');
-        }
-
-        if (selectedDate) {
-            dateSelect.value = selectedDate;
-            $('select').niceSelect('update');
-        }
-
-        // Store the selected values in sessionStorage
-        if (firstLoad) {
-            sessionStorage.setItem("selectedCity", selectedCitySession);
-            sessionStorage.setItem("selectedUni", selectedUniSession);
-            sessionStorage.setItem("selectedDate", selectedDateSession);
-        }
-
-    }) 
-    .catch(error => console.error('Error:', error));
-});
-
+            // Set default selected option for period dropdown if applicable
+            if (defaultPeriod) {
+                periodSelect.value = defaultPeriod;
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
 </script>
+
+
 
 
     <script>
