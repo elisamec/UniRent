@@ -117,9 +117,10 @@ class FPhoto {
         $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($rows as $row) {
+            $base64 = base64_encode($row['photo']);
             $photo = new EPhoto(
                 $row['id'],
-                $row['photo'],
+                $base64,
                 $row['relativeTo'],
                 $row['idAccommodation'],
                 $row['idReview']
@@ -160,9 +161,10 @@ class FPhoto {
 
         // Iterate over each row and create an EAccommodation object
         foreach ($rows as $row) {
+            $base64 = base64_encode($row['photo']);
             $photo = new EPhoto(
                 $row['id'],
-                $row['photo'],
+                $base64,
                 $row['relativeTo'],
                 $row['idAccommodation'],
                 $row['idReview']
@@ -201,8 +203,8 @@ class FPhoto {
 
             $row = $stm->fetch(PDO::FETCH_ASSOC);
 
-
-            $photo = new EPhoto($row['id'], $row['photo'], $row['relativeTo'], $row['idAccommodation'], $row['idReview']);
+            $base64 = base64_encode($row['photo']);
+            $photo = new EPhoto($row['id'], $base64, $row['relativeTo'], $row['idAccommodation'], $row['idReview']);
 
             return $photo;
 

@@ -95,8 +95,7 @@ class CStudent{
 
                 $session->setSessionElement('photo', $ph);
 
-                $base64 = base64_encode($ph);
-                $ph = "data:" . 'image/jpeg' . ";base64," . $base64;
+                $ph = "data:" . 'image/jpeg' . ";base64," . $ph;
             }
 
             $view->profile($student, $ph);
