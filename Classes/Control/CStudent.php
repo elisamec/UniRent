@@ -280,11 +280,20 @@ class CStudent{
 
         $oldStudent = $PM->load('EStudent', $studentID);
         $oldEmail = $oldStudent->getUniversityMail();
-        $oldPhoto = $session::getSessionElement('photo');
+        #$oldPhoto = $session::getSessionElement('photo');
+        $oldPhoto=$oldStudent->getPhoto();
 
-        $base64 = base64_encode($oldPhoto);
-        $photoError = "data:" . 'image/jpeg' . ";base64," . $base64;
-
+        if(!is_null($oldPhoto))
+        {
+            $base64 = base64_encode($oldPhoto->getPhoto());
+            $photoError = "data:" . 'image/jpeg' . ";base64," . $base64;
+            $oldPhoto=$photoError;
+        }
+        else
+        {
+            $oldPhoto=null;
+        }
+       
         //if the new email is not already in use and it's a student's email or you haven't changed it
         if((($PM->verifyUserEmail($email)==false)&&($PM->verifyStudentEmail($email)))||($oldEmail===$email)) { 
             
@@ -310,8 +319,15 @@ class CStudent{
                 print "Studente aggiornato <br>";
                 
                 if($result && !$error){
-
-                    $ph = $photo->getPhoto();
+                    
+                    if(!is_null($photo))
+                    {
+                        $ph = $photo->getPhoto();
+                    }
+                    else
+                    {
+                        $ph=null;
+                    }
                     $session->setSessionElement('username',$username);
                     $session->setSessionElement('password',$password);
                     $session->setSessionElement('photo',$ph);
