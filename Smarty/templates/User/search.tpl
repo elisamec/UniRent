@@ -575,9 +575,6 @@
                 }
             }
 
-            // Simulate fetching period options (adjust this according to your actual implementation)
-            const periodOptions = ["First Semester", "Second Semester", "Summer Term"];
-
             // Populate period dropdown
             periodOptions.forEach(period => {
                 let option = new Option(period, period);

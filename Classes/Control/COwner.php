@@ -431,11 +431,11 @@ class COwner
  
         if($month=='Sep')
         {
-            $month=9;
+            $month=8;
         }
         else
         {
-            $month=10;
+            $month=9;
         }
 
         $address=USuperGlobalAccess::getPost('address');

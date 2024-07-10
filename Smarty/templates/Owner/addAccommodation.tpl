@@ -621,7 +621,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     hiddenDateInput.value = "";
                 } else {
                 
-                const day = parseInt(dayInput.value, 10)+1;
+                const day = parseInt(dayInput.value, 10);
                 const month = document.querySelector("input[name='month']:checked").value;
 
                 let selectedDate = new Date();
@@ -634,7 +634,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
 
                 selectedDate.setDate(day);
-
+                console.log(selectedDate);
                 let currentDate = new Date();
                 currentDate.setHours(0, 0, 0, 0);
 

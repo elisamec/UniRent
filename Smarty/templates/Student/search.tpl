@@ -315,6 +315,7 @@
             </div>
          </div>
       </div>
+      </div>
       <!-- footer section end -->
       <!-- Javascript files-->
       <script src="/UniRent/Smarty/js/jquery.min.js"></script>
@@ -523,8 +524,6 @@ rangeInput.forEach((input) => {
                 }
             }
 
-            // Simulate fetching period options (adjust this according to your actual implementation)
-            const periodOptions = ["First Semester", "Second Semester", "Summer Term"];
 
             // Populate period dropdown
             periodOptions.forEach(period => {
