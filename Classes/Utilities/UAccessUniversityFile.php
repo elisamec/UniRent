@@ -111,6 +111,7 @@ class UAccessUniversityFile
                 $result[$università[$key][8]][]=$università[$key][2];
             }
         }
+        ksort($result);
         return $result;
     }
 }

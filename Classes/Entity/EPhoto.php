@@ -166,4 +166,30 @@ class EPhoto {
         }
         return $result;
     }
+    
+    /**
+     * Method toBase64
+     *
+     * this method convert an array of EPhoto object with a binary image in an array of EPhoto with images encoded in base 64
+     * @param array $a [array of EPhoto]
+     *
+     * @return array
+     */
+    public static function toBase64(array $a):array
+    {
+        $result=array();
+        foreach($a as $photo)
+        {
+            if(is_null($photo))  #se non c'è una foto non convertire
+            {}
+            else
+            {
+                $base64 = base64_encode($photo->getPhoto());
+                $picture_64 = "data:" . 'image/jpeg' . ";base64," . $base64;
+                $photo->setPhoto($picture_64);
+                $result[]=$photo;
+            }
+        }
+        return $result;
+    }
 }

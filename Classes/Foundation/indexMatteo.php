@@ -151,9 +151,6 @@ print $totalMinutes;
 
 #print EAccommodation::stringInMinutes('03:00');
 
-$FA=FAccommodation::getInstance();
-$result=$FA->findAccommodationsByCityAndDate('Teramo','september');
-$base64 = base64_encode($result[0]['photo']);
-$photo = "data:" . 'image/jpeg' . ";base64," . $base64;
-$result[0]['photo']=$photo;
+$UU=UAccessUniversityFile::getInstance();
+$result=$UU->getCities();
 print_r($result);

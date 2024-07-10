@@ -70,8 +70,8 @@ class VStudent{
         $this->smarty->assign('searchResult', json_encode($searchResult));
         $this->smarty->display('Student/search.tpl');
     }
-    public function accommodation(EAccommodation $accomm, EOwner $owner, array $reviewsData, string $period){
-        $photos=json_encode($accomm->getPhoto());
+    public function accommodation(EAccommodation $accomm, EOwner $owner, array $reviewsData, string $period, array $pictures){
+        $photos=json_encode($pictures);
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->assign('imagesJson', $photos);
         $this->smarty->assign('accommodation', $accomm);

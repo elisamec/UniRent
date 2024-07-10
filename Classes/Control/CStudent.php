@@ -196,33 +196,54 @@ class CStudent{
         else{
             print 'Spiacenti non sei stato registrato';
         }
-        
-
     }
+    
     public static function accommodation(int $idAccommodation) {
         $view = new VStudent();
         $PM = FPersistentManager::getInstance();
+       
         $accomm = $PM->load('EAccommodation', $idAccommodation);
+        #print_r($accomm);
+        $photos_acc=$accomm->getPhoto();
+        $photo_acc_64=EPhoto::toBase64($photos_acc);
+        $accomm->setPhoto($photo_acc_64);
+
+        $picture=array();
+        foreach($accomm->getPhoto() as $p)
+        {
+            if(is_null($p)){}
+            else
+            {
+                $picture[]=$p->getPhoto();
+            }
+        }
+
         $owner = $PM->load('EOwner', $accomm->getIdOwner());
+        $owner_photo=$owner->getPhoto();
+        $owner_photo_64=EPhoto::toBase64(array($owner_photo));
+        $owner->setPhoto($owner_photo_64[0]);
+        #print_r($owner);
+        
         USession::getInstance()->setSessionElement('owner', $owner->getUsername());
         $reviews = $PM->loadByRecipient($accomm->getIdAccommodation(), TType::ACCOMMODATION);
         $reviewsData = [];
         
         foreach ($reviews as $review) {
-            $profilePic = FStudent::getInstance()->load($review->getIdAuthor())->getPhoto();
+            $author = $PM::load('EStudent',$review->getIdAuthor());
+            $profilePic = $author->getPhoto();
             if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
-                'username' => FStudent::getInstance()->load($review->getIdAuthor())->getUsername(),
+                'username' => $author->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
-                'userPicture' => $profilePic,
+                'userPicture' => (EPhoto::toBase64(array($profilePic)))[0],
             ];
         }
         $period="september"; //È il periodo con cui si fa la ricerca, va cambiato
-        $view->accommodation($accomm, $owner, $reviewsData, $period);
+        $view->accommodation($accomm, $owner, $reviewsData, $period,$picture);
     }
 
 
