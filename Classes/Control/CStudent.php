@@ -54,11 +54,6 @@ class CStudent{
         } else {
             $rateO=0;
         }
-        if (USuperGlobalAccess::getPost('rateS')!== null) {
-            $rateS=USuperGlobalAccess::getPost('rateS');
-        } else {
-            $rateS=0;
-        }
         if (USuperGlobalAccess::getPost('min-price')!== null) {
             $minPrice=USuperGlobalAccess::getPost('min-price');
         } else {
@@ -81,7 +76,7 @@ class CStudent{
                 'photo' => null,
             ]
         ];*/
-        $view->findAccommodation($city,$university,$searchResult,$date, $rateO, $rateS, $rateA, $minPrice, $maxPrice);
+        $view->findAccommodation($city,$university,$searchResult,$date, $rateO, $rateA, $minPrice, $maxPrice);
     }
     public static function about(){
         $view = new VStudent();

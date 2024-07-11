@@ -158,45 +158,6 @@
                </div>
                <div class="Findcontainer">
                <div class="row">
-               <h1 class="rating_text">Student: </h1>
-                  <div class="rating">
-                     <input type="radio" id="star5S" name="rateS" value="5" />
-                     <label for="star5S" title="5 stars">
-                        <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
-                              <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
-                        </svg>
-                     </label>
-                     <input type="radio" id="star4S" name="rateS" value="4" />
-                     <label for="star4S" title="4 stars">
-                        <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
-                              <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
-                        </svg>
-                     </label>
-                     <input type="radio" id="star3S" name="rateS" value="3" />
-                     <label for="star3S" title="3 stars">
-                        <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
-                              <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
-                        </svg>
-                     </label>
-                     <input type="radio" id="star2S" name="rateS" value="2" />
-                     <label for="star2S" title="2 stars">
-                        <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
-                              <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
-                        </svg>
-                     </label>
-                     <input type="radio" id="star1S" name="rateS" value="1" />
-                     <label for="star1S" title="1 star">
-                        <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
-                              <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
-                        </svg>
-                     </label>
-                     <input type="radio" id="star0S" name="rateS" value="0" hidden checked/>
-                  </div>
-               <button class="button-spec finalLittle"id="clearRatingS" onclick="clearRatingS()">Clear</button>
-               </div>
-               </div>
-               <div class="Findcontainer">
-               <div class="row">
                <h1 class="rating_text">Accommodation: </h1>
                   <div class="rating">
                      <input type="radio" id="star5A" name="rateA" value="5" />
@@ -562,9 +523,6 @@
       function clearRatingO() {
     document.getElementById('star0O').checked = true;
 }
-function clearRatingS() {
-    document.getElementById('star0S').checked = true;
-}
 function clearRatingA() {
     document.getElementById('star0A').checked = true;
 }
@@ -584,7 +542,6 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener("DOMContentLoaded", function() {
     // Set default rating values from Smarty placeholders
     const ratingOwner = {$ratingOwner};
-    const ratingStudent = {$ratingStudent};
     const ratingAccommodation = {$ratingAccommodation};
 
     // Set default rating for Owner
@@ -605,11 +562,6 @@ document.addEventListener("DOMContentLoaded", function() {
     // Function to clear Owner rating
     window.clearRatingO = function() {
         document.getElementById('star0O').checked = true;
-    };
-
-    // Function to clear Student rating
-    window.clearRatingS = function() {
-        document.getElementById('star0S').checked = true;
     };
 
     // Function to clear Accommodation rating
