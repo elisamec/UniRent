@@ -17,7 +17,7 @@ class VStudent{
         $this->smarty = StartSmarty::configuration();
     }
 
-    public function home(){
+    public function home():void{
 
         $this->smarty->display('Student/home.tpl');
     }
@@ -54,23 +54,28 @@ class VStudent{
     }
 
     //Mostra la seconda parte della registrazione studente
-    public function showStudentRegistration(){
+    public function showStudentRegistration():void{
         $this->smarty->display('Student/register.tpl');
     }
-    public function contact(){
+    public function contact():void{
         $this->smarty->display('Student/contact.tpl');
     }
-    public function about(){
+    public function about():void{
         $this->smarty->display('Student/about.tpl');
     }
-    public function findAccommodation( $selectedCity, $selectedUni, array $searchResult, $date){
+    public function findAccommodation(string $selectedCity, string $selectedUni, array $searchResult, string $date, int $ratingOwner, int $ratingStudent, int $ratingAccommodation, int $minPrice, int $maxPrice):void{
         $this->smarty->assign('selectedCity', $selectedCity);
         $this->smarty->assign('selectedUni', $selectedUni);
         $this->smarty->assign('selectedDate', $date);
         $this->smarty->assign('searchResult', json_encode($searchResult));
+        $this->smarty->assign('ratingOwner', $ratingOwner);
+        $this->smarty->assign('ratingStudent', $ratingStudent);
+        $this->smarty->assign('ratingAccommodation', $ratingAccommodation);
+        $this->smarty->assign('minPrice', $minPrice);
+        $this->smarty->assign('maxPrice', $maxPrice);
         $this->smarty->display('Student/search.tpl');
     }
-    public function accommodation(EAccommodation $accomm, EOwner $owner, array $reviewsData, string $period, array $pictures){
+    public function accommodation(EAccommodation $accomm, EOwner $owner, array $reviewsData, string $period, array $pictures):void{
         $photos=json_encode($pictures);
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->assign('imagesJson', $photos);
@@ -79,25 +84,25 @@ class VStudent{
         $this->smarty->assign('period', $period);
         $this->smarty->display('Student/accommodation.tpl');
     }
-    public function reviews(array $reviewsData){
+    public function reviews(array $reviewsData):void{
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->display('Student/reviews.tpl');
     }
-    public function publicProfileFromStudent(EStudent $student, array $reviewsData){
+    public function publicProfileFromStudent(EStudent $student, array $reviewsData):void{
         $this->smarty->assign('student', $student);
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->display('Student/publicProfileFromStudent.tpl');
     }
-    public function publicProfileFromOwner(EStudent $student, array $reviewsData){
+    public function publicProfileFromOwner(EStudent $student, array $reviewsData):void{
         $this->smarty->assign('student', $student);
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->display('Student/publicProfileFromOwner.tpl');
     }
-    public function paymentMethods(array $cardsData){
+    public function paymentMethods(array $cardsData):void{
         $this->smarty->assign('cardsData', json_encode($cardsData));
         $this->smarty->display('Student/paymentMethods.tpl');
     }
-    public function postedReview(array $reviewsData){
+    public function postedReview(array $reviewsData):void{
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->display('Student/postedReviews.tpl');
     }

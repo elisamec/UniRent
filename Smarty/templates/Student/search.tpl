@@ -84,7 +84,7 @@
       <div class="container-fluid">
          <div class="search_box_section">
             <div class="search_box_main padding-reserve">
-            <form action="/UniRent/User/findAccommodation" method="post" id="yourFormId">
+            <form action="/UniRent/Student/findAccommodation" method="post" id="yourFormId">
                <h1 class="find_text">Find an Accommodation</h1>
                <div class="row">
                <div class="Findcontainer">
@@ -245,12 +245,12 @@
                      <div class="price-input">
                      <div class="field">
                         <span>Min</span>
-                        <input type="number" class="input-min" value="0">
+                        <input type="number" class="input-min" name="min-price" value="0">
                      </div>
                      <div class="separator">-</div>
                      <div class="field">
                         <span>Max</span>
-                        <input type="number" class="input-max" value="1000">
+                        <input type="number" class="input-max" name="max-price"value="1000">
                      </div>
                      </div>
                      <div class="slider">
@@ -267,7 +267,7 @@
                <div class="row">
                <div class="Findcontainer">
                   <div class="select-outline">
-                     <div class="find_btn"><a href="#" id="yourLinkId">Find Now</a></div>
+                     <div class="find_btn"><button type="submit">Find Now</button></div>
                   </div>
                </div>
                </div>
@@ -562,6 +562,98 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('clearRatingA').addEventListener('click', clearRatingA);
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Set default rating values from Smarty placeholders
+    const ratingOwner = {$ratingOwner};
+    const ratingStudent = {$ratingStudent};
+    const ratingAccommodation = {$ratingAccommodation};
+    const minPrice = {$minPrice};
+    const maxPrice = {$maxPrice};
+
+    // Set default rating for Owner
+    if (ratingOwner) {
+        document.getElementById('star' + ratingOwner + 'O').checked = true;
+    }
+
+    // Set default rating for Student
+    if (ratingStudent) {
+        document.getElementById('star' + ratingStudent + 'S').checked = true;
+    }
+
+    // Set default rating for Accommodation
+    if (ratingAccommodation) {
+        document.getElementById('star' + ratingAccommodation + 'A').checked = true;
+    }
+
+    // Set default price range values
+    document.querySelector('.input-min').value = minPrice;
+    document.querySelector('.input-max').value = maxPrice;
+    document.querySelector('.range-min').value = minPrice;
+    document.querySelector('.range-max').value = maxPrice;
+
+    // Adjust the progress bar
+    const progress = document.querySelector('.slider .progress');
+    progress.style.left = (minPrice / document.querySelector('.range-min').max) * 100 + '%';
+    progress.style.right = 100 - (maxPrice / document.querySelector('.range-max').max) * 100 + '%';
+
+    // Function to clear Owner rating
+    window.clearRatingO = function() {
+        document.getElementById('star0O').checked = true;
+    };
+
+    // Function to clear Student rating
+    window.clearRatingS = function() {
+        document.getElementById('star0S').checked = true;
+    };
+
+    // Function to clear Accommodation rating
+    window.clearRatingA = function() {
+        document.getElementById('star0A').checked = true;
+    };
+
+    // Slider functionality
+    const rangeInput = document.querySelectorAll(".range-input input"),
+        priceInput = document.querySelectorAll(".price-input input"),
+        range = document.querySelector(".slider .progress");
+    let priceGap = 1000;
+    
+    priceInput.forEach((input) => {
+        input.addEventListener("input", (e) => {
+            let minPrice = parseInt(priceInput[0].value),
+                maxPrice = parseInt(priceInput[1].value);
+            if (maxPrice - minPrice >= priceGap && maxPrice <= rangeInput[1].max) {
+                if (e.target.className === "input-min") {
+                    rangeInput[0].value = minPrice;
+                    range.style.left = (minPrice / rangeInput[0].max) * 100 + "%";
+                } else {
+                    rangeInput[1].value = maxPrice;
+                    range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
+                }
+            }
+        });
+    });
+    
+    rangeInput.forEach((input) => {
+        input.addEventListener("input", (e) => {
+            let minVal = parseInt(rangeInput[0].value),
+                maxVal = parseInt(rangeInput[1].value);
+            if (maxVal - minVal < priceGap) {
+                if (e.target.className === "range-min") {
+                    rangeInput[0].value = maxVal - priceGap;
+                } else {
+                    rangeInput[1].value = minVal + priceGap;
+                }
+            } else {
+                priceInput[0].value = minVal;
+                priceInput[1].value = maxVal;
+                range.style.left = (minVal / rangeInput[0].max) * 100 + "%";
+                range.style.right = 100 - (maxVal / rangeInput[1].max) * 100 + "%";
+            }
+        });
+    });
 });
 </script>
       
