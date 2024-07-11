@@ -70,9 +70,14 @@ class COwner
 
         $owner = $PM->load('EOwner', $accomm->getIdOwner());
         $owner_photo=$owner->getPhoto();
-        $owner_photo_64=EPhoto::toBase64(array($owner_photo));
-        $owner->setPhoto($owner_photo_64[0]);
-        #print_r($owner);
+        if(is_null($owner_photo)){}
+        else
+        {
+            $owner_photo_64=EPhoto::toBase64(array($owner_photo));
+            $owner->setPhoto($owner_photo_64[0]);
+            #print_r($owner);
+        }
+       
         
         USession::getInstance()->setSessionElement('owner', $owner->getUsername());
         $reviews = $PM->loadByRecipient($accomm->getIdAccommodation(), TType::ACCOMMODATION);

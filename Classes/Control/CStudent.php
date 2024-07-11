@@ -40,9 +40,11 @@ class CStudent{
         $view->contact();
     }
     public static function findAccommodation(){
+        $session=USession::getInstance();
         $view = new VStudent();
         $city=USuperGlobalAccess::getPost('city');
         $date=USuperGlobalAccess::getPost('date');
+        $session::setSessionElement('date',$date);
         $university=USuperGlobalAccess::getPost('university');
         if (USuperGlobalAccess::getPost('rateA')!== null) {
             $rateA=USuperGlobalAccess::getPost('rateA');
@@ -262,7 +264,7 @@ class CStudent{
                 'userPicture' => (EPhoto::toBase64(array($profilePic)))[0],
             ];
         }
-        $period=USuperGlobalAccess::getPost('date');
+        $period=USession::getInstance()::getSessionElement('date');
         $view->accommodation($accomm, $owner, $reviewsData, $period,$picture);
     }
 
