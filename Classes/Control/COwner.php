@@ -22,7 +22,76 @@ class COwner
     public static function home()
     {
         $view = new VOwner();
-        $view->home();
+        $PM=FPersistentManager::getInstance();
+        $username=USession::getInstance()::getSessionElement('username');
+        $ownerId=$PM->getOwnerIdByUsername($username);
+        $accommodationEntities=$PM->loadAccommodationsByOwner($ownerId);
+        $accommodations=[];
+        foreach($accommodationEntities as $accom) {
+            if(count($accom->getPhoto())==0)
+                {
+                    $photo=null;
+                }
+                else
+                {
+                   $base64 = base64_encode((($accom->getPhoto())[0])->getPhoto());
+                   $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
+                }
+            $accommodations[]=[
+                'id'=>$accom->getIdAccommodation(),
+                'photo'=>$photo,
+                'title'=>$accom->getTitle(),
+                'address'=>$accom->getAddress()->getAddressLine1() .", ". $accom->getAddress()->getLocality(),
+                'price'=>$accom->getPrice()
+            ];
+        }
+        $view->home($accommodations);
+    }
+    public static function accommodation(int $idAccommodation) {
+        $view = new VOwner();
+        $PM = FPersistentManager::getInstance();
+       
+        $accomm = $PM->load('EAccommodation', $idAccommodation);
+        #print_r($accomm);
+        $photos_acc=$accomm->getPhoto();
+        $photo_acc_64=EPhoto::toBase64($photos_acc);
+        $accomm->setPhoto($photo_acc_64);
+
+        $picture=array();
+        foreach($accomm->getPhoto() as $p)
+        {
+            if(is_null($p)){}
+            else
+            {
+                $picture[]=$p->getPhoto();
+            }
+        }
+
+        $owner = $PM->load('EOwner', $accomm->getIdOwner());
+        $owner_photo=$owner->getPhoto();
+        $owner_photo_64=EPhoto::toBase64(array($owner_photo));
+        $owner->setPhoto($owner_photo_64[0]);
+        #print_r($owner);
+        
+        USession::getInstance()->setSessionElement('owner', $owner->getUsername());
+        $reviews = $PM->loadByRecipient($accomm->getIdAccommodation(), TType::ACCOMMODATION);
+        $reviewsData = [];
+        
+        foreach ($reviews as $review) {
+            $author = $PM::load('EStudent',$review->getIdAuthor());
+            $profilePic = $author->getPhoto();
+            if ($profilePic === null) {
+                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+            }
+            $reviewsData[] = [
+                'title' => $review->getTitle(),
+                'username' => $author->getUsername(),
+                'stars' => $review->getValutation(),
+                'content' => $review->getDescription(),
+                'userPicture' => (EPhoto::toBase64(array($profilePic)))[0],
+            ];
+        }
+        $view->accommodation($accomm, $owner, $reviewsData,$picture);
     }
 
     public static function ownerRegistration(){

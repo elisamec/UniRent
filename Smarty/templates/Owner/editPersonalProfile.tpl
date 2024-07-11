@@ -347,7 +347,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
    // When the user clicks on the confirm button, proceed to delete
    confirmBtn.onclick = function() {
-      window.location.href = "/UniRent/Student/deleteProfile";
+      window.location.href = "/UniRent/Owner/deleteProfile";
    }
 
    // When the user clicks on the cancel button, close the modal

@@ -694,5 +694,56 @@
             }
             return $result;
         }
+        public function loadByOwner(int $idOwner): ?array{
+            
+            $FP=FPhoto::getInstance();
+            $FA=FAccommodation::getInstance();
+            $db=FConnection::getInstance()->getConnection();
+            $result=[];
 
+            try{
+                $db->exec('LOCK TABLES accommodation READ');
+                $db->beginTransaction();
+                $q="SELECT * FROM accommodation WHERE idOwner=:idOwner";    
+                $stm=$db->prepare($q);
+                $stm->bindParam(':idOwner',$idOwner,PDO::PARAM_INT);
+                $stm->execute();
+                $db->commit();
+                $db->exec('UNLOCK TABLES');
+
+            }catch (PDOException $e){
+                $db->rollBack();        
+                return null;
+            }
+            $row=$stm->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($row as $r){
+                print_r($r);
+                $photos = $FP->loadAccommodation($r['id']);
+                $address = new Address();
+                $address = $FA->loadAddress($r['address']);
+                $start = new DateTime($r['start']);
+                $visit = $FA->loadDays($r['id']);
+                
+                $result[]=new EAccommodation(
+                    $r['id'],
+                    $photos,
+                    $r['title'],
+                    $address,
+                    $r['price'],
+                    $start,
+                    $r['description'],
+                    $r['deposit'],
+                    $visit, 
+                    $r['visitDuration'],
+                    $r['man'],
+                    $r['woman'],
+                    $r['pets'],
+                    $r['smokers'],
+                    $r['idOwner']
+                );
+            return $result;
+
+        }
     }
+
+}
