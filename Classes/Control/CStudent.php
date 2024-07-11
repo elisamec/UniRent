@@ -262,7 +262,7 @@ class CStudent{
                 'userPicture' => (EPhoto::toBase64(array($profilePic)))[0],
             ];
         }
-        $period="september"; //È il periodo con cui si fa la ricerca, va cambiato
+        $period=USuperGlobalAccess::getPost('date');
         $view->accommodation($accomm, $owner, $reviewsData, $period,$picture);
     }
 
