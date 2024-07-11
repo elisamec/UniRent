@@ -45,6 +45,11 @@ class CStudent{
         $city=USuperGlobalAccess::getPost('city');
         $date=USuperGlobalAccess::getPost('date');
         $session::setSessionElement('date',$date);
+        if (USession::getInstance()::isSetSessionElement('date')) {
+            print 'La data è settata';
+        } else {
+            print 'La data non è settata';
+        }
         $university=USuperGlobalAccess::getPost('university');
         if (USuperGlobalAccess::getPost('rateA')!== null) {
             $rateA=USuperGlobalAccess::getPost('rateA');
@@ -246,7 +251,7 @@ class CStudent{
         $owner->setPhoto($owner_photo_64[0]);
         #print_r($owner);
         
-        USession::getInstance()->setSessionElement('owner', $owner->getUsername());
+        #USession::getInstance()::setSessionElement('owner', $owner->getUsername());
         $reviews = $PM->loadByRecipient($accomm->getIdAccommodation(), TType::ACCOMMODATION);
         $reviewsData = [];
         
@@ -263,6 +268,11 @@ class CStudent{
                 'content' => $review->getDescription(),
                 'userPicture' => (EPhoto::toBase64(array($profilePic)))[0],
             ];
+        }
+        if (USession::getInstance()::isSetSessionElement('date')) {
+            print 'La data è settata';
+        } else {
+            print 'La data non è settata';
         }
         $period=USession::getInstance()::getSessionElement('date');
         $view->accommodation($accomm, $owner, $reviewsData, $period,$picture);
