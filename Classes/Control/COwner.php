@@ -77,7 +77,6 @@ class COwner
             $owner->setPhoto($owner_photo_64[0]);
             #print_r($owner);
         }
-       
         
         $reviews = $PM->loadByRecipient($accomm->getIdAccommodation(), TType::ACCOMMODATION);
         $reviewsData = [];
@@ -88,12 +87,16 @@ class COwner
             if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
+            else
+            {
+                $profilePic=(EPhoto::toBase64(array($profilePic)))[0];
+            }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
-                'userPicture' => (EPhoto::toBase64(array($profilePic)))[0],
+                'userPicture' => $profilePic,
             ];
         }
         $view->accommodation($accomm, $owner, $reviewsData,$picture);
