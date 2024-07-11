@@ -697,11 +697,10 @@
         public function loadByOwner(int $idOwner): ?array
         {
             $result=array();
-            $PM=FPersistentManager::getInstance();
             $db=FConnection::getInstance()->getConnection();
             try
             {
-                $q='SELECT idAccommodation FROM accommodation WHERE idOwner=:id';
+                $q='SELECT id FROM accommodation WHERE idOwner=:id';
                 $db->beginTransaction();
                 $stm=$db->prepare($q);
                 $stm->bindParam(':id',$idOwner,PDO::PARAM_INT);
@@ -716,10 +715,10 @@
             $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
             foreach($rows as $row)
             {
-                $accom=$PM::load('EAccommodation',(int)$row);
+                $accom=self::load($row['id']);
                 $result[]=$accom;
             }
-            $result;
+            return $result;
         }
     }
 
