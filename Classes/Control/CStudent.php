@@ -39,18 +39,17 @@ class CStudent{
         $view = new VStudent();
         $view->contact();
     }
-    public static function findAccommodation(){
-        $session=USession::getInstance();
+    public static function findAccommodation()
+    {
         $view = new VStudent();
         $city=USuperGlobalAccess::getPost('city');
         $date=USuperGlobalAccess::getPost('date');
-        $session::setSessionElement('date',$date);
-        if (USession::getInstance()::isSetSessionElement('date')) {
-            print 'La data è settata';
-        } else {
-            print 'La data non è settata';
-        }
         $university=USuperGlobalAccess::getPost('university');
+        $rateA=0;
+        $rateO=0;
+        $minPrice=0;
+        $maxPrice=1000;
+        /*
         if (USuperGlobalAccess::getPost('rateA')!== null) {
             $rateA=USuperGlobalAccess::getPost('rateA');
         } else {
@@ -70,21 +69,13 @@ class CStudent{
             $maxPrice=USuperGlobalAccess::getPost('max-price');
         } else {
             $maxPrice=1000;
-        }
+        }*/
         $PM=FPersistentManager::getInstance();
         $searchResult=$PM->findAccommodations($city,$date);
-        /*
-        $searchResult= [
-            0 => [
-                'title' => 'Casa Rosada',
-                'id' => '5',
-                'price' => '230.7',
-                'address' => 'Via Roma 1, Milano',
-                'photo' => null,
-            ]
-        ];*/
         $view->findAccommodation($city,$university,$searchResult,$date, $rateO, $rateA, $minPrice, $maxPrice);
     }
+
+
     public static function about(){
         $view = new VStudent();
         $view->about();
@@ -228,9 +219,8 @@ class CStudent{
     public static function accommodation(int $idAccommodation) {
         $view = new VStudent();
         $PM = FPersistentManager::getInstance();
-       
+
         $accomm = $PM->load('EAccommodation', $idAccommodation);
-        #print_r($accomm);
         $photos_acc=$accomm->getPhoto();
         $photo_acc_64=EPhoto::toBase64($photos_acc);
         $accomm->setPhoto($photo_acc_64);
@@ -244,14 +234,17 @@ class CStudent{
                 $picture[]=$p->getPhoto();
             }
         }
-
+        
         $owner = $PM->load('EOwner', $accomm->getIdOwner());
         $owner_photo=$owner->getPhoto();
-        $owner_photo_64=EPhoto::toBase64(array($owner_photo));
-        $owner->setPhoto($owner_photo_64[0]);
-        #print_r($owner);
+        if(is_null($owner_photo)){}
+        else
+        {
+            $owner_photo_64=EPhoto::toBase64(array($owner_photo));
+            $owner->setPhoto($owner_photo_64[0]);
+            #print_r($owner);
+        }
         
-        #USession::getInstance()::setSessionElement('owner', $owner->getUsername());
         $reviews = $PM->loadByRecipient($accomm->getIdAccommodation(), TType::ACCOMMODATION);
         $reviewsData = [];
         
@@ -269,13 +262,10 @@ class CStudent{
                 'userPicture' => (EPhoto::toBase64(array($profilePic)))[0],
             ];
         }
-        if (USession::getInstance()::isSetSessionElement('date')) {
-            print 'La data è settata';
-        } else {
-            print 'La data non è settata';
-        }
-        $period=USession::getInstance()::getSessionElement('date');
-        $view->accommodation($accomm, $owner, $reviewsData, $period,$picture);
+        $data=$accomm->getStart()->format('m');
+        if($data=='09'){$period='september';}
+        else{$period='october';}
+        $view->accommodation($accomm, $owner, $reviewsData, $period, $picture);
     }
 
 

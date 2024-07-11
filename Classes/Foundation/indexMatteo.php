@@ -151,6 +151,6 @@ print $totalMinutes;
 
 #print EAccommodation::stringInMinutes('03:00');
 
-$FA=FAccommodation::getInstance();
-$result=$FA->loadByOwner(6);
-print_r($result);
+$a=FPersistentManager::getInstance()::load('EAccommodation',8);
+$risultato=$a->getRating();
+print_r($risultato);

@@ -482,7 +482,7 @@ use PDOException;
      *
      * @return int
      */
-    public function findOwnerRating($id):int
+    public static function findOwnerRating($id):int
     {
         $db=FConnection::getInstance()->getConnection();
         try

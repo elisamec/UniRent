@@ -555,11 +555,12 @@ class EAccommodation
         return sprintf("%02d:%02d", $hours, $minutes);
     }
 
-    private static function getRating():array
+    public function getRating():array
     {
         $PM=FPersistentManager::getInstance();
         $result=array();
         $result['owner']=$PM->getOwnerRating($this->idOwner);
         $result['accommodation']=$PM->getAccommodationRating($this->idAccommodation);
+        return $result;
     }
 }

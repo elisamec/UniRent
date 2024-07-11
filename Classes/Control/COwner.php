@@ -79,7 +79,6 @@ class COwner
         }
        
         
-        USession::getInstance()->setSessionElement('owner', $owner->getUsername());
         $reviews = $PM->loadByRecipient($accomm->getIdAccommodation(), TType::ACCOMMODATION);
         $reviewsData = [];
         

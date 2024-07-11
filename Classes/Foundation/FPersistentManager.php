@@ -4,6 +4,7 @@ require __DIR__ .'/../../vendor/autoload.php';
 use Classes\Foundation;
 use Classes\Entity;
 use Classes\Entity\ECreditCard;
+use Classes\Entity\EOwner;
 use Classes\Entity\EPhoto;
 use Classes\Entity\EStudent;
 use Classes\Tools\TType;
@@ -439,6 +440,19 @@ class FPersistentManager {
         $FA = FAccommodation::getInstance();
         $accommodations = $FA->loadByOwner($idOwner);
         return $accommodations;
+    }
+
+    public function getOwnerRating($id):int
+    {
+        $result=FOwner::findOwnerRating($id);
+        return $result;
+    }
+
+    public function getAccommodationRating($id):int
+    {
+        $FA=FAccommodation::getInstance();
+        $result=$FA->findAccommodationRating($id);
+        return $result;
     }
 
 }
