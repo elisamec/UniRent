@@ -52,6 +52,31 @@ class CUser
         $city=USuperGlobalAccess::getPost('city');
         $date=USuperGlobalAccess::getPost('date');
         $university=USuperGlobalAccess::getPost('university');
+        if (USuperGlobalAccess::getPost('rateA')!== null) {
+            $rateA=USuperGlobalAccess::getPost('rateA');
+        } else {
+            $rateA=0;
+        }
+        if (USuperGlobalAccess::getPost('rateO')!== null) {
+            $rateO=USuperGlobalAccess::getPost('rateO');
+        } else {
+            $rateO=0;
+        }
+        if (USuperGlobalAccess::getPost('rateS')!== null) {
+            $rateS=USuperGlobalAccess::getPost('rateS');
+        } else {
+            $rateS=0;
+        }
+        if (USuperGlobalAccess::getPost('min-price')!== null) {
+            $minPrice=USuperGlobalAccess::getPost('min-price');
+        } else {
+            $minPrice=0;
+        }
+        if (USuperGlobalAccess::getPost('max-price')!== null) {
+            $maxPrice=USuperGlobalAccess::getPost('max-price');
+        } else {
+            $maxPrice=1000;
+        }
         $PM=FPersistentManager::getInstance();
         $searchResult=$PM->findAccommodations($city,$date);
         /*$searchResult= [
@@ -62,7 +87,7 @@ class CUser
                 'address' => 'Via Roma 1, Milano',
             ]
         ];*/
-        $view->findAccommodation($city,$university,$searchResult,$date);
+        $view->findAccommodation($city,$university,$searchResult,$date, $rateO, $rateS, $rateA, $minPrice, $maxPrice);
     }
 
     public static function getCities()
