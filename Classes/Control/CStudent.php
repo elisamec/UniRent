@@ -46,7 +46,7 @@ class CStudent{
         $date=USuperGlobalAccess::getPost('date');
         $session::setSessionElement('date',$date);
         if (USession::getInstance()::isSetSessionElement('date')) {
-            print 'La data è settata';
+            print 'La data è settata ' . USession::getInstance()::getSessionElement('date');
         } else {
             print 'La data non è settata';
         }
