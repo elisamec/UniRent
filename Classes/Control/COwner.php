@@ -45,7 +45,8 @@ class COwner
                 'price'=>$accom->getPrice()
             ];
         }
-        $view->home($accommodations);
+        print_r($accommodations);
+        #$view->home($accommodations);
     }
     public static function accommodation(int $idAccommodation) {
         $view = new VOwner();

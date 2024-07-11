@@ -150,3 +150,7 @@ print $totalMinutes;
 // Parte 2 di creazione array visite
 
 #print EAccommodation::stringInMinutes('03:00');
+
+$FA=FAccommodation::getInstance();
+$result=$FA->loadByOwner(6);
+print_r($result);

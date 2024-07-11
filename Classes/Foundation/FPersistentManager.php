@@ -435,7 +435,7 @@ class FPersistentManager {
         $reviews = $FReview->loadByAuthor($idAuthor, $type);
         return $reviews;
     }
-    public function loadAccommodationsByOwner(int $idOwner): array {
+    public function loadAccommodationsByOwner(int $idOwner): ?array {
         $FA = FAccommodation::getInstance();
         $accommodations = $FA->loadByOwner($idOwner);
         return $accommodations;
