@@ -717,7 +717,6 @@
             }
             $row=$stm->fetchAll(PDO::FETCH_ASSOC);
             foreach ($row as $r){
-                print_r($r);
                 $photos = $FP->loadAccommodation($r['id']);
                 $address = new Address();
                 $address = $FA->loadAddress($r['address']);
