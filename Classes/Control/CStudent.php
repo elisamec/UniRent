@@ -44,6 +44,15 @@ class CStudent{
         $view = new VStudent();
         $city=USuperGlobalAccess::getPost('city');
         $date=USuperGlobalAccess::getPost('date');
+<<<<<<< HEAD
+=======
+        $session::setSessionElement('date',$date);
+        if (USession::getInstance()::isSetSessionElement('date')) {
+            print 'La data è settata ' . USession::getInstance()::getSessionElement('date');
+        } else {
+            print 'La data non è settata';
+        }
+>>>>>>> 0f250b4fe4ab080211fa7aa58aa8e9a80e843ebd
         $university=USuperGlobalAccess::getPost('university');
         $rateA=0;
         $rateO=0;
