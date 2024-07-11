@@ -2350,6 +2350,15 @@ textarea#comment::placeholder {
     font-size: 30px;
     font-weight: bold;
 }
+.titleTenants {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+    font-size: 30px;
+    font-weight: bold;
+    padding-right: 30px;
+}
 
 .reserve_btn a{
     width: 100%;
@@ -2357,7 +2366,7 @@ textarea#comment::placeholder {
     float: left;
     font-size: 16px;
     color: #ffffff;
-    background-color: #f44336;
+    background-color: #f9bc19;
     padding: 12px;
     text-align: center;
     border-radius: 1rem;
@@ -2377,7 +2386,7 @@ textarea#comment::placeholder {
     float: left;
     font-size: 16px;
     color: #ffffff;
-    background-color: #f9bc19;
+    background-color: #f44336;
     padding: 12px;
     text-align: center;
     border-radius: 1rem;

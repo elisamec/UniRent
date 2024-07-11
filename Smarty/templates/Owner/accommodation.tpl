@@ -107,7 +107,7 @@
                                  </div>
                               </div>
 
-                     <div class="reserve_btn"><a href="/UniRent/editAccommodation/{$accommodation->getId()}" >Edit</a></div>
+                     <div class="reserve_btn"><a href="/UniRent/editAccommodation/{$accommodation->getIdAccommodation()}" >Edit</a></div>
                       <div class="delete_button" id="deleteLink"><a href="#" >Delete</a></div>
                       <div class="ownerSect">
                       <div class="row">
@@ -142,8 +142,9 @@
                         <h2>Deposit: {$accommodation->getDeposit()} €</h2>
                         {/if}
                         <div class="row">
-                        <h1 class="title">Current Tenants</h1>
-                        <div class="reserve_btn"><a href="/UniRent/Contracts/{$accommodation->getId()}"Reserve</div>
+                        <h1 class="titleTenants">Current Tenants</h1>
+                        <div class="reserve_btn"><a href="/UniRent/Contracts/{$accommodation->getIdAccommodation()}">View Reservations</a></div>
+                        </div>
                         <div class="row">
                         <div class="col-md-4">
                         <div class="userSection">
@@ -182,6 +183,7 @@
                     
                     </div>
       </div>
+        </div>
 
 
       <div id="sliderContainer" class="hidden">
