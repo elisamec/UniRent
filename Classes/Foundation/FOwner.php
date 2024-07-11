@@ -473,4 +473,44 @@ use PDOException;
         $result_array=$stm->fetch(PDO::FETCH_ASSOC);        
         return $result_array['picture'];
     }
+    
+    /**
+     * Method findOwnerRating
+     *
+     * this method return the owner's reating
+     * @param $id $id [owner'sID]
+     *
+     * @return int
+     */
+    public function findOwnerRating($id):int
+    {
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $q='SELECT AVG(r.valutation) AS rateO
+                FROM accommodation a INNER JOIN owner o ON o.id=a.idOwner
+                INNER JOIN ownerreview orw ON orw.idOwner=o.id
+                INNER JOIN review r ON r.id=orw.idReview
+                WHERE o.id=:id';
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindParam(':id',$id,PDO::PARAM_INT);
+            $stm->execute();
+            $db->commit();
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return 0;
+        }
+        $row=$stm->fetch(PDO::FETCH_ASSOC);
+        if(is_null($row['rateO']))
+        {
+            return 0;
+        }
+        else
+        {
+            return (int)$row['rateO'];
+        }
+    }
  }

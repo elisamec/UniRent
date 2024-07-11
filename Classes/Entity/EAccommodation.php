@@ -3,6 +3,7 @@ namespace Classes\Entity;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
+use Classes\Foundation\FPersistentManager;
 use CommerceGuys\Addressing\Address;
 use DateTime;
 
@@ -552,5 +553,13 @@ class EAccommodation
         $minutes = $min % 60; // Ottiene i minuti residui
         // Format string like hh:mm
         return sprintf("%02d:%02d", $hours, $minutes);
+    }
+
+    private static function getRating():array
+    {
+        $PM=FPersistentManager::getInstance();
+        $result=array();
+        $result['owner']=$PM->getOwnerRating($this->idOwner);
+        $result['accommodation']=$PM->getAccommodationRating($this->idAccommodation);
     }
 }

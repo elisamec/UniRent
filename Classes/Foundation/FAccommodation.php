@@ -694,5 +694,43 @@
             }
             return $result;
         }
-
+        
+        /**
+         * Method findAccommodationRating
+         *
+         * this method return the accommodation reating 
+         * @param $id $id [accommodation's reating]
+         *
+         * @return int
+         */
+        public function findAccommodationRating($id):int
+        {
+            $db=FConnection::getInstance()->getConnection();
+            try
+            {
+                $q='SELECT AVG(r.valutation) AS rateA
+                    FROM accommodation a INNER JOIN accommodationreview ar ON a.id=ar.idAccommodation
+                    INNER JOIN review r ON r.id=ar.idReview
+                    WHERE a.id=:id';
+                $db->beginTransaction();
+                $stm=$db->prepare($q);
+                $stm->bindParam(':id',$id,PDO::PARAM_INT);
+                $stm->execute();
+                $db->commit();
+            }
+            catch(PDOException $e)
+            {
+                $db->rollBack();
+                return 0;
+            }
+            $row=$stm->fetch(PDO::FETCH_ASSOC);
+            if(is_null($row['rateA']))
+            {
+                return 0;
+            }
+            else
+            {
+                return (int)$row['rateA'];
+            }
+        }
     }

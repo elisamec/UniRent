@@ -150,7 +150,3 @@ print $totalMinutes;
 // Parte 2 di creazione array visite
 
 #print EAccommodation::stringInMinutes('03:00');
-
-$UU=UAccessUniversityFile::getInstance();
-$result=$UU->getCities();
-print_r($result);
