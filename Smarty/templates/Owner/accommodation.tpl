@@ -115,12 +115,12 @@
                         <div class="userSection">
                                 <div class="userIcon">
                                     {if $owner->getPhoto() === null}
-                                        <a href="/UniRent/Student/publicProfile/{$owner->getUsername()}"><img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon"></a>
+                                        <a href="/UniRent/Owner/publicProfile/{$owner->getUsername()}"><img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon"></a>
                                     {else}
-                                    <a href="/UniRent/Student/publicProfiler/{$owner->getUsername()}"><img src="{$owner->getPhoto()}"></a>
+                                    <a href="/UniRent/Owner/publicProfiler/{$owner->getUsername()}"><img src="{$owner->getPhoto()}"></a>
                                     {/if}
                                 </div>
-                                <div class="username"><a href="/UniRent/Student/publicProfile/{$owner->getUsername()}">{$owner->getUsername()}</a></div> <!-- Username of the owner -->
+                                <div class="username"><a href="/UniRent/Owner/publicProfile/{$owner->getUsername()}">{$owner->getUsername()}</a></div> <!-- Username of the owner -->
                             </div>
                         </div>
                         </div>
@@ -149,9 +149,9 @@
                         <div class="col-md-4">
                         <div class="userSection">
                                 <div class="userIcon">
-                                    <a href="/UniRent/Student/publicProfile/eli1"><img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture"></a>
+                                    <a href="/UniRent/Owner/publicProfile/eli1"><img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture"></a>
                                 </div>
-                                <div class="username"><a href="/UniRent/Student/publicProfile/eli1">eli1</a></div> <!-- Username of the reviewer -->
+                                <div class="username"><a href="/UniRent/Owner/publicProfile/eli1">eli1</a></div> <!-- Username of the reviewer -->
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -261,9 +261,9 @@
                   <h3 class="footer_text">Useful Links</h3>
                   <div class="footer_menu">
                      <ul>
-                        <li><a href="/UniRent/Student/home">Home</a></li>
-                        <li><a href="/UniRent/Student/about">About Us</a></li>
-                        <li><a href="/UniRent/Student/contact">Contact Us</a></li>
+                        <li><a href="/UniRent/Owner/home">Home</a></li>
+                        <li><a href="/UniRent/Owner/about">About Us</a></li>
+                        <li><a href="/UniRent/Owner/contact">Contact Us</a></li>
                      </ul>
                   </div>
                </div>
@@ -389,9 +389,9 @@
                         <div class="row">
                             <div class="userSection">
                                 <div class="userIcon">
-                                    <a href="/UniRent/Student/publicProfile/` + review.username + `"><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
+                                    <a href="/UniRent/Owner/publicProfile/` + review.username + `"><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
                                 </div>
-                                <div class="username"><a href="/UniRent/Student/publicProfile/` + review.username + `">` + review.username + `</a></div> <!-- Username of the reviewer -->
+                                <div class="username"><a href="/UniRent/Owner/publicProfile/` + review.username + `">` + review.username + `</a></div> <!-- Username of the reviewer -->
                             </div>
                             <div class="col-md-11">
                                 <div class="stars">
