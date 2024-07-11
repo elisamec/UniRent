@@ -412,44 +412,60 @@
 </script>
 {/literal}
 <script>
-      const rangeInput = document.querySelectorAll(".range-input input"),
-  priceInput = document.querySelectorAll(".price-input input"),
-  range = document.querySelector(".slider .progress");
-let priceGap = 1000;
-priceInput.forEach((input) => {
-  input.addEventListener("input", (e) => {
-    let minPrice = parseInt(priceInput[0].value),
-      maxPrice = parseInt(priceInput[1].value);
-    if (maxPrice - minPrice >= priceGap && maxPrice <= rangeInput[1].max) {
-      if (e.target.className === "input-min") {
-        rangeInput[0].value = minPrice;
-        range.style.left = (minPrice / rangeInput[0].max) * 100 + "%";
-      } else {
-        rangeInput[1].value = maxPrice;
-        range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
-      }
-    }
-  });
-});
-rangeInput.forEach((input) => {
-  input.addEventListener("input", (e) => {
-    let minVal = parseInt(rangeInput[0].value),
-      maxVal = parseInt(rangeInput[1].value);
-    if (maxVal - minVal < priceGap) {
-      if (e.target.className === "range-min") {
-        rangeInput[0].value = maxVal - priceGap;
-      } else {
-        rangeInput[1].value = minVal + priceGap;
-      }
-    } else {
+  document.addEventListener("DOMContentLoaded", function() {
+    const rangeInput = document.querySelectorAll(".range-input input"),
+          priceInput = document.querySelectorAll(".price-input input"),
+          range = document.querySelector(".slider .progress");
+    let priceGap = 1000;
+
+    // Initialize default values from Smarty placeholders
+    priceInput[0].value = {$minPrice};
+    priceInput[1].value = {$maxPrice};
+    rangeInput[0].value = {$minPrice};
+    rangeInput[1].value = {$maxPrice};
+    updateSliderPosition(); // Initial position update
+
+    // Event listeners for range inputs
+    rangeInput.forEach((input) => {
+      input.addEventListener("input", () => {
+        updatePriceInputs();
+        updateSliderPosition();
+      });
+    });
+
+    // Event listeners for price inputs
+    priceInput.forEach((input) => {
+      input.addEventListener("input", () => {
+        updateRangeInputs();
+        updateSliderPosition();
+      });
+    });
+
+    // Function to update price inputs based on range inputs
+    function updatePriceInputs() {
+      let minVal = parseInt(rangeInput[0].value),
+          maxVal = parseInt(rangeInput[1].value);
       priceInput[0].value = minVal;
       priceInput[1].value = maxVal;
+    }
+
+    // Function to update range inputs based on price inputs
+    function updateRangeInputs() {
+      let minPrice = parseInt(priceInput[0].value),
+          maxPrice = parseInt(priceInput[1].value);
+      rangeInput[0].value = minPrice;
+      rangeInput[1].value = maxPrice;
+    }
+
+    // Function to update slider position based on range inputs
+    function updateSliderPosition() {
+      let minVal = parseInt(rangeInput[0].value),
+          maxVal = parseInt(rangeInput[1].value);
       range.style.left = (minVal / rangeInput[0].max) * 100 + "%";
       range.style.right = 100 - (maxVal / rangeInput[1].max) * 100 + "%";
     }
   });
-});
-      </script>
+</script>
       <script>
     document.addEventListener("DOMContentLoaded", function() {
     const citySelect = document.getElementById("citySelect");
@@ -570,8 +586,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const ratingOwner = {$ratingOwner};
     const ratingStudent = {$ratingStudent};
     const ratingAccommodation = {$ratingAccommodation};
-    const minPrice = {$minPrice};
-    const maxPrice = {$maxPrice};
 
     // Set default rating for Owner
     if (ratingOwner) {
@@ -588,17 +602,6 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('star' + ratingAccommodation + 'A').checked = true;
     }
 
-    // Set default price range values
-    document.querySelector('.input-min').value = minPrice;
-    document.querySelector('.input-max').value = maxPrice;
-    document.querySelector('.range-min').value = minPrice;
-    document.querySelector('.range-max').value = maxPrice;
-
-    // Adjust the progress bar
-    const progress = document.querySelector('.slider .progress');
-    progress.style.left = (minPrice / document.querySelector('.range-min').max) * 100 + '%';
-    progress.style.right = 100 - (maxPrice / document.querySelector('.range-max').max) * 100 + '%';
-
     // Function to clear Owner rating
     window.clearRatingO = function() {
         document.getElementById('star0O').checked = true;
@@ -613,47 +616,6 @@ document.addEventListener("DOMContentLoaded", function() {
     window.clearRatingA = function() {
         document.getElementById('star0A').checked = true;
     };
-
-    // Slider functionality
-    const rangeInput = document.querySelectorAll(".range-input input"),
-        priceInput = document.querySelectorAll(".price-input input"),
-        range = document.querySelector(".slider .progress");
-    let priceGap = 1000;
-    
-    priceInput.forEach((input) => {
-        input.addEventListener("input", (e) => {
-            let minPrice = parseInt(priceInput[0].value),
-                maxPrice = parseInt(priceInput[1].value);
-            if (maxPrice - minPrice >= priceGap && maxPrice <= rangeInput[1].max) {
-                if (e.target.className === "input-min") {
-                    rangeInput[0].value = minPrice;
-                    range.style.left = (minPrice / rangeInput[0].max) * 100 + "%";
-                } else {
-                    rangeInput[1].value = maxPrice;
-                    range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
-                }
-            }
-        });
-    });
-    
-    rangeInput.forEach((input) => {
-        input.addEventListener("input", (e) => {
-            let minVal = parseInt(rangeInput[0].value),
-                maxVal = parseInt(rangeInput[1].value);
-            if (maxVal - minVal < priceGap) {
-                if (e.target.className === "range-min") {
-                    rangeInput[0].value = maxVal - priceGap;
-                } else {
-                    rangeInput[1].value = minVal + priceGap;
-                }
-            } else {
-                priceInput[0].value = minVal;
-                priceInput[1].value = maxVal;
-                range.style.left = (minVal / rangeInput[0].max) * 100 + "%";
-                range.style.right = 100 - (maxVal / rangeInput[1].max) * 100 + "%";
-            }
-        });
-    });
 });
 </script>
       
