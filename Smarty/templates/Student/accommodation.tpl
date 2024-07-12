@@ -114,7 +114,7 @@
                                     {if $owner->getPhoto() === null}
                                         <a href="/UniRent/Student/publicProfile/{$owner->getUsername()}"><img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon"></a>
                                     {else}
-                                    <a href="/UniRent/Student/publicProfiler/{$owner->getUsername()}"><img src="{$owner->getPhoto()->getPhoto()}"></a>
+                                    <a href="/UniRent/Student/publicProfile/{$owner->getUsername()}"><img src="{$owner->getPhoto()->getPhoto()}"></a>
                                     {/if}
                                 </div>
                                 <div class="username"><a href="/UniRent/Student/publicProfile/{$owner->getUsername()}">{$owner->getUsername()}</a></div> <!-- Username of the owner -->
