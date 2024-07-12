@@ -73,7 +73,7 @@ class CUser
             $maxPrice=1000;
         }
         $PM=FPersistentManager::getInstance();
-        $searchResult=$PM->findAccommodations($city,$date);
+        $searchResult=$PM->findAccommodationsUser($city,$date,$rateA,$rateO,$minPrice,$maxPrice);
         /*$searchResult= [
             0 => [
                 'title' => 'Appartamento in centro',

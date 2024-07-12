@@ -646,21 +646,25 @@
             }     
         }
 
-        public function findAccommodationsByCityAndDate($city, $date)
+        public function findAccommodationsUser($city, $date,$rateA,$rateO,$minPrice,$maxPrice)
         {
             $result=array();
             $db=FConnection::getInstance()->getConnection();
             $date==='september' ? $date=9 : $date=10 ;
             try
             {
-                $q ='SELECT a.id ';
-                $q.=' FROM accommodation a INNER JOIN address adr ON a.address=adr.id';
-                $q.=' WHERE MONTH(a.start)= :date  AND adr.city = :city';
+                $q ="SELECT a.id AS id
+                     FROM accommodation a INNER JOIN address ad ON a.address=ad.id
+                     WHERE ad.city= :city
+                     AND MONTH(a.`start`)= :m
+                     AND((a.price>= :min)AND(a.price<= :max))";
                 $db->exec('LOCK TABLES accommodation READ , address READ');
                 $db->beginTransaction();
                 $stm=$db->prepare($q);
+                $stm->bindParam(':min',$minPrice,PDO::PARAM_INT);
+                $stm->bindParam('max',$maxPrice,PDO::PARAM_INT);
                 $stm->bindParam(':city',$city,PDO::PARAM_STR);
-                $stm->bindParam(':date',$date,PDO::PARAM_INT);
+                $stm->bindParam(':m',$date,PDO::PARAM_INT);
                 $stm->execute();
                 $db->commit();
                 $db->exec('UNLOCK TABLES');
@@ -671,26 +675,32 @@
                 return $result;
             }
             $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
+            
             foreach($rows as $row)
             {
                 $r=$this->load($row['id']);
-                $ap=array();
-                $ap['title'] = $r->getTitle();
-                $ap['id'] = $r->getIdAccommodation();
-                $ap['price'] = $r->getPrice();
-                $ap['address'] = $r->getAddress()->getAddressLine1().' , '.$r->getAddress()->getLocality();
-                if(count($r->getPhoto())==0)
+                $rating=$r->getRating();
+                if(($rating['owner']>=$rateO) and ($rating['accommodation']>=$rateA) or($rateO=0 and $rateA=0)or($rateO=0 and $rating['accommodation']>=$rateO)or($rateA=0 and $rating['owner']>=$rateO))
                 {
-                    $ap['photo']=null;
+                    $ap=array();
+                    $ap['title'] = $r->getTitle();
+                    $ap['id'] = $r->getIdAccommodation();
+                    $ap['price'] = $r->getPrice();
+                    $ap['address'] = $r->getAddress()->getAddressLine1().' , '.$r->getAddress()->getLocality();
+                    if(count($r->getPhoto())==0)
+                    {
+                        $ap['photo']=null;
+                    }
+                    else
+                    {
+                        $ap['photo']=(($r->getPhoto())[0])->getPhoto();
+                        $base64 = base64_encode($ap['photo']);
+                        $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
+                        $ap['photo'] = $photo;
+                    }
+                    $result[]=$ap;
                 }
-                else
-                {
-                   $ap['photo']=(($r->getPhoto())[0])->getPhoto();
-                   $base64 = base64_encode($ap['photo']);
-                   $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
-                   $ap['photo'] = $photo;
-                }
-                $result[]=$ap;
+                else{}
             }
             return $result;
         }

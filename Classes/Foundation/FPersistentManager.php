@@ -425,10 +425,10 @@ class FPersistentManager {
      *
      * @return array
      */
-    public function findAccommodations($city,$date):array
+    public function findAccommodationsUser($city,$date,$rateA,$rateO,$minPrice,$maxPrice):array
     {
         $FA=FAccommodation::getInstance();
-        $result=$FA->findAccommodationsByCityAndDate($city,$date);
+        $result=$FA->findAccommodationsUser($city,$date,$rateA,$rateO,$minPrice,$maxPrice);
         return $result;
     }
     public function loadReviewsByAuthor(int $idAuthor, TType $type): array {

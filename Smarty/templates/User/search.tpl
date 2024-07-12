@@ -226,7 +226,7 @@
                <div class="row">
                <div class="Findcontainer">
                   <div class="select-outline">
-                     <div class="find_btn"><a href="#" class="yourLinkId">Find Now</a></div>
+                     <div class="find_btn"><input type="submit" class="yourLinkId">Find Now</div>
                   </div>
                </div>
                </div>
