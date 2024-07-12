@@ -550,6 +550,14 @@ class COwner
         $view = new VOwner();
         $PM=FPersistentManager::getInstance();
         $owner=$PM->getOwnerByUsername($username);
+        $owner_photo=$owner->getPhoto();
+        if(is_null($owner_photo)){}
+        else
+        {
+            $owner_photo_64=EPhoto::toBase64(array($owner_photo));
+            $owner->setPhoto($owner_photo_64[0]);
+            #print_r($owner);
+        }
 
 
         $reviews = FReview::getInstance()->loadByRecipient($owner->getId(), TType::OWNER);
@@ -575,6 +583,14 @@ class COwner
         $view = new VOwner();
         $PM=FPersistentManager::getInstance();
         $owner=$PM->getOwnerByUsername($username);
+        $owner_photo=$owner->getPhoto();
+        if(is_null($owner_photo)){}
+        else
+        {
+            $owner_photo_64=EPhoto::toBase64(array($owner_photo));
+            $owner->setPhoto($owner_photo_64[0]);
+            #print_r($owner);
+        }
 
 
         $reviews = FReview::getInstance()->loadByRecipient($owner->getId(), TType::OWNER);

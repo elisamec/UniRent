@@ -91,8 +91,8 @@
                      <h2 class="profile_head">{$owner->getName()} {$owner->getSurname()}</h2>
                      <p>@{$owner->getUsername()}</p>
                      <p>Phone Number: {$owner->getPhoneNumber()}.</p>
-                     <p> Average Rating: n <!--$owner->getRating()-->.</p>
-                     <p> Number of Ads: n <!--$owner->getNumberOfAds()-->.</p>
+                     <p> Average Rating: {$owner->getAverageRating()}.</p>
+                     <p> Number of Ads: {$owner->getNumberOfAds()}.</p>
                      <div class="col-md-3">
                      <div class="find_btn"><a href="/UniRent/Owner/viewOwnerAds"> View Ads</a></div>
                      <div class="delete_btn" id="reportOwn"><a href="#" onclick="openReportModal()">Report User</a></div>
@@ -105,7 +105,7 @@
                   {if $owner->getPhoto() === null}
                      <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
                   {else}
-                     <img src="{$owner->getPhoto()}">
+                     <img src="{$owner->getShowPhoto()}">
                   {/if}
                   </div>
                   

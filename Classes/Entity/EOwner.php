@@ -2,6 +2,7 @@
 namespace Classes\Entity;
 require __DIR__ . '../../../vendor/autoload.php';
 use Classes\Entity\EPhoto;
+use Classes\Foundation\FPersistentManager;
 
 
 class EOwner
@@ -113,6 +114,15 @@ class EOwner
     public function getPassword():string {
         return $this->password;
     }
+    public function getNumberOfAds():int {
+        $PM = FPersistentManager::getInstance();
+        $number=$PM->loadAccommodationsByOwner($this->id);
+        return count($number);
+    }
+    public function getAverageRating() {
+        $PM = FPersistentManager::getInstance();
+        return $PM->getOwnerRating($this->id);
+    }
     /**
      * Undocumented function
      *
@@ -126,6 +136,9 @@ class EOwner
     }
     public function getPhoto():?EPhoto {
         return $this->photo;
+    }
+    public function getShowPhoto():?string {
+        return $this->photo->getPhoto();
     }
     public function getMail():string {
         return $this->email;
