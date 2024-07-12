@@ -453,16 +453,17 @@ class COwner
      public static function reviews() {
         $view = new VOwner();
         $reviews = FReview::getInstance()->loadByRecipient(1, TType::OWNER);
+        $PM=FPersistentManager::getInstance();
         $reviewsData = [];
         
         foreach ($reviews as $review) {
-            $profilePic = FOwner::getInstance()->load($review->getIdAuthor())->getPhoto();
+            $profilePic = $PM->load('EStudent', $review->getIdAuthor())->getShowPhoto();
             if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
-                'username' => FOwner::getInstance()->load($review->getIdAuthor())->getUsername(),
+                'username' => $PM->load('EStudent', $review->getIdAuthor())->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,
