@@ -187,8 +187,10 @@
                             </div>
                         </div>
                         </div>
-
+                        <div class="row">
                         <h1 class="title"> Reviews</h1>
+                        <p>Average Rating: {$accommodation->getAverageRating()}</p>
+                        </div>
                          <div id="reviewsContainer">
                    </div>
                      </div>

@@ -184,6 +184,11 @@ class EAccommodation
         return $this->visit;
     }
 
+    public function getAverageRating() {
+        $PM = FPersistentManager::getInstance();
+        return $PM->getAccommodationRating($this->idAccommodation);
+    }
+
     /**
      * getVisitDuration
      * Returns the duration of the visit in minutes
