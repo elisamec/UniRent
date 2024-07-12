@@ -249,17 +249,21 @@ class CStudent{
         $reviewsData = [];
         
         foreach ($reviews as $review) {
-            $author = $PM::load('EStudent',$review->getIdAuthor());
+            $author=$PM->load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
             $profilePic = $author->getPhoto();
             if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+            }
+            else
+            {
+                $profilePic=(EPhoto::toBase64(array($profilePic)))[0];
             }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
-                'userPicture' => (EPhoto::toBase64(array($profilePic)))[0],
+                'userPicture' => $profilePic,
             ];
         }
         $data=$accomm->getStart()->format('m');
