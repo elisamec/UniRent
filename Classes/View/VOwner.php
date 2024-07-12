@@ -19,13 +19,13 @@ class VOwner {
         $this->smarty->assign('accommodations', json_encode($accommodations));
         $this->smarty->display('Owner/home.tpl');
     }
-    public function accommodation(EAccommodation $accomm, EOwner $owner, array $reviewsData, array $pictures):void{
+    public function accommodationManagement(EAccommodation $accomm, EOwner $owner, array $reviewsData, array $pictures):void{
         $photos=json_encode($pictures);
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->assign('imagesJson', $photos);
         $this->smarty->assign('accommodation', $accomm);
         $this->smarty->assign('owner', $owner);
-        $this->smarty->display('Owner/accommodation.tpl');
+        $this->smarty->display('Owner/accommodationManagement.tpl');
     }
 
     //Mostra la seconda parte della registrazione proprietario

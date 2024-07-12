@@ -88,10 +88,68 @@
          <hr class="border_main">
          </div>
     <div id="reviewsContainer"></div>
-      <script>
+
+    <div id="confirmModal" class="resModal">
+   <div class="resModal-content">
+      <span class="resClose">&times;</span>
+      <p>Are you sure you want to delete this review??</p>
+      <div class="btn-cont">
+      <button id="confirmDelete">Yes</button>
+      <button id="cancelDelete">Cancel</button>
+      </div>
+   </div>
+</div>
+
+<div id="editModal" class="resModal">
+    <div class="resModal-content">
+    <div class="row">
+        <span class="resClose" id="editClose">&times;</span>
+        <h1  class="resModal-head">Edit Review</h1>
+        </div>
+        <form id="editReviewForm" action="" method="post">
+        <div class="rating">
+                <input type="radio" id="star5A" name="rate" value="5" />
+                <label for="star5A" title="5 stars">
+                    <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
+                        <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
+                    </svg>
+                </label>
+                <input type="radio" id="star4A" name="rate" value="4" />
+                <label for="star4A" title="4 stars">
+                    <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
+                        <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
+                    </svg>
+                </label>
+                <input type="radio" id="star3A" name="rate" value="3" />
+                <label for="star3A" title="3 stars">
+                    <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
+                        <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
+                    </svg>
+                </label>
+                <input type="radio" id="star2A" name="rate" value="2" />
+                <label for="star2A" title="2 stars">
+                    <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
+                        <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
+                    </svg>
+                </label>
+                <input type="radio" id="star1A" name="rate" value="1" />
+                <label for="star1A" title="1 star">
+                    <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
+                        <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
+                    </svg>
+                </label>
+               </div>
+            <input type="text" name="title" id="reviewTitle" placeholder="Title" value="" required>
+            <textarea name="content" rows="5" id="reviewContent" placeholder="Content" required></textarea>
+            <button type="submit" class="edit_btn">Edit</button>
+        </form>
+    </div>
+</div>
+
+<script>
     {if isset($reviewsData)}
     const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
-
+    
     // Function to generate stars based on the rating
     function generateStars(stars) {
         let starElements = '';
@@ -104,11 +162,11 @@
         }
         return starElements;
     }
-
+    
     // Function to create and append reviews to the container
     function displayReviews(reviews) {
         const container = document.getElementById('reviewsContainer');
-
+    
         if (container) {
             if (reviews.length === 0) {
                 container.innerHTML = '<h1 class="noRev">There are no reviews yet!</h1>';
@@ -116,28 +174,54 @@
                 reviews.forEach(review => {
                     const reviewElement = document.createElement('div');
                     reviewElement.className = 'review';
-
+    
                     // Insert the names of the elements of the review array
                     reviewElement.innerHTML = `
+                    <div class="row">
                         <h1 class="ReviewTitle">` + review.title + `</h1> <!-- Title of the review -->
-                        <div class="row">
-                            <div class="userSection">
-                            <p> To: </p>
-                                <div class="userIcon">
-                                    <a href="/UniRent/Student/publicProfile/` + review.username + `"><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
-                                </div>
-                                <div class="username"><a href="/UniRent/Student/publicProfile/` + review.username + `">` + review.username + `</a></div> <!-- Username of the reviewer -->
-                            </div>
-                            <div class="col-md-11">
-                                <div class="stars">
-                                    ` + generateStars(review.stars) + ` <!-- Star rating -->
-                                </div>
-                                <p>` + review.content + `</p> <!-- Content of the review -->
-                            </div>
+                        <div class="btn-cont2">
+                            <button class="delete_button" data-review-id="` + review.id + `">Delete</button>
+                            <button class="edit_button" data-review-id="` + review.id + `">Edit</button>
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="userSection">
+                            <p> To: </p>
+                            <div class="userIcon">
+                                <a href="/UniRent/Student/publicProfile/` + review.username + `"><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
+                            </div>
+                            <div class="username"><a href="/UniRent/Student/publicProfile/` + review.username + `">` + review.username + `</a></div> <!-- Username of the reviewer -->
+                        </div>
+                        <div class="col-md-11">
+                            <div class="stars">
+                                ` + generateStars(review.stars) + ` <!-- Star rating -->
+                            </div>
+                            <p>` + review.content + `</p> <!-- Content of the review -->
+                        </div>
+                    </div>
                     `;
-
+    
                     container.appendChild(reviewElement);
+                });
+
+                // Add event listeners for edit buttons
+                const editButtons = document.querySelectorAll('.edit_button');
+                editButtons.forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        const reviewId = event.target.getAttribute('data-review-id');
+                        const review = reviews.find(r => r.id == reviewId);
+                        if (review) {
+                            // Populate form fields with review data
+                            document.getElementById('editReviewForm').action = '/UniRent/Review/edit/' + review.id;
+                            document.getElementById('editReviewForm').method = 'POST';
+                            document.getElementById('reviewTitle').value = review.title;
+                            document.getElementById('reviewContent').value = review.content;
+                            document.querySelector('input[name="rate"][value="' + review.stars + '"]').checked = true;
+
+                            // Display the modal
+                            document.getElementById('editModal').style.display = 'grid';
+                        }
+                    });
                 });
             }
         } else {
@@ -145,9 +229,63 @@
         }
     }
 
+    // Close modal when clicking on the close button or outside the modal
+    const modal = document.getElementById('editModal');
+    const closeModal = document.querySelector('#editClose');
+
+    closeModal.onclick = () => {
+        modal.style.display = 'none';
+    }
+
+    window.onclick = (event) => {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+
     // Call the function to display reviews
     displayReviews(reviews);
     {/if}
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const deleteButtons = document.querySelectorAll('.delete_button');
+        const modal = document.getElementById("confirmModal");
+        const span = document.querySelector(".resClose");
+        const confirmBtn = document.getElementById("confirmDelete");
+        const cancelBtn = document.getElementById("cancelDelete");
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                event.preventDefault(); // Prevent the default action (navigation)
+                const reviewId = event.target.getAttribute('data-review-id');
+                modal.style.display = "block";
+
+                // Set the delete action URL with the review ID
+                confirmBtn.onclick = function() {
+                    window.location.href = "/UniRent/Review/Delete/" + reviewId;
+                };
+            });
+        });
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        };
+
+        // When the user clicks on the cancel button, close the modal
+        cancelBtn.onclick = function() {
+            modal.style.display = "none";
+        };
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        };
+    });
 </script>
 </div>
 <!-- footer section start -->

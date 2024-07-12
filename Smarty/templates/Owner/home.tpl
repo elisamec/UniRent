@@ -193,7 +193,7 @@
                                 <img src="${accommodation.photo}" alt="">
                                 <div class="overlay">
                                     <div class="text">
-                                        <div class="some_text"><a href="/UniRent/Owner/accommodation/${accommodation.id}">See More</a></div>
+                                        <div class="some_text"><a href="/UniRent/Owner/accommodationManagement/${accommodation.id}">See More</a></div>
                                     </div>
                                 </div>
                             </div>

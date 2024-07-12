@@ -67,12 +67,12 @@ class FReview {
      * @param TType $recipientType
      * @return EReview
      */
-    public function load(int $id, TType $recipientType): EReview 
+    public function load(int $id): EReview 
     {
         $rowRev = FReview::loadReview($id);
-        [$authType, $author, $recipient] = FReview::loadSpecificReview($id, $recipientType);
+        [$authType, $author, $recipient] = FReview::loadSpecificReview($id, TType::tryFrom($rowRev['type']));
         $date=DateTime::createFromFormat('Y-m-d H:i:s',$rowRev['creationDate']);
-        $result=new EReview($rowRev['id'],$rowRev['title'],$rowRev['valutation'],$rowRev['description'], $recipientType,$date, $authType, $author, $recipient);
+        $result=new EReview($rowRev['id'],$rowRev['title'],$rowRev['valutation'],$rowRev['description'], TType::tryFrom($rowRev['type']),$date, $authType, $author, $recipient);
         return $result;
     }
     //DA SISTEMARE

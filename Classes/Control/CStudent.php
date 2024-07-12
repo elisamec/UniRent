@@ -776,6 +776,7 @@ class CStudent{
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,
+                'id'=> $review->getId()
             ];
         }
         $view->postedReview($reviewsData);

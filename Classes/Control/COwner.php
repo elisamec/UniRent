@@ -48,7 +48,7 @@ class COwner
         #print_r($accommodations);
         $view->home($accommodations);
     }
-    public static function accommodation(int $idAccommodation) {
+    public static function accommodationManagement(int $idAccommodation) {
         $view = new VOwner();
         $PM = FPersistentManager::getInstance();
        
@@ -99,7 +99,7 @@ class COwner
                 'userPicture' => $profilePic->getPhoto(),
             ];
         }
-        $view->accommodation($accomm, $owner, $reviewsData,$picture);
+        $view->accommodationManagement($accomm, $owner, $reviewsData,$picture);
     }
 
     public static function ownerRegistration(){
@@ -658,6 +658,7 @@ class COwner
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,
+                'id'=> $review->getId()
             ];
         }
         $view->postedReview($reviewsData);
