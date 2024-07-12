@@ -511,6 +511,14 @@ class CStudent{
         $student=$PM->getStudentByUsername($username);
         $reviews = $PM->loadByRecipient($student->getId(), TType::STUDENT); //va fatto il metodo nel PM
         $reviewsData = [];
+        $student_photo=$student->getPhoto();
+        if(is_null($student_photo)){}
+        else
+        {
+            $student_photo_64=EPhoto::toBase64(array($student_photo));
+            $student->setPhoto($student_photo_64[0]);
+            #print_r($owner);
+        }
         
         foreach ($reviews as $review) {
             $author = $PM::load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
@@ -539,6 +547,14 @@ class CStudent{
         $student=$PM->getStudentByUsername($username);
         $reviews = $PM->loadByRecipient($student->getId(), TType::STUDENT); //va fatto il metodo nel PM
         $reviewsData = [];
+        $student_photo=$student->getPhoto();
+        if(is_null($student_photo)){}
+        else
+        {
+            $student_photo_64=EPhoto::toBase64(array($student_photo));
+            $student->setPhoto($student_photo_64[0]);
+            #print_r($owner);
+        }
         
         foreach ($reviews as $review) {
             $author = $PM::load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
