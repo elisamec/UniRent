@@ -663,5 +663,32 @@ class COwner
         }
         $view->postedReview($reviewsData);
     }
+    public static function viewOwnerAds(int $id) {
+        $view = new VOwner();
+        $PM=FPersistentManager::getInstance();
+        $accommodationEntities=$PM->loadAccommodationsByOwner($id);
+        $username=$PM->getUsernameByOwnerId($id);
+        $accommodations=[];
+        foreach($accommodationEntities as $accom) {
+            if(count($accom->getPhoto())==0)
+                {
+                    $photo=null;
+                }
+                else
+                {
+                   $base64 = base64_encode((($accom->getPhoto())[0])->getPhoto());
+                   $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
+                }
+            $accommodations[]=[
+                'id'=>$accom->getIdAccommodation(),
+                'photo'=>$photo,
+                'title'=>$accom->getTitle(),
+                'address'=>$accom->getAddress()->getAddressLine1() .", ". $accom->getAddress()->getLocality(),
+                'price'=>$accom->getPrice()
+            ];
+        }
+        #print_r($accommodations);
+        $view->viewOwnerAds($accommodations, $username);
+    }
 
 }

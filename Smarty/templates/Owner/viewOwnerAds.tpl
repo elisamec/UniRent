@@ -31,7 +31,7 @@
       <!-- Include Font Awesome -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
       <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/home.css">
-      <link\ rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/cookie.css">
+      <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/cookie.css">
    </head>
    <body onload="on()">
       <div class="header_section">
@@ -79,77 +79,18 @@
             </nav>
          </div>
       </div>
-
-<div class="Properties_section layout_padding">
+      <!-- header section end -->
+      <!-- feature section start -->
+      <div class="Properties_section padding-reserve">
          <div class="container">
-            <div class="row">
-               <div class="col-sm-12">
-                  <div class="Properties_taital_main">
-                     <h1 class="Properties_taital">@{$owner->getUsername()} Proprieties</h1>
-                     <hr class="border_main">
-                  </div>
-               </div>
-            </div>
+                     <h1 class="accommodation_text">@{$username}'s Proprieties</h1>
             <div class="Properties_section_2">
-               <div class="row">
-                  <div class="col-lg-4 col-md-6col-lg-4 col-md-6">
-                     <div class="blog_img">
-                     <div class="container_main">
-                                 <img src="/UniRent/Smarty/images/img-4.png" alt="">
-                                 <div class="overlay">
-                                    <div class="text">
-                                       <div class="some_text"><a href="#">See More</a></div>
-                                    </div>
-                                 </div>
-                              </div>
-                        </div>
-                     <div class="image_box">
-                        <div class="left_box">
-                           <h1 class="road_text"><a href="#">2186 Lohariya Road</a></h1>
-                           <div class="area_main">
-                              <h3 class="area_text"><a>Area:<br>240m2</a></h3>
-                              <h3 class="area_text"><a>Beds:<br>3</a></h3>
-                              <h3 class="area_text"><a>Baths:<br>1</a></h3>
-                              <h3 class="area_text"><a>Garages:<br>1</a></h3>
-                           </div>
-                        </div>
-                        <div class="right_box">
-                           <div class="rate_text">$14000</div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-4 col-md-6">
-                     <div class="blog_img">
-                     <div class="container_main">
-                                 <img src="/UniRent/Smarty/images/img-5.png" alt="">
-                                 <div class="overlay">
-                                    <div class="text">
-                                       <div class="some_text"><a href="#">See More</a></div>
-                                    </div>
-                                 </div>
-                              </div>
-                        </div>
-                     <div class="image_box">
-                        <div class="left_box">
-                           <h1 class="road_text"><a href="#">2186 Lohariya Road</a></h1>
-                           <div class="area_main">
-                              <h3 class="area_text"><a>Area:<br>240m2</a></h3>
-                              <h3 class="area_text"><a>Beds:<br>3</a></h3>
-                              <h3 class="area_text"><a>Baths:<br>1</a></h3>
-                              <h3 class="area_text"><a>Garages:<br>1</a></h3>
-                           </div>
-                        </div>
-                        <div class="right_box">
-                           <div class="rate_text">$14000</div>
-                        </div>
-                     </div>
-                  </div>
-                  <div id="propertiesContainer"></div>
-
+               <div class="row" id="accommodationContainer">
                </div>
             </div>
          </div>
       </div>
+      
       <!-- footer section start -->
       <div class="footer_section layout_padding">
          <div class="container">
@@ -163,9 +104,9 @@
                   <h3 class="footer_text">Useful Links</h3>
                   <div class="footer_menu">
                      <ul>
-                        <li><a href="/UniRent/Student/home">Home</a></li>
-                        <li><a href="/UniRent/Student/about">About Us</a></li>
-                        <li><a href="/UniRent/Student/contact">Contact Us</a></li>
+                        <li class="active"><a href="/UniRent/Owner/home">Home</a></li>
+                        <li><a href="/UniRent/Owner/about">About Us</a></li>
+                        <li><a href="/UniRent/Owner/contact">Contact Us</a></li>
                      </ul>
                   </div>
                </div>
@@ -173,7 +114,9 @@
          </div>
       </div>
       <!-- footer section end -->
-<script src="/UniRent/Smarty/js/jquery.min.js"></script>
+      
+      <!-- Javascript files-->
+      <script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>
       <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
       <script src="/UniRent/Smarty/js/jquery-3.0.0.min.js"></script>
@@ -181,37 +124,16 @@
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
-<script>
-document.getElementById("file").onchange = function() {
-    document.getElementById("form").submit();
-};
-</script>
-
-         <script>
-      $(document).ready(function() {
-
-      
-      var readURL = function(input) {
-         if (input.files && input.files[0]) {
-               var reader = new FileReader();
-
-               reader.onload = function (e) {
-                  $('.imageIcon').attr('src', e.target.result);
-               }
-      
-               reader.readAsDataURL(input.files[0]);
-         }
-      }
-      
-
-      $(".file-upload").on('change', function(){
-         readURL(this);
-      });
-      
-      $(".label-button").on('click', function() {
-         $(".file-upload").click();
-      });
-   });
+      <!-- javascript --> 
+      <script>
+         // Material Select Initialization
+         $(document).ready(function() {
+         $('.mdb-select').materialSelect();
+         $('.select-wrapper.md-form.md-outline input.select-dropdown').bind('focus blur', function () {
+         $(this).closest('.select-outline').find('label').toggleClass('active');
+         $(this).closest('.select-outline').find('.caret').toggleClass('active');
+         });
+         });
       </script>
       <div class="modal" id="myModal">
       <div class"container-fluid">
@@ -232,5 +154,60 @@ document.getElementById("file").onchange = function() {
                document.getElementById("myModal").style.display = "none";
                }
          </script>
+{literal}
+         <script>
+    const accommodations = {/literal}{$accommodations}{literal};
+
+    // Function to create and append reviews to the container
+    function displayAccommodations(accommodations) {
+        const container = document.getElementById('accommodationContainer');
+
+        if (container) {
+            if (accommodations.length === 0) {
+                container.innerHTML = '<div class="container"><h1 class="noRev">You have no ads yet!</h1></div>';
+            } else {
+                accommodations.forEach(accommodation => {
+                    if (accommodation.photo == null) {
+                        accommodation.photo = "/UniRent/Smarty/images/noPic.png";
+                    }
+                    const accommodationElement = document.createElement('div');
+                    accommodationElement.className = 'col-lg-4 col-md-6col-lg-4 col-md-6';
+
+                    // Insert the names of the elements of the accommodation array
+                    accommodationElement.innerHTML = `
+                        <div class="blog_img">
+                            <div class="container_main">
+                                <img src="${accommodation.photo}" alt="">
+                                <div class="overlay">
+                                    <div class="text">
+                                        <div class="some_text"><a href="/UniRent/Student/accommodation/${accommodation.id}">See More</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="image_box">
+                            <div class="left_box">
+                                <h1 class="road_text">${accommodation.title}</h1>
+                                <p>${accommodation.address}</p>
+                            </div>
+                            <div class="right_box">
+                                <div class="rate_text">${accommodation.price} €</div>
+                            </div>
+                        </div>
+                    `;
+
+                    // Append the created element to the container
+                    container.appendChild(accommodationElement); // Corrected: accommodationElement instead of reviewElement
+                });
+            }
+        } else {
+            console.error("Container not found!"); // Debugging: Error if container is not found
+        }
+    }
+
+    // Call the function to display reviews
+    displayAccommodations(accommodations);
+</script>
+{/literal}
    </body>
 </html>
