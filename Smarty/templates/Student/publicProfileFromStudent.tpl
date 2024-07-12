@@ -106,7 +106,7 @@
                   {if $student->getPhoto() === null}
                      <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
                   {else}
-                     <img src="{$student->getPhoto()}">
+                     <img src="{$student->getShowPhoto()}">
                   {/if}
                   </div>
                </div>
