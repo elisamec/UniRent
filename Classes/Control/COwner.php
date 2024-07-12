@@ -82,7 +82,7 @@ class COwner
         $reviewsData = [];
         
         foreach ($reviews as $review) {
-            $author = $PM::load('EStudent',$review->getIdAuthor());
+            $author = $PM::load('E'. $review->getAuthorType()->value, $review->getIdAuthor());
             $profilePic = $author->getPhoto();
             if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
@@ -457,13 +457,18 @@ class COwner
         $reviewsData = [];
         
         foreach ($reviews as $review) {
-            $profilePic = $PM->load('EStudent', $review->getIdAuthor())->getShowPhoto();
+            $author=$PM->load('EStudent', $review->getIdAuthor());
+            $profilePic = $author->getPhoto();
             if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
+            else
+            {
+                $profilePic=(EPhoto::toBase64(array($profilePic)))[0];
+            }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
-                'username' => $PM->load('EStudent', $review->getIdAuthor())->getUsername(),
+                'username' => $author->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,
@@ -565,13 +570,18 @@ class COwner
         $reviewsData = [];
         
         foreach ($reviews as $review) {
-            $profilePic = FOwner::getInstance()->load($review->getIdAuthor())->getPhoto();
+            $author = $PM::load( 'EStudent', $review->getIdAuthor());
+            $profilePic =$author->getPhoto();
             if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
+            else
+            {
+                $profilePic=(EPhoto::toBase64(array($profilePic)))[0];
+            }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
-                'username' => FOwner::getInstance()->load($review->getIdAuthor())->getUsername(),
+                'username' => $author->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,
@@ -598,13 +608,18 @@ class COwner
         $reviewsData = [];
         
         foreach ($reviews as $review) {
-            $profilePic = FOwner::getInstance()->load($review->getIdAuthor())->getPhoto();
+            $author = $PM::load( 'EStudent', $review->getIdAuthor());
+            $profilePic = $author->getPhoto();
             if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
+            else
+            {
+                $profilePic=(EPhoto::toBase64(array($profilePic)))[0];
+            }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
-                'username' => FOwner::getInstance()->load($review->getIdAuthor())->getUsername(),
+                'username' => $author->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,
@@ -628,13 +643,14 @@ class COwner
         $reviewsData = [];
 
         foreach ($reviews as $review) {
-            $profilePic = $PM->load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor())->getPhoto();
+            $recipient = $PM::load( 'E' . $review->getRecipientType()->value, $review->getIDRecipient());
+            $profilePic = $recipient->getShowPhoto();
             if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
-                'username' => $PM->load( 'E' . $review->getRecipientType()->value, $review->getIDRecipient())->getUsername(),
+                'username' => $recipient->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,
