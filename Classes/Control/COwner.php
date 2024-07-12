@@ -82,7 +82,7 @@ class COwner
         $reviewsData = [];
         
         foreach ($reviews as $review) {
-            $author = $PM::load('E'. $review->getAuthorType()->value, $review->getIdAuthor());
+            $author = $PM::load('EStudent', $review->getIdAuthor());
             $profilePic = $author->getPhoto();
             if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";

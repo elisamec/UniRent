@@ -7,13 +7,11 @@ use Classes\Entity\ECreditCard;
 use Classes\Entity\EPhoto;
 use Classes\Foundation\FPersistentManager;
 use Classes\Entity\EStudent;
-use Classes\Foundation\FReview;
-use Classes\Foundation\FStudent;
 use Classes\Tools\TType;
 use Classes\Utilities\USession;
 use Classes\Utilities\USuperGlobalAccess;
 use Classes\View\VStudent; 
-use Classes\Control; 
+use Classes\Control;
 use DateTime;
 use FCreditCard;
 
@@ -249,7 +247,7 @@ class CStudent{
         $reviewsData = [];
         
         foreach ($reviews as $review) {
-            $author=$PM->load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
+            $author=$PM->load( 'EStudent', $review->getIdAuthor());
             $profilePic = $author->getPhoto();
             if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
@@ -288,6 +286,10 @@ class CStudent{
             $profilePic = $author->getPhoto();
             if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+            }
+            else
+            {
+                $profilePic=(EPhoto::toBase64(array($profilePic)))[0];
             }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
@@ -516,6 +518,10 @@ class CStudent{
             if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
+            else
+            {
+                $profilePic=(EPhoto::toBase64(array($profilePic)))[0];
+            }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
@@ -539,6 +545,10 @@ class CStudent{
             $profilePic = $author->getPhoto();
             if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+            }
+            else
+            {
+                $profilePic=(EPhoto::toBase64(array($profilePic)))[0];
             }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
@@ -755,6 +765,10 @@ class CStudent{
             $profilePic = $author->getPhoto();
             if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+            }
+            else
+            {
+                $profilePic=(EPhoto::toBase64(array($profilePic)))[0];
             }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
