@@ -130,6 +130,22 @@
                      <div class="col-lg-8 col-md-10 col-lg-8 col-md-10">
                      <div class="Accomcontainer">
                         <h1 class="title">Accommodation Details</h1>
+                        <div class="row">
+                        {if $accommodation->getPets() && $accommodation->getSmokers()}
+                        <div class="allowed" title="Pets Allowed"> <img src="/UniRent/Smarty/images/Pets.png" alt="Pets Allowed"> </div>
+                        <div class="allowed" title="Smokers Allowed"> <img id="smoke" src="/UniRent/Smarty/images/Smokers.png" alt="Smokers Allowed"> </div>
+                        {elseif $accommodation->getPets()}
+                         <div class="allowed" title="Pets Allowed"> <img src="/UniRent/Smarty/images/Pets.png" alt="Pets Allowed"> </div>
+                        <div class="notallowed" title="Smokers Not Allowed"> <img id="smoke" src="/UniRent/Smarty/images/Smokers.png" alt="Smokers Not Allowed"> </div>
+                        {elseif $accommodation->getSmokers()}
+                         <div class="notallowed" title="Pets Not Allowed"> <img src="/UniRent/Smarty/images/Pets.png" alt="Pets Not Allowed"> </div>
+                        <div class="allowed" title="Smokers Allowed"> <img id="smoke" src="/UniRent/Smarty/images/Smokers.png" alt="Smokers Allowed"> </div>
+                        {else}
+                         <div class="notallowed" title="Pets Not Allowed"> <img src="/UniRent/Smarty/images/Pets.png" alt="Pets Not Allowed"> </div>
+                        <div class="notallowed" title="Smokers Not Allowed"> <img id="smoke" src="/UniRent/Smarty/images/Smokers.png" alt="Smokers Not Allowed"> </div>
+                        {/if}
+                        </div>
+                        <h2>Location:</h2>
                         {if $accommodation->getAddress()->getAddressLine1() !== null && $accommodation->getAddress()->getLocality() !== null}
                         <p> {$accommodation->getAddress()->getAddressLine1()}, {$accommodation->getAddress()->getLocality()}</p>
                         {else}
@@ -149,9 +165,9 @@
                         <div class="col-md-4">
                         <div class="userSection">
                                 <div class="userIcon">
-                                    <a href="/UniRent/Owner/publicProfile/eli1"><img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture"></a>
+                                    <a href="/UniRent/Owner/publicProfile/eli"><img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture"></a>
                                 </div>
-                                <div class="username"><a href="/UniRent/Owner/publicProfile/eli1">eli1</a></div> <!-- Username of the reviewer -->
+                                <div class="username"><a href="/UniRent/Owner/publicProfile/eli">eli</a></div> <!-- Username of the reviewer -->
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -171,8 +187,10 @@
                             </div>
                         </div>
                         </div>
-
+                        <div class="row">
                         <h1 class="title"> Reviews</h1>
+                        <p>Average Rating: {$accommodation->getAverageRating()}</p>
+                        </div>
                          <div id="reviewsContainer">
                    </div>
                      </div>

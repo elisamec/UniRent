@@ -153,7 +153,7 @@
             <div class="row">
                <div class="col-sm-12">
                   <div class="Properties_taital_main">
-                     <h1 class="Properties_taital">New Properties In Milan</h1>
+                     <h1 class="Properties_taital">New Properties</h1>
                      <hr class="border_main">
                   </div>
                </div>
@@ -239,22 +239,7 @@
                      </div>
                   </div>
                </div>
-            </div>
-         </div>
-      </div>
-      <!-- Properties section start -->
-      <div class="Properties_section layout_padding">
-         <div class="container">
-            <div class="row">
-               <div class="col-sm-12">
-                  <div class="Properties_taital_main">
-                     <h1 class="Properties_taital">New Proprieties in Rome</h1>
-                     <hr class="border_main">
-                  </div>
-               </div>
-            </div>
-            <div class="Properties_section_2">
-               <div class="row">
+                <div class="row">
                   <div class="col-lg-4 col-md-6col-lg-4 col-md-6">
                      <div class="blog_img">
                      <div class="container_main">
@@ -336,6 +321,8 @@
                </div>
             </div>
          </div>
+      </div>
+      
       </div>
       <!-- Properties section end -->
       

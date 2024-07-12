@@ -2,6 +2,7 @@
 namespace Classes\Entity;
 require __DIR__ . '../../../vendor/autoload.php';
 use Classes\Entity\EPhoto;
+use Classes\Foundation\FPersistentManager;
 use DateTime;
 
 /**
@@ -199,6 +200,10 @@ class EStudent
     public function getShowPhoto():?string {
         return $this->picture->getPhoto();
     }
+    public function getAverageRating() {
+        $PM = FPersistentManager::getInstance();
+        return $PM->getStudentRating($this->id);
+    }
     /**
      * getUniversityMail
      *
@@ -330,7 +335,7 @@ class EStudent
      * @param  int $picture
      * @return void
      */
-    public function setPicture(EPhoto|null $picture)
+    public function setPhoto(EPhoto|null $picture)
     {
         $this->picture=$picture;
     }    

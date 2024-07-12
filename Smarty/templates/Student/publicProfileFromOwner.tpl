@@ -96,7 +96,7 @@
                      <p>Sex: Female</p>
                      {/if}
                      <p>Age: {$student->getAge()}.</p>
-                     <p> Average Rating: n <!--$student->getRating()-->.</p>
+                     <p> Average Rating: {$student->getAverageRating()}.</p>
                      <div class="col-md-2">
                         <div class="delete_btn"><a href="#" onclick="openReportModal()">Report User</a></div>
                      </div>

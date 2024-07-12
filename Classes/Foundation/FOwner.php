@@ -371,6 +371,27 @@ use PDOException;
         $result_array=$stm->fetch(PDO::FETCH_ASSOC);
         return $result_array['id'];
     }
+
+    public function getUsernameByOwnerId(int $id):?string
+    {
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $q='SELECT username FROM owner WHERE id= :id';
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindParam(':id',$id,PDO::PARAM_STR);
+            $stm->execute();
+            $db->commit();
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return null;
+        }
+        $result_array=$stm->fetch(PDO::FETCH_ASSOC);
+        return $result_array['username'];
+    }
     
     /**
      * Method verifyPhoneNumber

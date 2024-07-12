@@ -98,4 +98,9 @@ class VOwner {
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->display('Student/postedReviews.tpl');
     }
+    public function viewOwnerAds(array $accommodations, string $username){
+        $this->smarty->assign('accommodations', json_encode($accommodations));
+        $this->smarty->assign('username', $username);
+        $this->smarty->display('Owner/viewOwnerAds.tpl');
+    }
 }

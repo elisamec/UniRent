@@ -2237,6 +2237,47 @@ textarea#comment::placeholder {
     background-color: #f44336;
     border-radius: 100%;
 }
+.notallowed, .allowed {
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 95%;
+    border: solid 1.5px #9e9e9e;
+    border-radius: 1rem;
+    background: none;
+    font-size: 1rem;
+    color: #000000;
+    position: relative;
+    transform: none;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+    margin-bottom: 15px;
+    border-radius: 100%;
+    overflow: hidden;
+}
+#smoke {
+    padding: 3px;
+}
+
+.notallowed {
+    background-color: #f44336; /* Red color for does not accept */
+}
+
+.allowed {
+    background-color: #4CAF50; /* Green color for accepts */
+}
+
+.notallowed img,
+.allowed img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image fills the button */
+    border-radius: 50%; /* Ensures the image itself is round */
+}
 .button-spec.little1 {
     display: flex;
     align-items: center;

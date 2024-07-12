@@ -19,7 +19,7 @@ class CReview {
     public static function delete(int $id) {
         $PM=FPersistentManager::getInstance();
         $PM->delete('EReview', $id);
-        header('Refresh: 0');
+        header('Location:' . $_SERVER['HTTP_REFERER']);
     }
 
     public static function edit(int $id) {
@@ -29,6 +29,6 @@ class CReview {
         $review->setDescription(USuperGlobalAccess::getPost('content'));
         $review->setValutation(USuperGlobalAccess::getPost('rate'));
         $PM->update($review);
-        header('Refresh: 0');
+        header('Location:' . $_SERVER['HTTP_REFERER']);
     }
 }

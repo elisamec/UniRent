@@ -91,7 +91,7 @@
                      <p> Average Rating: {$owner->getAverageRating()}.</p>
                      <p> Number of Ads: {$owner->getNumberOfAds()}.</p>
                      <div class="col-md-3">
-                     <div class="find_btn"><a href="/UniRent/Student/viewOwnerAds"> View Ads</a></div>
+                     <div class="find_btn"><a href="/UniRent/Owner/viewOwnerAds/{$owner->getId()}"> View Ads</a></div>
                      <div class="delete_btn" id="reportOwn"><a href="#" onclick="openReportModal()">Report User</a></div>
                      </div>
                </div>
