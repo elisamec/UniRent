@@ -96,7 +96,7 @@ class COwner
                 'username' => $author->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
-                'userPicture' => $profilePic,
+                'userPicture' => $profilePic->getPhoto(),
             ];
         }
         $view->accommodation($accomm, $owner, $reviewsData,$picture);
@@ -471,7 +471,7 @@ class COwner
                 'username' => $author->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
-                'userPicture' => $profilePic,
+                'userPicture' => $profilePic->getPhoto(),
             ];
         }
         $view->reviews($reviewsData);
@@ -584,7 +584,7 @@ class COwner
                 'username' => $author->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
-                'userPicture' => $profilePic,
+                'userPicture' => $profilePic->getPhoto(),
             ];
         }
         $view->publicProfileFromOwner($owner, $reviewsData);
@@ -622,7 +622,7 @@ class COwner
                 'username' => $author->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
-                'userPicture' => $profilePic,
+                'userPicture' => $profilePic->getPhoto(),
             ];
         }
         $view->publicProfileFromStudent($owner, $reviewsData);
@@ -653,7 +653,7 @@ class COwner
                 'username' => $recipient->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
-                'userPicture' => $profilePic,
+                'userPicture' => $profilePic->getPhoto(),
             ];
         }
         $view->postedReview($reviewsData);

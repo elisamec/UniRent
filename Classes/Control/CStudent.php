@@ -261,7 +261,7 @@ class CStudent{
                 'username' => $author->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
-                'userPicture' => $profilePic,
+                'userPicture' => $profilePic->getPhoto(),
             ];
         }
         $data=$accomm->getStart()->format('m');
@@ -296,7 +296,7 @@ class CStudent{
                 'username' => $author->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
-                'userPicture' => $profilePic,
+                'userPicture' => $profilePic->getPhoto(),
             ];
         }
         $view->reviews($reviewsData);
@@ -527,7 +527,7 @@ class CStudent{
                 'username' => $author->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
-                'userPicture' => $profilePic,
+                'userPicture' => $profilePic->getPhoto(),
             ];
         }
         $view->publicProfileFromStudent($student, $reviewsData);
@@ -555,7 +555,7 @@ class CStudent{
                 'username' => $author->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
-                'userPicture' => $profilePic,
+                'userPicture' => $profilePic->getPhoto(),
             ];
         }
         $view->publicProfileFromOwner($student, $reviewsData);
@@ -775,7 +775,7 @@ class CStudent{
                 'username' => $author->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
-                'userPicture' => $profilePic,
+                'userPicture' => $profilePic->getPhoto(),
             ];
         }
         $view->postedReview($reviewsData);
