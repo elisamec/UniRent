@@ -761,8 +761,8 @@ class CStudent{
         $reviewsData = [];
 
         foreach ($reviews as $review) {
-            $author = $PM::load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
-            $profilePic = $author->getPhoto();
+            $recipient = $PM::load( 'E' . $review->getRecipientType()->value, $review->getIdRecipient());
+            $profilePic = $recipient->getPhoto();
             if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
@@ -772,7 +772,7 @@ class CStudent{
             }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
-                'username' => $author->getUsername(),
+                'username' => $recipient->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,
