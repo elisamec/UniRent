@@ -172,7 +172,7 @@ class CStudent{
 
         } else {
             
-            $photo = new EPhoto(null, $picture['img'], 'other', null, null);
+            $photo = new EPhoto(null, $picture['img'], 'other', null);
         }   
 
         $duration = USuperGlobalAccess::getPost('courseDuration');
@@ -443,8 +443,8 @@ class CStudent{
                     
             $photoId=$oldStudent->getPhoto()->getId();
 
-            is_null($picture) ? $photo = new EPhoto($photoId, $oldPhoto, 'other', null, null)
-                              : $photo = new EPhoto($photoId, $picture['img'], 'other', null, null);
+            is_null($picture) ? $photo = new EPhoto($photoId, $oldPhoto, 'other', null)
+                              : $photo = new EPhoto($photoId, $picture['img'], 'other', null);
 
         } else {
 
@@ -456,7 +456,7 @@ class CStudent{
 
             } else {
 
-                $photo = new EPhoto(null, $picture['img'], 'other', null, null);
+                $photo = new EPhoto(null, $picture['img'], 'other', null);
                 $risultato = $PM->storeAvatar($photo);
 
                 if(!$risultato){

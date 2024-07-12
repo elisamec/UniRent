@@ -115,7 +115,7 @@ class COwner
 
         } else {
             
-            $photo = new EPhoto(null, $picture['img'], 'other', null, null);
+            $photo = new EPhoto(null, $picture['img'], 'other', null);
         }
 
         $phone = EOwner::formatPhoneNumber(USuperGlobalAccess::getPost('phoneNumber'));
@@ -354,8 +354,8 @@ class COwner
                     
             $photoId=$oldOwner->getPhoto()->getId();
 
-            is_null($picture) ? $photo = new EPhoto($photoId, $oldPhoto, 'other', null, null)
-                              : $photo = new EPhoto($photoId, $picture['img'], 'other', null, null);
+            is_null($picture) ? $photo = new EPhoto($photoId, $oldPhoto, 'other', null)
+                              : $photo = new EPhoto($photoId, $picture['img'], 'other', null);
 
         } else {
 
@@ -369,7 +369,7 @@ class COwner
             } else {
 
                 print "La nuova foto non è null<br>";
-                $photo = new EPhoto(null, $picture['img'], 'other', null, null);
+                $photo = new EPhoto(null, $picture['img'], 'other', null);
                 $risultato = $PM->storeAvatar($photo);
 
                 if(!$risultato){

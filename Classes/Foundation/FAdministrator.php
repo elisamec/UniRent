@@ -1,9 +1,9 @@
 <?php
-
+namespace Classes\Foundation;
 use Classes\Entity\EAdministrator;
-
-require_once ('FConnection.php');
-require_once ('../Entity/EAdministrator.php');
+use Classes\Foundation\FConnection;
+use PDO;
+use PDOException;
 
 class FAdministrator
 {
