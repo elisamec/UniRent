@@ -195,7 +195,10 @@ class EStudent
     public function getPhoto():?EPhoto
     {
         return $this->picture;
-    }    
+    }
+    public function getShowPhoto():?string {
+        return $this->picture->getPhoto();
+    }
     /**
      * getUniversityMail
      *
