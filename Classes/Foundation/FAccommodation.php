@@ -739,6 +739,7 @@
             $result=array();
             $db=FConnection::getInstance()->getConnection();
             $date==='september' ? $date=9 : $date=10 ;
+            $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
 
             //Student informations
             $smoke=$student->getSmoker();
@@ -751,9 +752,16 @@
                     FROM accommodation a INNER JOIN address ad ON ad.id=a.address
                     WHERE ad.city= :city 
                     AND MONTH(a.`start`)= :mon
-                    AND a.pets= :pets
-                    AND a.smokers= :smoker
                     AND((a.price>= :min)AND(a.price<= :max))";
+                
+                if($smoke)
+                {
+                    $q.="AND a.smokers=TRUE";
+                }
+                if($animals)
+                {
+                    $q.="AND a.pets=TRUE";
+                }
                 
                 if($sex=='M')
                 {
@@ -768,8 +776,6 @@
                 $stm=$db->prepare($q);
                 $stm->bindParam(':city',$city,PDO::PARAM_STR);
                 $stm->bindParam(':mon',$date,PDO::PARAM_INT);
-                $stm->bindParam(':pets',$animals,PDO::PARAM_BOOL);
-                $stm->bindParam(':smoker',$smoke,PDO::PARAM_BOOL);
                 $stm->bindParam(':min',$minPrice,PDO::PARAM_INT);
                 $stm->bindParam(':max',$maxPrice,PDO::PARAM_INT);
                 $stm->execute();
@@ -778,10 +784,9 @@
             catch(PDOException $e)
             {
                 $db->rollBack();
-                return $result;
+                #return $result;
             }
             $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
-            print_r($rows);
 
             foreach($rows as $row)
             {
