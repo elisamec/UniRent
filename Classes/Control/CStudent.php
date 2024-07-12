@@ -280,13 +280,14 @@ class CStudent{
         $reviewsData = [];
         
         foreach ($reviews as $review) {
-            $profilePic = $PM->load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor())->getPhoto();
+            $author = $PM::load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
+            $profilePic = $author->getPhoto();
             if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
-                'username' => $PM->load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor())->getUsername(),
+                'username' => $author->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,
@@ -506,13 +507,14 @@ class CStudent{
         $reviewsData = [];
         
         foreach ($reviews as $review) {
-            $profilePic = $PM->load('E'. $review->getAuthorType()->value, $review->getIdAuthor())->getPhoto();
+            $author = $PM::load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
+            $profilePic = $author->getPhoto();
             if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
-                'username' => $PM->load('E'. $review->getAuthorType()->value, $review->getIdAuthor())->getUsername(),
+                'username' => $author->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,
@@ -529,13 +531,14 @@ class CStudent{
         $reviewsData = [];
         
         foreach ($reviews as $review) {
-            $profilePic = $PM->load('E'. $review->getAuthorType()->value, $review->getIdAuthor())->getPhoto();
+            $author = $PM::load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
+            $profilePic = $author->getPhoto();
             if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
-                'username' => $PM->load('E'. $review->getAuthorType()->value, $review->getIdAuthor())->getUsername(),
+                'username' => $author->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,
@@ -744,13 +747,14 @@ class CStudent{
         $reviewsData = [];
 
         foreach ($reviews as $review) {
-            $profilePic = $PM->load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor())->getPhoto();
+            $author = $PM::load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
+            $profilePic = $author->getPhoto();
             if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
-                'username' => $PM->load( 'E' . $review->getRecipientType()->value, $review->getIDRecipient())->getUsername(),
+                'username' => $author->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,
