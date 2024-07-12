@@ -4,7 +4,6 @@ require __DIR__.'../../../vendor/autoload.php';
 use Classes\Entity\EReview;
 use Classes\Tools\TType;
 use Classes\Foundation\FConnection;
-use Classes\Foundation\FPhoto;
 use DateTime;
 use PDO;
 use PDOException;
@@ -73,8 +72,7 @@ class FReview {
         $rowRev = FReview::loadReview($id);
         [$authType, $author, $recipient] = FReview::loadSpecificReview($id, $recipientType);
         $date=DateTime::createFromFormat('Y-m-d H:i:s',$rowRev['creationDate']);
-        $photo= FPhoto::getInstance()->loadReview($id);;
-        $result=new EReview($rowRev['id'],$rowRev['title'],$rowRev['valutation'],$rowRev['description'], $photo, $recipientType,$date, $authType, $author, $recipient);
+        $result=new EReview($rowRev['id'],$rowRev['title'],$rowRev['valutation'],$rowRev['description'], $recipientType,$date, $authType, $author, $recipient);
         return $result;
     }
     //DA SISTEMARE
@@ -89,7 +87,6 @@ class FReview {
                 $idReview = $rev['idReview'];
                 $rowRev = FReview::loadReview($idReview);
                 $date=DateTime::createFromFormat('Y-m-d H:i:s',$rowRev['creationDate']);
-                $photo= FPhoto::getInstance()->loadReview($idReview);
                 if ($rev['authorStudent']!==null) {
                     $author = $rev['authorStudent'];
                     $authType = TType::STUDENT;
@@ -98,7 +95,7 @@ class FReview {
                     $author = $rev['authorOwner'];
                     $authType = TType::OWNER;
                 }
-                $result[]=new EReview($idReview,$rowRev['title'],$rowRev['valutation'],$rowRev['description'], $photo, $recipientType, $date, $authType, $author, $idRec);
+                $result[]=new EReview($idReview,$rowRev['title'],$rowRev['valutation'],$rowRev['description'], $recipientType, $date, $authType, $author, $idRec);
             }
         }
         else {
@@ -106,10 +103,9 @@ class FReview {
                 $idReview = $rev['idReview'];
                 $rowRev = FReview::loadReview($idReview);
                 $date=DateTime::createFromFormat('Y-m-d H:i:s',$rowRev['creationDate']);
-                $photo= FPhoto::getInstance()->loadReview($idReview);
                 $authType = TType::STUDENT;
                 $author = $rev['idAuthor'];
-                $result[]=new EReview($idReview,$rowRev['title'],$rowRev['valutation'],$rowRev['description'], $photo, $recipientType, $date, $authType, $author, $idRec);
+                $result[]=new EReview($idReview,$rowRev['title'],$rowRev['valutation'],$rowRev['description'], $recipientType, $date, $authType, $author, $idRec);
             }
         }
         return $result;
@@ -233,15 +229,6 @@ class FReview {
         if ($storeRev===false){
             return false;
         }
-        $photos=$Review->getPhotos();
-        if ($photos!==null) {
-            foreach ($photos as $photo) {
-                $storePictures = FPhoto::getInstance()->store($photo);
-            }
-            if ($storePictures===false){
-                return false;
-            }
-        }
         $storeSpec = FReview::storeSpecificReview($Review);
         if ($storeSpec===false){
             return false;
@@ -341,67 +328,14 @@ class FReview {
             return false;
         }
     }
-    
-    /**
-     * update
-     *
-     * @param  EReview $Review
-     * @return bool
-     */
-    public function update(EReview $Review):bool 
-    {
-        $updateRev = FReview::updateReview($Review);
-        if ($updateRev===false){
-            return false;
-        }
-        $updatePhotos = FReview::updatePhotos($Review);
-        if ($updatePhotos===false){
-            return false;
-        }
-    return true;
 
-    }
-    /**
-     * updatePhotos
-     *
-     * @param  EReview $Review
-     * @return bool
-     */
-    private function updatePhotos(EReview $Review):bool {
-        $photos=$Review->getPhotos();
-        $photosDB = FPhoto::getInstance()->loadReview($Review->getId());
-        foreach ($photosDB as $DB) {
-            $el=array_search($DB, $photos);
-            if ($el!==false) {
-                $complete=FPhoto::getInstance()->update($photos[$el]);
-            } else {
-                $complete=FPhoto::getInstance()->delete($DB->getId());
-            }
-            if ($complete===false) {
-                return false;
-            }
-        }
-        foreach ($photos as $ph) {
-            $el=array_search($ph, $photosDB);
-            $add=[];
-            if ($el===false) {
-                $add[]=$photos[$el];
-            }
-            $complete=FPhoto::getInstance()->store($add);
-            if ($complete===false) {
-                return false;
-            }
-        }
-        
-        return true;
-    }
     /**
      * updateReview
      *
      * @param  EReview $Review
      * @return bool
      */
-    private function updateReview(EReview $Review):bool {
+    public function update(EReview $Review):bool {
         $db=FConnection::getInstance()->getConnection();      
         try
         {
@@ -473,23 +407,20 @@ class FReview {
                 $idReview = $oRev['idReview'];
                 $rowRev = FReview::loadReview($idReview);
                 $date=DateTime::createFromFormat('Y-m-d H:i:s',$rowRev['creationDate']);
-                $photo= FPhoto::getInstance()->loadReview($idReview);
-                $result[]=new EReview($idReview,$rowRev['title'],$rowRev['valutation'],$rowRev['description'], $photo, TType::OWNER, $date, $authorType, $idAuth, $oRev['idOwner']);
+                $result[]=new EReview($idReview,$rowRev['title'],$rowRev['valutation'],$rowRev['description'], TType::OWNER, $date, $authorType, $idAuth, $oRev['idOwner']);
             }
             foreach ($accommodationReviews as $aRev) {
                 $idReview = $aRev['idReview'];
                 $rowRev = FReview::loadReview($idReview);
                 $date=DateTime::createFromFormat('Y-m-d H:i:s',$rowRev['creationDate']);
-                $photo= FPhoto::getInstance()->loadReview($idReview);
-                $result[]=new EReview($idReview,$rowRev['title'],$rowRev['valutation'],$rowRev['description'], $photo, TType::ACCOMMODATION, $date, $authorType, $idAuth, $aRev['idAccommodation']);
+                $result[]=new EReview($idReview,$rowRev['title'],$rowRev['valutation'],$rowRev['description'], TType::ACCOMMODATION, $date, $authorType, $idAuth, $aRev['idAccommodation']);
             }
         }
         foreach ($studentReviews as $sRev) {
             $idReview = $sRev['idReview'];
             $rowRev = FReview::loadReview($idReview);
             $date=DateTime::createFromFormat('Y-m-d H:i:s',$rowRev['creationDate']);
-            $photo= FPhoto::getInstance()->loadReview($idReview);
-            $result[]=new EReview($idReview,$rowRev['title'],$rowRev['valutation'],$rowRev['description'], $photo, TType::STUDENT, $date, $authorType, $idAuth, $sRev['idStudent']);
+            $result[]=new EReview($idReview,$rowRev['title'],$rowRev['valutation'],$rowRev['description'], TType::STUDENT, $date, $authorType, $idAuth, $sRev['idStudent']);
         }
         return $result;
     }

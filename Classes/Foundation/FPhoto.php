@@ -46,27 +46,6 @@ class FPhoto {
     }
 
     /**
-    * exist photo refered to review
-    *
-    * @param  int $idPhoto
-    * @return bool
-    */
-    public function existReview(int $idReview):bool 
-    {
-        $q="SELECT * FROM photo WHERE idReview=:id";
-        $db=FConnection::getInstance()->getConnection();
-        $db->beginTransaction();
-        $stm=$db->prepare($q);
-        $stm->bindParam(':id',$idReview,PDO::PARAM_INT);
-        $stm->execute();
-        $db->commit();
-        $result=$stm->rowCount();
-
-        if ($result >0) return true;
-        return false;
-    }
-
-    /**
     * exist photo refered to accommodation
     *
     * @param  int $idPhoto
@@ -85,49 +64,6 @@ class FPhoto {
 
         if ($result >0) return true;
         return false;
-    }
-
-    
-    /**
-     * This method loads the photos of a review
-     * @param int $idReview
-     * @return array
-     */
-    public function loadReview(int $idReview):array
-    {
-        $db=FConnection::getInstance()->getConnection();
-            
-        try{
-            $db->exec('LOCK TABLES photo READ');
-            $db->beginTransaction();
-            $q="SELECT * FROM photo WHERE relativeTo = 'review' AND idReview = :id";    
-            $stm=$db->prepare($q);
-            $stm->bindParam(':id',$idReview,PDO::PARAM_INT);
-            $stm->execute();
-            $db->commit();
-            $db->exec('UNLOCK TABLES');
-            
-
-        }catch (PDOException $e){
-            $db->rollBack();
-            return [];
-        }
-
-        $photos = [];
-        $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
-
-        foreach ($rows as $row) {
-            $photo = new EPhoto(
-                $row['id'],
-                $row['photo'],
-                $row['relativeTo'],
-                $row['idAccommodation'],
-                $row['idReview']
-            );
-            $photos[] = $photo;
-        }
-
-        return $photos;
     }
 
     /**
@@ -164,8 +100,7 @@ class FPhoto {
                 $row['id'],
                 $row['photo'],
                 $row['relativeTo'],
-                $row['idAccommodation'],
-                $row['idReview']
+                $row['idAccommodation']
             );
             $photos[] = $photo;
         }
@@ -202,7 +137,7 @@ class FPhoto {
             $row = $stm->fetch(PDO::FETCH_ASSOC);
 
 
-            $photo = new EPhoto($row['id'], $row['photo'], $row['relativeTo'], $row['idAccommodation'], $row['idReview']);
+            $photo = new EPhoto($row['id'], $row['photo'], $row['relativeTo'], $row['idAccommodation']);
 
             return $photo;
 
@@ -232,14 +167,13 @@ class FPhoto {
             $photo = $EPhoto->getPhoto();
             $relative = $EPhoto->getRelativeTo();
 
-            $q='INSERT INTO photo ( photo, relativeTo, idAccommodation, idReview) ';
-            $q=$q.' VALUES (:photo, :relativeTo, :idAccommodation, :idReview)';
+            $q='INSERT INTO photo ( photo, relativeTo, idAccommodation) ';
+            $q=$q.' VALUES (:photo, :relativeTo, :idAccommodation)';
 
             $stm=$db->prepare($q);
             $stm->bindValue(':photo',$photo,PDO::PARAM_STR);
             $stm->bindValue(':relativeTo',$relative,PDO::PARAM_STR);
             $stm->bindValue(':idAccommodation',NULL,PDO::PARAM_INT);
-            $stm->bindValue(':idReview',NULL,PDO::PARAM_INT);
             
             $stm->execute();
             $id=$db->lastInsertId();
@@ -258,7 +192,7 @@ class FPhoto {
 
     /**
     * store
-    * Store accommodation's or review's photos
+    * Store accommodation's photos
     *
     * @param  array $EPhoto
     * @return bool
@@ -279,22 +213,14 @@ class FPhoto {
                 $relative = $ph->getRelativeTo();
                 //$id = $ph->getIdAccommodation();
 
-                $q='INSERT INTO photo (photo, relativeTo, idAccommodation, idReview) ';
-                $q=$q.' VALUES (:photo, :relativeTo, :idAccommodation, :idReview)';
+                $q='INSERT INTO photo (photo, relativeTo, idAccommodation) ';
+                $q=$q.' VALUES (:photo, :relativeTo, :idAccommodation)';
 
                 $stm=$db->prepare($q);
                 $stm->bindValue(':photo',$photo,PDO::PARAM_STR);
                 $stm->bindValue(':relativeTo',$relative,PDO::PARAM_STR);
-
-                if($relative == 'accommodation'){
-                    $id = $ph->getIdAccommodation();
-                    $stm->bindValue(':idAccommodation',$id,PDO::PARAM_INT);
-                    $stm->bindValue(':idReview',NULL,PDO::PARAM_INT);
-                }else{
-                    $id = $ph->getIdReview();
-                    $stm->bindValue(':idAccommodation',NULL,PDO::PARAM_INT);
-                    $stm->bindValue(':idReview',$id,PDO::PARAM_INT);
-                }
+                $id = $ph->getIdAccommodation();
+                $stm->bindValue(':idAccommodation',$id,PDO::PARAM_INT);
 
                 $stm->execute();
                 $id=$db->lastInsertId();
