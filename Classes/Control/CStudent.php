@@ -254,14 +254,14 @@ class CStudent{
             }
             else
             {
-                $profilePic=(EPhoto::toBase64(array($profilePic)))[0];
+                $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
             }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
-                'userPicture' => $profilePic->getPhoto(),
+                'userPicture' => $profilePic,
             ];
         }
         $data=$accomm->getStart()->format('m');
@@ -289,14 +289,14 @@ class CStudent{
             }
             else
             {
-                $profilePic=(EPhoto::toBase64(array($profilePic)))[0];
+                $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
             }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
-                'userPicture' => $profilePic->getPhoto(),
+                'userPicture' => $profilePic,
             ];
         }
         $view->reviews($reviewsData);
@@ -520,14 +520,14 @@ class CStudent{
             }
             else
             {
-                $profilePic=(EPhoto::toBase64(array($profilePic)))[0];
+                $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
             }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
-                'userPicture' => $profilePic->getPhoto(),
+                'userPicture' => $profilePic,
             ];
         }
         $view->publicProfileFromStudent($student, $reviewsData);
@@ -548,14 +548,14 @@ class CStudent{
             }
             else
             {
-                $profilePic=(EPhoto::toBase64(array($profilePic)))[0];
+                $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
             }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
-                'userPicture' => $profilePic->getPhoto(),
+                'userPicture' => $profilePic,
             ];
         }
         $view->publicProfileFromOwner($student, $reviewsData);
@@ -768,14 +768,14 @@ class CStudent{
             }
             else
             {
-                $profilePic=(EPhoto::toBase64(array($profilePic)))[0];
+                $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
             }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
-                'userPicture' => $profilePic->getPhoto(),
+                'userPicture' => $profilePic,
             ];
         }
         $view->postedReview($reviewsData);

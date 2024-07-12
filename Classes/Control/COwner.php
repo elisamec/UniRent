@@ -464,14 +464,14 @@ class COwner
             }
             else
             {
-                $profilePic=(EPhoto::toBase64(array($profilePic)))[0];
+                $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
             }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
-                'userPicture' => $profilePic->getPhoto(),
+                'userPicture' => $profilePic,
             ];
         }
         $view->reviews($reviewsData);
@@ -577,14 +577,14 @@ class COwner
             }
             else
             {
-                $profilePic=(EPhoto::toBase64(array($profilePic)))[0];
+                $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
             }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
-                'userPicture' => $profilePic->getPhoto(),
+                'userPicture' => $profilePic,
             ];
         }
         $view->publicProfileFromOwner($owner, $reviewsData);
@@ -615,14 +615,14 @@ class COwner
             }
             else
             {
-                $profilePic=(EPhoto::toBase64(array($profilePic)))[0];
+                $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
             }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
-                'userPicture' => $profilePic->getPhoto(),
+                'userPicture' => $profilePic,
             ];
         }
         $view->publicProfileFromStudent($owner, $reviewsData);
@@ -648,12 +648,16 @@ class COwner
             if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
+            else
+            {
+                $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
+            }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $recipient->getUsername(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
-                'userPicture' => $profilePic->getPhoto(),
+                'userPicture' => $profilePic,
             ];
         }
         $view->postedReview($reviewsData);
