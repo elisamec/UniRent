@@ -372,7 +372,7 @@ class FReview {
      * @param  EReview $Review
      * @return bool
      */
-    public function delete(EReview $Review): bool 
+    public function delete(int $id): bool 
     {
         $db=FConnection::getInstance()->getConnection();
         //$db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
@@ -382,7 +382,7 @@ class FReview {
             $db->beginTransaction();
             $q='DELETE FROM review WHERE id= :id';
             $stm=$db->prepare($q);
-            $stm->bindValue(':id',$Review->getId(), PDO::PARAM_INT);
+            $stm->bindValue(':id',$id, PDO::PARAM_INT);
             $stm->execute();    
             $db->commit();
             $db->exec('UNLOCK TABLES');
