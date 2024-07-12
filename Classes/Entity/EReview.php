@@ -1,7 +1,6 @@
 <?php
 namespace Classes\Entity;
 require __DIR__ . '../../../vendor/autoload.php';
-use Classes\Entity\EPhoto;
 use Classes\Tools\TType;
 use DateTime;
 /**
@@ -21,8 +20,6 @@ class EReview
      * @var int $valutation         The valutation of the review. 
      *                              Needs to be between 1 and 5: achieved through the GUI.
      * @var ?string $description    The description of the review. Can be empty.
-     * @var array $photo            Multiple instances of EPhoto stored in an array. 
-     *                              These are the photos linked to this specific review.
      * @var TType $recipientType    The type of the recipient. Needed for storing in the DB.
      * @var DateTime $creationDate  The date it was created. Given from the DB.
      * @var TType $authorType       Type of author. Needed for student reviews storing.
@@ -34,7 +31,6 @@ class EReview
     private string $title;
     private int $valutation;
     private ?string $description;
-    private array $photo;
     private TType $recipientType;
     private DateTime $creationDate;
     private TType $authorType;
@@ -49,14 +45,13 @@ class EReview
      * @param string $title
      * @param integer $valutation
      * @param string|null $description
-     * @param array $photo
      * @param TType $type
      * @param DateTime $creationDate
      * @param TType $authorType
      * @param integer $idAuthor
      * @param integer $idRecipient
      */
-    public function __construct(?int $idReview, string $title, int $valutation, ?string $description, array $photo, TType $type, DateTime $creationDate, TType $authorType, int $idAuthor, int $idRecipient) 
+    public function __construct(?int $idReview, string $title, int $valutation, ?string $description, TType $type, DateTime $creationDate, TType $authorType, int $idAuthor, int $idRecipient) 
     {
         $this->idReview=$idReview;
         $this->title=$title;
@@ -64,7 +59,6 @@ class EReview
         $this->description=$description;
         $this->recipientType=$type;
         $this->creationDate=$creationDate;
-        $this->photo = $photo;
         $this->authorType=$authorType;
         $this->idAuthor=$idAuthor;
         $this->idRecipient=$idRecipient;
@@ -139,20 +133,6 @@ class EReview
     public function setId(int $id):void {
         if ($this->idReview===null) {
             $this->idReview=$id;
-        }
-    } 
-
-    public function uploadPhoto(EPhoto $photo):void {
-        $this->photo[]=$photo;
-    }
-    public function getPhotos():array|null
-    {
-        $values = array_values($this->photo);
-        if (count($values)===0) {
-            return null;
-        }
-        else {
-            return array_values($this->photo);
         }
     }
     public function __toString():string

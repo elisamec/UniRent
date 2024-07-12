@@ -12,13 +12,11 @@ class EPhoto {
      * @var string $photo The photo itself.
      * @var string $relativeTo The entity to which the photo is related.
      * @var int $idAccommodation The identifier of the accommodation to which the photo is related.
-     * @var int $idReview The identifier of the review to which the photo is related.
      */
     private ?int $id;
     private $photo;
     private string $relativeTo;
     private ?int $idAccommodation;
-    private ?int $idReview;
 
     /**
      * __construct
@@ -27,14 +25,12 @@ class EPhoto {
      * @param string $photo The photo itself.
      * @param string $relativeTo The entity to which the photo is related.
      * @param int $idAccommodation The identifier of the accommodation to which the photo is related.
-     * @param int $idReview The identifier of the review to which the photo is related.
      */
-    public function __construct(?int $id, $photo, string $relativeTo, ?int $idAccommodation, ?int $idReview) {
+    public function __construct(?int $id, $photo, string $relativeTo, ?int $idAccommodation) {
         $this->id = $id;
         $this->photo = $photo;
         $this->relativeTo = $relativeTo;
         $this->idAccommodation = $idAccommodation;
-        $this->idReview = $idReview;
     }
 
     /**
@@ -71,15 +67,6 @@ class EPhoto {
      */
     public function getIdAccommodation():?int {
         return $this->idAccommodation;
-    }
-
-    /**
-     * getIdReview
-     * Returns the id of the review to which the photo is related
-     * @return int
-     */
-    public function getIdReview():?int {
-        return $this->idReview;
     }
 
     /**
@@ -123,23 +110,13 @@ class EPhoto {
     }
 
     /**
-     * setIdReview
-     * Sets the id of the review to which the photo is related
-     * @param int $idReview The identifier of the review to which the photo is related.
-     * @return void
-     */
-    public function setIdReview(?int $idReview):void {
-        $this->idReview = $idReview;
-    }
-
-    /**
      * __toString
      * Converts the object to string
      * @return string
      */
     public function __toString():string{
         $photo = "photo";
-        return "Id: $this->id, $photo, Relative To: $this->relativeTo, Id Accommodation: $this->idAccommodation, Id Review: $this->idReview";
+        return "Id: $this->id, $photo, Relative To: $this->relativeTo, Id Accommodation: $this->idAccommodation";
     }
     
     /**
@@ -160,7 +137,7 @@ class EPhoto {
             else
             {
                 $binaryPhoto=file_get_contents($p);
-                $np= new EPhoto(null,$binaryPhoto,'accommodation',null,null);
+                $np= new EPhoto(null,$binaryPhoto,'accommodation',null);
                 $result[]=$np;
             }
         }
