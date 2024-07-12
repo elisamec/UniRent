@@ -455,5 +455,12 @@ class FPersistentManager {
         return $result;
     }
 
+    public function getStudentRating($id):int
+    {
+        $FS=FStudent::getInstance();
+        $result=$FS->findStudentRating($id);
+        return $result;
+    }
+
 }
 

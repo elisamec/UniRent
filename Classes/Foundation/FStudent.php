@@ -461,6 +461,37 @@ class FStudent
         $result_array=$stm->fetch(PDO::FETCH_ASSOC);        
         return $result_array['picture'];
     }
+
+    public function findStudentRating(int $id):int
+    {
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $q='SELECT AVG(r.valutation) AS rateS
+                FROM student s INNER JOIN studentreview sr ON s.id=sr.idStudent
+                INNER JOIN review r ON r.id=sr.idReview
+                WHERE s.id=:id';
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindParam(':id',$id,PDO::PARAM_INT);
+            $stm->execute();
+            $db->commit();
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return 0;
+        }
+        $row=$stm->fetch(PDO::FETCH_ASSOC);
+        if(is_null($row['rateS']))
+        {
+            return 0;
+        }
+        else
+        {
+            return $row['rateS'];
+        }
+    }
 }
   
 
