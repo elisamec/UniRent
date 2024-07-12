@@ -431,6 +431,14 @@ class FPersistentManager {
         $result=$FA->findAccommodationsUser($city,$date,$rateA,$rateO,$minPrice,$maxPrice);
         return $result;
     }
+
+    public function findAccommodationsStudent($city,$date,$rateA,$rateO,$minPrice,$maxPrice,$student)
+    {
+        $FA=FAccommodation::getInstance();
+        $result=$FA->findAccommodationsStudent($city,$date,$rateA,$rateO,$minPrice,$maxPrice,$student);
+        return $result;
+    }
+
     public function loadReviewsByAuthor(int $idAuthor, TType $type): array {
         $FReview = FReview::getInstance();
         $reviews = $FReview->loadByAuthor($idAuthor, $type);

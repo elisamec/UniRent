@@ -40,14 +40,14 @@ class CStudent{
     public static function findAccommodation()
     {
         $view = new VStudent();
+        $session=USession::getInstance();
+        $PM=FPersistentManager::getInstance();
         $city=USuperGlobalAccess::getPost('city');
         $date=USuperGlobalAccess::getPost('date');
         $university=USuperGlobalAccess::getPost('university');
-        $rateA=0;
-        $rateO=0;
-        $minPrice=0;
-        $maxPrice=1000;
-        /*
+        $student_username=$session::getSessionElement('username');
+        $student=$PM->getStudentByUsername($student_username);
+    
         if (USuperGlobalAccess::getPost('rateA')!== null) {
             $rateA=USuperGlobalAccess::getPost('rateA');
         } else {
@@ -67,9 +67,9 @@ class CStudent{
             $maxPrice=USuperGlobalAccess::getPost('max-price');
         } else {
             $maxPrice=1000;
-        }*/
+        }
         $PM=FPersistentManager::getInstance();
-        $searchResult=$PM->findAccommodations($city,$date);
+        $searchResult=$PM->findAccommodationsStudent($city,$date,$rateA,$rateO,$minPrice,$maxPrice,$student);
         $view->findAccommodation($city,$university,$searchResult,$date, $rateO, $rateA, $minPrice, $maxPrice);
     }
 

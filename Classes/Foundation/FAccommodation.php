@@ -645,8 +645,22 @@
                 return false;
             }     
         }
-
-        public function findAccommodationsUser($city, $date,$rateA,$rateO,$minPrice,$maxPrice)
+        
+        /**
+         * Method findAccommodationsUser
+         * 
+         * this method return an array of EAccommodations with give specifics
+         *
+         * @param $city $city [city]
+         * @param $date $date [month's of start]
+         * @param $rateA $rateA [accommodation's rating]
+         * @param $rateO $rateO [owner's rating]
+         * @param $minPrice $minPrice [min Price]
+         * @param $maxPrice $maxPrice [max Price]
+         *
+         * @return array
+         */
+        public function findAccommodationsUser($city, $date,$rateA,$rateO,$minPrice,$maxPrice):array
         {
             $result=array();
             $db=FConnection::getInstance()->getConnection();
@@ -704,6 +718,101 @@
             }
             return $result;
         }
+        
+        /**
+         * Method findAccommodationsStudent
+         * 
+         * this method return an array of EAccommodation with the given specifics
+         *
+         * @param $city $city [city]
+         * @param $date $date [month's of start]
+         * @param $rateA $rateA [Accommodation's rating]
+         * @param $rateO $rateO [Owner's rating]
+         * @param $minPrice $minPrice [min Pirice]
+         * @param $maxPrice $maxPrice [max Price]
+         * @param $student $student [object EStudent]
+         *
+         * @return array
+         */
+        public function findAccommodationsStudent($city,$date,$rateA,$rateO,$minPrice,$maxPrice,$student):array
+        {
+            $result=array();
+            $db=FConnection::getInstance()->getConnection();
+            $date==='september' ? $date=9 : $date=10 ;
+
+            //Student informations
+            $smoke=$student->getSmoker();
+            $animals=$student->getAnimals();
+            $sex=$student->getSex();
+
+            try
+            {
+                $q="SELECT a.id
+                    FROM accommodation a INNER JOIN address ad ON ad.id=a.address
+                    WHERE ad.city= :city 
+                    AND MONTH(a.`start`)= :mon
+                    AND a.pets= :pets
+                    AND a.smokers= :smoker
+                    AND((a.price>= :min)AND(a.price<= :max))";
+                
+                if($sex=='M')
+                {
+                    $q.="AND ((a.man=TRUE AND a.woman=TRUE)OR(a.man=FALSE AND a.woman=FALSE)OR(a.man=TRUE AND a.woman=FALSE))";
+                }
+                else
+                {
+                    $q.="AND ((a.man=TRUE AND a.woman=TRUE)OR(a.man=FALSE AND a.woman=FALSE)OR(a.man=FALSE AND a.woman=TRUE))";
+                }
+                
+                $db->beginTransaction();
+                $stm=$db->prepare($q);
+                $stm->bindParam(':city',$city,PDO::PARAM_STR);
+                $stm->bindParam(':mon',$date,PDO::PARAM_INT);
+                $stm->bindParam(':pets',$animals,PDO::PARAM_BOOL);
+                $stm->bindParam(':smoker',$smoke,PDO::PARAM_BOOL);
+                $stm->bindParam(':min',$minPrice,PDO::PARAM_INT);
+                $stm->bindParam(':max',$maxPrice,PDO::PARAM_INT);
+                $stm->execute();
+                $db->commit();
+            }
+            catch(PDOException $e)
+            {
+                $db->rollBack();
+                return $result;
+            }
+            $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
+            print_r($rows);
+
+            foreach($rows as $row)
+            {
+                $r=$this->load($row['id']);
+                $rating=$r->getRating();
+                if(($rating['owner']>=$rateO) and ($rating['accommodation']>=$rateA) or($rateO=0 and $rateA=0)or($rateO=0 and $rating['accommodation']>=$rateO)or($rateA=0 and $rating['owner']>=$rateO))
+                {
+                    $ap=array();
+                    $ap['title'] = $r->getTitle();
+                    $ap['id'] = $r->getIdAccommodation();
+                    $ap['price'] = $r->getPrice();
+                    $ap['address'] = $r->getAddress()->getAddressLine1().' , '.$r->getAddress()->getLocality();
+                    if(count($r->getPhoto())==0)
+                    {
+                        $ap['photo']=null;
+                    }
+                    else
+                    {
+                        $ap['photo']=(($r->getPhoto())[0])->getPhoto();
+                        $base64 = base64_encode($ap['photo']);
+                        $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
+                        $ap['photo'] = $photo;
+                    }
+                    $result[]=$ap;
+                }
+                else{}
+            }
+            return $result;
+        }
+
+
         public function loadByOwner(int $idOwner): ?array
         {
             $result=array();
