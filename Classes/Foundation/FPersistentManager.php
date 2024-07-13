@@ -445,6 +445,20 @@ class FPersistentManager {
         return $result;
     }
 
+    public function lastAccommodationsUser():array
+    {
+        $FA=FAccommodation::getInstance();
+        $result=$FA->lastAccommodationsUser();
+        return $result;
+    }
+
+    public function lastAccommodationsStudent(EStudent $student):array
+    {
+        $FA=FAccommodation::getInstance();
+        $result=$FA->lastAccommodationsStudent($student);
+        return $result;
+    }
+
     public function loadReviewsByAuthor(int $idAuthor, TType $type): array {
         $FReview = FReview::getInstance();
         $reviews = $FReview->loadByAuthor($idAuthor, $type);

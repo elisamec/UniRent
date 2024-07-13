@@ -7,7 +7,8 @@
     use Classes\Foundation\FPhoto;
     use Classes\Entity\EAccommodation;
     use Classes\Entity\EPhoto;
-    use PDO;
+use Classes\Entity\EStudent;
+use PDO;
     use DateTime;
     use PDOException;
 
@@ -752,20 +753,20 @@
                     FROM accommodation a INNER JOIN address ad ON ad.id=a.address
                     WHERE ad.city= :city 
                     AND MONTH(a.`start`)= :mon
-                    AND((a.price>= :min)AND(a.price<= :max))";
+                    AND((a.price>= :min)AND(a.price<= :max)) ";
                 
                 if($smoke)
                 {
-                    $q.="AND a.smokers=TRUE";
+                    $q.=" AND a.smokers=TRUE ";
                 }
                 if($animals)
                 {
-                    $q.="AND a.pets=TRUE";
+                    $q.=" AND a.pets=TRUE ";
                 }
                 
                 if($sex=='M')
                 {
-                    $q.="AND ((a.man=TRUE AND a.woman=TRUE)OR(a.man=FALSE AND a.woman=FALSE)OR(a.man=TRUE AND a.woman=FALSE))";
+                    $q.=" AND ((a.man=TRUE AND a.woman=TRUE)OR(a.man=FALSE AND a.woman=FALSE)OR(a.man=TRUE AND a.woman=FALSE)) ";
                 }
                 else
                 {
@@ -815,6 +816,128 @@
                 else{}
             }
             return $result;
+        }
+
+        public function lastAccommodationsUser():array
+        {
+            $result=array();
+            $db=FConnection::getInstance()->getConnection();
+            $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+            try
+            {
+                $q="SELECT *
+                    FROM accommodation a 
+                    ORDER BY a.`start` DESC LIMIT 6";
+                $db->exec('LOCK TABLES accommodation READ');
+                $db->beginTransaction();
+                $stm=$db->prepare($q);
+                $stm->execute();
+                $db->commit();
+                $db->exec('UNLOCK TABLES');
+            }
+            catch(PDOException $e)
+            {
+                $db->rollBack();
+                return $result;
+            }
+            $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
+            foreach($rows as $row)
+            {
+                $r=$this->load($row['id']);
+                $ap=array();
+                $ap['title'] = $r->getTitle();
+                $ap['id'] = $r->getIdAccommodation();
+                $ap['price'] = $r->getPrice();
+                $ap['address'] = $r->getAddress()->getAddressLine1().' , '.$r->getAddress()->getLocality();
+                if(count($r->getPhoto())==0)
+                {
+                    $ap['photo']=null;
+                }
+                else
+                {
+                    $ap['photo']=(($r->getPhoto())[0])->getPhoto();
+                    $base64 = base64_encode($ap['photo']);
+                    $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
+                    $ap['photo'] = $photo;
+                }
+                $result[]=$ap;
+            }
+            return $result;
+        }
+
+        public function lastAccommodationsStudent(EStudent $student):array
+        {
+            $result=array();
+            $db=FConnection::getInstance()->getConnection();
+            $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+
+            //Student informations
+            $smoke=$student->getSmoker();
+            $animals=$student->getAnimals();
+            $sex=$student->getSex();
+
+            try
+            {
+                $q="SELECT *
+                    FROM accommodation a "; 
+
+                if($sex=='M')
+                {
+                    $q.=" WHERE ((a.man=TRUE AND a.woman=TRUE)OR(a.man=FALSE AND a.woman=FALSE)OR(a.man=TRUE AND a.woman=FALSE)) ";
+                }
+                else
+                {
+                    $q.=" WHERE ((a.man=TRUE AND a.woman=TRUE)OR(a.man=FALSE AND a.woman=FALSE)OR(a.man=FALSE AND a.woman=TRUE))";
+                }
+
+                if($smoke)
+                {
+                    $q.=" AND a.smokers=TRUE ";
+                }
+                if($animals)
+                {
+                    $q.=" AND a.pets=TRUE ";
+                }
+                
+                $q.=" ORDER BY a.`start` DESC LIMIT 6 ";
+                
+                $db->exec('LOCK TABLES accommodation READ');
+                $db->beginTransaction();
+                $stm=$db->prepare($q);
+                $stm->execute();
+                $db->commit();
+                $db->exec('UNLOCK TABLES');
+            }
+            catch(PDOException $e)
+            {
+                $db->rollBack();
+                return $result;
+            }
+            $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach($rows as $row)
+            {
+                $r=$this->load($row['id']);
+                $ap=array();
+                $ap['title'] = $r->getTitle();
+                $ap['id'] = $r->getIdAccommodation();
+                $ap['price'] = $r->getPrice();
+                $ap['address'] = $r->getAddress()->getAddressLine1().' , '.$r->getAddress()->getLocality();
+                if(count($r->getPhoto())==0)
+                {
+                    $ap['photo']=null;
+                }
+                else
+                {
+                    $ap['photo']=(($r->getPhoto())[0])->getPhoto();
+                    $base64 = base64_encode($ap['photo']);
+                    $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
+                    $ap['photo'] = $photo;
+                }
+                $result[]=$ap;
+            }
+            return $result;
+
         }
 
 

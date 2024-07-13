@@ -152,5 +152,6 @@ print $totalMinutes;
 #print EAccommodation::stringInMinutes('03:00');
 
 $PM=FPersistentManager::getInstance();
-$result=$PM->getStudentRating(5);
-print $result;
+$student=$PM::load('EStudent',5);
+$result=$PM->lastAccommodationsStudent($student);
+print_r($result);
