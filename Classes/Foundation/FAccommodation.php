@@ -618,6 +618,36 @@ use PDO;
             
         }
 
+        //Per ora elimina solo la riga dentro la tabella accommodation
+        //Da gestire ancora tutte le altre tabelle
+        public function delete(int $idAccommodation):bool{
+            $db=FConnection::getInstance()->getConnection();
+            $FA=FAccommodation::getInstance();
+            
+            if($FA->exist($idAccommodation)){
+                try
+                {  
+                    $db->exec('LOCK TABLES accommodation WRITE');
+                    $db->beginTransaction();
+                    $q='DELETE FROM accommodation WHERE id=:id';
+                    $stm=$db->prepare($q);
+                    $stm->bindValue(':id',$idAccommodation, PDO::PARAM_INT);
+                    $stm->execute();    
+                    $db->commit();
+                    $db->exec('UNLOCK TABLES');
+
+                    return true;
+                }
+                catch(PDOException $e)
+                {
+                    $db->rollBack();
+                    return false;
+                }
+
+            } else return false;
+        }
+
+
         /**
          * deleteTime   
          * private class that deletes the times of visit of an accommodation in db
