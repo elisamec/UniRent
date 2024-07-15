@@ -172,25 +172,27 @@
 </div>
 </div>
                             <div id="div13">
-                            <div class="checkbox-container">
-                            <label class="checkbox-label">Tenants preferences:</label>
-                            <label>
-                                 <input type="checkbox" name="men" id="men"> Men
-                                 <input type="hidden" id="hiddenMen" name="men" value="false">
-                           </label>
-                              <label>
-                                 <input type="checkbox" name="women" id="women"> Women
-                                 <input type="hidden" id="hiddenWomen" name="women" value="false">
-                              </label>
-                              <label>
-                                 <input type="checkbox" name="animals" id="animals"> Animals
-                                 <input type="hidden" id="hiddenAnimals" name="animals" value="false">
-                              </label>
-                              <label>
-                                 <input type="checkbox" name="smokers" id="smokers"> Smokers
-                                 <input type="hidden" id="hiddenSmokers" name="smokers" value="false">
-                              </label>
-                              </div>
+                                <div class="checkbox-container">
+                                    <label class="checkbox-label">Tenants preferences:</label>
+                                    <div class="row">
+                                    <label>
+                                        <input type="checkbox" name="men" id="men"> Men
+                                        <input type="hidden" id="hiddenMen" name="men" value="false">
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="women" id="women"> Women
+                                        <input type="hidden" id="hiddenWomen" name="women" value="false">
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="animals" id="animals"> Animals
+                                        <input type="hidden" id="hiddenAnimals" name="animals" value="false">
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="smokers" id="smokers"> Smokers
+                                        <input type="hidden" id="hiddenSmokers" name="smokers" value="false">
+                                    </label>
+                                    </div>
+                                </div>
                             </div>
                             <div id="div14">
                               <div class="input-group">
@@ -199,13 +201,6 @@
                               </div>
                            </div>
                             <div id="div15">
-                            <div class="input-group">
-    <textarea class="textarea1-spec" rows="2" id="comment" name="comment" placeholder=" "></textarea>
-    <label class="textarea-label" for="comment">Notes</label>
-</div>
-
-                            </div>
-                            <div id="div16">
                               <input type="hidden" id="visitAvailabilityData" name="visitAvailabilityData">
                               <input type="hidden" id="uploadedImagesData" name="uploadedImagesData">
                            <div class="button-group">

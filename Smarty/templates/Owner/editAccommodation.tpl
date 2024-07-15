@@ -125,7 +125,7 @@
                            </div>
                            <div id="div5">
                               <div class="input-group">
-                                 <input  id="Date" required="" type="number" name="startDate" autocomplete="off" class="input-spec" min=1 max=31 id="startDate">
+                                 <input  id="Date" required="" type="number" name="startDate" autocomplete="off" class="input-spec" min=1 max=31>
                                  <label class="user-label">Start day</label>
                               </div>
                            </div>
@@ -174,6 +174,7 @@
                             <div id="div13">
                                 <div class="checkbox-container">
                                     <label class="checkbox-label">Tenants preferences:</label>
+                                    <div class="row">
                                     <label>
                                         <input type="checkbox" name="men" id="men"> Men
                                         <input type="hidden" id="hiddenMen" name="men" value="false">
@@ -190,6 +191,7 @@
                                         <input type="checkbox" name="smokers" id="smokers"> Smokers
                                         <input type="hidden" id="hiddenSmokers" name="smokers" value="false">
                                     </label>
+                                    </div>
                                 </div>
                             </div>
                             <div id="div14">
@@ -198,7 +200,6 @@
                                  <label class="user-label">Number of Places</label>
                               </div>
                            </div>
-                            </div>
                             <div id="div15">
                               <input type="hidden" id="visitAvailabilityData" name="visitAvailabilityData">
                               <input type="hidden" id="uploadedImagesData" name="uploadedImagesData">
@@ -699,7 +700,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("title").value = accommodationData.title;
     document.getElementById("price").value = accommodationData.price;
     document.getElementById("deposit").value = accommodationData.deposit;
-    document.getElementById("startDate").value = accommodationData.startDate;
+    document.getElementById("Date").value = accommodationData.startDate;
     if (accommodationData.month == 'september') {
         document.getElementById("september").checked = true;
     } else {
@@ -711,36 +712,35 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("city").value = accommodationData.city;
     document.getElementById("postalCode").value = accommodationData.postalCode;
     document.getElementById("description").value = accommodationData.description;
-    if (accommodation.men === 'true') {
+    if (accommodationData.men === 'true') {
         document.getElementById("men").checked = true;
         document.getElementById("hiddenMen").value = 'true';
     } else {
         document.getElementById("men").checked = true;
         document.getElementById("hiddenMen").value = 'false';
     }
-    if (accommodation.women === 'true') {
+    if (accommodationData.women === 'true') {
         document.getElementById("women").checked = true;
         document.getElementById("hiddenWomen").value = 'true';
     } else {
         document.getElementById("women").checked = false;
         document.getElementById("hiddenWomen").value = 'false';
     }
-    if (accommodation.animals === 'true') {
+    if (accommodationData.animals === 'true') {
         document.getElementById("animals").checked = true;
         document.getElementById("hiddenAnimals").value = 'true';
     } else {
         document.getElementById("animals").checked = false;
         document.getElementById("hiddenAnimals").value = 'false';
     }
-    if (accommodation.smokers === 'true') {
+    if (accommodationData.smokers === 'true') {
         document.getElementById("smokers").checked = true;
         document.getElementById("hiddenSmokers").value = 'true';
     } else {
         document.getElementById("smokers").checked = false;
         document.getElementById("hiddenSmokers").value = 'false';
     }
-    document.getElementById("places").value = accommodation.places;
-    document.getElementById("comment").value = accommodation.comment;
+    document.getElementById("places").value = accommodationData.places;
 
     // Add more fields as needed
 
