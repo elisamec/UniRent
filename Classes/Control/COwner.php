@@ -697,6 +697,13 @@ class COwner
         $accommodation = $PM::load('EAccommodation', (int)$id);
         $photos_acc=$accommodation->getPhoto();
         $uploadedPhotos=EPhoto::toBase64($photos_acc);
+
+        $img=array();
+        foreach($uploadedPhotos as $p)
+        {
+            $img[]=$p->getPhoto();
+        }
+
         $accommodationData = [
             'title' => $accommodation->getTitle(),
             'price' => $accommodation->getPrice(),
@@ -725,7 +732,7 @@ class COwner
                 'duration' => $accommodation->getVisitDuration()
             ];
         }
-        $view->editAccommodation($accommodationData, $uploadedPhotos, $visitAvailabilityData, $id);
+        $view->editAccommodation($accommodationData, $img , $visitAvailabilityData, $id);
         
     }
     public static function deleteAccommodation(int $id) {
