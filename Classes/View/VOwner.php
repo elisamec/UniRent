@@ -103,4 +103,12 @@ class VOwner {
         $this->smarty->assign('username', $username);
         $this->smarty->display('Owner/viewOwnerAds.tpl');
     }
+    public function editAccommodation(array $accomm, array $pictures, array $visitAvailabilityData, int $id){
+        $photos=json_encode($pictures);
+        $this->smarty->assign('accommodationId', $id);
+        $this->smarty->assign('uploadedImagesData', $photos);
+        $this->smarty->assign('accommodationData', json_encode($accomm));
+        $this->smarty->assign('visitAvailabilityData', json_encode($visitAvailabilityData));
+        $this->smarty->display('Owner/editAccommodation.tpl');
+    }
 }

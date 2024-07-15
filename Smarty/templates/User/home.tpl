@@ -147,6 +147,16 @@
          </div>
          </form>
       </div>
+      <div id="loginModal" class="resModal">
+    <div class="resModal-content">
+        <span class="resClose" id="loginClose">&times;</span>
+        <p>Please, login to continue: </p>
+        <div class="btn-cont">
+       <div class="login-required"><a href="/UniRent/User/login">Login</a></div>
+        <div class="login-required"> <a href="/UniRent/User/register">Sign Up</a></div>
+        </div>
+    </div>
+</div>
       <!-- feature section start -->
       <div class="Properties_section layout_padding">
          <div class="container">
@@ -300,7 +310,7 @@
                                 <img src="${accommodation.photo}" alt="">
                                 <div class="overlay">
                                     <div class="text">
-                                        <div class="some_text"><a href="/UniRent/Student/accommodation/${accommodation.id}">See More</a></div>
+                                        <div class="some_text"><a href="#" onclick="showModal(event)">See More</a></div>
                                     </div>
                                 </div>
                             </div>
@@ -329,5 +339,30 @@
     displayAccommodations(accommodations);
 </script>
 {/literal}
+<script>
+    // Get the modal
+    var modal = document.getElementById("loginModal");
+    // Get the <span> element that closes the modal
+    var span = document.getElementById("loginClose");
+
+
+    // When the user clicks the button, open the modal 
+    function showModal(event) {
+        event.preventDefault();
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
    </body>
 </html>

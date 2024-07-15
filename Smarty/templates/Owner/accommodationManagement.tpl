@@ -107,7 +107,7 @@
                                  </div>
                               </div>
 
-                     <div class="reserve_btn"><a href="/UniRent/editAccommodation/{$accommodation->getIdAccommodation()}" >Edit</a></div>
+                     <div class="reserve_btn"><a href="/UniRent/Owner/editAccommodation/{$accommodation->getIdAccommodation()}" >Edit</a></div>
                       <div class="delete_button" id="deleteLink"><a href="#" >Delete</a></div>
                       <div class="ownerSect">
                       <div class="row">

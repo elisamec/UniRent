@@ -691,5 +691,41 @@ class COwner
         #print_r($accommodations);
         $view->viewOwnerAds($accommodations, $username);
     }
+    public static function editAccommodation(string $id) {
+        $view = new VOwner();
+        $PM=FPersistentManager::getInstance();
+        $accommodation = $PM->load('EAccommodation', (int)$id);
+        $photos_acc=$accommodation->getPhoto();
+        $uploadedPhotos=EPhoto::toBase64($photos_acc);
+        $accommodationData = [
+            'title' => $accommodation->getTitle(),
+            'price' => $accommodation->getPrice(),
+            'deposit' => $accommodation->getDeposit(),
+            'date' => $accommodation->getStart(),
+            'startDate' => $accommodation->getStart()->format('d'),
+            'month' => $accommodation->getStart()->format('M') == 9 ? 'september' : 'october',
+            'address' => $accommodation->getAddress()->getAddressLine1(),
+            'city' => $accommodation->getAddress()->getLocality(),
+            'postalCode' => $accommodation->getAddress()->getPostalCode(),
+            'description' => $accommodation->getDescription(),
+            'men' => $accommodation->getMan(),
+            'women' => $accommodation->getWoman(),
+            'animals' => $accommodation->getPets(),
+            'smokers' => $accommodation->getSmokers(),
+            'places' => $accommodation->getPlaces()
+        ];
+        $visitAvailabilityData = [];
+        foreach ($accommodation->getVisit() as $day =>$times) {
+            $endTime= new DateTime($times[count($times)-1]);
+            $endTime->modify('+' . $accommodation->getVisitDuration() . ' minutes');
+            $visitAvailabilityData[$day] = [
+                'start' => $times[0],
+                'end' => $endTime->format('H:i'),
+                'duration' => $accommodation->getVisitDuration()
+            ];
+        }
+        $view->editAccommodation($accommodationData, $uploadedPhotos, $visitAvailabilityData, $id);
+        
+    }
 
 }
