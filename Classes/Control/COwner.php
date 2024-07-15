@@ -826,7 +826,7 @@ class COwner
         $PM=FPersistentManager::getInstance();
         $ownerId=$PM->getOwnerIdByUsername($username);
         $view = new VOwner();
-        $tenants = [];
+        $tenants = $PM->getTenants($kind,$ownerId);
         $tenants[] = [
             'accommodation' => 'Accommodation Title 1',
             'tenants' => [

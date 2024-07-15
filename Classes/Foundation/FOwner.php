@@ -3,6 +3,7 @@ namespace Classes\Foundation;
 require __DIR__.'../../../vendor/autoload.php';
 use Classes\Foundation\FConnection;
 use Classes\Entity\EOwner;
+use Classes\Entity\EPhoto;
 use Classes\Foundation\FPhoto;
 use Classes\Tools\TError;
 use PDO;
@@ -534,7 +535,16 @@ use PDOException;
             return (int)$row['rateO'];
         }
     }
-
+    
+    /**
+     * Method getTenans
+     *
+     * this method return an array of EStudent who are tenants of an Owner
+     * @param string $type [past, present or future tenants]
+     * @param int $idOwner [Owner id]
+     *
+     * @return array
+     */
     public function getTenans(string $type, int $idOwner):array
     {
         $result=array();
@@ -542,7 +552,7 @@ use PDOException;
         try
         {
             $db->exec('LOCK TABLES owner READ, accommodation READ, reservation READ, student READ, contract READ');
-            $q="SELECT a.title AS title , s.id AS idStudent 
+            $q="SELECT a.id AS idAccommodation , s.id AS idStudent 
                 FROM accommodation a INNER JOIN reservation r ON a.id=r.idAccommodation
                 INNER JOIN student s ON s.id=r.idStudent
                 INNER JOIN contract c ON c.idReservation=r.id
@@ -562,6 +572,24 @@ use PDOException;
             $db->rollBack();
             return $result;
         }
-        $rows=
+        $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
+        foreach($rows as $row)
+        {
+            $student=FPersistentManager::getInstance()::load('EStudent',$row['idStudent']);
+
+            $p_student=$student->getPhoto();
+            $p_student=(EPhoto::toBase64(array($p_student)))[0];
+            $student->setPhoto($p_student);
+            
+            if(in_array($row['idAccommodation'],array_keys($result)))
+            {
+                $result[$row['idAccommodation']][]=$student;
+            }
+            else
+            {
+                $result[$row['idAccommodation']]=array($student);
+            }  
+        }
+        return $result;
     }
  }
