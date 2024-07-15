@@ -175,7 +175,7 @@ class COwner
 
         if(is_null($owner)){
             $session->setSessionElement('photo', $ph);
-            print '<b>500 : SERVER ERROR </b>';
+            http_response_code(500);
         } else {
 
             $ph = $owner->getPhoto();
@@ -205,7 +205,7 @@ class COwner
         $owner=$PM->load("EOwner", $id);
         if(is_null($owner)){
 
-            print '<b>500 : SERVER ERROR </b>';
+            http_response_code(500);
         } else {
 
             $photo = USession::getInstance()::getSessionElement('photo');
@@ -314,7 +314,7 @@ class COwner
                             }
                             elseif (!$result) {
                     
-                                header("HTTP/1.1 500 Internal Server Error");
+                                http_response_code(500);
                                 
                             }
                         }
@@ -373,7 +373,7 @@ class COwner
                 $risultato = $PM->storeAvatar($photo);
 
                 if(!$risultato){
-                    header("HTTP/1.1 500 Internal Server Error");
+                    http_response_code(500);
                 }
             }
         }
@@ -500,8 +500,9 @@ class COwner
         $startDate=(int) USuperGlobalAccess::getPost('startDate');
         $month=USuperGlobalAccess::getPost('month');
         $visits=USuperGlobalAccess::getPost('visitAvailabilityData');  #json in arrivo dal post
+        $places=(int)USuperGlobalAccess::getPost('places');
         $duration=EAccommodation::DurationOfVisit($visits);
-
+        
         if(!is_null($duration) and $duration>0)  #se la durata delle visite è zero non ci saranno visite
         {
             $array_visit=EAccommodation::fromJsonToArrayOfVisit($visits);
@@ -540,7 +541,7 @@ class COwner
         $addressObj= new Address();
         $addressObj=$addressObj->withAddressLine1($address)->withPostalcode($postalCode)->withLocality($city);
         #print $addressObj->getAddressLine1().' '.$addressObj->getPostalCode().' '.$addressObj->getLocality();
-        $accomodation = new EAccommodation(null,$array_photos,$title,$addressObj,$price,$date,$description,$deposit,$array_visit,$duration,$men,$women,$animals,$smokers,$idOwner);
+        $accomodation = new EAccommodation(null,$array_photos,$title,$addressObj,$price,$date,$description,$places,$deposit,$array_visit,$duration,$men,$women,$animals,$smokers,$idOwner);
         $result=$PM::store($accomodation);
         if($result)
         {
@@ -548,7 +549,7 @@ class COwner
         }
         else
         {
-            print '500 : SERVER ERROR';
+            http_response_code(500);
         }
     }
     public static function publicProfileFromOwner(string $username)
@@ -690,5 +691,126 @@ class COwner
         #print_r($accommodations);
         $view->viewOwnerAds($accommodations, $username);
     }
+    public static function editAccommodation(string $id) {
+        $view = new VOwner();
+        $PM=FPersistentManager::getInstance();
+        $accommodation = $PM::load('EAccommodation', (int)$id);
+        $photos_acc=$accommodation->getPhoto();
+        $uploadedPhotos=EPhoto::toBase64($photos_acc);
 
+        $img=array();
+        foreach($uploadedPhotos as $p)
+        {
+            $img[]=$p->getPhoto();
+        }
+
+        $accommodationData = [
+            'title' => $accommodation->getTitle(),
+            'price' => $accommodation->getPrice(),
+            'deposit' => $accommodation->getDeposit(),
+            'date' => $accommodation->getStart(),
+            'startDate' => $accommodation->getStart()->format('d'),
+            'month' => $accommodation->getStart()->format('M') == 9 ? 'september' : 'october',
+            'address' => $accommodation->getAddress()->getAddressLine1(),
+            'city' => $accommodation->getAddress()->getLocality(),
+            'postalCode' => $accommodation->getAddress()->getPostalCode(),
+            'description' => $accommodation->getDescription(),
+            'men' => $accommodation->getMan(),
+            'women' => $accommodation->getWoman(),
+            'animals' => $accommodation->getPets(),
+            'smokers' => $accommodation->getSmokers(),
+            'places' => $accommodation->getPlaces()
+        ];
+        
+        $visitAvailabilityData = [];
+        foreach ($accommodation->getVisit() as $day =>$times) {
+            $endTime= new DateTime($times[count($times)-1]);
+            $endTime->modify('+' . $accommodation->getVisitDuration() . ' minutes');
+            $visitAvailabilityData[$day] = [
+                'start' => $times[0],
+                'end' => $endTime->format('H:i'),
+                'duration' => $accommodation->getVisitDuration()
+            ];
+        }
+        $view->editAccommodation($accommodationData, $img , $visitAvailabilityData, $id);
+        
+    }
+    public static function deleteAccommodation(int $id) {
+        $PM=FPersistentManager::getInstance();
+        $result=$PM->delete('EAccommodation', $id);
+        if($result)
+        {
+            header('Location:/UniRent/Owner/home');
+        }
+        else
+        {
+            http_response_code(500);
+        }
+    }
+    public static function editAccommodationOperations(int $id)
+    {
+        
+        $pictures=USuperGlobalAccess::getPost('uploadedImagesData');
+        $myarray=json_decode($pictures,true);
+        $array_photos=EPhoto::fromJsonToPhotos($myarray);
+
+        $title=USuperGlobalAccess::getPost('title');
+        $price=USuperGlobalAccess::getPost('price');
+        $deposit=(float)USuperGlobalAccess::getPost('deposit');
+        $startDate=(int) USuperGlobalAccess::getPost('startDate');
+        $month=USuperGlobalAccess::getPost('month');
+        $visits=USuperGlobalAccess::getPost('visitAvailabilityData');  #json in arrivo dal post
+        $places=(int)USuperGlobalAccess::getPost('places');
+        $duration=EAccommodation::DurationOfVisit($visits);
+        
+        if(!is_null($duration) and $duration>0)  #se la durata delle visite è zero non ci saranno visite
+        {
+            $array_visit=EAccommodation::fromJsonToArrayOfVisit($visits);
+        }
+        else
+        {
+            $array_visit=array();
+            $duration=0;
+        }
+ 
+        if($month=='Sep')
+        {
+            $month=8;
+        }
+        else
+        {
+            $month=9;
+        }
+
+        $address=USuperGlobalAccess::getPost('address');
+        $city=USuperGlobalAccess::getPost('city');
+        $postalCode=USuperGlobalAccess::getPost('postalCode');
+        $description=USuperGlobalAccess::getPost('description');
+        $men=USession::booleanSolver(USuperGlobalAccess::getPost('men'));
+        $women=USession::booleanSolver(USuperGlobalAccess::getPost('women'));
+        $smokers=USession::booleanSolver(USuperGlobalAccess::getPost('smokers'));
+        $animals=USession::booleanSolver(USuperGlobalAccess::getPost('animals'));
+
+        $date= new DateTime('now');
+        $year=(int)$date->format('Y');
+        $date=$date->setDate($year,$month,$startDate);
+
+        $PM=FPersistentManager::getInstance();
+        
+        $idOwner=$PM->getOwnerIdByUsername(USession::getInstance()::getSessionElement('username'));
+        $addressId = $PM->load('EAccommodation', $id)->getAddress()->getSortingCode();
+        $addressObj= new Address();
+        $addressObj=$addressObj->withAddressLine1($address)->withPostalcode($postalCode)->withLocality($city)->withSortingCode($addressId);
+        #print $addressObj->getAddressLine1().' '.$addressObj->getPostalCode().' '.$addressObj->getLocality();
+        $accomodation = new EAccommodation($id,$array_photos,$title,$addressObj,$price,$date,$description,$places,$deposit,$array_visit,$duration,$men,$women,$animals,$smokers,$idOwner);
+        $result=$PM::update($accomodation);
+        if($result)
+        {
+            header('Location:/UniRent/Owner/accommodationManagement/'.$id);
+        }
+        else
+        {
+            http_response_code(500);
+        }
+    }
 }

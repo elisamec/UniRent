@@ -1872,7 +1872,7 @@ textarea#comment::placeholder {
 
        #cssportal-grid {
         display: grid;
-        grid-template-rows: repeat(9, 1fr);
+        grid-template-rows: repeat(8, 1fr);
         grid-template-columns: repeat(6, 1fr);
         gap: 0;
         width: 100%;
@@ -1915,16 +1915,13 @@ textarea#comment::placeholder {
         grid-area: 5 / 1 / 7 / 7;
     }
     #div13 {
-        grid-area: 7 / 1 / 9 / 4;
+        grid-area: 7 / 1 / 8 / 4;
     }
     #div14 {
         grid-area: 7 / 4 / 8 / 7;
     }
     #div15 {
-        grid-area: 8 / 4 / 9 / 7;
-    }
-    #div16 {
-        grid-area: 9 / 1 / 10 / 7;
+        grid-area: 8 / 1 / 9 / 7;
     }
     
     .pictures {
@@ -2102,6 +2099,7 @@ textarea#comment::placeholder {
     display: flex;
     flex-direction: column;
     align-items: flex-start; /* Align items to the left */
+    justify-content: center; /* Center items vertically */
 }
 
 .checkbox-label {
@@ -2118,6 +2116,8 @@ textarea#comment::placeholder {
 
 .checkbox-container input[type="checkbox"] {
     margin-right: 5px;
+    margin-left: 30px;
+    padding: 5px;
 }
 /* Label styling for empty textarea */
 .textarea1-spec:placeholder-shown ~ .textarea-label {
@@ -2857,7 +2857,7 @@ button.delete_button:hover{
 #input-radio {
     margin-top: 20px;
 }
-#month {
+#september, #october {
     margin-right: 10px;
     margin-left:20px
 }
@@ -2867,3 +2867,4 @@ button.delete_button:hover{
     padding: 5px;
     height: 35px;
 }
+

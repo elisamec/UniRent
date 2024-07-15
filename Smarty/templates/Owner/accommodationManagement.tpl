@@ -107,7 +107,7 @@
                                  </div>
                               </div>
 
-                     <div class="reserve_btn"><a href="/UniRent/editAccommodation/{$accommodation->getIdAccommodation()}" >Edit</a></div>
+                     <div class="reserve_btn"><a href="/UniRent/Owner/editAccommodation/{$accommodation->getIdAccommodation()}" >Edit</a></div>
                       <div class="delete_button" id="deleteLink"><a href="#" >Delete</a></div>
                       <div class="ownerSect">
                       <div class="row">
@@ -159,7 +159,7 @@
                         {/if}
                         <div class="row">
                         <h1 class="titleTenants">Current Tenants</h1>
-                        <div class="reserve_btn"><a href="/UniRent/Contracts/{$accommodation->getIdAccommodation()}">View Reservations</a></div>
+                        <div class="reserve_btn"><a href="/UniRent/Contracts/viewOngoing/{$accommodation->getIdAccommodation()}">View Contracts</a></div>
                         </div>
                         <div class="row">
                         <div class="col-md-4">
@@ -168,6 +168,7 @@
                                     <a href="/UniRent/Owner/publicProfile/eli"><img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture"></a>
                                 </div>
                                 <div class="username"><a href="/UniRent/Owner/publicProfile/eli">eli</a></div> <!-- Username of the reviewer -->
+                                <div class="username">Expiry Date: 2025-07-01</div>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -460,7 +461,7 @@
 
    // When the user clicks on the confirm button, proceed to delete
    confirmBtn.onclick = function() {
-      window.location.href = "/UniRent/Owner/deleteAccommodation";
+      window.location.href = "/UniRent/Owner/deleteAccommodation/{$accommodation->getIdAccommodation()}";
    }
 
    // When the user clicks on the cancel button, close the modal

@@ -98,7 +98,7 @@
                    Regarding the start date you need to insert the day of the month and the month (Sep/Oct) for the start 
                    of the rental relationship. The end date is calculated based on the start date, giving always a 10 month rental period.
                    </p>
-                    <form action="/UniRent/Owner/addAccommodationOperations" class="form" method="post" id="yourFormId">
+                    <form action="/UniRent/Owner/editAccommodationOperations/{$accommodationId}" class="form" method="post">
                         <div id="cssportal-grid">
                            <div id="div1">
                               <div class="pictures">
@@ -107,19 +107,19 @@
                            </div>
                            <div id="div2">
                               <div class="input-group">
-                                 <input  required="" type="text" name="title" autocomplete="off" class="input-spec">
+                                 <input  required="" type="text" name="title" autocomplete="off" class="input-spec" id="title">
                                  <label class="user-label">Title</label>
                               </div>
                            </div>
                            <div id="div3">
                               <div class="input-group">
-                                 <input  required="" type="number" name="price" autocomplete="off" class="input-spec" min=0 max=1000>
+                                 <input  required="" type="number" name="price" autocomplete="off" class="input-spec" min=0 max=1000 id="price">
                                  <label class="user-label">Monthly Price (€)</label>
                               </div>
                            </div>
                            <div id="div4">
                               <div class="input-group">
-                                 <input required="" type="number" name="deposit" autocomplete="off" class="input-spec"  min=0 max=1000>
+                                 <input required="" type="number" name="deposit" autocomplete="off" class="input-spec"  min=0 max=1000 id="deposit">
                                  <label class="user-label">Deposit (€)</label>
                               </div>
                            </div>
@@ -132,17 +132,17 @@
                            <div id="div6">
                               <div class="col-md-12">
                               <div class="row" id="input-radio">
-                                 <input  id="month" required="" type="radio" name="month" value="september" checked> September
+                                 <input  id="september" required="" type="radio" name="month" value="september" checked> September
                                  </div>
                                  <div class="row">
-                                 <input  id="month" required="" type="radio" name="month" value="october"> October
+                                 <input  id="october" required="" type="radio" name="month" value="october"> October
                                  </div>
                               </div>
                               <input type="date" id="date" name="date" hidden>
                            </div>
                            <div id="div7">
                               <div class="input-group">
-                                 <input  required="" type="text" name="address" autocomplete="off" class="input-spec">
+                                 <input  required="" type="text" name="address" autocomplete="off" class="input-spec" id="address">
                                  <label class="user-label">Address</label>
                               </div>
                            </div>
@@ -155,22 +155,22 @@
                            </div>
                            <div id="div9">
                            <div class="input-group">
-                                 <input  required="" type="text" name="city" autocomplete="off" class="input-spec">
+                                 <input  required="" type="text" name="city" autocomplete="off" class="input-spec" id="city">
                                  <label class="user-label">City</label>
                               </div>
                            </div>
                             <div id="div10">
                             <div class="input-group">
-                                 <input  required="" type="number" name="postalCode" autocomplete="off" class="input-spec">
+                                 <input  required="" type="number" name="postalCode" autocomplete="off" class="input-spec" id="postalCode">
                                  <label class="user-label">Postal Code</label>
                               </div>
                            </div>
                             <div id="div12"> 
-                            <div class="input-group">
-    <textarea  class="textarea-spec" rows="5" id="notes" name="description" required></textarea>
-    <label class="textarea-label" for="notes">Description</label>
-</div>
-</div>
+                                <div class="input-group">
+                                    <textarea  class="textarea-spec" rows="5" id="description" id="description" name="description" required></textarea>
+                                    <label class="textarea-label" for="description">Description</label>
+                                </div>
+                            </div>
                             <div id="div13">
                                 <div class="checkbox-container">
                                     <label class="checkbox-label">Tenants preferences:</label>
@@ -196,7 +196,7 @@
                             </div>
                             <div id="div14">
                               <div class="input-group">
-                                 <input  required="" type="number" name="places" autocomplete="off" class="input-spec" min=1>
+                                 <input  required="" type="number" name="places" autocomplete="off" class="input-spec" min=1 id="places">
                                  <label class="user-label">Number of Places</label>
                               </div>
                            </div>
@@ -209,7 +209,7 @@
                                   <button class="button-spec final" type="submit">Submit</button>
                                  </div>
                                  <div class="col-md-6">
-                                 <button type="button" class="button-spec final" onclick="window.location.href='/UniRent/Owner/home'">Cancel</button>
+                                 <button type="button" class="button-spec final" onclick="window.location.href='/UniRent/Owner/accommodationManagement/{$accommodationId}'">Cancel</button>
                                  </div>
                               </div>
                            </div>
@@ -665,6 +665,121 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     </script>
     {/literal}
+    {literal}
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Load images data
+    var imagesData = {/literal}{$uploadedImagesData}{literal};
+    setImagesData(imagesData);
+
+    // Function to set images data in the form
+    function setImagesData(data) {
+        let container = document.getElementById('imageContainer');
+        container.innerHTML = '';
+        for (let i = 0; i < data.length; i++) {
+            let imgWrapper = document.createElement('div');
+            imgWrapper.className = 'image-wrapper';
+            imgWrapper.innerHTML = `
+                <img src="${data[i]}" class="uploaded-image">
+                <button type="button" onclick="removeImage(${i})" class="button-spec little">-</button>
+            `;
+            container.appendChild(imgWrapper);
+        }
+    }
+
+    function removeImage(index) {
+        imagesData.splice(index, 1);
+        setImagesData(imagesData);
+    }
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Initialize form fields with Smarty variables
+    var accommodationData = {/literal}{$accommodationData}{literal};
+    document.getElementById("title").value = accommodationData.title;
+    document.getElementById("price").value = accommodationData.price;
+    document.getElementById("deposit").value = accommodationData.deposit;
+    document.getElementById("Date").value = accommodationData.startDate;
+    if (accommodationData.month == 'september') {
+        document.getElementById("september").checked = true;
+    } else {
+        document.getElementById("october").checked = true;
+    
+    }
+    document.getElementById("date").value = accommodationData.date;
+    document.getElementById("address").value = accommodationData.address;
+    document.getElementById("city").value = accommodationData.city;
+    document.getElementById("postalCode").value = accommodationData.postalCode;
+    document.getElementById("description").value = accommodationData.description;
+    if (accommodationData.men === 'true') {
+        document.getElementById("men").checked = true;
+        document.getElementById("hiddenMen").value = 'true';
+    } else {
+        document.getElementById("men").checked = true;
+        document.getElementById("hiddenMen").value = 'false';
+    }
+    if (accommodationData.women === 'true') {
+        document.getElementById("women").checked = true;
+        document.getElementById("hiddenWomen").value = 'true';
+    } else {
+        document.getElementById("women").checked = false;
+        document.getElementById("hiddenWomen").value = 'false';
+    }
+    if (accommodationData.animals === 'true') {
+        document.getElementById("animals").checked = true;
+        document.getElementById("hiddenAnimals").value = 'true';
+    } else {
+        document.getElementById("animals").checked = false;
+        document.getElementById("hiddenAnimals").value = 'false';
+    }
+    if (accommodationData.smokers === 'true') {
+        document.getElementById("smokers").checked = true;
+        document.getElementById("hiddenSmokers").value = 'true';
+    } else {
+        document.getElementById("smokers").checked = false;
+        document.getElementById("hiddenSmokers").value = 'false';
+    }
+    document.getElementById("places").value = accommodationData.places;
+
+    // Add more fields as needed
+
+    // Load visit availability data
+    var visitData = {/literal}{$visitAvailabilityData}{literal};
+    setVisitData(visitData);
+
+    // Function to set visit data in the form
+    function setVisitData(data) {
+        let container = document.getElementById('availabilityContainer');
+        container.innerHTML = '';
+        for (let i = 0; i < data.length; i++) {
+            let availability = document.createElement('div');
+            availability.className = 'availability';
+            availability.innerHTML = `
+                <button type="button" onclick="removeAvailability(this)" class="button-spec little">-</button>
+                <label for="duration">Visit Duration (minutes):</label>
+                <input type="number" class="duration" name="duration" value="${data[i].duration}" min="10">
+                <label for="day">Weekday:</label>
+                <select name="day">
+                    <option value="Monday" ${data[i].day === 'Monday' ? 'selected' : ''}>Monday</option>
+                    <option value="Tuesday" ${data[i].day === 'Tuesday' ? 'selected' : ''}>Tuesday</option>
+                    <option value="Wednesday" ${data[i].day === 'Wednesday' ? 'selected' : ''}>Wednesday</option>
+                    <option value="Thursday" ${data[i].day === 'Thursday' ? 'selected' : ''}>Thursday</option>
+                    <option value="Friday" ${data[i].day === 'Friday' ? 'selected' : ''}>Friday</option>
+                    <option value="Saturday" ${data[i].day === 'Saturday' ? 'selected' : ''}>Saturday</option>
+                    <option value="Sunday" ${data[i].day === 'Sunday' ? 'selected' : ''}>Sunday</option>
+                </select>
+                <label for="start">Availability start:</label>
+                <input type="time" class="start" name="start" value="${data[i].start}">
+                <label for="end">Availability end:</label>
+                <input type="time" class="end" name="end" value="${data[i].end}">
+            `;
+            container.appendChild(availability);
+        }
+    }
+});
+</script>
+{/literal}
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

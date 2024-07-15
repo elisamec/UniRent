@@ -51,7 +51,7 @@ use PDO;
         */
         public function exist(int $accommodatioId):bool 
         {
-            $q="SELECT * FROM visit WHERE id=:id";
+            $q="SELECT * FROM accommodation WHERE id=:id";
             $db=FConnection::getInstance()->getConnection();
             $db->beginTransaction();
             $stm=$db->prepare($q);
@@ -246,7 +246,7 @@ use PDO;
                 
 
                 $q='INSERT INTO accommodation (title, address, price, start, description, places, deposit, visitDuration, man, woman, pets, smokers, idOwner)';
-                $q=$q.' VALUES (:title, :address, :price, :start, :description, :deposit, :places, :visitDuration, :man, :woman, :pets, :smokers, :idOwner)';
+                $q=$q.' VALUES (:title, :address, :price, :start, :description, :places, :deposit, :visitDuration, :man, :woman, :pets, :smokers, :idOwner)';
 
                 $stm=$db->prepare($q);
 
@@ -459,11 +459,9 @@ use PDO;
                 $stm->bindValue(':smokers',$accommodation->getSmokers(),PDO::PARAM_BOOL);
                 $stm->bindValue(':idOwner',$accommodation->getIdOwner(),PDO::PARAM_INT);
                 $stm->bindValue(':id',$accommodationId,PDO::PARAM_INT);
-
                 $stm->execute();           
                 $db->commit();
                 $db->exec('UNLOCK TABLES');
-
                 return true;
             }
             catch(PDOException $e){
@@ -486,7 +484,6 @@ use PDO;
             try{
                 $db->exec('LOCK TABLES address WRITE');
                 $db->beginTransaction();
-                
                 $q='UPDATE address SET addressLine = :addressLine, postalCode = :postalCode, city = :city  WHERE id=:id';
                 $stm=$db->prepare($q);
                 $stm->bindValue(':addressLine',$address->getAddressLine1(),PDO::PARAM_STR);
