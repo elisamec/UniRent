@@ -578,8 +578,12 @@ use PDOException;
             $student=FPersistentManager::getInstance()::load('EStudent',$row['idStudent']);
 
             $p_student=$student->getPhoto();
-            $p_student=(EPhoto::toBase64(array($p_student)))[0];
-            $student->setPhoto($p_student);
+            if(!is_null($p_student))
+            {
+                $p_student=(EPhoto::toBase64(array($p_student)))[0];
+                $student->setPhoto($p_student);
+            }
+            
             
             if(in_array($row['idAccommodation'],array_keys($result)))
             {
