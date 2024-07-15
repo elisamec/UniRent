@@ -246,7 +246,7 @@ use PDO;
                 
 
                 $q='INSERT INTO accommodation (title, address, price, start, description, places, deposit, visitDuration, man, woman, pets, smokers, idOwner)';
-                $q=$q.' VALUES (:title, :address, :price, :start, :description, :deposit, :places, :visitDuration, :man, :woman, :pets, :smokers, :idOwner)';
+                $q=$q.' VALUES (:title, :address, :price, :start, :description, :places, :deposit, :visitDuration, :man, :woman, :pets, :smokers, :idOwner)';
 
                 $stm=$db->prepare($q);
 
