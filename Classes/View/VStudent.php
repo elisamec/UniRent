@@ -87,14 +87,16 @@ class VStudent{
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->display('Student/reviews.tpl');
     }
-    public function publicProfileFromStudent(EStudent $student, array $reviewsData):void{
+    public function publicProfileFromStudent(EStudent $student, array $reviewsData, ?string $kind="#"):void{
         $this->smarty->assign('student', $student);
         $this->smarty->assign('reviewsData', $reviewsData);
+        $this->smarty->assign('kind', $kind);
         $this->smarty->display('Student/publicProfileFromStudent.tpl');
     }
-    public function publicProfileFromOwner(EStudent $student, array $reviewsData):void{
+    public function publicProfileFromOwner(EStudent $student, array $reviewsData, ?string $kind="#"):void{
         $this->smarty->assign('student', $student);
         $this->smarty->assign('reviewsData', $reviewsData);
+        $this->smarty->assign('kind', $kind);
         $this->smarty->display('Student/publicProfileFromOwner.tpl');
     }
     public function paymentMethods(array $cardsData):void{

@@ -559,7 +559,7 @@ class COwner
             http_response_code(500);
         }
     }
-    public static function publicProfileFromOwner(string $username)
+    public static function publicProfileFromOwner(string $username, ?string $kind="#")
     {
         $view = new VOwner();
         $PM=FPersistentManager::getInstance();
@@ -595,9 +595,9 @@ class COwner
                 'userPicture' => $profilePic,
             ];
         }
-        $view->publicProfileFromOwner($owner, $reviewsData);
+        $view->publicProfileFromOwner($owner, $reviewsData, $kind);
     }
-    public static function publicProfileFromStudent(string $username)
+    public static function publicProfileFromStudent(string $username, ?string $kind= null)
     {
         $view = new VOwner();
         $PM=FPersistentManager::getInstance();
@@ -633,12 +633,12 @@ class COwner
                 'userPicture' => $profilePic,
             ];
         }
-        $view->publicProfileFromStudent($owner, $reviewsData);
+        $view->publicProfileFromStudent($owner, $reviewsData, $kind);
     }
-    public static function publicProfile(string $username) {
+    public static function publicProfile(string $username, ?string $kind="#") {
         $PM=FPersistentManager::getInstance();
         $user=$PM->verifyUserUsername($username);
-        $location='/UniRent/'.$user['type'].'/publicProfileFromOwner/'.$username;
+        $location='/UniRent/'.$user['type'].'/publicProfileFromOwner/'.$username.'/'.$kind;
         header('Location:'.$location);
     }
     public static function postedReview() {
@@ -651,8 +651,8 @@ class COwner
         $reviewsData = [];
 
         foreach ($reviews as $review) {
-            $recipient = $PM::load( 'E' . $review->getRecipientType()->value, $review->getIDRecipient());
-            $profilePic = $recipient->getShowPhoto();
+            $recipient = $PM::load( 'E' . $review->getRecipientType()->value, $review->getIdRecipient());
+            $profilePic = $recipient->getPhoto();
             if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }

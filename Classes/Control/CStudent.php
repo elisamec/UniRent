@@ -502,14 +502,14 @@ class CStudent{
     }
 
 
-    public static function publicProfile(string $username) {
+    public static function publicProfile(string $username, ?string $kind="#") {
         $PM=FPersistentManager::getInstance();
         $user=$PM->verifyUserUsername($username);
-        $location='/UniRent/'.$user['type'].'/publicProfileFromStudent/'.$username;
+        $location='/UniRent/'.$user['type'].'/publicProfileFromStudent/'.$username .$kind;
         header('Location:'.$location);
     }
         
-    public static function publicProfileFromStudent(string $username)
+    public static function publicProfileFromStudent(string $username, ?string $kind="#")
     {
         $view = new VStudent();
         $PM=FPersistentManager::getInstance();
@@ -543,9 +543,9 @@ class CStudent{
                 'userPicture' => $profilePic,
             ];
         }
-        $view->publicProfileFromStudent($student, $reviewsData);
+        $view->publicProfileFromStudent($student, $reviewsData, $kind);
     }
-    public static function publicProfileFromOwner(string $username)
+    public static function publicProfileFromOwner(string $username, ?string $kind="#")
     {
         $view = new VStudent();
         $PM=FPersistentManager::getInstance();
@@ -579,7 +579,7 @@ class CStudent{
                 'userPicture' => $profilePic,
             ];
         }
-        $view->publicProfileFromOwner($student, $reviewsData);
+        $view->publicProfileFromOwner($student, $reviewsData, $kind);
     }
       
     public static function paymentMethods()

@@ -496,6 +496,18 @@ class FPersistentManager {
         $result=$FO->getTenans($type,$idOwner);
         return $result;
     }
+    public function getUserType($id):TType
+    {
+        $FO=FOwner::getInstance();
+        $result=$FO->exist($id);
+        if ($result) {
+            return TType::OWNER;
+        }
+        else
+        {
+            return TType::STUDENT;
+        }
+    }
     
 }
 

@@ -31,4 +31,39 @@ class CReview {
         $PM->update($review);
         header('Location:' . $_SERVER['HTTP_REFERER']);
     }
+    public static function addReviewStudent(int $idStudent) {
+        $idAuthor=USession::getInstance()->getSessionElement('id');
+        $PM=FPersistentManager::getInstance();
+        $authorType = $PM->getUserType($idAuthor);
+        $type=TType::STUDENT;
+        $title=USuperGlobalAccess::getPost('title');
+        $description=USuperGlobalAccess::getPost('content');
+        $valutation=USuperGlobalAccess::getPost('rate');
+        $date=new DateTime();
+        $review=new EReview(null, $title, $valutation, $description, $type, $date, $authorType, $idAuthor, $idStudent);
+        $res=$PM::store($review);
+        if ($res) {
+            header('Location:' . $_SERVER['HTTP_REFERER']);
+        } else {
+            http_response_code(500);
+        }
+    }
+    public static function addReviewOwner(int $idOwner) {
+        $author=USession::getInstance()->getSessionElement('username');
+        $PM=FPersistentManager::getInstance();
+        $idAuthor = $PM->getStudentIdByUsername($author);
+        $authorType=TType::STUDENT;
+        $type=TType::OWNER;
+        $title=USuperGlobalAccess::getPost('title');
+        $description=USuperGlobalAccess::getPost('content');
+        $valutation=USuperGlobalAccess::getPost('rate');
+        $date=new DateTime();
+        $review=new EReview(null, $title, $valutation, $description, $type, $date, $authorType, $idAuthor, $idOwner);
+        $res=$PM::store($review);
+        if ($res) {
+            header('Location:' . $_SERVER['HTTP_REFERER']);
+            } else {
+                http_response_code(500);
+            }
+    }
 }

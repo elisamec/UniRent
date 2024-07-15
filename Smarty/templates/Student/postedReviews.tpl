@@ -141,7 +141,10 @@
                </div>
             <input type="text" name="title" id="reviewTitle" placeholder="Title" value="" required>
             <textarea name="content" rows="5" id="reviewContent" placeholder="Content" required></textarea>
+            <div class="btn-cont">
             <button type="submit" class="edit_btn">Edit</button>
+            <button type="button" class="edit_btn" id="CancelBut">Cancel</button>
+            </div>
         </form>
     </div>
 </div>
@@ -232,6 +235,11 @@
     // Close modal when clicking on the close button or outside the modal
     const modal = document.getElementById('editModal');
     const closeModal = document.querySelector('#editClose');
+    const cancelBut = document.querySelector('#CancelBut');
+
+    cancelBut.onclick = () => {
+        modal.style.display = 'none';
+    }
 
     closeModal.onclick = () => {
         modal.style.display = 'none';
