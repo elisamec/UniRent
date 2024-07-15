@@ -43,14 +43,14 @@
                </button>
                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav ml-auto">
-                     <li class="nav-item active">
+                     <li class="nav-item">
                         <a class="nav-link" href="/UniRent/Owner/home">Home</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="#">Reservations</a>
                      </li>
                      <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Tenants</a>
+                        <a class="nav-link dropdown-toggle active" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Tenants</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                            <a class="dropdown-item" href="/UniRent/Owner/tenants/current">Current</a>
                            <a class="dropdown-item" href="/UniRent/Owner/tenants/past">Past</a>
@@ -84,21 +84,123 @@
       </div>
       <!-- header section end -->
       <!-- feature section start -->
-      <div class="container">
-      <div class="new_bt"><a href="/UniRent/Owner/addAccommodation">Add a new Accommodation</a></div>
+       <div class="container-fluid">
+         <div class="search_box_section">
+            <div class="search_box_main padding-reserve">
+            <form action="/UniRent/Owner/filterTenants/[$kind}" method="post" id="yourFormId">
+            <div class="container">
+               <h1 class="find_text">Filter Tenants</h1>
+               </div>
+               <div class="row">
+               <div class="Findcontainer">
+                  <div class="select-outline">
+                     <select name="accommodation" id="accommodationSelect" class="mdb-select md-form md-outline colorful-select dropdown-primary">
+                        <option value="" disabled selected>Select an accommodation</option>
+                     </select>
+                  </div>
+               </div>
+               </div>
+               <div class="row">
+               <div class="Findcontainer">
+                     <input name="name" id="tenantName" type="text" placeholder="Name of the tenant">
+               </div>
+               </div>
+               <div class="Findcontainer">
+               <div class="row">
+               <h1 class="rating_text">Rating: </h1>
+                  <div class="rating">
+                     <input type="radio" id="star5T" name="rateT" value="5" />
+                     <label for="star5T" title="5 stars">
+                        <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
+                              <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
+                        </svg>
+                     </label>
+                     <input type="radio" id="star4T" name="rateT" value="4" />
+                     <label for="star4T" title="4 stars">
+                        <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
+                              <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
+                        </svg>
+                     </label>
+                     <input type="radio" id="star3T" name="rateT" value="3" />
+                     <label for="star3T" title="3 stars">
+                        <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
+                              <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
+                        </svg>
+                     </label>
+                     <input type="radio" id="star2T" name="rateT" value="2" />
+                     <label for="star2T" title="2 stars">
+                        <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
+                              <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
+                        </svg>
+                     </label>
+                     <input type="radio" id="star1T" name="rateT" value="1" />
+                     <label for="star1T" title="1 star">
+                        <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
+                              <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
+                        </svg>
+                     </label>
+                     <input type="radio" id="star0T" name="rateT" value="0" hidden checked/>
+                  </div>
+               <button class="button-spec finalLittle"id="clearRatingA" onclick="clearRatingA()">Clear</button>
+               </div>
+               </div>
+               <div class="row">
+               <div class="Findcontainer">
+                  <div class="select-outline">
+                     <select name="date" id="expiryDateT" class="mdb-select md-form md-outline colorful-select dropdown-primary">
+                        <option value="" disabled selected>Select a period</option>
+                        <option value="september">September to June</option>
+                        <option value="october">October to July</option>
+                     </select>
+                  </div>
+               </div>
+               </div>
+               <div class="row">
+               <div class="Findcontainer">
+                     <input type="number" name="age" id="age" placeholder="Age of the tenant" min="18" max="110">
+               </div>
+               </div>
+               <div class="row">
+               <div class="Findcontainer">
+                     <div class="checkbox-container">
+                                    <label class="checkbox-label">Sex:</label>
+                                    <div class="row">
+                                    <label>
+                                        <input type="checkbox" name="men" id="men"> Men
+                                        <input type="hidden" id="hiddenMen" name="men" value="false">
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="women" id="women"> Women
+                                        <input type="hidden" id="hiddenWomen" name="women" value="false">
+                                    </label>
+                                    </div>
+                                </div>
+               </div>
+               </div>
+               <div class="row">
+               <div class="Findcontainer">
+                  <div class="select-outline">
+                     <div class="find_btn"><button type="submit">Find Now</button></div>
+                  </div>
+               </div>
+               </div>
+            </div>
+         </div>
+         </form>
       </div>
-      <div class="Properties_section layout_padding">
-         <div class="container">
+      </div>
+      <div class="Properties_section">
+         <div class="Searchcontainer1">
             <div class="row">
                <div class="col-sm-12">
                   <div class="Properties_taital_main">
-                     <h1 class="Properties_taital">Your Proprieties</h1>
+                     <h1 class="Properties_taital">Your Tenants</h1>
                      <hr class="border_main">
                   </div>
                </div>
             </div>
             <div class="Properties_section_2">
-               <div class="row" id="accommodationContainer">
+               <div class="row" id="tenantsContainer">
                </div>
             </div>
          </div>
@@ -117,7 +219,7 @@
                   <h3 class="footer_text">Useful Links</h3>
                   <div class="footer_menu">
                      <ul>
-                        <li class="active"><a href="/UniRent/Owner/home">Home</a></li>
+                        <li><a href="/UniRent/Owner/home">Home</a></li>
                         <li><a href="/UniRent/Owner/about">About Us</a></li>
                         <li><a href="/UniRent/Owner/contact">Contact Us</a></li>
                      </ul>
@@ -169,58 +271,81 @@
          </script>
 {literal}
          <script>
-    const accommodations = {/literal}{$accommodations}{literal};
+    const data = {/literal}{$tenants}{literal};
 
-    // Function to create and append reviews to the container
-    function displayAccommodations(accommodations) {
-        const container = document.getElementById('accommodationContainer');
+// Function to populate tenantsContainer
+function populateTenantsContainer(data) {
+  const tenantsContainer = document.getElementById("tenantsContainer");
 
-        if (container) {
-            if (accommodations.length === 0) {
-                container.innerHTML = '<div class="container"><h1 class="noRev">You have no ads yet!</h1></div>';
-            } else {
-                accommodations.forEach(accommodation => {
-                    if (accommodation.photo == null) {
-                        accommodation.photo = "/UniRent/Smarty/images/noPic.png";
-                    }
-                    const accommodationElement = document.createElement('div');
-                    accommodationElement.className = 'col-lg-4 col-md-6col-lg-4 col-md-6';
+  data.forEach(item => {
+    const accommodationDiv = document.createElement("div");
+    accommodationDiv.classList.add("accommodation");
 
-                    // Insert the names of the elements of the accommodation array
-                    accommodationElement.innerHTML = `
-                        <div class="blog_img">
-                            <div class="container_main">
-                                <img src="${accommodation.photo}" alt="">
-                                <div class="overlay">
-                                    <div class="text">
-                                        <div class="some_text"><a href="/UniRent/Owner/accommodationManagement/${accommodation.id}">See More</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="image_box">
-                            <div class="left_box">
-                                <h1 class="road_text">${accommodation.title}</h1>
-                                <p>${accommodation.address}</p>
-                            </div>
-                            <div class="right_box">
-                                <div class="rate_text">${accommodation.price} €</div>
-                            </div>
-                        </div>
-                    `;
+    const title = document.createElement("h1");
+    title.classList.add("titleAccomm");
+    title.textContent = item.accommodation;
+    accommodationDiv.appendChild(title);
 
-                    // Append the created element to the container
-                    container.appendChild(accommodationElement); // Corrected: accommodationElement instead of reviewElement
-                });
-            }
-        } else {
-            console.error("Container not found!"); // Debugging: Error if container is not found
-        }
-    }
+    const rowDiv = document.createElement("div");
+    rowDiv.classList.add("row");
 
-    // Call the function to display reviews
-    displayAccommodations(accommodations);
+    item.tenants.forEach(tenant => {
+      const colDiv = document.createElement("div");
+      colDiv.classList.add("col-md-3");
+
+      const userSectionDiv = document.createElement("div");
+      userSectionDiv.classList.add("userSection");
+
+      const userIconDiv = document.createElement("div");
+      userIconDiv.classList.add("userIcon");
+
+      const userLink = document.createElement("a");
+      userLink.href = `/UniRent/Owner/publicProfile/${tenant.username}`;
+
+      const userImage = document.createElement("img");
+      userImage.src = tenant.image || "/UniRent/Smarty/images/ImageIcon.png";
+      userImage.alt = "User Profile Picture";
+
+      userLink.appendChild(userImage);
+      userIconDiv.appendChild(userLink);
+      userSectionDiv.appendChild(userIconDiv);
+
+      const usernameDiv = document.createElement("div");
+      usernameDiv.classList.add("username");
+
+      const usernameLink = document.createElement("a");
+      usernameLink.href = `/UniRent/Owner/publicProfile/${tenant.username}`;
+      usernameLink.textContent = tenant.username;
+
+      usernameDiv.appendChild(usernameLink);
+      userSectionDiv.appendChild(usernameDiv);
+
+      colDiv.appendChild(userSectionDiv);
+      rowDiv.appendChild(colDiv);
+    });
+
+    accommodationDiv.appendChild(rowDiv);
+    tenantsContainer.appendChild(accommodationDiv);
+  });
+}
+
+// Call the function with the sample data
+populateTenantsContainer(data);
 </script>
 {/literal}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    function updateHiddenInput(checkboxId, hiddenInputId) {
+        var checkbox = document.getElementById(checkboxId);
+        var hiddenInput = document.getElementById(hiddenInputId);
+        checkbox.addEventListener('change', function() {
+            hiddenInput.value = this.checked ? 'true' : 'false';
+        });
+    }
+
+    updateHiddenInput('men', 'hiddenMen');
+    updateHiddenInput('women', 'hiddenWomen');
+});
+</script>
    </body>
 </html>

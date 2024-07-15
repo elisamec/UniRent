@@ -99,7 +99,14 @@ class COwner
                 'userPicture' => $profilePic->getPhoto(),
             ];
         }
-        $view->accommodationManagement($accomm, $owner, $reviewsData,$picture);
+        $num_places=$accomm->getPlaces();
+        $tenants=[];
+        $tenants[]= [
+            'username' => 'eli',
+            'expiry_date' => '2025-07-30',
+            'photo' => null
+        ];
+        $view->accommodationManagement($accomm, $owner, $reviewsData, $picture, $tenants, $num_places);
     }
 
     public static function ownerRegistration(){
@@ -812,5 +819,26 @@ class COwner
         {
             http_response_code(500);
         }
+    }
+    public static function tenants(string $kind) {
+        $view = new VOwner();
+        $tenants = [];
+        $tenants[] = [
+            'accommodation' => 'Accommodation Title 1',
+            'tenants' => [
+                ['username' => 'eli', 'image' => null],
+                ['username' => 'john', 'image' => null],
+                ['username' => 'doe', 'image' => null]
+            ]
+            ];
+        $tenants[] =
+        [
+            'accommodation' => 'Accommodation Title 2',
+            'tenants' => [
+                ['username' => 'alice', 'image' => null],
+                ['username' => 'bob', 'image' => null]
+            ]
+            ];
+        $view->tenants($tenants, $kind);
     }
 }

@@ -54,9 +54,9 @@
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Tenants</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="#">Current</a>
-                           <a class="dropdown-item" href="#">Past</a>
-                           <a class="dropdown-item" href="#">Future</a>
+                           <a class="dropdown-item" href="/UniRent/Owner/tenants/current">Current</a>
+                           <a class="dropdown-item" href="/UniRent/Owner/tenants/past">Past</a>
+                           <a class="dropdown-item" href="/UniRent/Owner/tenants/future">Future</a>
                         </div>
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contracts</a>
@@ -161,32 +161,7 @@
                         <h1 class="titleTenants">Current Tenants</h1>
                         <div class="reserve_btn"><a href="/UniRent/Contracts/viewOngoing/{$accommodation->getIdAccommodation()}">View Contracts</a></div>
                         </div>
-                        <div class="row">
-                        <div class="col-md-4">
-                        <div class="userSection">
-                                <div class="userIcon">
-                                    <a href="/UniRent/Owner/publicProfile/eli"><img src="/UniRent/Smarty/images/ImageIcon.png" alt="User Profile Picture"></a>
-                                </div>
-                                <div class="username"><a href="/UniRent/Owner/publicProfile/eli">eli</a></div> <!-- Username of the reviewer -->
-                                <div class="username">Expiry Date: 2025-07-01</div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                        <div class="userSection">
-                                <div class="userIcon">
-                                    <a><img src="/UniRent/Smarty/images/FreeBadge.png" alt="User Profile Picture"></a>
-                                </div>
-                                <div class="username"></div> <!-- Username of the reviewer -->
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                        <div class="userSection">
-                                <div class="userIcon">
-                                    <a><img src="/UniRent/Smarty/images/FreeBadge.png" alt="User Profile Picture"></a>
-                                </div>
-                                <div class="username"></div> <!-- Username of the reviewer -->
-                            </div>
-                        </div>
+                        <div class="row" id="tenantCont">
                         </div>
                         <div class="row">
                         <h1 class="title"> Reviews</h1>
@@ -478,4 +453,59 @@
 });
 
       </script>
+      {literal}
+      <script>
+    // Retrieve Smarty variables (assuming they are passed as JSON strings)
+    var tenants = {/literal}{$tenantsJson}{literal};
+    var numPlaces = {/literal}{$num_places}{literal};
+
+    // Get the container element
+    var tenantContainer = document.getElementById('tenantCont');
+
+    // Function to create tenant section
+    function createTenantSection(username, expiryDate, profilePic) {
+        if (!profilePic){
+            profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+        }
+        console.log("Profile Pic URL:", profilePic);
+        
+        return `
+            <div class="col-md-4">
+                <div class="userSection">
+                    <div class="userIcon">
+                        <a href="/UniRent/Owner/publicProfile/${username}"><img src="${profilePic}" alt="User Profile Picture" onerror="this.onerror=null;this.src='/UniRent/Smarty/images/defaultProfilePic.png';"></a>
+                    </div>
+                    <div class="username"><a href="/UniRent/Owner/publicProfile/${username}">${username}</a></div>
+                    <div class="username">Expiry Date: ${expiryDate}</div>
+                </div>
+            </div>
+        `;
+    }
+
+    // Function to create free space section
+    function createFreeSpaceSection() {
+        return `
+            <div class="col-md-4">
+                <div class="userSection">
+                    <div class="userIcon">
+                        <a><img src="/UniRent/Smarty/images/FreeBadge.png" alt="Free Badge"></a>
+                    </div>
+                    <div class="username"></div>
+                </div>
+            </div>
+        `;
+    }
+
+    // Generate tenant sections
+    for (var i = 0; i < tenants.length; i++) {
+        var tenant = tenants[i];
+        tenantContainer.innerHTML += createTenantSection(tenant.username, tenant.expiry_date, tenant.profile_pic);
+    }
+
+    // Fill remaining places with free space sections
+    for (var j = tenants.length; j < numPlaces; j++) {
+        tenantContainer.innerHTML += createFreeSpaceSection();
+    }
+</script>
+{/literal}
    </body>

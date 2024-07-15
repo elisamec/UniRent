@@ -19,12 +19,14 @@ class VOwner {
         $this->smarty->assign('accommodations', json_encode($accommodations));
         $this->smarty->display('Owner/home.tpl');
     }
-    public function accommodationManagement(EAccommodation $accomm, EOwner $owner, array $reviewsData, array $pictures):void{
+    public function accommodationManagement(EAccommodation $accomm, EOwner $owner, array $reviewsData, array $pictures, array $tenants, int $num_places):void{
         $photos=json_encode($pictures);
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->assign('imagesJson', $photos);
         $this->smarty->assign('accommodation', $accomm);
         $this->smarty->assign('owner', $owner);
+        $this->smarty->assign('tenantsJson', json_encode($tenants));
+        $this->smarty->assign('num_places', $num_places);
         $this->smarty->display('Owner/accommodationManagement.tpl');
     }
 
@@ -96,7 +98,7 @@ class VOwner {
     }
     public function postedReview(array $reviewsData){
         $this->smarty->assign('reviewsData', $reviewsData);
-        $this->smarty->display('Student/postedReviews.tpl');
+        $this->smarty->display('Owner/postedReviews.tpl');
     }
     public function viewOwnerAds(array $accommodations, string $username){
         $this->smarty->assign('accommodations', json_encode($accommodations));
@@ -110,5 +112,10 @@ class VOwner {
         $this->smarty->assign('accommodationData', json_encode($accomm));
         $this->smarty->assign('visitAvailabilityData', json_encode($visitAvailabilityData));
         $this->smarty->display('Owner/editAccommodation.tpl');
+    }
+    public function tenants(array $tenants, string $kind) {
+        $this->smarty->assign('tenants', json_encode($tenants));
+        $this->smarty->assign('kind', $kind);
+        $this->smarty->display('Owner/tenants.tpl');
     }
 }

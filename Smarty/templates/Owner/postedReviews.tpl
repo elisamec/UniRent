@@ -52,9 +52,9 @@
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Tenants</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="#">Current</a>
-                           <a class="dropdown-item" href="#">Past</a>
-                           <a class="dropdown-item" href="#">Future</a>
+                           <a class="dropdown-item" href="/UniRent/Owner/tenants/current">Current</a>
+                           <a class="dropdown-item" href="/UniRent/Owner/tenants/past">Past</a>
+                           <a class="dropdown-item" href="/UniRent/Owner/tenants/future">Future</a>
                         </div>
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contracts</a>
@@ -74,7 +74,7 @@
                   <form class="form-inline my-2 my-lg-0">
                      <div class="login_bt">
                         <ul>
-                           <li><a href="/UniRent/Owner/profile" class="active"><span class="user_icon"><i class="fa fa-user" aria-hidden="true"></i></span>Profile</a></li>
+                           <li><a href="/UniRent/Owner/profile"><span class="user_icon"><i class="fa fa-user" aria-hidden="true"></i></span>Profile</a></li>
                         </ul>
                      </div>
                   </form>
@@ -83,7 +83,7 @@
          </div>
       </div>
       <div class="path">
-            <p><a href="/UniRent/Student/home">Home</a> / Posted Reviews </p>
+            <p><a href="/UniRent/Owner/home">Home</a> / Posted Reviews </p>
       </div>
       
          <div class="Properties_taital_main layout">
