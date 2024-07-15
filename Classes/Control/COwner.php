@@ -749,6 +749,7 @@ class COwner
     }
     public static function editAccommodationOperations(int $id)
     {
+        
         $pictures=USuperGlobalAccess::getPost('uploadedImagesData');
         $myarray=json_decode($pictures,true);
         $array_photos=EPhoto::fromJsonToPhotos($myarray);
@@ -797,8 +798,9 @@ class COwner
         $PM=FPersistentManager::getInstance();
         
         $idOwner=$PM->getOwnerIdByUsername(USession::getInstance()::getSessionElement('username'));
+        $addressId = $PM->load('EAccommodation', $id)->getAddress()->getSortingCode();
         $addressObj= new Address();
-        $addressObj=$addressObj->withAddressLine1($address)->withPostalcode($postalCode)->withLocality($city);
+        $addressObj=$addressObj->withAddressLine1($address)->withPostalcode($postalCode)->withLocality($city)->withSortingCode($addressId);
         #print $addressObj->getAddressLine1().' '.$addressObj->getPostalCode().' '.$addressObj->getLocality();
         $accomodation = new EAccommodation($id,$array_photos,$title,$addressObj,$price,$date,$description,$places,$deposit,$array_visit,$duration,$men,$women,$animals,$smokers,$idOwner);
         $result=$PM::update($accomodation);
