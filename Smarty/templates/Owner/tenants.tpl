@@ -87,7 +87,7 @@
        <div class="container-fluid">
          <div class="search_box_section">
             <div class="search_box_main padding-reserve">
-            <form action="/UniRent/Owner/filterTenants" method="post" id="yourFormId">
+            <form action="/UniRent/Owner/filterTenants/[$kind}" method="post" id="yourFormId">
             <div class="container">
                <h1 class="find_text">Filter Tenants</h1>
                </div>
