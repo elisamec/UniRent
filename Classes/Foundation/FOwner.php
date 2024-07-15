@@ -534,4 +534,34 @@ use PDOException;
             return (int)$row['rateO'];
         }
     }
+
+    public function getTenans(string $type, int $idOwner):array
+    {
+        $result=array();
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $db->exec('LOCK TABLES owner READ, accommodation READ, reservation READ, student READ, contract READ');
+            $q="SELECT a.title AS title , s.id AS idStudent 
+                FROM accommodation a INNER JOIN reservation r ON a.id=r.idAccommodation
+                INNER JOIN student s ON s.id=r.idStudent
+                INNER JOIN contract c ON c.idReservation=r.id
+                INNER JOIN owner o ON o.id=a.idOwner
+                WHERE c.`status`= :type
+                AND o.id= :idOwner";
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindParam(':type',$type,PDO::PARAM_STR);
+            $stm->bindParam(':idOwner',$idOwner,PDO::PARAM_INT);
+            $stm->execute();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return $result;
+        }
+        $rows=
+    }
  }

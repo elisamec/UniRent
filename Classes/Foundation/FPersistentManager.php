@@ -490,5 +490,12 @@ class FPersistentManager {
         return $result;
     }
 
+    public function getTenants(string $type, int $idOwner):array
+    {
+        $FO=FOwner::getInstance();
+        $result=$FO->getTenants($type,$idOwner);
+        return $result;
+    }
+    
 }
 

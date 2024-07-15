@@ -814,6 +814,10 @@ class COwner
         }
     }
     public static function tenants(string $kind) {
+        $session=USession::getInstance();
+        $username=$session::getSessionElement('username');
+        $PM=FPersistentManager::getInstance();
+        $ownerId=$PM->getOwnerIdByUsername($username);
         $view = new VOwner();
         $tenants = [];
         $tenants[] = [
