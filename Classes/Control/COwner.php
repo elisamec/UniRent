@@ -838,11 +838,11 @@ class COwner
                 }
                 else
                 {
-                    $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
+                    $profilePic=$profilePic->getPhoto();
                 }
                 $tenantList[] = [
                     'username' => $student->getUsername(),
-                    'image' => $profilePic,
+                    'image' => $profilePic
                 ];
             }
 
