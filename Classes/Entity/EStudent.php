@@ -277,6 +277,8 @@ class EStudent
         return $this->animals;
     }
 
+
+
     //SET methods
     
     /**

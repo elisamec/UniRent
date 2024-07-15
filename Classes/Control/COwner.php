@@ -11,6 +11,7 @@ use Classes\View\VOwner;
 use Classes\Foundation\FPersistentManager;
 use Classes\Entity\EOwner;
 use Classes\Entity\EPhoto;
+use Classes\Entity\EStudent;
 use Classes\Foundation\FOwner;
 use Classes\Foundation\FReview;
 use Classes\Tools\TType;
@@ -852,5 +853,51 @@ class COwner
             ];
         }
         $view->tenants($tenants, $kind);
+    }
+
+    public static function filterTenants(string $type)
+    {
+        $session=USession::getInstance();
+        $username=$session::getSessionElement('username');
+        $PM=FPersistentManager::getInstance();
+        $ownerId=$PM->getOwnerIdByUsername($username);
+        $view = new VOwner();
+        // DA AGGIUNGERE LA LISTA DELLE ACCOMMODATION DEL PROPRIETARIO (ALT ERROR R.519 PM)
+        $accommodation_name=USuperGlobalAccess::getPost('accommodation');
+        $t_name=USuperGlobalAccess::getPost('name');
+        $rateT=USuperGlobalAccess::getPost('rateT');
+        $date=USuperGlobalAccess::getPost('date');
+        $t_age=USuperGlobalAccess::getPost('age');
+        $men=USuperGlobalAccess::getPost('men');
+        $women=USuperGlobalAccess::getPost('women');
+
+        #print $accommodation_name.' '.$t_name.' '.$rateT.' '.$date.' '.$t_age.' '.$men.' '.$women;
+        $tenantsArray=$PM->getFilterTenants($type,$accommodation_name,$t_name,$t_age,$rateT,$date,$men,$women);
+        
+        $tenants=[];
+        foreach ($tenantsArray as $idAccommodation => $students) {
+            $accommodationTitle = $PM->load('EAccommodation', $idAccommodation)->getTitle();
+            $tenantList = [];
+            foreach ($students as $student) {
+                $profilePic = $student->getPhoto();
+                if ($profilePic === null) {
+                    $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+                }
+                else
+                {
+                    $profilePic=$profilePic->getPhoto();
+                }
+                $tenantList[] = [
+                    'username' => $student->getUsername(),
+                    'image' => $profilePic
+                ];
+            }
+
+            $tenants[] = [
+                'accommodation' => $accommodationTitle,
+                'tenants' => $tenantList
+            ];
+        }
+        $view->tenants($tenants, $type);
     }
 }

@@ -596,4 +596,24 @@ use PDOException;
         }
         return $result;
     }
+
+    public function getFilterTenants($type,$accommodation_name,$t_name,$t_age,$rateT,$date,$men,$women):array
+    {
+        /* DA FINIRE.....
+        $result=array();
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $q="";
+            $db->exec('LOCK TABLES')
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return $result;
+        }*/
+        // TO BE CONTINUED.......
+        return array();    
+    }
+    
  }

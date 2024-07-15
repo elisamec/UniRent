@@ -515,6 +515,13 @@ class FPersistentManager {
             return TType::STUDENT;
         }
     }
+
+    public function getFilterTenants(string $type, string $accommodation_name, string $t_name, int $t_age, int $rateT, string $date, bool $men, bool $women):array
+    {
+        $FO=FOwner::getInstance();
+        $result=$FO->getFilterTenants($type,$accommodation_name,$t_name,$t_age,$rateT,$date,$men,$women);
+        return $result;
+    }
     
 }
 
