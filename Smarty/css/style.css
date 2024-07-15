@@ -2861,6 +2861,9 @@ button.delete_button:hover{
     margin-right: 10px;
     margin-left:20px
 }
+#navbarDropdown {
+    cursor: pointer;
+}
 
 #day {
     margin-right: 10px;
