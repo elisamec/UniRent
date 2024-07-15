@@ -645,7 +645,6 @@ use PDO;
 
                 $FA->deleteDay($idAccommodation);
                 $addressId = $FA->retriveAddressId($idAccommodation);
-                print "The address id is: $addressId \n";
 
                 try{  
 
@@ -658,9 +657,7 @@ use PDO;
                     $db->commit();
                     $db->exec('UNLOCK TABLES');
 
-                    
-                    $result = $FA->deleteAddress($addressId);
-                    $result ? print "Address deleted \n" : print "Address not deleted \n";
+                    $FA->deleteAddress($addressId);
 
                     return true;
                 }
