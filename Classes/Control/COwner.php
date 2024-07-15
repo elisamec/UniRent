@@ -694,7 +694,7 @@ class COwner
     public static function editAccommodation(string $id) {
         $view = new VOwner();
         $PM=FPersistentManager::getInstance();
-        $accommodation = $PM->load('EAccommodation', (int)$id);
+        $accommodation = $PM::load('EAccommodation', (int)$id);
         $photos_acc=$accommodation->getPhoto();
         $uploadedPhotos=EPhoto::toBase64($photos_acc);
         $accommodationData = [
@@ -714,6 +714,7 @@ class COwner
             'smokers' => $accommodation->getSmokers(),
             'places' => $accommodation->getPlaces()
         ];
+        
         $visitAvailabilityData = [];
         foreach ($accommodation->getVisit() as $day =>$times) {
             $endTime= new DateTime($times[count($times)-1]);
