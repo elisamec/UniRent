@@ -815,6 +815,23 @@ class COwner
     }
     public static function tenants(string $kind) {
         $view = new VOwner();
-        $view->tenants($kind);
+        $tenants = [];
+        $tenants[] = [
+            'accommodation' => 'Accommodation Title 1',
+            'tenants' => [
+                ['username' => 'eli', 'image' => null],
+                ['username' => 'john', 'image' => null],
+                ['username' => 'doe', 'image' => null]
+            ]
+            ];
+        $tenants[] =
+        [
+            'accommodation' => 'Accommodation Title 2',
+            'tenants' => [
+                ['username' => 'alice', 'image' => null],
+                ['username' => 'bob', 'image' => null]
+            ]
+            ];
+        $view->tenants($tenants);
     }
 }

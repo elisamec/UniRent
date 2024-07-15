@@ -379,7 +379,7 @@ button {
     float: left;
     position: relative;
     margin-bottom: 100px;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .search_box_main {
@@ -823,6 +823,14 @@ hr.border_main {
     margin-right: 50px;
     min-height: 900.18px;
     height: auto;
+}
+.Searchcontainer1 {
+    float: right;
+    width: 60%;
+    margin-right: 50px;
+    min-height: 625.39px;
+    height: auto;
+    margin-bottom:20px;
 }
 
 .image_box{
@@ -2876,4 +2884,15 @@ button.delete_button:hover{
     padding: 5px;
     height: 35px;
     margin-top: 10px;
+}
+.titleAccomm {
+    padding-top: 10px;
+    font-size: 30px;
+    margin-right: 30px;
+    margin-bottom: 20px;
+}
+.accommodation {
+    padding-top: 20px;
+    padding-left: 20px;
+    width: 100%;
 }

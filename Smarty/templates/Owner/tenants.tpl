@@ -190,33 +190,17 @@
       </div>
       </div>
       <div class="Properties_section">
-         <div class="Searchcontainer">
+         <div class="Searchcontainer1">
             <div class="row">
                <div class="col-sm-12">
                   <div class="Properties_taital_main">
-                     <h1 class="Properties_taital">Search Results</h1>
+                     <h1 class="Properties_taital">Your Tenants</h1>
                      <hr class="border_main">
                   </div>
                </div>
             </div>
             <div class="Properties_section_2">
-               <div class="row" id="resultContainer">
-               </div>
-            </div>
-         </div>
-      </div>
-      <div class="Properties_section layout_padding">
-         <div class="container">
-            <div class="row">
-               <div class="col-sm-12">
-                  <div class="Properties_taital_main">
-                     <h1 class="Properties_taital">Your Proprieties</h1>
-                     <hr class="border_main">
-                  </div>
-               </div>
-            </div>
-            <div class="Properties_section_2">
-               <div class="row" id="accommodationContainer">
+               <div class="row" id="tenantsContainer">
                </div>
             </div>
          </div>
@@ -287,57 +271,66 @@
          </script>
 {literal}
          <script>
-    const accommodations = {/literal}{$accommodations}{literal};
+    const data = {/literal}{$tenants}{literal};
 
-    // Function to create and append reviews to the container
-    function displayAccommodations(accommodations) {
-        const container = document.getElementById('accommodationContainer');
+// Function to populate tenantsContainer
+function populateTenantsContainer(data) {
+  const tenantsContainer = document.getElementById("tenantsContainer");
 
-        if (container) {
-            if (accommodations.length === 0) {
-                container.innerHTML = '<div class="container"><h1 class="noRev">You have no ads yet!</h1></div>';
-            } else {
-                accommodations.forEach(accommodation => {
-                    if (accommodation.photo == null) {
-                        accommodation.photo = "/UniRent/Smarty/images/noPic.png";
-                    }
-                    const accommodationElement = document.createElement('div');
-                    accommodationElement.className = 'col-lg-4 col-md-6col-lg-4 col-md-6';
+  data.forEach(item => {
+    const accommodationDiv = document.createElement("div");
+    accommodationDiv.classList.add("accommodation");
 
-                    // Insert the names of the elements of the accommodation array
-                    accommodationElement.innerHTML = `
-                        <div class="blog_img">
-                            <div class="container_main">
-                                <img src="${accommodation.photo}" alt="">
-                                <div class="overlay">
-                                    <div class="text">
-                                        <div class="some_text"><a href="/UniRent/Owner/accommodationManagement/${accommodation.id}">See More</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="image_box">
-                            <div class="left_box">
-                                <h1 class="road_text">${accommodation.title}</h1>
-                                <p>${accommodation.address}</p>
-                            </div>
-                            <div class="right_box">
-                                <div class="rate_text">${accommodation.price} €</div>
-                            </div>
-                        </div>
-                    `;
+    const title = document.createElement("h1");
+    title.classList.add("titleAccomm");
+    title.textContent = item.accommodation;
+    accommodationDiv.appendChild(title);
 
-                    // Append the created element to the container
-                    container.appendChild(accommodationElement); // Corrected: accommodationElement instead of reviewElement
-                });
-            }
-        } else {
-            console.error("Container not found!"); // Debugging: Error if container is not found
-        }
-    }
+    const rowDiv = document.createElement("div");
+    rowDiv.classList.add("row");
 
-    // Call the function to display reviews
-    displayAccommodations(accommodations);
+    item.tenants.forEach(tenant => {
+      const colDiv = document.createElement("div");
+      colDiv.classList.add("col-md-3");
+
+      const userSectionDiv = document.createElement("div");
+      userSectionDiv.classList.add("userSection");
+
+      const userIconDiv = document.createElement("div");
+      userIconDiv.classList.add("userIcon");
+
+      const userLink = document.createElement("a");
+      userLink.href = `/UniRent/Owner/publicProfile/${tenant.username}`;
+
+      const userImage = document.createElement("img");
+      userImage.src = tenant.image || "/UniRent/Smarty/images/ImageIcon.png";
+      userImage.alt = "User Profile Picture";
+
+      userLink.appendChild(userImage);
+      userIconDiv.appendChild(userLink);
+      userSectionDiv.appendChild(userIconDiv);
+
+      const usernameDiv = document.createElement("div");
+      usernameDiv.classList.add("username");
+
+      const usernameLink = document.createElement("a");
+      usernameLink.href = `/UniRent/Owner/publicProfile/${tenant.username}`;
+      usernameLink.textContent = tenant.username;
+
+      usernameDiv.appendChild(usernameLink);
+      userSectionDiv.appendChild(usernameDiv);
+
+      colDiv.appendChild(userSectionDiv);
+      rowDiv.appendChild(colDiv);
+    });
+
+    accommodationDiv.appendChild(rowDiv);
+    tenantsContainer.appendChild(accommodationDiv);
+  });
+}
+
+// Call the function with the sample data
+populateTenantsContainer(data);
 </script>
 {/literal}
 <script>
