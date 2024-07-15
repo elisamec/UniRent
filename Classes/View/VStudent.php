@@ -17,8 +17,8 @@ class VStudent{
         $this->smarty = StartSmarty::configuration();
     }
 
-    public function home():void{
-
+    public function home(array $accommodations):void{
+        $this->smarty->assign('accommodations', json_encode($accommodations));
         $this->smarty->display('Student/home.tpl');
     }
 

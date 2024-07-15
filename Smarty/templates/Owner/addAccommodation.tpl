@@ -107,42 +107,42 @@
                            </div>
                            <div id="div2">
                               <div class="input-group">
-                                 <input title=" " required="" type="text" name="title" autocomplete="off" class="input-spec">
+                                 <input  required="" type="text" name="title" autocomplete="off" class="input-spec">
                                  <label class="user-label">Title</label>
                               </div>
                            </div>
                            <div id="div3">
                               <div class="input-group">
-                                 <input title=" " required="" type="number" name="price" autocomplete="off" class="input-spec" min=0 max=1000>
+                                 <input  required="" type="number" name="price" autocomplete="off" class="input-spec" min=0 max=1000>
                                  <label class="user-label">Monthly Price (€)</label>
                               </div>
                            </div>
                            <div id="div4">
                               <div class="input-group">
-                                 <input required="" type="number" name="deposit" autocomplete="off" class="input-spec" title=" " min=0 max=1000>
+                                 <input required="" type="number" name="deposit" autocomplete="off" class="input-spec"  min=0 max=1000>
                                  <label class="user-label">Deposit (€)</label>
                               </div>
                            </div>
                            <div id="div5">
                               <div class="input-group">
-                                 <input title=" " id="Date" required="" type="number" name="startDate" autocomplete="off" class="input-spec" min=1 max=31>
+                                 <input  id="Date" required="" type="number" name="startDate" autocomplete="off" class="input-spec" min=1 max=31>
                                  <label class="user-label">Start day</label>
                               </div>
                            </div>
                            <div id="div6">
                               <div class="col-md-12">
                               <div class="row" id="input-radio">
-                                 <input title=" " id="month" required="" type="radio" name="month" value="september" checked> September
+                                 <input  id="month" required="" type="radio" name="month" value="september" checked> September
                                  </div>
                                  <div class="row">
-                                 <input title=" " id="month" required="" type="radio" name="month" value="october"> October
+                                 <input  id="month" required="" type="radio" name="month" value="october"> October
                                  </div>
                               </div>
                               <input type="date" id="date" name="date" hidden>
                            </div>
                            <div id="div7">
                               <div class="input-group">
-                                 <input title=" " required="" type="text" name="address" autocomplete="off" class="input-spec">
+                                 <input  required="" type="text" name="address" autocomplete="off" class="input-spec">
                                  <label class="user-label">Address</label>
                               </div>
                            </div>
@@ -155,19 +155,19 @@
                            </div>
                            <div id="div9">
                            <div class="input-group">
-                                 <input title=" " required="" type="text" name="city" autocomplete="off" class="input-spec">
+                                 <input  required="" type="text" name="city" autocomplete="off" class="input-spec">
                                  <label class="user-label">City</label>
                               </div>
                            </div>
                             <div id="div10">
                             <div class="input-group">
-                                 <input title=" " required="" type="number" name="postalCode" autocomplete="off" class="input-spec">
+                                 <input  required="" type="number" name="postalCode" autocomplete="off" class="input-spec">
                                  <label class="user-label">Postal Code</label>
                               </div>
                            </div>
                             <div id="div12"> 
                             <div class="input-group">
-    <textarea title=" " class="textarea-spec" rows="5" id="notes" name="description" required></textarea>
+    <textarea  class="textarea-spec" rows="5" id="notes" name="description" required></textarea>
     <label class="textarea-label" for="notes">Description</label>
 </div>
 </div>
@@ -193,13 +193,19 @@
                               </div>
                             </div>
                             <div id="div14">
+                              <div class="input-group">
+                                 <input  required="" type="number" name="places" autocomplete="off" class="input-spec" min=1>
+                                 <label class="user-label">Number of Places</label>
+                              </div>
+                           </div>
+                            <div id="div15">
                             <div class="input-group">
-    <textarea class="textarea1-spec" rows="5" id="comment" name="comment" placeholder=" "></textarea>
+    <textarea class="textarea1-spec" rows="2" id="comment" name="comment" placeholder=" "></textarea>
     <label class="textarea-label" for="comment">Notes</label>
 </div>
 
                             </div>
-                            <div id="div15">
+                            <div id="div16">
                               <input type="hidden" id="visitAvailabilityData" name="visitAvailabilityData">
                               <input type="hidden" id="uploadedImagesData" name="uploadedImagesData">
                            <div class="button-group">

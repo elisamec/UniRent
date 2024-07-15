@@ -17,7 +17,9 @@ class CUser
     
     public static function home(){
         $view = new VUser();
-        $view->home();
+        $PM=FPersistentManager::getInstance();
+        $accommodations = $PM->lastAccommodationsUser();
+        $view->home($accommodations);
     }
     public static function about(){
         $view = new VUser();

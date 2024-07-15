@@ -13,8 +13,8 @@ class VUser{
         $this->smarty = StartSmarty::configuration();
     }
 
-    public function home(){
-
+    public function home(array $accommodations){
+        $this->smarty->assign('accommodations', json_encode($accommodations));
         $this->smarty->display('User/home.tpl');
     }
 

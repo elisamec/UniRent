@@ -31,7 +31,12 @@ class CStudent{
      */
     public static function home(){
         $view = new VStudent();
-        $view->home();
+        $PM=FPersistentManager::getInstance();
+        $session=USession::getInstance();
+        $user = $session->getSessionElement('username');
+        $student = $PM->getStudentByUsername($user);
+        $accommodations = $PM->lastAccommodationsStudent($student);
+        $view->home($accommodations);
     }
     public static function contact(){
         $view = new VStudent();
