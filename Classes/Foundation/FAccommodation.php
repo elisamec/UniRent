@@ -107,6 +107,7 @@ use PDO;
                 $row['price'],
                 $start,
                 $row['description'],
+                $row['places'],
                 $row['deposit'],
                 $visit, 
                 $row['visitDuration'],
@@ -244,8 +245,8 @@ use PDO;
                 $db->exec('LOCK TABLES accommodation WRITE');
                 
 
-                $q='INSERT INTO accommodation (title, address, price, start, description, deposit, visitDuration, man, woman, pets, smokers, idOwner)';
-                $q=$q.' VALUES (:title, :address, :price, :start, :description, :deposit, :visitDuration, :man, :woman, :pets, :smokers, :idOwner)';
+                $q='INSERT INTO accommodation (title, address, price, start, description, places, deposit, visitDuration, man, woman, pets, smokers, idOwner)';
+                $q=$q.' VALUES (:title, :address, :price, :start, :description, :deposit, :places, :visitDuration, :man, :woman, :pets, :smokers, :idOwner)';
 
                 $stm=$db->prepare($q);
 
@@ -256,6 +257,7 @@ use PDO;
                 $stm->bindValue(':price',$accommodation->getPrice(),PDO::PARAM_INT);
                 $stm->bindValue(':start',$accommodation->getStart()->format('Y-m-d H:i:s'),PDO::PARAM_STR);
                 $stm->bindValue(':description',$accommodation->getDescription(),PDO::PARAM_STR);
+                $stm->bindValue(':places',$accommodation->getPlaces(),PDO::PARAM_INT);
                 $stm->bindValue(':deposit',$accommodation->getDeposit(),PDO::PARAM_INT);
                 $stm->bindValue(':visitDuration',$accommodation->getVisitDuration(),PDO::PARAM_INT);
                 $stm->bindValue(':man',$accommodation->getMan(),PDO::PARAM_BOOL);
@@ -435,7 +437,7 @@ use PDO;
                 $db->beginTransaction();
                 
                 $q='UPDATE accommodation SET title = :title, price = :price,
-                                    start = :start, description = :description, deposit = :deposit,
+                                    start = :start, description = :description, places = :places, deposit = :deposit,
                                     visitDuration = :visitDuration, man = :man, woman = :woman,
                                     pets = :pets, smokers = :smokers, idOwner = :idOwner  WHERE id=:id';
                 
@@ -448,6 +450,7 @@ use PDO;
                 $stm->bindValue(':price',$accommodation->getPrice(),PDO::PARAM_INT);
                 $stm->bindValue(':start',$accommodation->getStart()->format('Y-m-d H:i:s'),PDO::PARAM_STR);
                 $stm->bindValue(':description',$accommodation->getDescription(),PDO::PARAM_STR);
+                $stm->bindValue(':places',$accommodation->getPlaces(),PDO::PARAM_INT);
                 $stm->bindValue(':deposit',$accommodation->getDeposit(),PDO::PARAM_INT);
                 $stm->bindValue(':visitDuration',$accommodation->getVisitDuration(),PDO::PARAM_INT);
                 $stm->bindValue(':man',$accommodation->getMan(),PDO::PARAM_BOOL);
