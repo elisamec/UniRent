@@ -561,37 +561,6 @@ use PDO;
             
         }
 
-        public function deleteDay(int $idAccommodation):bool 
-        {
-            $db=FConnection::getInstance()->getConnection();
-            $FA = FAccommodation::getInstance();
-
-            try{
-                $db->exec('LOCK TABLES day WRITE');
-                $db->beginTransaction();
-
-                $days = $FA->retriveDayId($idAccommodation);
-                foreach($days as $day){
-                    $FA->deleteTime($day);
-                }
-                
-                $q='DELETE FROM day WHERE idAccommodation=:idAccommodation';
-                $stm=$db->prepare($q);
-                $stm->bindValue(':idAccommodation',$idAccommodation,PDO::PARAM_INT);
-                $stm->execute();           
-                print "transazione iniziata";
-                $db->commit();
-                $db->exec('UNLOCK TABLES');
-
-                return true;
-            }
-            catch(PDOException $e){
-                $db->rollBack();
-                return false;
-            }
-            
-        }
-
         public function retriveDayId(int $idAccommodation):array 
         {
             $db=FConnection::getInstance()->getConnection();
@@ -621,15 +590,20 @@ use PDO;
             
         }
 
-        //Per ora elimina solo la riga dentro la tabella accommodation
-        //Da gestire ancora tutte le altre tabelle
+        //For now i can delete only the row of the accommodation
+        //Manage other tables!!!
         public function delete(int $idAccommodation):bool{
             $db=FConnection::getInstance()->getConnection();
             $FA=FAccommodation::getInstance();
+            $FP=FPhoto::getInstance();
+
+            //Delete address, photos, days, times
             
             if($FA->exist($idAccommodation)){
+
                 try
                 {  
+
                     $db->exec('LOCK TABLES accommodation WRITE');
                     $db->beginTransaction();
                     $q='DELETE FROM accommodation WHERE id=:id';
@@ -638,6 +612,8 @@ use PDO;
                     $stm->execute();    
                     $db->commit();
                     $db->exec('UNLOCK TABLES');
+
+
 
                     return true;
                 }
@@ -648,6 +624,37 @@ use PDO;
                 }
 
             } else return false;
+        }
+
+        public function deleteDay(int $idAccommodation):bool {
+
+            $db=FConnection::getInstance()->getConnection();
+            $FA = FAccommodation::getInstance();
+
+            try{
+                $db->exec('LOCK TABLES day WRITE');
+                $db->beginTransaction();
+
+                $days = $FA->retriveDayId($idAccommodation);
+                foreach($days as $day){
+                    $FA->deleteTime($day);
+                }
+                
+                $q='DELETE FROM day WHERE idAccommodation=:idAccommodation';
+                $stm=$db->prepare($q);
+                $stm->bindValue(':idAccommodation',$idAccommodation,PDO::PARAM_INT);
+                $stm->execute();           
+                print "transazione iniziata";
+                $db->commit();
+                $db->exec('UNLOCK TABLES');
+
+                return true;
+            }
+            catch(PDOException $e){
+                $db->rollBack();
+                return false;
+            }
+            
         }
 
 
