@@ -460,7 +460,7 @@
 
    // When the user clicks on the confirm button, proceed to delete
    confirmBtn.onclick = function() {
-      window.location.href = "/UniRent/Owner/deleteAccommodation";
+      window.location.href = "/UniRent/Owner/deleteAccommodation/{$accommodation->getIdAccommodation()}";
    }
 
    // When the user clicks on the cancel button, close the modal

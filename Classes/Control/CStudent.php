@@ -389,7 +389,7 @@ class CStudent{
                     header('Location:/UniRent/Student/profile');
                 } elseif (!$result) {
                     
-                    header("HTTP/1.1 500 Internal Server Error");
+                    http_response_code(500);
                     
                 } 
             }
@@ -660,7 +660,7 @@ class CStudent{
                 }
                 else
                 {
-                    print '500: SERVER ERROR!';
+                    http_response_code(500);
                 }
             }
             else
@@ -673,7 +673,7 @@ class CStudent{
                 }
                 else
                 {
-                    print '500: SERVER ERROR!';
+                    http_response_code(500);
                 }
             }
         }
@@ -716,7 +716,7 @@ class CStudent{
             }
             else
             {
-                print '500 : SERVER ERROR';
+                http_response_code(500);
             }
         }
         else
@@ -729,7 +729,7 @@ class CStudent{
             }
             else
             {
-                print '500 : SERVER ERROR';
+                http_response_code(500);
             }
         }  
     }

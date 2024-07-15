@@ -175,7 +175,7 @@ class COwner
 
         if(is_null($owner)){
             $session->setSessionElement('photo', $ph);
-            print '<b>500 : SERVER ERROR </b>';
+            http_response_code(500);
         } else {
 
             $ph = $owner->getPhoto();
@@ -205,7 +205,7 @@ class COwner
         $owner=$PM->load("EOwner", $id);
         if(is_null($owner)){
 
-            print '<b>500 : SERVER ERROR </b>';
+            http_response_code(500);
         } else {
 
             $photo = USession::getInstance()::getSessionElement('photo');
@@ -314,7 +314,7 @@ class COwner
                             }
                             elseif (!$result) {
                     
-                                header("HTTP/1.1 500 Internal Server Error");
+                                http_response_code(500);
                                 
                             }
                         }
@@ -373,7 +373,7 @@ class COwner
                 $risultato = $PM->storeAvatar($photo);
 
                 if(!$risultato){
-                    header("HTTP/1.1 500 Internal Server Error");
+                    http_response_code(500);
                 }
             }
         }
@@ -549,7 +549,7 @@ class COwner
         }
         else
         {
-            print '500 : SERVER ERROR';
+            http_response_code(500);
         }
     }
     public static function publicProfileFromOwner(string $username)
@@ -728,5 +728,16 @@ class COwner
         $view->editAccommodation($accommodationData, $uploadedPhotos, $visitAvailabilityData, $id);
         
     }
-
+    public function deleteAccommodation(int $id) {
+        $PM=FPersistentManager::getInstance();
+        $result=$PM->delete('EAccommodation', $id);
+        if($result)
+        {
+            header('Location:/UniRent/Owner/home');
+        }
+        else
+        {
+            http_response_code(500);
+        }
+    }
 }
