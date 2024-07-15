@@ -1764,6 +1764,7 @@ textarea#comment::placeholder {
     .userSection {
         text-align: center;
         margin-left: 10px;
+        margin-bottom:20px;
     }
     
     .userIcon {

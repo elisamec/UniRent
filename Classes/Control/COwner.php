@@ -99,7 +99,14 @@ class COwner
                 'userPicture' => $profilePic->getPhoto(),
             ];
         }
-        $view->accommodationManagement($accomm, $owner, $reviewsData,$picture);
+        $num_places=$accomm->getPlaces();
+        $tenants=[];
+        $tenants[]= [
+            'username' => 'eli',
+            'expiry_date' => '2025-07-30',
+            'photo' => null
+        ];
+        $view->accommodationManagement($accomm, $owner, $reviewsData, $picture, $tenants, $num_places);
     }
 
     public static function ownerRegistration(){

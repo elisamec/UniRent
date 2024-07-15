@@ -43,14 +43,14 @@
                </button>
                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav ml-auto">
-                     <li class="nav-item active">
+                     <li class="nav-item">
                         <a class="nav-link" href="/UniRent/Owner/home">Home</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="#">Reservations</a>
                      </li>
                      <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Tenants</a>
+                        <a class="nav-link dropdown-toggle active" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Tenants</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                            <a class="dropdown-item" href="/UniRent/Owner/tenants/current">Current</a>
                            <a class="dropdown-item" href="/UniRent/Owner/tenants/past">Past</a>
@@ -157,7 +157,7 @@
                </div>
                <div class="row">
                <div class="Findcontainer">
-                     <input type="number" name="age" id="age" placeholder="Age of the tenant">
+                     <input type="number" name="age" id="age" placeholder="Age of the tenant" min="18" max="110">
                </div>
                </div>
                <div class="row">
@@ -219,7 +219,7 @@
                   <h3 class="footer_text">Useful Links</h3>
                   <div class="footer_menu">
                      <ul>
-                        <li class="active"><a href="/UniRent/Owner/home">Home</a></li>
+                        <li><a href="/UniRent/Owner/home">Home</a></li>
                         <li><a href="/UniRent/Owner/about">About Us</a></li>
                         <li><a href="/UniRent/Owner/contact">Contact Us</a></li>
                      </ul>
