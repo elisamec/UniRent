@@ -493,6 +493,13 @@ class FPersistentManager {
     public function getTenants(string $type, int $idOwner):array
     {
         $FO=FOwner::getInstance();
+        if ($type=='current')
+        {
+            $type='onGoing';
+        } else if ($type=='past')
+        {
+            $type='finshed';
+        }
         $result=$FO->getTenans($type,$idOwner);
         return $result;
     }

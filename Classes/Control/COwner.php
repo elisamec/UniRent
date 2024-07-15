@@ -826,23 +826,31 @@ class COwner
         $PM=FPersistentManager::getInstance();
         $ownerId=$PM->getOwnerIdByUsername($username);
         $view = new VOwner();
-        $tenants = $PM->getTenants($kind,$ownerId);
-        $tenants[] = [
-            'accommodation' => 'Accommodation Title 1',
-            'tenants' => [
-                ['username' => 'eli', 'image' => null],
-                ['username' => 'john', 'image' => null],
-                ['username' => 'doe', 'image' => null]
-            ]
+        $tenantsArray = $PM->getTenants($kind,$ownerId);
+        $tenants=[];
+        foreach ($tenantsArray as $idAccommodation => $students) {
+            $accommodationTitle = $PM->load('EAccommodation', $idAccommodation)->getTitle();
+            $tenantList = [];
+            foreach ($students as $student) {
+                $profilePic = $student->getPhoto();
+                if ($profilePic === null) {
+                    $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+                }
+                else
+                {
+                    $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
+                }
+                $tenantList[] = [
+                    'username' => $student->getUsername(),
+                    'image' => $profilePic,
+                ];
+            }
+
+            $tenants[] = [
+                'accommodation' => $accommodationTitle,
+                'tenants' => $tenantList
             ];
-        $tenants[] =
-        [
-            'accommodation' => 'Accommodation Title 2',
-            'tenants' => [
-                ['username' => 'alice', 'image' => null],
-                ['username' => 'bob', 'image' => null]
-            ]
-            ];
+        }
         $view->tenants($tenants, $kind);
     }
 }

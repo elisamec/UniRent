@@ -304,8 +304,7 @@ function populateTenantsContainer(data) {
       userLink.href = `/UniRent/Owner/publicProfile/${tenant.username}/${kind}`;
 
       const userImage = document.createElement("img");
-      userImage.src = tenant.image || "/UniRent/Smarty/images/ImageIcon.png";
-      userImage.alt = "User Profile Picture";
+      userImage.src = tenant.image;
 
       userLink.appendChild(userImage);
       userIconDiv.appendChild(userLink);
