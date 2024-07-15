@@ -2871,3 +2871,9 @@ button.delete_button:hover{
     height: 35px;
 }
 
+#accommodationSelect, #tenantName, #expiryDateT, #age {
+    width: 100%;
+    padding: 5px;
+    height: 35px;
+    margin-top: 10px;
+}

@@ -52,9 +52,9 @@
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Tenants</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="#">Current</a>
-                           <a class="dropdown-item" href="#">Past</a>
-                           <a class="dropdown-item" href="#">Future</a>
+                           <a class="dropdown-item" href="/UniRent/Owner/tenants/current">Current</a>
+                           <a class="dropdown-item" href="/UniRent/Owner/tenants/past">Past</a>
+                           <a class="dropdown-item" href="/UniRent/Owner/tenants/future">Future</a>
                         </div>
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contracts</a>
@@ -84,8 +84,126 @@
       </div>
       <!-- header section end -->
       <!-- feature section start -->
-      <div class="container">
-      <div class="new_bt"><a href="/UniRent/Owner/addAccommodation">Add a new Accommodation</a></div>
+       <div class="container-fluid">
+         <div class="search_box_section">
+            <div class="search_box_main padding-reserve">
+            <form action="/UniRent/Owner/filterTenants" method="post" id="yourFormId">
+            <div class="container">
+               <h1 class="find_text">Filter Tenants</h1>
+               </div>
+               <div class="row">
+               <div class="Findcontainer">
+                  <div class="select-outline">
+                     <select name="accommodation" id="accommodationSelect" class="mdb-select md-form md-outline colorful-select dropdown-primary">
+                        <option value="" disabled selected>Select an accommodation</option>
+                     </select>
+                  </div>
+               </div>
+               </div>
+               <div class="row">
+               <div class="Findcontainer">
+                     <input name="name" id="tenantName" type="text" placeholder="Name of the tenant">
+               </div>
+               </div>
+               <div class="Findcontainer">
+               <div class="row">
+               <h1 class="rating_text">Rating: </h1>
+                  <div class="rating">
+                     <input type="radio" id="star5T" name="rateT" value="5" />
+                     <label for="star5T" title="5 stars">
+                        <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
+                              <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
+                        </svg>
+                     </label>
+                     <input type="radio" id="star4T" name="rateT" value="4" />
+                     <label for="star4T" title="4 stars">
+                        <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
+                              <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
+                        </svg>
+                     </label>
+                     <input type="radio" id="star3T" name="rateT" value="3" />
+                     <label for="star3T" title="3 stars">
+                        <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
+                              <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
+                        </svg>
+                     </label>
+                     <input type="radio" id="star2T" name="rateT" value="2" />
+                     <label for="star2T" title="2 stars">
+                        <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
+                              <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
+                        </svg>
+                     </label>
+                     <input type="radio" id="star1T" name="rateT" value="1" />
+                     <label for="star1T" title="1 star">
+                        <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
+                              <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
+                        </svg>
+                     </label>
+                     <input type="radio" id="star0T" name="rateT" value="0" hidden checked/>
+                  </div>
+               <button class="button-spec finalLittle"id="clearRatingA" onclick="clearRatingA()">Clear</button>
+               </div>
+               </div>
+               <div class="row">
+               <div class="Findcontainer">
+                  <div class="select-outline">
+                     <select name="date" id="expiryDateT" class="mdb-select md-form md-outline colorful-select dropdown-primary">
+                        <option value="" disabled selected>Select a period</option>
+                        <option value="september">September to June</option>
+                        <option value="october">October to July</option>
+                     </select>
+                  </div>
+               </div>
+               </div>
+               <div class="row">
+               <div class="Findcontainer">
+                     <input type="number" name="age" id="age" placeholder="Age of the tenant">
+               </div>
+               </div>
+               <div class="row">
+               <div class="Findcontainer">
+                     <div class="checkbox-container">
+                                    <label class="checkbox-label">Sex:</label>
+                                    <div class="row">
+                                    <label>
+                                        <input type="checkbox" name="men" id="men"> Men
+                                        <input type="hidden" id="hiddenMen" name="men" value="false">
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="women" id="women"> Women
+                                        <input type="hidden" id="hiddenWomen" name="women" value="false">
+                                    </label>
+                                    </div>
+                                </div>
+               </div>
+               </div>
+               <div class="row">
+               <div class="Findcontainer">
+                  <div class="select-outline">
+                     <div class="find_btn"><button type="submit">Find Now</button></div>
+                  </div>
+               </div>
+               </div>
+            </div>
+         </div>
+         </form>
+      </div>
+      </div>
+      <div class="Properties_section">
+         <div class="Searchcontainer">
+            <div class="row">
+               <div class="col-sm-12">
+                  <div class="Properties_taital_main">
+                     <h1 class="Properties_taital">Search Results</h1>
+                     <hr class="border_main">
+                  </div>
+               </div>
+            </div>
+            <div class="Properties_section_2">
+               <div class="row" id="resultContainer">
+               </div>
+            </div>
+         </div>
       </div>
       <div class="Properties_section layout_padding">
          <div class="container">
@@ -222,5 +340,19 @@
     displayAccommodations(accommodations);
 </script>
 {/literal}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    function updateHiddenInput(checkboxId, hiddenInputId) {
+        var checkbox = document.getElementById(checkboxId);
+        var hiddenInput = document.getElementById(hiddenInputId);
+        checkbox.addEventListener('change', function() {
+            hiddenInput.value = this.checked ? 'true' : 'false';
+        });
+    }
+
+    updateHiddenInput('men', 'hiddenMen');
+    updateHiddenInput('women', 'hiddenWomen');
+});
+</script>
    </body>
 </html>
