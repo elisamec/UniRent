@@ -747,4 +747,68 @@ class COwner
             http_response_code(500);
         }
     }
+    public static function editAccommodationOperations(int $id)
+    {
+        $pictures=USuperGlobalAccess::getPost('uploadedImagesData');
+        $myarray=json_decode($pictures,true);
+        $array_photos=EPhoto::fromJsonToPhotos($myarray);
+
+        $title=USuperGlobalAccess::getPost('title');
+        $price=USuperGlobalAccess::getPost('price');
+        $deposit=(float)USuperGlobalAccess::getPost('deposit');
+        $startDate=(int) USuperGlobalAccess::getPost('startDate');
+        $month=USuperGlobalAccess::getPost('month');
+        $visits=USuperGlobalAccess::getPost('visitAvailabilityData');  #json in arrivo dal post
+        $places=(int)USuperGlobalAccess::getPost('places');
+        $duration=EAccommodation::DurationOfVisit($visits);
+        
+        if(!is_null($duration) and $duration>0)  #se la durata delle visite è zero non ci saranno visite
+        {
+            $array_visit=EAccommodation::fromJsonToArrayOfVisit($visits);
+        }
+        else
+        {
+            $array_visit=array();
+            $duration=0;
+        }
+ 
+        if($month=='Sep')
+        {
+            $month=8;
+        }
+        else
+        {
+            $month=9;
+        }
+
+        $address=USuperGlobalAccess::getPost('address');
+        $city=USuperGlobalAccess::getPost('city');
+        $postalCode=USuperGlobalAccess::getPost('postalCode');
+        $description=USuperGlobalAccess::getPost('description');
+        $men=USession::booleanSolver(USuperGlobalAccess::getPost('men'));
+        $women=USession::booleanSolver(USuperGlobalAccess::getPost('women'));
+        $smokers=USession::booleanSolver(USuperGlobalAccess::getPost('smokers'));
+        $animals=USession::booleanSolver(USuperGlobalAccess::getPost('animals'));
+
+        $date= new DateTime('now');
+        $year=(int)$date->format('Y');
+        $date=$date->setDate($year,$month,$startDate);
+
+        $PM=FPersistentManager::getInstance();
+        
+        $idOwner=$PM->getOwnerIdByUsername(USession::getInstance()::getSessionElement('username'));
+        $addressObj= new Address();
+        $addressObj=$addressObj->withAddressLine1($address)->withPostalcode($postalCode)->withLocality($city);
+        #print $addressObj->getAddressLine1().' '.$addressObj->getPostalCode().' '.$addressObj->getLocality();
+        $accomodation = new EAccommodation($id,$array_photos,$title,$addressObj,$price,$date,$description,$places,$deposit,$array_visit,$duration,$men,$women,$animals,$smokers,$idOwner);
+        $result=$PM::update($accomodation);
+        if($result)
+        {
+            header('Location:/UniRent/Owner/accommodationManagement/'.$id);
+        }
+        else
+        {
+            http_response_code(500);
+        }
+    }
 }
