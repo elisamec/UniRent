@@ -839,6 +839,6 @@ class COwner
                 ['username' => 'bob', 'image' => null]
             ]
             ];
-        $view->tenants($tenants);
+        $view->tenants($tenants, $kind);
     }
 }
