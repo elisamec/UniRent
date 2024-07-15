@@ -209,7 +209,7 @@
                                   <button class="button-spec final" type="submit">Submit</button>
                                  </div>
                                  <div class="col-md-6">
-                                 <button type="button" class="button-spec final" onclick="window.location.href='/UniRent/Owner/accommodation/{$accommodationId}'">Cancel</button>
+                                 <button type="button" class="button-spec final" onclick="window.location.href='/UniRent/Owner/accommodationManagement/{$accommodationId}'">Cancel</button>
                                  </div>
                               </div>
                            </div>

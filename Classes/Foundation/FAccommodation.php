@@ -625,6 +625,7 @@ use PDO;
         //Da gestire ancora tutte le altre tabelle
         public function delete(int $idAccommodation):bool{
             $db=FConnection::getInstance()->getConnection();
+            $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
             $FA=FAccommodation::getInstance();
             
             if($FA->exist($idAccommodation)){
