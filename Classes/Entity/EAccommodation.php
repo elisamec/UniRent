@@ -24,6 +24,7 @@ class EAccommodation
      * @var float $price The price of the accommodation.
      * @var DateTime $start The start date of the accommodation.
      * @var string $description The description of the accommodation.
+     * @var int $places The number of places of the accommodation.
      * @var float $deposit The deposit of the accommodation.
      * @var array $visit The avaiability for visit.
      * @var int $visitDuration The duration of the visit in minutes.
@@ -40,6 +41,7 @@ class EAccommodation
     private float $price;
     private DateTime $start;    
     private String $description;
+    private int $places;
     private ?float $deposit;
     private array $visit;
     private int $visitDuration;
@@ -64,6 +66,7 @@ class EAccommodation
      * @var float $price The price of the accommodation.
      * @var DateTime $start The start date of the accommodation.
      * @var string $description The description of the accommodation.
+     * @var int $places The number of places of the accommodation.
      * @var float $deposit The deposit of the accommodation.
      * @var array $visit The avaiability for visit.
      * @var int $visitDuration The duration of the visit in minutes.
@@ -74,7 +77,7 @@ class EAccommodation
      * @var int $idOwner The identifier of the owner of the accommodation.
      */
     public function __construct(?int $idAccommodation, array $photo, string $title, Address $address, float $price,
-                                DateTime $start, ?String $description, ?float $deposit, array $visit, int $visitDuration, 
+                                DateTime $start, ?String $description, int $places, ?float $deposit, array $visit, int $visitDuration, 
                                 bool $man, bool $woman, bool $pets, bool $smokers, int $idOwner){
 
         $this->idAccommodation = $idAccommodation;
@@ -84,6 +87,7 @@ class EAccommodation
         $this->price = $price;
         $this->start = $start;
         $this->description = $description;
+        $this->places = $places;
         $this->deposit = $deposit;
         $this->visit = $visit;
         $this->visitDuration = $visitDuration;
@@ -165,6 +169,15 @@ class EAccommodation
     public function getDescription(): ?String{
         return $this->description;
     }   
+
+    /**
+     * getPlaces
+     * Returns the number of places of the accommodation
+     * @return int
+     */
+    public function getPlaces(): int{
+        return $this->places;   
+    }
 
     /**
      * getDeposit
@@ -315,6 +328,17 @@ class EAccommodation
     }
 
     /**
+     * setPlaces
+     * Sets the number of places of the accommodation
+     * @param int $places
+     * @return void
+     */
+    public function setPlaces(int $places): void{
+        $this->places = $places;
+        
+    }
+
+    /**
      * setDeposit
      * Sets the deposit of the accommodation
      * @param float $deposit
@@ -415,6 +439,7 @@ class EAccommodation
                 "Price: $this->price  \n".
                 "Start: $start  \n".
                 "Description: $this->description  \n".
+                "Places: $this->places  \n".
                 "Deposit: $this->deposit  \n" .
                 "Visit:  ";
 
