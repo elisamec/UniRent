@@ -813,4 +813,8 @@ class COwner
             http_response_code(500);
         }
     }
+    public static function tenants(string $kind) {
+        $view = new VOwner();
+        $view->tenants($kind);
+    }
 }

@@ -31,19 +31,19 @@
       <!-- Include Font Awesome -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
       <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/home.css">
-      <link\ rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/cookie.css">
+      <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/cookie.css">
    </head>
    <body onload="on()">
       <div class="header_section">
         <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-               <a class="navbar-brand"href="/UniRent/Owner/home"><img src="/UniRent/Smarty/images/logo.png"></a>
+               <a class="navbar-brand"href="/UniRent/Student/home"><img src="/UniRent/Smarty/images/logo.png"></a>
                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
                </button>
                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav ml-auto">
-                     <li class="nav-item">
+                     <li class="nav-item active">
                         <a class="nav-link" href="/UniRent/Owner/home">Home</a>
                      </li>
                      <li class="nav-item">
@@ -52,9 +52,9 @@
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Tenants</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="/UniRent/Owner/tenants/current">Current</a>
-                           <a class="dropdown-item" href="/UniRent/Owner/tenants/past">Past</a>
-                           <a class="dropdown-item" href="/UniRent/Owner/tenants/future">Future</a>
+                           <a class="dropdown-item" href="#">Current</a>
+                           <a class="dropdown-item" href="#">Past</a>
+                           <a class="dropdown-item" href="#">Future</a>
                         </div>
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contracts</a>
@@ -82,183 +82,29 @@
             </nav>
          </div>
       </div>
-
-      <div class="profile">
-      <div class="containerProf">
-         <div class="row">
-            <div class="col-md-10">
-                  <div class="profile_info">
-                     <h2 class="profile_head">{$owner->getName()} {$owner->getSurname()}</h2>
-                     <p>@{$owner->getUsername()}</p>
-                     <p>Phone Number: {$owner->getPhoneNumber()}.</p>
-                     <p> Average Rating: {$owner->getAverageRating()}.</p>
-                     <p> Number of Ads: {$owner->getNumberOfAds()}.</p>
-                     <div class="col-md-3">
-                     <div class="delete_btn" id="reportOwn"><a href="#" onclick="openReportModal()">Report User</a></div>
-                     </div>
-               </div>
-               </div>
-            <div class="col-md-2">
-               <div class="container">
-                  <div class="profile_pic">
-                  {if $owner->getPhoto() === null}
-                     <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
-                  {else}
-                     <img src="{$owner->getShowPhoto()}">
-                  {/if}
+      <!-- header section end -->
+      <!-- feature section start -->
+      <div class="container">
+      <div class="new_bt"><a href="/UniRent/Owner/addAccommodation">Add a new Accommodation</a></div>
+      </div>
+      <div class="Properties_section layout_padding">
+         <div class="container">
+            <div class="row">
+               <div class="col-sm-12">
+                  <div class="Properties_taital_main">
+                     <h1 class="Properties_taital">Your Proprieties</h1>
+                     <hr class="border_main">
                   </div>
-                  
+               </div>
+            </div>
+            <div class="Properties_section_2">
+               <div class="row" id="accommodationContainer">
                </div>
             </div>
          </div>
       </div>
-      </div>
-      <div class="col-md-9">
-         <div class="Properties_taital_main layout">
-         <h2 class="profile_head">Reviews</h2>
-         </div>
-    <div id="reviewsContainer"></div>
-</div>
-    <script>
-    {if isset($reviewsData)}
-    const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
-
-    // Function to generate stars based on the rating
-    function generateStars(stars) {
-        let starElements = '';
-        for (let i = 0; i < 5; i++) {
-            if (i < stars) {
-                starElements += '<span class="fa fa-star or"></span>';
-            } else {
-                starElements += '<span class="fa fa-star"></span>';
-            }
-        }
-        return starElements;
-    }
-
-    // Function to create and append reviews to the container
-    function displayReviews(reviews) {
-        const container = document.getElementById('reviewsContainer');
-
-        if (container) {
-            if (reviews.length === 0) {
-                container.innerHTML = '<div class="container"><h1 class="noRev">There are no reviews yet!</h1></div>';
-            } else {
-                reviews.forEach(review => {
-                    const reviewElement = document.createElement('div');
-                    reviewElement.className = 'review';
-
-                    // Insert the names of the elements of the review array
-                    reviewElement.innerHTML = `
-                        <h1 class="ReviewTitle">` + review.title + `</h1> <!-- Title of the review -->
-                        <div class="row">
-                            <div class="userSection">
-                                <div class="userIcon">
-                                    <a href="/UniRent/Owner/publicProfile/` + review.username + `"><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
-                                </div>
-                                <div class="username"><a href="/UniRent/Owner/publicProfile/` + review.username + `">` + review.username + `</a></div> <!-- Username of the reviewer -->
-                            </div>
-                            <div class="col-md-11">
-                                <div class="stars">
-                                    ` + generateStars(review.stars) + ` <!-- Star rating -->
-                                </div>
-                                <p>` + review.content + `</p> <!-- Content of the review -->
-                            </div>
-                        </div>
-                    `;
-
-                    container.appendChild(reviewElement);
-                });
-            }
-        } else {
-            console.error("Container not found!"); // Debugging: Error if container is not found
-        }
-    }
-
-    // Call the function to display reviews
-    displayReviews(reviews);
-    {/if}
-</script>
-<div id="reportModal" class="resModal">
-
-    <!-- Modal content -->
-    <div class="resModal-content">
-        <span class="resClose" onclick="closeReportModal()">&times;</span>
-        <h2>Report User</h2>
-        <form id="reportForm" action="/UniRent/Owner/report" class="form" method="POST" enctype="multipart/form-data">
-            <label for="reportReason">Reason for report:</label><br>
-            <textarea id="reportReason" name="reportReason" rows="4" cols="50" oninput="checkInput()"></textarea><br><br>
-            <div class="btn-cont">
-            <button type="submit" id="confirmDelete" class="disabled" onclick="submitReport()" disabled>Submit</button>
-            <button type="button" id="cancelDelete" onclick="cancelReport()">Cancel</button>
-            </div>
-    </div>
-
-</div>
-
-<script>
-    // Get the modal
-    var modal = document.getElementById("reportModal");
-
-    // Get the button that opens the modal
-    var btn = document.querySelector(".delete_btn a");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("resClose")[0];
-
-    // Get the textarea and submit button
-    var textarea = document.getElementById("reportReason");
-    var submitBtn = document.getElementById("confirmDelete");
-
-    // Open the modal
-    function openReportModal() {
-        modal.style.display = "block";
-    }
-
-    // Close the modal
-    function closeReportModal() {
-        modal.style.display = "none";
-    }
-
-    // Check input and enable/disable submit button
-    function checkInput() {
-        if (textarea.value.trim() !== "") {
-            submitBtn.disabled = false;
-            submitBtn.classList.remove("disabled");
-        } else {
-            submitBtn.disabled = true;
-            submitBtn.classList.add("disabled");
-        }
-    }
-
-    // Submit the report
-    function submitReport() {
-        if (textarea.value.trim() !== "") {
-            // Implement your submit logic here
-            alert("Report submitted: " + textarea.value.trim());
-            // Close the modal after submission
-            closeReportModal();
-        }
-    }
-    function cancelReport() {
-        // Clear the textarea
-        textarea.value = '';
-        // Disable the submit button
-        submitBtn.disabled = true;
-        submitBtn.classList.add("disabled");
-        // Close the modal
-        closeReportModal();
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>
-
-<!-- footer section start -->
+      
+      <!-- footer section start -->
       <div class="footer_section layout_padding">
          <div class="container">
             <div class="row">
@@ -271,7 +117,7 @@
                   <h3 class="footer_text">Useful Links</h3>
                   <div class="footer_menu">
                      <ul>
-                        <li><a href="/UniRent/Owner/home">Home</a></li>
+                        <li class="active"><a href="/UniRent/Owner/home">Home</a></li>
                         <li><a href="/UniRent/Owner/about">About Us</a></li>
                         <li><a href="/UniRent/Owner/contact">Contact Us</a></li>
                      </ul>
@@ -281,7 +127,9 @@
          </div>
       </div>
       <!-- footer section end -->
-<script src="/UniRent/Smarty/js/jquery.min.js"></script>
+      
+      <!-- Javascript files-->
+      <script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>
       <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
       <script src="/UniRent/Smarty/js/jquery-3.0.0.min.js"></script>
@@ -289,37 +137,16 @@
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
-<script>
-document.getElementById("file").onchange = function() {
-    document.getElementById("form").submit();
-};
-</script>
-
-         <script>
-      $(document).ready(function() {
-
-      
-      var readURL = function(input) {
-         if (input.files && input.files[0]) {
-               var reader = new FileReader();
-
-               reader.onload = function (e) {
-                  $('.imageIcon').attr('src', e.target.result);
-               }
-      
-               reader.readAsDataURL(input.files[0]);
-         }
-      }
-      
-
-      $(".file-upload").on('change', function(){
-         readURL(this);
-      });
-      
-      $(".label-button").on('click', function() {
-         $(".file-upload").click();
-      });
-   });
+      <!-- javascript --> 
+      <script>
+         // Material Select Initialization
+         $(document).ready(function() {
+         $('.mdb-select').materialSelect();
+         $('.select-wrapper.md-form.md-outline input.select-dropdown').bind('focus blur', function () {
+         $(this).closest('.select-outline').find('label').toggleClass('active');
+         $(this).closest('.select-outline').find('.caret').toggleClass('active');
+         });
+         });
       </script>
       <div class="modal" id="myModal">
       <div class"container-fluid">
@@ -340,4 +167,60 @@ document.getElementById("file").onchange = function() {
                document.getElementById("myModal").style.display = "none";
                }
          </script>
+{literal}
+         <script>
+    const accommodations = {/literal}{$accommodations}{literal};
+
+    // Function to create and append reviews to the container
+    function displayAccommodations(accommodations) {
+        const container = document.getElementById('accommodationContainer');
+
+        if (container) {
+            if (accommodations.length === 0) {
+                container.innerHTML = '<div class="container"><h1 class="noRev">You have no ads yet!</h1></div>';
+            } else {
+                accommodations.forEach(accommodation => {
+                    if (accommodation.photo == null) {
+                        accommodation.photo = "/UniRent/Smarty/images/noPic.png";
+                    }
+                    const accommodationElement = document.createElement('div');
+                    accommodationElement.className = 'col-lg-4 col-md-6col-lg-4 col-md-6';
+
+                    // Insert the names of the elements of the accommodation array
+                    accommodationElement.innerHTML = `
+                        <div class="blog_img">
+                            <div class="container_main">
+                                <img src="${accommodation.photo}" alt="">
+                                <div class="overlay">
+                                    <div class="text">
+                                        <div class="some_text"><a href="/UniRent/Owner/accommodationManagement/${accommodation.id}">See More</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="image_box">
+                            <div class="left_box">
+                                <h1 class="road_text">${accommodation.title}</h1>
+                                <p>${accommodation.address}</p>
+                            </div>
+                            <div class="right_box">
+                                <div class="rate_text">${accommodation.price} €</div>
+                            </div>
+                        </div>
+                    `;
+
+                    // Append the created element to the container
+                    container.appendChild(accommodationElement); // Corrected: accommodationElement instead of reviewElement
+                });
+            }
+        } else {
+            console.error("Container not found!"); // Debugging: Error if container is not found
+        }
+    }
+
+    // Call the function to display reviews
+    displayAccommodations(accommodations);
+</script>
+{/literal}
    </body>
+</html>

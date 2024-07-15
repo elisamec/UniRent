@@ -111,4 +111,7 @@ class VOwner {
         $this->smarty->assign('visitAvailabilityData', json_encode($visitAvailabilityData));
         $this->smarty->display('Owner/editAccommodation.tpl');
     }
+    public function tenants(string $kind) {
+        $this->smarty->display('Owner/tenants.tpl');
+    }
 }
