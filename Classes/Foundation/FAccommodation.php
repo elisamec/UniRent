@@ -94,6 +94,8 @@ use PDO;
 
             $photos = $FP->loadAccommodation($idAccommodation);
             $row=$stm->fetch(PDO::FETCH_ASSOC);
+            print "Ho recuperato le seguenti info per l'accomodation con id $idAccommodation <br>";
+            var_dump($row);
             $address = new Address();
             $address = $FA->loadAddress($row['address']);
             $start = new DateTime($row['start']);

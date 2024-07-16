@@ -758,6 +758,8 @@ class COwner
         $view->editAccommodation($accommodationData, $img , $visitAvailabilityData, $id);
         
     }
+
+    
     public static function deleteAccommodation(int $id) {
         $PM=FPersistentManager::getInstance();
         $result=$PM->delete('EAccommodation', $id);
