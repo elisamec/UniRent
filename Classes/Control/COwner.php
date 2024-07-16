@@ -104,9 +104,14 @@ class COwner
         }
         $num_places=$accomm->getPlaces();
         $tenantOwner= $PM->getTenants('current',$accomm->getIdOwner());
-        $tenants=[];
-        foreach ($tenantOwner[$idAccommodation] as $i) {
-            $profilePic = $i[0]->getPhoto();
+        if (!array_key_exists($idAccommodation, $tenantOwner)) {
+            $tenants=[];
+        }
+        else
+        {
+            $tenants=[];
+            foreach ($tenantOwner[$idAccommodation] as $i) {
+                $profilePic = $i[0]->getPhoto();
                 if ($profilePic === null) {
                     $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
                 }
@@ -114,11 +119,12 @@ class COwner
                 {
                     $profilePic=$profilePic->getPhoto();
                 }
-            $tenants[]= [
-                'username' => $i[0]->getUsername(),
-                'expiryDate' => $i[1],
-                'profilePic' => $profilePic
-            ];
+                $tenants[]= [
+                    'username' => $i[0]->getUsername(),
+                    'expiryDate' => $i[1],
+                    'profilePic' => $profilePic,
+                ];
+            }
         }
         $view->accommodationManagement($accomm, $owner, $reviewsData, $picture, $tenants, $num_places);
     }

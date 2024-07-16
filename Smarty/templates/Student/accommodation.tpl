@@ -294,11 +294,13 @@
       <h2 class="resModal-head">Visit this accommodation</h2>
       <p> Each visit is scheduled for {$duration} minutes. Please select a day and time for your visit.</p>
     </div>
-    <form action="/UniRent/Visit/studentRequest/{$accommodation->getIdAccommodation()}" class="form" method="POST" enctype="multipart/form-data">
+    <form action="/UniRent/Visit/studentRequest/{$accommodation->getIdAccommodation()}" class="formVisit" method="POST" enctype="multipart/form-data">
+      <div class="grid-container">
       <div class="row padding-reserve">
         <p>Day of the week (next week):</p>
-        <div class="col-lg-6 select-outline">
-          <select name="day" id="day">
+        </div>
+      <div class="row padding-reserve">
+          <select name="day" id="day" class="selectVisit">
           <option value="" selected disabled>Select a day</option>
             <option value="Monday">Monday</option>
             <option value="Tuesday">Tuesday</option>
@@ -306,16 +308,18 @@
             <option value="Thursday">Thursday</option>
             <option value="Friday">Friday</option>
           </select>
-        </div>
       </div>
       <div class="row padding-reserve">
         <p>Time:</p>
-        <div class="col-lg-6 select-outline">
-          <select name="time" id="time">
+        </div>
+        <div class="row padding-reserve">
+          <select name="time" id="time"class="selectVisit">
+            <option value="" selected disabled>Select the time</option>
             <!-- Time options will be populated here -->
           </select>
-        </div>
+          
       </div>
+        </div>
       <div class="btn-cont">
         <button id="visit" type="submit">Visit</button>
         <button id="cancelVisit" type="button">Cancel</button>
@@ -367,7 +371,7 @@
     var timeSelect = document.getElementById("time");
     
     // Clear previous options
-    timeSelect.innerHTML = '';
+    timeSelect.innerHTML = '<option value="" selected disabled>Select the time</option>';
 
 
     // Populate new options
