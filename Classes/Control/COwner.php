@@ -103,12 +103,23 @@ class COwner
             ];
         }
         $num_places=$accomm->getPlaces();
+        $tenantOwner= $PM->getTenants('current',$accomm->getIdOwner());
         $tenants=[];
-        $tenants[]= [
-            'username' => 'eli',
-            'expiry_date' => '2025-07-30',
-            'photo' => null
-        ];
+        foreach ($tenantOwner[$idAccommodation] as $i) {
+            $profilePic = $i[0]->getPhoto();
+                if ($profilePic === null) {
+                    $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+                }
+                else
+                {
+                    $profilePic=$profilePic->getPhoto();
+                }
+            $tenants[]= [
+                'username' => $i[0]->getUsername(),
+                'expiryDate' => $i[1],
+                'profilePic' => $profilePic
+            ];
+        }
         $view->accommodationManagement($accomm, $owner, $reviewsData, $picture, $tenants, $num_places);
     }
 
@@ -879,7 +890,7 @@ class COwner
             $accommodationTitle = $PM->load('EAccommodation', $idAccommodation)->getTitle();
             $tenantList = [];
             foreach ($students as $student) {
-                $profilePic = $student->getPhoto();
+                $profilePic = $student[0]->getPhoto();
                 if ($profilePic === null) {
                     $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
                 }
@@ -888,7 +899,7 @@ class COwner
                     $profilePic=$profilePic->getPhoto();
                 }
                 $tenantList[] = [
-                    'username' => $student->getUsername(),
+                    'username' => $student[0]->getUsername(),
                     'image' => $profilePic
                 ];
             }

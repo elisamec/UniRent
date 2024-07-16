@@ -287,6 +287,105 @@
         }
     }
 </script>
+<div class="resModal" id="visitModal">
+  <div class="resModal-content">
+    <div class="row">
+      <span class="resClose" id="visitClose">&times;</span>
+      <h2 class="resModal-head">Visit this accommodation</h2>
+      <p> Each visit is scheduled for {$duration} minutes. Please select a day and time for your visit.</p>
+    </div>
+    <form action="/UniRent/Visit/studentRequest/{$accommodation->getIdAccommodation()}" class="form" method="POST" enctype="multipart/form-data">
+      <div class="row padding-reserve">
+        <p>Day of the week (next week):</p>
+        <div class="col-lg-6 select-outline">
+          <select name="day" id="day">
+          <option value="" selected disabled>Select a day</option>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+          </select>
+        </div>
+      </div>
+      <div class="row padding-reserve">
+        <p>Time:</p>
+        <div class="col-lg-6 select-outline">
+          <select name="time" id="time">
+            <!-- Time options will be populated here -->
+          </select>
+        </div>
+      </div>
+      <div class="btn-cont">
+        <button id="visit" type="submit">Visit</button>
+        <button id="cancelVisit" type="button">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+{literal}
+<script>
+  // Get the modal
+  var modal = document.getElementById("visitModal");
+
+  // Get the button that opens the modal
+  var btn = document.getElementById("visitBtn");
+
+  // Get the <span> element that closes the modal
+  var span = document.getElementById("visitClose");
+
+  var cancelBtn = document.getElementById("cancelVisit");
+
+  // JSON data for time slots
+  var timeSlots = {/literal}{$timeSlots}{literal};
+
+  // When the user clicks the button, open the modal 
+  btn.onclick = function(event) {
+    event.preventDefault();
+    modal.style.display = "block";
+  }
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  cancelBtn.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+  // Populate time slots based on the selected day
+  document.getElementById("day").addEventListener("change", function() {
+    var selectedDay = this.value;
+    var timeSelect = document.getElementById("time");
+    
+    // Clear previous options
+    timeSelect.innerHTML = '';
+
+
+    // Populate new options
+    if (timeSlots[selectedDay]) {
+      timeSlots[selectedDay].forEach(function(slot) {
+        var option = document.createElement("option");
+        option.value = slot;
+        option.textContent = slot;
+        timeSelect.appendChild(option);
+      });
+    }
+  });
+
+  // Trigger the change event on page load to populate the initial time slots
+  document.getElementById("day").dispatchEvent(new Event('change'));
+</script>
+{/literal}
+
 
 
 <!-- footer section start -->
@@ -466,16 +565,12 @@
 
     // Function to create tenant section
     function createTenantSection(username, expiryDate, profilePic) {
-        if (!profilePic){
-            profilePic = "/UniRent/Smarty/images/ImageIcon.png";
-        }
-        console.log("Profile Pic URL:", profilePic);
         
         return `
             <div class="col-md-4">
                 <div class="userSection">
                     <div class="userIcon">
-                        <a href="/UniRent/Owner/publicProfile/${username}"><img src="${profilePic}" alt="User Profile Picture" onerror="this.onerror=null;this.src='/UniRent/Smarty/images/defaultProfilePic.png';"></a>
+                        <a href="/UniRent/Owner/publicProfile/${username}"><img src="${profilePic}" alt="User Profile Picture"></a>
                     </div>
                     <div class="username"><a href="/UniRent/Owner/publicProfile/${username}">${username}</a></div>
                     <div class="username">Expiry Date: ${expiryDate}</div>
@@ -501,7 +596,7 @@
     // Generate tenant sections
     for (var i = 0; i < tenants.length; i++) {
         var tenant = tenants[i];
-        tenantContainer.innerHTML += createTenantSection(tenant.username, tenant.expiry_date, tenant.profile_pic);
+        tenantContainer.innerHTML += createTenantSection(tenant.username, tenant.expiryDate, tenant.profilePic);
     }
 
     // Fill remaining places with free space sections

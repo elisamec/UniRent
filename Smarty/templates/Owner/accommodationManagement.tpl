@@ -464,10 +464,6 @@
 
     // Function to create tenant section
     function createTenantSection(username, expiryDate, profilePic) {
-        if (!profilePic){
-            profilePic = "/UniRent/Smarty/images/ImageIcon.png";
-        }
-        console.log("Profile Pic URL:", profilePic);
         
         return `
             <div class="col-md-4">

@@ -272,7 +272,27 @@ class CStudent{
         $data=$accomm->getStart()->format('m');
         if($data=='09'){$period='september';}
         else{$period='october';}
-        $view->accommodation($accomm, $owner, $reviewsData, $period, $picture);
+        $visits=$accomm->getVisit();
+        $visitDuration=$accomm->getVisitDuration();
+        $num_places=$accomm->getPlaces();
+        $tenantOwner= $PM->getTenants('current',$accomm->getIdOwner());
+        $tenants=[];
+        foreach ($tenantOwner[$idAccommodation] as $i) {
+            $profilePic = $i[0]->getPhoto();
+                if ($profilePic === null) {
+                    $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+                }
+                else
+                {
+                    $profilePic=$profilePic->getPhoto();
+                }
+            $tenants[]= [
+                'username' => $i[0]->getUsername(),
+                'expiryDate' => $i[1],
+                'profilePic' => $profilePic,
+            ];
+        }
+        $view->accommodation($accomm, $owner, $reviewsData, $period, $picture, $visits, $visitDuration, $tenants, $num_places);
     }
 
 

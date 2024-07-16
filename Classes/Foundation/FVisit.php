@@ -88,7 +88,7 @@ class FVisit
             }
 
             $row=$stm->fetch(PDO::FETCH_ASSOC);
-            $visit = new DateTime($row['visitDay']);
+            $visit = new DateTime($row['day']);
             $result=new EVisit($row['id'],$visit,$row['idStudent'],$row['idAccommodation']);
             return $result;
         }else{
@@ -116,7 +116,7 @@ class FVisit
             $idStudent = $visit->getIdStudent();
             $idAccommodation = $visit->getIdAccommodation();
 
-            $q='INSERT INTO visit ( visitDay, idStudent, idAccommodation)';
+            $q='INSERT INTO visit ( day, idStudent, idAccommodation)';
             $q=$q.' VALUES (:day, :idStudent, :idAccommodation)';
 
             $stm=$db->prepare($q);
@@ -157,7 +157,7 @@ class FVisit
 
             $day = $visit->getDate()->format('Y-m-d H:i:s');
             
-            $q='UPDATE visit SET visitDay = :day  WHERE id=:id';
+            $q='UPDATE visit SET day = :day  WHERE id=:id';
             $stm=$db->prepare($q);
             $stm->bindValue(':day',$day,PDO::PARAM_STR);
             $stm->bindValue(':id',$visitId,PDO::PARAM_INT);

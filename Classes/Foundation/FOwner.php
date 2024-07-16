@@ -552,7 +552,7 @@ use PDOException;
         try
         {
             $db->exec('LOCK TABLES owner READ, accommodation READ, reservation READ, student READ, contract READ');
-            $q="SELECT a.id AS idAccommodation , s.id AS idStudent 
+            $q="SELECT a.id AS idAccommodation , s.id AS idStudent, r.toDate AS expiryDate 
                 FROM accommodation a INNER JOIN reservation r ON a.id=r.idAccommodation
                 INNER JOIN student s ON s.id=r.idStudent
                 INNER JOIN contract c ON c.idReservation=r.id
@@ -587,11 +587,11 @@ use PDOException;
             
             if(in_array($row['idAccommodation'],array_keys($result)))
             {
-                $result[$row['idAccommodation']][]=$student;
+                $result[$row['idAccommodation']][]=[$student, $row['expiryDate']];
             }
             else
             {
-                $result[$row['idAccommodation']]=array($student);
+                $result[$row['idAccommodation']]=array([$student, $row['expiryDate']]);
             }  
         }
         return $result;

@@ -132,10 +132,10 @@
                            <div id="div6">
                               <div class="col-md-12">
                               <div class="row" id="input-radio">
-                                 <input  id="month" required="" type="radio" name="month" value="september" checked> September
+                                 <input  id="september" required="" type="radio" name="month" value="september" checked> September
                                  </div>
                                  <div class="row">
-                                 <input  id="month" required="" type="radio" name="month" value="october"> October
+                                 <input  id="october" required="" type="radio" name="month" value="october"> October
                                  </div>
                               </div>
                               <input type="date" id="date" name="date" hidden>
