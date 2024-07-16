@@ -49,6 +49,8 @@ class COwner
         #print_r($accommodations);
         $view->home($accommodations);
     }
+
+
     public static function accommodationManagement(int $idAccommodation) {
         $view = new VOwner();
         $PM = FPersistentManager::getInstance();
@@ -699,6 +701,8 @@ class COwner
         #print_r($accommodations);
         $view->viewOwnerAds($accommodations, $username);
     }
+
+
     public static function editAccommodation(string $id) {
         $view = new VOwner();
         $PM=FPersistentManager::getInstance();
@@ -812,15 +816,11 @@ class COwner
         #print $addressObj->getAddressLine1().' '.$addressObj->getPostalCode().' '.$addressObj->getLocality();
         $accomodation = new EAccommodation($id,$array_photos,$title,$addressObj,$price,$date,$description,$places,$deposit,$array_visit,$duration,$men,$women,$animals,$smokers,$idOwner);
         $result=$PM::update($accomodation);
-        if($result)
-        {
-            header('Location:/UniRent/Owner/accommodationManagement/'.$id);
-        }
-        else
-        {
-            http_response_code(500);
-        }
+        
+        $result ? header('Location:/UniRent/Owner/accommodationManagement/'.$id) : http_response_code(500);
     }
+
+
     public static function tenants(string $kind) {
         $session=USession::getInstance();
         $username=$session::getSessionElement('username');
