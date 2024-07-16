@@ -2589,7 +2589,7 @@ button.delete_button:hover{
     margin-right: 20px; /* Optional, if you want to maintain a gap from the right */
 }
 
-#cancelDelete, #confirmDelete, #reserve, #cancelReserve{
+#cancelDelete, #confirmDelete, #reserve, #cancelReserve, #visit, #cancelVisit{
     padding: 10px 20px;
     font-size: 16px;
     color: #ffffff;
@@ -2604,7 +2604,7 @@ button.delete_button:hover{
     border-radius: 1rem;
 }
 
-#cancelDelete, #reserve {
+#cancelDelete, #reserve, #visit, #cancelVisit {
     background-color: #f9bc19;
 }
 .login-required a {
@@ -2615,7 +2615,7 @@ button.delete_button:hover{
     background-color: #f91919;
 }
 
-#cancelDelete:hover, #confirmDelete:hover, #reserve:hover, #cancelReserve:hover {
+#cancelDelete:hover, #confirmDelete:hover, #reserve:hover, #cancelReserve:hover, #visit:hover, #cancelVisit:hover{
     color: #d0d1d2;
     background-color: #ffffff;
     box-shadow: 0px 2px 16px 0px #eaeaea !important;
@@ -2874,7 +2874,7 @@ button.delete_button:hover{
     cursor: pointer;
 }
 
-#day {
+#day, #time {
     margin-right: 10px;
     padding: 5px;
     height: 35px;
@@ -2897,3 +2897,16 @@ button.delete_button:hover{
     padding-left: 20px;
     width: 100%;
 }
+.selectVisit {
+    margin-top: 15px;
+    margin-left: 15px;
+    width: 90%;
+}
+.formVisit {
+    width: 100%;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: auto 1fr; /* 2 columns: first column auto width for paragraphs, second column takes remaining space for selects */
+    gap: 15px; /* gap between rows and columns */
+  }
