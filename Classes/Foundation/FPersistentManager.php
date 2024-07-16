@@ -522,6 +522,12 @@ class FPersistentManager {
         $result=$FO->getFilterTenants($type,$accommodation_name,$t_name,$t_age,$rateT,$date,$men,$women);
         return $result;
     }
+    public function loadVisitsByWeek():array
+    {
+        $FV=FVisit::getInstance();
+        $result=$FV->loadByWeek();
+        return $result;
+    }
     
 }
 
