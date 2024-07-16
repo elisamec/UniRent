@@ -290,8 +290,8 @@ class FReview {
             $table=$recipientType.'review';
             $firstCol='id'. ucfirst($recipientType);
             if ($recipientType==='student') {
-                $thirdCol = 'authorType, authorStudent, authorOwner';
-                $thirdVal = ':authType, :student, :owner';
+                $thirdCol = 'authorStudent, authorOwner';
+                $thirdVal = ':student, :owner';
                 $authType=$Review->getAuthorType()->value;
                 if ($authType==='student') {
                     $other='owner';
@@ -313,7 +313,6 @@ class FReview {
             $stm->bindValue(':idRec', $Review->getIDRecipient(), PDO::PARAM_INT);
             $stm->bindValue(':idRev', $Review->getId(), PDO::PARAM_INT);
             if ($recipientType==='student') {
-                $stm->bindValue(':authType', $Review->getAuthorType()->value, PDO::PARAM_STR);
                 $stm->bindValue(':'.$other, null, PDO::PARAM_NULL);
             }
             $stm->bindValue(':'.$authType, $Review->getIDAuthor(), PDO::PARAM_INT);

@@ -87,7 +87,7 @@
        <div class="container-fluid">
          <div class="search_box_section">
             <div class="search_box_main padding-reserve">
-            <form action="/UniRent/Owner/filterTenants/[$kind}" method="post" id="yourFormId">
+            <form action="/UniRent/Owner/filterTenants/{$kind}" method="post" id="yourFormId">
             <div class="container">
                <h1 class="find_text">Filter Tenants</h1>
                </div>
@@ -272,6 +272,7 @@
 {literal}
          <script>
     const data = {/literal}{$tenants}{literal};
+    const kind = {/literal}"{$kind}"{literal};
 
 // Function to populate tenantsContainer
 function populateTenantsContainer(data) {
@@ -300,11 +301,10 @@ function populateTenantsContainer(data) {
       userIconDiv.classList.add("userIcon");
 
       const userLink = document.createElement("a");
-      userLink.href = `/UniRent/Owner/publicProfile/${tenant.username}`;
+      userLink.href = `/UniRent/Owner/publicProfile/${tenant.username}/${kind}`;
 
       const userImage = document.createElement("img");
-      userImage.src = tenant.image || "/UniRent/Smarty/images/ImageIcon.png";
-      userImage.alt = "User Profile Picture";
+      userImage.src = tenant.image;
 
       userLink.appendChild(userImage);
       userIconDiv.appendChild(userLink);

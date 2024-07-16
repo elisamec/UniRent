@@ -490,5 +490,38 @@ class FPersistentManager {
         return $result;
     }
 
+    public function getTenants(string $type, int $idOwner):array
+    {
+        $FO=FOwner::getInstance();
+        if ($type=='current')
+        {
+            $type='onGoing';
+        } else if ($type=='past')
+        {
+            $type='finshed';
+        }
+        $result=$FO->getTenans($type,$idOwner);
+        return $result;
+    }
+    public function getUserType($id):TType
+    {
+        $FO=FOwner::getInstance();
+        $result=$FO->exist($id);
+        if ($result) {
+            return TType::OWNER;
+        }
+        else
+        {
+            return TType::STUDENT;
+        }
+    }
+
+    public function getFilterTenants(string $type, string $accommodation_name, string $t_name, int $t_age, int $rateT, string $date, bool $men, bool $women):array
+    {
+        $FO=FOwner::getInstance();
+        $result=$FO->getFilterTenants($type,$accommodation_name,$t_name,$t_age,$rateT,$date,$men,$women);
+        return $result;
+    }
+    
 }
 
