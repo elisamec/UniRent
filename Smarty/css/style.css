@@ -2910,3 +2910,14 @@ button.delete_button:hover{
     grid-template-columns: auto 1fr; /* 2 columns: first column auto width for paragraphs, second column takes remaining space for selects */
     gap: 15px; /* gap between rows and columns */
   }
+  select::-ms-expand {
+    display: none;
+ }
+ 
+ select {
+    font-size: 16px;
+    line-height: 16px;
+    background: url('/UniRent/Smarty/img/select-arrows.svg') no-repeat 100% 50%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+ }
