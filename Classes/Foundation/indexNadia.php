@@ -22,17 +22,17 @@ use DateTime;
     $FP=FPersistentManager::getInstance();
     $FA=FAccommodation::getInstance();
 
-    //$a = new Address();
-    //$a = $a->withSortingCode(25)->withAddressLine1('Via Anna, 1')->withPostalCode('55555')->withLocality('Milano');
-    //$st = new DateTime('2021-06-01');
+    $a = new Address();
+    $a = $a->withSortingCode(25)->withAddressLine1('Via Anna, 1')->withPostalCode('55555')->withLocality('Milano');
+    $st = new DateTime('2021-06-01');
 
-    //$ph1 = new EPhoto(null, "foto1", "accommodation", null, null);
-    //$ph2 = new EPhoto(null, "fo1", "accommodation", null, null);
-    //$photo = [$ph1, $ph2];
+    $ph1 = new EPhoto(null, "foto1", "accommodation", null, null);
+    $ph2 = new EPhoto(null, "fo1", "accommodation", null, null);
+    $photo = [$ph1, $ph2];
 
-    //$visit = ['moday' => ["10:30", "11:20"], 'thursday' => ["20:40"]];
+    $visit = ['moday' => ["10:30", "11:20"], 'thursday' => ["20:40"]];
 
-    //$acc = new EAccommodation(null, $photo, "Casa", $a, 100, $st, "casetta bellissima v2", 100, $visit, 30, false, true, true, false, 2);
+    $acc = new EAccommodation(19, $photo, "Casa", $a, 100, $st, "casetta bellissima v2", 3, 100, $visit, 30, false, true, true, false, 2);
 
     //$risultato = $FA->update($acc);
 
@@ -60,9 +60,11 @@ use DateTime;
 
     print($risultato);*/
 
-    $risultato = $FP->delete("EAccommodation", 18);
+    //$risultato = $FP->delete("EAccommodation", 18);
 
-    $risultato ? print("Cancellazione avvenuta con successo") : print("Cancellazione non avvenuta");
+    $risultato = $FP->update($acc);
+
+    $risultato ? print("Aggiornamento avvenuto con successo") : print("Aggiornamento non avvenuto");
 
 
 
