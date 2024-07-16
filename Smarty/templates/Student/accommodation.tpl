@@ -332,7 +332,7 @@
     <div class="row">
       <span class="resClose" id="confirmClose">&times;</span>
       <h2 class="resModal-head">Are you sure you want to book another visit?</h2>
-      <p>You already have one booked for {$day} at {$time}. The duration of the visit is {$duration} minutes.</p>
+      <p>You already have one booked for {$day} at {$time} of the duration of {$duration} minutes.</p>
     </div>
     <div class="btn-cont">
       <button id="confirmBooking" type="button">Continue</button>
