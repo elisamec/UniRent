@@ -765,7 +765,7 @@ class COwner
         
     }
 
-    
+
     public static function deleteAccommodation(int $id) {
         $PM=FPersistentManager::getInstance();
         $result=$PM->delete('EAccommodation', $id);
@@ -835,6 +835,7 @@ class COwner
         #print $addressObj->getAddressLine1().' '.$addressObj->getPostalCode().' '.$addressObj->getLocality();
         $accomodation = new EAccommodation($id,$array_photos,$title,$addressObj,$price,$date,$description,$places,$deposit,$array_visit,$duration,$men,$women,$animals,$smokers,$idOwner);
         $result=$PM::update($accomodation);
+        $id = $accomodation->getIdAccommodation();
         
         $result ? header('Location:/UniRent/Owner/accommodationManagement/'.$id) : http_response_code(500);
     }
