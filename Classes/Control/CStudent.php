@@ -281,6 +281,7 @@ class CStudent{
                     {
                         $studBooked=true;
                         $dayOfBooking=$b->getDate()->format('d-m-Y');
+                        $dayOfBooking=$b->getDayOfweek().' the '.$dayOfBooking;
                         $timeOfBooking=$b->getDate()->format('H:i');
                     }
                     if($b->getDayOfWeek()==$day && $b->getDate()->format('H:i')==$t)
