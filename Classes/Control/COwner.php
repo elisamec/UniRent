@@ -778,6 +778,7 @@ class COwner
             http_response_code(500);
         }
     }
+    
     public static function editAccommodationOperations(int $id)
     {
         
