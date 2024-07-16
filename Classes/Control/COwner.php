@@ -104,7 +104,7 @@ class COwner
         }
         $num_places=$accomm->getPlaces();
         $tenantOwner= $PM->getTenants('current',$accomm->getIdOwner());
-        if ($tenantOwner[$idAccommodation]===null) {
+        if (!array_key_exists($idAccommodation, $tenantOwner)) {
             $tenants=[];
         }
         else
