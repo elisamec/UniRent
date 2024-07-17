@@ -864,7 +864,8 @@ class COwner
                 }
                 $tenantList[] = [
                     'username' => ($student[0])->getUsername(),
-                    'image' => $profilePic
+                    'image' => $profilePic,
+                    'expiryDate' => $student[1]
                 ];
             }
 
@@ -873,6 +874,21 @@ class COwner
                 'tenants' => $tenantList
             ];
         }
+        $tenants[]=[
+            'accommodation' => 'Tutti',
+            'tenants' =>[ [
+                'username' => 'Tutti',
+                'image' => '/UniRent/Smarty/images/ImageIcon.png',
+                'expiryDate' => '01-11-2024'
+            ], 
+            [
+                'username' => 'Another',
+                'image' => '/UniRent/Smarty/images/ImageIcon.png',
+                'expiryDate' => '01-11-2025'
+            ]
+            ]
+        ];
+        
         $view->tenants($tenants, $kind);
     }
 
