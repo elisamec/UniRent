@@ -247,6 +247,14 @@
                         {/if}
             </select>
     </div>
+    <div class="row padding-reserve">
+        <p>Year:</p>
+        </div>
+        <div class="row padding-reserve">
+            <select name="year" id="year" class="selectPeriod">
+                <option value="" disabled selected>Select a year</option>
+            </select>
+        </div>
     </div>
      <div class="btn-cont">
         <button id="reserve" class="cancelClass" type="submit">Reserve</button>
@@ -298,83 +306,7 @@
     </div>
 </div>
 
-<script>
-    // Get the reserve modal and not reservable modal
-    var reserveModal = document.getElementById("reserveModal");
-    var notReservableModal = document.getElementById("notReservableModal");
-    var successReserveModal = document.getElementById("successReserveModal");
 
-    // Get the button that opens the reserve modal
-    var reserveBtn = document.getElementById("reserveBtn");
-
-    // Get the buttons and elements for closing modals
-    var reserveClose = document.getElementById("reserveClose");
-    var notReservableClose = document.getElementById("notReservableClose");
-    var understoodReserve = document.getElementById("understoodReserve");
-    var cancelReserve = document.getElementById("cancelReserve");
-
-    // Check if reservation is not possible
-    var notReservable = '{$disabled}';
-
-    // When the user clicks the reserve button
-    reserveBtn.onclick = function(event) {
-        event.preventDefault(); // Prevent the default action (navigation)
-        if (!notReservable) {
-            reserveModal.style.display = "block";
-        } else {
-            notReservableModal.style.display = "block";
-        }
-    }
-
-    // When the user clicks on <span> to close the reserve modal
-    reserveClose.onclick = function() {
-        reserveModal.style.display = "none";
-    }
-
-    // When the user clicks on <span> to close the not reservable modal
-    notReservableClose.onclick = function() {
-        notReservableModal.style.display = "none";
-    }
-
-    // When the user clicks on 'Understood' in not reservable modal
-    understoodReserve.onclick = function() {
-        notReservableModal.style.display = "none";
-    }
-
-    // When the user clicks on 'Cancel' in the reserve modal
-    cancelReserve.onclick = function() {
-        reserveModal.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of a modal, close it
-    window.onclick = function(event) {
-        if (event.target == reserveModal) {
-            reserveModal.style.display = "none";
-        }
-        if (event.target == notReservableModal) {
-            notReservableModal.style.display = "none";
-        }
-        if (event.target == successReserveModal) {
-            successReserveModal.style.display = "none";
-        }
-    }
-
-    // Function to show success modal if reservation was successful
-    function showsuccessReserveModal() {
-        if ('{$successReserve}' != 'null') {
-            successReserveModal.style.display = "block";
-        }
-    }
-    document.getElementById("successReserveClose").onclick = function() {
-        successReserveModal.style.display = "none";
-    }
-    document.getElementById("closesuccessReserveModal").onclick = function() {
-        successReserveModal.style.display = "none";
-    }
-
-    // Call the function to check for success and show modal
-    showsuccessReserveModal();
-</script>
 
 <div class="resModal" id="visitModal">
   <div class="resModal-content">
@@ -590,7 +522,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("successVisitClose").onclick = function() {
         reserveModal.style.display = "none";
     }
-    document.getElementById("closesuccessVisitModal").onclick = function() {
+    document.getElementById("closeSuccessVisitModal").onclick = function() {
         reserveModal.style.display = "none";
     }
 
@@ -821,4 +753,114 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 </script>
 {/literal}
+<script>
+    // Get the reserve modal and not reservable modal
+    var reserveModal = document.getElementById("reserveModal");
+    var notReservableModal = document.getElementById("notReservableModal");
+    var successReserveModal = document.getElementById("successReserveModal");
+    // JavaScript function to populate the date select dropdown with dynamic year selection
+ // JavaScript function to populate the year select dropdown
+    function populateYearSelect() {
+        var select = document.getElementById("year");
+        var currentYear = new Date().getFullYear();
+
+        // Clear existing options
+        select.innerHTML = "";
+
+        // Add options for the next 4 years starting from current year
+        for (var i = 0; i < 5; i++) {
+            var option = document.createElement("option");
+            option.value = currentYear + i;
+            option.text = currentYear + i;
+            select.appendChild(option);
+        }
+    }
+
+    // Call populateYearSelect function on document ready
+    document.addEventListener("DOMContentLoaded", function() {
+        populateYearSelect();
+    });
+
+$(document).ready(function() {
+    // Call populateDateSelect function on document ready
+    populateDateSelect();
+
+    // Event listener to handle change in select option
+    $('#date').on('change', function() {
+        populateDateSelect();
+    });
+});
+
+
+    // Get the button that opens the reserve modal
+    var reserveBtn = document.getElementById("reserveBtn");
+
+    // Get the buttons and elements for closing modals
+    var reserveClose = document.getElementById("reserveClose");
+    var notReservableClose = document.getElementById("notReservableClose");
+    var understoodReserve = document.getElementById("understoodReserve");
+    var cancelReserve = document.getElementById("cancelReserve");
+
+    // Check if reservation is not possible
+    var notReservable = '{$disabled}';
+
+    // When the user clicks the reserve button
+    reserveBtn.onclick = function(event) {
+        event.preventDefault(); // Prevent the default action (navigation)
+        if (!notReservable) {
+            reserveModal.style.display = "block";
+        } else {
+            notReservableModal.style.display = "block";
+        }
+    }
+
+    // When the user clicks on <span> to close the reserve modal
+    reserveClose.onclick = function() {
+        reserveModal.style.display = "none";
+    }
+
+    // When the user clicks on <span> to close the not reservable modal
+    notReservableClose.onclick = function() {
+        notReservableModal.style.display = "none";
+    }
+
+    // When the user clicks on 'Understood' in not reservable modal
+    understoodReserve.onclick = function() {
+        notReservableModal.style.display = "none";
+    }
+
+    // When the user clicks on 'Cancel' in the reserve modal
+    cancelReserve.onclick = function() {
+        reserveModal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of a modal, close it
+    window.onclick = function(event) {
+        if (event.target == reserveModal) {
+            reserveModal.style.display = "none";
+        }
+        if (event.target == notReservableModal) {
+            notReservableModal.style.display = "none";
+        }
+        if (event.target == successReserveModal) {
+            successReserveModal.style.display = "none";
+        }
+    }
+
+    // Function to show success modal if reservation was successful
+    function showsuccessReserveModal() {
+        if ('{$successReserve}' != 'null') {
+            successReserveModal.style.display = "block";
+        }
+    }
+    document.getElementById("successReserveClose").onclick = function() {
+        successReserveModal.style.display = "none";
+    }
+    document.getElementById("closesuccessReserveModal").onclick = function() {
+        successReserveModal.style.display = "none";
+    }
+
+    // Call the function to check for success and show modal
+    showsuccessReserveModal();
+</script>
    </body>

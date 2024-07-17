@@ -126,7 +126,7 @@ class COwner
                 ];
             }
         }
-        $disabled=true;
+        $disabled=$accomm->getStatus();
         $deletable=false;
         $view->accommodationManagement($accomm, $owner, $reviewsData, $picture, $tenants, $num_places, $disabled, $deletable);
     }
@@ -570,16 +570,10 @@ class COwner
         $addressObj= new Address();
         $addressObj=$addressObj->withAddressLine1($address)->withPostalcode($postalCode)->withLocality($city);
         #print $addressObj->getAddressLine1().' '.$addressObj->getPostalCode().' '.$addressObj->getLocality();
-        $accomodation = new EAccommodation(null,$array_photos,$title,$addressObj,$price,$date,$description,$places,$deposit,$array_visit,$duration,$men,$women,$animals,$smokers,true,$idOwner);
+        $accomodation = new EAccommodation(null,$array_photos,$title,$addressObj,$price,$date,$description,$places,$deposit,$array_visit,$duration,$men,$women,$animals,$smokers, true,$idOwner);
         $result=$PM::store($accomodation);
-        if($result)
-        {
-            header('Location:/UniRent/Owner/home');
-        }
-        else
-        {
-            http_response_code(500);
-        }
+        $result ? header('Location:/UniRent/Owner/home') : http_response_code(500);
+
     }
     public static function publicProfileFromOwner(string $username, ?string $kind="#")
     {
@@ -837,6 +831,7 @@ class COwner
         $addressObj= new Address();
         $addressObj=$addressObj->withAddressLine1($address)->withPostalcode($postalCode)->withLocality($city)->withSortingCode($addressId);
         #print $addressObj->getAddressLine1().' '.$addressObj->getPostalCode().' '.$addressObj->getLocality();
+        //Nella seguente riga manca il penultimo attributo status che deve essere true o false
         $accomodation = new EAccommodation($id,$array_photos,$title,$addressObj,$price,$date,$description,$places,$deposit,$array_visit,$duration,$men,$women,$animals,$smokers,$idOwner);
         $result=$PM::update($accomodation);
         $id = $accomodation->getIdAccommodation();
