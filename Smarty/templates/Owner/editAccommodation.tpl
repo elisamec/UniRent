@@ -397,8 +397,6 @@ function getVisitData() {
             let start = startInput.value;
             let end = endInput.value;
             data.push({ duration, day, start, end });
-        } else {
-            console.error("One or more input fields not found in availability element:", availabilities[i]);
         }
     }
     return data;
@@ -494,18 +492,45 @@ imageInput.addEventListener('change', function(event) {
         reader.readAsDataURL(file);
     }
 });
+document.addEventListener("DOMContentLoaded", function() {
+    // Load images data
+    var imagesDataOld = {/literal}{$uploadedImagesData}{literal};
+    setImagesData(imagesDataOld);
+
+    // Function to set images data in the form
+    function setImagesData(data) {
+        let container = document.getElementById('imageContainer');
+        container.innerHTML = '';
+        for (let i = 0; i < data.length; i++) {
+            let imgWrapper = document.createElement('div');
+            imgWrapper.className = 'image-wrapper';
+            imgWrapper.innerHTML = `
+                <img src="${data[i]}" class="uploaded-image">
+                <button type="button" onclick="removeImage(${i})" class="button-spec little">-</button>
+            `;
+            container.appendChild(imgWrapper);
+        }
+    }
+});
 
 function displayImages() {
-    imageContainer.innerHTML = '';
+    // Get the current content of imageContainer
+    let currentHtml = imageContainer.innerHTML;
+    var imagesDataOldCount =  Object.keys({/literal}{$uploadedImagesData}{literal}).length;
+
+    // Append new images to the existing content
     for (let i = 0; i < imagesData.length; i++) {
         let imgWrapper = document.createElement('div');
         imgWrapper.className = 'image-wrapper';
         imgWrapper.innerHTML = `
             <img src="${imagesData[i]}" class="uploaded-image">
-            <button type="button" onclick="removeImage(${i})" class="button-spec little">-</button>
+            <button type="button" onclick="removeImage(${i+imagesDataOldCount})" class="button-spec little">-</button>
         `;
-        imageContainer.appendChild(imgWrapper);
+        currentHtml += imgWrapper.outerHTML; // Append new image wrapper
     }
+
+    // Set the updated HTML back to imageContainer
+    imageContainer.innerHTML = currentHtml;
 }
 
 function removeImage(index) {
@@ -635,7 +660,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
 
                 selectedDate.setDate(day);
-                console.log(selectedDate);
                 let currentDate = new Date();
                 currentDate.setHours(0, 0, 0, 0);
 
@@ -666,33 +690,6 @@ document.addEventListener("DOMContentLoaded", function() {
     </script>
     {/literal}
     {literal}
-    <script>
-document.addEventListener("DOMContentLoaded", function() {
-    // Load images data
-    var imagesData = {/literal}{$uploadedImagesData}{literal};
-    setImagesData(imagesData);
-
-    // Function to set images data in the form
-    function setImagesData(data) {
-        let container = document.getElementById('imageContainer');
-        container.innerHTML = '';
-        for (let i = 0; i < data.length; i++) {
-            let imgWrapper = document.createElement('div');
-            imgWrapper.className = 'image-wrapper';
-            imgWrapper.innerHTML = `
-                <img src="${data[i]}" class="uploaded-image">
-                <button type="button" onclick="removeImage(${i})" class="button-spec little">-</button>
-            `;
-            container.appendChild(imgWrapper);
-        }
-    }
-
-    function removeImage(index) {
-        imagesData.splice(index, 1);
-        setImagesData(imagesData);
-    }
-});
-</script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     // Initialize form fields with Smarty variables
