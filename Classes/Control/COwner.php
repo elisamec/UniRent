@@ -838,11 +838,8 @@ class COwner
         $accomodation = new EAccommodation($id,$array_photos,$title,$addressObj,$price,$date,$description,$places,$deposit,$array_visit,$duration,$men,$women,$animals,$smokers,$status,$idOwner);
         $result=$PM->update($accomodation);
         $id = $accomodation->getIdAccommodation();
-        $requestUri = trim($_SERVER['HTTP_REFERER'], '/');
-        $uriParts = explode('/', $requestUri);
-        print_r($uriParts);
         if ($result) {
-            header('Location:/UniRent/'.$uriParts[4].'/'.$uriParts[5].'/'.$id);
+            header('Location:/UniRent/Owner/accommodationManagement/'.$id);
         } else {
             http_response_code(500);
         }
