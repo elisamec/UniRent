@@ -154,6 +154,14 @@
                      </select>
                   </div>
                </div>
+               </div><div class="row">
+               <div class="Findcontainer">
+                  <div class="select-outline">
+                     <select name="year" id="year" class="selectFilter mdb-select md-form md-outline colorful-select dropdown-primary">
+                        <option value="" disabled selected>Select a year</option>
+                     </select>
+                  </div>
+               </div>
                </div>
                <div class="row">
                <div class="Findcontainer">
@@ -274,14 +282,17 @@
   const data = {/literal}{$tenants}{literal};
   const kind = {/literal}"{$kind}"{literal};
 
-   // Function to populate tenantsContainer
-    function populateTenantsContainer(data) {
+   function populateTenantsContainer(data) {
         const tenantsContainer = document.getElementById("tenantsContainer");
+        const yearSelect = document.getElementById("year");
+
+        // Clear existing options in year select
+        yearSelect.innerHTML = '<option value="" disabled selected>Select a year</option>';
 
         data.forEach(item => {
             const accommodationDiv = document.createElement("div");
             accommodationDiv.classList.add("accommodation");
-
+            console.log(item);
             const title = document.createElement("h1");
             title.classList.add("titleAccomm");
             title.textContent = item.accommodation;
@@ -318,49 +329,76 @@
                     const usernameLink = document.createElement("a");
                     usernameLink.href = `/UniRent/Owner/publicProfile/${tenant.username}`;
                     usernameLink.textContent = tenant.username;
-
                     usernameDiv.appendChild(usernameLink);
+
+                    // Display expiry date under username
+                    const expiryDateDiv = document.createElement("div");
+                    expiryDateDiv.textContent = `Expiry Date: ${tenant.expiryDate}`;
+                    usernameDiv.appendChild(expiryDateDiv);
+
                     userSectionDiv.appendChild(usernameDiv);
 
                     colDiv.appendChild(userSectionDiv);
                     rowDiv.appendChild(colDiv);
+
+                    // Extract year from expiryDate and add to yearSelect if unique
+                    const year = new Date(tenant.expiryDate).getFullYear();
+                    if (!yearSelect.querySelector(`option[value="${year}"]`)) {
+                        const option = document.createElement("option");
+                        option.value = year;
+                        option.textContent = year;
+                        yearSelect.appendChild(option);
+                    }
                 });
             } else if (typeof item.tenants === 'object') {
-                // If item.tenants is an object, convert it to an array and iterate
-                const tenantArray = [item.tenants]; // Wrap object in an array
-                tenantArray.forEach(tenant => {
-                    const colDiv = document.createElement("div");
-                    colDiv.classList.add("col-md-3");
+                // Handle case where tenants is an object (not an array)
+                const tenant = item.tenants;
 
-                    const userSectionDiv = document.createElement("div");
-                    userSectionDiv.classList.add("userSection");
+                const colDiv = document.createElement("div");
+                colDiv.classList.add("col-md-3");
 
-                    const userIconDiv = document.createElement("div");
-                    userIconDiv.classList.add("userIcon");
+                const userSectionDiv = document.createElement("div");
+                userSectionDiv.classList.add("userSection");
 
-                    const userLink = document.createElement("a");
-                    userLink.href = `/UniRent/Owner/publicProfile/${tenant.username}/${kind}`;
+                const userIconDiv = document.createElement("div");
+                userIconDiv.classList.add("userIcon");
 
-                    const userImage = document.createElement("img");
-                    userImage.src = tenant.image;
+                const userLink = document.createElement("a");
+                userLink.href = `/UniRent/Owner/publicProfile/${tenant.username}/${kind}`;
 
-                    userLink.appendChild(userImage);
-                    userIconDiv.appendChild(userLink);
-                    userSectionDiv.appendChild(userIconDiv);
+                const userImage = document.createElement("img");
+                userImage.src = tenant.image;
 
-                    const usernameDiv = document.createElement("div");
-                    usernameDiv.classList.add("username");
+                userLink.appendChild(userImage);
+                userIconDiv.appendChild(userLink);
+                userSectionDiv.appendChild(userIconDiv);
 
-                    const usernameLink = document.createElement("a");
-                    usernameLink.href = `/UniRent/Owner/publicProfile/${tenant.username}`;
-                    usernameLink.textContent = tenant.username;
+                const usernameDiv = document.createElement("div");
+                usernameDiv.classList.add("username");
 
-                    usernameDiv.appendChild(usernameLink);
-                    userSectionDiv.appendChild(usernameDiv);
+                const usernameLink = document.createElement("a");
+                usernameLink.href = `/UniRent/Owner/publicProfile/${tenant.username}`;
+                usernameLink.textContent = tenant.username;
+                usernameDiv.appendChild(usernameLink);
 
-                    colDiv.appendChild(userSectionDiv);
-                    rowDiv.appendChild(colDiv);
-                });
+                // Display expiry date under username
+                const expiryDateDiv = document.createElement("div");
+                expiryDateDiv.textContent = `Expiry Date: ${tenant.expiryDate}`;
+                usernameDiv.appendChild(expiryDateDiv);
+
+                userSectionDiv.appendChild(usernameDiv);
+
+                colDiv.appendChild(userSectionDiv);
+                rowDiv.appendChild(colDiv);
+
+                // Extract year from expiryDate and add to yearSelect if unique
+                const year = new Date(tenant.expiryDate).getFullYear();
+                if (!yearSelect.querySelector(`option[value="${year}"]`)) {
+                    const option = document.createElement("option");
+                    option.value = year;
+                    option.textContent = year;
+                    yearSelect.appendChild(option);
+                }
             } else {
                 console.error("Unexpected format for item.tenants:", item.tenants);
             }
@@ -370,7 +408,7 @@
         });
     }
 
-    // Populate the select element with accommodation titles when the page loads
+    // Populate the select element with accommodation titles and year options when the page loads
     document.addEventListener("DOMContentLoaded", function() {
         const accommodationSelect = document.getElementById("accommodationSelect");
 
@@ -381,7 +419,7 @@
             accommodationSelect.appendChild(option);
         });
 
-        // Call the function to populate tenantsContainer
+        // Call the function to populate tenantsContainer and year select
         populateTenantsContainer(data);
     });
 </script>
