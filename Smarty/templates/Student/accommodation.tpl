@@ -232,10 +232,12 @@
     <h2 class="resModal-head">Reserve this accommodation</h2>
     </div>
     <form action="/UniRent/Student/reserveAccommodation" class="form" method="POST" enctype="multipart/form-data">
+    <div class="grid-container">
     <div class="row padding-reserve">
         <p>Period:</p>
-        <div class="col-lg-6 select-outline">
-            <select name="date" id="date" class="mdb-select md-form md-outline colorful-select dropdown-primary">
+        </div>
+        <div class="row padding-reserve">
+            <select name="date" id="date" class="selectPeriod">
                         {if $period === "september"}
                         <option value="september" selected>September to June</option>
                         <option value="october">October to July</option>
@@ -244,49 +246,126 @@
                         <option value="october" selected>October to July</option>
                         {/if}
             </select>
-         </div>
+    </div>
     </div>
      <div class="btn-cont">
-        <button id="reserve" type="submit">Reserve</button>
-        <button id="cancelReserve" type="button">Cancel</button>
+        <button id="reserve" class="cancelClass" type="submit">Reserve</button>
+        <button id="cancelReserve" class="confirmClass" type="button">Cancel</button>
     </div>
     </form>
   </div>
 </div>
 </div>
+<div id="notReservableModal" class="resModal">
+    <div class="resModal-content">
+        <span class="resClose" id="notReservableClose">&times;</span>
+        <h2 class="resModal-head">You cannot reserve this accommodation</h2>
+        <p>This accommodation does not accept any more reservations.</p>
+        <button class="cancelClass" id="understoodReserve">Understood</button>
+    </div>
+</div>
+<div id="notVisitableModal" class="resModal">
+    <div class="resModal-content">
+        <span class="resClose" id="notVisitableClose">&times;</span>
+        <h2 class="resModal-head">You cannot visit this accommodation</h2>
+        <p>This accommodation does not accept any more visit requests.</p>
+        <button class="cancelClass" id="understoodVisit">Understood</button>
+    </div>
+</div>
+
+<div id="successReserveModal" class="resModal">
+    <div class="resModal-content">
+        <div class="row">
+            <span class="resClose" id="successReserveClose">&times;</span>
+            {if $successReserve === "sent"}
+            <h2 class="resModal-head">Reservation Sent</h2>
+            <p>Your reservation was successfully sent.</p>
+            {else if $successReserve === "full"}
+            <h2 class="resModal-head">No more places available</h2>
+            <p>Your reservation could not be sent due to full booking. Please choose a different period.</p>
+            {else}
+            <h2 class="resModal-head">Reservation Failed</h2>
+            <p>Your reservation could not be sent. Please try again later.</p>
+            {/if}
+        </div>
+        <div class="btn-cont">
+            <button id="closesuccessReserveModal" class="cancelClass" type="button">Close</button>
+        </div>
+    </div>
+</div>
+
 <script>
-    // Get the modal
-    var modal = document.getElementById("reserveModal");
+    // Get the reserve modal and not reservable modal
+    var reserveModal = document.getElementById("reserveModal");
+    var notReservableModal = document.getElementById("notReservableModal");
+    var successReserveModal = document.getElementById("successReserveModal");
 
-    // Get the button that opens the modal
-    var btn = document.getElementById("reserveBtn");
+    // Get the button that opens the reserve modal
+    var reserveBtn = document.getElementById("reserveBtn");
 
-    // Get the <span> element that closes the modal
-    var span = document.getElementById("reserveClose");
+    // Get the buttons and elements for closing modals
+    var reserveClose = document.getElementById("reserveClose");
+    var notReservableClose = document.getElementById("notReservableClose");
+    var understoodReserve = document.getElementById("understoodReserve");
+    var cancelReserve = document.getElementById("cancelReserve");
 
-    var cancelBtn = document.getElementById("cancelReserve");
+    // Check if reservation is not possible
+    var notReservable = '{$disabled}';
 
-    // When the user clicks the button, open the modal 
-    btn.onclick = function(event) {
-        event.preventDefault();
-        modal.style.display = "block";
-    }
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-    cancelBtn.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
+    // When the user clicks the reserve button
+    reserveBtn.onclick = function(event) {
+        event.preventDefault(); // Prevent the default action (navigation)
+        if (!notReservable) {
+            reserveModal.style.display = "block";
+        } else {
+            notReservableModal.style.display = "block";
         }
     }
+
+    // When the user clicks on <span> to close the reserve modal
+    reserveClose.onclick = function() {
+        reserveModal.style.display = "none";
+    }
+
+    // When the user clicks on <span> to close the not reservable modal
+    notReservableClose.onclick = function() {
+        notReservableModal.style.display = "none";
+    }
+
+    // When the user clicks on 'Understood' in not reservable modal
+    understoodReserve.onclick = function() {
+        notReservableModal.style.display = "none";
+    }
+
+    // When the user clicks on 'Cancel' in the reserve modal
+    cancelReserve.onclick = function() {
+        reserveModal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of a modal, close it
+    window.onclick = function(event) {
+        if (event.target == reserveModal) {
+            reserveModal.style.display = "none";
+        }
+        if (event.target == notReservableModal) {
+            notReservableModal.style.display = "none";
+        }
+        if (event.target == successReserveModal) {
+            successReserveModal.style.display = "none";
+        }
+    }
+
+    // Function to show success modal if reservation was successful
+    function showsuccessReserveModal() {
+        if ('{$successReserve}' != 'null') {
+            successReserveModal.style.display = "block";
+        }
+    }
+
+    // Call the function to check for success and show modal
+    showsuccessReserveModal();
 </script>
+
 <div class="resModal" id="visitModal">
   <div class="resModal-content">
     <div class="row">
@@ -300,7 +379,7 @@
         <p>Day of the week (next week):</p>
         </div>
       <div class="row padding-reserve">
-          <select name="day" id="day" class="selectVisit">
+          <select name="day" id="day" class="selectVisit" required>
           <option value="" selected disabled>Select a day</option>
             <option value="Monday">Monday</option>
             <option value="Tuesday">Tuesday</option>
@@ -313,7 +392,7 @@
         <p>Time:</p>
         </div>
         <div class="row padding-reserve">
-          <select name="time" id="time"class="selectVisit">
+          <select name="time" id="time"class="selectVisit" required>
             <option value="" selected disabled>Select the time</option>
             <!-- Time options will be populated here -->
           </select>
@@ -321,8 +400,8 @@
       </div>
         </div>
       <div class="btn-cont">
-        <button id="visit" type="submit">Visit</button>
-        <button id="cancelVisit" type="button">Cancel</button>
+        <button id="visit" class="cancelClass" type="submit">Visit</button>
+        <button id="cancelVisit" class="cancelClass" type="button">Cancel</button>
       </div>
     </form>
   </div>
@@ -335,87 +414,176 @@
       <p>You already have one booked for {$day} at {$time} of the duration of {$duration} minutes.</p>
     </div>
     <div class="btn-cont">
-      <button id="confirmBooking" type="button">Continue</button>
-      <button id="cancelBooking" type="button">Cancel</button>
+      <button id="confirmBooking" class="cancelClass" class="confirmClass" type="button">Continue</button>
+      <button id="cancelBooking" class="cancelClass" type="button">Cancel</button>
     </div>
   </div>
 </div>
-{literal}
+<div id="successVisitModal" class="resModal">
+    <div class="resModal-content">
+        <div class="row">
+            <span class="resClose" id="successVisitClose">&times;</span>
+            {if $successVisit === "sent"}
+            <h2 class="resModal-head">Visit Request Sent</h2>
+            <p>Your visit request was successfully sent.</p>
+            {else}
+            <h2 class="resModal-head">Visit Request Failed to Send</h2>
+            <p>Your visit request could not be sent. Please try again later.</p>
+            {/if}
+        </div>
+        <div class="btn-cont">
+            <button id="closeSuccessVisitModal" class="cancelClass" type="button">Close</button>
+        </div>
+    </div>
+</div>
+<!-- Place your modal and script code within your HTML structure -->
+<div id="visitEmptyModal" class="resModal">
+    <div class="resModal-content">
+        <div class="row">
+            <span class="resClose" id="visitEmptyClose">&times;</span>
+            <h2 class="resModal-head">No possible visit slots</h2>
+            <p>There are no available visit slots for this accommodation.</p>
+        </div>
+        <div class="btn-cont">
+        <button id="closeVisitEmptyModal" class= "cancelClass" type="button" >Close</button>
+        </div>
+    </div>
+</div>
+
 <script>
-  // Get the modal elements
-  var visitModal = document.getElementById("visitModal");
-  var confirmModal = document.getElementById("confirmModal");
+document.addEventListener('DOMContentLoaded', function() {
+    // Get the visit modal and other necessary elements
+    var visitModal = document.getElementById("visitModal");
+    var confirmModal = document.getElementById("confirmModal");
+    var successVisitModal = document.getElementById("successVisitModal");
+    var visitEmptyModal = document.getElementById("visitEmptyModal");
 
-  // Get the button that opens the visit modal
-  var visitBtn = document.getElementById("visitBtn");
+    var visitBtn = document.getElementById("visitBtn");
+    var disabled = '{$disabled}'; // Ensure this variable is properly initialized
 
-  // JSON data for time slots
-  var timeSlots = {/literal}{$timeSlots}{literal};
+    // Event handler for Visit button
+    visitBtn.onclick = function(event) {
+        event.preventDefault();
 
-  // When the user clicks the button to open the visit modal
-  visitBtn.onclick = function(event) {
-    event.preventDefault();
-
-    // Check if already booked
-    if ({/literal}{$booked}{literal}) {
-      // Show confirmation modal
-      confirmModal.style.display = "block";
-    } else {
-      // Show visit modal
-      visitModal.style.display = "block";
+        if (disabled) {
+            // Show not visitable modal
+            document.getElementById("notVisitableModal").style.display = "block";
+        } else {
+            // Check if timeSlots is undefined or not an object
+            var timeSlots = '{$timeSlots}';
+            if (!timeSlots || typeof timeSlots !== 'object' || Object.keys(timeSlots).length === 0) {
+                // Show visit empty modal
+                visitEmptyModal.style.display = "block";
+            } else {
+                // Check if already booked
+                if ('{$booked}') {
+                    // Show confirmation modal
+                    confirmModal.style.display = "block";
+                } else {
+                    // Show visit modal
+                    visitModal.style.display = "block";
+                }
+            }
+        }
     }
-  }
 
-  // Close visit modal
-  document.getElementById("visitClose").onclick = function() {
-    visitModal.style.display = "none";
-  }
-  document.getElementById("cancelVisit").onclick = function() {
-    visitModal.style.display = "none";
-  }
+    // Close not visitable modal
+    document.getElementById("notVisitableClose").onclick = function() {
+        document.getElementById("notVisitableModal").style.display = "none";
+    }
 
-  // Close confirmation modal
-  document.getElementById("confirmClose").onclick = function() {
-    confirmModal.style.display = "none";
-  }
+    document.getElementById("understoodVisit").onclick = function() {
+        document.getElementById("notVisitableModal").style.display = "none";
+    }
 
-  // Cancel booking action
-  document.getElementById("cancelBooking").onclick = function() {
-    confirmModal.style.display = "none";
-  }
+    // Close visit modal
+    document.getElementById("visitClose").onclick = function() {
+        visitModal.style.display = "none";
+    }
 
-  // Continue booking action
-  document.getElementById("confirmBooking").onclick = function() {
-    confirmModal.style.display = "none";
-    visitModal.style.display = "block"; // Show visit modal after confirmation
-  }
+    // Cancel visit action
+    document.getElementById("cancelVisit").onclick = function() {
+        visitModal.style.display = "none";
+    }
 
-  // Populate time slots based on the selected day
-  document.getElementById("day").addEventListener("change", function() {
-    var selectedDay = this.value;
+    // Close confirmation modal
+    document.getElementById("confirmClose").onclick = function() {
+        confirmModal.style.display = "none";
+    }
+
+    // Cancel booking action
+    document.getElementById("cancelBooking").onclick = function() {
+        confirmModal.style.display = "none";
+    }
+
+    // Continue booking action
+    document.getElementById("confirmBooking").onclick = function() {
+        confirmModal.style.display = "none";
+        visitModal.style.display = "block"; // Show visit modal after confirmation
+    }
+
+    // Close success visit modal
+    document.getElementById("closeSuccessVisitModal").onclick = function() {
+        successVisitModal.style.display = "none";
+    }
+
+    // Close visit empty modal
+    document.getElementById("closeVisitEmptyModal").onclick = function() {
+        visitEmptyModal.style.display = "none";
+    }
+    document.getElementById("visitEmptyClose").onclick = function() {
+        visitEmptyModal.style.display = "none";
+    }
+
+    // Function to show success visit modal based on $successVisit value
+    function showSuccessVisitModal() {
+        var successVisit = '{$successVisit}';
+        if (successVisit !== 'null') {
+            successVisitModal.style.display = "block";
+        }
+    }
+
+    // Call the function to check for $successVisit and show modal
+    showSuccessVisitModal();
+
+    // Optional: Populate time slots based on the selected day (if needed)
     var timeSelect = document.getElementById("time");
-    
-    // Clear previous options
-    timeSelect.innerHTML = '<option value="" selected disabled>Select the time</option>';
-    // Populate new options
-     if (timeSlots[selectedDay] && typeof timeSlots[selectedDay] === 'object') {
-    // Iterate over the keys of timeSlots[selectedDay]
-    Object.keys(timeSlots[selectedDay]).forEach(function(key) {
-      var option = document.createElement("option");
-      option.value = timeSlots[selectedDay][key]; // Use the value corresponding to the key
-      option.textContent = timeSlots[selectedDay][key]; // Use the same value for textContent
-      timeSelect.appendChild(option);
-    });
-  } else {
-    console.error("timeSlots[selectedDay] is not defined or is not an object.");
-    // Handle the case where timeSlots[selectedDay] is not as expected (optional)
-  }
-  });
+    var timeSlots = {$timeSlots}; // Ensure this variable is properly initialized
 
-  // Trigger the change event on page load to populate the initial time slots
-  document.getElementById("day").dispatchEvent(new Event('change'));
+    // Ensure the initial time slots are populated when the page loads
+    if (timeSelect && timeSlots) {
+        var selectedDay = document.getElementById("day").value;
+        populateTimeSlots(selectedDay);
+    }
+
+    // Event listener for day change to populate time slots dynamically
+    document.getElementById("day").addEventListener("change", function() {
+        var selectedDay = this.value;
+        populateTimeSlots(selectedDay);
+    });
+
+    // Function to populate time slots based on the selected day
+    function populateTimeSlots(selectedDay) {
+        // Clear previous options
+        timeSelect.innerHTML = '<option value="" selected disabled>Select the time</option>';
+
+        // Populate new options if timeSlots for selectedDay exist
+        if (timeSlots[selectedDay] && typeof timeSlots[selectedDay] === 'object') {
+            Object.keys(timeSlots[selectedDay]).forEach(function(key) {
+                var option = document.createElement("option");
+                option.value = timeSlots[selectedDay][key];
+                option.textContent = timeSlots[selectedDay][key];
+                timeSelect.appendChild(option);
+            });
+        }
+    }
+
+});
 </script>
-{/literal}
+
+
+
+
 
 
 
