@@ -790,6 +790,7 @@ class COwner
         $startDate=(int) USuperGlobalAccess::getPost('startDate');
         $month=USuperGlobalAccess::getPost('month');
         $visits=USuperGlobalAccess::getPost('visitAvailabilityData');  #json in arrivo dal post
+        print_r($visits);
         $places=(int)USuperGlobalAccess::getPost('places');
         $duration=EAccommodation::DurationOfVisit($visits);
         
