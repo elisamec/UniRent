@@ -32,7 +32,7 @@
 
     $visit = ['moday' => ["10:30", "11:20"], 'thursday' => ["20:40"]];
 
-    $acc = new EAccommodation(19, $photo, "Casa", $a, 100, $st, "casetta bellissima v2", 3, 100, $visit, 30, false, true, true, false, true, 2);
+    $acc = new EAccommodation(14, $photo, "Casa", $a, 100, $st, "casetta bellissima v2", 3, 100, $visit, 30, false, true, true, false, true, 2);
 
     //$risultato = $FA->update($acc);
 

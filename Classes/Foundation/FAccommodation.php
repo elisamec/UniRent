@@ -373,7 +373,7 @@ use PDO;
                 
                 $stm->execute();
                 $id=$db->lastInsertId();
-                $db->commit();
+                //$db->commit();
                 $db->exec('UNLOCK TABLES');
                 
                 return $id;
@@ -411,7 +411,7 @@ use PDO;
                 $stm->bindValue(':idDay',$idDay,PDO::PARAM_INT);
                 
                 $stm->execute();
-                $db->commit();
+                //$db->commit();
                 $db->exec('UNLOCK TABLES');
                 
                 return true;
@@ -429,7 +429,7 @@ use PDO;
         * @param  EAccommodation $accommodation
         * @return bool
         */
-        public function update(EAccommodation $accommodation):bool 
+        /*public function update(EAccommodation $accommodation):bool 
         {   
             $FA=FAccommodation::getInstance();
 
@@ -440,9 +440,134 @@ use PDO;
             $delete ? $store = $FA->store($accommodation) : $store = false;
 
             return $store;
+        }*/
+
+        public function update(EAccommodation $accommodation):bool 
+        {   
+            $FA=FAccommodation::getInstance();
+            $db=FConnection::getInstance()->getConnection();
+            $accommodationId = $accommodation->getIdAccommodation();
+            try{
+                $db->exec('LOCK TABLES accommodation WRITE');
+                $db->beginTransaction();
+
+                print "The problem is down\n";
+                $resAddress = $FA->updateAddress($accommodation->getAddress());
+                $resVisit = $FA -> updateDay($accommodation);
+                
+                if($resAddress && $resVisit){
+                    print "Here is the probelm\n";
+
+                    $q='UPDATE accommodation SET title = :title, price = :price,
+                                    start = :start, description = :description, places = :places, deposit = :deposit,
+                                    visitDuration = :visitDuration, man = :man, woman = :woman,
+                                    pets = :pets, smokers = :smokers, status = :status, idOwner = :idOwner  WHERE id=:id';
+                
+                    $stm=$db->prepare($q);
+                    //Cambiare le photo
+                    
+                    $stm->bindValue(':title',$accommodation->getTitle(),PDO::PARAM_STR);
+                    $stm->bindValue(':price',$accommodation->getPrice(),PDO::PARAM_INT);
+                    $stm->bindValue(':start',$accommodation->getStart()->format('Y-m-d H:i:s'),PDO::PARAM_STR);
+                    $stm->bindValue(':description',$accommodation->getDescription(),PDO::PARAM_STR);
+                    $stm->bindValue(':places',$accommodation->getPlaces(),PDO::PARAM_INT);
+                    $stm->bindValue(':deposit',$accommodation->getDeposit(),PDO::PARAM_INT);
+                    $stm->bindValue(':visitDuration',$accommodation->getVisitDuration(),PDO::PARAM_INT);
+                    $stm->bindValue(':man',$accommodation->getMan(),PDO::PARAM_BOOL);
+                    $stm->bindValue(':woman',$accommodation->getWoman(),PDO::PARAM_BOOL);
+                    $stm->bindValue(':pets',$accommodation->getPets(),PDO::PARAM_BOOL);
+                    $stm->bindValue(':smokers',$accommodation->getSmokers(),PDO::PARAM_BOOL);
+                    $stm->bindValue(':status',$accommodation->getStatus(),PDO::PARAM_BOOL);
+                    $stm->bindValue(':idOwner',$accommodation->getIdOwner(),PDO::PARAM_INT);
+                    $stm->bindValue(':id',$accommodationId,PDO::PARAM_INT);
+
+                    $stm->execute();           
+                    $db->commit();
+                    $db->exec('UNLOCK TABLES');
+                    return true;
+
+                } else return false;
+                
+            }
+            catch(PDOException $e){
+                $db->rollBack();
+                print "Error: " . $e->getMessage() . "\n"; // Add this line to see the error message
+                return false;
+            }
+            
         }
 
 
+        /**
+         * updateAddress
+         * private class that updates the address of an accommodation in db
+         * 
+         * @param  Address $address
+         * @return bool
+         */
+        private function updateAddress(Address $address): bool {
+            $db=FConnection::getInstance()->getConnection();
+            try{
+                $db->exec('LOCK TABLES address WRITE');
+                $db->beginTransaction();
+                $q='UPDATE address SET addressLine = :addressLine, postalCode = :postalCode, city = :city  WHERE id=:id';
+                $stm=$db->prepare($q);
+                $stm->bindValue(':addressLine',$address->getAddressLine1(),PDO::PARAM_STR);
+                $stm->bindValue(':postalCode',$address->getPostalCode(),PDO::PARAM_STR);
+                $stm->bindValue(':city',$address->getLocality(),PDO::PARAM_STR);
+                $stm->bindValue(':id',$address->getSortingCode(),PDO::PARAM_INT);
+                $stm->execute();          
+                $db->exec('UNLOCK TABLES');
+                return true;
+            }
+            catch(PDOException $e){
+                $db->rollBack();
+                return false;
+            }
+        }
+
+
+        /**
+         * updateDay
+         * private class that updates the days and times of visit of an accommodation in db
+         * 
+         * @param  int $idAccommodation
+         * @param  string $day
+         * @return bool
+         */
+        public function updateDay(EAccommodation $accommodation):bool 
+        {
+            $db=FConnection::getInstance()->getConnection();
+            $FA = FAccommodation::getInstance();
+
+            $idAccommodation = $accommodation->getIdAccommodation();
+            
+            //Delete the days and times of visit
+            $delete = $FA -> deleteDay($idAccommodation);
+
+            //If the days and times of visit are deleted, store the new ones
+            if ($delete) {
+
+                //Get new days and times of visit
+                $visit = $accommodation->getVisit();
+                $days = array_keys($visit);
+
+                //Store new days and times
+                foreach($days as $day){
+
+                    $tmp = $FA -> storeDay($idAccommodation, $day);
+
+                    foreach ($visit[$day] as $time){
+                        $result = $FA -> storeTime($tmp, $time);
+                    }
+                }
+            
+            } else $result = false;
+
+            return $result;
+            
+        }
+        
         /**
          * retriveDayId
          * private class that retrives the days of visit of an accommodation from db
