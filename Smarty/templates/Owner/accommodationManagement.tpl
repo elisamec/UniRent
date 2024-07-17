@@ -228,9 +228,7 @@
         <span class="resClose" id="notDeletableClose">&times;</span>
         <h2 class="resModal-head">You cannot delete this accommodation</h2>
         <p>This accommodation cannot be deleted because there are ongoing or future contracts associated with it.</p>
-        <div class="btn-cont">
-            <button id="understood" class="reserve_btn">Understood</button>
-        </div>
+        <div class="reserve_btn"><button id="understood">Understood</button></div>
     </div>
 </div>
 
@@ -502,7 +500,10 @@ $(document).ready(function() {
     var confirmBtn = document.getElementById("confirmDelete");
     var cancelBtn = document.getElementById("cancelDelete");
     var understoodBtn = document.getElementById("understood");
-    var deletable = {$deletable};
+
+    // Determine if deletable based on Smarty variable
+    var deletable = '{$deletable}'; // Ensure this is correctly replaced with true/false
+
     // When the user clicks the button, open the appropriate modal
     btn.onclick = function(event) {
         event.preventDefault(); // Prevent the default action (navigation)
@@ -512,7 +513,6 @@ $(document).ready(function() {
             notDeletableModal.style.display = "block";
         }
     }
-
 
     // When the user clicks on <span> (x), close the modal
     confirmClose.onclick = function() {
@@ -548,6 +548,7 @@ $(document).ready(function() {
     }
 });
 </script>
+
       {literal}
       <script>
     // Retrieve Smarty variables (assuming they are passed as JSON strings)
