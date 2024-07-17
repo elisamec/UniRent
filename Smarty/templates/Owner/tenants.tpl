@@ -271,67 +271,121 @@
          </script>
 {literal}
          <script>
-    const data = {/literal}{$tenants}{literal};
-    const kind = {/literal}"{$kind}"{literal};
+  const data = {/literal}{$tenants}{literal};
+  const kind = {/literal}"{$kind}"{literal};
 
-// Function to populate tenantsContainer
-function populateTenantsContainer(data) {
-  const tenantsContainer = document.getElementById("tenantsContainer");
+   // Function to populate tenantsContainer
+    function populateTenantsContainer(data) {
+        const tenantsContainer = document.getElementById("tenantsContainer");
 
-  data.forEach(item => {
-    const accommodationDiv = document.createElement("div");
-    accommodationDiv.classList.add("accommodation");
+        data.forEach(item => {
+            const accommodationDiv = document.createElement("div");
+            accommodationDiv.classList.add("accommodation");
 
-    const title = document.createElement("h1");
-    title.classList.add("titleAccomm");
-    title.textContent = item.accommodation;
-    accommodationDiv.appendChild(title);
+            const title = document.createElement("h1");
+            title.classList.add("titleAccomm");
+            title.textContent = item.accommodation;
+            accommodationDiv.appendChild(title);
 
-    const rowDiv = document.createElement("div");
-    rowDiv.classList.add("row");
+            const rowDiv = document.createElement("div");
+            rowDiv.classList.add("row");
 
-    item.tenants.forEach(tenant => {
-      const colDiv = document.createElement("div");
-      colDiv.classList.add("col-md-3");
+            // Check if item.tenants is an array
+            if (Array.isArray(item.tenants)) {
+                item.tenants.forEach(tenant => {
+                    const colDiv = document.createElement("div");
+                    colDiv.classList.add("col-md-3");
 
-      const userSectionDiv = document.createElement("div");
-      userSectionDiv.classList.add("userSection");
+                    const userSectionDiv = document.createElement("div");
+                    userSectionDiv.classList.add("userSection");
 
-      const userIconDiv = document.createElement("div");
-      userIconDiv.classList.add("userIcon");
+                    const userIconDiv = document.createElement("div");
+                    userIconDiv.classList.add("userIcon");
 
-      const userLink = document.createElement("a");
-      userLink.href = `/UniRent/Owner/publicProfile/${tenant.username}/${kind}`;
+                    const userLink = document.createElement("a");
+                    userLink.href = `/UniRent/Owner/publicProfile/${tenant.username}/${kind}`;
 
-      const userImage = document.createElement("img");
-      userImage.src = tenant.image;
+                    const userImage = document.createElement("img");
+                    userImage.src = tenant.image;
 
-      userLink.appendChild(userImage);
-      userIconDiv.appendChild(userLink);
-      userSectionDiv.appendChild(userIconDiv);
+                    userLink.appendChild(userImage);
+                    userIconDiv.appendChild(userLink);
+                    userSectionDiv.appendChild(userIconDiv);
 
-      const usernameDiv = document.createElement("div");
-      usernameDiv.classList.add("username");
+                    const usernameDiv = document.createElement("div");
+                    usernameDiv.classList.add("username");
 
-      const usernameLink = document.createElement("a");
-      usernameLink.href = `/UniRent/Owner/publicProfile/${tenant.username}`;
-      usernameLink.textContent = tenant.username;
+                    const usernameLink = document.createElement("a");
+                    usernameLink.href = `/UniRent/Owner/publicProfile/${tenant.username}`;
+                    usernameLink.textContent = tenant.username;
 
-      usernameDiv.appendChild(usernameLink);
-      userSectionDiv.appendChild(usernameDiv);
+                    usernameDiv.appendChild(usernameLink);
+                    userSectionDiv.appendChild(usernameDiv);
 
-      colDiv.appendChild(userSectionDiv);
-      rowDiv.appendChild(colDiv);
+                    colDiv.appendChild(userSectionDiv);
+                    rowDiv.appendChild(colDiv);
+                });
+            } else if (typeof item.tenants === 'object') {
+                // If item.tenants is an object, convert it to an array and iterate
+                const tenantArray = [item.tenants]; // Wrap object in an array
+                tenantArray.forEach(tenant => {
+                    const colDiv = document.createElement("div");
+                    colDiv.classList.add("col-md-3");
+
+                    const userSectionDiv = document.createElement("div");
+                    userSectionDiv.classList.add("userSection");
+
+                    const userIconDiv = document.createElement("div");
+                    userIconDiv.classList.add("userIcon");
+
+                    const userLink = document.createElement("a");
+                    userLink.href = `/UniRent/Owner/publicProfile/${tenant.username}/${kind}`;
+
+                    const userImage = document.createElement("img");
+                    userImage.src = tenant.image;
+
+                    userLink.appendChild(userImage);
+                    userIconDiv.appendChild(userLink);
+                    userSectionDiv.appendChild(userIconDiv);
+
+                    const usernameDiv = document.createElement("div");
+                    usernameDiv.classList.add("username");
+
+                    const usernameLink = document.createElement("a");
+                    usernameLink.href = `/UniRent/Owner/publicProfile/${tenant.username}`;
+                    usernameLink.textContent = tenant.username;
+
+                    usernameDiv.appendChild(usernameLink);
+                    userSectionDiv.appendChild(usernameDiv);
+
+                    colDiv.appendChild(userSectionDiv);
+                    rowDiv.appendChild(colDiv);
+                });
+            } else {
+                console.error("Unexpected format for item.tenants:", item.tenants);
+            }
+
+            accommodationDiv.appendChild(rowDiv);
+            tenantsContainer.appendChild(accommodationDiv);
+        });
+    }
+
+    // Populate the select element with accommodation titles when the page loads
+    document.addEventListener("DOMContentLoaded", function() {
+        const accommodationSelect = document.getElementById("accommodationSelect");
+
+        data.forEach(item => {
+            const option = document.createElement("option");
+            option.value = item.accommodation;
+            option.textContent = item.accommodation;
+            accommodationSelect.appendChild(option);
+        });
+
+        // Call the function to populate tenantsContainer
+        populateTenantsContainer(data);
     });
-
-    accommodationDiv.appendChild(rowDiv);
-    tenantsContainer.appendChild(accommodationDiv);
-  });
-}
-
-// Call the function with the sample data
-populateTenantsContainer(data);
 </script>
+
 {/literal}
 <script>
 document.addEventListener("DOMContentLoaded", function() {
