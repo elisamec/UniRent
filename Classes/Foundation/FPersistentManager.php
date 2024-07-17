@@ -516,10 +516,10 @@ class FPersistentManager {
         }
     }
 
-    public function getFilterTenants(string $type, string $accommodation_name, string $t_name, int $t_age, int $rateT, string $date, bool $men, bool $women):array
+    public function getFilterTenants(string $type, string $accommodation_name, string $t_username, int $t_age, int $rateT, string $date, bool $men, bool $women, int $idOwner):array
     {
         $FO=FOwner::getInstance();
-        $result=$FO->getFilterTenants($type,$accommodation_name,$t_name,$t_age,$rateT,$date,$men,$women);
+        $result=$FO->getFilterTenants($type,$accommodation_name,$t_username,$t_age,$rateT,$date,$men,$women,$idOwner);
         return $result;
     }
     public function loadVisitsByWeek():array

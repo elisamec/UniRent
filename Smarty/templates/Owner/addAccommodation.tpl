@@ -284,7 +284,7 @@ function addAvailability() {
         <input type="number" class="duration" name="duration" title="Please enter a number" min="10" value="10">
         <label for="day">Weekday:</label>
             <select id="day" name="day">
-                <option value="" disabled selected>Select a weekday</option>
+                <option value="" disabled selected>Select</option>
                 <option value="Monday">Monday</option>
                 <option value="Tuesday">Tuesday</option>
                 <option value="Wednesday">Wednesday</option>

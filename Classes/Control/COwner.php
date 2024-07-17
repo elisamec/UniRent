@@ -27,7 +27,7 @@ class COwner
         $username=USession::getInstance()::getSessionElement('username');
         $ownerId=$PM->getOwnerIdByUsername($username);
         $accommodationEntities=$PM->loadAccommodationsByOwner($ownerId);
-        $accommodations=[];
+        $accommodations=['active' => [], 'inactive' => []];
         foreach($accommodationEntities as $accom) {
             if(count($accom->getPhoto())==0)
                 {
@@ -38,14 +38,17 @@ class COwner
                    $base64 = base64_encode((($accom->getPhoto())[0])->getPhoto());
                    $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
                 }
-            $accommodations[]=[
-                'id'=>$accom->getIdAccommodation(),
-                'photo'=>$photo,
-                'title'=>$accom->getTitle(),
-                'address'=>$accom->getAddress()->getAddressLine1() .", ". $accom->getAddress()->getLocality(),
-                'price'=>$accom->getPrice()
-            ];
-        }
+                    $status = $accom->getStatus() ? 'active' : 'inactive';
+                    $accommodations[] = [
+                        'id' => $accom->getIdAccommodation(),
+                        'photo' => $photo,
+                        'title' => $accom->getTitle(),
+                        'address' => $accom->getAddress()->getAddressLine1() . ", " . $accom->getAddress()->getLocality(),
+                        'price' => $accom->getPrice(),
+                        'status' => $status
+                    ];
+                }
+                
         #print_r($accommodations);
         $view->home($accommodations);
     }
@@ -703,6 +706,8 @@ class COwner
                    $base64 = base64_encode((($accom->getPhoto())[0])->getPhoto());
                    $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
                 }
+            if ($accom->getStatus() == true) {
+                
             $accommodations[]=[
                 'id'=>$accom->getIdAccommodation(),
                 'photo'=>$photo,
@@ -710,6 +715,7 @@ class COwner
                 'address'=>$accom->getAddress()->getAddressLine1() .", ". $accom->getAddress()->getLocality(),
                 'price'=>$accom->getPrice()
             ];
+        }
         }
         #print_r($accommodations);
         $view->viewOwnerAds($accommodations, $username);
@@ -760,20 +766,6 @@ class COwner
         $view->editAccommodation($accommodationData, $img , $visitAvailabilityData, $id);
         
     }
-
-
-    public static function deleteAccommodation(int $id) {
-        $PM=FPersistentManager::getInstance();
-        $result=$PM->delete('EAccommodation', $id);
-        if($result)
-        {
-            header('Location:/UniRent/Owner/home');
-        }
-        else
-        {
-            http_response_code(500);
-        }
-    }
     
     public static function editAccommodationOperations(int $id)
     {
@@ -782,7 +774,7 @@ class COwner
         $myarray=json_decode($pictures,true);
         $array_photos=EPhoto::fromJsonToPhotos($myarray);
         print_r($array_photos);
-/*
+
         $title=USuperGlobalAccess::getPost('title');
         $price=USuperGlobalAccess::getPost('price');
         $deposit=(float)USuperGlobalAccess::getPost('deposit');
@@ -825,6 +817,8 @@ class COwner
         $date=$date->setDate($year,$month,$startDate);
     
         $PM=FPersistentManager::getInstance();
+
+        $status=$PM::load('EAccommodation',$id)->getStatus();
         
         $idOwner=$PM->getOwnerIdByUsername(USession::getInstance()::getSessionElement('username'));
         $addressId = $PM->load('EAccommodation', $id)->getAddress()->getSortingCode();
@@ -832,11 +826,10 @@ class COwner
         $addressObj=$addressObj->withAddressLine1($address)->withPostalcode($postalCode)->withLocality($city)->withSortingCode($addressId);
         #print $addressObj->getAddressLine1().' '.$addressObj->getPostalCode().' '.$addressObj->getLocality();
         //Nella seguente riga manca il penultimo attributo status che deve essere true o false
-        $accomodation = new EAccommodation($id,$array_photos,$title,$addressObj,$price,$date,$description,$places,$deposit,$array_visit,$duration,$men,$women,$animals,$smokers,$idOwner);
+        $accomodation = new EAccommodation($id,$array_photos,$title,$addressObj,$price,$date,$description,$places,$deposit,$array_visit,$duration,$men,$women,$animals,$smokers,$status,$idOwner);
         $result=$PM::update($accomodation);
         $id = $accomodation->getIdAccommodation();
-        print_r($accomodation);
-        $result ? header('Location:/UniRent/Owner/accommodationManagement/'.$id) : http_response_code(500);*/
+        $result ? header('Location:/UniRent/Owner/accommodationManagement/'.$id) : http_response_code(500);
     }
 
 
@@ -883,7 +876,7 @@ class COwner
         $view = new VOwner();
         // DA AGGIUNGERE LA LISTA DELLE ACCOMMODATION DEL PROPRIETARIO (ALT ERROR R.519 PM)
         $accommodation_name=USuperGlobalAccess::getPost('accommodation');
-        $t_name=USuperGlobalAccess::getPost('name');
+        $t_username=USuperGlobalAccess::getPost('username');
         $rateT=USuperGlobalAccess::getPost('rateT');
         $date=USuperGlobalAccess::getPost('date');
         $t_age=USuperGlobalAccess::getPost('age');
@@ -891,7 +884,7 @@ class COwner
         $women=USuperGlobalAccess::getPost('women');
 
         #print $accommodation_name.' '.$t_name.' '.$rateT.' '.$date.' '.$t_age.' '.$men.' '.$women;
-        $tenantsArray=$PM->getFilterTenants($type,$accommodation_name,$t_name,$t_age,$rateT,$date,$men,$women);
+        $tenantsArray=$PM->getFilterTenants($type,$accommodation_name,$t_username,$t_age,$rateT,$date,$men,$women,$ownerId);
         
         $tenants=[];
         foreach ($tenantsArray as $idAccommodation => $students) {

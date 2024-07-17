@@ -93,6 +93,7 @@
                <div class="col-sm-12">
                   <div class="Properties_taital_main">
                      <h1 class="Properties_taital">Your Proprieties</h1>
+                     <p>Here you can see all the properties you have posted. The ones a little greyish are the ones that you have disabled.</p>
                      <hr class="border_main">
                   </div>
                </div>
@@ -170,7 +171,8 @@
 {literal}
          <script>
     const accommodations = {/literal}{$accommodations}{literal};
-
+      let classDisplay = "";
+      let imageClass = "";
     // Function to create and append reviews to the container
     function displayAccommodations(accommodations) {
         const container = document.getElementById('accommodationContainer');
@@ -185,10 +187,16 @@
                     }
                     const accommodationElement = document.createElement('div');
                     accommodationElement.className = 'col-lg-4 col-md-6col-lg-4 col-md-6';
-
+                     if (accommodation.status == true) {
+                        classDisplay = "image_box";
+                        imageClass="blog_img";
+                     } else {
+                        classDisplay = "image_box grey";
+                        imageClass="blog_img grey";
+                     }
                     // Insert the names of the elements of the accommodation array
                     accommodationElement.innerHTML = `
-                        <div class="blog_img">
+                        <div class="${imageClass}">
                             <div class="container_main">
                                 <img src="${accommodation.photo}" alt="">
                                 <div class="overlay">
@@ -198,7 +206,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="image_box">
+                        <div class="${classDisplay}">
                             <div class="left_box">
                                 <h1 class="road_text">${accommodation.title}</h1>
                                 <p>${accommodation.address}</p>

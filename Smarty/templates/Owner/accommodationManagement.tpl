@@ -487,7 +487,7 @@ function deactivateFunct() {
 
    // When the user clicks on the confirm button, proceed to delete
    confirmBtn.onclick = function() {
-      window.location.href = "/UniRent/Owner/deleteAccommodation/{$accommodation->getIdAccommodation()}";
+      window.location.href = "/UniRent/Accommodation/delete/{$accommodation->getIdAccommodation()}";
       modal.style.display = "none";
    }
 
@@ -545,7 +545,7 @@ $(document).ready(function() {
 
     // When the user clicks on the confirm button, proceed to delete
     confirmBtn.onclick = function() {
-        window.location.href = "/UniRent/Owner/deleteAccommodation/{$accommodation->getIdAccommodation()}";
+        window.location.href = "/UniRent/Accommodation/delete/{$accommodation->getIdAccommodation()}";
     }
 
     // When the user clicks on the cancel button, close the modal
