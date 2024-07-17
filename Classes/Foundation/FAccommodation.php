@@ -1097,12 +1097,15 @@ use PDO;
             $db=FConnection::getInstance()->getConnection();
             try
             {
+                $db->exec('LOCK TABLES accommodation READ');
                 $q='SELECT id FROM accommodation WHERE idOwner=:id';
                 $db->beginTransaction();
                 $stm=$db->prepare($q);
                 $stm->bindParam(':id',$idOwner,PDO::PARAM_INT);
                 $stm->execute();
                 $db->commit();
+                $db->exec('UNLOCK TABLES');
+                
             }
             catch(PDOException $e)
             {

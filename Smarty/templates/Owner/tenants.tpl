@@ -141,7 +141,7 @@
                      </label>
                      <input type="radio" id="star0T" name="rateT" value="0" hidden checked/>
                   </div>
-               <button class="button-spec finalLittle"id="clearRatingA" onclick="clearRatingA()">Clear</button>
+               <button type="button" class="button-spec finalLittle"id="clearRatingA" onclick="clearRatingA()">Clear</button>
                </div>
                </div>
                <div class="row">
@@ -447,19 +447,7 @@
             }
         // Call the function to populate tenantsContainer and year select
         populateTenantsContainer(data);
-        const rating = {/literal}{$rating}{literal};
-
-    // Set default rating for Owner
-    if (rating) {
-        document.getElementById('star' + rating + 'T').checked = true;
-    }
     });
-     const rating = {$rating};
-
-    // Set default rating for Owner
-    if (rating) {
-        document.getElementById('star' + rating + 'T').checked = true;
-    }
 </script>
 
 {/literal}
@@ -478,9 +466,29 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 <script>
-function clearRatingA() {
-    document.getElementById('star0T').checked = true;
-}
+        function clearRatingA() {
+            console.log('clearRatingA() called');
+            const star0T = document.getElementById('star0T');
+            if (star0T) {
+                console.log('Element found');
+                star0T.checked = true;
+            } else {
+                console.error('Element not found');
+            }
+        }
+
+        const rating = {$rating}; // Set this to your dynamic value, e.g., {$rating};
+
+        // Set default rating for Owner
+        if (rating) {
+            const starRating = document.getElementById('star' + rating + 'T');
+            if (starRating) {
+                starRating.checked = true;
+            } else {
+                console.error('Star rating element not found for rating:', rating);
+            }
+        }
+</script>
 
    </body>
 </html>
