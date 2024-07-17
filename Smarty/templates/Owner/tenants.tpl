@@ -37,7 +37,7 @@
       <div class="header_section">
         <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-               <a class="navbar-brand"href="/UniRent/Student/home"><img src="/UniRent/Smarty/images/logo.png"></a>
+               <a class="navbar-brand"href="/UniRent/Owner/home"><img src="/UniRent/Smarty/images/logo.png"></a>
                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
                </button>
@@ -291,6 +291,18 @@
         // Clear existing options in year select
         yearSelect.innerHTML = '<option value="" disabled selected>Select a year</option>';
 
+            if (data.length === 0) {
+                const noTenantsDiv = document.createElement("div");
+                noTenantsDiv.classList.add("container");
+                noTenantsDiv.textContent = "No tenants found.";
+                tenantsContainer.appendChild(noTenantsDiv);
+            } else if (Object.keys(data).length === 0) {
+                const noTenantsDiv = document.createElement("div");
+                noTenantsDiv.classList.add("container");
+                noTenantsDiv.textContent = "No tenants found.";
+                tenantsContainer.appendChild(noTenantsDiv);
+            }
+
         data.forEach(item => {
             const accommodationDiv = document.createElement("div");
             accommodationDiv.classList.add("accommodation");
@@ -302,12 +314,7 @@
 
             const rowDiv = document.createElement("div");
             rowDiv.classList.add("row");
-            if (item.tenants.length === 0) {
-                const noTenantsDiv = document.createElement("div");
-                noTenantsDiv.classList.add("container");
-                noTenantsDiv.textContent = "No tenants found.";
-                rowDiv.appendChild(noTenantsDiv);
-            }
+            
             // Check if item.tenants is an array
             if (Array.isArray(item.tenants)) {
                 item.tenants.forEach(tenant => {
@@ -458,5 +465,10 @@ document.addEventListener("DOMContentLoaded", function() {
     updateHiddenInput('women', 'hiddenWomen');
 });
 </script>
+<script>
+function clearRatingA() {
+    document.getElementById('star0T').checked = true;
+}
+
    </body>
 </html>
