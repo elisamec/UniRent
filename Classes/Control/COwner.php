@@ -911,7 +911,7 @@ class COwner
 
         $accommodation_name=USuperGlobalAccess::getPost('accommodation');
         $t_username=USuperGlobalAccess::getPost('username');
-        $rateT=USuperGlobalAccess::getPost('rateT');
+        $rateT=(int)USuperGlobalAccess::getPost('rateT');
         $date=USuperGlobalAccess::getPost('date');
         $t_age=(int)USuperGlobalAccess::getPost('age');
         $men=USuperGlobalAccess::getPost('men');
