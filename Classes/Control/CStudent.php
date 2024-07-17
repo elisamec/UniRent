@@ -319,8 +319,8 @@ class CStudent{
                 ];
             }
         }
-        $disabled=false;
-        $successReserve="sent";
+        $disabled=true;
+        $successReserve="null";
         $successVisit="null";
         $view->accommodation($accomm, $owner, $reviewsData, $period, $picture, $visits, $visitDuration, $tenants, $num_places, $studBooked, $dayOfBooking, $timeOfBooking, $disabled, $successReserve, $successVisit);
     }
