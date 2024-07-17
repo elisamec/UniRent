@@ -280,6 +280,7 @@
 {literal}
          <script>
   const data = {/literal}{$tenants}{literal};
+  const accommodationTitles = {/literal}"{$accommodation}"{literal};
   const kind = {/literal}"{$kind}"{literal};
 
    function populateTenantsContainer(data) {
@@ -412,7 +413,7 @@
     document.addEventListener("DOMContentLoaded", function() {
         const accommodationSelect = document.getElementById("accommodationSelect");
 
-        data.forEach(item => {
+        accommodationTitles.forEach(item => {
             const option = document.createElement("option");
             option.value = item.accommodation;
             option.textContent = item.accommodation;
