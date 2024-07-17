@@ -27,7 +27,8 @@ class COwner
         $username=USession::getInstance()::getSessionElement('username');
         $ownerId=$PM->getOwnerIdByUsername($username);
         $accommodationEntities=$PM->loadAccommodationsByOwner($ownerId);
-        $accommodations=['active' => [], 'inactive' => []];
+        $accommodationsActive=[];
+        $accommodationsInactive=[];
         foreach($accommodationEntities as $accom) {
             if(count($accom->getPhoto())==0)
                 {
@@ -38,19 +39,27 @@ class COwner
                    $base64 = base64_encode((($accom->getPhoto())[0])->getPhoto());
                    $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
                 }
-                    $status = $accom->getStatus() ? 'active' : 'inactive';
-                    $accommodations[] = [
+            if ($accom->getStatus() == true) {
+                    $accommodationsActive[] = [
                         'id' => $accom->getIdAccommodation(),
                         'photo' => $photo,
                         'title' => $accom->getTitle(),
                         'address' => $accom->getAddress()->getAddressLine1() . ", " . $accom->getAddress()->getLocality(),
                         'price' => $accom->getPrice(),
-                        'status' => $status
+                    ];
+                } else {
+                    $accommodationsInactive[] = [
+                        'id' => $accom->getIdAccommodation(),
+                        'photo' => $photo,
+                        'title' => $accom->getTitle(),
+                        'address' => $accom->getAddress()->getAddressLine1() . ", " . $accom->getAddress()->getLocality(),
+                        'price' => $accom->getPrice(),
                     ];
                 }
+            }
                 
         #print_r($accommodations);
-        $view->home($accommodations);
+        $view->home($accommodationsActive, $accommodationsInactive);
     }
 
 
