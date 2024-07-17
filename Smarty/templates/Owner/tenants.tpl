@@ -102,7 +102,7 @@
                </div>
                <div class="row">
                <div class="Findcontainer">
-                     <input name="name" id="tenantName" type="text" placeholder="Name of the tenant">
+                     <input name="username" id="tenantName" type="text" placeholder="Username of the tenant">
                </div>
                </div>
                <div class="Findcontainer">
