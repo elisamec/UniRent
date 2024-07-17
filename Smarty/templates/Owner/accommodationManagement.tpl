@@ -207,8 +207,8 @@
       <h2 class="resModal-head">Are you sure you want to delete this accommodation ad?</h2>
       <p>This action is permanent.</p>
       <div class="btn-cont">
-      <button id="confirmDelete">Yes</button>
-      <button id="cancelDelete">Cancel</button>
+      <button id="confirmDelete" class="confirmClass">Yes</button>
+      <button id="cancelDelete" class="cancelClass">Cancel</button>
       </div>
    </div>
 </div>

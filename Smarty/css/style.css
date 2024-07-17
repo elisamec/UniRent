@@ -2589,7 +2589,7 @@ button.delete_button:hover{
     margin-right: 20px; /* Optional, if you want to maintain a gap from the right */
 }
 
-#cancelDelete, #confirmDelete, #reserve, #cancelReserve, #visit, #cancelVisit, #confirmBooking, #cancelBooking{
+.cancelClass, .confirmClass {
     padding: 10px 20px;
     font-size: 16px;
     color: #ffffff;
@@ -2604,18 +2604,18 @@ button.delete_button:hover{
     border-radius: 1rem;
 }
 
-#cancelDelete, #reserve, #visit, #cancelVisit, #cancelBooking{
+.cancelClass{
     background-color: #f9bc19;
 }
 .login-required a {
     background-color: #f9bc19;
 }
 
-#confirmDelete, #cancelReserve, #confirmBooking{
+.confirmClass{
     background-color: #f91919;
 }
 
-#cancelDelete:hover, #confirmDelete:hover, #reserve:hover, #cancelReserve:hover, #visit:hover, #cancelVisit:hover, #confirmBooking:hover, #cancelBooking:hover{
+.cancelClass:hover, .confirmClass:hover {
     color: #d0d1d2;
     background-color: #ffffff;
     box-shadow: 0px 2px 16px 0px #eaeaea !important;
@@ -2901,6 +2901,13 @@ button.delete_button:hover{
     margin-top: 15px;
     margin-left: 15px;
     width: 90%;
+}
+.selectPeriod {
+    margin-top: 15px;
+    margin-left: 15px;
+    padding-left: 10px;
+    width: 90%;
+    height:60%;
 }
 .formVisit {
     width: 100%;

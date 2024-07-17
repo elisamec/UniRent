@@ -787,7 +787,8 @@ class COwner
         $pictures=USuperGlobalAccess::getPost('uploadedImagesData');
         $myarray=json_decode($pictures,true);
         $array_photos=EPhoto::fromJsonToPhotos($myarray);
-
+        print_r($array_photos);
+/*
         $title=USuperGlobalAccess::getPost('title');
         $price=USuperGlobalAccess::getPost('price');
         $deposit=(float)USuperGlobalAccess::getPost('deposit');
@@ -807,13 +808,13 @@ class COwner
             $duration=0;
         }
  
-        if($month=='Sep')
+        if($month=='september')
         {
-            $month=8;
+            $month=9;
         }
         else
         {
-            $month=9;
+            $month=10;
         }
 
         $address=USuperGlobalAccess::getPost('address');
@@ -828,7 +829,7 @@ class COwner
         $date= new DateTime('now');
         $year=(int)$date->format('Y');
         $date=$date->setDate($year,$month,$startDate);
-
+    
         $PM=FPersistentManager::getInstance();
         
         $idOwner=$PM->getOwnerIdByUsername(USession::getInstance()::getSessionElement('username'));
@@ -839,8 +840,8 @@ class COwner
         $accomodation = new EAccommodation($id,$array_photos,$title,$addressObj,$price,$date,$description,$places,$deposit,$array_visit,$duration,$men,$women,$animals,$smokers,$idOwner);
         $result=$PM::update($accomodation);
         $id = $accomodation->getIdAccommodation();
-        
-        $result ? header('Location:/UniRent/Owner/accommodationManagement/'.$id) : http_response_code(500);
+        print_r($accomodation);
+        $result ? header('Location:/UniRent/Owner/accommodationManagement/'.$id) : http_response_code(500);*/
     }
 
 
@@ -856,7 +857,7 @@ class COwner
             $accommodationTitle = $PM->load('EAccommodation', $idAccommodation)->getTitle();
             $tenantList = [];
             foreach ($students as $student) {
-                $profilePic = $student->getPhoto();
+                $profilePic = ($student[0])->getPhoto();
                 if ($profilePic === null) {
                     $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
                 }
@@ -865,7 +866,7 @@ class COwner
                     $profilePic=$profilePic->getPhoto();
                 }
                 $tenantList[] = [
-                    'username' => $student->getUsername(),
+                    'username' => ($student[0])->getUsername(),
                     'image' => $profilePic
                 ];
             }

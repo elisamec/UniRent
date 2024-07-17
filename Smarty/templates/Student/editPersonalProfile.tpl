@@ -263,8 +263,8 @@
       <span class="resClose">&times;</span>
       <p>Are you sure you want to delete your profile?</p>
       <div class="btn-cont">
-      <button id="confirmDelete">Yes</button>
-      <button id="cancelDelete">Cancel</button>
+      <button id="confirmDelete" class="confirmClass">Yes</button>
+      <button id="cancelDelete" class="cancelClass">Cancel</button>
       </div>
    </div>
 </div>
