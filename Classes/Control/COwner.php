@@ -883,18 +883,38 @@ class COwner
         $PM=FPersistentManager::getInstance();
         $ownerId=$PM->getOwnerIdByUsername($username);
         $view = new VOwner();
-        // DA AGGIUNGERE LA LISTA DELLE ACCOMMODATION DEL PROPRIETARIO (ALT ERROR R.519 PM)
+
         $accommodation_name=USuperGlobalAccess::getPost('accommodation');
         $t_username=USuperGlobalAccess::getPost('username');
         $rateT=USuperGlobalAccess::getPost('rateT');
+        if($rateT='0'){$rateT=0;}
+        else{$rateT=(int)$rateT;}
+        
         $date=USuperGlobalAccess::getPost('date');
-        $t_age=USuperGlobalAccess::getPost('age');
+        $t_age=(int)USuperGlobalAccess::getPost('age');
         $men=USuperGlobalAccess::getPost('men');
         $women=USuperGlobalAccess::getPost('women');
+        if($men==='false')
+        {
+            $men=false;
+        }
+        else
+        {
+            $men=true;
+        }
+        if($women==='false')
+        {
+            $women=false;
+        }
+        else
+        {
+            $women=true;
+        }
 
-        #print $accommodation_name.' '.$t_name.' '.$rateT.' '.$date.' '.$t_age.' '.$men.' '.$women;
-        $tenantsArray=$PM->getFilterTenants($type,$accommodation_name,$t_username,$t_age,$rateT,$date,$men,$women,$ownerId);
+        #print var_dump($rateT).' '.var_dump($date).' '.var_dump($t_age);
         
+        $tenantsArray=$PM->getFilterTenants($type,$accommodation_name,$t_username,$t_age,$rateT,$date,$men,$women,$ownerId);
+
         $tenants=[];
         foreach ($tenantsArray as $idAccommodation => $students) {
             $accommodationTitle = $PM->load('EAccommodation', $idAccommodation)->getTitle();
