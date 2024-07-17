@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Lug 17, 2024 alle 10:53
+-- Creato il: Lug 17, 2024 alle 10:57
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -41,7 +41,7 @@ CREATE TABLE `accommodation` (
   `woman` tinyint(1) NOT NULL,
   `pets` tinyint(1) NOT NULL,
   `smokers` tinyint(1) NOT NULL,
-  `status` enum('active','disabilited') NOT NULL DEFAULT 'active',
+  `status` tinyint(1) NOT NULL DEFAULT 1,
   `idOwner` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -50,9 +50,9 @@ CREATE TABLE `accommodation` (
 --
 
 INSERT INTO `accommodation` (`id`, `title`, `address`, `price`, `start`, `description`, `places`, `deposit`, `visitDuration`, `man`, `woman`, `pets`, `smokers`, `status`, `idOwner`) VALUES
-(5, 'Casa Rosada', 2, 230.7, '2024-06-04', 'Presidenza della Repubblica Argentina', 0, 230, 21, 1, 0, 0, 0, 'active', 2),
-(6, 'Casa Maloni', 3, 1000, '2024-09-10', 'La casa più bella e al contempo sfasciata del mondo', 0, 250, 30, 1, 1, 1, 0, 'active', 2),
-(7, 'Bella casa', 4, 800, '2024-09-30', 'Casa bellissima in centro', 3, 200, 0, 0, 0, 0, 0, 'active', 5);
+(5, 'Casa Rosada', 2, 230.7, '2024-06-04', 'Presidenza della Repubblica Argentina', 0, 230, 21, 1, 0, 0, 0, 1, 2),
+(6, 'Casa Maloni', 3, 1000, '2024-09-10', 'La casa più bella e al contempo sfasciata del mondo', 0, 250, 30, 1, 1, 1, 0, 1, 2),
+(7, 'Bella casa', 4, 800, '2024-09-30', 'Casa bellissima in centro', 3, 200, 0, 0, 0, 0, 0, 1, 5);
 
 -- --------------------------------------------------------
 
