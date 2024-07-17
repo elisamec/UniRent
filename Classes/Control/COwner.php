@@ -782,7 +782,6 @@ class COwner
         $pictures=USuperGlobalAccess::getPost('uploadedImagesData');
         $myarray=json_decode($pictures,true);
         $array_photos=EPhoto::fromJsonToPhotos($myarray);
-        print_r($array_photos);
 
         $title=USuperGlobalAccess::getPost('title');
         $price=USuperGlobalAccess::getPost('price');
