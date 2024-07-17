@@ -274,6 +274,9 @@ class CStudent{
         else{$period='october';}
         $visits=$accomm->getVisit();
         $booked=$PM->loadVisitsByWeek();
+        $studBooked=false;
+        $dayOfBooking='';
+        $timeOfBooking='';
         foreach ($visits as $day=>$time) {
             foreach ($time as $key=>$t) {
                 foreach ($booked as $b) {
