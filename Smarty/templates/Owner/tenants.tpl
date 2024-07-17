@@ -280,7 +280,8 @@
 {literal}
          <script>
   const data = {/literal}{$tenants}{literal};
-  const accommodationTitles = {/literal}"{$accommodation}"{literal};
+  const accommodationTitles = {/literal}{$accommodationTitles}{literal};
+  console.log(accommodationTitles);
   const kind = {/literal}"{$kind}"{literal};
 
    function populateTenantsContainer(data) {
@@ -417,14 +418,26 @@
     // Populate the select element with accommodation titles and year options when the page loads
     document.addEventListener("DOMContentLoaded", function() {
         const accommodationSelect = document.getElementById("accommodationSelect");
-
-        accommodationTitles.forEach(item => {
-            const option = document.createElement("option");
-            option.value = item.accommodation;
-            option.textContent = item.accommodation;
-            accommodationSelect.appendChild(option);
-        });
-
+        console.log(typeof accommodationTitles);
+        if (Array.isArray(accommodationTitles)) {
+                accommodationTitles.forEach(item => {
+                    console.log(item); // Log the item to verify its content
+                    const option = document.createElement("option");
+                    option.value = item.accommodation;
+                    option.textContent = item.accommodation;
+                    accommodationSelect.appendChild(option);
+                });
+            } else if (typeof accommodationTitles === 'object') {
+                Object.keys(accommodationTitles).forEach(key => {
+                    console.log(key, accommodationTitles[key]); // Log the key and its corresponding value
+                    const option = document.createElement("option");
+                    option.value = key;
+                    option.textContent = accommodationTitles[key];
+                    accommodationSelect.appendChild(option);
+                });
+            } else {
+                console.error("Unexpected format for accommodationTitles:", accommodationTitles, "typeof:", typeof accommodationTitles);
+            }
         // Call the function to populate tenantsContainer and year select
         populateTenantsContainer(data);
     });
