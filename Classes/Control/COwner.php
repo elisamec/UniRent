@@ -882,6 +882,7 @@ class COwner
                 'tenants' => $tenantList
             ];
         }
+        /*
         $tenants[]=[
             'accommodation' => 'Tutti',
             'tenants' =>[ [
@@ -896,7 +897,7 @@ class COwner
             ]
             ]
         ];
-        
+        */
         $view->tenants($tenants, $kind, $accommodationTitles);
     }
 
