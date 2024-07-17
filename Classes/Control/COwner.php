@@ -774,7 +774,7 @@ class COwner
         $myarray=json_decode($pictures,true);
         $array_photos=EPhoto::fromJsonToPhotos($myarray);
         print_r($array_photos);
-/*
+
         $title=USuperGlobalAccess::getPost('title');
         $price=USuperGlobalAccess::getPost('price');
         $deposit=(float)USuperGlobalAccess::getPost('deposit');
@@ -817,6 +817,8 @@ class COwner
         $date=$date->setDate($year,$month,$startDate);
     
         $PM=FPersistentManager::getInstance();
+
+        $status=$PM::load('EAccommodation',$id)->getStatus();
         
         $idOwner=$PM->getOwnerIdByUsername(USession::getInstance()::getSessionElement('username'));
         $addressId = $PM->load('EAccommodation', $id)->getAddress()->getSortingCode();
@@ -824,11 +826,10 @@ class COwner
         $addressObj=$addressObj->withAddressLine1($address)->withPostalcode($postalCode)->withLocality($city)->withSortingCode($addressId);
         #print $addressObj->getAddressLine1().' '.$addressObj->getPostalCode().' '.$addressObj->getLocality();
         //Nella seguente riga manca il penultimo attributo status che deve essere true o false
-        $accomodation = new EAccommodation($id,$array_photos,$title,$addressObj,$price,$date,$description,$places,$deposit,$array_visit,$duration,$men,$women,$animals,$smokers,$idOwner);
+        $accomodation = new EAccommodation($id,$array_photos,$title,$addressObj,$price,$date,$description,$places,$deposit,$array_visit,$duration,$men,$women,$animals,$smokers,$status,$idOwner);
         $result=$PM::update($accomodation);
         $id = $accomodation->getIdAccommodation();
-        print_r($accomodation);
-        $result ? header('Location:/UniRent/Owner/accommodationManagement/'.$id) : http_response_code(500);*/
+        $result ? header('Location:/UniRent/Owner/accommodationManagement/'.$id) : http_response_code(500);
     }
 
 
