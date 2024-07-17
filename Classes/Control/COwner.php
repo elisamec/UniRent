@@ -897,7 +897,7 @@ class COwner
             ]
         ];
         
-        $view->tenants($tenants, $kind, $accommodationTitles);
+        $view->tenants($tenantList, $kind, $accommodationTitles);
     }
 
     public static function filterTenants(string $type)
@@ -910,9 +910,10 @@ class COwner
 
         $accommodation_name=USuperGlobalAccess::getPost('accommodation');
         $t_username=USuperGlobalAccess::getPost('username');
-        $rateT=USuperGlobalAccess::getPost('rateT');
-        if($rateT='0'){$rateT=0;}
-        else{$rateT=(int)$rateT;}
+        $rateT=(int)USuperGlobalAccess::getPost('rateT');
+
+        /*if($rateT='0'){$rateT=0;}
+        else{$rateT=(int)$rateT;}*/
         
         $date=USuperGlobalAccess::getPost('date');
         $t_age=(int)USuperGlobalAccess::getPost('age');
@@ -935,8 +936,8 @@ class COwner
             $women=true;
         }
 
-        #print var_dump($rateT).' '.var_dump($date).' '.var_dump($t_age);
-        
+        #print var_dump($rateT);
+    
         $tenantsArray=$PM->getFilterTenants($type,$accommodation_name,$t_username,$t_age,$rateT,$date,$men,$women,$ownerId);
 
         $tenants=[];
@@ -968,6 +969,6 @@ class COwner
         foreach ($accommodations as $accom) {
             $accommodationTitles[$accom->getIdAccommodation()]=$accom->getTitle();
         }
-        $view->tenants($tenants, $type, $accommodationTitles);
+        $view->tenants($tenantList, $type, $accommodationTitles);
     }
 }
