@@ -93,9 +93,9 @@
                <div class="col-sm-12">
                   <div class="Properties_taital_main">
                      <h1 class="Properties_taital">Your Proprieties</h1>
-                     <p>Here you can see all the properties you have posted. The ones a little greyish are the ones that you have disabled.</p>
                      <hr class="border_main">
                   </div>
+                  <p>Here you can see all the properties you have posted. The ones a little greyish are the ones that you have disabled.</p>
                </div>
             </div>
             <div class="Properties_section_2">
