@@ -570,7 +570,7 @@ class COwner
         $addressObj= new Address();
         $addressObj=$addressObj->withAddressLine1($address)->withPostalcode($postalCode)->withLocality($city);
         #print $addressObj->getAddressLine1().' '.$addressObj->getPostalCode().' '.$addressObj->getLocality();
-        $accomodation = new EAccommodation(null,$array_photos,$title,$addressObj,$price,$date,$description,$places,$deposit,$array_visit,$duration,$men,$women,$animals,$smokers,$idOwner);
+        $accomodation = new EAccommodation(null,$array_photos,$title,$addressObj,$price,$date,$description,$places,$deposit,$array_visit,$duration,$men,$women,$animals,$smokers,true,$idOwner);
         $result=$PM::store($accomodation);
         if($result)
         {

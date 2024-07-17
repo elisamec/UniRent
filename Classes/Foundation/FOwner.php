@@ -596,24 +596,101 @@ use PDOException;
         }
         return $result;
     }
-
-    public function getFilterTenants($type,$accommodation_name,$t_name,$t_age,$rateT,$date,$men,$women):array
+    
+    /**
+     * Method getFilterTenants
+     *
+     * this method return an array which contains the accommodation id as key an as value an array of EStudent as first element and the expiry date as second element
+     * @param $type $type [current/future/past contract]
+     * @param $accommodation_name $accommodation_name [accommodation title]
+     * @param $t_username $t_username [student's username]
+     * @param $t_age $t_age [student'age]
+     * @param $rateT $rateT [student'rating]
+     * @param $date $date [september/october]
+     * @param $men 
+     * @param $women
+     *
+     * @return array
+     */
+    public function getFilterTenants($type,$accommodation_name,$t_username,$t_age,$rateT,$date,$men,$women):array
     {
-        /* DA FINIRE.....
+
         $result=array();
         $db=FConnection::getInstance()->getConnection();
+
+        if($date=='september'){$date=9;}
+        else{$date=10;}
+
+        if ($type=='current')
+        {
+            $type='onGoing';
+        } else if ($type=='past')
+        {
+            $type='finshed';
+        }
+
         try
         {
-            $q="";
-            $db->exec('LOCK TABLES')
+            $q="SELECT a.id AS idAccommodation , s.id AS idStudent, r.toDate AS expiryDate
+                FROM accommodation a INNER JOIN owner o ON o.id=a.idOwner
+                INNER JOIN reservation r ON r.idAccommodation=a.id
+                INNER JOIN contract c ON c.idReservation=r.id
+                INNER JOIN student s ON s.id=r.idStudent
+                WHERE TIMESTAMPDIFF(YEAR,s.birthDate,CURDATE())= :age
+                AND MONTH(a.`start`)= :month
+                AND c.`status`= :type
+                AND a.title= :accommodation_name
+                AND s.username= :student_username";
+            
+            if($men==true and $women==true){}
+            elseif($men==false and $women==true){$q.=" AND s.sex='F'";}
+            elseif($men==true and $women==false){$q.=" AND s.sex='M'";}
+            else{}
+
+            $db->exec('LOCK TABLES accommodation READ, reservation READ, contract READ, owner READ, student READ');
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindParam(':age',$t_age,PDO::PARAM_INT);
+            $stm->bindParam(':month',$date,PDO::PARAM_INT);
+            $stm->bindParam(';type',$type,PDO::PARAM_STR);
+            $stm->bindParam(':accommodation_name',$accommodation_name,PDO::PARAM_STR);
+            $stm->bindParam(':student_username',$t_username,PDO::PARAM_STR);
+            $stm->execute();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
         }
         catch(PDOException $e)
         {
             $db->rollBack();
             return $result;
-        }*/
-        // TO BE CONTINUED.......
-        return array();    
+        }
+        $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
+        foreach($rows as $row)
+        {
+            $student=FPersistentManager::getInstance()::load('EStudent',$row['idStudent']);
+
+            if(($student->getRating()>=$rateT) or($student->getRating()==0))
+            {
+                $p_student=$student->getPhoto();
+                if(!is_null($p_student))
+                {
+                    $p_student=(EPhoto::toBase64(array($p_student)))[0];
+                    $student->setPhoto($p_student);
+                }
+            
+            
+                if(in_array($row['idAccommodation'],array_keys($result)))
+                {
+                    $result[$row['idAccommodation']][]=[$student, $row['expiryDate']];
+                }
+                else
+                {
+                    $result[$row['idAccommodation']]=array([$student, $row['expiryDate']]);
+                }
+            }
+            else{}
+        }
+        return $result;   
     }
     
  }
