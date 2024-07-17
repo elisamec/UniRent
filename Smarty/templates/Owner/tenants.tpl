@@ -37,7 +37,7 @@
       <div class="header_section">
         <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-               <a class="navbar-brand"href="/UniRent/Student/home"><img src="/UniRent/Smarty/images/logo.png"></a>
+               <a class="navbar-brand"href="/UniRent/Owner/home"><img src="/UniRent/Smarty/images/logo.png"></a>
                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
                </button>
@@ -458,5 +458,10 @@ document.addEventListener("DOMContentLoaded", function() {
     updateHiddenInput('women', 'hiddenWomen');
 });
 </script>
+<script>
+function clearRatingA() {
+    document.getElementById('star0T').checked = true;
+}
+
    </body>
 </html>
