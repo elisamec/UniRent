@@ -855,6 +855,10 @@ class COwner
         $view = new VOwner();
         $tenantsArray = $PM->getTenants($kind,$ownerId);
         $tenants=[];
+        $accommodations=$PM->loadAccommodationsByOwner($ownerId);
+        foreach ($accommodations as $accom) {
+            $accommodationTitles[$accom->getIdAccommodation()]=$accom->getTitle();
+        }
         foreach ($tenantsArray as $idAccommodation => $students) {
             $accommodationTitle = $PM->load('EAccommodation', $idAccommodation)->getTitle();
             $tenantList = [];
@@ -894,7 +898,7 @@ class COwner
             ]
         ];
         
-        $view->tenants($tenants, $kind);
+        $view->tenants($tenants, $kind, $accommodationTitles);
     }
 
     public static function filterTenants(string $type)
@@ -961,6 +965,10 @@ class COwner
                 'tenants' => $tenantList
             ];
         }
-        $view->tenants($tenants, $type);
+        $accommodations=$PM->loadAccommodationsByOwner($ownerId);
+        foreach ($accommodations as $accom) {
+            $accommodationTitles[$accom->getIdAccommodation()]=$accom->getTitle();
+        }
+        $view->tenants($tenants, $type, $accommodationTitles);
     }
 }
