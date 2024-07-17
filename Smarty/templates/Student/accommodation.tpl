@@ -279,13 +279,17 @@
             <span class="resClose" id="successReserveClose">&times;</span>
             {if $successReserve === "sent"}
             <h2 class="resModal-head">Reservation Sent</h2>
+            <div class="col-md-12">
             <p>Your reservation was successfully sent.</p>
+            </div>
             {else if $successReserve === "full"}
             <h2 class="resModal-head">No more places available</h2>
             <p>Your reservation could not be sent due to full booking. Please choose a different period.</p>
             {else}
             <h2 class="resModal-head">Reservation Failed</h2>
-            <p>Your reservation could not be sent. Please try again later.</p>
+            <div class="col-md-12">
+              <p>Your reservation could not be sent. Please try again later.</p>
+            </div>
             {/if}
         </div>
         <div class="btn-cont">
@@ -360,6 +364,12 @@
         if ('{$successReserve}' != 'null') {
             successReserveModal.style.display = "block";
         }
+    }
+    document.getElementById("successReserveClose").onclick = function() {
+        successReserveModal.style.display = "none";
+    }
+    document.getElementById("closesuccessReserveModal").onclick = function() {
+        successReserveModal.style.display = "none";
     }
 
     // Call the function to check for success and show modal
@@ -576,6 +586,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 timeSelect.appendChild(option);
             });
         }
+    }
+    document.getElementById("successVisitClose").onclick = function() {
+        reserveModal.style.display = "none";
+    }
+    document.getElementById("closesuccessVisitModal").onclick = function() {
+        reserveModal.style.display = "none";
     }
 
 });
