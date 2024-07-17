@@ -447,7 +447,19 @@
             }
         // Call the function to populate tenantsContainer and year select
         populateTenantsContainer(data);
+        const rating = {/literal}{$rating}{literal};
+
+    // Set default rating for Owner
+    if (rating) {
+        document.getElementById('star' + rating + 'T').checked = true;
+    }
     });
+     const rating = {$rating};
+
+    // Set default rating for Owner
+    if (rating) {
+        document.getElementById('star' + rating + 'T').checked = true;
+    }
 </script>
 
 {/literal}

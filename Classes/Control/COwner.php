@@ -897,7 +897,7 @@ class COwner
             ]
         ];
         
-        $view->tenants($tenantList, $kind, $accommodationTitles);
+        $view->tenants($tenants, $kind, $accommodationTitles);
     }
 
     public static function filterTenants(string $type)
@@ -965,6 +965,6 @@ class COwner
         foreach ($accommodations as $accom) {
             $accommodationTitles[$accom->getIdAccommodation()]=$accom->getTitle();
         }
-        $view->tenants($tenantList, $type, $accommodationTitles);
+        $view->tenants($tenants, $type, $accommodationTitles, $rateT);
     }
 }
