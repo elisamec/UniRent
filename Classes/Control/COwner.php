@@ -883,7 +883,7 @@ class COwner
         $view = new VOwner();
         // DA AGGIUNGERE LA LISTA DELLE ACCOMMODATION DEL PROPRIETARIO (ALT ERROR R.519 PM)
         $accommodation_name=USuperGlobalAccess::getPost('accommodation');
-        $t_name=USuperGlobalAccess::getPost('name');
+        $t_username=USuperGlobalAccess::getPost('username');
         $rateT=USuperGlobalAccess::getPost('rateT');
         $date=USuperGlobalAccess::getPost('date');
         $t_age=USuperGlobalAccess::getPost('age');
@@ -891,7 +891,7 @@ class COwner
         $women=USuperGlobalAccess::getPost('women');
 
         #print $accommodation_name.' '.$t_name.' '.$rateT.' '.$date.' '.$t_age.' '.$men.' '.$women;
-        $tenantsArray=$PM->getFilterTenants($type,$accommodation_name,$t_name,$t_age,$rateT,$date,$men,$women,$ownerId);
+        $tenantsArray=$PM->getFilterTenants($type,$accommodation_name,$t_username,$t_age,$rateT,$date,$men,$women,$ownerId);
         
         $tenants=[];
         foreach ($tenantsArray as $idAccommodation => $students) {
