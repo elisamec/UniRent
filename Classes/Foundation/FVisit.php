@@ -96,6 +96,32 @@ class FVisit
         }
     }
 
+    public function loadByWeek(): array{
+
+        $db=FConnection::getInstance()->getConnection();
+        
+            try{
+                $db->exec('LOCK TABLES visit READ');
+                $db->beginTransaction();
+                $q="SELECT * FROM visit WHERE DateDiff(day,NOW())<8 and DateDiff(day,NOW())>0";    
+                $stm=$db->prepare($q);
+                $stm->execute();
+                $db->commit();
+                $db->exec('UNLOCK TABLES');
+
+            }catch (PDOException $e){
+                $db->rollBack();
+            }
+
+            $row=$stm->fetchall(PDO::FETCH_ASSOC);
+            $result = array();
+            foreach($row as $r){
+                $visit = new DateTime($r['day']);
+                $result[]=new EVisit($r['id'],$visit,$r['idStudent'],$r['idAccommodation']);
+            }
+            return $result;
+    }
+
     /**
     * store
     *

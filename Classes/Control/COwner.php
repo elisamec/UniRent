@@ -126,7 +126,9 @@ class COwner
                 ];
             }
         }
-        $view->accommodationManagement($accomm, $owner, $reviewsData, $picture, $tenants, $num_places);
+        $disabled=true;
+        $deletable=false;
+        $view->accommodationManagement($accomm, $owner, $reviewsData, $picture, $tenants, $num_places, $disabled, $deletable);
     }
 
     public static function ownerRegistration(){

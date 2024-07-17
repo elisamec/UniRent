@@ -2422,7 +2422,7 @@ textarea#comment::placeholder {
     padding-right: 30px;
 }
 
-.reserve_btn a{
+.reserve_btn a, .reserve_btn button{
     width: 100%;
     height: 60px;
     float: left;
@@ -2437,7 +2437,7 @@ textarea#comment::placeholder {
     margin-bottom: 20px;
 }
 
-.reserve_btn a:hover{
+.reserve_btn a:hover, .reserve_btn button:hover{
     color: #d0d1d2;
     background-color: #ffffff;
     box-shadow: 0px 2px 16px 0px #eaeaea !important;
@@ -2589,7 +2589,7 @@ button.delete_button:hover{
     margin-right: 20px; /* Optional, if you want to maintain a gap from the right */
 }
 
-#cancelDelete, #confirmDelete, #reserve, #cancelReserve, #visit, #cancelVisit{
+#cancelDelete, #confirmDelete, #reserve, #cancelReserve, #visit, #cancelVisit, #confirmBooking, #cancelBooking{
     padding: 10px 20px;
     font-size: 16px;
     color: #ffffff;
@@ -2604,18 +2604,18 @@ button.delete_button:hover{
     border-radius: 1rem;
 }
 
-#cancelDelete, #reserve, #visit, #cancelVisit {
+#cancelDelete, #reserve, #visit, #cancelVisit, #cancelBooking{
     background-color: #f9bc19;
 }
 .login-required a {
     background-color: #f9bc19;
 }
 
-#confirmDelete, #cancelReserve {
+#confirmDelete, #cancelReserve, #confirmBooking{
     background-color: #f91919;
 }
 
-#cancelDelete:hover, #confirmDelete:hover, #reserve:hover, #cancelReserve:hover, #visit:hover, #cancelVisit:hover{
+#cancelDelete:hover, #confirmDelete:hover, #reserve:hover, #cancelReserve:hover, #visit:hover, #cancelVisit:hover, #confirmBooking:hover, #cancelBooking:hover{
     color: #d0d1d2;
     background-color: #ffffff;
     box-shadow: 0px 2px 16px 0px #eaeaea !important;
@@ -2935,3 +2935,4 @@ background-size:
 background-repeat: no-repeat;
 
  }
+ 

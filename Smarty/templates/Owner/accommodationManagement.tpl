@@ -108,7 +108,18 @@
                               </div>
 
                      <div class="reserve_btn"><a href="/UniRent/Owner/editAccommodation/{$accommodation->getIdAccommodation()}" >Edit</a></div>
-                      <div class="delete_button" id="deleteLink"><a href="/UniRent/Owner/deleteAccommodation/{$id}" >Delete</a></div>
+                     {if $disabled == false}
+                        <div class="delete_button" id="deactivateLink">
+                            <a href="#">Deactivate</a>
+                        </div>
+                    {else}
+                            <div class="reserve_btn" id="activateLink">
+                                <a href="#">Activate</a>
+                            </div>
+                            <div class="delete_button" id="deleteLink">
+                                <a href="#">Delete</a>
+                            </div>
+                    {/if}
                       <div class="ownerSect">
                       <div class="row">
                       <h1 class="titleOwn">Owner:</h1>
@@ -190,21 +201,41 @@
             <a class="next">&#10095;</a>
         </div>
     </div>
-    <div id="confirmModal" class="resModal">
+<div id="confirmModal" class="resModal">
    <div class="resModal-content">
-      <span class="resClose">&times;</span>
-      <p>Are you sure you want to delete this accommodation ad?</p>
+      <span class="resClose" id="confirmClose">&times;</span>
+      <h2 class="resModal-head">Are you sure you want to delete this accommodation ad?</h2>
+      <p>This action is permanent.</p>
       <div class="btn-cont">
       <button id="confirmDelete">Yes</button>
       <button id="cancelDelete">Cancel</button>
       </div>
    </div>
 </div>
+<div id="deactivateModal" class="resModal">
+   <div class="resModal-content">
+      <span class="resClose" id="deactivateClose">&times;</span>
+      <h2 class="resModal-head">Are you sure you want to deactivate this accommodation ad?</h2>
+      <p>By deactivating the accommodation ad, it will no longer be visible to new tenants. For those who have concluded contracts with you the reserve and visit buttons will be disabled. You can then decide to reactivate the ad or delete it. This last operation can be done only after all ongoing and future contracts will be concluded.</p>
+      <div class="btn-cont">
+      <button id="confirmDeactivate">Yes</button>
+      <button id="cancelDeactivate">Cancel</button>
+      </div>
+   </div>
+</div>
+<div id="notDeletableModal" class="resModal">
+    <div class="resModal-content">
+        <span class="resClose" id="notDeletableClose">&times;</span>
+        <h2 class="resModal-head">You cannot delete this accommodation</h2>
+        <p>This accommodation cannot be deleted because there are ongoing or future contracts associated with it.</p>
+        <div class="reserve_btn"><button id="understood">Understood</button></div>
+    </div>
+</div>
 
 <div id="contactModal" class="resModal">
   <div class="resModal-content">
   <div class="row">
-    <span class="resClose">&times;</span>
+    <span class="resClose" id="contactClose">&times;</span>
     <h2 class="resModal-head">Owner Contacts</h2>
     </div>
     <p>Phone: {$owner->getPhoneNumber()}</p>
@@ -220,7 +251,7 @@
     var btn = document.getElementById("contactBtn");
 
     // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("resClose")[0];
+    var span = document.getElementById("contactClose");
 
     // When the user clicks the button, open the modal 
     btn.onclick = function(event) {
@@ -248,7 +279,7 @@
             <div class="row">
                <div class="col-md-4">
                   <h3 class="footer_text">About Us</h3>
-                  <p class="lorem_text">Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web</p>
+                  <p class="lorem_text">Established in 2024, UniRent has revolutionized the way students find their home away from home. Connecting students with trusted landlords, UniRent ensures a seamless rental experience.</p>
                </div>
                <hr></hr>
                <div class="col-md-4">
@@ -417,7 +448,7 @@
    var btn = document.getElementById("deleteLink");
 
    // Get the <span> element that closes the modal
-   var span = document.getElementsByClassName("resClose")[0];
+   var span = document.getElementById("confirmClose");
 
    // Get the confirm and cancel buttons
    var confirmBtn = document.getElementById("confirmDelete");
@@ -451,8 +482,73 @@
       }
    }
 });
+</script>
+<script>
+$(document).ready(function() {
+    // Get the modals
+    var confirmModal = document.getElementById("confirmModal");
+    var notDeletableModal = document.getElementById("notDeletableModal");
 
-      </script>
+    // Get the button that opens the modal
+    var btn = document.getElementById("deleteLink");
+
+    // Get the <span> elements that close the modals
+    var confirmClose = document.getElementById("confirmClose");
+    var notDeletableClose = document.getElementById("notDeletableClose");
+
+    // Get the confirm and cancel buttons
+    var confirmBtn = document.getElementById("confirmDelete");
+    var cancelBtn = document.getElementById("cancelDelete");
+    var understoodBtn = document.getElementById("understood");
+
+    // Determine if deletable based on Smarty variable
+    var deletable = '{$deletable}'; // Ensure this is correctly replaced with true/false
+
+    // When the user clicks the button, open the appropriate modal
+    btn.onclick = function(event) {
+        event.preventDefault(); // Prevent the default action (navigation)
+        if (deletable) {
+            confirmModal.style.display = "block";
+        } else {
+            notDeletableModal.style.display = "block";
+        }
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    confirmClose.onclick = function() {
+        confirmModal.style.display = "none";
+    }
+    notDeletableClose.onclick = function() {
+        notDeletableModal.style.display = "none";
+    }
+
+    // When the user clicks on the confirm button, proceed to delete
+    confirmBtn.onclick = function() {
+        window.location.href = "/UniRent/Owner/deleteAccommodation/{$accommodation->getIdAccommodation()}";
+    }
+
+    // When the user clicks on the cancel button, close the modal
+    cancelBtn.onclick = function() {
+        confirmModal.style.display = "none";
+    }
+
+    // When the user clicks on the understood button, close the modal
+    understoodBtn.onclick = function() {
+        notDeletableModal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == confirmModal) {
+            confirmModal.style.display = "none";
+        }
+        if (event.target == notDeletableModal) {
+            notDeletableModal.style.display = "none";
+        }
+    }
+});
+</script>
+
       {literal}
       <script>
     // Retrieve Smarty variables (assuming they are passed as JSON strings)
@@ -495,7 +591,7 @@
     // Generate tenant sections
     for (var i = 0; i < tenants.length; i++) {
         var tenant = tenants[i];
-        tenantContainer.innerHTML += createTenantSection(tenant.username, tenant.expiry_date, tenant.profile_pic);
+        tenantContainer.innerHTML += createTenantSection(tenant.username, tenant.expiryDate, tenant.profilePic);
     }
 
     // Fill remaining places with free space sections

@@ -19,7 +19,7 @@ class VOwner {
         $this->smarty->assign('accommodations', json_encode($accommodations));
         $this->smarty->display('Owner/home.tpl');
     }
-    public function accommodationManagement(EAccommodation $accomm, EOwner $owner, array $reviewsData, array $pictures, array $tenants, int $num_places):void{
+    public function accommodationManagement(EAccommodation $accomm, EOwner $owner, array $reviewsData, array $pictures, array $tenants, int $num_places, bool $disabled, bool $deletable):void{
         $photos=json_encode($pictures);
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->assign('imagesJson', $photos);
@@ -27,6 +27,8 @@ class VOwner {
         $this->smarty->assign('owner', $owner);
         $this->smarty->assign('tenantsJson', json_encode($tenants));
         $this->smarty->assign('num_places', $num_places);
+        $this->smarty->assign('disabled', $disabled);
+        $this->smarty->assign('deletable', $deletable);
         $this->smarty->display('Owner/accommodationManagement.tpl');
     }
 

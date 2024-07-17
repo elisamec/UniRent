@@ -71,6 +71,9 @@ class EVisit
     public function getDate():DateTime{
         return $this->date;
     }
+    public function getDayOfWeek():string{
+        return $this->date->format('l');
+    }
 
     /**
      * getIdStudent

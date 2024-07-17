@@ -273,6 +273,27 @@ class CStudent{
         if($data=='09'){$period='september';}
         else{$period='october';}
         $visits=$accomm->getVisit();
+        $booked=$PM->loadVisitsByWeek();
+        $studBooked=false;
+        $dayOfBooking='';
+        $timeOfBooking='';
+        foreach ($visits as $day=>$time) {
+            foreach ($time as $key=>$t) {
+                foreach ($booked as $b) {
+                    if ($b->getIdStudent()===USession::getInstance()->getSessionElement('id') && $b->getIdAccommodation()==$idAccommodation)
+                    {
+                        $studBooked=true;
+                        $dayOfBooking=$b->getDate()->format('d-m-Y');
+                        $dayOfBooking=$b->getDayOfweek().' '.$dayOfBooking;
+                        $timeOfBooking=$b->getDate()->format('H:i');
+                    }
+                    if($b->getDayOfWeek()==$day && $b->getDate()->format('H:i')==$t)
+                    {
+                        unset($visits[$day][$key]);
+                    }
+                }
+            }
+        }
         $visitDuration=$accomm->getVisitDuration();
         $num_places=$accomm->getPlaces();
         $tenantOwner= $PM->getTenants('current',$accomm->getIdOwner());
@@ -298,7 +319,7 @@ class CStudent{
                 ];
             }
         }
-        $view->accommodation($accomm, $owner, $reviewsData, $period, $picture, $visits, $visitDuration, $tenants, $num_places);
+        $view->accommodation($accomm, $owner, $reviewsData, $period, $picture, $visits, $visitDuration, $tenants, $num_places, $studBooked, $dayOfBooking, $timeOfBooking);
     }
 
 

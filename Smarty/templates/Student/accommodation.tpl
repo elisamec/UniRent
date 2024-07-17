@@ -327,42 +327,67 @@
     </form>
   </div>
 </div>
+<div class="resModal" id="confirmModal" style="display: none;">
+  <div class="resModal-content">
+    <div class="row">
+      <span class="resClose" id="confirmClose">&times;</span>
+      <h2 class="resModal-head">Are you sure you want to book another visit?</h2>
+      <p>You already have one booked for {$day} at {$time} of the duration of {$duration} minutes.</p>
+    </div>
+    <div class="btn-cont">
+      <button id="confirmBooking" type="button">Continue</button>
+      <button id="cancelBooking" type="button">Cancel</button>
+    </div>
+  </div>
+</div>
 {literal}
 <script>
-  // Get the modal
-  var modal = document.getElementById("visitModal");
+  // Get the modal elements
+  var visitModal = document.getElementById("visitModal");
+  var confirmModal = document.getElementById("confirmModal");
 
-  // Get the button that opens the modal
-  var btn = document.getElementById("visitBtn");
-
-  // Get the <span> element that closes the modal
-  var span = document.getElementById("visitClose");
-
-  var cancelBtn = document.getElementById("cancelVisit");
+  // Get the button that opens the visit modal
+  var visitBtn = document.getElementById("visitBtn");
 
   // JSON data for time slots
   var timeSlots = {/literal}{$timeSlots}{literal};
 
-  // When the user clicks the button, open the modal 
-  btn.onclick = function(event) {
+  // When the user clicks the button to open the visit modal
+  visitBtn.onclick = function(event) {
     event.preventDefault();
-    modal.style.display = "block";
-  }
 
-  // When the user clicks on <span> (x), close the modal
-  span.onclick = function() {
-    modal.style.display = "none";
-  }
-
-  cancelBtn.onclick = function() {
-    modal.style.display = "none";
-  }
-
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
+    // Check if already booked
+    if ({/literal}{$booked}{literal}) {
+      // Show confirmation modal
+      confirmModal.style.display = "block";
+    } else {
+      // Show visit modal
+      visitModal.style.display = "block";
     }
+  }
+
+  // Close visit modal
+  document.getElementById("visitClose").onclick = function() {
+    visitModal.style.display = "none";
+  }
+  document.getElementById("cancelVisit").onclick = function() {
+    visitModal.style.display = "none";
+  }
+
+  // Close confirmation modal
+  document.getElementById("confirmClose").onclick = function() {
+    confirmModal.style.display = "none";
+  }
+
+  // Cancel booking action
+  document.getElementById("cancelBooking").onclick = function() {
+    confirmModal.style.display = "none";
+  }
+
+  // Continue booking action
+  document.getElementById("confirmBooking").onclick = function() {
+    confirmModal.style.display = "none";
+    visitModal.style.display = "block"; // Show visit modal after confirmation
   }
 
   // Populate time slots based on the selected day
@@ -372,17 +397,19 @@
     
     // Clear previous options
     timeSelect.innerHTML = '<option value="" selected disabled>Select the time</option>';
-
-
     // Populate new options
-    if (timeSlots[selectedDay]) {
-      timeSlots[selectedDay].forEach(function(slot) {
-        var option = document.createElement("option");
-        option.value = slot;
-        option.textContent = slot;
-        timeSelect.appendChild(option);
-      });
-    }
+     if (timeSlots[selectedDay] && typeof timeSlots[selectedDay] === 'object') {
+    // Iterate over the keys of timeSlots[selectedDay]
+    Object.keys(timeSlots[selectedDay]).forEach(function(key) {
+      var option = document.createElement("option");
+      option.value = timeSlots[selectedDay][key]; // Use the value corresponding to the key
+      option.textContent = timeSlots[selectedDay][key]; // Use the same value for textContent
+      timeSelect.appendChild(option);
+    });
+  } else {
+    console.error("timeSlots[selectedDay] is not defined or is not an object.");
+    // Handle the case where timeSlots[selectedDay] is not as expected (optional)
+  }
   });
 
   // Trigger the change event on page load to populate the initial time slots
@@ -392,13 +419,14 @@
 
 
 
+
 <!-- footer section start -->
       <div class="footer_section layout_padding">
          <div class="container">
             <div class="row">
                <div class="col-md-4">
                   <h3 class="footer_text">About Us</h3>
-                  <p class="lorem_text">Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web</p>
+                  <p class="lorem_text">Established in 2024, UniRent has revolutionized the way students find their home away from home. Connecting students with trusted landlords, UniRent ensures a seamless rental experience.</p>
                </div>
                <hr></hr>
                <div class="col-md-4">
