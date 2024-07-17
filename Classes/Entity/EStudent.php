@@ -276,6 +276,12 @@ class EStudent
     {
         return $this->animals;
     }
+    public function getRating():int
+    {
+        $PM=FPersistentManager::getInstance();
+        $result=$PM->getStudentRating($this->id);
+        return $result;
+    }
 
 
 

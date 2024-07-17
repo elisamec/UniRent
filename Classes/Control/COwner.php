@@ -891,7 +891,7 @@ class COwner
         $women=USuperGlobalAccess::getPost('women');
 
         #print $accommodation_name.' '.$t_name.' '.$rateT.' '.$date.' '.$t_age.' '.$men.' '.$women;
-        $tenantsArray=$PM->getFilterTenants($type,$accommodation_name,$t_name,$t_age,$rateT,$date,$men,$women);
+        $tenantsArray=$PM->getFilterTenants($type,$accommodation_name,$t_name,$t_age,$rateT,$date,$men,$women,$ownerId);
         
         $tenants=[];
         foreach ($tenantsArray as $idAccommodation => $students) {

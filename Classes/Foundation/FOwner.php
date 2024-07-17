@@ -609,10 +609,11 @@ use PDOException;
      * @param $date $date [september/october]
      * @param $men 
      * @param $women
+     * @param $idOwner
      *
      * @return array
      */
-    public function getFilterTenants($type,$accommodation_name,$t_username,$t_age,$rateT,$date,$men,$women):array
+    public function getFilterTenants($type,$accommodation_name,$t_username,$t_age,$rateT,$date,$men,$women,$idOwner):array
     {
 
         $result=array();
@@ -640,7 +641,8 @@ use PDOException;
                 AND MONTH(a.`start`)= :month
                 AND c.`status`= :type
                 AND a.title= :accommodation_name
-                AND s.username= :student_username";
+                AND s.username= :student_username
+                AND o.id= :id";
             
             if($men==true and $women==true){}
             elseif($men==false and $women==true){$q.=" AND s.sex='F'";}
@@ -655,6 +657,7 @@ use PDOException;
             $stm->bindParam(';type',$type,PDO::PARAM_STR);
             $stm->bindParam(':accommodation_name',$accommodation_name,PDO::PARAM_STR);
             $stm->bindParam(':student_username',$t_username,PDO::PARAM_STR);
+            $stm->bindParam(':id',$idOwner,PDO::PARAM_INT);
             $stm->execute();
             $db->commit();
             $db->exec('UNLOCK TABLES');
