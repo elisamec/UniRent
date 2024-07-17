@@ -32,6 +32,7 @@ class EAccommodation
      * @var bool $woman If only womens are required is true.
      * @var bool $pets If pets are allowed is true.
      * @var bool $smokers If smokers are allowed is true.
+     * @var bool $status If the accommodation is active is true, else if the accommodation is desabilited is false.
      * @var int $idOwner The identifier of the owner of the accommodation.
      */
     private ?int $idAccommodation;
@@ -49,6 +50,7 @@ class EAccommodation
     private bool $woman;
     private bool $pets;
     private bool $smokers;
+    private bool $status;
     private int $idOwner;
 
     /**
@@ -74,11 +76,12 @@ class EAccommodation
      * @var bool $woman If only womens are required is true.
      * @var bool $pets If pets are allowed is true.
      * @var bool $smokers If smokers are allowed is true.
+     * @var bool $status If the accommodation is active is true, else if the accommodation is desabilited is false.
      * @var int $idOwner The identifier of the owner of the accommodation.
      */
     public function __construct(?int $idAccommodation, array $photo, string $title, Address $address, float $price,
                                 DateTime $start, ?String $description, int $places, ?float $deposit, array $visit, int $visitDuration, 
-                                bool $man, bool $woman, bool $pets, bool $smokers, int $idOwner){
+                                bool $man, bool $woman, bool $pets, bool $smokers, bool $status, int $idOwner){
 
         $this->idAccommodation = $idAccommodation;
         $this->photo = $photo;
@@ -95,6 +98,7 @@ class EAccommodation
         $this->woman = $woman;
         $this->pets = $pets;
         $this->smokers = $smokers;
+        $this->status = $status;
         $this->idOwner = $idOwner;
     }
 
@@ -246,6 +250,15 @@ class EAccommodation
      */
     public function getSmokers(): bool{
         return $this->smokers;
+    }
+
+    /**
+     * getStatus
+     * Returns true if accommodation is active, else if it's disabilited the function returns false
+     * @return bool
+     */
+    public function getStatus(): bool{
+        return $this->status;
     }
 
     /**
@@ -409,6 +422,16 @@ class EAccommodation
     }
 
     /**
+     * setStatus
+     * Sets true if accommodation is active, else if it's disabilited the function sets false
+     * @param bool $status
+     * @return void
+     */
+    public function setStatus(bool $status): void{
+        $this->status = $status;
+    }
+
+    /**
      * setIdOwner
      * Sets the id of the owner of the accommodation
      * @param int $idOwner
@@ -461,6 +484,7 @@ class EAccommodation
                 "Woman: $this->woman \n".
                 "Pets: $this->pets \n".
                 "Smokers: $this->smokers \n".
+                "Status: $this->status \n".
                 "ID Owner: $this->idOwner \n";
 
         return $str;
