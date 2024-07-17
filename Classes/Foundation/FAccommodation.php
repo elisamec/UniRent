@@ -453,10 +453,10 @@ use PDO;
 
                 $resAddress = $FA->updateAddress($accommodation->getAddress());
                 $resVisit = $FA -> updateDay($accommodation);
-                $resPhoto = $FA -> updatePhoto($accommodation);
+                //$resPhoto = $FA -> updatePhoto($accommodation);
 
                 
-                if($resAddress && $resVisit && $resPhoto){
+                if($resAddress && $resVisit ){
 
                     $q='UPDATE accommodation SET title = :title, price = :price,
                                     start = :start, description = :description, places = :places, deposit = :deposit,

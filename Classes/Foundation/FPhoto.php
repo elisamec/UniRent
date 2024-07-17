@@ -127,7 +127,7 @@ class FPhoto {
                 $stm=$db->prepare($q);
                 $stm->bindParam(':id',$id,PDO::PARAM_INT);
                 $stm->execute();
-                $db->commit();
+                //$db->commit();
                 $db->exec('UNLOCK TABLES');
 
             }catch (PDOException $e){
@@ -332,7 +332,7 @@ class FPhoto {
             $stm->bindValue(':idAccommodation',$idAccommodation, PDO::PARAM_INT);
             $stm->bindValue(':relativeTo','accommodation', PDO::PARAM_STR);
             $stm->execute();    
-            $db->commit();
+            //$db->commit();
             $db->exec('UNLOCK TABLES');
 
             return true;
