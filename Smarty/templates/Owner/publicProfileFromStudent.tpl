@@ -268,8 +268,8 @@ const modal = document.getElementById('revModal');
             <label for="reportReason">Reason for report:</label><br>
             <textarea id="reportReason" name="reportReason" rows="4" cols="50" oninput="checkInput()"></textarea><br><br>
             <div class="btn-cont">
-            <button type="submit" id="confirmDelete" class="disabled" onclick="submitReport()" disabled>Submit</button>
-            <button type="button" id="cancelDelete" onclick="cancelReport()">Cancel</button>
+            <button type="submit" id="confirmDelete" class="disabled confirmClass" onclick="submitReport()" disabled>Submit</button>
+            <button type="button" id="cancelDelete" class="cancelClass" onclick="cancelReport()">Cancel</button>
             </div>
          </form>
     </div>

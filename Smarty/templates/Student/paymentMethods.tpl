@@ -263,8 +263,8 @@ function updatePaymentMethod() {
         <span class="resClose" onclick="closeConfirmModal()">&times;</span>
         <p>Are you sure you want to delete this card?</p>
         <div class="btn-cont">
-        <button id="confirmDelete" type="button">Yes</button>
-        <button id="cancelDelete" type="button" onclick="closeConfirmModal()">Cancel</button>
+        <button id="confirmDelete" class="confirmClass" type="button">Yes</button>
+        <button id="cancelDelete" class="cancelClass" type="button" onclick="closeConfirmModal()">Cancel</button>
         </div>
     </div>
 </div>
