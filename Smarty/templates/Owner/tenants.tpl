@@ -291,6 +291,18 @@
         // Clear existing options in year select
         yearSelect.innerHTML = '<option value="" disabled selected>Select a year</option>';
 
+            if (data.length === 0) {
+                const noTenantsDiv = document.createElement("div");
+                noTenantsDiv.classList.add("container");
+                noTenantsDiv.textContent = "No tenants found.";
+                tenantsContainer.appendChild(noTenantsDiv);
+            } else if (Object.keys(data).length === 0) {
+                const noTenantsDiv = document.createElement("div");
+                noTenantsDiv.classList.add("container");
+                noTenantsDiv.textContent = "No tenants found.";
+                tenantsContainer.appendChild(noTenantsDiv);
+            }
+
         data.forEach(item => {
             const accommodationDiv = document.createElement("div");
             accommodationDiv.classList.add("accommodation");
@@ -302,12 +314,7 @@
 
             const rowDiv = document.createElement("div");
             rowDiv.classList.add("row");
-            if (item.tenants.length === 0) {
-                const noTenantsDiv = document.createElement("div");
-                noTenantsDiv.classList.add("container");
-                noTenantsDiv.textContent = "No tenants found.";
-                rowDiv.appendChild(noTenantsDiv);
-            }
+            
             // Check if item.tenants is an array
             if (Array.isArray(item.tenants)) {
                 item.tenants.forEach(tenant => {
