@@ -820,6 +820,7 @@ use PDO;
                      FROM accommodation a INNER JOIN address ad ON a.address=ad.id
                      WHERE ad.city= :city
                      AND MONTH(a.`start`)= :m
+                     AND a.status=TRUE
                      AND((a.price>= :min)AND(a.price<= :max))";
                 $db->exec('LOCK TABLES accommodation READ , address READ');
                 $db->beginTransaction();
@@ -900,6 +901,7 @@ use PDO;
                 $q="SELECT a.id
                     FROM accommodation a INNER JOIN address ad ON ad.id=a.address
                     WHERE ad.city= :city 
+                    AND a.status= TRUE
                     AND MONTH(a.`start`)= :mon
                     AND((a.price>= :min)AND(a.price<= :max)) ";
                 
