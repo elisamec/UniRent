@@ -429,7 +429,7 @@ use PDO;
         * @param  EAccommodation $accommodation
         * @return bool
         */
-        /*public function update(EAccommodation $accommodation):bool 
+        public function update(EAccommodation $accommodation):bool 
         {   
             $FA=FAccommodation::getInstance();
 
@@ -440,9 +440,9 @@ use PDO;
             $delete ? $store = $FA->store($accommodation) : $store = false;
 
             return $store;
-        }*/
+        }
 
-        public function update(EAccommodation $accommodation):bool 
+        /*public function update(EAccommodation $accommodation):bool 
         {   
             $FA=FAccommodation::getInstance();
             $db=FConnection::getInstance()->getConnection();
@@ -495,7 +495,7 @@ use PDO;
                 return false;
             }
             
-        }
+        }*/
 
 
         /**
