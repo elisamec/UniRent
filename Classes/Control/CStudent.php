@@ -319,7 +319,7 @@ class CStudent{
                 ];
             }
         }
-        $disabled=true;
+        $disabled=false;
         $successReserve="null";
         $successVisit="null";
         $view->accommodation($accomm, $owner, $reviewsData, $period, $picture, $visits, $visitDuration, $tenants, $num_places, $studBooked, $dayOfBooking, $timeOfBooking, $disabled, $successReserve, $successVisit);

@@ -117,6 +117,7 @@ use PDO;
                 $row['woman'],
                 $row['pets'],
                 $row['smokers'],
+                $row['status'],
                 $row['idOwner']
             );
             return $result;
@@ -247,8 +248,8 @@ use PDO;
                 $db->exec('LOCK TABLES accommodation WRITE');
                 
 
-                $q='INSERT INTO accommodation (title, address, price, start, description, places, deposit, visitDuration, man, woman, pets, smokers, idOwner)';
-                $q=$q.' VALUES (:title, :address, :price, :start, :description, :places, :deposit, :visitDuration, :man, :woman, :pets, :smokers, :idOwner)';
+                $q='INSERT INTO accommodation (title, address, price, start, description, places, deposit, visitDuration, man, woman, pets, smokers, status, idOwner)';
+                $q=$q.' VALUES (:title, :address, :price, :start, :description, :places, :deposit, :visitDuration, :man, :woman, :pets, :smokers, :status, :idOwner)';
 
                 $stm=$db->prepare($q);
 
@@ -266,6 +267,7 @@ use PDO;
                 $stm->bindValue(':woman',$accommodation->getWoman(),PDO::PARAM_BOOL);
                 $stm->bindValue(':pets',$accommodation->getPets(),PDO::PARAM_BOOL);
                 $stm->bindValue(':smokers',$accommodation->getSmokers(),PDO::PARAM_BOOL);
+                $stm->bindValue(':status',$accommodation->getStatus(),PDO::PARAM_BOOL);
                 $stm->bindValue(':idOwner',$accommodation->getIdOwner(),PDO::PARAM_INT);
                 
                 $stm->execute();
