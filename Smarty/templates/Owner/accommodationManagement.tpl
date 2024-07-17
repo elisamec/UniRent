@@ -108,13 +108,13 @@
                               </div>
 
                      <div class="reserve_btn"><a href="/UniRent/Owner/editAccommodation/{$accommodation->getIdAccommodation()}" >Edit</a></div>
-                     {if $disabled == false}
+                     {if $disabled == true}
                         <div class="delete_button" id="deactivateLink">
                             <a href="#">Deactivate</a>
                         </div>
                     {else}
                             <div class="reserve_btn" id="activateLink">
-                                <a href="#">Activate</a>
+                                <a href="/UniRent/Accommodation/activate/{$accommodation->getIdAccommodation()}">Activate</a>
                             </div>
                             <div class="delete_button" id="deleteLink">
                                 <a href="#">Delete</a>
@@ -218,8 +218,8 @@
       <h2 class="resModal-head">Are you sure you want to deactivate this accommodation ad?</h2>
       <p>By deactivating the accommodation ad, it will no longer be visible to new tenants. For those who have concluded contracts with you the reserve and visit buttons will be disabled. You can then decide to reactivate the ad or delete it. This last operation can be done only after all ongoing and future contracts will be concluded.</p>
       <div class="btn-cont">
-      <button id="confirmDeactivate">Yes</button>
-      <button id="cancelDeactivate">Cancel</button>
+      <button id="confirmDeactivate" class="confirmClass" onclick="deactivateFunct()">Yes</button>
+      <button id="cancelDeactivate" class="cancelClass">Cancel</button>
       </div>
    </div>
 </div>
@@ -440,6 +440,10 @@
     {/if}
 </script>
 <script>
+function deactivateFunct() {
+      window.location.href = "/UniRent/Accommodation/deactivate/{$accommodation->getIdAccommodation()}";
+      deactivateModal.style.display = "none";
+   }
       $(document).ready(function() {
    // Get the modal
    var modal = document.getElementById("confirmModal");
@@ -449,6 +453,22 @@
 
    // Get the <span> element that closes the modal
    var span = document.getElementById("confirmClose");
+
+   var deactivateClose = document.getElementById("deactivateClose");
+   var cancelDeactivate = document.getElementById("cancelDeactivate");
+   var deactivateBtn = document.getElementById("deactivateLink");
+   var deactivateModal = document.getElementById("deactivateModal");
+
+   deactivateBtn.onclick = function(event) {
+      event.preventDefault(); // Prevent the default action (navigation)
+      deactivateModal.style.display = "block";
+   }
+   deactivateClose.onclick = function() {
+      deactivateModal.style.display = "none";
+   }
+    cancelDeactivate.onclick = function() {
+        deactivateModal.style.display = "none";
+    }
 
    // Get the confirm and cancel buttons
    var confirmBtn = document.getElementById("confirmDelete");
@@ -468,6 +488,7 @@
    // When the user clicks on the confirm button, proceed to delete
    confirmBtn.onclick = function() {
       window.location.href = "/UniRent/Owner/deleteAccommodation/{$accommodation->getIdAccommodation()}";
+      modal.style.display = "none";
    }
 
    // When the user clicks on the cancel button, close the modal
