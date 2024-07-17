@@ -301,7 +301,12 @@
 
             const rowDiv = document.createElement("div");
             rowDiv.classList.add("row");
-
+            if (item.tenants.length === 0) {
+                const noTenantsDiv = document.createElement("div");
+                noTenantsDiv.classList.add("container");
+                noTenantsDiv.textContent = "No tenants found.";
+                rowDiv.appendChild(noTenantsDiv);
+            }
             // Check if item.tenants is an array
             if (Array.isArray(item.tenants)) {
                 item.tenants.forEach(tenant => {
