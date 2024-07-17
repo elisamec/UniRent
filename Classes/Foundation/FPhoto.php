@@ -312,4 +312,35 @@ class FPhoto {
 
         } else return false;  
     }    
+
+    /**
+    * delete all photos of an accomodation
+    *
+    * @param  int $idPhoto
+    * @return bool
+    */
+    public function deleteAccommodation(int $idAccommodation): bool 
+    {
+        $db=FConnection::getInstance()->getConnection();
+    
+        try
+        {  
+            $db->exec('LOCK TABLES photo WRITE');
+            $db->beginTransaction();
+            $q='DELETE FROM photo WHERE relativeTo = :relativeTo and idAccommodation = :idAccommodation';
+            $stm=$db->prepare($q);
+            $stm->bindValue(':idAccommodation',$idAccommodation, PDO::PARAM_INT);
+            $stm->bindValue(':relativeTo','accommodation', PDO::PARAM_STR);
+            $stm->execute();    
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+
+            return true;
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return false;
+        } 
+    }    
 }

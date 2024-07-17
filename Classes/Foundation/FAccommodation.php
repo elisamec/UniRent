@@ -451,12 +451,12 @@ use PDO;
                 $db->exec('LOCK TABLES accommodation WRITE');
                 $db->beginTransaction();
 
-                print "The problem is down\n";
                 $resAddress = $FA->updateAddress($accommodation->getAddress());
                 $resVisit = $FA -> updateDay($accommodation);
+                $resPhoto = $FA -> updatePhoto($accommodation);
+
                 
-                if($resAddress && $resVisit){
-                    print "Here is the probelm\n";
+                if($resAddress && $resVisit && $resPhoto){
 
                     $q='UPDATE accommodation SET title = :title, price = :price,
                                     start = :start, description = :description, places = :places, deposit = :deposit,
@@ -535,9 +535,8 @@ use PDO;
          * @param  string $day
          * @return bool
          */
-        public function updateDay(EAccommodation $accommodation):bool 
-        {
-            $db=FConnection::getInstance()->getConnection();
+        private function updateDay(EAccommodation $accommodation):bool {
+
             $FA = FAccommodation::getInstance();
 
             $idAccommodation = $accommodation->getIdAccommodation();
@@ -566,6 +565,34 @@ use PDO;
 
             return $result;
             
+        }
+
+        /**
+         * update photo
+         * private class that updates photos of an accommodation
+         * 
+         * 
+         */
+        
+        private function updatePhoto(EAccommodation $accommodation):bool{
+
+            $FP = FPhoto::getInstance();
+
+            $idAccommodation = $accommodation->getIdAccommodation();
+            $delete = $FP -> deleteAccommodation($idAccommodation);
+
+            if($delete){
+                $photos = $accommodation->getPhoto();
+
+                foreach($photos as $photo){
+                    $photo = $photo->setIdAccommodation($idAccommodation);
+                }
+
+                $FP -> store($photos);
+                return true;
+
+            } else return false;
+
         }
         
         /**

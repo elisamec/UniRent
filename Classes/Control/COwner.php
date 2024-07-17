@@ -828,7 +828,7 @@ class COwner
         //Nella seguente riga manca il penultimo attributo status che deve essere true o false
         $accomodation = new EAccommodation($id,$array_photos,$title,$addressObj,$price,$date,$description,$places,$deposit,$array_visit,$duration,$men,$women,$animals,$smokers,$status,$idOwner);
         $result=$PM::update($accomodation);
-        $id = $accomodation->getIdAccommodation();
+        //$id = $accomodation->getIdAccommodation();
         $result ? header('Location:/UniRent/Owner/accommodationManagement/'.$id) : http_response_code(500);
     }
 
