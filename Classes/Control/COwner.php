@@ -946,7 +946,8 @@ class COwner
                 }
                 $tenantList[] = [
                     'username' => $student[0]->getUsername(),
-                    'image' => $profilePic
+                    'image' => $profilePic,
+                    'expiryDate' => $student[1]
                 ];
             }
 
