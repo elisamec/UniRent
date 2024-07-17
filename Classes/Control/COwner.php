@@ -27,7 +27,7 @@ class COwner
         $username=USession::getInstance()::getSessionElement('username');
         $ownerId=$PM->getOwnerIdByUsername($username);
         $accommodationEntities=$PM->loadAccommodationsByOwner($ownerId);
-        $accommodations=[];
+        $accommodations=['active' => [], 'inactive' => []];
         foreach($accommodationEntities as $accom) {
             if(count($accom->getPhoto())==0)
                 {
@@ -38,14 +38,17 @@ class COwner
                    $base64 = base64_encode((($accom->getPhoto())[0])->getPhoto());
                    $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
                 }
-            $accommodations[]=[
-                'id'=>$accom->getIdAccommodation(),
-                'photo'=>$photo,
-                'title'=>$accom->getTitle(),
-                'address'=>$accom->getAddress()->getAddressLine1() .", ". $accom->getAddress()->getLocality(),
-                'price'=>$accom->getPrice()
-            ];
-        }
+                    $status = $accom->getStatus() ? 'active' : 'inactive';
+                    $accommodations[] = [
+                        'id' => $accom->getIdAccommodation(),
+                        'photo' => $photo,
+                        'title' => $accom->getTitle(),
+                        'address' => $accom->getAddress()->getAddressLine1() . ", " . $accom->getAddress()->getLocality(),
+                        'price' => $accom->getPrice(),
+                        'status' => $status
+                    ];
+                }
+                
         #print_r($accommodations);
         $view->home($accommodations);
     }
@@ -703,6 +706,8 @@ class COwner
                    $base64 = base64_encode((($accom->getPhoto())[0])->getPhoto());
                    $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
                 }
+            if ($accom->getStatus() == true) {
+                
             $accommodations[]=[
                 'id'=>$accom->getIdAccommodation(),
                 'photo'=>$photo,
@@ -710,6 +715,7 @@ class COwner
                 'address'=>$accom->getAddress()->getAddressLine1() .", ". $accom->getAddress()->getLocality(),
                 'price'=>$accom->getPrice()
             ];
+        }
         }
         #print_r($accommodations);
         $view->viewOwnerAds($accommodations, $username);
@@ -759,20 +765,6 @@ class COwner
         }
         $view->editAccommodation($accommodationData, $img , $visitAvailabilityData, $id);
         
-    }
-
-
-    public static function deleteAccommodation(int $id) {
-        $PM=FPersistentManager::getInstance();
-        $result=$PM->delete('EAccommodation', $id);
-        if($result)
-        {
-            header('Location:/UniRent/Owner/home');
-        }
-        else
-        {
-            http_response_code(500);
-        }
     }
     
     public static function editAccommodationOperations(int $id)

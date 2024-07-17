@@ -37,4 +37,16 @@ class CAccommodation
             http_response_code(500);
         }
     }
+    public static function delete(int $id) {
+        $PM=FPersistentManager::getInstance();
+        $result=$PM->delete('EAccommodation', $id);
+        if($result)
+        {
+            header('Location:/UniRent/Owner/home');
+        }
+        else
+        {
+            http_response_code(500);
+        }
+    }
 }

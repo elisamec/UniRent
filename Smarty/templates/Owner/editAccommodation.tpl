@@ -752,29 +752,32 @@ document.addEventListener("DOMContentLoaded", function() {
     function setVisitData(data) {
         let container = document.getElementById('availabilityContainer');
         container.innerHTML = '';
-        for (let i = 0; i < data.length; i++) {
-            let availability = document.createElement('div');
-            availability.className = 'availability';
-            availability.innerHTML = `
-                <button type="button" onclick="removeAvailability(this)" class="button-spec little">-</button>
-                <label for="duration">Visit Duration (minutes):</label>
-                <input type="number" class="duration" name="duration" value="${data[i].duration}" min="10">
-                <label for="day">Weekday:</label>
-                <select name="day">
-                    <option value="Monday" ${data[i].day === 'Monday' ? 'selected' : ''}>Monday</option>
-                    <option value="Tuesday" ${data[i].day === 'Tuesday' ? 'selected' : ''}>Tuesday</option>
-                    <option value="Wednesday" ${data[i].day === 'Wednesday' ? 'selected' : ''}>Wednesday</option>
-                    <option value="Thursday" ${data[i].day === 'Thursday' ? 'selected' : ''}>Thursday</option>
-                    <option value="Friday" ${data[i].day === 'Friday' ? 'selected' : ''}>Friday</option>
-                    <option value="Saturday" ${data[i].day === 'Saturday' ? 'selected' : ''}>Saturday</option>
-                    <option value="Sunday" ${data[i].day === 'Sunday' ? 'selected' : ''}>Sunday</option>
-                </select>
-                <label for="start">Availability start:</label>
-                <input type="time" class="start" name="start" value="${data[i].start}">
-                <label for="end">Availability end:</label>
-                <input type="time" class="end" name="end" value="${data[i].end}">
-            `;
-            container.appendChild(availability);
+        // Assuming 'data' is your object with availability details
+        for (let day in data) {
+            if (data.hasOwnProperty(day)) {
+                let availability = document.createElement('div');
+                availability.className = 'availability';
+                availability.innerHTML = `
+                    <button type="button" onclick="removeAvailability(this)" class="button-spec little">-</button>
+                    <label for="duration">Visit Duration (minutes):</label>
+                    <input type="number" class="duration" name="duration" value="${data[day].duration}" min="10">
+                    <label for="day">Weekday:</label>
+                    <select name="day" id="day">
+                        <option value="Monday" ${day === 'Monday' ? 'selected' : ''}>Monday</option>
+                        <option value="Tuesday" ${day === 'Tuesday' ? 'selected' : ''}>Tuesday</option>
+                        <option value="Wednesday" ${day === 'Wednesday' ? 'selected' : ''}>Wednesday</option>
+                        <option value="Thursday" ${day === 'Thursday' ? 'selected' : ''}>Thursday</option>
+                        <option value="Friday" ${day === 'Friday' ? 'selected' : ''}>Friday</option>
+                        <option value="Saturday" ${day === 'Saturday' ? 'selected' : ''}>Saturday</option>
+                        <option value="Sunday" ${day === 'Sunday' ? 'selected' : ''}>Sunday</option>
+                    </select>
+                    <label for="start">Availability start:</label>
+                    <input type="time" class="start" name="start" value="${data[day].start}">
+                    <label for="end">Availability end:</label>
+                    <input type="time" class="end" name="end" value="${data[day].end}">
+                `;
+                container.appendChild(availability);
+            }
         }
     }
 });
