@@ -15,8 +15,9 @@ class VOwner {
     }
 
     //Mostra la home del proprietario
-    public function home(array $accommodations) {
-        $this->smarty->assign('accommodations', json_encode($accommodations));
+    public function home(array $accommodationsActive, array $accommodationsInactive) {
+        $this->smarty->assign('accommodationsActive', json_encode($accommodationsActive));
+        $this->smarty->assign('accommodationsInactive', json_encode($accommodationsInactive));
         $this->smarty->display('Owner/home.tpl');
     }
     public function accommodationManagement(EAccommodation $accomm, EOwner $owner, array $reviewsData, array $pictures, array $tenants, int $num_places, bool $disabled, bool $deletable):void{

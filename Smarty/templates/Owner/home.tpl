@@ -93,9 +93,9 @@
                <div class="col-sm-12">
                   <div class="Properties_taital_main">
                      <h1 class="Properties_taital">Your Proprieties</h1>
-                     <p>Here you can see all the properties you have posted. The ones a little greyish are the ones that you have disabled.</p>
                      <hr class="border_main">
                   </div>
+                  <p>Here you can see all the properties you have posted. The ones a little greyish are the ones that you have disabled.</p>
                </div>
             </div>
             <div class="Properties_section_2">
@@ -170,64 +170,76 @@
          </script>
 {literal}
          <script>
-    const accommodations = {/literal}{$accommodations}{literal};
-      let classDisplay = "";
-      let imageClass = "";
-    // Function to create and append reviews to the container
-    function displayAccommodations(accommodations) {
-        const container = document.getElementById('accommodationContainer');
+    const accommodationsActive = {/literal}{$accommodationsActive}{literal};
+const accommodationsInactive = {/literal}{$accommodationsInactive}{literal};
+let classDisplay = "";
+let imageClass = "";
 
-        if (container) {
-            if (accommodations.length === 0) {
-                container.innerHTML = '<div class="container"><h1 class="noRev">You have no ads yet!</h1></div>';
-            } else {
-                accommodations.forEach(accommodation => {
-                    if (accommodation.photo == null) {
-                        accommodation.photo = "/UniRent/Smarty/images/noPic.png";
-                    }
-                    const accommodationElement = document.createElement('div');
-                    accommodationElement.className = 'col-lg-4 col-md-6col-lg-4 col-md-6';
-                     if (accommodation.status == true) {
+// Function to create and append accommodations to the container
+function displayAccommodations(accommodationsActive, accommodationsInactive) {
+    const container = document.getElementById('accommodationContainer');
+
+    if (container) {
+        console.log(accommodationsActive);
+        console.log(Array.isArray(accommodationsActive));
+
+        // Combine both active and inactive accommodations
+        const allAccommodations = [...accommodationsActive, ...accommodationsInactive];
+
+        if (allAccommodations.length === 0) {
+            container.innerHTML = '<div class="container"><h1 class="noRev">You have no ads yet!</h1></div>';
+        } else {
+            allAccommodations.forEach(accommodation => {
+                if (accommodation.photo == null) {
+                    accommodation.photo = "/UniRent/Smarty/images/noPic.png";
+                }
+
+                if (accommodationsActive.includes(accommodation)) {
                         classDisplay = "image_box";
-                        imageClass="blog_img";
-                     } else {
+                        imageClass = "blog_img";
+                } else {
                         classDisplay = "image_box grey";
-                        imageClass="blog_img grey";
-                     }
-                    // Insert the names of the elements of the accommodation array
-                    accommodationElement.innerHTML = `
-                        <div class="${imageClass}">
-                            <div class="container_main">
-                                <img src="${accommodation.photo}" alt="">
-                                <div class="overlay">
-                                    <div class="text">
-                                        <div class="some_text"><a href="/UniRent/Owner/accommodationManagement/${accommodation.id}">See More</a></div>
-                                    </div>
+                        imageClass = "blog_img grey";
+                }
+
+                // Create HTML for each accommodation
+                const accommodationElement = document.createElement('div');
+                accommodationElement.className = 'col-lg-4 col-md-6';
+
+                accommodationElement.innerHTML = `
+                    <div class="${imageClass}">
+                        <div class="container_main">
+                            <img src="${accommodation.photo}" alt="">
+                            <div class="overlay">
+                                <div class="text">
+                                    <div class="some_text"><a href="/UniRent/Owner/accommodationManagement/${accommodation.id}">See More</a></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="${classDisplay}">
-                            <div class="left_box">
-                                <h1 class="road_text">${accommodation.title}</h1>
-                                <p>${accommodation.address}</p>
-                            </div>
-                            <div class="right_box">
-                                <div class="rate_text">${accommodation.price} €</div>
-                            </div>
+                    </div>
+                    <div class="${classDisplay}">
+                        <div class="left_box">
+                            <h1 class="road_text">${accommodation.title}</h1>
+                            <p>${accommodation.address}</p>
                         </div>
-                    `;
+                        <div class="right_box">
+                            <div class="rate_text">${accommodation.price} €</div>
+                        </div>
+                    </div>
+                `;
 
-                    // Append the created element to the container
-                    container.appendChild(accommodationElement); // Corrected: accommodationElement instead of reviewElement
-                });
-            }
-        } else {
-            console.error("Container not found!"); // Debugging: Error if container is not found
+                // Append the created element to the container
+                container.appendChild(accommodationElement);
+            });
         }
+    } else {
+        console.error("Container not found!");
     }
+}
 
-    // Call the function to display reviews
-    displayAccommodations(accommodations);
+// Call the function to display accommodations
+displayAccommodations(accommodationsActive, accommodationsInactive);
+
 </script>
 {/literal}
    </body>
