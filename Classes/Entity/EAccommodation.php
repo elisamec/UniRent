@@ -505,9 +505,23 @@ class EAccommodation
         $result=array();
         foreach($myarray as $key=>$value)
         {
-            $difference=date_diff(date_create($value['start']),date_create($value['end']));
-            $totalMinutes = $difference->h * 60 + $difference->i;
-            $value['diff']=(int)$totalMinutes;
+            //controllo dell'orario
+            $start=$value['start'];
+            $end=$value['end'];
+            $start=EAccommodation::stringInMinutes($start);
+            $end=EAccommodation::stringInMinutes($end);
+
+            if($start>=$end) #in questo modo non prenderò in considerazione intervalli negativi di tempo!
+            {
+                $value['diff']=-1;
+            }
+            else
+            {
+                $difference=date_diff(date_create($value['start']),date_create($value['end']));
+                $totalMinutes = $difference->h * 60 + $difference->i;
+                $value['diff']=(int)$totalMinutes;
+            }
+            
             if($value['diff']<=0){continue;}
             else
             {

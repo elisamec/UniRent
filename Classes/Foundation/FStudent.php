@@ -464,9 +464,12 @@ class FStudent
 
     public function findStudentRating(int $id):int
     {
+        
         $db=FConnection::getInstance()->getConnection();
+        $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
         try
         {
+            $db->exec('LOCK TABLES student READ, studentreview READ, review READ');
             $q='SELECT AVG(r.valutation) AS rateS
                 FROM student s INNER JOIN studentreview sr ON s.id=sr.idStudent
                 INNER JOIN review r ON r.id=sr.idReview
@@ -476,6 +479,7 @@ class FStudent
             $stm->bindParam(':id',$id,PDO::PARAM_INT);
             $stm->execute();
             $db->commit();
+            $db->exec('UNLOCK TABLES');
         }
         catch(PDOException $e)
         {

@@ -545,10 +545,12 @@ use PDO;
 
             //If the days and times of visit are deleted, store the new ones
             if ($delete) {
-
+                
                 //Get new days and times of visit
                 $visit = $accommodation->getVisit();
                 $days = array_keys($visit);
+
+                if($days == []) return true;  #If for visits days there aren't, true you can return,said master Yoda
 
                 //Store new days and times
                 foreach($days as $day){
@@ -562,8 +564,7 @@ use PDO;
             
             } else $result = false;
 
-            return $result;
-            
+            return $result;   
         }
 
         /**
