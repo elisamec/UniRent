@@ -28,14 +28,23 @@ class FStudent
     }
     public function exist(int $id):bool
     {
-        $q='SELECT * FROM student  WHERE id=:id';
-        $connection= FConnection::getInstance();
-        $db=$connection->getConnection();
-        $db->beginTransaction();
-        $stm=$db->prepare($q);
-        $stm->bindParam(':id',$id,PDO::PARAM_INT);
-        $stm->execute();
-        //$db->commit();
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $q='SELECT * FROM student  WHERE id=:id';
+            $db->exec('LOCK TABLES student READ');
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindParam(':id',$id,PDO::PARAM_INT);
+            $stm->execute();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return false;
+        }
         $result=$stm->rowCount();
 
         if ($result >0)
