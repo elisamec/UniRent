@@ -283,7 +283,7 @@ function addAvailability() {
         <label for="duration">Visit Duration (minutes):</label>
         <input type="number" class="duration" name="duration" title="Please enter a number" min="10" value="10">
         <label for="day">Weekday:</label>
-            <select id="day" name="day" required>
+            <select class="day" name="day" required>
                 <option value="" disabled selected>Select</option>
                 <option value="Monday">Monday</option>
                 <option value="Tuesday">Tuesday</option>
@@ -342,6 +342,7 @@ function addAvailability() {
 }
 
 // Function to get the current duration value
+// Function to get the current duration value
 function getCurrentDurationValue() {
     let durationInputs = document.querySelectorAll('.duration');
     if (durationInputs.length > 0) {
@@ -358,6 +359,11 @@ function updateDurationSynchronization() {
     // Add event listener to each duration input
     durationInputs.forEach(function(input) {
         input.addEventListener('input', function() {
+            // Check if the input value is empty
+            if (input.value.trim() === '') {
+                input.value = 10; // Default to 10 if empty
+            }
+            
             // Update all other duration inputs
             durationInputs.forEach(function(otherInput) {
                 if (otherInput !== input) {
@@ -366,7 +372,18 @@ function updateDurationSynchronization() {
             });
         });
     });
+
+    // Ensure that all inputs have a default value of 10 if initially empty
+    durationInputs.forEach(function(input) {
+        if (input.value.trim() === '') {
+            input.value = 10;
+        }
+    });
 }
+
+// Initial call to ensure synchronization for existing elements
+updateDurationSynchronization();
+
 
 // Initial call to ensure synchronization for existing elements
 updateDurationSynchronization();
@@ -414,7 +431,7 @@ function setVisitData(data) {
             <label for="duration">Visit Duration (minutes):</label>
             <input type="number" id="duration" name="duration" title="Please enter a number" value="${data[i].duration}" min="10">
             <label for="day">Weekday:</label>
-            <select id="day" name="day" required>
+            <select class="day" name="day" required>
                 <option value="" disabled>Select</option>
                 <option value="Monday" ${data[i].day === 'Monday' ? 'selected' : ''}>Monday</option>
                 <option value="Tuesday" ${data[i].day === 'Tuesday' ? 'selected' : ''}>Tuesday</option>
@@ -760,7 +777,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     <label for="duration">Visit Duration (minutes):</label>
                     <input type="number" class="duration" name="duration" value="${data[day].duration}" min="10">
                     <label for="day">Weekday:</label>
-                    <select name="day" id="day" required>
+                    <select name="day" class="day" required>
                         <option value="" disabled selected>Select</option>
                         <option value="Monday" ${day === 'Monday' ? 'selected' : ''}>Monday</option>
                         <option value="Tuesday" ${day === 'Tuesday' ? 'selected' : ''}>Tuesday</option>
@@ -776,8 +793,51 @@ document.addEventListener("DOMContentLoaded", function() {
                     <input type="time" class="end" name="end" value="${data[day].end}">
                 `;
                 container.appendChild(availability);
-            }
+            
+            // Add event listeners to start and end time inputs
+    const startInput = availability.querySelector('.start');
+    const endInput = availability.querySelector('.end');
+
+    
+
+
+
+    // Ensure new duration input inherits the current duration value
+    const durationInput = availability.querySelector('.duration');
+    const currentDurationValue = getCurrentDurationValue();
+    if (currentDurationValue !== null) {
+        durationInput.value = currentDurationValue;
+    }
+
+    // Update duration inputs synchronization
+    updateDurationSynchronization();
+
+    function adjustEndTime() {
+        let duration = durationInput.value ? parseInt(durationInput.value) : 10;
+        let newEndTime = new Date('1970-01-01T' + startInput.value + ':00');
+        newEndTime.setHours(newEndTime.getHours()+1);
+        newEndTime.setMinutes(newEndTime.getMinutes() + duration);
+        endInput.value = newEndTime.toISOString().slice(11, 16);
+    }
+
+    startInput.addEventListener('change', function() {
+        if (endInput.value && startInput.value > endInput.value) {
+            adjustEndTime();
         }
+    });
+
+    endInput.addEventListener('change', function() {
+        if (startInput.value && endInput.value < startInput.value) {
+            adjustEndTime();
+        }
+    });
+
+    durationInput.addEventListener('change', adjustEndTime);
+}
+
+// Initial call to ensure synchronization for existing elements
+updateDurationSynchronization();
+            }
     }
 });
 </script>
