@@ -429,8 +429,8 @@ use PDO;
         * @param  EAccommodation $accommodation
         * @return bool
         */
-        public function update(EAccommodation $accommodation):bool 
-        {   
+        public function update(EAccommodation $accommodation):bool {
+
             $FA=FAccommodation::getInstance();
 
             $idAccommodation = $accommodation->getIdAccommodation();
@@ -442,8 +442,8 @@ use PDO;
             return $store;
         }
 
-        /*public function update(EAccommodation $accommodation):bool 
-        {   
+        /*public function update(EAccommodation $accommodation):bool {
+           
             $FA=FAccommodation::getInstance();
             $db=FConnection::getInstance()->getConnection();
             $accommodationId = $accommodation->getIdAccommodation();
