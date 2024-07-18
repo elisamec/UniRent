@@ -141,7 +141,7 @@
                      </label>
                      <input type="radio" id="star0T" name="rateT" value="0" hidden checked/>
                   </div>
-               <button type="button" class="button-spec finalLittle"id="clearRatingA" onclick="clearRatingA()">Clear</button>
+               <button type="button" class="button-spec finalLittle" onclick="clearRatingA()">Clear</button>
                </div>
                </div>
                <div class="row">
@@ -466,28 +466,31 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 <script>
-        function clearRatingA() {
-            console.log('clearRatingA() called');
-            const star0T = document.getElementById('star0T');
-            if (star0T) {
-                console.log('Element found');
-                star0T.checked = true;
-            } else {
-                console.error('Element not found');
-            }
-        }
 
-        const rating = {$rating}; // Set this to your dynamic value, e.g., {$rating};
+        // Function to clear the rating
+function clearRatingA() {
+    // Get all star rating inputs
+   document.getElementById('star0T').checked = true;
+    // Uncheck all star rating inputs
+    
+}
 
-        // Set default rating for Owner
-        if (rating) {
-            const starRating = document.getElementById('star' + rating + 'T');
-            if (starRating) {
-                starRating.checked = true;
-            } else {
-                console.error('Star rating element not found for rating:', rating);
-            }
+// Function to set the rating based on the dynamic value
+function setRating(rating) {
+    if (rating) {
+        const starRating = document.getElementById('star' + rating + 'T');
+        if (starRating) {
+            starRating.checked = true;
+        } else {
+            console.error('Star rating element not found for rating:', rating);
         }
+    }
+}
+
+// Set default rating for Owner (Assuming Smarty placeholder is replaced with actual value)
+const rating = 3; // Set this to your dynamic value, e.g., {$rating};
+setRating(rating);
+
 </script>
 
    </body>
