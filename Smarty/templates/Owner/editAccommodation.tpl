@@ -98,7 +98,7 @@
                    Regarding the start date you need to insert the day of the month and the month (Sep/Oct) for the start 
                    of the rental relationship. The end date is calculated based on the start date, giving always a 10 month rental period.
                    </p>
-                    <form action="/UniRent/Owner/editAccommodationOperations/{$accommodationId}" class="form" method="post">
+                    <form action="/UniRent/Owner/editAccommodationOperations/{$accommodationId}" class="form" method="post" id="myForm">
                         <div id="cssportal-grid">
                            <div id="div1">
                               <div class="pictures">
@@ -451,6 +451,7 @@ visitForm.addEventListener('submit', function(event) {
 
 
 {/literal}
+
 {literal}
 <script>
     var imageModal = document.getElementById("imagePopup");
@@ -519,6 +520,39 @@ visitForm.addEventListener('submit', function(event) {
         uploadedImagesData.value = JSON.stringify(imagesData);  // Update hidden input with image data
         closeImageModal();
     }
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get the form element
+            var form = document.getElementById('myForm');
+
+            // Add a submit event listener to the form
+            form.addEventListener('submit', function(event) {
+                // Prevent the default form submission
+                event.preventDefault();
+
+                // Perform your actions here
+                console.log('Form submit button clicked!');
+                
+                // Call the function you want to run before submission
+                beforeFormSubmit();
+
+                // After your actions are complete, submit the form programmatically
+                form.submit();
+            });
+        });
+
+        function beforeFormSubmit() {
+            // Example function to be called before form submission
+            console.log('Running beforeFormSubmit function');
+            // Perform your actions here, e.g., update hidden input, validate data, etc.
+            let uploadedImagesData = document.getElementById('uploadedImagesData');
+            uploadedImagesData.value = JSON.stringify(imagesData);  // Update hidden input with image data
+            let data = getVisitData();
+    sessionStorage.setItem('availabilities', JSON.stringify(data));
+
+    // Store the JSON data in the hidden input field in the main form
+    let visitAvailabilityData = document.getElementById('visitAvailabilityData');
+    visitAvailabilityData.value = JSON.stringify(data);
+        }
 </script>
 {/literal}
 

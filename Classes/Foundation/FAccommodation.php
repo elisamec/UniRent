@@ -289,7 +289,8 @@ use PDO;
                     $tmp = $FA -> storeDay($id, $day);
 
                     foreach ($visit[$day] as $time){
-                        $result = $FA -> storeTime($tmp, $time);
+                       $result = $FA -> storeTime($tmp, $time);
+                       print $time;
                     }
                 }
 
@@ -411,7 +412,7 @@ use PDO;
                 $stm->bindValue(':idDay',$idDay,PDO::PARAM_INT);
                 
                 $stm->execute();
-                //$db->commit();
+                $db->commit();
                 $db->exec('UNLOCK TABLES');
                 
                 return true;
