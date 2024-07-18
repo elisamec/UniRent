@@ -764,6 +764,7 @@ class COwner
         
         $visitAvailabilityData = [];
         foreach ($accommodation->getVisit() as $day =>$times) {
+            if ($times !== []) {
             $endTime= new DateTime($times[count($times)-1]);
             $endTime->modify('+' . $accommodation->getVisitDuration() . ' minutes');
             $visitAvailabilityData[$day] = [
@@ -772,6 +773,8 @@ class COwner
                 'duration' => $accommodation->getVisitDuration()
             ];
         }
+        }
+        print_r($accommodation->getVisit());
         $view->editAccommodation($accommodationData, $img , $visitAvailabilityData, $id);
         
     }
@@ -796,6 +799,7 @@ class COwner
         if(!is_null($duration) and $duration>0)  #se la durata delle visite è zero non ci saranno visite
         {
             $array_visit=EAccommodation::fromJsonToArrayOfVisit($visits);
+            print_r($array_visit);
         }
         else
         {

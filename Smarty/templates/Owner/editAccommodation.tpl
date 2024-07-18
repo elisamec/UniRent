@@ -284,7 +284,7 @@ function addAvailability() {
         <input type="number" class="duration" name="duration" title="Please enter a number" min="10" value="10">
         <label for="day">Weekday:</label>
             <select id="day" name="day">
-                <option value="" disabled selected>Select a weekday</option>
+                <option value="" disabled selected>Select</option>
                 <option value="Monday">Monday</option>
                 <option value="Tuesday">Tuesday</option>
                 <option value="Wednesday">Wednesday</option>
@@ -415,7 +415,7 @@ function setVisitData(data) {
             <input type="number" id="duration" name="duration" title="Please enter a number" value="${data[i].duration}" min="10">
             <label for="day">Weekday:</label>
             <select id="day" name="day">
-                <option value="" disabled>Select a weekday</option>
+                <option value="" disabled>Select</option>
                 <option value="Monday" ${data[i].day === 'Monday' ? 'selected' : ''}>Monday</option>
                 <option value="Tuesday" ${data[i].day === 'Tuesday' ? 'selected' : ''}>Tuesday</option>
                 <option value="Wednesday" ${data[i].day === 'Wednesday' ? 'selected' : ''}>Wednesday</option>
@@ -453,99 +453,75 @@ visitForm.addEventListener('submit', function(event) {
 {/literal}
 {literal}
 <script>
-// Get the image upload modal
-var imageModal = document.getElementById("imagePopup");
-var initialImagesData = [];
+    var imageModal = document.getElementById("imagePopup");
+    var initialImagesData = [];
+    var imagesData = {/literal}{$uploadedImagesData}{literal};  // Initialize imagesData as an empty array
 
-// Open modal and store initial data
-function openImageModal() {
-    imageModal.style.display = "block";
-    initialImagesData = JSON.parse(JSON.stringify(imagesData));
-}
-
-// Close modal without saving
-function cancelImageModal() {
-    imagesData = JSON.parse(JSON.stringify(initialImagesData));
-    displayImages();
-    closeImageModal();
-}
-
-function closeImageModal() {
-    imageModal.style.display = "none";
-}
-
-// Image upload handling
-let imageInput = document.getElementById('img');
-let imageContainer = document.getElementById('imageContainer');
-let imagesData = [];
-
-imageInput.addEventListener('change', function(event) {
-    let files = event.target.files;
-    for (let i = 0; i < files.length; i++) {
-        let file = files[i];
-        let reader = new FileReader();
-        reader.onload = function(e) {
-            let imgData = e.target.result;
-            imagesData.push(imgData);
-            displayImages();
-        }
-        reader.readAsDataURL(file);
+    function openImageModal() {
+        imageModal.style.display = "block";
+        initialImagesData = JSON.parse(JSON.stringify(imagesData));
     }
-});
-document.addEventListener("DOMContentLoaded", function() {
-    // Load images data
-    var imagesDataOld = {/literal}{$uploadedImagesData}{literal};
-    setImagesData(imagesDataOld);
 
-    // Function to set images data in the form
-    function setImagesData(data) {
+    function cancelImageModal() {
+        imagesData = JSON.parse(JSON.stringify(initialImagesData));
+        displayImages();
+        closeImageModal();
+    }
+
+    function closeImageModal() {
+        imageModal.style.display = "none";
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        let imageInput = document.getElementById('img');
+        let imageContainer = document.getElementById('imageContainer');
+
+        imageInput.addEventListener('change', function(event) {
+            let files = event.target.files;
+            for (let i = 0; i < files.length; i++) {
+                let file = files[i];
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    let imgData = e.target.result;
+                    imagesData.push(imgData);
+                    displayImages();  // Display images after adding new one
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Load initial images data if any
+        displayImages();
+    });
+
+    function displayImages() {
         let container = document.getElementById('imageContainer');
-        container.innerHTML = '';
-        for (let i = 0; i < data.length; i++) {
+        container.innerHTML = '';  // Clear the container
+
+        for (let i = 0; i < imagesData.length; i++) {
             let imgWrapper = document.createElement('div');
             imgWrapper.className = 'image-wrapper';
             imgWrapper.innerHTML = `
-                <img src="${data[i]}" class="uploaded-image">
+                <img src="${imagesData[i]}" class="uploaded-image">
                 <button type="button" onclick="removeImage(${i})" class="button-spec little">-</button>
             `;
             container.appendChild(imgWrapper);
         }
     }
-});
 
-function displayImages() {
-    // Get the current content of imageContainer
-    let currentHtml = imageContainer.innerHTML;
-    var imagesDataOldCount =  Object.keys({/literal}{$uploadedImagesData}{literal}).length;
-
-    // Append new images to the existing content
-    for (let i = 0; i < imagesData.length; i++) {
-        let imgWrapper = document.createElement('div');
-        imgWrapper.className = 'image-wrapper';
-        imgWrapper.innerHTML = `
-            <img src="${imagesData[i]}" class="uploaded-image">
-            <button type="button" onclick="removeImage(${i+imagesDataOldCount})" class="button-spec little">-</button>
-        `;
-        currentHtml += imgWrapper.outerHTML; // Append new image wrapper
+    function removeImage(index) {
+        imagesData.splice(index, 1);  // Remove the image at the specified index
+        displayImages();  // Refresh the image display
     }
 
-    // Set the updated HTML back to imageContainer
-    imageContainer.innerHTML = currentHtml;
-}
-
-function removeImage(index) {
-    imagesData.splice(index, 1);
-    displayImages();
-}
-
-function confirmImages() {
-    let uploadedImagesData = document.getElementById('uploadedImagesData');
-    uploadedImagesData.value = JSON.stringify(imagesData);
-    closeImageModal();
-}
+    function confirmImages() {
+        let uploadedImagesData = document.getElementById('uploadedImagesData');
+        uploadedImagesData.value = JSON.stringify(imagesData);  // Update hidden input with image data
+        closeImageModal();
+    }
 </script>
-
 {/literal}
+
                </div>
                
             </div>
@@ -709,28 +685,29 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("city").value = accommodationData.city;
     document.getElementById("postalCode").value = accommodationData.postalCode;
     document.getElementById("description").value = accommodationData.description;
-    if (accommodationData.men === 'true') {
+    console.log(accommodationData);
+    if (accommodationData.men === true) {
         document.getElementById("men").checked = true;
         document.getElementById("hiddenMen").value = 'true';
     } else {
-        document.getElementById("men").checked = true;
+        document.getElementById("men").checked = false;
         document.getElementById("hiddenMen").value = 'false';
     }
-    if (accommodationData.women === 'true') {
+    if (accommodationData.women === true) {
         document.getElementById("women").checked = true;
         document.getElementById("hiddenWomen").value = 'true';
     } else {
         document.getElementById("women").checked = false;
         document.getElementById("hiddenWomen").value = 'false';
     }
-    if (accommodationData.animals === 'true') {
+    if (accommodationData.animals === true) {
         document.getElementById("animals").checked = true;
         document.getElementById("hiddenAnimals").value = 'true';
     } else {
         document.getElementById("animals").checked = false;
         document.getElementById("hiddenAnimals").value = 'false';
     }
-    if (accommodationData.smokers === 'true') {
+    if (accommodationData.smokers === true) {
         document.getElementById("smokers").checked = true;
         document.getElementById("hiddenSmokers").value = 'true';
     } else {
@@ -743,10 +720,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Load visit availability data
     var visitData = {/literal}{$visitAvailabilityData}{literal};
-    setVisitData(visitData);
+    setEditVisitData(visitData);
 
     // Function to set visit data in the form
-    function setVisitData(data) {
+    function setEditVisitData(data) {
         let container = document.getElementById('availabilityContainer');
         container.innerHTML = '';
         // Assuming 'data' is your object with availability details
