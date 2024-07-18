@@ -283,7 +283,7 @@ function addAvailability() {
         <label for="duration">Visit Duration (minutes):</label>
         <input type="number" class="duration" name="duration" title="Please enter a number" min="10" value="10">
         <label for="day">Weekday:</label>
-            <select id="day" name="day">
+            <select id="day" name="day" required>
                 <option value="" disabled selected>Select</option>
                 <option value="Monday">Monday</option>
                 <option value="Tuesday">Tuesday</option>
@@ -414,7 +414,7 @@ function setVisitData(data) {
             <label for="duration">Visit Duration (minutes):</label>
             <input type="number" id="duration" name="duration" title="Please enter a number" value="${data[i].duration}" min="10">
             <label for="day">Weekday:</label>
-            <select id="day" name="day">
+            <select id="day" name="day" required>
                 <option value="" disabled>Select</option>
                 <option value="Monday" ${data[i].day === 'Monday' ? 'selected' : ''}>Monday</option>
                 <option value="Tuesday" ${data[i].day === 'Tuesday' ? 'selected' : ''}>Tuesday</option>
@@ -760,7 +760,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     <label for="duration">Visit Duration (minutes):</label>
                     <input type="number" class="duration" name="duration" value="${data[day].duration}" min="10">
                     <label for="day">Weekday:</label>
-                    <select name="day" id="day">
+                    <select name="day" id="day" required>
+                        <option value="" disabled selected>Select</option>
                         <option value="Monday" ${day === 'Monday' ? 'selected' : ''}>Monday</option>
                         <option value="Tuesday" ${day === 'Tuesday' ? 'selected' : ''}>Tuesday</option>
                         <option value="Wednesday" ${day === 'Wednesday' ? 'selected' : ''}>Wednesday</option>
