@@ -488,7 +488,7 @@ function setRating(rating) {
 }
 
 // Set default rating for Owner (Assuming Smarty placeholder is replaced with actual value)
-const rating = 3; // Set this to your dynamic value, e.g., {$rating};
+const rating = {$rating}; // Set this to your dynamic value, e.g., {$rating};
 setRating(rating);
 
 </script>
