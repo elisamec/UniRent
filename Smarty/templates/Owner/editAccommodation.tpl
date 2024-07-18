@@ -438,13 +438,6 @@ let visitForm = document.getElementById('visitAvailabilityForm');
 visitForm.addEventListener('submit', function(event) {
     event.preventDefault();
 
-    let data = getVisitData();
-    sessionStorage.setItem('availabilities', JSON.stringify(data));
-
-    // Store the JSON data in the hidden input field in the main form
-    let visitAvailabilityData = document.getElementById('visitAvailabilityData');
-    visitAvailabilityData.value = JSON.stringify(data);
-
     closeModal();
 });
 </script>
@@ -516,8 +509,6 @@ visitForm.addEventListener('submit', function(event) {
     }
 
     function confirmImages() {
-        let uploadedImagesData = document.getElementById('uploadedImagesData');
-        uploadedImagesData.value = JSON.stringify(imagesData);  // Update hidden input with image data
         closeImageModal();
     }
         document.addEventListener("DOMContentLoaded", function() {
@@ -547,7 +538,6 @@ visitForm.addEventListener('submit', function(event) {
             let uploadedImagesData = document.getElementById('uploadedImagesData');
             uploadedImagesData.value = JSON.stringify(imagesData);  // Update hidden input with image data
             let data = getVisitData();
-    sessionStorage.setItem('availabilities', JSON.stringify(data));
 
     // Store the JSON data in the hidden input field in the main form
     let visitAvailabilityData = document.getElementById('visitAvailabilityData');
