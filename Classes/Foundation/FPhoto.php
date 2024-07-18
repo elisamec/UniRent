@@ -224,7 +224,7 @@ class FPhoto {
 
                 $stm->execute();
                 $id=$db->lastInsertId();
-                $db->commit();
+                //$db->commit();
                 $db->exec('UNLOCK TABLES');
                 $ph->setId($id);
                 

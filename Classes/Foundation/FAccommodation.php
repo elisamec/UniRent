@@ -412,7 +412,7 @@ use PDO;
                 $stm->bindValue(':idDay',$idDay,PDO::PARAM_INT);
                 
                 $stm->execute();
-                $db->commit();
+                //$db->commit();
                 $db->exec('UNLOCK TABLES');
                 
                 return true;
@@ -430,7 +430,7 @@ use PDO;
         * @param  EAccommodation $accommodation
         * @return bool
         */
-        public function update(EAccommodation $accommodation):bool {
+        /*public function update(EAccommodation $accommodation):bool {
 
             $FA=FAccommodation::getInstance();
 
@@ -441,9 +441,9 @@ use PDO;
             $delete ? $store = $FA->store($accommodation) : $store = false;
 
             return $store;
-        }
+        }*/
 
-        /*public function update(EAccommodation $accommodation):bool {
+        public function update(EAccommodation $accommodation):bool {
            
             $FA=FAccommodation::getInstance();
             $db=FConnection::getInstance()->getConnection();
@@ -454,10 +454,9 @@ use PDO;
 
                 $resAddress = $FA->updateAddress($accommodation->getAddress());
                 $resVisit = $FA -> updateDay($accommodation);
-                //$resPhoto = $FA -> updatePhoto($accommodation);
-
+                $resPhoto = $FA -> updatePhoto($accommodation);
                 
-                if($resAddress && $resVisit ){
+                if(1 ){
 
                     $q='UPDATE accommodation SET title = :title, price = :price,
                                     start = :start, description = :description, places = :places, deposit = :deposit,
@@ -465,7 +464,6 @@ use PDO;
                                     pets = :pets, smokers = :smokers, status = :status, idOwner = :idOwner  WHERE id=:id';
                 
                     $stm=$db->prepare($q);
-                    //Cambiare le photo
                     
                     $stm->bindValue(':title',$accommodation->getTitle(),PDO::PARAM_STR);
                     $stm->bindValue(':price',$accommodation->getPrice(),PDO::PARAM_INT);
@@ -496,7 +494,7 @@ use PDO;
                 return false;
             }
             
-        }*/
+        }
 
 
         /**
