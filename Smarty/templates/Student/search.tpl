@@ -532,9 +532,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('clearRatingO').addEventListener('click', clearRatingO);
 });
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('clearRatingS').addEventListener('click', clearRatingS);
-});
-document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('clearRatingA').addEventListener('click', clearRatingA);
 });
 </script>

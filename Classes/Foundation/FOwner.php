@@ -618,9 +618,10 @@ use PDOException;
 
         $result=array();
         $db=FConnection::getInstance()->getConnection();
+        $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
 
         if($date=='september'){$date=9;}
-        else{$date=10;}
+        elseif($date=='october'){$date=10;}
 
         if ($type=='current')
         {
@@ -637,28 +638,46 @@ use PDOException;
                 INNER JOIN reservation r ON r.idAccommodation=a.id
                 INNER JOIN contract c ON c.idReservation=r.id
                 INNER JOIN student s ON s.id=r.idStudent
-                WHERE TIMESTAMPDIFF(YEAR,s.birthDate,CURDATE())= :age
-                AND MONTH(a.`start`)= :month
-                AND c.`status`= :type
-                AND a.title= :accommodation_name
-                AND s.username= :student_username
+                WHERE c.`status`= :type
                 AND o.id= :id";
+            $params=array();
+            $params[':type']=$type;
+            $params[':id']=$idOwner;
+            if($t_age!=0)
+            {
+                $q.=" AND TIMESTAMPDIFF(YEAR,s.birthDate,CURDATE())= :age";
+                $params[':age']=$t_age;
+            }
+            if(!is_null($date))
+            {
+                $q.=" AND MONTH(a.`start`)= :date";
+                $params[':date']=$date;
+            }
+            if(!is_null($accommodation_name))
+            {
+                $q.=" AND a.title= :accommodation_name";
+                $params[':accommodation_name']=$accommodation_name;
+            }
+            if($t_username!='')
+            {
+                $q.=" AND s.username= :t_username";
+                $params[':t_username']=$t_username;
+            }
+
+                
             
             if($men==true and $women==true){}
             elseif($men==false and $women==true){$q.=" AND s.sex='F'";}
             elseif($men==true and $women==false){$q.=" AND s.sex='M'";}
             else{}
+            #print $q;
+           /* print $type;
+            print $idOwner;*/
 
             $db->exec('LOCK TABLES accommodation READ, reservation READ, contract READ, owner READ, student READ');
             $db->beginTransaction();
             $stm=$db->prepare($q);
-            $stm->bindParam(':age',$t_age,PDO::PARAM_INT);
-            $stm->bindParam(':month',$date,PDO::PARAM_INT);
-            $stm->bindParam(';type',$type,PDO::PARAM_STR);
-            $stm->bindParam(':accommodation_name',$accommodation_name,PDO::PARAM_STR);
-            $stm->bindParam(':student_username',$t_username,PDO::PARAM_STR);
-            $stm->bindParam(':id',$idOwner,PDO::PARAM_INT);
-            $stm->execute();
+            $stm->execute($params);
             $db->commit();
             $db->exec('UNLOCK TABLES');
         }
@@ -667,12 +686,14 @@ use PDOException;
             $db->rollBack();
             return $result;
         }
+        
         $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
+        
         foreach($rows as $row)
         {
             $student=FPersistentManager::getInstance()::load('EStudent',$row['idStudent']);
 
-            if(($student->getRating()>=$rateT) or($student->getRating()==0))
+            if(($student->getRating()>=$rateT) or ($student->getRating()==0))
             {
                 $p_student=$student->getPhoto();
                 if(!is_null($p_student))

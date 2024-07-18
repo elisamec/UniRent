@@ -37,7 +37,7 @@
       <div class="header_section">
         <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-               <a class="navbar-brand"href="/UniRent/Student/home"><img src="/UniRent/Smarty/images/logo.png"></a>
+               <a class="navbar-brand"href="/UniRent/Owner/home"><img src="/UniRent/Smarty/images/logo.png"></a>
                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
                </button>
@@ -141,7 +141,7 @@
                      </label>
                      <input type="radio" id="star0T" name="rateT" value="0" hidden checked/>
                   </div>
-               <button class="button-spec finalLittle"id="clearRatingA" onclick="clearRatingA()">Clear</button>
+               <button type="button" class="button-spec finalLittle" onclick="clearRatingA()">Clear</button>
                </div>
                </div>
                <div class="row">
@@ -151,6 +151,14 @@
                         <option value="" disabled selected>Select a period</option>
                         <option value="september">September to June</option>
                         <option value="october">October to July</option>
+                     </select>
+                  </div>
+               </div>
+               </div><div class="row">
+               <div class="Findcontainer">
+                  <div class="select-outline">
+                     <select name="year" id="year" class="selectFilter mdb-select md-form md-outline colorful-select dropdown-primary">
+                        <option value="" disabled selected>Select a year</option>
                      </select>
                   </div>
                </div>
@@ -271,67 +279,177 @@
          </script>
 {literal}
          <script>
-    const data = {/literal}{$tenants}{literal};
-    const kind = {/literal}"{$kind}"{literal};
+  const data = {/literal}{$tenants}{literal};
+  const accommodationTitles = {/literal}{$accommodationTitles}{literal};
+  console.log(accommodationTitles);
+  const kind = {/literal}"{$kind}"{literal};
 
-// Function to populate tenantsContainer
-function populateTenantsContainer(data) {
-  const tenantsContainer = document.getElementById("tenantsContainer");
+   function populateTenantsContainer(data) {
+        const tenantsContainer = document.getElementById("tenantsContainer");
+        const yearSelect = document.getElementById("year");
 
-  data.forEach(item => {
-    const accommodationDiv = document.createElement("div");
-    accommodationDiv.classList.add("accommodation");
+        // Clear existing options in year select
+        yearSelect.innerHTML = '<option value="" disabled selected>Select a year</option>';
 
-    const title = document.createElement("h1");
-    title.classList.add("titleAccomm");
-    title.textContent = item.accommodation;
-    accommodationDiv.appendChild(title);
+            if (data.length === 0) {
+                const noTenantsDiv = document.createElement("div");
+                noTenantsDiv.classList.add("container");
+                noTenantsDiv.textContent = "No tenants found.";
+                tenantsContainer.appendChild(noTenantsDiv);
+            } else if (Object.keys(data).length === 0) {
+                const noTenantsDiv = document.createElement("div");
+                noTenantsDiv.classList.add("container");
+                noTenantsDiv.textContent = "No tenants found.";
+                tenantsContainer.appendChild(noTenantsDiv);
+            }
 
-    const rowDiv = document.createElement("div");
-    rowDiv.classList.add("row");
+        data.forEach(item => {
+            const accommodationDiv = document.createElement("div");
+            accommodationDiv.classList.add("accommodation");
+            console.log(item);
+            const title = document.createElement("h1");
+            title.classList.add("titleAccomm");
+            title.textContent = item.accommodation;
+            accommodationDiv.appendChild(title);
 
-    item.tenants.forEach(tenant => {
-      const colDiv = document.createElement("div");
-      colDiv.classList.add("col-md-3");
+            const rowDiv = document.createElement("div");
+            rowDiv.classList.add("row");
+            
+            // Check if item.tenants is an array
+            if (Array.isArray(item.tenants)) {
+                item.tenants.forEach(tenant => {
+                    const colDiv = document.createElement("div");
+                    colDiv.classList.add("col-md-3");
 
-      const userSectionDiv = document.createElement("div");
-      userSectionDiv.classList.add("userSection");
+                    const userSectionDiv = document.createElement("div");
+                    userSectionDiv.classList.add("userSection");
 
-      const userIconDiv = document.createElement("div");
-      userIconDiv.classList.add("userIcon");
+                    const userIconDiv = document.createElement("div");
+                    userIconDiv.classList.add("userIcon");
 
-      const userLink = document.createElement("a");
-      userLink.href = `/UniRent/Owner/publicProfile/${tenant.username}/${kind}`;
+                    const userLink = document.createElement("a");
+                    userLink.href = `/UniRent/Owner/publicProfile/${tenant.username}/${kind}`;
 
-      const userImage = document.createElement("img");
-      userImage.src = tenant.image;
+                    const userImage = document.createElement("img");
+                    userImage.src = tenant.image;
 
-      userLink.appendChild(userImage);
-      userIconDiv.appendChild(userLink);
-      userSectionDiv.appendChild(userIconDiv);
+                    userLink.appendChild(userImage);
+                    userIconDiv.appendChild(userLink);
+                    userSectionDiv.appendChild(userIconDiv);
 
-      const usernameDiv = document.createElement("div");
-      usernameDiv.classList.add("username");
+                    const usernameDiv = document.createElement("div");
+                    usernameDiv.classList.add("username");
 
-      const usernameLink = document.createElement("a");
-      usernameLink.href = `/UniRent/Owner/publicProfile/${tenant.username}`;
-      usernameLink.textContent = tenant.username;
+                    const usernameLink = document.createElement("a");
+                    usernameLink.href = `/UniRent/Owner/publicProfile/${tenant.username}`;
+                    usernameLink.textContent = tenant.username;
+                    usernameDiv.appendChild(usernameLink);
 
-      usernameDiv.appendChild(usernameLink);
-      userSectionDiv.appendChild(usernameDiv);
+                    // Display expiry date under username
+                    const expiryDateDiv = document.createElement("div");
+                    expiryDateDiv.textContent = `Expiry Date: ${tenant.expiryDate}`;
+                    usernameDiv.appendChild(expiryDateDiv);
 
-      colDiv.appendChild(userSectionDiv);
-      rowDiv.appendChild(colDiv);
+                    userSectionDiv.appendChild(usernameDiv);
+
+                    colDiv.appendChild(userSectionDiv);
+                    rowDiv.appendChild(colDiv);
+
+                    // Extract year from expiryDate and add to yearSelect if unique
+                    const year = new Date(tenant.expiryDate).getFullYear();
+                    if (!yearSelect.querySelector(`option[value="${year}"]`)) {
+                        const option = document.createElement("option");
+                        option.value = year;
+                        option.textContent = year;
+                        yearSelect.appendChild(option);
+                    }
+                });
+            } else if (typeof item.tenants === 'object') {
+                // Handle case where tenants is an object (not an array)
+                const tenant = item.tenants;
+
+                const colDiv = document.createElement("div");
+                colDiv.classList.add("col-md-3");
+
+                const userSectionDiv = document.createElement("div");
+                userSectionDiv.classList.add("userSection");
+
+                const userIconDiv = document.createElement("div");
+                userIconDiv.classList.add("userIcon");
+
+                const userLink = document.createElement("a");
+                userLink.href = `/UniRent/Owner/publicProfile/${tenant.username}/${kind}`;
+
+                const userImage = document.createElement("img");
+                userImage.src = tenant.image;
+
+                userLink.appendChild(userImage);
+                userIconDiv.appendChild(userLink);
+                userSectionDiv.appendChild(userIconDiv);
+
+                const usernameDiv = document.createElement("div");
+                usernameDiv.classList.add("username");
+
+                const usernameLink = document.createElement("a");
+                usernameLink.href = `/UniRent/Owner/publicProfile/${tenant.username}`;
+                usernameLink.textContent = tenant.username;
+                usernameDiv.appendChild(usernameLink);
+
+                // Display expiry date under username
+                const expiryDateDiv = document.createElement("div");
+                expiryDateDiv.textContent = `Expiry Date: ${tenant.expiryDate}`;
+                usernameDiv.appendChild(expiryDateDiv);
+
+                userSectionDiv.appendChild(usernameDiv);
+
+                colDiv.appendChild(userSectionDiv);
+                rowDiv.appendChild(colDiv);
+
+                // Extract year from expiryDate and add to yearSelect if unique
+                const year = new Date(tenant.expiryDate).getFullYear();
+                if (!yearSelect.querySelector(`option[value="${year}"]`)) {
+                    const option = document.createElement("option");
+                    option.value = year;
+                    option.textContent = year;
+                    yearSelect.appendChild(option);
+                }
+            } else {
+                console.error("Unexpected format for item.tenants:", item.tenants);
+            }
+
+            accommodationDiv.appendChild(rowDiv);
+            tenantsContainer.appendChild(accommodationDiv);
+        });
+    }
+
+    // Populate the select element with accommodation titles and year options when the page loads
+    document.addEventListener("DOMContentLoaded", function() {
+        const accommodationSelect = document.getElementById("accommodationSelect");
+        console.log(typeof accommodationTitles);
+        if (Array.isArray(accommodationTitles)) {
+                accommodationTitles.forEach(item => {
+                    console.log(item); // Log the item to verify its content
+                    const option = document.createElement("option");
+                    option.value = item.accommodation;
+                    option.textContent = item.accommodation;
+                    accommodationSelect.appendChild(option);
+                });
+            } else if (typeof accommodationTitles === 'object') {
+                Object.keys(accommodationTitles).forEach(key => {
+                    console.log(key, accommodationTitles[key]); // Log the key and its corresponding value
+                    const option = document.createElement("option");
+                    option.value = key;
+                    option.textContent = accommodationTitles[key];
+                    accommodationSelect.appendChild(option);
+                });
+            } else {
+                console.error("Unexpected format for accommodationTitles:", accommodationTitles, "typeof:", typeof accommodationTitles);
+            }
+        // Call the function to populate tenantsContainer and year select
+        populateTenantsContainer(data);
     });
-
-    accommodationDiv.appendChild(rowDiv);
-    tenantsContainer.appendChild(accommodationDiv);
-  });
-}
-
-// Call the function with the sample data
-populateTenantsContainer(data);
 </script>
+
 {/literal}
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -347,5 +465,33 @@ document.addEventListener("DOMContentLoaded", function() {
     updateHiddenInput('women', 'hiddenWomen');
 });
 </script>
+<script>
+
+        // Function to clear the rating
+function clearRatingA() {
+    // Get all star rating inputs
+   document.getElementById('star0T').checked = true;
+    // Uncheck all star rating inputs
+    
+}
+
+// Function to set the rating based on the dynamic value
+function setRating(rating) {
+    if (rating) {
+        const starRating = document.getElementById('star' + rating + 'T');
+        if (starRating) {
+            starRating.checked = true;
+        } else {
+            console.error('Star rating element not found for rating:', rating);
+        }
+    }
+}
+
+// Set default rating for Owner (Assuming Smarty placeholder is replaced with actual value)
+const rating = {$rating}; // Set this to your dynamic value, e.g., {$rating};
+setRating(rating);
+
+</script>
+
    </body>
 </html>

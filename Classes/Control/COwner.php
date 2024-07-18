@@ -764,6 +764,7 @@ class COwner
         
         $visitAvailabilityData = [];
         foreach ($accommodation->getVisit() as $day =>$times) {
+            if ($times !== []) {
             $endTime= new DateTime($times[count($times)-1]);
             $endTime->modify('+' . $accommodation->getVisitDuration() . ' minutes');
             $visitAvailabilityData[$day] = [
@@ -772,6 +773,8 @@ class COwner
                 'duration' => $accommodation->getVisitDuration()
             ];
         }
+        }
+        print_r($accommodation->getVisit());
         $view->editAccommodation($accommodationData, $img , $visitAvailabilityData, $id);
         
     }
@@ -782,7 +785,6 @@ class COwner
         $pictures=USuperGlobalAccess::getPost('uploadedImagesData');
         $myarray=json_decode($pictures,true);
         $array_photos=EPhoto::fromJsonToPhotos($myarray);
-        print_r($array_photos);
 
         $title=USuperGlobalAccess::getPost('title');
         $price=USuperGlobalAccess::getPost('price');
@@ -790,12 +792,14 @@ class COwner
         $startDate=(int) USuperGlobalAccess::getPost('startDate');
         $month=USuperGlobalAccess::getPost('month');
         $visits=USuperGlobalAccess::getPost('visitAvailabilityData');  #json in arrivo dal post
+        print_r($visits);
         $places=(int)USuperGlobalAccess::getPost('places');
         $duration=EAccommodation::DurationOfVisit($visits);
         
         if(!is_null($duration) and $duration>0)  #se la durata delle visite è zero non ci saranno visite
         {
             $array_visit=EAccommodation::fromJsonToArrayOfVisit($visits);
+            print_r($array_visit);
         }
         else
         {
@@ -836,9 +840,13 @@ class COwner
         #print $addressObj->getAddressLine1().' '.$addressObj->getPostalCode().' '.$addressObj->getLocality();
         //Nella seguente riga manca il penultimo attributo status che deve essere true o false
         $accomodation = new EAccommodation($id,$array_photos,$title,$addressObj,$price,$date,$description,$places,$deposit,$array_visit,$duration,$men,$women,$animals,$smokers,$status,$idOwner);
-        $result=$PM::update($accomodation);
-        //$id = $accomodation->getIdAccommodation();
-        $result ? header('Location:/UniRent/Owner/accommodationManagement/'.$id) : http_response_code(500);
+        $result=$PM->update($accomodation);
+        $id = $accomodation->getIdAccommodation();
+        if ($result) {
+            header('Location:/UniRent/Owner/accommodationManagement/'.$id);
+        } else {
+            http_response_code(500);
+        }
     }
 
 
@@ -850,6 +858,10 @@ class COwner
         $view = new VOwner();
         $tenantsArray = $PM->getTenants($kind,$ownerId);
         $tenants=[];
+        $accommodations=$PM->loadAccommodationsByOwner($ownerId);
+        foreach ($accommodations as $accom) {
+            $accommodationTitles[$accom->getIdAccommodation()]=$accom->getTitle();
+        }
         foreach ($tenantsArray as $idAccommodation => $students) {
             $accommodationTitle = $PM->load('EAccommodation', $idAccommodation)->getTitle();
             $tenantList = [];
@@ -864,7 +876,8 @@ class COwner
                 }
                 $tenantList[] = [
                     'username' => ($student[0])->getUsername(),
-                    'image' => $profilePic
+                    'image' => $profilePic,
+                    'expiryDate' => $student[1]
                 ];
             }
 
@@ -873,7 +886,23 @@ class COwner
                 'tenants' => $tenantList
             ];
         }
-        $view->tenants($tenants, $kind);
+        /*
+        $tenants[]=[
+            'accommodation' => 'Tutti',
+            'tenants' =>[ [
+                'username' => 'Tutti',
+                'image' => '/UniRent/Smarty/images/ImageIcon.png',
+                'expiryDate' => '01-11-2024'
+            ], 
+            [
+                'username' => 'Another',
+                'image' => '/UniRent/Smarty/images/ImageIcon.png',
+                'expiryDate' => '01-11-2025'
+            ]
+            ]
+        ];
+        */
+        $view->tenants($tenants, $kind, $accommodationTitles);
     }
 
     public static function filterTenants(string $type)
@@ -883,18 +912,35 @@ class COwner
         $PM=FPersistentManager::getInstance();
         $ownerId=$PM->getOwnerIdByUsername($username);
         $view = new VOwner();
-        // DA AGGIUNGERE LA LISTA DELLE ACCOMMODATION DEL PROPRIETARIO (ALT ERROR R.519 PM)
+
         $accommodation_name=USuperGlobalAccess::getPost('accommodation');
         $t_username=USuperGlobalAccess::getPost('username');
-        $rateT=USuperGlobalAccess::getPost('rateT');
+        $rateT=(int)USuperGlobalAccess::getPost('rateT');
         $date=USuperGlobalAccess::getPost('date');
-        $t_age=USuperGlobalAccess::getPost('age');
+        $t_age=(int)USuperGlobalAccess::getPost('age');
         $men=USuperGlobalAccess::getPost('men');
         $women=USuperGlobalAccess::getPost('women');
+        if($men==='false')
+        {
+            $men=false;
+        }
+        else
+        {
+            $men=true;
+        }
+        if($women==='false')
+        {
+            $women=false;
+        }
+        else
+        {
+            $women=true;
+        }
 
-        #print $accommodation_name.' '.$t_name.' '.$rateT.' '.$date.' '.$t_age.' '.$men.' '.$women;
+        #print var_dump($rateT);
+    
         $tenantsArray=$PM->getFilterTenants($type,$accommodation_name,$t_username,$t_age,$rateT,$date,$men,$women,$ownerId);
-        
+
         $tenants=[];
         foreach ($tenantsArray as $idAccommodation => $students) {
             $accommodationTitle = $PM->load('EAccommodation', $idAccommodation)->getTitle();
@@ -910,7 +956,8 @@ class COwner
                 }
                 $tenantList[] = [
                     'username' => $student[0]->getUsername(),
-                    'image' => $profilePic
+                    'image' => $profilePic,
+                    'expiryDate' => $student[1]
                 ];
             }
 
@@ -919,6 +966,10 @@ class COwner
                 'tenants' => $tenantList
             ];
         }
-        $view->tenants($tenants, $type);
+        $accommodations=$PM->loadAccommodationsByOwner($ownerId);
+        foreach ($accommodations as $accom) {
+            $accommodationTitles[$accom->getIdAccommodation()]=$accom->getTitle();
+        }
+        $view->tenants($tenants, $type, $accommodationTitles, $rateT);
     }
 }

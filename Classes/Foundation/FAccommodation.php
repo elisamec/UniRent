@@ -289,7 +289,8 @@ use PDO;
                     $tmp = $FA -> storeDay($id, $day);
 
                     foreach ($visit[$day] as $time){
-                        $result = $FA -> storeTime($tmp, $time);
+                       $result = $FA -> storeTime($tmp, $time);
+                       print $time;
                     }
                 }
 
@@ -411,7 +412,7 @@ use PDO;
                 $stm->bindValue(':idDay',$idDay,PDO::PARAM_INT);
                 
                 $stm->execute();
-                //$db->commit();
+                $db->commit();
                 $db->exec('UNLOCK TABLES');
                 
                 return true;
@@ -820,6 +821,7 @@ use PDO;
                      FROM accommodation a INNER JOIN address ad ON a.address=ad.id
                      WHERE ad.city= :city
                      AND MONTH(a.`start`)= :m
+                     AND a.status=TRUE
                      AND((a.price>= :min)AND(a.price<= :max))";
                 $db->exec('LOCK TABLES accommodation READ , address READ');
                 $db->beginTransaction();
@@ -900,6 +902,7 @@ use PDO;
                 $q="SELECT a.id
                     FROM accommodation a INNER JOIN address ad ON ad.id=a.address
                     WHERE ad.city= :city 
+                    AND a.status= TRUE
                     AND MONTH(a.`start`)= :mon
                     AND((a.price>= :min)AND(a.price<= :max)) ";
                 
@@ -1095,12 +1098,15 @@ use PDO;
             $db=FConnection::getInstance()->getConnection();
             try
             {
+                $db->exec('LOCK TABLES accommodation READ');
                 $q='SELECT id FROM accommodation WHERE idOwner=:id';
                 $db->beginTransaction();
                 $stm=$db->prepare($q);
                 $stm->bindParam(':id',$idOwner,PDO::PARAM_INT);
                 $stm->execute();
                 $db->commit();
+                $db->exec('UNLOCK TABLES');
+                
             }
             catch(PDOException $e)
             {
