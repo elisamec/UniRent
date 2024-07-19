@@ -151,7 +151,7 @@ print $totalMinutes;
 
 #print EAccommodation::stringInMinutes('03:00');
 
-$PM=FPersistentManager::getInstance();
-$FS=FStudent::getInstance();
-$result=$PM::load('EStudent',8);
-print($result->getRating());
+$FA=FAccommodation::getInstance();
+$result=$FA->areThereFreePlaces(7,2024);
+
+print var_dump($result) ;

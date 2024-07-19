@@ -231,7 +231,7 @@
     <span class="resClose" id="reserveClose">&times;</span>
     <h2 class="resModal-head">Reserve this accommodation</h2>
     </div>
-    <form action="/UniRent/Student/reserveAccommodation" class="form" method="POST" enctype="multipart/form-data">
+    <form action="/UniRent/Student/reserveAccommodation/{$accommodation->getIdAccommodation()}" class="form" method="POST" enctype="multipart/form-data">
     <div class="grid-container">
     <div class="row padding-reserve">
         <p>Period:</p>
