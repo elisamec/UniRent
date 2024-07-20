@@ -572,9 +572,10 @@ class FPersistentManager {
             $result_places=$this->areThereFreePlaces($idAccommodation,$year);
             if($result_places)# se ci sono posti liberi per quell' anno
             {
-                $d = new DateTime();
-                $from=$d->setDate($year,$date,1);
-                $to=$d->setDate($year_2,$date_2,1);
+                $from = new DateTime();
+                $to = new DateTime();
+                $from=$from->setDate($year,$date,1);
+                $to=$to->setDate($year_2,$date_2,1);
                 $reservation = new EReservation($from,$to,$idAccommodation,$student_id);
                 $result=$this::store($reservation);
                 if($result)# se riesci a registrare la prenotazione
