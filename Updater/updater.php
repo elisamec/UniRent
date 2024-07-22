@@ -1,4 +1,16 @@
+
 <?php 
+
+
+
+/**
+ * Updater
+ * 
+ * this class is used to update the whole DataBase after the first https message of the day
+ * 
+ * @author Matteo Maloni (UniRent) <matteo.maloni@student.univaq.it>
+ * @package Updater
+ */
 class Updater
 {
     
@@ -10,10 +22,11 @@ class Updater
      * @return self
      */
     public function __construct(){}
-    
+       
     /**
-     * getInstance
+     * Method getInstance
      *
+     * return the Updater singleton class
      * @return Updater
      */
     public static function getInstance():Updater
@@ -24,7 +37,13 @@ class Updater
         }
         return self::$instance;
     }
-
+    
+    /**
+     * Method run
+     *
+     * the main method of this class used in index.php befor the call to MainController
+     * @return void
+     */
     public function run()
     {
         include 'day.php';
@@ -40,8 +59,17 @@ class Updater
         }
         #print 'non sei nell\'if';
     }
-
-    public function updateDayFile(string $d)
+    
+    /**
+     * Method updateDayFile
+     * 
+     * this private method is used to update the file which contains the current day
+     *
+     * @param string $d [day 'day-month-year']
+     *
+     * @return void
+     */
+    private function updateDayFile(string $d)
     {
         $day = $d;
         $file = fopen(__DIR__.'/day.php', 'w');
