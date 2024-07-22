@@ -52,57 +52,68 @@ class CVisit
     $visits=$PM->loadVisitSchedule($id, $userType);
     $visitsData = [];
 
-foreach ($visits as $visit) {
-    $student = $PM->load('EStudent', $visit->getIdStudent());
-    $accommodation = $PM->load('EAccommodation', $visit->getIdAccommodation());
-    $profilePic = $student->getPhoto();
-
-    if ($profilePic === null) {
-        $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
-    } else {
-        $profilePic = (EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
-    }
-
-    $date = $visit->getDate();
-    $day = (int) $date->format('d');
-    $month = (int) $date->format('m');
-    $year = (int) $date->format('Y');
-    $time = $date->format('H:i') . '-' . $date->modify('+' . $accommodation->getVisitDuration() . ' minutes')->format('H:i');
+    foreach ($visits as $visit) {
+        $student = $PM->load('EStudent', $visit->getIdStudent());
+        $accommodation = $PM->load('EAccommodation', $visit->getIdAccommodation());
+        $profilePic = $student->getPhoto();
     
-    // Create the event array
-    $event = [
-        'photo' => $profilePic,
-        'username' => $student->getUsername(),
-        'accommodationTitle' => $accommodation->getTitle(),
-        'time' => $time,
-        'idVisit' => $visit->getIdVisit()
-    ];
+        if ($profilePic === null) {
+            $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+        } else {
+            $profilePic = (EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
+        }
     
-    // Find the index of the existing date entry, if it exists
-    $key = array_search(true, array_map(function($item) use ($day, $month, $year) {
-        return $item['day'] === $day && $item['month'] === $month && $item['year'] === $year;
-    }, $visitsData));
-    
-    // If an entry for the date exists, add the event to the existing entry
-    if ($key !== false) {
-        $visitsData[$key]['events'][] = $event;
-    } else {
-        // Otherwise, create a new entry for the date
-        $visitsData[] = [
-            'day' => $day,
-            'month' => $month,
-            'year' => $year,
-            'events' => [$event]
+        $date = $visit->getDate();
+        $day = (int) $date->format('d');
+        $month = (int) $date->format('m');
+        $year = (int) $date->format('Y');
+        $time = $date->format('H:i') . '-' . $date->modify('+' . $accommodation->getVisitDuration() . ' minutes')->format('H:i');
+        
+        // Create the event array
+        $event = [
+            'photo' => $profilePic,
+            'username' => $student->getUsername(),
+            'accommodationTitle' => $accommodation->getTitle(),
+            'time' => $time,
+            'idVisit' => $visit->getIdVisit()
         ];
+        
+        // Find the index of the existing date entry, if it exists
+        $key = array_search(true, array_map(function($item) use ($day, $month, $year) {
+            return $item['day'] === $day && $item['month'] === $month && $item['year'] === $year;
+        }, $visitsData));
+        
+        // If an entry for the date exists, add the event to the existing entry
+        if ($key !== false) {
+            $visitsData[$key]['events'][] = $event;
+        } else {
+            // Otherwise, create a new entry for the date
+            $visitsData[] = [
+                'day' => $day,
+                'month' => $month,
+                'year' => $year,
+                'events' => [$event]
+            ];
+        }
     }
-}
-
-// Optionally, sort the data by date before encoding to JSON
-usort($visitsData, function($a, $b) {
-    $dateA = sprintf('%04d-%02d-%02d', $a['year'], $a['month'], $a['day']);
-    $dateB = sprintf('%04d-%02d-%02d', $b['year'], $b['month'], $b['day']);
-    return strcmp($dateA, $dateB);
-});
+    
+    // Sort the events within each date by start time
+    foreach ($visitsData as &$data) {
+        usort($data['events'], function($a, $b) {
+            $startTimeA = substr($a['time'], 0, 5); // Extract the start time (HH:MM)
+            $startTimeB = substr($b['time'], 0, 5); // Extract the start time (HH:MM)
+            return strcmp($startTimeA, $startTimeB);
+        });
+    }
+    unset($data); // Break the reference
+    
+    // Sort the data by date
+    usort($visitsData, function($a, $b) {
+        $dateA = sprintf('%04d-%02d-%02d', $a['year'], $a['month'], $a['day']);
+        $dateB = sprintf('%04d-%02d-%02d', $b['year'], $b['month'], $b['day']);
+        return strcmp($dateA, $dateB);
+    });
+    
     $view->visits($visitsData);
    }
 }
