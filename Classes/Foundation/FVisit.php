@@ -123,6 +123,98 @@ class FVisit
     }
 
     /**
+     * loadFutreById
+     * Return all the future visits of a student or accommodation
+     * 
+     * @param  int $id id of student or accommodation
+     * @param  string $requestType can be "student" or "accommodation"
+     * @return array
+     */
+    public function loadFutreById(int $id, string $requestType): array{
+
+        $db=FConnection::getInstance()->getConnection();
+        $date = new DateTime();
+        $date = $date->format('Y-m-d H:i:s');
+        var_dump($date);
+        
+            try{
+                $db->exec('LOCK TABLES visit READ');
+                $db->beginTransaction();
+
+                if($requestType == "student"){
+                    $q="SELECT * FROM visit WHERE day>=:day and idStudent=:id";  
+                }elseif($requestType == "accommodation"){
+                    $q="SELECT * FROM visit WHERE day>=:day and idAccommodation=:id";
+                }
+                //else???
+
+                $stm=$db->prepare($q);
+                $stm->bindParam(':id',$id,PDO::PARAM_INT);
+                $stm->bindParam(':day',$date,PDO::PARAM_STR);
+                $stm->execute();
+                $db->commit();
+                $db->exec('UNLOCK TABLES');
+
+            }catch (PDOException $e){
+                $db->rollBack();
+            }
+
+            $row=$stm->fetchall(PDO::FETCH_ASSOC);
+            $result = array();
+            foreach($row as $r){
+                $visit = new DateTime($r['day']);
+                $result[]=new EVisit($r['id'],$visit,$r['idStudent'],$r['idAccommodation']);
+            }
+            return $result;
+    }
+
+    /**
+     * loadPassedById
+     * Return all the passed visits of a student or accommodation
+     * 
+     * @param  int $id id of student or accommodation
+     * @param  string $requestType can be "student" or "accommodation"
+     * @return array
+     */
+    public function loadPassedById(int $id, string $requestType): array{
+
+        $db=FConnection::getInstance()->getConnection();
+        $date = new DateTime();
+        $date = $date->format('Y-m-d H:i:s');
+        var_dump($date);
+        
+            try{
+                $db->exec('LOCK TABLES visit READ');
+                $db->beginTransaction();
+
+                if($requestType == "student"){
+                    $q="SELECT * FROM visit WHERE day<:day and idStudent=:id";  
+                }elseif($requestType == "accommodation"){
+                    $q="SELECT * FROM visit WHERE day<:day and idAccommodation=:id";
+                }
+                //else???
+
+                $stm=$db->prepare($q);
+                $stm->bindParam(':id',$id,PDO::PARAM_INT);
+                $stm->bindParam(':day',$date,PDO::PARAM_STR);
+                $stm->execute();
+                $db->commit();
+                $db->exec('UNLOCK TABLES');
+
+            }catch (PDOException $e){
+                $db->rollBack();
+            }
+
+            $row=$stm->fetchall(PDO::FETCH_ASSOC);
+            $result = array();
+            foreach($row as $r){
+                $visit = new DateTime($r['day']);
+                $result[]=new EVisit($r['id'],$visit,$r['idStudent'],$r['idAccommodation']);
+            }
+            return $result;
+    }
+
+    /**
     * store
     *
     * @param  EVisit $visit

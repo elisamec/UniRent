@@ -21,6 +21,7 @@
 
     $FP=FPersistentManager::getInstance();
     $FA=FAccommodation::getInstance();
+    $FV=FVisit::getInstance();
 
     $a = new Address();
     $a = $a->withSortingCode(25)->withAddressLine1('Via Anna, 1')->withPostalCode('55555')->withLocality('Milano');
@@ -62,9 +63,9 @@
 
     //$risultato = $FP->delete("EAccommodation", 18);
 
-    $risultato = $FP->update($acc);
+    $risultato = $FV -> loadFutreById(5, "accommodation");
 
-    $risultato ? print("Aggiornamento avvenuto con successo") : print("Aggiornamento non avvenuto");
+    print_r ($risultato);
 
 
 
