@@ -138,22 +138,31 @@ class FVisit
         var_dump($date);
         
             try{
-                $db->exec('LOCK TABLES visit READ');
-                $db->beginTransaction();
+                if($requestType != "student" && $requestType != "accommodation"){
 
-                if($requestType == "student"){
-                    $q="SELECT * FROM visit WHERE day>=:day and idStudent=:id";  
-                }elseif($requestType == "accommodation"){
-                    $q="SELECT * FROM visit WHERE day>=:day and idAccommodation=:id";
+                    return [];
+                } else {
+
+                    $db->exec('LOCK TABLES visit READ');
+                    $db->beginTransaction();
+
+                    if($requestType == "student"){
+
+                        $q="SELECT * FROM visit WHERE day>=:day and idStudent=:id"; 
+
+                    }elseif($requestType == "accommodation"){
+
+                        $q="SELECT * FROM visit WHERE day>=:day and idAccommodation=:id";
+                    }
+                    
+
+                    $stm=$db->prepare($q);
+                    $stm->bindParam(':id',$id,PDO::PARAM_INT);
+                    $stm->bindParam(':day',$date,PDO::PARAM_STR);
+                    $stm->execute();
+                    $db->commit();
+                    $db->exec('UNLOCK TABLES');
                 }
-                //else???
-
-                $stm=$db->prepare($q);
-                $stm->bindParam(':id',$id,PDO::PARAM_INT);
-                $stm->bindParam(':day',$date,PDO::PARAM_STR);
-                $stm->execute();
-                $db->commit();
-                $db->exec('UNLOCK TABLES');
 
             }catch (PDOException $e){
                 $db->rollBack();
@@ -184,22 +193,32 @@ class FVisit
         var_dump($date);
         
             try{
-                $db->exec('LOCK TABLES visit READ');
-                $db->beginTransaction();
 
-                if($requestType == "student"){
-                    $q="SELECT * FROM visit WHERE day<:day and idStudent=:id";  
-                }elseif($requestType == "accommodation"){
-                    $q="SELECT * FROM visit WHERE day<:day and idAccommodation=:id";
-                }
-                //else???
+                if($requestType != "student" && $requestType != "accommodation"){
 
-                $stm=$db->prepare($q);
-                $stm->bindParam(':id',$id,PDO::PARAM_INT);
-                $stm->bindParam(':day',$date,PDO::PARAM_STR);
-                $stm->execute();
-                $db->commit();
-                $db->exec('UNLOCK TABLES');
+                    return [];
+                } else {
+                    
+                    $db->exec('LOCK TABLES visit READ');
+                    $db->beginTransaction();
+    
+                    if($requestType == "student"){
+
+                        $q="SELECT * FROM visit WHERE day<:day and idStudent=:id";  
+
+                    }elseif($requestType == "accommodation"){
+                        
+                        $q="SELECT * FROM visit WHERE day<:day and idAccommodation=:id";
+                    }
+
+    
+                    $stm=$db->prepare($q);
+                    $stm->bindParam(':id',$id,PDO::PARAM_INT);
+                    $stm->bindParam(':day',$date,PDO::PARAM_STR);
+                    $stm->execute();
+                    $db->commit();
+                    $db->exec('UNLOCK TABLES');
+                }                
 
             }catch (PDOException $e){
                 $db->rollBack();
