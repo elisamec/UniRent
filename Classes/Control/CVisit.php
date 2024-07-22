@@ -40,7 +40,12 @@ class CVisit
     $session = USession::getInstance();
     $id=$session->getSessionElement('id');
     $PM= FPersistentManager::getInstance();
-    $userType=$PM->getUserType($id);
+    $userType=$session::getSessionElement('userType');
+    if($userType=='Student'){$userType=TType::STUDENT;}
+    elseif($userType=='Owner'){$userType=TType::OWNER;}
+    else{$userType='undefined';}
+    
+    #$userType=$PM->getUserType($id);
     if ($userType===TType::STUDENT) {
         $view= new VStudent();
     } elseif ($userType===TType::OWNER) {
