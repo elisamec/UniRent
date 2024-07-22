@@ -44,18 +44,14 @@
                </button>
                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav ml-auto">
-                     <li class="nav-item active">
-                        <a class="nav-link" href="/UniRent/Owner/home">Home</a>
-                     </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="#">Reservations</a>
+                        <a class="nav-link" href="/UniRent/Student/home">Home</a>
                      </li>
                      <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Tenants</a>
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reservations</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="/UniRent/Owner/tenants/current">Current</a>
-                           <a class="dropdown-item" href="/UniRent/Owner/tenants/past">Past</a>
-                           <a class="dropdown-item" href="/UniRent/Owner/tenants/future">Future</a>
+                           <a class="dropdown-item" href="#">Accepted</a>
+                           <a class="dropdown-item" href="#">Waiting</a>
                         </div>
                      </li>
                      <li class="nav-item dropdown">
@@ -67,7 +63,7 @@
                         </div>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="/UniRent/Owner/postedReview">Posted Reviews</a>
+                        <a class="nav-link" href="/UniRent/Student/postedReview">Posted Reviews</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href = "/UniRent/Visit/visits">Visits</a>
@@ -76,7 +72,7 @@
                   <form class="form-inline my-2 my-lg-0">
                      <div class="login_bt">
                         <ul>
-                           <li><a href="/UniRent/Owner/profile"><span class="user_icon"><i class="fa fa-user" aria-hidden="true"></i></span>Profile</a></li>
+                           <li><a href="/UniRent/Student/profile"><span class="user_icon"><i class="fa fa-user" aria-hidden="true"></i></span>Profile</a></li>
                         </ul>
                      </div>
                   </form>
@@ -289,7 +285,7 @@ function initCalendar() {
       i === new Date().getDate() &&
       year === new Date().getFullYear() &&
       month === new Date().getMonth() &&
-      activeDay === null
+      activeDay === null // Check if no active day is set
     ) {
       activeDay = i;
       getActiveDay(i);
@@ -392,7 +388,7 @@ todayBtn.addEventListener("click", () => {
   today = new Date();
   month = today.getMonth();
   year = today.getFullYear();
-  activeDay = null; 
+  activeDay = null; // Reset active day when going to today's month
   initCalendar();
 });
 
@@ -419,11 +415,8 @@ function updateEvents(date) {
         // Generate HTML with an id attribute set to the event idVisit
         events += `<div class="event" id="event-${event.idVisit}">
             <div class="title">
-            <div class="userIcon">
-              <img src="${event.photo}" alt="Event photo">
-            </div>
+            <i class="fa fa-circle"></i>
             <div class="event-details">
-              <h3 class="event-title">@ ${event.username}</h3>
               <p>${event.accommodationTitle}</p>
               <div class="event-time">
               <span class="event-time">${event.time}</span>
