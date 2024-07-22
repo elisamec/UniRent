@@ -2886,7 +2886,7 @@ button.delete_button:hover{
     cursor: pointer;
 }
 
-.day, .time {
+.dayV {
     margin-right: 10px;
     padding: 5px;
     height: 35px;
@@ -2918,7 +2918,9 @@ button.delete_button:hover{
 .selectVisit {
     margin-top: 15px;
     margin-left: 15px;
+    padding-left:10px;
     width: 90%;
+    height: 35px;
 }
 .selectFilter {
     padding-top: 9px;
@@ -2952,6 +2954,7 @@ button.delete_button:hover{
     border-radius: 0.4rem;
     -webkit-appearance: none;
     -moz-appearance: none;
+    appearance: none;
     background-image:
   linear-gradient(45deg, transparent 50%, gray 50%),
   linear-gradient(135deg, gray 50%, transparent 50%),

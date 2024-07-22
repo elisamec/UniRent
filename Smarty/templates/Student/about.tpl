@@ -74,7 +74,7 @@
                         <a class="nav-link" href="/UniRent/Student/postedReview">Posted Reviews</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href = "#">Visits</a>
+                        <a class="nav-link" href = "/UniRent/Visit/visits">Visits</a>
                      </li>
                   </ul>
                   <form class="form-inline my-2 my-lg-0">

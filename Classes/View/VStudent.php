@@ -117,4 +117,8 @@ class VStudent{
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->display('Student/postedReviews.tpl');
     }
+    public function visits(array $visitsData):void{
+        $this->smarty->assign('visitsData', json_encode($visitsData));
+        $this->smarty->display('Student/visits.tpl');
+    }
 }

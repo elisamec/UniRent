@@ -67,7 +67,7 @@
                         <a class="nav-link" href="/UniRent/Student/postedReview">Posted Reviews</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href = "#">Visits</a>
+                        <a class="nav-link" href = "/UniRent/Visit/visits">Visits</a>
                      </li>
                   </ul>
                   <form class="form-inline my-2 my-lg-0">
@@ -412,7 +412,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById("notVisitableModal").style.display = "block";
         } else {
             // Check if timeSlots is undefined or not an object
-            var timeSlots = '{$timeSlots}';
+            var timeSlots = {$timeSlots};
             if (!timeSlots || typeof timeSlots !== 'object' || Object.keys(timeSlots).length === 0) {
                 // Show visit empty modal
                 visitEmptyModal.style.display = "block";

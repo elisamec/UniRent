@@ -125,4 +125,8 @@ class VOwner {
         $this->smarty->assign('rating', $rating);
         $this->smarty->display('Owner/tenants.tpl');
     }
+    public function visits(array $visitsData) {
+        $this->smarty->assign('eventsData', json_encode($visitsData));
+        $this->smarty->display('Owner/visits.tpl');
+    }
 }

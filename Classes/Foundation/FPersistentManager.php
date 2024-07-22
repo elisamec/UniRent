@@ -609,6 +609,23 @@ class FPersistentManager {
         $result=$FA->areThereFreePlaces($idAccommodation,$year);
         return $result;
     }
+    public function loadVisitSchedule(int $id, TType $type):array
+    {
+       if ($type==TType::STUDENT)
+       {
+           $FV=FVisit::getInstance();
+           $result=$FV->loadVisitScheduleStudent($id);
+           return $result;
+       }
+       else
+       {   
+            $PM=self::getInstance();
+            $accommodations=$PM->loadAccommodationsByOwner($id);
+            $FV=FVisit::getInstance();
+            $result=$FV->loadVisitScheduleOwner($accommodations);
+            return $result;
+       }
+    }
     
 }
 

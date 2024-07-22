@@ -58,6 +58,7 @@
                            <a class="dropdown-item" href="/UniRent/Owner/tenants/past">Past</a>
                            <a class="dropdown-item" href="/UniRent/Owner/tenants/future">Future</a>
                         </div>
+                        </li>
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contracts</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -70,7 +71,7 @@
                         <a class="nav-link" href="/UniRent/Owner/postedReview">Posted Reviews</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href = "#">Visits</a>
+                        <a class="nav-link" href = "/UniRent/Visit/visits">Visits</a>
                      </li>
                   </ul>
                   <form class="form-inline my-2 my-lg-0">
@@ -283,7 +284,7 @@ function addAvailability() {
         <label for="duration">Visit Duration (minutes):</label>
         <input type="number" class="duration" name="duration" title="Please enter a number" min="10" value="10">
         <label for="day">Weekday:</label>
-            <select class="day" name="day" required>
+            <select class="dayV" name="day" required>
                 <option value="" disabled selected>Select</option>
                 <option value="Monday">Monday</option>
                 <option value="Tuesday">Tuesday</option>
@@ -431,7 +432,7 @@ function setVisitData(data) {
             <label for="duration">Visit Duration (minutes):</label>
             <input type="number" id="duration" name="duration" title="Please enter a number" value="${data[i].duration}" min="10">
             <label for="day">Weekday:</label>
-            <select class="day" name="day" required>
+            <select class="dayV" name="day" required>
                 <option value="" disabled>Select</option>
                 <option value="Monday" ${data[i].day === 'Monday' ? 'selected' : ''}>Monday</option>
                 <option value="Tuesday" ${data[i].day === 'Tuesday' ? 'selected' : ''}>Tuesday</option>
@@ -777,7 +778,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     <label for="duration">Visit Duration (minutes):</label>
                     <input type="number" class="duration" name="duration" value="${data[day].duration}" min="10">
                     <label for="day">Weekday:</label>
-                    <select name="day" class="day" required>
+                    <select name="day" class="dayV" required>
                         <option value="" disabled selected>Select</option>
                         <option value="Monday" ${day === 'Monday' ? 'selected' : ''}>Monday</option>
                         <option value="Tuesday" ${day === 'Tuesday' ? 'selected' : ''}>Tuesday</option>

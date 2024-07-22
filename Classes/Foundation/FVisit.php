@@ -6,6 +6,7 @@ require __DIR__ . '/../../vendor/autoload.php';
 
 use Classes\Foundation\FConnection;
 use Classes\Entity\EVisit;
+use Classes\Tools\TType;
 use PDO;
 use PDOException;
 use DateTime;
@@ -346,5 +347,53 @@ class FVisit
 
         } else return false;
         
+    }
+    public function loadVisitScheduleStudent(int $id):array {
+        $db=FConnection::getInstance()->getConnection();
+            try{
+                $db->exec('LOCK TABLES visit READ');
+                $db->beginTransaction();
+                $q="SELECT * FROM visit WHERE idStudent=:id";    
+                $stm=$db->prepare($q);
+                $stm->bindParam(':id',$id,PDO::PARAM_INT);
+                $stm->execute();
+                $db->commit();
+                $db->exec('UNLOCK TABLES');
+
+            }catch (PDOException $e){
+                $db->rollBack();
+            }
+
+            $row=$stm->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($row as $r){
+                $visit = new DateTime($r['day']);
+                $result[]=new EVisit($r['id'],$visit,$r['idStudent'],$r['idAccommodation']);
+            }
+            return $result;
+    }
+    public function loadVisitScheduleOwner(array $accommodation):array {
+        $db=FConnection::getInstance()->getConnection();
+        $result=[];
+            try{
+                foreach ($accommodation as $accomm){
+                    $id= $accomm->getIdAccommodation();
+                    $db->exec('LOCK TABLES visit READ');
+                    $db->beginTransaction();
+                    $q="SELECT * FROM visit WHERE idAccommodation=:id";    
+                    $stm=$db->prepare($q);
+                    $stm->bindParam(':id',$id,PDO::PARAM_INT);
+                    $stm->execute();
+                    $db->commit();
+                    $db->exec('UNLOCK TABLES');
+                    $row=$stm->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($row as $r){
+                        $visit = new DateTime($r['day']);
+                        $result[]=new EVisit($r['id'],$visit,$r['idStudent'],$r['idAccommodation']);
+                    }
+                }
+            }catch (PDOException $e){
+                $db->rollBack();
+            }
+            return $result;
     }
 }
