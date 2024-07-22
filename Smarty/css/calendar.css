@@ -1,5 +1,5 @@
 :root {
-    --primary-clr: #b38add;
+    --primary-clr: #118af1;
   }
   * {
     margin: 0;
@@ -35,7 +35,7 @@
     color: #fff;
     display: flex;
     border-radius: 10px;
-    background-color: #373c4f;
+    background-color: #f9bc19;
   }
   .left {
     width: 60%;
@@ -158,13 +158,13 @@
   .calendar .days .next-date {
     color: #b3b3b3;
   }
-  .calendar .days .activeCal {
+  .calendar .days .active {
     position: relative;
     font-size: 2rem;
     color: #fff;
     background-color: var(--primary-clr);
   }
-  .calendar .days .activeCal::before {
+  .calendar .days .active::before {
     content: "";
     position: absolute;
     top: 0;
@@ -273,7 +273,7 @@
   .right .today-date .event-date {
     font-size: 1rem;
     font-weight: 400;
-    color: #878895;
+    color: #fff;
   }
   .events {
     width: 100%;
@@ -296,7 +296,7 @@
     padding: 0 20px;
     padding-left: 50px;
     color: #fff;
-    background: linear-gradient(90deg, #3f4458, transparent);
+    background: linear-gradient(90deg, #d29a01, transparent);
     cursor: pointer;
   }
   /* even event */
@@ -337,7 +337,7 @@
   .events .event .event-time {
     font-size: 1rem;
     font-weight: 400;
-    color: #878895;
+    color: #fff;
     margin-left: 10px;
     pointer-events: none;
   }
@@ -346,7 +346,6 @@
   }
   /* add tick in event after */
   .events .event::after {
-    content: "✓";
     position: absolute;
     top: 50%;
     right: 0;
@@ -395,7 +394,7 @@
   .events .no-event h3 {
     font-size: 1.5rem;
     font-weight: 500;
-    color: #878895;
+    color: #fff;
     text-transform: uppercase;
   }
   .add-event-wrapper {
