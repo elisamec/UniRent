@@ -297,11 +297,12 @@
     color: #fff;
     background: linear-gradient(90deg, #d29a01, transparent);
     cursor: pointer;
+    border: none; /* Remove all borders */
+  border-bottom: 2px solid transparent; /* Create space for the gradient border */
+  border-top: 1px solid transparent; /* Create space for the gradient border */
+  border-image: linear-gradient(to right, #b88700, transparent) 1;
   }
-  /* even event */
-  .events .event:nth-child(even) {
-    background: transparent;
-  }
+  
   .events .event:hover {
     background: linear-gradient(90deg, var(--primary-clr), transparent);
   }
