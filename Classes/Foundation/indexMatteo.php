@@ -150,8 +150,14 @@ print $totalMinutes;
 // Parte 2 di creazione array visite
 
 #print EAccommodation::stringInMinutes('03:00');
-
+/*
 $FA=FAccommodation::getInstance();
 $result=$FA->areThereFreePlaces(7,2024);
 
-print var_dump($result) ;
+print var_dump($result) ;*/
+
+
+require_once(__DIR__.'/../../Updater/updater.php');
+
+$U=Updater::getInstance();
+$U->run();
