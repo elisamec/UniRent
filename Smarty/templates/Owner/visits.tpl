@@ -91,10 +91,10 @@
             <div class="row">
                <div class="col-sm-12">
                   <div class="Properties_taital_main">
-                     <h1 class="Properties_taital">Proprieties with visits</h1>
+                     <h1 class="Properties_taital">Your visit schedule</h1>
                      <hr class="border_main">
                   </div>
-                  <p> Here you can see all the properties that have visits scheduled. </p>
+                  <p> Here you can see all your scheduled visits. You can click on the visit to see more details.</p>
                </div>
             </div>
          </div>
