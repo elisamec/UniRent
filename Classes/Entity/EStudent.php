@@ -279,7 +279,7 @@ class EStudent
     public function getRating():int
     {
         $PM=FPersistentManager::getInstance();
-        $result=$PM->getStudentRating($this->id);
+        $result=$PM->getStudentRating($this->getId());
         return $result;
     }
 

@@ -1,6 +1,7 @@
 <?php
 namespace Classes\Foundation;
 require __DIR__ .'/../../vendor/autoload.php';
+use Classes\Entity\EReservation;
 use Classes\Foundation;
 use Classes\Entity;
 use Classes\Entity\ECreditCard;
@@ -526,6 +527,86 @@ class FPersistentManager {
     {
         $FV=FVisit::getInstance();
         $result=$FV->loadByWeek();
+        return $result;
+    }
+
+    public function reserve(int $idAccommodation, int $year, int $date, int $year_2, int $date_2, int $student_id)
+    {
+        $now = new DateTime('now');
+        $start_accommodation=self::load('EAccommodation',$idAccommodation)->getStart();
+
+        if(((int)($start_accommodation->format('Y')))==$year)#se l' anno è quello corrente
+        {
+            if($date>=((int)($now->format('m'))))# il mese in cui vuoi prenotare non è già passato (siamo a ottobre ma vuoi prenotare per settembre)
+            {
+                $result_places=$this->areThereFreePlaces($idAccommodation,$year);#controlla se ci sono posti disponibili
+                if($result_places)# se ci sono prova a reggistrare la prenotazione
+                {
+                    $from = new DateTime();
+                    $to = new DateTime();
+                    $from=$from->setDate($year,$date,1);
+                    $to=$to->setDate($year_2,$date_2,1);
+                    $reservation = new EReservation($from,$to,$idAccommodation,$student_id);
+                    $result=$this::store($reservation);
+                    if($result)#se tutto va a buon fine
+                    {
+                        return true;#tutto ok
+                    }
+                    else#altrimenti
+                    {
+                        http_response_code(500);#problema del server
+                    }
+                }
+                else# posti esauriti per quest'anno
+                {
+                    return false;
+                }      
+            }
+            else # il mese per cui vuoi prenotare è già passato quest'anno
+            {
+                return false;
+            }
+        }
+        else #l' anno non è quello corrente
+        {
+            $result_places=$this->areThereFreePlaces($idAccommodation,$year);
+            if($result_places)# se ci sono posti liberi per quell' anno
+            {
+                $from = new DateTime();
+                $to = new DateTime();
+                $from=$from->setDate($year,$date,1);
+                $to=$to->setDate($year_2,$date_2,1);
+                $reservation = new EReservation($from,$to,$idAccommodation,$student_id);
+                $result=$this::store($reservation);
+                if($result)# se riesci a registrare la prenotazione
+                {
+                    return true; #tutto ok
+                }
+                else
+                {
+                    http_response_code(500); #altrimenti ci sono problemi con il server
+                }
+            }
+            else #non ci sono posti liberi per l' anno selezionato
+            {
+                return false;
+            }
+        }
+    }
+    
+    /**
+     * Method areThereFreePlaces
+     *
+     * this method check if there are free places in the accommodation asking to DB
+     * @param int $idAccommodation [accommodation's id]
+     * @param int $year [year of the reservation]
+     *
+     * @return bool
+     */
+    private function areThereFreePlaces(int $idAccommodation, int $year):bool
+    {
+        $FA=FAccommodation::getInstance();
+        $result=$FA->areThereFreePlaces($idAccommodation,$year);
         return $result;
     }
     

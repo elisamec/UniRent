@@ -545,10 +545,12 @@ use PDO;
 
             //If the days and times of visit are deleted, store the new ones
             if ($delete) {
-
+                
                 //Get new days and times of visit
                 $visit = $accommodation->getVisit();
                 $days = array_keys($visit);
+
+                if($days == []) return true;  #If for visits days there aren't, true you can return,said master Yoda
 
                 //Store new days and times
                 foreach($days as $day){
@@ -562,8 +564,7 @@ use PDO;
             
             } else $result = false;
 
-            return $result;
-            
+            return $result;   
         }
 
         /**
@@ -1148,6 +1149,61 @@ use PDO;
             else
             {
                 return (int)$row['rateA'];
+            }
+        }
+        
+        /**
+         * Method areThereFreePlaces
+         * 
+         * this method return true if there are free places in the accommodation
+         *
+         * @param int $idAccommodation [accommodation's id]
+         * @param int $year [year]
+         *
+         * @return bool
+         */
+        public function areThereFreePlaces(int $idAccommodation, int $year):bool
+        {
+            $db=FConnection::getInstance()->getConnection();
+            $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+            try
+            {
+                $q="SELECT DISTINCT COUNT(*) AS places_used , a.places AS total_places
+                    FROM accommodation a INNER JOIN reservation r ON r.idAccommodation=a.id
+                    INNER JOIN contract c ON c.idReservation=r.id
+                    WHERE a.id= :idA
+                    AND YEAR(r.fromDate)=:year
+                    GROUP BY a.places";
+                $db->exec('LOCK TABLES accommodation READ, reservation READ, contract READ');
+                $db->beginTransaction();
+                $stm=$db->prepare($q);
+                $stm->bindParam(':year',$year,PDO::PARAM_INT);
+                $stm->bindParam(':idA',$idAccommodation,PDO::PARAM_INT);
+                $stm->execute();
+                $db->commit();
+                $db->exec('UNLOCK TABLES');
+            }
+            catch(PDOException $e)
+            {
+                $db->rollBack();
+                print $e->getMessage();
+            }
+            $row=$stm->fetch(PDO::FETCH_ASSOC);
+
+            if($row==false)# nel caso non ci sono contratti , no reservation per l' anno selezionato
+            {
+                return true;
+            }
+            else
+            {
+                if($row['total_places']>$row['places_used'])
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }

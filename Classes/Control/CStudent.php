@@ -5,15 +5,17 @@ require __DIR__.'/../../vendor/autoload.php';
 
 use Classes\Entity\ECreditCard;
 use Classes\Entity\EPhoto;
+use Classes\Entity\EReservation;
 use Classes\Foundation\FPersistentManager;
 use Classes\Entity\EStudent;
 use Classes\Tools\TType;
 use Classes\Utilities\USession;
 use Classes\Utilities\USuperGlobalAccess;
 use Classes\View\VStudent; 
+use Classes\Foundation\FCreditCard;
 use Classes\Control;
 use DateTime;
-use FCreditCard;
+
 
 /**
  * Student controller class
@@ -851,5 +853,42 @@ class CStudent{
             ];
         }
         $view->postedReview($reviewsData);
+    }
+
+    public static function reserveAccommodation(int $idAccommodation)
+    {
+        // get student's id
+        $session=USession::getInstance();
+        $PM=FPersistentManager::getInstance();
+        $student_username=$session::getSessionElement('username');
+        $student_id=$PM->getStudentIdByUsername($student_username);
+
+        //get post informations
+        $year=(int)USuperGlobalAccess::getPost('year');
+        $date=USuperGlobalAccess::getPost('date');
+        $year_2=$year+1;
+        $date_2=null;
+        if($date=='September' or $date=='september')
+        {
+            $date=9;
+            $date_2=6;
+        }
+        else
+        {
+            $date=10;
+            $date_2=7;
+        }
+
+        $result=$PM->reserve($idAccommodation,$year,$date,$year_2,$date_2,$student_id);
+        
+        if($result)
+        {
+            header('Location:/UniRent/Student/home');
+        }
+        else
+        {
+            print 'Spiacenti non ci sono posti disponibili';
+            header('Location:/UniRent/Student/home');
+        }
     }
 }

@@ -151,6 +151,7 @@ print $totalMinutes;
 
 #print EAccommodation::stringInMinutes('03:00');
 
-$PM=FPersistentManager::getInstance();
-$result=$PM->getTenants('future',2);
-print_r($result);
+$FA=FAccommodation::getInstance();
+$result=$FA->areThereFreePlaces(7,2024);
+
+print var_dump($result) ;

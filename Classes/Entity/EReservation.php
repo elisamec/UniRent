@@ -1,5 +1,6 @@
 <?php 
 namespace Classes\Entity;
+require __DIR__.'/../../vendor/autoload.php';
 
 use DateTime;
 

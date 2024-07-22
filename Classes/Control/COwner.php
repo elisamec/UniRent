@@ -842,6 +842,7 @@ class COwner
         $accomodation = new EAccommodation($id,$array_photos,$title,$addressObj,$price,$date,$description,$places,$deposit,$array_visit,$duration,$men,$women,$animals,$smokers,$status,$idOwner);
         $result=$PM->update($accomodation);
         $id = $accomodation->getIdAccommodation();
+        
         if ($result) {
             header('Location:/UniRent/Owner/accommodationManagement/'.$id);
         } else {
