@@ -158,13 +158,13 @@
   .calendar .days .next-date {
     color: #b3b3b3;
   }
-  .calendar .days .active {
+  .calendar .days .activeCal {
     position: relative;
     font-size: 2rem;
     color: #fff;
     background-color: var(--primary-clr);
   }
-  .calendar .days .active::before {
+  .calendar .days .activeCal::before {
     content: "";
     position: absolute;
     top: 0;
@@ -335,7 +335,7 @@
     color: #fff;
   }
   .events .event .event-time {
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: 400;
     color: #878895;
     margin-left: 10px;

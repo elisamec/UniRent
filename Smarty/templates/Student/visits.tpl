@@ -65,7 +65,7 @@
                      <li class="nav-item">
                         <a class="nav-link" href="/UniRent/Student/postedReview">Posted Reviews</a>
                      </li>
-                     <li class="nav-item">
+                     <li class="nav-item active">
                         <a class="nav-link" href = "/UniRent/Visit/visits">Visits</a>
                      </li>
                   </ul>
@@ -142,9 +142,9 @@
                   <h3 class="footer_text">Useful Links</h3>
                   <div class="footer_menu">
                      <ul>
-                        <li class="active"><a href="/UniRent/Owner/home">Home</a></li>
-                        <li><a href="/UniRent/Owner/about">About Us</a></li>
-                        <li><a href="/UniRent/Owner/contact">Contact Us</a></li>
+                        <li><a href="/UniRent/Student/home">Home</a></li>
+                        <li><a href="/UniRent/Student/about">About Us</a></li>
+                        <li><a href="/UniRent/Student/contact">Contact Us</a></li>
                      </ul>
                   </div>
                </div>
