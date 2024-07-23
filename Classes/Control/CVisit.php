@@ -31,9 +31,9 @@ class CVisit
     $PM= FPersistentManager::getInstance();
     $res=$PM->store($visit);
     if ($res) {
-        header('Location:' . $_SERVER['HTTP_REFERER']);
+        header('Location:' . $_SERVER['HTTP_REFERER']. '/sent');
         } else {
-            http_response_code(500);
+            header('Location:' . $_SERVER['HTTP_REFERER']. '/false');
         }
    }
    public static function visits() {
@@ -120,5 +120,75 @@ class CVisit
     });
     
     $view->visits($visitsData);
+   }
+   public static function viewVisit(int $id, string $successEdit="null", string $successDelete="null") {
+    $session = USession::getInstance();
+    $userType=$session::getSessionElement('userType');
+    $PM= FPersistentManager::getInstance();
+    $visit=$PM->load('EVisit', $id);
+    $accommodation = $PM->load('EAccommodation', $visit->getIdAccommodation());
+    if ($userType=='Student') {
+        $view= new VStudent();
+        $idUser=$accommodation->getIdOwner();
+        $visitUserType='Owner';
+    } elseif ($userType=='Owner') {
+        $view= new VOwner();
+        $idUser=$visit->getIdStudent();
+        $visitUserType='Student';
+    } else {
+        http_response_code(403);
+        exit();
+    }
+    $PM= FPersistentManager::getInstance();
+    $visit=$PM->load('EVisit', $id);
+    $user = $PM->load('E'.$visitUserType, $idUser);
+    if ($accommodation->getPhoto() === null) {
+        $accommodationPhoto = "/UniRent/Smarty/images/NoPic.png";
+    } else {
+        $accommodationPhoto = (EPhoto::toBase64($accommodation->getPhoto()))[0]->getPhoto();
+    }
+    $visits=$accommodation->getVisit();
+        $booked=$PM->loadVisitsByWeek();
+        foreach ($visits as $day=>$time) {
+            foreach ($time as $key=>$t) {
+                foreach ($booked as $b) {
+                    if($b->getDayOfWeek()==$day && $b->getDate()->format('H:i')==$t && $b->getIdVisit()!==$id)
+                    {
+                        unset($visits[$day][$key]);
+                    }
+                }
+            }
+        }
+    $view->viewVisit($visit, $user, $accommodation, $accommodationPhoto, $visits, $successEdit, $successDelete);
+   }
+   public static function delete(int $id) {
+    $PM= FPersistentManager::getInstance();
+    $session=USession::getInstance();
+    $res=$PM->delete('EVisit', $id);
+    $userType=$session::getSessionElement('userType');
+    if ($res) {
+        header('Location:/UniRent/' . $userType. '/home');
+    } else {
+        header('Location:' . $_SERVER['HTTP_REFERER']. '/null/false');
+    }
+   }
+   public static function edit(int $id) {
+    $day=USuperGlobalAccess::getPost('day');
+    $time=USuperGlobalAccess::getPost('time');
+    $time=explode(":", $time);
+    $hour=$time[0];
+    $minutes=$time[1];
+    $date=new DateTime();
+    $date->modify('next '.$day);
+    $date->setTime($hour, $minutes);
+    $PM= FPersistentManager::getInstance();
+    $visit=$PM->load('EVisit', $id);
+    $visit->setDate($date);
+    $res=$PM->update($visit);
+    if ($res) {
+        header('Location:' . $_SERVER['HTTP_REFERER']. '/true');
+    } else {
+        header('Location:' . $_SERVER['HTTP_REFERER']. '/false');
+    }
    }
 }

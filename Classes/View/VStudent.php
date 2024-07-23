@@ -8,6 +8,7 @@ use Classes\Entity\EOwner;
 use Classes\Entity\EPhoto;
 use StartSmarty;
 use Classes\Entity\EStudent;
+use Classes\Entity\EVisit;
 
 class VStudent{
     private $smarty;
@@ -120,5 +121,15 @@ class VStudent{
     public function visits(array $visitsData):void{
         $this->smarty->assign('eventsData', json_encode($visitsData));
         $this->smarty->display('Student/visits.tpl');
+    }
+    public function viewVisit(EVisit $visit, EOwner $owner, EAccommodation $accommodation, string $accommodationPhoto, array $timeSlots, string $successEdit, string $successDelete):void {
+        $this->smarty->assign('visit', $visit);
+        $this->smarty->assign('owner', $owner);
+        $this->smarty->assign('accommodation', $accommodation);
+        $this->smarty->assign('timeSlots', json_encode($timeSlots));
+        $this->smarty->assign('accommodationImage', $accommodationPhoto);
+        $this->smarty->assign('successEdit', $successEdit);
+        $this->smarty->assign('successDelete', $successDelete);
+        $this->smarty->display('Student/visitDetails.tpl');
     }
 }

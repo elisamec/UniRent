@@ -221,7 +221,7 @@ class CStudent{
         }
     }
     
-    public static function accommodation(int $idAccommodation) {
+    public static function accommodation(int $idAccommodation, string $successVisit='null', string $successReserve='null', bool $disabled=false) {
         $view = new VStudent();
         $PM = FPersistentManager::getInstance();
 
@@ -321,9 +321,6 @@ class CStudent{
                 ];
             }
         }
-        $disabled=false;
-        $successReserve="null";
-        $successVisit="null";
         $view->accommodation($accomm, $owner, $reviewsData, $period, $picture, $visits, $visitDuration, $tenants, $num_places, $studBooked, $dayOfBooking, $timeOfBooking, $disabled, $successReserve, $successVisit);
     }
 
@@ -883,12 +880,12 @@ class CStudent{
         
         if($result)
         {
-            header('Location:/UniRent/Student/home');
+            header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/true');
         }
         else
         {
             print 'Spiacenti non ci sono posti disponibili';
-            header('Location:/UniRent/Student/home');
+            header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/full');
         }
     }
 }
