@@ -18,7 +18,7 @@ class CReservation
         $reservations=$PM->loadReservationsByStudent($id, $kind);
         $reservationsData = [];
         foreach ($reservations as $reservation) {
-            $accommodation=$PM->load('EAccommodation', $reservation->getIdAccommodation());
+            $accommodation=$PM->load('EAccommodation', $reservation->getAccomodationId());
             $period = $reservation->getFromDate()->format('d/m/Y') . ' - ' . $reservation->getToDate()->format('d/m/Y');
             if ($accommodation->getPhoto() === null) {
                 $accommodationPhoto = "/UniRent/Smarty/images/NoPic.png";
@@ -31,7 +31,7 @@ class CReservation
                 'photo' => $accommodationPhoto,
                 'period' => $period,
                 'price' => $accommodation->getPrice(),
-                'address' => $accommodation->getAddress()
+                'address' => $accommodation->getAddress()->getAddressLine1() . ', ' . $accommodation->getAddress()->getLocality(),
             ];
         }
         $view= new VStudent();

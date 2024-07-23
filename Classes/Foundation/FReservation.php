@@ -452,7 +452,7 @@ class FReservation
         $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
         try
         {
-            $q='SELECT * FROM reservation WHERE idStudent=:id';
+            $q='SELECT * FROM reservation WHERE idStudent=:id AND DateDiff(fromDate,NOW())>0 ORDER BY fromDate ASC AND id NOT IN (SELECT idReservation FROM contract)';
             $db->exec('LOCK TABLES reservation READ');
             $db->beginTransaction();
             $stm=$db->prepare($q);
