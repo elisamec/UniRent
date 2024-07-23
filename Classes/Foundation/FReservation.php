@@ -446,4 +446,58 @@ class FReservation
             return null;
         }
     }
+
+    public function loadReservationsByStudent(int $id, string $kind) {
+        $db=FConnection::getInstance()->getConnection();
+        $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+        try
+        {
+            $q='SELECT * FROM reservation WHERE idStudent=:id';
+            $db->exec('LOCK TABLES reservation READ');
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindParam(':id',$id,PDO::PARAM_INT);
+            $stm->execute();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            $result=TError::getInstance()->errorGettingReservations();
+            return $result;
+        }
+        $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
+        $resultAccepted=array();
+        $resultWaiting=array();
+
+        foreach ($rows as $row) 
+        {
+            $FROM= new DateTime($row['fromDate']);
+            $TO= new DateTime($row['toDate']);
+            $r=new EReservation($FROM,$TO,$row['idAccommodation'],$row['idStudent']);
+            $r->setID($row['id']);
+            $r->setStatus($row['statusAccept']);
+            if($r->getStatusAccept()===true)
+            {
+                $resultAccepted[]=$r;
+            }
+            else
+            {
+                $resultWaiting[]=$r;
+            }
+        }
+        if ($kind==='accepted')
+        {
+            return $resultAccepted;
+        }
+        elseif ($kind==='waiting')
+        {
+            return $resultWaiting;
+        }
+        else
+        {
+            return null;
+        }
+    }
 }

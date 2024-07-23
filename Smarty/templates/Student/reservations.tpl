@@ -71,7 +71,7 @@
                   <form class="form-inline my-2 my-lg-0">
                      <div class="login_bt">
                         <ul>
-                           <li><a href="/UniRent/Student/profile"><span class="user_icon"><i class="fa fa-user" aria-hidden="true"></i></span>Profile</a></li>
+                           <li><a href="/UniRent/Student/profile" class="active"><span class="user_icon"><i class="fa fa-user" aria-hidden="true"></i></span>Profile</a></li>
                         </ul>
                      </div>
                   </form>
@@ -81,9 +81,17 @@
       </div>
       <!-- header section end -->
       <!-- feature section start -->
-      <div class="Properties_section padding-reserve">
+      <div class="Properties_section layout_padding">
          <div class="container">
-                     <h1 class="accommodation_text">@{$username}'s Proprieties</h1>
+            <div class="row">
+               <div class="col-sm-12">
+                  <div class="Properties_taital_main">
+                     <h1 class="Properties_taital">Your Reservations</h1>
+                     <hr class="border_main">
+                  </div>
+                  <p>Here you can see all the properties you have reserved.</p>
+               </div>
+            </div>
             <div class="Properties_section_2">
                <div class="row" id="accommodationContainer">
                </div>
@@ -104,9 +112,9 @@
                   <h3 class="footer_text">Useful Links</h3>
                   <div class="footer_menu">
                      <ul>
-                        <li><a href="/UniRent/Student/home">Home</a></li>
-                        <li><a href="/UniRent/Student/about">About Us</a></li>
-                        <li><a href="/UniRent/Student/contact">Contact Us</a></li>
+                        <li class="active"><a href="/UniRent/Owner/home">Home</a></li>
+                        <li><a href="/UniRent/Owner/about">About Us</a></li>
+                        <li><a href="/UniRent/Owner/contact">Contact Us</a></li>
                      </ul>
                   </div>
                </div>
@@ -156,7 +164,7 @@
          </script>
 {literal}
          <script>
-    const accommodations = {/literal}{$accommodations}{literal};
+    const accommodations = {/literal}{$reservations}{literal};
 
     // Function to create and append reviews to the container
     function displayAccommodations(accommodations) {
@@ -180,7 +188,7 @@
                                 <img src="${accommodation.photo}" alt="">
                                 <div class="overlay">
                                     <div class="text">
-                                        <div class="some_text"><a href="/UniRent/Student/accommodation/${accommodation.id}">See More</a></div>
+                                        <div class="some_text"><a href="/UniRent/Reservation/showStudentReservation/${accommodation.idReservation}">See More</a></div>
                                     </div>
                                 </div>
                             </div>
@@ -189,6 +197,7 @@
                             <div class="left_box">
                                 <h1 class="road_text">${accommodation.title}</h1>
                                 <p>${accommodation.address}</p>
+                                <p>${accommodation.period}</p>
                             </div>
                             <div class="right_box">
                                 <div class="rate_text">${accommodation.price} €</div>

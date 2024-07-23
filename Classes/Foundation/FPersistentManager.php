@@ -627,6 +627,12 @@ class FPersistentManager {
             return $result;
        }
     }
+    public function loadReservationsByStudent(int $id, string $kind):array
+    {
+        $FR=FReservation::getInstance();
+        $result=$FR->loadReservationsByStudent($id,$kind);
+        return $result;
+    }
     
     public function updateDataBase()
     {

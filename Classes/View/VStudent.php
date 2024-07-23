@@ -132,4 +132,8 @@ class VStudent{
         $this->smarty->assign('successDelete', $successDelete);
         $this->smarty->display('Student/visitDetails.tpl');
     }
+    public function showReservations(array $reservationsData):void {
+        $this->smarty->assign('reservations', json_encode($reservationsData));
+        $this->smarty->display('Student/reservations.tpl');
+    }
 }

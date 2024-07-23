@@ -50,8 +50,8 @@
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reservations</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="#">Accepted</a>
-                           <a class="dropdown-item" href="#">Waiting</a>
+                           <a class="dropdown-item" href="/UniRent/Reservation/showStudent/sccepted">Accepted</a>
+                           <a class="dropdown-item" href="/UniRent/Reservation/showStudent/waiting">Waiting</a>
                         </div>
                      </li>
                      <li class="nav-item dropdown">
