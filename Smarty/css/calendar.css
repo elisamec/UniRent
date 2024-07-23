@@ -314,8 +314,8 @@
   .events .event .title .event-title {
     font-size: 1rem;
     font-weight: 400;
-    margin-left: 20px;
-    margin-bottom: 0;
+    margin: 0 20px;
+    padding-bottom: 5px;
     color: #fff;
   }
   .events .event .title .event-details {
@@ -323,9 +323,9 @@
     flex-direction: column; /* Stack h3 and p vertically */
   }
   .events .event .title p {
-    margin-left: 20px; /* Remove default margin */
     color: #fff; /* Adjust color as needed */
-    margin-top:0;
+    margin:0 20px;
+    border-bottom: 1px solid #fff
   }
   .events .event i {
     color: var(--primary-clr);

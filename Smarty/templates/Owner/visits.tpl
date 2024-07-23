@@ -423,7 +423,7 @@ function updateEvents(date) {
               <img src="${event.photo}" alt="Event photo">
             </div>
             <div class="event-details">
-              <h3 class="event-title">@ ${event.username}</h3>
+              <h3 class="event-title">@${event.username}</h3>
               <p>${event.accommodationTitle}</p>
               <div class="event-time">
               <span class="event-time">${event.time}</span>
