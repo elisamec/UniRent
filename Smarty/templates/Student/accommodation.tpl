@@ -328,6 +328,8 @@
             <option value="Wednesday">Wednesday</option>
             <option value="Thursday">Thursday</option>
             <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+            <option value="Sunday">Sunday</option>
           </select>
       </div>
       <div class="row padding-reserve">
@@ -366,7 +368,9 @@
         <div class="row">
             <span class="resClose" id="successVisitClose">&times;</span>
             {if $successVisit === "sent"}
+            <div class="col-md-12">
             <h2 class="resModal-head">Visit Request Sent</h2>
+            </div>
             <p>Your visit request was successfully sent.</p>
             {else}
             <h2 class="resModal-head">Visit Request Failed to Send</h2>
@@ -519,10 +523,10 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
-    document.getElementById("successVisitClose").onclick = function() {
+    document.getElementById("successReserveClose").onclick = function() {
         reserveModal.style.display = "none";
     }
-    document.getElementById("closeSuccessVisitModal").onclick = function() {
+    document.getElementById("closesuccessReserveModal").onclick = function() {
         reserveModal.style.display = "none";
     }
 

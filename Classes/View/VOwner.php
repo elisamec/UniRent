@@ -5,6 +5,8 @@ require __DIR__.'/../../vendor/autoload.php';
 
 use Classes\Entity\EAccommodation;
 use Classes\Entity\EOwner;
+use Classes\Entity\EStudent;
+use Classes\Entity\EVisit;
 use StartSmarty;
 
 class VOwner {
@@ -128,5 +130,15 @@ class VOwner {
     public function visits(array $visitsData) {
         $this->smarty->assign('eventsData', json_encode($visitsData));
         $this->smarty->display('Owner/visits.tpl');
+    }
+    public function viewVisit(EVisit $visit, EStudent $student, EAccommodation $accommodation, string $accommodationPhoto, array $timeSlots, string $successEdit, string $successDelete) {
+        $this->smarty->assign('visit', $visit);
+        $this->smarty->assign('student', $student);
+        $this->smarty->assign('accommodation', $accommodation);
+        $this->smarty->assign('timeSlots', json_encode($timeSlots));
+        $this->smarty->assign('accommodationImage', $accommodationPhoto);
+        $this->smarty->assign('successEdit', $successEdit);
+        $this->smarty->assign('successDelete', $successDelete);
+        $this->smarty->display('Owner/visitDetails.tpl');
     }
 }
