@@ -1,7 +1,7 @@
-
 <?php 
 
-
+namespace Updater;
+use DateTime;
 
 /**
  * Updater

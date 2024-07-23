@@ -12,6 +12,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use Classes\Foundation\FOwner;
 use Classes\Utilities\UAccessUniversityFile;
+use Updater\Updater;
 
 # PARTE MATTEO cancellato materiale precedente 22/06/2024
 /*
@@ -157,7 +158,6 @@ $result=$FA->areThereFreePlaces(7,2024);
 print var_dump($result) ;*/
 
 
-require_once(__DIR__.'/../../Updater/updater.php');
 
 $U=Updater::getInstance();
 $U->run();
