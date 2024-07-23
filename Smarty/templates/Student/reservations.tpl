@@ -172,7 +172,7 @@
 
         if (container) {
             if (accommodations.length === 0) {
-                container.innerHTML = '<div class="container"><h1 class="noRev">You have no ads yet!</h1></div>';
+                container.innerHTML = '<div class="container"><h1 class="noRev">You have no reservations yet!</h1></div>';
             } else {
                 accommodations.forEach(accommodation => {
                     if (accommodation.photo == null) {
