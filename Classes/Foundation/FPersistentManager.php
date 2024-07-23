@@ -10,6 +10,7 @@ use Classes\Entity\EPhoto;
 use Classes\Entity\EStudent;
 use Classes\Tools\TType;
 use Classes\Utilities\UAccessUniversityFile;
+use Classes\Foundation\FUpdater;
 use DateTime;
 
 
@@ -625,6 +626,12 @@ class FPersistentManager {
             $result=$FV->loadVisitScheduleOwner($accommodations);
             return $result;
        }
+    }
+    
+    public function updateDataBase()
+    {
+        $FU=FUpdater::getInstance();
+        $FU->updateDB();
     }
     
 }
