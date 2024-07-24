@@ -289,21 +289,43 @@
 </script>
 {/literal}
 <script>
-document.addEventListener("DOMContentLoaded", function() {
+    // Function to set a cookie
+    function setCookie(name, value, days) {
+        let expires = "";
+        if (days) {
+            let date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        console.log("Cookie set:", name, value);
+    }
+
     // Function to get the value of a cookie by name
     function getCookie(name) {
-        let cookieArr = document.cookie.split(";");
-        for (let i = 0; i < cookieArr.length; i++) {
-            let cookiePair = cookieArr[i].split("=");
-            if (name == cookiePair[0].trim()) {
-                return decodeURIComponent(cookiePair[1]);
-            }
+        let nameEQ = name + "=";
+        let ca = document.cookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') c = c.substring(1);
+            if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
         }
         return null;
     }
 
-    // Get the current page URL from the PHP cookie
-    let currentPage = getCookie("current_page");
+    // Function to delete a cookie
+    function eraseCookie(name) {
+        document.cookie = name + '=; Max-Age=-99999999;';
+    }
+
+    // Get the current page URL
+    let currentPage = window.location.pathname;
+
+    // Set the cookie with the current page URL
+    setCookie('current_page', currentPage, 1); // Expires in 1 day
+
+    // Get the current page URL from the cookie
+    currentPage = getCookie("current_page");
 
     if (currentPage) {
         // Get the existing visited pages from sessionStorage
@@ -326,7 +348,6 @@ document.addEventListener("DOMContentLoaded", function() {
         // Display the visited pages (for debugging purposes)
         console.log("Visited Pages:", visitedPages);
     }
-});
 </script>
 
 
