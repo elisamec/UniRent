@@ -633,6 +633,12 @@ class FPersistentManager {
         $result=$FR->loadReservationsByStudent($id,$kind);
         return $result;
     }
+    public function getTitleAccommodationById(int $id):string
+    {
+        $FA=FAccommodation::getInstance();
+        $result=$FA->getTitleById($id);
+        return $result;
+    }
     
     public function updateDataBase()
     {

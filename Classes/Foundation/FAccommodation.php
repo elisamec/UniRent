@@ -1206,5 +1206,26 @@ use PDO;
                 }
             }
         }
+        public function getTitleById(int $id) {
+            $db=FConnection::getInstance()->getConnection();
+            try
+            {
+                $db->exec('LOCK TABLES accommodation READ');
+                $q='SELECT title FROM accommodation WHERE id=:id';
+                $db->beginTransaction();
+                $stm=$db->prepare($q);
+                $stm->bindParam(':id',$id,PDO::PARAM_INT);
+                $stm->execute();
+                $db->commit();
+                $db->exec('UNLOCK TABLES');
+            }
+            catch(PDOException $e)
+            {
+                $db->rollBack();
+                return null;
+            }
+            $row=$stm->fetch(PDO::FETCH_ASSOC);
+            return $row['title'];
+        }
     }
 

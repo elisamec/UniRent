@@ -864,7 +864,7 @@ class COwner
             $accommodationTitles[$accom->getIdAccommodation()]=$accom->getTitle();
         }
         foreach ($tenantsArray as $idAccommodation => $students) {
-            $accommodationTitle = $PM->load('EAccommodation', $idAccommodation)->getTitle();
+            $accommodationTitle = $PM->getTitleAccommodationById($idAccommodation);
             $tenantList = [];
             foreach ($students as $student) {
                 $profilePic = ($student[0])->getPhoto();
@@ -944,7 +944,7 @@ class COwner
 
         $tenants=[];
         foreach ($tenantsArray as $idAccommodation => $students) {
-            $accommodationTitle = $PM->load('EAccommodation', $idAccommodation)->getTitle();
+            $accommodationTitle = $PM->getTitleAccommodationById($idAccommodation);
             $tenantList = [];
             foreach ($students as $student) {
                 $profilePic = $student[0]->getPhoto();

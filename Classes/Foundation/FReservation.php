@@ -349,7 +349,7 @@ class FReservation
             {
                 $q='SELECT *
                     FROM reservation r INNER JOIN accommodation a ON a.id=r.idAccommodation
-                    INNER JOIN owner o ON o.id=a.owner
+                    INNER JOIN owner o ON o.id=a.idOwner
                     WHERE o.id=:id AND r.statusAccept=false';
                 $db->exec('LOCK TABLES reservation READ');
                 $db->beginTransaction();
@@ -375,7 +375,7 @@ class FReservation
                 $r=new EReservation($FROM,$TO,$row['idAccommodation'],$row['idStudent']);
                 $r->setID($row['id']);
                 $r->setStatus($row['statusAccept']);
-                $result[]=$r;
+                $result[$row['idAccommodation']][]=$r;
             }
             return $result;
 
@@ -491,7 +491,7 @@ class FReservation
         {
             return $resultAccepted;
         }
-        elseif ($kind==='waiting')
+        elseif ($kind==='pending')
         {
             return $resultWaiting;
         }
