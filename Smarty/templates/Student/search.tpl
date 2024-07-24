@@ -568,5 +568,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
       
-   </body>
+   <script src="/UniRent/Smarty/js/cookie.js"></script>
+</body>
 </html>

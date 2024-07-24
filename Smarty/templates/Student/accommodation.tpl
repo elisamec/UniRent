@@ -867,4 +867,5 @@ $(document).ready(function() {
     // Call the function to check for success and show modal
     showsuccessReserveModal();
 </script>
-   </body>
+   <script src="/UniRent/Smarty/js/cookie.js"></script>
+</body>

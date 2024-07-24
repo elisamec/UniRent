@@ -419,6 +419,7 @@
     <!-- Custom scripts for all pages-->
     <script src="/UniRent/Smarty/js/sb-admin-2.min.js"></script>
 
+<script src="/UniRent/Smarty/js/cookie.js"></script>
 </body>
 
 </html>
