@@ -41,32 +41,43 @@ currentPage = getCookie("current_page");
 console.log("Current Page in cookie:", currentPage);
 
 if (currentPage) {
-    // Get the existing visited pages from sessionStorage
-    let visitedPages = JSON.parse(sessionStorage.getItem("visitedPages")) || {};
-    console.log("Visited Pages from sessionStorage:", visitedPages);
+    // Check if currentPage matches any of the specified URLs
+    const resetPages = ['/UniRent/Owner/home', '/UniRent/User/home', '/UniRent/Student/home'];
+    if (resetPages.includes(currentPage)) {
+        console.log("Current page matches reset criteria. Clearing visitedPages.");
+        // Only keep the current page in visitedPages
+        let visitedPages = {};
+        visitedPages[0] = currentPage;
+        sessionStorage.setItem("visitedPages", JSON.stringify(visitedPages));
+        console.log("Visited Pages:", visitedPages);
+    } else {
+        // Get the existing visited pages from sessionStorage
+        let visitedPages = JSON.parse(sessionStorage.getItem("visitedPages")) || {};
+        console.log("Visited Pages from sessionStorage:", visitedPages);
 
-    // Remove the old occurrence of the current page URL, if it exists
-    for (let key in visitedPages) {
-        if (visitedPages[key] === currentPage) {
-            console.log("Removing old occurrence of current page URL");
-            delete visitedPages[key];
+        // Remove the old occurrence of the current page URL, if it exists
+        for (let key in visitedPages) {
+            if (visitedPages[key] === currentPage) {
+                console.log("Removing old occurrence of current page URL");
+                delete visitedPages[key];
+            }
         }
+
+        // Reindex visited pages to shift keys if necessary
+        let newVisitedPages = {};
+        let index = 0;
+        for (let key in visitedPages) {
+            newVisitedPages[index] = visitedPages[key];
+            index++;
+        }
+
+        // Add the current page URL with the next available index
+        newVisitedPages[index] = currentPage;
+
+        // Save the updated visited pages back to sessionStorage
+        sessionStorage.setItem("visitedPages", JSON.stringify(newVisitedPages));
+
+        // Display the visited pages (for debugging purposes)
+        console.log("Visited Pages:", newVisitedPages);
     }
-
-    // Reindex visited pages to shift keys if necessary
-    let newVisitedPages = {};
-    let index = 0;
-    for (let key in visitedPages) {
-        newVisitedPages[index] = visitedPages[key];
-        index++;
-    }
-
-    // Add the current page URL with the next available index
-    newVisitedPages[index] = currentPage;
-
-    // Save the updated visited pages back to sessionStorage
-    sessionStorage.setItem("visitedPages", JSON.stringify(newVisitedPages));
-
-    // Display the visited pages (for debugging purposes)
-    console.log("Visited Pages:", newVisitedPages);
 }
