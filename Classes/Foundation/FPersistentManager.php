@@ -104,12 +104,6 @@ class FPersistentManager {
         $result=$FR->getWaitingReservations($idProprietario);
         return $result;
     }
-    public function getAcceptedReservations(int $idProprietario):array
-    {
-        $FR= Foundation\FReservation::getInstance();
-        $result=$FR->getAcceptedReservations($idProprietario);
-        return $result;
-    }
     
     /**
      * Method verifyStudentEmail
