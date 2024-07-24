@@ -23,6 +23,7 @@ class FUpdater
     public function updateDB()
     {
         $db=FConnection::getInstance()->getConnection();
+        $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
         try
         {
             $db->exec('LOCK TABLES contract WRITE, reservation WRITE');
@@ -119,8 +120,7 @@ class FUpdater
 
                 
 
-                //delete reservation 
-
+                //select reservation's ids to delete
                 $q3="SELECT id
                      FROM reservation
                      WHERE DateDiff(made, NOW())<-2
@@ -128,16 +128,46 @@ class FUpdater
 			                        FROM contract c
 			                        INNER JOIN reservation r1 ON r1.id = c.idReservation)";
 
-                
+                $stm3=$db->prepare($q3);
+                $stm3->execute();
+                $res3=$stm3->fetchAll(PDO::FETCH_COLUMN,0);
+
+                //delete reservation after 2 days 
+                if(!empty($res3))
+                {
+                    $ids3 = implode(',', array_map('intval', $res3));
+                    $updateQuery3 = "DELETE FROM reservation WHERE id IN ($ids3)";
+                    $updateStm3 = $db->prepare($updateQuery3);
+                    $updateStm3->execute();
+                }
 
 
+                //delete reservation if there is no more free places
+                $q4="WITH freeTable AS (
+                                        SELECT DISTINCT a1.id AS idAccommodation,
 
+                                        a1.places - ( SELECT COUNT(*)
+                                                      FROM contract c2
+                                                      INNER JOIN reservation r2 ON c2.idReservation = r2.id
+                                                      WHERE r2.idAccommodation = a1.id AND EXTRACT(YEAR FROM r2.fromDate) = EXTRACT(YEAR FROM r1.fromDate)
+                                                    ) AS freePlaces,
 
+                                        EXTRACT(YEAR FROM r1.fromDate) AS year
 
+                                        FROM accommodation a1
+                                        INNER JOIN reservation r1 ON a1.id = r1.idAccommodation
+                                        )
 
+                    DELETE FROM reservation WHERE id IN (SELECT r2.id
+                                                         FROM freeTable f1
+                                                         INNER JOIN reservation r2
+                                                         ON(f1.idAccommodation = r2.idAccommodation
+                                                         AND f1.year = EXTRACT(YEAR FROM r2.fromDate))
+                                                         WHERE f1.freePlaces=0)";
+                $stm4 = $db->prepare($q4);
+                $stm4->execute();
 
-
-
+                //END UPDATE OPERATIONS
 
                 $result=$db->commit();
                 if($result)
