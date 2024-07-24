@@ -30,7 +30,7 @@ class FUpdater
             if($cont==0)
             {
                 $db->beginTransaction();
-
+// CONTRACTS UPDATE
                 #seleziona gli id dei contratti che dovrebbero essere messi come onGoing
                 $q="SELECT 	r.id 
                     FROM reservation r 
@@ -50,12 +50,95 @@ class FUpdater
                     $updateStm->execute();
                 }
 
-                //update contract to finished
+                //select contract to finished
                 $q1="SELECT r.id 
                      FROM reservation r 
                      INNER JOIN contract c ON r.id = c.idReservation           #seleziona gli id dei contratti che dovrebbero essere messi come finished
                      WHERE DateDiff(toDate, NOW())<0";
+
+                $stm1=$db->prepare($q1);
+                $stm1->execute();
+                $res1=$stm1->fetchAll(PDO::FETCH_COLUMN,0);
+
+                //update contract to finished
+                if(!empty($res1))
+                {
+                    $ids1 = implode(',', array_map('intval', $res1));
+                    $updateQuery1 = "UPDATE contract SET status='finished'
+                                     WHERE idReservation IN ($ids1)";
+                    $updateStm1 = $db->prepare($updateQuery1);
+                    $updateStm1->execute();
+                }
+
+// RESERVATION UPDATE
+
+                #select the reservation to be accepted
+                $q2="WITH freeTable AS (
+                                        SELECT DISTINCT 
+                                        a1.id AS idAccommodation, 
+                                        a1.places - (
+                                        SELECT COUNT(*)
+                                        FROM contract c2
+                                        INNER JOIN reservation r2 ON c2.idReservation = r2.id
+                                        WHERE r2.idAccommodation = a1.id AND EXTRACT(YEAR FROM r2.fromDate) = EXTRACT(YEAR FROM r1.fromDate)
+                                        ) AS freePlaces, 
+                                        EXTRACT(YEAR FROM r1.fromDate) AS year
+                                        FROM accommodation a1
+                                        INNER JOIN reservation r1 ON a1.id = r1.idAccommodation
+                                        )
+                                        
+                    SELECT DISTINCT r.id
+                    FROM reservation r 
+                    INNER JOIN accommodation a ON a.id = r.idAccommodation
+                    WHERE r.id NOT IN (SELECT r3.id
+				    FROM reservation r3
+				    INNER JOIN contract c3 ON c3.idReservation = r3.id)
+                    AND DATEDIFF(r.made, NOW())<-2
+                    AND r.statusAccept = 0
+                    AND EXISTS (
+                                SELECT 1
+                                FROM freeTable ft
+                                WHERE ft.idAccommodation = a.id
+                                AND ft.year = EXTRACT(YEAR FROM r.fromDate)
+                                )
+                    ORDER BY r.made ASC";
+                $stm2=$db->prepare($q2);
+                $stm2->execute();
+                $res2=$stm2->fetchAll(PDO::FETCH_COLUMN,0);
+
                 
+                //update reservation to accepted after 2 days
+                if(!empty($res2))
+                {
+                    $ids2 = implode(',', array_map('intval', $res2));
+                    $updateQuery2 = "UPDATE reservation SET status = 1, made=CURRENT_TIMESTAMP
+                                     WHERE id IN ($ids2)";
+                    $updateStm2 = $db->prepare($updateQuery2);
+                    $updateStm2->execute();
+                }
+
+                
+
+                //delete reservation 
+
+                $q3="SELECT id
+                     FROM reservation
+                     WHERE DateDiff(made, NOW())<-2
+                     AND id NOT IN (SELECT r1.id
+			                        FROM contract c
+			                        INNER JOIN reservation r1 ON r1.id = c.idReservation)";
+
+                
+
+
+
+
+
+
+
+
+
+
                 $result=$db->commit();
                 if($result)
                 {
