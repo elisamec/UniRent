@@ -16,10 +16,21 @@ class CUser
 {
     
     public static function home(){
+        $session=USession::getInstance();
+        $type=$session::getSessionElement('userType');
+        if($type==='Student')
+        {
+            header('Location: /UniRent/Student/home');
+        }
+        elseif($type==='Owner')
+        {
+            header('Location: /UniRent/Owner/home');
+        }
+        else{
         $view = new VUser();
         $PM=FPersistentManager::getInstance();
         $accommodations = $PM->lastAccommodationsUser();
-        $view->home($accommodations);
+        $view->home($accommodations);}
     }
     public static function about(){
         $view = new VUser();
