@@ -27,7 +27,8 @@ class FUpdater
         try
         {
             $db->exec('LOCK TABLES contract WRITE, reservation WRITE');
-            require_once __DIR__.'/../../Updater/day.php';
+            include __DIR__.'/../../Updater/day.php';
+            $d=$day;
             if($cont==0)
             {
                 $db->beginTransaction();
@@ -143,27 +144,25 @@ class FUpdater
 
 
                 //delete reservation if there is no more free places
-                $q4="WITH freeTable AS (
-                                        SELECT DISTINCT a1.id AS idAccommodation,
-
-                                        a1.places - ( SELECT COUNT(*)
-                                                      FROM contract c2
-                                                      INNER JOIN reservation r2 ON c2.idReservation = r2.id
-                                                      WHERE r2.idAccommodation = a1.id AND EXTRACT(YEAR FROM r2.fromDate) = EXTRACT(YEAR FROM r1.fromDate)
-                                                    ) AS freePlaces,
-
+                $q4="DELETE FROM reservation
+                     WHERE id IN (
+                                  SELECT r2.id
+                                  FROM (
+                                        SELECT a1.id AS idAccommodation,
+                                        (SELECT COUNT(*)
+                                         FROM contract c2
+                                         INNER JOIN reservation r2 ON c2.idReservation = r2.id
+                                         WHERE r2.idAccommodation = a1.id AND EXTRACT(YEAR FROM r2.fromDate) = EXTRACT(YEAR FROM r1.fromDate)
+                                        ) AS freePlaces,
                                         EXTRACT(YEAR FROM r1.fromDate) AS year
-
                                         FROM accommodation a1
                                         INNER JOIN reservation r1 ON a1.id = r1.idAccommodation
-                                        )
-
-                    DELETE FROM reservation WHERE id IN (SELECT r2.id
-                                                         FROM freeTable f1
-                                                         INNER JOIN reservation r2
-                                                         ON(f1.idAccommodation = r2.idAccommodation
-                                                         AND f1.year = EXTRACT(YEAR FROM r2.fromDate))
-                                                         WHERE f1.freePlaces=0)";
+                                        ) AS freeTable
+                                        INNER JOIN reservation r2 ON freeTable.idAccommodation = r2.idAccommodation
+                                        AND freeTable.year = EXTRACT(YEAR FROM r2.fromDate)
+                                        WHERE freeTable.freePlaces = 0
+                                        )";
+                        
                 $stm4 = $db->prepare($q4);
                 $stm4->execute();
 
@@ -172,7 +171,8 @@ class FUpdater
                 $result=$db->commit();
                 if($result)
                 {
-                    Updater::getInstance()->updateDayFile($day,1);
+                    Updater::getInstance()->updateDayFile($d,1);
+                    #print 'ok';
                 }
                 $db->exec('UNLOCK TABLES');
                 return;
