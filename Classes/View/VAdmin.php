@@ -16,7 +16,7 @@ class VAdmin
 
     public function home(){
 
-        $this->smarty->display('Admin/home.tpl');
+        $this->smarty->display('Admin/dashboard.tpl');
     }
 
     public function login(){
