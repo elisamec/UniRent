@@ -21,6 +21,9 @@ class CFrontController{
     public function run($requestUri){
         $requestUri = trim($requestUri, '/');
         $uriParts = explode('/', $requestUri);
+        $currentPage = $requestUri;
+        $set=setcookie('current_page', $currentPage, time() + 3600, '/');
+        print $set;
 
         array_shift($uriParts);
 

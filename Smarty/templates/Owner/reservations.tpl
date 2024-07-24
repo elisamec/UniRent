@@ -287,8 +287,48 @@
         });
     }
 </script>
-
 {/literal}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Function to get the value of a cookie by name
+    function getCookie(name) {
+        let cookieArr = document.cookie.split(";");
+        for (let i = 0; i < cookieArr.length; i++) {
+            let cookiePair = cookieArr[i].split("=");
+            if (name == cookiePair[0].trim()) {
+                return decodeURIComponent(cookiePair[1]);
+            }
+        }
+        return null;
+    }
+
+    // Get the current page URL from the PHP cookie
+    let currentPage = getCookie("current_page");
+
+    if (currentPage) {
+        // Get the existing visited pages from sessionStorage
+        let visitedPages = JSON.parse(sessionStorage.getItem("visitedPages")) || {};
+
+        // Remove the old occurrence of the current page URL, if it exists
+        for (let key in visitedPages) {
+            if (visitedPages[key] === currentPage) {
+                delete visitedPages[key];
+            }
+        }
+
+        // Add the current page URL with the next available index
+        let newIndex = Object.keys(visitedPages).length;
+        visitedPages[newIndex] = currentPage;
+
+        // Save the updated visited pages back to sessionStorage
+        sessionStorage.setItem("visitedPages", JSON.stringify(visitedPages));
+
+        // Display the visited pages (for debugging purposes)
+        console.log("Visited Pages:", visitedPages);
+    }
+});
+</script>
+
 
    </body>
 </html>
