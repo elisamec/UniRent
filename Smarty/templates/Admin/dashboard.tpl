@@ -754,6 +754,7 @@
     <script src="/UniRent/Smarty/js/demo/chart-area-demo.js"></script>
     <script src="/UniRent/Smarty/js/demo/chart-pie-demo.js"></script>
 
+<script src="/UniRent/Smarty/js/cookie.js"></script>
 </body>
 
 </html>

@@ -364,5 +364,6 @@
         }
     }
 </script>
+<script src="/UniRent/Smarty/js/cookie.js"></script>
    </body>
 </html>

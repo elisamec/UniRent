@@ -473,5 +473,6 @@ function convertTime(time) {
 }
 </script>
 {/literal}
-   </body>
+   <script src="/UniRent/Smarty/js/cookie.js"></script>
+</body>
 </html>

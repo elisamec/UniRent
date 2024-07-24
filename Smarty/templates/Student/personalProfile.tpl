@@ -225,4 +225,5 @@ document.getElementById("file").onchange = function() {
                document.getElementById("myModal").style.display = "none";
                }
          </script>
-   </body>
+   <script src="/UniRent/Smarty/js/cookie.js"></script>
+</body>

@@ -622,4 +622,5 @@ $(document).ready(function() {
     }
 </script>
 {/literal}
+<script src="/UniRent/Smarty/js/cookie.js"></script>
    </body>

@@ -183,5 +183,6 @@
     document.getElementById("yourFormId").submit();
 }
       </script>
-   </body>
+   <script src="/UniRent/Smarty/js/cookie.js"></script>
+</body>
 </html>
