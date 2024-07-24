@@ -4,6 +4,7 @@ namespace Classes\Foundation;
 
 use PDOException;
 use Updater\Updater;
+use PDO;
 
 class FUpdater
 {
@@ -29,7 +30,7 @@ class FUpdater
             if($cont==0)
             {
                 $db->beginTransaction();
-                
+
                 #seleziona gli id dei contratti che dovrebbero essere messi come onGoing
                 $q="SELECT 	r.id 
                     FROM reservation r 
@@ -38,7 +39,22 @@ class FUpdater
                     AND DateDiff(toDate, NOW())>0";
                 $stm=$db->prepare($q);
                 $stm->execute();
-                $res=$stm->fetchAll();
+                $res=$stm->fetchAll(PDO::FETCH_COLUMN,0);
+
+                //update contract to onGoing
+                if(!empty($res))
+                {
+                    $ids = implode(',', array_map('intval', $res));
+                    $updateQuery = "UPDATE contract SET status = 'onGoing' WHERE idReservation IN ($ids)";
+                    $updateStm = $db->prepare($updateQuery);
+                    $updateStm->execute();
+                }
+
+                //update contract to finished
+                $q1="SELECT r.id 
+                     FROM reservation r 
+                     INNER JOIN contract c ON r.id = c.idReservation           #seleziona gli id dei contratti che dovrebbero essere messi come finished
+                     WHERE DateDiff(toDate, NOW())<0";
                 
                 $result=$db->commit();
                 if($result)
