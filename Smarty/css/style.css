@@ -841,6 +841,9 @@ hr.border_main {
     padding: 20px 10px;
     margin-bottom:20px;
     box-shadow: 0px 9px 9px 0px #eaeaea !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .image_box_inactive{
     width: 100%;
@@ -850,6 +853,9 @@ hr.border_main {
     padding: 20px 10px;
     margin-bottom:20px;
     box-shadow: 0px 9px 9px 0px #eaeaea !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .grey {
     opacity:0.5;
@@ -857,6 +863,11 @@ hr.border_main {
 .left_box{
     width: 70%;
     float: left;
+}
+.left_box p{
+    margin: 0;
+    margin-left: 20px;
+    margin-bottom: 10px;
 }
 .right_box{
     width: 30%;
@@ -881,6 +892,7 @@ hr.border_main {
     color: #202020;
     text-transform: uppercase;
     font-weight: bold;
+    margin-left: 20px;
 }
 
 .area_main{

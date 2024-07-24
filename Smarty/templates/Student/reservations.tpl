@@ -46,11 +46,11 @@
                      <li class="nav-item">
                         <a class="nav-link" href="/UniRent/Student/home">Home</a>
                      </li>
-                     <li class="nav-item dropdown">
+                     <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reservations</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="/UniRent/Reservation/showStudent/sccepted">Accepted</a>
-                           <a class="dropdown-item" href="/UniRent/Reservation/showStudent/waiting">Waiting</a>
+                           <a class="dropdown-item" href="/UniRent/Reservation/showStudent/accepted">Accepted</a>
+                           <a class="dropdown-item" href="/UniRent/Reservation/showStudent/pending">Pending</a>
                         </div>
                      </li>
                      <li class="nav-item dropdown">
@@ -71,7 +71,7 @@
                   <form class="form-inline my-2 my-lg-0">
                      <div class="login_bt">
                         <ul>
-                           <li><a href="/UniRent/Student/profile" class="active"><span class="user_icon"><i class="fa fa-user" aria-hidden="true"></i></span>Profile</a></li>
+                           <li><a href="/UniRent/Student/profile"><span class="user_icon"><i class="fa fa-user" aria-hidden="true"></i></span>Profile</a></li>
                         </ul>
                      </div>
                   </form>
@@ -112,7 +112,7 @@
                   <h3 class="footer_text">Useful Links</h3>
                   <div class="footer_menu">
                      <ul>
-                        <li class="active"><a href="/UniRent/Owner/home">Home</a></li>
+                        <li><a href="/UniRent/Owner/home">Home</a></li>
                         <li><a href="/UniRent/Owner/about">About Us</a></li>
                         <li><a href="/UniRent/Owner/contact">Contact Us</a></li>
                      </ul>
@@ -172,7 +172,7 @@
 
         if (container) {
             if (accommodations.length === 0) {
-                container.innerHTML = '<div class="container"><h1 class="noRev">You have no ads yet!</h1></div>';
+                container.innerHTML = '<div class="container"><h1 class="noRev">You have no reservations yet!</h1></div>';
             } else {
                 accommodations.forEach(accommodation => {
                     if (accommodation.photo == null) {
