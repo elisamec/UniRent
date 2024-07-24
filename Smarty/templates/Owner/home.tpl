@@ -286,7 +286,7 @@ function getCookie(name) {
 
     // Get the current page URL from the cookie
     currentPage = getCookie("current_page");
-    console.log("Current Page:", currentPage);
+    console.log("Current Page in cookie:", currentPage);
 
     if (currentPage) {
         // Get the existing visited pages from sessionStorage
