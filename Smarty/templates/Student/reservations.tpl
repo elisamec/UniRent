@@ -92,7 +92,11 @@
                      <h1 class="Properties_taital">Your Reservations</h1>
                      <hr class="border_main">
                   </div>
-                  <p>Here you can see all the properties you have reserved.</p>
+                  {if $kind == "accepted"}
+                  <p>Here you can see all your reservations that have been accepted. Please pay them within two days from the acceptance date.</p>
+                  {else}
+                  <p>Here you can see all your reservations that are pending. The owner has two days to accept them.</p>
+                  {/if}
                </div>
             </div>
             <div class="Properties_section_2">
@@ -181,6 +185,13 @@
                     if (accommodation.photo == null) {
                         accommodation.photo = "/UniRent/Smarty/images/noPic.png";
                     }
+                    let expire = "";
+                    if ({/literal}'{$kind}'{literal} == "accepted") {
+                        expire='Pay within ' + accommodation.expires + ' from today';
+                    } else {
+                        expire= 'The Owner has ' + accommodation.expires + ' before it gets automatically accepted';
+
+                    }
                     const accommodationElement = document.createElement('div');
                     accommodationElement.className = 'col-lg-4 col-md-6col-lg-4 col-md-6';
 
@@ -201,6 +212,7 @@
                                 <h1 class="road_text">${accommodation.title}</h1>
                                 <p>${accommodation.address}</p>
                                 <p>${accommodation.period}</p>
+                                <p>${expire}</p>
                             </div>
                             <div class="right_box">
                                 <div class="rate_text">${accommodation.price} €</div>

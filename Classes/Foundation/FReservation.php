@@ -114,7 +114,7 @@ class FReservation
             $row=$stm->fetch(PDO::FETCH_ASSOC);
             $FROM= new DateTime($row['fromDate']);
             $TO= new DateTime($row['toDate']);
-            $result=new EReservation($FROM,$TO,$row['idAccommodation'],$row['idStudent']);
+            $result=new EReservation($FROM,$TO,$row['idAccommodation'],$row['idStudent'], new DateTime($row['made']));
             $result->setID($row['id']);
             $result->setStatus($row['statusAccept']);
             return $result;
@@ -376,7 +376,7 @@ class FReservation
             {
                 $FROM= new DateTime($row['fromDate']);
                 $TO= new DateTime($row['toDate']);
-                $r=new EReservation($FROM,$TO,$row['idAccommodation'],$row['idStudent']);
+                $r=new EReservation($FROM,$TO,$row['idAccommodation'],$row['idStudent'], new DateTime($row['made']));
                 $r->setID($row['id']);
                 $r->setStatus($row['statusAccept']);
                 $result[$row['idAccommodation']][]=$r;
@@ -428,7 +428,7 @@ class FReservation
         {
             $FROM= new DateTime($row['fromDate']);
             $TO= new DateTime($row['toDate']);
-            $r=new EReservation($FROM,$TO,$row['idAccommodation'],$row['idStudent']);
+            $r=new EReservation($FROM,$TO,$row['idAccommodation'],$row['idStudent'], new DateTime($row['made']));
             $r->setID($row['id']);
             $r->setStatus($row['statusAccept']);
             if($r->getStatusAccept()===true)

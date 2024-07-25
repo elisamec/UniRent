@@ -63,13 +63,13 @@ private ?int $id=null;
      * @param  mixed $idStudent
      * @return void
      */
-    public function __construct(DateTime $from, DateTime $to, int $accomodationId, int $idStudent)
+    public function __construct(DateTime $from, DateTime $to, int $accomodationId, int $idStudent, DateTime $made=new DateTime('now'))
     {
         $this->fromDate=$from;
         $this->toDate=$to;
         $this->accomodationId=$accomodationId;
         $this->idStudent=$idStudent;
-        $this->made=new DateTime('now');
+        $this->made=$made;
     }
     
     /**

@@ -868,6 +868,7 @@ hr.border_main {
     margin: 0;
     margin-left: 20px;
     margin-bottom: 10px;
+    margin-right: 30px;
 }
 .right_box{
     width: 30%;
@@ -876,7 +877,6 @@ hr.border_main {
 
 .rate_text {
     width: 90%;
-    float: right;
     font-size: 16px;
     color: #ffffff;
     text-align: center;

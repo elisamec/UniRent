@@ -8,6 +8,7 @@ use Classes\Utilities\USession;
 use Classes\View\VOwner;
 use Classes\View\VStudent;
 use Classes\View\VError;
+use DateTime;
 
 require __DIR__.'/../../vendor/autoload.php';
 
@@ -19,6 +20,7 @@ class CReservation
         $PM= FPersistentManager::getInstance();
         $reservations=$PM->loadReservationsByStudent($id, $kind);
         $reservationsData = [];
+        $today = new DateTime('today');
         foreach ($reservations as $reservation) {
             $accommodation=$PM->load('EAccommodation', $reservation->getAccomodationId());
             $period = $reservation->getFromDate()->format('d/m/Y') . ' - ' . $reservation->getToDate()->format('d/m/Y');
@@ -34,10 +36,12 @@ class CReservation
                 'period' => $period,
                 'price' => $accommodation->getPrice(),
                 'address' => $accommodation->getAddress()->getAddressLine1() . ', ' . $accommodation->getAddress()->getLocality(),
+                'expires' => $today->diff($reservation->getMade())->format('%a days %h hours %i minutes'),
             ];
         }
+        print $reservation->getMade()->format('Y-m-d H:i:s') . '-' . $today->format('Y-m-d H:i:s');
         $view= new VStudent();
-        $view->showReservations($reservationsData);
+        $view->showReservations($reservationsData, $kind);
 
     }
     public static function showOwner():void {
@@ -57,6 +61,7 @@ class CReservation
             });
             $accommodationTitle = $PM->getTitleAccommodationById($idAccommodation);
             $studentList = [];
+            $today = new DateTime('today');
             foreach ($reservations as $reservation) {
                 $student=$PM->load('EStudent', $reservation->getIdStudent());
                 $student_photo=$student->getPhoto();
@@ -72,6 +77,7 @@ class CReservation
                     'username' => $student->getUsername(),
                     'image' => $profilePic,
                     'period' => 'from '. $reservation->getFromDate()->format('d/m/Y') . ' to ' . $reservation->getToDate()->format('d/m/Y'),
+                    'expires' => $today->diff($reservation->getMade())->format('%a days %h hours %i minutes')
                 ];
             }
 

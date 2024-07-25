@@ -236,6 +236,10 @@
                     periodDiv.textContent = `Period: ${reservation.period}`;
                     usernameDiv.appendChild(periodDiv);
 
+                    const expiresDiv = document.createElement("div");
+                     expiresDiv.textContent = `You have ${reservation.expires} before the reservation is automatically accepted.`;
+                     usernameDiv.appendChild(expiresDiv);
+
                     userSectionDiv.appendChild(usernameDiv);
 
                     colDiv.appendChild(userSectionDiv);
@@ -276,6 +280,10 @@
                 const periodDiv = document.createElement("div");
                 periodDiv.textContent = `Period: ${reservation.period}`;
                 usernameDiv.appendChild(periodDiv);
+                
+                const expiresDiv = document.createElement("div");
+                     expiresDiv.textContent = `You have ${reservation.expires} before the reservation is automatically accepted.`;
+                     usernameDiv.appendChild(expiresDiv);
 
                 userSectionDiv.appendChild(usernameDiv);
 
