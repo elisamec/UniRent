@@ -895,7 +895,7 @@ class CStudent{
         
         if($result)
         {
-            self::accommodation($idAccommodation, 'null', 'true');
+            self::accommodation($idAccommodation, 'null', 'sent');
         }
         else
         {

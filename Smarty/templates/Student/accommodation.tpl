@@ -526,12 +526,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
-    document.getElementById("successReserveClose").onclick = function() {
-        reserveModal.style.display = "none";
-    }
-    document.getElementById("closesuccessReserveModal").onclick = function() {
-        reserveModal.style.display = "none";
-    }
 
 });
 </script>
