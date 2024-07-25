@@ -582,7 +582,7 @@ class FPersistentManager {
                 else
                 {
                     $viewError= new VError();
-            $viewError->error(500); #altrimenti ci sono problemi con il server
+                    $viewError->error(500); #altrimenti ci sono problemi con il server
                 }
             }
             else #non ci sono posti liberi per l' anno selezionato
