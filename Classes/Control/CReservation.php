@@ -24,7 +24,7 @@ class CReservation
             $formatted = self::formatDate($reservation->getMade());
             $accommodation=$PM->load('EAccommodation', $reservation->getAccomodationId());
             $period = $reservation->getFromDate()->format('d/m/Y') . ' - ' . $reservation->getToDate()->format('d/m/Y');
-            if ($accommodation->getPhoto() === null) {
+            if ($accommodation->getPhoto() === []) {
                 $accommodationPhoto = "/UniRent/Smarty/images/NoPic.png";
             } else {
                 $accommodationPhoto = (EPhoto::toBase64($accommodation->getPhoto()))[0]->getPhoto();

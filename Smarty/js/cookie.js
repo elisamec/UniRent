@@ -33,10 +33,20 @@ function eraseCookie(name) {
 let currentPage = window.location.pathname;
 console.log("Current Page:", currentPage);
 
-// Set the cookie with the current page URL
+// Normalize the current page URL
+function normalizeUrl(url) {
+    if (url.startsWith('/UniRent/Student/accommodation/')) {
+        return '/UniRent/Student/accommodation/*';
+    }
+    return url;
+}
+
+currentPage = normalizeUrl(currentPage);
+
+// Set the cookie with the normalized current page URL
 setCookie('current_page', currentPage, 1); // Expires in 1 day
 
-// Get the current page URL from the cookie
+// Get the normalized current page URL from the cookie
 currentPage = getCookie("current_page");
 console.log("Current Page in cookie:", currentPage);
 
