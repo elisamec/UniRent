@@ -23,7 +23,7 @@ class CReservation
         foreach ($reservations as $reservation) {
             $today = new DateTime('now');
             // Calculate the difference
-            $interval = $today->diff($reservation->getMade());
+            $interval = $today->diff($reservation->getMade()->modify('+2 days'));
 
             // Extract the components of the difference
             $days = $interval->days;
@@ -99,7 +99,7 @@ class CReservation
             foreach ($reservations as $reservation) {
                 $today = new DateTime('now');
                 // Calculate the difference
-                $interval = $today->diff($reservation->getMade());
+                $interval = $today->diff($reservation->getMade()->modify('+2 days'));
 
                 // Extract the components of the difference
                 $days = $interval->days;
