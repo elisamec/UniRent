@@ -142,7 +142,7 @@ class CVisit
     $PM= FPersistentManager::getInstance();
     $visit=$PM->load('EVisit', $id);
     $user = $PM->load('E'.$visitUserType, $idUser);
-    if ($accommodation->getPhoto() === null) {
+    if (count($accommodation->getPhoto()) ==0) {
         $accommodationPhoto = "/UniRent/Smarty/images/NoPic.png";
     } else {
         $accommodationPhoto = (EPhoto::toBase64($accommodation->getPhoto()))[0]->getPhoto();
