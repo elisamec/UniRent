@@ -895,12 +895,11 @@ class CStudent{
         
         if($result)
         {
-            header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/true');
+            self::accommodation($idAccommodation, 'null', 'true');
         }
         else
         {
-            print 'Spiacenti non ci sono posti disponibili';
-            header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/full');
+            self::accommodation($idAccommodation, 'null', 'full');
         }
     }
 }
