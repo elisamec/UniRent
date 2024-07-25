@@ -13,6 +13,7 @@ use Classes\View\VStudent;
 use Classes\Control;
 use DateTime;
 use FCreditCard;
+use Classes\View\VError;
 
 class CReview {
 
@@ -45,7 +46,8 @@ class CReview {
         if ($res) {
             header('Location:' . $_SERVER['HTTP_REFERER']);
         } else {
-            http_response_code(500);
+            $viewError= new VError();
+            $viewError->error(500);
         }
     }
     public static function addReviewOwner(int $idOwner) {
@@ -63,7 +65,8 @@ class CReview {
         if ($res) {
             header('Location:' . $_SERVER['HTTP_REFERER']);
             } else {
-                http_response_code(500);
+                $viewError= new VError();
+            $viewError->error(500);
             }
     }
 }

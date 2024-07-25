@@ -11,6 +11,7 @@ use Classes\Utilities\USuperGlobalAccess;
 use Classes\View\VOwner;
 use Classes\View\VStudent;
 use DateTime;
+use Classes\View\VError;
 
 require __DIR__.'/../../vendor/autoload.php';
 
@@ -51,7 +52,8 @@ class CVisit
     } elseif ($userType===TType::OWNER) {
         $view= new VOwner();
     } else {
-        http_response_code(403);
+        $viewError= new VError();
+            $viewError->error(403);
         exit();
     }
     $visits=$PM->loadVisitSchedule($id, $userType);
@@ -136,7 +138,8 @@ class CVisit
         $idUser=$visit->getIdStudent();
         $visitUserType='Student';
     } else {
-        http_response_code(403);
+        $viewError= new VError();
+            $viewError->error(403);
         exit();
     }
     $PM= FPersistentManager::getInstance();

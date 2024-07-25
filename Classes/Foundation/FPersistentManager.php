@@ -549,7 +549,8 @@ class FPersistentManager {
                     }
                     else#altrimenti
                     {
-                        http_response_code(500);#problema del server
+                        $viewError= new VError();
+            $viewError->error(500);#problema del server
                     }
                 }
                 else# posti esauriti per quest'anno
@@ -579,7 +580,8 @@ class FPersistentManager {
                 }
                 else
                 {
-                    http_response_code(500); #altrimenti ci sono problemi con il server
+                    $viewError= new VError();
+            $viewError->error(500); #altrimenti ci sono problemi con il server
                 }
             }
             else #non ci sono posti liberi per l' anno selezionato

@@ -11,6 +11,7 @@ use Classes\View\VStudent;
 use Classes\View\VOwner;
 use Classes\Utilities\USuperGlobalAccess;
 use Classes\Utilities\UCookie;
+use Classes\View\VError;
 
 class CUser
 {

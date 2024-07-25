@@ -187,7 +187,8 @@ class FUpdater
         {
             $db->rollBack();
             $db->exec('UNLOCK TABLES');
-            http_response_code(500);
+            $viewError= new VError();
+            $viewError->error(500);
         }
     }
 }

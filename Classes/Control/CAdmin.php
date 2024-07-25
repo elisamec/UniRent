@@ -8,6 +8,7 @@ use Classes\Utilities\USession;
 use Classes\View\VAdmin;
 use Classes\Utilities\USuperGlobalAccess;
 use Classes\Utilities\UCookie;
+use Classes\View\VError;
 
 class CAdmin
 {

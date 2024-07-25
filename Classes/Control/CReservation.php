@@ -7,6 +7,7 @@ use Classes\Foundation\FPersistentManager;
 use Classes\Utilities\USession;
 use Classes\View\VOwner;
 use Classes\View\VStudent;
+use Classes\View\VError;
 
 require __DIR__.'/../../vendor/autoload.php';
 
