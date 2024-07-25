@@ -180,7 +180,7 @@ class CUser
                 if($user->getStatus()=='banned')
                 {
                     $v=new VError();
-                    $v->error(1000);
+                    $v->error(600);
                     return;
                 }
                 $passwordIn=USuperGlobalAccess::getPost('password');
