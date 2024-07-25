@@ -117,6 +117,17 @@ if (currentPage) {
         // Get the existing visited pages from sessionStorage
         let visitedPages = JSON.parse(sessionStorage.getItem("visitedPages")) || {};
         console.log("Visited Pages from sessionStorage:", visitedPages);
+        if (String(window.performance.getEntriesByType("navigation")[0].type) === "back_forward") {
+            let lastPage = visitedPages[Object.keys(visitedPages).length - 1];
+            // Remove the last occurrence of the current page URL
+            for (let key in visitedPages) {
+                if (visitedPages[key] === lastPage) {
+                    console.log("Removing last occurrence of current page URL back_forward");
+                    delete visitedPages[key];
+                    break;
+                }
+            }
+        }
 
         // Remove the old occurrence of the current page URL, if it exists
         for (let key in visitedPages) {
