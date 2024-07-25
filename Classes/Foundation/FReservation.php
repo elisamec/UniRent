@@ -396,11 +396,15 @@ class FReservation
         FPersistentManager::getInstance()->updateDataBase();
         try
         {
-            $q='SELECT * FROM reservation
-                WHERE idStudent=:id 
-                AND DateDiff(fromDate,NOW())>0 
-                AND id NOT IN (SELECT idReservation FROM contract)
-                ORDER BY fromDate ASC ';
+            $q='SELECT * 
+                FROM reservation
+                WHERE idStudent = :id 
+                AND DATEDIFF(fromDate, NOW()) > 0 
+                AND id NOT IN (
+                    SELECT idReservation 
+                    FROM contract
+                )
+                ORDER BY fromDate ASC';
                 
             $db->exec('LOCK TABLES reservation READ');
             $db->beginTransaction();
