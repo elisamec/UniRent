@@ -190,17 +190,17 @@ class CUser
   
                 } else { //password is not correct
                 
-                    $view->loginError(true, false, false, $username, $type);
+                    $view->loginError(true, false, $username, $type);
                 }
                 
             } else  { //doesn't exist an username for that type
                
-                $view->loginError(false, true, false, $username, $type);
+                $view->loginError(false, true, $username, $type);
             }
 
         } else {#user dose not exist
         
-           $view->loginUsernameError(false, true, false, $type);
+           $view->loginUsernameError(false, true, $type);
         }
     }
 

@@ -77,8 +77,6 @@
             {if $usernameError === true || $passwordError === true}
                <h1 class="error">Username or password are incorrect</h1>
                <p class="error center">Note: you may have selected the wrong user type.</p>
-            {elseif $usernameBanned === true}
-               <h1 class="error">This user has been banned</h1>
             {/if}
             <form action="/UniRent/User/checkLogin" class="form" method="post">
               <input required class="input" type="text" name="username" id="username" placeholder="Userame">
