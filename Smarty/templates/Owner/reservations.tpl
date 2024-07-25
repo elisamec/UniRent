@@ -214,7 +214,7 @@
                     userIconDiv.classList.add("userIcon");
 
                     const userLink = document.createElement("a");
-                    userLink.href = `/UniRent/Owner/publicProfile/${reservation.username}`;
+                    userLink.href = `/UniRent/Reservation/reservationDetails/${reservation.idReservation}`;
 
                     const userImage = document.createElement("img");
                     userImage.src = reservation.image;
@@ -227,7 +227,7 @@
                     usernameDiv.classList.add("username");
 
                     const usernameLink = document.createElement("a");
-                    usernameLink.href = `/UniRent/Owner/publicProfile/${reservation.username}`;
+                    usernameLink.href = `/UniRent/Reservation/reservationDetails/${reservation.idReservation}`;
                     usernameLink.textContent = reservation.username;
                     usernameDiv.appendChild(usernameLink);
 
@@ -259,7 +259,7 @@
                 userIconDiv.classList.add("userIcon");
 
                 const userLink = document.createElement("a");
-                userLink.href = `/UniRent/Owner/publicProfile/${reservation.username}`;
+                userLink.href = `/UniRent/Reservation/reservationDetails/${reservation.idReservation}`;
 
                 const userImage = document.createElement("img");
                 userImage.src = reservation.image;
@@ -272,7 +272,7 @@
                 usernameDiv.classList.add("username");
 
                 const usernameLink = document.createElement("a");
-                usernameLink.href = `/UniRent/Owner/publicProfile/${reservation.username}`;
+                usernameLink.href = `/UniRent/Reservation/reservationDetails/${reservation.idReservation}`;
                 usernameLink.textContent = reservation.username;
                 usernameDiv.appendChild(usernameLink);
 

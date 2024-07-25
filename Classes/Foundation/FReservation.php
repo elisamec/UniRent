@@ -351,7 +351,7 @@ class FReservation
             FPersistentManager::getInstance()->updateDataBase();
             try
             {
-                $q='SELECT *
+                $q='SELECT r.*
                     FROM reservation r INNER JOIN accommodation a ON a.id=r.idAccommodation
                     INNER JOIN owner o ON o.id=a.idOwner
                     WHERE o.id=:id AND r.statusAccept=false';

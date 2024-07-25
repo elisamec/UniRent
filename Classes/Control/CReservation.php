@@ -21,42 +21,7 @@ class CReservation
         $reservations=$PM->loadReservationsByStudent($id, $kind);
         $reservationsData = [];
         foreach ($reservations as $reservation) {
-            $today = new DateTime('now');
-            // Calculate the difference
-            $interval = $today->diff($reservation->getMade()->modify('+2 days'));
-
-            // Extract the components of the difference
-            $days = $interval->days;
-            $hours = $interval->h;
-            $minutes = $interval->i;
-
-            // Create the formatted string with singular/plural logic
-            $parts = [];
-
-            // Add days to the array if greater than 0
-            if ($days > 0) {
-                $parts[] = $days . ' ' . ($days > 1 ? 'days' : 'day');
-            }
-
-            // Add hours to the array if greater than 0
-            if ($hours > 0) {
-                $parts[] = $hours . ' ' . ($hours > 1 ? 'hours' : 'hour');
-            }
-
-            // Add minutes to the array if greater than 0
-            if ($minutes > 0) {
-                $parts[] = $minutes . ' ' . ($minutes > 1 ? 'minutes' : 'minute');
-            }
-
-            // Handle the case where all values might be zero
-            // Join the parts with a comma and 'and'
-            if (count($parts) > 1) {
-                $formatted = implode(', ', array_slice($parts, 0, -1)) . ' and ' . end($parts);
-            } elseif (count($parts) === 1) {
-                $formatted = $parts[0];
-            } else {
-                $formatted = '0 minutes';
-            }
+            $formatted = self::formatDate($reservation->getMade());
             $accommodation=$PM->load('EAccommodation', $reservation->getAccomodationId());
             $period = $reservation->getFromDate()->format('d/m/Y') . ' - ' . $reservation->getToDate()->format('d/m/Y');
             if ($accommodation->getPhoto() === null) {
@@ -97,9 +62,82 @@ class CReservation
             $studentList = [];
 
             foreach ($reservations as $reservation) {
-                $today = new DateTime('now');
+                $formatted = self::formatDate($reservation->getMade());
+                $student=$PM->load('EStudent', $reservation->getIdStudent());
+                $student_photo=$student->getPhoto();
+                if(is_null($student_photo)){}
+                else
+                {
+                    $student_photo_64=EPhoto::toBase64(array($student_photo));
+                    $student->setPhoto($student_photo_64[0]);
+                    #print_r($owner);
+                }
+                $profilePic = $student->getPhoto() === null ? "/UniRent/Smarty/images/ImageIcon.png" : $student->getPhoto()->getPhoto();
+                $studentList[] = [
+                    'idReservation' => $reservation->getID(),
+                    'username' => $student->getUsername(),
+                    'image' => $profilePic,
+                    'period' => 'from '. $reservation->getFromDate()->format('d/m/Y') . ' to ' . $reservation->getToDate()->format('d/m/Y'),
+                    'expires' => $formatted
+                ];
+            }
+
+            $reservationData[] = [
+                'accommodation' => $accommodationTitle,
+                'reservations' => $studentList
+            ];
+        }
+        $view->showReservations($reservationData);
+    }
+    public static function reservationDetails(int $idReservation): void {
+        $session = USession::getInstance();
+        $userType = $session->getSessionElement('userType');
+        $PM=FPersistentManager::getInstance();
+        $reservation = $PM->load('EReservation', $idReservation);
+        if ($userType==='Student') {
+            $accommodation = $PM->load('EAccommodation', $reservation->getAccomodationId());
+            $photos_acc=$accommodation->getPhoto();
+            $photo_acc_64=EPhoto::toBase64($photos_acc);
+            $accommodation->setPhoto($photo_acc_64);
+
+            $picture=array();
+            foreach($accommodation->getPhoto() as $p)
+            {
+                if(is_null($p)){}
+                else
+                {
+                    $picture[]=$p->getPhoto();
+                }
+            }
+            
+            $owner = $PM->load('EOwner', $accommodation->getIdOwner());
+            $owner_photo=$owner->getPhoto();
+            if(is_null($owner_photo)){}
+            else
+            {
+                $owner_photo_64=EPhoto::toBase64(array($owner_photo));
+                $owner->setPhoto($owner_photo_64[0]);
+            }
+            $view= new VStudent();
+            $view->reservationDetails($reservation, $accommodation, $owner, self::formatDate($reservation->getMade()), $picture);
+        }
+        else {
+            $student = $PM->load('EStudent', $reservation->getIdStudent());
+            $student_photo=$student->getPhoto();
+            if(is_null($student_photo)){}
+            else
+            {
+                $student_photo_64=EPhoto::toBase64(array($student_photo));
+                $student->setPhoto($student_photo_64[0]);
+            }
+            $view = new VOwner();
+            $view->reservationDetails($reservation, $student, self::formatDate($reservation->getMade()));
+        }
+    }
+    private static function formatDate(DateTime $date): string {
+        $today = new DateTime('now');
                 // Calculate the difference
-                $interval = $today->diff($reservation->getMade()->modify('+2 days'));
+                $interval = $today->diff($date->modify('+2 days'));
 
                 // Extract the components of the difference
                 $days = $interval->days;
@@ -134,30 +172,6 @@ class CReservation
                 } else {
                     $formatted = '0 minutes';
                 }
-                $student=$PM->load('EStudent', $reservation->getIdStudent());
-                $student_photo=$student->getPhoto();
-                if(is_null($student_photo)){}
-                else
-                {
-                    $student_photo_64=EPhoto::toBase64(array($student_photo));
-                    $student->setPhoto($student_photo_64[0]);
-                    #print_r($owner);
-                }
-                $profilePic = $student->getPhoto() === null ? "/UniRent/Smarty/images/ImageIcon.png" : $student->getPhoto()->getPhoto();
-                $studentList[] = [
-                    'username' => $student->getUsername(),
-                    'image' => $profilePic,
-                    'period' => 'from '. $reservation->getFromDate()->format('d/m/Y') . ' to ' . $reservation->getToDate()->format('d/m/Y'),
-                    'expires' => $formatted
-                ];
-            }
-
-            $reservationData[] = [
-                'accommodation' => $accommodationTitle,
-                'reservations' => $studentList
-            ];
-        }
-        $view->showReservations($reservationData);
+                return $formatted;
     }
-
 }

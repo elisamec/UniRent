@@ -2982,4 +2982,23 @@ background-size:
 background-repeat: no-repeat;
 
  }
+
+ .grey_square {
+    background-color: #f0f0f0; /* Light grey background color */
+    border: 1px solid #d0d0d0; /* Slightly darker grey border */
+    padding: 20px; /* Add some space inside the box */
+    margin: 20px; /* Add some space outside the box */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    width:90%;
+}
+.squareContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+#reviewsContainer {
+    margin-bottom: 20px;
+}
  

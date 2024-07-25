@@ -6,6 +6,7 @@ require __DIR__.'/../../vendor/autoload.php';
 use Classes\Entity\EAccommodation;
 use Classes\Entity\EOwner;
 use Classes\Entity\EPhoto;
+use Classes\Entity\EReservation;
 use StartSmarty;
 use Classes\Entity\EStudent;
 use Classes\Entity\EVisit;
@@ -136,5 +137,13 @@ class VStudent{
         $this->smarty->assign('reservations', json_encode($reservationsData));
         $this->smarty->assign('kind', $kind);
         $this->smarty->display('Student/reservations.tpl');
+    }
+    public function reservationDetails(EReservation $reservation, EAccommodation $accommodation, EOwner $owner, string $timeLeft, array $pictures):void {
+        $this->smarty->assign('accommodation', $accommodation);
+        $this->smarty->assign('reservation', $reservation);
+        $this->smarty->assign('owner', $owner);
+        $this->smarty->assign('timeLeft', $timeLeft);
+        $this->smarty->assign('imagesJson', json_encode($pictures));
+        $this->smarty->display('Student/reservationDetails.tpl');
     }
 }

@@ -42,8 +42,9 @@ console.log("Current Page in cookie:", currentPage);
 
 // Get custom names from the data attribute or session storage
 const breadcrumbElement = document.getElementById('breadcrumb');
-let accommodationName = breadcrumbElement ? breadcrumbElement.getAttribute('data-accommodation-name') || sessionStorage.getItem('accommodationName') || 'Student Accommodation' : 'Student Accommodation';
+let accommodationName = breadcrumbElement ? breadcrumbElement.getAttribute('data-accommodation-name') || sessionStorage.getItem('accommodationName') || 'Accommodation' : 'Accommodation';
 let username = breadcrumbElement ? breadcrumbElement.getAttribute('data-user-name') || sessionStorage.getItem('username') || 'Guest' : 'Guest';
+let reservationDetail = accommodationName === 'Accommodation' ? username : accommodationName;
 
 // Save the accommodation name and username to session storage
 sessionStorage.setItem('accommodationName', accommodationName);
@@ -85,7 +86,8 @@ const customNamesPatterns = {
     '/UniRent/Reservation/showStudent/pending': 'Pending Reservations',
     '/UniRent/Student/reviews': 'Reviews',
     '/UniRent/Student/search': 'Search',
-    '/UniRent/User/search': 'Search'
+    '/UniRent/User/search': 'Search',
+    '/UniRent/Reservation/reservationDetails/*': 'Reservation Details: ' + reservationDetail,
 };
 
 // Function to get custom name based on URL patterns
