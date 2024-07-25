@@ -1166,6 +1166,7 @@ use PDO;
         {
             $db=FConnection::getInstance()->getConnection();
             $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+            FPersistentManager::getInstance()->updateDataBase();
             try
             {
                 $q="SELECT DISTINCT COUNT(*) AS places_used , a.places AS total_places

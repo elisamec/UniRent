@@ -58,6 +58,7 @@ class FReservation
         $q='SELECT * FROM reservation WHERE id=:id';
         $connection= FConnection::getInstance();
         $db=$connection->getConnection();
+        FPersistentManager::getInstance()->updateDataBase();
         try
         {
             $db->beginTransaction();
@@ -135,6 +136,7 @@ class FReservation
     {
         $db=FConnection::getInstance()->getConnection();
         $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+        FPersistentManager::getInstance()->updateDataBase();
         try
         {
             $db->exec('LOCK TABLES reservation WRITE');
@@ -186,6 +188,7 @@ class FReservation
                 }
                 
                 $db=FConnection::getInstance()->getConnection();
+                FPersistentManager::getInstance()->updateDataBase();
                 try
                 {
                     $db->exec('LOCK TABLES reservation WRITE');
@@ -345,6 +348,7 @@ class FReservation
         {
             $db=FConnection::getInstance()->getConnection();
             $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+            FPersistentManager::getInstance()->updateDataBase();
             try
             {
                 $q='SELECT *
@@ -389,6 +393,7 @@ class FReservation
     public function loadReservationsByStudent(int $id, string $kind) {
         $db=FConnection::getInstance()->getConnection();
         $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+        FPersistentManager::getInstance()->updateDataBase();
         try
         {
             $q='SELECT * FROM reservation WHERE idStudent=:id AND DateDiff(fromDate,NOW())>0 ORDER BY fromDate ASC AND id NOT IN (SELECT idReservation FROM contract)';
