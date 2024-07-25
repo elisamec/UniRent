@@ -2,6 +2,7 @@
 
 namespace Classes\Foundation;
 
+use Classes\View\VError;
 use PDOException;
 use Updater\Updater;
 use PDO;

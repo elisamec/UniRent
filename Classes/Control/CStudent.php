@@ -895,11 +895,11 @@ class CStudent{
         
         if($result)
         {
-            self::accommodation($idAccommodation, 'null', 'sent');
+            header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/sent');
         }
         else
         {
-            self::accommodation($idAccommodation, 'null', 'full');
+            header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/full');
         }
     }
 }
