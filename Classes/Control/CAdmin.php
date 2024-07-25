@@ -62,4 +62,13 @@ class CAdmin
             $view->loginError(true, false);
         }
     }
+    public static function logout()
+    {
+        $session = USession::getInstance();
+        $session::destroySession();
+        header('Location:/UniRent/Admin/login');
+    }
+    public static function report(int $id)
+    {
+    }
 }

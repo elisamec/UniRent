@@ -161,7 +161,7 @@
     <!-- Modal content -->
     <div class="resModal-content">
         <span class="resClose" onclick="closeDeleteModal()">&times;</span>
-        <h2>Report User</h2>
+        <h2>Delete Visit</h2>
         <form id="reportForm" action="/UniRent/Visit/delete/{$visit->getIdVisit()}" class="form" method="POST" enctype="multipart/form-data">
             <label for="deleteReason">Reason for deletition (optional):</label><br>
             <textarea id="deleteReason" name="deleteReason" rows="4" cols="50"></textarea><br><br>
