@@ -121,6 +121,7 @@ class CVisit
     
     $view->visits($visitsData);
    }
+
    public static function viewVisit(int $id, string $successEdit="null", string $successDelete="null") {
     $session = USession::getInstance();
     $userType=$session::getSessionElement('userType');
@@ -161,6 +162,8 @@ class CVisit
         }
     $view->viewVisit($visit, $user, $accommodation, $accommodationPhoto, $visits, $successEdit, $successDelete);
    }
+
+   
    public static function delete(int $id) {
     $PM= FPersistentManager::getInstance();
     $session=USession::getInstance();

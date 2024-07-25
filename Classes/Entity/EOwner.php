@@ -17,6 +17,7 @@ class EOwner
     private string $email;
     private string $phoneNumber;
     private string $iban;
+    private string $status;
     private static $entity = EOwner::class;
     /**
      * Undocumented function
@@ -38,8 +39,9 @@ class EOwner
      * @param string $email
      * @param integer $phonenumber
      * @param string $iban
+     * @param string $status
      */
-    public function __construct(?int $id, string $username, string $password, string $name, string $surname, ?EPhoto $photo, string $email, int $phonenumber, string $iban) {
+    public function __construct(?int $id, string $username, string $password, string $name, string $surname, ?EPhoto $photo, string $email, int $phonenumber, string $iban, string $status='active') {
         $this->id=$id;
         $this->username=$username;
         $this->password=EOwner::isPasswordHashed($password) ? $password : password_hash($password, PASSWORD_DEFAULT);
@@ -50,6 +52,7 @@ class EOwner
         $this->email=$email; 
         $this->phoneNumber=$phonenumber;
         $this->iban = $iban;
+        $this->status=$status;
     }
     private static function isPasswordHashed($password) {
         // The cost parameter of bcrypt is stored in the first 7 characters of the hash
@@ -150,6 +153,10 @@ class EOwner
         return $this->iban;
     }
 
+    public function getStatus():string {
+        return $this->status;
+    }
+
     public function setId(int $id):void {
         if ($this->id===null) {
             $this->id=$id;
@@ -188,8 +195,13 @@ class EOwner
     public function setIBAN(string $iban):void {
         $this->iban=$iban;
     }
+
+    public function setStatus(string $status):void {
+        $this->status=$status;
+    }
+
     public function __toString():string
     {
-        return 'ID: '. $this->id. ', Username: '. $this->username. ', Password: '. $this->password. ', Name: '. $this->name. ', Surname: '. $this->surname. ', E-Mail: '.$this->email.', Phone Number: '. $this->phoneNumber. ', IBAN: '.$this->iban;
+        return 'ID: '. $this->id. ', Username: '. $this->username. ', Password: '. $this->password. ', Name: '. $this->name. ', Surname: '. $this->surname. ', E-Mail: '.$this->email.', Phone Number: '. $this->phoneNumber. ', IBAN: '.$this->iban . ', Status: '.$this->status;
     }
 }

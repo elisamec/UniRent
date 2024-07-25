@@ -157,10 +157,8 @@ class EPhoto {
         $result=array();
         foreach($a as $photo)
         {
-            if(is_null($photo))  #se non c'è una foto non convertire
-            {}
-            else
-            {
+            if(!is_null($photo)) {
+                
                 $base64 = base64_encode($photo->getPhoto());
                 $picture_64 = "data:" . 'image/jpeg' . ";base64," . $base64;
                 $photo->setPhoto($picture_64);

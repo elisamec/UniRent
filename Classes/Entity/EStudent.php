@@ -92,6 +92,12 @@ class EStudent
      */
     private bool $animals;
     private static $entity =EStudent::class;
+    /**
+     * status
+     * 
+     * @var string
+     */
+    private string $status;
     
     /**
      * __construct
@@ -109,9 +115,10 @@ class EStudent
      * @param  string $sex
      * @param  bool $smoker
      * @param  bool $animals
+     * @param  string $status
      * @return self
      */
-    public function __construct(string $username, string $password, string $name, string $surname, EPhoto|null $picture, string $universityMail, int $courseDuration, int $immatricolationYear, DateTime $birthDate, string $sex, bool $smoker, bool $animals)
+    public function __construct(string $username, string $password, string $name, string $surname, EPhoto|null $picture, string $universityMail, int $courseDuration, int $immatricolationYear, DateTime $birthDate, string $sex, bool $smoker, bool $animals, string $status='active')
     {
         $this->username=$username;
         $this->password=EStudent::isPasswordHashed($password) ? $password : password_hash($password, PASSWORD_DEFAULT);
@@ -125,6 +132,7 @@ class EStudent
         $this->sex=$sex;
         $this->smoker=$smoker;
         $this->animals=$animals;
+        $this->status=$status;
     }
     private static function isPasswordHashed($password) {
         // The cost parameter of bcrypt is stored in the first 7 characters of the hash
@@ -276,6 +284,16 @@ class EStudent
     {
         return $this->animals;
     }
+
+    /**
+     * getStatus
+     *
+     * @return string
+     */
+    public function getStatus():string{
+        return $this->status;
+    }
+
     public function getRating():int
     {
         $PM=FPersistentManager::getInstance();
@@ -418,6 +436,16 @@ class EStudent
         $this->animals=$animals;
     }
 
+    /**
+     * setStatus
+     *
+     * @param  string $status
+     * @return void
+     */
+    public function setStatus(string $status){
+        $this->status=$status;
+    }
+
     // toSting method
         
     /**
@@ -428,7 +456,7 @@ class EStudent
     public function __toString():string
     {
         $result='USERNAME:'.$this->username.' PASSWORD:'.$this->password.' NAME:'.$this->name.' SURNAME:'.$this->surname.' UNIVERSITY_MAIL:'.$this->universityMail.' COURSE_DURATION:'.(string)$this->courseDuration;
-        $result.=' IMMATRICOLATION_YEAR:'.(string)$this->immatricolationYear.' BIRTH_DATE:'.$this->birthDate->format('d/m/Y').' SEX:'.$this->sex.' SMOKER:'.(string)$this->smoker.' ANIMALS:'.(string)$this->animals.' PICTURE: '.$this->getPhoto();
+        $result.=' IMMATRICOLATION_YEAR:'.(string)$this->immatricolationYear.' BIRTH_DATE:'.$this->birthDate->format('d/m/Y').' SEX:'.$this->sex.' SMOKER:'.(string)$this->smoker.' ANIMALS:'.(string)$this->animals.' PICTURE: '.$this->getPhoto().' STATUS:'.$this->status;
         return $result;
     }
 
