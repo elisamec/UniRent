@@ -78,12 +78,12 @@ class FStudent
             $photoID=$row['picture'];
             if(is_null($photoID))
             {
-                $student = new EStudent($row['username'],$row['password'],$row['name'],$row['surname'],$photoID,$row['universityMail'],$row['courseDuration'],$row['immatricolationYear'],$BIRTH,$row['sex'],$row['smoker'],$row['animals']);             
+                $student = new EStudent($row['username'],$row['password'],$row['name'],$row['surname'],$photoID,$row['universityMail'],$row['courseDuration'],$row['immatricolationYear'],$BIRTH,$row['sex'],$row['smoker'],$row['animals'],$row['status']);             
             }
             else
             {
                 $photo=FPhoto::getInstance()->loadAvatar($photoID);
-                $student = new EStudent($row['username'],$row['password'],$row['name'],$row['surname'],$photo,$row['universityMail'],$row['courseDuration'],$row['immatricolationYear'],$BIRTH,$row['sex'],$row['smoker'],$row['animals']);
+                $student = new EStudent($row['username'],$row['password'],$row['name'],$row['surname'],$photo,$row['universityMail'],$row['courseDuration'],$row['immatricolationYear'],$BIRTH,$row['sex'],$row['smoker'],$row['animals'],$row['status']);
             }
             $student->setID($id);
             return $student;
@@ -100,8 +100,8 @@ class FStudent
             try
             {
                 $db->exec('LOCK TABLES student WRITE');
-                $q='INSERT INTO student (username,password,name,surname,picture,universityMail,courseDuration,immatricolationYear,birthDate,sex,smoker,animals)';
-                $q=$q.' VALUES (:username, :password, :name, :surname, :picture, :universityMail,:courseDuration,:immatricolationYear,:birthDate,:sex,:smoker,:animals)';
+                $q='INSERT INTO student (username,password,name,surname,picture,universityMail,courseDuration,immatricolationYear,birthDate,sex,smoker,animals, status)';
+                $q=$q.' VALUES (:username, :password, :name, :surname, :picture, :universityMail,:courseDuration,:immatricolationYear,:birthDate,:sex,:smoker,:animals, :status)';
                 $db->beginTransaction();
                 $stm=$db->prepare($q);
                 $stm->bindValue(':username',$student->getUsername(),PDO::PARAM_STR);
@@ -124,6 +124,7 @@ class FStudent
                 $stm->bindValue(':sex',$student->getSex(),PDO::PARAM_STR);
                 $stm->bindValue(':smoker',$student->getSmoker(),PDO::PARAM_BOOL);
                 $stm->bindValue(':animals',$student->getAnimals(),PDO::PARAM_BOOL);
+                $stm->bindValue(':status',$student->getStatus(),PDO::PARAM_STR);
                 $stm->execute();
                 $db->commit();
                 $db->exec('UNLOCK TABLES');
@@ -167,7 +168,7 @@ class FStudent
                 $db->exec('LOCK TABLES student WRITE');
                 //$db->beginTransaction();
                 $q='UPDATE student SET username = :user, password = :pass, name = :name, surname = :surname, picture = :picture, universityMail = :email, ';
-                $q.='courseDuration = :courseDuration, immatricolationYear = :immatricolationYear, birthDate = :birthDate, sex = :sex, smoker = :smoker, animals = :animals WHERE id=:id';
+                $q.='courseDuration = :courseDuration, immatricolationYear = :immatricolationYear, birthDate = :birthDate, sex = :sex, smoker = :smoker, animals = :animals, status = :status WHERE id=:id';
                 $stm=$db->prepare($q);
                 $stm->bindValue(':id',$student->getID());
                 $stm->bindValue(':user', $student->getUsername(), PDO::PARAM_STR);
@@ -181,6 +182,7 @@ class FStudent
                 $stm->bindValue(':sex',$student->getSex(),PDO::PARAM_STR);
                 $stm->bindValue(':smoker',$student->getSmoker(),PDO::PARAM_BOOL);
                 $stm->bindValue(':animals',$student->getAnimals(),PDO::PARAM_BOOL);
+                $stm->bindValue(':status',$student->getStatus(),PDO::PARAM_STR);
 
                 if ($student->getPhoto()!=null) 
                 {
@@ -338,6 +340,7 @@ class FStudent
             $sex=$result_array['sex'];
             $smoker=$result_array['smoker'];
             $animals=$result_array['animals'];
+            $status=$result_array['status'];
             $birth=new DateTime($result_array['birthDate']);
         } else {
             return null;
@@ -351,7 +354,7 @@ class FStudent
         {
             $photo=FPhoto::getInstance()->loadAvatar($result_array['picture']);
         }
-        $student= new EStudent($username,$password,$name,$surname,$photo,$email,$courseDuration,$immatricolation,$birth,$sex,$smoker,$animals);
+        $student= new EStudent($username,$password,$name,$surname,$photo,$email,$courseDuration,$immatricolation,$birth,$sex,$smoker,$animals,$status);
         $student->setID($result_array['id']);
         return $student;
     }

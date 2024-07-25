@@ -73,7 +73,7 @@ use PDOException;
         $row=$stm->fetch(PDO::FETCH_ASSOC);
         $photoID=$row['picture'];
         $photo= ($photoID!==null) ? FPhoto::getInstance()->loadAvatar($photoID) : null;
-        $result=new EOwner($row['id'],$row['username'], $row['password'], $row['name'], $row['surname'], $photo, $row['email'], $row['phoneNumber'], $row['iban']);
+        $result=new EOwner($row['id'],$row['username'], $row['password'], $row['name'], $row['surname'], $photo, $row['email'], $row['phoneNumber'], $row['iban'], $row['status']);
         return $result;
     }
 
@@ -89,8 +89,8 @@ use PDOException;
             }
             $db->exec('LOCK TABLES owner WRITE');
             $db->beginTransaction();
-            $q='INSERT INTO owner (username, password, name, surname, picture, email, phonenumber, iban)';
-            $q=$q.'VALUES (:user, :pass, :name, :surname, :picture, :email, :phone, :iban)';
+            $q='INSERT INTO owner (username, password, name, surname, picture, email, phonenumber, iban, status)';
+            $q=$q.'VALUES (:user, :pass, :name, :surname, :picture, :email, :phone, :iban, :status)';
             $stm = $db->prepare($q);
             $stm->bindValue(':user', $owner->getUsername(), PDO::PARAM_STR);
             $stm->bindValue(':pass', $owner->getPassword(), PDO::PARAM_STR);
@@ -103,7 +103,8 @@ use PDOException;
             }
             $stm->bindValue(':email', $owner->getMail(), PDO::PARAM_STR);
             $stm->bindValue(':phone', $owner->getPhoneNumber(), PDO::PARAM_STR);
-            $stm->bindValue(':iban', $owner->getIBAN(), PDO::PARAM_STR);
+            $stm->bindValue(':iban', $owner->getIBAN(), PDO::PARAM_STR);    
+            $stm->bindValue(':status', $owner->getStatus(), PDO::PARAM_STR);
             $stm->execute();
             $id=$db->lastInsertId();
             $db->commit();
@@ -147,7 +148,7 @@ use PDOException;
             }
             $db->exec('LOCK TABLES owner WRITE');
             //$db->beginTransaction();
-            $q='UPDATE owner SET username = :user, password = :pass, name = :name, surname = :surname, picture = :picture, email = :email, phonenumber = :phone, iban = :iban WHERE id = :id';
+            $q='UPDATE owner SET username = :user, password = :pass, name = :name, surname = :surname, picture = :picture, email = :email, phonenumber = :phone, iban = :iban, status = :status WHERE id = :id';
             $stm = $db->prepare($q);
             $stm->bindValue(':id', $owner->getId(), PDO::PARAM_INT);
             $stm->bindValue(':user', $owner->getUsername(), PDO::PARAM_STR);
@@ -162,6 +163,7 @@ use PDOException;
             $stm->bindValue(':email', $owner->getMail(), PDO::PARAM_STR);
             $stm->bindValue(':phone', $owner->getPhoneNumber(), PDO::PARAM_STR);
             $stm->bindValue(':iban', $owner->getIBAN(), PDO::PARAM_STR);
+            $stm->bindValue(':status', $owner->getStatus(), PDO::PARAM_STR);
             print 'prima di execute';
             $stm->execute();
             print 'dopo execute';
@@ -302,6 +304,7 @@ use PDOException;
         $email=$result_array['email'];
         $phone=$result_array['phoneNumber'];
         $IBAN=$result_array['iban'];
+        $status=$result_array['status'];
         if(is_null($result_array['picture']))
         {
             $photo=null;
@@ -310,7 +313,7 @@ use PDOException;
         {
             $photo=FPhoto::getInstance()->loadAvatar($result_array['picture']);
         }
-        $owner= new EOwner(null,$username,$password,$name,$surname,$photo,$email,$phone,$IBAN);
+        $owner= new EOwner(null,$username,$password,$name,$surname,$photo,$email,$phone,$IBAN,$status);
         $owner->setID($result_array['id']);
         return $owner;
     }
