@@ -88,8 +88,8 @@
       </div>
       <!-- contact section start -->
     <div class="path">
-            <p><a href="/UniRent/Student/home">Home</a> / Contact Us</p>
-      </div>
+        <p id="breadcrumb"></p>
+    </div>
 
 
 

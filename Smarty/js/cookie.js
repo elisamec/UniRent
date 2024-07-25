@@ -42,10 +42,12 @@ console.log("Current Page in cookie:", currentPage);
 
 // Get custom names from the data attribute or session storage
 const breadcrumbElement = document.getElementById('breadcrumb');
-let accommodationName = breadcrumbElement.getAttribute('data-accommodation-name') || sessionStorage.getItem('accommodationName') || 'Student Accommodation';
+let accommodationName = breadcrumbElement ? breadcrumbElement.getAttribute('data-accommodation-name') || sessionStorage.getItem('accommodationName') || 'Student Accommodation' : 'Student Accommodation';
+let username = breadcrumbElement ? breadcrumbElement.getAttribute('data-user-name') || sessionStorage.getItem('username') || 'Guest' : 'Guest';
 
-// Save the accommodation name to session storage
+// Save the accommodation name and username to session storage
 sessionStorage.setItem('accommodationName', accommodationName);
+sessionStorage.setItem('username', username);
 
 // Define patterns and corresponding names
 const customNamesPatterns = {
@@ -53,7 +55,37 @@ const customNamesPatterns = {
     '/UniRent/User/home': 'Home',
     '/UniRent/Student/home': 'Home',
     '/UniRent/Student/about': 'About Us',
-    '/UniRent/Student/accommodation/*': accommodationName
+    '/UniRent/Student/accommodation/*': accommodationName,
+    '/UniRent/Student/publicProfile/*': username, // New pattern for username
+    '/UniRent/Owner/accommodationManagement/*': accommodationName,
+    '/UniRent/Owner/publicProfile/*': username,
+    'UniRent/Owner/about': 'About Us',
+    '/UniRent/User/about': 'About Us',
+    '/UniRent/Owner/addAccommodation': 'Add Accommodation',
+    '/UniRent/Owner/contact': 'Contact Us',
+    '/UniRent/User/contact': 'Contact Us',
+    '/UniRent/Student/contact': 'Contact Us',
+    '/UniRent/Owner/editAccommodation/*': 'Edit Accommodation',
+    '/UniRent/Owner/editProfile': 'Edit Profile',
+    '/UniRent/Student/editProfile': 'Edit Profile',
+    '/UniRent/Owner/profile': 'Profile',
+    '/UniRent/Student/profile': 'Profile',
+    '/UniRent/Owner/postedReview': 'Posted Reviews',
+    '/UniRent/Student/postedReview': 'Posted Reviews',
+    '/UniRent/Reservation/showOwner': 'Reservations',
+    '/UniRent/Owner/reviews': 'Reviews',
+    '/UniRent/Owner/tenants/current': 'Current Tenants',
+    '/UniRent/Owner/tenants/past': 'Past Tenants',
+    '/UniRent/Owner/tenants/future': 'Future Tenants',
+    '/UniRent/Student/viewsOwnerAds': username + "'s Ads",
+    '/UniRent/Visit/viewVisits': username + "'s Visits",
+    '/UniRent/Visit/visits': 'Visits',
+    '/UniRent/Student/paymentMethods': 'Payment Methods',
+    '/UniRent/Reservation/showStudent/accepted': 'Accepted Reservations',
+    '/UniRent/Reservation/showStudent/pending': 'Pending Reservations',
+    '/UniRent/Student/reviews': 'Reviews',
+    '/UniRent/Student/search': 'Search',
+    '/UniRent/User/search': 'Search'
 };
 
 // Function to get custom name based on URL patterns
@@ -124,6 +156,11 @@ function displayBreadcrumb(visitedPages) {
     }
 
     const breadcrumbContainer = document.getElementById('breadcrumb');
+    if (!breadcrumbContainer) {
+        console.log("Breadcrumb element not found. Skipping breadcrumb display.");
+        return;
+    }
+
     breadcrumbContainer.innerHTML = ''; // Clear existing breadcrumb
 
     const keys = Object.keys(visitedPages);

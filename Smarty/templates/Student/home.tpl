@@ -119,7 +119,7 @@
       <!-- header section end -->
       <!-- select box section start -->
       <div class="container">
-         <form action="/UniRent/Student/findAccommodation" method="post">
+         <form action="/UniRent/Student/search" method="post">
          <div class="select_box_section">
             <div class="select_box_main">
                <h1 class="find_text">Find an Accommodation</h1>

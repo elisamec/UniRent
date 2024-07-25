@@ -79,12 +79,15 @@
             </nav>
          </div>
       </div>
+      <div class="path">
+        <p id="breadcrumb"></p>
+    </div>
       <!-- header section end -->
       <!-- select box section start -->
       <div class="container-fluid">
          <div class="search_box_section">
             <div class="search_box_main padding-reserve">
-            <form action="/UniRent/Student/findAccommodation" method="post" id="yourFormId">
+            <form action="/UniRent/Student/search" method="post" id="yourFormId">
                <h1 class="find_text">Find an Accommodation</h1>
                <div class="row">
                <div class="Findcontainer">

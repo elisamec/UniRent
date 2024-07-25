@@ -79,7 +79,9 @@
             </nav>
          </div>
       </div>
-
+      <div class="path">
+        <p id="breadcrumb" data-user-name="{$accommodation->getTitle()}"></p>
+    </div>
       <div class="profile">
       <div class="containerProf">
          <div class="row">

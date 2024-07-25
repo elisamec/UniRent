@@ -85,6 +85,9 @@
             </nav>
          </div>
       </div>
+      <div class="path">
+        <p id="breadcrumb"></p>
+    </div>
       
       <div class="addAccom">
       <div class="container">

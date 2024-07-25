@@ -666,8 +666,11 @@ class COwner
     public static function publicProfile(string $username, ?string $kind="#") {
         $PM=FPersistentManager::getInstance();
         $user=$PM->verifyUserUsername($username);
-        $location='/UniRent/'.$user['type'].'/publicProfileFromOwner/'.$username.'/'.$kind;
-        header('Location:'.$location);
+        if ($user['type'] === 'Student') {
+            CStudent::publicProfileFromOwner($username, $kind);
+        } else {
+            self::publicProfileFromOwner($username, $kind);
+        }
     }
     public static function postedReview() {
         $view = new VOwner();

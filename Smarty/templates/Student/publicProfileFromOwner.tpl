@@ -82,7 +82,9 @@
             </nav>
          </div>
       </div>
-
+        <div class="path">
+        <p id="breadcrumb" data-user-name="{$student->getUsername()}"></p>
+    </div>
       <div class="profile">
       <div class="containerProf">
          <div class="row">

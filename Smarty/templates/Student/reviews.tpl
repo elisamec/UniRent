@@ -80,8 +80,8 @@
          </div>
       </div>
       <div class="path">
-            <p><a href="/UniRent/Student/home">Home</a> / <a href="/UniRent/Student/profile">Profile</a> / Reviews </p>
-      </div>
+        <p id="breadcrumb"></p>
+    </div>
       <div class="profile">
          <div class="row">
          <div class="col-md-3">

@@ -79,6 +79,9 @@
             </nav>
          </div>
       </div>
+      <div class="path">
+        <p id="breadcrumb"></p>
+    </div>
       <!-- header section end -->
       <!-- feature section start -->
       <div class="Properties_section layout_padding">

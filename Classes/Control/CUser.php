@@ -60,7 +60,7 @@ class CUser
         $view = new VUser();
         $view->contact();
     }
-    public static function findAccommodation(){
+    public static function search(){
         $view = new VUser();
         $city=USuperGlobalAccess::getPost('city');
         $date=USuperGlobalAccess::getPost('date');

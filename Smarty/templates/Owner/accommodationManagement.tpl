@@ -85,6 +85,9 @@
             </nav>
          </div>
       </div>
+      <div class="path">
+        <p id="breadcrumb" data-accommodation-name="{$accommodation->getTitle()}"></p>
+    </div>
     <!-- header section end -->
     <!-- accommodation section start -->
       <div class="container-fluid">

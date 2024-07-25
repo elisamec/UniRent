@@ -90,6 +90,9 @@
             </nav>
          </div>
       </div>
+      <div class="path">
+        <p id="breadcrumb"></p>
+    </div>
       <!-- contact section start -->
       <div class="contact_section layout_padding">
          <div class="container">

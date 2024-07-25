@@ -79,6 +79,9 @@
             </nav>
          </div>
       </div>
+      <div class="path">
+        <p id="breadcrumb" data-user-name="{$username}"></p>
+    </div>
       <!-- header section end -->
       <!-- feature section start -->
       <div class="Properties_section padding-reserve">

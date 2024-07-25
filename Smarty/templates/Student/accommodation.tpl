@@ -725,9 +725,9 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="col-md-4">
                 <div class="userSection">
                     <div class="userIcon">
-                        <a href="/UniRent/Owner/publicProfile/${username}"><img src="${profilePic}" alt="User Profile Picture"></a>
+                        <a href="/UniRent/Student/publicProfile/${username}"><img src="${profilePic}" alt="User Profile Picture"></a>
                     </div>
-                    <div class="username"><a href="/UniRent/Owner/publicProfile/${username}">${username}</a></div>
+                    <div class="username"><a href="/UniRent/Student/publicProfile/${username}">${username}</a></div>
                     <div class="username">Expiry Date: ${expiryDate}</div>
                 </div>
             </div>

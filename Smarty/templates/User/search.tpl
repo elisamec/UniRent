@@ -77,9 +77,9 @@
       <!-- header section end -->
       <!-- select box section start -->
       <div class="path">
-            <p><a href="/UniRent/User/home">Home</a> / Search</p>
-      </div>
-   <form action="/UniRent/User/findAccommodation" method="post" class="yourFormId">
+        <p id="breadcrumb"></p>
+    </div>
+   <form action="/UniRent/User/search" method="post" class="yourFormId">
       <div class="container-fluid">
          <div class="search_box_section padding-reserve">
             <div class="search_box_main">
