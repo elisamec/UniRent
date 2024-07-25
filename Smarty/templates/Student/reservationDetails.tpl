@@ -106,8 +106,6 @@
                                     </div>
                                  </div>
                               </div>
-
-                      <div class="delete_button" id="deleteBtn"><a href="#" >Delete</a></div>
                       <div class="ownerSect">
                       <div class="row">
                       <h1 class="titleOwn">Owner:</h1>
@@ -136,6 +134,9 @@
                         {else}
                         <h1 class="title">Status: Pending</h1>
                         <h2> The owner has {$timeLeft} left to accept your reservation</h2>
+                        <div class="btn-cont">
+                        <button class="delete_button" id="deleteBtn">Delete</button>
+                        </div>
                         {/if}
                         </div>
                         <h1 class="title">Accommodation Details</h1>
