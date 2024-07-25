@@ -177,7 +177,12 @@ class CUser
             if($result_username_array['type']==$type) { //if exist an username for that type
             
                 $user = $PM->load("E$type", $result_username_array['id']);
-                if($user->get)
+                if($user->getStatus()=='banned')
+                {
+                    $v=new VError();
+                    $v->error(1000);
+                    return;
+                }
                 $passwordIn=USuperGlobalAccess::getPost('password');
                 if(password_verify($passwordIn, $user->getPassword())){
                    
