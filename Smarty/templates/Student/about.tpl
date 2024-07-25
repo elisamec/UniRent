@@ -89,7 +89,7 @@
          </div>
       </div>
       <div class="path">
-            <p><a href="/UniRent/Student/home">Home</a> / About Us</p>
+            <p id="breadcrumb"></p>
       </div>
 
       <div class="about">

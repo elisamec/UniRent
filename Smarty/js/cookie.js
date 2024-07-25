@@ -40,6 +40,37 @@ setCookie('current_page', currentPage, 1); // Expires in 1 day
 currentPage = getCookie("current_page");
 console.log("Current Page in cookie:", currentPage);
 
+// Get custom names from the data attribute or session storage
+const breadcrumbElement = document.getElementById('breadcrumb');
+let accommodationName = breadcrumbElement.getAttribute('data-accommodation-name') || sessionStorage.getItem('accommodationName') || 'Student Accommodation';
+
+// Save the accommodation name to session storage
+sessionStorage.setItem('accommodationName', accommodationName);
+
+// Define patterns and corresponding names
+const customNamesPatterns = {
+    '/UniRent/Owner/home': 'Home',
+    '/UniRent/User/home': 'Home',
+    '/UniRent/Student/home': 'Home',
+    '/UniRent/Student/about': 'About Us',
+    '/UniRent/Student/accommodation/*': accommodationName
+};
+
+// Function to get custom name based on URL patterns
+function getCustomName(url) {
+    for (const pattern in customNamesPatterns) {
+        if (pattern.includes('*')) {
+            const regexPattern = new RegExp('^' + pattern.replace('*', '.*') + '$');
+            if (regexPattern.test(url)) {
+                return customNamesPatterns[pattern];
+            }
+        } else if (pattern === url) {
+            return customNamesPatterns[pattern];
+        }
+    }
+    return url;
+}
+
 if (currentPage) {
     // Check if currentPage matches any of the specified URLs
     const resetPages = ['/UniRent/Owner/home', '/UniRent/User/home', '/UniRent/Student/home'];
@@ -79,5 +110,55 @@ if (currentPage) {
 
         // Display the visited pages (for debugging purposes)
         console.log("Visited Pages:", newVisitedPages);
+
+        // Update and display the breadcrumb
+        displayBreadcrumb(newVisitedPages);
     }
 }
+
+function displayBreadcrumb(visitedPages) {
+    // Ensure no breadcrumb is shown on reset pages
+    const resetPages = ['/UniRent/Owner/home', '/UniRent/User/home', '/UniRent/Student/home'];
+    if (resetPages.includes(currentPage)) {
+        return;
+    }
+
+    const breadcrumbContainer = document.getElementById('breadcrumb');
+    breadcrumbContainer.innerHTML = ''; // Clear existing breadcrumb
+
+    const keys = Object.keys(visitedPages);
+    for (let i = 0; i < keys.length; i++) {
+        const page = visitedPages[keys[i]];
+        const linkName = getCustomName(page); // Use custom name or default to URL
+
+        if (i < keys.length - 1) {
+            // Create clickable breadcrumb item
+            const breadcrumbItem = document.createElement('a');
+            breadcrumbItem.href = page;
+            breadcrumbItem.innerText = linkName;
+            breadcrumbItem.addEventListener('click', (event) => {
+                // Update visited pages before navigating
+                const newVisitedPages = {};
+                for (let k in visitedPages) {
+                    newVisitedPages[k] = visitedPages[k];
+                    if (visitedPages[k] === page) break;
+                }
+                sessionStorage.setItem("visitedPages", JSON.stringify(newVisitedPages));
+            });
+            breadcrumbContainer.appendChild(breadcrumbItem);
+        } else {
+            // Create non-clickable breadcrumb item for the current page
+            const breadcrumbItem = document.createElement('span');
+            breadcrumbItem.innerText = linkName;
+            breadcrumbContainer.appendChild(breadcrumbItem);
+        }
+
+        if (i < keys.length - 1) {
+            breadcrumbContainer.appendChild(document.createTextNode(' > ')); // Separator
+        }
+    }
+}
+
+// Initial breadcrumb setup
+const visitedPages = JSON.parse(sessionStorage.getItem("visitedPages")) || {};
+displayBreadcrumb(visitedPages);
