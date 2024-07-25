@@ -1,6 +1,8 @@
 <?php 
 
 namespace Updater;
+
+use Classes\Foundation\FPersistentManager;
 use DateTime;
 
 /**
@@ -53,33 +55,32 @@ class Updater
         $now=new DateTime($now->format('d-m-Y'));
         if($day<$now)
         {
-            $this->updateDayFile($now->format('d-m-Y'));
-            #$this->updateDataBase();
-            #print 'tutto ok';
+            $this->updateDayFile($now->format('d-m-Y'),0);
+            $this->updateDataBase();
         }
-        #print 'non sei nell\'if';
     }
     
     /**
      * Method updateDayFile
      * 
-     * this private method is used to update the file which contains the current day
+     * this method is used to update the file which contains the current day
      *
      * @param string $d [day 'day-month-year']
      *
      * @return void
      */
-    private function updateDayFile(string $d)
+    public function updateDayFile(string $d, int $cont)
     {
         $day = $d;
         $file = fopen(__DIR__.'/day.php', 'w');
-        $content = "<?php\n\n\$day = '" . addslashes($day) . "';\n";
-        $r=fwrite($file, $content);
+        $content = "<?php\n\n\$day = '" . addslashes($day) . "';"."\n\n\$cont=$cont;";
+        fwrite($file, $content);
         fclose($file);
     }
 
     private function updateDataBase()
     {
-
+        $PM=FPersistentManager::getInstance();
+        $PM->updateDataBase();
     }
 }

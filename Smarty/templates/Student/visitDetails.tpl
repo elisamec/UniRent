@@ -49,8 +49,8 @@
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reservations</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="#">Accepted</a>
-                           <a class="dropdown-item" href="#">Waiting</a>
+                           <a class="dropdown-item" href="/UniRent/Reservation/showStudent/accepted">Accepted</a>
+                           <a class="dropdown-item" href="/UniRent/Reservation/showStudent/pending">Pending</a>
                         </div>
                      </li>
                      <li class="nav-item dropdown">
@@ -79,7 +79,9 @@
             </nav>
          </div>
       </div>
-
+      <div class="path">
+        <p id="breadcrumb" data-user-name="{$accommodation->getTitle()}"></p>
+    </div>
       <div class="profile">
       <div class="containerProf">
          <div class="row">
@@ -154,7 +156,7 @@
     <!-- Modal content -->
     <div class="resModal-content">
         <span class="resClose" onclick="closeDeleteModal()">&times;</span>
-        <h2>Report User</h2>
+        <h2>Delete Visit</h2>
         <form id="reportForm" action="/UniRent/Visit/delete/{$visit->getIdVisit()}" class="form" method="POST" enctype="multipart/form-data">
             <label for="deleteReason">Reason for deletition (optional):</label><br>
             <textarea id="deleteReason" name="deleteReason" rows="4" cols="50"></textarea><br><br>
@@ -409,4 +411,5 @@
             showsuccessDeleteModal();
             showsuccessEditModal();
             </script>
-   </body>
+   <script src="/UniRent/Smarty/js/cookie.js"></script>
+</body>

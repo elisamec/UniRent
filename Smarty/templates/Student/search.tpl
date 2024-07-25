@@ -49,8 +49,8 @@
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reservations</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="#">Accepted</a>
-                           <a class="dropdown-item" href="#">Waiting</a>
+                           <a class="dropdown-item" href="/UniRent/Reservation/showStudent/accepted">Accepted</a>
+                           <a class="dropdown-item" href="/UniRent/Reservation/showStudent/pending">Pending</a>
                         </div>
                      </li>
                      <li class="nav-item dropdown">
@@ -79,12 +79,15 @@
             </nav>
          </div>
       </div>
+      <div class="path">
+        <p id="breadcrumb"></p>
+    </div>
       <!-- header section end -->
       <!-- select box section start -->
       <div class="container-fluid">
          <div class="search_box_section">
             <div class="search_box_main padding-reserve">
-            <form action="/UniRent/Student/findAccommodation" method="post" id="yourFormId">
+            <form action="/UniRent/Student/search" method="post" id="yourFormId">
                <h1 class="find_text">Find an Accommodation</h1>
                <div class="row">
                <div class="Findcontainer">
@@ -568,5 +571,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
       
-   </body>
+   <script src="/UniRent/Smarty/js/cookie.js"></script>
+</body>
 </html>

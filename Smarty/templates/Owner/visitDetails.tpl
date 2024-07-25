@@ -47,7 +47,7 @@
                         <a class="nav-link" href="/UniRent/Owner/home">Home</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="#">Reservations</a>
+                        <a class="nav-link" href="/UniRent/Reservation/showOwner">Reservations</a>
                      </li>
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Tenants</a>
@@ -83,6 +83,9 @@
             </nav>
          </div>
       </div>
+      <div class="path">
+        <p id="breadcrumb" data-user-name="{$student->getUsername()}"></p>
+    </div>
 
       <div class="profile">
       <div class="containerProf">
@@ -158,7 +161,7 @@
     <!-- Modal content -->
     <div class="resModal-content">
         <span class="resClose" onclick="closeDeleteModal()">&times;</span>
-        <h2>Report User</h2>
+        <h2>Delete Visit</h2>
         <form id="reportForm" action="/UniRent/Visit/delete/{$visit->getIdVisit()}" class="form" method="POST" enctype="multipart/form-data">
             <label for="deleteReason">Reason for deletition (optional):</label><br>
             <textarea id="deleteReason" name="deleteReason" rows="4" cols="50"></textarea><br><br>
@@ -413,4 +416,5 @@
             showsuccessDeleteModal();
             showsuccessEditModal();
             </script>
-   </body>
+   <script src="/UniRent/Smarty/js/cookie.js"></script>
+</body>

@@ -47,7 +47,7 @@
                         <a class="nav-link" href="/UniRent/Owner/home">Home</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="#">Reservations</a>
+                        <a class="nav-link" href="/UniRent/Reservation/showOwner">Reservations</a>
                      </li>
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Tenants</a>
@@ -84,8 +84,8 @@
          </div>
       </div>
       <div class="path">
-            <p><a href="/UniRent/Owner/home">Home</a> / Posted Reviews </p>
-      </div>
+        <p id="breadcrumb"></p>
+    </div>
       
          <div class="Properties_taital_main layout">
          <h1 class="Properties_taital">What you think of others:</h1>
@@ -348,4 +348,5 @@
                document.getElementById("myModal").style.display = "none";
                }
          </script>
-   </body>
+   <script src="/UniRent/Smarty/js/cookie.js"></script>
+</body>

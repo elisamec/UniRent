@@ -549,6 +549,7 @@ use PDOException;
     {
         $result=array();
         $db=FConnection::getInstance()->getConnection();
+        FPersistentManager::getInstance()->updateDataBase();
         try
         {
             $db->exec('LOCK TABLES owner READ, accommodation READ, reservation READ, student READ, contract READ');
@@ -673,7 +674,7 @@ use PDOException;
             #print $q;
            /* print $type;
             print $idOwner;*/
-
+            FPersistentManager::getInstance()->updateDataBase();
             $db->exec('LOCK TABLES accommodation READ, reservation READ, contract READ, owner READ, student READ');
             $db->beginTransaction();
             $stm=$db->prepare($q);

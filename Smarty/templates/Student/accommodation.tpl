@@ -31,7 +31,7 @@
       <!-- Include Font Awesome -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
       <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/home.css">
-      <link\ rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/cookie.css">
+      <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/cookie.css">
       <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     
    </head>
@@ -51,8 +51,8 @@
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reservations</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="#">Accepted</a>
-                           <a class="dropdown-item" href="#">Waiting</a>
+                           <a class="dropdown-item" href="/UniRent/Reservation/showStudent/accepted">Accepted</a>
+                           <a class="dropdown-item" href="/UniRent/Reservation/showStudent/pending">Pending</a>
                         </div>
                      </li>
                      <li class="nav-item dropdown">
@@ -81,6 +81,9 @@
             </nav>
          </div>
       </div>
+    <div class="path">
+        <p id="breadcrumb" data-accommodation-name="{$accommodation->getTitle()}"></p>
+    </div>
     <!-- header section end -->
     <!-- accommodation section start -->
       <div class="container-fluid">
@@ -722,9 +725,9 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="col-md-4">
                 <div class="userSection">
                     <div class="userIcon">
-                        <a href="/UniRent/Owner/publicProfile/${username}"><img src="${profilePic}" alt="User Profile Picture"></a>
+                        <a href="/UniRent/Student/publicProfile/${username}"><img src="${profilePic}" alt="User Profile Picture"></a>
                     </div>
-                    <div class="username"><a href="/UniRent/Owner/publicProfile/${username}">${username}</a></div>
+                    <div class="username"><a href="/UniRent/Student/publicProfile/${username}">${username}</a></div>
                     <div class="username">Expiry Date: ${expiryDate}</div>
                 </div>
             </div>
@@ -867,4 +870,5 @@ $(document).ready(function() {
     // Call the function to check for success and show modal
     showsuccessReserveModal();
 </script>
-   </body>
+   <script src="/UniRent/Smarty/js/cookie.js"></script>
+</body>

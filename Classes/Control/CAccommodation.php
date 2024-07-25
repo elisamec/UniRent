@@ -3,6 +3,7 @@
 namespace Classes\Control;
 
 use Classes\Foundation\FPersistentManager;
+use Classes\View\VError;
 
 require __DIR__.'/../../vendor/autoload.php';
 
@@ -19,7 +20,8 @@ class CAccommodation
         if ($res) {
             header('Location:/UniRent/'.$uriParts[4].'/'.$uriParts[5].'/'.$accommodation->getIdAccommodation());
         } else {
-            http_response_code(500);
+            $viewError= new VError();
+            $viewError->error(500);
         }
     }
 
@@ -34,7 +36,8 @@ class CAccommodation
         if ($res) {
             header('Location:/UniRent/'.$uriParts[4].'/'.$uriParts[5].'/'.$accommodation->getIdAccommodation());
         } else {
-            http_response_code(500);
+            $viewError= new VError();
+$viewError->error(500);
         }
     }
     public static function delete(int $id) {
@@ -46,7 +49,8 @@ class CAccommodation
         }
         else
         {
-            http_response_code(500);
+            $viewError= new VError();
+$viewError->error(500);
         }
     }
 }

@@ -49,8 +49,8 @@
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reservations</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="#">Accepted</a>
-                           <a class="dropdown-item" href="#">Waiting</a>
+                           <a class="dropdown-item" href="/UniRent/Reservation/showStudent/accepted">Accepted</a>
+                           <a class="dropdown-item" href="/UniRent/Reservation/showStudent/pending">Pending</a>
                         </div>
                      </li>
                      <li class="nav-item dropdown">
@@ -79,6 +79,9 @@
             </nav>
          </div>
       </div>
+      <div class="path">
+        <p id="breadcrumb" data-user-name="{$username}"></p>
+    </div>
       <!-- header section end -->
       <!-- feature section start -->
       <div class="Properties_section padding-reserve">
@@ -209,5 +212,6 @@
     displayAccommodations(accommodations);
 </script>
 {/literal}
-   </body>
+   <script src="/UniRent/Smarty/js/cookie.js"></script>
+</body>
 </html>

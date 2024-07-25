@@ -58,8 +58,8 @@
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reservations</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="#">Accepted</a>
-                           <a class="dropdown-item" href="#">Waiting</a>
+                           <a class="dropdown-item" href="/UniRent/Reservation/showStudent/accepted">Accepted</a>
+                           <a class="dropdown-item" href="/UniRent/Reservation/showStudent/pending">Pending</a>
                         </div>
                      </li>
                      <li class="nav-item dropdown">
@@ -89,7 +89,7 @@
          </div>
       </div>
       <div class="path">
-            <p><a href="/UniRent/Student/home">Home</a> / About Us</p>
+            <p id="breadcrumb"></p>
       </div>
 
       <div class="about">
@@ -175,5 +175,6 @@
                document.getElementById("myModal").style.display = "none";
                }
          </script>
-   </body>
+   <script src="/UniRent/Smarty/js/cookie.js"></script>
+</body>
 </html>

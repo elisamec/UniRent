@@ -47,7 +47,7 @@
                         <a class="nav-link" href="/UniRent/Owner/home">Home</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="#">Reservations</a>
+                        <a class="nav-link" href="/UniRent/Reservation/showOwner">Reservations</a>
                      </li>
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Tenants</a>
@@ -83,7 +83,9 @@
             </nav>
          </div>
       </div>
-
+      <div class="path">
+        <p id="breadcrumb" data-user-name="{$owner->getUsername()}"></p>
+    </div>
       <div class="profile">
       <div class="containerProf">
          <div class="row">
@@ -186,7 +188,7 @@
     <div class="resModal-content">
         <span class="resClose" onclick="closeReportModal()">&times;</span>
         <h2>Report User</h2>
-        <form id="reportForm" action="/UniRent/Owner/report" class="form" method="POST" enctype="multipart/form-data">
+        <form id="reportForm" action="/UniRent/Admin/report/{$owner->getId()}" class="form" method="POST" enctype="multipart/form-data">
             <label for="reportReason">Reason for report:</label><br>
             <textarea id="reportReason" name="reportReason" rows="4" cols="50" oninput="checkInput()"></textarea><br><br>
             <div class="btn-cont">
@@ -341,4 +343,5 @@ document.getElementById("file").onchange = function() {
                document.getElementById("myModal").style.display = "none";
                }
          </script>
-   </body>
+   <script src="/UniRent/Smarty/js/cookie.js"></script>
+</body>

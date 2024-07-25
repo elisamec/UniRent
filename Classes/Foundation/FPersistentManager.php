@@ -10,6 +10,8 @@ use Classes\Entity\EPhoto;
 use Classes\Entity\EStudent;
 use Classes\Tools\TType;
 use Classes\Utilities\UAccessUniversityFile;
+use Classes\Foundation\FUpdater;
+use Classes\View\VError;
 use DateTime;
 
 
@@ -101,12 +103,6 @@ class FPersistentManager {
     {
         $FR= Foundation\FReservation::getInstance();
         $result=$FR->getWaitingReservations($idProprietario);
-        return $result;
-    }
-    public function getAcceptedReservations(int $idProprietario):array
-    {
-        $FR= Foundation\FReservation::getInstance();
-        $result=$FR->getAcceptedReservations($idProprietario);
         return $result;
     }
     
@@ -554,7 +550,8 @@ class FPersistentManager {
                     }
                     else#altrimenti
                     {
-                        http_response_code(500);#problema del server
+                        $viewError= new VError();
+            $viewError->error(500);#problema del server
                     }
                 }
                 else# posti esauriti per quest'anno
@@ -584,7 +581,8 @@ class FPersistentManager {
                 }
                 else
                 {
-                    http_response_code(500); #altrimenti ci sono problemi con il server
+                    $viewError= new VError();
+            $viewError->error(500); #altrimenti ci sono problemi con il server
                 }
             }
             else #non ci sono posti liberi per l' anno selezionato
@@ -625,6 +623,24 @@ class FPersistentManager {
             $result=$FV->loadVisitScheduleOwner($accommodations);
             return $result;
        }
+    }
+    public function loadReservationsByStudent(int $id, string $kind):array
+    {
+        $FR=FReservation::getInstance();
+        $result=$FR->loadReservationsByStudent($id,$kind);
+        return $result;
+    }
+    public function getTitleAccommodationById(int $id):string
+    {
+        $FA=FAccommodation::getInstance();
+        $result=$FA->getTitleById($id);
+        return $result;
+    }
+    
+    public function updateDataBase()
+    {
+        $FU=FUpdater::getInstance();
+        $FU->updateDB();
     }
     
 }

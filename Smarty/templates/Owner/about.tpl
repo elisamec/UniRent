@@ -56,7 +56,7 @@
                         <a class="nav-link" href="/UniRent/Owner/home">Home</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="#">Reservations</a>
+                        <a class="nav-link" href="/UniRent/Reservation/showOwner">Reservations</a>
                      </li>
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Tenants</a>
@@ -92,6 +92,9 @@
             </nav>
          </div>
       </div>
+      <div class="path">
+        <p id="breadcrumb"></p>
+    </div>
       <div class="about">
          <h2 class="search_text">About Us</h2>
          <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum risus sed augue sodales, eu porta quam laoreet. Nunc fermentum dui eros, non facilisis lacus pharetra quis. Duis augue sem, vestibulum vel est at, tempus feugiat turpis. Integer vel eros vel purus sodales gravida ut nec dolor. Integer ullamcorper augue lorem, eu tincidunt orci consequat molestie. Curabitur commodo magna non velit efficitur, non condimentum lorem eleifend. Phasellus ut ex id felis euismod rhoncus eget eu mi. Praesent iaculis vehicula arcu id sagittis. Suspendisse tempor lobortis tortor, eu tincidunt magna accumsan quis. Aliquam erat volutpat. Cras scelerisque massa eu lorem mattis, sit amet gravida velit feugiat. Praesent quis augue nec leo viverra bibendum. Integer nec enim at ante facilisis dignissim ac a nulla. Nullam id lacinia sapien, quis finibus velit.</p>
@@ -175,5 +178,6 @@
                document.getElementById("myModal").style.display = "none";
                }
          </script>
+         <script src="/UniRent/Smarty/js/cookie.js"></script>
    </body>
 </html>

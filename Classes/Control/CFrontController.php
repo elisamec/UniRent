@@ -21,6 +21,7 @@ class CFrontController{
     public function run($requestUri){
         $requestUri = trim($requestUri, '/');
         $uriParts = explode('/', $requestUri);
+        
 
         array_shift($uriParts);
 

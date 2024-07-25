@@ -15,6 +15,7 @@ use Classes\View\VStudent;
 use Classes\Foundation\FCreditCard;
 use Classes\Control;
 use DateTime;
+use Classes\View\VError;
 
 
 /**
@@ -44,7 +45,7 @@ class CStudent{
         $view = new VStudent();
         $view->contact();
     }
-    public static function findAccommodation()
+    public static function search()
     {
         $view = new VStudent();
         $session=USession::getInstance();
@@ -438,7 +439,8 @@ class CStudent{
                     header('Location:/UniRent/Student/profile');
                 } elseif (!$result) {
                     
-                    http_response_code(500);
+                    $viewError= new VError();
+            $viewError->error(500);
                     
                 } 
             }
@@ -554,8 +556,11 @@ class CStudent{
     public static function publicProfile(string $username, ?string $kind="#") {
         $PM=FPersistentManager::getInstance();
         $user=$PM->verifyUserUsername($username);
-        $location='/UniRent/'.$user['type'].'/publicProfileFromStudent/'.$username .$kind;
-        header('Location:'.$location);
+        if ($user['type'] === 'Student') {
+            self::publicProfileFromStudent($username, $kind);
+        } else {
+            COwner::publicProfileFromStudent($username, $kind);
+        }
     }
         
     public static function publicProfileFromStudent(string $username, ?string $kind="#")
@@ -709,7 +714,8 @@ class CStudent{
                 }
                 else
                 {
-                    http_response_code(500);
+                    $viewError= new VError();
+            $viewError->error(500);
                 }
             }
             else
@@ -722,7 +728,8 @@ class CStudent{
                 }
                 else
                 {
-                    http_response_code(500);
+                    $viewError= new VError();
+            $viewError->error(500);
                 }
             }
         }
@@ -735,11 +742,13 @@ class CStudent{
         $result=$PM->deleteCreditCard($number);
         if($result)
         {
-            http_response_code(200);  # ok
+            $viewError= new VError();
+            $viewError->error(200);  # ok
         }
         else
         {
-            http_response_code(500);   # server error
+            $viewError= new VError();
+            $viewError->error(500);   # server error
         }
     }
 
@@ -765,7 +774,8 @@ class CStudent{
             }
             else
             {
-                http_response_code(500);
+                $viewError= new VError();
+            $viewError->error(500);
             }
         }
         else
@@ -778,7 +788,8 @@ class CStudent{
             }
             else
             {
-                http_response_code(500);
+                $viewError= new VError();
+            $viewError->error(500);
             }
         }  
     }
@@ -796,7 +807,8 @@ class CStudent{
         {
             $actualcard->setMain(true);
             $PM::update($actualcard);
-            http_response_code(200);
+            $viewError= new VError();
+            $viewError->error(200);
         }
         else
         {
@@ -808,16 +820,19 @@ class CStudent{
                 $res_2=$PM::update($actualcard);
                 if($res_2)
                 {
-                    http_response_code(200);
+                    $viewError= new VError();
+            $viewError->error(200);
                 }
                 else
                 {
-                    http_response_code(500);
+                    $viewError= new VError();
+            $viewError->error(500);
                 }
             }
             else
             {
-                http_response_code(500);
+                $viewError= new VError();
+            $viewError->error(500);
             }
         }
     }

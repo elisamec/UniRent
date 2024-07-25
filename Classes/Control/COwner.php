@@ -17,6 +17,7 @@ use Classes\Foundation\FReview;
 use Classes\Tools\TType;
 use CommerceGuys\Addressing\Address;
 use DateTime;
+use Classes\View\VError;
 
 class COwner 
 {
@@ -216,7 +217,8 @@ class COwner
 
         if(is_null($owner)){
             $session->setSessionElement('photo', $ph);
-            http_response_code(500);
+            $viewError= new VError();
+            $viewError->error(500);
         } else {
 
             $ph = $owner->getPhoto();
@@ -246,7 +248,8 @@ class COwner
         $owner=$PM->load("EOwner", $id);
         if(is_null($owner)){
 
-            http_response_code(500);
+            $viewError= new VError();
+            $viewError->error(500);
         } else {
 
             $photo = USession::getInstance()::getSessionElement('photo');
@@ -355,7 +358,8 @@ class COwner
                             }
                             elseif (!$result) {
                     
-                                http_response_code(500);
+                                $viewError= new VError();
+            $viewError->error(500);
                                 
                             }
                         }
@@ -414,7 +418,8 @@ class COwner
                 $risultato = $PM->storeAvatar($photo);
 
                 if(!$risultato){
-                    http_response_code(500);
+                    $viewError= new VError();
+            $viewError->error(500);
                 }
             }
         }
@@ -584,7 +589,8 @@ class COwner
         #print $addressObj->getAddressLine1().' '.$addressObj->getPostalCode().' '.$addressObj->getLocality();
         $accomodation = new EAccommodation(null,$array_photos,$title,$addressObj,$price,$date,$description,$places,$deposit,$array_visit,$duration,$men,$women,$animals,$smokers, true,$idOwner);
         $result=$PM::store($accomodation);
-        $result ? header('Location:/UniRent/Owner/home') : http_response_code(500);
+        $result ? header('Location:/UniRent/Owner/home') : $viewError= new VError();
+            $viewError->error(500);
 
     }
     public static function publicProfileFromOwner(string $username, ?string $kind="#")
@@ -666,8 +672,11 @@ class COwner
     public static function publicProfile(string $username, ?string $kind="#") {
         $PM=FPersistentManager::getInstance();
         $user=$PM->verifyUserUsername($username);
-        $location='/UniRent/'.$user['type'].'/publicProfileFromOwner/'.$username.'/'.$kind;
-        header('Location:'.$location);
+        if ($user['type'] === 'Student') {
+            CStudent::publicProfileFromOwner($username, $kind);
+        } else {
+            self::publicProfileFromOwner($username, $kind);
+        }
     }
     public static function postedReview() {
         $view = new VOwner();
@@ -846,7 +855,8 @@ class COwner
         if ($result) {
             header('Location:/UniRent/Owner/accommodationManagement/'.$id);
         } else {
-            http_response_code(500);
+            $viewError= new VError();
+            $viewError->error(500);
         }
     }
 
@@ -864,7 +874,7 @@ class COwner
             $accommodationTitles[$accom->getIdAccommodation()]=$accom->getTitle();
         }
         foreach ($tenantsArray as $idAccommodation => $students) {
-            $accommodationTitle = $PM->load('EAccommodation', $idAccommodation)->getTitle();
+            $accommodationTitle = $PM->getTitleAccommodationById($idAccommodation);
             $tenantList = [];
             foreach ($students as $student) {
                 $profilePic = ($student[0])->getPhoto();
@@ -944,7 +954,7 @@ class COwner
 
         $tenants=[];
         foreach ($tenantsArray as $idAccommodation => $students) {
-            $accommodationTitle = $PM->load('EAccommodation', $idAccommodation)->getTitle();
+            $accommodationTitle = $PM->getTitleAccommodationById($idAccommodation);
             $tenantList = [];
             foreach ($students as $student) {
                 $profilePic = $student[0]->getPhoto();

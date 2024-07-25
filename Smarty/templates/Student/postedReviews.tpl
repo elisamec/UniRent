@@ -49,8 +49,8 @@
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reservations</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="#">Accepted</a>
-                           <a class="dropdown-item" href="#">Waiting</a>
+                           <a class="dropdown-item" href="/UniRent/Reservation/showStudent/accepted">Accepted</a>
+                           <a class="dropdown-item" href="/UniRent/Reservation/showStudent/pending">Pending</a>
                         </div>
                      </li>
                      <li class="nav-item dropdown">
@@ -80,8 +80,8 @@
          </div>
       </div>
       <div class="path">
-            <p><a href="/UniRent/Student/home">Home</a> / Posted Reviews </p>
-      </div>
+        <p id="breadcrumb"></p>
+    </div>
       <div class="container-fluid">
          <div class="Properties_taital_main layout">
          <h1 class="Properties_taital">What you think of others:</h1>
@@ -347,4 +347,5 @@
                document.getElementById("myModal").style.display = "none";
                }
          </script>
-   </body>
+   <script src="/UniRent/Smarty/js/cookie.js"></script>
+</body>

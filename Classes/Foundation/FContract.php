@@ -50,6 +50,8 @@ class FContract
      */
     public function exist(int $reservID):bool 
     {
+        $PM=FPersistentManager::getInstance();
+        $PM->updateDataBase();
         $q='SELECT * FROM contract WHERE idReservation=:reservID';
         $connection= FConnection::getInstance();
         $db=$connection->getConnection();
@@ -83,6 +85,7 @@ class FContract
         }
         $db=FConnection::getInstance()->getConnection();
         $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+        FPersistentManager::getInstance()->updateDataBase();
         try
         {
             $db->exec('LOCK TABLES contract WRITE');
@@ -117,6 +120,7 @@ class FContract
         $db=FConnection::getInstance()->getConnection();
         if($this->exist($id))
         {
+            FPersistentManager::getInstance()->updateDataBase();
             try
             {
                 $q='SELECT * FROM contract WHERE idReservation=:id';

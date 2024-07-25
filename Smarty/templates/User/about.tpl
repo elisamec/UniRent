@@ -66,7 +66,7 @@
          </div>
       </div>
       <div class="path">
-            <p><a href="/UniRent/User/home">Home</a> / About Us</p>
+            <p id="breadcrumb"></p>
       </div>
       <div class="about">
       <h2 class="search_text">About Us</h2>
@@ -151,5 +151,6 @@
                document.getElementById("myModal").style.display = "none";
                }
          </script>
-   </body>
+   <script src="/UniRent/Smarty/js/cookie.js"></script>
+</body>
 </html>

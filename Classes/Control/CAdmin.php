@@ -8,6 +8,7 @@ use Classes\Utilities\USession;
 use Classes\View\VAdmin;
 use Classes\Utilities\USuperGlobalAccess;
 use Classes\Utilities\UCookie;
+use Classes\View\VError;
 
 class CAdmin
 {
@@ -60,5 +61,14 @@ class CAdmin
         {
             $view->loginError(true, false);
         }
+    }
+    public static function logout()
+    {
+        $session = USession::getInstance();
+        $session::destroySession();
+        header('Location:/UniRent/Admin/login');
+    }
+    public static function report(int $id)
+    {
     }
 }

@@ -141,4 +141,9 @@ class VOwner {
         $this->smarty->assign('successDelete', $successDelete);
         $this->smarty->display('Owner/visitDetails.tpl');
     }
+    public function showReservations(array $reservationsData):void {
+        $json =  json_encode($reservationsData);
+        $this->smarty->assign('reservationsData', $json);
+        $this->smarty->display('Owner/reservations.tpl');
+    }
 }

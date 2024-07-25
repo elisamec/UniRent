@@ -58,6 +58,7 @@ class FReservation
         $q='SELECT * FROM reservation WHERE id=:id';
         $connection= FConnection::getInstance();
         $db=$connection->getConnection();
+        FPersistentManager::getInstance()->updateDataBase();
         try
         {
             $db->beginTransaction();
@@ -113,7 +114,7 @@ class FReservation
             $row=$stm->fetch(PDO::FETCH_ASSOC);
             $FROM= new DateTime($row['fromDate']);
             $TO= new DateTime($row['toDate']);
-            $result=new EReservation($FROM,$TO,$row['idAccommodation'],$row['idStudent']);
+            $result=new EReservation($FROM,$TO,$row['idAccommodation'],$row['idStudent'], new DateTime($row['made']));
             $result->setID($row['id']);
             $result->setStatus($row['statusAccept']);
             return $result;
@@ -135,6 +136,7 @@ class FReservation
     {
         $db=FConnection::getInstance()->getConnection();
         $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+        FPersistentManager::getInstance()->updateDataBase();
         try
         {
             $db->exec('LOCK TABLES reservation WRITE');
@@ -186,6 +188,7 @@ class FReservation
                 }
                 
                 $db=FConnection::getInstance()->getConnection();
+                FPersistentManager::getInstance()->updateDataBase();
                 try
                 {
                     $db->exec('LOCK TABLES reservation WRITE');
@@ -345,11 +348,12 @@ class FReservation
         {
             $db=FConnection::getInstance()->getConnection();
             $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+            FPersistentManager::getInstance()->updateDataBase();
             try
             {
                 $q='SELECT *
                     FROM reservation r INNER JOIN accommodation a ON a.id=r.idAccommodation
-                    INNER JOIN owner o ON o.id=a.owner
+                    INNER JOIN owner o ON o.id=a.idOwner
                     WHERE o.id=:id AND r.statusAccept=false';
                 $db->exec('LOCK TABLES reservation READ');
                 $db->beginTransaction();
@@ -372,10 +376,10 @@ class FReservation
             {
                 $FROM= new DateTime($row['fromDate']);
                 $TO= new DateTime($row['toDate']);
-                $r=new EReservation($FROM,$TO,$row['idAccommodation'],$row['idStudent']);
+                $r=new EReservation($FROM,$TO,$row['idAccommodation'],$row['idStudent'], new DateTime($row['made']));
                 $r->setID($row['id']);
                 $r->setStatus($row['statusAccept']);
-                $result[]=$r;
+                $result[$row['idAccommodation']][]=$r;
             }
             return $result;
 
@@ -385,61 +389,64 @@ class FReservation
             return null;
         }
     }
-    
-    /**
-     * Method getAcceptedReservations
-     * 
-     *This method return a EReservation array of resercations that have been accepted by the owner but not still paied by the student 
-     * @param int $id [Reservation id]
-     *
-     * @return array
-     */
-    public function getAcceptedReservations(int $id):?array
-    {
-        if(FOwner::getInstance()->exist($id))
+
+    public function loadReservationsByStudent(int $id, string $kind) {
+        $db=FConnection::getInstance()->getConnection();
+        $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+        FPersistentManager::getInstance()->updateDataBase();
+        try
         {
-            $db=FConnection::getInstance()->getConnection();
-            $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
-            try
-            {
-                $q='  SELECT *';
-                $q.=' FROM reservation r INNER JOIN accommodation a ON a.id=r.idAccommodation';
-                $q.=' INNER JOIN owner o ON o.id=a.owner';
-                $q.=' WHERE r.statusAccept=TRUE AND o.id=:id AND r.id NOT IN (';
-
-                $q.=' SELECT DISTINCT r.id';
-                $q.=' FROM reservation r INNER JOIN contract c ON c.idReservation=r.id )';
-
-                $db->exec('LOCK TABLES reservation READ, owner READ , accommodation READ');
-                $db->beginTransaction();
-                $stm=$db->prepare($q);
-                $stm->bindParam(':id',$id,PDO::PARAM_INT);
-                $stm->execute();
-                print 'qui';
-                $db->commit();
-                $db->exec('UNLOCK TABLES');
-            }
-            catch(PDOException $e)
-            {
-                $db->rollBack();
-                $result=TError::getInstance()->errorGettingReservations();
-                return $result;
-            }
-            $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
-            $result=array();
-
-            foreach ($rows as $row) 
-            {
-                $FROM= new DateTime($row['fromDate']);
-                $TO= new DateTime($row['toDate']);
-                $r=new EReservation($FROM,$TO,$row['idAccommodation'],$row['idStudent']);
-                $r->setID($row['id']);
-                $r->setStatus($row['statusAccept']);
-                $result[]=$r;
-            }
-            print 'Qui ci sono, dopo il ciclo';
+            $q='SELECT * 
+                FROM reservation
+                WHERE idStudent = :id 
+                AND DATEDIFF(fromDate, NOW()) > 0 
+                AND id NOT IN (
+                    SELECT idReservation 
+                    FROM contract
+                )
+                ORDER BY fromDate ASC';
+                
+            $db->exec('LOCK TABLES reservation READ');
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindParam(':id',$id,PDO::PARAM_INT);
+            $stm->execute();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            $result=TError::getInstance()->errorGettingReservations();
             return $result;
+        }
+        $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
+        $resultAccepted=array();
+        $resultWaiting=array();
 
+        foreach ($rows as $row) 
+        {
+            $FROM= new DateTime($row['fromDate']);
+            $TO= new DateTime($row['toDate']);
+            $r=new EReservation($FROM,$TO,$row['idAccommodation'],$row['idStudent'], new DateTime($row['made']));
+            $r->setID($row['id']);
+            $r->setStatus($row['statusAccept']);
+            if($r->getStatusAccept()===true)
+            {
+                $resultAccepted[]=$r;
+            }
+            else
+            {
+                $resultWaiting[]=$r;
+            }
+        }
+        if ($kind==='accepted')
+        {
+            return $resultAccepted;
+        }
+        elseif ($kind==='pending')
+        {
+            return $resultWaiting;
         }
         else
         {

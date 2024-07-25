@@ -11,15 +11,27 @@ use Classes\View\VStudent;
 use Classes\View\VOwner;
 use Classes\Utilities\USuperGlobalAccess;
 use Classes\Utilities\UCookie;
+use Classes\View\VError;
 
 class CUser
 {
     
     public static function home(){
+        $session=USession::getInstance();
+        $type=$session::getSessionElement('userType');
+        if($type==='Student')
+        {
+            header('Location: /UniRent/Student/home');
+        }
+        elseif($type==='Owner')
+        {
+            header('Location: /UniRent/Owner/home');
+        }
+        else{
         $view = new VUser();
         $PM=FPersistentManager::getInstance();
         $accommodations = $PM->lastAccommodationsUser();
-        $view->home($accommodations);
+        $view->home($accommodations);}
     }
     public static function about(){
         $view = new VUser();
@@ -49,7 +61,7 @@ class CUser
         $view = new VUser();
         $view->contact();
     }
-    public static function findAccommodation(){
+    public static function search(){
         $view = new VUser();
         $city=USuperGlobalAccess::getPost('city');
         $date=USuperGlobalAccess::getPost('date');
