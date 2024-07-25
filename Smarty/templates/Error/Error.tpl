@@ -40,7 +40,7 @@
                         <div class="error mx-auto" data-text="{$error}">{$error}</div>
                         {if $error == 400}
                         <p class="lead text-gray-800 mb-5">Bad Request</p>
-                        {else if $error == 1000}
+                        {else if $error == 600}
                         <p class="lead text-gray-800 mb-5">This User Has Been Banned</p>
                         {else if $error == 401}
                         <p class="lead text-gray-800 mb-5">Unauthorized</p>
