@@ -20,8 +20,43 @@ class CReservation
         $PM= FPersistentManager::getInstance();
         $reservations=$PM->loadReservationsByStudent($id, $kind);
         $reservationsData = [];
-        $today = new DateTime('today');
         foreach ($reservations as $reservation) {
+            $today = new DateTime('now');
+            // Calculate the difference
+            $interval = $today->diff($reservation->getMade());
+
+            // Extract the components of the difference
+            $days = $interval->days;
+            $hours = $interval->h;
+            $minutes = $interval->i;
+
+            // Create the formatted string with singular/plural logic
+            $parts = [];
+
+            // Add days to the array if greater than 0
+            if ($days > 0) {
+                $parts[] = $days . ' ' . ($days > 1 ? 'days' : 'day');
+            }
+
+            // Add hours to the array if greater than 0
+            if ($hours > 0) {
+                $parts[] = $hours . ' ' . ($hours > 1 ? 'hours' : 'hour');
+            }
+
+            // Add minutes to the array if greater than 0
+            if ($minutes > 0) {
+                $parts[] = $minutes . ' ' . ($minutes > 1 ? 'minutes' : 'minute');
+            }
+
+            // Handle the case where all values might be zero
+            // Join the parts with a comma and 'and'
+            if (count($parts) > 1) {
+                $formatted = implode(', ', array_slice($parts, 0, -1)) . ' and ' . end($parts);
+            } elseif (count($parts) === 1) {
+                $formatted = $parts[0];
+            } else {
+                $formatted = '0 minutes';
+            }
             $accommodation=$PM->load('EAccommodation', $reservation->getAccomodationId());
             $period = $reservation->getFromDate()->format('d/m/Y') . ' - ' . $reservation->getToDate()->format('d/m/Y');
             if ($accommodation->getPhoto() === null) {
@@ -36,10 +71,9 @@ class CReservation
                 'period' => $period,
                 'price' => $accommodation->getPrice(),
                 'address' => $accommodation->getAddress()->getAddressLine1() . ', ' . $accommodation->getAddress()->getLocality(),
-                'expires' => $today->diff($reservation->getMade())->format('%a days %h hours %i minutes'),
+                'expires' => $formatted,
             ];
         }
-        print $reservation->getMade()->format('Y-m-d H:i:s') . '-' . $today->format('Y-m-d H:i:s');
         $view= new VStudent();
         $view->showReservations($reservationsData, $kind);
 
@@ -61,8 +95,45 @@ class CReservation
             });
             $accommodationTitle = $PM->getTitleAccommodationById($idAccommodation);
             $studentList = [];
-            $today = new DateTime('today');
+
             foreach ($reservations as $reservation) {
+                $today = new DateTime('now');
+                // Calculate the difference
+                $interval = $today->diff($reservation->getMade());
+
+                // Extract the components of the difference
+                $days = $interval->days;
+                $hours = $interval->h;
+                $minutes = $interval->i;
+
+                // Create the formatted string with singular/plural logic
+                // Create the formatted string with singular/plural logic
+                $parts = [];
+
+                // Add days to the array if greater than 0
+                if ($days > 0) {
+                    $parts[] = $days . ' ' . ($days > 1 ? 'days' : 'day');
+                }
+
+                // Add hours to the array if greater than 0
+                if ($hours > 0) {
+                    $parts[] = $hours . ' ' . ($hours > 1 ? 'hours' : 'hour');
+                }
+
+                // Add minutes to the array if greater than 0
+                if ($minutes > 0) {
+                    $parts[] = $minutes . ' ' . ($minutes > 1 ? 'minutes' : 'minute');
+                }
+
+                // Handle the case where all values might be zero
+                // Join the parts with a comma and 'and'
+                if (count($parts) > 1) {
+                    $formatted = implode(', ', array_slice($parts, 0, -1)) . ' and ' . end($parts);
+                } elseif (count($parts) === 1) {
+                    $formatted = $parts[0];
+                } else {
+                    $formatted = '0 minutes';
+                }
                 $student=$PM->load('EStudent', $reservation->getIdStudent());
                 $student_photo=$student->getPhoto();
                 if(is_null($student_photo)){}
@@ -77,7 +148,7 @@ class CReservation
                     'username' => $student->getUsername(),
                     'image' => $profilePic,
                     'period' => 'from '. $reservation->getFromDate()->format('d/m/Y') . ' to ' . $reservation->getToDate()->format('d/m/Y'),
-                    'expires' => $today->diff($reservation->getMade())->format('%a days %h hours %i minutes')
+                    'expires' => $formatted
                 ];
             }
 
