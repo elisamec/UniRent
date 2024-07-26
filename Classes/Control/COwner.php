@@ -597,6 +597,12 @@ class COwner
     }
     public static function publicProfileFromOwner(string $username, ?string $kind="#")
     {
+        $session=USession::getInstance();
+        if ($session::getSessionElement('username') === $username) {
+            $self = true;
+        } else {
+            $self = false;
+        }
         $view = new VOwner();
         $PM=FPersistentManager::getInstance();
         $owner=$PM->getOwnerByUsername($username);
@@ -636,7 +642,7 @@ class COwner
                 'userPicture' => $profilePic,
             ];
         }
-        $view->publicProfileFromOwner($owner, $reviewsData, $kind);
+        $view->publicProfileFromOwner($owner, $reviewsData, $kind, $self);
     }
     public static function publicProfileFromStudent(string $username, ?string $kind= null)
     {

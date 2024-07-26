@@ -577,6 +577,12 @@ class CStudent{
         
     public static function publicProfileFromStudent(string $username, ?string $kind="#")
     {
+        $session=USession::getInstance();
+        if ($session::getSessionElement('username') === $username) {
+            $self = true;
+        } else {
+            $self = false;
+        }
         $view = new VStudent();
         $PM=FPersistentManager::getInstance();
         $student=$PM->getStudentByUsername($username);
@@ -614,7 +620,7 @@ class CStudent{
                 'userPicture' => $profilePic,
             ];
         }
-        $view->publicProfileFromStudent($student, $reviewsData, $kind);
+        $view->publicProfileFromStudent($student, $reviewsData, $kind, $self);
     }
     public static function publicProfileFromOwner(string $username, ?string $kind="#")
     {

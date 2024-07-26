@@ -92,10 +92,11 @@ class VOwner {
     {
         $this->smarty->display('Owner/addAccommodation.tpl');
     }
-    public function publicProfileFromOwner(EOwner $owner, array $reviewsData, ?string $kind="#"){
+    public function publicProfileFromOwner(EOwner $owner, array $reviewsData, ?string $kind="#", bool $self){
         $this->smarty->assign('owner', $owner);
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->assign('kind', $kind);
+        $this->smarty->assign('self', $self);
         $this->smarty->display('Owner/publicProfileFromOwner.tpl');
     }
     public function publicProfileFromStudent(EOwner $owner, array $reviewsData, ?string $kind="#"){
