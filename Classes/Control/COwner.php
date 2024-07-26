@@ -100,7 +100,9 @@ class COwner
         foreach ($reviews as $review) {
             $author = $PM::load('EStudent', $review->getIdAuthor());
             $profilePic = $author->getPhoto();
-            if ($profilePic === null) {
+            if ($author->getStatus() === 'banned') {
+                $profilePic = "/UniRent/Smarty/images/BannedUser.png";
+            } else if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
             else
@@ -506,7 +508,9 @@ class COwner
         foreach ($reviews as $review) {
             $author=$PM->load('EStudent', $review->getIdAuthor());
             $profilePic = $author->getPhoto();
-            if ($profilePic === null) {
+            if ($author->getStatus() === 'banned') {
+                $profilePic = "/UniRent/Smarty/images/BannedUser.png";
+            } else if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
             else
@@ -708,7 +712,9 @@ class COwner
         foreach ($reviews as $review) {
             $recipient = $PM::load( 'E' . $review->getRecipientType()->value, $review->getIdRecipient());
             $profilePic = $recipient->getPhoto();
-            if ($profilePic === null) {
+            if ($recipient->getStatus() === 'banned') {
+                $profilePic = "/UniRent/Smarty/images/BannedUser.png";
+            } else if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
             else

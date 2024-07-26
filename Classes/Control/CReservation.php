@@ -21,7 +21,7 @@ class CReservation
         $reservations=$PM->loadReservationsByStudent($id, $kind);
         $reservationsData = [];
         foreach ($reservations as $reservation) {
-            $formatted = self::formatDate($reservation->getMade());
+            $formatted = self::formatDate($reservation->getMade()->setTime(0,0,0));
             $accommodation=$PM->load('EAccommodation', $reservation->getAccomodationId());
             $period = $reservation->getFromDate()->format('d/m/Y') . ' - ' . $reservation->getToDate()->format('d/m/Y');
             if ($accommodation->getPhoto() === []) {
@@ -62,7 +62,7 @@ class CReservation
             $studentList = [];
 
             foreach ($reservations as $reservation) {
-                $formatted = self::formatDate($reservation->getMade());
+                $formatted = self::formatDate($reservation->getMade()->setTime(0,0,0));
                 $student=$PM->load('EStudent', $reservation->getIdStudent());
                 $student_photo=$student->getPhoto();
                 if(is_null($student_photo)){}
@@ -119,7 +119,7 @@ class CReservation
                 $owner->setPhoto($owner_photo_64[0]);
             }
             $view= new VStudent();
-            $view->reservationDetails($reservation, $accommodation, $owner, self::formatDate($reservation->getMade()), $picture);
+            $view->reservationDetails($reservation, $accommodation, $owner, self::formatDate($reservation->getMade()->setTime(0,0,0)), $picture);
         }
         else {
             $student = $PM->load('EStudent', $reservation->getIdStudent());
@@ -131,11 +131,11 @@ class CReservation
                 $student->setPhoto($student_photo_64[0]);
             }
             $view = new VOwner();
-            $view->reservationDetails($reservation, $student, self::formatDate($reservation->getMade()));
+            $view->reservationDetails($reservation, $student, self::formatDate($reservation->getMade()->setTime(0,0,0)));
         }
     }
     private static function formatDate(DateTime $date): string {
-        $today = new DateTime('now');
+        $today = new DateTime('today');
                 // Calculate the difference
                 $interval = $today->diff($date->modify('+2 days'));
 
