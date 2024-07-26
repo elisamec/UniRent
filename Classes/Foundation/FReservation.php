@@ -342,7 +342,7 @@ class FReservation
      *
      * @return array
      */
-    public function getWaitingReservations(int $id):?array
+    public function getWaitingReservations(int $id):array
     {
         if(FOwner::getInstance()->exist($id))
         {
@@ -386,7 +386,7 @@ class FReservation
         }
         else
         {
-            return null;
+            return array();
         }
     }
 

@@ -350,6 +350,7 @@ class FVisit
     }
     public function loadVisitScheduleStudent(int $id):array {
         $db=FConnection::getInstance()->getConnection();
+        $result=array();
             try{
                 $db->exec('LOCK TABLES visit READ');
                 $db->beginTransaction();
