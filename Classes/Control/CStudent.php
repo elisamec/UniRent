@@ -242,8 +242,15 @@ class CStudent{
         
         $owner = $PM->load('EOwner', $accomm->getIdOwner());
         $owner_photo=$owner->getPhoto();
-        if(is_null($owner_photo)){}
-        else
+        $ownerStatus = $owner->getStatus();
+        /*if($ownerStatus === 'banned'){
+            
+            $owner_photo = file_get_contents("/UniRent/Smarty/images/BannedUser.png");
+            $owner_photo_64=EPhoto::toBase64(array($owner_photo));
+            $owner->setPhoto($owner_photo_64[0]);
+        }
+        else*/
+        if(!is_null($owner_photo))
         {
             $owner_photo_64=EPhoto::toBase64(array($owner_photo));
             $owner->setPhoto($owner_photo_64[0]);
@@ -311,8 +318,12 @@ class CStudent{
         {
             $tenants=[];
             foreach ($tenantOwner[$idAccommodation] as $i) {
+                $status = $i[0]->getStatus();
                 $profilePic = $i[0]->getPhoto();
-                if ($profilePic === null) {
+                if($status === 'banned'){
+                    $profilePic = "/UniRent/Smarty/images/BannedUser.png";
+                }
+                elseif ($profilePic === null) {
                     $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
                 }
                 else
