@@ -19,13 +19,34 @@ class CUser
     public static function home(){
         $session=USession::getInstance();
         $type=$session::getSessionElement('userType');
+        $username=$session::getSessionElement('username');
         if($type==='Student')
         {
-            header('Location: /UniRent/Student/home');
+            $student=FPersistentManager::getInstance()->getStudentByUsername($username);
+            if($student->getStatus()=='banned')
+            {
+                $v=new VError();
+                $v->error(600);
+                return;
+            }
+            else
+            {
+                header('Location: /UniRent/Student/home');
+            }
         }
         elseif($type==='Owner')
         {
-            header('Location: /UniRent/Owner/home');
+            $owner=FPersistentManager::getInstance()->getOwnerByUsername($username);
+            if($owner->getStatus()=='banned')
+            {
+                $v=new VError();
+                $v->error(600);
+                return;
+            }
+            else
+            {
+                header('Location: /UniRent/Owner/home');
+            }
         }
         else{
         $view = new VUser();
