@@ -2867,6 +2867,10 @@ button.delete_button:hover{
     cursor: not-allowed;
     opacity: 0.5;
 }
+a.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
 #reportReason {
     width:100%;
 }

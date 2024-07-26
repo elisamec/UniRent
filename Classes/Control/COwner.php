@@ -110,6 +110,7 @@ class COwner
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
+                'userStatus' => $author->getStatus(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic->getPhoto(),
@@ -515,6 +516,7 @@ class COwner
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
+                'userStatus' => $author->getStatus(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,
@@ -628,6 +630,7 @@ class COwner
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
+                'userStatus' => $author->getStatus(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,
@@ -670,6 +673,7 @@ class COwner
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
+                'userStatus' => $author->getStatus(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,
@@ -708,6 +712,7 @@ class COwner
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $recipient->getUsername(),
+                'userStatus' => $recipient->getStatus(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,

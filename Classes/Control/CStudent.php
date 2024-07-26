@@ -270,6 +270,7 @@ class CStudent{
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
+                'userStatus' => $author->getStatus(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,
@@ -352,6 +353,7 @@ class CStudent{
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
+                'userStatus' => $author->getStatus(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,
@@ -595,6 +597,7 @@ class CStudent{
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
+                'userStatus' => $author->getStatus(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,
@@ -635,6 +638,7 @@ class CStudent{
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
+                'userStatus' => $author->getStatus(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,
@@ -855,6 +859,7 @@ class CStudent{
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $recipient->getUsername(),
+                'userStatus' => $recipient->getStatus(),
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,
