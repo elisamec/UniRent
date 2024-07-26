@@ -975,7 +975,7 @@ use PDO;
             $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
             try
             {
-                $q="SELECT *
+                $q="SELECT a.id AS id
                     FROM accommodation a INNER JOIN owner o ON o.id=a.idOwner
                     WHERE o.status != 'banned'
                     ORDER BY a.`start` DESC LIMIT 6";
