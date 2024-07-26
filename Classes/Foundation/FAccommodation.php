@@ -976,7 +976,8 @@ use PDO;
             try
             {
                 $q="SELECT *
-                    FROM accommodation a 
+                    FROM accommodation a INNER JOIN owner o ON o.id=a.idOwner
+                    WHERE o.status != 'banned'
                     ORDER BY a.`start` DESC LIMIT 6";
                 $db->exec('LOCK TABLES accommodation READ');
                 $db->beginTransaction();

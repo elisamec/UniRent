@@ -157,7 +157,5 @@ $result=$FA->areThereFreePlaces(7,2024);
 
 print var_dump($result) ;*/
 
-
-
-$U=Updater::getInstance();
-$U->run();
+$addres=FPersistentManager::getInstance()->load('EAccommodation',4);
+print_r($addres);
