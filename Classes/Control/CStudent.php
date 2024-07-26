@@ -914,7 +914,7 @@ class CStudent{
         
         if($result)
         {
-            header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/true');
+            header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/sent');
         }
         else
         {
