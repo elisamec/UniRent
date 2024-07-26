@@ -15,7 +15,6 @@ use Classes\View\VStudent;
 use Classes\Foundation\FCreditCard;
 use Classes\Control;
 use DateTime;
-use Classes\View\VError;
 
 
 /**
@@ -45,7 +44,7 @@ class CStudent{
         $view = new VStudent();
         $view->contact();
     }
-    public static function search()
+    public static function findAccommodation()
     {
         $view = new VStudent();
         $session=USession::getInstance();
@@ -256,8 +255,12 @@ class CStudent{
         
         foreach ($reviews as $review) {
             $author=$PM->load( 'EStudent', $review->getIdAuthor());
+            $authorStatus = $author->getStatus();
             $profilePic = $author->getPhoto();
-            if ($profilePic === null) {
+            if($authorStatus === 'banned'){
+                $profilePic = "/UniRent/Smarty/images/BannedUser.png";
+            }
+            elseif ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
             else
@@ -439,8 +442,7 @@ class CStudent{
                     header('Location:/UniRent/Student/profile');
                 } elseif (!$result) {
                     
-                    $viewError= new VError();
-            $viewError->error(500);
+                    http_response_code(500);
                     
                 } 
             }
@@ -556,11 +558,8 @@ class CStudent{
     public static function publicProfile(string $username, ?string $kind="#") {
         $PM=FPersistentManager::getInstance();
         $user=$PM->verifyUserUsername($username);
-        if ($user['type'] === 'Student') {
-            self::publicProfileFromStudent($username, $kind);
-        } else {
-            COwner::publicProfileFromStudent($username, $kind);
-        }
+        $location='/UniRent/'.$user['type'].'/publicProfileFromStudent/'.$username .$kind;
+        header('Location:'.$location);
     }
         
     public static function publicProfileFromStudent(string $username, ?string $kind="#")
@@ -714,8 +713,7 @@ class CStudent{
                 }
                 else
                 {
-                    $viewError= new VError();
-            $viewError->error(500);
+                    http_response_code(500);
                 }
             }
             else
@@ -728,8 +726,7 @@ class CStudent{
                 }
                 else
                 {
-                    $viewError= new VError();
-            $viewError->error(500);
+                    http_response_code(500);
                 }
             }
         }
@@ -742,13 +739,11 @@ class CStudent{
         $result=$PM->deleteCreditCard($number);
         if($result)
         {
-            $viewError= new VError();
-            $viewError->error(200);  # ok
+            http_response_code(200);  # ok
         }
         else
         {
-            $viewError= new VError();
-            $viewError->error(500);   # server error
+            http_response_code(500);   # server error
         }
     }
 
@@ -774,8 +769,7 @@ class CStudent{
             }
             else
             {
-                $viewError= new VError();
-            $viewError->error(500);
+                http_response_code(500);
             }
         }
         else
@@ -788,8 +782,7 @@ class CStudent{
             }
             else
             {
-                $viewError= new VError();
-            $viewError->error(500);
+                http_response_code(500);
             }
         }  
     }
@@ -807,8 +800,7 @@ class CStudent{
         {
             $actualcard->setMain(true);
             $PM::update($actualcard);
-            $viewError= new VError();
-            $viewError->error(200);
+            http_response_code(200);
         }
         else
         {
@@ -820,19 +812,16 @@ class CStudent{
                 $res_2=$PM::update($actualcard);
                 if($res_2)
                 {
-                    $viewError= new VError();
-            $viewError->error(200);
+                    http_response_code(200);
                 }
                 else
                 {
-                    $viewError= new VError();
-            $viewError->error(500);
+                    http_response_code(500);
                 }
             }
             else
             {
-                $viewError= new VError();
-            $viewError->error(500);
+                http_response_code(500);
             }
         }
     }
@@ -895,10 +884,11 @@ class CStudent{
         
         if($result)
         {
-            header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/sent');
+            header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/true');
         }
         else
         {
+            print 'Spiacenti non ci sono posti disponibili';
             header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/full');
         }
     }
