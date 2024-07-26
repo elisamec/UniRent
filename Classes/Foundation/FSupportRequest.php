@@ -63,13 +63,14 @@ class FSupportRequest {
             $db->rollBack();
         }
         $row=$stm->fetch(PDO::FETCH_ASSOC);
-        $authType=$row['authorType'];
-        if ($authType===TType::STUDENT) {
+        if ($row['idStudent']!=null) {
             $author=$row['idStudent'];
+            $authType=TType::STUDENT;
         } else {
             $author=$row['idOwner'];
+            $authType=TType::OWNER;
         }
-        $result=new ESupportRequest($row['id'],$row['message'], TRequestType::tryFrom($row['topic']), $author, TType::tryFrom($authType));
+        $result=new ESupportRequest($row['id'],$row['message'], TRequestType::tryFrom($row['topic']), $author, $authType);
         return $result;
     }
 
@@ -82,13 +83,12 @@ class FSupportRequest {
             $authCol='id'.ucfirst($authType);
             $db->exec('LOCK TABLES supportrequest WRITE');
             $db->beginTransaction();
-            $q='INSERT INTO supportrequest (message, topic,'.$authCol.', authorType, status)';
-            $q=$q.'VALUES (:message, :topic, :author, :authType, :status)';
+            $q='INSERT INTO supportrequest (message, topic,'.$authCol.', status)';
+            $q=$q.'VALUES (:message, :topic, :author, :status)';
             $stm = $db->prepare($q);
             $stm->bindValue(':message', $supportrequest->getMessage(), PDO::PARAM_STR);
             $stm->bindValue(':topic', $supportrequest->getTopic()->value, PDO::PARAM_STR);
             $stm->bindValue(':author', $supportrequest->getAuthorID(), PDO::PARAM_INT);
-            $stm->bindValue(':authType', $supportrequest->getAuthorType()->value, PDO::PARAM_STR);
             $stm->bindValue(':status', $supportrequest->getStatus()->value, PDO::PARAM_INT);
             $stm->execute();
             $id=$db->lastInsertId();
@@ -109,9 +109,8 @@ class FSupportRequest {
         { 
             $db->exec('LOCK TABLES supportrequest WRITE');
             $db->beginTransaction();
-            $q='UPDATE supportrequest SET message = :message, status = :status';
+            $q='UPDATE supportrequest SET status = :status';
             $stm = $db->prepare($q);
-            $stm->bindValue(':message', $supportrequest->getMessage(), PDO::PARAM_STR);
             $stm->bindValue(':status', $supportrequest->getStatus()->value, PDO::PARAM_INT);
             $stm->execute();
             $db->commit();

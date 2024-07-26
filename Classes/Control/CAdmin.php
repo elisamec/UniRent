@@ -3,7 +3,9 @@
 namespace Classes\Control;
 require __DIR__.'/../../vendor/autoload.php';
 
+use Classes\Entity\ESupportRequest;
 use Classes\Foundation\FPersistentManager;
+use Classes\Tools\TType;
 use Classes\Utilities\USession;
 use Classes\View\VAdmin;
 use Classes\Utilities\USuperGlobalAccess;
@@ -70,5 +72,33 @@ class CAdmin
     }
     public static function report(int $id)
     {
+    }
+
+    public static function supportRequest()
+    {
+        $session=USession::getInstance();
+        $idUser=$session::getSessionElement('id');
+        $type=$session::getSessionElement('userType');
+        if ($type=='Student')
+        {
+            $type=TType::STUDENT;
+        }
+        else
+        {
+            $type=TType::OWNER;
+        }
+        $topic=USuperGlobalAccess::getPost('topic');
+        $message=USuperGlobalAccess::getPost('message');
+        $supportRequest=new ESupportRequest(0,$message,$topic,$idUser,$type);
+        $PM=FPersistentManager::getInstance();
+        $res=$PM::store($supportRequest);
+        if ($res)
+        {
+            header('Location:/UniRent/'.ucfirst($type->value).'/contact/sent');
+        }
+        else
+        {
+            header('Location:/UniRent/'.ucfirst($type->value).'/contact/fail');
+        }
     }
 }
