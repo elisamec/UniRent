@@ -922,7 +922,6 @@ class CStudent{
         }
         else
         {
-            print 'Spiacenti non ci sono posti disponibili';
             header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/full');
         }
     }
