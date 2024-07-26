@@ -180,6 +180,12 @@
                 reviews.forEach(review => {
                     const reviewElement = document.createElement('div');
                     reviewElement.className = 'review';
+
+                    if (review.userStatus ==='banned') {
+                        let style = ' disabled';
+                    } else {
+                        let style = '';
+                    }
     
                     // Insert the names of the elements of the review array
                     reviewElement.innerHTML = `
@@ -193,10 +199,10 @@
                     <div class="row">
                         <div class="userSection">
                             <p> To: </p>
-                            <div class="userIcon">
+                            <div class="userIcon` + style + `">
                                 <a href="/UniRent/Student/publicProfile/` + review.username + `"><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
                             </div>
-                            <div class="username"><a href="/UniRent/Student/publicProfile/` + review.username + `">` + review.username + `</a></div> <!-- Username of the reviewer -->
+                            <div class="username` + style + `"><a href="/UniRent/Student/publicProfile/` + review.username + `">` + review.username + `</a></div> <!-- Username of the reviewer -->
                         </div>
                         <div class="col-md-11">
                             <div class="stars">
