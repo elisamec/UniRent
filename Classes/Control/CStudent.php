@@ -580,8 +580,12 @@ class CStudent{
         
         foreach ($reviews as $review) {
             $author = $PM::load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
+            $status = $author->getStatus();
             $profilePic = $author->getPhoto();
-            if ($profilePic === null) {
+            if($status === 'banned'){
+                $profilePic = "/UniRent/Smarty/images/BannedUser.png";
+            }
+            elseif ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
             else
@@ -616,8 +620,12 @@ class CStudent{
         
         foreach ($reviews as $review) {
             $author = $PM::load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
+            $status = $author->getStatus();
             $profilePic = $author->getPhoto();
-            if ($profilePic === null) {
+            if($status === 'banned'){
+                $profilePic = "/UniRent/Smarty/images/BannedUser.png";
+            }
+            elseif ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
             else
@@ -842,7 +850,7 @@ class CStudent{
             }
             else
             {
-                $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
+                $profilekPic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
             }
             $reviewsData[] = [
                 'title' => $review->getTitle(),

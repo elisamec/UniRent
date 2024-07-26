@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jul 26, 2024 at 08:57 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Host: 127.0.0.1
+-- Creato il: Lug 26, 2024 alle 13:33
+-- Versione del server: 10.4.32-MariaDB
+-- Versione PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `accommodation`
+-- Struttura della tabella `accommodation`
 --
 
 CREATE TABLE `accommodation` (
@@ -46,7 +46,7 @@ CREATE TABLE `accommodation` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `accommodation`
+-- Dump dei dati per la tabella `accommodation`
 --
 
 INSERT INTO `accommodation` (`id`, `title`, `address`, `price`, `start`, `description`, `places`, `deposit`, `visitDuration`, `man`, `woman`, `pets`, `smokers`, `status`, `idOwner`) VALUES
@@ -59,7 +59,7 @@ INSERT INTO `accommodation` (`id`, `title`, `address`, `price`, `start`, `descri
 -- --------------------------------------------------------
 
 --
--- Table structure for table `accommodationreview`
+-- Struttura della tabella `accommodationreview`
 --
 
 CREATE TABLE `accommodationreview` (
@@ -68,10 +68,18 @@ CREATE TABLE `accommodationreview` (
   `idAuthor` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dump dei dati per la tabella `accommodationreview`
+--
+
+INSERT INTO `accommodationreview` (`idReview`, `idAccommodation`, `idAuthor`) VALUES
+(33, 6, 5),
+(34, 6, 8);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `address`
+-- Struttura della tabella `address`
 --
 
 CREATE TABLE `address` (
@@ -82,7 +90,7 @@ CREATE TABLE `address` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `address`
+-- Dump dei dati per la tabella `address`
 --
 
 INSERT INTO `address` (`id`, `addressLine`, `postalCode`, `city`) VALUES
@@ -99,7 +107,7 @@ INSERT INTO `address` (`id`, `addressLine`, `postalCode`, `city`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contract`
+-- Struttura della tabella `contract`
 --
 
 CREATE TABLE `contract` (
@@ -110,7 +118,7 @@ CREATE TABLE `contract` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `contract`
+-- Dump dei dati per la tabella `contract`
 --
 
 INSERT INTO `contract` (`idReservation`, `status`, `paymentDate`, `cardNumber`) VALUES
@@ -119,7 +127,7 @@ INSERT INTO `contract` (`idReservation`, `status`, `paymentDate`, `cardNumber`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `creditcard`
+-- Struttura della tabella `creditcard`
 --
 
 CREATE TABLE `creditcard` (
@@ -134,7 +142,7 @@ CREATE TABLE `creditcard` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `creditcard`
+-- Dump dei dati per la tabella `creditcard`
 --
 
 INSERT INTO `creditcard` (`number`, `name`, `surname`, `expiry`, `cvv`, `idStudent`, `main`, `title`) VALUES
@@ -145,7 +153,7 @@ INSERT INTO `creditcard` (`number`, `name`, `surname`, `expiry`, `cvv`, `idStude
 -- --------------------------------------------------------
 
 --
--- Table structure for table `day`
+-- Struttura della tabella `day`
 --
 
 CREATE TABLE `day` (
@@ -155,7 +163,7 @@ CREATE TABLE `day` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `day`
+-- Dump dei dati per la tabella `day`
 --
 
 INSERT INTO `day` (`id`, `day`, `idAccommodation`) VALUES
@@ -167,7 +175,7 @@ INSERT INTO `day` (`id`, `day`, `idAccommodation`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `owner`
+-- Struttura della tabella `owner`
 --
 
 CREATE TABLE `owner` (
@@ -184,7 +192,7 @@ CREATE TABLE `owner` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `owner`
+-- Dump dei dati per la tabella `owner`
 --
 
 INSERT INTO `owner` (`id`, `username`, `password`, `name`, `surname`, `picture`, `email`, `phoneNumber`, `iban`, `status`) VALUES
@@ -195,7 +203,7 @@ INSERT INTO `owner` (`id`, `username`, `password`, `name`, `surname`, `picture`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ownerreview`
+-- Struttura della tabella `ownerreview`
 --
 
 CREATE TABLE `ownerreview` (
@@ -205,7 +213,7 @@ CREATE TABLE `ownerreview` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `ownerreview`
+-- Dump dei dati per la tabella `ownerreview`
 --
 
 INSERT INTO `ownerreview` (`idOwner`, `idReview`, `idAuthor`) VALUES
@@ -214,7 +222,7 @@ INSERT INTO `ownerreview` (`idOwner`, `idReview`, `idAuthor`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `photo`
+-- Struttura della tabella `photo`
 --
 
 CREATE TABLE `photo` (
@@ -225,7 +233,7 @@ CREATE TABLE `photo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `photo`
+-- Dump dei dati per la tabella `photo`
 --
 
 INSERT INTO `photo` (`id`, `photo`, `relativeTo`, `idAccommodation`) VALUES
@@ -254,7 +262,7 @@ INSERT INTO `photo` (`id`, `photo`, `relativeTo`, `idAccommodation`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reservation`
+-- Struttura della tabella `reservation`
 --
 
 CREATE TABLE `reservation` (
@@ -268,17 +276,18 @@ CREATE TABLE `reservation` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `reservation`
+-- Dump dei dati per la tabella `reservation`
 --
 
 INSERT INTO `reservation` (`id`, `fromDate`, `toDate`, `made`, `statusAccept`, `idAccommodation`, `idStudent`) VALUES
-(6, '2024-07-15', '2024-07-19', '2024-07-15 19:47:49', 1, 7, 8),
-(7, '2024-09-11', '2025-06-10', '2024-07-25 17:45:57', 0, 7, 8);
+(3, '2024-06-06', '2024-08-06', '2024-06-06 15:58:56', 1, 5, 2),
+(4, '2024-06-10', '2024-06-25', '2024-06-07 15:51:22', 0, 6, 5),
+(6, '2024-07-15', '2024-07-19', '2024-07-15 19:47:49', 1, 7, 8);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `review`
+-- Struttura della tabella `review`
 --
 
 CREATE TABLE `review` (
@@ -291,7 +300,7 @@ CREATE TABLE `review` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `review`
+-- Dump dei dati per la tabella `review`
 --
 
 INSERT INTO `review` (`id`, `title`, `valutation`, `description`, `type`, `creationDate`) VALUES
@@ -299,12 +308,14 @@ INSERT INTO `review` (`id`, `title`, `valutation`, `description`, `type`, `creat
 (26, 'Review', 4, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'student', '2024-07-09 09:15:02'),
 (27, 'Review', 4, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'owner', '2024-07-12 08:19:13'),
 (28, 'Review', 3, 'Something', 'student', '2024-07-15 15:05:55'),
-(32, 'This is my last try', 4, 'hello', 'student', '2024-07-15 17:51:58');
+(32, 'This is my last try', 4, 'hello', 'student', '2024-07-15 17:51:58'),
+(33, 'Review', 5, 'ok', 'accommodation', '2024-07-26 11:17:11'),
+(34, 'Review', 10, 'test', 'accommodation', '2024-07-26 11:26:16');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `student`
+-- Struttura della tabella `student`
 --
 
 CREATE TABLE `student` (
@@ -325,13 +336,13 @@ CREATE TABLE `student` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `student`
+-- Dump dei dati per la tabella `student`
 --
 
 INSERT INTO `student` (`id`, `username`, `password`, `name`, `surname`, `picture`, `universityMail`, `courseDuration`, `immatricolationYear`, `birthDate`, `sex`, `smoker`, `animals`, `status`) VALUES
 (2, 'Matthew', '$2y$10$xz68jh34Sb4XRrOVIBfA7.Rd8cCaZy47r', 'MIKE', 'Maloni', NULL, 'matteo.maloni@student.univaq.it', 3, 2021, '2019-05-18', 'M', 0, 0, 'active'),
 (3, 'Morge', 'pippo', 'Simone', 'Cialini', 4, 'simone.cialini@student.univaq.it', 3, 2021, '2018-05-09', 'M', 0, 1, 'active'),
-(5, 'Fratmo', 'pippo', 'Lorenzo', 'Maloni', NULL, 'lorenzo.maloni.02@gmail.com', 3, 2021, '2002-11-09', 'M', 0, 0, 'active'),
+(5, 'Fratmo', 'pippo', 'Lorenzo', 'Maloni', NULL, 'lorenzo.maloni.02@gmail.com', 3, 2021, '2002-11-09', 'M', 0, 0, 'banned'),
 (6, 'Dante', '$2y$10$JaCOvawDGXGvg/eeLKdJGezG.pygoLPpE', 'Dante', 'Alighieri', NULL, 'danteAlighieri@gmail.com', 3, 1300, '1269-12-12', 'M', 0, 0, 'active'),
 (7, 'Interstellar', '$2y$10$eh0UatZFEBohW.SVuanVaeluhZi45cTUfeAAfsWTFd2D7oZviQflu', 'Matthew', 'McConeghey', NULL, 'matthew.mcconeghey@student.unito.it', 3, 2020, '2024-07-02', 'M', 0, 1, 'active'),
 (8, 'eli', '$2y$10$Zz29dfbJIwXVbtn0gLNbTutz0WTaMVYTFhX4SlijYf9UBnBS9rqF2', 'Elisabetta', 'Mecozzi', 9, 'elisabetta.mecozzi@student.univaq.it', 3, 2021, '2002-11-11', 'F', 0, 0, 'active'),
@@ -341,7 +352,7 @@ INSERT INTO `student` (`id`, `username`, `password`, `name`, `surname`, `picture
 -- --------------------------------------------------------
 
 --
--- Table structure for table `studentreview`
+-- Struttura della tabella `studentreview`
 --
 
 CREATE TABLE `studentreview` (
@@ -352,7 +363,7 @@ CREATE TABLE `studentreview` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `studentreview`
+-- Dump dei dati per la tabella `studentreview`
 --
 
 INSERT INTO `studentreview` (`idStudent`, `idReview`, `authorStudent`, `authorOwner`) VALUES
@@ -364,7 +375,7 @@ INSERT INTO `studentreview` (`idStudent`, `idReview`, `authorStudent`, `authorOw
 -- --------------------------------------------------------
 
 --
--- Table structure for table `supportrequest`
+-- Struttura della tabella `supportrequest`
 --
 
 CREATE TABLE `supportrequest` (
@@ -379,7 +390,7 @@ CREATE TABLE `supportrequest` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `time`
+-- Struttura della tabella `time`
 --
 
 CREATE TABLE `time` (
@@ -389,7 +400,7 @@ CREATE TABLE `time` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `time`
+-- Dump dei dati per la tabella `time`
 --
 
 INSERT INTO `time` (`id`, `hour`, `idDay`) VALUES
@@ -411,7 +422,7 @@ INSERT INTO `time` (`id`, `hour`, `idDay`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `visit`
+-- Struttura della tabella `visit`
 --
 
 CREATE TABLE `visit` (
@@ -422,7 +433,7 @@ CREATE TABLE `visit` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `visit`
+-- Dump dei dati per la tabella `visit`
 --
 
 INSERT INTO `visit` (`id`, `day`, `idStudent`, `idAccommodation`) VALUES
@@ -433,11 +444,11 @@ INSERT INTO `visit` (`id`, `day`, `idStudent`, `idAccommodation`) VALUES
 (5, '2024-07-29 10:30:00', 10, 16);
 
 --
--- Indexes for dumped tables
+-- Indici per le tabelle scaricate
 --
 
 --
--- Indexes for table `accommodation`
+-- Indici per le tabelle `accommodation`
 --
 ALTER TABLE `accommodation`
   ADD PRIMARY KEY (`id`),
@@ -445,7 +456,7 @@ ALTER TABLE `accommodation`
   ADD KEY `address` (`address`);
 
 --
--- Indexes for table `accommodationreview`
+-- Indici per le tabelle `accommodationreview`
 --
 ALTER TABLE `accommodationreview`
   ADD KEY `idAccommodation` (`idAccommodation`),
@@ -453,34 +464,34 @@ ALTER TABLE `accommodationreview`
   ADD KEY `idReview` (`idReview`);
 
 --
--- Indexes for table `address`
+-- Indici per le tabelle `address`
 --
 ALTER TABLE `address`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `contract`
+-- Indici per le tabelle `contract`
 --
 ALTER TABLE `contract`
   ADD KEY `idReservation` (`idReservation`),
   ADD KEY `cardNumber` (`cardNumber`);
 
 --
--- Indexes for table `creditcard`
+-- Indici per le tabelle `creditcard`
 --
 ALTER TABLE `creditcard`
   ADD PRIMARY KEY (`number`),
   ADD KEY `idStudent` (`idStudent`);
 
 --
--- Indexes for table `day`
+-- Indici per le tabelle `day`
 --
 ALTER TABLE `day`
   ADD PRIMARY KEY (`id`),
   ADD KEY `accommodation` (`idAccommodation`);
 
 --
--- Indexes for table `owner`
+-- Indici per le tabelle `owner`
 --
 ALTER TABLE `owner`
   ADD PRIMARY KEY (`id`),
@@ -491,7 +502,7 @@ ALTER TABLE `owner`
   ADD KEY `picture` (`picture`);
 
 --
--- Indexes for table `ownerreview`
+-- Indici per le tabelle `ownerreview`
 --
 ALTER TABLE `ownerreview`
   ADD KEY `idAuthor` (`idAuthor`),
@@ -499,14 +510,14 @@ ALTER TABLE `ownerreview`
   ADD KEY `idReview` (`idReview`);
 
 --
--- Indexes for table `photo`
+-- Indici per le tabelle `photo`
 --
 ALTER TABLE `photo`
   ADD PRIMARY KEY (`id`),
   ADD KEY `photo_ibfk_1` (`idAccommodation`);
 
 --
--- Indexes for table `reservation`
+-- Indici per le tabelle `reservation`
 --
 ALTER TABLE `reservation`
   ADD PRIMARY KEY (`id`),
@@ -514,13 +525,13 @@ ALTER TABLE `reservation`
   ADD KEY `idStudent` (`idStudent`);
 
 --
--- Indexes for table `review`
+-- Indici per le tabelle `review`
 --
 ALTER TABLE `review`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `student`
+-- Indici per le tabelle `student`
 --
 ALTER TABLE `student`
   ADD PRIMARY KEY (`id`),
@@ -529,7 +540,7 @@ ALTER TABLE `student`
   ADD KEY `picture` (`picture`);
 
 --
--- Indexes for table `studentreview`
+-- Indici per le tabelle `studentreview`
 --
 ALTER TABLE `studentreview`
   ADD KEY `idStudent` (`idStudent`),
@@ -538,7 +549,7 @@ ALTER TABLE `studentreview`
   ADD KEY `authorOwner` (`authorOwner`);
 
 --
--- Indexes for table `supportrequest`
+-- Indici per le tabelle `supportrequest`
 --
 ALTER TABLE `supportrequest`
   ADD PRIMARY KEY (`id`),
@@ -546,14 +557,14 @@ ALTER TABLE `supportrequest`
   ADD KEY `idStudent` (`idStudent`);
 
 --
--- Indexes for table `time`
+-- Indici per le tabelle `time`
 --
 ALTER TABLE `time`
   ADD PRIMARY KEY (`id`),
   ADD KEY `idDay` (`idDay`);
 
 --
--- Indexes for table `visit`
+-- Indici per le tabelle `visit`
 --
 ALTER TABLE `visit`
   ADD PRIMARY KEY (`id`),
@@ -561,88 +572,88 @@ ALTER TABLE `visit`
   ADD KEY `idAccommodation` (`idAccommodation`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT per le tabelle scaricate
 --
 
 --
--- AUTO_INCREMENT for table `accommodation`
+-- AUTO_INCREMENT per la tabella `accommodation`
 --
 ALTER TABLE `accommodation`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT for table `address`
+-- AUTO_INCREMENT per la tabella `address`
 --
 ALTER TABLE `address`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT for table `day`
+-- AUTO_INCREMENT per la tabella `day`
 --
 ALTER TABLE `day`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
--- AUTO_INCREMENT for table `owner`
+-- AUTO_INCREMENT per la tabella `owner`
 --
 ALTER TABLE `owner`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `photo`
+-- AUTO_INCREMENT per la tabella `photo`
 --
 ALTER TABLE `photo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
--- AUTO_INCREMENT for table `reservation`
+-- AUTO_INCREMENT per la tabella `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `review`
+-- AUTO_INCREMENT per la tabella `review`
 --
 ALTER TABLE `review`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
--- AUTO_INCREMENT for table `student`
+-- AUTO_INCREMENT per la tabella `student`
 --
 ALTER TABLE `student`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `supportrequest`
+-- AUTO_INCREMENT per la tabella `supportrequest`
 --
 ALTER TABLE `supportrequest`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `time`
+-- AUTO_INCREMENT per la tabella `time`
 --
 ALTER TABLE `time`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
--- AUTO_INCREMENT for table `visit`
+-- AUTO_INCREMENT per la tabella `visit`
 --
 ALTER TABLE `visit`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- Constraints for dumped tables
+-- Limiti per le tabelle scaricate
 --
 
 --
--- Constraints for table `accommodation`
+-- Limiti per la tabella `accommodation`
 --
 ALTER TABLE `accommodation`
   ADD CONSTRAINT `accommodation_ibfk_6` FOREIGN KEY (`address`) REFERENCES `address` (`id`),
   ADD CONSTRAINT `owner` FOREIGN KEY (`idOwner`) REFERENCES `owner` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `accommodationreview`
+-- Limiti per la tabella `accommodationreview`
 --
 ALTER TABLE `accommodationreview`
   ADD CONSTRAINT `accommodationreview_ibfk_1` FOREIGN KEY (`idAccommodation`) REFERENCES `accommodation` (`id`) ON DELETE CASCADE,
@@ -650,32 +661,32 @@ ALTER TABLE `accommodationreview`
   ADD CONSTRAINT `accommodationreview_ibfk_3` FOREIGN KEY (`idReview`) REFERENCES `review` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `contract`
+-- Limiti per la tabella `contract`
 --
 ALTER TABLE `contract`
   ADD CONSTRAINT `contract_ibfk_1` FOREIGN KEY (`idReservation`) REFERENCES `reservation` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `contract_ibfk_2` FOREIGN KEY (`cardNumber`) REFERENCES `creditcard` (`number`) ON DELETE CASCADE;
 
 --
--- Constraints for table `creditcard`
+-- Limiti per la tabella `creditcard`
 --
 ALTER TABLE `creditcard`
   ADD CONSTRAINT `creditcard_ibfk_1` FOREIGN KEY (`idStudent`) REFERENCES `student` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `day`
+-- Limiti per la tabella `day`
 --
 ALTER TABLE `day`
   ADD CONSTRAINT `accommodation` FOREIGN KEY (`idAccommodation`) REFERENCES `accommodation` (`id`);
 
 --
--- Constraints for table `owner`
+-- Limiti per la tabella `owner`
 --
 ALTER TABLE `owner`
   ADD CONSTRAINT `owner_ibfk_1` FOREIGN KEY (`picture`) REFERENCES `photo` (`id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `ownerreview`
+-- Limiti per la tabella `ownerreview`
 --
 ALTER TABLE `ownerreview`
   ADD CONSTRAINT `ownerreview_ibfk_1` FOREIGN KEY (`idAuthor`) REFERENCES `student` (`id`) ON DELETE CASCADE,
@@ -683,26 +694,26 @@ ALTER TABLE `ownerreview`
   ADD CONSTRAINT `ownerreview_ibfk_3` FOREIGN KEY (`idReview`) REFERENCES `review` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `photo`
+-- Limiti per la tabella `photo`
 --
 ALTER TABLE `photo`
   ADD CONSTRAINT `photo_ibfk_1` FOREIGN KEY (`idAccommodation`) REFERENCES `accommodation` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `reservation`
+-- Limiti per la tabella `reservation`
 --
 ALTER TABLE `reservation`
   ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`idAccommodation`) REFERENCES `accommodation` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`idStudent`) REFERENCES `student` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `student`
+-- Limiti per la tabella `student`
 --
 ALTER TABLE `student`
   ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`picture`) REFERENCES `photo` (`id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `studentreview`
+-- Limiti per la tabella `studentreview`
 --
 ALTER TABLE `studentreview`
   ADD CONSTRAINT `studentreview_ibfk_1` FOREIGN KEY (`idStudent`) REFERENCES `student` (`id`) ON DELETE CASCADE,
@@ -711,20 +722,20 @@ ALTER TABLE `studentreview`
   ADD CONSTRAINT `studentreview_ibfk_4` FOREIGN KEY (`authorOwner`) REFERENCES `owner` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `supportrequest`
+-- Limiti per la tabella `supportrequest`
 --
 ALTER TABLE `supportrequest`
   ADD CONSTRAINT `supportrequest_ibfk_1` FOREIGN KEY (`idOwner`) REFERENCES `owner` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `supportrequest_ibfk_2` FOREIGN KEY (`idStudent`) REFERENCES `student` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `time`
+-- Limiti per la tabella `time`
 --
 ALTER TABLE `time`
   ADD CONSTRAINT `time_ibfk_1` FOREIGN KEY (`idDay`) REFERENCES `day` (`id`);
 
 --
--- Constraints for table `visit`
+-- Limiti per la tabella `visit`
 --
 ALTER TABLE `visit`
   ADD CONSTRAINT `visit_ibfk_1` FOREIGN KEY (`idStudent`) REFERENCES `student` (`id`) ON DELETE CASCADE,
