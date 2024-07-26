@@ -1029,16 +1029,17 @@ use PDO;
 
             try
             {
-                $q="SELECT *
-                    FROM accommodation a "; 
+                $q="SELECT a.id AS id
+                    FROM accommodation a INNER JOIN owner o ON o.id=a.idOwner
+                    WHERE o.status != 'banned' "; 
 
                 if($sex=='M')
                 {
-                    $q.=" WHERE ((a.man=TRUE AND a.woman=TRUE)OR(a.man=FALSE AND a.woman=FALSE)OR(a.man=TRUE AND a.woman=FALSE)) ";
+                    $q.=" AND ((a.man=TRUE AND a.woman=TRUE)OR(a.man=FALSE AND a.woman=FALSE)OR(a.man=TRUE AND a.woman=FALSE)) ";
                 }
                 else
                 {
-                    $q.=" WHERE ((a.man=TRUE AND a.woman=TRUE)OR(a.man=FALSE AND a.woman=FALSE)OR(a.man=FALSE AND a.woman=TRUE))";
+                    $q.=" AND ((a.man=TRUE AND a.woman=TRUE)OR(a.man=FALSE AND a.woman=FALSE)OR(a.man=FALSE AND a.woman=TRUE))";
                 }
 
                 if($smoke)
