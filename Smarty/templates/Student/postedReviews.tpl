@@ -178,10 +178,11 @@
                     const reviewElement = document.createElement('div');
                     reviewElement.className = 'review';
 
+                    let style;
                     if (review.userStatus ==='banned') {
-                        let style = ' disabled';
+                        style = 'class="disabled"';
                     } else {
-                        let style = '';
+                        style = '';
                     }
     
                     // Insert the names of the elements of the review array
@@ -196,10 +197,10 @@
                     <div class="row">
                         <div class="userSection">
                             <p> To: </p>
-                            <div class="userIcon` + style + `">
-                                <a href="/UniRent/Student/publicProfile/` + review.username + `"><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
+                            <div class="userIcon">
+                                <a href="/UniRent/Student/publicProfile/` + review.username + `" ` + style + `><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
                             </div>
-                            <div class="username` + style + `"><a href="/UniRent/Student/publicProfile/` + review.username + `">` + review.username + `</a></div> <!-- Username of the reviewer -->
+                            <div class="username"><a href="/UniRent/Student/publicProfile/` + review.username + `" ` + style + `>` + review.username + `</a></div> <!-- Username of the reviewer -->
                         </div>
                         <div class="col-md-11">
                             <div class="stars">
@@ -237,6 +238,11 @@
             console.error("Container not found!"); // Debugging: Error if container is not found
         }
     }
+    document.querySelectorAll('a.disabled').forEach(function(link) {
+    link.addEventListener('click', function(event) {
+      event.preventDefault();
+    });
+  });
 
     // Close modal when clicking on the close button or outside the modal
     const modal = document.getElementById('editModal');

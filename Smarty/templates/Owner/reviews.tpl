@@ -138,11 +138,13 @@
                     const reviewElement = document.createElement('div');
                     reviewElement.className = 'review';
 
+                    let style;
                     if (review.userStatus ==='banned') {
-                        let style = ' disabled';
+                        style = 'class="disabled"';
                     } else {
-                        let style = '';
+                        style = '';
                     }
+    
 
                     // Insert the names of the elements of the review array
                     reviewElement.innerHTML = `
