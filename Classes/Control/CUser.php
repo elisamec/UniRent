@@ -222,4 +222,12 @@ class CUser
         setcookie('PHPSESSID','',time()-3600,'/','',isset($_SERVER["HTTPS"]),true);
         header('Location: /UniRent/User/home');
     }
+
+    public static function supportRequest() {
+        $message=USuperGlobalAccess::getPost('message');
+        $email=USuperGlobalAccess::getPost('email');
+        //bisogna fare in modo che venga inviata una mail all'admin oppure cambio e gli do 
+        //direttamente l'opzione di mandare una mail all'admin o facendo in modo che il pulsante chiami
+        //che si apra l'editor della mail, oppure dandogli le informazioni di contatto dell'admin
+    }
 }

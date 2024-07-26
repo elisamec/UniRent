@@ -81,7 +81,7 @@
             <div class="row">
                <div class="col-sm-12">
                   <div class="contact_taital_main">
-                     <h1 class="contact_taital">Requeste A Call Back</h1>
+                     <h1 class="contact_taital">Request A Call Back</h1>
                      <hr class="contact_border_main">
                   </div>
                </div>
@@ -92,12 +92,11 @@
                <div class="row">
                   <div class="col-md-6">
                      <div class="mail_section map_form_container">
-                        <form action="" method="post" class="yourFormId">
+                        <form action="/UniRent/User/supportRequest" method="post" class="yourFormId">
                         <input type="text" class="mail_text" placeholder="Name" name="Name">
                         <input type="text" class="mail_text" placeholder="Email" name="Email">
-                        <textarea class="massage-bt" placeholder="Massage" rows="5" id="comment" name="Massage"></textarea>
-                        
-                           <div class="send_bt"><a href="#" class="yourLinkId">Send Now</a></div>
+                        <textarea class="message-bt" placeholder="Message" rows="5" id="comment" name="Message"></textarea>
+                        <div class="send_bt"><button type="submit">Send Now</button></div>
                         </form>
                      </div>
                   </div>

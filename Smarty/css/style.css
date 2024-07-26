@@ -1250,7 +1250,7 @@ input.mail_text::placeholder {
     color: #7c7c7d;
 }
 
-.massage-bt {
+.message-bt, .select-bt {
     color: #7c7c7d;
     width: 100%;
     height: auto;
@@ -1258,9 +1258,10 @@ input.mail_text::placeholder {
     color: #7c7c7d;
     border-bottom: 1px solid #7c7c7d !important;
     background-color: transparent;
-    padding: 20px 15px 0px 0px;
+    padding: 10px 15px 10px 0px;
     margin-bottom: 10px;
     border: 0px;
+    border-radius: 0px;
 }
 textarea#comment::placeholder {
     color: #7c7c7d;
