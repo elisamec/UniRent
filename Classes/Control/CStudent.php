@@ -874,6 +874,8 @@ class CStudent{
                 $profilePic = "/UniRent/Smarty/images/BannedUser.png";
             } else if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+            } else if (gettype($profilePic) === 'array') {
+                $profilePic = $profilePic[0];
             }
             else
             {
