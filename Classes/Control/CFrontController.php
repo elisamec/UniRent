@@ -2,6 +2,11 @@
 
 namespace Classes\Control;
 
+use Classes\Foundation\FPersistentManager;
+use Classes\Tools\TStatusUser;
+use Classes\Utilities\USession;
+use Classes\View\VError;
+
 /**
  * Front controller class
  *
@@ -21,7 +26,17 @@ class CFrontController{
     public function run($requestUri){
         $requestUri = trim($requestUri, '/');
         $uriParts = explode('/', $requestUri);
-        
+        $session = USession::getInstance();
+        if ($session::getSessionElement('id') != null) {
+            $PM = FPersistentManager::getInstance();
+            $userType = $session::getSessionElement('userType');
+            $user = $PM->load('E' . $userType, $session::getSessionElement('id'));
+            if ($user->getStatus() == TStatusUser::BANNED) {
+                $viewError = new VError();
+                $viewError->error(600);
+                return;
+            }
+        }
 
         array_shift($uriParts);
 
