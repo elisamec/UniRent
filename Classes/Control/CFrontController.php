@@ -34,6 +34,7 @@ class CFrontController{
             if ($user->getStatus() == TStatusUser::BANNED) {
                 $viewError = new VError();
                 $viewError->error(600);
+                CUser::logout();
                 return;
             }
         }
