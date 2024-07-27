@@ -243,14 +243,14 @@ class CStudent{
         $owner = $PM->load('EOwner', $accomm->getIdOwner());
         $owner_photo=$owner->getPhoto();
         $ownerStatus = $owner->getStatus();
-        /*if($ownerStatus === 'banned'){
+        if($ownerStatus === 'banned'){
             
-            $owner_photo = file_get_contents("/UniRent/Smarty/images/BannedUser.png");
+            $path = __DIR__ . "/../../Smarty/images/BannedUser.png";
+            $owner_photo = new EPhoto(null, file_get_contents($path), 'other', null);
             $owner_photo_64=EPhoto::toBase64(array($owner_photo));
             $owner->setPhoto($owner_photo_64[0]);
         }
-        else*/
-        if(!is_null($owner_photo))
+        elseif(!is_null($owner_photo))
         {
             $owner_photo_64=EPhoto::toBase64(array($owner_photo));
             $owner->setPhoto($owner_photo_64[0]);

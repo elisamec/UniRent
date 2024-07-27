@@ -112,11 +112,19 @@ class CReservation
             
             $owner = $PM->load('EOwner', $accommodation->getIdOwner());
             $owner_photo=$owner->getPhoto();
-            if(is_null($owner_photo)){}
-            else
+            $ownerStatus = $owner->getStatus();
+            if($ownerStatus === 'banned'){
+                
+                $path = __DIR__ . "/../../Smarty/images/BannedUser.png";
+                $owner_photo = new EPhoto(null, file_get_contents($path), 'other', null);
+                $owner_photo_64=EPhoto::toBase64(array($owner_photo));
+                $owner->setPhoto($owner_photo_64[0]);
+            }
+            elseif(!is_null($owner_photo))
             {
                 $owner_photo_64=EPhoto::toBase64(array($owner_photo));
                 $owner->setPhoto($owner_photo_64[0]);
+                #print_r($owner);
             }
             $view= new VStudent();
             $view->reservationDetails($reservation, $accommodation, $owner, self::formatDate($reservation->getMade()), $picture);
