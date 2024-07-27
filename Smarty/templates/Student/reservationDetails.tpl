@@ -111,13 +111,17 @@
                       <h1 class="titleOwn">Owner:</h1>
                         <div class="userSection">
                                 <div class="userIcon">
-                                    {if $owner->getPhoto() === null}
-                                        <a href="/UniRent/Owner/publicProfile/{$owner->getUsername()}"><img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon"></a>
+                                    {if $owner->getStatus()->value === 'banned'}
+                                        <a href="/UniRent/Owner/publicProfile/{$owner->getUsername()}" class="disabled"><img src="{$owner->getPhoto()->getPhoto()}" class="imageIcon"></a>
                                     {else}
                                     <a href="/UniRent/Owner/publicProfile/{$owner->getUsername()}"><img src="{$owner->getPhoto()->getPhoto()}"></a>
                                     {/if}
                                 </div>
+                                {if $owner->getStatus()->value === 'banned'}
+                                    <div class="username"><a href="/UniRent/Owner/publicProfile/{$owner->getUsername()}" class="disabled">{$owner->getUsername()}</a></div>
+                                {else}
                                 <div class="username"><a href="/UniRent/Owner/publicProfile/{$owner->getUsername()}">{$owner->getUsername()}</a></div> <!-- Username of the owner -->
+                                {/if}
                             </div>
                         </div>
                         </div>
@@ -126,6 +130,9 @@
                     </div>
                      <div class="col-lg-8 col-md-10 col-lg-8 col-md-10">
                      <div class="Accomcontainer">
+                     {if $owner->getStatus()->value === "banned"}
+                        <h1 class="title">Warning: The Owner of this Accommodation has been Banned</h1>
+                    {/if}
                         <div class="grey_square">
                         <h1 class="title">You have reserved this place from {$reservation->getFromDate()->format('d/m/Y')} to {$reservation->getToDate()->format('d/m/Y')}</h1>
                         {if $reservation->getStatusAccept() === true}
@@ -143,6 +150,7 @@
                         </div>
                         {/if}
                         </div>
+                        
                         <h1 class="title">Accommodation Details</h1>
                         <div class="row">
                         {if $accommodation->getPets() && $accommodation->getSmokers()}
