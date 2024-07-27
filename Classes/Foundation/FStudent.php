@@ -166,7 +166,7 @@ class FStudent
                     FPhoto::getInstance()->update($CPhoto);
                 }
                 $db->exec('LOCK TABLES student WRITE');
-                //$db->beginTransaction();
+                $db->beginTransaction();
                 $q='UPDATE student SET username = :user, password = :pass, name = :name, surname = :surname, picture = :picture, universityMail = :email, ';
                 $q.='courseDuration = :courseDuration, immatricolationYear = :immatricolationYear, birthDate = :birthDate, sex = :sex, smoker = :smoker, animals = :animals, status = :status WHERE id=:id';
                 $stm=$db->prepare($q);
@@ -317,11 +317,13 @@ class FStudent
         try
         {
             $q='SELECT * FROM student WHERE username= :user';
+            $db->exec('LOCK TABLES student READ');
             $db->beginTransaction();
             $stm=$db->prepare($q);
             $stm->bindParam(':user',$user,PDO::PARAM_STR);
             $stm->execute();
             $db->commit();
+            $db->exec('UNLOCK TABLES');
         }
         catch(PDOException $e)
         {
@@ -373,11 +375,13 @@ class FStudent
         try
         {
             $q='DELETE FROM student WHERE username = :user';
+            $db->exec('LOCK TABLES student WRITE');
             $db->beginTransaction();
             $stm=$db->prepare($q);
             $stm->bindParam(':user',$user,PDO::PARAM_STR);
             $stm->execute();
             $db->commit();
+            $db->exec('UNLOCK TABLES');
             return true;
         }
         catch(PDOException $e)
@@ -401,11 +405,13 @@ class FStudent
         try
         {
             $q='SELECT id FROM student WHERE username = :user';
+            $db->exec('LOCK TABLES student READ');
             $db->beginTransaction();
             $stm=$db->prepare($q);
             $stm->bindParam(':user',$user,PDO::PARAM_STR);
             $stm->execute();
             $db->commit();
+            $db->exec('UNLOCK TABLES');
         }
         catch(PDOException $e)
         {
@@ -429,11 +435,13 @@ class FStudent
         try
         {
             $q='SELECT universityMail FROM student WHERE username = :user';
+            $db->exec('LOCK TABLES student READ');
             $db->beginTransaction();
             $stm=$db->prepare($q);
             $stm->bindParam(':user',$user);
             $stm->execute();
             $db->commit();
+            $db->exec('UNLOCK TABLES');
         }
         catch(PDOException $e)
         {
@@ -458,11 +466,13 @@ class FStudent
         try
         {
             $q='SELECT picture FROM student WHERE username = :user';
+            $db->exec('LOCK TABLES student READ');
             $db->beginTransaction();
             $stm=$db->prepare($q);
             $stm->bindParam(':user',$user);
             $stm->execute();
             $db->commit();
+            $db->exec('UNLOCK TABLES');
         }
         catch(PDOException $e)
         {
