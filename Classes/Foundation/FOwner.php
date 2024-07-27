@@ -35,14 +35,23 @@ use PDOException;
 
     public function exist(int $id):bool 
     {
-        $q='SELECT * FROM owner WHERE id=:idOwner';
-        $connection= FConnection::getInstance();
-        $db=$connection->getConnection();
-        $db->beginTransaction();
-        $stm=$db->prepare($q);
-        $stm->bindParam(':idOwner',$id,PDO::PARAM_INT);
-        $stm->execute();
-        //$db->commit();
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $db->exec('LOCK TABLES owner READ');
+            $db->beginTransaction();
+            $q='SELECT * FROM owner WHERE id=:id';
+            $stm=$db->prepare($q);
+            $stm->bindparam(':id', $id, PDO::PARAM_INT);
+            $stm->execute();
+            $db->commit();
+            
+        }
+        catch (PDOException $e) 
+        {
+            $db->rollBack();
+        }
+        $db->exec('UNLOCK TABLES');
         $result=$stm->rowCount();
 
         if ($result >0)

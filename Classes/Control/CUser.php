@@ -20,10 +20,10 @@ class CUser
     public static function home(){
         $session=USession::getInstance();
         $type=$session::getSessionElement('userType');
-        $username=$session::getSessionElement('username');
+        $id=$session::getSessionElement('id');
         if($type==='Student')
         {
-            $student=FPersistentManager::getInstance()->getStudentByUsername($username);
+            $student=FPersistentManager::getInstance()->load('EStudent',$id);
             if($student->getStatus()==TStatusUser::BANNED)
             {
                 $v=new VError();
@@ -37,7 +37,7 @@ class CUser
         }
         elseif($type==='Owner')
         {
-            $owner=FPersistentManager::getInstance()->getOwnerByUsername($username);
+            $owner=FPersistentManager::load('EOwner',$id);
             if($owner->getStatus()==TStatusUser::BANNED)
             {
                 $v=new VError();

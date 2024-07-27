@@ -37,7 +37,8 @@ class CStudent{
         $PM=FPersistentManager::getInstance();
         $session=USession::getInstance();
         $user = $session->getSessionElement('username');
-        $student = $PM->getStudentByUsername($user);
+        $student_id = $session->getSessionElement('id');
+        $student = $PM->load('EStudent', $student_id);
         $accommodations = $PM->lastAccommodationsStudent($student);
         $view->home($accommodations);
     }
@@ -99,15 +100,15 @@ class CStudent{
         $view = new VStudent();
         $session=USession::getInstance();
 
-        $user = $session->getSessionElement('username');
+        $user_id = $session->getSessionElement('id');
         $PM=FPersistentManager::getInstance();
-        $student=$PM->getStudentByUsername($user);
+        $student=$PM::load('EStudent',$user_id);
         $ph = null;
 
         if(is_null($student)){
 
             $session->setSessionElement('photo', $ph);
-            print '<b>500 : SERVER ERROR </b>';
+            http_response_code(500);
 
         } else {   
 
@@ -861,14 +862,13 @@ class CStudent{
     public static function postedReview() {
         $view = new VStudent();
         $session=USession::getInstance();
-        $username=$session::getSessionElement('username');
+        $studentId=$session::getSessionElement('id');
         $PM=FPersistentManager::getInstance();
-        $studentId=$PM->getStudentIdByUsername($username);
         $reviews = $PM->loadReviewsByAuthor($studentId, TType::STUDENT);
         $reviewsData = [];
 
         foreach ($reviews as $review) {
-            $recipient = $PM::load( 'E' . $review->getRecipientType()->value, $review->getIdRecipient());
+            $recipient = $PM::load( 'E' . ucfirst($review->getRecipientType()->value), $review->getIdRecipient());
             $profilePic = $recipient->getPhoto();
             if ($recipient->getStatus() === TStatusUser::BANNED) {
                 $profilePic = "/UniRent/Smarty/images/BannedUser.png";
@@ -877,7 +877,11 @@ class CStudent{
             }
             else
             {
-                $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
+                $p=[];
+                $p[]=$profilePic;
+                $p=EPhoto::toBase64($p);
+                $p1=$p[0];
+                $profilePic=$p1->getPhoto();
             }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
@@ -889,7 +893,7 @@ class CStudent{
                 'id'=> $review->getId()
             ];
         }
-        $view->postedReview($reviewsData);
+        #$view->postedReview($reviewsData);
     }
 
     public static function reserveAccommodation(int $idAccommodation)

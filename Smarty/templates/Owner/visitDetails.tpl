@@ -95,7 +95,7 @@
                      <h1>Visit Details</h1>
                      <p> This visit is scheduled for the {$visit->getDate()->format('d-m-Y')} at {$visit->getDate()->format('H:i')}.</p>
                      <p> The visit will last for {$accommodation->getVisitDuration()} minutes.</p>
-                     <p> The student who requested the visit is <a href="/UniRent/Owner/publicProfile/{$student->getUsername()}">@{$student->getUsername()}</a>.</p>
+                     <p> The student who requested the visit is <a href="/UniRent/Student/publicProfile/{$student->getUsername()}">@{$student->getUsername()}</a>.</p>
                      <div class="col-md-3">
                      <div class="find_btn"><a href="#" onclick="openEditModal()"> Edit</a></div>
                      <div class="delete_btn" id="reportOwn"><a href="#" onclick="openDeleteModal()">Delete</a></div>

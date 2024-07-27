@@ -115,17 +115,17 @@
                         <div class="userSection">
                                 <div class="userIcon">
                                     {if $owner->getStatusString() === "banned"}
-                                        <a href="/UniRent/Student/publicProfile/{$owner->getUsername()}" class="disabled"><img src="/UniRent/Smarty/images/BannedUser.png" class="imageIcon"></a>
+                                        <a href="/UniRent/Owner/publicProfile/{$owner->getUsername()}" class="disabled"><img src="/UniRent/Smarty/images/BannedUser.png" class="imageIcon"></a>
                                         {else if $owner->getPhoto() === null}
-                                        <a href="/UniRent/Student/publicProfile/{$owner->getUsername()}"><img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon"></a>
+                                        <a href="/UniRent/Owner/publicProfile/{$owner->getUsername()}"><img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon"></a>
                                     {else}
-                                    <a href="/UniRent/Student/publicProfile/{$owner->getUsername()}"><img src="{$owner->getPhoto()->getPhoto()}"></a>
+                                    <a href="/UniRent/Owner/publicProfile/{$owner->getUsername()}"><img src="{$owner->getPhoto()->getPhoto()}"></a>
                                     {/if}
                                 </div>
                                 {if $owner->getStatusString() === "banned"}
-                                <div class="username"><a href="/UniRent/Student/publicProfile/{$owner->getUsername()}" class="disabled">{$owner->getUsername()}</a></div> <!-- Username of the owner -->
+                                <div class="username"><a href="/UniRent/Owner/publicProfile/{$owner->getUsername()}" class="disabled">{$owner->getUsername()}</a></div> <!-- Username of the owner -->
                                 {else}
-                                <div class="username"><a href="/UniRent/Student/publicProfile/{$owner->getUsername()}">{$owner->getUsername()}</a></div> <!-- Username of the owner -->
+                                <div class="username"><a href="/UniRent/Owner/publicProfile/{$owner->getUsername()}">{$owner->getUsername()}</a></div> <!-- Username of the owner -->
                                 {/if}
                             </div>
                         </div>

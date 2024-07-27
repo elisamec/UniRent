@@ -157,5 +157,6 @@ $result=$FA->areThereFreePlaces(7,2024);
 
 print var_dump($result) ;*/
 
-$addres=FPersistentManager::getInstance()->load('EAccommodation',4);
-print_r($addres);
+$student=FPersistentManager::getInstance()->getStudentIdByUsername('eli');
+$student=FPersistentManager::getInstance()->load('EStudent',$student);
+print_r($student);

@@ -26,8 +26,7 @@ class COwner
     {
         $view = new VOwner();
         $PM=FPersistentManager::getInstance();
-        $username=USession::getInstance()::getSessionElement('username');
-        $ownerId=$PM->getOwnerIdByUsername($username);
+        $ownerId=USession::getInstance()::getSessionElement('id');
         $accommodationEntities=$PM->loadAccommodationsByOwner($ownerId);
         $accommodationsActive=[];
         $accommodationsInactive=[];
@@ -711,9 +710,8 @@ class COwner
     public static function postedReview() {
         $view = new VOwner();
         $session=USession::getInstance();
-        $username=$session::getSessionElement('username');
+        $ownerId=$session::getSessionElement('id');
         $PM=FPersistentManager::getInstance();
-        $ownerId=$PM->getOwnerIdByUsername($username);
         $reviews = $PM->loadReviewsByAuthor($ownerId, TType::OWNER);
         $reviewsData = [];
 
@@ -896,9 +894,8 @@ class COwner
 
     public static function tenants(string $kind) {
         $session=USession::getInstance();
-        $username=$session::getSessionElement('username');
+        $ownerId=$session::getSessionElement('id');
         $PM=FPersistentManager::getInstance();
-        $ownerId=$PM->getOwnerIdByUsername($username);
         $view = new VOwner();
         $tenantsArray = $PM->getTenants($kind,$ownerId);
         $tenants=[];
@@ -952,9 +949,8 @@ class COwner
     public static function filterTenants(string $type)
     {
         $session=USession::getInstance();
-        $username=$session::getSessionElement('username');
+        $ownerId=$session::getSessionElement('id');
         $PM=FPersistentManager::getInstance();
-        $ownerId=$PM->getOwnerIdByUsername($username);
         $view = new VOwner();
 
         $accommodation_name=USuperGlobalAccess::getPost('accommodation');
