@@ -908,7 +908,9 @@ class COwner
             $tenantList = [];
             foreach ($students as $student) {
                 $profilePic = ($student[0])->getPhoto();
-                if ($profilePic === null) {
+                if ($student[0]->getStatus() === TStatusUser::BANNED) {
+                    $profilePic = "/UniRent/Smarty/images/BannedUser.png";
+                } else if ($profilePic === null) {
                     $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
                 }
                 else
@@ -918,7 +920,8 @@ class COwner
                 $tenantList[] = [
                     'username' => ($student[0])->getUsername(),
                     'image' => $profilePic,
-                    'expiryDate' => $student[1]
+                    'expiryDate' => $student[1],
+                    'status' => ($student[0])->getStatus()->value
                 ];
             }
 
@@ -987,7 +990,9 @@ class COwner
             $tenantList = [];
             foreach ($students as $student) {
                 $profilePic = $student[0]->getPhoto();
-                if ($profilePic === null) {
+                if ($student[0]->getStatus() === TStatusUser::BANNED) {
+                    $profilePic = "/UniRent/Smarty/images/BannedUser.png";
+                } else if ($profilePic === null) {
                     $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
                 }
                 else
@@ -997,7 +1002,8 @@ class COwner
                 $tenantList[] = [
                     'username' => $student[0]->getUsername(),
                     'image' => $profilePic,
-                    'expiryDate' => $student[1]
+                    'expiryDate' => $student[1],
+                    'status' => $student[0]->getStatus()->value
                 ];
             }
 

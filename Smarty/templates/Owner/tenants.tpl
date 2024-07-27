@@ -333,6 +333,9 @@
 
                     const userLink = document.createElement("a");
                     userLink.href = `/UniRent/Owner/publicProfile/${tenant.username}/${kind}`;
+                    if (tenant.status === 'banned') {
+                        userLink.classList.add("disabled");
+                    }
 
                     const userImage = document.createElement("img");
                     userImage.src = tenant.image;
@@ -346,6 +349,9 @@
 
                     const usernameLink = document.createElement("a");
                     usernameLink.href = `/UniRent/Owner/publicProfile/${tenant.username}`;
+                    if (tenant.status === 'banned') {
+                        usernameLink.classList.add("disabled");
+                    }
                     usernameLink.textContent = tenant.username;
                     usernameDiv.appendChild(usernameLink);
 
@@ -383,6 +389,9 @@
 
                 const userLink = document.createElement("a");
                 userLink.href = `/UniRent/Owner/publicProfile/${tenant.username}/${kind}`;
+                if (tenant.status === 'banned') {
+                        userLink.classList.add("disabled");
+                    }
 
                 const userImage = document.createElement("img");
                 userImage.src = tenant.image;
@@ -397,6 +406,9 @@
                 const usernameLink = document.createElement("a");
                 usernameLink.href = `/UniRent/Owner/publicProfile/${tenant.username}`;
                 usernameLink.textContent = tenant.username;
+                if (tenant.status === 'banned') {
+                        usernameLink.classList.add("disabled");
+                    }
                 usernameDiv.appendChild(usernameLink);
 
                 // Display expiry date under username
