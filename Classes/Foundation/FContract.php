@@ -148,4 +148,44 @@ class FContract
             return false;
         }
     }
+    public function getContractsByStudent(int $id, ?int $idAccommodation=null):array|bool
+    {
+        $db=FConnection::getInstance()->getConnection();
+        $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+        FPersistentManager::getInstance()->updateDataBase();
+        $contracts=[];
+        try
+        {
+            $db->exec('LOCK TABLES contract READ');
+            $q='SELECT * FROM contract WHERE idReservation IN (SELECT id FROM reservation WHERE idStudent=:id';
+            if(!is_null($idAccommodation))
+            {
+                $q.=' AND idAccommodation=:idAccommodation)';
+            }
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindValue(':id',$id,PDO::PARAM_INT);
+            if (!is_null($idAccommodation))
+            {
+            $stm->bindValue(':idAccommodation',$idAccommodation, PDO::PARAM_INT);
+            }
+            $stm->execute();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return false;
+        }
+        $row=$stm->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($row as $r)
+        {
+            $reservationAssociated=FReservation::getInstance()->load($r['idReservation']);
+            $date= new DateTime($r['paymentDate']);
+            $contract= new EContract($r['status'],$r['cardNumber'],$reservationAssociated, $date);
+            $contracts[]=$contract;
+        }
+        return $contracts;
+    }
 }

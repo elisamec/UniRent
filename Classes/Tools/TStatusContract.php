@@ -1,8 +1,8 @@
 <?php
 namespace Classes\Tools;
-interface StatusEnum extends \BackedEnum {}
+interface StatusContractEnum extends \BackedEnum {}
 
-enum TStatusContract:string implements StatusEnum 
+enum TStatusContract:string implements StatusContractEnum 
 {
     //refers to contract
     case FUTURE = 'future';

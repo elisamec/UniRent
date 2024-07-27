@@ -276,12 +276,19 @@ class CStudent{
             {
                 $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
             }
+            if ($review->getDescription()===null) {
+                $content='No description';
+            }
+            else
+            {
+                $content=$review->getDescription();
+            }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
                 'userStatus' => $author->getStatus()->value,
                 'stars' => $review->getValutation(),
-                'content' => $review->getDescription(),
+                'content' => $content,
                 'userPicture' => $profilePic,
             ];
         }
@@ -340,7 +347,21 @@ class CStudent{
                 ];
             }
         }
-        $view->accommodation($accomm, $owner, $reviewsData, $period, $picture, $visits, $visitDuration, $tenants, $num_places, $studBooked, $dayOfBooking, $timeOfBooking, $disabled, $successReserve, $successVisit);
+        $contracts=count($PM->getContractsByStudent(USession::getInstance()->getSessionElement('id'),$idAccommodation));
+        $postedReviews=$PM->loadReviewsByAuthor(USession::getInstance()->getSessionElement('id'), TType::STUDENT);
+        $countRev=0;
+        foreach ($postedReviews as $review) {
+            if ($review->getRecipientType()===TType::ACCOMMODATION) {
+                if ($review->getIdRecipient()==$idAccommodation) {
+                    $countRev++;
+                }
+            }
+        }
+        $leavebleReviews=$contracts-$countRev;
+        if ($leavebleReviews<0) {
+            $leavebleReviews=0;
+        }
+        $view->accommodation($accomm, $owner, $reviewsData, $period, $picture, $visits, $visitDuration, $tenants, $num_places, $studBooked, $dayOfBooking, $timeOfBooking, $disabled, $successReserve, $successVisit, $leavebleReviews);
     }
 
 
@@ -366,12 +387,19 @@ class CStudent{
             {
                 $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
             }
+            if ($review->getDescription()===null) {
+                $content='No description';
+            }
+            else
+            {
+                $content=$review->getDescription();
+            }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
                 'userStatus' => $author->getStatus()->value,
                 'stars' => $review->getValutation(),
-                'content' => $review->getDescription(),
+                'content' => $content,
                 'userPicture' => $profilePic,
             ];
         }
@@ -616,12 +644,19 @@ class CStudent{
             {
                 $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
             }
+            if ($review->getDescription()===null) {
+                $content='No description';
+            }
+            else
+            {
+                $content=$review->getDescription();
+            }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
                 'userStatus' => $author->getStatus()->value,
                 'stars' => $review->getValutation(),
-                'content' => $review->getDescription(),
+                'content' => $content,
                 'userPicture' => $profilePic,
             ];
         }
@@ -657,12 +692,19 @@ class CStudent{
             {
                 $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
             }
+            if ($review->getDescription()===null) {
+                $content='No description';
+            }
+            else
+            {
+                $content=$review->getDescription();
+            }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
                 'userStatus' => $author->getStatus()->value,
                 'stars' => $review->getValutation(),
-                'content' => $review->getDescription(),
+                'content' => $content,
                 'userPicture' => $profilePic,
             ];
         }
@@ -876,23 +918,35 @@ class CStudent{
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             } else if (gettype($profilePic) === 'array') {
                 $profilePic = $profilePic[0];
+                $profilePic=(EPhoto::toBase64(array($profilePic))[0])->getPhoto();
             }
             else
             {
-                $p=[];
-                $p[]=$profilePic;
-                $p=EPhoto::toBase64($p);
-                $p1=$p[0];
-                $profilePic=$p1->getPhoto();
+                $profilePic=(EPhoto::toBase64(array($profilePic))[0])->getPhoto();
+            }
+            if ($review->getRecipientType()->value === 'accommodation') {
+                $username = $recipient->getTitle();
+                $status = $recipient->getStatus();
+            } else {
+                $username = $recipient->getUsername();
+                $status = $recipient->getStatus()->value;
+            }
+            if ($review->getDescription()===null) {
+                $content='No description';
+            }
+            else
+            {
+                $content=$review->getDescription();
             }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
-                'username' => $recipient->getUsername(),
-                'userStatus' => $recipient->getStatus()->value,
+                'username' => $username,
+                'userStatus' => $status,
                 'stars' => $review->getValutation(),
-                'content' => $review->getDescription(),
+                'content' => $content,
                 'userPicture' => $profilePic,
-                'id'=> $review->getId()
+                'id'=> $review->getId(),
+                'type' => ucfirst($review->getRecipientType()->value),
             ];
         }
         $view->postedReview($reviewsData);

@@ -642,6 +642,12 @@ class FPersistentManager {
         $FU=FUpdater::getInstance();
         $FU->updateDB();
     }
+    public function getContractsByStudent(int $id, int $idAccommodation):array|bool
+    {
+        $FC=FContract::getInstance();
+        $result=$FC->getContractsByStudent($id, $idAccommodation);
+        return $result;
+    }
     
 }
 

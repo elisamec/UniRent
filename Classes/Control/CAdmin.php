@@ -6,6 +6,7 @@ require __DIR__.'/../../vendor/autoload.php';
 use Classes\Entity\EStudent;
 use Classes\Entity\ESupportRequest;
 use Classes\Foundation\FPersistentManager;
+use Classes\Tools\TStatusUser;
 use Classes\Tools\TType;
 use Classes\Utilities\USession;
 use Classes\View\VAdmin;
@@ -131,6 +132,28 @@ class CAdmin
         else
         {
             header('Location:/UniRent/'.ucfirst($type->value).'/contact/fail');
+        }
+    }
+    public static function ban(int $id, string $type)
+    {
+        $PM = FPersistentManager::getInstance();
+        $user=$PM::load('E'.ucfirst($type), $id);
+        $user->setStatus(TStatusUser::BANNED);
+        if (ucfirst($type)==='Owner') {
+            $accommodationArray=$PM->loadAccommodationsByOwner($id);
+            foreach ($accommodationArray as $accommodation) {
+                $accommodation->setStatus(false);
+                $PM::update($accommodation);
+            }
+        }
+        $res=$PM::update($user);
+        if ($res)
+        {
+            #header('Location:/UniRent/Admin/home/banned');
+        }
+        else
+        {
+            #header('Location:/UniRent/Admin/home/error');
         }
     }
 }

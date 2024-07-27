@@ -56,7 +56,7 @@ class EAccommodation
     /**
      * @var string $entity 
      */
-    private static $entity = EVisit::class;
+    private static $entity = EAccommodation::class;
 
     /**
      * __construct

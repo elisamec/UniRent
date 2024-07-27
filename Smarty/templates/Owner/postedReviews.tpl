@@ -204,6 +204,7 @@
                                 <a href="/UniRent/Student/publicProfile/` + review.username + `" ` + style + `><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
                             </div>
                             <div class="username"><a href="/UniRent/Student/publicProfile/` + review.username + `" ` + style + `>` + review.username + `</a></div> <!-- Username of the reviewer -->
+                            <p class="reviewRecipType">` + review.type + `</p>
                         </div>
                         <div class="col-md-11">
                             <div class="stars">

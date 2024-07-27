@@ -1802,6 +1802,22 @@ textarea#comment::placeholder {
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
         transition: border-color 0.3s ease;
     }
+    .accomm {
+        width: 50px; /* Set the width of the icon */
+        height: 50px; /* Set the height of the icon */
+        border-radius: 20%; /* Make the icon circular */
+        overflow: hidden; /* Hide any overflow */
+        display: inline-block; /* Ensure it displays inline with other content */
+        border: 2px solid #ccc; /* Optional: Add a border for a polished look */
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+        transition: border-color 0.3s ease;
+    }
+    .reviewRecipType {
+        padding:0;
+        margin:0;
+        opacity: 0.7;
+        font-size: 15px;
+    }
     
     .userIcon img {
         width: 100%; /* Make the image take up the full width of the container */

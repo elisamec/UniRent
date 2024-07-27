@@ -116,12 +116,19 @@ class COwner
             {
                 $profilePic=(EPhoto::toBase64(array($profilePic)))[0];
             }
+            if ($review->getDescription()===null) {
+                $content='No description';
+            }
+            else
+            {
+                $content=$review->getDescription();
+            }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
                 'userStatus' => $author->getStatus()->value,
                 'stars' => $review->getValutation(),
-                'content' => $review->getDescription(),
+                'content' => $content,
                 'userPicture' => $profilePic->getPhoto(),
             ];
         }
@@ -527,12 +534,19 @@ class COwner
             {
                 $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
             }
+            if ($review->getDescription()===null) {
+                $content='No description';
+            }
+            else
+            {
+                $content=$review->getDescription();
+            }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
                 'userStatus' => $author->getStatus()->value,
                 'stars' => $review->getValutation(),
-                'content' => $review->getDescription(),
+                'content' => $content,
                 'userPicture' => $profilePic,
             ];
         }
@@ -647,12 +661,19 @@ class COwner
             {
                 $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
             }
+            if ($review->getDescription()===null) {
+                $content='No description';
+            }
+            else
+            {
+                $content=$review->getDescription();
+            }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
                 'userStatus' => $author->getStatus()->value,
                 'stars' => $review->getValutation(),
-                'content' => $review->getDescription(),
+                'content' => $content,
                 'userPicture' => $profilePic,
             ];
         }
@@ -690,12 +711,19 @@ class COwner
             {
                 $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
             }
+            if ($review->getDescription()===null) {
+                $content='No description';
+            }
+            else
+            {
+                $content=$review->getDescription();
+            }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
                 'userStatus' => $author->getStatus()->value,
                 'stars' => $review->getValutation(),
-                'content' => $review->getDescription(),
+                'content' => $content,
                 'userPicture' => $profilePic,
             ];
         }
@@ -730,14 +758,22 @@ class COwner
             {
                 $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
             }
+            if ($review->getDescription()===null) {
+                $content='No description';
+            }
+            else
+            {
+                $content=$review->getDescription();
+            }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $recipient->getUsername(),
                 'userStatus' => $recipient->getStatus()->value,
                 'stars' => $review->getValutation(),
-                'content' => $review->getDescription(),
+                'content' => $content,
                 'userPicture' => $profilePic,
-                'id'=> $review->getId()
+                'id'=> $review->getId(),
+                'type' => ucfirst($review->getRecipientType()->value)
             ];
         }
         $view->postedReview($reviewsData);

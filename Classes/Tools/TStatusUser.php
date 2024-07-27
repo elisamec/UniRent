@@ -1,8 +1,8 @@
 <?php
 namespace Classes\Tools;
-interface StatusEnum extends \BackedEnum {}
+interface StatusUserEnum extends \BackedEnum {}
 
-enum TStatusUser:string implements StatusEnum
+enum TStatusUser:string implements StatusUserEnum
 {
     case ACTIVE = 'active';
     case BANNED = 'banned';

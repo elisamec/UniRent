@@ -69,4 +69,23 @@ class CReview {
             $viewError->error(500);
             }
     }
+    public static function addReviewAccommodation(int $idAccommodation) {
+        $PM=FPersistentManager::getInstance();
+        $session=USession::getInstance();
+        $idAuthor = $session->getSessionElement('id');
+        $authorType=TType::STUDENT;
+        $type=TType::ACCOMMODATION;
+        $title=USuperGlobalAccess::getPost('title');
+        $description=USuperGlobalAccess::getPost('content');
+        $valutation=USuperGlobalAccess::getPost('rate');
+        $date=new DateTime();
+        $review=new EReview(null, $title, $valutation, $description, $type, $date, $authorType, $idAuthor, $idAccommodation);
+        $res=$PM::store($review);
+        if ($res) {
+            header('Location:' . $_SERVER['HTTP_REFERER']);
+        } else {
+            $viewError= new VError();
+            $viewError->error(500);
+        }
+    }
 }

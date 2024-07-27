@@ -1,8 +1,8 @@
 <?php  
 namespace Classes\Entity;
 require __DIR__.'/../../vendor/autoload.php';
-require_once('../Tools/TStatus.php');
 use Classes\Entity\EReservation;
+use Classes\Tools\TStatusContract;
 use DateTime;
 
 /**
@@ -27,9 +27,9 @@ class EContract extends EReservation
     /**
      * cardNumber
      *
-     * @var int $cardNumber
+     * @var string $cardNumber
      */
-    private int $cardNumber;
+    private string $cardNumber;
     
     /**
      * __construct
@@ -40,9 +40,12 @@ class EContract extends EReservation
      * @param  DateTime $payment
      * @return self
      */
-    public function __construct(TStatusContract $status, string $cardNumber, EReservation $reserv, DateTime $payment)
+    public function __construct(TStatusContract | string $status, string $cardNumber, EReservation $reserv, DateTime $payment)
     {
         parent::__construct($reserv->getFromDate(),$reserv->getToDate(),$reserv->getAccomodationId(),$reserv->getIdStudent());
+        if (is_string($status)) {
+            $status = TStatusContract::tryFrom($status);
+        }
         $this->status=$status;
         $this->cardNumber=$cardNumber;
         $this->paymentDate=$payment;

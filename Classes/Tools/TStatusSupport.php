@@ -1,8 +1,8 @@
 <?php
 namespace Classes\Tools;
-interface StatusEnum extends \BackedEnum {}
+interface StatusSupportEnum extends \BackedEnum {}
 
-enum TStatusSupport:int implements StatusEnum
+enum TStatusSupport:int implements StatusSupportEnum
 {
     case WAITING = 1;
     case RESOLVED = 0;

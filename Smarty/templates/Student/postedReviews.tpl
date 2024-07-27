@@ -184,6 +184,12 @@
                     } else {
                         style = '';
                     }
+                    let userStyle
+                    if (review.type === 'Accommodation') {
+                        userStyle = 'class="accomm"';
+                    } else {
+                        userStyle = 'class="userIcon"';
+                    }
     
                     // Insert the names of the elements of the review array
                     reviewElement.innerHTML = `
@@ -197,12 +203,13 @@
                     <div class="row">
                         <div class="userSection">
                             <p> To: </p>
-                            <div class="userIcon">
+                            <div ` + userStyle + `>
                                 <a href="/UniRent/Student/publicProfile/` + review.username + `" ` + style + `><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
                             </div>
                             <div class="username"><a href="/UniRent/Student/publicProfile/` + review.username + `" ` + style + `>` + review.username + `</a></div> <!-- Username of the reviewer -->
+                            <p class="reviewRecipType">` + review.type + `</p>
                         </div>
-                        <div class="col-md-11">
+                        <div class="col-md-10">
                             <div class="stars">
                                 ` + generateStars(review.stars) + ` <!-- Star rating -->
                             </div>
