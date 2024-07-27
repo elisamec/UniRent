@@ -215,7 +215,6 @@ class CReservation
 
                 // Extract the components of the difference
                 $days = $interval->days;
-                print($days);
                 // Add days to the array if greater than 0
                 if ($days > 0) {
                     $formatted = $days . ' ' . ($days > 1 ? 'days' : 'day');
@@ -229,7 +228,6 @@ class CReservation
         $reservation = $PM::load('EReservation', $id);
         $reservation->setStatus(true);
         $reservation->setMade(new DateTime('now'));
-        print($reservation->getStatusAccept());
         $res = $PM::update($reservation);
         if ($res) {
             header('Location:/UniRent/Reservation/showOwner/accepted');

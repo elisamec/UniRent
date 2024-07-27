@@ -893,7 +893,7 @@ class CStudent{
                 'id'=> $review->getId()
             ];
         }
-        #$view->postedReview($reviewsData);
+        $view->postedReview($reviewsData);
     }
 
     public static function reserveAccommodation(int $idAccommodation)

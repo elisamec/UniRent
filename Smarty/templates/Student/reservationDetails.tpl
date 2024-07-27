@@ -128,9 +128,13 @@
                      <div class="Accomcontainer">
                         <div class="grey_square">
                         <h1 class="title">You have reserved this place from {$reservation->getFromDate()->format('d/m/Y')} to {$reservation->getToDate()->format('d/m/Y')}</h1>
-                        {if $reservation->getStatusAccept === true}
+                        {if $reservation->getStatusAccept() === true}
                         <h1 class="title">Status: Accepted</h1>
                         <h2> You have {$timeLeft} left to sign and pay the contract</h2>
+                        <div class="btn-cont">
+                        <button class="edit_button" id="payBtn">Pay</button>
+                        <button class="delete_button" id="deleteBtn">Delete</button>
+                        </div>
                         {else}
                         <h1 class="title">Status: Pending</h1>
                         <h2> The owner has {$timeLeft} left to accept your reservation</h2>

@@ -21,9 +21,10 @@ class CUser
         $session=USession::getInstance();
         $type=$session::getSessionElement('userType');
         $id=$session::getSessionElement('id');
+        $PM=FPersistentManager::getInstance();
         if($type==='Student')
         {
-            $student=FPersistentManager::getInstance()->load('EStudent',$id);
+            $student=$PM::load('EStudent', $id);
             if($student->getStatus()==TStatusUser::BANNED)
             {
                 $v=new VError();
@@ -37,7 +38,7 @@ class CUser
         }
         elseif($type==='Owner')
         {
-            $owner=FPersistentManager::load('EOwner',$id);
+            $owner=$PM::load('EOwner',$id);
             if($owner->getStatus()==TStatusUser::BANNED)
             {
                 $v=new VError();
@@ -51,7 +52,6 @@ class CUser
         }
         else{
         $view = new VUser();
-        $PM=FPersistentManager::getInstance();
         $accommodations = $PM->lastAccommodationsUser();
         $view->home($accommodations);}
     }
