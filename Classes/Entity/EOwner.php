@@ -3,7 +3,7 @@ namespace Classes\Entity;
 require __DIR__ . '../../../vendor/autoload.php';
 use Classes\Entity\EPhoto;
 use Classes\Foundation\FPersistentManager;
-
+use Classes\Tools\TStatusUser;
 
 class EOwner
 {
@@ -17,7 +17,7 @@ class EOwner
     private string $email;
     private string $phoneNumber;
     private string $iban;
-    private string $status;
+    private TStatusUser $status;
     private static $entity = EOwner::class;
     /**
      * Undocumented function
@@ -39,9 +39,9 @@ class EOwner
      * @param string $email
      * @param integer $phonenumber
      * @param string $iban
-     * @param string $status
+     * @param TStatusUser $status
      */
-    public function __construct(?int $id, string $username, string $password, string $name, string $surname, ?EPhoto $photo, string $email, int $phonenumber, string $iban, string $status='active') {
+    public function __construct(?int $id, string $username, string $password, string $name, string $surname, ?EPhoto $photo, string $email, int $phonenumber, string $iban, TStatusUser|string $statusStr='active') {
         $this->id=$id;
         $this->username=$username;
         $this->password=EOwner::isPasswordHashed($password) ? $password : password_hash($password, PASSWORD_DEFAULT);
@@ -52,7 +52,11 @@ class EOwner
         $this->email=$email; 
         $this->phoneNumber=$phonenumber;
         $this->iban = $iban;
-        $this->status=$status;
+        if (is_string($statusStr)) {
+            $this->status=TStatusUser::tryFrom($statusStr);
+        } else {
+            $this->status=$statusStr;
+        }
     }
     private static function isPasswordHashed($password) {
         // The cost parameter of bcrypt is stored in the first 7 characters of the hash
@@ -153,8 +157,11 @@ class EOwner
         return $this->iban;
     }
 
-    public function getStatus():string {
+    public function getStatus():TStatusUser {
         return $this->status;
+    }
+    public function getStatusString():string {
+        return $this->status->value;
     }
 
     public function setId(int $id):void {
@@ -196,8 +203,12 @@ class EOwner
         $this->iban=$iban;
     }
 
-    public function setStatus(string $status):void {
-        $this->status=$status;
+    public function setStatus(TStatusUser | string $status):void {
+        if (is_string($status)) {
+            $this->status=TStatusUser::tryFrom($status);
+        } else {
+            $this->status=$status;
+        }
     }
 
     public function __toString():string

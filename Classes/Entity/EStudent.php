@@ -4,6 +4,7 @@ require __DIR__ . '../../../vendor/autoload.php';
 use Classes\Entity\EPhoto;
 use Classes\Foundation\FPersistentManager;
 use DateTime;
+use Classes\Tools\TStatusUser;
 
 /**
  * EStudent
@@ -95,9 +96,9 @@ class EStudent
     /**
      * status
      * 
-     * @var string
+     * @var TStatusUser
      */
-    private string $status;
+    private TStatusUser $status;
     
     /**
      * __construct
@@ -115,10 +116,10 @@ class EStudent
      * @param  string $sex
      * @param  bool $smoker
      * @param  bool $animals
-     * @param  string $status
+     * @param  TStatusUser $status
      * @return self
      */
-    public function __construct(string $username, string $password, string $name, string $surname, EPhoto|null $picture, string $universityMail, int $courseDuration, int $immatricolationYear, DateTime $birthDate, string $sex, bool $smoker, bool $animals, string $status='active')
+    public function __construct(string $username, string $password, string $name, string $surname, EPhoto|null $picture, string $universityMail, int $courseDuration, int $immatricolationYear, DateTime $birthDate, string $sex, bool $smoker, bool $animals, TStatusUser | string $statusStr='active')
     {
         $this->username=$username;
         $this->password=EStudent::isPasswordHashed($password) ? $password : password_hash($password, PASSWORD_DEFAULT);
@@ -132,7 +133,11 @@ class EStudent
         $this->sex=$sex;
         $this->smoker=$smoker;
         $this->animals=$animals;
-        $this->status=$status;
+        if (is_string($statusStr)) {
+            $this->status=TStatusUser::tryFrom($statusStr);
+        } else {
+            $this->status=$statusStr;
+        }
     }
     private static function isPasswordHashed($password) {
         // The cost parameter of bcrypt is stored in the first 7 characters of the hash
@@ -288,10 +293,13 @@ class EStudent
     /**
      * getStatus
      *
-     * @return string
+     * @return TStatusUser
      */
-    public function getStatus():string{
+    public function getStatus():TStatusUser{
         return $this->status;
+    }
+    public function getStatusString():string {
+        return $this->status->value;
     }
 
     public function getRating():int
@@ -442,8 +450,12 @@ class EStudent
      * @param  string $status
      * @return void
      */
-    public function setStatus(string $status){
-        $this->status=$status;
+    public function setStatus(TStatusUser | string $status){
+        if (is_string($status)) {
+            $this->status=TStatusUser::tryFrom($status);
+        } else {
+            $this->status=$status;
+        }
     }
 
     // toSting method
@@ -456,7 +468,7 @@ class EStudent
     public function __toString():string
     {
         $result='USERNAME:'.$this->username.' PASSWORD:'.$this->password.' NAME:'.$this->name.' SURNAME:'.$this->surname.' UNIVERSITY_MAIL:'.$this->universityMail.' COURSE_DURATION:'.(string)$this->courseDuration;
-        $result.=' IMMATRICOLATION_YEAR:'.(string)$this->immatricolationYear.' BIRTH_DATE:'.$this->birthDate->format('d/m/Y').' SEX:'.$this->sex.' SMOKER:'.(string)$this->smoker.' ANIMALS:'.(string)$this->animals.' PICTURE: '.$this->getPhoto().' STATUS:'.$this->status;
+        $result.=' IMMATRICOLATION_YEAR:'.(string)$this->immatricolationYear.' BIRTH_DATE:'.$this->birthDate->format('d/m/Y').' SEX:'.$this->sex.' SMOKER:'.(string)$this->smoker.' ANIMALS:'.(string)$this->animals.' PICTURE: '.$this->getPhoto().' STATUS:'.$this->status->value;
         return $result;
     }
 

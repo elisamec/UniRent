@@ -3,6 +3,7 @@
 namespace Classes\Control;
 require __DIR__.'/../../vendor/autoload.php';
 
+use Classes\Entity\EStudent;
 use Classes\Entity\ESupportRequest;
 use Classes\Foundation\FPersistentManager;
 use Classes\Tools\TType;
@@ -59,7 +60,7 @@ class CAdmin
                     $view->loginError(false, true);
                 }
             }
-        else  #dose not exist an username for that type
+        else  #does not exist an username for that type
         {
             $view->loginError(true, false);
         }
@@ -70,8 +71,32 @@ class CAdmin
         $session::destroySession();
         header('Location:/UniRent/Admin/login');
     }
-    public static function report(int $id)
+    public static function report(int $id, string $type)
     {
+        $PM = FPersistentManager::getInstance();
+        $session = USession::getInstance();
+        $userType  = $session::getSessionElement('userType');
+        if ($type == 'Student')
+        {
+            $student = $PM::load('EStudent', $id);
+            $student->setStatus('reported');
+            $res=$PM::update($student);
+            if ($res)
+            {
+                header('Location:' . $_SERVER['HTTP_REFERER']);
+            }
+            else
+            {
+                $view = new VError();
+                $view->error(600);
+            }
+        }
+        else
+        {
+            $owner = $PM::load('EOwner', $id);
+            $view = new VAdmin();
+            $view->reportOwner($owner);
+        }
     }
 
     public static function supportRequest()

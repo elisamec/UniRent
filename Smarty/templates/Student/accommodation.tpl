@@ -114,13 +114,19 @@
                       <h1 class="titleOwn">Owner:</h1>
                         <div class="userSection">
                                 <div class="userIcon">
-                                    {if $owner->getPhoto() === null}
+                                    {if $owner->getStatusString() === "banned"}
+                                        <a href="/UniRent/Student/publicProfile/{$owner->getUsername()}" class="disabled"><img src="/UniRent/Smarty/images/BannedUser.png" class="imageIcon"></a>
+                                        {else if $owner->getPhoto() === null}
                                         <a href="/UniRent/Student/publicProfile/{$owner->getUsername()}"><img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon"></a>
                                     {else}
                                     <a href="/UniRent/Student/publicProfile/{$owner->getUsername()}"><img src="{$owner->getPhoto()->getPhoto()}"></a>
                                     {/if}
                                 </div>
+                                {if $owner->getStatusString() === "banned"}
+                                <div class="username"><a href="/UniRent/Student/publicProfile/{$owner->getUsername()}" class="disabled">{$owner->getUsername()}</a></div> <!-- Username of the owner -->
+                                {else}
                                 <div class="username"><a href="/UniRent/Student/publicProfile/{$owner->getUsername()}">{$owner->getUsername()}</a></div> <!-- Username of the owner -->
+                                {/if}
                             </div>
                         </div>
                         </div>
@@ -729,15 +735,21 @@ document.addEventListener('DOMContentLoaded', function() {
     var tenantContainer = document.getElementById('tenantCont');
 
     // Function to create tenant section
-    function createTenantSection(username, expiryDate, profilePic) {
+    function createTenantSection(username, expiryDate, profilePic, status) {
+        let style
+        if (status === "banned") {
+            style = 'class="disabled"';
+        } else {
+            style = '';
+        }
         
         return `
             <div class="col-md-4">
                 <div class="userSection">
                     <div class="userIcon">
-                        <a href="/UniRent/Student/publicProfile/${username}"><img src="${profilePic}" alt="User Profile Picture"></a>
+                        <a href="/UniRent/Student/publicProfile/${username}" ${style}><img src="${profilePic}" alt="User Profile Picture"></a>
                     </div>
-                    <div class="username"><a href="/UniRent/Student/publicProfile/${username}">${username}</a></div>
+                    <div class="username"><a href="/UniRent/Student/publicProfile/${username}" ${style}>${username}</a></div>
                     <div class="username">Expiry Date: ${expiryDate}</div>
                 </div>
             </div>
@@ -761,7 +773,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Generate tenant sections
     for (var i = 0; i < tenants.length; i++) {
         var tenant = tenants[i];
-        tenantContainer.innerHTML += createTenantSection(tenant.username, tenant.expiryDate, tenant.profilePic);
+        tenantContainer.innerHTML += createTenantSection(tenant.username, tenant.expiryDate, tenant.profilePic, tenant.status);
     }
 
     // Fill remaining places with free space sections

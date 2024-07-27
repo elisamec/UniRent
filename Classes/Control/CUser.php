@@ -12,6 +12,7 @@ use Classes\View\VOwner;
 use Classes\Utilities\USuperGlobalAccess;
 use Classes\Utilities\UCookie;
 use Classes\View\VError;
+use Classes\Tools\TStatusUser;
 
 class CUser
 {
@@ -23,7 +24,7 @@ class CUser
         if($type==='Student')
         {
             $student=FPersistentManager::getInstance()->getStudentByUsername($username);
-            if($student->getStatus()=='banned')
+            if($student->getStatus()==TStatusUser::BANNED)
             {
                 $v=new VError();
                 $v->error(600);
@@ -37,7 +38,7 @@ class CUser
         elseif($type==='Owner')
         {
             $owner=FPersistentManager::getInstance()->getOwnerByUsername($username);
-            if($owner->getStatus()=='banned')
+            if($owner->getStatus()==TStatusUser::BANNED)
             {
                 $v=new VError();
                 $v->error(600);
@@ -198,7 +199,7 @@ class CUser
             if($result_username_array['type']==$type) { //if exist an username for that type
             
                 $user = $PM->load("E$type", $result_username_array['id']);
-                if($user->getStatus()=='banned')
+                if($user->getStatus()==TStatusUser::BANNED)
                 {
                     $v=new VError();
                     $v->error(600);

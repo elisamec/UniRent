@@ -14,6 +14,7 @@ use Classes\Utilities\USuperGlobalAccess;
 use Classes\View\VStudent; 
 use Classes\Foundation\FCreditCard;
 use Classes\Control;
+use Classes\Tools\TStatusUser;
 use DateTime;
 
 
@@ -243,7 +244,7 @@ class CStudent{
         $owner = $PM->load('EOwner', $accomm->getIdOwner());
         $owner_photo=$owner->getPhoto();
         $ownerStatus = $owner->getStatus();
-        if($ownerStatus === 'banned'){
+        if($ownerStatus === TStatusUser::BANNED){
             
             $path = __DIR__ . "/../../Smarty/images/BannedUser.png";
             $owner_photo = new EPhoto(null, file_get_contents($path), 'other', null);
@@ -264,7 +265,7 @@ class CStudent{
             $author=$PM->load( 'EStudent', $review->getIdAuthor());
             $authorStatus = $author->getStatus();
             $profilePic = $author->getPhoto();
-            if($authorStatus === 'banned'){
+            if($authorStatus === TStatusUser::BANNED){
                 $profilePic = "/UniRent/Smarty/images/BannedUser.png";
             }
             elseif ($profilePic === null) {
@@ -277,7 +278,7 @@ class CStudent{
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
-                'userStatus' => $author->getStatus(),
+                'userStatus' => $author->getStatus()->value,
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,
@@ -320,7 +321,7 @@ class CStudent{
             foreach ($tenantOwner[$idAccommodation] as $i) {
                 $status = $i[0]->getStatus();
                 $profilePic = $i[0]->getPhoto();
-                if($status === 'banned'){
+                if($status === TStatusUser::BANNED){
                     $profilePic = "/UniRent/Smarty/images/BannedUser.png";
                 }
                 elseif ($profilePic === null) {
@@ -334,6 +335,7 @@ class CStudent{
                     'username' => $i[0]->getUsername(),
                     'expiryDate' => $i[1],
                     'profilePic' => $profilePic,
+                    'status' => $status
                 ];
             }
         }
@@ -354,7 +356,7 @@ class CStudent{
         foreach ($reviews as $review) {
             $author = $PM::load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
             $profilePic = $author->getPhoto();
-            if ($author->getStatus() === 'banned') {
+            if ($author->getStatus() === TStatusUser::BANNED) {
                 $profilePic = "/UniRent/Smarty/images/BannedUser.png";
             } else if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
@@ -366,7 +368,7 @@ class CStudent{
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
-                'userStatus' => $author->getStatus(),
+                'userStatus' => $author->getStatus()->value,
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,
@@ -603,7 +605,7 @@ class CStudent{
             $author = $PM::load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
             $status = $author->getStatus();
             $profilePic = $author->getPhoto();
-            if($status === 'banned'){
+            if($status === TStatusUser::BANNED){
                 $profilePic = "/UniRent/Smarty/images/BannedUser.png";
             }
             elseif ($profilePic === null) {
@@ -616,7 +618,7 @@ class CStudent{
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
-                'userStatus' => $author->getStatus(),
+                'userStatus' => $author->getStatus()->value,
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,
@@ -644,7 +646,7 @@ class CStudent{
             $author = $PM::load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
             $status = $author->getStatus();
             $profilePic = $author->getPhoto();
-            if($status === 'banned'){
+            if($status === TStatusUser::BANNED){
                 $profilePic = "/UniRent/Smarty/images/BannedUser.png";
             }
             elseif ($profilePic === null) {
@@ -657,7 +659,7 @@ class CStudent{
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
-                'userStatus' => $author->getStatus(),
+                'userStatus' => $author->getStatus()->value,
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,
@@ -868,7 +870,7 @@ class CStudent{
         foreach ($reviews as $review) {
             $recipient = $PM::load( 'E' . $review->getRecipientType()->value, $review->getIdRecipient());
             $profilePic = $recipient->getPhoto();
-            if ($recipient->getStatus() === 'banned') {
+            if ($recipient->getStatus() === TStatusUser::BANNED) {
                 $profilePic = "/UniRent/Smarty/images/BannedUser.png";
             } else if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
@@ -880,7 +882,7 @@ class CStudent{
             $reviewsData[] = [
                 'title' => $review->getTitle(),
                 'username' => $recipient->getUsername(),
-                'userStatus' => $recipient->getStatus(),
+                'userStatus' => $recipient->getStatus()->value,
                 'stars' => $review->getValutation(),
                 'content' => $review->getDescription(),
                 'userPicture' => $profilePic,

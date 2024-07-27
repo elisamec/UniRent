@@ -199,7 +199,7 @@
     <div class="resModal-content">
         <span class="resClose" onclick="closeReportModal()">&times;</span>
         <h2>Report User</h2>
-        <form id="reportForm" action="/UniRent/Admin/report/{$student->getId()}" class="form" method="POST" enctype="multipart/form-data">
+        <form id="reportForm" action="/UniRent/Admin/report/{$student->getId()}/Student" class="form" method="POST" enctype="multipart/form-data">
             <label for="reportReason">Reason for report:</label><br>
             <textarea id="reportReason" name="reportReason" rows="4" cols="50" oninput="checkInput()"></textarea><br><br>
             <div class="btn-cont">

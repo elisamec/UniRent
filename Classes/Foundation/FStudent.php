@@ -124,7 +124,7 @@ class FStudent
                 $stm->bindValue(':sex',$student->getSex(),PDO::PARAM_STR);
                 $stm->bindValue(':smoker',$student->getSmoker(),PDO::PARAM_BOOL);
                 $stm->bindValue(':animals',$student->getAnimals(),PDO::PARAM_BOOL);
-                $stm->bindValue(':status',$student->getStatus(),PDO::PARAM_STR);
+                $stm->bindValue(':status',$student->getStatus()->value,PDO::PARAM_STR);
                 $stm->execute();
                 $db->commit();
                 $db->exec('UNLOCK TABLES');
@@ -182,7 +182,7 @@ class FStudent
                 $stm->bindValue(':sex',$student->getSex(),PDO::PARAM_STR);
                 $stm->bindValue(':smoker',$student->getSmoker(),PDO::PARAM_BOOL);
                 $stm->bindValue(':animals',$student->getAnimals(),PDO::PARAM_BOOL);
-                $stm->bindValue(':status',$student->getStatus(),PDO::PARAM_STR);
+                $stm->bindValue(':status',$student->getStatus()->value,PDO::PARAM_STR);
 
                 if ($student->getPhoto()!=null) 
                 {
