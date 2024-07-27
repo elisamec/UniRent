@@ -161,7 +161,10 @@ class FContract
             if(!is_null($idAccommodation))
             {
                 $q.=' AND idAccommodation=:idAccommodation)';
+            } else {
+                $q.=')';
             }
+            $q=' AND status!="future"';
             $db->beginTransaction();
             $stm=$db->prepare($q);
             $stm->bindValue(':id',$id,PDO::PARAM_INT);

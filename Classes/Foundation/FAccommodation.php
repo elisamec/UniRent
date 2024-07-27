@@ -53,11 +53,13 @@ use PDO;
         {
             $q="SELECT * FROM accommodation WHERE id=:id";
             $db=FConnection::getInstance()->getConnection();
+            $db->exec('LOCK TABLES accommodation READ');
             $db->beginTransaction();
             $stm=$db->prepare($q);
             $stm->bindParam(':id',$accommodatioId,PDO::PARAM_INT);
             $stm->execute();
-            //$db->commit();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
             $result=$stm->rowCount();
 
             if ($result >0) return true;
