@@ -324,17 +324,11 @@
         <p>Day of the week (next week):</p>
         </div>
       <div class="row padding-reserve">
-          <select name="day" id="day" class="selectVisit" required>
-          <option value="" selected disabled>Select a day</option>
-            <option value="Monday">Monday</option>
-            <option value="Tuesday">Tuesday</option>
-            <option value="Wednesday">Wednesday</option>
-            <option value="Thursday">Thursday</option>
-            <option value="Friday">Friday</option>
-            <option value="Saturday">Saturday</option>
-            <option value="Sunday">Sunday</option>
-          </select>
-      </div>
+            <select name="day" id="day" class="selectVisit" required>
+                <option value="" selected disabled>Select a day</option>
+                <!-- Day options will be populated here -->
+            </select>
+        </div>
       <div class="row padding-reserve">
         <p>Time:</p>
         </div>
@@ -497,16 +491,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Optional: Populate time slots based on the selected day (if needed)
     var timeSelect = document.getElementById("time");
+    var daySelect = document.getElementById("day");
     var timeSlots = {$timeSlots}; // Ensure this variable is properly initialized
 
-    // Ensure the initial time slots are populated when the page loads
-    if (timeSelect && timeSlots) {
-        var selectedDay = document.getElementById("day").value;
-        populateTimeSlots(selectedDay);
+    // Function to populate day select options
+    function populateDays() {
+        // Clear previous options
+        daySelect.innerHTML = '<option value="" selected disabled>Select a day</option>';
+
+        // Populate new options from timeSlots keys
+        Object.keys(timeSlots).forEach(function(day) {
+            var option = document.createElement("option");
+            option.value = day;
+            option.textContent = day.charAt(0).toUpperCase() + day.slice(1); // Capitalize the first letter
+            daySelect.appendChild(option);
+        });
     }
 
+    // Ensure the initial day options are populated when the page loads
+    populateDays();
+
+    // Ensure the initial time slots are populated when the page loads if a day is selected
+    var selectedDay = daySelect.value;
+    populateTimeSlots(selectedDay);
+
     // Event listener for day change to populate time slots dynamically
-    document.getElementById("day").addEventListener("change", function() {
+    daySelect.addEventListener("change", function() {
         var selectedDay = this.value;
         populateTimeSlots(selectedDay);
     });
@@ -526,7 +536,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
-
 });
 </script>
 

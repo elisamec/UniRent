@@ -354,7 +354,9 @@ class CStudent{
         foreach ($reviews as $review) {
             $author = $PM::load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
             $profilePic = $author->getPhoto();
-            if ($profilePic === null) {
+            if ($author->getStatus() === 'banned') {
+                $profilePic = "/UniRent/Smarty/images/BannedUser.png";
+            } else if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
             else
@@ -577,6 +579,12 @@ class CStudent{
         
     public static function publicProfileFromStudent(string $username, ?string $kind="#")
     {
+        $session=USession::getInstance();
+        if ($session::getSessionElement('username') === $username) {
+            $self = true;
+        } else {
+            $self = false;
+        }
         $view = new VStudent();
         $PM=FPersistentManager::getInstance();
         $student=$PM->getStudentByUsername($username);
@@ -614,7 +622,7 @@ class CStudent{
                 'userPicture' => $profilePic,
             ];
         }
-        $view->publicProfileFromStudent($student, $reviewsData, $kind);
+        $view->publicProfileFromStudent($student, $reviewsData, $kind, $self);
     }
     public static function publicProfileFromOwner(string $username, ?string $kind="#")
     {
@@ -860,12 +868,14 @@ class CStudent{
         foreach ($reviews as $review) {
             $recipient = $PM::load( 'E' . $review->getRecipientType()->value, $review->getIdRecipient());
             $profilePic = $recipient->getPhoto();
-            if ($profilePic === null) {
+            if ($recipient->getStatus() === 'banned') {
+                $profilePic = "/UniRent/Smarty/images/BannedUser.png";
+            } else if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
             else
             {
-                $profilekPic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
+                $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
             }
             $reviewsData[] = [
                 'title' => $review->getTitle(),
@@ -908,11 +918,10 @@ class CStudent{
         
         if($result)
         {
-            header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/true');
+            header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/sent');
         }
         else
         {
-            print 'Spiacenti non ci sono posti disponibili';
             header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/full');
         }
     }

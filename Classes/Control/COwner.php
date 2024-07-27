@@ -107,7 +107,9 @@ class COwner
         foreach ($reviews as $review) {
             $author = $PM::load('EStudent', $review->getIdAuthor());
             $profilePic = $author->getPhoto();
-            if ($profilePic === null) {
+            if ($author->getStatus() === 'banned') {
+                $profilePic = "/UniRent/Smarty/images/BannedUser.png";
+            } else if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
             else
@@ -517,7 +519,9 @@ class COwner
         foreach ($reviews as $review) {
             $author=$PM->load('EStudent', $review->getIdAuthor());
             $profilePic = $author->getPhoto();
-            if ($profilePic === null) {
+            if ($author->getStatus() === 'banned') {
+                $profilePic = "/UniRent/Smarty/images/BannedUser.png";
+            } else if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
             else
@@ -608,6 +612,12 @@ class COwner
     }
     public static function publicProfileFromOwner(string $username, ?string $kind="#")
     {
+        $session=USession::getInstance();
+        if ($session::getSessionElement('username') === $username) {
+            $self = true;
+        } else {
+            $self = false;
+        }
         $view = new VOwner();
         $PM=FPersistentManager::getInstance();
         $owner=$PM->getOwnerByUsername($username);
@@ -647,7 +657,7 @@ class COwner
                 'userPicture' => $profilePic,
             ];
         }
-        $view->publicProfileFromOwner($owner, $reviewsData, $kind);
+        $view->publicProfileFromOwner($owner, $reviewsData, $kind, $self);
     }
     public static function publicProfileFromStudent(string $username, ?string $kind= null)
     {
@@ -713,7 +723,9 @@ class COwner
         foreach ($reviews as $review) {
             $recipient = $PM::load( 'E' . $review->getRecipientType()->value, $review->getIdRecipient());
             $profilePic = $recipient->getPhoto();
-            if ($profilePic === null) {
+            if ($recipient->getStatus() === 'banned') {
+                $profilePic = "/UniRent/Smarty/images/BannedUser.png";
+            } else if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             }
             else

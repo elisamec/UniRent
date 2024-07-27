@@ -96,10 +96,11 @@
                      {/if}
                      <p>Age: {$student->getAge()}.</p>
                      <p> Average Rating: {$student->getAverageRating()}.</p>
-                     <div class="col-md-2">
-                        <div class="delete_btn"><a href="#" onclick="openReportModal()">Report User</a></div>
-                        <button class="edit_button" id="reviewButton">Review</button>
+                     {if (!{$self})}
+                     <div class="col-md-3">
+                     <div class="delete_btn" id="reportOwn"><a href="#" onclick="openReportModal()">Report User</a></div>
                      </div>
+                     {/if}
                   
                </div>
                </div>

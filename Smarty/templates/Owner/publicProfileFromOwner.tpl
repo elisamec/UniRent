@@ -96,9 +96,11 @@
                      <p>Phone Number: {$owner->getPhoneNumber()}.</p>
                      <p> Average Rating: {$owner->getAverageRating()}.</p>
                      <p> Number of Ads: {$owner->getNumberOfAds()}.</p>
+                     {if (!{$self})}
                      <div class="col-md-3">
                      <div class="delete_btn" id="reportOwn"><a href="#" onclick="openReportModal()">Report User</a></div>
                      </div>
+                     {/if}
                </div>
                </div>
             <div class="col-md-2">
