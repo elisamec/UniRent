@@ -179,9 +179,6 @@
                         {if $accommodation->getDeposit() !== null}
                         <h2>Deposit: {$accommodation->getDeposit()} €</h2>
                         {/if}
-                        <h1 class="title">Current Tenants</h1>
-                        <div class="row" id="tenantCont">
-                        </div>
                         
 
                         <div class="row">
@@ -434,56 +431,6 @@
     displayReviews(reviews);
     {/if}
 </script>
-{literal}
-      <script>
-    // Retrieve Smarty variables (assuming they are passed as JSON strings)
-    var tenants = {/literal}{$tenantsJson}{literal};
-    var numPlaces = {/literal}{$num_places}{literal};
 
-    // Get the container element
-    var tenantContainer = document.getElementById('tenantCont');
-
-    // Function to create tenant section
-    function createTenantSection(username, expiryDate, profilePic) {
-        
-        return `
-            <div class="col-md-4">
-                <div class="userSection">
-                    <div class="userIcon">
-                        <a href="/UniRent/Student/publicProfile/${username}"><img src="${profilePic}" alt="User Profile Picture"></a>
-                    </div>
-                    <div class="username"><a href="/UniRent/Student/publicProfile/${username}">${username}</a></div>
-                    <div class="username">Expiry Date: ${expiryDate}</div>
-                </div>
-            </div>
-        `;
-    }
-
-    // Function to create free space section
-    function createFreeSpaceSection() {
-        return `
-            <div class="col-md-4">
-                <div class="userSection">
-                    <div class="userIcon">
-                        <a><img src="/UniRent/Smarty/images/FreeBadge.png" alt="Free Badge"></a>
-                    </div>
-                    <div class="username"></div>
-                </div>
-            </div>
-        `;
-    }
-
-    // Generate tenant sections
-    for (var i = 0; i < tenants.length; i++) {
-        var tenant = tenants[i];
-        tenantContainer.innerHTML += createTenantSection(tenant.username, tenant.expiryDate, tenant.profilePic);
-    }
-
-    // Fill remaining places with free space sections
-    for (var j = tenants.length; j < numPlaces; j++) {
-        tenantContainer.innerHTML += createFreeSpaceSection();
-    }
-</script>
-{/literal}
    <script src="/UniRent/Smarty/js/cookie.js"></script>
 </body>

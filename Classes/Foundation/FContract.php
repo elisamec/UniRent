@@ -164,7 +164,7 @@ class FContract
             } else {
                 $q.=')';
             }
-            $q=' AND status!="future"';
+            $q.=' AND status!="future"';
             $db->beginTransaction();
             $stm=$db->prepare($q);
             $stm->bindValue(':id',$id,PDO::PARAM_INT);

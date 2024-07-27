@@ -1134,11 +1134,13 @@ use PDO;
                     FROM accommodation a INNER JOIN accommodationreview ar ON a.id=ar.idAccommodation
                     INNER JOIN review r ON r.id=ar.idReview
                     WHERE a.id=:id';
+                $db->exec('LOCK TABLES accommodation READ, accommodationreview READ, review READ');
                 $db->beginTransaction();
                 $stm=$db->prepare($q);
                 $stm->bindParam(':id',$id,PDO::PARAM_INT);
                 $stm->execute();
                 $db->commit();
+                $db->exec('UNLOCK TABLES');
             }
             catch(PDOException $e)
             {
