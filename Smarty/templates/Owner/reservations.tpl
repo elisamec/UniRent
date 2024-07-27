@@ -237,7 +237,7 @@
                     usernameDiv.appendChild(periodDiv);
 
                     const expiresDiv = document.createElement("div");
-                     expiresDiv.textContent = `You have ${reservation.expires} before the reservation is automatically accepted.`;
+                     expiresDiv.textContent = `You have ${reservation.expires} left before the reservation is automatically accepted.`;
                      usernameDiv.appendChild(expiresDiv);
 
                     userSectionDiv.appendChild(usernameDiv);
@@ -273,7 +273,7 @@
 
                 const usernameLink = document.createElement("a");
                 usernameLink.href = `/UniRent/Reservation/reservationDetails/${reservation.idReservation}`;
-                usernameLink.textContent = reservation.username;
+                    usernameLink.textContent = reservation.username;
                 usernameDiv.appendChild(usernameLink);
 
                 // Display period under username
@@ -282,7 +282,7 @@
                 usernameDiv.appendChild(periodDiv);
                 
                 const expiresDiv = document.createElement("div");
-                     expiresDiv.textContent = `You have ${reservation.expires} before the reservation is automatically accepted.`;
+                     expiresDiv.textContent = `You have ${reservation.expires} left before the reservation is automatically accepted.`;
                      usernameDiv.appendChild(expiresDiv);
 
                 userSectionDiv.appendChild(usernameDiv);

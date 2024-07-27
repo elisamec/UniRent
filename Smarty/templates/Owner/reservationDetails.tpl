@@ -100,6 +100,9 @@
          <div class="row">
             <div class="col-md-10">
                   <div class="profile_info">
+                  {if $student->getStatus()->value === "banned"}
+                        <h1 class="title">Warning: Banned User</h1>
+                    {/if}
                      <h2 class="profile_head">{$student->getName()} {$student->getSurname()}</h2>
                      <p>@{$student->getUsername()}</p>
                      {if $student->getSex() === "M"}

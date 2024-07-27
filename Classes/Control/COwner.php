@@ -88,7 +88,7 @@ class COwner
         $owner = $PM->load('EOwner', $accomm->getIdOwner());
         $owner_photo=$owner->getPhoto();
         $ownerStatus = $owner->getStatus();
-        if($ownerStatus === 'banned'){
+        if($ownerStatus === TStatusUser::BANNED){
             
             $path = __DIR__ . "/../../Smarty/images/BannedUser.png";
             $owner_photo = new EPhoto(null, file_get_contents($path), 'other', null);

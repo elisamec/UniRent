@@ -66,7 +66,15 @@ class CReservation
                 $formatted = self::formatDate($reservation->getMade()->setTime(0,0,0));
                 $student=$PM->load('EStudent', $reservation->getIdStudent());
                 $student_photo=$student->getPhoto();
-                if(is_null($student_photo)){}
+                $studentStatus = $student->getStatus();
+                if($studentStatus === TStatusUser::BANNED){
+                
+                    $path = __DIR__ . "/../../Smarty/images/BannedUser.png";
+                    $student_photo = new EPhoto(null, file_get_contents($path), 'other', null);
+                    $student_photo_64=EPhoto::toBase64(array($student_photo));
+                    $student->setPhoto($student_photo_64[0]);
+                }
+                else if(is_null($student_photo)){}
                 else
                 {
                     $student_photo_64=EPhoto::toBase64(array($student_photo));
@@ -79,7 +87,8 @@ class CReservation
                     'username' => $student->getUsername(),
                     'image' => $profilePic,
                     'period' => 'from '. $reservation->getFromDate()->format('d/m/Y') . ' to ' . $reservation->getToDate()->format('d/m/Y'),
-                    'expires' => $formatted
+                    'expires' => $formatted,
+                    'status' => $studentStatus->value
                 ];
             }
 
@@ -114,7 +123,7 @@ class CReservation
             $owner = $PM->load('EOwner', $accommodation->getIdOwner());
             $owner_photo=$owner->getPhoto();
             $ownerStatus = $owner->getStatus();
-            if($ownerStatus === 'banned'){
+            if($ownerStatus === TStatusUser::BANNED){
                 
                 $path = __DIR__ . "/../../Smarty/images/BannedUser.png";
                 $owner_photo = new EPhoto(null, file_get_contents($path), 'other', null);
@@ -157,36 +166,12 @@ class CReservation
 
                 // Extract the components of the difference
                 $days = $interval->days;
-                $hours = $interval->h;
-                $minutes = $interval->i;
-
-                // Create the formatted string with singular/plural logic
-                // Create the formatted string with singular/plural logic
-                $parts = [];
-
+                print($days);
                 // Add days to the array if greater than 0
                 if ($days > 0) {
-                    $parts[] = $days . ' ' . ($days > 1 ? 'days' : 'day');
-                }
-
-                // Add hours to the array if greater than 0
-                if ($hours > 0) {
-                    $parts[] = $hours . ' ' . ($hours > 1 ? 'hours' : 'hour');
-                }
-
-                // Add minutes to the array if greater than 0
-                if ($minutes > 0) {
-                    $parts[] = $minutes . ' ' . ($minutes > 1 ? 'minutes' : 'minute');
-                }
-
-                // Handle the case where all values might be zero
-                // Join the parts with a comma and 'and'
-                if (count($parts) > 1) {
-                    $formatted = implode(', ', array_slice($parts, 0, -1)) . ' and ' . end($parts);
-                } elseif (count($parts) === 1) {
-                    $formatted = $parts[0];
+                    $formatted = $days . ' ' . ($days > 1 ? 'days' : 'day');
                 } else {
-                    $formatted = '0 minutes';
+                    $formatted = 'no days';
                 }
                 return $formatted;
     }
