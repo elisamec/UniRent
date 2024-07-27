@@ -604,8 +604,11 @@ class CStudent{
     public static function publicProfile(string $username, ?string $kind="#") {
         $PM=FPersistentManager::getInstance();
         $user=$PM->verifyUserUsername($username);
-        $location='/UniRent/'.$user['type'].'/publicProfileFromStudent/'.$username .$kind;
-        header('Location:'.$location);
+        if ($user['type']==='Student') {
+            self::publicProfileFromStudent($username, $kind);
+        } else {
+            COwner::publicProfileFromStudent($username, $kind);
+        }
     }
         
     public static function publicProfileFromStudent(string $username, ?string $kind="#")

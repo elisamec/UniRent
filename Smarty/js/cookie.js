@@ -35,8 +35,9 @@ console.log("Current Page:", currentPage);
 
 // Normalize the current page URL
 function normalizeUrl(url) {
-    if (url.startsWith('/UniRent/Student/accommodation/')) {
-        return '/UniRent/Student/accommodation/*';
+    if (url.match(/\/UniRent\/Owner\/accommodation\/\d\/\*\/\*/)) {
+        let splitUrl = url.split('/');
+        return '/UniRent/Owner/accommodation/' + splitUrl[4];
     }
     return url;
 }
