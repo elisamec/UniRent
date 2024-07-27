@@ -132,8 +132,15 @@ class CReservation
         else {
             $student = $PM->load('EStudent', $reservation->getIdStudent());
             $student_photo=$student->getPhoto();
-            if(is_null($student_photo)){}
-            else
+            $studentStatus = $student->getStatus();
+            if($studentStatus === 'banned'){
+                
+                $path = __DIR__ . "/../../Smarty/images/BannedUser.png";
+                $student_photo = new EPhoto(null, file_get_contents($path), 'other', null);
+                $student_photo_64=EPhoto::toBase64(array($student_photo));
+                $student->setPhoto($student_photo_64[0]);
+            }
+            elseif(!is_null($student_photo))
             {
                 $student_photo_64=EPhoto::toBase64(array($student_photo));
                 $student->setPhoto($student_photo_64[0]);
