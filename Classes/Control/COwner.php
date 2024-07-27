@@ -14,7 +14,7 @@ use Classes\Entity\EPhoto;
 use Classes\Entity\EStudent;
 use Classes\Foundation\FOwner;
 use Classes\Foundation\FReview;
-use Classes\Tools\TStatusUser\TStatusUser;
+use Classes\Tools\TStatusUser;
 use Classes\Tools\TType;
 use CommerceGuys\Addressing\Address;
 use DateTime;
