@@ -135,7 +135,9 @@ class COwner
             $tenants=[];
             foreach ($tenantOwner[$idAccommodation] as $i) {
                 $profilePic = $i[0]->getPhoto();
-                if ($profilePic === null) {
+                if ($i[0]->getStatus() === TStatusUser::BANNED) {
+                    $profilePic = "/UniRent/Smarty/images/BannedUser.png";
+                } else if ($profilePic === null) {
                     $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
                 }
                 else
@@ -146,6 +148,7 @@ class COwner
                     'username' => $i[0]->getUsername(),
                     'expiryDate' => $i[1],
                     'profilePic' => $profilePic,
+                    'status' => $i[0]->getStatus()->value,
                 ];
             }
         }

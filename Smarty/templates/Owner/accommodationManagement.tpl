@@ -592,15 +592,20 @@ $(document).ready(function() {
     var tenantContainer = document.getElementById('tenantCont');
 
     // Function to create tenant section
-    function createTenantSection(username, expiryDate, profilePic) {
+    function createTenantSection(username, expiryDate, profilePic, status) {
+        if (status === 'banned') {
+            var style = 'class="disabled"';
+        } else {
+            var style = '';
+        }
         
         return `
             <div class="col-md-4">
                 <div class="userSection">
                     <div class="userIcon">
-                        <a href="/UniRent/Owner/publicProfile/${username}/current"><img src="${profilePic}" alt="User Profile Picture" onerror="this.onerror=null;this.src='/UniRent/Smarty/images/defaultProfilePic.png';"></a>
+                        <a href="/UniRent/Owner/publicProfile/${username}/current" ${style}><img src="${profilePic}" alt="User Profile Picture" onerror="this.onerror=null;this.src='/UniRent/Smarty/images/defaultProfilePic.png';"></a>
                     </div>
-                    <div class="username"><a href="/UniRent/Owner/publicProfile/${username}/current">${username}</a></div>
+                    <div class="username"><a href="/UniRent/Owner/publicProfile/${username}/current" ${style}>${username}</a></div>
                     <div class="username">Expiry Date: ${expiryDate}</div>
                 </div>
             </div>
@@ -624,7 +629,7 @@ $(document).ready(function() {
     // Generate tenant sections
     for (var i = 0; i < tenants.length; i++) {
         var tenant = tenants[i];
-        tenantContainer.innerHTML += createTenantSection(tenant.username, tenant.expiryDate, tenant.profilePic);
+        tenantContainer.innerHTML += createTenantSection(tenant.username, tenant.expiryDate, tenant.profilePic, tenant.status);
     }
 
     // Fill remaining places with free space sections
