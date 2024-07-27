@@ -90,7 +90,7 @@
                         <h1 class="title">This student has reserved this place from {$reservation->getFromDate()->format('d/m/Y')} to {$reservation->getToDate()->format('d/m/Y')}</h1>
                         <h2> You have {$timeLeft} left to accept this reservation</h2>
                         <div class="btn-cont">
-                        <button class="edit_button" onclick="openAcceptModal()">Accept</button>
+                        <button class="edit_button" id="acceptBtn">Accept</button>
                         <button class="delete_button" id="denyButton">Deny</button>
                      </div>
                         </div>
@@ -139,6 +139,7 @@
        <script>
     {if isset($reviewsData)}
     const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
+    console.log(reviews);
 
     // Function to generate stars based on the rating
     function generateStars(stars) {
@@ -158,6 +159,7 @@
         const container = document.getElementById('reviewsContainer');
 
         if (container) {
+            
             if (reviews.length === 0) {
                 container.innerHTML = '<div class="container"><h1 class="noRev">There are no reviews yet!</h1></div>';
             } else {
@@ -203,175 +205,77 @@
     displayReviews(reviews);
     {/if}
 </script>
-<div id="reportModal" class="resModal">
-
-    <!-- Modal content -->
+<div id="acceptModal" class="resModal">
     <div class="resModal-content">
-        <span class="resClose" onclick="closeReportModal()">&times;</span>
-        <h2>Report User</h2>
-        <form id="reportForm" action="/UniRent/Admin/report/{$student->getId()}/Student" class="form" method="POST" enctype="multipart/form-data">
-            <label for="reportReason">Reason for report:</label><br>
-            <textarea id="reportReason" name="reportReason" rows="4" cols="50" oninput="checkInput()"></textarea><br><br>
-            <div class="btn-cont">
-            <button type="submit" id="confirmDelete" class="disabled confirmClass" onclick="submitReport()" disabled>Submit</button>
-            <button type="button" id="cancelDelete" class="cancelClass" onclick="cancelReport()">Cancel</button>
-            </div>
-         </form>
+    <div class="row">
+        <span class="resClose" id="acceptClose">&times;</span>
+        <h2 class="resModal-head">Accept Reservation</h2>
+        </div>
+        <p>Are you sure you want to accept this reservation?</p>
+        <p>The student will have 2 days from now to pay the contract.</p>
+        <div class="btn-cont">
+            <button  class="confirmClass" onclick="acceptFunct()">Yes</button>
+            <button class="cancelClass" id="cancelAccept">No</button>
+        </div>
+    </div>
+</div>
+<div id="denyModal" class="resModal">
+    <div class="resModal-content">
+    <div class="row">
+        <span class="resClose" id="denyClose">&times;</span>
+        <h2 class="resModal-head">Deny Reservation</h2>
+        </div>
+        <p>Are you sure you want to deny this reservation?</p>
+        <p>This will be permanently deleted.</p>
+        <div class="btn-cont">
+            <button  class="confirmClass" onclick="denyFunct()">Yes</button>
+            <button class="cancelClass" id="cancelDeny">No</button>
+        </div>
     </div>
 
 </div>
 
 <script>
-    // Get the modal
-    var modal = document.getElementById("reportModal");
+function acceptFunct() {
+      window.location.href = "/UniRent/Reservation/accept/{$reservation->getID()}";
+      acceptModal.style.display = "none";
+   }
+    function denyFunct() {
+        window.location.href = "/UniRent/Reservation/deny/{$reservation->getID()}";
+        denyModal.style.display = "none";
+    }
+        var denyModal = document.getElementById("denyModal");
+        var denyClose = document.getElementById("denyClose");
+        var cancelDeny = document.getElementById("cancelDeny");
+        var denyBtn = document.getElementById("denyButton");
 
-    // Get the button that opens the modal
-    var btn = document.querySelector(".delete_btn a");
+   var acceptClose = document.getElementById("acceptClose");
+   var cancelAccept = document.getElementById("cancelAccept");
+   var acceptBtn = document.getElementById("acceptBtn");
+   var acceptModal = document.getElementById("acceptModal");
 
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("resClose")[0];
-
-    // Get the textarea and submit button
-    var textarea = document.getElementById("reportReason");
-    var submitBtn = document.getElementById("confirmDelete");
-
-    // Open the modal
-    function openReportModal() {
-        modal.style.display = "block";
+   acceptBtn.onclick = function(event) {
+      event.preventDefault(); // Prevent the default action (navigation)
+      acceptModal.style.display = "block";
+   }
+   acceptClose.onclick = function() {
+      acceptModal.style.display = "none";
+   }
+    cancelAccept.onclick = function() {
+        acceptModal.style.display = "none";
     }
 
-    // Close the modal
-    function closeReportModal() {
-        modal.style.display = "none";
+    denyBtn.onclick = function(event) {
+        event.preventDefault(); // Prevent the default action (navigation)
+        denyModal.style.display = "block";
     }
-
-    // Check input and enable/disable submit button
-    function checkInput() {
-        if (textarea.value.trim() !== "") {
-            submitBtn.disabled = false;
-            submitBtn.classList.remove("disabled");
-        } else {
-            submitBtn.disabled = true;
-            submitBtn.classList.add("disabled");
-        }
+    denyClose.onclick = function() {
+        denyModal.style.display = "none";
     }
-
-    // Submit the report
-    function submitReport() {
-        if (textarea.value.trim() !== "") {
-            // Implement your submit logic here
-            alert("Report submitted: " + textarea.value.trim());
-            // Close the modal after submission
-            closeReportModal();
-        }
-    }
-    function cancelReport() {
-        // Clear the textarea
-        textarea.value = '';
-        // Disable the submit button
-        submitBtn.disabled = true;
-        submitBtn.classList.add("disabled");
-        // Close the modal
-        closeReportModal();
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
+    cancelDeny.onclick = function() {
+        denyModal.style.display = "none";
     }
 </script>
-<div id="revModal" class="resModal">
-    <div class="resModal-content">
-      <div class="row">
-        <span class="resClose" id="revClose">&times;</span>
-        <h1  class="resModal-head">Review</h1>
-      </div>
-        <form id="ReviewForm" action="/UniRent/Review/addReviewStudent/{$student->getId()}" method="POST">
-            <div class="rating">
-                <input type="radio" id="star5A" name="rate" value="5" />
-                <label for="star5A" title="5 stars">
-                    <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
-                        <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
-                    </svg>
-                </label>
-                <input type="radio" id="star4A" name="rate" value="4" />
-                <label for="star4A" title="4 stars">
-                    <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
-                        <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
-                    </svg>
-                </label>
-                <input type="radio" id="star3A" name="rate" value="3" />
-                <label for="star3A" title="3 stars">
-                    <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
-                        <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
-                    </svg>
-                </label>
-                <input type="radio" id="star2A" name="rate" value="2" />
-                <label for="star2A" title="2 stars">
-                    <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
-                        <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
-                    </svg>
-                </label>
-                <input type="radio" id="star1A" name="rate" value="1" checked/>
-                <label for="star1A" title="1 star">
-                    <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
-                        <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
-                    </svg>
-                </label>
-            </div>
-            <input type="text" name="title" id="reviewTitle" placeholder="Title" value="" required>
-            <textarea name="content" rows="5" id="reviewContent" placeholder="Content" required></textarea>
-            <div class="btn-cont">
-            <button type="submit" class="edit_btn">Submit</button>
-            <button type="button" class="edit_btn" id="CancelBut">Cancel</button>
-            </div>
-      </form>
-    </div>
-</div>
-<script>
-        document.addEventListener("DOMContentLoaded", function() {
-    var kind = "{$kind|escape:'javascript'}";
-    console.log("kind:", kind); // Log the value to ensure it's correct
-    var button = document.getElementById("reviewButton");
-
-    if (kind === "future" || kind === "#") {
-        button.style.display = "none"; // Correct way to hide the button
-    }
-
-    // Add event listener to reviewButton if it exists
-    if (button) {
-        button.addEventListener('click', function(event) {
-            document.getElementById('revModal').style.display = 'grid';
-        });
-    }
-});
-
-// Modal close functionality
-const modalRev = document.getElementById('revModal');
-const closeModalRev = document.querySelector('#revClose');
-const cancelBut = document.querySelector('#CancelBut');
-
-if (closeModalRev) {
-    closeModalRev.onclick = () => {
-        modalRev.style.display = 'none';
-    };
-}
-
-if (cancelBut) {
-    cancelBut.onclick = () => {
-        modalRev.style.display = 'none';
-    };
-}
-
-window.onclick = (event) => {
-    if (event.target == modalRev) {
-        modalRev.style.display = 'none';
-    }
-};
-
-    </script>
 
 <!-- footer section start -->
       <div class="footer_section layout_padding">

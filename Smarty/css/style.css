@@ -2871,6 +2871,9 @@ a.disabled {
     pointer-events: none;
     opacity: 0.5;
 }
+.bottomPadding {
+    padding-bottom: 20px;
+}
 #reportReason {
     width:100%;
 }

@@ -192,12 +192,14 @@ class FReservation
                 try
                 {
                     $db->exec('LOCK TABLES reservation WRITE');
-                    $q='UPDATE reservation SET fromDate=:from,toDate=:to WHERE id=:id';
+                    $q='UPDATE reservation SET fromDate=:from,toDate=:to, statusAccept=:status, made=:made WHERE id=:id';
                     $db->beginTransaction();
                     $stm=$db->prepare($q);
                     $stm->bindValue(':id',$reserv->getID(),PDO::PARAM_INT);
                     $stm->bindValue(':from',$reserv->getFromDate()->format('Y-m-d H:i:s'),PDO::PARAM_STR);
                     $stm->bindValue(':to',$reserv->getToDate()->format('Y-m-d H:i:s'),PDO::PARAM_STR);
+                    $stm->bindValue(':status',$reserv->getStatusAccept(),PDO::PARAM_BOOL);
+                    $stm->bindValue(':made',$reserv->getMade()->format('Y-m-d H:i:s'),PDO::PARAM_STR);
                     $stm->execute();
                     $db->commit();
                     $db->exec('UNLOCK TABLES');

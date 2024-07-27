@@ -5,6 +5,7 @@ namespace Classes\Control;
 use Classes\Entity\EPhoto;
 use Classes\Foundation\FPersistentManager;
 use Classes\Tools\TStatusUser;
+use Classes\Tools\TType;
 use Classes\Utilities\USession;
 use Classes\View\VOwner;
 use Classes\View\VStudent;
@@ -44,7 +45,7 @@ class CReservation
         $view->showReservations($reservationsData, $kind);
 
     }
-    public static function showOwner():void {
+    public static function showOwner(string $statusAccept="null", string $statusDeny="null"):void {
         $session=USession::getInstance();
         $id=$session::getSessionElement('id');
         $PM=FPersistentManager::getInstance();
@@ -136,8 +137,32 @@ class CReservation
                 $owner->setPhoto($owner_photo_64[0]);
                 #print_r($owner);
             }
+            $reviews = $PM->loadByRecipient($accommodation->getIdAccommodation(), TType::ACCOMMODATION);
+            $reviewsData = [];
+            
+            foreach ($reviews as $review) {
+                $author = $PM::load('EStudent', $review->getIdAuthor());
+                $profilePic = $author->getPhoto();
+                if ($author->getStatus() === TStatusUser::BANNED) {
+                    $profilePic = "/UniRent/Smarty/images/BannedUser.png";
+                } else if ($profilePic === null) {
+                    $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+                }
+                else
+                {
+                    $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
+                }
+                $reviewsData[] = [
+                    'title' => $review->getTitle(),
+                    'username' => $author->getUsername(),
+                    'userStatus' => $author->getStatus()->value,
+                    'stars' => $review->getValutation(),
+                    'content' => $review->getDescription(),
+                    'userPicture' => $profilePic,
+                ];
+            }
             $view= new VStudent();
-            $view->reservationDetails($reservation, $accommodation, $owner, self::formatDate($reservation->getMade()->setTime(0,0,0)), $picture);
+            $view->reservationDetails($reservation, $accommodation, $owner, self::formatDate($reservation->getMade()->setTime(0,0,0)), $picture, $reviewsData);
         }
         else {
             $student = $PM->load('EStudent', $reservation->getIdStudent());
@@ -155,8 +180,32 @@ class CReservation
                 $student_photo_64=EPhoto::toBase64(array($student_photo));
                 $student->setPhoto($student_photo_64[0]);
             }
+            $reviews = $PM->loadByRecipient($student->getId(), TType::STUDENT);
+            $reviewsData = [];
+            
+            foreach ($reviews as $review) {
+                $author = $PM::load('EStudent', $review->getIdAuthor());
+                $profilePic = $author->getPhoto();
+                if ($author->getStatus() === TStatusUser::BANNED) {
+                    $profilePic = "/UniRent/Smarty/images/BannedUser.png";
+                } else if ($profilePic === null) {
+                    $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+                }
+                else
+                {
+                    $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
+                }
+                $reviewsData[] = [
+                    'title' => $review->getTitle(),
+                    'username' => $author->getUsername(),
+                    'userStatus' => $author->getStatus()->value,
+                    'stars' => $review->getValutation(),
+                    'content' => $review->getDescription(),
+                    'userPicture' => $profilePic,
+                ];
+            }
             $view = new VOwner();
-            $view->reservationDetails($reservation, $student, self::formatDate($reservation->getMade()->setTime(0,0,0)));
+            $view->reservationDetails($reservation, $student, self::formatDate($reservation->getMade()->setTime(0,0,0)), $reviewsData);
         }
     }
     private static function formatDate(DateTime $date): string {
@@ -175,4 +224,27 @@ class CReservation
                 }
                 return $formatted;
     }
+    public static function accept(int $id) {
+        $PM = FPersistentManager::getInstance();
+        $reservation = $PM::load('EReservation', $id);
+        $reservation->setStatus(true);
+        $reservation->setMade(new DateTime('now'));
+        print($reservation->getStatusAccept());
+        $res = $PM::update($reservation);
+        if ($res) {
+            header('Location:/UniRent/Reservation/showOwner/accepted');
+        } else {
+            header('Location:/UniRent/Reservation/showOwner/error');
+        }
+    }
+    public static function deny(int $id) {
+        $PM = FPersistentManager::getInstance();
+        $res = $PM::delete('EReservation', $id); 
+        if ($res) {
+            header('Location:/UniRent/Reservation/showOwner/null/denied');
+        } else {
+            header('Location:/UniRent/Reservation/showOwner/null/error');
+        }
+    }
+
 }

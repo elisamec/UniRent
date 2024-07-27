@@ -148,10 +148,11 @@ class VOwner {
         $this->smarty->assign('reservationsData', $json);
         $this->smarty->display('Owner/reservations.tpl');
     }
-    public function reservationDetails(EReservation $reservation, EStudent $student, string $timeLeft):void {
+    public function reservationDetails(EReservation $reservation, EStudent $student, string $timeLeft, array $reviewsData):void {
         $this->smarty->assign('reservation', $reservation);
         $this->smarty->assign('student', $student);
         $this->smarty->assign('timeLeft', $timeLeft);
+        $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->display('Owner/reservationDetails.tpl');
     }
 }

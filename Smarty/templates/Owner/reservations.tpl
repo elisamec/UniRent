@@ -181,11 +181,13 @@
             if (data.length === 0) {
                 const noReservationsDiv = document.createElement("div");
                 noReservationsDiv.classList.add("container");
+                noReservationsDiv.classList.add("bottomPadding");
                 noReservationsDiv.textContent = "You have no reservations yet.";
                 reservationsContainer.appendChild(noReservationsDiv);
             } else if (Object.keys(data).length === 0) {
                 const noReservationsDiv = document.createElement("div");
                 noReservationsDiv.classList.add("container");
+                  noReservationsDiv.classList.add("bottomPadding");
                 noReservationsDiv.textContent = "You have no reservations yet.";
                 reservationsContainer.appendChild(noReservationsDiv);
             }
