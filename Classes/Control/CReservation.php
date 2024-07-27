@@ -4,6 +4,7 @@ namespace Classes\Control;
 
 use Classes\Entity\EPhoto;
 use Classes\Foundation\FPersistentManager;
+use Classes\Tools\TStatusUser;
 use Classes\Utilities\USession;
 use Classes\View\VOwner;
 use Classes\View\VStudent;
@@ -133,7 +134,7 @@ class CReservation
             $student = $PM->load('EStudent', $reservation->getIdStudent());
             $student_photo=$student->getPhoto();
             $studentStatus = $student->getStatus();
-            if($studentStatus === 'banned'){
+            if($studentStatus === TStatusUser::BANNED){
                 
                 $path = __DIR__ . "/../../Smarty/images/BannedUser.png";
                 $student_photo = new EPhoto(null, file_get_contents($path), 'other', null);

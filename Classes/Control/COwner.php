@@ -14,7 +14,7 @@ use Classes\Entity\EPhoto;
 use Classes\Entity\EStudent;
 use Classes\Foundation\FOwner;
 use Classes\Foundation\FReview;
-use Classes\Tools\TStatusUser\TStatusUser;
+use Classes\Tools\TStatusUser;
 use Classes\Tools\TType;
 use CommerceGuys\Addressing\Address;
 use DateTime;
@@ -136,11 +136,7 @@ class COwner
             $tenants=[];
             foreach ($tenantOwner[$idAccommodation] as $i) {
                 $profilePic = $i[0]->getPhoto();
-                $status = $i[0]->getStatus();
-                if($status === 'banned'){
-                    $profilePic = "/UniRent/Smarty/images/BannedUser.png";
-                }
-                elseif ($profilePic === null) {
+                if ($profilePic === null) {
                     $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
                 }
                 else

@@ -83,19 +83,26 @@ class CAdmin
             $res=$PM::update($student);
             if ($res)
             {
-                header('Location:' . $_SERVER['HTTP_REFERER']);
+                header('Location:' . ucfirst($userType) . '/publicProfile/' . $student->getUsername() . '/reported');
             }
             else
             {
-                $view = new VError();
-                $view->error(600);
+                header('Location:' . ucfirst($userType) . '/publicProfile/' . $student->getUsername() . '/error');
             }
         }
         else
         {
             $owner = $PM::load('EOwner', $id);
-            $view = new VAdmin();
-            $view->reportOwner($owner);
+            $owner->setStatus('reported');
+            $res=$PM::update($owner);
+            if ($res)
+            {
+                header('Location:' . ucfirst($userType) . '/publicProfile/' . $owner->getUsername() . '/reported');
+            }
+            else
+            {
+                header('Location:' . ucfirst($userType) . '/publicProfile/' . $owner->getUsername() . '/error');
+            }
         }
     }
 
