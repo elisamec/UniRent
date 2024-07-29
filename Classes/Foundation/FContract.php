@@ -149,8 +149,8 @@ class FContract
             return false;
         }
     }
-    public function getContractsByStudent(int $id, ?int $idAccommodation=null, ?string $kind=null):array|bool
-    {
+    public function getContractsByStudent(int $id, ?int $idAccommodation=null, ?string $kind=null)#:array|bool
+    {  
         $db=FConnection::getInstance()->getConnection();
         $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
         FPersistentManager::getInstance()->updateDataBase();
@@ -158,25 +158,24 @@ class FContract
         try
         {
             $db->exec('LOCK TABLES contract READ');
+            $param=array();
             $q='SELECT * FROM contract WHERE idReservation IN (SELECT id FROM reservation WHERE idStudent=:id';
+            $param[':id']=$id;
             if(!is_null($idAccommodation))
             {
-                $q.=' AND idAccommodation=:idAccommodation) AND status!="future"';
+                $q.=' AND idAccommodation=:idAccommodation) AND status != "future"';
+                $param[':idAccommodation']=$idAccommodation;
             } else {
                 $q.=')';
             }
             if (!is_null($kind))
             {
                 $q.=' AND status=:kind';
+                $param[':kind']=$kind;
             }
             $db->beginTransaction();
             $stm=$db->prepare($q);
-            $stm->bindValue(':id',$id,PDO::PARAM_INT);
-            if (!is_null($idAccommodation))
-            {
-            $stm->bindValue(':idAccommodation',$idAccommodation, PDO::PARAM_INT);
-            }
-            $stm->execute();
+            $stm->execute($param);
             $db->commit();
             $db->exec('UNLOCK TABLES');
         }
@@ -186,6 +185,9 @@ class FContract
             return false;
         }
         $row=$stm->fetchAll(PDO::FETCH_ASSOC);
+        #print_r($row);
+        #print $q;
+        #print $id.' '.$kind.' '.$idAccommodation;
         foreach ($row as $r)
         {
             $reservationAssociated=FReservation::getInstance()->load($r['idReservation']);

@@ -66,6 +66,8 @@ class CContract
             $kind='onGoing';
         }
         $contracts=$PM->getContractsByStudent($id, null, $kind);
+        #print_r($contracts);
+        
         usort($contracts, function($a, $b) {
             $today = new DateTime();
             $fromDateA = $a->getFromDate();

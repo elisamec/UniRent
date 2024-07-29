@@ -645,7 +645,7 @@ class FPersistentManager {
     public function getContractsByStudent(int $id, ?int $idAccommodation=null, ?string $kind=null):array|bool
     {
         $FC=FContract::getInstance();
-        $result=$FC->getContractsByStudent($id, $idAccommodation);
+        $result=$FC->getContractsByStudent($id, $idAccommodation,$kind);
         return $result;
     }
     
