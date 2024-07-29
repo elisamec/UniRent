@@ -258,42 +258,49 @@
         <form action="/UniRent/Contract/pay/{$reservation->getId()}" method="post">
             <div id="creditCardContainer" class="creditCardCont"></div>
             <div id="newCardContainer" style="display: none;">
-            <p> Important: This card will be automatically saved for future payments in your profile for contract management purposes.</p>
-                    <div class="form-grid">
-                        <div class="form-row">
-                            <label for="cardTitle">Card Title:</label>
-                            <input type="text" id="cardTitle" name="cardTitle" required>
-                        </div>
-                        <div class="form-row">
-                            <label for="cardnumber">Enter Credit Card Number:</label>
-                            <input id="cardnumber" type="text" name="cardnumber" data-inputmask="'mask': '9999 9999 9999 9999'" placeholder="____ ____ ____ ____">
-                        </div>
-                        <div class="form-row">
-                            <label for="expiryDate">Expiry Date:</label>
-                            <input id="expirydate" name="expirydate" type="text" data-inputmask="'mask': '99/99'" placeholder="mm/yy">
-                        </div>
-                        <div class="form-row">
-                            <label for="cvv">CVV (Security Code):</label>
-                            <input type="text" pattern="[0-9]*" inputmode="numeric" maxlength="3" id="cvv" name="cvv" required>
-                        </div>
-                        <div class="form-row">
-                            <label for="name">Cardholder Name:</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-row">
-                            <label for="surname">Cardholder Surname:</label>
-                            <input type="text" id="surname" name="surname" required>
-                        </div>
+                <p> Important: This card will be automatically saved for future payments in your profile for contract management purposes.</p>
+                <div class="form-grid">
+                    <div class="form-row">
+                        <label for="cardTitle">Card Title:</label>
+                        <input type="text" id="cardTitle" name="cardTitle">
                     </div>
+                    <div class="form-row">
+                        <label for="cardnumber">Enter Credit Card Number:</label>
+                        <input id="cardnumber" type="text" name="creditNewCardNumber" data-inputmask="'mask': '9999 9999 9999 9999'" placeholder="____ ____ ____ ____">
+                    </div>
+                    <div class="form-row">
+                        <label for="expiryDate">Expiry Date:</label>
+                        <input id="expirydate" name="expirydate" type="text" data-inputmask="'mask': '99/99'" placeholder="mm/yy">
+                    </div>
+                    <div class="form-row">
+                        <label for="cvv">CVV (Security Code):</label>
+                        <input type="text" pattern="[0-9]*" inputmode="numeric" maxlength="3" id="cvv" name="cvv">
+                    </div>
+                    <div class="form-row">
+                        <label for="name">Cardholder Name:</label>
+                        <input type="text" id="name" name="name">
+                    </div>
+                    <div class="form-row">
+                        <label for="surname">Cardholder Surname:</label>
+                        <input type="text" id="surname" name="surname">
+                    </div>
+                </div>
             </div>
             <div class="btn-cont">
                 <button type="submit" class="edit_button" id="payBtn">Pay</button>
-                <button class="delete_button" id="cancelPayBtn">Cancel</button>
+                <button type="button" class="delete_button" id="cancelPayBtn">Cancel</button>
             </div>
         </form>
     </div>
 </div>
 <script>
+    // Initialize input masks
+    document.addEventListener("DOMContentLoaded", function() {
+        if (typeof Inputmask !== 'undefined') {
+            Inputmask().mask(document.querySelectorAll("input[data-inputmask]"));
+        }
+    });
+
     // Get the modal
     var payModal = document.getElementById("payModal");
 
@@ -350,21 +357,28 @@
 
             var label = document.createElement('label');
             label.htmlFor = 'card' + index;
-            label.textContent = card.cardName + ' (' + card.cardNumber + ')';
+            label.textContent = card.cardName + ' (' + card.cardNumberHidden + ')';
 
             container.appendChild(radioBtn);
             container.appendChild(label);
             container.appendChild(document.createElement('br'));
+
+            // Add event listener to hide new card form if this button is clicked
+            radioBtn.addEventListener('click', function() {
+                document.getElementById('newCardContainer').style.display = 'none';
+                toggleRequired(false);
+            });
         });
 
         // Add option for inserting a new card
         var newCardRadioBtn = document.createElement('input');
         newCardRadioBtn.type = 'radio';
-        newCardRadioBtn.name = 'creditCardNumber';
+        newCardRadioBtn.name = 'creditCard';
         newCardRadioBtn.value = 'newCard';
         newCardRadioBtn.id = 'newCard';
         newCardRadioBtn.onclick = function() {
             document.getElementById('newCardContainer').style.display = 'block';
+            toggleRequired(true);
         };
 
         var newCardLabel = document.createElement('label');
@@ -378,7 +392,20 @@
 
     // Call the function to create radio buttons
     createCreditCardRadioButtons(creditCardData);
+
+    // Function to toggle the required attribute of the new card input fields
+    function toggleRequired(isRequired) {
+        var newCardFields = document.querySelectorAll('#newCardContainer input');
+        newCardFields.forEach(function(field) {
+            if (isRequired) {
+                field.setAttribute('required', 'required');
+            } else {
+                field.removeAttribute('required');
+            }
+        });
+    }
 </script>
+
 <script>
     // Initialize inputmask for credit card number and expiry date fields
     $(document).ready(function() {

@@ -22,10 +22,11 @@ class CContract
 {
     public static function pay(int $idReservation) {
         $session = USession::getInstance();
+        print $idReservation;
         $idStudent = $session->getSessionElement('id');
         $PM = FPersistentManager::getInstance();
         $reservation = $PM->load('EReservation', $idReservation);
-        $creditCardNumber = USuperGlobalAccess::getPost('creditCardNumber');
+        $creditCardNumber = USuperGlobalAccess::getPost('creditCardNumber') ?? USuperGlobalAccess::getPost('creditNewCardNumber');
         $futureDate= $reservation->getFromDate() > new DateTime('today');
         if ($PM->existsTheCard($creditCardNumber)) {
             if ($futureDate) {
@@ -39,7 +40,7 @@ class CContract
             $name = USuperGlobalAccess::getPost('name');
             $surname = USuperGlobalAccess::getPost('surname');
             $expirationDate = USuperGlobalAccess::getPost('expirydate');
-            $cvv = USuperGlobalAccess::getPost('cvv');
+            $cvv = (int)USuperGlobalAccess::getPost('cvv');
             $title = USuperGlobalAccess::getPost('cardTitle');
             $creditCard = new ECreditCard($creditCardNumber, $name, $surname, $expirationDate, $cvv, false, $idStudent, $title);
             $PM->store($creditCard);
@@ -52,9 +53,9 @@ class CContract
             $res=$PM->store($contract);
         }
         if ($res) {
-            header('Location:' . $_SERVER['HTTP_REFERER'].'/payed');
+            header('Location:/Contract/showStudent/'.$idReservation.'/payed'); //redirect to contract page of the one you jest payed
         } else {
-            header('Location:' . $_SERVER['HTTP_REFERER'].'/error');
+            header('Location:/Contract/showStudent/'.$idReservation.'/error');
         }
 
     }

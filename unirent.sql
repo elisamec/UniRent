@@ -665,7 +665,7 @@ ALTER TABLE `accommodationreview`
 --
 ALTER TABLE `contract`
   ADD CONSTRAINT `contract_ibfk_1` FOREIGN KEY (`idReservation`) REFERENCES `reservation` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `contract_ibfk_2` FOREIGN KEY (`cardNumber`) REFERENCES `creditcard` (`number`) ON DELETE CASCADE;
+  ADD CONSTRAINT `contract_ibfk_2` FOREIGN KEY (`cardNumber`) REFERENCES `creditcard` (`number`) ON DELETE NO ACTION;
 
 --
 -- Limiti per la tabella `creditcard`

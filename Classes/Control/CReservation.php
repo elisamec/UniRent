@@ -164,9 +164,10 @@ class CReservation
             $creditCardDataArray = $PM->loadStudentCards($reservation->getIdStudent());
             $creditCardData = [];
             foreach ($creditCardDataArray as $card) {
-                $cardNumber='**** **** **** ' . substr($card->getNumber(), -4);
+                $cardNumberHidden='**** **** **** ' . substr($card->getNumber(), -4);
                 $creditCardData[] = [
-                    'cardNumber' => $cardNumber,
+                    'cardNumberHidden' => $cardNumberHidden,
+                    'cardNumber' => $card->getNumber(),
                     'cardName' => $card->getName(). ' ' . $card->getSurname(),
                     'main' => $card->getMain()
                 ];
