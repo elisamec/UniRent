@@ -187,7 +187,7 @@
                     }
                     let expire = "";
                     if ({/literal}'{$kind}'{literal} == "accepted") {
-                        expire='Pay within ' + accommodation.expires + ' from today';
+                        expire='You have ' + accommodation.expires + ' left to pay';
                     } else {
                         expire= 'The owner has ' + accommodation.expires + ' before it gets automatically accepted';
 

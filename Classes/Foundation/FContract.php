@@ -148,7 +148,7 @@ class FContract
             return false;
         }
     }
-    public function getContractsByStudent(int $id, ?int $idAccommodation=null):array|bool
+    public function getContractsByStudent(int $id, ?int $idAccommodation=null, string $kind=null):array|bool
     {
         $db=FConnection::getInstance()->getConnection();
         $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
@@ -160,11 +160,14 @@ class FContract
             $q='SELECT * FROM contract WHERE idReservation IN (SELECT id FROM reservation WHERE idStudent=:id';
             if(!is_null($idAccommodation))
             {
-                $q.=' AND idAccommodation=:idAccommodation)';
+                $q.=' AND idAccommodation=:idAccommodation) AND status!="future"';
             } else {
                 $q.=')';
             }
-            $q.=' AND status!="future"';
+            if (!is_null($kind))
+            {
+                $q.=' AND status=:kind';
+            }
             $db->beginTransaction();
             $stm=$db->prepare($q);
             $stm->bindValue(':id',$id,PDO::PARAM_INT);

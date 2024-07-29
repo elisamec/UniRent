@@ -140,13 +140,14 @@ class VStudent{
         $this->smarty->assign('kind', $kind);
         $this->smarty->display('Student/reservations.tpl');
     }
-    public function reservationDetails(EReservation $reservation, EAccommodation $accommodation, EOwner $owner, string $timeLeft, array $pictures, array $reviewsData):void {
+    public function reservationDetails(EReservation $reservation, EAccommodation $accommodation, EOwner $owner, string $timeLeft, array $pictures, array $reviewsData, array $creditCardData):void {
         $this->smarty->assign('accommodation', $accommodation);
         $this->smarty->assign('reservation', $reservation);
         $this->smarty->assign('owner', $owner);
         $this->smarty->assign('timeLeft', $timeLeft);
         $this->smarty->assign('imagesJson', json_encode($pictures));
         $this->smarty->assign('reviewsData', $reviewsData);
+        $this->smarty->assign('creditCardData', json_encode($creditCardData));
         $this->smarty->display('Student/reservationDetails.tpl');
     }
 }

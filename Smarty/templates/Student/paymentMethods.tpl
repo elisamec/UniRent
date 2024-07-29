@@ -147,11 +147,11 @@
             <input type="text" pattern="[0-9]*" inputmode="numeric" maxlength="3" id="cvv" name="cvv" required>
         </div>
         <div class="form-row">
-            <label for="name">Name on Card:</label>
+            <label for="name">Cardholder Name:</label>
             <input type="text" id="name" name="name" required>
         </div>
         <div class="form-row">
-            <label for="surname">Surname on Card:</label>
+            <label for="surname">Cardholder Surname:</label>
             <input type="text" id="surname" name="surname" required>
         </div>
         <div class="form-row full-width">

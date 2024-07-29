@@ -139,7 +139,7 @@
                         <h1 class="title">Status: Accepted</h1>
                         <h2> You have {$timeLeft} left to sign and pay the contract</h2>
                         <div class="btn-cont">
-                        <button class="edit_button" id="payBtn">Pay</button>
+                        <button class="edit_button" id="payOpenBtn">Pay</button>
                         <button class="delete_button" id="deleteBtn">Delete</button>
                         </div>
                         {else}
@@ -249,13 +249,150 @@
         }
     }
 </script>
+<div class="resModal" id="payModal">
+    <div class="resModal-content">
+        <div class="row">
+            <span class="resClose">&times;</span>
+            <h2 class="resModal-head">Payment</h2>
+        </div>
+        <form action="/UniRent/Contract/pay/{$reservation->getId()}" method="post">
+            <div id="creditCardContainer" class="creditCardCont"></div>
+            <div id="newCardContainer" style="display: none;">
+            <p> Important: This card will be automatically saved for future payments in your profile for contract management purposes.</p>
+                    <div class="form-grid">
+                        <div class="form-row">
+                            <label for="cardTitle">Card Title:</label>
+                            <input type="text" id="cardTitle" name="cardTitle" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="cardnumber">Enter Credit Card Number:</label>
+                            <input id="cardnumber" type="text" name="cardnumber" data-inputmask="'mask': '9999 9999 9999 9999'" placeholder="____ ____ ____ ____">
+                        </div>
+                        <div class="form-row">
+                            <label for="expiryDate">Expiry Date:</label>
+                            <input id="expirydate" name="expirydate" type="text" data-inputmask="'mask': '99/99'" placeholder="mm/yy">
+                        </div>
+                        <div class="form-row">
+                            <label for="cvv">CVV (Security Code):</label>
+                            <input type="text" pattern="[0-9]*" inputmode="numeric" maxlength="3" id="cvv" name="cvv" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="name">Cardholder Name:</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="surname">Cardholder Surname:</label>
+                            <input type="text" id="surname" name="surname" required>
+                        </div>
+                    </div>
+            </div>
+            <div class="btn-cont">
+                <button type="submit" class="edit_button" id="payBtn">Pay</button>
+                <button class="delete_button" id="cancelPayBtn">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    // Get the modal
+    var payModal = document.getElementById("payModal");
 
+    var payOpenBtn = document.getElementById("payOpenBtn");
 
+    // Get the button that opens the modal
+    var btn = document.getElementById("payBtn");
 
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("resClose")[1];
 
+    var cancelBtn = document.getElementById("cancelPayBtn");
 
+    // When the user clicks the button, open the modal 
+    payOpenBtn.onclick = function(event) {
+        event.preventDefault();
+        payModal.style.display = "block";
+    }
 
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        payModal.style.display = "none";
+    }
+    btn.onclick = function() {
+        payModal.style.display = "none";
+    }
+    cancelBtn.onclick = function() {
+        payModal.style.display = "none";
+    }
 
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == payModal) {
+            payModal.style.display = "none";
+        }
+    }
+
+    // JSON data from Smarty placeholder
+    var creditCardData = {$creditCardData};
+
+    // Function to dynamically create radio buttons
+    function createCreditCardRadioButtons(creditCardData) {
+        var container = document.getElementById('creditCardContainer');
+        container.innerHTML = ''; // Clear existing content
+        creditCardData.forEach(function(card, index) {
+            var radioBtn = document.createElement('input');
+            radioBtn.type = 'radio';
+            radioBtn.name = 'creditCardNumber';
+            radioBtn.value = card.cardNumber;
+            radioBtn.id = 'card' + index;
+            if (card.main) {
+                radioBtn.checked = true;
+            }
+
+            var label = document.createElement('label');
+            label.htmlFor = 'card' + index;
+            label.textContent = card.cardName + ' (' + card.cardNumber + ')';
+
+            container.appendChild(radioBtn);
+            container.appendChild(label);
+            container.appendChild(document.createElement('br'));
+        });
+
+        // Add option for inserting a new card
+        var newCardRadioBtn = document.createElement('input');
+        newCardRadioBtn.type = 'radio';
+        newCardRadioBtn.name = 'creditCardNumber';
+        newCardRadioBtn.value = 'newCard';
+        newCardRadioBtn.id = 'newCard';
+        newCardRadioBtn.onclick = function() {
+            document.getElementById('newCardContainer').style.display = 'block';
+        };
+
+        var newCardLabel = document.createElement('label');
+        newCardLabel.htmlFor = 'newCard';
+        newCardLabel.textContent = 'Insert a new card';
+
+        container.appendChild(newCardRadioBtn);
+        container.appendChild(newCardLabel);
+        container.appendChild(document.createElement('br'));
+    }
+
+    // Call the function to create radio buttons
+    createCreditCardRadioButtons(creditCardData);
+</script>
+<script>
+    // Initialize inputmask for credit card number and expiry date fields
+    $(document).ready(function() {
+      $('#cardnumber').inputmask({
+        mask: '9999 9999 9999 9999',
+        placeholder: ''
+      });
+
+      $('#expirydate').inputmask({
+        mask: '99/99',
+        placeholder: ''
+      });
+    });
+  </script>
 
 
 <!-- footer section start -->

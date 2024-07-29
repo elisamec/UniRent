@@ -161,8 +161,18 @@ class CReservation
                     'userPicture' => $profilePic,
                 ];
             }
+            $creditCardDataArray = $PM->loadStudentCards($reservation->getIdStudent());
+            $creditCardData = [];
+            foreach ($creditCardDataArray as $card) {
+                $cardNumber='**** **** **** ' . substr($card->getNumber(), -4);
+                $creditCardData[] = [
+                    'cardNumber' => $cardNumber,
+                    'cardName' => $card->getName(). ' ' . $card->getSurname(),
+                    'main' => $card->getMain()
+                ];
+            }
             $view= new VStudent();
-            $view->reservationDetails($reservation, $accommodation, $owner, self::formatDate($reservation->getMade()->setTime(0,0,0)), $picture, $reviewsData);
+            $view->reservationDetails($reservation, $accommodation, $owner, self::formatDate($reservation->getMade()->setTime(0,0,0)), $picture, $reviewsData, $creditCardData);
         }
         else {
             $student = $PM->load('EStudent', $reservation->getIdStudent());

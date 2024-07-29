@@ -3025,4 +3025,10 @@ background-repeat: no-repeat;
 #reviewsContainer {
     margin-bottom: 20px;
 }
- 
+
+.creditCardCont label {
+    padding-left: 10px;
+}
+#saveNewCard {
+    transform: scale(0.6);
+}
