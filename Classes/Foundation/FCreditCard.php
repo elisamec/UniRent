@@ -45,14 +45,26 @@ class FCreditCard
      */
     public function exist(string $number):bool 
     {
-        $q='SELECT * FROM creditcard WHERE number=:number';
-        $connection= FConnection::getInstance();
-        $db=$connection->getConnection();
-        $db->beginTransaction();
-        $stm=$db->prepare($q);
-        $stm->bindParam(':number',$number,PDO::PARAM_STR);
-        $stm->execute();
-        $db->commit();
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $db->exec('LOCK TABLES creditcard READ');
+            $q='SELECT * FROM creditcard WHERE number=:number';
+            $connection= FConnection::getInstance();
+            $db=$connection->getConnection();
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindParam(':number',$number,PDO::PARAM_STR);
+            $stm->execute();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            $db->exec('UNLOCK TABLES');
+            return false;
+        }
         $result=$stm->rowCount();
 
         if ($result >0)
