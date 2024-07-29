@@ -114,7 +114,7 @@ class FUpdater
                 if(!empty($res2))
                 {
                     $ids2 = implode(',', array_map('intval', $res2));
-                    $updateQuery2 = "UPDATE reservation SET status = 1, made=CURRENT_TIMESTAMP
+                    $updateQuery2 = "UPDATE reservation SET statusAccept = 1, made=CURRENT_TIMESTAMP
                                      WHERE id IN ($ids2)";
                     $updateStm2 = $db->prepare($updateQuery2);
                     $updateStm2->execute();
