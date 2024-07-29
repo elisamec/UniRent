@@ -915,8 +915,16 @@ class CStudent{
             } else if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             } else if (gettype($profilePic) === 'array') {
-                $profilePic = $profilePic[0];
-                $profilePic=(EPhoto::toBase64(array($profilePic))[0])->getPhoto();
+
+                if(count($profilePic)==0) #if the accommodation has no photos
+                {
+                    $profilePic = "/UniRent/Smarty/images/noPic.png";
+                }
+                else
+                {
+                    $profilePic = $profilePic[0];
+                    $profilePic=(EPhoto::toBase64(array($profilePic))[0])->getPhoto();
+                }
             }
             else
             {
