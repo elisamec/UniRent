@@ -37,36 +37,32 @@
       <div class="header_section">
         <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-               <a class="navbar-brand"href="/UniRent/Owner/home"><img src="/UniRent/Smarty/images/logo.png"></a>
+               <a class="navbar-brand"href="/UniRent/Student/home"><img src="/UniRent/Smarty/images/logo.png"></a>
                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
                </button>
                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav ml-auto">
                      <li class="nav-item">
-                        <a class="nav-link" href="/UniRent/Owner/home">Home</a>
-                     </li>
-                     <li class="nav-item active">
-                        <a class="nav-link" href="/UniRent/Reservation/showOwner">Reservations</a>
+                        <a class="nav-link" href="/UniRent/Student/home">Home</a>
                      </li>
                      <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Tenants</a>
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reservations</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="/UniRent/Owner/tenants/current">Current</a>
-                           <a class="dropdown-item" href="/UniRent/Owner/tenants/past">Past</a>
-                           <a class="dropdown-item" href="/UniRent/Owner/tenants/future">Future</a>
+                           <a class="dropdown-item" href="/UniRent/Reservation/showStudent/accepted">Accepted</a>
+                           <a class="dropdown-item" href="/UniRent/Reservation/showStudent/pending">Pending</a>
                         </div>
                      </li>
-                     <li class="nav-item dropdown">
+                     <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contracts</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <<a class="dropdown-item" href="/UniRent/Contract/showOwner/ongoing">Ongoing</a>
-                           <a class="dropdown-item" href="/UniRent/Contract/showOwner/finished">Past</a>
-                           <a class="dropdown-item" href="/UniRent/Contract/showOwner/future">Future</a>
+                           <<a class="dropdown-item" href="/UniRent/Contract/showStudent/ongoing">Ongoing</a>
+                           <a class="dropdown-item" href="/UniRent/Contract/showStudent/finished">Past</a>
+                           <a class="dropdown-item" href="/UniRent/Contract/showStudent/future">Future</a>
                         </div>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="/UniRent/Owner/postedReview">Posted Reviews</a>
+                        <a class="nav-link" href="/UniRent/Student/postedReview">Posted Reviews</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href = "/UniRent/Visit/visits">Visits</a>
@@ -75,7 +71,7 @@
                   <form class="form-inline my-2 my-lg-0">
                      <div class="login_bt">
                         <ul>
-                           <li><a href="/UniRent/Owner/profile"><span class="user_icon"><i class="fa fa-user" aria-hidden="true"></i></span>Profile</a></li>
+                           <li><a href="/UniRent/Student/profile"><span class="user_icon"><i class="fa fa-user" aria-hidden="true"></i></span>Profile</a></li>
                         </ul>
                      </div>
                   </form>
@@ -93,13 +89,20 @@
             <div class="row">
                <div class="col-sm-12">
                   <div class="Properties_taital_main">
-                     <h1 class="Properties_taital">Your Reservations</h1>
+                     <h1 class="Properties_taital">Your Contracts</h1>
                      <hr class="border_main">
                   </div>
+                  {if $kind == "ongoing"}
+                  <p>Here you can see all your ongoing contracts.</p>
+                  {elseif $kind == "finished"}
+                  <p>Here you can see all your past contracts.</p>
+                  {else}
+                  <p>Here you can see all your future contracts.</p>
+                  {/if}
                </div>
             </div>
             <div class="Properties_section_2">
-               <div class="row" id="reservationsContainer">
+               <div class="row" id="accommodationContainer">
                </div>
             </div>
          </div>
@@ -118,9 +121,9 @@
                   <h3 class="footer_text">Useful Links</h3>
                   <div class="footer_menu">
                      <ul>
-                        <li><a href="/UniRent/Owner/home">Home</a></li>
-                        <li><a href="/UniRent/Owner/about">About Us</a></li>
-                        <li><a href="/UniRent/Owner/contact">Contact Us</a></li>
+                        <li><a href="/UniRent/Student/home">Home</a></li>
+                        <li><a href="/UniRent/Student/about">About Us</a></li>
+                        <li><a href="/UniRent/Student/contact">Contact Us</a></li>
                      </ul>
                   </div>
                </div>
@@ -170,139 +173,60 @@
          </script>
 {literal}
          <script>
-  const data = {/literal}{$reservationsData}{literal};
-  console.log(data);
-  populateReservationsContainer(data);
+    const accommodations = {/literal}{$contracts}{literal};
 
-   function populateReservationsContainer(data) {
-        const reservationsContainer = document.getElementById("reservationsContainer");
-        reservationsContainer.innerHTML = '';
+    // Function to create and append reviews to the container
+    function displayAccommodations(accommodations) {
+        const container = document.getElementById('accommodationContainer');
 
-            if (data.length === 0) {
-                const noReservationsDiv = document.createElement("div");
-                noReservationsDiv.classList.add("container");
-                noReservationsDiv.classList.add("bottomPadding");
-                noReservationsDiv.textContent = "You have no reservations yet.";
-                reservationsContainer.appendChild(noReservationsDiv);
-            } else if (Object.keys(data).length === 0) {
-                const noReservationsDiv = document.createElement("div");
-                noReservationsDiv.classList.add("container");
-                  noReservationsDiv.classList.add("bottomPadding");
-                noReservationsDiv.textContent = "You have no reservations yet.";
-                reservationsContainer.appendChild(noReservationsDiv);
-            }
-
-        data.forEach(item => {
-            const accommodationDiv = document.createElement("div");
-            accommodationDiv.classList.add("accommodation");
-            const title = document.createElement("h1");
-            title.classList.add("titleAccomm");
-            title.textContent = item.accommodation;
-            accommodationDiv.appendChild(title);
-
-            const rowDiv = document.createElement("div");
-            rowDiv.classList.add("row");
-            
-            // Check if item.reservations is an array
-            if (Array.isArray(item.reservations)) {
-                item.reservations.forEach(reservation => {
-                    const colDiv = document.createElement("div");
-                    colDiv.classList.add("col-md-3");
-
-                    const userSectionDiv = document.createElement("div");
-                    userSectionDiv.classList.add("userSection");
-
-                    const userIconDiv = document.createElement("div");
-                    userIconDiv.classList.add("userIcon");
-
-                    const userLink = document.createElement("a");
-                    userLink.href = `/UniRent/Reservation/reservationDetails/${reservation.idReservation}`;
-
-                    const userImage = document.createElement("img");
-                    userImage.src = reservation.image;
-
-                    userLink.appendChild(userImage);
-                    userIconDiv.appendChild(userLink);
-                    userSectionDiv.appendChild(userIconDiv);
-
-                    const usernameDiv = document.createElement("div");
-                    usernameDiv.classList.add("username");
-
-                    const usernameLink = document.createElement("a");
-                    usernameLink.href = `/UniRent/Reservation/reservationDetails/${reservation.idReservation}`;
-                    usernameLink.textContent = reservation.username;
-                    usernameDiv.appendChild(usernameLink);
-
-                    // Display period under username
-                    const periodDiv = document.createElement("div");
-                    periodDiv.textContent = `Period: ${reservation.period}`;
-                    usernameDiv.appendChild(periodDiv);
-
-                    const expiresDiv = document.createElement("div");
-                     expiresDiv.textContent = `You have ${reservation.expires} left before the reservation is automatically accepted.`;
-                     usernameDiv.appendChild(expiresDiv);
-
-                    userSectionDiv.appendChild(usernameDiv);
-
-                    colDiv.appendChild(userSectionDiv);
-                    rowDiv.appendChild(colDiv);
-                });
-            } else if (typeof item.reservations === 'object') {
-                // Handle case where reservations is an object (not an array)
-                const reservation = item.reservations;
-
-                const colDiv = document.createElement("div");
-                colDiv.classList.add("col-md-3");
-
-                const userSectionDiv = document.createElement("div");
-                userSectionDiv.classList.add("userSection");
-
-                const userIconDiv = document.createElement("div");
-                userIconDiv.classList.add("userIcon");
-
-                const userLink = document.createElement("a");
-                userLink.href = `/UniRent/Reservation/reservationDetails/${reservation.idReservation}`;
-
-                const userImage = document.createElement("img");
-                userImage.src = reservation.image;
-
-                userLink.appendChild(userImage);
-                userIconDiv.appendChild(userLink);
-                userSectionDiv.appendChild(userIconDiv);
-
-                const usernameDiv = document.createElement("div");
-                usernameDiv.classList.add("username");
-
-                const usernameLink = document.createElement("a");
-                usernameLink.href = `/UniRent/Reservation/reservationDetails/${reservation.idReservation}`;
-                    usernameLink.textContent = reservation.username;
-                usernameDiv.appendChild(usernameLink);
-
-                // Display period under username
-                const periodDiv = document.createElement("div");
-                periodDiv.textContent = `Period: ${reservation.period}`;
-                usernameDiv.appendChild(periodDiv);
-                
-                const expiresDiv = document.createElement("div");
-                     expiresDiv.textContent = `You have ${reservation.expires} left before the reservation is automatically accepted.`;
-                     usernameDiv.appendChild(expiresDiv);
-
-                userSectionDiv.appendChild(usernameDiv);
-
-                colDiv.appendChild(userSectionDiv);
-                rowDiv.appendChild(colDiv);
+        if (container) {
+            if (accommodations.length === 0) {
+                container.innerHTML = '<div class="container"><h1 class="noRev">You have no contracts yet!</h1></div>';
             } else {
-                console.error("Unexpected format for item.reservations:", item.reservations);
-            }
+                accommodations.forEach(accommodation => {
+                    if (accommodation.photo == null) {
+                        accommodation.photo = "/UniRent/Smarty/images/noPic.png";
+                    }
+                    const accommodationElement = document.createElement('div');
+                    accommodationElement.className = 'col-lg-4 col-md-6col-lg-4 col-md-6';
 
-            accommodationDiv.appendChild(rowDiv);
-            reservationsContainer.appendChild(accommodationDiv);
-        });
+                    // Insert the names of the elements of the accommodation array
+                    accommodationElement.innerHTML = `
+                        <div class="blog_img">
+                            <div class="container_main">
+                                <img src="${accommodation.photo}" alt="">
+                                <div class="overlay">
+                                    <div class="text">
+                                        <div class="some_text"><a href="/UniRent/Contract/contractDetails/${accommodation.idContract}">See More</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="image_box">
+                            <div class="left_box">
+                                <h1 class="road_text">${accommodation.title}</h1>
+                                <p>${accommodation.address}</p>
+                                <p>${accommodation.period}</p>
+                            </div>
+                            <div class="right_box">
+                                <div class="rate_text">${accommodation.price} €</div>
+                            </div>
+                        </div>
+                    `;
+
+                    // Append the created element to the container
+                    container.appendChild(accommodationElement); // Corrected: accommodationElement instead of reviewElement
+                });
+            }
+        } else {
+            console.error("Container not found!"); // Debugging: Error if container is not found
+        }
     }
+
+    // Call the function to display reviews
+    displayAccommodations(accommodations);
 </script>
 {/literal}
-<script src="/UniRent/Smarty/js/cookie.js"></script>
-
-
-   </body>
+   <script src="/UniRent/Smarty/js/cookie.js"></script>
+</body>
 </html>

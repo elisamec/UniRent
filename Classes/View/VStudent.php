@@ -150,4 +150,9 @@ class VStudent{
         $this->smarty->assign('creditCardData', json_encode($creditCardData));
         $this->smarty->display('Student/reservationDetails.tpl');
     }
+    public function showContracts(array $contractsData, string $kind):void {
+        $this->smarty->assign('contracts', json_encode($contractsData));
+        $this->smarty->assign('kind', $kind);
+        $this->smarty->display('Student/contracts.tpl');
+    }
 }

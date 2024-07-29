@@ -16,7 +16,7 @@ class EReservation
      *
      * @var ?int $id
      */
-private ?int $id=null;    
+private ?int $id;    
     /**
      * fromDate
      *
@@ -63,8 +63,9 @@ private ?int $id=null;
      * @param  mixed $idStudent
      * @return void
      */
-    public function __construct(DateTime $from, DateTime $to, int $accomodationId, int $idStudent, DateTime $made=new DateTime('now'))
+    public function __construct(DateTime $from, DateTime $to, int $accomodationId, int $idStudent, DateTime $made=new DateTime('now'), ?int $id=null)
     {
+        $this->id=$id;
         $this->fromDate=$from;
         $this->toDate=$to;
         $this->accomodationId=$accomodationId;

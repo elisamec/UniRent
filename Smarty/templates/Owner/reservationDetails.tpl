@@ -59,9 +59,9 @@
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contracts</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="#">Ongoing</a>
-                           <a class="dropdown-item" href="#">Past</a>
-                           <a class="dropdown-item" href="#">Future</a>
+                           <<a class="dropdown-item" href="/UniRent/Contract/showOwner/ongoing">Ongoing</a>
+                           <a class="dropdown-item" href="/UniRent/Contract/showOwner/finished">Past</a>
+                           <a class="dropdown-item" href="/UniRent/Contract/showOwner/future">Future</a>
                         </div>
                      </li>
                      <li class="nav-item">
@@ -290,9 +290,9 @@ function acceptFunct() {
                   <h3 class="footer_text">Useful Links</h3>
                   <div class="footer_menu">
                      <ul>
-                        <li><a href="/UniRent/Student/home">Home</a></li>
-                        <li><a href="/UniRent/Student/about">About Us</a></li>
-                        <li><a href="/UniRent/Student/contact">Contact Us</a></li>
+                        <li><a href="/UniRent/Owner/home">Home</a></li>
+                        <li><a href="/UniRent/Owner/about">About Us</a></li>
+                        <li><a href="/UniRent/Owner/contact">Contact Us</a></li>
                      </ul>
                   </div>
                </div>

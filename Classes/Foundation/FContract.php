@@ -78,7 +78,8 @@ class FContract
      * @return bool
      */
     public function store(EContract $con):bool
-    {
+    {   
+        print $con->getID();
         if(FReservation::getInstance()->exist($con->getID())===false)  //if dose not exist the reservation
         {
             return false;  //return store and not store the contract
@@ -94,7 +95,7 @@ class FContract
             $db->beginTransaction();
             $stm=$db->prepare($q);
             $stm->bindValue(':RID',$con->getID(),PDO::PARAM_INT);
-            $stm->bindValue(':ST',$con->getStatus(),PDO::PARAM_STR);
+            $stm->bindValue(':ST',$con->getStatus()->value,PDO::PARAM_STR);
             $stm->bindValue(':PD',$con->getPaymentDate()->format('Y-m-d H:i:s'),PDO::PARAM_STR);
             $stm->bindValue(':CN',$con->getCardNumber(),PDO::PARAM_STR);
             $stm->execute();
@@ -148,7 +149,7 @@ class FContract
             return false;
         }
     }
-    public function getContractsByStudent(int $id, ?int $idAccommodation=null, string $kind=null):array|bool
+    public function getContractsByStudent(int $id, ?int $idAccommodation=null, ?string $kind=null):array|bool
     {
         $db=FConnection::getInstance()->getConnection();
         $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);

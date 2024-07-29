@@ -42,7 +42,7 @@ class EContract extends EReservation
      */
     public function __construct(TStatusContract | string $status, string $cardNumber, EReservation $reserv, DateTime $payment)
     {
-        parent::__construct($reserv->getFromDate(),$reserv->getToDate(),$reserv->getAccomodationId(),$reserv->getIdStudent());
+        parent::__construct($reserv->getFromDate(),$reserv->getToDate(),$reserv->getAccomodationId(),$reserv->getIdStudent(), new DateTime("now"), $reserv->getID());
         if (is_string($status)) {
             $status = TStatusContract::tryFrom($status);
         }
