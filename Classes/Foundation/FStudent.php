@@ -151,13 +151,8 @@ class FStudent
         $db=FConnection::getInstance()->getConnection();
         $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
 
-        
-        //$verifica = $this->exist($student->getID());
+        if($this->exist($student->getID())){
 
-        //$verifica ? print "Lo studente da aggiornare esiste<br>" : print "Lo studente da aggiornare non esiste<br>";
-        //if($this->exist($student->getID())){
-
-            print "Sono dentro l'if<br>";
             try
             {
                 $CPhoto=$student->getPhoto();
@@ -193,13 +188,10 @@ class FStudent
                     $stm->bindValue(':picture', null, PDO::PARAM_NULL);;
                 }
 
-                print "Ho preparato tutti i dati <br>";
+
                 $stm->execute();
-                print "Ho eseguito la query <br>";
-                //$db->commit();
-                print "Ho fatto il commit <br>";
+                $db->commit();
                 $db->exec('UNLOCK TABLES');
-                print "Ho sbloccato le tabelle <br>";
                 return true;
             }
             catch(PDOException $e)
@@ -216,11 +208,11 @@ class FStudent
                 }
                 return false;
             }
-        /*} 
+        } 
         else
         {
             return false;
-        }*/
+        }
     }
     
     private function currentPhoto(int $id): ?int   #restituisce l'ID della foto del profilo dello studente corrente
