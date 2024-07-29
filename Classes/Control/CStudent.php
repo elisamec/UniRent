@@ -411,6 +411,7 @@ class CStudent{
         $session=USession::getInstance();
         $view = new VStudent();
         $error = 0;
+        $photoError = "";
 
         //reed the data from the form
         $username=USuperGlobalAccess::getPost('username');
@@ -434,7 +435,6 @@ class CStudent{
 
         $oldStudent = $PM->load('EStudent', $studentID);
         $oldEmail = $oldStudent->getUniversityMail();
-        #$oldPhoto = $session::getSessionElement('photo');
         $oldPhoto=$oldStudent->getPhoto();
 
         if(!is_null($oldPhoto))
@@ -459,18 +459,12 @@ class CStudent{
                 $password = $passChange[0];
                 $error = $passChange[1];
 
-
                 $photo = CStudent::changePhoto($oldPhoto, $picture, $oldStudent);      
                 
-
                 $student=new EStudent($username,$password,$name,$surname,$photo,$email,$courseDuration,$immatricolationYear,$birthDate,$sex,$smoker,$animals);
                 $student->setID($studentID);
 
-                print "Sto per aggionare lo studente <br>";
-
                 $result=$PM->update($student);
-
-                print "Studente aggiornato <br>";
                 
                 if($result && !$error){
                     
@@ -483,6 +477,7 @@ class CStudent{
                         $ph=null;
                     }
                     $session->setSessionElement('username',$username);
+                    $password = $student->getPassword();
                     $session->setSessionElement('password',$password);
                     $session->setSessionElement('photo',$ph);
                     header('Location:/UniRent/Student/profile');
