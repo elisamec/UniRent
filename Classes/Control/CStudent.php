@@ -210,6 +210,7 @@ class CStudent{
         $result = $PM->store($student);
 
         if ($result){
+            $session->setSessionElement('id', $student->getId());
             $session->setSessionElement('courseDuration', $duration);
             $session->setSessionElement('immatricolationYear', $immatricolation);
             $session->setSessionElement('birthDate', $birthDate);
