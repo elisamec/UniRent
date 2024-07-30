@@ -43,7 +43,7 @@
                </button>
                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav ml-auto">
-                     <li class="nav-item active">
+                     <li class="nav-item">
                         <a class="nav-link" href="/UniRent/Owner/home">Home</a>
                      </li>
                      <li class="nav-item">
@@ -57,7 +57,7 @@
                            <a class="dropdown-item" href="/UniRent/Owner/tenants/future">Future</a>
                         </div>
                      </li>
-                     <li class="nav-item dropdown">
+                     <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contracts</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                            <a class="dropdown-item" href="/UniRent/Contract/showOwner/onGoing">Ongoing</a>
@@ -83,24 +83,23 @@
             </nav>
          </div>
       </div>
+      <div class="path">
+        <p id="breadcrumb"></p>
+    </div>
       <!-- header section end -->
       <!-- feature section start -->
-      <div class="container">
-      <div class="new_bt"><a href="/UniRent/Owner/addAccommodation">Add a new Accommodation</a></div>
-      </div>
       <div class="Properties_section layout_padding">
          <div class="container">
             <div class="row">
                <div class="col-sm-12">
                   <div class="Properties_taital_main">
-                     <h1 class="Properties_taital">Your Proprieties</h1>
+                     <h1 class="Properties_taital">Your Contracts</h1>
                      <hr class="border_main">
                   </div>
-                  <p>Here you can see all the properties you have posted. The ones a little greyish are the ones that you have disabled.</p>
                </div>
             </div>
             <div class="Properties_section_2">
-               <div class="row" id="accommodationContainer">
+               <div class="row" id="contractsContainer">
                </div>
             </div>
          </div>
@@ -119,7 +118,7 @@
                   <h3 class="footer_text">Useful Links</h3>
                   <div class="footer_menu">
                      <ul>
-                        <li class="active"><a href="/UniRent/Owner/home">Home</a></li>
+                        <li><a href="/UniRent/Owner/home">Home</a></li>
                         <li><a href="/UniRent/Owner/about">About Us</a></li>
                         <li><a href="/UniRent/Owner/contact">Contact Us</a></li>
                      </ul>
@@ -171,78 +170,131 @@
          </script>
 {literal}
          <script>
-    const accommodationsActive = {/literal}{$accommodationsActive}{literal};
-const accommodationsInactive = {/literal}{$accommodationsInactive}{literal};
-let classDisplay = "";
-let imageClass = "";
+  const data = {/literal}{$contractsData}{literal};
+  console.log(data);
+  populateContractsContainer(data);
 
-// Function to create and append accommodations to the container
-function displayAccommodations(accommodationsActive, accommodationsInactive) {
-    const container = document.getElementById('accommodationContainer');
+   function populateContractsContainer(data) {
+        const contractsContainer = document.getElementById("contractsContainer");
+        contractsContainer.innerHTML = '';
 
-    if (container) {
-        console.log(accommodationsActive);
-        console.log(Array.isArray(accommodationsActive));
+            if (data.length === 0) {
+                const noContractsDiv = document.createElement("div");
+                noContractsDiv.classList.add("container");
+                noContractsDiv.classList.add("bottomPadding");
+                noContractsDiv.textContent = "You have no contracts yet.";
+                contractsContainer.appendChild(noContractsDiv);
+            } else if (Object.keys(data).length === 0) {
+                const noContractsDiv = document.createElement("div");
+                noContractsDiv.classList.add("container");
+                  noContractsDiv.classList.add("bottomPadding");
+                noContractsDiv.textContent = "You have no contracts yet.";
+                contractsContainer.appendChild(noContractsDiv);
+            }
 
-        // Combine both active and inactive accommodations
-        const allAccommodations = [...accommodationsActive, ...accommodationsInactive];
+        data.forEach(item => {
+            const accommodationDiv = document.createElement("div");
+            accommodationDiv.classList.add("accommodation");
+            const title = document.createElement("h1");
+            title.classList.add("titleAccomm");
+            title.textContent = item.accommodation;
+            accommodationDiv.appendChild(title);
 
-        if (allAccommodations.length === 0) {
-            container.innerHTML = '<div class="container"><h1 class="noRev">You have no ads yet!</h1></div>';
-        } else {
-            allAccommodations.forEach(accommodation => {
-                if (accommodation.photo == null) {
-                    accommodation.photo = "/UniRent/Smarty/images/noPic.png";
-                }
+            const rowDiv = document.createElement("div");
+            rowDiv.classList.add("row");
+            
+            // Check if item.contracts is an array
+            if (Array.isArray(item.contracts)) {
+                item.contracts.forEach(contract => {
+                    const colDiv = document.createElement("div");
+                    colDiv.classList.add("col-md-3");
 
-                if (accommodationsActive.includes(accommodation)) {
-                        classDisplay = "image_box";
-                        imageClass = "blog_img";
-                } else {
-                        classDisplay = "image_box grey";
-                        imageClass = "blog_img grey";
-                }
+                    const userSectionDiv = document.createElement("div");
+                    userSectionDiv.classList.add("userSection");
 
-                // Create HTML for each accommodation
-                const accommodationElement = document.createElement('div');
-                accommodationElement.className = 'col-lg-4 col-md-6';
+                    const userIconDiv = document.createElement("div");
+                    userIconDiv.classList.add("userIcon");
 
-                accommodationElement.innerHTML = `
-                    <div class="${imageClass}">
-                        <div class="container_main">
-                            <img src="${accommodation.photo}" alt="">
-                            <div class="overlay">
-                                <div class="text">
-                                    <div class="some_text"><a href="/UniRent/Owner/accommodationManagement/${accommodation.id}">See More</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="${classDisplay}">
-                        <div class="left_box">
-                            <h1 class="road_text">${accommodation.title}</h1>
-                            <p>${accommodation.address}</p>
-                        </div>
-                        <div class="right_box">
-                            <div class="rate_text">${accommodation.price} €</div>
-                        </div>
-                    </div>
-                `;
+                    const userLink = document.createElement("a");
+                    userLink.href = `/UniRent/Contract/contractDetails/${contract.idContract}`;
 
-                // Append the created element to the container
-                container.appendChild(accommodationElement);
-            });
-        }
-    } else {
-        console.error("Container not found!");
+                    const userImage = document.createElement("img");
+                    userImage.src = contract.image;
+
+                    userLink.appendChild(userImage);
+                    userIconDiv.appendChild(userLink);
+                    userSectionDiv.appendChild(userIconDiv);
+
+                    const usernameDiv = document.createElement("div");
+                    usernameDiv.classList.add("username");
+
+                    const usernameLink = document.createElement("a");
+                    usernameLink.href = `/UniRent/Contract/contractDetails/${contract.idContract}`;
+                    usernameLink.textContent = contract.username;
+                    usernameDiv.appendChild(usernameLink);
+
+                    // Display period under username
+                    const periodDiv = document.createElement("div");
+                    periodDiv.textContent = `Period: ${contract.period}`;
+                    usernameDiv.appendChild(periodDiv);
+
+                    userSectionDiv.appendChild(usernameDiv);
+
+                    colDiv.appendChild(userSectionDiv);
+                    rowDiv.appendChild(colDiv);
+                });
+            } else if (typeof item.contracts === 'object') {
+                // Handle case where contracts is an object (not an array)
+                const contract = item.contracts;
+
+                const colDiv = document.createElement("div");
+                colDiv.classList.add("col-md-3");
+
+                const userSectionDiv = document.createElement("div");
+                userSectionDiv.classList.add("userSection");
+
+                const userIconDiv = document.createElement("div");
+                userIconDiv.classList.add("userIcon");
+
+                const userLink = document.createElement("a");
+                userLink.href = `/UniRent/Contract/contractDetails/${contract.idContract}`;
+
+                const userImage = document.createElement("img");
+                userImage.src = contract.image;
+
+                userLink.appendChild(userImage);
+                userIconDiv.appendChild(userLink);
+                userSectionDiv.appendChild(userIconDiv);
+
+                const usernameDiv = document.createElement("div");
+                usernameDiv.classList.add("username");
+
+                const usernameLink = document.createElement("a");
+                usernameLink.href = `/UniRent/Contract/contractDetails/${contract.idContract}`;
+                    usernameLink.textContent = contract.username;
+                usernameDiv.appendChild(usernameLink);
+
+                // Display period under username
+                const periodDiv = document.createElement("div");
+                periodDiv.textContent = `Period: ${contract.period}`;
+                usernameDiv.appendChild(periodDiv);
+
+                userSectionDiv.appendChild(usernameDiv);
+
+                colDiv.appendChild(userSectionDiv);
+                rowDiv.appendChild(colDiv);
+            } else {
+                console.error("Unexpected format for item.contracts:", item.contracts);
+            }
+
+            accommodationDiv.appendChild(rowDiv);
+            contractsContainer.appendChild(accommodationDiv);
+        });
     }
-}
-
-// Call the function to display accommodations
-displayAccommodations(accommodationsActive, accommodationsInactive);
-
 </script>
 {/literal}
 <script src="/UniRent/Smarty/js/cookie.js"></script>
+
+
    </body>
 </html>

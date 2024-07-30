@@ -97,28 +97,30 @@ class CContract
         $view->showContracts($contractsData, $kind);
 
     }
-    /*
-    public static function showOwner(string $kind, string $statusAccept="null", string $statusDeny="null"):void {
+    
+    public static function showOwner(string $kind):void {
         $session=USession::getInstance();
         $id=$session::getSessionElement('id');
         $PM=FPersistentManager::getInstance();
-        $reservationsArray=$PM->getWaitingReservations($id);
+        $contractsArray=$PM->getContractsByOwner($id, $kind);
         $view = new VOwner();
-        $reservationData=[];
-        foreach ($reservationsArray as $idAccommodation => $reservations) {
-            usort($reservations, function($a, $b) {
-                $dateA = $a->getMade();
-                $dateB = $b->getMade();
-                
-                // Compare DateTime objects directly
-                return $dateA <=> $dateB;
-            });
+        $contractsData=[];
+        foreach ($contractsArray as $idAccommodation => $contracts) {
             $accommodationTitle = $PM->getTitleAccommodationById($idAccommodation);
             $studentList = [];
 
-            foreach ($reservations as $reservation) {
-                $formatted = self::formatDate($reservation->getMade()->setTime(0,0,0));
-                $student=$PM->load('EStudent', $reservation->getIdStudent());
+            foreach ($contracts as $contract) {
+                usort($contracts, function($a, $b) {
+                    $today = new DateTime();
+                    $fromDateA = $a->getFromDate();
+                    $fromDateB = $b->getFromDate();
+                
+                    $diffA = $today->diff($fromDateA)->days;
+                    $diffB = $today->diff($fromDateB)->days;
+                
+                    return $diffA - $diffB;
+                });
+                $student=$PM->load('EStudent', $contract->getIdStudent());
                 $student_photo=$student->getPhoto();
                 $studentStatus = $student->getStatus();
                 if($studentStatus === TStatusUser::BANNED){
@@ -137,23 +139,20 @@ class CContract
                 }
                 $profilePic = $student->getPhoto() === null ? "/UniRent/Smarty/images/ImageIcon.png" : $student->getPhoto()->getPhoto();
                 $studentList[] = [
-                    'idReservation' => $reservation->getID(),
+                    'idContract' => $contract->getID(),
                     'username' => $student->getUsername(),
                     'image' => $profilePic,
-                    'period' => 'from '. $reservation->getFromDate()->format('d/m/Y') . ' to ' . $reservation->getToDate()->format('d/m/Y'),
-                    'expires' => $formatted,
-                    'status' => $studentStatus->value
+                    'period' => 'from '. $contract->getFromDate()->format('d/m/Y') . ' to ' . $contract->getToDate()->format('d/m/Y')
                 ];
             }
 
-            $reservationData[] = [
+            $contractsData[] = [
                 'accommodation' => $accommodationTitle,
-                'reservations' => $studentList
+                'contracts' => $studentList
             ];
         }
-        $view->showReservations($reservationData);
+        $view->showContracts($contractsData, $kind);
     }
-        */
     public static function contractDetails(int $idContract) {
         $session = USession::getInstance();
         $userType = $session->getSessionElement('userType');
@@ -222,8 +221,7 @@ class CContract
             $view->contractDetails($contract, $accommodation, $owner, $cardNumber, $cardHolder, $picture, $reviewsData);
         }
         else {
-            /*
-            $student = $PM->load('EStudent', $reservation->getIdStudent());
+            $student = $PM->load('EStudent', $contract->getIdStudent());
             $student_photo=$student->getPhoto();
             $studentStatus = $student->getStatus();
             if($studentStatus === TStatusUser::BANNED){
@@ -263,8 +261,8 @@ class CContract
                 ];
             }
             $view = new VOwner();
-            $view->reservationDetails($reservation, $student, self::formatDate($reservation->getMade()->setTime(0,0,0)), $reviewsData);
-            */
+            $view->contractDetails($contract, $student, $reviewsData);
+            
         }
     }
 }
