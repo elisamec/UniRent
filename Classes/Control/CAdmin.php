@@ -76,7 +76,8 @@ class CAdmin
     {
         $PM = FPersistentManager::getInstance();
         $session = USession::getInstance();
-        $userType  = $session::getSessionElement('userType');
+        $userType  = $session::getSessionElement('userType');     
+        
         if ($type == 'Student')
         {
             $student = $PM::load('EStudent', $id);
@@ -84,11 +85,11 @@ class CAdmin
             $res=$PM::update($student);
             if ($res)
             {
-                header('Location:' . ucfirst($userType) . '/publicProfile/' . $student->getUsername() . '/reported');
+                header('Location:/UniRent/' . ucfirst($userType) . '/publicProfile/' . $student->getUsername() . '/reported');
             }
             else
             {
-                header('Location:' . ucfirst($userType) . '/publicProfile/' . $student->getUsername() . '/error');
+                header('Location:/UniRent/' . ucfirst($userType) . '/publicProfile/' . $student->getUsername() . '/error');
             }
         }
         else
@@ -98,11 +99,11 @@ class CAdmin
             $res=$PM::update($owner);
             if ($res)
             {
-                header('Location:' . ucfirst($userType) . '/publicProfile/' . $owner->getUsername() . '/reported');
+                header('Location:/UniRent/' . ucfirst($userType) . '/publicProfile/' . $owner->getUsername() . '/reported');
             }
             else
             {
-                header('Location:' . ucfirst($userType) . '/publicProfile/' . $owner->getUsername() . '/error');
+                header('Location:/UniRent/' . ucfirst($userType) . '/publicProfile/' . $owner->getUsername() . '/error');
             }
         }
     }
