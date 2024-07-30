@@ -136,6 +136,9 @@ class CReservation
                 $owner_photo_64=EPhoto::toBase64(array($owner_photo));
                 $owner->setPhoto($owner_photo_64[0]);
                 #print_r($owner);
+            } else if (is_null($owner_photo)) {
+                $photo = new EPhoto(null, file_get_contents(__DIR__ . "/../../Smarty/images/ImageIcon.png"), 'other', null);
+                $owner->setPhoto($photo);
             }
             $reviews = $PM->loadByRecipient($accommodation->getIdAccommodation(), TType::ACCOMMODATION);
             $reviewsData = [];
