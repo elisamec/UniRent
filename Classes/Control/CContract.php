@@ -62,9 +62,6 @@ class CContract
         $session=USession::getInstance();
         $id=$session->getSessionElement('id');
         $PM= FPersistentManager::getInstance();
-        if ($kind=='ongoing') {
-            $kind='onGoing';
-        }
         $contracts=$PM->getContractsByStudent($id, null, $kind);
         #print_r($contracts);
         
@@ -157,4 +154,117 @@ class CContract
         $view->showReservations($reservationData);
     }
         */
+    public static function contractDetails(int $idContract) {
+        $session = USession::getInstance();
+        $userType = $session->getSessionElement('userType');
+        $PM=FPersistentManager::getInstance();
+        $contract = $PM->load('EContract', $idContract);
+        if ($userType==='Student') {
+            $accommodation = $PM->load('EAccommodation', $contract->getAccomodationId());
+            $photos_acc=$accommodation->getPhoto();
+            $photo_acc_64=EPhoto::toBase64($photos_acc);
+            $accommodation->setPhoto($photo_acc_64);
+
+            $picture=array();
+            foreach($accommodation->getPhoto() as $p)
+            {
+                if(is_null($p)){}
+                else
+                {
+                    $picture[]=$p->getPhoto();
+                }
+            }
+            
+            $owner = $PM->load('EOwner', $accommodation->getIdOwner());
+            $owner_photo=$owner->getPhoto();
+            $ownerStatus = $owner->getStatus();
+            if($ownerStatus === TStatusUser::BANNED){
+                
+                $path = __DIR__ . "/../../Smarty/images/BannedUser.png";
+                $owner_photo = new EPhoto(null, file_get_contents($path), 'other', null);
+                $owner_photo_64=EPhoto::toBase64(array($owner_photo));
+                $owner->setPhoto($owner_photo_64[0]);
+            }
+            elseif(!is_null($owner_photo))
+            {
+                $owner_photo_64=EPhoto::toBase64(array($owner_photo));
+                $owner->setPhoto($owner_photo_64[0]);
+                #print_r($owner);
+            }
+            $reviews = $PM->loadByRecipient($accommodation->getIdAccommodation(), TType::ACCOMMODATION);
+            $reviewsData = [];
+            
+            foreach ($reviews as $review) {
+                $author = $PM::load('EStudent', $review->getIdAuthor());
+                $profilePic = $author->getPhoto();
+                if ($author->getStatus() === TStatusUser::BANNED) {
+                    $profilePic = "/UniRent/Smarty/images/BannedUser.png";
+                } else if ($profilePic === null) {
+                    $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+                }
+                else
+                {
+                    $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
+                }
+                $reviewsData[] = [
+                    'title' => $review->getTitle(),
+                    'username' => $author->getUsername(),
+                    'userStatus' => $author->getStatus()->value,
+                    'stars' => $review->getValutation(),
+                    'content' => $review->getDescription(),
+                    'userPicture' => $profilePic,
+                ];
+            }
+            $creditCard = $PM->loadCreditCard($contract->getCardNumber());
+            $cardNumber='**** **** **** ' . substr($creditCard->getNumber(), -4);
+            $cardHolder = $creditCard->getName() . " ". $creditCard->getSurname();
+            $view= new VStudent();
+            $view->contractDetails($contract, $accommodation, $owner, $cardNumber, $cardHolder, $picture, $reviewsData);
+        }
+        else {
+            /*
+            $student = $PM->load('EStudent', $reservation->getIdStudent());
+            $student_photo=$student->getPhoto();
+            $studentStatus = $student->getStatus();
+            if($studentStatus === TStatusUser::BANNED){
+                
+                $path = __DIR__ . "/../../Smarty/images/BannedUser.png";
+                $student_photo = new EPhoto(null, file_get_contents($path), 'other', null);
+                $student_photo_64=EPhoto::toBase64(array($student_photo));
+                $student->setPhoto($student_photo_64[0]);
+            }
+            elseif(!is_null($student_photo))
+            {
+                $student_photo_64=EPhoto::toBase64(array($student_photo));
+                $student->setPhoto($student_photo_64[0]);
+            }
+            $reviews = $PM->loadByRecipient($student->getId(), TType::STUDENT);
+            $reviewsData = [];
+            
+            foreach ($reviews as $review) {
+                $author = $PM::load('EStudent', $review->getIdAuthor());
+                $profilePic = $author->getPhoto();
+                if ($author->getStatus() === TStatusUser::BANNED) {
+                    $profilePic = "/UniRent/Smarty/images/BannedUser.png";
+                } else if ($profilePic === null) {
+                    $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+                }
+                else
+                {
+                    $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
+                }
+                $reviewsData[] = [
+                    'title' => $review->getTitle(),
+                    'username' => $author->getUsername(),
+                    'userStatus' => $author->getStatus()->value,
+                    'stars' => $review->getValutation(),
+                    'content' => $review->getDescription(),
+                    'userPicture' => $profilePic,
+                ];
+            }
+            $view = new VOwner();
+            $view->reservationDetails($reservation, $student, self::formatDate($reservation->getMade()->setTime(0,0,0)), $reviewsData);
+            */
+        }
+    }
 }

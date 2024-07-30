@@ -58,7 +58,7 @@
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contracts</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="/UniRent/Contract/showStudent/ongoing">Ongoing</a>
+                           <a class="dropdown-item" href="/UniRent/Contract/showStudent/onGoing">Ongoing</a>
                            <a class="dropdown-item" href="/UniRent/Contract/showStudent/finished">Past</a>
                            <a class="dropdown-item" href="/UniRent/Contract/showStudent/future">Future</a>
                         </div>
@@ -134,21 +134,8 @@
                         <h1 class="title">Warning: The Owner of this Accommodation has been Banned</h1>
                     {/if}
                         <div class="grey_square">
-                        <h1 class="title">You have reserved this place from {$reservation->getFromDate()->format('d/m/Y')} to {$reservation->getToDate()->format('d/m/Y')}</h1>
-                        {if $reservation->getStatusAccept() === true}
-                        <h1 class="title">Status: Accepted</h1>
-                        <h2> You have {$timeLeft} left to sign and pay the contract</h2>
-                        <div class="btn-cont">
-                        <button class="edit_button" id="payOpenBtn">Pay</button>
-                        <button class="delete_button" id="deleteBtn">Delete</button>
-                        </div>
-                        {else}
-                        <h1 class="title">Status: Pending</h1>
-                        <h2> The owner has {$timeLeft} left to accept your reservation</h2>
-                        <div class="btn-cont">
-                        <button class="delete_button" id="deleteBtn">Delete</button>
-                        </div>
-                        {/if}
+                        <h1 class="title">You have reserved this place from {$contract->getFromDate()->format('d/m/Y')} to {$contract->getToDate()->format('d/m/Y')}, therefore this contract is classified as {$contract->getStatus()->value}</h1>
+                        <h1>You have payed on {$contract->getPaymentDate()->format('d/m/Y')} with {$cardNumber} owned by {$cardHolder}</h1>
                         </div>
                         
                         <h1 class="title">Accommodation Details</h1>
@@ -249,177 +236,6 @@
         }
     }
 </script>
-<div class="resModal" id="payModal">
-    <div class="resModal-content">
-        <div class="row">
-            <span class="resClose">&times;</span>
-            <h2 class="resModal-head">Payment</h2>
-        </div>
-        <form action="/UniRent/Contract/pay/{$reservation->getId()}" method="post">
-            <div id="creditCardContainer" class="creditCardCont"></div>
-            <div id="newCardContainer" style="display: none;">
-                <p> Important: This card will be automatically saved for future payments in your profile for contract management purposes.</p>
-                <div class="form-grid">
-                    <div class="form-row">
-                        <label for="cardTitle">Card Title:</label>
-                        <input type="text" id="cardTitle" name="cardTitle">
-                    </div>
-                    <div class="form-row">
-                        <label for="cardnumber">Enter Credit Card Number:</label>
-                        <input id="cardnumber" type="text" name="creditNewCardNumber" data-inputmask="'mask': '9999 9999 9999 9999'" placeholder="____ ____ ____ ____">
-                    </div>
-                    <div class="form-row">
-                        <label for="expiryDate">Expiry Date:</label>
-                        <input id="expirydate" name="expirydate" type="text" data-inputmask="'mask': '99/99'" placeholder="mm/yy">
-                    </div>
-                    <div class="form-row">
-                        <label for="cvv">CVV (Security Code):</label>
-                        <input type="text" pattern="[0-9]*" inputmode="numeric" maxlength="3" id="cvv" name="cvv">
-                    </div>
-                    <div class="form-row">
-                        <label for="name">Cardholder Name:</label>
-                        <input type="text" id="name" name="name">
-                    </div>
-                    <div class="form-row">
-                        <label for="surname">Cardholder Surname:</label>
-                        <input type="text" id="surname" name="surname">
-                    </div>
-                </div>
-            </div>
-            <div class="btn-cont">
-                <button type="submit" class="edit_button" id="payBtn">Pay</button>
-                <button type="button" class="delete_button" id="cancelPayBtn">Cancel</button>
-            </div>
-        </form>
-    </div>
-</div>
-<script>
-    // Initialize input masks
-    document.addEventListener("DOMContentLoaded", function() {
-        if (typeof Inputmask !== 'undefined') {
-            Inputmask().mask(document.querySelectorAll("input[data-inputmask]"));
-        }
-    });
-
-    // Get the modal
-    var payModal = document.getElementById("payModal");
-
-    var payOpenBtn = document.getElementById("payOpenBtn");
-
-    // Get the button that opens the modal
-    var btn = document.getElementById("payBtn");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("resClose")[1];
-
-    var cancelBtn = document.getElementById("cancelPayBtn");
-
-    // When the user clicks the button, open the modal 
-    payOpenBtn.onclick = function(event) {
-        event.preventDefault();
-        payModal.style.display = "block";
-    }
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        payModal.style.display = "none";
-    }
-    btn.onclick = function() {
-        payModal.style.display = "none";
-    }
-    cancelBtn.onclick = function() {
-        payModal.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == payModal) {
-            payModal.style.display = "none";
-        }
-    }
-
-    // JSON data from Smarty placeholder
-    var creditCardData = {$creditCardData};
-
-    // Function to dynamically create radio buttons
-    function createCreditCardRadioButtons(creditCardData) {
-        var container = document.getElementById('creditCardContainer');
-        container.innerHTML = ''; // Clear existing content
-        creditCardData.forEach(function(card, index) {
-            var radioBtn = document.createElement('input');
-            radioBtn.type = 'radio';
-            radioBtn.name = 'creditCardNumber';
-            radioBtn.value = card.cardNumber;
-            radioBtn.id = 'card' + index;
-            if (card.main) {
-                radioBtn.checked = true;
-            }
-
-            var label = document.createElement('label');
-            label.htmlFor = 'card' + index;
-            label.textContent = card.cardName + ' (' + card.cardNumberHidden + ')';
-
-            container.appendChild(radioBtn);
-            container.appendChild(label);
-            container.appendChild(document.createElement('br'));
-
-            // Add event listener to hide new card form if this button is clicked
-            radioBtn.addEventListener('click', function() {
-                document.getElementById('newCardContainer').style.display = 'none';
-                toggleRequired(false);
-            });
-        });
-
-        // Add option for inserting a new card
-        var newCardRadioBtn = document.createElement('input');
-        newCardRadioBtn.type = 'radio';
-        newCardRadioBtn.name = 'creditCard';
-        newCardRadioBtn.value = 'newCard';
-        newCardRadioBtn.id = 'newCard';
-        newCardRadioBtn.onclick = function() {
-            document.getElementById('newCardContainer').style.display = 'block';
-            toggleRequired(true);
-        };
-
-        var newCardLabel = document.createElement('label');
-        newCardLabel.htmlFor = 'newCard';
-        newCardLabel.textContent = 'Insert a new card';
-
-        container.appendChild(newCardRadioBtn);
-        container.appendChild(newCardLabel);
-        container.appendChild(document.createElement('br'));
-    }
-
-    // Call the function to create radio buttons
-    createCreditCardRadioButtons(creditCardData);
-
-    // Function to toggle the required attribute of the new card input fields
-    function toggleRequired(isRequired) {
-        var newCardFields = document.querySelectorAll('#newCardContainer input');
-        newCardFields.forEach(function(field) {
-            if (isRequired) {
-                field.setAttribute('required', 'required');
-            } else {
-                field.removeAttribute('required');
-            }
-        });
-    }
-</script>
-
-<script>
-    // Initialize inputmask for credit card number and expiry date fields
-    $(document).ready(function() {
-      $('#cardnumber').inputmask({
-        mask: '9999 9999 9999 9999',
-        placeholder: ''
-      });
-
-      $('#expirydate').inputmask({
-        mask: '99/99',
-        placeholder: ''
-      });
-    });
-  </script>
 
 
 <!-- footer section start -->

@@ -4,6 +4,8 @@ namespace Classes\View;
 require __DIR__.'/../../vendor/autoload.php';
 
 use Classes\Entity\EAccommodation;
+use Classes\Entity\EContract;
+use Classes\Entity\ECreditCard;
 use Classes\Entity\EOwner;
 use Classes\Entity\EPhoto;
 use Classes\Entity\EReservation;
@@ -154,5 +156,15 @@ class VStudent{
         $this->smarty->assign('contracts', json_encode($contractsData));
         $this->smarty->assign('kind', $kind);
         $this->smarty->display('Student/contracts.tpl');
+    }
+    public function contractDetails(EContract $contract, EAccommodation $accommodation, EOwner $owner, string $cardNumber, string $cardHolder, array $pictures, array $reviewsData):void {
+        $this->smarty->assign('accommodation', $accommodation);
+        $this->smarty->assign('contract', $contract);
+        $this->smarty->assign('owner', $owner);
+        $this->smarty->assign('cardNumber', $cardNumber);
+        $this->smarty->assign('cardHolder', $cardHolder);
+        $this->smarty->assign('imagesJson', json_encode($pictures));
+        $this->smarty->assign('reviewsData', $reviewsData);
+        $this->smarty->display('Student/contractDetails.tpl');
     }
 }
