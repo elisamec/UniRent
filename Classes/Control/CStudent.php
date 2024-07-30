@@ -37,7 +37,7 @@ class CStudent{
         $PM=FPersistentManager::getInstance();
         $session=USession::getInstance();
         $user = $session->getSessionElement('username');
-        $student_id = $session->getSessionElement('id');
+        $student_id = $PM->getStudentIdByUsername($user);
         $student = $PM->load('EStudent', $student_id);
         $accommodations = $PM->lastAccommodationsStudent($student);
         $view->home($accommodations);

@@ -135,7 +135,7 @@
                     {/if}
                         <div class="grey_square">
                         <h1 class="title">You have reserved this place from {$contract->getFromDate()->format('d/m/Y')} to {$contract->getToDate()->format('d/m/Y')}, therefore this contract is classified as {$contract->getStatus()->value}</h1>
-                        <h1>You have payed on {$contract->getPaymentDate()->format('d/m/Y')} with {$cardNumber} owned by {$cardHolder}</h1>
+                        <h1>You have payed on the {$contract->getPaymentDate()->format('d/m/Y')} with {$cardNumber} owned by {$cardHolder}</h1>
                         </div>
                         
                         <h1 class="title">Accommodation Details</h1>

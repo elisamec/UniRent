@@ -139,14 +139,15 @@ class CUser
         $type = USuperGlobalAccess::getPost('userType');
         $password = USuperGlobalAccess::getPost('password');
         $mail = USuperGlobalAccess::getPost('email');
+        
         $username = USuperGlobalAccess::getPost('username');
         $name = USuperGlobalAccess::getPost('name');
         $surname = USuperGlobalAccess::getPost('surname');
         $picture = USuperGlobalAccess::getPhoto('img');
 
-        
         if($PM->verifyUserEmail($mail)==false && $PM->verifyUserUsername(USuperGlobalAccess::getPost('username'))==false)
         {
+            http_response_code(500);
             $session=USession::getInstance();
             $session::setSessionElement('email', $mail);
             $session::setSessionElement('username', $username);
