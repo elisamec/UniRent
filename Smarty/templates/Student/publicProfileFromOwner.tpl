@@ -213,7 +213,7 @@
 
 <script>
     // Get the modal
-    var modal = document.getElementById("reportModal");
+    var modalRep = document.getElementById("reportModal");
 
     // Get the button that opens the modal
     var btn = document.querySelector(".delete_btn a");
@@ -227,12 +227,12 @@
 
     // Open the modal
     function openReportModal() {
-        modal.style.display = "block";
+        modalRep.style.display = "block";
     }
 
     // Close the modal
     function closeReportModal() {
-        modal.style.display = "none";
+        modalRep.style.display = "none";
     }
 
     // Check input and enable/disable submit button
@@ -268,7 +268,7 @@
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
         if (event.target == modal) {
-            modal.style.display = "none";
+            modalRep.style.display = "none";
         }
     }
 </script>
