@@ -38,7 +38,7 @@ class FUpdater
                 $q="SELECT 	r.id 
                     FROM reservation r 
                     INNER JOIN contract c ON r.id = c.idReservation             
-                    WHERE DateDiff(fromDate, NOW())<0
+                    WHERE DateDiff(fromDate, NOW())<=0
                     AND DateDiff(toDate, NOW())>0";
                 $stm=$db->prepare($q);
                 $stm->execute();
