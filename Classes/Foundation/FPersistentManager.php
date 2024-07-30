@@ -655,5 +655,21 @@ class FPersistentManager {
         return $result;
     }
     
+    /**
+     * Method getOnGoingContractsByAccommodationId
+     * 
+     * this method call the method in FContract to accive the contract's onGoing for the accommodation with given ID
+     *
+     * @param int $id [accommodation ID]
+     *
+     * @return array
+     */
+    public function getOnGoingContractsByAccommodationId(int $id):array
+    {
+        $FC=FContract::getInstance();
+        $result=$FC->getOnGoingContractsByAccommodationId($id);
+        return $result;
+    }
+    
 }
 

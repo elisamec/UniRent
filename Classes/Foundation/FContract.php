@@ -236,4 +236,48 @@ class FContract
         return $contracts;
     }
     
+    /**
+     * Method getOnGoingContractsByAccommodationId
+     *
+     * this method return an array with the Accommodation's ID as key an an array of EContract as value, where the contract status is 'onGoing'
+     * @param int $id [idAccommodation]
+     *
+     * @return array
+     */
+    public function getOnGoingContractsByAccommodationId(int $id):array
+    {
+        $db=FConnection::getInstance()->getConnection();
+        $contracts=array();
+        try
+        {
+            $q="SELECT *
+                FROM accommodation a INNER JOIN reservation r ON r.idAccommodation=a.id
+                INNER JOIN contract c ON r.id=c.idReservation
+                WHERE c.`status`='onGoing'
+                AND a.id= :id";
+            $db->exec('LOCK TABLES accommodation READ, reservation READ, contract READ');
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindParam(':id',$id,PDO::PARAM_INT);
+            $stm->execute();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            $db->exec('UNLOCK TABLES');
+            return $contracts;
+        }
+        $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($rows as $row) 
+        {
+            $reservationAssociated = FPersistentManager::getInstance()::load('EReservation',$row['idReservation']);
+            $date = new DateTime($row['paymentDate']);
+            $contract = new EContract($row['status'], $row['cardNumber'], $reservationAssociated, $date);
+            $contracts[$row['idAccommodation']][] = $contract;
+        }
+        return $contracts;
+    }
+    
 }

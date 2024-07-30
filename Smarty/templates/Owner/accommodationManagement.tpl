@@ -174,7 +174,7 @@
                         {/if}
                         <div class="row">
                         <h1 class="titleTenants">Current Tenants</h1>
-                        <div class="reserve_btn"><a href="/UniRent/Contracts/viewOngoing/{$accommodation->getIdAccommodation()}">View Contracts</a></div>
+                        <div class="reserve_btn"><a href="/UniRent/Contract/viewOngoing/{$accommodation->getIdAccommodation()}">View Contracts</a></div>
                         </div>
                         <div class="row" id="tenantCont">
                         </div>

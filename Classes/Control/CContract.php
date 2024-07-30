@@ -262,7 +262,21 @@ class CContract
             }
             $view = new VOwner();
             $view->contractDetails($contract, $student, $reviewsData);
-            
         }
+    }
+    
+    /**
+     * Method viewOngoing
+     * the method return to the view all onGoing contracts for the accommodation with given ID
+     * @param $id $id [explicite description]
+     *
+     * @return void
+     */
+    public static function viewOngoing(int $id)
+    {
+        $PM=FPersistentManager::getInstance();
+        $result=$PM->getOnGoingContractsByAccommodationId($id);
+        print_r($result);
+        #per il momento printo solo, non sò se c'è il template
     }
 }
