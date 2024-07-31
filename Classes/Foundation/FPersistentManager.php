@@ -670,6 +670,21 @@ class FPersistentManager {
         $result=$FC->getOnGoingContractsByAccommodationId($id);
         return $result;
     }
-    
+        
+    /**
+     * Method remainingReviewStudentToStudent
+     *
+     * this method call the omonim method in FReview to get the number of remaining reservation that a student can make about another student
+     * @param int $id1 [student id 1, the one of the student who makes the student's review]
+     * @param int $id2 [student id 2]
+     *
+     * @return int
+     */
+    public function remainingReviewStudentToStudent(int $id1, int $id2):int
+    {
+        $FR=FReview::getInstance();
+        $result=$FR->remainingReviewStudentToStudent($id1,$id2);
+        return $result;
+    }
 }
 

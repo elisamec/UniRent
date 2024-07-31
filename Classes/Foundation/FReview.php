@@ -495,6 +495,56 @@ class FReview {
         $row=$stm->fetchall(PDO::FETCH_ASSOC);
         return $row;
     } 
+    
+    /**
+     * Method remainingReviewStudentToStudent
+     *
+     * this method get the number of remaining review that student 1 can make about a student 2
+     * @param int $id1 [student 1]
+     * @param int $id2 [student 2]
+     *
+     * @return int
+     */
+    public function remainingReviewStudentToStudent(int $id1, int $id2):int
+    {
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $q="SELECT 
+                (SELECT COUNT(*) 
+                 FROM student s1 INNER JOIN reservation r ON r.idStudent=s1.id
+                 INNER JOIN contract c ON c.idReservation=r.id
+                 INNER JOIN reservation r2 ON r.idAccommodation=r2.idAccommodation
+                 INNER JOIN accommodation a ON a.id=r.idAccommodation
+                 INNER JOIN student s2 ON s2.id=r2.idStudent
+                 WHERE s1.id != s2.id
+                 AND YEAR(r.fromDate)=YEAR(r2.fromDate)
+                 AND c.`status`!='future'
+                 AND s1.id=:id1
+                 AND s2.id=:id2)
+                 -
+                (SELECT COUNT(*)
+                 FROM student s INNER JOIN studentreview sr ON s.id=sr.authorStudent
+                 WHERE s.id=:id1
+                 AND sr.idStudent=:id2) AS remaining_reviews
+
+                LOCK IN SHARE MODE";
+
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindParam(':id1',$id1,PDO::PARAM_INT);
+            $stm->bindParam('id2',$id2,PDO::PARAM_INT);
+            $stm->execute();
+            $db->commit();
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return 0;
+        }
+        $result=$stm->fetchAll(PDO::FETCH_ASSOC);
+        return (int)$result['remaining_reviews'];
+    }
 
 
 }

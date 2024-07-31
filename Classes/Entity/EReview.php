@@ -1,6 +1,8 @@
 <?php
 namespace Classes\Entity;
 require __DIR__ . '../../../vendor/autoload.php';
+
+use Classes\Foundation\FPersistentManager;
 use Classes\Tools\TType;
 use DateTime;
 /**
@@ -139,5 +141,20 @@ class EReview
     {
         $description = ($this->description !== null) ? $this->description : 'No description set';
         return 'ID: '. $this->idReview. ', Title: '. $this->title. ', Valutation: '. $this->valutation. ', Description: '. $description. ', RecipientType: '. $this->recipientType->value. ', AuthorType: '.$this->authorType->value.', IDAuthor: '. $this->idAuthor. ', IDRecipient: '.$this->idRecipient;
+    }
+    
+    /**
+     * Method remainingReviewStudentToStudent
+     *
+     * this method return the number of review that a Student can make about another Student
+     * @param int $id1 [student 1, the one who makes the reviews]
+     * @param int $id2 [student 2]
+     *
+     * @return int
+     */
+    public static function remainingReviewStudentToStudent(int $id1, int $id2):int
+    {
+        $result=FPersistentManager::getInstance()->remainingReviewStudentToStudent($id1,$id2);
+        return $result;
     }
 }
