@@ -56,7 +56,7 @@
                      <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contracts</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <<a class="dropdown-item" href="/UniRent/Contract/showStudent/ongoing">Ongoing</a>
+                           <a class="dropdown-item" href="/UniRent/Contract/showStudent/onGoing">Ongoing</a>
                            <a class="dropdown-item" href="/UniRent/Contract/showStudent/finished">Past</a>
                            <a class="dropdown-item" href="/UniRent/Contract/showStudent/future">Future</a>
                         </div>
@@ -92,7 +92,7 @@
                      <h1 class="Properties_taital">Your Contracts</h1>
                      <hr class="border_main">
                   </div>
-                  {if $kind == "ongoing"}
+                  {if $kind == "onGoing"}
                   <p>Here you can see all your ongoing contracts.</p>
                   {elseif $kind == "finished"}
                   <p>Here you can see all your past contracts.</p>

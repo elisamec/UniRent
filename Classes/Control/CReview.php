@@ -42,7 +42,7 @@ class CReview {
         $valutation=USuperGlobalAccess::getPost('rate');
         $date=new DateTime();
         $review=new EReview(null, $title, $valutation, $description, $type, $date, $authorType, $idAuthor, $idStudent);
-        $res=$PM::store($review);
+        $res=$PM->store($review);
         if ($res) {
             header('Location:' . $_SERVER['HTTP_REFERER']);
         } else {
@@ -61,7 +61,7 @@ class CReview {
         $valutation=USuperGlobalAccess::getPost('rate');
         $date=new DateTime();
         $review=new EReview(null, $title, $valutation, $description, $type, $date, $authorType, $idAuthor, $idOwner);
-        $res=$PM::store($review);
+        $res=$PM->store($review);
         if ($res) {
             header('Location:' . $_SERVER['HTTP_REFERER']);
             } else {
@@ -80,7 +80,7 @@ class CReview {
         $valutation=USuperGlobalAccess::getPost('rate');
         $date=new DateTime();
         $review=new EReview(null, $title, $valutation, $description, $type, $date, $authorType, $idAuthor, $idAccommodation);
-        $res=$PM::store($review);
+        $res=$PM->store($review);
         if ($res) {
             header('Location:' . $_SERVER['HTTP_REFERER']);
         } else {

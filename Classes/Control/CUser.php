@@ -24,7 +24,7 @@ class CUser
         $PM=FPersistentManager::getInstance();
         if($type==='Student')
         {
-            $student=$PM::load('EStudent', $id);
+            $student=$PM->load('EStudent', $id);
             if($student->getStatus()==TStatusUser::BANNED)
             {
                 $v=new VError();
@@ -38,7 +38,7 @@ class CUser
         }
         elseif($type==='Owner')
         {
-            $owner=$PM::load('EOwner',$id);
+            $owner=$PM->load('EOwner',$id);
             if($owner->getStatus()==TStatusUser::BANNED)
             {
                 $v=new VError();
@@ -139,14 +139,15 @@ class CUser
         $type = USuperGlobalAccess::getPost('userType');
         $password = USuperGlobalAccess::getPost('password');
         $mail = USuperGlobalAccess::getPost('email');
+        
         $username = USuperGlobalAccess::getPost('username');
         $name = USuperGlobalAccess::getPost('name');
         $surname = USuperGlobalAccess::getPost('surname');
         $picture = USuperGlobalAccess::getPhoto('img');
 
-        
         if($PM->verifyUserEmail($mail)==false && $PM->verifyUserUsername(USuperGlobalAccess::getPost('username'))==false)
         {
+            http_response_code(500);
             $session=USession::getInstance();
             $session::setSessionElement('email', $mail);
             $session::setSessionElement('username', $username);

@@ -76,33 +76,34 @@ class CAdmin
     {
         $PM = FPersistentManager::getInstance();
         $session = USession::getInstance();
-        $userType  = $session::getSessionElement('userType');
+        $userType  = $session::getSessionElement('userType');     
+        
         if ($type == 'Student')
         {
-            $student = $PM::load('EStudent', $id);
+            $student = $PM->load('EStudent', $id);
             $student->setStatus('reported');
-            $res=$PM::update($student);
+            $res=$PM->update($student);
             if ($res)
             {
-                header('Location:' . ucfirst($userType) . '/publicProfile/' . $student->getUsername() . '/reported');
+                header('Location:/UniRent/' . ucfirst($userType) . '/publicProfile/' . $student->getUsername() . '/reported');
             }
             else
             {
-                header('Location:' . ucfirst($userType) . '/publicProfile/' . $student->getUsername() . '/error');
+                header('Location:/UniRent/' . ucfirst($userType) . '/publicProfile/' . $student->getUsername() . '/error');
             }
         }
         else
         {
-            $owner = $PM::load('EOwner', $id);
+            $owner = $PM->load('EOwner', $id);
             $owner->setStatus('reported');
-            $res=$PM::update($owner);
+            $res=$PM->update($owner);
             if ($res)
             {
-                header('Location:' . ucfirst($userType) . '/publicProfile/' . $owner->getUsername() . '/reported');
+                header('Location:/UniRent/' . ucfirst($userType) . '/publicProfile/' . $owner->getUsername() . '/reported');
             }
             else
             {
-                header('Location:' . ucfirst($userType) . '/publicProfile/' . $owner->getUsername() . '/error');
+                header('Location:/UniRent/' . ucfirst($userType) . '/publicProfile/' . $owner->getUsername() . '/error');
             }
         }
     }
@@ -124,7 +125,7 @@ class CAdmin
         $message=USuperGlobalAccess::getPost('message');
         $supportRequest=new ESupportRequest(0,$message,$topic,$idUser,$type);
         $PM=FPersistentManager::getInstance();
-        $res=$PM::store($supportRequest);
+        $res=$PM->store($supportRequest);
         if ($res)
         {
             header('Location:/UniRent/'.ucfirst($type->value).'/contact/sent');
@@ -137,16 +138,16 @@ class CAdmin
     public static function ban(int $id, string $type)
     {
         $PM = FPersistentManager::getInstance();
-        $user=$PM::load('E'.ucfirst($type), $id);
+        $user=$PM->load('E'.ucfirst($type), $id);
         $user->setStatus(TStatusUser::BANNED);
         if (ucfirst($type)==='Owner') {
             $accommodationArray=$PM->loadAccommodationsByOwner($id);
             foreach ($accommodationArray as $accommodation) {
                 $accommodation->setStatus(false);
-                $PM::update($accommodation);
+                $PM->update($accommodation);
             }
         }
-        $res=$PM::update($user);
+        $res=$PM->update($user);
         if ($res)
         {
             #header('Location:/UniRent/Admin/home/banned');

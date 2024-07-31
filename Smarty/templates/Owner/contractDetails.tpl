@@ -56,8 +56,7 @@
                            <a class="dropdown-item" href="/UniRent/Owner/tenants/past">Past</a>
                            <a class="dropdown-item" href="/UniRent/Owner/tenants/future">Future</a>
                         </div>
-                     </li>
-                     <li class="nav-item dropdown">
+                     <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contracts</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                            <a class="dropdown-item" href="/UniRent/Contract/showOwner/onGoing">Ongoing</a>
@@ -83,36 +82,50 @@
             </nav>
          </div>
       </div>
-      <div class="path">
-        <p id="breadcrumb" data-user-name="{$owner->getUsername()}"></p>
+        <div class="path">
+        <p id="breadcrumb" data-user-name="{$student->getUsername()}"></p>
     </div>
-      <div class="profile">
+    <div class="squareContainer">
+    <div class="grey_square">
+                        <h1 class="title">This student has a contract with you for this place from {$contract->getFromDate()->format('d/m/Y')} to {$contract->getToDate()->format('d/m/Y')} and therefore is classified as {$contract->getStatus()->value}</h1>
+                        <h2> It has been payed on the {$contract->getPaymentDate()->format('d/m/Y')}.</h2>
+                        </div>
+                        </div>
+      <div class="profile"> 
       <div class="containerProf">
          <div class="row">
             <div class="col-md-10">
                   <div class="profile_info">
-                     <h2 class="profile_head">{$owner->getName()} {$owner->getSurname()}</h2>
-                     <p>@{$owner->getUsername()}</p>
-                     <p>Phone Number: {$owner->getPhoneNumber()}.</p>
-                     <p> Average Rating: {$owner->getAverageRating()}.</p>
-                     <p> Number of Ads: {$owner->getNumberOfAds()}.</p>
-                     {if (!{$self})}
-                     <div class="col-md-3">
-                     <div class="delete_btn" id="reportOwn"><a href="#" onclick="openReportModal()">Report User</a></div>
-                     </div>
+                  {if $student->getStatus()->value === "banned"}
+                        <h1 class="title">Warning: Banned User</h1>
+                    {/if}
+                     <h2 class="profile_head">{$student->getName()} {$student->getSurname()}</h2>
+                     <p>@{$student->getUsername()}</p>
+                     {if $student->getSex() === "M"}
+                     <p>Sex: Male</p>
+                     {else}
+                     <p>Sex: Female</p>
                      {/if}
+                     <p>Age: {$student->getAge()}.</p>
+                     <p> Average Rating: {$student->getAverageRating()}.</p>
+                     <div class="col-md-2">
+                        <div class="delete_btn"><a href="#" onclick="openReportModal()">Report User</a></div>
+                        {if $contract->getStatus()->value != "future"}
+                        <button class="edit_button" id="reviewButton">Review</button>
+                        {/if}
+                     </div>
+                  
                </div>
                </div>
             <div class="col-md-2">
                <div class="container">
                   <div class="profile_pic">
-                  {if $owner->getPhoto() === null}
+                  {if $student->getPhoto() === null}
                      <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
                   {else}
-                     <img src="{$owner->getShowPhoto()}">
+                     <img src="{$student->getShowPhoto()}">
                   {/if}
                   </div>
-                  
                </div>
             </div>
          </div>
@@ -124,9 +137,10 @@
          </div>
     <div id="reviewsContainer"></div>
 </div>
-    <script>
+       <script>
     {if isset($reviewsData)}
     const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
+    console.log(reviews);
 
     // Function to generate stars based on the rating
     function generateStars(stars) {
@@ -146,12 +160,20 @@
         const container = document.getElementById('reviewsContainer');
 
         if (container) {
+            
             if (reviews.length === 0) {
                 container.innerHTML = '<div class="container"><h1 class="noRev">There are no reviews yet!</h1></div>';
             } else {
                 reviews.forEach(review => {
                     const reviewElement = document.createElement('div');
                     reviewElement.className = 'review';
+                    let style;
+                    if (review.userStatus ==='banned') {
+                        style = 'class="disabled"';
+                    } else {
+                        style = '';
+                    }
+    
 
                     // Insert the names of the elements of the review array
                     reviewElement.innerHTML = `
@@ -159,10 +181,10 @@
                         <div class="row">
                             <div class="userSection">
                                 <div class="userIcon">
-                                    <a href="/UniRent/Owner/publicProfile/` + review.username + `"><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
-                                </div>
-                                <div class="username"><a href="/UniRent/Owner/publicProfile/` + review.username + `">` + review.username + `</a></div> <!-- Username of the reviewer -->
+                                <a href="/UniRent/Student/publicProfile/` + review.username + `" ` + style + `><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
                             </div>
+                            <div class="username"><a href="/UniRent/Student/publicProfile/` + review.username + `" ` + style + `>` + review.username + `</a></div> <!-- Username of the reviewer -->
+                        </div>
                             <div class="col-md-11">
                                 <div class="stars">
                                     ` + generateStars(review.stars) + ` <!-- Star rating -->
@@ -184,26 +206,51 @@
     displayReviews(reviews);
     {/if}
 </script>
-<div id="reportModal" class="resModal">
+
+<!-- footer section start -->
+      <div class="footer_section layout_padding">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-4">
+                  <h3 class="footer_text">About Us</h3>
+                  <p class="lorem_text">Created in 2024, UniRent has revolutionized the way students find their home away from home. Connecting students with trusted landlords, UniRent ensures a seamless rental experience.</p>
+               </div>
+               <hr></hr>
+               <div class="col-md-4">
+                  <h3 class="footer_text">Useful Links</h3>
+                  <div class="footer_menu">
+                     <ul>
+                        <li><a href="/UniRent/Owner/home">Home</a></li>
+                        <li><a href="/UniRent/Owner/about">About Us</a></li>
+                        <li><a href="/UniRent/Owner/contact">Contact Us</a></li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- footer section end -->
+      <div id="reportModal" class="resModal">
 
     <!-- Modal content -->
     <div class="resModal-content">
         <span class="resClose" onclick="closeReportModal()">&times;</span>
         <h2>Report User</h2>
-        <form id="reportForm" action="/UniRent/Admin/report/{$owner->getId()}/Owner" class="form" method="POST" enctype="multipart/form-data">
+        <form id="reportForm" action="/UniRent/Admin/report/{$student->getId()}/Student" class="form" method="POST" enctype="multipart/form-data">
             <label for="reportReason">Reason for report:</label><br>
             <textarea id="reportReason" name="reportReason" rows="4" cols="50" oninput="checkInput()"></textarea><br><br>
             <div class="btn-cont">
             <button type="submit" id="confirmDelete" class="disabled confirmClass" onclick="submitReport()" disabled>Submit</button>
             <button type="button" id="cancelDelete" class="cancelClass" onclick="cancelReport()">Cancel</button>
             </div>
+         </form>
     </div>
 
 </div>
 
 <script>
     // Get the modal
-    var modalRep = document.getElementById("reportModal");
+    var modal = document.getElementById("reportModal");
 
     // Get the button that opens the modal
     var btn = document.querySelector(".delete_btn a");
@@ -217,12 +264,12 @@
 
     // Open the modal
     function openReportModal() {
-        modalRep.style.display = "block";
+        modal.style.display = "block";
     }
 
     // Close the modal
     function closeReportModal() {
-        modalRep.style.display = "none";
+        modal.style.display = "none";
     }
 
     // Check input and enable/disable submit button
@@ -258,34 +305,101 @@
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
         if (event.target == modal) {
-            modalRep.style.display = "none";
+            modal.style.display = "none";
         }
     }
 </script>
 
-<!-- footer section start -->
-      <div class="footer_section layout_padding">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-4">
-                  <h3 class="footer_text">About Us</h3>
-                  <p class="lorem_text">Created in 2024, UniRent has revolutionized the way students find their home away from home. Connecting students with trusted landlords, UniRent ensures a seamless rental experience.</p>
-               </div>
-               <hr></hr>
-               <div class="col-md-4">
-                  <h3 class="footer_text">Useful Links</h3>
-                  <div class="footer_menu">
-                     <ul>
-                        <li><a href="/UniRent/Owner/home">Home</a></li>
-                        <li><a href="/UniRent/Owner/about">About Us</a></li>
-                        <li><a href="/UniRent/Owner/contact">Contact Us</a></li>
-                     </ul>
-                  </div>
-               </div>
-            </div>
-         </div>
+      <div id="revModal" class="resModal">
+    <div class="resModal-content">
+      <div class="row">
+        <span class="resClose" id="revClose">&times;</span>
+        <h1  class="resModal-head">Review</h1>
       </div>
-      <!-- footer section end -->
+        <form id="ReviewForm" action="/UniRent/Review/addReviewStudent/{$student->getId()}" method="POST">
+            <div class="rating">
+                <input type="radio" id="star5A" name="rate" value="5" />
+                <label for="star5A" title="5 stars">
+                    <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
+                        <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
+                    </svg>
+                </label>
+                <input type="radio" id="star4A" name="rate" value="4" />
+                <label for="star4A" title="4 stars">
+                    <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
+                        <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
+                    </svg>
+                </label>
+                <input type="radio" id="star3A" name="rate" value="3" />
+                <label for="star3A" title="3 stars">
+                    <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
+                        <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
+                    </svg>
+                </label>
+                <input type="radio" id="star2A" name="rate" value="2" />
+                <label for="star2A" title="2 stars">
+                    <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
+                        <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
+                    </svg>
+                </label>
+                <input type="radio" id="star1A" name="rate" value="1" checked/>
+                <label for="star1A" title="1 star">
+                    <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
+                        <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
+                    </svg>
+                </label>
+            </div>
+            <input type="text" name="title" id="reviewTitle" placeholder="Title" value="" required>
+            <textarea name="content" rows="5" id="reviewContent" placeholder="Content" required></textarea>
+            <div class="btn-cont">
+            <button type="submit" class="edit_btn">Submit</button>
+            <button type="button" class="edit_btn" id="CancelBut">Cancel</button>
+            </div>
+      </form>
+    </div>
+</div>
+<script>
+        document.addEventListener("DOMContentLoaded", function() {
+    var kind = "{$kind|escape:'javascript'}";
+    console.log("kind:", kind); // Log the value to ensure it's correct
+    var button = document.getElementById("reviewButton");
+
+    if (kind === "future" || kind === "#") {
+        button.style.display = "none"; // Correct way to hide the button
+    }
+
+    // Add event listener to reviewButton if it exists
+    if (button) {
+        button.addEventListener('click', function(event) {
+            document.getElementById('revModal').style.display = 'grid';
+        });
+    }
+});
+
+// Modal close functionality
+const modalRev = document.getElementById('revModal');
+const closeModalRev = document.querySelector('#revClose');
+const cancelBut = document.querySelector('#CancelBut');
+
+if (closeModalRev) {
+    closeModalRev.onclick = () => {
+        modalRev.style.display = 'none';
+    };
+}
+
+if (cancelBut) {
+    cancelBut.onclick = () => {
+        modalRev.style.display = 'none';
+    };
+}
+
+window.onclick = (event) => {
+    if (event.target == modalRev) {
+        modalRev.style.display = 'none';
+    }
+};
+
+    </script>
 <script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>
       <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
@@ -294,12 +408,6 @@
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
-<script>
-document.getElementById("file").onchange = function() {
-    document.getElementById("form").submit();
-};
-</script>
-
          <script>
       $(document).ready(function() {
 

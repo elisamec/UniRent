@@ -105,7 +105,7 @@ class COwner
         $reviewsData = [];
         
         foreach ($reviews as $review) {
-            $author = $PM::load('EStudent', $review->getIdAuthor());
+            $author = $PM->load('EStudent', $review->getIdAuthor());
             $profilePic = $author->getPhoto();
             if ($author->getStatus() === TStatusUser::BANNED) {
                 $profilePic = "/UniRent/Smarty/images/BannedUser.png";
@@ -366,7 +366,7 @@ class COwner
                             $owner->setPhoneNumber($newPhoneNumber);
                             $owner->setIban($newIBAN);
                             #$owner = new EOwner($ownerId, $newUsername, $newPassword, $name, $surname, $photo, $newemail, $newPhoneNumber, $newIBAN);
-                            $result=$PM::update($owner);
+                            $result=$PM->update($owner);
                             if($result  && !$error)
                             {   
                                 $ph = $photo->getPhoto();
@@ -619,7 +619,7 @@ class COwner
         $addressObj=$addressObj->withAddressLine1($address)->withPostalcode($postalCode)->withLocality($city);
         #print $addressObj->getAddressLine1().' '.$addressObj->getPostalCode().' '.$addressObj->getLocality();
         $accomodation = new EAccommodation(null,$array_photos,$title,$addressObj,$price,$date,$description,$places,$deposit,$array_visit,$duration,$men,$women,$animals,$smokers, true,$idOwner);
-        $result=$PM::store($accomodation);
+        $result=$PM->store($accomodation);
         $result ? header('Location:/UniRent/Owner/home') : $viewError= new VError();
             $viewError->error(500);
 
@@ -649,7 +649,7 @@ class COwner
         $reviewsData = [];
         
         foreach ($reviews as $review) {
-            $author = $PM::load( 'EStudent', $review->getIdAuthor());
+            $author = $PM->load( 'EStudent', $review->getIdAuthor());
             $status = $author -> getStatus();
             $profilePic =$author->getPhoto();
             if($status === TStatusUser::BANNED){
@@ -699,7 +699,7 @@ class COwner
         $reviewsData = [];
         
         foreach ($reviews as $review) {
-            $author = $PM::load( 'EStudent', $review->getIdAuthor());
+            $author = $PM->load( 'EStudent', $review->getIdAuthor());
             $status = $author -> getStatus();
             $profilePic = $author->getPhoto();
             if($status === TStatusUser::BANNED){
@@ -748,7 +748,7 @@ class COwner
         $reviewsData = [];
 
         foreach ($reviews as $review) {
-            $recipient = $PM::load( 'E' . $review->getRecipientType()->value, $review->getIdRecipient());
+            $recipient = $PM->load( 'E' . $review->getRecipientType()->value, $review->getIdRecipient());
             $profilePic = $recipient->getPhoto();
             if ($recipient->getStatus() === TStatusUser::BANNED) {
                 $profilePic = "/UniRent/Smarty/images/BannedUser.png";
@@ -814,7 +814,7 @@ class COwner
     public static function editAccommodation(string $id) {
         $view = new VOwner();
         $PM=FPersistentManager::getInstance();
-        $accommodation = $PM::load('EAccommodation', (int)$id);
+        $accommodation = $PM->load('EAccommodation', (int)$id);
         $photos_acc=$accommodation->getPhoto();
         $uploadedPhotos=EPhoto::toBase64($photos_acc);
 
@@ -911,7 +911,7 @@ class COwner
     
         $PM=FPersistentManager::getInstance();
 
-        $status=$PM::load('EAccommodation',$id)->getStatus();
+        $status=$PM->load('EAccommodation',$id)->getStatus();
         
         $idOwner=$PM->getOwnerIdByUsername(USession::getInstance()::getSessionElement('username'));
         $addressId = $PM->load('EAccommodation', $id)->getAddress()->getSortingCode();

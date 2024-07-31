@@ -112,7 +112,7 @@ INSERT INTO `address` (`id`, `addressLine`, `postalCode`, `city`) VALUES
 
 CREATE TABLE `contract` (
   `idReservation` int(11) NOT NULL,
-  `status` enum('onGoing','future','finshed') NOT NULL,
+  `status` enum('onGoing','future','finished') NOT NULL,
   `paymentDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `cardNumber` varchar(19) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

@@ -62,7 +62,7 @@
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contracts</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <<a class="dropdown-item" href="/UniRent/Contract/showOwner/ongoing">Ongoing</a>
+                           <a class="dropdown-item" href="/UniRent/Contract/showOwner/onGoing">Ongoing</a>
                            <a class="dropdown-item" href="/UniRent/Contract/showOwner/finished">Past</a>
                            <a class="dropdown-item" href="/UniRent/Contract/showOwner/future">Future</a>
                         </div>
@@ -174,7 +174,7 @@
                         {/if}
                         <div class="row">
                         <h1 class="titleTenants">Current Tenants</h1>
-                        <div class="reserve_btn"><a href="/UniRent/Contracts/viewOngoing/{$accommodation->getIdAccommodation()}">View Contracts</a></div>
+                        <div class="reserve_btn"><a href="/UniRent/Contract/viewOngoing/{$accommodation->getIdAccommodation()}">View Contracts</a></div>
                         </div>
                         <div class="row" id="tenantCont">
                         </div>

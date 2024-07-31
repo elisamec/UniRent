@@ -31,7 +31,7 @@
       <!-- Include Font Awesome -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
       <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/home.css">
-      <link\ rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/cookie.css">
+      <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/cookie.css">
    </head>
    <body onload="on()">
       <div class="header_section">
@@ -57,7 +57,7 @@
                            <a class="dropdown-item" href="/UniRent/Owner/tenants/future">Future</a>
                         </div>
                      </li>
-                     <li class="nav-item dropdown">
+                     <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contracts</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                            <a class="dropdown-item" href="/UniRent/Contract/showOwner/onGoing">Ongoing</a>
@@ -84,186 +84,28 @@
          </div>
       </div>
       <div class="path">
-        <p id="breadcrumb" data-user-name="{$owner->getUsername()}"></p>
+        <p id="breadcrumb"></p>
     </div>
-      <div class="profile">
-      <div class="containerProf">
-         <div class="row">
-            <div class="col-md-10">
-                  <div class="profile_info">
-                     <h2 class="profile_head">{$owner->getName()} {$owner->getSurname()}</h2>
-                     <p>@{$owner->getUsername()}</p>
-                     <p>Phone Number: {$owner->getPhoneNumber()}.</p>
-                     <p> Average Rating: {$owner->getAverageRating()}.</p>
-                     <p> Number of Ads: {$owner->getNumberOfAds()}.</p>
-                     {if (!{$self})}
-                     <div class="col-md-3">
-                     <div class="delete_btn" id="reportOwn"><a href="#" onclick="openReportModal()">Report User</a></div>
-                     </div>
-                     {/if}
-               </div>
-               </div>
-            <div class="col-md-2">
-               <div class="container">
-                  <div class="profile_pic">
-                  {if $owner->getPhoto() === null}
-                     <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
-                  {else}
-                     <img src="{$owner->getShowPhoto()}">
-                  {/if}
+      <!-- header section end -->
+      <!-- feature section start -->
+      <div class="Properties_section layout_padding">
+         <div class="container">
+            <div class="row">
+               <div class="col-sm-12">
+                  <div class="Properties_taital_main">
+                     <h1 class="Properties_taital">Your Contracts</h1>
+                     <hr class="border_main">
                   </div>
-                  
+               </div>
+            </div>
+            <div class="Properties_section_2">
+               <div class="row" id="contractsContainer">
                </div>
             </div>
          </div>
       </div>
-      </div>
-      <div class="col-md-9">
-         <div class="Properties_taital_main layout">
-         <h2 class="profile_head">Reviews</h2>
-         </div>
-    <div id="reviewsContainer"></div>
-</div>
-    <script>
-    {if isset($reviewsData)}
-    const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
-
-    // Function to generate stars based on the rating
-    function generateStars(stars) {
-        let starElements = '';
-        for (let i = 0; i < 5; i++) {
-            if (i < stars) {
-                starElements += '<span class="fa fa-star or"></span>';
-            } else {
-                starElements += '<span class="fa fa-star"></span>';
-            }
-        }
-        return starElements;
-    }
-
-    // Function to create and append reviews to the container
-    function displayReviews(reviews) {
-        const container = document.getElementById('reviewsContainer');
-
-        if (container) {
-            if (reviews.length === 0) {
-                container.innerHTML = '<div class="container"><h1 class="noRev">There are no reviews yet!</h1></div>';
-            } else {
-                reviews.forEach(review => {
-                    const reviewElement = document.createElement('div');
-                    reviewElement.className = 'review';
-
-                    // Insert the names of the elements of the review array
-                    reviewElement.innerHTML = `
-                        <h1 class="ReviewTitle">` + review.title + `</h1> <!-- Title of the review -->
-                        <div class="row">
-                            <div class="userSection">
-                                <div class="userIcon">
-                                    <a href="/UniRent/Owner/publicProfile/` + review.username + `"><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
-                                </div>
-                                <div class="username"><a href="/UniRent/Owner/publicProfile/` + review.username + `">` + review.username + `</a></div> <!-- Username of the reviewer -->
-                            </div>
-                            <div class="col-md-11">
-                                <div class="stars">
-                                    ` + generateStars(review.stars) + ` <!-- Star rating -->
-                                </div>
-                                <p>` + review.content + `</p> <!-- Content of the review -->
-                            </div>
-                        </div>
-                    `;
-
-                    container.appendChild(reviewElement);
-                });
-            }
-        } else {
-            console.error("Container not found!"); // Debugging: Error if container is not found
-        }
-    }
-
-    // Call the function to display reviews
-    displayReviews(reviews);
-    {/if}
-</script>
-<div id="reportModal" class="resModal">
-
-    <!-- Modal content -->
-    <div class="resModal-content">
-        <span class="resClose" onclick="closeReportModal()">&times;</span>
-        <h2>Report User</h2>
-        <form id="reportForm" action="/UniRent/Admin/report/{$owner->getId()}/Owner" class="form" method="POST" enctype="multipart/form-data">
-            <label for="reportReason">Reason for report:</label><br>
-            <textarea id="reportReason" name="reportReason" rows="4" cols="50" oninput="checkInput()"></textarea><br><br>
-            <div class="btn-cont">
-            <button type="submit" id="confirmDelete" class="disabled confirmClass" onclick="submitReport()" disabled>Submit</button>
-            <button type="button" id="cancelDelete" class="cancelClass" onclick="cancelReport()">Cancel</button>
-            </div>
-    </div>
-
-</div>
-
-<script>
-    // Get the modal
-    var modalRep = document.getElementById("reportModal");
-
-    // Get the button that opens the modal
-    var btn = document.querySelector(".delete_btn a");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("resClose")[0];
-
-    // Get the textarea and submit button
-    var textarea = document.getElementById("reportReason");
-    var submitBtn = document.getElementById("confirmDelete");
-
-    // Open the modal
-    function openReportModal() {
-        modalRep.style.display = "block";
-    }
-
-    // Close the modal
-    function closeReportModal() {
-        modalRep.style.display = "none";
-    }
-
-    // Check input and enable/disable submit button
-    function checkInput() {
-        if (textarea.value.trim() !== "") {
-            submitBtn.disabled = false;
-            submitBtn.classList.remove("disabled");
-        } else {
-            submitBtn.disabled = true;
-            submitBtn.classList.add("disabled");
-        }
-    }
-
-    // Submit the report
-    function submitReport() {
-        if (textarea.value.trim() !== "") {
-            // Implement your submit logic here
-            alert("Report submitted: " + textarea.value.trim());
-            // Close the modal after submission
-            closeReportModal();
-        }
-    }
-    function cancelReport() {
-        // Clear the textarea
-        textarea.value = '';
-        // Disable the submit button
-        submitBtn.disabled = true;
-        submitBtn.classList.add("disabled");
-        // Close the modal
-        closeReportModal();
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modalRep.style.display = "none";
-        }
-    }
-</script>
-
-<!-- footer section start -->
+      
+      <!-- footer section start -->
       <div class="footer_section layout_padding">
          <div class="container">
             <div class="row">
@@ -286,7 +128,9 @@
          </div>
       </div>
       <!-- footer section end -->
-<script src="/UniRent/Smarty/js/jquery.min.js"></script>
+      
+      <!-- Javascript files-->
+      <script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>
       <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
       <script src="/UniRent/Smarty/js/jquery-3.0.0.min.js"></script>
@@ -294,37 +138,16 @@
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
-<script>
-document.getElementById("file").onchange = function() {
-    document.getElementById("form").submit();
-};
-</script>
-
-         <script>
-      $(document).ready(function() {
-
-      
-      var readURL = function(input) {
-         if (input.files && input.files[0]) {
-               var reader = new FileReader();
-
-               reader.onload = function (e) {
-                  $('.imageIcon').attr('src', e.target.result);
-               }
-      
-               reader.readAsDataURL(input.files[0]);
-         }
-      }
-      
-
-      $(".file-upload").on('change', function(){
-         readURL(this);
-      });
-      
-      $(".label-button").on('click', function() {
-         $(".file-upload").click();
-      });
-   });
+      <!-- javascript --> 
+      <script>
+         // Material Select Initialization
+         $(document).ready(function() {
+         $('.mdb-select').materialSelect();
+         $('.select-wrapper.md-form.md-outline input.select-dropdown').bind('focus blur', function () {
+         $(this).closest('.select-outline').find('label').toggleClass('active');
+         $(this).closest('.select-outline').find('.caret').toggleClass('active');
+         });
+         });
       </script>
       <div class="modal" id="myModal">
       <div class"container-fluid">
@@ -345,5 +168,133 @@ document.getElementById("file").onchange = function() {
                document.getElementById("myModal").style.display = "none";
                }
          </script>
-   <script src="/UniRent/Smarty/js/cookie.js"></script>
-</body>
+{literal}
+         <script>
+  const data = {/literal}{$contractsData}{literal};
+  console.log(data);
+  populateContractsContainer(data);
+
+   function populateContractsContainer(data) {
+        const contractsContainer = document.getElementById("contractsContainer");
+        contractsContainer.innerHTML = '';
+
+            if (data.length === 0) {
+                const noContractsDiv = document.createElement("div");
+                noContractsDiv.classList.add("container");
+                noContractsDiv.classList.add("bottomPadding");
+                noContractsDiv.textContent = "You have no contracts yet.";
+                contractsContainer.appendChild(noContractsDiv);
+            } else if (Object.keys(data).length === 0) {
+                const noContractsDiv = document.createElement("div");
+                noContractsDiv.classList.add("container");
+                  noContractsDiv.classList.add("bottomPadding");
+                noContractsDiv.textContent = "You have no contracts yet.";
+                contractsContainer.appendChild(noContractsDiv);
+            }
+
+        data.forEach(item => {
+            const accommodationDiv = document.createElement("div");
+            accommodationDiv.classList.add("accommodation");
+            const title = document.createElement("h1");
+            title.classList.add("titleAccomm");
+            title.textContent = item.accommodation;
+            accommodationDiv.appendChild(title);
+
+            const rowDiv = document.createElement("div");
+            rowDiv.classList.add("row");
+            
+            // Check if item.contracts is an array
+            if (Array.isArray(item.contracts)) {
+                item.contracts.forEach(contract => {
+                    const colDiv = document.createElement("div");
+                    colDiv.classList.add("col-md-3");
+
+                    const userSectionDiv = document.createElement("div");
+                    userSectionDiv.classList.add("userSection");
+
+                    const userIconDiv = document.createElement("div");
+                    userIconDiv.classList.add("userIcon");
+
+                    const userLink = document.createElement("a");
+                    userLink.href = `/UniRent/Contract/contractDetails/${contract.idContract}`;
+
+                    const userImage = document.createElement("img");
+                    userImage.src = contract.image;
+
+                    userLink.appendChild(userImage);
+                    userIconDiv.appendChild(userLink);
+                    userSectionDiv.appendChild(userIconDiv);
+
+                    const usernameDiv = document.createElement("div");
+                    usernameDiv.classList.add("username");
+
+                    const usernameLink = document.createElement("a");
+                    usernameLink.href = `/UniRent/Contract/contractDetails/${contract.idContract}`;
+                    usernameLink.textContent = contract.username;
+                    usernameDiv.appendChild(usernameLink);
+
+                    // Display period under username
+                    const periodDiv = document.createElement("div");
+                    periodDiv.textContent = `Period: ${contract.period}`;
+                    usernameDiv.appendChild(periodDiv);
+
+                    userSectionDiv.appendChild(usernameDiv);
+
+                    colDiv.appendChild(userSectionDiv);
+                    rowDiv.appendChild(colDiv);
+                });
+            } else if (typeof item.contracts === 'object') {
+                // Handle case where contracts is an object (not an array)
+                const contract = item.contracts;
+
+                const colDiv = document.createElement("div");
+                colDiv.classList.add("col-md-3");
+
+                const userSectionDiv = document.createElement("div");
+                userSectionDiv.classList.add("userSection");
+
+                const userIconDiv = document.createElement("div");
+                userIconDiv.classList.add("userIcon");
+
+                const userLink = document.createElement("a");
+                userLink.href = `/UniRent/Contract/contractDetails/${contract.idContract}`;
+
+                const userImage = document.createElement("img");
+                userImage.src = contract.image;
+
+                userLink.appendChild(userImage);
+                userIconDiv.appendChild(userLink);
+                userSectionDiv.appendChild(userIconDiv);
+
+                const usernameDiv = document.createElement("div");
+                usernameDiv.classList.add("username");
+
+                const usernameLink = document.createElement("a");
+                usernameLink.href = `/UniRent/Contract/contractDetails/${contract.idContract}`;
+                    usernameLink.textContent = contract.username;
+                usernameDiv.appendChild(usernameLink);
+
+                // Display period under username
+                const periodDiv = document.createElement("div");
+                periodDiv.textContent = `Period: ${contract.period}`;
+                usernameDiv.appendChild(periodDiv);
+
+                userSectionDiv.appendChild(usernameDiv);
+
+                colDiv.appendChild(userSectionDiv);
+                rowDiv.appendChild(colDiv);
+            } else {
+                console.error("Unexpected format for item.contracts:", item.contracts);
+            }
+
+            accommodationDiv.appendChild(rowDiv);
+            contractsContainer.appendChild(accommodationDiv);
+        });
+    }
+</script>
+{/literal}
+<script src="/UniRent/Smarty/js/cookie.js"></script>
+
+
+   </body>
+</html>

@@ -58,7 +58,7 @@
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contracts</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="/UniRent/Contract/showStudent/ongoing">Ongoing</a>
+                           <a class="dropdown-item" href="/UniRent/Contract/showStudent/onGoing">Ongoing</a>
                            <a class="dropdown-item" href="/UniRent/Contract/showStudent/finished">Past</a>
                            <a class="dropdown-item" href="/UniRent/Contract/showStudent/future">Future</a>
                         </div>
@@ -106,6 +106,9 @@
                                     </div>
                                  </div>
                               </div>
+                        {if $contract->getStatus()->value != "future"}
+                        <button class="edit_button" id="reviewButton">Review</button>
+                        {/if}
                       <div class="ownerSect">
                       <div class="row">
                       <h1 class="titleOwn">Owner:</h1>
@@ -134,21 +137,8 @@
                         <h1 class="title">Warning: The Owner of this Accommodation has been Banned</h1>
                     {/if}
                         <div class="grey_square">
-                        <h1 class="title">You have reserved this place from {$reservation->getFromDate()->format('d/m/Y')} to {$reservation->getToDate()->format('d/m/Y')}</h1>
-                        {if $reservation->getStatusAccept() === true}
-                        <h1 class="title">Status: Accepted</h1>
-                        <h2> You have {$timeLeft} left to sign and pay the contract</h2>
-                        <div class="btn-cont">
-                        <button class="edit_button" id="payOpenBtn">Pay</button>
-                        <button class="delete_button" id="deleteBtn">Delete</button>
-                        </div>
-                        {else}
-                        <h1 class="title">Status: Pending</h1>
-                        <h2> The owner has {$timeLeft} left to accept your reservation</h2>
-                        <div class="btn-cont">
-                        <button class="delete_button" id="deleteBtn">Delete</button>
-                        </div>
-                        {/if}
+                        <h1 class="title">You have reserved this place from {$contract->getFromDate()->format('d/m/Y')} to {$contract->getToDate()->format('d/m/Y')}, therefore this contract is classified as {$contract->getStatus()->value}</h1>
+                        <h1>You have payed on the {$contract->getPaymentDate()->format('d/m/Y')} with {$cardNumber} owned by {$cardHolder}</h1>
                         </div>
                         
                         <h1 class="title">Accommodation Details</h1>
@@ -249,177 +239,96 @@
         }
     }
 </script>
-<div class="resModal" id="payModal">
+<div id="revModal" class="resModal">
     <div class="resModal-content">
-        <div class="row">
-            <span class="resClose">&times;</span>
-            <h2 class="resModal-head">Payment</h2>
-        </div>
-        <form action="/UniRent/Contract/pay/{$reservation->getId()}" method="post">
-            <div id="creditCardContainer" class="creditCardCont"></div>
-            <div id="newCardContainer" style="display: none;">
-                <p> Important: This card will be automatically saved for future payments in your profile for contract management purposes.</p>
-                <div class="form-grid">
-                    <div class="form-row">
-                        <label for="cardTitle">Card Title:</label>
-                        <input type="text" id="cardTitle" name="cardTitle">
-                    </div>
-                    <div class="form-row">
-                        <label for="cardnumber">Enter Credit Card Number:</label>
-                        <input id="cardnumber" type="text" name="creditNewCardNumber" data-inputmask="'mask': '9999 9999 9999 9999'" placeholder="____ ____ ____ ____">
-                    </div>
-                    <div class="form-row">
-                        <label for="expiryDate">Expiry Date:</label>
-                        <input id="expirydate" name="expirydate" type="text" data-inputmask="'mask': '99/99'" placeholder="mm/yy">
-                    </div>
-                    <div class="form-row">
-                        <label for="cvv">CVV (Security Code):</label>
-                        <input type="text" pattern="[0-9]*" inputmode="numeric" maxlength="3" id="cvv" name="cvv">
-                    </div>
-                    <div class="form-row">
-                        <label for="name">Cardholder Name:</label>
-                        <input type="text" id="name" name="name">
-                    </div>
-                    <div class="form-row">
-                        <label for="surname">Cardholder Surname:</label>
-                        <input type="text" id="surname" name="surname">
-                    </div>
-                </div>
+      <div class="row">
+        <span class="resClose" id="revClose">&times;</span>
+        <h1  class="resModal-head">Review</h1>
+      </div>
+        <form id="ReviewForm" action="/UniRent/Review/addReviewAccommodation/{$accommodation->getIdAccommodation()}" method="POST">
+            <div class="rating">
+                <input type="radio" id="star5A" name="rate" value="5" />
+                <label for="star5A" title="5 stars">
+                    <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
+                        <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
+                    </svg>
+                </label>
+                <input type="radio" id="star4A" name="rate" value="4" />
+                <label for="star4A" title="4 stars">
+                    <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
+                        <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
+                    </svg>
+                </label>
+                <input type="radio" id="star3A" name="rate" value="3" />
+                <label for="star3A" title="3 stars">
+                    <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
+                        <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
+                    </svg>
+                </label>
+                <input type="radio" id="star2A" name="rate" value="2" />
+                <label for="star2A" title="2 stars">
+                    <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
+                        <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
+                    </svg>
+                </label>
+                <input type="radio" id="star1A" name="rate" value="1" checked/>
+                <label for="star1A" title="1 star">
+                    <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="star-solid">
+                        <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
+                    </svg>
+                </label>
             </div>
+            <input type="text" name="title" id="reviewTitle" placeholder="Title" value="" required>
+            <textarea name="content" rows="5" id="reviewContent" placeholder="Content" required></textarea>
             <div class="btn-cont">
-                <button type="submit" class="edit_button" id="payBtn">Pay</button>
-                <button type="button" class="delete_button" id="cancelPayBtn">Cancel</button>
+            <button type="submit" class="edit_btn" id="revSubmit">Submit</button>
+            <button type="button" class="edit_btn" id="CancelBut">Cancel</button>
             </div>
-        </form>
+      </form>
     </div>
 </div>
 <script>
-    // Initialize input masks
-    document.addEventListener("DOMContentLoaded", function() {
-        if (typeof Inputmask !== 'undefined') {
-            Inputmask().mask(document.querySelectorAll("input[data-inputmask]"));
-        }
-    });
+        document.addEventListener("DOMContentLoaded", function() {
+    var kind = "{$kind|escape:'javascript'}";
+    console.log("kind:", kind); // Log the value to ensure it's correct
+    var button = document.getElementById("reviewButton");
 
-    // Get the modal
-    var payModal = document.getElementById("payModal");
-
-    var payOpenBtn = document.getElementById("payOpenBtn");
-
-    // Get the button that opens the modal
-    var btn = document.getElementById("payBtn");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("resClose")[1];
-
-    var cancelBtn = document.getElementById("cancelPayBtn");
-
-    // When the user clicks the button, open the modal 
-    payOpenBtn.onclick = function(event) {
-        event.preventDefault();
-        payModal.style.display = "block";
+    if (kind === "future" || kind === "#") {
+        button.style.display = "none"; // Correct way to hide the button
     }
 
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        payModal.style.display = "none";
-    }
-    btn.onclick = function() {
-        payModal.style.display = "none";
-    }
-    cancelBtn.onclick = function() {
-        payModal.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == payModal) {
-            payModal.style.display = "none";
-        }
-    }
-
-    // JSON data from Smarty placeholder
-    var creditCardData = {$creditCardData};
-
-    // Function to dynamically create radio buttons
-    function createCreditCardRadioButtons(creditCardData) {
-        var container = document.getElementById('creditCardContainer');
-        container.innerHTML = ''; // Clear existing content
-        creditCardData.forEach(function(card, index) {
-            var radioBtn = document.createElement('input');
-            radioBtn.type = 'radio';
-            radioBtn.name = 'creditCardNumber';
-            radioBtn.value = card.cardNumber;
-            radioBtn.id = 'card' + index;
-            if (card.main) {
-                radioBtn.checked = true;
-            }
-
-            var label = document.createElement('label');
-            label.htmlFor = 'card' + index;
-            label.textContent = card.cardName + ' (' + card.cardNumberHidden + ')';
-
-            container.appendChild(radioBtn);
-            container.appendChild(label);
-            container.appendChild(document.createElement('br'));
-
-            // Add event listener to hide new card form if this button is clicked
-            radioBtn.addEventListener('click', function() {
-                document.getElementById('newCardContainer').style.display = 'none';
-                toggleRequired(false);
-            });
-        });
-
-        // Add option for inserting a new card
-        var newCardRadioBtn = document.createElement('input');
-        newCardRadioBtn.type = 'radio';
-        newCardRadioBtn.name = 'creditCard';
-        newCardRadioBtn.value = 'newCard';
-        newCardRadioBtn.id = 'newCard';
-        newCardRadioBtn.onclick = function() {
-            document.getElementById('newCardContainer').style.display = 'block';
-            toggleRequired(true);
-        };
-
-        var newCardLabel = document.createElement('label');
-        newCardLabel.htmlFor = 'newCard';
-        newCardLabel.textContent = 'Insert a new card';
-
-        container.appendChild(newCardRadioBtn);
-        container.appendChild(newCardLabel);
-        container.appendChild(document.createElement('br'));
-    }
-
-    // Call the function to create radio buttons
-    createCreditCardRadioButtons(creditCardData);
-
-    // Function to toggle the required attribute of the new card input fields
-    function toggleRequired(isRequired) {
-        var newCardFields = document.querySelectorAll('#newCardContainer input');
-        newCardFields.forEach(function(field) {
-            if (isRequired) {
-                field.setAttribute('required', 'required');
-            } else {
-                field.removeAttribute('required');
-            }
+    // Add event listener to reviewButton if it exists
+    if (button) {
+        button.addEventListener('click', function(event) {
+            document.getElementById('revModal').style.display = 'grid';
         });
     }
-</script>
+});
 
-<script>
-    // Initialize inputmask for credit card number and expiry date fields
-    $(document).ready(function() {
-      $('#cardnumber').inputmask({
-        mask: '9999 9999 9999 9999',
-        placeholder: ''
-      });
+// Modal close functionality
+const modalRev = document.getElementById('revModal');
+const closeModalRev = document.querySelector('#revClose');
+const cancelBut = document.querySelector('#CancelBut');
 
-      $('#expirydate').inputmask({
-        mask: '99/99',
-        placeholder: ''
-      });
-    });
-  </script>
+if (closeModalRev) {
+    closeModalRev.onclick = () => {
+        modalRev.style.display = 'none';
+    };
+}
+
+if (cancelBut) {
+    cancelBut.onclick = () => {
+        modalRev.style.display = 'none';
+    };
+}
+
+window.onclick = (event) => {
+    if (event.target == modalRev) {
+        modalRev.style.display = 'none';
+    }
+};
+
+    </script>
 
 
 <!-- footer section start -->

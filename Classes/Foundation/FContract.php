@@ -149,8 +149,8 @@ class FContract
             return false;
         }
     }
-    public function getContractsByStudent(int $id, ?int $idAccommodation=null, ?string $kind=null):array|bool
-    {
+    public function getContractsByStudent(int $id, ?int $idAccommodation=null, ?string $kind=null)#:array|bool
+    {  
         $db=FConnection::getInstance()->getConnection();
         $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
         FPersistentManager::getInstance()->updateDataBase();
@@ -158,23 +158,28 @@ class FContract
         try
         {
             $db->exec('LOCK TABLES contract READ');
+            $param=array();
             $q='SELECT * FROM contract WHERE idReservation IN (SELECT id FROM reservation WHERE idStudent=:id';
             if(!is_null($idAccommodation))
             {
-                $q.=' AND idAccommodation=:idAccommodation) AND status!="future"';
+                $q.=' AND idAccommodation=:idAccommodation) AND status != "future"';
+                $param[':idAccommodation']=$idAccommodation;
             } else {
                 $q.=')';
             }
             if (!is_null($kind))
             {
                 $q.=' AND status=:kind';
+                $param[':kind']=$kind;
             }
             $db->beginTransaction();
             $stm=$db->prepare($q);
-            $stm->bindValue(':id',$id,PDO::PARAM_INT);
-            if (!is_null($idAccommodation))
-            {
-            $stm->bindValue(':idAccommodation',$idAccommodation, PDO::PARAM_INT);
+            $stm->bindParam(':id',$id,PDO::PARAM_INT);
+            if (!is_null($idAccommodation)) {
+                $stm->bindParam(':idAccommodation',$idAccommodation,PDO::PARAM_INT);
+            }
+            if (!is_null($kind)) {
+                $stm->bindParam(':kind',$kind,PDO::PARAM_STR);
             }
             $stm->execute();
             $db->commit();
@@ -186,6 +191,9 @@ class FContract
             return false;
         }
         $row=$stm->fetchAll(PDO::FETCH_ASSOC);
+        #print_r($row);
+        #print $q;
+        #print $id.' '.$kind.' '.$idAccommodation;
         foreach ($row as $r)
         {
             $reservationAssociated=FReservation::getInstance()->load($r['idReservation']);
@@ -195,4 +203,81 @@ class FContract
         }
         return $contracts;
     }
+    public function getContractsByOwner(int $id, string $kind) {
+        $db = FConnection::getInstance()->getConnection();
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+        FPersistentManager::getInstance()->updateDataBase();
+        $contracts = [];
+        try {
+            $db->exec('LOCK TABLES contract READ');
+            $q = 'SELECT contract.*, reservation.idAccommodation 
+                  FROM contract 
+                  JOIN reservation ON contract.idReservation = reservation.id 
+                  JOIN accommodation ON reservation.idAccommodation = accommodation.id 
+                  WHERE accommodation.idOwner = :id AND contract.status = :kind;';
+            $db->beginTransaction();
+            $stm = $db->prepare($q);
+            $stm->bindParam(':id', $id, PDO::PARAM_INT);
+            $stm->bindParam(':kind', $kind, PDO::PARAM_STR);
+            $stm->execute();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+        } catch (PDOException $e) {
+            $db->rollBack();
+            return false;
+        }
+        $row = $stm->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($row as $r) {
+            $reservationAssociated = FReservation::getInstance()->load($r['idReservation']);
+            $date = new DateTime($r['paymentDate']);
+            $contract = new EContract($r['status'], $r['cardNumber'], $reservationAssociated, $date);
+            $contracts[$r['idAccommodation']][] = $contract;
+        }
+        return $contracts;
+    }
+    
+    /**
+     * Method getOnGoingContractsByAccommodationId
+     *
+     * this method return an array with the Accommodation's ID as key an an array of EContract as value, where the contract status is 'onGoing'
+     * @param int $id [idAccommodation]
+     *
+     * @return array
+     */
+    public function getOnGoingContractsByAccommodationId(int $id):array
+    {
+        $db=FConnection::getInstance()->getConnection();
+        $contracts=array();
+        try
+        {
+            $q="SELECT *
+                FROM accommodation a INNER JOIN reservation r ON r.idAccommodation=a.id
+                INNER JOIN contract c ON r.id=c.idReservation
+                WHERE c.`status`='onGoing'
+                AND a.id= :id";
+            $db->exec('LOCK TABLES accommodation READ, reservation READ, contract READ');
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindParam(':id',$id,PDO::PARAM_INT);
+            $stm->execute();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            $db->exec('UNLOCK TABLES');
+            return $contracts;
+        }
+        $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($rows as $row) 
+        {
+            $reservationAssociated = FPersistentManager::getInstance()->load('EReservation',$row['idReservation']);
+            $date = new DateTime($row['paymentDate']);
+            $contract = new EContract($row['status'], $row['cardNumber'], $reservationAssociated, $date);
+            $contracts[$row['idAccommodation']][] = $contract;
+        }
+        return $contracts;
+    }
+    
 }

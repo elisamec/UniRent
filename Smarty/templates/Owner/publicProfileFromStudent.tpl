@@ -56,13 +56,13 @@
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contracts</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <<a class="dropdown-item" href="/UniRent/Contract/showOwner/ongoing">Ongoing</a>
-                           <a class="dropdown-item" href="/UniRent/Contract/showOwner/finished">Past</a>
-                           <a class="dropdown-item" href="/UniRent/Contract/showOwner/future">Future</a>
+                           <a class="dropdown-item" href="/UniRent/Contract/showStudent/onGoing">Ongoing</a>
+                           <a class="dropdown-item" href="/UniRent/Contract/showStudent/finished">Past</a>
+                           <a class="dropdown-item" href="/UniRent/Contract/showStudent/future">Future</a>
                         </div>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="/UniRent/Owner/postedReview">Posted Reviews</a>
+                        <a class="nav-link" href="/UniRent/Student/postedReview">Posted Reviews</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href = "/UniRent/Visit/visits">Visits</a>
@@ -287,7 +287,7 @@ const modal = document.getElementById('revModal');
 
 <script>
     // Get the modal
-    var modal = document.getElementById("reportModal");
+    var modalRep = document.getElementById("reportModal");
 
     // Get the button that opens the modal
     var btn = document.querySelector(".delete_btn a");
@@ -301,12 +301,12 @@ const modal = document.getElementById('revModal');
 
     // Open the modal
     function openReportModal() {
-        modal.style.display = "block";
+        modalRep.style.display = "block";
     }
 
     // Close the modal
     function closeReportModal() {
-        modal.style.display = "none";
+        modalRep.style.display = "none";
     }
 
     // Check input and enable/disable submit button
@@ -342,7 +342,7 @@ const modal = document.getElementById('revModal');
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
         if (event.target == modal) {
-            modal.style.display = "none";
+            modalRep.style.display = "none";
         }
     }
 </script>

@@ -15,6 +15,7 @@ use Classes\View\VStudent;
 use Classes\Foundation\FCreditCard;
 use Classes\Control;
 use Classes\Tools\TStatusUser;
+use Classes\View\VError;
 use DateTime;
 
 
@@ -37,7 +38,7 @@ class CStudent{
         $PM=FPersistentManager::getInstance();
         $session=USession::getInstance();
         $user = $session->getSessionElement('username');
-        $student_id = $session->getSessionElement('id');
+        $student_id = $PM->getStudentIdByUsername($user);
         $student = $PM->load('EStudent', $student_id);
         $accommodations = $PM->lastAccommodationsStudent($student);
         $view->home($accommodations);
@@ -102,7 +103,7 @@ class CStudent{
 
         $user_id = $session->getSessionElement('id');
         $PM=FPersistentManager::getInstance();
-        $student=$PM::load('EStudent',$user_id);
+        $student=$PM->load('EStudent',$user_id);
         $ph = null;
 
         if(is_null($student)){
@@ -210,6 +211,7 @@ class CStudent{
         $result = $PM->store($student);
 
         if ($result){
+            $session->setSessionElement('id', $student->getId());
             $session->setSessionElement('courseDuration', $duration);
             $session->setSessionElement('immatricolationYear', $immatricolation);
             $session->setSessionElement('birthDate', $birthDate);
@@ -376,7 +378,7 @@ class CStudent{
         $reviewsData = [];
         
         foreach ($reviews as $review) {
-            $author = $PM::load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
+            $author = $PM->load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
             $profilePic = $author->getPhoto();
             if ($author->getStatus() === TStatusUser::BANNED) {
                 $profilePic = "/UniRent/Smarty/images/BannedUser.png";
@@ -629,7 +631,7 @@ class CStudent{
         }
         
         foreach ($reviews as $review) {
-            $author = $PM::load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
+            $author = $PM->load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
             $status = $author->getStatus();
             $profilePic = $author->getPhoto();
             if($status === TStatusUser::BANNED){
@@ -677,7 +679,7 @@ class CStudent{
         }
         
         foreach ($reviews as $review) {
-            $author = $PM::load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
+            $author = $PM->load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
             $status = $author->getStatus();
             $profilePic = $author->getPhoto();
             if($status === TStatusUser::BANNED){
@@ -780,7 +782,7 @@ class CStudent{
             if(count(FPersistentManager::getInstance()->loadStudentCards($studentId))>0)
             {
                 $card = new ECreditCard($number,$name,$surname,$expiry,(int)$cvv,(int)$studentId,false,$title);
-                $result=FPersistentManager::getInstance()::store($card);
+                $result=FPersistentManager::getInstance()->store($card);
                 if($result)
                 {
                     header('Location:/UniRent/Student/paymentMethods');
@@ -793,7 +795,7 @@ class CStudent{
             else
             {
                 $card = new ECreditCard($number,$name,$surname,$expiry,(int)$cvv,(int)$studentId,true,$title);
-                $result=FPersistentManager::getInstance()::store($card);
+                $result=FPersistentManager::getInstance()->store($card);
                 if($result)
                 {
                     header('Location:/UniRent/Student/paymentMethods');
@@ -836,7 +838,7 @@ class CStudent{
         if($PM->isMainCard($studentId,$number))
         {
             $c= new ECreditCard($number,$name,$surname,$expiry,$cvv,$studentId,true,$title);
-            $result=$PM::update($c);
+            $result=$PM->update($c);
             if($result)
             {
                 header('Location:/UniRent/Student/paymentMethods');
@@ -849,7 +851,7 @@ class CStudent{
         else
         {
             $c= new ECreditCard($number,$name,$surname,$expiry,$cvv,$studentId,false,$title);
-            $result=$PM::update($c);
+            $result=$PM->update($c);
             if($result)
             {
                header('Location:/UniRent/student/paymentMethods');
@@ -873,29 +875,31 @@ class CStudent{
         if(is_null($actualMain))
         {
             $actualcard->setMain(true);
-            $PM::update($actualcard);
+            $PM->update($actualcard);
             http_response_code(200);
         }
         else
         {
             $actualMain->setMain(false);
-            $res_1=$PM::update($actualMain);
+            $res_1=$PM->update($actualMain);
             if($res_1)
             {
                 $actualcard->setMain(true);
-                $res_2=$PM::update($actualcard);
+                $res_2=$PM->update($actualcard);
                 if($res_2)
                 {
                     http_response_code(200);
                 }
                 else
                 {
-                    http_response_code(500);
+                    $view=new VError();
+                    $view->error('500');
                 }
             }
             else
             {
-                http_response_code(500);
+                $view=new VError();
+                $view->error('500');
             }
         }
     }
@@ -908,15 +912,23 @@ class CStudent{
         $reviewsData = [];
 
         foreach ($reviews as $review) {
-            $recipient = $PM::load( 'E' . ucfirst($review->getRecipientType()->value), $review->getIdRecipient());
+            $recipient = $PM->load( 'E' . ucfirst($review->getRecipientType()->value), $review->getIdRecipient());
             $profilePic = $recipient->getPhoto();
             if ($recipient->getStatus() === TStatusUser::BANNED) {
                 $profilePic = "/UniRent/Smarty/images/BannedUser.png";
             } else if ($profilePic === null) {
                 $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
             } else if (gettype($profilePic) === 'array') {
-                $profilePic = $profilePic[0];
-                $profilePic=(EPhoto::toBase64(array($profilePic))[0])->getPhoto();
+
+                if(count($profilePic)==0) #if the accommodation has no photos
+                {
+                    $profilePic = "/UniRent/Smarty/images/noPic.png";
+                }
+                else
+                {
+                    $profilePic = $profilePic[0];
+                    $profilePic=(EPhoto::toBase64(array($profilePic))[0])->getPhoto();
+                }
             }
             else
             {
@@ -945,6 +957,7 @@ class CStudent{
                 'userPicture' => $profilePic,
                 'id'=> $review->getId(),
                 'type' => ucfirst($review->getRecipientType()->value),
+                'idRecipient' => $review->getIdRecipient(),
             ];
         }
         $view->postedReview($reviewsData);

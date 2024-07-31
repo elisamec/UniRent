@@ -99,6 +99,13 @@ const customNamesPatterns = {
     '/UniRent/Student/search': 'Search',
     '/UniRent/User/search': 'Search',
     '/UniRent/Reservation/reservationDetails/*': 'Reservation Details: ' + reservationDetail,
+    '/UniRent/Contract/showStudent/finished': 'Past Contracts',
+    '/UniRent/Contract/showStudent/onGoing': 'OnGoing Contracts',
+    '/UniRent/Contract/showStudent/future': 'Upcoming Contracts',
+    '/UniRent/Contract/showOwner/finished': 'Past Contracts',
+    '/UniRent/Contract/showOwner/onGoing': 'OnGoing Contracts',
+    '/UniRent/Contract/showOwner/future': 'Upcoming Contracts',
+    '/UniRent/Contract/contractDetails/*': 'Contract Details',
 };
 
 // Function to get custom name based on URL patterns

@@ -136,12 +136,16 @@ class CReservation
                 $owner_photo_64=EPhoto::toBase64(array($owner_photo));
                 $owner->setPhoto($owner_photo_64[0]);
                 #print_r($owner);
+            } else if (is_null($owner_photo)) {
+                $photo = new EPhoto(null, file_get_contents(__DIR__ . "/../../Smarty/images/ImageIcon.png"), 'other', null);
+                $owner_photo_64=EPhoto::toBase64(array($photo));
+                $owner->setPhoto($owner_photo_64[0]);
             }
             $reviews = $PM->loadByRecipient($accommodation->getIdAccommodation(), TType::ACCOMMODATION);
             $reviewsData = [];
             
             foreach ($reviews as $review) {
-                $author = $PM::load('EStudent', $review->getIdAuthor());
+                $author = $PM->load('EStudent', $review->getIdAuthor());
                 $profilePic = $author->getPhoto();
                 if ($author->getStatus() === TStatusUser::BANNED) {
                     $profilePic = "/UniRent/Smarty/images/BannedUser.png";
@@ -195,7 +199,7 @@ class CReservation
             $reviewsData = [];
             
             foreach ($reviews as $review) {
-                $author = $PM::load('EStudent', $review->getIdAuthor());
+                $author = $PM->load('EStudent', $review->getIdAuthor());
                 $profilePic = $author->getPhoto();
                 if ($author->getStatus() === TStatusUser::BANNED) {
                     $profilePic = "/UniRent/Smarty/images/BannedUser.png";
@@ -236,10 +240,10 @@ class CReservation
     }
     public static function accept(int $id) {
         $PM = FPersistentManager::getInstance();
-        $reservation = $PM::load('EReservation', $id);
+        $reservation = $PM->load('EReservation', $id);
         $reservation->setStatus(true);
         $reservation->setMade(new DateTime('now'));
-        $res = $PM::update($reservation);
+        $res = $PM->update($reservation);
         if ($res) {
             header('Location:/UniRent/Reservation/showOwner/accepted');
         } else {
@@ -248,7 +252,7 @@ class CReservation
     }
     public static function deny(int $id) {
         $PM = FPersistentManager::getInstance();
-        $res = $PM::delete('EReservation', $id); 
+        $res = $PM->delete('EReservation', $id); 
         if ($res) {
             header('Location:/UniRent/Reservation/showOwner/null/denied');
         } else {
