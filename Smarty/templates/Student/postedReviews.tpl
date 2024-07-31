@@ -184,11 +184,14 @@
                     } else {
                         style = '';
                     }
-                    let userStyle
+                    let userStyle;
+                    let hrefLink;
                     if (review.type === 'Accommodation') {
                         userStyle = 'class="accomm"';
+                        hrefLink = '/UniRent/Student/accommodation/' + review.idRecipient;
                     } else {
                         userStyle = 'class="userIcon"';
+                        hrefLink = '/UniRent/Student/publicProfile/' + review.username;
                     }
     
                     // Insert the names of the elements of the review array
@@ -204,9 +207,9 @@
                         <div class="userSection">
                             <p> To: </p>
                             <div ` + userStyle + `>
-                                <a href="/UniRent/Student/publicProfile/` + review.username + `" ` + style + `><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
+                                <a href=` + hrefLink + style + `><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
                             </div>
-                            <div class="username"><a href="/UniRent/Student/publicProfile/` + review.username + `" ` + style + `>` + review.username + `</a></div> <!-- Username of the reviewer -->
+                            <div class="username"><a href=` + hrefLink + style + `>` + review.username + `</a></div> <!-- Username of the reviewer -->
                             <p class="reviewRecipType">` + review.type + `</p>
                         </div>
                         <div class="col-md-10">

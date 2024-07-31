@@ -954,6 +954,7 @@ class CStudent{
                 'userPicture' => $profilePic,
                 'id'=> $review->getId(),
                 'type' => ucfirst($review->getRecipientType()->value),
+                'idRecipient' => $review->getIdRecipient(),
             ];
         }
         $view->postedReview($reviewsData);

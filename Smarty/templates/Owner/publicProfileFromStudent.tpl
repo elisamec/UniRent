@@ -56,13 +56,13 @@
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contracts</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="/UniRent/Contract/showOwner/onGoing">Ongoing</a>
-                           <a class="dropdown-item" href="/UniRent/Contract/showOwner/finished">Past</a>
-                           <a class="dropdown-item" href="/UniRent/Contract/showOwner/future">Future</a>
+                           <a class="dropdown-item" href="/UniRent/Contract/showStudent/onGoing">Ongoing</a>
+                           <a class="dropdown-item" href="/UniRent/Contract/showStudent/finished">Past</a>
+                           <a class="dropdown-item" href="/UniRent/Contract/showStudent/future">Future</a>
                         </div>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="/UniRent/Owner/postedReview">Posted Reviews</a>
+                        <a class="nav-link" href="/UniRent/Student/postedReview">Posted Reviews</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href = "/UniRent/Visit/visits">Visits</a>
