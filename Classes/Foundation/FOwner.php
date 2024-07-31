@@ -588,7 +588,7 @@ use PDOException;
         $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
         foreach($rows as $row)
         {
-            $student=FPersistentManager::getInstance()::load('EStudent',$row['idStudent']);
+            $student=FPersistentManager::getInstance()->load('EStudent',$row['idStudent']);
 
             $p_student=$student->getPhoto();
             if(!is_null($p_student))
@@ -704,7 +704,7 @@ use PDOException;
         
         foreach($rows as $row)
         {
-            $student=FPersistentManager::getInstance()::load('EStudent',$row['idStudent']);
+            $student=FPersistentManager::getInstance()->load('EStudent',$row['idStudent']);
 
             if(($student->getRating()>=$rateT) or ($student->getRating()==0))
             {
