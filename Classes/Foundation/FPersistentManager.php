@@ -32,7 +32,7 @@ class FPersistentManager {
      * @param int $id Refers to the id of the object
      * @return ?object
      */
-    public static function load(String $EClass, int $id): ?object{
+    public function load(String $EClass, int $id): ?object{
         
         $FClass = str_replace("E", "Classes\Foundation\F", $EClass);
 
@@ -48,7 +48,7 @@ class FPersistentManager {
      * @param object $obj Refers to the object to be stored
      * @return bool
      */
-    public static function store(object $obj): bool{
+    public function store(object $obj): bool{
         $EClass = get_class($obj); 
         $FClass = str_replace("Classes\Entity\E", "Classes\Foundation\F", $EClass);
 
@@ -65,7 +65,7 @@ class FPersistentManager {
      * @param object $obj Refers to the object to be stored
      * @return bool
      */
-    public static function update(object $obj): bool{
+    public function update(object $obj): bool{
 
         print "Sto nel PM";
         $EClass = get_class($obj); 
@@ -85,7 +85,7 @@ class FPersistentManager {
      * @param int $id Refers to the object to be stored
      * @return bool
      */
-    public static function delete(String $EClass, int $id): bool{
+    public function delete(String $EClass, int $id): bool{
 
         $FClass = str_replace("E", "Classes\Foundation\F", $EClass);
 
@@ -543,7 +543,7 @@ class FPersistentManager {
                     $from=$from->setDate($year,$date,1);
                     $to=$to->setDate($year_2,$date_2,1);
                     $reservation = new EReservation($from,$to,$idAccommodation,$student_id);
-                    $result=$this::store($reservation);
+                    $result=$this->store($reservation);
                     if($result)#se tutto va a buon fine
                     {
                         return true;#tutto ok
@@ -551,7 +551,7 @@ class FPersistentManager {
                     else#altrimenti
                     {
                         $viewError= new VError();
-            $viewError->error(500);#problema del server
+                        $viewError->error(500);#problema del server
                     }
                 }
                 else# posti esauriti per quest'anno
@@ -574,7 +574,7 @@ class FPersistentManager {
                 $from=$from->setDate($year,$date,1);
                 $to=$to->setDate($year_2,$date_2,1);
                 $reservation = new EReservation($from,$to,$idAccommodation,$student_id);
-                $result=$this::store($reservation);
+                $result=$this->store($reservation);
                 if($result)# se riesci a registrare la prenotazione
                 {
                     return true; #tutto ok

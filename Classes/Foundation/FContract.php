@@ -272,7 +272,7 @@ class FContract
         $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
         foreach ($rows as $row) 
         {
-            $reservationAssociated = FPersistentManager::getInstance()::load('EReservation',$row['idReservation']);
+            $reservationAssociated = FPersistentManager::getInstance()->load('EReservation',$row['idReservation']);
             $date = new DateTime($row['paymentDate']);
             $contract = new EContract($row['status'], $row['cardNumber'], $reservationAssociated, $date);
             $contracts[$row['idAccommodation']][] = $contract;

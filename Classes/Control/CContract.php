@@ -194,7 +194,7 @@ class CContract
             $reviewsData = [];
             
             foreach ($reviews as $review) {
-                $author = $PM::load('EStudent', $review->getIdAuthor());
+                $author = $PM->load('EStudent', $review->getIdAuthor());
                 $profilePic = $author->getPhoto();
                 if ($author->getStatus() === TStatusUser::BANNED) {
                     $profilePic = "/UniRent/Smarty/images/BannedUser.png";
@@ -240,7 +240,7 @@ class CContract
             $reviewsData = [];
             
             foreach ($reviews as $review) {
-                $author = $PM::load('EStudent', $review->getIdAuthor());
+                $author = $PM->load('EStudent', $review->getIdAuthor());
                 $profilePic = $author->getPhoto();
                 if ($author->getStatus() === TStatusUser::BANNED) {
                     $profilePic = "/UniRent/Smarty/images/BannedUser.png";
@@ -268,7 +268,7 @@ class CContract
     /**
      * Method viewOngoing
      * the method return to the view all onGoing contracts for the accommodation with given ID
-     * @param $id $id [explicite description]
+     * @param int $id
      *
      * @return void
      */

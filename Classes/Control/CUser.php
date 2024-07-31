@@ -24,7 +24,7 @@ class CUser
         $PM=FPersistentManager::getInstance();
         if($type==='Student')
         {
-            $student=$PM::load('EStudent', $id);
+            $student=$PM->load('EStudent', $id);
             if($student->getStatus()==TStatusUser::BANNED)
             {
                 $v=new VError();
@@ -38,7 +38,7 @@ class CUser
         }
         elseif($type==='Owner')
         {
-            $owner=$PM::load('EOwner',$id);
+            $owner=$PM->load('EOwner',$id);
             if($owner->getStatus()==TStatusUser::BANNED)
             {
                 $v=new VError();
