@@ -477,7 +477,7 @@ class CStudent{
                         $ph=null;
                     }
                     $session->setSessionElement('username',$username);
-                    $password = $student->getPassword();
+                    //$password = $student->getPassword();
                     $session->setSessionElement('password',$password);
                     $session->setSessionElement('photo',$ph);
                     header('Location:/UniRent/Student/profile');
