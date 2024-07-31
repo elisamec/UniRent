@@ -60,7 +60,7 @@ try {
 /*
 $student= new EStudent('jojo','pippo','Giovanni','Filone',null,'giovanni.filone@student.univaq.it',3,2023,new DateTime('now'),'M',true,true);
 $PM=FPersistentManager::getInstance();
-$result=$PM::store($student);
+$result=$PM->store($student);
 if($result)
 {
     print ' nessun problema!';

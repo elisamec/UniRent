@@ -479,7 +479,7 @@ class CStudent{
                         $ph=null;
                     }
                     $session->setSessionElement('username',$username);
-                    $password = $student->getPassword();
+                    //$password = $student->getPassword();
                     $session->setSessionElement('password',$password);
                     $session->setSessionElement('photo',$ph);
                     header('Location:/UniRent/Student/profile');
@@ -660,7 +660,8 @@ class CStudent{
                 'userPicture' => $profilePic,
             ];
         }
-        $view->publicProfileFromStudent($student, $reviewsData, $kind, $self);
+        $roomate=1;
+        $view->publicProfileFromStudent($student, $reviewsData, $kind, $self, $roomate);
     }
     public static function publicProfileFromOwner(string $username, ?string $kind="#")
     {

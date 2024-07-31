@@ -102,11 +102,12 @@ class VStudent{
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->display('Student/reviews.tpl');
     }
-    public function publicProfileFromStudent(EStudent $student, array $reviewsData, ?string $kind="#", bool $self):void{
+    public function publicProfileFromStudent(EStudent $student, array $reviewsData, ?string $kind="#", bool $self, int $roomate):void{
         $this->smarty->assign('student', $student);
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->assign('kind', $kind);
         $this->smarty->assign('self', $self);
+        $this->smarty->assign('roomate', $roomate);
         $this->smarty->display('Student/publicProfileFromStudent.tpl');
     }
     public function publicProfileFromOwner(EStudent $student, array $reviewsData, ?string $kind="#"):void{
