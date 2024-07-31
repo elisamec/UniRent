@@ -503,11 +503,12 @@ class FReview {
      * @param int $id1 [student 1]
      * @param int $id2 [student 2]
      *
-     * @return int
+     * @param int  
      */
     public function remainingReviewStudentToStudent(int $id1, int $id2):int
     {
         $db=FConnection::getInstance()->getConnection();
+        $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
         try
         {
             $q="SELECT 
@@ -526,7 +527,7 @@ class FReview {
                 (SELECT COUNT(*)
                  FROM student s INNER JOIN studentreview sr ON s.id=sr.authorStudent
                  WHERE s.id=:id1
-                 AND sr.idStudent=:id2) AS remaining_reviews
+                 AND sr.idStudent=:id2) AS RR
 
                 LOCK IN SHARE MODE";
 
@@ -542,8 +543,8 @@ class FReview {
             $db->rollBack();
             return 0;
         }
-        $result=$stm->fetchAll(PDO::FETCH_ASSOC);
-        return (int)$result['remaining_reviews'];
+        $result=$stm->fetch(PDO::FETCH_ASSOC);
+        return (int)$result['RR'];
     }
 
 

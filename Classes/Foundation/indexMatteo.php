@@ -3,6 +3,7 @@ require __DIR__.'../../../vendor/autoload.php';
 
 use Classes\Entity\EAccommodation;
 use Classes\Entity\ECreditCard;
+use Classes\Entity\EReview;
 use Classes\Entity\EStudent;
 use Classes\Foundation\FAccommodation;
 use Classes\Foundation\FCreditCard;
@@ -11,6 +12,7 @@ use Classes\Foundation\FStudent;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use Classes\Foundation\FOwner;
+use Classes\Foundation\FReview;
 use Classes\Utilities\UAccessUniversityFile;
 use Updater\Updater;
 
@@ -157,6 +159,5 @@ $result=$FA->areThereFreePlaces(7,2024);
 
 print var_dump($result) ;*/
 
-$student=FPersistentManager::getInstance()->getStudentIdByUsername('eli');
-$student=FPersistentManager::getInstance()->load('EStudent',$student);
-print_r($student);
+$result=EReview::remainingReviewStudentToStudent(8,5);
+print $result;
