@@ -660,7 +660,8 @@ class CStudent{
                 'userPicture' => $profilePic,
             ];
         }
-        $view->publicProfileFromStudent($student, $reviewsData, $kind, $self);
+        $roomate=1;
+        $view->publicProfileFromStudent($student, $reviewsData, $kind, $self, $roomate);
     }
     public static function publicProfileFromOwner(string $username, ?string $kind="#")
     {

@@ -276,7 +276,54 @@ class CContract
     {
         $PM=FPersistentManager::getInstance();
         $result=$PM->getOnGoingContractsByAccommodationId($id);
-        print_r($result);
-        #per il momento printo solo, non sò se c'è il template
+        $view = new VOwner();
+        $contractsData=[];
+        foreach ($result as $idAccommodation => $contracts) {
+            $accommodationTitle = $PM->getTitleAccommodationById($idAccommodation);
+            $studentList = [];
+
+            foreach ($contracts as $contract) {
+                usort($contracts, function($a, $b) {
+                    $today = new DateTime();
+                    $fromDateA = $a->getFromDate();
+                    $fromDateB = $b->getFromDate();
+                
+                    $diffA = $today->diff($fromDateA)->days;
+                    $diffB = $today->diff($fromDateB)->days;
+                
+                    return $diffA - $diffB;
+                });
+                $student=$PM->load('EStudent', $contract->getIdStudent());
+                $student_photo=$student->getPhoto();
+                $studentStatus = $student->getStatus();
+                if($studentStatus === TStatusUser::BANNED){
+                
+                    $path = __DIR__ . "/../../Smarty/images/BannedUser.png";
+                    $student_photo = new EPhoto(null, file_get_contents($path), 'other', null);
+                    $student_photo_64=EPhoto::toBase64(array($student_photo));
+                    $student->setPhoto($student_photo_64[0]);
+                }
+                else if(is_null($student_photo)){}
+                else
+                {
+                    $student_photo_64=EPhoto::toBase64(array($student_photo));
+                    $student->setPhoto($student_photo_64[0]);
+                    #print_r($owner);
+                }
+                $profilePic = $student->getPhoto() === null ? "/UniRent/Smarty/images/ImageIcon.png" : $student->getPhoto()->getPhoto();
+                $studentList[] = [
+                    'idContract' => $contract->getID(),
+                    'username' => $student->getUsername(),
+                    'image' => $profilePic,
+                    'period' => 'from '. $contract->getFromDate()->format('d/m/Y') . ' to ' . $contract->getToDate()->format('d/m/Y')
+                ];
+            }
+
+            $contractsData[] = [
+                'accommodation' => $accommodationTitle,
+                'contracts' => $studentList
+            ];
+        }
+        $view->showContracts($contractsData, 'onGoing');
     }
 }
