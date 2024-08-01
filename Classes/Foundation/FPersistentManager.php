@@ -12,6 +12,7 @@ use Classes\Tools\TType;
 use Classes\Utilities\UAccessUniversityFile;
 use Classes\Foundation\FUpdater;
 use Classes\View\VError;
+use Classes\Foundation\FReport;
 use DateTime;
 
 
@@ -708,6 +709,13 @@ class FPersistentManager {
         $result_owner=$FO->getBannedOwners();
         $result['students']=$result_student;
         $result['owners']=$result_owner;
+        return $result;
+    }
+    public function getBanReason(string $username):string {
+        $FRe=FReport::getInstance();
+        $FS=FStudent::getInstance();
+        $student=$FS->getStudentByUsername($username);
+        $result=$FRe->getLastBanReportByStudent($student->getId())->getDescription();
         return $result;
     }
 }

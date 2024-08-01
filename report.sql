@@ -33,8 +33,8 @@ CREATE TABLE `report` (
   `made` timestamp NOT NULL DEFAULT current_timestamp(),
   `banDate` date DEFAULT NULL,
   `idStudent` int(11) DEFAULT NULL,
-  `idOwner` int(11) NOT NULL,
-  `idReview` int(11) NOT NULL
+  `idOwner` int(11) DEFAULT NULL,
+  `idReview` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
