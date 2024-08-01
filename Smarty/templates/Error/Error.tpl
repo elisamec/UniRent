@@ -47,7 +47,7 @@
                         <p>{$banReason}</p>
                         <p class="text-gray-500 mb-0">Please contact the administrator for more information</p>
                         <form class="flex-form" action="/UniRent/Admin/removeBanRequest/{$username}" method="post">
-                            <textarea placeholder="Message" rows="5" id="comment" name="Message"></textarea>
+                            <textarea placeholder="Message" rows="5" id="comment" name="Message" required></textarea>
                             <button type="submit" class="btn btn-primary btn-user send_btn">Send</button>
                         </form>
                         {else if $error == 401}
