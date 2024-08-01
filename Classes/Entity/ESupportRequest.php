@@ -28,10 +28,13 @@ class ESupportRequest {
         return $this->entity;
     }
 
-    public function __construct(?int $id, string $message, TRequestType $topic, ?int $idAuthor, ?TType $authorType) 
+    public function __construct(?int $id, string $message, string | TRequestType $topic, ?int $idAuthor, ?TType $authorType) 
     {
         $this->id=$id;
         $this->message=$message;
+        if (is_string($topic)) {
+            $topic = TRequestType::from($topic);
+        }
         $this->topic=$topic;
         $this->idAuthor=$idAuthor;
         $this->authorType=$authorType;
