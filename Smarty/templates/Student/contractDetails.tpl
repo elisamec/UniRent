@@ -162,15 +162,15 @@
                         <div class="userSection">
                                 <div class="userIcon">
                                     {if $owner->getStatus()->value === 'banned'}
-                                        <a href="/UniRent/Owner/publicProfile/{$owner->getUsername()}" class="disabled"><img src="{$owner->getPhoto()->getPhoto()}" class="imageIcon"></a>
+                                        <a href="/UniRent/Student/publicProfile/{$owner->getUsername()}" class="disabled"><img src="{$owner->getPhoto()->getPhoto()}" class="imageIcon"></a>
                                     {else}
-                                    <a href="/UniRent/Owner/publicProfile/{$owner->getUsername()}"><img src="{$owner->getPhoto()->getPhoto()}"></a>
+                                    <a href="/UniRent/Student/publicProfile/{$owner->getUsername()}"><img src="{$owner->getPhoto()->getPhoto()}"></a>
                                     {/if}
                                 </div>
                                 {if $owner->getStatus()->value === 'banned'}
-                                    <div class="username"><a href="/UniRent/Owner/publicProfile/{$owner->getUsername()}" class="disabled">{$owner->getUsername()}</a></div>
+                                    <div class="username"><a href="/UniRent/Student/publicProfile/{$owner->getUsername()}" class="disabled">{$owner->getUsername()}</a></div>
                                 {else}
-                                <div class="username"><a href="/UniRent/Owner/publicProfile/{$owner->getUsername()}">{$owner->getUsername()}</a></div> <!-- Username of the owner -->
+                                <div class="username"><a href="/UniRent/Student/publicProfile/{$owner->getUsername()}">{$owner->getUsername()}</a></div> <!-- Username of the owner -->
                                 {/if}
                             </div>
                         </div>
