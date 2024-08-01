@@ -4215,7 +4215,7 @@ function fcamelCase( _all, letter ) {
 
 // Convert dashed to camelCase; used by the css and data modules
 // Support: IE <=9 - 11, Edge 12 - 15
-// Microsoft forgot to hump their vendor prefix (#9572)
+// Microsoft forgot to hump their /UniRent/Smarty/templates/Admin/AdminVendor prefix (#9572)
 function camelCase( string ) {
 	return string.replace( rmsPrefix, "ms-" ).replace( rdashAlpha, fcamelCase );
 }
@@ -6650,10 +6650,10 @@ var cssPrefixes = [ "Webkit", "Moz", "ms" ],
 	emptyStyle = document.createElement( "div" ).style,
 	vendorProps = {};
 
-// Return a vendor-prefixed property or undefined
+// Return a /UniRent/Smarty/templates/Admin/AdminVendor-prefixed property or undefined
 function vendorPropName( name ) {
 
-	// Check for vendor prefixed names
+	// Check for /UniRent/Smarty/templates/Admin/AdminVendor prefixed names
 	var capName = name[ 0 ].toUpperCase() + name.slice( 1 ),
 		i = cssPrefixes.length;
 
@@ -6665,7 +6665,7 @@ function vendorPropName( name ) {
 	}
 }
 
-// Return a potentially-mapped jQuery.cssProps or vendor prefixed property
+// Return a potentially-mapped jQuery.cssProps or /UniRent/Smarty/templates/Admin/AdminVendor prefixed property
 function finalPropName( name ) {
 	var final = jQuery.cssProps[ name ] || vendorProps[ name ];
 

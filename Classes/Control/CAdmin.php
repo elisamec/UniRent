@@ -18,8 +18,10 @@ use Classes\View\VError;
 class CAdmin
 {
     public static function home(){
+        $PM=FPersistentManager::getInstance();
+        $stats=$PM->getStatistics();
         $view = new VAdmin();
-        $view->home();
+        $view->home($stats);
     }
 
     public static function login(){

@@ -3,8 +3,6 @@ Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,Bli
 Chart.defaults.global.defaultFontColor = '#858796';
 
 function number_format(number, decimals, dec_point, thousands_sep) {
-  // *     example: number_format(1234.56, 2, ',', ' ');
-  // *     return: '1 234,56'
   number = (number + '').replace(',', '').replace(' ', '');
   var n = !isFinite(+number) ? 0 : +number,
     prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
@@ -15,7 +13,6 @@ function number_format(number, decimals, dec_point, thousands_sep) {
       var k = Math.pow(10, prec);
       return '' + Math.round(n * k) / k;
     };
-  // Fix for IE parseFloat(0.55).toFixed(0) = 0;
   s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
   if (s[0].length > 3) {
     s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
@@ -27,14 +24,42 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   return s.join(dec);
 }
 
+// Function to generate day labels and data for the current month up to today
+function generateDayLabelsAndData() {
+  var labels = [];
+  var data = [];
+  var date = new Date();
+  var currentMonth = date.getMonth(); // 0-based
+  var currentYear = date.getFullYear();
+  var currentDate = date.getDate();
+  var daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+  for (var i = 1; i <= daysInMonth; i++) {
+    labels.push(i.toString());
+    // Fill data array with 0 if i is in future days, otherwise use chartData
+    if (i <= currentDate) {
+      data.push(chartData[i - 1] || 0);
+    } else {
+      data.push(null); // Use null for future days to avoid displaying them
+    }
+  }
+
+  return { labels: labels, data: data };
+}
+
+// Generate labels and data
+var result = generateDayLabelsAndData();
+var labels = result.labels;
+var data = result.data;
+
 // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    labels: labels,
     datasets: [{
-      label: "Earnings",
+      label: "Number of Contracts",
       lineTension: 0.3,
       backgroundColor: "rgba(78, 115, 223, 0.05)",
       borderColor: "rgba(78, 115, 223, 1)",
@@ -46,7 +71,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
+      data: data,
     }],
   },
   options: {
@@ -62,7 +87,7 @@ var myLineChart = new Chart(ctx, {
     scales: {
       xAxes: [{
         time: {
-          unit: 'date'
+          unit: 'day'
         },
         gridLines: {
           display: false,
@@ -74,12 +99,12 @@ var myLineChart = new Chart(ctx, {
       }],
       yAxes: [{
         ticks: {
-          maxTicksLimit: 5,
-          padding: 10,
-          // Include a dollar sign in the ticks
+          // Ensure that y-axis shows linear values even if data is zero
           callback: function(value, index, values) {
-            return '$' + number_format(value);
-          }
+            return number_format(value);
+          },
+          beginAtZero: true, // Ensure axis starts at zero
+          stepSize: 1 // Set a step size for better scaling
         },
         gridLines: {
           color: "rgb(234, 236, 244)",
@@ -110,7 +135,8 @@ var myLineChart = new Chart(ctx, {
       callbacks: {
         label: function(tooltipItem, chart) {
           var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-          return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+          var value = tooltipItem.yLabel; // Get the value of the hovered data point
+          return datasetLabel + ': ' + number_format(value); // Display the label and formatted value
         }
       }
     }
