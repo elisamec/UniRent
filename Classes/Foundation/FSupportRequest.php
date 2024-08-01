@@ -66,9 +66,12 @@ class FSupportRequest {
         if ($row['idStudent']!=null) {
             $author=$row['idStudent'];
             $authType=TType::STUDENT;
-        } else {
+        } else if ($row['idOwner']!=null) {
             $author=$row['idOwner'];
             $authType=TType::OWNER;
+        } else {
+            $author=null;
+            $authType=null;
         }
         $result=new ESupportRequest($row['id'],$row['message'], TRequestType::tryFrom($row['topic']), $author, $authType);
         return $result;
@@ -80,15 +83,32 @@ class FSupportRequest {
         try
         {   
             $authType=$supportrequest->getAuthorType()->value;
-            $authCol='id'.ucfirst($authType);
+            if ($authType!=null) {
+                $authCol='id'.ucfirst($authType);
+                $value= ':author';
+            } else {
+                $authCol='idStudent, idOwner';
+                $value= ':idStudent, :idOwner';
+            }
             $db->exec('LOCK TABLES supportrequest WRITE');
             $db->beginTransaction();
-            $q='INSERT INTO supportrequest (message, topic,'.$authCol.', status)';
-            $q=$q.'VALUES (:message, :topic, :author, :status)';
+            $q='INSERT INTO supportrequest (message, topic,'.$authCol.', status, supportReply, statusRead)';
+            $q=$q.'VALUES (:message, :topic,'.$value.', :status, :supportReply, :statusRead)';
             $stm = $db->prepare($q);
             $stm->bindValue(':message', $supportrequest->getMessage(), PDO::PARAM_STR);
             $stm->bindValue(':topic', $supportrequest->getTopic()->value, PDO::PARAM_STR);
-            $stm->bindValue(':author', $supportrequest->getAuthorID(), PDO::PARAM_INT);
+            if ($authType!=null) {
+                $stm->bindValue(':author', $supportrequest->getAuthorID(), PDO::PARAM_INT);
+            } else {
+                $stm->bindValue(':idStudent', null, PDO::PARAM_NULL);
+                $stm->bindValue(':idOwner', null, PDO::PARAM_NULL);
+            }
+            if ($supportrequest->getSupportReply()!=null) {
+                $stm->bindValue(':supportReply', $supportrequest->getSupportReply(), PDO::PARAM_STR);
+            } else {
+                $stm->bindValue(':supportReply', null, PDO::PARAM_NULL);
+            }
+            $stm->bindValue(':statusRead', $supportrequest->getStatusRead(), PDO::PARAM_INT);
             $stm->bindValue(':status', $supportrequest->getStatus()->value, PDO::PARAM_INT);
             $stm->execute();
             $id=$db->lastInsertId();
@@ -109,8 +129,15 @@ class FSupportRequest {
         { 
             $db->exec('LOCK TABLES supportrequest WRITE');
             $db->beginTransaction();
-            $q='UPDATE supportrequest SET status = :status';
+            $q='UPDATE supportrequest SET status = :status, supportReply=:supportReply statusRead = :statusRead WHERE id = :id';
             $stm = $db->prepare($q);
+            $stm->bindValue(':id', $supportrequest->getId(), PDO::PARAM_INT);
+            if ($supportrequest->getSupportReply()!=null) {
+                $stm->bindValue(':supportReply', $supportrequest->getSupportReply(), PDO::PARAM_STR);
+            } else {
+                $stm->bindValue(':supportReply', null, PDO::PARAM_NULL);
+            }
+            $stm->bindValue(':statusRead', $supportrequest->getStatusRead(), PDO::PARAM_INT);
             $stm->bindValue(':status', $supportrequest->getStatus()->value, PDO::PARAM_INT);
             $stm->execute();
             $db->commit();

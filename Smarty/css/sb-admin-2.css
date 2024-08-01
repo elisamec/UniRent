@@ -427,7 +427,7 @@ hr {
 }
 
 small,
-.small {
+.smallMessages {
   font-size: 80%;
   font-weight: 400;
 }
@@ -11278,4 +11278,12 @@ footer.sticky-footer .copyright {
 
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
+}
+.send_btn {
+  display: block;
+  width: 50%;
+}
+.flex-form {
+  display: flex;
+  justify-content: space-between;
 }

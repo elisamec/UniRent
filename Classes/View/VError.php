@@ -14,8 +14,10 @@ class VError
         $this->smarty = StartSmarty::configuration();
     }
 
-    public function error(int $errorCode){
+    public function error(int $errorCode, ?string $username=null, string $requestSuccess='null'){
         $this->smarty->assign('error', $errorCode);
+        $this->smarty->assign('username', $username);
+        $this->smarty->assign('requestSuccess', $requestSuccess);
         $this->smarty->display('Error/error.tpl');
     }
 }

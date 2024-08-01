@@ -17,8 +17,8 @@ class ESupportRequest {
     private ?int $id;
     private string $message;
     private TRequestType $topic;
-    private int $idAuthor;
-    private TType $authorType;
+    private ?int $idAuthor;
+    private ?TType $authorType;
     private ?string $supportReply=null;
     private bool $statusRead=false;
     private TStatusSupport $status=TStatusSupport::WAITING;
@@ -28,12 +28,18 @@ class ESupportRequest {
         return $this->entity;
     }
 
-    public function __construct(?int $id, string $message, TRequestType $topic, int $idAuthor, TType $authorType) 
+    public function __construct(?int $id, string $message, string | TRequestType $topic, ?int $idAuthor, string | null| TType $authorType) 
     {
         $this->id=$id;
         $this->message=$message;
+        if (is_string($topic)) {
+            $topic = TRequestType::from($topic);
+        }
         $this->topic=$topic;
         $this->idAuthor=$idAuthor;
+        if (is_string($authorType)) {
+            $authorType = TType::from(strtolower($authorType));
+        }
         $this->authorType=$authorType;
     }
     public function getId(): int {

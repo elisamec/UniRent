@@ -42,6 +42,11 @@
                         <p class="lead text-gray-800 mb-5">Bad Request</p>
                         {else if $error == 600}
                         <p class="lead text-gray-800 mb-5">This User Has Been Banned</p>
+                        <p class="text-gray-500 mb-0">Please contact the administrator for more information</p>
+                        <form class="flex-form" action="/UniRent/Admin/removeBanRequest/{$username}" method="post">
+                            <textarea placeholder="Message" rows="5" id="comment" name="Message"></textarea>
+                            <button type="submit" class="btn btn-primary btn-user send_btn">Send</button>
+                        </form>
                         {else if $error == 401}
                         <p class="lead text-gray-800 mb-5">Unauthorized</p>
                         {else if $error == 403}
@@ -93,7 +98,46 @@
             </div>
             <!-- End of Main Content -->
 
+        </div>
+        <!-- End of Content Wrapper -->
+<div class="resModal" id="successRequestModal">
+    <div class="resModal-content">
+        <span class="resClose" id="closeSpan">&times;</span>
+        {if $requestSuccess == 'requestSent'}
+        <h1>Request Sent Successfully</h1>
+        <p>Your request has been sent successfully. Please wait for the administrator to examine your request. If the administrator thinks your ban can be removed, your account will be reactivated by tomorrow. Thank you for you patience.</p>
+        {else if $requestSuccess == 'error'}
+        <h1>Error</h1>
+        <p>There was an error while sending your request. Please try again later.</p>
+        {/if}
+        <button class="resCloseBtn" id="closeButton">Close</button>
+    </div>
+</div>
+<script>
 
+    var modal = document.getElementById("successRequestModal");
+    var span = document.getElementById("closeSpan");
+    var button = document.getElementById("closeButton");
+
+    if ('{$requestSuccess}' !== 'null') {
+        modal.style.display = "block";
+    } else {
+        modal.style.display = "none";
+    }
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    button.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

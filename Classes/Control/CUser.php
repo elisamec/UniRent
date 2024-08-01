@@ -203,7 +203,7 @@ class CUser
                 if($user->getStatus()==TStatusUser::BANNED)
                 {
                     $v=new VError();
-                    $v->error(600);
+                    $v->error(600, $username);
                     return;
                 }
                 $passwordIn=USuperGlobalAccess::getPost('password');
@@ -246,11 +246,4 @@ class CUser
         header('Location: /UniRent/User/home');
     }
 
-    public static function supportRequest() {
-        $message=USuperGlobalAccess::getPost('message');
-        $email=USuperGlobalAccess::getPost('email');
-        //bisogna fare in modo che venga inviata una mail all'admin oppure cambio e gli do 
-        //direttamente l'opzione di mandare una mail all'admin o facendo in modo che il pulsante chiami
-        //che si apra l'editor della mail, oppure dandogli le informazioni di contatto dell'admin
-    }
 }

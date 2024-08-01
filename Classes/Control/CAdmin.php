@@ -6,6 +6,7 @@ require __DIR__.'/../../vendor/autoload.php';
 use Classes\Entity\EStudent;
 use Classes\Entity\ESupportRequest;
 use Classes\Foundation\FPersistentManager;
+use Classes\Tools\TRequestType;
 use Classes\Tools\TStatusUser;
 use Classes\Tools\TType;
 use Classes\Utilities\USession;
@@ -111,28 +112,45 @@ class CAdmin
     public static function supportRequest()
     {
         $session=USession::getInstance();
-        $idUser=$session::getSessionElement('id');
-        $type=$session::getSessionElement('userType');
-        if ($type=='Student')
+        if (!$session::isSetSessionElement('id'))
         {
-            $type=TType::STUDENT;
-        }
-        else
-        {
-            $type=TType::OWNER;
-        }
-        $topic=USuperGlobalAccess::getPost('topic');
-        $message=USuperGlobalAccess::getPost('message');
-        $supportRequest=new ESupportRequest(0,$message,$topic,$idUser,$type);
-        $PM=FPersistentManager::getInstance();
-        $res=$PM->store($supportRequest);
-        if ($res)
-        {
-            header('Location:/UniRent/'.ucfirst($type->value).'/contact/sent');
-        }
-        else
-        {
-            header('Location:/UniRent/'.ucfirst($type->value).'/contact/fail');
+            $topic=TRequestType::BUG;
+            $message=USuperGlobalAccess::getPost('Message');
+            $supportRequest=new ESupportRequest(0,$message,$topic,null,null);
+            $PM=FPersistentManager::getInstance();
+            $res=$PM->store($supportRequest);
+            if ($res)
+            {
+                header('Location:/UniRent/User/contact/sent');
+            }
+            else
+            {
+                header('Location:/UniRent/User/contact/fail');
+            }
+        } else {
+            $idUser=$session::getSessionElement('id');
+            $type=$session::getSessionElement('userType');
+            if ($type=='Student')
+            {
+                $type=TType::STUDENT;
+            }
+            else
+            {
+                $type=TType::OWNER;
+            }
+            $topic=USuperGlobalAccess::getPost('topic');
+            $message=USuperGlobalAccess::getPost('Message');
+            $supportRequest=new ESupportRequest(0,$message,$topic,$idUser,$type);
+            $PM=FPersistentManager::getInstance();
+            $res=$PM->store($supportRequest);
+            if ($res)
+            {
+                header('Location:/UniRent/'.ucfirst($type->value).'/contact/sent');
+            }
+            else
+            {
+                header('Location:/UniRent/'.ucfirst($type->value).'/contact/fail');
+            }
         }
     }
     public static function ban(int $id, string $type)
@@ -157,8 +175,40 @@ class CAdmin
             #header('Location:/UniRent/Admin/home/error');
         }
     }
-    
-    /**
+    public static function studentEmailIssue() {
+        $mail = USuperGlobalAccess::getPost('emailIssue');
+        $supportRequest= new ESupportRequest(null, 'A student is trying to register with the following email, which is not accepted by the system: '. $mail, TRequestType::REGISTRATION, null, null);
+        $PM=FPersistentManager::getInstance();
+        $res=$PM->store($supportRequest);
+        if ($res)
+        {
+            header('Location:/UniRent/User/showRegistration/issueSent');
+        }
+        else
+        {
+            header('Location:/UniRent/User/showRegistration/error');
+        }
+    }
+    public static function removeBanRequest(string $username) {
+        $PM=FPersistentManager::getInstance();
+        $topic=TRequestType::REMOVEBAN;
+        $user= $PM->verifyUserUsername($username);
+        $message=USuperGlobalAccess::getPost('Message');
+        $supportRequest=new ESupportRequest(null,$message, $topic, $user['id'], $user['type']);
+        $res=$PM->store($supportRequest);
+        if ($res)
+        {
+            $view=new VError();
+            $view->error(600, $username, 'requestSent');
+        }
+        else
+        {
+            $view=new VError();
+            $view->error(600, $username, 'error');
+        }
+    }
+
+     /**
      * Method getStatistics
      * 
      * this method gets the statistics for administrator from DataBase
@@ -172,4 +222,5 @@ class CAdmin
         $result = $PM->getStatistics();
         print_r($result); #momentaneo, da collegare con view
     }
+
 }
