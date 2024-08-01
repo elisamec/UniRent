@@ -42,7 +42,9 @@
                         {if $error == 400}
                         <p class="lead text-gray-800 mb-5">Bad Request</p>
                         {else if $error == 600}
-                        <p class="lead text-gray-800 mb-5">This User Has Been Banned</p>
+                        <h6 class="lead text-gray-800 mb-5">This User Has Been Banned</h6>
+                        <p> The report that was sent to the administrator and therefore that has caused your profile to be banned (only after a thorough investigation had been conducted) is as follows:</p>
+                        <p>{$banReason}</p>
                         <p class="text-gray-500 mb-0">Please contact the administrator for more information</p>
                         <form class="flex-form" action="/UniRent/Admin/removeBanRequest/{$username}" method="post">
                             <textarea placeholder="Message" rows="5" id="comment" name="Message"></textarea>

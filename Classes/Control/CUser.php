@@ -28,7 +28,7 @@ class CUser
             if($student->getStatus()==TStatusUser::BANNED)
             {
                 $v=new VError();
-                $v->error(600);
+                $v->error(600, $student->getUsername(), 'null', $PM->getBanReason($student->getUsername()));
                 return;
             }
             else
@@ -42,7 +42,7 @@ class CUser
             if($owner->getStatus()==TStatusUser::BANNED)
             {
                 $v=new VError();
-                $v->error(600);
+                $v->error(600, $owner->getUsername(), 'null', $PM->getBanReason($owner->getUsername()));
                 return;
             }
             else
@@ -202,8 +202,9 @@ class CUser
                 $user = $PM->load("E$type", $result_username_array['id']);
                 if($user->getStatus()==TStatusUser::BANNED)
                 {
+                    $banReason=$PM->getBanReason($username);
                     $v=new VError();
-                    $v->error(600, $username);
+                    $v->error(600, $username, 'null', $banReason);
                     return;
                 }
                 $passwordIn=USuperGlobalAccess::getPost('password');
