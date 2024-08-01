@@ -19,6 +19,8 @@ class ESupportRequest {
     private TRequestType $topic;
     private int $idAuthor;
     private TType $authorType;
+    private ?string $supportReply=null;
+    private bool $statusRead=false;
     private TStatusSupport $status=TStatusSupport::WAITING;
     private static $entity = ESupportRequest::class;
 
@@ -57,6 +59,14 @@ class ESupportRequest {
     {
         return $this->status;
     }
+    public function getSupportReply(): ?string
+    {
+        return $this->supportReply;
+    }
+    public function getStatusRead(): bool
+    {
+        return $this->statusRead;
+    }
     public function setId(int $id): void {
         $this->id=$id;
     }
@@ -79,5 +89,13 @@ class ESupportRequest {
     public function setStatus(TStatusSupport $status): void
     {
         $this->status=$status;
+    }
+    public function setSupportReply(string $supportReply): void
+    {
+        $this->supportReply=$supportReply;
+    }
+    public function setStatusRead(bool $statusRead): void
+    {
+        $this->statusRead=$statusRead;
     }
 }
