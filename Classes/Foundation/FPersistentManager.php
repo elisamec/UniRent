@@ -686,10 +686,28 @@ class FPersistentManager {
         $result=$FR->remainingReviewStudentToStudent($id1,$id2);
         return $result;
     }
-
+    
+    /**
+     * Method getStatistics
+     *
+     * call the omonim method in Foundation to achive the statistics for the administrator
+     * @return array
+     */
     public function getStatistics():array
     {
         $result = FConnection::getInstance()->getStatistics();
+        return $result;
+    }
+
+    public function getBannedList():array
+    {
+        $result=array();
+        $FS=FStudent::getInstance();
+        $FO=FOwner::getInstance();
+        $result_student=$FS->getBannedStudents();
+        $result_owner=$FO->getBannedOwners();
+        $result['students']=$result_student;
+        $result['owners']=$result_owner;
         return $result;
     }
 }

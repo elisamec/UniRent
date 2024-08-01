@@ -510,6 +510,40 @@ class FStudent
             return $row['rateS'];
         }
     }
+    
+    /**
+     * Method getBannedStudents
+     *
+     * this method return an array of banned students from Data Base
+     * @return array
+     */
+    public function getBannedStudents():array
+    {
+        $result=array();
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $q="SELECT s.id AS ID
+                FROM student s 
+                WHERE s.`status`='banned'";
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->execute();
+            $db->commit();
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return $result;
+        }
+        $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($rows as $row)
+        {
+            $student=$this->load($row['ID']);
+            $result[]=$student;
+        }
+        return $result;
+    }
 }
   
 

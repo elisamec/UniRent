@@ -16,6 +16,7 @@ use Classes\Foundation\FOwner;
 use Classes\Foundation\FReview;
 use Classes\Utilities\UAccessUniversityFile;
 use Updater\Updater;
+use Classes\Control\CAdmin;
 
 # PARTE MATTEO cancellato materiale precedente 22/06/2024
 /*
@@ -160,6 +161,6 @@ $result=$FA->areThereFreePlaces(7,2024);
 
 print var_dump($result) ;*/
 
-$result=FConnection::getInstance()->getStatistics();
+$result=FPersistentManager::getInstance()->getBannedList();
 
 print_r($result);

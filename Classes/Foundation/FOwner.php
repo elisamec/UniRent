@@ -729,5 +729,39 @@ use PDOException;
         }
         return $result;   
     }
+
+    /**
+     * Method getBannedOwners
+     *
+     * this method return an array of banned owners from Data Base
+     * @return array
+     */
+    public function getBannedOwners():array
+    {
+        $result=array();
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $q="SELECT o.id AS ID
+                FROM owner o
+                WHERE o.`status`='banned'";
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->execute();
+            $db->commit();
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return $result;
+        }
+        $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($rows as $row)
+        {
+            $owner=$this->load($row['ID']);
+            $result[]=$owner;
+        }
+        return $result;
+    }
     
  }

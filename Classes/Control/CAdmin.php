@@ -222,5 +222,46 @@ class CAdmin
         $result = $PM->getStatistics();
         print_r($result); #momentaneo, da collegare con view
     }
+    
+    /**
+     * Method active
+     * 
+     * this method permits the administrator to make active a Owner or a Student
+     *
+     * @param string $type [Owner/Student]
+     * @param int $id [Owner/Student id]
+     *
+     * @return void
+     */
+    public static function active(string $type, int $id)
+    {
+        $PM = FPersistentManager::getInstance();
+        $user = $PM->load('E'.ucfirst($type), $id);
+        $user->setStatus(TStatusUser::ACTIVE);
+        $res = $PM->update($user);
+        if ($res)
+        {
+            header('Location:/UniRent/Admin/home/active');
+        }
+        else
+        {
+            header('Location:/UniRent/Admin/home/error');
+        }
+    }
+    
+    /**
+     * Method bannedList
+     * 
+     * this method return an associavie array with the list of Student and Owner banned
+     *
+     * @return void
+     */
+    public static function bannedList()
+    {
+        $view = new VAdmin();
+        $PM=FPersistentManager::getInstance();
+        $result=$PM->getBannedList();
+        print_r($result); #temporaneo bisogna mettere una vista
+    }
 
 }
