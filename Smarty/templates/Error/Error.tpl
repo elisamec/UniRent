@@ -19,6 +19,7 @@
 
     <!-- Custom styles for this template-->
     <link href="/UniRent/Smarty/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/UniRent/Smarty/css/modal.css" rel="stylesheet">
 
 </head>
 
@@ -102,15 +103,18 @@
         <!-- End of Content Wrapper -->
 <div class="resModal" id="successRequestModal">
     <div class="resModal-content">
+    <div class="row">
         <span class="resClose" id="closeSpan">&times;</span>
         {if $requestSuccess == 'requestSent'}
-        <h1>Request Sent Successfully</h1>
+        <h3 class="resModal-head">Request Sent Successfully</h3>
+        </div>
         <p>Your request has been sent successfully. Please wait for the administrator to examine your request. If the administrator thinks your ban can be removed, your account will be reactivated by tomorrow. Thank you for you patience.</p>
         {else if $requestSuccess == 'error'}
-        <h1>Error</h1>
+        <h3 class="resModal-head">Error</h3>
+        </div>
         <p>There was an error while sending your request. Please try again later.</p>
         {/if}
-        <button class="resCloseBtn" id="closeButton">Close</button>
+        <button class="cancelClass" id="closeButton">Understood</button>
     </div>
 </div>
 <script>

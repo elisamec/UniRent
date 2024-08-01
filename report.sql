@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Creato il: Lug 31, 2024 alle 19:52
--- Versione del server: 10.4.32-MariaDB
--- Versione PHP: 8.2.12
+-- Host: localhost
+-- Generation Time: Aug 01, 2024 at 04:40 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,23 +24,25 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `report`
+-- Table structure for table `report`
 --
 
 CREATE TABLE `report` (
   `id` int(11) NOT NULL,
   `description` varchar(500) NOT NULL,
+  `made` timestamp NOT NULL DEFAULT current_timestamp(),
+  `banDate` date DEFAULT NULL,
   `idStudent` int(11) DEFAULT NULL,
   `idOwner` int(11) NOT NULL,
   `idReview` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Indici per le tabelle scaricate
+-- Indexes for dumped tables
 --
 
 --
--- Indici per le tabelle `report`
+-- Indexes for table `report`
 --
 ALTER TABLE `report`
   ADD PRIMARY KEY (`id`),
@@ -49,21 +51,21 @@ ALTER TABLE `report`
   ADD KEY `idReview` (`idReview`);
 
 --
--- AUTO_INCREMENT per le tabelle scaricate
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT per la tabella `report`
+-- AUTO_INCREMENT for table `report`
 --
 ALTER TABLE `report`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Limiti per le tabelle scaricate
+-- Constraints for dumped tables
 --
 
 --
--- Limiti per la tabella `report`
+-- Constraints for table `report`
 --
 ALTER TABLE `report`
   ADD CONSTRAINT `idOwner` FOREIGN KEY (`idOwner`) REFERENCES `owner` (`id`),

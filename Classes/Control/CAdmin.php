@@ -196,6 +196,7 @@ class CAdmin
         $message=USuperGlobalAccess::getPost('Message');
         $supportRequest=new ESupportRequest(null,$message, $topic, $user['id'], $user['type']);
         $res=$PM->store($supportRequest);
+        $res=true;
         if ($res)
         {
             $view=new VError();
