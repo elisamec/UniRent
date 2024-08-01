@@ -17,8 +17,8 @@ class ESupportRequest {
     private ?int $id;
     private string $message;
     private TRequestType $topic;
-    private int $idAuthor;
-    private TType $authorType;
+    private ?int $idAuthor;
+    private ?TType $authorType;
     private ?string $supportReply=null;
     private bool $statusRead=false;
     private TStatusSupport $status=TStatusSupport::WAITING;
