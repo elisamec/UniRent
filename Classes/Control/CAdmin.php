@@ -6,6 +6,7 @@ require __DIR__.'/../../vendor/autoload.php';
 use Classes\Entity\EStudent;
 use Classes\Entity\ESupportRequest;
 use Classes\Foundation\FPersistentManager;
+use Classes\Tools\TRequestType;
 use Classes\Tools\TStatusUser;
 use Classes\Tools\TType;
 use Classes\Utilities\USession;
@@ -155,6 +156,20 @@ class CAdmin
         else
         {
             #header('Location:/UniRent/Admin/home/error');
+        }
+    }
+    public static function studentEmailIssue() {
+        $mail = USuperGlobalAccess::getPost('emailIssue');
+        $supportRequest= new ESupportRequest(null, 'A student is trying to register with the following email, which is not accepted by the system: '. $mail, TRequestType::REGISTRATION, null, null);
+        $PM=FPersistentManager::getInstance();
+        $res=$PM->store($supportRequest);
+        if ($res)
+        {
+            header('Location:/UniRent/User/showRegistration/issueSent');
+        }
+        else
+        {
+            header('Location:/UniRent/User/showRegistration/error');
         }
     }
 }
