@@ -6,6 +6,7 @@ use Classes\Entity\ECreditCard;
 use Classes\Entity\EReview;
 use Classes\Entity\EStudent;
 use Classes\Foundation\FAccommodation;
+use Classes\Foundation\FConnection;
 use Classes\Foundation\FCreditCard;
 use Classes\Foundation\FPersistentManager;
 use Classes\Foundation\FStudent;
@@ -159,5 +160,6 @@ $result=$FA->areThereFreePlaces(7,2024);
 
 print var_dump($result) ;*/
 
-$result=EReview::remainingReviewStudentToStudent(8,5);
-print $result;
+$result=FConnection::getInstance()->getStatistics();
+
+print_r($result);

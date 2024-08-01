@@ -686,5 +686,11 @@ class FPersistentManager {
         $result=$FR->remainingReviewStudentToStudent($id1,$id2);
         return $result;
     }
+
+    public function getStatistics():array
+    {
+        $result = FConnection::getInstance()->getStatistics();
+        return $result;
+    }
 }
 

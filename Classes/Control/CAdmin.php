@@ -157,4 +157,19 @@ class CAdmin
             #header('Location:/UniRent/Admin/home/error');
         }
     }
+    
+    /**
+     * Method getStatistics
+     * 
+     * this method gets the statistics for administrator from DataBase
+     *
+     * @return void
+     */
+    public static function getStatistics()
+    {
+        $view = new VAdmin();
+        $PM=FPersistentManager::getInstance();
+        $result = $PM->getStatistics();
+        print_r($result); #momentaneo, da collegare con view
+    }
 }
