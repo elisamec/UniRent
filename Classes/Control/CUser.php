@@ -203,7 +203,7 @@ class CUser
                 if($user->getStatus()==TStatusUser::BANNED)
                 {
                     $v=new VError();
-                    $v->error(600);
+                    $v->error(600, $username);
                     return;
                 }
                 $passwordIn=USuperGlobalAccess::getPost('password');

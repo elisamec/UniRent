@@ -28,7 +28,7 @@ class ESupportRequest {
         return $this->entity;
     }
 
-    public function __construct(?int $id, string $message, string | TRequestType $topic, ?int $idAuthor, ?TType $authorType) 
+    public function __construct(?int $id, string $message, string | TRequestType $topic, ?int $idAuthor, string | null| TType $authorType) 
     {
         $this->id=$id;
         $this->message=$message;
@@ -37,6 +37,9 @@ class ESupportRequest {
         }
         $this->topic=$topic;
         $this->idAuthor=$idAuthor;
+        if (is_string($authorType)) {
+            $authorType = TType::from(strtolower($authorType));
+        }
         $this->authorType=$authorType;
     }
     public function getId(): int {

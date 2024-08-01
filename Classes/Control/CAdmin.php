@@ -115,7 +115,7 @@ class CAdmin
         if (!$session::isSetSessionElement('id'))
         {
             $topic=TRequestType::BUG;
-            $message=USuperGlobalAccess::getPost('message');
+            $message=USuperGlobalAccess::getPost('Message');
             $supportRequest=new ESupportRequest(0,$message,$topic,null,null);
             $PM=FPersistentManager::getInstance();
             $res=$PM->store($supportRequest);
@@ -139,7 +139,7 @@ class CAdmin
                 $type=TType::OWNER;
             }
             $topic=USuperGlobalAccess::getPost('topic');
-            $message=USuperGlobalAccess::getPost('message');
+            $message=USuperGlobalAccess::getPost('Message');
             $supportRequest=new ESupportRequest(0,$message,$topic,$idUser,$type);
             $PM=FPersistentManager::getInstance();
             $res=$PM->store($supportRequest);
@@ -187,6 +187,24 @@ class CAdmin
         else
         {
             header('Location:/UniRent/User/showRegistration/error');
+        }
+    }
+    public static function removeBanRequest(string $username) {
+        $PM=FPersistentManager::getInstance();
+        $topic=TRequestType::REMOVEBAN;
+        $user= $PM->verifyUserUsername($username);
+        $message=USuperGlobalAccess::getPost('Message');
+        $supportRequest=new ESupportRequest(null,$message, $topic, $user['id'], $user['type']);
+        $res=$PM->store($supportRequest);
+        if ($res)
+        {
+            $view=new VError();
+            $view->error(600, $username, 'requestSent');
+        }
+        else
+        {
+            $view=new VError();
+            $view->error(600, $username, 'error');
         }
     }
 }
