@@ -82,7 +82,8 @@
             <div class="row">
                <div class="col-sm-12">
                   <div class="contact_taital_main">
-                     <h1 class="contact_taital">Request A Call Back</h1>
+                     <h1 class="contact_taital">App Issues</h1>
+                     <p> Please, feel free to contact us in case of any issues with the app. We are here to help you.</p>
                      <hr class="contact_border_main">
                   </div>
                </div>
@@ -93,9 +94,7 @@
                <div class="row">
                   <div class="col-md-6">
                      <div class="mail_section map_form_container">
-                        <form action="/UniRent/User/supportRequest" method="post" class="yourFormId">
-                        <input type="text" class="mail_text" placeholder="Name" name="Name">
-                        <input type="text" class="mail_text" placeholder="Email" name="Email">
+                        <form action="/UniRent/Admin/supportRequest" method="post" class="yourFormId">
                         <textarea class="message-bt" placeholder="Message" rows="5" id="comment" name="Message"></textarea>
                         <div class="send_bt"><button type="submit">Send Now</button></div>
                         </form>

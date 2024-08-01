@@ -112,28 +112,45 @@ class CAdmin
     public static function supportRequest()
     {
         $session=USession::getInstance();
-        $idUser=$session::getSessionElement('id');
-        $type=$session::getSessionElement('userType');
-        if ($type=='Student')
+        if (!$session::isSetSessionElement('id'))
         {
-            $type=TType::STUDENT;
-        }
-        else
-        {
-            $type=TType::OWNER;
-        }
-        $topic=USuperGlobalAccess::getPost('topic');
-        $message=USuperGlobalAccess::getPost('message');
-        $supportRequest=new ESupportRequest(0,$message,$topic,$idUser,$type);
-        $PM=FPersistentManager::getInstance();
-        $res=$PM->store($supportRequest);
-        if ($res)
-        {
-            header('Location:/UniRent/'.ucfirst($type->value).'/contact/sent');
-        }
-        else
-        {
-            header('Location:/UniRent/'.ucfirst($type->value).'/contact/fail');
+            $topic=TRequestType::BUG;
+            $message=USuperGlobalAccess::getPost('message');
+            $supportRequest=new ESupportRequest(0,$message,$topic,null,null);
+            $PM=FPersistentManager::getInstance();
+            $res=$PM->store($supportRequest);
+            if ($res)
+            {
+                header('Location:/UniRent/User/contact/sent');
+            }
+            else
+            {
+                header('Location:/UniRent/User/contact/fail');
+            }
+        } else {
+            $idUser=$session::getSessionElement('id');
+            $type=$session::getSessionElement('userType');
+            if ($type=='Student')
+            {
+                $type=TType::STUDENT;
+            }
+            else
+            {
+                $type=TType::OWNER;
+            }
+            $topic=USuperGlobalAccess::getPost('topic');
+            $message=USuperGlobalAccess::getPost('message');
+            $supportRequest=new ESupportRequest(0,$message,$topic,$idUser,$type);
+            $PM=FPersistentManager::getInstance();
+            $res=$PM->store($supportRequest);
+            if ($res)
+            {
+                header('Location:/UniRent/'.ucfirst($type->value).'/contact/sent');
+            }
+            else
+            {
+                header('Location:/UniRent/'.ucfirst($type->value).'/contact/fail');
+            }
         }
     }
     public static function ban(int $id, string $type)
