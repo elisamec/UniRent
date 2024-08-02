@@ -159,6 +159,14 @@ class EReview
     {
         $this->banned=true;
     }
+    public function unban():void
+    {
+        $this->banned=false;
+    }
+    public function unreport():void
+    {
+        $this->reported=false;
+    }
     public function __toString():string
     {
         $description = ($this->description !== null) ? $this->description : 'No description set';

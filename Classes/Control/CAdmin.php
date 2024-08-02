@@ -96,7 +96,7 @@ class CAdmin
                 header('Location:/UniRent/' . ucfirst($userType) . '/publicProfile/' . $student->getUsername() . '/error');
             }
         }
-        else
+        else if ($type == 'Owner')
         {
             $owner = $PM->load('EOwner', $id);
             $owner->setStatus('reported');
@@ -108,6 +108,18 @@ class CAdmin
             else
             {
                 header('Location:/UniRent/' . ucfirst($userType) . '/publicProfile/' . $owner->getUsername() . '/error');
+            }
+        } else if ($type == 'Review') {
+            $review = $PM->load('EReview', $id);
+            $review->report();
+            $res=$PM->update($review);
+            if ($res)
+            {
+                header('Location:/UniRent/' .$_SERVER['HTTP_REFERER'].'/reported');
+            }
+            else
+            {
+                header('Location:/UniRent/' . $_SERVER['HTTP_REFERER'] .'/error');
             }
         }
     }
