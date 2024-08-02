@@ -119,7 +119,7 @@
               
               {if $studentMailError === true}
               <input required="" class="input" type="email" name="email" id="email" placeholder="E-mail">
-               <p class="error">You need to insert a university mail. Please note that this issue may be caused by the fact that you haven't included student in your mail. If the problem persists, please:</p>
+               <p class="error">You need to insert a university mail. Please note that this issue may be caused by the fact that your university is not listed in our database, therefore feel free to contact the administrator to seek manual approval. Thank you for your patience.</p>
                <button class="login-button" type="button" onclick="emailFormOpen()">Contact Administrator</button>
                {elseif $mailDuplicateError === true}
                <input required="" class="input" type="email" name="email" id="email" placeholder="E-mail">
@@ -181,6 +181,8 @@
             <form action="/UniRent/Admin/studentEmailIssue" class="form" method="post">
                <div class="form-group">
                   <input required="" class="input" type="email" name="emailIssue" id="emailIssue" placeholder="E-mail">
+                  <input required="" class="input" type="text" name="university" id="university" placeholder="University Name">
+                  <input required="" class="input" type="text" name="city" id="city" placeholder="City where the University is Placed">
                </div>
                <div class="button-container">
                <button type="submit" class="login-button">Submit</button>
