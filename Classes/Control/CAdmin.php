@@ -14,6 +14,7 @@ use Classes\View\VAdmin;
 use Classes\Utilities\USuperGlobalAccess;
 use Classes\Utilities\UCookie;
 use Classes\View\VError;
+use Classes\Utilities\UAccessUniversityFile;
 
 class CAdmin
 {
@@ -265,6 +266,27 @@ class CAdmin
         $PM=FPersistentManager::getInstance();
         $result=$PM->getBannedList();
         print_r($result); #temporaneo bisogna mettere una vista
+    }
+
+    /**
+     * Method verifyEmail
+     * If an email isn't in the list of the universities, it will be added by admin
+     * 
+     * @param string $email [email to verify]
+     * @param string $uniName [name of the university]
+     * @param string $city [city of the university]
+     * 
+     * @return void
+     */
+    public static function verifyEmail(string $email, string $uniName, string $city):void{
+
+        $email = explode(".", str_replace("@", ".", $email));
+        $domain = array_slice($email, -2);
+        $domain = "www." . $domain[0] . "." . $domain[1];
+
+        $AUF=UAccessUniversityFile::getInstance();
+        $AUF->addElement($domain, $uniName, $city);        
+
     }
 
 }

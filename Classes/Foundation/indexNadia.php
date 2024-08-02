@@ -16,10 +16,11 @@
     use Classes\Foundation\FOwner;
     use Classes\Entity\EPhoto;
     use Classes\Entity\EStudent;
+    use Classes\Control\CAdmin;
     use DateTime;
    
 
-    $FP=FPersistentManager::getInstance();
+    /*$FP=FPersistentManager::getInstance();
     $FA=FAccommodation::getInstance();
     $FV=FVisit::getInstance();
 
@@ -34,7 +35,7 @@
     $visit = ['moday' => ["10:30", "11:20"], 'thursday' => ["20:40"]];
 
     $acc = new EAccommodation(14, $photo, "Casa", $a, 100, $st, "casetta bellissima v2", 3, 100, $visit, 30, false, true, true, false, true, 2);
-
+*/
     //$risultato = $FA->update($acc);
 
     //$id = $acc->getIdAccommodation(); 
@@ -63,9 +64,13 @@
 
     //$risultato = $FP->delete("EAccommodation", 18);
 
-    $risultato = $FV -> loadFutreById(5, "accommodation");
+    /*$risultato = $FV -> loadFutreById(5, "accommodation");
 
-    print_r ($risultato);
+    print_r ($risultato);*/
+
+    $a = new CAdmin();
+
+    $a -> verifyEmail("nadia@student.univaq.com", "Univaq", "L'Aquila");
 
 
 

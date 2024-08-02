@@ -44,6 +44,24 @@ class UAccessUniversityFile
     {
         self::$instance=null;
     }
+
+    /**
+     * Method addElement
+     * this method add an element to the json file
+     * 
+     * @param array $element
+     * @return void
+     * 
+     */
+    public function addElement(string $domain, string $uniName, string $city):void{
+
+        $element = [0, 0, $uniName, "", "Attivo  ", "", "", "", $city, "", "", "", $domain, ""];
+        $json=file_get_contents(self::$path);
+        $myarray=json_decode($json,true);
+        $myarray['records'][]=$element;
+        $json=json_encode($myarray);
+        file_put_contents(self::$path,$json);
+    }
     
     /**
      * Method getUniversityByCity
