@@ -763,5 +763,23 @@ use PDOException;
         }
         return $result;
     }
+
+    public function getSupportReply(int $id):array
+    {
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $q="SELECT s.id
+                FROM supportrequest s
+                WHERE idStudent IS NULL 
+                AND s.idOwner=:id
+                AND s.supportReply IS NULL
+                LOCK IN SHARE MODE";
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindParam(':id',$id,PDO::PARAM_INT);
+            
+        }
+    }
     
  }
