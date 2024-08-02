@@ -105,6 +105,15 @@
 
         </div>
         <!-- End of Content Wrapper -->
+        <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; UniRent 2024</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
 <div class="resModal" id="successRequestModal">
     <div class="resModal-content">
     <div class="row">
