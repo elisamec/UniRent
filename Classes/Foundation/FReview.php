@@ -72,7 +72,7 @@ class FReview {
         $rowRev = FReview::loadReview($id);
         [$authType, $author, $recipient] = FReview::loadSpecificReview($id, TType::tryFrom($rowRev['type']));
         $date=DateTime::createFromFormat('Y-m-d H:i:s',$rowRev['creationDate']);
-        $result=new EReview($rowRev['id'],$rowRev['title'],$rowRev['valutation'],$rowRev['description'], TType::tryFrom($rowRev['type']),$date, $authType, $author, $recipient);
+        $result=new EReview($rowRev['id'],$rowRev['title'],$rowRev['valutation'],$rowRev['description'], TType::tryFrom($rowRev['type']),$date, $authType, $author, $recipient, $rowRev['reported'], $rowRev['banned']);
         return $result;
     }
     //DA SISTEMARE
@@ -95,7 +95,7 @@ class FReview {
                     $author = $rev['authorOwner'];
                     $authType = TType::OWNER;
                 }
-                $result[]=new EReview($idReview,$rowRev['title'],$rowRev['valutation'],$rowRev['description'], $recipientType, $date, $authType, $author, $idRec);
+                $result[]=new EReview($idReview,$rowRev['title'],$rowRev['valutation'],$rowRev['description'], $recipientType, $date, $authType, $author, $idRec, $rowRev['reported'], $rowRev['banned']);
             }
         }
         else {
@@ -105,7 +105,7 @@ class FReview {
                 $date=DateTime::createFromFormat('Y-m-d H:i:s',$rowRev['creationDate']);
                 $authType = TType::STUDENT;
                 $author = $rev['idAuthor'];
-                $result[]=new EReview($idReview,$rowRev['title'],$rowRev['valutation'],$rowRev['description'], $recipientType, $date, $authType, $author, $idRec);
+                $result[]=new EReview($idReview,$rowRev['title'],$rowRev['valutation'],$rowRev['description'], $recipientType, $date, $authType, $author, $idRec, $rowRev['reported'], $rowRev['banned']);
             }
         }
         return $result;
@@ -249,8 +249,8 @@ class FReview {
         { 
             $db->exec('LOCK TABLES review WRITE');
             $db->beginTransaction();
-            $q='INSERT INTO review (title , valutation, description, type)';
-            $q=$q.' VALUES (:title, :valutation, :description, :type)';
+            $q='INSERT INTO review (title , valutation, description, type, reported, banned)';
+            $q=$q.' VALUES (:title, :valutation, :description, :type, :reported, :banned)';
             $stm=$db->prepare($q);
             $stm->bindValue(':title',$Review->getTitle(),PDO::PARAM_STR);
             $stm->bindValue(':valutation',$Review->getValutation(),PDO::PARAM_INT);
@@ -262,6 +262,8 @@ class FReview {
                 $stm->bindValue(':description', $description, PDO::PARAM_NULL);
             }
             $stm->bindValue(':type',$Review->getRecipientType()->value,PDO::PARAM_STR);
+            $stm->bindValue(':reported',$Review->isReported(),PDO::PARAM_BOOL);
+            $stm->bindValue(':banned',$Review->isBanned(),PDO::PARAM_BOOL);
             $stm->execute();
             $id=$db->lastInsertId();
             $db->commit();
@@ -340,7 +342,7 @@ class FReview {
         {
             $db->exec('LOCK TABLES review WRITE');
             $db->beginTransaction();
-            $q='UPDATE review SET title = :title, valutation = :valutation, description = :description WHERE id=:id';
+            $q='UPDATE review SET title = :title, valutation = :valutation, description = :description, reported= :reported, banned= :banned WHERE id=:id';
             $stm=$db->prepare($q);
             $stm->bindValue(':id', $Review->getId(), PDO::PARAM_INT);
             $stm->bindValue(':title',$Review->getTitle(),PDO::PARAM_STR);
@@ -352,6 +354,8 @@ class FReview {
             else {
                 $stm->bindValue(':description', $description, PDO::PARAM_NULL);
             }
+            $stm->bindValue(':reported',$Review->isReported(),PDO::PARAM_BOOL);
+            $stm->bindValue(':banned',$Review->isBanned(),PDO::PARAM_BOOL);
             $stm->execute();           
             $db->commit();
             $db->exec('UNLOCK TABLES');
@@ -406,20 +410,20 @@ class FReview {
                 $idReview = $oRev['idReview'];
                 $rowRev = FReview::loadReview($idReview);
                 $date=DateTime::createFromFormat('Y-m-d H:i:s',$rowRev['creationDate']);
-                $result[]=new EReview($idReview,$rowRev['title'],$rowRev['valutation'],$rowRev['description'], TType::OWNER, $date, $authorType, $idAuth, $oRev['idOwner']);
+                $result[]=new EReview($idReview,$rowRev['title'],$rowRev['valutation'],$rowRev['description'], TType::OWNER, $date, $authorType, $idAuth, $oRev['idOwner'], $rowRev['reported'], $rowRev['banned']);
             }
             foreach ($accommodationReviews as $aRev) {
                 $idReview = $aRev['idReview'];
                 $rowRev = FReview::loadReview($idReview);
                 $date=DateTime::createFromFormat('Y-m-d H:i:s',$rowRev['creationDate']);
-                $result[]=new EReview($idReview,$rowRev['title'],$rowRev['valutation'],$rowRev['description'], TType::ACCOMMODATION, $date, $authorType, $idAuth, $aRev['idAccommodation']);
+                $result[]=new EReview($idReview,$rowRev['title'],$rowRev['valutation'],$rowRev['description'], TType::ACCOMMODATION, $date, $authorType, $idAuth, $aRev['idAccommodation'], $rowRev['reported'], $rowRev['banned']);
             }
         }
         foreach ($studentReviews as $sRev) {
             $idReview = $sRev['idReview'];
             $rowRev = FReview::loadReview($idReview);
             $date=DateTime::createFromFormat('Y-m-d H:i:s',$rowRev['creationDate']);
-            $result[]=new EReview($idReview,$rowRev['title'],$rowRev['valutation'],$rowRev['description'], TType::STUDENT, $date, $authorType, $idAuth, $sRev['idStudent']);
+            $result[]=new EReview($idReview,$rowRev['title'],$rowRev['valutation'],$rowRev['description'], TType::STUDENT, $date, $authorType, $idAuth, $sRev['idStudent'], $rowRev['reported'], $rowRev['banned']);
         }
         return $result;
     }
@@ -546,6 +550,12 @@ class FReview {
         $result=$stm->fetch(PDO::FETCH_ASSOC);
         return (int)$result['RR'];
     }
+    /*
+    public function getReportedReviews():array
+    {
+        //da fare
+    }
+        */
 
 
 }
