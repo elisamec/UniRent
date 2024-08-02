@@ -2,3 +2,4 @@ vendor
 htaccess
 Smarty/templates_c
 .DS_Store
+day.php
