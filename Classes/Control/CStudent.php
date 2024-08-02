@@ -286,6 +286,7 @@ class CStudent{
                 $content=$review->getDescription();
             }
             $reviewsData[] = [
+                'id' => $review->getId(),
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
                 'userStatus' => $author->getStatus()->value,
@@ -397,6 +398,7 @@ class CStudent{
                 $content=$review->getDescription();
             }
             $reviewsData[] = [
+                'id' => $review->getId(),
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
                 'userStatus' => $author->getStatus()->value,
@@ -652,6 +654,7 @@ class CStudent{
                 $content=$review->getDescription();
             }
             $reviewsData[] = [
+                'id' => $review->getId(),
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
                 'userStatus' => $author->getStatus()->value,
@@ -701,6 +704,7 @@ class CStudent{
                 $content=$review->getDescription();
             }
             $reviewsData[] = [
+                'id' => $review->getId(),
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
                 'userStatus' => $author->getStatus()->value,

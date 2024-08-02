@@ -20,6 +20,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="/UniRent/Smarty/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/UniRent/Smarty/css/sb-admin-2.css" rel="stylesheet">
 
 </head>
 
@@ -306,8 +307,51 @@
                                     </div>
                                 </div>
                             </div>
-
+                            
                         </div>
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Banned Users</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Username</th>
+                                            <th>Type</th>
+                                            <th>Cause (user report)</th>
+                                            <th>Banned Since</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Username</th>
+                                            <th>Type</th>
+                                            <th>Cause (user report)</th>
+                                            <th>Banned Since</th>
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <tr>
+                                            <td>Tiger Nixon</td>
+                                            <td>@tiger</td>
+                                            <td>Owner</td>
+                                            <td>Yu are ugly</td>
+                                            <td>2011/04/25</td>
+                                            <td><a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"> Remove Ban</a></td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                     </div>
 
                 </div>
@@ -388,8 +432,15 @@
 <!-- Optional: Popper.js and Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+ <!-- Bootstrap core JavaScript-->
+    <script src="/UniRent/Smarty/templates/Admin/AdminVendor/jquery/jquery.min.js"></script>
+    <script src="/UniRent/Smarty/templates/Admin/AdminVendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-  
+    <!-- Core plugin JavaScript-->
+    <script src="/UniRent/Smarty/templates/Admin/AdminVendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/UniRent/Smarty/js/sb-admin-2.min.js"></script>
 
 <script src="/UniRent/Smarty/js/cookie.js"></script>
 <div class="modal" id="myModal">

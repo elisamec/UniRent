@@ -543,6 +543,7 @@ class COwner
                 $content=$review->getDescription();
             }
             $reviewsData[] = [
+                'id' => $review->getId(),
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
                 'userStatus' => $author->getStatus()->value,
@@ -670,6 +671,7 @@ class COwner
                 $content=$review->getDescription();
             }
             $reviewsData[] = [
+                'id' => $review->getId(),
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
                 'userStatus' => $author->getStatus()->value,
@@ -720,6 +722,7 @@ class COwner
                 $content=$review->getDescription();
             }
             $reviewsData[] = [
+                'id' => $review->getId(),
                 'title' => $review->getTitle(),
                 'username' => $author->getUsername(),
                 'userStatus' => $author->getStatus()->value,

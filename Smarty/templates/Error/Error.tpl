@@ -28,7 +28,7 @@
     <!-- Page Wrapper -->
 
         <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content-wrapper" class="d-flex-error flex-column">
 
             <!-- Main Content -->
             <div id="content">
@@ -96,16 +96,7 @@
                         {/if}
                         <a href="/UniRent/">&larr; Back to home</a>
                     </div>
-
-                </div>
-                <!-- /.container-fluid -->
-
-            </div>
-            <!-- End of Main Content -->
-
-        </div>
-        <!-- End of Content Wrapper -->
-        <!-- Footer -->
+                <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
@@ -114,6 +105,15 @@
                 </div>
             </footer>
             <!-- End of Footer -->
+                </div>
+                <!-- /.container-fluid -->
+            
+            </div>
+            <!-- End of Main Content -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+        
 <div class="resModal" id="successRequestModal">
     <div class="resModal-content">
     <div class="row">

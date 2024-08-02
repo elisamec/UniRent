@@ -194,8 +194,13 @@
 
                     // Insert the names of the elements of the review array
                     reviewElement.innerHTML = `
+                    <div class="row">
                         <h1 class="ReviewTitle">` + review.title + `</h1> <!-- Title of the review -->
-                        <div class="row">
+                        <div class="btn-cont2">
+                            <button class="delete_button" data-review-id="` + review.id + `">Report</button>
+                        </div>
+                    </div>
+                    <div class="row">
                             <div class="userSection">
                                 <div class="userIcon">
                                 <a href="/UniRent/Student/publicProfile/` + review.username + `" ` + style + `><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
@@ -222,6 +227,87 @@
     // Call the function to display reviews
     displayReviews(reviews);
     {/if}
+</script>
+<!-- HTML for the Modal -->
+<div id="reportModal" class="resModal">
+    <!-- Modal content -->
+    <div class="resModal-content">
+    <div class="row">
+        <span class="resClose">&times;</span>
+        <h2 class="resModal-head">Report Review</h2>
+    </div>
+        <form id="reportForm" action="" class="form" method="POST" enctype="multipart/form-data">
+            <label for="reportReason">Reason for report:</label><br>
+            <textarea id="reportReason" name="reportReason" rows="4" cols="50" oninput="checkInput()"></textarea><br><br>
+            <div class="btn-cont">
+                <button type="submit" id="confirmReport" class="disabled confirmClass" disabled>Submit</button>
+                <button type="button" id="cancelReport" class="cancelClass" onclick="cancelReport()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    const reportButtons = document.querySelectorAll('.delete_button');
+    const modal = document.getElementById("reportModal");
+    const span = document.querySelector(".resClose");
+    const confirmBtn = document.getElementById("confirmReport");
+    const cancelBtn = document.getElementById("cancelReport");
+    const form = document.getElementById("reportForm");
+    const textarea = document.getElementById("reportReason");
+
+    reportButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            event.preventDefault();
+            const reviewId = button.getAttribute('data-review-id'); // Get the owner ID from the button
+            form.action = "/UniRent/Admin/report/" + reviewId + "/Review"; // Dynamically set the form action
+            modal.style.display = "block";
+        });
+    });
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    };
+
+    // When the user clicks on the cancel button, close the modal
+    cancelBtn.onclick = function() {
+        cancelReport();
+    };
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
+});
+
+function checkInput() {
+    const submitBtn = document.getElementById("confirmReport");
+    const textarea = document.getElementById("reportReason");
+    if (textarea.value.trim() !== "") {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove("disabled");
+    } else {
+        submitBtn.disabled = true;
+        submitBtn.classList.add("disabled");
+    }
+}
+
+function cancelReport() {
+    const textarea = document.getElementById("reportReason");
+    const submitBtn = document.getElementById("confirmReport");
+    textarea.value = '';
+    submitBtn.disabled = true;
+    submitBtn.classList.add("disabled");
+    closeReportModal();
+}
+
+function closeReportModal() {
+    document.getElementById("reportModal").style.display = "none";
+}
 </script>
 <!-- footer section start -->
       <div class="footer_section">

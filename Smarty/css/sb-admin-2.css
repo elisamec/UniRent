@@ -11287,3 +11287,12 @@ body.sidebar-toggled footer.sticky-footer {
   display: flex;
   justify-content: space-between;
 }
+.d-flex-error {
+  display: flex !important;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
