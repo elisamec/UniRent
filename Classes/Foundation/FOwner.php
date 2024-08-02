@@ -764,7 +764,7 @@ use PDOException;
         return $result;
     }
 
-    public function getSupportReply(int $id):array
+    /*public function getSupportReply(int $id):array
     {
         $db=FConnection::getInstance()->getConnection();
         try
@@ -780,6 +780,6 @@ use PDOException;
             $stm->bindParam(':id',$id,PDO::PARAM_INT);
             
         }
-    }
+    }*/
     
  }

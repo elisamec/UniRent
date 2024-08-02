@@ -1000,11 +1000,11 @@ class CStudent{
         }
     }
 
-    public static function getSupportReply()
+    /*public static function getSupportReply()
     {
         $PM=FPersistentManager::getInstance();
         $session=USession::getInstance();
         $result=$PM->getSupportReply($session::getSessionElement('id'),$session::getSessionElement('type'));
         return $result;
-    }
+    }*/
 }

@@ -118,7 +118,11 @@ class FPersistentManager {
     public function verifyStudentEmail(string $email):bool
     {
         $AUF=UAccessUniversityFile::getInstance();
-        $mail_domain=substr(strrchr($email,"@student"),8);
+        
+        $email = explode(".", str_replace("@", ".", $email));
+        $domain = array_slice($email, -2);
+        $mail_domain = $domain[0] . "." . $domain[1];
+
         if(in_array($mail_domain,$AUF->getUniversityEmailList()))
         {
             return true;
@@ -719,7 +723,7 @@ class FPersistentManager {
         return $result;
     }
 
-    public function getSupportReply(int $id, string $type):array
+    /*public function getSupportReply(int $id, string $type):array
     {
         if($type=='owner')
         {
@@ -737,6 +741,6 @@ class FPersistentManager {
         {
             return array();
         }
-    }
+    }*/
 }
 
