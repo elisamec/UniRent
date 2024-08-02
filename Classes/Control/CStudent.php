@@ -621,6 +621,10 @@ class CStudent{
         $view = new VStudent();
         $PM=FPersistentManager::getInstance();
         $student=$PM->getStudentByUsername($username);
+        if ($student->getStatus() === TStatusUser::BANNED) {
+            $viewError=new VError();
+            $viewError->error(403);
+        }
         $reviews = $PM->loadByRecipient($student->getId(), TType::STUDENT); //va fatto il metodo nel PM
         $reviewsData = [];
         $student_photo=$student->getPhoto();
@@ -671,6 +675,10 @@ class CStudent{
         $view = new VStudent();
         $PM=FPersistentManager::getInstance();
         $student=$PM->getStudentByUsername($username);
+        if ($student->getStatus() === TStatusUser::BANNED) {
+            $viewError=new VError();
+            $viewError->error(403);
+        }
         $reviews = $PM->loadByRecipient($student->getId(), TType::STUDENT); //va fatto il metodo nel PM
         $reviewsData = [];
         $student_photo=$student->getPhoto();

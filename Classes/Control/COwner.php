@@ -636,6 +636,10 @@ class COwner
         $view = new VOwner();
         $PM=FPersistentManager::getInstance();
         $owner=$PM->getOwnerByUsername($username);
+        if ($owner->getStatus() === TStatusUser::BANNED) {
+            $viewError=new VError();
+            $viewError->error(403);
+        }
         $owner_photo=$owner->getPhoto();
         if(is_null($owner_photo)){}
         else
@@ -687,6 +691,10 @@ class COwner
         $view = new VOwner();
         $PM=FPersistentManager::getInstance();
         $owner=$PM->getOwnerByUsername($username);
+        if ($owner->getStatus() === TStatusUser::BANNED) {
+            $viewError=new VError();
+            $viewError->error(403);
+        }
         $owner_photo=$owner->getPhoto();
         if(is_null($owner_photo)){}
         else
