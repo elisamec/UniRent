@@ -379,7 +379,7 @@ window.onclick = (event) => {
 
 
 <!-- footer section start -->
-      <div class="footer_section layout_padding">
+      <div class="footer_section">
          <div class="container">
             <div class="row">
                <div class="col-md-4">
@@ -387,6 +387,9 @@ window.onclick = (event) => {
                   <p class="lorem_text">Created in 2024, UniRent has revolutionized the way students find their home away from home. Connecting students with trusted landlords, UniRent ensures a seamless rental experience.</p>
                </div>
                <hr></hr>
+               <div class="col-md-4">
+                  <span class="lorem_text">Copyright &copy; UniRent 2024</span>
+               </div>
                <div class="col-md-4">
                   <h3 class="footer_text">Useful Links</h3>
                   <div class="footer_menu">

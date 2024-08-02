@@ -74,7 +74,7 @@ class CAdmin
     {
         $session = USession::getInstance();
         $session::destroySession();
-        header('Location:/UniRent/Admin/login');
+        header('Location:/UniRent/User/home');
     }
     public static function report(int $id, string $type)
     {

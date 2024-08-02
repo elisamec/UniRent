@@ -38,6 +38,8 @@ class EReview
     private TType $authorType;
     private int $idAuthor;
     private int $idRecipient;
+    private bool $reported;
+    private bool $banned;
     private static $entity = EReview::class;
 
     /**
@@ -52,8 +54,10 @@ class EReview
      * @param TType $authorType
      * @param integer $idAuthor
      * @param integer $idRecipient
+     * @param boolean $reported
+     * @param boolean $banned
      */
-    public function __construct(?int $idReview, string $title, int $valutation, ?string $description, TType $type, DateTime $creationDate, TType $authorType, int $idAuthor, int $idRecipient) 
+    public function __construct(?int $idReview, string $title, int $valutation, ?string $description, TType $type, DateTime $creationDate, TType $authorType, int $idAuthor, int $idRecipient, bool $reported=false, bool $banned=false) 
     {
         $this->idReview=$idReview;
         $this->title=$title;
@@ -64,6 +68,8 @@ class EReview
         $this->authorType=$authorType;
         $this->idAuthor=$idAuthor;
         $this->idRecipient=$idRecipient;
+        $this->reported=$reported;
+        $this->banned=$banned;
     }
     /**
      * getEntity()
@@ -120,6 +126,14 @@ class EReview
     {
         return $this->creationDate;
     }
+    public function isReported():bool
+    {
+        return $this->reported;
+    }
+    public function isBanned():bool
+    {
+        return $this->banned;
+    }
     public function setTitle(string $newTitle):void
     {
         $this->title=$newTitle;
@@ -136,6 +150,14 @@ class EReview
         if ($this->idReview===null) {
             $this->idReview=$id;
         }
+    }
+   public function report():void
+    {
+        $this->reported=true;
+    }
+    public function ban():void
+    {
+        $this->banned=true;
     }
     public function __toString():string
     {
