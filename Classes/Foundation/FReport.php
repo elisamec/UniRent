@@ -82,7 +82,7 @@ class FReport {
             $db->beginTransaction();
             $stm=$db->prepare($q);
             $description=$report->getDescription();
-            $banDate=$report->getBanDate()->format('Y-m-d');
+            $banDate=$report->getBanDate()==null? null : $report->getBanDate()->format('Y-m-d');
             $idSubject=$report->getIdSubject();
             $type = $report->getSubjectType();
             $null=null;

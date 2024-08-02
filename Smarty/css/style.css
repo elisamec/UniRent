@@ -3108,3 +3108,11 @@ a.badge-danger.focus,a.badge-danger:focus{
   font-size: 80%;
   font-weight: 400;
 }
+#reportReason {
+    padding: 10px;
+}
+.reported-warning {
+    color: red;
+    font-weight: bold;
+    margin-left: 10px;
+}

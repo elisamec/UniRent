@@ -963,6 +963,7 @@ class CStudent{
                 'id'=> $review->getId(),
                 'type' => ucfirst($review->getRecipientType()->value),
                 'idRecipient' => $review->getIdRecipient(),
+                'reported' => $review->isReported()
             ];
         }
         $view->postedReview($reviewsData);

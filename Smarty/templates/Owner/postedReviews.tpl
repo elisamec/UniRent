@@ -219,77 +219,97 @@
     
     // Function to create and append reviews to the container
     function displayReviews(reviews) {
-        const container = document.getElementById('reviewsContainer');
-    
-        if (container) {
-            if (reviews.length === 0) {
-                container.innerHTML = '<h1 class="noRev">There are no reviews yet!</h1>';
-            } else {
-                reviews.forEach(review => {
-                    const reviewElement = document.createElement('div');
-                    reviewElement.className = 'review';
+    const container = document.getElementById('reviewsContainer');
 
-                    let style;
-                    if (review.userStatus ==='banned') {
-                        style = 'class="disabled"';
-                    } else {
-                        style = '';
-                    }
-    
-                    // Insert the names of the elements of the review array
-                    reviewElement.innerHTML = `
-                    <div class="row">
-                        <h1 class="ReviewTitle">` + review.title + `</h1> <!-- Title of the review -->
-                        <div class="btn-cont2">
-                            <button class="delete_button" data-review-id="` + review.id + `">Delete</button>
-                            <button class="edit_button" data-review-id="` + review.id + `">Edit</button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="userSection">
-                            <p> To: </p>
-                            <div class="userIcon">
-                                <a href="/UniRent/Owner/publicProfile/` + review.username + `" ` + style + `><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
-                            </div>
-                            <div class="username"><a href="/UniRent/Owner/publicProfile/` + review.username + `" ` + style + `>` + review.username + `</a></div> <!-- Username of the reviewer -->
-                            <p class="reviewRecipType">` + review.type + `</p>
-                        </div>
-                        <div class="col-md-11">
-                            <div class="stars">
-                                ` + generateStars(review.stars) + ` <!-- Star rating -->
-                            </div>
-                            <p>` + review.content + `</p> <!-- Content of the review -->
-                        </div>
-                    </div>
-                    `;
-    
-                    container.appendChild(reviewElement);
-                });
-
-                // Add event listeners for edit buttons
-                const editButtons = document.querySelectorAll('.edit_button');
-                editButtons.forEach(button => {
-                    button.addEventListener('click', (event) => {
-                        const reviewId = event.target.getAttribute('data-review-id');
-                        const review = reviews.find(r => r.id == reviewId);
-                        if (review) {
-                            // Populate form fields with review data
-                            document.getElementById('editReviewForm').action = '/UniRent/Review/edit/' + review.id;
-                            document.getElementById('editReviewForm').method = 'POST';
-                            document.getElementById('reviewTitle').value = review.title;
-                            document.getElementById('reviewContent').value = review.content;
-                            document.querySelector('input[name="rate"][value="' + review.stars + '"]').checked = true;
-
-                            // Display the modal
-                            document.getElementById('editModal').style.display = 'grid';
-                        }
-                    });
-                });
-            }
+    if (container) {
+        if (reviews.length === 0) {
+            container.innerHTML = '<h1 class="noRev">There are no reviews yet!</h1>';
         } else {
-            console.error("Container not found!"); // Debugging: Error if container is not found
+            reviews.forEach(review => {
+                const reviewElement = document.createElement('div');
+                reviewElement.className = 'review';
+
+                let style;
+                if (review.userStatus === 'banned') {
+                    style = 'class="disabled"';
+                } else {
+                    style = '';
+                }
+
+                let userStyle;
+                let hrefLink;
+                if (review.type === 'Accommodation') {
+                    userStyle = 'class="accomm"';
+                    hrefLink = '/UniRent/Student/accommodation/' + review.idRecipient;
+                } else {
+                    userStyle = 'class="userIcon"';
+                    hrefLink = '/UniRent/Student/publicProfile/' + review.username;
+                }
+
+                // Apply opacity and warning if reported
+                let reportedStyle = '';
+                let reportedWarning = '';
+                if (review.reported) {
+                    reportedStyle = 'style="opacity: 0.5;"';
+                    reportedWarning = '<h1 class="reported-warning" style="color: red; font-weight: bold; margin-left: 10px;">Reported</h1>';
+                }
+
+                // Insert the names of the elements of the review array
+                reviewElement.innerHTML = `
+                <div class="row" ` + reportedStyle + `>
+                    <h1 class="ReviewTitle">` + review.title + `</h1> <!-- Title of the review -->
+                    {literal}${reportedWarning}{/literal}
+                    <div class="btn-cont2">
+                        <button class="delete_button" data-review-id="` + review.id + `">Delete</button>
+                        <button class="edit_button" data-review-id="` + review.id + `">Edit</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="userSection">
+                        <p> To: </p>
+                        <div ` + userStyle + `>
+                            <a href=` + hrefLink + style + `><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
+                        </div>
+                        <div class="username"><a href=` + hrefLink + style + `>` + review.username + `</a></div> <!-- Username of the reviewer -->
+                        <p class="reviewRecipType">` + review.type + `</p>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="stars">
+                            ` + generateStars(review.stars) + ` <!-- Star rating -->
+                        </div>
+                        <p>` + review.content + `</p> <!-- Content of the review -->
+                    </div>
+                </div>
+                `;
+
+                container.appendChild(reviewElement);
+            });
+
+            // Add event listeners for edit buttons
+            const editButtons = document.querySelectorAll('.edit_button');
+            editButtons.forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const reviewId = event.target.getAttribute('data-review-id');
+                    const review = reviews.find(r => r.id == reviewId);
+                    if (review) {
+                        // Populate form fields with review data
+                        document.getElementById('editReviewForm').action = '/UniRent/Review/edit/' + review.id;
+                        document.getElementById('editReviewForm').method = 'POST';
+                        document.getElementById('reviewTitle').value = review.title;
+                        document.getElementById('reviewContent').value = review.content;
+                        document.querySelector('input[name="rate"][value="' + review.stars + '"]').checked = true;
+
+                        // Display the modal
+                        document.getElementById('editModal').style.display = 'grid';
+                    }
+                });
+            });
         }
+    } else {
+        console.error("Container not found!"); // Debugging: Error if container is not found
     }
+}
+
 
     // Close modal when clicking on the close button or outside the modal
     const modal = document.getElementById('editModal');

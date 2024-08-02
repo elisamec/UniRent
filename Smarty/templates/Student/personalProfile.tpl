@@ -150,6 +150,14 @@
          </div>
             <div class="col-md-6">
                   <div class="profile_info">
+                  {if $student->getStatus()->value == 'reported'}
+                  <div class="squareContainer">
+                     <div class="grey_square">
+                        <h1 class="title"> Warning: Your account has been reported. </h1>
+                        <h2> Please contact the administrator for further information. </h2>
+                     </div>
+                  </div>
+                  {/if}
                      <h2 class="profile_head">Hello, {$student->getName()} {$student->getSurname()}</h2>
                      <p>Your Username: {$student->getUsername()}</p>
                      <p>Your Email: {$student->getUniversityMail()}</p>

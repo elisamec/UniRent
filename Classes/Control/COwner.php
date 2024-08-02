@@ -777,7 +777,8 @@ class COwner
                 'content' => $content,
                 'userPicture' => $profilePic,
                 'id'=> $review->getId(),
-                'type' => ucfirst($review->getRecipientType()->value)
+                'type' => ucfirst($review->getRecipientType()->value),
+                'reported' => $review->isReported()
             ];
         }
         $view->postedReview($reviewsData);

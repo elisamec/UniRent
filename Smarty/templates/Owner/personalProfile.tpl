@@ -151,6 +151,14 @@
          </div>
             <div class="col-md-6">
                   <div class="profile_info">
+                  {if $owner->getStatus()->value == 'reported'}
+                  <div class="squareContainer">
+                     <div class="grey_square">
+                        <h1 class="title"> Warning: Your account has been reported. </h1>
+                        <h2> Please contact the administrator for further information. </h2>
+                     </div>
+                  </div>
+                  {/if}
                      <h2 class="profile_head">Hello, {$owner->getName()} {$owner->getSurname()}</h2>
                      <p>Your Username: {$owner->getUsername()}</p>
                      <p>Your Email: {$owner->getMail()}</p>

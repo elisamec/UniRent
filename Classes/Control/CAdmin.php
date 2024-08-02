@@ -3,6 +3,7 @@
 namespace Classes\Control;
 require __DIR__.'/../../vendor/autoload.php';
 
+use Classes\Entity\EReport;
 use Classes\Entity\EStudent;
 use Classes\Entity\ESupportRequest;
 use Classes\Foundation\FPersistentManager;
@@ -15,6 +16,7 @@ use Classes\Utilities\USuperGlobalAccess;
 use Classes\Utilities\UCookie;
 use Classes\View\VError;
 use Classes\Utilities\UAccessUniversityFile;
+use DateTime;
 
 class CAdmin
 {
@@ -80,14 +82,17 @@ class CAdmin
     {
         $PM = FPersistentManager::getInstance();
         $session = USession::getInstance();
-        $userType  = $session::getSessionElement('userType');     
+        $userType  = $session::getSessionElement('userType');
+        $reportReason=USuperGlobalAccess::getPost('reportReason');
         
         if ($type == 'Student')
         {
             $student = $PM->load('EStudent', $id);
             $student->setStatus('reported');
             $res=$PM->update($student);
-            if ($res)
+            $report= new EReport(null, $reportReason, new DateTime('today'), null, $id, TType::STUDENT);
+            $res2=$PM->store($report);
+            if ($res && $res2)
             {
                 header('Location:/UniRent/' . ucfirst($userType) . '/publicProfile/' . $student->getUsername() . '/reported');
             }
@@ -101,7 +106,9 @@ class CAdmin
             $owner = $PM->load('EOwner', $id);
             $owner->setStatus('reported');
             $res=$PM->update($owner);
-            if ($res)
+            $report= new EReport(null, $reportReason, new DateTime('today'), null, $id, TType::OWNER);
+            $res2=$PM->store($report);
+            if ($res && $res2)
             {
                 header('Location:/UniRent/' . ucfirst($userType) . '/publicProfile/' . $owner->getUsername() . '/reported');
             }
@@ -113,7 +120,9 @@ class CAdmin
             $review = $PM->load('EReview', $id);
             $review->report();
             $res=$PM->update($review);
-            if ($res)
+            $report= new EReport(null, $reportReason, new DateTime('today'), null, $id, TType::REVIEW);
+            $res2=$PM->store($report);
+            if ($res && $res2)
             {
                 header('Location:/UniRent/' .$_SERVER['HTTP_REFERER'].'/reported');
             }
