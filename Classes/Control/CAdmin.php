@@ -141,7 +141,7 @@ class CAdmin
             {
                 $type=TType::OWNER;
             }
-            $topic=USuperGlobalAccess::getPost('topic');
+            $topic=USuperGlobalAccess::getPost('Subject');
             $message=USuperGlobalAccess::getPost('Message');
             $supportRequest=new ESupportRequest(0,$message,$topic,$idUser,$type);
             $PM=FPersistentManager::getInstance();
