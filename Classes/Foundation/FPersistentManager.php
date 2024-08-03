@@ -778,5 +778,21 @@ class FPersistentManager {
             return array();
         }
     }
+    
+    /**
+     * Method get_Request_and_Report
+     * 
+     * return an associative array with Reports and Support Requests to the administrator
+     *
+     * @return array
+     */
+    public function get_Request_and_Report():array
+    {
+        $FReq=FSupportRequest::getInstance();
+        $FRep=FReport::getInstance();
+        $result['Request']=$FReq->getAllRequest();
+        $result['Report']=$FRep->getAllReport();
+        return $result;
+    }
 }
 

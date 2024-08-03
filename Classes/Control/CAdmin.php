@@ -295,5 +295,18 @@ class CAdmin
         $AUF->addElement($domain, $uniName, $city);        
 
     }
+    
+    /**
+     * Method get_Request_and_Report
+     *
+     * this method is used to get Reports and SupportRequests by the administrator
+     * 
+     */
+    public static function get_Request_and_Report()
+    {
+        $PM=FPersistentManager::getInstance();
+        $result=$PM->get_Request_and_Report();
+        return $result;
+    }
 
 }

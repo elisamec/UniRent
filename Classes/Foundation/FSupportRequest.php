@@ -172,4 +172,41 @@ class FSupportRequest {
             return false;
         }
     }
+    
+    /**
+     * Method getAllRequest
+     *
+     * this method return all the supportRequests
+     * @return array
+     */
+    public function getAllRequest():array
+    {
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $q="SELECT *
+                FROM supportrequest sr
+                WHERE sr.supportReply IS NULL
+                LOCK IN SHARE MODE ";
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->execute();
+            $db->commit();
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return array();
+        }
+        $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
+        $result=array();
+        foreach($rows as $row)
+        {
+            $sr=$this->load($row['id']);
+            $sr->setStatusRead($row['statusRead']);
+            $sr->setSupportReply($row['statusRead']);
+            $result[]=$sr;
+        }
+        return $result;
+    }
 }

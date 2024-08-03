@@ -186,4 +186,36 @@ class FReport {
         $report=new EReport($result['id'],$result['description'],new DateTime($result['made']),new DateTime($result['banDate']),$idSubject,$type);
         return $report;
     }
+    
+    /**
+     * Method getAllReport
+     *
+     * this method return all the reports
+     * @return array
+     */
+    public function getAllReport():array
+    {
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $q="SELECT id FROM report
+                LOCK IN SHARE MODE";
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->execute();
+            $db->commit();
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return [];
+        }
+        $result=$stm->fetchAll(PDO::FETCH_ASSOC);
+        foreach($result as $report)
+        {
+            $reports[]=$this->load($report['id']);
+        }
+        return $reports;
+    }
 }
+
