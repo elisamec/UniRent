@@ -4,6 +4,8 @@ namespace Classes\View;
 require __DIR__.'/../../vendor/autoload.php';
 
 use StartSmarty;
+use Classes\Entity\EStudent;
+use Classes\Entity\EOwner;
 
 class VAdmin
 {
@@ -29,5 +31,11 @@ class VAdmin
         $this->smarty->assign('usernameError', $usernameError);
         $this->smarty->assign('passwordError', $passwordError);
         $this->smarty->display('Admin/login.tpl');
+    }
+    public function profile(EStudent | EOwner $user, string $userType, array $reviewsData) {
+        $this->smarty->assign('user', $user);
+        $this->smarty->assign('reviewsData', $reviewsData);
+        $this->smarty->assign('userType', $userType);
+        $this->smarty->display('Admin/profile.tpl');
     }
 }

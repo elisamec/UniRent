@@ -519,7 +519,7 @@ class COwner
     }
      public static function reviews() {
         $view = new VOwner();
-        $reviews = FReview::getInstance()->loadByRecipient(1, TType::OWNER);
+        $reviews = $PM->loadByRecipient(1, TType::OWNER);
         $PM=FPersistentManager::getInstance();
         $reviewsData = [];
         
@@ -650,7 +650,7 @@ class COwner
         }
 
 
-        $reviews = FReview::getInstance()->loadByRecipient($owner->getId(), TType::OWNER);
+        $reviews = $PM->loadByRecipient($owner->getId(), TType::OWNER);
         $reviewsData = [];
         
         foreach ($reviews as $review) {
@@ -705,7 +705,7 @@ class COwner
         }
 
 
-        $reviews = FReview::getInstance()->loadByRecipient($owner->getId(), TType::OWNER);
+        $reviews = $PM->loadByRecipient($owner->getId(), TType::OWNER);
         $reviewsData = [];
         
         foreach ($reviews as $review) {

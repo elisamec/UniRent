@@ -17,6 +17,7 @@ use Classes\Utilities\UCookie;
 use Classes\View\VError;
 use Classes\Utilities\UAccessUniversityFile;
 use DateTime;
+use Classes\Entity\EPhoto;
 
 class CAdmin
 {
@@ -295,7 +296,60 @@ class CAdmin
         $AUF->addElement($domain, $uniName, $city);        
 
     }
-    
+        public static function profile(string $username)
+    {
+        $PM=FPersistentManager::getInstance();
+        $user=$PM->verifyUserUsername($username);
+        $userType=$user['type'];
+        $user=$PM->load('E'.ucfirst($userType), $user['id']);
+        $view=new VAdmin();
+        $user_photo=$user->getPhoto();
+        if(is_null($user_photo)){}
+        else
+        {
+            $user_photo_64=EPhoto::toBase64(array($user_photo));
+            $user->setPhoto($user_photo_64[0]);
+            #print_r($owner);
+        }
+        
+
+        $reviews = $PM->loadByRecipient($user->getId(), TType::tryFrom(strtolower($userType)));
+        $reviewsData = [];
+        
+        foreach ($reviews as $review) {
+            $author = $PM->load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
+            $status = $author->getStatus();
+            $profilePic = $author->getPhoto();
+            if($status === TStatusUser::BANNED){
+                $profilePic = "/UniRent/Smarty/images/BannedUser.png";
+            }
+            elseif ($profilePic === null) {
+                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+            }
+            else
+            {
+                $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
+            }
+            if ($review->getDescription()===null) {
+                $content='No description';
+            }
+            else
+            {
+                $content=$review->getDescription();
+            }
+            $reviewsData[] = [
+                'id' => $review->getId(),
+                'title' => $review->getTitle(),
+                'username' => $author->getUsername(),
+                'userStatus' => $author->getStatus()->value,
+                'stars' => $review->getValutation(),
+                'content' => $content,
+                'userPicture' => $profilePic,
+            ];
+        }
+        $view->profile($user, $userType, $reviewsData);
+    }
+
     /**
      * Method get_Request_and_Report
      *

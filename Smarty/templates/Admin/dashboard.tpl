@@ -160,7 +160,9 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
+                <div class="path">
+        <p id="breadcrumb"></p>
+    </div>
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Welcome, Admin!</h1>
@@ -342,11 +344,11 @@
                                         {foreach $banned as $user}
                                         <tr>
                                             <td>{$user['User']->getName()} {$user['User']->getSurname()}</td>
-                                            <td>{$user['User']->getUsername()}</td>
+                                            <td><a href="/UniRent/Admin/profile/{$user['User']->getUsername()}">{$user['User']->getUsername()}</a></td>
                                             <td>{$user['Type']}</td>
                                             <td>{$user['Report']->getDescription()}</td>
                                             <td>{$user['Report']->getBanDate()->format('Y-m-d')}</td>
-                                            <td><a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" onclick="removeBanModal({$user['User']->getId()}, {$suer['Type']})"> Remove Ban</a></td>
+                                            <td><a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" onclick="removeBanModal({$user['User']->getId()}, {$user['Type']})"> Remove Ban</a></td>
                                         </tr>
                                         {/foreach}
                                         

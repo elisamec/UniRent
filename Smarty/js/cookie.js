@@ -66,6 +66,7 @@ const customNamesPatterns = {
     '/UniRent/Owner/home': 'Home',
     '/UniRent/User/home': 'Home',
     '/UniRent/Student/home': 'Home',
+    '/UniRent/Admin/home': 'Dashboard',
     '/UniRent/Student/about': 'About Us',
     '/UniRent/Student/accommodation/*': accommodationName,
     '/UniRent/Student/publicProfile/*': username, // New pattern for username
@@ -106,6 +107,7 @@ const customNamesPatterns = {
     '/UniRent/Contract/showOwner/onGoing': 'OnGoing Contracts',
     '/UniRent/Contract/showOwner/future': 'Upcoming Contracts',
     '/UniRent/Contract/contractDetails/*': 'Contract Details',
+    '/UniRent/Admin/profile/*': username + '\'s Profile',
 };
 
 // Function to get custom name based on URL patterns
@@ -125,7 +127,7 @@ function getCustomName(url) {
 
 if (currentPage) {
     // Check if currentPage matches any of the specified URLs
-    const resetPages = ['/UniRent/Owner/home', '/UniRent/User/home', '/UniRent/Student/home'];
+    const resetPages = ['/UniRent/Owner/home', '/UniRent/User/home', '/UniRent/Student/home', '/UniRent/Admin/home'];
     if (resetPages.includes(currentPage)) {
         console.log("Current page matches reset criteria. Clearing visitedPages.");
         // Only keep the current page in visitedPages
