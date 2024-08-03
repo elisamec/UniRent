@@ -19,7 +19,6 @@
 
 * {
     box-sizing: border-box !important;
-    transition: ease all 0.5s;
 }
 
 html {
@@ -269,6 +268,9 @@ button {
 }
 .user_icon{
     padding-right: 15px;
+}
+.user_icon:hover i{
+    color: black;
 }
 
 .login_bt {
@@ -3081,14 +3083,16 @@ a.badge-danger.focus,a.badge-danger:focus{
 .fa-envelope {
     color: #ffffff;
 }
-.fa-envelope:hover {
-    color: #000000;
-}
 #messagesDropdown {
     position: relative;
     display: inline-block;
     text-decoration: none;
     color: inherit;
+}
+.nav-link[aria-expanded="true"] .fas, .nav-link:hover .fas {
+
+    transition: color 0.5s ease;
+    color: #000000;
 }
 .dropdownWidth {
     width: 300px;

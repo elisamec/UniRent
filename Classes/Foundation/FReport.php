@@ -153,14 +153,18 @@ class FReport {
             return false;
         }
     }
-    public function getLastBanReportByStudent(int $studentId):EReport | bool {
+    public function getLastBanReportBySubject(int $subjectId, TType | string $type):EReport | bool {
+        if (!is_string($type)) {
+            $type=$type->value;
+        }
+        $db=FConnection::getInstance()->getConnection();
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         try {
-            $q="SELECT * FROM report WHERE idStudent=:idStudent AND banDate IS NOT NULL ORDER BY banDate DESC LIMIT 1";
-            $db=FConnection::getInstance()->getConnection();
+            $q="SELECT * FROM report WHERE id". ucfirst($type)."=:idSubject AND banDate IS NOT NULL ORDER BY banDate DESC LIMIT 1";
             $db->exec('LOCK TABLE report READ');
             $db->beginTransaction();
             $stm=$db->prepare($q);
-            $stm->bindParam(':idStudent',$studentId,PDO::PARAM_INT);
+            $stm->bindParam(':idSubject',$subjectId,PDO::PARAM_INT);
             $stm->execute();
             $db->commit();
             $db->exec('UNLOCK TABLES');

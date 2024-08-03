@@ -14,8 +14,9 @@ class VAdmin
         $this->smarty = StartSmarty::configuration();
     }
 
-    public function home(array $stats){
+    public function home(array $stats, array $banned){
         $this->smarty->assign('stats', $stats);
+        $this->smarty->assign('banned', $banned);
         $this->smarty->display('Admin/dashboard.tpl');
     }
 

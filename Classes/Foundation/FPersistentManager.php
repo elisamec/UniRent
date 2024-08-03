@@ -7,6 +7,7 @@ use Classes\Entity;
 use Classes\Entity\ECreditCard;
 use Classes\Entity\EOwner;
 use Classes\Entity\EPhoto;
+use Classes\Entity\EReport;
 use Classes\Entity\EStudent;
 use Classes\Tools\TType;
 use Classes\Utilities\UAccessUniversityFile;
@@ -710,16 +711,41 @@ class FPersistentManager {
         $FS=FStudent::getInstance();
         $FO=FOwner::getInstance();
         $result_student=$FS->getBannedStudents();
+        $result=[];
+        foreach ($result_student as $student)
+        {
+            $result[]= ['User'=> $student, 'Type' =>'Student', 'Report'=> $this->getLastBanReport($student->getUsername())];
+        }
         $result_owner=$FO->getBannedOwners();
-        $result['students']=$result_student;
-        $result['owners']=$result_owner;
+        foreach ($result_owner as $owner)
+        {
+            $result[]= ['User'=> $owner,'Type' =>'Owner', 'Report'=>$this->getLastBanReport($owner->getUsername())];
+        }
+        usort($result, function($a, $b) {
+            $ad = new DateTime($a['Report']->getBanDate());
+            $bd = new DateTime($b['Report']->getBanDate());
+        
+            // Compare dates: newest first
+            return $bd <=> $ad; // Use spaceship operator for clean comparison
+        });
+        
         return $result;
     }
-    public function getBanReason(string $username):string {
+    public function getLastBanReport(string $username):EReport {
         $FRe=FReport::getInstance();
         $FS=FStudent::getInstance();
-        $student=$FS->getStudentByUsername($username);
-        $result=$FRe->getLastBanReportByStudent($student->getId())->getDescription();
+        $FO=FOwner::getInstance();
+        if ($FS->getStudentByUsername($username))
+        {
+            $subject=$FS->getStudentByUsername($username);
+            $type=TType::STUDENT;
+        }
+        else
+        {
+            $subject=$FO->getOwnerByUsername($username);
+            $type=TType::OWNER;
+        }
+        $result=$FRe->getLastBanReportBySubject($subject->getId(), $type);
         return $result;
     }
     

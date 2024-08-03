@@ -80,7 +80,7 @@
                             <div class="dropdownWidth dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="messagesDropdown">
                                 <h6 class="dropdown-header">
-                                    Message Center
+                                    Admin Replies
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     
@@ -271,6 +271,7 @@
                document.getElementById("myModal").style.display = "none";
                }
          </script>
+         
 <script>
         document.addEventListener("DOMContentLoaded", function() {
         const citySelect = document.getElementById("citySelect");

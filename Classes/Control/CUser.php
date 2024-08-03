@@ -28,7 +28,7 @@ class CUser
             if($student->getStatus()==TStatusUser::BANNED)
             {
                 $v=new VError();
-                $v->error(600, $student->getUsername(), 'null', $PM->getBanReason($student->getUsername()));
+                $v->error(600, $student->getUsername(), 'null', $PM->getLastBanReport($student->getUsername())->getDescription());
                 return;
             }
             else
@@ -42,7 +42,7 @@ class CUser
             if($owner->getStatus()==TStatusUser::BANNED)
             {
                 $v=new VError();
-                $v->error(600, $owner->getUsername(), 'null', $PM->getBanReason($owner->getUsername()));
+                $v->error(600, $owner->getUsername(), 'null', $PM->getLastBanReport($owner->getUsername())->getDescription());
                 return;
             }
             else
@@ -202,7 +202,7 @@ class CUser
                 $user = $PM->load("E$type", $result_username_array['id']);
                 if($user->getStatus()==TStatusUser::BANNED)
                 {
-                    $banReason=$PM->getBanReason($username);
+                    $banReason=$PM->getLastBanReport($username)->getDescription();
                     $v=new VError();
                     $v->error(600, $username, 'null', $banReason);
                     return;
