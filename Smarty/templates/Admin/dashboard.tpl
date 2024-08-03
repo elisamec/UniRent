@@ -59,7 +59,7 @@
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
                                 <h6 class="dropdown-header">
-                                    Alerts Center
+                                    Reports
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
@@ -94,7 +94,7 @@
                                         Spending Alert: We've noticed unusually high spending for your account.
                                     </div>
                                 </a>
-                                <a class="dropdown-item text-center smallMessages text-gray-500" href="#">Show All Alerts</a>
+                                <a class="dropdown-item text-center smallMessages text-gray-500" href="#">Show All Reports</a>
                             </div>
                         </li>
 
@@ -110,7 +110,7 @@
                             <div class="dropdownWidth dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="messagesDropdown">
                                 <h6 class="dropdown-header">
-                                    Message Center
+                                    Support Requests
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     
@@ -141,7 +141,7 @@
                                         <div class="smallMessages text-gray-500">Chicken the Dog · 2w</div>
                                     </div>
                                 </a>
-                                <a class="dropdown-item text-center smallMessages text-gray-500" href="#">Read More Messages</a>
+                                <a class="dropdown-item text-center smallMessages text-gray-500" href="#">Read More Requests</a>
                             </div>
                         </li>
 
