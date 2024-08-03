@@ -271,6 +271,7 @@
                document.getElementById("myModal").style.display = "none";
                }
          </script>
+         
 <script>
         document.addEventListener("DOMContentLoaded", function() {
         const citySelect = document.getElementById("citySelect");

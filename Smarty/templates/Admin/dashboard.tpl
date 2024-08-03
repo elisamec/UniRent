@@ -9,7 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>UniRent Admin - Dashboard</title>
+    <link rel="icon" href="/UniRent/Smarty/images/favicon.png" type="image/png">
 
     <!-- Custom fonts for this template-->
     <link href="AdminAdminVendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -338,14 +339,16 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                        {foreach $banned as $user}
                                         <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>@tiger</td>
-                                            <td>Owner</td>
-                                            <td>Yu are ugly</td>
-                                            <td>2011/04/25</td>
-                                            <td><a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"> Remove Ban</a></td>
+                                            <td>{$user['User']->getName()} {$user['User']->getSurname()}</td>
+                                            <td>{$user['User']->getUsername()}</td>
+                                            <td>{$user['Type']}</td>
+                                            <td>{$user['Report']->getDescription()}</td>
+                                            <td>{$user['Report']->getBanDate()->format('Y-m-d')}</td>
+                                            <td><a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" onclick="removeBanModal({$user['User']->getId()}, {$suer['Type']})"> Remove Ban</a></td>
                                         </tr>
+                                        {/foreach}
                                         
                                     </tbody>
                                 </table>
@@ -384,7 +387,7 @@
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog center" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
@@ -400,6 +403,33 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="removeBanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog center" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Remove Ban</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Are you sure you want to remove the ban?</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a id="removeBanButton" class="btn btn-primary" href="" data-dismiss="modal">Remove Ban</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function removeBanModal(userId, type) {
+            document.getElementById('removeBanButton').href = '/UniRent/Admin/active/' + type + '/' + userId;
+            $('#removeBanModal').modal('show');
+        }
+    </script>
+        
 
    <!-- jQuery library -->
 <script src="/UniRent/Smarty/templates/Admin/AdminVendor/jquery/jquery.min.js"></script>

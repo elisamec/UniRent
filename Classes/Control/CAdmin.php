@@ -23,8 +23,9 @@ class CAdmin
     public static function home(){
         $PM=FPersistentManager::getInstance();
         $stats=$PM->getStatistics();
+        $banned=$PM->getBannedList();
         $view = new VAdmin();
-        $view->home($stats);
+        $view->home($stats, $banned);
     }
 
     public static function login(){
@@ -272,21 +273,6 @@ class CAdmin
         {
             header('Location:/UniRent/Admin/home/error');
         }
-    }
-    
-    /**
-     * Method bannedList
-     * 
-     * this method return an associavie array with the list of Student and Owner banned
-     *
-     * @return void
-     */
-    public static function bannedList()
-    {
-        $view = new VAdmin();
-        $PM=FPersistentManager::getInstance();
-        $result=$PM->getBannedList();
-        print_r($result); #temporaneo bisogna mettere una vista
     }
 
     /**
