@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `supportrequest` (
   `id` int(11) NOT NULL,
   `message` varchar(1000) NOT NULL,
-  `topic` enum('other','appUse','bug', 'removeBanRequest') NOT NULL,
+  `topic` enum('other','appUse','bug', 'removeBanRequest', 'register') NOT NULL,
   `idStudent` int(11) DEFAULT NULL,
   `idOwner` int(11) DEFAULT NULL,
   `status` tinyint(1) NOT NULL,

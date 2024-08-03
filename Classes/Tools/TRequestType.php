@@ -4,7 +4,7 @@ interface RequestType extends \BackedEnum {}
 
 enum TRequestType:string implements RequestType 
 {
-    case REGISTRATION = 'registration';
+    case REGISTRATION = 'register';
     case USAGE = 'appUse';
     case BUG = 'bug';
     case OTHER = 'other';

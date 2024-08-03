@@ -11415,3 +11415,6 @@ body.sidebar-toggled footer.sticky-footer {
 .screenSize {
   min-height: 68vh;
 }
+.form-control {
+  margin-bottom: 20px;
+}

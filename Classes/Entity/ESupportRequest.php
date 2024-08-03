@@ -53,7 +53,7 @@ class ESupportRequest {
     {
         return $this->topic;
     }
-    public function getAuthorID(): int
+    public function getAuthorID(): ?int
     {
         return $this->idAuthor;
     }

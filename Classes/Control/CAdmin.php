@@ -18,6 +18,7 @@ use Classes\View\VError;
 use Classes\Utilities\UAccessUniversityFile;
 use DateTime;
 use Classes\Entity\EPhoto;
+use Classes\Tools\TStatusSupport;
 
 class CAdmin
 {
@@ -204,7 +205,9 @@ class CAdmin
     }
     public static function studentEmailIssue() {
         $mail = USuperGlobalAccess::getPost('emailIssue');
-        $supportRequest= new ESupportRequest(null, 'A student is trying to register with the following email, which is not accepted by the system: '. $mail, TRequestType::REGISTRATION, null, null);
+        $university = USuperGlobalAccess::getPost('university');
+        $city = USuperGlobalAccess::getPost('city');
+        $supportRequest= new ESupportRequest(null, 'A student is trying to register with the following email, which is not accepted by the system: '. $mail. '. This is the university: '. $university. ' of this city: '.$city, TRequestType::REGISTRATION, null, null);
         $PM=FPersistentManager::getInstance();
         $res=$PM->store($supportRequest);
         if ($res)
@@ -287,14 +290,14 @@ class CAdmin
      * 
      * @return void
      */
-    public static function verifyEmail(string $email, string $uniName, string $city):void{
+    private static function verifyEmail(string $email, string $uniName, string $city):void{
 
         $email = explode(".", str_replace("@", ".", $email));
         $domain = array_slice($email, -2);
         $domain = "www." . $domain[0] . "." . $domain[1];
 
         $AUF=UAccessUniversityFile::getInstance();
-        $AUF->addElement($domain, $uniName, $city);        
+        $AUF->addElement($domain, $uniName, $city);  
 
     }
         public static function profile(string $username)
@@ -373,7 +376,13 @@ class CAdmin
         $requests=[];
         $countRequests=0;
         foreach ($requestsArray as $request) {
+            if ($request->getAuthorID()!=null) {
             $author=$PM->getUsernameById($request->getAuthorID(), $request->getAuthorType());
+            }
+            else
+            {
+                $author='User';
+            }
             $requests[]=[
                 'Request'=>$request,
                 'author'=>$author
@@ -425,5 +434,38 @@ class CAdmin
         }
         $view=new VAdmin();
         $view->readMoreSupportRequest($requests, $count, $reports, $countReports, $countRequests);
+    }
+    public static function addToJson() {
+        $email = USuperGlobalAccess::getPost('email');
+        $uniName = USuperGlobalAccess::getPost('university');
+        $city = USuperGlobalAccess::getPost('city');
+        self::verifyEmail($email, $uniName, $city);
+        $id=USuperGlobalAccess::getPost('requestId');
+        $PM=FPersistentManager::getInstance();
+        $request=$PM->load('ESupportRequest', $id);
+        $request->setStatus(TStatusSupport::RESOLVED);
+        $request->setSupportReply('The email has been added to the list of the universities');
+        $res=$PM->update($request);
+        if ($res)
+        {
+            header('Location:/UniRent/Admin/home');
+        }
+        else
+        {
+            header('Location:/UniRent/Admin/home/error');
+        }
+    }
+    public static function deleteSupportRequest(int $id)
+    {
+        $PM=FPersistentManager::getInstance();
+        $res=$PM->delete('ESupportRequest', $id);
+        if ($res)
+        {
+            header('Location:/UniRent/Admin/home');
+        }
+        else
+        {
+            header('Location:/UniRent/Admin/home/error');
+        }
     }
 }

@@ -152,7 +152,7 @@ class FSupportRequest {
             #return false;
         }
     }
-    public function delete(ESupportRequest $supportrequest): bool {
+    public function delete(int $id): bool {
         $db=FConnection::getInstance()->getConnection();
         //$db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
         try
@@ -161,7 +161,7 @@ class FSupportRequest {
             $db->beginTransaction();
             $q='DELETE FROM supportrequest WHERE id= :id';
             $stm=$db->prepare($q);
-            $stm->bindValue(':id',$supportrequest->getId(), PDO::PARAM_INT);
+            $stm->bindValue(':id',$id, PDO::PARAM_INT);
             $stm->execute();    
             $db->commit();
             $db->exec('UNLOCK TABLES');

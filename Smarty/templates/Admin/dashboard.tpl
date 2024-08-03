@@ -411,12 +411,28 @@
                 <p><strong>Author:</strong> <span id="requestAuthor"></span></p>
                 <p><strong>Topic:</strong> <span id="requestTopic"></span></p>
                 <hr>
+
                 <!-- Text Area for Admin Reply (conditionally displayed) -->
                 <div class="form-group" id="replyContainer" style="display: none;">
                     <form action="/UniRent/Admin/supportReply" method="post">
                         <label for="adminReply">Your Reply:</label>
                         <textarea class="form-control" id="adminReply" name="answare" rows="5" placeholder="Type your reply here..." required></textarea>
                         <input type="hidden" name="requestId" value="">
+                    </form>
+                </div>
+
+                <!-- Additional Fields for 'registe' Topic (conditionally displayed) -->
+                <div class="form-group" id="additionalFieldsContainer" style="display: none;">
+                    <form id="additionalFieldsForm">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+                        <label for="university">University:</label>
+                        <input type="text" class="form-control" id="university" name="university" placeholder="Enter university" required>
+                        <label for="city">City:</label>
+                        <input type="text" class="form-control" id="city" name="city" placeholder="Enter city" required>
+                        <input type="hidden" name="requestId" value="">
+                        <button type="button" class="btn btn-primary" id="addToJson">Add to JSON</button>
+                        <button type="button" class="btn btn-secondary" id="deleteRequest">Delete Request</button>
                     </form>
                 </div>
             </div>
@@ -427,7 +443,6 @@
         </div>
     </div>
 </div>
-
 <!-- End of Request Detail Modal -->
 
 
@@ -502,11 +517,11 @@
          </script>
          <script>
     $(document).ready(function() {
-        $(' .requestItem').on('click', function() {
+        $('.requestItem').on('click', function() {
             var content = $(this).data('content');
             var author = $(this).data('author');
             var topic = $(this).data('topic');
-            var showForm = $(this).data('show-form'); // Example condition from the clicked item
+            var showForm = $(this).data('show-form') === '1'; // Convert to boolean
 
             // Set modal content
             $('#requestContent').text(content);
@@ -514,15 +529,43 @@
             $('#requestTopic').text(topic);
             $('input[name="requestId"]').val($(this).data('id'));
 
-    console.log(showForm);
-            // Show or hide the form and the send button based on the condition
-            if (showForm === true || showForm === 1) {
+            // Show or hide the reply form based on the request status
+            if (showForm) {
                 $('#replyContainer').show();
                 $('#submitReply').show(); // Show the "Send Reply" button
             } else {
                 $('#replyContainer').hide();
                 $('#submitReply').hide(); // Hide the "Send Reply" button
             }
+
+            // Show or hide additional fields based on the topic
+            if (topic === 'register') {
+                $('#additionalFieldsContainer').show();
+                $('#submitReply').hide(); // Hide the "Send Reply" button if topic is 'registe'
+            } else {
+                $('#additionalFieldsContainer').hide();
+                $('#submitReply').show(); // Show the "Send Reply" button for other topics
+            }
+        });
+        $('#deleteRequest').on('click', function() {
+            var requestId = $('input[name="requestId"]').val();
+            window.location.href = '/UniRent/Admin/deleteSupportRequest/' + requestId;
+        });
+
+        // Handle the 'Add to JSON' button click event
+        $('#addToJson').on('click', function() {
+            var email = $('#email').val();
+            var university = $('#university').val();
+            var city = $('#city').val();
+
+            // Example function to handle the collected data
+            console.log({
+                email: email,
+                university: university,
+                city: city
+            });
+
+            // Optionally, you can send this data to your server or process it further
         });
     });
 </script>
