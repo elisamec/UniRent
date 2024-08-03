@@ -519,6 +519,7 @@ class COwner
     }
      public static function reviews() {
         $view = new VOwner();
+        $PM = FPersistentManager::getInstance();
         $reviews = $PM->loadByRecipient(1, TType::OWNER);
         $PM=FPersistentManager::getInstance();
         $reviewsData = [];

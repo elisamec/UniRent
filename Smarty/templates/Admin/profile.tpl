@@ -9,7 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Blank</title>
+    <title>UniRent Admin - Profile</title>
+    <link rel="icon" href="/UniRent/Smarty/images/favicon.png" type="image/png">
 
     <!-- Custom fonts for this template-->
     <link href="/UniRent/Smarty/templates/Admin/AdminVendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
