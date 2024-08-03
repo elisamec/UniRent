@@ -125,11 +125,12 @@ class FSupportRequest {
     }
     public static function update(ESupportRequest $supportrequest):bool {
         $db=FConnection::getInstance()->getConnection();
+        $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
         try
         { 
             $db->exec('LOCK TABLES supportrequest WRITE');
             $db->beginTransaction();
-            $q='UPDATE supportrequest SET status = :status, supportReply=:supportReply statusRead = :statusRead WHERE id = :id';
+            $q='UPDATE supportrequest SET status = :status, supportReply=:supportReply, statusRead = :statusRead WHERE id = :id';
             $stm = $db->prepare($q);
             $stm->bindValue(':id', $supportrequest->getId(), PDO::PARAM_INT);
             if ($supportrequest->getSupportReply()!=null) {
@@ -147,7 +148,8 @@ class FSupportRequest {
         }
         catch (PDOException $e) {
             $db->rollBack();
-            return false;
+            print $e->getMessage();
+            #return false;
         }
     }
     public function delete(ESupportRequest $supportrequest): bool {

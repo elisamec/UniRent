@@ -308,5 +308,22 @@ class CAdmin
         $result=$PM->get_Request_and_Report();
         return $result;
     }
+    
+    /**
+     * Method supportReply
+     *
+     * this method permits the administrator to answer to a supportRequest
+     * @param int $id [supportRequest ID]
+     *
+     * @return void
+     */
+    public function supportReply(int $id)
+    {
+        $answare=USuperGlobalAccess::getPost('answare');
+        $PM=FPersistentManager::getInstance();
+        $result=$PM->SupportReply($id,$answare);
+        if ($result){header('Location:/UniRent/Admin/home');}
+        else {header('Location:/UniRent/Admin/home/error');}
+    }
 
 }

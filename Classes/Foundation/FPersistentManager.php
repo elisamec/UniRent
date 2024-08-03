@@ -794,5 +794,21 @@ class FPersistentManager {
         $result['Report']=$FRep->getAllReport();
         return $result;
     }
+
+    public function supportReply(int $id, string $ans ):bool
+    {
+        $FSP=FSupportRequest::getInstance();
+        $reply=$FSP->load($id);
+        $reply->setSupportReply($ans);
+        $result=$FSP->update($reply);
+        if($result)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
 
