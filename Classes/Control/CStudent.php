@@ -1012,12 +1012,20 @@ class CStudent{
             header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/full');
         }
     }
-
-    /*public static function getSupportReply()
+    
+    /**
+     * Method getSupportReply
+     * 
+     * this method return the support replies of the administrator
+     *
+     * @return void
+     */
+    public static function getSupportReply()
     {
         $PM=FPersistentManager::getInstance();
         $session=USession::getInstance();
         $result=$PM->getSupportReply($session::getSessionElement('id'),$session::getSessionElement('type'));
-        return $result;
-    }*/
+        #return $result;
+        print_r($result);
+    }
 }

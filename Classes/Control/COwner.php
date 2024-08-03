@@ -1070,4 +1070,20 @@ class COwner
         }
         $view->tenants($tenants, $type, $accommodationTitles, $rateT);
     }
+
+    /**
+     * Method getSupportReply
+     * 
+     * this method return the support replies of the administrator
+     *
+     * @return void
+     */
+    public static function getSupportReply()
+    {
+        $PM=FPersistentManager::getInstance();
+        $session=USession::getInstance();
+        $result=$PM->getSupportReply($session::getSessionElement('id'),$session::getSessionElement('type'));
+        #return $result;
+        print_r($result);
+    }
 }

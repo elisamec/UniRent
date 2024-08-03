@@ -96,7 +96,7 @@ class ESupportRequest {
     {
         $this->status=$status;
     }
-    public function setSupportReply(string $supportReply): void
+    public function setSupportReply(?string $supportReply): void
     {
         $this->supportReply=$supportReply;
     }

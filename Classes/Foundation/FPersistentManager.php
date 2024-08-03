@@ -722,8 +722,18 @@ class FPersistentManager {
         $result=$FRe->getLastBanReportByStudent($student->getId())->getDescription();
         return $result;
     }
-
-    /*public function getSupportReply(int $id, string $type):array
+    
+    /**
+     * Method getSupportReply
+     * 
+     * this method return all the owner's/student's support replies 
+     *
+     * @param int $id [student/owner ID]
+     * @param string $type [student/owner]
+     *
+     * @return array
+     */
+    public function getSupportReply(int $id, string $type):array
     {
         if($type=='owner')
         {
@@ -741,6 +751,6 @@ class FPersistentManager {
         {
             return array();
         }
-    }*/
+    }
 }
 

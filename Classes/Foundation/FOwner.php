@@ -763,23 +763,49 @@ use PDOException;
         }
         return $result;
     }
-
-    /*public function getSupportReply(int $id):array
+    
+    /**
+     * Method getSupportReply
+     * 
+     * this method return the owner's support replies
+     *
+     * @param int $id [explicite description]
+     *
+     * @return array
+     */
+    public function getSupportReply(int $id):array
     {
         $db=FConnection::getInstance()->getConnection();
         try
         {
-            $q="SELECT s.id
+            $q="SELECT s.id as id
                 FROM supportrequest s
                 WHERE idStudent IS NULL 
                 AND s.idOwner=:id
-                AND s.supportReply IS NULL
+                AND s.supportReply IS NOT NULL
                 LOCK IN SHARE MODE";
             $db->beginTransaction();
             $stm=$db->prepare($q);
             $stm->bindParam(':id',$id,PDO::PARAM_INT);
-            
+            $stm->execute();
+            $db->commit();
         }
-    }*/
+        catch(PDOException $e)
+        {
+            print $e->getMessage();
+            $db->rollBack();
+            return array();
+        }
+        $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
+        $result=array();
+        foreach($rows as $row)
+        {
+            $supportreply= FPersistentManager::getInstance()->load('ESupportRequest',$row['id']);
+            $supportreply->setStatusRead($row['statusRead']);
+            $supportreply->setSupportReply($row['supportReply']);
+            $result[]=$supportreply;
+        }
+        return $result;
+    }
     
  }

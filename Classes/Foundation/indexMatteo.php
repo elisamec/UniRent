@@ -161,6 +161,7 @@ $result=$FA->areThereFreePlaces(7,2024);
 
 print var_dump($result) ;*/
 
-$result=FPersistentManager::getInstance()->getBannedList();
+
+$result=FPersistentManager::getInstance()->getSupportReply(5,'student');
 
 print_r($result);

@@ -544,6 +544,49 @@ class FStudent
         }
         return $result;
     }
+    
+    /**
+     * Method getSupportReply
+     * 
+     * this method return the student support replies 
+     *
+     * @param int $id [student ID]
+     *
+     * @return array
+     */
+    public function getSupportReply(int $id):array
+    {
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $q="SELECT *
+                FROM supportrequest s
+                WHERE idOwner IS NULL 
+                AND s.idStudent=:id
+                AND s.supportReply IS NOT NULL
+                LOCK IN SHARE MODE";
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindParam(':id',$id,PDO::PARAM_INT);
+            $stm->execute();
+            $db->commit();
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return array();
+        }
+        $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
+        $result=array();
+        foreach($rows as $row)
+        {
+            $supportreply= FPersistentManager::getInstance()->load('ESupportRequest',$row['id']);
+            $supportreply->setStatusRead($row['statusRead']);
+            $supportreply->setSupportReply($row['supportReply']);
+            $result[]=$supportreply;
+        }
+        return $result;
+    }
 }
   
 
