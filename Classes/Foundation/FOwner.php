@@ -807,5 +807,26 @@ use PDOException;
         }
         return $result;
     }
+    public function getUsernameById(int $id): string | bool {
+        $db=FConnection::getInstance()->getConnection();
+        try
+        {
+            $db->exec('LOCK TABLES owner READ');
+            $db->beginTransaction();
+            $q='SELECT username FROM owner WHERE id=:id';
+            $stm=$db->prepare($q);
+            $stm->bindparam(':id', $id, PDO::PARAM_INT);
+            $stm->execute();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+        }
+        catch (PDOException $e) 
+        {
+            $db->rollBack();
+            return false;
+        }
+        $row=$stm->fetch(PDO::FETCH_ASSOC);
+        return $row['username'];
+    }
     
  }

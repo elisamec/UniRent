@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>UniRent Admin - Profile</title>
+    <title>UniRent Admin - Support Requests</title>
     <link rel="icon" href="/UniRent/Smarty/images/favicon.png" type="image/png">
 
     <!-- Custom fonts for this template-->
@@ -21,6 +21,7 @@
     <!-- Custom styles for this template-->
     <link href="/UniRent/Smarty/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="/UniRent/Smarty/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/UniRent/Smarty/css/pagination.css" rel="stylesheet">
 
 </head>
 
@@ -40,7 +41,7 @@
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <h1 class="h3 mb-0 text-gray-800">User Profile</h1>
+                    <h1 class="h3 mb-0 text-gray-800">Support Requests</h1>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -91,27 +92,12 @@
                                 <span class="badge badge-danger badge-counter">{$countRequests}</span>
                             </a>
                             <!-- Dropdown - Messages -->
-                            <div class="dropdownWidth dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            <div class="dropdownWidth dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" id="requestDropdown"
                                 aria-labelledby="messagesDropdown">
                                 <h6 class="dropdown-header">
                                     Support Requests
                                 </h6>
-                                {foreach from=$requests item=request}
-                                {if $smarty.foreach.requests.iteration <= 4}
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                    {if ($request['Request']->getStatus()->value == 0)}
-                                        <div class="font-weight-bold requestItem" 
-                                    {else}
-                                        <div class="requestItem"
-                                    {/if}
-                                        data-toggle="modal" data-target="#requestModal" data-content="{$request['Request']->getMessage()}" data-author="{$request['author']}" data-topic="{$request['Request']->getTopic()->value}" data-id="{$request['Request']->getId()}" data-show-form={$request['Request']->getStatus()->value == 0}>
-                                            <div class="text-truncate">{$request['Request']->getMessage()}</div>
-                                            <div class="smallMessages text-gray-500">{$request['author']} · {$request['Request']->getTopic()->value}</div>
-                                        </div>
-                                    </a>
-                                {/if}
-                                    {/foreach}
-                                <a class="dropdown-item text-center smallMessages text-gray-500" href="/UniRent/Admin/readMoreSupportRequest">Read More Requests</a>
+                                
                             </div>
                         </li>
 
@@ -129,67 +115,45 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <div class="container-fluid screenSize">
 
                     <!-- Page Heading -->
                     <div class="path">
-        <p id="breadcrumb"></p>
-    </div>
-                    <div class="profile">
-                        <div class="containerProf">
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <div class="profile_info">
-                                        <h2 class="profile_head">{$user->getName()} {$user->getSurname()}</h2>
-                                        <p>@{$user->getUsername()}</p>
-                                        {if {$userType} == 'Owner'}
-                                            <p>Phone Number: {$user->getPhoneNumber()}.</p>
-                                            <p> Number of Ads: {$user->getNumberOfAds()}.</p>
-                                        {else if {$userType} == 'Student'}
-                                            {if $user->getSex() === "M"}
-                                                <p>Sex: Male</p>
-                                            {else}
-                                                <p>Sex: Female</p>
-                                            {/if}
-                                            <p>Age: {$user->getAge()}.</p>
-                                        {/if}
-                                        <p> Average Rating: {$user->getAverageRating()}.</p>
-                                        <div class="col-md-3">
-                                        {if $user->getStatus()->value=='banned'}
-                                            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" onclick="removeBanModal({$user->getId()}, {$userType})"> Remove Ban</a>
-                                        {else}
-                                            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" onclick="banModal({$user->getId()}, {$userType})"> Ban</a>
-                                        {/if}
-                                        </div>
-                                </div>
-                                </div>
-                                <div class="col-md-2">
-                                <div class="container">
-                                    <div class="profile_pic">
-                                    {if $user->getPhoto() === null}
-                                        <img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon">
-                                    {else}
-                                        <img src="{$user->getShowPhoto()}" class="imageIcon">
-                                    {/if}
-                                    </div>
-                                    
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="Properties_taital_main layout">
-                            <h2 class="profile_head">Reviews</h2>
-                            </div>
-                        <div id="reviewsContainer"></div>
+                        <p id="breadcrumb"></p>
                     </div>
-
+                    <h1 class="h3 mb-2 text-gray-800">Here there are all of the support requests</h1>
+                    <ul class="request-list">
+                    </ul>
+                    
                 </div>
                 <!-- /.container-fluid -->
 
             </div>
             <!-- End of Main Content -->
-
+<div class="containerPagination">
+        <div class="paginate">
+            <button class="prevBtn">
+              <span class="prevBtn-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="24px" height="24px">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+</svg></span><span class="prevBtn-text">Prev</span>
+</button>
+            <div class="containerBtns">
+                <div class="leftContainer"></div>
+                <button class="activeBtn"></button>
+                <div class="rightContainer"></div>
+            </div>
+            <button class="nextBtn">
+              <span class="nextBtn-text">Next</span>
+              <span class="nextBtn-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="24px" height="24px">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+</svg>
+              </span>
+          </button>
+        </div>
+        
+        <div class="paginate-details"><span>-<span> <span class="count">1477 pages</span> <span>-<span></div>
+    </div>
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
@@ -230,25 +194,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade center" id="removeBanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog center" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Remove Ban</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Are you sure you want to remove the ban?</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a id="removeBanButton" class="btn btn-primary" href="" data-dismiss="modal">Remove Ban</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Request Detail Modal -->
+       <!-- Request Detail Modal -->
 <div class="modal fade centerSupport" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="requestModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -282,41 +228,9 @@
 
 <!-- End of Request Detail Modal -->
 
-
-    <script>
-        function removeBanModal(userId, type) {
-            document.getElementById('removeBanButton').href = '/UniRent/Admin/active/' + type + '/' + userId;
-            $('#removeBanModal').modal('show');
-        }
-    </script>
-    <div class="modal fade" id="banModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog center" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Remove Ban</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Are you sure you want to banthis user?</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a id="removeBanButton" class="btn btn-primary" href="" data-dismiss="modal">Ban</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function removeBanModal(userId, type) {
-            document.getElementById('removeBanButton').href = '/UniRent/Admin/ban/' + type + '/' + userId;
-            $('#removeBanModal').modal('show');
-        }
-    </script>
-
     <!-- jQuery library -->
 <script src="/UniRent/Smarty/templates/Admin/AdminVendor/jquery/jquery.min.js"></script>
+
 <!-- Bootstrap Bundle with Popper -->
 <script src="/UniRent/Smarty/templates/Admin/AdminVendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -325,6 +239,106 @@
 
 <!-- Custom scripts for all pages -->
 <script src="/UniRent/Smarty/js/sb-admin-2.min.js"></script>
+
+
+    {literal}
+    <script>
+// Assuming Smarty JSON data is available as a JavaScript variable
+var jsonData = {/literal}{$requests}{literal};
+
+// Function to populate the request list
+function populateRequestList(data) {
+    var container = document.querySelector('.request-list');
+    container.innerHTML = '';
+
+    data.forEach(function(item) {
+        var requestItem = document.createElement('div');
+        requestItem.className = 'request-item';
+        requestItem.setAttribute('data-toggle', 'modal');
+        requestItem.setAttribute('data-target', '#requestModal');
+        requestItem.setAttribute('data-content', item.message);
+        requestItem.setAttribute('data-author', item.author);
+        requestItem.setAttribute('data-topic', item.topic);
+        requestItem.setAttribute('data-id', item.id);
+        requestItem.setAttribute('data-show-form', item.status === 0);
+
+        if (item.status === 0) {
+            requestItem.classList.add('font-weight-bold');
+        }
+        requestItem.innerHTML = `
+            <div class="text-truncate">${item.message}</div>
+            <div class="smallMessages text-gray-500">${item.author} · ${item.topic}</div>
+        `;
+        container.appendChild(requestItem);
+    });
+}
+
+// Function to handle page button clicks
+function handlePageButtonClick(event) {
+    var pageNumber = parseInt(event.target.getAttribute('data-page'));
+    if (jsonData[pageNumber]) {
+        populateRequestList(jsonData[pageNumber]);
+    }
+}
+
+// Event listener for pagination buttons
+document.addEventListener('DOMContentLoaded', function() {
+    var paginationButtons = document.querySelectorAll('.containerBtns button');
+    paginationButtons.forEach(function(button) {
+        button.addEventListener('click', handlePageButtonClick);
+    });
+
+    // Initialize with the content of the first page
+    var firstPage = Object.keys(jsonData)[0];
+    if (firstPage) {
+        populateRequestList(jsonData[firstPage]);
+    }
+});
+</script>
+
+{/literal}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var maxItems = 4; // Maximum number of items to display
+        var requestDropdown = document.getElementById('requestDropdown');
+
+        // Iterate through requests and build the dropdown items
+        jsonData[1].slice(0, maxItems).forEach(function(request) {
+            var listItem = document.createElement('a');
+            listItem.className = 'dropdown-item d-flex align-items-center';
+            listItem.href = '#';
+            listItem.dataset.toggle = 'modal';
+            listItem.dataset.target = '#requestModal';
+            listItem.dataset.content = request.message;
+            listItem.dataset.author = request.author;
+            listItem.dataset.topic = request.topic;
+            listItem.dataset.id = request.id;
+            listItem.dataset.showForm = request.status === 0;
+
+            var div = document.createElement('div');
+            div.className = request.status === 0 ? 'font-weight-bold requestItem' : 'requestItem';
+
+            var messageDiv = document.createElement('div');
+            messageDiv.className = 'text-truncate';
+            messageDiv.textContent = request.message;
+
+            var smallMessagesDiv = document.createElement('div');
+            smallMessagesDiv.className = 'smallMessages text-gray-500';
+            smallMessagesDiv.textContent = request.author + ' · ' + request.topic;
+
+            div.appendChild(messageDiv);
+            div.appendChild(smallMessagesDiv);
+            listItem.appendChild(div);
+            requestDropdown.appendChild(listItem);
+        });
+        var readMoreItem = document.createElement('a');
+        readMoreItem.className = 'dropdown-item text-center smallMessages text-gray-500';
+        readMoreItem.href = '/UniRent/Admin/readMoreSupportRequest';
+        readMoreItem.textContent = 'Read More Requests';
+
+        requestDropdown.appendChild(readMoreItem);
+    });
+</script>
 
 
 <!-- Optional: jQuery slim version -->
@@ -342,7 +356,10 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/UniRent/Smarty/js/sb-admin-2.min.js"></script>
-
+    <script>
+    const countPage = {$count};
+    </script>
+<script src="/UniRent/Smarty/js/pagination.js"></script>
 <script src="/UniRent/Smarty/js/cookie.js"></script>
 <div class="modal" id="myModal">
       <div class"container-fluid">
@@ -365,71 +382,8 @@
                }
          </script>
          <script>
-    {if isset($reviewsData)}
-    const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
-
-    // Function to generate stars based on the rating
-    function generateStars(stars) {
-        let starElements = '';
-        for (let i = 0; i < 5; i++) {
-            if (i < stars) {
-                starElements += '<span class="fa fa-star or"></span>';
-            } else {
-                starElements += '<span class="fa fa-star"></span>';
-            }
-        }
-        return starElements;
-    }
-
-    // Function to create and append reviews to the container
-    function displayReviews(reviews) {
-        const container = document.getElementById('reviewsContainer');
-
-        if (container) {
-            if (reviews.length === 0) {
-                container.innerHTML = '<h4 class="noRev">There are no reviews yet!</h4>';
-            } else {
-                reviews.forEach(review => {
-                    const reviewElement = document.createElement('div');
-                    reviewElement.className = 'review';
-    
-
-                    // Insert the names of the elements of the review array
-                    reviewElement.innerHTML = `
-                    <div class="row">
-                        <h1 class="ReviewTitle">` + review.title + `</h1> <!-- Title of the review -->
-                    </div>
-                    <div class="row">
-                            <div class="userSection">
-                                <div class="userIcon">
-                                <a href="/UniRent/Admin/profile/` + review.username + `"><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
-                            </div>
-                            <div class="username"><a href="/UniRent/Admin/profile/` + review.username + `">` + review.username + `</a></div> <!-- Username of the reviewer -->
-                        </div>
-                            <div class="col-md-11">
-                                <div class="stars">
-                                    ` + generateStars(review.stars) + ` <!-- Star rating -->
-                                </div>
-                                <p>` + review.content + `</p> <!-- Content of the review -->
-                            </div>
-                        </div>
-                    `;
-
-                    container.appendChild(reviewElement);
-                });
-            }
-        } else {
-            console.error("Container not found!"); // Debugging: Error if container is not found
-        }
-    }
-
-    // Call the function to display reviews
-    displayReviews(reviews);
-    {/if}
-</script>
-<script>
     $(document).ready(function() {
-        $(' .requestItem').on('click', function() {
+        $('.request-item, .requestItem').on('click', function() {
             var content = $(this).data('content');
             var author = $(this).data('author');
             var topic = $(this).data('topic');
@@ -441,9 +395,9 @@
             $('#requestTopic').text(topic);
             $('input[name="requestId"]').val($(this).data('id'));
 
-    console.log(showForm);
+
             // Show or hide the form and the send button based on the condition
-            if (showForm === true || showForm === 1) {
+            if (showForm === true || showForm === 1) { 
                 $('#replyContainer').show();
                 $('#submitReply').show(); // Show the "Send Reply" button
             } else {
@@ -453,6 +407,7 @@
         });
     });
 </script>
+         
 </body>
 
 </html>

@@ -53,7 +53,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
+                                <span class="badge badge-danger badge-counter">{$countReports}</span>
                             </a>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -61,39 +61,25 @@
                                 <h6 class="dropdown-header">
                                     Reports
                                 </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fa fa-file-alt text-white"></i>
+                                {foreach from=$reports item=report}
+                                {if $smarty.foreach.reports.iteration <= 4}
+                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                        <div class="mr-3">
+                                            <div class="icon-circle bg-danger">
+                                                <i class="fa fa-exclamation-triangle text-white"></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div>
-                                        <div class="smallMessages text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fa fa-donate text-white"></i>
+                                        <div>
+                                            <div class="smallMessages text-gray-500">{$report->getMade()->format('F d, Y')}</div>
+                                            {if ($report->getBanDate() === null)}
+                                                <span class="font-weight-bold">{$report->getDescription()}</span>
+                                            {else}
+                                                <span>{$report->getDescription()}</span>
+                                            {/if}
                                         </div>
-                                    </div>
-                                    <div>
-                                        <div class="smallMessages text-gray-500">December 7, 2019</div>
-                                        $290.29 has been deposited into your account!
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fa fa-exclamation-triangle text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="smallMessages text-gray-500">December 2, 2019</div>
-                                        Spending Alert: We've noticed unusually high spending for your account.
-                                    </div>
-                                </a>
+                                    </a>
+                                {/if}
+                                    {/foreach}
                                 <a class="dropdown-item text-center smallMessages text-gray-500" href="#">Show All Reports</a>
                             </div>
                         </li>
@@ -104,7 +90,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-envelope fa-fw"></i>
                                 <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">7</span>
+                                <span class="badge badge-danger badge-counter">{$countRequests}</span>
                             </a>
                             <!-- Dropdown - Messages -->
                             <div class="dropdownWidth dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -112,36 +98,22 @@
                                 <h6 class="dropdown-header">
                                     Support Requests
                                 </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    
-                                    <div class="font-weight-bold">
-                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
-                                            problem I've been having.</div>
-                                        <div class="smallMessages text-gray-500">Emily Fowler · 58m</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div>
-                                        <div class="text-truncate">I have the photos that you ordered last month, how
-                                            would you like them sent to you?</div>
-                                        <div class="smallMessages text-gray-500">Jae Chun · 1d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div>
-                                        <div class="text-truncate">Last month's report looks great, I am very happy with
-                                            the progress so far, keep up the good work!</div>
-                                        <div class="smallMessages text-gray-500">Morgan Alvarez · 2d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div>
-                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
-                                            told me that people say this to all dogs, even if they aren't good...</div>
-                                        <div class="smallMessages text-gray-500">Chicken the Dog · 2w</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center smallMessages text-gray-500" href="#">Read More Requests</a>
+                                {foreach from=$requests item=request}
+                                {if $smarty.foreach.requests.iteration <= 4}
+                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                    {if ($request['Request']->getStatus()->value == 0)}
+                                        <div class="font-weight-bold requestItem" 
+                                    {else}
+                                        <div class="requestItem"
+                                    {/if}
+                                        data-toggle="modal" data-target="#requestModal" data-content="{$request['Request']->getMessage()}" data-author="{$request['author']}" data-topic="{$request['Request']->getTopic()->value}" data-id="{$request['Request']->getId()}" data-show-form={$request['Request']->getStatus->value==0}>
+                                            <div class="text-truncate">{$request['Request']->getMessage()}</div>
+                                            <div class="smallMessages text-gray-500">{$request['author']} · {$request['Request']->getTopic()->value}</div>
+                                        </div>
+                                    </a>
+                                {/if}
+                                    {/foreach}
+                                <a class="dropdown-item text-center smallMessages text-gray-500" href="/UniRent/Admin/readMoreSupportRequest">Read More Requests</a>
                             </div>
                         </li>
 
@@ -424,6 +396,40 @@
             </div>
         </div>
     </div>
+   <!-- Request Detail Modal -->
+<div class="modal fade centerSupport" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="requestModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="requestModalLabel">Support Request Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="requestContent"></p>
+                <p><strong>Author:</strong> <span id="requestAuthor"></span></p>
+                <p><strong>Topic:</strong> <span id="requestTopic"></span></p>
+                <hr>
+                <!-- Text Area for Admin Reply (conditionally displayed) -->
+                <div class="form-group" id="replyContainer" style="display: none;">
+                    <form action="/UniRent/Admin/supportReply" method="post">
+                        <label for="adminReply">Your Reply:</label>
+                        <textarea class="form-control" id="adminReply" name="answare" rows="5" placeholder="Type your reply here..." required></textarea>
+                        <input type="hidden" name="requestId" value="">
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" id="submitReply" form="replyForm" style="display: none;">Send Reply</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End of Request Detail Modal -->
+
 
     <script>
         function removeBanModal(userId, type) {
@@ -473,7 +479,6 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/UniRent/Smarty/js/sb-admin-2.min.js"></script>
-
 <script src="/UniRent/Smarty/js/cookie.js"></script>
 <div class="modal" id="myModal">
       <div class"container-fluid">
@@ -495,6 +500,32 @@
                document.getElementById("myModal").style.display = "none";
                }
          </script>
+         <script>
+    $(document).ready(function() {
+        $(' .requestItem').on('click', function() {
+            var content = $(this).data('content');
+            var author = $(this).data('author');
+            var topic = $(this).data('topic');
+            var showForm = $(this).data('show-form'); // Example condition from the clicked item
+
+            // Set modal content
+            $('#requestContent').text(content);
+            $('#requestAuthor').text(author);
+            $('#requestTopic').text(topic);
+            $('input[name="requestId"]').val($(this).data('id'));
+
+    console.log(showForm);
+            // Show or hide the form and the send button based on the condition
+            if (showForm === true || showForm === 1) {
+                $('#replyContainer').show();
+                $('#submitReply').show(); // Show the "Send Reply" button
+            } else {
+                $('#replyContainer').hide();
+                $('#submitReply').hide(); // Hide the "Send Reply" button
+            }
+        });
+    });
+</script>
 </body>
 
 </html>

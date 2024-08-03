@@ -68,7 +68,12 @@ class FReport {
                 $idSubject=$result['idReview'];
                 $type=TType::REVIEW;
             }
-            $report=new EReport($result['id'],$result['description'],new DateTime($result['made']),new DateTime($result['banDate']),$idSubject,$type);
+            if ($result['banDate']!=null) {
+                $banDate=new DateTime($result['banDate']);
+            } else {
+                $banDate=null;
+            }
+            $report=new EReport($result['id'],$result['description'],new DateTime($result['made']),$banDate,$idSubject,$type);
             return $report;
         } else {
             return false;
@@ -183,7 +188,12 @@ class FReport {
             $idSubject=$result['idReview'];
             $type=TType::REVIEW;
         }
-        $report=new EReport($result['id'],$result['description'],new DateTime($result['made']),new DateTime($result['banDate']),$idSubject,$type);
+        if ($result['banDate']!=null) {
+            $banDate=new DateTime($result['banDate']);
+        } else {
+            $banDate=null;
+        }
+        $report=new EReport($result['id'],$result['description'],new DateTime($result['made']),$banDate,$idSubject,$type);
         return $report;
     }
     
@@ -198,7 +208,18 @@ class FReport {
         $db=FConnection::getInstance()->getConnection();
         try
         {
-            $q="SELECT id FROM report
+            $q="SELECT id
+                FROM report
+                ORDER BY 
+                    bandate IS NULL DESC, 
+                    CASE 
+                        WHEN bandate IS NULL THEN made 
+                        ELSE NULL 
+                    END DESC,
+                    CASE 
+                        WHEN bandate IS NOT NULL THEN bandate 
+                        ELSE NULL 
+                    END ASC
                 LOCK IN SHARE MODE";
             $db->beginTransaction();
             $stm=$db->prepare($q);

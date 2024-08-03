@@ -25,8 +25,9 @@ class CAdmin
         $PM=FPersistentManager::getInstance();
         $stats=$PM->getStatistics();
         $banned=$PM->getBannedList();
+        [$reports, $requests, $countReports, $countRequests]=self::get_Request_and_Report();
         $view = new VAdmin();
-        $view->home($stats, $banned);
+        $view->home($stats, $banned, $requests, $reports, $countRequests, $countReports);
     }
 
     public static function login(){
@@ -299,6 +300,7 @@ class CAdmin
         public static function profile(string $username)
     {
         $PM=FPersistentManager::getInstance();
+        [$reports, $requests, $countReports, $countRequests]=self::get_Request_and_Report();
         $user=$PM->verifyUserUsername($username);
         $userType=$user['type'];
         $user=$PM->load('E'.ucfirst($userType), $user['id']);
@@ -347,7 +349,7 @@ class CAdmin
                 'userPicture' => $profilePic,
             ];
         }
-        $view->profile($user, $userType, $reviewsData);
+        $view->profile($user, $userType, $reviewsData,$reports, $requests, $countReports, $countRequests);
     }
 
     /**
@@ -356,11 +358,31 @@ class CAdmin
      * this method is used to get Reports and SupportRequests by the administrator
      * 
      */
-    public static function get_Request_and_Report()
+    private static function get_Request_and_Report()
     {
         $PM=FPersistentManager::getInstance();
         $result=$PM->get_Request_and_Report();
-        return $result;
+        $reports=$result['Report'];
+        $countReports=0;
+        foreach ($reports as $report) {
+            if ($report->getBanDate()===null) {
+                $countReports++;
+            }
+        }
+        $requestsArray=$result['Request'];
+        $requests=[];
+        $countRequests=0;
+        foreach ($requestsArray as $request) {
+            $author=$PM->getUsernameById($request->getAuthorID(), $request->getAuthorType());
+            $requests[]=[
+                'Request'=>$request,
+                'author'=>$author
+            ];
+            if ($request->getStatus()->value===0) {
+                $countRequests++;
+            }
+        }
+        return [$reports, $requests, $countReports, $countRequests];
     }
     
     /**
@@ -379,5 +401,29 @@ class CAdmin
         if ($result){header('Location:/UniRent/Admin/home');}
         else {header('Location:/UniRent/Admin/home/error');}
     }
-
+    public static function readMoreSupportRequest()
+    {   
+        $PM=FPersistentManager::getInstance();
+        [$reports, $requestArray, $countReports, $countRequests]=self::get_Request_and_Report();
+        $requests=[];
+        $count=1;
+        foreach ($requestArray as $request) {
+            $author=$request['author'];
+            $request=$request['Request'];
+            if (array_key_exists($count, $requests)) {
+                if (count($requests[$count])==10) {
+                    $count++;
+                }
+            }
+            $requests[$count][]=[
+                'id'=>$request->getId(),
+                'message'=>$request->getMessage(),
+                'topic'=>$request->getTopic()->value,
+                'author'=>$author,
+                'status'=>$request->getStatus()->value
+            ];
+        }
+        $view=new VAdmin();
+        $view->readMoreSupportRequest($requests, $count, $reports, $countReports, $countRequests);
+    }
 }

@@ -5668,6 +5668,9 @@ a.close.disabled {
   position: relative;
   top: 30%;
 }
+.centerSupport {
+  top: 23%;
+}
 
 .modal.fade .modal-dialog {
   transition: transform 0.3s ease-out;
@@ -11396,4 +11399,19 @@ body.sidebar-toggled footer.sticky-footer {
 }
 .userIcon:hover {
   border-color: #4e73df; /* Change the border color on hover */
+}
+.request-list {
+  list-style-type: none;
+  padding: 0;
+}
+.request-item {
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+.request-item:hover {
+  background-color: #f1f1f1;
+}
+.screenSize {
+  min-height: 68vh;
 }

@@ -4,6 +4,6 @@ interface StatusSupportEnum extends \BackedEnum {}
 
 enum TStatusSupport:int implements StatusSupportEnum
 {
-    case WAITING = 1;
-    case RESOLVED = 0;
+    case WAITING = 0;
+    case RESOLVED = 1;
 }

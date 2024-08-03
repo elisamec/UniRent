@@ -108,6 +108,7 @@ const customNamesPatterns = {
     '/UniRent/Contract/showOwner/future': 'Upcoming Contracts',
     '/UniRent/Contract/contractDetails/*': 'Contract Details',
     '/UniRent/Admin/profile/*': username + '\'s Profile',
+    '/UniRent/Admin/readMoreSupportRequest': 'Support Requests',
 };
 
 // Function to get custom name based on URL patterns

@@ -189,6 +189,7 @@ class FSupportRequest {
             $q="SELECT *
                 FROM supportrequest sr
                 WHERE sr.supportReply IS NULL
+                ORDER BY sr.status ASC
                 LOCK IN SHARE MODE ";
             $db->beginTransaction();
             $stm=$db->prepare($q);

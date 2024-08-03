@@ -14,6 +14,7 @@ use Classes\Utilities\UAccessUniversityFile;
 use Classes\Foundation\FUpdater;
 use Classes\View\VError;
 use Classes\Foundation\FReport;
+use Classes\Tools\TStatusSupport;
 use DateTime;
 
 
@@ -218,6 +219,21 @@ class FPersistentManager {
         $FS=FStudent::getInstance();
         $id=$FS->getIdByUsername($user);
         return $id;
+    }
+    public function getUsernameById(int $id, TType $type):?string
+    {
+        if ($type==TType::STUDENT)
+        {
+            $FS=FStudent::getInstance();
+            $username=$FS->getUsernameById($id);
+            return $username;
+        }
+        else
+        {
+            $FO=FOwner::getInstance();
+            $username=$FO->getUsernameById($id);
+            return $username;
+        }
     }
 
     public function getStudentPhotoById(int $id):?EPhoto
@@ -800,6 +816,7 @@ class FPersistentManager {
         $FSP=FSupportRequest::getInstance();
         $reply=$FSP->load($id);
         $reply->setSupportReply($ans);
+        $reply->setStatus(TStatusSupport::RESOLVED);
         $result=$FSP->update($reply);
         if($result)
         {
