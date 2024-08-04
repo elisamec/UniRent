@@ -1,5 +1,6 @@
 <?php
-require(__DIR__ . '/Smarty/Smarty.class.php');
+require(__DIR__ . '/../Smarty/Smarty.class.php');
+
 
 class StartSmarty{
     static function configuration(){

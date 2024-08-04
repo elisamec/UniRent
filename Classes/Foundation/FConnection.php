@@ -5,7 +5,7 @@ use PDO;
 use PDOException;
 //use const UniRent\{DB_HOST, DB_NAME, DB_PASS, DB_USER, SQL_FILE_PATH};
 
-require __DIR__ . '/../../config.php';
+use Configuration\Config;
 /**
  * The class FConnection provide to connect to database.
  * @author Matteo Maloni ('UniRent')
@@ -24,10 +24,10 @@ class FConnection
 	 * @var mixed
 	 */
 	private $db;
-	private static $hostname =DB_HOST;
-    private static $username =DB_USER;
-    private static $password =DB_PASS;
-    private static $dbname = DB_NAME;
+	private static $hostname =Config::DB_HOST;
+    private static $username =Config::DB_USER;
+    private static $password =Config::DB_PASS;
+    private static $dbname = Config::DB_NAME;
 
 	private static $ClassItSelf=null;
     	
