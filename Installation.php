@@ -1,12 +1,12 @@
 <?php
 
-namespace Installation;
+namespace UniRent;
 use PDO;
 use PDOException;
 
 require __DIR__ . '/config.php';
 /**
- * calass for checking if the db exist and if not create it
+ * class for checking if the db exist and if not create it
  */
 class Installation{
     public static function install(){
