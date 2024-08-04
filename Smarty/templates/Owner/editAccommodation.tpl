@@ -888,6 +888,7 @@ updateDurationSynchronization();
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
    <script src="/UniRent/Smarty/js/cookie.js"></script>
+   <script src="/UniRent/Smarty/js/cookie.js"></script>
    <!-- Request Detail Modal -->
 <div class="resModal" id="replyModal">
       <div class="resModal-content">
@@ -895,9 +896,14 @@ updateDurationSynchronization();
             <span class="resClose">&times;</span>
             <h2 class="resModal-head">Support Reply Details</h2>
          </div>
-                <p><strong>Your Request:</strong><span id="requestContent"></span></p>
-                <p><strong>Admin Reply:</strong> <span id="replyContent"></span></p>
-                <p><strong>Topic:</strong> <span id="requestTopic"></span></p>
+         <h4>Your Request</h4>
+                <p id="requestContent"></p>
+                  <hr>
+                  <h4>Admin Reply</h4>
+                <p id="replyContent"></p>
+                  <hr>
+                  <h4>Topic</h4>
+                <p id="requestTopic"></p>
                 <hr>
             <div class="btn-cont">
                 <button type="button" class="edit_btn" id="closeReply">Close</button>
@@ -909,6 +915,7 @@ updateDurationSynchronization();
 <script>
     $(document).ready(function() {
         $('.requestItem').on('click', function() {
+            replyModal.style.display = "block";
             var content = $(this).data('request');
             var reply = $(this).data('reply');
             var topic = $(this).data('topic');
