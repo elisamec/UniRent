@@ -1006,7 +1006,7 @@ class COwner
     {
         $PM=FPersistentManager::getInstance();
         $session=USession::getInstance();
-        $result=$PM->getSupportReply($session::getSessionElement('id'),$session::getSessionElement('type'));
+        $result=$PM->getSupportReply($session::getSessionElement('id'),$session::getSessionElement('userType'));
         $countReply=0;
         foreach ($result as $reply) {
             if ($reply->getStatusRead() === false) {
@@ -1015,10 +1015,10 @@ class COwner
         }
         return [$result, $countReply];
     }
-    public static function readSupportReply(int $id)
+    public static function readSupportReply(int |string $id)
     {
         $PM=FPersistentManager::getInstance();
-        $result=$PM->readSupportReply($id);
+        $result=$PM->readSupportReply((int)$id);
         $location=$_COOKIE['current_page'];
         if($result)
         {

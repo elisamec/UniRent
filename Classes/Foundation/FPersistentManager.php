@@ -777,13 +777,13 @@ class FPersistentManager {
      */
     public function getSupportReply(int $id, string $type):array
     {
-        if($type=='owner')
+        if($type=='Owner')
         {
             $FO=FOwner::getInstance();
             $result=$FO->getSupportReply($id);
             return $result;
         }
-        elseif($type=='student')
+        elseif($type=='Student')
         {
             $FS=FStudent::getInstance();
             $result=$FS->getSupportReply($id);

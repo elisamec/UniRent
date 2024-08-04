@@ -778,7 +778,7 @@ use PDOException;
         $db=FConnection::getInstance()->getConnection();
         try
         {
-            $q="SELECT s.id as id
+            $q="SELECT s.id as id, s.statusRead as statusRead, s.supportReply as supportReply
                 FROM supportrequest s
                 WHERE idStudent IS NULL 
                 AND s.idOwner=:id

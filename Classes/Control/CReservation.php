@@ -98,7 +98,8 @@ class CReservation
                 'reservations' => $studentList
             ];
         }
-        $view->showReservations($reservationData);
+        [$replies, $countReply] = self::getSupportReply();
+        $view->showReservations($reservationData, $replies, $countReply);
     }
     public static function reservationDetails(int $idReservation): void {
         $session = USession::getInstance();
@@ -226,7 +227,8 @@ class CReservation
                 ];
             }
             $view = new VOwner();
-            $view->reservationDetails($reservation, $student, self::formatDate($reservation->getMade()->setTime(0,0,0)), $reviewsData);
+            [$replies, $countReply] = self::getSupportReply();
+            $view->reservationDetails($reservation, $student, self::formatDate($reservation->getMade()->setTime(0,0,0)), $reviewsData, $replies, $countReply);
         }
     }
     private static function formatDate(DateTime $date): string {
@@ -265,5 +267,17 @@ class CReservation
             header('Location:/UniRent/Reservation/showOwner/null/error');
         }
     }
-
+    private static function getSupportReply(): array
+    {
+        $PM=FPersistentManager::getInstance();
+        $session=USession::getInstance();
+        $result=$PM->getSupportReply($session::getSessionElement('id'),$session::getSessionElement('userType'));
+        $countReply=0;
+        foreach ($result as $reply) {
+            if ($reply->getStatusRead() === false) {
+                $countReply++;
+            }
+        }
+        return [$result, $countReply];
+    }
 }

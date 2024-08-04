@@ -18,7 +18,7 @@ class VOwner {
         $this->smarty = StartSmarty::configuration();
     }
     private function assignReplies(array $replies, int $countReply) {
-        $this->smarty->assign('replies', json_encode($replies));
+        $this->smarty->assign('replies', $replies);
         $this->smarty->assign('countReply', $countReply);
     }
 

@@ -151,7 +151,8 @@ class CContract
                 'contracts' => $studentList
             ];
         }
-        $view->showContracts($contractsData, $kind);
+        [$replies, $countReply] = self::getSupportReply();
+        $view->showContracts($contractsData, $kind, $replies, $countReply);
     }
     public static function contractDetails(int $idContract) {
         $session = USession::getInstance();
@@ -266,8 +267,9 @@ class CContract
                     'userPicture' => $profilePic,
                 ];
             }
+            [$replies, $countReply] = self::getSupportReply();
             $view = new VOwner();
-            $view->contractDetails($contract, $student, $reviewsData);
+            $view->contractDetails($contract, $student, $reviewsData, $replies, $countReply);
         }
     }
     
@@ -330,6 +332,20 @@ class CContract
                 'contracts' => $studentList
             ];
         }
-        $view->showContracts($contractsData, 'onGoing');
+        [$replies, $countReply] = self::getSupportReply();
+        $view->showContracts($contractsData, 'onGoing', $replies, $countReply);
+    }
+    private static function getSupportReply(): array
+    {
+        $PM=FPersistentManager::getInstance();
+        $session=USession::getInstance();
+        $result=$PM->getSupportReply($session::getSessionElement('id'),$session::getSessionElement('userType'));
+        $countReply=0;
+        foreach ($result as $reply) {
+            if ($reply->getStatusRead() === false) {
+                $countReply++;
+            }
+        }
+        return [$result, $countReply];
     }
 }
