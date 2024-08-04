@@ -1047,13 +1047,15 @@ class CStudent{
     {
         $PM=FPersistentManager::getInstance();
         $result=$PM->readSupportReply($id);
+        $location=$_COOKIE['current_page'];
         if($result)
         {
-            http_response_code(200);
+            header('Location:'.$location);
         }
         else
         {
-            http_response_code(500);
+            $view=new VError();
+            $view->error(500);
         }
     }
 }

@@ -309,24 +309,24 @@
         <div class="modal-dialog center" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Remove Ban</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Ban</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Are you sure you want to banthis user?</div>
+                <div class="modal-body">Are you sure you want to ban this user?</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a id="removeBanButton" class="btn btn-primary" href="" data-dismiss="modal">Ban</a>
+                    <a id="banButton" class="btn btn-primary" href="" data-dismiss="modal">Ban</a>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        function removeBanModal(userId, type) {
-            document.getElementById('removeBanButton').href = '/UniRent/Admin/ban/' + type + '/' + userId;
-            $('#removeBanModal').modal('show');
+        function BanModal(userId, type) {
+            document.getElementById('banButton').href = '/UniRent/Admin/ban/' + type + '/' + userId;
+            $('#banModal').modal('show');
         }
     </script>
 
