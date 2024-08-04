@@ -311,18 +311,18 @@ displayAccommodations(accommodationsActive, accommodationsInactive);
             var content = $(this).data('request');
             var reply = $(this).data('reply');
             var topic = $(this).data('topic');
+            var requestId = $(this).data('id');
+            $('#closeReply').on('click', function() {
+            window.location.href = '/UniRent/Owner/readSupportReply/' + requestId;
+        });
 
             // Set modal content
             $('#requestContent').text(content);
             $('#replyContent').text(reply);
             $('#requestTopic').text(topic);
-            $('input[name="requestId"]').val($(this).data('id'));
         });
 
-        $('#closeReply').on('click', function() {
-            var requestId = $('input[name="requestId"]').val();
-            window.location.href = '/UniRent/Owner/readSupportReply/' + requestId;
-        });
+        
     });
 </script>
    </body>
