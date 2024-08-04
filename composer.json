@@ -12,7 +12,8 @@
             "Classes\\Control\\" : "Classes/Control",
             "Classes\\Tools\\" : "Classes/Tools",
             "UniRent\\":"UniRent/" ,
-            "Updater\\": "Updater/"
+            "Updater\\": "Updater/",
+            "Installation\\": "Installation/"
         }
 
     },
