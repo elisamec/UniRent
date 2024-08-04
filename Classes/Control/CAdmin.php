@@ -185,22 +185,29 @@ class CAdmin
     {
         $PM = FPersistentManager::getInstance();
         $user=$PM->load('E'.ucfirst($type), $id);
-        $user->setStatus(TStatusUser::BANNED);
-        if (ucfirst($type)==='Owner') {
+        if (ucfirst($type)==='Student')
+        {
+            $user->setStatus(TStatusUser::BANNED);
+        }
+        else if (ucfirst($type)==='Owner')
+        {
+            $user->setStatus(TStatusUser::BANNED);
             $accommodationArray=$PM->loadAccommodationsByOwner($id);
             foreach ($accommodationArray as $accommodation) {
                 $accommodation->setStatus(false);
                 $PM->update($accommodation);
             }
+        } else if (ucfirst($type)==='Review') {
+            $user->ban();
         }
         $res=$PM->update($user);
         if ($res)
         {
-            #header('Location:/UniRent/Admin/home/banned');
+            header('Location:/UniRent/Admin/home/banned');
         }
         else
         {
-            #header('Location:/UniRent/Admin/home/error');
+            header('Location:/UniRent/Admin/home/error');
         }
     }
     public static function studentEmailIssue() {
