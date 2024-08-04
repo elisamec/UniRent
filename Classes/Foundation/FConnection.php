@@ -4,6 +4,7 @@ namespace Classes\Foundation;
 use PDO;
 use PDOException;
 
+require __DIR__ . '/../../config.php';
 /**
  * The class FConnection provide to connect to database.
  * @author Matteo Maloni ('UniRent')
@@ -22,10 +23,10 @@ class FConnection
 	 * @var mixed
 	 */
 	private $db;
-	private static $hostname ="127.0.0.1";
-    private static $username ="root";
-    private static $password ="pippo";
-    private static $dbname = "unirent";
+	private static $hostname =DB_HOST;
+    private static $username =DB_USER;
+    private static $password =DB_PASS;
+    private static $dbname = DB_NAME;
 
 	private static $ClassItSelf=null;
     	

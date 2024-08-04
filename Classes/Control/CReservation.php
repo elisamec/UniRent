@@ -146,6 +146,9 @@ class CReservation
             
             foreach ($reviews as $review) {
                 $author = $PM->load('EStudent', $review->getIdAuthor());
+                if ($review->isBanned()) {
+                    continue;
+                }
                 $profilePic = $author->getPhoto();
                 if ($author->getStatus() === TStatusUser::BANNED) {
                     $profilePic = "/UniRent/Smarty/images/BannedUser.png";
@@ -200,6 +203,9 @@ class CReservation
             
             foreach ($reviews as $review) {
                 $author = $PM->load('EStudent', $review->getIdAuthor());
+                if ($review->isBanned()) {
+                    continue;
+                }
                 $profilePic = $author->getPhoto();
                 if ($author->getStatus() === TStatusUser::BANNED) {
                     $profilePic = "/UniRent/Smarty/images/BannedUser.png";

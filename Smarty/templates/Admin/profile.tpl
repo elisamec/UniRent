@@ -407,8 +407,17 @@
                 reviews.forEach(review => {
                     const reviewElement = document.createElement('div');
                     reviewElement.className = 'review';
-    
-
+                    /*
+                    let style;
+                    if (review.statusReported === 1 || review.statusReported === true) {
+                        style = 'style="background-color: #ffcccc;"';
+                    } else if (review.statusBanned === 1 || review.statusBanned === true) {
+                        style = 'style="background-color: #ff9999;"';
+                    } else {
+                        style = '';
+                    }
+                    reviewElement.attributes = style;
+                    */
                     // Insert the names of the elements of the review array
                     reviewElement.innerHTML = `
                     <div class="row">

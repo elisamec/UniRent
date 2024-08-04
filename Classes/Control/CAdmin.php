@@ -357,6 +357,8 @@ class CAdmin
                 'stars' => $review->getValutation(),
                 'content' => $content,
                 'userPicture' => $profilePic,
+                'statusBanned' => $review->isBanned(),
+                'statusReported' => $review->isReported()
             ];
         }
         $view->profile($user, $userType, $reviewsData,$reports, $requests, $countReports, $countRequests);

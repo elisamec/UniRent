@@ -266,6 +266,9 @@ class CStudent{
         
         foreach ($reviews as $review) {
             $author=$PM->load( 'EStudent', $review->getIdAuthor());
+            if ($review->isBanned()) {
+                continue;
+            }
             $authorStatus = $author->getStatus();
             $profilePic = $author->getPhoto();
             if($authorStatus === TStatusUser::BANNED){
@@ -380,6 +383,9 @@ class CStudent{
         
         foreach ($reviews as $review) {
             $author = $PM->load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
+            if ($review->isBanned()) {
+                continue;
+            }
             $profilePic = $author->getPhoto();
             if ($author->getStatus() === TStatusUser::BANNED) {
                 $profilePic = "/UniRent/Smarty/images/BannedUser.png";
@@ -638,6 +644,9 @@ class CStudent{
         
         foreach ($reviews as $review) {
             $author = $PM->load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
+            if ($review->isBanned()) {
+                continue;
+            }
             $status = $author->getStatus();
             $profilePic = $author->getPhoto();
             if($status === TStatusUser::BANNED){
@@ -692,6 +701,9 @@ class CStudent{
         
         foreach ($reviews as $review) {
             $author = $PM->load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
+            if ($review->isBanned()) {
+                continue;
+            }
             $status = $author->getStatus();
             $profilePic = $author->getPhoto();
             if($status === TStatusUser::BANNED){
@@ -926,6 +938,9 @@ class CStudent{
 
         foreach ($reviews as $review) {
             $recipient = $PM->load( 'E' . ucfirst($review->getRecipientType()->value), $review->getIdRecipient());
+            if ($review->isBanned()) {
+                continue;
+            }
             $profilePic = $recipient->getPhoto();
             if ($recipient->getStatus() === TStatusUser::BANNED) {
                 $profilePic = "/UniRent/Smarty/images/BannedUser.png";
@@ -1027,5 +1042,18 @@ class CStudent{
         $result=$PM->getSupportReply($session::getSessionElement('id'),$session::getSessionElement('type'));
         #return $result;
         print_r($result);
+    }
+    public static function readSupportReply(int $id)
+    {
+        $PM=FPersistentManager::getInstance();
+        $result=$PM->readSupportReply($id);
+        if($result)
+        {
+            http_response_code(200);
+        }
+        else
+        {
+            http_response_code(500);
+        }
     }
 }

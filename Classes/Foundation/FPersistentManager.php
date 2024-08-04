@@ -827,5 +827,20 @@ class FPersistentManager {
             return false;
         }
     }
+    public function readSupportReply(int $id):bool
+    {
+        $FSP=FSupportRequest::getInstance();
+        $reply=$FSP->load($id);
+        $reply->setStatusRead(true);
+        $result=$FSP->update($reply);
+        if($result)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
 

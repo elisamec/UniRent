@@ -101,37 +101,7 @@ class COwner
             #print_r($owner);
         }
         
-        $reviews = $PM->loadByRecipient($accomm->getIdAccommodation(), TType::ACCOMMODATION);
-        $reviewsData = [];
-        
-        foreach ($reviews as $review) {
-            $author = $PM->load('EStudent', $review->getIdAuthor());
-            $profilePic = $author->getPhoto();
-            if ($author->getStatus() === TStatusUser::BANNED) {
-                $profilePic = "/UniRent/Smarty/images/BannedUser.png";
-            } else if ($profilePic === null) {
-                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
-            }
-            else
-            {
-                $profilePic=(EPhoto::toBase64(array($profilePic)))[0];
-            }
-            if ($review->getDescription()===null) {
-                $content='No description';
-            }
-            else
-            {
-                $content=$review->getDescription();
-            }
-            $reviewsData[] = [
-                'title' => $review->getTitle(),
-                'username' => $author->getUsername(),
-                'userStatus' => $author->getStatus()->value,
-                'stars' => $review->getValutation(),
-                'content' => $content,
-                'userPicture' => $profilePic->getPhoto(),
-            ];
-        }
+        $reviewsData = self::reviewsDataByrecipient($accomm->getIdAccommodation(), TType::ACCOMMODATION);
         $num_places=$accomm->getPlaces();
         $tenantOwner= $PM->getTenants('current',$accomm->getIdOwner());
         if (!array_key_exists($idAccommodation, $tenantOwner)) {
@@ -162,6 +132,45 @@ class COwner
         $disabled=$accomm->getStatus();
         $deletable=false;
         $view->accommodationManagement($accomm, $owner, $reviewsData, $picture, $tenants, $num_places, $disabled, $deletable);
+    }
+    private static function reviewsDataByrecipient(int $idRecipient, TType $typeRecipient): array {
+        $reviewsData = [];
+        $PM = FPersistentManager::getInstance();
+        $reviews = $PM->loadByRecipient($idRecipient, $typeRecipient);
+        
+        foreach ($reviews as $review) {
+            $author = $PM->load('EStudent', $review->getIdAuthor());
+            if ($review->isBanned()) {
+                continue;
+            }
+            $profilePic = $author->getPhoto();
+            if ($author->getStatus() === TStatusUser::BANNED) {
+                $profilePic = "/UniRent/Smarty/images/BannedUser.png";
+            } else if ($profilePic === null) {
+                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+            }
+            else
+            {
+                $profilePic=(EPhoto::toBase64(array($profilePic)))[0];
+            }
+            if ($review->getDescription()===null) {
+                $content='No description';
+            }
+            else
+            {
+                $content=$review->getDescription();
+            }
+            $reviewsData[] = [
+                'id' => $review->getId(),
+                'title' => $review->getTitle(),
+                'username' => $author->getUsername(),
+                'userStatus' => $author->getStatus()->value,
+                'stars' => $review->getValutation(),
+                'content' => $content,
+                'userPicture' => $profilePic->getPhoto(),
+            ];
+        }
+        return $reviewsData;
     }
 
     public static function ownerRegistration(){
@@ -519,40 +528,9 @@ class COwner
     }
      public static function reviews() {
         $view = new VOwner();
-        $PM = FPersistentManager::getInstance();
-        $reviews = $PM->loadByRecipient(1, TType::OWNER);
-        $PM=FPersistentManager::getInstance();
-        $reviewsData = [];
-        
-        foreach ($reviews as $review) {
-            $author=$PM->load('EStudent', $review->getIdAuthor());
-            $profilePic = $author->getPhoto();
-            if ($author->getStatus() === TStatusUser::BANNED) {
-                $profilePic = "/UniRent/Smarty/images/BannedUser.png";
-            } else if ($profilePic === null) {
-                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
-            }
-            else
-            {
-                $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
-            }
-            if ($review->getDescription()===null) {
-                $content='No description';
-            }
-            else
-            {
-                $content=$review->getDescription();
-            }
-            $reviewsData[] = [
-                'id' => $review->getId(),
-                'title' => $review->getTitle(),
-                'username' => $author->getUsername(),
-                'userStatus' => $author->getStatus()->value,
-                'stars' => $review->getValutation(),
-                'content' => $content,
-                'userPicture' => $profilePic,
-            ];
-        }
+        $session=USession::getInstance();
+        $id=$session::getSessionElement('id');
+        $reviewsData = self::reviewsDataByrecipient($id, TType::OWNER);
         $view->reviews($reviewsData);
     }
 /*
@@ -649,42 +627,7 @@ class COwner
             $owner->setPhoto($owner_photo_64[0]);
             #print_r($owner);
         }
-
-
-        $reviews = $PM->loadByRecipient($owner->getId(), TType::OWNER);
-        $reviewsData = [];
-        
-        foreach ($reviews as $review) {
-            $author = $PM->load( 'EStudent', $review->getIdAuthor());
-            $status = $author -> getStatus();
-            $profilePic =$author->getPhoto();
-            if($status === TStatusUser::BANNED){
-                $profilePic = "/UniRent/Smarty/images/BannedUser.png";
-            }
-            elseif ($profilePic === null) {
-                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
-            }
-            else
-            {
-                $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
-            }
-            if ($review->getDescription()===null) {
-                $content='No description';
-            }
-            else
-            {
-                $content=$review->getDescription();
-            }
-            $reviewsData[] = [
-                'id' => $review->getId(),
-                'title' => $review->getTitle(),
-                'username' => $author->getUsername(),
-                'userStatus' => $author->getStatus()->value,
-                'stars' => $review->getValutation(),
-                'content' => $content,
-                'userPicture' => $profilePic,
-            ];
-        }
+        $reviewsData = self::reviewsDataByrecipient($owner->getId(), TType::OWNER);
         $view->publicProfileFromOwner($owner, $reviewsData, $kind, $self);
     }
     public static function publicProfileFromStudent(string $username, ?string $kind= null)
@@ -705,41 +648,7 @@ class COwner
             #print_r($owner);
         }
 
-
-        $reviews = $PM->loadByRecipient($owner->getId(), TType::OWNER);
-        $reviewsData = [];
-        
-        foreach ($reviews as $review) {
-            $author = $PM->load( 'EStudent', $review->getIdAuthor());
-            $status = $author -> getStatus();
-            $profilePic = $author->getPhoto();
-            if($status === TStatusUser::BANNED){
-                $profilePic = "/UniRent/Smarty/images/BannedUser.png";
-            }
-            elseif ($profilePic === null) {
-                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
-            }
-            else
-            {
-                $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
-            }
-            if ($review->getDescription()===null) {
-                $content='No description';
-            }
-            else
-            {
-                $content=$review->getDescription();
-            }
-            $reviewsData[] = [
-                'id' => $review->getId(),
-                'title' => $review->getTitle(),
-                'username' => $author->getUsername(),
-                'userStatus' => $author->getStatus()->value,
-                'stars' => $review->getValutation(),
-                'content' => $content,
-                'userPicture' => $profilePic,
-            ];
-        }
+        $reviewsData = self::reviewsDataByrecipient($owner->getId(), TType::OWNER);
         $view->publicProfileFromStudent($owner, $reviewsData, $kind);
     }
     public static function publicProfile(string $username, ?string $kind="#") {
