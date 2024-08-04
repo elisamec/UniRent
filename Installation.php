@@ -3,8 +3,10 @@
 namespace UniRent;
 use PDO;
 use PDOException;
+//use const UniRent\{DB_HOST, DB_NAME, DB_PASS, DB_USER, SQL_FILE_PATH};
 
 require __DIR__ . '/config.php';
+
 /**
  * class for checking if the db exist and if not create it
  */
