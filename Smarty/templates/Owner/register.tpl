@@ -46,57 +46,9 @@
                         <a class="nav-link" href="/UniRent/User/about">About Us</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="#">Contact Us</a>
+                        <a class="nav-link" href="/UniRent/User/contact">Contact Us</a>
                      </li>
                   </ul>
-                  <!-- Nav Item - Messages -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-envelope fa-fw"></i>
-                                <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">7</span>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdownWidth dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="messagesDropdown">
-                                <h6 class="dropdown-header">
-                                    Admin Replies
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    
-                                    <div class="font-weight-bold">
-                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
-                                            problem I've been having.</div>
-                                        <div class="smallMessages text-gray-500">Emily Fowler · 58m</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div>
-                                        <div class="text-truncate">I have the photos that you ordered last month, how
-                                            would you like them sent to you?</div>
-                                        <div class="smallMessages text-gray-500">Jae Chun · 1d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div>
-                                        <div class="text-truncate">Last month's report looks great, I am very happy with
-                                            the progress so far, keep up the good work!</div>
-                                        <div class="smallMessages text-gray-500">Morgan Alvarez · 2d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div>
-                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
-                                            told me that people say this to all dogs, even if they aren't good...</div>
-                                        <div class="smallMessages text-gray-500">Chicken the Dog · 2w</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center smallMessages text-gray-500" href="#">Read More Messages</a>
-                            </div>
-                        </li>
-
-                        <div class="topbar-divider d-none d-sm-block"></div>
                   <form class="form-inline my-2 my-lg-0">
                      <div class="login_bt">
                         <ul>
@@ -175,7 +127,7 @@
                      <ul>
                         <li><a href="/UniRent/User/home">Home</a></li>
                         <li><a href="/UniRent/User/about">About Us</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="/UniREnt/User/contact">Contact Us</a></li>
                      </ul>
                   </div>
                </div>
