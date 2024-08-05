@@ -191,7 +191,6 @@ class FSupportRequest {
         {
             $q="SELECT *
                 FROM supportrequest sr
-                WHERE sr.supportReply IS NULL
                 ORDER BY sr.status ASC
                 LOCK IN SHARE MODE ";
             $db->beginTransaction();
@@ -210,7 +209,7 @@ class FSupportRequest {
         {
             $sr=$this->load($row['id']);
             $sr->setStatusRead($row['statusRead']);
-            $sr->setSupportReply($row['statusRead']);
+            $sr->setSupportReply($row['supportReply']);
             $result[]=$sr;
         }
         return $result;

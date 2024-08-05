@@ -273,7 +273,13 @@
                     </form>
                 </div>
 
-                <!-- Additional Fields for 'registe' Topic (conditionally displayed) -->
+                <!-- Admin Reply Display (conditionally displayed) -->
+                <div id="adminReplyDisplay" style="display: none;">
+                    <p><strong>Admin Reply:</strong></p>
+                    <p id="adminReplyText"></p>
+                </div>
+
+                <!-- Additional Fields for 'Registration' Topic (conditionally displayed) -->
                 <div class="form-group" id="additionalFieldsContainer" style="display: none;">
                     <form id="additionalFieldsForm">
                         <label for="email">Email:</label>
@@ -283,6 +289,7 @@
                         <label for="city">City:</label>
                         <input type="text" class="form-control" id="city" name="city" placeholder="Enter city" required>
                         <input type="hidden" name="requestId" value="">
+                        <input type="hidden" name="answare" value="The mail was added to the json">
                         <button type="button" class="btn btn-primary" id="addToJson">Add to JSON</button>
                         <button type="button" class="btn btn-secondary" id="deleteRequest">Delete Request</button>
                     </form>
@@ -451,63 +458,7 @@
     displayReviews(reviews);
     {/if}
 </script>
-<script>
-    $(document).ready(function() {
-        $('.requestItem').on('click', function() {
-            var content = $(this).data('content');
-            var author = $(this).data('author');
-            var topic = $(this).data('topic');
-            var showForm = $(this).data('show-form') === '1'; // Convert to boolean
-
-            // Set modal content
-            $('#requestContent').text(content);
-            $('#requestAuthor').text(author);
-            $('#requestTopic').text(topic);
-            $('input[name="requestId"]').val($(this).data('id'));
-
-            // Show or hide the reply form based on the request status
-            if (showForm) {
-                $('#replyContainer').show();
-                $('#submitReply').show(); // Show the "Send Reply" button
-            } else {
-                $('#replyContainer').hide();
-                $('#submitReply').hide(); // Hide the "Send Reply" button
-            }
-
-            // Show or hide additional fields based on the topic
-            if (topic === 'register') {
-                $('#additionalFieldsContainer').show();
-                $('#submitReply').hide(); // Hide the "Send Reply" button if topic is 'registe'
-            } else {
-                $('#additionalFieldsContainer').hide();
-                $('#submitReply').show(); // Show the "Send Reply" button for other topics
-            }
-        });
-
-        $('#deleteRequest').on('click', function() {
-            var requestId = $('input[name="requestId"]').val();
-            window.location.href = '/UniRent/Admin/deleteSupportRequest/' + requestId;
-        });
-
-
-
-        // Handle the 'Add to JSON' button click event
-        $('#addToJson').on('click', function() {
-            var email = $('#email').val();
-            var university = $('#university').val();
-            var city = $('#city').val();
-
-            // Example function to handle the collected data
-            console.log({
-                email: email,
-                university: university,
-                city: city
-            });
-
-            // Optionally, you can send this data to your server or process it further
-        });
-    });
-</script>
+<script src = "/UniRent/Smarty/js/adminDropdowns.js"></script>
 </body>
 
 </html>

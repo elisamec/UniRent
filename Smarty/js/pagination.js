@@ -7,42 +7,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const rightContainer = document.querySelector('.rightContainer');
     const btns = document.querySelector('.containerBtns');
 
+
     const changeActiveBtn = (value) => {
         activeBtn.textContent = value;
         activeBtn.disabled = true;
     }
 
     const init = () => {
-        if (countPage === 1) {
-            countContainer.textContent = countPage + ' page';
-        } else {
-        countContainer.textContent = countPage + ' pages';
-        }
+        countContainer.textContent = countPage === 1 ? '1 page' : `${countPage} pages`;
         changeActiveBtn(1);
-        updateRightContainer(1);
-        updateLeftContainer(1);
+        updatePaginate(1);
     }
 
     const handlePrevBtn = () => {
         const curActive = Number(activeBtn.textContent) - 1;
-        updatePaginate(curActive)
+        updatePaginate(curActive);
     }
 
     const handleNextBtn = () => {
         const curActive = Number(activeBtn.textContent) + 1;
-        updatePaginate(curActive)
+        updatePaginate(curActive);
     }
 
     const updatePaginate = (value) => {
         changeActiveBtn(value);
         updateBlockBtn(value);
-        updateLeftContainer(value)
-        updateRightContainer(value)
+        updateLeftContainer(value);
+        updateRightContainer(value);
     }
 
     const handleBtnNumbers = (e) => {
         const target = e.target.closest('.numberBtn');
-
         if (target) {
             const pageNumber = Number(target.getAttribute('data-page'));
             updatePaginate(pageNumber);
@@ -54,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         nextBtn.disabled = value === countPage;
     }
 
-    const createButton = (text, classNames = [], disabled = false, pageNumber = null) => {
+    const createButton = (text, classNames = [], disabled = true, pageNumber = null) => {
         const button = document.createElement('button');
         button.textContent = text;
         button.classList.add(...classNames);
@@ -67,19 +62,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const updateContainer = (container, array, disabledIndexes = []) => {
         container.textContent = '';
-        for (let i = 0; i < array.length; i++) {
-            const text = disabledIndexes.includes(i) ? '...' : array[i];
-            const pageNumber = array[i];
-            const button = createButton(text, ['w-7', 'h-7', 'mx-2', 'numberBtn', 'w-32'], disabledIndexes.includes(i), pageNumber);
+        array.forEach((pageNumber, i) => {
+            const text = disabledIndexes.includes(i) ? '...' : pageNumber;
+            const button = createButton(text, ['w-7', 'h-7', 'mx-2', 'numberBtn', 'w-32'], true, pageNumber);
             container.appendChild(button);
-        }
+        });
     };
 
     const updateLeftContainer = (value) => {
         if (value <= 5) {
-            updateContainer(leftContainer, Array.from({length: value-1}, (_,i) => i + 1), []);
+            updateContainer(leftContainer, Array.from({ length: value - 1 }, (_, i) => i + 1), []);
         } else {
-            updateContainer(leftContainer, [1, 2, value-2, value-1], [1]);
+            updateContainer(leftContainer, [1, 2, value - 2, value - 1], [0]);
         }
     }
 
@@ -88,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const tail = countPage - value;
             updateContainer(rightContainer, Array.from({ length: tail }, (_, i) => i + value + 1), []);
         } else {
-            updateContainer(rightContainer, [value+1, value+2, countPage - 1, countPage], [1])
+            updateContainer(rightContainer, [value + 1, value + 2, countPage - 1, countPage], [2]);
         }
     }
 
@@ -97,4 +91,4 @@ document.addEventListener('DOMContentLoaded', () => {
     btns.addEventListener('click', handleBtnNumbers);
 
     init();
-})
+});

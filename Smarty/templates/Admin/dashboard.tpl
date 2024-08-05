@@ -53,34 +53,11 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">{$countReports}</span>
+                                <span class="badge badge-danger badge-counter" id="alertCount">{$countReports}</span>
                             </a>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
-                                <h6 class="dropdown-header">
-                                    Reports
-                                </h6>
-                                {foreach from=$reports item=report}
-                                {if $smarty.foreach.reports.iteration <= 4}
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="mr-3">
-                                            <div class="icon-circle bg-danger">
-                                                <i class="fa fa-exclamation-triangle text-white"></i>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="smallMessages text-gray-500">{$report->getMade()->format('F d, Y')}</div>
-                                            {if ($report->getBanDate() === null)}
-                                                <span class="font-weight-bold">{$report->getDescription()}</span>
-                                            {else}
-                                                <span>{$report->getDescription()}</span>
-                                            {/if}
-                                        </div>
-                                    </a>
-                                {/if}
-                                    {/foreach}
-                                <a class="dropdown-item text-center smallMessages text-gray-500" href="#">Show All Reports</a>
                             </div>
                         </li>
 
@@ -90,30 +67,11 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-envelope fa-fw"></i>
                                 <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">{$countRequests}</span>
+                                <span class="badge badge-danger badge-counter" id="messageCount">{$countRequests}</span>
                             </a>
                             <!-- Dropdown - Messages -->
                             <div class="dropdownWidth dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="messagesDropdown">
-                                <h6 class="dropdown-header">
-                                    Support Requests
-                                </h6>
-                                {foreach from=$requests item=request}
-                                {if $smarty.foreach.requests.iteration <= 4}
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                    {if ($request['Request']->getStatus()->value == 0)}
-                                        <div class="font-weight-bold requestItem" 
-                                    {else}
-                                        <div class="requestItem"
-                                    {/if}
-                                        data-toggle="modal" data-target="#requestModal" data-content="{$request['Request']->getMessage()}" data-author="{$request['author']}" data-topic="{$request['Request']->getTopic()->value}" data-id="{$request['Request']->getId()}" data-show-form={$request['Request']->getStatus->value==0}>
-                                            <div class="text-truncate">{$request['Request']->getMessage()}</div>
-                                            <div class="smallMessages text-gray-500">{$request['author']} · {$request['Request']->getTopic()->value}</div>
-                                        </div>
-                                    </a>
-                                {/if}
-                                    {/foreach}
-                                <a class="dropdown-item text-center smallMessages text-gray-500" href="/UniRent/Admin/readMoreSupportRequest">Read More Requests</a>
                             </div>
                         </li>
 
@@ -421,7 +379,13 @@
                     </form>
                 </div>
 
-                <!-- Additional Fields for 'registe' Topic (conditionally displayed) -->
+                <!-- Admin Reply Display (conditionally displayed) -->
+                <div id="adminReplyDisplay" style="display: none;">
+                    <p><strong>Your Reply:</strong></p>
+                    <p id="adminReplyText"></p>
+                </div>
+
+                <!-- Additional Fields for 'Registration' Topic (conditionally displayed) -->
                 <div class="form-group" id="additionalFieldsContainer" style="display: none;">
                     <form id="additionalFieldsForm">
                         <label for="email">Email:</label>
@@ -431,6 +395,7 @@
                         <label for="city">City:</label>
                         <input type="text" class="form-control" id="city" name="city" placeholder="Enter city" required>
                         <input type="hidden" name="requestId" value="">
+                        <input type="hidden" name="answare" value="The mail was added to the json">
                         <button type="button" class="btn btn-primary" id="addToJson">Add to JSON</button>
                         <button type="button" class="btn btn-secondary" id="deleteRequest">Delete Request</button>
                     </form>
@@ -444,6 +409,7 @@
     </div>
 </div>
 <!-- End of Request Detail Modal -->
+
 
 
     <script>
@@ -515,60 +481,8 @@
                document.getElementById("myModal").style.display = "none";
                }
          </script>
-         <script>
-    $(document).ready(function() {
-        $('.requestItem').on('click', function() {
-            var content = $(this).data('content');
-            var author = $(this).data('author');
-            var topic = $(this).data('topic');
-            var showForm = $(this).data('show-form') === '1'; // Convert to boolean
+         <script src="/UniRent/Smarty/js/adminDropdowns.js"></script>
 
-            // Set modal content
-            $('#requestContent').text(content);
-            $('#requestAuthor').text(author);
-            $('#requestTopic').text(topic);
-            $('input[name="requestId"]').val($(this).data('id'));
-
-            // Show or hide the reply form based on the request status
-            if (showForm) {
-                $('#replyContainer').show();
-                $('#submitReply').show(); // Show the "Send Reply" button
-            } else {
-                $('#replyContainer').hide();
-                $('#submitReply').hide(); // Hide the "Send Reply" button
-            }
-
-            // Show or hide additional fields based on the topic
-            if (topic === 'register') {
-                $('#additionalFieldsContainer').show();
-                $('#submitReply').hide(); // Hide the "Send Reply" button if topic is 'registe'
-            } else {
-                $('#additionalFieldsContainer').hide();
-                $('#submitReply').show(); // Show the "Send Reply" button for other topics
-            }
-        });
-        $('#deleteRequest').on('click', function() {
-            var requestId = $('input[name="requestId"]').val();
-            window.location.href = '/UniRent/Admin/deleteSupportRequest/' + requestId;
-        });
-
-        // Handle the 'Add to JSON' button click event
-        $('#addToJson').on('click', function() {
-            var email = $('#email').val();
-            var university = $('#university').val();
-            var city = $('#city').val();
-
-            // Example function to handle the collected data
-            console.log({
-                email: email,
-                university: university,
-                city: city
-            });
-
-            // Optionally, you can send this data to your server or process it further
-        });
-    });
-</script>
 </body>
 
 </html>

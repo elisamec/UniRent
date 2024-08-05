@@ -26,9 +26,8 @@ class CAdmin
         $PM=FPersistentManager::getInstance();
         $stats=$PM->getStatistics();
         $banned=$PM->getBannedList();
-        [$reports, $requests, $countReports, $countRequests]=self::get_Request_and_Report();
         $view = new VAdmin();
-        $view->home($stats, $banned, $requests, $reports, $countRequests, $countReports);
+        $view->home($stats, $banned);
     }
 
     public static function login(){
@@ -49,32 +48,20 @@ class CAdmin
     {
 
         $view = new VAdmin();
-        $username=USuperGlobalAccess::getPost('username');
-        
-        //If user exist, get the user and check the password
-        if($username === 'Admin')
-        {
                 $passwordIn=USuperGlobalAccess::getPost('password');
 
                 if(password_verify($passwordIn, '$2y$10$oqDyOSQOyj8bBbbeq1UFfe5B.zB/HGenmr9IRQnzGSBI5eRrHRF5i'))
                 {
-                    print 'La password è corretta!';
                    
                     $session = USession::getInstance();
                     $session::setSessionElement("userType", 'Admin');
-                    $session::setSessionElement('username', $username);
                     $session::setSessionElement('password',USuperGlobalAccess::getPost('password'));
                     header('Location:/UniRent/Admin/home'); 
                 }
                 else  #password is not correct
                 {
-                    $view->loginError(false, true);
+                    $view->loginError();
                 }
-            }
-        else  #does not exist an username for that type
-        {
-            $view->loginError(true, false);
-        }
     }
     public static function logout()
     {
@@ -310,7 +297,6 @@ class CAdmin
         public static function profile(string $username)
     {
         $PM=FPersistentManager::getInstance();
-        [$reports, $requests, $countReports, $countRequests]=self::get_Request_and_Report();
         $user=$PM->verifyUserUsername($username);
         $userType=$user['type'];
         $user=$PM->load('E'.ucfirst($userType), $user['id']);
@@ -361,7 +347,7 @@ class CAdmin
                 'statusReported' => $review->isReported()
             ];
         }
-        $view->profile($user, $userType, $reviewsData,$reports, $requests, $countReports, $countRequests);
+        $view->profile($user, $userType, $reviewsData);
     }
 
     /**
@@ -370,37 +356,85 @@ class CAdmin
      * this method is used to get Reports and SupportRequests by the administrator
      * 
      */
-    private static function get_Request_and_Report()
+    public static function get_Request_and_Report()
     {
+        header('Content-Type: application/json');
         $PM=FPersistentManager::getInstance();
         $result=$PM->get_Request_and_Report();
-        $reports=$result['Report'];
+        $reportsArray=$result['Report'];
         $countReports=0;
-        foreach ($reports as $report) {
+        $reports=[];
+        foreach ($reportsArray as $report) {
             if ($report->getBanDate()===null) {
                 $countReports++;
             }
+            $reports[]=[
+                'id'=>$report->getId(),
+                'description'=>$report->getDescription(),
+                'made'=>$report->getMade()->format('Y-m-d'),
+                'banDate'=>$report->getBanDate()? $report->getBanDate()->format('Y-m-d') : null,
+            ];
         }
         $requestsArray=$result['Request'];
         $requests=[];
+        $res=[];
         $countRequests=0;
-        foreach ($requestsArray as $request) {
-            if ($request->getAuthorID()!=null) {
-            $author=$PM->getUsernameById($request->getAuthorID(), $request->getAuthorType());
-            }
-            else
-            {
-                $author='User';
-            }
-            $requests[]=[
-                'Request'=>$request,
-                'author'=>$author
-            ];
-            if ($request->getStatus()->value===0) {
-                $countRequests++;
-            }
+        $requestsArray = $result['Request'];
+    $requests = [];
+    $countRequests = 0;
+
+    // Process requests
+    foreach ($requestsArray as $request) {
+        if ($request->getAuthorID() != null) {
+            $author = $PM->getUsernameById($request->getAuthorID(), $request->getAuthorType());
+        } else {
+            $author = 'User';
         }
-        return [$reports, $requests, $countReports, $countRequests];
+
+        switch ($request->getTopic()) {
+            case TRequestType::REGISTRATION:
+                $topic = 'Registration';
+                break;
+            case TRequestType::USAGE:
+                $topic = 'App Usage';
+                break;
+            case TRequestType::BUG:
+                $topic = 'Bug';
+                break;
+            case TRequestType::REMOVEBAN:
+                $topic = 'Remove Ban Request';
+                break;
+            default:
+                $topic = 'Other';
+                break;
+        }
+
+        // Create a single request entry
+        $requests[] = [
+            'Request' => [
+                [
+                    'id' => $request->getId(),
+                    'message' => $request->getMessage(),
+                    'topic' => $topic,
+                    'status' => $request->getStatus()->value,
+                    'reply' => $request->getSupportReply()
+                ]
+            ],
+            'author' => $author
+        ];
+
+        if ($request->getStatus()->value === 0) {
+            $countRequests++;
+        }
+    }
+
+    $response = [
+        'Reports' => $reports,
+        'Requests' => $requests,
+        'countReports' => $countReports,
+        'countRequests' => $countRequests
+    ];
+    echo json_encode($response);
     }
     
     /**
@@ -422,12 +456,32 @@ class CAdmin
     public static function readMoreSupportRequest()
     {   
         $PM=FPersistentManager::getInstance();
-        [$reports, $requestArray, $countReports, $countRequests]=self::get_Request_and_Report();
         $requests=[];
         $count=1;
+        $requestArray=$PM->get_Request_and_Report()['Request'];
         foreach ($requestArray as $request) {
-            $author=$request['author'];
-            $request=$request['Request'];
+            if ($request->getAuthorID() != null) {
+                $author = $PM->getUsernameById($request->getAuthorID(), $request->getAuthorType());
+            } else {
+                $author = 'User';
+            }
+            switch ($request->getTopic()) {
+                case TRequestType::REGISTRATION:
+                    $topic = 'Registration';
+                    break;
+                case TRequestType::USAGE:
+                    $topic = 'App Usage';
+                    break;
+                case TRequestType::BUG:
+                    $topic = 'Bug';
+                    break;
+                case TRequestType::REMOVEBAN:
+                    $topic = 'Remove Ban Request';
+                    break;
+                default:
+                    $topic = 'Other';
+                    break;
+            }
             if (array_key_exists($count, $requests)) {
                 if (count($requests[$count])==10) {
                     $count++;
@@ -436,13 +490,14 @@ class CAdmin
             $requests[$count][]=[
                 'id'=>$request->getId(),
                 'message'=>$request->getMessage(),
-                'topic'=>$request->getTopic()->value,
+                'topic'=>$topic,
                 'author'=>$author,
-                'status'=>$request->getStatus()->value
+                'status'=>$request->getStatus()->value,
+                'reply'=>$request->getSupportReply()
             ];
         }
         $view=new VAdmin();
-        $view->readMoreSupportRequest($requests, $count, $reports, $countReports, $countRequests);
+        $view->readMoreSupportRequest($requests, $count);
     }
     public static function addToJson() {
         $email = USuperGlobalAccess::getPost('email');

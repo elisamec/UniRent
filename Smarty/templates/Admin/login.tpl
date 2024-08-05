@@ -53,7 +53,6 @@
                 <h1 class="error">Password incorrect</h1>
             {/if}
             <form action="/UniRent/Admin/checkLogin" class="form" method="post">
-              <input required="" class="input" type="text" name="username" id="username" placeholder="Userame">
               <input required="" class="input" type="password" name="password" id="password" placeholder="Password">
               <input class="login-button" type="submit" onclick="location.href='/UniRent/Admin/checkLogin'" value="Log In">
             </form>

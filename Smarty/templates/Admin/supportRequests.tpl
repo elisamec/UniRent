@@ -176,7 +176,7 @@
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade center" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade " id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -219,9 +219,15 @@
                     </form>
                 </div>
 
-                <!-- Additional Fields for 'registe' Topic (conditionally displayed) -->
+                <!-- Admin Reply Display (conditionally displayed) -->
+                <div id="adminReplyDisplay" style="display: none;">
+                    <p><strong>Admin Reply:</strong></p>
+                    <p id="adminReplyText"></p>
+                </div>
+
+                <!-- Additional Fields for 'Registration' Topic (conditionally displayed) -->
                 <div class="form-group" id="additionalFieldsContainer" style="display: none;">
-                    <form id="additionalFieldsForm" action="UniRent/Admin/addToJson">
+                    <form id="additionalFieldsForm">
                         <label for="email">Email:</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
                         <label for="university">University:</label>
@@ -229,8 +235,9 @@
                         <label for="city">City:</label>
                         <input type="text" class="form-control" id="city" name="city" placeholder="Enter city" required>
                         <input type="hidden" name="requestId" value="">
+                        <input type="hidden" name="answare" value="The mail was added to the json">
                         <button type="button" class="btn btn-primary" id="addToJson">Add to JSON</button>
-                        <button type="button" class="btn btn-danger" id="deleteRequest">Delete Request</button>
+                        <button type="button" class="btn btn-secondary" id="deleteRequest">Delete Request</button>
                     </form>
                 </div>
             </div>
@@ -256,105 +263,7 @@
 <!-- Custom scripts for all pages -->
 <script src="/UniRent/Smarty/js/sb-admin-2.min.js"></script>
 
-
-    {literal}
-    <script>
-// Assuming Smarty JSON data is available as a JavaScript variable
-var jsonData = {/literal}{$requests}{literal};
-
-// Function to populate the request list
-function populateRequestList(data) {
-    var container = document.querySelector('.request-list');
-    container.innerHTML = '';
-
-    data.forEach(function(item) {
-        var requestItem = document.createElement('div');
-        requestItem.className = 'request-item';
-        requestItem.setAttribute('data-toggle', 'modal');
-        requestItem.setAttribute('data-target', '#requestModal');
-        requestItem.setAttribute('data-content', item.message);
-        requestItem.setAttribute('data-author', item.author);
-        requestItem.setAttribute('data-topic', item.topic);
-        requestItem.setAttribute('data-id', item.id);
-        requestItem.setAttribute('data-show-form', item.status === 0);
-
-        if (item.status === 0) {
-            requestItem.classList.add('font-weight-bold');
-        }
-        requestItem.innerHTML = `
-            <div class="text-truncate">${item.message}</div>
-            <div class="smallMessages text-gray-500">${item.author} · ${item.topic}</div>
-        `;
-        container.appendChild(requestItem);
-    });
-}
-
-// Function to handle page button clicks
-function handlePageButtonClick(event) {
-    var pageNumber = parseInt(event.target.getAttribute('data-page'));
-    if (jsonData[pageNumber]) {
-        populateRequestList(jsonData[pageNumber]);
-    }
-}
-
-// Event listener for pagination buttons
-document.addEventListener('DOMContentLoaded', function() {
-    var paginationButtons = document.querySelectorAll('.containerBtns button');
-    paginationButtons.forEach(function(button) {
-        button.addEventListener('click', handlePageButtonClick);
-    });
-
-    // Initialize with the content of the first page
-    var firstPage = Object.keys(jsonData)[0];
-    if (firstPage) {
-        populateRequestList(jsonData[firstPage]);
-    }
-});
-</script>
-
-{/literal}
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var maxItems = 4; // Maximum number of items to display
-        var requestDropdown = document.getElementById('requestDropdown');
-
-        // Iterate through requests and build the dropdown items
-        jsonData[1].slice(0, maxItems).forEach(function(request) {
-            var listItem = document.createElement('a');
-            listItem.className = 'dropdown-item d-flex align-items-center';
-            listItem.href = '#';
-            listItem.dataset.toggle = 'modal';
-            listItem.dataset.target = '#requestModal';
-            listItem.dataset.content = request.message;
-            listItem.dataset.author = request.author;
-            listItem.dataset.topic = request.topic;
-            listItem.dataset.id = request.id;
-            listItem.dataset.showForm = request.status === 0;
-
-            var div = document.createElement('div');
-            div.className = request.status === 0 ? 'font-weight-bold requestItem' : 'requestItem';
-
-            var messageDiv = document.createElement('div');
-            messageDiv.className = 'text-truncate';
-            messageDiv.textContent = request.message;
-
-            var smallMessagesDiv = document.createElement('div');
-            smallMessagesDiv.className = 'smallMessages text-gray-500';
-            smallMessagesDiv.textContent = request.author + ' · ' + request.topic;
-
-            div.appendChild(messageDiv);
-            div.appendChild(smallMessagesDiv);
-            listItem.appendChild(div);
-            requestDropdown.appendChild(listItem);
-        });
-        var readMoreItem = document.createElement('a');
-        readMoreItem.className = 'dropdown-item text-center smallMessages text-gray-500';
-        readMoreItem.href = '/UniRent/Admin/readMoreSupportRequest';
-        readMoreItem.textContent = 'Read More Requests';
-
-        requestDropdown.appendChild(readMoreItem);
-    });
-</script>
+    
 
 
 <!-- Optional: jQuery slim version -->
@@ -397,62 +306,11 @@ document.addEventListener('DOMContentLoaded', function() {
                document.getElementById("myModal").style.display = "none";
                }
          </script>
-         <script>
-    $(document).ready(function() {
-        $('.request-item .requestItem').on('click', function() {
-            var content = $(this).data('content');
-            var author = $(this).data('author');
-            var topic = $(this).data('topic');
-            var showForm = $(this).data('show-form') === '1'; // Convert to boolean
-
-            // Set modal content
-            $('#requestContent').text(content);
-            $('#requestAuthor').text(author);
-            $('#requestTopic').text(topic);
-            $('input[name="requestId"]').val($(this).data('id'));
-
-            // Show or hide the reply form based on the request status
-            if (showForm) {
-                $('#replyContainer').show();
-                $('#submitReply').show(); // Show the "Send Reply" button
-            } else {
-                $('#replyContainer').hide();
-                $('#submitReply').hide(); // Hide the "Send Reply" button
-            }
-
-            // Show or hide additional fields based on the topic
-            if (topic === 'register') {
-                $('#additionalFieldsContainer').show();
-                $('#submitReply').hide(); // Hide the "Send Reply" button if topic is 'registe'
-            } else {
-                $('#additionalFieldsContainer').hide();
-                $('#submitReply').show(); // Show the "Send Reply" button for other topics
-            }
-        });
-
-        $('#deleteRequest').on('click', function() {
-            var requestId = $('input[name="requestId"]').val();
-            window.location.href = '/UniRent/Admin/deleteSupportRequest/' + requestId;
-        });
-
-
-        // Handle the 'Add to JSON' button click event
-        $('#addToJson').on('click', function() {
-            var email = $('#email').val();
-            var university = $('#university').val();
-            var city = $('#city').val();
-
-            // Example function to handle the collected data
-            console.log({
-                email: email,
-                university: university,
-                city: city
-            });
-
-            // Optionally, you can send this data to your server or process it further
-        });
-    });
+<script>
+// Assuming Smarty JSON data is available as a JavaScript variable
+var jsonData = {$requests};
 </script>
+<script src="/UniRent/Smarty/js/adminDropdowns.js"></script>
 
          
 </body>
