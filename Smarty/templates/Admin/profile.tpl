@@ -51,34 +51,11 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">{$countReports}</span>
+                                <span class="badge badge-danger badge-counter" id="alertCount">{$countReports}</span>
                             </a>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
-                                <h6 class="dropdown-header">
-                                    Reports
-                                </h6>
-                                {foreach from=$reports item=report}
-                                {if $smarty.foreach.reports.iteration <= 4}
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="mr-3">
-                                            <div class="icon-circle bg-danger">
-                                                <i class="fa fa-exclamation-triangle text-white"></i>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="smallMessages text-gray-500">{$report->getMade()->format('F d, Y')}</div>
-                                            {if ($report->getBanDate() === null)}
-                                                <span class="font-weight-bold">{$report->getDescription()}</span>
-                                            {else}
-                                                <span>{$report->getDescription()}</span>
-                                            {/if}
-                                        </div>
-                                    </a>
-                                {/if}
-                                    {/foreach}
-                                <a class="dropdown-item text-center smallMessages text-gray-500" href="#">Show All Reports</a>
                             </div>
                         </li>
 
@@ -88,30 +65,11 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-envelope fa-fw"></i>
                                 <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">{$countRequests}</span>
+                                <span class="badge badge-danger badge-counter" id="messageCount">{$countRequests}</span>
                             </a>
                             <!-- Dropdown - Messages -->
                             <div class="dropdownWidth dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="messagesDropdown">
-                                <h6 class="dropdown-header">
-                                    Support Requests
-                                </h6>
-                                {foreach from=$requests item=request}
-                                {if $smarty.foreach.requests.iteration <= 4}
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                    {if ($request['Request']->getStatus()->value == 0)}
-                                        <div class="font-weight-bold requestItem" 
-                                    {else}
-                                        <div class="requestItem"
-                                    {/if}
-                                        data-toggle="modal" data-target="#requestModal" data-content="{$request['Request']->getMessage()}" data-author="{$request['author']}" data-topic="{$request['Request']->getTopic()->value}" data-id="{$request['Request']->getId()}" data-show-form={$request['Request']->getStatus()->value == 0}>
-                                            <div class="text-truncate">{$request['Request']->getMessage()}</div>
-                                            <div class="smallMessages text-gray-500">{$request['author']} · {$request['Request']->getTopic()->value}</div>
-                                        </div>
-                                    </a>
-                                {/if}
-                                    {/foreach}
-                                <a class="dropdown-item text-center smallMessages text-gray-500" href="/UniRent/Admin/readMoreSupportRequest">Read More Requests</a>
                             </div>
                         </li>
 

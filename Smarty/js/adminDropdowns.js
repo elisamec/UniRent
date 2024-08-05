@@ -102,21 +102,19 @@ document.addEventListener('DOMContentLoaded', function () {
         $('input[name="requestId"]').val(requestId);
 
         // Show or hide the reply form based on the request status
-        if (showForm) {
+        if (showForm && topic !== 'Registration') {
             $('#replyContainer').show();
             $('#submitReply').show(); // Show the "Send Reply" button
             $('#adminReplyDisplay').hide(); // Hide admin reply display
+            $('#additionalFieldsContainer').hide();
+        } else if (showForm && topic === 'Registration') {
+            $('#adminReplyDisplay').hide(); // Hide admin reply display
+            $('#additionalFieldsContainer').show(); 
         } else {
             $('#replyContainer').hide();
             $('#submitReply').hide(); // Hide the "Send Reply" button
             $('#adminReplyDisplay').show(); // Show admin reply display
             $('#adminReplyText').text(adminReply); // Set the admin reply text
-        }
-
-        // Show or hide additional fields based on the topic
-        if (topic === 'Registration') {
-            $('#additionalFieldsContainer').show();
-        } else {
             $('#additionalFieldsContainer').hide();
         }
     });
