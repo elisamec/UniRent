@@ -559,21 +559,31 @@ class FStudent
         $db=FConnection::getInstance()->getConnection();
         try
         {
+            if(!$db->inTransaction())
+            {
+                $db->beginTransaction();
+            }
             $q="SELECT *
                 FROM supportrequest s
                 WHERE idOwner IS NULL 
                 AND s.idStudent=:id
                 AND s.supportReply IS NOT NULL
                 LOCK IN SHARE MODE";
-            $db->beginTransaction();
+            
             $stm=$db->prepare($q);
             $stm->bindParam(':id',$id,PDO::PARAM_INT);
             $stm->execute();
-            $db->commit();
+            if($db->inTransaction())
+            {
+                $db->commit();
+            }
         }
         catch(PDOException $e)
         {
-            $db->rollBack();
+            if(!$db->inTransaction())
+            {
+                $db->rollBack();
+            }
             return array();
         }
         $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
