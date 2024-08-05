@@ -162,6 +162,5 @@ $result=$FA->areThereFreePlaces(7,2024);
 print var_dump($result) ;*/
 
 
-$result=FPersistentManager::getInstance()->supportReply(2,'como estas?');
-
-if($result){print 'ok!';}
+$result=FOwner::getInstance()->getSupportReply(5);
+print_r($result);

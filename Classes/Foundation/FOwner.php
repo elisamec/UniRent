@@ -776,25 +776,36 @@ use PDOException;
     public function getSupportReply(int $id):array
     {
         $db=FConnection::getInstance()->getConnection();
+        $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
         try
         {
+            if(!$db->inTransaction())
+            {
+                $db->beginTransaction();
+            }
             $q="SELECT s.id as id, s.statusRead as statusRead, s.supportReply as supportReply
                 FROM supportrequest s
                 WHERE idStudent IS NULL 
                 AND s.idOwner=:id
-                AND s.supportReply IS NOT NULL";
-            $db->exec('LOCK TABLES supportrequest READ');
-            $db->beginTransaction();
+                AND s.supportReply IS NOT NULL
+                LOCK IN SHARE MODE";
+            #$db->exec('LOCK TABLES supportrequest READ');
+            
             $stm=$db->prepare($q);
             $stm->bindParam(':id',$id,PDO::PARAM_INT);
             $stm->execute();
-            $db->commit();
-            $db->exec('UNLOCK TABLES');
+            if($db->inTransaction())
+            {
+                $db->commit();
+            }
+            #$db->exec('UNLOCK TABLES');
         }
         catch(PDOException $e)
         {
-            print $e->getMessage();
-            $db->rollBack();
+            if($db->inTransaction())
+            {
+                $db->rollBack();
+            }
             return array();
         }
         $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
