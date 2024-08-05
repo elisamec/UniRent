@@ -74,37 +74,19 @@
                   </ul>
                   <!-- Nav Item - Messages -->
                         <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-envelope fa-fw"></i>
-                                <!-- Counter - Messages -->
-                                {if $countMessages > 0}
-                                <span class="badge badge-danger badge-counter">{$countReply}</span>
-                                {/if}
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdownWidth dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="messagesDropdown">
-                                <h6 class="dropdown-header">
-                                    Admin Replies
-                                </h6>
-                                {foreach from=$replies item=reply name=replies}
-                                {if $smarty.foreach.replies.iteration <= 4}
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                    {if ($reply->getStatusRead() == 0 || $reply->getStatusRead() == false)}
-                                        <div class="font-weight-bold requestItem" 
-                                    {else}
-                                        <div class="requestItem"
-                                    {/if}
-                                       data-request="{$reply->getMessage()}" data-reply="{$reply->getSupportReply()}" data-topic="{$reply->getTopic()->value}" data-id="{$reply->getId()}">
-                                            <div class="text-truncate">{$reply->getSupportReply()}</div>
-                                            <div class="smallMessages text-gray-500">{$reply->getTopic()->value}</div>
-                                        </div>
-                                    </a>
-                                {/if}
-                                    {/foreach}
-                                <a class="dropdown-item text-center smallMessages text-gray-500" href="/UniRent/Owner/readMoreSupportReplies">Read More Replies</a>
-                            </div>
+                           <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <i class="fa fa-envelope fa-fw"></i>
+                              <!-- Counter - Messages -->
+                              <span id="messageCount" class="badge badge-danger badge-counter"></span>
+                           </a>
+                           <!-- Dropdown - Messages -->
+                           <div id="dropdownMenu" class="dropdownWidth dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
+                              <h6 class="dropdown-header">Admin Replies</h6>
+                              <div id="messageList">
+                                    <!-- Dynamic content will be loaded here -->
+                              </div>
+                              <a class="dropdown-item text-center smallMessages text-gray-500" href="/UniRent/Owner/readMoreSupportReplies">Read More Replies</a>
+                           </div>
                         </li>
 
                         <div class="topbar-divider d-none d-sm-block"></div>
@@ -290,6 +272,7 @@ displayAccommodations(accommodationsActive, accommodationsInactive);
             <span class="resClose">&times;</span>
             <h2 class="resModal-head">Support Reply Details</h2>
          </div>
+         <div class="container cont-padding">
          <h4>Your Request</h4>
                 <p id="requestContent"></p>
                   <hr>
@@ -299,6 +282,7 @@ displayAccommodations(accommodationsActive, accommodationsInactive);
                   <h4>Topic</h4>
                 <p id="requestTopic"></p>
                 <hr>
+                </div>
             <div class="btn-cont">
                 <button type="button" class="edit_btn" id="closeReply">Close</button>
             </div>
@@ -306,26 +290,7 @@ displayAccommodations(accommodationsActive, accommodationsInactive);
     </div>
 </div>
 <!-- End of Request Detail Modal -->
-<script>
-    $(document).ready(function() {
-        $('.requestItem').on('click', function() {
-            replyModal.style.display = "block";
-            var content = $(this).data('request');
-            var reply = $(this).data('reply');
-            var topic = $(this).data('topic');
-            var requestId = $(this).data('id');
-            $('#closeReply').on('click', function() {
-            window.location.href = '/UniRent/Owner/readSupportReply/' + requestId;
-        });
 
-            // Set modal content
-            $('#requestContent').text(content);
-            $('#replyContent').text(reply);
-            $('#requestTopic').text(topic);
-        });
-
-        
-    });
-</script>
+<script src="/UniRent/Smarty/js/supportReplyDropdown.js"></script>
    </body>
 </html>

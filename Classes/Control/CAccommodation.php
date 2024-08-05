@@ -9,7 +9,12 @@ require __DIR__.'/../../vendor/autoload.php';
 
 class CAccommodation
 {
-    public static function deactivate($idAccommodation) {
+    /**
+     * Deactivate Accommodation
+     * @param int $idAccommodation
+     * @return void
+     */
+    public static function deactivate(int $idAccommodation):void {
         $PM= FPersistentManager::getInstance();
         $accommodation=$PM->load('EAccommodation', $idAccommodation);
         $accommodation->setStatus(false);
@@ -24,8 +29,12 @@ class CAccommodation
             $viewError->error(500);
         }
     }
-
-    public static function activate($idAccommodation) {
+    /**
+     * Activate Accommodation
+     * @param int $idAccommodation
+     * @return void
+     */
+    public static function activate(int $idAccommodation):void {
         $PM= FPersistentManager::getInstance();
         $accommodation=$PM->load('EAccommodation', $idAccommodation);
         $accommodation->setStatus(true);

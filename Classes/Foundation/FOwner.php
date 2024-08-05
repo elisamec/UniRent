@@ -782,13 +782,14 @@ use PDOException;
                 FROM supportrequest s
                 WHERE idStudent IS NULL 
                 AND s.idOwner=:id
-                AND s.supportReply IS NOT NULL
-                LOCK IN SHARE MODE";
+                AND s.supportReply IS NOT NULL";
+            $db->exec('LOCK TABLES supportrequest READ');
             $db->beginTransaction();
             $stm=$db->prepare($q);
             $stm->bindParam(':id',$id,PDO::PARAM_INT);
             $stm->execute();
             $db->commit();
+            $db->exec('UNLOCK TABLES');
         }
         catch(PDOException $e)
         {

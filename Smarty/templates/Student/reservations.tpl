@@ -279,6 +279,7 @@
             <span class="resClose">&times;</span>
             <h2 class="resModal-head">Support Reply Details</h2>
          </div>
+         <div class="container cont-padding">
          <h4>Your Request</h4>
                 <p id="requestContent"></p>
                   <hr>
@@ -288,6 +289,7 @@
                   <h4>Topic</h4>
                 <p id="requestTopic"></p>
                 <hr>
+                </div>
             <div class="btn-cont">
                 <button type="button" class="edit_btn" id="closeReply">Close</button>
             </div>
@@ -295,26 +297,7 @@
     </div>
 </div>
 <!-- End of Request Detail Modal -->
-<script>
-    $(document).ready(function() {
-        $('.requestItem').on('click', function() {
-            replyModal.style.display = "block";
-            var content = $(this).data('request');
-            var reply = $(this).data('reply');
-            var topic = $(this).data('topic');
 
-            // Set modal content
-            $('#requestContent').text(content);
-            $('#replyContent').text(reply);
-            $('#requestTopic').text(topic);
-            $('input[name="requestId"]').val($(this).data('id'));
-        });
-
-        $('#closeReply').on('click', function() {
-            var requestId = $('input[name="requestId"]').val();
-            window.location.href = '/UniRent/Student/readSupportReply/' + requestId;
-        });
-    });
-</script>
+<script src="/UniRent/Smarty/js/supportReplyDropdown.js"></script>
 </body>
 </html>

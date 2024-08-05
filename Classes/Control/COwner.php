@@ -60,8 +60,8 @@ class COwner
             }
                 
         #print_r($accommodations);
-        [$replies, $countReply] = self::getSupportReply();
-        $view->home($accommodationsActive, $accommodationsInactive, $replies, $countReply);
+        
+        $view->home($accommodationsActive, $accommodationsInactive);
     }
 
 
@@ -132,8 +132,8 @@ class COwner
         }
         $disabled=$accomm->getStatus();
         $deletable=false;
-        [$replies, $countReply] = self::getSupportReply();
-        $view->accommodationManagement($accomm, $owner, $reviewsData, $picture, $tenants, $num_places, $disabled, $deletable, $replies, $countReply);
+        
+        $view->accommodationManagement($accomm, $owner, $reviewsData, $picture, $tenants, $num_places, $disabled, $deletable);
     }
     private static function reviewsDataByrecipient(int $idRecipient, TType $typeRecipient): array {
         $reviewsData = [];
@@ -263,8 +263,8 @@ class COwner
                 $base64 = base64_encode($ph);
                 $ph = "data:" . 'image/jpeg' . ";base64," . $base64;
             }
-            [$replies, $countReply] = self::getSupportReply();
-            $view->profile($owner, $ph, $replies, $countReply);
+            
+            $view->profile($owner, $ph);
         }
     }
 
@@ -287,8 +287,8 @@ class COwner
 
             $base64 = base64_encode($photo);
             $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
-            [$replies, $countReply] = self::getSupportReply();
-            $view->editProfile($owner, $photo, false, false, false, false, false, false, $replies, $countReply);
+            
+            $view->editProfile($owner, $photo, false, false, false, false, false, false);
 
         }
     }
@@ -325,7 +325,7 @@ class COwner
         $session=USession::getInstance();
         $error = 0;
         $PM=FPersistentManager::getInstance();
-        [$replies, $countReply] = self::getSupportReply();
+        
 
         //Reed the data from the form
         $name=USuperGlobalAccess::getPost('name');
@@ -398,25 +398,25 @@ class COwner
                         }
                         else
                         {
-                            $view->editProfile($owner, $picture, false, false, false, true, false, false, $replies, $countReply); //Iban already in use
+                            $view->editProfile($owner, $picture, false, false, false, true, false, false); //Iban already in use
                             #header('Location:/UniRent/Owner/profile');
                         }
                     }
                     else
                     {
-                        $view->editProfile($owner, $picture, false, false, true, false, false, false, $replies, $countReply); //phone already in use
+                        $view->editProfile($owner, $picture, false, false, true, false, false, false); //phone already in use
                         #header('Location:/UniRent/Owner/profile');
                     }
                 }
                 else
                 {   
-                    $view->editProfile($owner, $picture, true, false, false, false, false, false, $replies, $countReply); //Username already in use
+                    $view->editProfile($owner, $picture, true, false, false, false, false, false); //Username already in use
                     #header('Location:/UniRent/Owner/profile');
                 }
             }
             else
             {   
-                $view->editProfile($owner, $picture, false, true, false, false, false, false, $replies, $countReply); //Email already in use
+                $view->editProfile($owner, $picture, false, true, false, false, false, false); //Email already in use
                 #header('Location:/UniRent/Owner/profile');
             }
         }
@@ -522,22 +522,22 @@ class COwner
     public static function contact()
     {
         $view = new VOwner();
-        [$replies, $countReply] = self::getSupportReply();
-        $view->contact($replies, $countReply);
+        
+        $view->contact();
     }
     public static function about()
     {
         $view = new VOwner();
-        [$replies, $countReply] = self::getSupportReply();
-        $view->about($replies, $countReply);
+        
+        $view->about();
     }
      public static function reviews() {
         $view = new VOwner();
         $session=USession::getInstance();
         $id=$session::getSessionElement('id');
         $reviewsData = self::reviewsDataByrecipient($id, TType::OWNER);
-        [$replies, $countReply] = self::getSupportReply();
-        $view->reviews($reviewsData, $replies, $countReply);
+        
+        $view->reviews($reviewsData);
     }
 /*
     public static function changePicture()
@@ -548,8 +548,8 @@ class COwner
     public static function addAccommodation()
     {
         $view=new VOwner();
-        [$replies, $countReply] = self::getSupportReply();
-        $view->addAccommodation($replies, $countReply);
+        
+        $view->addAccommodation();
     }
 
     public static function addAccommodationOperations()
@@ -635,8 +635,8 @@ class COwner
             #print_r($owner);
         }
         $reviewsData = self::reviewsDataByrecipient($owner->getId(), TType::OWNER);
-        [$replies, $countReply] = self::getSupportReply();
-        $view->publicProfileFromOwner($owner, $reviewsData, $kind, $self, $replies, $countReply);
+        
+        $view->publicProfileFromOwner($owner, $reviewsData, $kind, $self);
     }
     public static function publicProfileFromStudent(string $username, ?string $kind= null)
     {
@@ -657,8 +657,8 @@ class COwner
         }
 
         $reviewsData = self::reviewsDataByrecipient($owner->getId(), TType::OWNER);
-        [$replies, $countReply] = self::getSupportReply();
-        $view->publicProfileFromStudent($owner, $reviewsData, $kind, $replies, $countReply);
+        
+        $view->publicProfileFromStudent($owner, $reviewsData, $kind);
     }
     public static function publicProfile(string $username, ?string $kind="#") {
         $PM=FPersistentManager::getInstance();
@@ -708,8 +708,8 @@ class COwner
                 'reported' => $review->isReported()
             ];
         }
-        [$replies, $countReply] = self::getSupportReply();
-        $view->postedReview($reviewsData, $replies, $countReply);
+        
+        $view->postedReview($reviewsData);
     }
     public static function viewOwnerAds(int $id) {
         $view = new VOwner();
@@ -739,8 +739,8 @@ class COwner
         }
         }
         #print_r($accommodations);
-        [$replies, $countReply] = self::getSupportReply();
-        $view->viewOwnerAds($accommodations, $username, $replies, $countReply);
+        
+        $view->viewOwnerAds($accommodations, $username);
     }
 
 
@@ -788,8 +788,8 @@ class COwner
         }
         }
         print_r($accommodation->getVisit());
-        [$replies, $countReply] = self::getSupportReply();
-        $view->editAccommodation($accommodationData, $img , $visitAvailabilityData, $id, $replies, $countReply);
+        
+        $view->editAccommodation($accommodationData, $img , $visitAvailabilityData, $id);
         
     }
     
@@ -920,8 +920,8 @@ class COwner
             ]
         ];
         */
-        [$replies, $countReply] = self::getSupportReply();
-        $view->tenants($tenants, $kind, $accommodationTitles,0, $replies, $countReply);
+        
+        $view->tenants($tenants, $kind, $accommodationTitles,0);
     }
 
     public static function filterTenants(string $type)
@@ -991,43 +991,7 @@ class COwner
         foreach ($accommodations as $accom) {
             $accommodationTitles[$accom->getIdAccommodation()]=$accom->getTitle();
         }
-        [$replies, $countReply] = self::getSupportReply();
-        $view->tenants($tenants, $type, $accommodationTitles, $rateT, $replies, $countReply);
-    }
-
-    /**
-     * Method getSupportReply
-     * 
-     * this method return the support replies of the administrator
-     *
-     * @return void
-     */
-    private static function getSupportReply(): array
-    {
-        $PM=FPersistentManager::getInstance();
-        $session=USession::getInstance();
-        $result=$PM->getSupportReply($session::getSessionElement('id'),$session::getSessionElement('userType'));
-        $countReply=0;
-        foreach ($result as $reply) {
-            if ($reply->getStatusRead() === false) {
-                $countReply++;
-            }
-        }
-        return [$result, $countReply];
-    }
-    public static function readSupportReply(int |string $id)
-    {
-        $PM=FPersistentManager::getInstance();
-        $result=$PM->readSupportReply((int)$id);
-        $location=$_COOKIE['current_page'];
-        if($result)
-        {
-            header('Location:'.$location);
-        }
-        else
-        {
-            $view=new VError();
-            $view->error(500);
-        }
+        
+        $view->tenants($tenants, $type, $accommodationTitles, $rateT);
     }
 }

@@ -1027,35 +1027,4 @@ class CStudent{
             header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/full');
         }
     }
-    
-    /**
-     * Method getSupportReply
-     * 
-     * this method return the support replies of the administrator
-     *
-     * @return void
-     */
-    public static function getSupportReply()
-    {
-        $PM=FPersistentManager::getInstance();
-        $session=USession::getInstance();
-        $result=$PM->getSupportReply($session::getSessionElement('id'),$session::getSessionElement('type'));
-        #return $result;
-        print_r($result);
-    }
-    public static function readSupportReply(int $id)
-    {
-        $PM=FPersistentManager::getInstance();
-        $result=$PM->readSupportReply($id);
-        $location=$_COOKIE['current_page'];
-        if($result)
-        {
-            header('Location:'.$location);
-        }
-        else
-        {
-            $view=new VError();
-            $view->error(500);
-        }
-    }
 }

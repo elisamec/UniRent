@@ -8,6 +8,7 @@ use Classes\Entity\ESupportRequest;
 use Classes\Tools\TType;
 use Classes\Tools\TRequestType;
 use Classes\Tools\TStatus;
+use Classes\Tools\TStatusSupport;
 
 class FSupportRequest {
     private static $instance=null;
@@ -74,6 +75,8 @@ class FSupportRequest {
             $authType=null;
         }
         $result=new ESupportRequest($row['id'],$row['message'], TRequestType::tryFrom($row['topic']), $author, $authType);
+        $result->setStatus(TStatusSupport::tryFrom($row['status']));
+        $result->setSupportReply($row['supportReply']);
         return $result;
     }
 
@@ -149,7 +152,7 @@ class FSupportRequest {
         catch (PDOException $e) {
             $db->rollBack();
             print $e->getMessage();
-            #return false;
+            return false;
         }
     }
     public function delete(int $id): bool {
