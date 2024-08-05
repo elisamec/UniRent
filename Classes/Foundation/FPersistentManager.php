@@ -710,6 +710,22 @@ class FPersistentManager {
     }
     
     /**
+     * Method remainingReviewStudentToOwner
+     *
+     * this method call the omonim method in FReview to get the number of remaining reservation that a student can make about an owner
+     * @param int $id1 [student id, the one who makes the review]
+     * @param int $id2 [owner id]
+     *
+     * @return int
+     */
+    public function remainingReviewStudentToOwner(int $id1, int $id2):int
+    {
+        $FR=FReview::getInstance();
+        $result=$FR->remainingReviewStudentToOwner($id1,$id2);
+        return $result;
+    }
+    
+    /**
      * Method getStatistics
      *
      * call the omonim method in Foundation to achive the statistics for the administrator

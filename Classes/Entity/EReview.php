@@ -181,10 +181,34 @@ class EReview
      * @param int $id2 [student 2]
      *
      * @return int
+     */    
+    /**
+     * Method remainingReviewStudentToStudent
+     *
+     * this method return the number of review that a Student can make about another Student
+     * @param int $id1 [student 1 who makes the reviews]
+     * @param int $id2 [student 2]
+     *
+     * @return int
      */
     public static function remainingReviewStudentToStudent(int $id1, int $id2):int
     {
         $result=FPersistentManager::getInstance()->remainingReviewStudentToStudent($id1,$id2);
+        return $result;
+    }
+    
+    /**
+     * Method remainingReviewStudentToOwner
+     *
+     * this method return the number of review that a Student can make about an Owner
+     * @param int $id1 [student , the one who makes the reviews]
+     * @param int $id2 [owner]
+     *
+     * @return int
+     */
+    public static function remainingReviewStudentToOwner(int $id1, int $id2):int
+    {
+        $result=FPersistentManager::getInstance()->remainingReviewStudentToOwner($id1,$id2);
         return $result;
     }
 }
