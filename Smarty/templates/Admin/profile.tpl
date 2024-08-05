@@ -51,7 +51,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter" id="alertCount">{$countReports}</span>
+                                <span class="badge badge-danger badge-counter" id="alertCount"></span>
                             </a>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -65,7 +65,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-envelope fa-fw"></i>
                                 <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter" id="messageCount">{$countRequests}</span>
+                                <span class="badge badge-danger badge-counter" id="messageCount"></span>
                             </a>
                             <!-- Dropdown - Messages -->
                             <div class="dropdownWidth dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
