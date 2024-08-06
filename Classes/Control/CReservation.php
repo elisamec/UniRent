@@ -45,7 +45,7 @@ class CReservation
         $view->showReservations($reservationsData, $kind);
 
     }
-    public static function showOwner(string $statusAccept="null", string $statusDeny="null"):void {
+    public static function showOwner(?string $modalSuccess=null):void {
         $session=USession::getInstance();
         $id=$session::getSessionElement('id');
         $PM=FPersistentManager::getInstance();
@@ -98,8 +98,7 @@ class CReservation
                 'reservations' => $studentList
             ];
         }
-        [$replies, $countReply] = self::getSupportReply();
-        $view->showReservations($reservationData, $replies, $countReply);
+        $view->showReservations($reservationData, $modalSuccess);
     }
     public static function reservationDetails(int $idReservation): void {
         $session = USession::getInstance();

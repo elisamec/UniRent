@@ -21,8 +21,9 @@ class VStudent{
         $this->smarty = StartSmarty::configuration();
     }
 
-    public function home(array $accommodations):void{
+    public function home(array $accommodations, ?string $modalSuccess=null):void{
         $this->smarty->assign('accommodations', json_encode($accommodations));
+        $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('Student/home.tpl');
     }
 
@@ -33,9 +34,10 @@ class VStudent{
      * @param string|null $photo The student's profile photo
      * @return void
      */
-    public function profile(EStudent $student, ?string $photo) :void {
+    public function profile(EStudent $student, ?string $photo, ?string $modalSuccess=null) :void {
 
         $this->smarty->assign('photo', $photo);
+        $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->assign('student', $student);
         $this->smarty->display('Student/personalProfile.tpl');
     }
@@ -61,7 +63,8 @@ class VStudent{
     public function showStudentRegistration():void{
         $this->smarty->display('Student/register.tpl');
     }
-    public function contact():void{
+    public function contact(?string $modalSuccess=null):void{
+        $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('Student/contact.tpl');
     }
     public function about():void{
@@ -98,30 +101,35 @@ class VStudent{
         $this->smarty->assign('leavebleReviews', $leavebleReviews);
         $this->smarty->display('Student/accommodation.tpl');
     }
-    public function reviews(array $reviewsData):void{
+    public function reviews(array $reviewsData, ?string $modalSuccess=null):void{
         $this->smarty->assign('reviewsData', $reviewsData);
+        $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('Student/reviews.tpl');
     }
-    public function publicProfileFromStudent(EStudent $student, array $reviewsData, ?string $kind="#", bool $self, int $roomate):void{
+    public function publicProfileFromStudent(EStudent $student, array $reviewsData, ?string $kind="#", bool $self, int $roomate, ?string $modalSuccess=null):void{
         $this->smarty->assign('student', $student);
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->assign('kind', $kind);
         $this->smarty->assign('self', $self);
         $this->smarty->assign('roomate', $roomate);
+        $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('Student/publicProfileFromStudent.tpl');
     }
-    public function publicProfileFromOwner(EStudent $student, array $reviewsData, ?string $kind="#"):void{
+    public function publicProfileFromOwner(EStudent $student, array $reviewsData, ?string $kind="#", ?string $modalSuccess=null):void{
         $this->smarty->assign('student', $student);
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->assign('kind', $kind);
+        $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('Student/publicProfileFromOwner.tpl');
     }
-    public function paymentMethods(array $cardsData):void{
+    public function paymentMethods(array $cardsData, ?string $modalSuccess=null):void{
         $this->smarty->assign('cardsData', json_encode($cardsData));
+        $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('Student/paymentMethods.tpl');
     }
-    public function postedReview(array $reviewsData):void{
+    public function postedReview(array $reviewsData, ?string $modalSuccess=null):void{
         $this->smarty->assign('reviewsData', $reviewsData);
+        $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('Student/postedReviews.tpl');
     }
     public function visits(array $visitsData):void{
@@ -138,12 +146,13 @@ class VStudent{
         $this->smarty->assign('successDelete', $successDelete);
         $this->smarty->display('Student/visitDetails.tpl');
     }
-    public function showReservations(array $reservationsData, string $kind):void {
+    public function showReservations(array $reservationsData, string $kind, ?string $modalSuccess=null):void {
         $this->smarty->assign('reservations', json_encode($reservationsData));
         $this->smarty->assign('kind', $kind);
+        $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('Student/reservations.tpl');
     }
-    public function reservationDetails(EReservation $reservation, EAccommodation $accommodation, EOwner $owner, string $timeLeft, array $pictures, array $reviewsData, array $creditCardData):void {
+    public function reservationDetails(EReservation $reservation, EAccommodation $accommodation, EOwner $owner, string $timeLeft, array $pictures, array $reviewsData, array $creditCardData, ?string $modalSuccess=null):void {
         $this->smarty->assign('accommodation', $accommodation);
         $this->smarty->assign('reservation', $reservation);
         $this->smarty->assign('owner', $owner);
@@ -151,14 +160,16 @@ class VStudent{
         $this->smarty->assign('imagesJson', json_encode($pictures));
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->assign('creditCardData', json_encode($creditCardData));
+        $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('Student/reservationDetails.tpl');
     }
-    public function showContracts(array $contractsData, string $kind):void {
+    public function showContracts(array $contractsData, string $kind, ?string $modalSuccess=null):void {
         $this->smarty->assign('contracts', json_encode($contractsData));
         $this->smarty->assign('kind', $kind);
+        $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('Student/contracts.tpl');
     }
-    public function contractDetails(EContract $contract, EAccommodation $accommodation, EOwner $owner, string $cardNumber, string $cardHolder, array $pictures, array $reviewsData):void {
+    public function contractDetails(EContract $contract, EAccommodation $accommodation, EOwner $owner, string $cardNumber, string $cardHolder, array $pictures, array $reviewsData, ?string $modalSuccess=null):void {
         $this->smarty->assign('accommodation', $accommodation);
         $this->smarty->assign('contract', $contract);
         $this->smarty->assign('owner', $owner);
@@ -166,6 +177,7 @@ class VStudent{
         $this->smarty->assign('cardHolder', $cardHolder);
         $this->smarty->assign('imagesJson', json_encode($pictures));
         $this->smarty->assign('reviewsData', $reviewsData);
+        $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('Student/contractDetails.tpl');
     }
 }

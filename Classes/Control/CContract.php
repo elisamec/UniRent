@@ -52,7 +52,7 @@ class CContract
             $res=$PM->store($contract);
         }
         if ($res) {
-            header('Location:/Contract/contractDetails/'.$idReservation.'/payed'); //redirect to contract page of the one you jest payed
+            header('Location:/Contract/contractDetails/'.$idReservation.'/success'); //redirect to contract page of the one you jest payed
         } else {
             header('Location:/Contract/contractDetails/'.$idReservation.'/error');
         }
@@ -151,10 +151,9 @@ class CContract
                 'contracts' => $studentList
             ];
         }
-        [$replies, $countReply] = self::getSupportReply();
-        $view->showContracts($contractsData, $kind, $replies, $countReply);
+        $view->showContracts($contractsData, $kind);
     }
-    public static function contractDetails(int $idContract) {
+    public static function contractDetails(int $idContract, ?string $modalSuccess=null):void {
         $session = USession::getInstance();
         $userType = $session->getSessionElement('userType');
         $PM=FPersistentManager::getInstance();
@@ -267,9 +266,8 @@ class CContract
                     'userPicture' => $profilePic,
                 ];
             }
-            [$replies, $countReply] = self::getSupportReply();
             $view = new VOwner();
-            $view->contractDetails($contract, $student, $reviewsData, $replies, $countReply);
+            $view->contractDetails($contract, $student, $reviewsData, $modalSuccess);
         }
     }
     
@@ -332,20 +330,6 @@ class CContract
                 'contracts' => $studentList
             ];
         }
-        [$replies, $countReply] = self::getSupportReply();
-        $view->showContracts($contractsData, 'onGoing', $replies, $countReply);
-    }
-    private static function getSupportReply(): array
-    {
-        $PM=FPersistentManager::getInstance();
-        $session=USession::getInstance();
-        $result=$PM->getSupportReply($session::getSessionElement('id'),$session::getSessionElement('userType'));
-        $countReply=0;
-        foreach ($result as $reply) {
-            if ($reply->getStatusRead() === false) {
-                $countReply++;
-            }
-        }
-        return [$result, $countReply];
+        $view->showContracts($contractsData, 'onGoing');
     }
 }

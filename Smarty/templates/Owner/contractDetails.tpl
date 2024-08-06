@@ -605,5 +605,58 @@ window.onclick = (event) => {
 </div>
 <!-- End of Request Detail Modal -->
 
+<!-- Success Modal -->
+<div class="resModal" id="successModal">
+      <div class="resModal-content">
+         <div class="row">
+            <span class="resClose">&times;</span>
+            <h2 class="resModal-head">
+            {if $modalSuccess == 'success'}
+            Success
+            {else}
+            Error
+            {/if}
+            </h2>
+         </div>
+         <div class="container cont-padding">
+         {if $modalSuccess == 'success'}
+            <h4>Operation completed successfully.</h4>
+         {else}
+            <h4>There was an error while processing. Please try again later.</h4>
+         {/if}
+                </div>
+            <div class="btn-cont">
+                <button type="button" class="edit_btn" id="closeSuccess">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Success Modal -->
+<script>
+var modalSuccess= '{$modalSuccess}';
+var successModal = document.getElementById("successModal");
+var successClose = document.querySelector(".resClose");
+var closeSuccess = document.getElementById("closeSuccess");
+if (modalSuccess !== '') {
+    successModal.style.display = "block";
+} else {
+    successModal.style.display = "none";
+}
+
+successClose.onclick = function() {
+    successModal.style.display = "none";
+}
+
+closeSuccess.onclick = function() {
+    successModal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == successModal) {
+        successModal.style.display = "none";
+    }
+}
+</script>
+
 <script src="/UniRent/Smarty/js/supportReplyDropdown.js"></script>
 </body>

@@ -19,15 +19,36 @@ class CAccommodation
         $accommodation=$PM->load('EAccommodation', $idAccommodation);
         $accommodation->setStatus(false);
         $res=$PM->update($accommodation);
-        $requestUri = trim($_SERVER['HTTP_REFERER'], '/');
-        $uriParts = explode('/', $requestUri);
-        print_r($uriParts);
         if ($res) {
-            header('Location:/UniRent/'.$uriParts[4].'/'.$uriParts[5].'/'.$accommodation->getIdAccommodation());
+            if (self::checkURL($_COOKIE['current_page'], 'success')) {
+                header('Location:'.$_COOKIE['current_page']);
+            } else {
+                header('Location:'.$_COOKIE['current_page'].'/success');
+            }
         } else {
-            $viewError= new VError();
-            $viewError->error(500);
+            if (self::checkURL($_COOKIE['current_page'], 'error')) {
+                header('Location:'.$_COOKIE['current_page']);
+            } else {
+                header('Location:'.$_COOKIE['current_page'].'/success');
+            }
         }
+    }
+    private static function checkURL(string $url, string $val):bool {
+        $currentPage = isset($url) ? $url : '';
+
+        // Step 2: Parse the URL to get the path
+        $parsedUrl = parse_url($currentPage);
+        $path = isset($parsedUrl['path']) ? $parsedUrl['path'] : '';
+
+        // Step 3: Split the path into segments
+        $pathSegments = explode('/', trim($path, '/'));
+
+        // Step 4: Check if the last segment is 'success'
+        $lastSegment = end($pathSegments);
+        if ($lastSegment === $val) {
+            return true;
+        }
+        return false;
     }
     /**
      * Activate Accommodation
@@ -39,14 +60,18 @@ class CAccommodation
         $accommodation=$PM->load('EAccommodation', $idAccommodation);
         $accommodation->setStatus(true);
         $res=$PM->update($accommodation);
-        $requestUri = trim($_SERVER['HTTP_REFERER'], '/');
-        $uriParts = explode('/', $requestUri);
-        print_r($uriParts);
         if ($res) {
-            header('Location:/UniRent/'.$uriParts[4].'/'.$uriParts[5].'/'.$accommodation->getIdAccommodation());
+            if (self::checkURL($_COOKIE['current_page'], 'success')) {
+                header('Location:'.$_COOKIE['current_page']);
+            } else {
+                header('Location:'.$_COOKIE['current_page'].'/success');
+            }
         } else {
-            $viewError= new VError();
-$viewError->error(500);
+            if (self::checkURL($_COOKIE['current_page'], 'error')) {
+                header('Location:'.$_COOKIE['current_page']);
+            } else {
+                header('Location:'.$_COOKIE['current_page'].'/success');
+            }
         }
     }
     public static function delete(int $id) {
@@ -54,12 +79,11 @@ $viewError->error(500);
         $result=$PM->delete('EAccommodation', $id);
         if($result)
         {
-            header('Location:/UniRent/Owner/home');
+            header('Location:/UniRent/Owner/home/success');
         }
         else
         {
-            $viewError= new VError();
-$viewError->error(500);
+            header('Location:/UniRent/Owner/home/error');
         }
     }
 }
