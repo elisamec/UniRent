@@ -22,12 +22,12 @@ use Classes\Tools\TStatusSupport;
 
 class CAdmin
 {
-    public static function home(){
+    public static function home(?string $modalMessage = null){
         $PM=FPersistentManager::getInstance();
         $stats=$PM->getStatistics();
         $banned=$PM->getBannedList();
         $view = new VAdmin();
-        $view->home($stats, $banned);
+        $view->home($stats, $banned, $modalMessage);
     }
 
     public static function login(){
@@ -38,9 +38,6 @@ class CAdmin
                 $session = USession::getInstance();
             }
         }
-        /*if($session::isSetSessionElement('userType')){
-            header('Location: /Agora/Student/home');
-        }*/
         $view = new VAdmin();
         $view->login();
     }
@@ -85,7 +82,7 @@ class CAdmin
             $res2=$PM->store($report);
             if ($res && $res2)
             {
-                header('Location:/UniRent/' . ucfirst($userType) . '/publicProfile/' . $student->getUsername() . '/reported');
+                header('Location:/UniRent/' . ucfirst($userType) . '/publicProfile/' . $student->getUsername() . '/success');
             }
             else
             {
@@ -101,7 +98,7 @@ class CAdmin
             $res2=$PM->store($report);
             if ($res && $res2)
             {
-                header('Location:/UniRent/' . ucfirst($userType) . '/publicProfile/' . $owner->getUsername() . '/reported');
+                header('Location:/UniRent/' . ucfirst($userType) . '/publicProfile/' . $owner->getUsername() . '/success');
             }
             else
             {
@@ -115,11 +112,11 @@ class CAdmin
             $res2=$PM->store($report);
             if ($res && $res2)
             {
-                header('Location:/UniRent/' .$_SERVER['HTTP_REFERER'].'/reported');
+                header('Location:/UniRent/' .$_COOKIE['current_page'].'/success');
             }
             else
             {
-                header('Location:/UniRent/' . $_SERVER['HTTP_REFERER'] .'/error');
+                header('Location:/UniRent/' . $_COOKIE['current_page'] .'/error');
             }
         }
     }
@@ -194,11 +191,11 @@ class CAdmin
         $res=$PM->update($user);
         if ($res)
         {
-            header('Location:/UniRent/Admin/home/banned');
+            header('Location:'.$_COOKIE['current_page'].'/success');
         }
         else
         {
-            header('Location:/UniRent/Admin/home/error');
+            header('Location:'.$_COOKIE['current_page'].'/rror');
         }
     }
     public static function studentEmailIssue() {
@@ -210,7 +207,7 @@ class CAdmin
         $res=$PM->store($supportRequest);
         if ($res)
         {
-            header('Location:/UniRent/User/showRegistration/issueSent');
+            header('Location:/UniRent/User/showRegistration/success');
         }
         else
         {
@@ -228,28 +225,13 @@ class CAdmin
         if ($res)
         {
             $view=new VError();
-            $view->error(600, $username, 'requestSent');
+            $view->error(600, $username, 'success');
         }
         else
         {
             $view=new VError();
             $view->error(600, $username, 'error');
         }
-    }
-
-     /**
-     * Method getStatistics
-     * 
-     * this method gets the statistics for administrator from DataBase
-     *
-     * @return void
-     */
-    public static function getStatistics()
-    {
-        $view = new VAdmin();
-        $PM=FPersistentManager::getInstance();
-        $result = $PM->getStatistics();
-        print_r($result); #momentaneo, da collegare con view
     }
     
     /**
@@ -270,11 +252,11 @@ class CAdmin
         $res = $PM->update($user);
         if ($res)
         {
-            header('Location:/UniRent/Admin/home/active');
+            header('Location:'.$_COOKIE['current_page'].'/success');
         }
         else
         {
-            header('Location:/UniRent/Admin/home/error');
+            header('Location:'.$_COOKIE['current_page'].'/error');
         }
     }
 
@@ -298,7 +280,7 @@ class CAdmin
         $AUF->addElement($domain, $uniName, $city);  
 
     }
-        public static function profile(string $username, ?int $reportId = null)
+        public static function profile(string $username, ?int $reportId = null, ?string $modalMessage = null)
     {
         $PM=FPersistentManager::getInstance();
         $user=$PM->verifyUserUsername($username);
@@ -351,13 +333,13 @@ class CAdmin
                 'statusReported' => $review->isReported()
             ];
         }
-        $view->profile($user, $userType, $reviewsData, $reportId);
+        $view->profile($user, $userType, $reviewsData, $reportId, $modalMessage);
     }
 
     /**
      * Method get_Request_and_Report
      *
-     * this method is used to get Reports and SupportRequests by the administrator
+     * this method is used to get Reports and SupportRequests by the administrator. It is called by the jaascript therefore it prints a json
      * 
      */
     public static function get_Request_and_Report()
@@ -471,10 +453,10 @@ class CAdmin
         $answare=USuperGlobalAccess::getPost('answare');
         $PM=FPersistentManager::getInstance();
         $result=$PM->SupportReply($id,$answare);
-        if ($result){header('Location:/UniRent/Admin/home');}
-        else {header('Location:/UniRent/Admin/home/error');}
+        if ($result){header('Location:'.$_COOKIE['current_page'].'/success');}
+        else {header('Location:'.$_COOKIE['current_page'].'/error');}
     }
-    public static function readMoreSupportRequest()
+    public static function readMoreSupportRequest(?string $modalMessage = null)
     {   
         $PM=FPersistentManager::getInstance();
         $requests=[];
@@ -518,7 +500,7 @@ class CAdmin
             ];
         }
         $view=new VAdmin();
-        $view->readMoreSupportRequest($requests, $count);
+        $view->readMoreSupportRequest($requests, $count, $modalMessage);
     }
     public static function addToJson() {
         $email = USuperGlobalAccess::getPost('email');
@@ -533,11 +515,11 @@ class CAdmin
         $res=$PM->update($request);
         if ($res)
         {
-            header('Location:/UniRent/Admin/home');
+            header('Location:'.$_COOKIE['current_page'].'/success');
         }
         else
         {
-            header('Location:/UniRent/Admin/home/error');
+            header('Location:'.$_COOKIE['current_page'].'/error');
         }
     }
     public static function deleteSupportRequest(int $id)
@@ -546,14 +528,27 @@ class CAdmin
         $res=$PM->delete('ESupportRequest', $id);
         if ($res)
         {
-            header('Location:/UniRent/Admin/home');
+            header('Location:'.$_COOKIE['current_page'].'/success');
         }
         else
         {
-            header('Location:/UniRent/Admin/home/error');
+            header('Location:'.$_COOKIE['current_page'].'/error');
         }
     }
-    public static function readMoreReports() {
+    public static function deleteReport(int $id)
+    {
+        $PM=FPersistentManager::getInstance();
+        $res=$PM->delete('EReport', $id);
+        if ($res)
+        {
+            header('Location:'.$_COOKIE['current_page'].'/success');
+        }
+        else
+        {
+            header('Location:'.$_COOKIE['current_page'].'/error');
+        }
+    }
+    public static function readMoreReports(?string $modalMessage = null) {
         $PM=FPersistentManager::getInstance();
         $reports=[];
         $count=1;
@@ -589,6 +584,6 @@ class CAdmin
                 ];
             }
         $view=new VAdmin();
-        $view->readMoreReports($reports, $count);
+        $view->readMoreReports($reports, $count, $modalMessage);
     }
 }

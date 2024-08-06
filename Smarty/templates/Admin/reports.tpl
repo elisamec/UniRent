@@ -35,13 +35,13 @@
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
-            <div id="content">
+            <div id="content screenSize">
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <h1 class="h3 mb-0 text-gray-800">Support Requests</h1>
+                    <h1 class="h3 mb-0 text-gray-800">Reports</h1>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -257,6 +257,39 @@
     </div>
 </div>
 <!-- End of Report Detail Modal -->
+<!-- Confirmation Modal -->
+ <div class="modal fade " id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmationModalLabel">
+                    {if $modalMessage === 'success'}
+                    Success
+                    {else}
+                    Error
+                    {/if}
+                    </h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                {if $modalMessage === 'success'}
+                <div class="modal-body">The operation was successfully completed.</div>
+                {else}
+                <div class="modal-body">There was an error while processing your request. Please try again later.</div>
+                {/if}
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of Confirmation Modal -->
+    <script>
+    var modalMessage = '{$modalMessage}';
+    </script>
+
 
 
     <!-- jQuery library -->

@@ -35,7 +35,7 @@
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
-            <div id="content">
+            <div id="content screenSize">
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -257,6 +257,36 @@
     </div>
 </div>
 <!-- End of Report Detail Modal -->
+<!-- Confirmation Modal -->
+ <div class="modal fade " id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmationModalLabel">
+                    {if $modalMessage === 'success'}
+                    Success </h5>
+                    <p>Operation completed successfully.</p>
+                    {else}
+                    Error </h5>
+                    <p> There was an error while processing. Please try again later.</p>
+                    {/if}
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="/UniRent/Admin/logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of Confirmation Modal -->
+<script>
+    var modalMessage = '{$modalMessage}';
+    </script>
 
 
     <!-- jQuery library -->

@@ -31,7 +31,7 @@
         <div id="content-wrapper" class="d-flex-error flex-column">
 
             <!-- Main Content -->
-            <div id="content">
+            <div id="content screenSize">
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -118,7 +118,7 @@
     <div class="resModal-content">
     <div class="row">
         <span class="resClose" id="closeSpan">&times;</span>
-        {if $requestSuccess == 'requestSent'}
+        {if $requestSuccess == 'success'}
         <h3 class="resModal-head">Request Sent Successfully</h3>
         </div>
         <p>Your request has been sent successfully. Please wait for the administrator to examine your request. If the administrator thinks your ban can be removed, your account will be reactivated by tomorrow. Thank you for you patience.</p>

@@ -328,6 +328,8 @@ dropdownMenu.innerHTML = `
     }
 }
 
-    
+if (modalMessage !== '') {
+    $('#confirmationModal').modal('show');
+}
     
 });
