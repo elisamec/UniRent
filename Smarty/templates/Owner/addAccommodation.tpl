@@ -124,7 +124,7 @@
     </div>
       
       <div class="addAccom">
-      <div class="container">
+      <div class="container screenSize">
       <div class="Properties_taital_main">
                      <h1 class="Properties_taital">Add Accommodation</h1>
                      <hr class="border_main">

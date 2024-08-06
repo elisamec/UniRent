@@ -120,10 +120,10 @@
       <div class="path">
         <p id="breadcrumb"></p>
     </div>
-      <div class="profile">
+      <div class="profile screenSize">
          <div class="row">
          <div class="col-md-3">
-         <div class="sidebar">
+         <div class="sidebar screenSize">
          <div class="col-md-3">
             <div class="sidebar_but active"><a href="/UniRent/Owner/profile">Profile</a></div>
          </div>

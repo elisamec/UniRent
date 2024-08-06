@@ -122,7 +122,7 @@
     </div>
       <!-- header section end -->
       <!-- feature section start -->
-      <div class="Properties_section layout_padding">
+      <div class="Properties_section layout_padding screenSize">
          <div class="container">
             <div class="row">
                <div class="col-sm-12">

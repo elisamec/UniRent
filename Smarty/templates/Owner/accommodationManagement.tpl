@@ -31,7 +31,7 @@
       <!-- Include Font Awesome -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
       <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/home.css">
-      <link\ rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/cookie.css">
+      <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/cookie.css">
       <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     
    </head>
@@ -124,7 +124,7 @@
     </div>
     <!-- header section end -->
     <!-- accommodation section start -->
-      <div class="container-fluid">
+      <div class="container-fluid screenSize">
       <div class="row">
          <div class="col-md-12">
             <div class="profile_text">

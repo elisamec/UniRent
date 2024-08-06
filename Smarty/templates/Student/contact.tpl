@@ -127,7 +127,7 @@
 
 
 
-      <div class="contact_section layout_padding">
+      <div class="contact_section layout_padding screenSize">
          <div class="container">
             <div class="row">
                <div class="col-sm-12">

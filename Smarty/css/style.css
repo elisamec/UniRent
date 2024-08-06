@@ -3125,5 +3125,11 @@ a.badge-danger.focus,a.badge-danger:focus{
     margin-left: 10px;
 }
 .screenSize {
-    min-height: 68vh;
+    min-height: 47vh;
+}
+.lessMargin {
+    margin-top: 0;
+}
+.moreMargin {
+    margin-top: 10px;
 }

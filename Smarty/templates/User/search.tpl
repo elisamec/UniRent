@@ -246,7 +246,7 @@
                   </div>
                </div>
             </div>
-            <div class="Properties_section_2" >
+            <div class="Properties_section_2 screenSize" >
                <div class="row" id="resultContainer">
                   
                   </div>

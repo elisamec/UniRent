@@ -122,7 +122,7 @@
     </div>
       <!-- header section end -->
       <!-- feature section start -->
-       <div class="container-fluid">
+       <div class="container-fluid ">
          <div class="search_box_section">
             <div class="search_box_main padding-reserve">
             <form action="/UniRent/Owner/filterTenants/{$kind}" method="post" id="yourFormId">
@@ -245,7 +245,7 @@
                   </div>
                </div>
             </div>
-            <div class="Properties_section_2">
+            <div class="Properties_section_2 screenSize">
                <div class="row" id="tenantsContainer">
                </div>
             </div>

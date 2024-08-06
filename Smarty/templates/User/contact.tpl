@@ -78,7 +78,7 @@
         <p id="breadcrumb"></p>
     </div>
       <div class="contact_section layout_padding">
-         <div class="container">
+         <div class="container screenSize">
             <div class="row">
                <div class="col-sm-12">
                   <div class="contact_taital_main">

@@ -120,7 +120,7 @@
     </div>
     <!-- header section end -->
     <!-- accommodation section start -->
-      <div class="container-fluid">
+      <div class="container-fluid screenSize">
       <div class="row">
          <div class="col-md-12">
             <div class="profile_text">

@@ -119,7 +119,7 @@
       <!-- header section end -->
       <!-- feature section start -->
       <div class="Properties_section layout_padding">
-         <div class="container">
+         <div class="container screenSize">
             <div class="row">
                <div class="col-sm-12">
                   <div class="Properties_taital_main">

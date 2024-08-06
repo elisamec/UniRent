@@ -63,7 +63,7 @@
          </div>
       <!-- banner section start --> 
       <div class="layout_padding">
-        <div class="container">
+        <div class="container screenSize">
           <div class="Logcontainer">
             <div class="heading">Sign Up</div>
             <form action="/UniRent/User/showRegistration" class="form" method="post" id="profileForm" enctype="multipart/form-data">

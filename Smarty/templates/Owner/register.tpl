@@ -60,8 +60,8 @@
             </nav>
          </div>
       <!-- banner section start --> 
-      <div class="layout_padding">
-        <div class="container">
+      <div class="layout_padding ">
+        <div class="container screenSize">
           <div class="Logcontainer">
             <div class="heading">Owner Sign Up</div>
             <form action="/UniRent/Owner/ownerRegistration" class="form" method="post">

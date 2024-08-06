@@ -118,7 +118,7 @@
     </div>
       <!-- header section end -->
       <!-- feature section start -->
-      <div class="Properties_section padding-reserve">
+      <div class="Properties_section padding-reserve screenSize">
          <div class="container">
                      <h1 class="accommodation_text">@{$username}'s Proprieties</h1>
             <div class="Properties_section_2">

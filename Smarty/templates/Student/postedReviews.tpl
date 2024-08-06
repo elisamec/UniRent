@@ -31,7 +31,7 @@
       <!-- Include Font Awesome -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
       <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/home.css">
-      <link\ rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/cookie.css">
+      <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/cookie.css">
    </head>
    <body onload="on()">
       <div class="header_section">
@@ -121,7 +121,7 @@
          <h1 class="Properties_taital">What you think of others:</h1>
          <hr class="border_main">
          </div>
-    <div id="reviewsContainer"></div>
+    <div id="reviewsContainer screenSize"></div>
 
     <div id="confirmModal" class="resModal">
    <div class="resModal-content">

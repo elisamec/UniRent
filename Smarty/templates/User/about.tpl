@@ -69,15 +69,43 @@
       <div class="path">
             <p id="breadcrumb"></p>
       </div>
-      <div class="about">
+      <div class="about screenSize">
       <h2 class="search_text">About Us</h2>
-      <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum risus sed augue sodales, eu porta quam laoreet. Nunc fermentum dui eros, non facilisis lacus pharetra quis. Duis augue sem, vestibulum vel est at, tempus feugiat turpis. Integer vel eros vel purus sodales gravida ut nec dolor. Integer ullamcorper augue lorem, eu tincidunt orci consequat molestie. Curabitur commodo magna non velit efficitur, non condimentum lorem eleifend. Phasellus ut ex id felis euismod rhoncus eget eu mi. Praesent iaculis vehicula arcu id sagittis. Suspendisse tempor lobortis tortor, eu tincidunt magna accumsan quis. Aliquam erat volutpat. Cras scelerisque massa eu lorem mattis, sit amet gravida velit feugiat. Praesent quis augue nec leo viverra bibendum. Integer nec enim at ante facilisis dignissim ac a nulla. Nullam id lacinia sapien, quis finibus velit.</p>
-      <p>Nulla vel quam aliquam, pharetra velit quis, mattis ex. Cras interdum mollis metus eget dictum. Pellentesque faucibus est non leo ullamcorper consectetur. Proin fermentum, libero in iaculis imperdiet, purus turpis congue turpis, interdum egestas neque massa vitae ex. Praesent faucibus ipsum metus, quis dictum tortor elementum vitae. In vitae mi nec neque commodo vestibulum. Cras vestibulum nisl nibh, vitae scelerisque lacus luctus eget.</p>
-      <p>Quisque egestas purus et ipsum suscipit, vitae cursus metus varius. Praesent ut tortor quis nisl posuere pharetra ac vitae velit. Fusce mi turpis, vestibulum id mi sit amet, porttitor commodo diam. Nullam nisi dolor, congue at metus pellentesque, euismod consectetur leo. Nulla ultricies mi quis mauris viverra lacinia. Mauris vitae mauris nec quam consectetur tincidunt. Curabitur dictum ipsum sed luctus aliquet. Nulla facilisi. Morbi dolor mauris, congue eu tempor ut, varius ut tellus. Nullam pulvinar maximus turpis sed malesuada.</p>
-      <p>Curabitur a hendrerit felis. Curabitur dui mauris, fermentum id tempor eu, placerat eu ligula. Donec neque lectus, volutpat ac tortor vitae, sollicitudin dignissim sapien. Nam ut lacus vestibulum, gravida metus facilisis, auctor mi. Quisque bibendum neque rutrum tempus molestie. Praesent porttitor, lectus eget blandit porttitor, erat lacus ultricies magna, at lobortis lectus justo porta augue. Integer eu nisi tempor, convallis dolor laoreet, fringilla nisi. Proin dictum ipsum velit, vitae tincidunt nulla tempor in. Suspendisse vel est nec quam maximus egestas. Sed pretium libero urna, sed tristique turpis consequat id. Donec est nibh, hendrerit non vestibulum sed, tempus at purus. Suspendisse elementum dolor lacinia nibh mollis, commodo consequat justo ullamcorper. Praesent ac dignissim nisi, non bibendum lacus.</p>
-      <p>Quisque orci mi, consectetur et purus quis, imperdiet sagittis ante. Proin porta pulvinar sapien vel ornare. Vestibulum accumsan scelerisque urna, eget condimentum lectus accumsan eu. Cras varius diam ut nisi porttitor, eget lacinia justo rutrum. Aenean ut fringilla metus. Fusce id blandit massa. Suspendisse potenti. Aenean a nulla sed ante aliquet elementum. Nulla nisi ipsum, iaculis nec rutrum ac, porttitor sed ipsum. Praesent pretium facilisis lacus, sit amet sollicitudin quam posuere ut. Ut at leo vel massa aliquam rutrum.</p>
+      <p>
+      Welcome to UniRent, the web application designed to simplify the process of finding and renting student accommodations. 
+      Created as a university project by three passionate students, UniRent is here to bridge the gap between students seeking the perfect place to live and property owners looking to rent out their apartments to students.
+      </p>
+      <h3>Our Mission</h3>
+      <p>At UniRent, our mission is to make the search for student housing straightforward and efficient. 
+      We understand the challenges students face when finding accommodations that fit their needs and budget, and we aim to offer a streamlined platform where students can easily connect with property owners. 
+      Whether you're a student searching for a place to call home or an owner with apartments available, UniRent is designed to make the rental process as smooth as possible.
+      </p>
+      <h3>The Team</h3>
+      <h5 class="moreMargin">Elisabetta Mecozzi</h5>
+      <p class="lessMargin">With a keen eye for design and a knack for JavaScript, Elisabetta was instrumental in shaping the user interface and experience of UniRent. 
+      Her focus on the graphics and frontend ensures that navigating our platform is both intuitive and engaging.</p>
+      <h5 class="moreMargin">Matteo Maloni</h5>
+      <p class="lessMargin">Matteo’s expertise in backend development and database management played a crucial role in building the robust infrastructure of UniRent. 
+      His work ensures that the application runs smoothly and efficiently on the server side.</p>
+      <h5 class="moreMargin">Nadia Muzyka</h5>
+      <p class="lessMargin">Nadia’s contributions to the backend were vital in developing and optimizing the application's core functionalities. 
+      Her problem-solving skills in managing the database and server-side operations help ensure a seamless user experience.</p>
+      <h3>Our Inspiration</h3>
+      <p>UniRent was born out of a desire to provide a practical solution for students in search of accommodation and to help property owners better showcase their properties.
+      We recognize the difficulty students often face when looking for housing and saw an opportunity to create a platform that not only facilitates finding a place to live but also encourages social interaction among students. 
+      By creating a dedicated space for student rentals, we hope to foster a sense of community and make the rental process more transparent and efficient.
+      </p>
+      <h3>How It Works</h3>
+      <p>UniRent allows students to rent properties for fixed periods of 10 months, with the option to start their contract in either September or October. 
+      Our platform supports multiple rental agreements, enabling students to secure an apartment for only themselves or to rent multiple places at the same time.
+      Owners can accept reservations within two days, and students have the same period to complete their payment. 
+      If either party does not act within these timeframes, the reservation is canceled.</p>
+      <h3>Future Endeavors</h3>
+      <p>While UniRent was developed as a university project and does not have future development goals, Elisabetta Mecozzi and Matteo Maloni will continue to explore its potential. 
+      Elisabetta will use UniRent for her thesis work on penetration testing and vulnerability patching, while Matteo will delve into Doctrine and Symfony as part of his thesis research.<p>
+      <hr>
+      <h4>Thank you for visiting UniRent. We hope our platform helps you find the perfect accommodation or connect you with the right student tenants. If you have any questions or feedback, feel free to reach out!</h4>
       </div>
-      
       <!-- footer section start -->
       <div class="footer_section">
          <div class="container">
