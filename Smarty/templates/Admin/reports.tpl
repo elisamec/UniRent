@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>UniRent Admin - Support Requests</title>
+    <title>UniRent Admin - Reports</title>
     <link rel="icon" href="/UniRent/Smarty/images/favicon.png" type="image/png">
 
     <!-- Custom fonts for this template-->
@@ -94,8 +94,8 @@
                     <div class="path">
                         <p id="breadcrumb"></p>
                     </div>
-                    <h1 class="h3 mb-2 text-gray-800">Here there are all of the support requests</h1>
-                    <ul class="request-list">
+                    <h1 class="h3 mb-2 text-gray-800">Here there are all of the reports that have been made</h1>
+                    <ul class="report-list">
                     </ul>
                     
                 </div>
@@ -316,7 +316,7 @@
          </script>
 <script>
 // Assuming Smarty JSON data is available as a JavaScript variable
-var jsonData = {$requests};
+var reportsData = {$reports};
 </script>
 <script src="/UniRent/Smarty/js/adminDropdowns.js"></script>
 

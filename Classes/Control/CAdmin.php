@@ -55,7 +55,7 @@ class CAdmin
                    
                     $session = USession::getInstance();
                     $session::setSessionElement("userType", 'Admin');
-                    $session::setSessionElement('password',USuperGlobalAccess::getPost('password'));
+                    $session::setSessionElement('password',$passwordIn);
                     header('Location:/UniRent/Admin/home'); 
                 }
                 else  #password is not correct
@@ -168,13 +168,17 @@ class CAdmin
             }
         }
     }
-    public static function ban(int $id, string $type)
+    public static function ban(int $id, string $type, int $reportId)
     {
         $PM = FPersistentManager::getInstance();
         $user=$PM->load('E'.ucfirst($type), $id);
+        $report=$PM->load('EReport', $reportId);
+        $report->setBanDate(new DateTime('today'));
+        $res=$PM->update($report);
         if (ucfirst($type)==='Student')
         {
             $user->setStatus(TStatusUser::BANNED);
+
         }
         else if (ucfirst($type)==='Owner')
         {
@@ -294,7 +298,7 @@ class CAdmin
         $AUF->addElement($domain, $uniName, $city);  
 
     }
-        public static function profile(string $username)
+        public static function profile(string $username, ?int $reportId = null)
     {
         $PM=FPersistentManager::getInstance();
         $user=$PM->verifyUserUsername($username);
@@ -347,7 +351,7 @@ class CAdmin
                 'statusReported' => $review->isReported()
             ];
         }
-        $view->profile($user, $userType, $reviewsData);
+        $view->profile($user, $userType, $reviewsData, $reportId);
     }
 
     /**
@@ -368,11 +372,28 @@ class CAdmin
             if ($report->getBanDate()===null) {
                 $countReports++;
             }
+            if ($report->getSubjectType()==TType::REVIEW) {
+                $subject=$PM->load('EReview', $report->getIdSubject());
+                $review = [
+                    'id' => $subject->getId(),
+                    'title' => $subject->getTitle(),
+                    'description' => $subject->getDescription(),
+                ];
+                $usernameSubject=$PM->getUsernameById($subject->getIdAuthor(), $subject->getAuthorType());
+            }
+            else
+            { 
+                $review=null;
+                $usernameSubject=$PM->getUsernameById($report->getIdSubject(), $report->getSubjectType());
+            }
             $reports[]=[
                 'id'=>$report->getId(),
                 'description'=>$report->getDescription(),
                 'made'=>$report->getMade()->format('Y-m-d'),
                 'banDate'=>$report->getBanDate()? $report->getBanDate()->format('Y-m-d') : null,
+                'type' => $report->getSubjectType()->value,
+                'usernameSubject' =>$usernameSubject,
+                'review' => $review
             ];
         }
         $requestsArray=$result['Request'];
@@ -531,5 +552,43 @@ class CAdmin
         {
             header('Location:/UniRent/Admin/home/error');
         }
+    }
+    public static function readMoreReports() {
+        $PM=FPersistentManager::getInstance();
+        $reports=[];
+        $count=1;
+        $reportArray=$PM->get_Request_and_Report()['Report'];
+        foreach ($reportArray as $report) {
+                if (array_key_exists($count, $reports)) {
+                    if (count($reports[$count])==10) {
+                        $count++;
+                    }
+                }
+                if ($report->getSubjectType()==TType::REVIEW) {
+                    $subject=$PM->load('EReview', $report->getIdSubject());
+                    $review = [
+                        'id' => $subject->getId(),
+                        'title' => $subject->getTitle(),
+                        'description' => $subject->getDescription(),
+                    ];
+                    $usernameSubject=$PM->getUsernameById($subject->getIdAuthor(), $subject->getAuthorType());
+                }
+                else
+                { 
+                    $review=null;
+                    $usernameSubject=$PM->getUsernameById($report->getIdSubject(), $report->getSubjectType());
+                }
+                $reports[$count][]=[
+                    'id'=>$report->getId(),
+                    'description'=>$report->getDescription(),
+                    'made'=>$report->getMade()->format('Y-m-d'),
+                    'banDate'=>$report->getBanDate()? $report->getBanDate()->format('Y-m-d') : null,
+                    'type' => $report->getSubjectType()->value,
+                    'usernameSubject' =>$usernameSubject,
+                    'review' => $review
+                ];
+            }
+        $view=new VAdmin();
+        $view->readMoreReports($reports, $count);
     }
 }

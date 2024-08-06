@@ -31,15 +31,21 @@ class VAdmin
         $this->smarty->assign('passwordError', true);
         $this->smarty->display('Admin/login.tpl');
     }
-    public function profile(EStudent | EOwner $user, string $userType, array $reviewsData){
+    public function profile(EStudent | EOwner $user, string $userType, array $reviewsData, ?int $reportId){
         $this->smarty->assign('user', $user);
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->assign('userType', $userType);
+        $this->smarty->assign('reportId', $reportId);
         $this->smarty->display('Admin/profile.tpl');
     }
     public function readMoreSupportRequest(array $requests, int $count){ 
         $this->smarty->assign('requests', json_encode($requests));
         $this->smarty->assign('count', $count);
         $this->smarty->display('Admin/supportRequests.tpl');
+    }
+    public function readMoreReports(array $reports, int $count){
+        $this->smarty->assign('reports', json_encode($reports));
+        $this->smarty->assign('count', $count);
+        $this->smarty->display('Admin/reports.tpl');
     }
 }

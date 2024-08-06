@@ -11309,7 +11309,7 @@ body.sidebar-toggled footer.sticky-footer {
     }
     .profile {
       padding-bottom:20px;
-      height: 78vh;
+      min-height: 78vh;
   }
   .profile_pic {
       width: 100%;
@@ -11342,7 +11342,10 @@ body.sidebar-toggled footer.sticky-footer {
 .stars {
   display: inline-block;
   vertical-align: middle;
-  margin-left: 20px;
+  margin-left: 10px;
+}
+.reviewContent {
+  padding-left: 10px;
 }
 
 .or {
@@ -11417,4 +11420,36 @@ body.sidebar-toggled footer.sticky-footer {
 }
 .form-control {
   margin-bottom: 20px;
+}
+#reviewsContainer {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.ReviewTitle {
+  padding-left: 80px;
+  padding-top: 20px;
+  font-size: 26px;
+  font-weight: bold;
+}
+.report-list {
+  list-style-type: none;
+  padding: 0;
+}
+.report-item {
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+.report-item:hover {
+  background-color: #f1f1f1;
+}
+#reportedReview h6 {
+  padding-left: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+#reportedReview p {
+  padding-left: 20px;
+  font-size: 16px;
 }

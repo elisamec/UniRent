@@ -115,8 +115,8 @@
                                         <div class="col-md-3">
                                         {if $user->getStatus()->value=='banned'}
                                             <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" onclick="removeBanModal({$user->getId()}, {$userType})"> Remove Ban</a>
-                                        {else}
-                                            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" onclick="banModal({$user->getId()}, {$userType})"> Ban</a>
+                                        {else if $reportId!=null}
+                                            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" onclick="BanModal({$user->getId()}, {$userType}, {$reportId})"> Ban</a>
                                         {/if}
                                         </div>
                                 </div>
@@ -261,6 +261,41 @@
     </div>
 </div>
 <!-- End of Request Detail Modal -->
+<!-- Report Detail Modal -->
+<div class="modal fade centerSupport" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reportModalLabel">Report Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <p><strong>Made:</strong> <span id="reportMade"></span></p>
+                <p><strong>Report Content: </strong><span id="reportContent"></span></p>
+                <p><strong>Subject type:</strong> <span id="reportType"></span></p>
+                <p><strong>Subject:</strong> <span id="reportSubject"></span></p>
+                <p><strong>Ban Date:</strong> <span id="reportBanDate"></span></p>
+                <input type="hidden" name="reportId" value="">
+                <hr>
+
+                <!-- Review Display (conditionally displayed) -->
+                <div id="reviewContainer" style="display: none;">
+                    <p><strong>Reported Review:</strong></p>
+                    <div id="reportedReview"></div>
+                    <input type="hidden" name="reviewId" value="">
+                    <button type="button" class="btn btn-primary" id="banReview" style="display: none;">Ban Review</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="deleteReport" style="display: none;">Delete Report</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Report Detail Modal -->
 
 
     <script>
@@ -289,8 +324,8 @@
     </div>
 
     <script>
-        function BanModal(userId, type) {
-            document.getElementById('banButton').href = '/UniRent/Admin/ban/' + type + '/' + userId;
+        function BanModal(userId, type, reportId) {
+            document.getElementById('banButton').href = '/UniRent/Admin/ban/' + type + '/' + userId +'/' + reportId;
             $('#banModal').modal('show');
         }
     </script>
@@ -399,7 +434,7 @@
                                 <div class="stars">
                                     ` + generateStars(review.stars) + ` <!-- Star rating -->
                                 </div>
-                                <p>` + review.content + `</p> <!-- Content of the review -->
+                                <p class="reviewContent">` + review.content + `</p> <!-- Content of the review -->
                             </div>
                         </div>
                     `;

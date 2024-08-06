@@ -3124,3 +3124,6 @@ a.badge-danger.focus,a.badge-danger:focus{
     font-weight: bold;
     margin-left: 10px;
 }
+.screenSize {
+    min-height: 68vh;
+}
