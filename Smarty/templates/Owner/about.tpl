@@ -164,7 +164,7 @@
       <p>While UniRent was developed as a university project and does not have future development goals, Elisabetta Mecozzi and Matteo Maloni will continue to explore its potential. 
       Elisabetta will use UniRent for her thesis work on penetration testing and vulnerability patching, while Matteo will delve into Doctrine and Symfony as part of his thesis research.<p>
       <hr>
-      <h4>Thank you for visiting UniRent. We hope our platform helps you find the perfect accommodation or connect you with the right student tenants. If you have any questions or feedback, feel free to reach out!</h4>
+      <h4>Thank you for visiting UniRent. We hope our platform helps you find the perfect tenants for your apartments. If you have any questions or feedback, feel free to reach out!</h4>
       </div>
       
       <!-- footer section start -->
