@@ -1313,7 +1313,7 @@ textarea#comment::placeholder {
     transform: translateX(125%);
 }
 
-.send_bt a {
+.send_bt a , .send_bt button{
     width: 100%;
     text-align: center;
     font-size: 18px;
@@ -1327,11 +1327,11 @@ textarea#comment::placeholder {
     border-radius: 5px;
 }
 
-.send_bt a:hover {
+.send_bt a:hover , .send_bt button:hover{
     color: #fff;
     background-color: #252525;
 }
-.send_bt.active a {
+.send_bt.active a , .send_bt.active button{
     color: #ffffff;
     background-color: #252525;
 }

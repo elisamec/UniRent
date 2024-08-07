@@ -78,14 +78,14 @@
         <p id="breadcrumb"></p>
     </div>
       <div class="contact_section layout_padding">
-         <div class="container screenSize">
+         <div class="container">
             <div class="row">
                <div class="col-sm-12">
                   <div class="contact_taital_main">
                      <h1 class="contact_taital">App Issues</h1>
-                     <p> Please, feel free to contact us in case of any issues with the app. We are here to help you.</p>
                      <hr class="contact_border_main">
                   </div>
+                  <p> Please, feel free to contact us in case of any issues with the app. We are here to help you.</p>
                </div>
             </div>
          </div>
