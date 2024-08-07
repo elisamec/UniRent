@@ -26,7 +26,7 @@ class CVisit
     $hour=$time[0];
     $minutes=$time[1];
     $date=new DateTime();
-    $date->modify('next '.$day);
+    $date->modify('next'.$day);
     $date->setTime($hour, $minutes);
     $visit= new EVisit(null, $date, $idStudent, $idAccommodation);
     $PM= FPersistentManager::getInstance();

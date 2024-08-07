@@ -19,8 +19,12 @@ class CReview {
 
     public static function delete(int $id) {
         $PM=FPersistentManager::getInstance();
-        $PM->delete('EReview', $id);
-        header('Location:' . $_SERVER['HTTP_REFERER']);
+        $res=$PM->delete('EReview', $id);
+        if ($res) {
+            header('Location:' . $_COOKIE['current_page'].'/success');
+        } else {
+            header('Location:' . $_COOKIE['current_page'].'/error');
+        }
     }
 
     public static function edit(int $id) {
@@ -29,8 +33,12 @@ class CReview {
         $review->setTitle(USuperGlobalAccess::getPost('title'));
         $review->setDescription(USuperGlobalAccess::getPost('content'));
         $review->setValutation(USuperGlobalAccess::getPost('rate'));
-        $PM->update($review);
-        header('Location:' . $_SERVER['HTTP_REFERER']);
+        $res=$PM->update($review);
+        if ($res) {
+            header('Location:' . $_COOKIE['current_page'].'/success');
+        } else {
+            header('Location:' . $_COOKIE['current_page'].'/error');
+        }
     }
     public static function addReviewStudent(int $idStudent) {
         $idAuthor=USession::getInstance()->getSessionElement('id');
@@ -44,10 +52,9 @@ class CReview {
         $review=new EReview(null, $title, $valutation, $description, $type, $date, $authorType, $idAuthor, $idStudent);
         $res=$PM->store($review);
         if ($res) {
-            header('Location:' . $_SERVER['HTTP_REFERER']);
+            header('Location:' . $_COOKIE['current_page'].'/success');
         } else {
-            $viewError= new VError();
-            $viewError->error(500);
+            header('Location:' . $_COOKIE['current_page'].'/error');
         }
     }
     public static function addReviewOwner(int $idOwner) {
@@ -63,11 +70,10 @@ class CReview {
         $review=new EReview(null, $title, $valutation, $description, $type, $date, $authorType, $idAuthor, $idOwner);
         $res=$PM->store($review);
         if ($res) {
-            header('Location:' . $_SERVER['HTTP_REFERER']);
-            } else {
-                $viewError= new VError();
-            $viewError->error(500);
-            }
+            header('Location:' . $_COOKIE['current_page'].'/success');
+        } else {
+            header('Location:' . $_COOKIE['current_page'].'/error');
+        }
     }
     public static function addReviewAccommodation(int $idAccommodation) {
         $PM=FPersistentManager::getInstance();
@@ -82,10 +88,9 @@ class CReview {
         $review=new EReview(null, $title, $valutation, $description, $type, $date, $authorType, $idAuthor, $idAccommodation);
         $res=$PM->store($review);
         if ($res) {
-            header('Location:' . $_SERVER['HTTP_REFERER']);
+            header('Location:' . $_COOKIE['current_page'].'/success');
         } else {
-            $viewError= new VError();
-            $viewError->error(500);
+            header('Location:' . $_COOKIE['current_page'].'/error');
         }
     }
 

@@ -58,7 +58,7 @@ class CContract
         }
 
     }
-    public static function showStudent(string $kind) {
+    public static function showStudent(string $kind, ?string $modalSuccess=null):void {
         $session=USession::getInstance();
         $id=$session->getSessionElement('id');
         $PM= FPersistentManager::getInstance();
@@ -94,11 +94,11 @@ class CContract
             ];
         }
         $view= new VStudent();
-        $view->showContracts($contractsData, $kind);
+        $view->showContracts($contractsData, $kind, $modalSuccess);
 
     }
     
-    public static function showOwner(string $kind):void {
+    public static function showOwner(string $kind, ?string $modalSuccess=null):void {
         $session=USession::getInstance();
         $id=$session::getSessionElement('id');
         $PM=FPersistentManager::getInstance();
@@ -151,7 +151,7 @@ class CContract
                 'contracts' => $studentList
             ];
         }
-        $view->showContracts($contractsData, $kind);
+        $view->showContracts($contractsData, $kind, $modalSuccess);
     }
     public static function contractDetails(int $idContract, ?string $modalSuccess=null):void {
         $session = USession::getInstance();
@@ -221,7 +221,7 @@ class CContract
             $cardNumber='**** **** **** ' . substr($creditCard->getNumber(), -4);
             $cardHolder = $creditCard->getName() . " ". $creditCard->getSurname();
             $view= new VStudent();
-            $view->contractDetails($contract, $accommodation, $owner, $cardNumber, $cardHolder, $picture, $reviewsData);
+            $view->contractDetails($contract, $accommodation, $owner, $cardNumber, $cardHolder, $picture, $reviewsData, $modalSuccess);
         }
         else {
             $student = $PM->load('EStudent', $contract->getIdStudent());
@@ -278,7 +278,7 @@ class CContract
      *
      * @return void
      */
-    public static function viewOngoing(int $id)
+    public static function viewOngoing(int $id, ?string $modalSuccess=null):void
     {
         $PM=FPersistentManager::getInstance();
         $result=$PM->getOnGoingContractsByAccommodationId($id);
@@ -330,6 +330,6 @@ class CContract
                 'contracts' => $studentList
             ];
         }
-        $view->showContracts($contractsData, 'onGoing');
+        $view->showContracts($contractsData, 'onGoing', $modalSuccess);
     }
 }

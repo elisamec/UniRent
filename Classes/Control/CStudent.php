@@ -33,7 +33,7 @@ class CStudent{
      * Display the home page
      * 
      */
-    public static function home(){
+    public static function home(?string $modalSuccess=null){
         $view = new VStudent();
         $PM=FPersistentManager::getInstance();
         $session=USession::getInstance();
@@ -41,11 +41,11 @@ class CStudent{
         $student_id = $PM->getStudentIdByUsername($user);
         $student = $PM->load('EStudent', $student_id);
         $accommodations = $PM->lastAccommodationsStudent($student);
-        $view->home($accommodations);
+        $view->home($accommodations, $modalSuccess);
     }
-    public static function contact(){
+    public static function contact(?string $modalSuccess=null){
         $view = new VStudent();
-        $view->contact();
+        $view->contact($modalSuccess);
     }
     public static function findAccommodation()
     {
@@ -96,7 +96,7 @@ class CStudent{
      * 
      * @return void
      */
-    public static function profile(): void{
+    public static function profile(?string $modalSuccess=null): void{
 
         $view = new VStudent();
         $session=USession::getInstance();
@@ -125,11 +125,11 @@ class CStudent{
                 $ph = "data:" . 'image/jpeg' . ";base64," . $base64;
             }
 
-            $view->profile($student, $ph);
+            $view->profile($student, $ph, $modalSuccess);
         }
     }
     
-    public static function editProfile(){
+    public static function editProfile(?string $modalSuccess=null){
         $view = new VStudent();
         $PM = FPersistentManager::getInstance();
         $student = $PM->getStudentByUsername(USession::getInstance()::getSessionElement('username'));
@@ -141,7 +141,7 @@ class CStudent{
             $base64 = base64_encode($photo);
             $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
 
-            $view->editProfile($student, $photo, false, false, false, false);
+            $view->editProfile($student, $photo, false, false, false, false, $modalSuccess);
         }
         
     }
@@ -157,11 +157,11 @@ class CStudent{
             $session::unsetSession();
             $session::destroySession();
             setcookie('PHPSESSID','',time()-3600);
-            header('Location:/UniRent/User/home');
+            header('Location:/UniRent/User/home/success');
         }
         else
         {
-            print 'Spiacenti non puoi andartene ;)';
+            header('Location:/UniRent/'.$_COOKIE['current_page'].'/error');
         }
     }
 
@@ -221,7 +221,8 @@ class CStudent{
             header('Location:/UniRent/Student/home');
         }
         else{
-            print 'Spiacenti non sei stato registrato';
+            $viewError=new VError();
+            $viewError->error(500);
         }
     }
     
@@ -282,7 +283,7 @@ class CStudent{
                 $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
             }
             if ($review->getDescription()===null) {
-                $content='No description';
+                $content='No additional details were provided by the author.';
             }
             else
             {
@@ -372,7 +373,7 @@ class CStudent{
 
 
     //DA AGGIUSTARE PER LA SESSIONE
-    public static function reviews() {
+    public static function reviews(?string $modalSuccess=null) {
         $view = new VStudent();
         $session=USession::getInstance();
         $studentUsername=$session::getSessionElement('username');
@@ -397,7 +398,7 @@ class CStudent{
                 $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
             }
             if ($review->getDescription()===null) {
-                $content='No description';
+                $content='No additional details were provided by the author.';
             }
             else
             {
@@ -413,7 +414,7 @@ class CStudent{
                 'userPicture' => $profilePic,
             ];
         }
-        $view->reviews($reviewsData);
+        $view->reviews($reviewsData, $modalSuccess);
     }
 
     public static function modifyStudentProfile(){
@@ -490,25 +491,23 @@ class CStudent{
                     //$password = $student->getPassword();
                     $session->setSessionElement('password',$password);
                     $session->setSessionElement('photo',$ph);
-                    header('Location:/UniRent/Student/profile');
+                    header('Location:/UniRent/Student/profile/success');
                 } elseif (!$result) {
                     
-                    http_response_code(500);
+                    header('Location:/UniRent/Student/profile/error');
                     
                 } 
             }
             else
             {
                 //Username error
-                $view->editProfile($oldStudent, $photoError, false, true, false, false);
-                #header('Location:/UniRent/Student/profile');s
+                $view->editProfile($oldStudent, $photoError, false, true, false, false, null);
             }
         }
         else
         {
             //Email error
-            $view->editProfile($oldStudent, $photoError, false, false, false, true);
-            #header('Location:/UniRent/Student/profile');
+            $view->editProfile($oldStudent, $photoError, false, false, false, true, null);
         }  
     }
 
@@ -528,13 +527,13 @@ class CStudent{
 
                     $error = 1;
                     $password=$session::getSessionElement('password');
-                    $view->editProfile($oldStudent, $photoError, true, false, false, false);
+                    $view->editProfile($oldStudent, $photoError, true, false, false, false, null);
 
                 } else $password=$newPassword;
                 
             } else {
                 $error = 1;
-                $view->editProfile($oldStudent, $photoError, false, false, false, true);
+                $view->editProfile($oldStudent, $photoError, false, false, false, true, null);
                 $password=$session::getSessionElement('password');
             }
         }
@@ -569,7 +568,7 @@ class CStudent{
                 $risultato = $PM->storeAvatar($photo);
 
                 if(!$risultato){
-                    header("HTTP/1.1 500 Internal Server Error");
+                    header("Location:/UniRent/Student/profile/error");
                 }
             }
         }
@@ -601,7 +600,7 @@ class CStudent{
             $photo = null;
             $session->setSessionElement('photo',$photo);
             header('Location:/UniRent/Student/profile');
-        }  else print "Errore nell'eliminazione della foto <br>";
+        }  else header('Location:/UniRent/Student/profile/error');
 
     }
 
@@ -616,7 +615,7 @@ class CStudent{
         }
     }
         
-    public static function publicProfileFromStudent(string $username, ?string $kind="#")
+    public static function publicProfileFromStudent(string $username, ?string $kind="#", ?string $modalSuccess=null)
     {
         $session=USession::getInstance();
         if ($session::getSessionElement('username') === $username) {
@@ -660,7 +659,7 @@ class CStudent{
                 $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
             }
             if ($review->getDescription()===null) {
-                $content='No description';
+                $content='No additional details were provided by the author.';
             }
             else
             {
@@ -677,9 +676,9 @@ class CStudent{
             ];
         }
         $roomate=1;
-        $view->publicProfileFromStudent($student, $reviewsData, $kind, $self, $roomate);
+        $view->publicProfileFromStudent($student, $reviewsData, $kind, $self, $roomate, $modalSuccess);
     }
-    public static function publicProfileFromOwner(string $username, ?string $kind="#")
+    public static function publicProfileFromOwner(string $username, ?string $kind="#", ?string $modalSuccess=null)
     {
         $view = new VStudent();
         $PM=FPersistentManager::getInstance();
@@ -717,7 +716,7 @@ class CStudent{
                 $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
             }
             if ($review->getDescription()===null) {
-                $content='No description';
+                $content='No additional details were provided by the author.';
             }
             else
             {
@@ -733,10 +732,10 @@ class CStudent{
                 'userPicture' => $profilePic,
             ];
         }
-        $view->publicProfileFromOwner($student, $reviewsData, $kind);
+        $view->publicProfileFromOwner($student, $reviewsData, $kind, $modalSuccess);
     }
       
-    public static function paymentMethods()
+    public static function paymentMethods(?string $modalSuccess=null)
     {
         $view = new VStudent();
         $session=USession::getInstance();
@@ -785,7 +784,7 @@ class CStudent{
             ];
         }
         #print_r($cardsData);
-        $view->paymentMethods($cardsData);
+        $view->paymentMethods($cardsData, $modalSuccess);
     }
 
     public static function addCreditCard()
@@ -800,7 +799,7 @@ class CStudent{
         $studentId=FPersistentManager::getInstance()->getStudentIdByUsername($username);
         if(FPersistentManager::getInstance()->existsTheCard($number))
         {
-            print 'This credit card already exists!';
+            header('Location:/UniRent/Student/paymentMethods/error');
         }
         else
         {
@@ -810,11 +809,11 @@ class CStudent{
                 $result=FPersistentManager::getInstance()->store($card);
                 if($result)
                 {
-                    header('Location:/UniRent/Student/paymentMethods');
+                    header('Location:/UniRent/Student/paymentMethods/success');
                 }
                 else
                 {
-                    http_response_code(500);
+                    header('Location:/UniRent/Student/paymentMethods/error');
                 }
             }
             else
@@ -823,11 +822,11 @@ class CStudent{
                 $result=FPersistentManager::getInstance()->store($card);
                 if($result)
                 {
-                    header('Location:/UniRent/Student/paymentMethods');
+                    header('Location:/UniRent/Student/paymentMethods/success');
                 }
                 else
                 {
-                    http_response_code(500);
+                    header('Location:/UniRent/Student/paymentMethods/error');
                 }
             }
         }
@@ -840,11 +839,11 @@ class CStudent{
         $result=$PM->deleteCreditCard($number);
         if($result)
         {
-            http_response_code(200);  # ok
+            header('Location:/UniRent/Student/paymentMethods/success');
         }
         else
         {
-            http_response_code(500);   # server error
+           header('Location:/UniRent/Student/paymentMethods/error');
         }
     }
 
@@ -866,11 +865,11 @@ class CStudent{
             $result=$PM->update($c);
             if($result)
             {
-                header('Location:/UniRent/Student/paymentMethods');
+                header('Location:/UniRent/Student/paymentMethods/success');
             }
             else
             {
-                http_response_code(500);
+                header('Location:/UniRent/Student/paymentMethods/error');
             }
         }
         else
@@ -879,11 +878,11 @@ class CStudent{
             $result=$PM->update($c);
             if($result)
             {
-               header('Location:/UniRent/student/paymentMethods');
+               header('Location:/UniRent/student/paymentMethods/success');
             }
             else
             {
-                http_response_code(500);
+                header('Location:/UniRent/Student/paymentMethods/error');
             }
         }  
     }
@@ -900,8 +899,15 @@ class CStudent{
         if(is_null($actualMain))
         {
             $actualcard->setMain(true);
-            $PM->update($actualcard);
-            http_response_code(200);
+            $res=$PM->update($actualcard);
+            if ($res)
+            {
+                header('Location:/UniRent/Student/paymentMethods/success');
+            }
+            else
+            {
+                header('Location:/UniRent/Student/paymentMethods/error');
+            }
         }
         else
         {
@@ -913,22 +919,20 @@ class CStudent{
                 $res_2=$PM->update($actualcard);
                 if($res_2)
                 {
-                    http_response_code(200);
+                    header('Location:/UniRent/Student/paymentMethods/success');
                 }
                 else
                 {
-                    $view=new VError();
-                    $view->error('500');
+                    header('Location:/UniRent/Student/paymentMethods/error');
                 }
             }
             else
             {
-                $view=new VError();
-                $view->error('500');
+                header('Location:/UniRent/Student/paymentMethods/error');
             }
         }
     }
-    public static function postedReview() {
+    public static function postedReview(?string $modalSuccess=null) {
         $view = new VStudent();
         $session=USession::getInstance();
         $studentId=$session::getSessionElement('id');
@@ -970,7 +974,7 @@ class CStudent{
                 $status = $recipient->getStatus()->value;
             }
             if ($review->getDescription()===null) {
-                $content='No description';
+                $content='No additional details were provided by the author.';
             }
             else
             {
@@ -989,7 +993,7 @@ class CStudent{
                 'reported' => $review->isReported()
             ];
         }
-        $view->postedReview($reviewsData);
+        $view->postedReview($reviewsData, $modalSuccess);
     }
 
     public static function reserveAccommodation(int $idAccommodation)

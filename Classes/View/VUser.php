@@ -13,8 +13,9 @@ class VUser{
         $this->smarty = StartSmarty::configuration();
     }
 
-    public function home(array $accommodations){
+    public function home(array $accommodations, ?string $modalSuccess){
         $this->smarty->assign('accommodations', json_encode($accommodations));
+        $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('User/home.tpl');
     }
 
@@ -28,8 +29,8 @@ class VUser{
 
         $this->smarty->display('User/about.tpl');
     }
-    public function contact(){
-
+    public function contact(?string $modalSuccess){
+        $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('User/contact.tpl');
     }
     public function findAccommodation(string $selectedCity, string $selectedUni, array $searchResult, string $date, int $ratingOwner, int $ratingAccommodation, int $minPrice, int $maxPrice):void{

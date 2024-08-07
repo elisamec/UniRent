@@ -17,7 +17,7 @@ use Classes\Tools\TStatusUser;
 class CUser
 {
     
-    public static function home(){
+    public static function home(?string $modalSuccess=null){
         $session=USession::getInstance();
         $type=$session::getSessionElement('userType');
         $id=$session::getSessionElement('id');
@@ -53,7 +53,8 @@ class CUser
         else{
         $view = new VUser();
         $accommodations = $PM->lastAccommodationsUser();
-        $view->home($accommodations);}
+        $view->home($accommodations, $modalSuccess);
+    }
     }
     public static function about(){
         $view = new VUser();
@@ -79,9 +80,9 @@ class CUser
         $view = new VUser();
         $view->register();
     }
-    public static function contact(){
+    public static function contact(?string $modalSuccess=null){
         $view = new VUser();
-        $view->contact();
+        $view->contact($modalSuccess);
     }
     public static function search(){
         $view = new VUser();
@@ -186,8 +187,6 @@ class CUser
     {
 
         $view = new VUser();
-        $viewStudent = new VStudent();
-        $viewOwner = new VOwner();
         $username=USuperGlobalAccess::getPost('username');
         $type = USuperGlobalAccess::getPost('userType');
         $PM = FPersistentManager::getInstance();

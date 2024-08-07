@@ -19,13 +19,13 @@ class VOwner {
     }
 
     //Mostra la home del proprietario
-    public function home(array $accommodationsActive, array $accommodationsInactive, ?string $modalSuccess=null):void {
+    public function home(array $accommodationsActive, array $accommodationsInactive, ?string $modalSuccess):void {
         $this->smarty->assign('accommodationsActive', json_encode($accommodationsActive));
         $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->assign('accommodationsInactive', json_encode($accommodationsInactive));
         $this->smarty->display('Owner/home.tpl');
     }
-    public function accommodationManagement(EAccommodation $accomm, EOwner $owner, array $reviewsData, array $pictures, array $tenants, int $num_places, bool $disabled, bool $deletable, ?string $modalSuccess=null):void{
+    public function accommodationManagement(EAccommodation $accomm, EOwner $owner, array $reviewsData, array $pictures, array $tenants, int $num_places, bool $disabled, bool $deletable, ?string $modalSuccess):void{
         $photos=json_encode($pictures);
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->assign('imagesJson', $photos);
@@ -62,14 +62,14 @@ class VOwner {
      * @param EOwner $owner The owner's profile to display
      * @param string|null $photo The owner's profile photo
      */
-    public function profile(EOwner $owner, ?string $photo, ?string $modalSuccess=null){
+    public function profile(EOwner $owner, ?string $photo, ?string $modalSuccess){
         $this->smarty->assign('photo', $photo);
         $this->smarty->assign('owner', $owner);
         $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('Owner/personalProfile.tpl');
     }
 
-    public function editProfile(EOwner $owner, ?string $photo, bool $usernameDuplicate, bool $emailDuplicate, bool $phoneError, bool $ibanError, bool $oldPasswordError, bool $passwordError):void {
+    public function editProfile(EOwner $owner, ?string $photo, bool $usernameDuplicate, bool $emailDuplicate, bool $phoneError, bool $ibanError, bool $oldPasswordError, bool $passwordError, ?string $modalSuccess):void {
         $this->smarty->assign('photo', $photo);
         $this->smarty->assign('owner', $owner);
         $this->smarty->assign('usernameDuplicate', $usernameDuplicate);
@@ -78,16 +78,17 @@ class VOwner {
         $this->smarty->assign('ibanError', $ibanError);
         $this->smarty->assign('oldPasswordError', $oldPasswordError);
         $this->smarty->assign('passwordError', $passwordError);
+        $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('Owner/editPersonalProfile.tpl');
     }
-    public function contact(?string $modalSuccess=null){
+    public function contact(?string $modalSuccess){
         $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('Owner/contact.tpl');
     }
     public function about(){
         $this->smarty->display('Owner/about.tpl');
     }
-    public function reviews(array $reviewsData, ?string $modalSuccess=null){
+    public function reviews(array $reviewsData, ?string $modalSuccess){
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('Owner/reviews.tpl');
@@ -97,7 +98,7 @@ class VOwner {
     {
         $this->smarty->display('Owner/addAccommodation.tpl');
     }
-    public function publicProfileFromOwner(EOwner $owner, array $reviewsData, ?string $kind="#", bool $self, ?string $modalSuccess=null){
+    public function publicProfileFromOwner(EOwner $owner, array $reviewsData, ?string $kind="#", bool $self, ?string $modalSuccess){
         $this->smarty->assign('owner', $owner);
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->assign('kind', $kind);
@@ -105,14 +106,14 @@ class VOwner {
         $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('Owner/publicProfileFromOwner.tpl');
     }
-    public function publicProfileFromStudent(EOwner $owner, array $reviewsData, ?string $kind="#", ?string $modalSuccess=null){
+    public function publicProfileFromStudent(EOwner $owner, array $reviewsData, ?string $kind="#", ?string $modalSuccess){
         $this->smarty->assign('owner', $owner);
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->assign('kind', $kind);
         $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('Owner/publicProfileFromStudent.tpl');
     }
-    public function postedReview(array $reviewsData, ?string $modalSuccess=null){
+    public function postedReview(array $reviewsData, ?string $modalSuccess){
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('Owner/postedReviews.tpl');
@@ -153,14 +154,14 @@ class VOwner {
         $this->smarty->assign('successDelete', $successDelete);
         $this->smarty->display('Owner/visitDetails.tpl');
     }
-    public function showReservations(array $reservationsData, ?string $modalSuccess=null):void {
+    public function showReservations(array $reservationsData, ?string $modalSuccess):void {
         
         $json =  json_encode($reservationsData);
         $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->assign('reservationsData', $json);
         $this->smarty->display('Owner/reservations.tpl');
     }
-    public function reservationDetails(EReservation $reservation, EStudent $student, string $timeLeft, array $reviewsData, ?string $modalSuccess=null):void {
+    public function reservationDetails(EReservation $reservation, EStudent $student, string $timeLeft, array $reviewsData, ?string $modalSuccess):void {
         
         $this->smarty->assign('reservation', $reservation);
         $this->smarty->assign('student', $student);
@@ -169,14 +170,14 @@ class VOwner {
         $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('Owner/reservationDetails.tpl');
     }
-    public function showContracts(array $contractsData, string $kind, ?string $modalSuccess=null):void {
+    public function showContracts(array $contractsData, string $kind, ?string $modalSuccess):void {
         
         $this->smarty->assign('contractsData', json_encode($contractsData));
         $this->smarty->assign('kind', $kind);
         $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('Owner/contracts.tpl');
     }
-    public function contractDetails(EContract $contract, EStudent $student, array $reviewsData, ?string $modalSuccess=null):void {
+    public function contractDetails(EContract $contract, EStudent $student, array $reviewsData, ?string $modalSuccess):void {
         
         $this->smarty->assign('contract', $contract);
         $this->smarty->assign('student', $student);

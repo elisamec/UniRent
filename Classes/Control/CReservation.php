@@ -16,7 +16,7 @@ require __DIR__.'/../../vendor/autoload.php';
 
 class CReservation
 {
-    public static function showStudent(string $kind) {
+    public static function showStudent(string $kind, ?string $modalSuccess=null): void {
         $session=USession::getInstance();
         $id=$session->getSessionElement('id');
         $PM= FPersistentManager::getInstance();
@@ -42,7 +42,7 @@ class CReservation
             ];
         }
         $view= new VStudent();
-        $view->showReservations($reservationsData, $kind);
+        $view->showReservations($reservationsData, $kind, $modalSuccess);
 
     }
     public static function showOwner(?string $modalSuccess=null):void {
@@ -100,7 +100,7 @@ class CReservation
         }
         $view->showReservations($reservationData, $modalSuccess);
     }
-    public static function reservationDetails(int $idReservation): void {
+    public static function reservationDetails(int $idReservation, ?string $modalSuccess=null): void {
         $session = USession::getInstance();
         $userType = $session->getSessionElement('userType');
         $PM=FPersistentManager::getInstance();
@@ -180,7 +180,7 @@ class CReservation
                 ];
             }
             $view= new VStudent();
-            $view->reservationDetails($reservation, $accommodation, $owner, self::formatDate($reservation->getMade()->setTime(0,0,0)), $picture, $reviewsData, $creditCardData);
+            $view->reservationDetails($reservation, $accommodation, $owner, self::formatDate($reservation->getMade()->setTime(0,0,0)), $picture, $reviewsData, $creditCardData, $modalSuccess);
         }
         else {
             $student = $PM->load('EStudent', $reservation->getIdStudent());
@@ -226,8 +226,7 @@ class CReservation
                 ];
             }
             $view = new VOwner();
-            [$replies, $countReply] = self::getSupportReply();
-            $view->reservationDetails($reservation, $student, self::formatDate($reservation->getMade()->setTime(0,0,0)), $reviewsData, $replies, $countReply);
+            $view->reservationDetails($reservation, $student, self::formatDate($reservation->getMade()->setTime(0,0,0)), $reviewsData, $modalSuccess);
         }
     }
     private static function formatDate(DateTime $date): string {
@@ -252,7 +251,7 @@ class CReservation
         $reservation->setMade(new DateTime('now'));
         $res = $PM->update($reservation);
         if ($res) {
-            header('Location:/UniRent/Reservation/showOwner/accepted');
+            header('Location:/UniRent/Reservation/showOwner/success');
         } else {
             header('Location:/UniRent/Reservation/showOwner/error');
         }
@@ -261,22 +260,9 @@ class CReservation
         $PM = FPersistentManager::getInstance();
         $res = $PM->delete('EReservation', $id); 
         if ($res) {
-            header('Location:/UniRent/Reservation/showOwner/null/denied');
+            header('Location:/UniRent/Reservation/showOwner/success');
         } else {
-            header('Location:/UniRent/Reservation/showOwner/null/error');
+            header('Location:/UniRent/Reservation/showOwner/error');
         }
-    }
-    private static function getSupportReply(): array
-    {
-        $PM=FPersistentManager::getInstance();
-        $session=USession::getInstance();
-        $result=$PM->getSupportReply($session::getSessionElement('id'),$session::getSessionElement('userType'));
-        $countReply=0;
-        foreach ($result as $reply) {
-            if ($reply->getStatusRead() === false) {
-                $countReply++;
-            }
-        }
-        return [$result, $countReply];
     }
 }

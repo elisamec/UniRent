@@ -22,7 +22,7 @@ use Classes\View\VError;
 
 class COwner 
 {
-    public static function home()
+    public static function home(?string $modalSuccess=null)
     {
         $view = new VOwner();
         $PM=FPersistentManager::getInstance();
@@ -61,11 +61,11 @@ class COwner
                 
         #print_r($accommodations);
         
-        $view->home($accommodationsActive, $accommodationsInactive);
+        $view->home($accommodationsActive, $accommodationsInactive, $modalSuccess);
     }
 
 
-    public static function accommodationManagement(int $idAccommodation) {
+    public static function accommodationManagement(int $idAccommodation, ?string $modalSuccess=null) {
         $view = new VOwner();
         $PM = FPersistentManager::getInstance();
        
@@ -133,7 +133,7 @@ class COwner
         $disabled=$accomm->getStatus();
         $deletable=false;
         
-        $view->accommodationManagement($accomm, $owner, $reviewsData, $picture, $tenants, $num_places, $disabled, $deletable);
+        $view->accommodationManagement($accomm, $owner, $reviewsData, $picture, $tenants, $num_places, $disabled, $deletable, $modalSuccess);
     }
     private static function reviewsDataByrecipient(int $idRecipient, TType $typeRecipient): array {
         $reviewsData = [];
@@ -156,7 +156,7 @@ class COwner
                 $profilePic=(EPhoto::toBase64(array($profilePic)))[0];
             }
             if ($review->getDescription()===null) {
-                $content='No description';
+                $content='No additional details were provided by the author.';
             }
             else
             {
@@ -226,7 +226,7 @@ class COwner
 
         }else{
 
-            print 'Spiacenti non sei stato registrato';
+            header('Location:/UniRent/User/home/error');
         }
         
     }
@@ -236,7 +236,7 @@ class COwner
      * 
      * @return void
      */
-    public static function profile(): void {
+    public static function profile(?string $modalSuccess=null): void {
         $view = new VOwner();
         $session=USession::getInstance();
         //$user = $session->getSessionElement('username');
@@ -264,11 +264,11 @@ class COwner
                 $ph = "data:" . 'image/jpeg' . ";base64," . $base64;
             }
             
-            $view->profile($owner, $ph);
+            $view->profile($owner, $ph, $modalSuccess);
         }
     }
 
-    public static function editProfile()
+    public static function editProfile(?string $modalSuccess=null)
     {
         $view = new VOwner();
         $session=USession::getInstance();
@@ -288,7 +288,7 @@ class COwner
             $base64 = base64_encode($photo);
             $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
             
-            $view->editProfile($owner, $photo, false, false, false, false, false, false);
+            $view->editProfile($owner, $photo, false, false, false, false, false, false, $modalSuccess);
 
         }
     }
@@ -314,7 +314,7 @@ class COwner
         }
         else
         {
-            print 'Spiacenti non puoi andartene ;)';
+            header('Location:/UniRent/Owner/profile/error');
         }
     }
 
@@ -347,7 +347,8 @@ class COwner
 
         if($ownerId===null)
         {
-            print 'Spiacenti non sei un owner';
+            $viewError= new VError();
+            $viewError->error(403);
         }
         else
         {
@@ -391,32 +392,31 @@ class COwner
                             }
                             elseif (!$result) {
                     
-                                $viewError= new VError();
-            $viewError->error(500);
+                                header('Location:/UniRent/Owner/profile/error');
                                 
                             }
                         }
                         else
                         {
-                            $view->editProfile($owner, $picture, false, false, false, true, false, false); //Iban already in use
+                            $view->editProfile($owner, $picture, false, false, false, true, false, false, null); //Iban already in use
                             #header('Location:/UniRent/Owner/profile');
                         }
                     }
                     else
                     {
-                        $view->editProfile($owner, $picture, false, false, true, false, false, false); //phone already in use
+                        $view->editProfile($owner, $picture, false, false, true, false, false, false, null); //phone already in use
                         #header('Location:/UniRent/Owner/profile');
                     }
                 }
                 else
                 {   
-                    $view->editProfile($owner, $picture, true, false, false, false, false, false); //Username already in use
+                    $view->editProfile($owner, $picture, true, false, false, false, false, false, null); //Username already in use
                     #header('Location:/UniRent/Owner/profile');
                 }
             }
             else
             {   
-                $view->editProfile($owner, $picture, false, true, false, false, false, false); //Email already in use
+                $view->editProfile($owner, $picture, false, true, false, false, false, false, null); //Email already in use
                 #header('Location:/UniRent/Owner/profile');
             }
         }
@@ -451,8 +451,7 @@ class COwner
                 $risultato = $PM->storeAvatar($photo);
 
                 if(!$risultato){
-                    $viewError= new VError();
-            $viewError->error(500);
+                    header('Location:/UniRent/Owner/profile/error');
                 }
             }
         }
@@ -501,8 +500,9 @@ class COwner
 
         if(is_null($photo)){
 
-            print "Non hai nessuna foto da eliminare";
             $result = 0;
+            $viewError= new VError();
+            $viewError->error(500);
 
         } else {
             $photoID = $photo->getId();
@@ -514,16 +514,16 @@ class COwner
         if ($result > 0) {
             $photo = null;
             $session->setSessionElement('photo',$photo);
-            header('Location:/UniRent/Owner/profile');
-        }  else print "Errore nell'eliminazione della foto <br>";
+            header('Location:/UniRent/Owner/profile/success');
+        }  else header('Location:/UniRent/Owner/profile/error');
 
     }
 
-    public static function contact()
+    public static function contact(?string $modalSuccess=null)
     {
         $view = new VOwner();
         
-        $view->contact();
+        $view->contact($modalSuccess);
     }
     public static function about()
     {
@@ -531,13 +531,13 @@ class COwner
         
         $view->about();
     }
-     public static function reviews() {
+     public static function reviews(?string $modalSuccess=null) {
         $view = new VOwner();
         $session=USession::getInstance();
         $id=$session::getSessionElement('id');
         $reviewsData = self::reviewsDataByrecipient($id, TType::OWNER);
         
-        $view->reviews($reviewsData);
+        $view->reviews($reviewsData, $modalSuccess);
     }
 /*
     public static function changePicture()
@@ -607,11 +607,10 @@ class COwner
         #print $addressObj->getAddressLine1().' '.$addressObj->getPostalCode().' '.$addressObj->getLocality();
         $accomodation = new EAccommodation(null,$array_photos,$title,$addressObj,$price,$date,$description,$places,$deposit,$array_visit,$duration,$men,$women,$animals,$smokers, true,$idOwner);
         $result=$PM->store($accomodation);
-        $result ? header('Location:/UniRent/Owner/home') : $viewError= new VError();
-            $viewError->error(500);
+        $result ? header('Location:/UniRent/Owner/home/success') : header('Location:/UniRent/Owner/home/error');
 
     }
-    public static function publicProfileFromOwner(string $username, ?string $kind="#")
+    public static function publicProfileFromOwner(string $username, ?string $kind="#", ?string $modalSuccess=null)
     {
         $session=USession::getInstance();
         if ($session::getSessionElement('username') === $username) {
@@ -636,9 +635,9 @@ class COwner
         }
         $reviewsData = self::reviewsDataByrecipient($owner->getId(), TType::OWNER);
         
-        $view->publicProfileFromOwner($owner, $reviewsData, $kind, $self);
+        $view->publicProfileFromOwner($owner, $reviewsData, $kind, $self, $modalSuccess);
     }
-    public static function publicProfileFromStudent(string $username, ?string $kind= null)
+    public static function publicProfileFromStudent(string $username, ?string $kind= '#', ?string $modalSuccess=null)
     {
         $view = new VOwner();
         $PM=FPersistentManager::getInstance();
@@ -658,7 +657,7 @@ class COwner
 
         $reviewsData = self::reviewsDataByrecipient($owner->getId(), TType::OWNER);
         
-        $view->publicProfileFromStudent($owner, $reviewsData, $kind);
+        $view->publicProfileFromStudent($owner, $reviewsData, $kind, $modalSuccess);
     }
     public static function publicProfile(string $username, ?string $kind="#") {
         $PM=FPersistentManager::getInstance();
@@ -669,7 +668,7 @@ class COwner
             self::publicProfileFromOwner($username, $kind);
         }
     }
-    public static function postedReview() {
+    public static function postedReview(?string $modalSuccess=null) {
         $view = new VOwner();
         $session=USession::getInstance();
         $ownerId=$session::getSessionElement('id');
@@ -690,7 +689,7 @@ class COwner
                 $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
             }
             if ($review->getDescription()===null) {
-                $content='No description';
+                $content='No additional details were provided by the author.';
             }
             else
             {
@@ -709,7 +708,7 @@ class COwner
             ];
         }
         
-        $view->postedReview($reviewsData);
+        $view->postedReview($reviewsData, $modalSuccess);
     }
     public static function viewOwnerAds(int $id) {
         $view = new VOwner();
@@ -858,10 +857,9 @@ class COwner
         $id = $accomodation->getIdAccommodation();
         
         if ($result) {
-            header('Location:/UniRent/Owner/accommodationManagement/'.$id);
+            header('Location:/UniRent/Owner/accommodationManagement/'.$id.'/success');
         } else {
-            $viewError= new VError();
-            $viewError->error(500);
+            header('Location:/UniRent/Owner/accommodationManagement/'.$id.'/error');
         }
     }
 

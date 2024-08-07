@@ -169,7 +169,7 @@ class EReview
     }
     public function __toString():string
     {
-        $description = ($this->description !== null) ? $this->description : 'No description set';
+        $description = ($this->description !== null) ? $this->description : 'No additional details were provided by the author. set';
         return 'ID: '. $this->idReview. ', Title: '. $this->title. ', Valutation: '. $this->valutation. ', Description: '. $description. ', RecipientType: '. $this->recipientType->value. ', AuthorType: '.$this->authorType->value.', IDAuthor: '. $this->idAuthor. ', IDRecipient: '.$this->idRecipient;
     }
     
