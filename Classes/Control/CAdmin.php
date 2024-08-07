@@ -51,6 +51,7 @@ class CAdmin
                 {
                    
                     $session = USession::getInstance();
+                    $session::setSessionElement("id", null);
                     $session::setSessionElement("userType", 'Admin');
                     $session::setSessionElement('password',$passwordIn);
                     header('Location:/UniRent/Admin/home'); 
@@ -315,7 +316,7 @@ class CAdmin
                 $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
             }
             if ($review->getDescription()===null) {
-                $content='No description';
+                $content='No additional details were provided by the author.';
             }
             else
             {
