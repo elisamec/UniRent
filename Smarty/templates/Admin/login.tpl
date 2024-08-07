@@ -78,7 +78,6 @@
                }
          </script>
   <script src="/UniRent/Smarty/js/cookie.js"></script>
-<script src="/UniRent/Smarty/js/cookie.js"></script>
 <div class="modal" id="myModal">
       <div class"container-fluid">
       <div class="card">
