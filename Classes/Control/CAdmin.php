@@ -33,10 +33,8 @@ class CAdmin
     public static function login(){
         if(UCookie::isSet('PHPSESSID'))
         {
-            if(session_status() == PHP_SESSION_NONE)
-            {
-                $session = USession::getInstance();
-            }
+            setcookie('PHPSESSID','',time()-3600);
+            $session = USession::getInstance();
         }
         $view = new VAdmin();
         $view->login();

@@ -763,7 +763,7 @@ class FPersistentManager {
         
         return $result;
     }
-    public function getLastBanReport(string $username):EReport {
+    public function getLastBanReport(string $username):EReport |bool {
         $FRe=FReport::getInstance();
         $FS=FStudent::getInstance();
         $FO=FOwner::getInstance();

@@ -178,6 +178,7 @@ class FReport {
             return false;
         }
         $result=$stm->fetch(PDO::FETCH_ASSOC);
+        if(!$result){return false;}
         if ($result['idStudent']!=null) {
             $idSubject=$result['idStudent'];
             $type=TType::STUDENT;
