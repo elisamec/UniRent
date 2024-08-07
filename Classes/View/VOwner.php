@@ -185,4 +185,8 @@ class VOwner {
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->display('Owner/contractDetails.tpl');
     }
+    public function supportReplies(array $replies):void {
+        $this->smarty->assign('replies', json_encode($replies));
+        $this->smarty->display('Owner/supportReplies.tpl');
+    }
 }

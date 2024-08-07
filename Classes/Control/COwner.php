@@ -11,14 +11,12 @@ use Classes\View\VOwner;
 use Classes\Foundation\FPersistentManager;
 use Classes\Entity\EOwner;
 use Classes\Entity\EPhoto;
-use Classes\Entity\EStudent;
-use Classes\Foundation\FOwner;
-use Classes\Foundation\FReview;
 use Classes\Tools\TStatusUser;
 use Classes\Tools\TType;
 use CommerceGuys\Addressing\Address;
 use DateTime;
 use Classes\View\VError;
+use Classes\Tools\TRequestType;
 
 class COwner 
 {

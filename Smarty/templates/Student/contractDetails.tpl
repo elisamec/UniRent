@@ -86,7 +86,7 @@
                                 </h6>
                                 <div id="messageList"></div>
                                 
-                                <a class="dropdown-item text-center smallMessages text-gray-500" href="/UniRent/Student/readMoreSupportReplies">Read More Replies</a>
+                                <a class="dropdown-item text-center smallMessages text-gray-500" href="/UniRent/SupportRequest/readMoreSupportReplies">Read More Replies</a>
                             </div>
                         </li>
 

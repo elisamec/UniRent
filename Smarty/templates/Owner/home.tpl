@@ -85,7 +85,7 @@
                               <div id="messageList">
                                     <!-- Dynamic content will be loaded here -->
                               </div>
-                              <a class="dropdown-item text-center smallMessages text-gray-500" href="/UniRent/Owner/readMoreSupportReplies">Read More Replies</a>
+                              <a class="dropdown-item text-center smallMessages text-gray-500" href="/UniRent/SupportRequest/readMoreSupportReplies">Read More Replies</a>
                            </div>
                         </li>
 

@@ -5,6 +5,8 @@ use Classes\Foundation\FPersistentManager;
 use Classes\Tools\TRequestType;
 use Classes\Utilities\USession;
 use Classes\View\VError;
+use Classes\View\VOwner;
+use Classes\View\VStudent;
 use Exception;
 
 class CSupportRequest
@@ -88,5 +90,59 @@ class CSupportRequest
             $view=new VError();
             $view->error(500);
         }
+    }
+    public static function readMoreSupportReplies() {
+        $PM = FPersistentManager::getInstance();
+            $session = USession::getInstance();
+            $userType = $session::getSessionElement('userType');
+            // Fetch replies
+            $result = $PM->getSupportReply($session::getSessionElement('id'), $userType);
+            
+            // Prepare response data
+            $count = 1;
+            $replies = [];
+            
+            foreach ($result as $reply) {
+                if (array_key_exists($count, $replies)) {
+                    if (count($replies[$count])==10) {
+                        $count++;
+                    }
+                }
+                switch ($reply->getTopic()) {
+                    case TRequestType::REGISTRATION:
+                        $topic = 'Registration';
+                        break;
+                    case TRequestType::USAGE:
+                        $topic = 'App Usage';
+                        break;
+                    case TRequestType::BUG:
+                        $topic = 'Bug';
+                        break;
+                    case TRequestType::REMOVEBAN:
+                        $topic = 'Remove Ban Request';
+                        break;
+                    default:
+                        $topic = 'Other';
+                        break;
+                }
+                $replies[$count][] = [
+                    'id' => $reply->getId(),
+                    'message' => $reply->getMessage(),
+                    'supportReply' => $reply->getSupportReply(),
+                    'topic' => $topic,
+                    'statusRead' => $reply->getStatusRead()
+                ];
+            }
+            if ($userType == 'Student') {
+                $view = new VStudent();
+                $view->supportReplies($replies);
+            } else if ($userType == 'Owner') {
+                $view = new VOwner();
+                $view->supportReplies($replies);
+            } else {
+                $view = new VError();
+                $view->error(403);
+            }
+            
     }
 }
