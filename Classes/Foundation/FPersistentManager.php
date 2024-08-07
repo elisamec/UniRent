@@ -746,12 +746,20 @@ class FPersistentManager {
         $result=[];
         foreach ($result_student as $student)
         {
-            $result[]= ['User'=> $student, 'Type' =>'Student', 'Report'=> $this->getLastBanReport($student->getUsername())];
+            $report= $this->getLastBanReport($student->getUsername());
+            if($report!==false)
+            {
+                $result[]= ['User'=> $student, 'Type' =>'Student', 'Report'=> $report];
+            }
         }
         $result_owner=$FO->getBannedOwners();
         foreach ($result_owner as $owner)
         {
-            $result[]= ['User'=> $owner,'Type' =>'Owner', 'Report'=>$this->getLastBanReport($owner->getUsername())];
+            $report = $this->getLastBanReport($owner->getUsername());
+            if($report !== false)
+            {
+                $result[]= ['User'=> $owner,'Type' =>'Owner', 'Report'=>$report];
+            }
         }
         usort($result, function($a, $b) {
             $ad = new DateTime($a['Report']->getBanDate());
