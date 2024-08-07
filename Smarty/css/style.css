@@ -440,6 +440,7 @@ z-index: 2 !important;
     padding: 10px;
     margin: 10px;
     text-align: center;
+    transition: ease 0.5s;
 }
 
 .find_btn a:hover{
@@ -456,6 +457,7 @@ z-index: 2 !important;
     padding: 10px;
     margin: 10px;
     text-align: center;
+    transition: ease 0.5s;
 }
 
 .find_btn button:hover{
@@ -1615,7 +1617,9 @@ textarea#comment::placeholder {
     color: #ffffff;
     background-color: #f9bc19;
     padding: 10px;
+    margin-left: 10px;
     text-align: center;
+    transition: ease 0.5s;
 }
 .form label.change_btn:hover{
     color: #d0d1d2;
