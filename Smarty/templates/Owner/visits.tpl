@@ -79,7 +79,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-envelope fa-fw"></i>
                                 <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">{$countReply}</span>
+                                <span class="badge badge-danger badge-counter" id="messageCount"></span>
                             </a>
                             <!-- Dropdown - Messages -->
                             <div class="dropdownWidth dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -87,21 +87,8 @@
                                 <h6 class="dropdown-header">
                                     Admin Replies
                                 </h6>
-                                {foreach from=$replies item=reply}
-                                {if $smarty.foreach.replies.iteration <= 4}
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                    {if ($reply->getStatusRead() == 0 || $reply->getStatusRead() == false)}
-                                        <div class="font-weight-bold requestItem" 
-                                    {else}
-                                        <div class="requestItem"
-                                    {/if}
-                                        data-toggle="modal" data-target="#replyModal" data-request="{$reply->getMessage()}" data-reply="{$reply->getSupportReply()}" data-topic="{$reply->getTopic()->value}" data-id="{$reply->getId()}">
-                                            <div class="text-truncate">{$reply->getSupportReply()}</div>
-                                            <div class="smallMessages text-gray-500">{$reply->getTopic()->value}</div>
-                                        </div>
-                                    </a>
-                                {/if}
-                                    {/foreach}
+                                <div id="messageList"></div>
+                                
                                 <a class="dropdown-item text-center smallMessages text-gray-500" href="/UniRent/Owner/readMoreSupportReplies">Read More Replies</a>
                             </div>
                         </li>
