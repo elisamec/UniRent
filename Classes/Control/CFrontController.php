@@ -27,7 +27,7 @@ class CFrontController{
         $requestUri = trim($requestUri, '/');
         $uriParts = explode('/', $requestUri);
         $session = USession::getInstance();
-        if ($session::getSessionElement('id') != null && $session::getSessionElement('userType') != 'Admin' && $session::getSessionElement('userType') != 'undefined') {
+        if ($session::getSessionElement('id') != null) {
             $PM = FPersistentManager::getInstance();
             $userType = $session::getSessionElement('userType');
             $user = $PM->load('E' . $userType, $session::getSessionElement('id'));
