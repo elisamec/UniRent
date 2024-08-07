@@ -31,61 +31,42 @@ function eraseCookie(name) {
 
 // Get the current page URL
 let currentPage = window.location.pathname;
+console.log("Current Page:", currentPage);
 
-// Function to normalize the URL
+// Normalize the current page URL
 function normalizeUrl(url) {
-    let segments = url.split('/');
-    let lastSegment = segments.pop();
-    // Remove status segments like 'success' or 'error'
-    if (['success', 'error'].includes(lastSegment)) {
-        return segments.join('/');
-    }
+    const endingsToStrip = [
+        '/success', '/error', '/sent', '/fail', '/null/sent', '/null/full',
+        '/false', '/null/false', '/true'
+    ];
+    
+    endingsToStrip.forEach(ending => {
+        if (url.endsWith(ending)) {
+            url = url.substring(0, url.length - ending.length);
+        }
+    });
+    
     return url;
 }
 
-// Set and get normalized URL from cookies
-function updateCookieWithNormalizedUrl() {
-    let normalizedUrl = normalizeUrl(currentPage);
-    setCookie('current_page', normalizedUrl, 1); // Expires in 1 day
-}
+currentPage = normalizeUrl(currentPage);
 
-// Get normalized URL from cookie
-function getCleanUrlFromCookie() {
-    return getCookie("current_page");
-}
+// Set the cookie with the normalized current page URL
+setCookie('current_page', currentPage, 1); // Expires in 1 day
 
-// Set the normalized URL in cookie
-updateCookieWithNormalizedUrl();
-let cleanUrl = getCleanUrlFromCookie();
-console.log("Clean URL from cookie:", cleanUrl);
+// Get the normalized current page URL from the cookie
+currentPage = getCookie("current_page");
+console.log("Current Page in cookie:", currentPage);
 
-// Extract username from URL
-function extractUsernameFromUrl(url) {
-    const match = url.match(/\/UniRent\/Admin\/profile\/([^\/]+)/);
-    return match ? match[1] : 'Guest';
-}
+// Get custom names from the data attribute or session storage
+const breadcrumbElement = document.getElementById('breadcrumb');
+let accommodationName = breadcrumbElement ? breadcrumbElement.getAttribute('data-accommodation-name') || sessionStorage.getItem('accommodationName') || 'Accommodation' : 'Accommodation';
+let username = breadcrumbElement ? breadcrumbElement.getAttribute('data-user-name') || sessionStorage.getItem('username') || 'Guest' : 'Guest';
+let reservationDetail = accommodationName === 'Accommodation' ? username : accommodationName;
 
-// Function to add a username to session storage with indexing
-function addUsernameToSessionStorage(url, username) {
-    let visitedPages = JSON.parse(sessionStorage.getItem("visitedPages")) || {};
-    let index = Object.keys(visitedPages).length;
-
-    // Find existing entry with the same URL and remove it
-    for (let key in visitedPages) {
-        if (visitedPages[key].url === url) {
-            delete visitedPages[key];
-            break;
-        }
-    }
-
-    // Add the new entry
-    visitedPages[index] = { url: url, username: username };
-    sessionStorage.setItem("visitedPages", JSON.stringify(visitedPages));
-}
-
-// Add username for current page
-const username = extractUsernameFromUrl(currentPage);
-addUsernameToSessionStorage(currentPage, username);
+// Save the accommodation name and username to session storage
+sessionStorage.setItem('accommodationName', accommodationName);
+sessionStorage.setItem('username', username);
 
 // Define patterns and corresponding names
 const customNamesPatterns = {
@@ -94,10 +75,10 @@ const customNamesPatterns = {
     '/UniRent/Student/home': 'Home',
     '/UniRent/Admin/home': 'Dashboard',
     '/UniRent/Student/about': 'About Us',
-    '/UniRent/Student/accommodation/*': 'Accommodation',
-    '/UniRent/Student/publicProfile/*': (username) => username + "'s Profile",
-    '/UniRent/Owner/accommodationManagement/*': 'Accommodation',
-    '/UniRent/Owner/publicProfile/*': (username) => username + "'s Profile",
+    '/UniRent/Student/accommodation/*': accommodationName,
+    '/UniRent/Student/publicProfile/*': username, // New pattern for username
+    '/UniRent/Owner/accommodationManagement/*': accommodationName,
+    '/UniRent/Owner/publicProfile/*': username,
     '/UniRent/Owner/about': 'About Us',
     '/UniRent/User/about': 'About Us',
     '/UniRent/Owner/addAccommodation': 'Add Accommodation',
@@ -116,8 +97,8 @@ const customNamesPatterns = {
     '/UniRent/Owner/tenants/current': 'Current Tenants',
     '/UniRent/Owner/tenants/past': 'Past Tenants',
     '/UniRent/Owner/tenants/future': 'Future Tenants',
-    '/UniRent/Student/viewsOwnerAds': (username) => username + "'s Ads",
-    '/UniRent/Visit/viewVisits': (username) => username + "'s Visits",
+    '/UniRent/Student/viewsOwnerAds': username + "'s Ads",
+    '/UniRent/Visit/viewVisits': username + "'s Visits",
     '/UniRent/Visit/visits': 'Visits',
     '/UniRent/Student/paymentMethods': 'Payment Methods',
     '/UniRent/Reservation/showStudent/accepted': 'Accepted Reservations',
@@ -125,7 +106,7 @@ const customNamesPatterns = {
     '/UniRent/Student/reviews': 'Reviews',
     '/UniRent/Student/search': 'Search',
     '/UniRent/User/search': 'Search',
-    '/UniRent/Reservation/reservationDetails/*': (reservationDetail) => 'Reservation Details: ' + reservationDetail,
+    '/UniRent/Reservation/reservationDetails/*': 'Reservation Details: ' + reservationDetail,
     '/UniRent/Contract/showStudent/finished': 'Past Contracts',
     '/UniRent/Contract/showStudent/onGoing': 'OnGoing Contracts',
     '/UniRent/Contract/showStudent/future': 'Upcoming Contracts',
@@ -133,31 +114,86 @@ const customNamesPatterns = {
     '/UniRent/Contract/showOwner/onGoing': 'OnGoing Contracts',
     '/UniRent/Contract/showOwner/future': 'Upcoming Contracts',
     '/UniRent/Contract/contractDetails/*': 'Contract Details',
-    '/UniRent/Admin/profile/*': (username) => username + "'s Profile",
+    '/UniRent/Admin/profile/*': username + '\'s Profile',
     '/UniRent/Admin/readMoreSupportRequest': 'Support Requests',
 };
 
-// Function to get custom name based on URL patterns
+// Initialize or retrieve `urlDisplayNames` from sessionStorage
+const urlDisplayNames = JSON.parse(sessionStorage.getItem("urlDisplayNames")) || {};
+
+// Function to update `urlDisplayNames`
+function updateUrlDisplayNames(url, displayName) {
+    urlDisplayNames[url] = displayName;
+    sessionStorage.setItem("urlDisplayNames", JSON.stringify(urlDisplayNames));
+}
+
+// Function to remove `urlDisplayNames`
+function removeUrlDisplayNames(url) {
+    delete urlDisplayNames[url];
+    sessionStorage.setItem("urlDisplayNames", JSON.stringify(urlDisplayNames));
+}
+
+// Function to get the display name for a URL
 function getCustomName(url) {
     for (const pattern in customNamesPatterns) {
-        if (pattern.includes('*')) {
-            const regexPattern = new RegExp('^' + pattern.replace('*', '(.+)') + '$');
-            const match = regexPattern.exec(url);
-            if (match) {
-                const parameter = match[1];
-                const nameFunction = customNamesPatterns[pattern];
-                return typeof nameFunction === 'function' ? nameFunction(parameter) : nameFunction;
-            }
-        } else if (pattern === url) {
+        // Check if the URL matches the pattern
+        const regex = new RegExp('^' + pattern.replace(/\*/g, '.*') + '$');
+        if (regex.test(url)) {
             return customNamesPatterns[pattern];
         }
     }
-    return url;
+    return url; // Default to the URL itself if no match found
 }
 
-// Function to display breadcrumbs
+if (currentPage) {
+    const resetPages = ['/UniRent/Owner/home', '/UniRent/User/home', '/UniRent/Student/home', '/UniRent/Admin/home'];
+    if (resetPages.includes(currentPage)) {
+        console.log("Current page matches reset criteria. Clearing visitedPages and urlDisplayNames.");
+        sessionStorage.setItem("visitedPages", JSON.stringify({0: currentPage}));
+        sessionStorage.setItem("urlDisplayNames", JSON.stringify({}));
+        console.log("Visited Pages: {0: " + currentPage + "}");
+        console.log("urlDisplayNames: {}");
+    } else {
+        let visitedPages = JSON.parse(sessionStorage.getItem("visitedPages")) || {};
+        console.log("Visited Pages from sessionStorage:", visitedPages);
+        
+        if (String(window.performance.getEntriesByType("navigation")[0].type) === "back_forward") {
+            let lastPage = visitedPages[Object.keys(visitedPages).length - 1];
+            for (let key in visitedPages) {
+                if (visitedPages[key] === lastPage) {
+                    console.log("Removing last occurrence of current page URL back_forward");
+                    delete visitedPages[key];
+                    break;
+                }
+            }
+        }
+
+        for (let key in visitedPages) {
+            if (visitedPages[key] === currentPage) {
+                console.log("Removing old occurrence of current page URL");
+                delete visitedPages[key];
+            }
+        }
+
+        let newVisitedPages = {};
+        let index = 0;
+        for (let key in visitedPages) {
+            newVisitedPages[index] = visitedPages[key];
+            index++;
+        }
+
+        newVisitedPages[index] = currentPage;
+        sessionStorage.setItem("visitedPages", JSON.stringify(newVisitedPages));
+        console.log("Visited Pages:", newVisitedPages);
+
+        // Update urlDisplayNames for the current page
+        const displayName = getCustomName(currentPage);
+        updateUrlDisplayNames(currentPage, displayName);
+        displayBreadcrumb(newVisitedPages);
+    }
+}
+
 function displayBreadcrumb(visitedPages) {
-    // Ensure no breadcrumb is shown on reset pages
     const resetPages = ['/UniRent/Owner/home', '/UniRent/User/home', '/UniRent/Student/home'];
     if (resetPages.includes(currentPage)) {
         return;
@@ -173,27 +209,23 @@ function displayBreadcrumb(visitedPages) {
 
     const keys = Object.keys(visitedPages);
     for (let i = 0; i < keys.length; i++) {
-        const entry = visitedPages[keys[i]];
-        const page = entry.url;
-        const linkName = getCustomName(page); // Use custom name or default to URL
+        const page = visitedPages[keys[i]];
+        const linkName = urlDisplayNames[page] || getCustomName(page); // Use urlDisplayNames or default to getCustomName
 
         if (i < keys.length - 1) {
-            // Create clickable breadcrumb item
             const breadcrumbItem = document.createElement('a');
             breadcrumbItem.href = page;
             breadcrumbItem.innerText = linkName;
             breadcrumbItem.addEventListener('click', (event) => {
-                // Update visited pages before navigating
                 const newVisitedPages = {};
                 for (let k in visitedPages) {
                     newVisitedPages[k] = visitedPages[k];
-                    if (visitedPages[k].url === page) break;
+                    if (visitedPages[k] === page) break;
                 }
                 sessionStorage.setItem("visitedPages", JSON.stringify(newVisitedPages));
             });
             breadcrumbContainer.appendChild(breadcrumbItem);
         } else {
-            // Create non-clickable breadcrumb item for the current page
             const breadcrumbItem = document.createElement('span');
             breadcrumbItem.innerText = linkName;
             breadcrumbContainer.appendChild(breadcrumbItem);

@@ -169,7 +169,7 @@ class COwner
                 'userStatus' => $author->getStatus()->value,
                 'stars' => $review->getValutation(),
                 'content' => $content,
-                'userPicture' => $profilePic->getPhoto(),
+                'userPicture' => $profilePic,
             ];
         }
         return $reviewsData;

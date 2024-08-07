@@ -193,7 +193,7 @@ class CAdmin
         }
         else
         {
-            header('Location:'.$_COOKIE['current_page'].'/rror');
+            header('Location:'.$_COOKIE['current_page'].'/error');
         }
     }
     public static function studentEmailIssue() {

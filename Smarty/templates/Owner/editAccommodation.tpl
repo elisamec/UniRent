@@ -875,7 +875,6 @@ updateDurationSynchronization();
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
    <script src="/UniRent/Smarty/js/cookie.js"></script>
-   <script src="/UniRent/Smarty/js/cookie.js"></script>
    <!-- Request Detail Modal -->
 <div class="resModal" id="replyModal">
       <div class="resModal-content">
