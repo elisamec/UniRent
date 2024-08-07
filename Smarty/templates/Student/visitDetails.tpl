@@ -262,33 +262,8 @@
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
+<script src="/UniRent/Smarty/js/cookie.js"></script>
 
-         <script>
-      $(document).ready(function() {
-
-      
-      var readURL = function(input) {
-         if (input.files && input.files[0]) {
-               var reader = new FileReader();
-
-               reader.onload = function (e) {
-                  $('.imageIcon').attr('src', e.target.result);
-               }
-      
-               reader.readAsDataURL(input.files[0]);
-         }
-      }
-      
-
-      $(".file-upload").on('change', function(){
-         readURL(this);
-      });
-      
-      $(".label-button").on('click', function() {
-         $(".file-upload").click();
-      });
-   });
-      </script>
       <div class="modal" id="myModal">
       <div class"container-fluid">
       <div class="card">
@@ -422,25 +397,29 @@
             }
             successDeleteClose.onclick = function() {
                successDeleteModal.style.display = "none";
+               window.location.href = currentPage;
             }
             closesuccessDeleteModal.onclick = function() {
                successDeleteModal.style.display = "none";
+               window.location.href = currentPage;
             }
             successEditClose.onclick = function() {
                successEditModal.style.display = "none";
+               window.location.href = currentPage;
             }
             closesuccessEditModal.onclick = function() {
                successEditModal.style.display = "none";
+               window.location.href = currentPage;
             }
             showsuccessDeleteModal();
             showsuccessEditModal();
             </script>
-   <script src="/UniRent/Smarty/js/cookie.js"></script>
+   
    <!-- Request Detail Modal -->
 <div class="resModal" id="replyModal">
       <div class="resModal-content">
          <div class="row">
-            <span class="resClose">&times;</span>
+            <span class="resClose" id="replyClose">&times;</span>
             <h2 class="resModal-head">Support Reply Details</h2>
          </div>
          <div class="container cont-padding">
@@ -466,7 +445,7 @@
 <div class="resModal" id="successModal">
       <div class="resModal-content">
          <div class="row">
-            <span class="resClose">&times;</span>
+            <span class="resClose" id="successClose">&times;</span>
             <h2 class="resModal-head">
             {if $modalSuccess == 'success'}
             Success
@@ -492,7 +471,7 @@
 <script>
 var modalSuccess= '{$modalSuccess}';
 var successModal = document.getElementById("successModal");
-var successClose = document.querySelector(".resClose");
+var successClose = document.getElementById("successClose");
 var closeSuccess = document.getElementById("closeSuccess");
 if (modalSuccess !== '') {
     successModal.style.display = "block";

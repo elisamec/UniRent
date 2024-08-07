@@ -401,7 +401,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="resModal" id="replyModal">
       <div class="resModal-content">
          <div class="row">
-            <span class="resClose">&times;</span>
+            <span class="resClose" id="replyClose">&times;</span>
             <h2 class="resModal-head">Support Reply Details</h2>
          </div>
          <div class="container cont-padding">
@@ -427,7 +427,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="resModal" id="successModal">
       <div class="resModal-content">
          <div class="row">
-            <span class="resClose">&times;</span>
+            <span class="resClose" id="successClose">&times;</span>
             <h2 class="resModal-head">
             {if $modalSuccess == 'success'}
             Success
@@ -453,7 +453,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <script>
 var modalSuccess= '{$modalSuccess}';
 var successModal = document.getElementById("successModal");
-var successClose = document.querySelector(".resClose");
+var successClose = document.getElementById("successClose");
 var closeSuccess = document.getElementById("closeSuccess");
 if (modalSuccess !== '') {
     successModal.style.display = "block";

@@ -303,6 +303,7 @@
          </div> 
       </div>
       </div>
+      <script src="/UniRent/Smarty/js/cookie.js"></script>
     <script>
             function on() {
             if (!navigator.cookieEnabled) {
@@ -427,25 +428,29 @@
             }
             successDeleteClose.onclick = function() {
                successDeleteModal.style.display = "none";
+               window.location.href = currentPage;
             }
             closesuccessDeleteModal.onclick = function() {
                successDeleteModal.style.display = "none";
+               window.location.href = currentPage;
             }
             successEditClose.onclick = function() {
                successEditModal.style.display = "none";
+               window.location.href = currentPage;
             }
             closesuccessEditModal.onclick = function() {
                successEditModal.style.display = "none";
+               window.location.href = currentPage;
             }
             showsuccessDeleteModal();
             showsuccessEditModal();
             </script>
-   <script src="/UniRent/Smarty/js/cookie.js"></script>
+   
    <!-- Request Detail Modal -->
 <div class="resModal" id="replyModal">
       <div class="resModal-content">
          <div class="row">
-            <span class="resClose">&times;</span>
+            <span class="resClose" id="replyClose">&times;</span>
             <h2 class="resModal-head">Support Reply Details</h2>
          </div>
          <div class="container cont-padding">

@@ -130,7 +130,19 @@
         <button class="cancelClass" id="closeButton">Understood</button>
     </div>
 </div>
-<script>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/UniRent/Smarty/js/sb-admin-2.min.js"></script>
+
+    <script src="/UniRent/Smarty/js/cookie.js"></script>
+    <script>
 
     var modal = document.getElementById("successRequestModal");
     var span = document.getElementById("closeSpan");
@@ -143,10 +155,12 @@
     }
     span.onclick = function() {
         modal.style.display = "none";
+        window.location.href = currentPage;
     }
 
     button.onclick = function() {
         modal.style.display = "none";
+        window.location.href = currentPage;
     }
 
     window.onclick = function(event) {
@@ -155,17 +169,6 @@
         }
     }
 </script>
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="/UniRent/Smarty/js/sb-admin-2.min.js"></script>
-
-    <script src="/UniRent/Smarty/js/cookie.js"></script>
 </body>
 
 </html>

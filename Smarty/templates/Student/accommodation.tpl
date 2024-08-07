@@ -574,6 +574,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Close success visit modal
     document.getElementById("closeSuccessVisitModal").onclick = function() {
         successVisitModal.style.display = "none";
+        window.location.href= currentPage;
+    }
+    document.getElementById("successVisitClose").onclick = function() {
+        successVisitModal.style.display = "none";
+        window.location.href= currentPage;
     }
 
     // Close visit empty modal
@@ -686,6 +691,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
+      <script src="/UniRent/Smarty/js/cookie.js"></script>
 
 
       <div class="modal" id="myModal">
@@ -1062,6 +1068,7 @@ $(document).ready(function() {
         }
         if (event.target == successReserveModal) {
             successReserveModal.style.display = "none";
+            window.location.href= currentPage;
         }
     }
 
@@ -1073,9 +1080,11 @@ $(document).ready(function() {
     }
     document.getElementById("successReserveClose").onclick = function() {
         successReserveModal.style.display = "none";
+        window.location.href= currentPage;
     }
     document.getElementById("closesuccessReserveModal").onclick = function() {
         successReserveModal.style.display = "none";
+        window.location.href= currentPage;
     }
 
     // Call the function to check for success and show modal
@@ -1087,7 +1096,7 @@ $(document).ready(function() {
 <div class="resModal" id="replyModal">
       <div class="resModal-content">
          <div class="row">
-            <span class="resClose">&times;</span>
+            <span class="resClose" id="replyClose">&times;</span>
             <h2 class="resModal-head">Support Reply Details</h2>
          </div>
          <div class="container cont-padding">

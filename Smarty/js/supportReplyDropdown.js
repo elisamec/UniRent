@@ -59,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const requestContent = document.getElementById('requestContent');
     const replyContent = document.getElementById('replyContent');
     const requestTopic = document.getElementById('requestTopic');
+    const replyClose = document.getElementById('replyClose');
     
     // Show modal when a requestItem is clicked
     document.addEventListener('click', function(event) {
@@ -73,6 +74,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Handle closing of the modal
             closeReply.addEventListener('click', function() {
+                window.location.href = '/UniRent/SupportRequest/readSupportReply/' + target.dataset.id;
+            });
+            replyClose.addEventListener('click', function() {
                 window.location.href = '/UniRent/SupportRequest/readSupportReply/' + target.dataset.id;
             });
         }

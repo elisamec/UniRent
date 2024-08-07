@@ -52,6 +52,19 @@ function normalizeUrl(url) {
 
 currentPage = normalizeUrl(currentPage);
 
+var closeSuccess = document.getElementById('closeSuccess');
+var successClose = document.getElementById('successClose');
+if (closeSuccess) {
+    closeSuccess.addEventListener('click', function() {
+        window.location.href = currentPage;
+    });
+}
+if (successClose) {
+    successClose.addEventListener('click', function() {
+        window.location.href = currentPage;
+    });
+}
+
 
 // Set the cookie with the normalized current page URL
 setCookie('current_page', currentPage, 1); // Expires in 1 day
