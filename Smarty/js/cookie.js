@@ -33,6 +33,7 @@ function eraseCookie(name) {
 let currentPage = window.location.pathname;
 console.log("Current Page:", currentPage);
 
+
 // Normalize the current page URL
 function normalizeUrl(url) {
     const endingsToStrip = [
@@ -50,6 +51,7 @@ function normalizeUrl(url) {
 }
 
 currentPage = normalizeUrl(currentPage);
+
 
 // Set the cookie with the normalized current page URL
 setCookie('current_page', currentPage, 1); // Expires in 1 day
