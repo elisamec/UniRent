@@ -51,7 +51,6 @@ class CAdmin
                 {
                    
                     $session = USession::getInstance();
-                    $session::setSessionElement("id", null);
                     $session::setSessionElement("userType", 'Admin');
                     $session::setSessionElement('password',$passwordIn);
                     header('Location:/UniRent/Admin/home'); 
