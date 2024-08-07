@@ -32,13 +32,30 @@ class FPhoto {
     */
     public function exist(int $idPhoto):bool 
     {
-        $q="SELECT * FROM photo WHERE id=:idPhoto";
         $db=FConnection::getInstance()->getConnection();
-        $db->beginTransaction();
-        $stm=$db->prepare($q);
-        $stm->bindParam(':idPhoto',$idPhoto,PDO::PARAM_INT);
-        $stm->execute();
-        $db->commit();
+        try
+        {
+            if(!$db->inTransaction())
+            {
+                $db->beginTransaction();
+            }
+            $q="SELECT * FROM photo WHERE id=:idPhoto LOCK IN SHARE MODE";
+            $stm=$db->prepare($q);
+            $stm->bindParam(':idPhoto',$idPhoto,PDO::PARAM_INT);
+            $stm->execute();
+            if(!$db->inTransaction())
+            {
+                $db->commit();
+            }  
+        }
+        catch(PDOException $e)
+        {
+            if(!$db->inTransaction())
+            {
+                $db->rollBack();
+            }
+            return false;
+        }
         $result=$stm->rowCount();
 
         if ($result >0) return true;
