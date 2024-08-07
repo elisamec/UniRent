@@ -181,4 +181,8 @@ class VStudent{
         $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('Student/contractDetails.tpl');
     }
+    public function supportReplies(array $replies):void {
+        $this->smarty->assign('replies', json_encode($replies));
+        $this->smarty->display('Student/supportReplies.tpl');
+    }
 }
