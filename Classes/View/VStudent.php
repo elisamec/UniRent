@@ -107,19 +107,20 @@ class VStudent{
         $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('Student/reviews.tpl');
     }
-    public function publicProfileFromStudent(EStudent $student, array $reviewsData, ?string $kind="#", bool $self, int $roomate, ?string $modalSuccess):void{
+    public function publicProfileFromStudent(EStudent $student, array $reviewsData, ?string $kind="#", bool $self, int $leavebleReviews, ?string $modalSuccess):void{
         $this->smarty->assign('student', $student);
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->assign('kind', $kind);
         $this->smarty->assign('self', $self);
-        $this->smarty->assign('roomate', $roomate);
+        $this->smarty->assign('leavebleReviews', $leavebleReviews);
         $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('Student/publicProfileFromStudent.tpl');
     }
-    public function publicProfileFromOwner(EStudent $student, array $reviewsData, ?string $kind="#", ?string $modalSuccess):void{
+    public function publicProfileFromOwner(EStudent $student, array $reviewsData, ?string $kind="#",?string $modalSuccess, int $leavebleReviews):void{
         $this->smarty->assign('student', $student);
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->assign('kind', $kind);
+        $this->smarty->assign('leavebleReviews', $leavebleReviews);
         $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('Student/publicProfileFromOwner.tpl');
     }

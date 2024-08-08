@@ -654,8 +654,9 @@ class COwner
         }
 
         $reviewsData = self::reviewsDataByrecipient($owner->getId(), TType::OWNER);
-        
-        $view->publicProfileFromStudent($owner, $reviewsData, $kind, $modalSuccess);
+        $session=USession::getInstance();
+        $leavebleReviews=$PM->remainingReviewStudentToOwner($session::getSessionElement('id'), $owner->getId());
+        $view->publicProfileFromStudent($owner, $reviewsData, $kind, $modalSuccess, $leavebleReviews);
     }
     public static function publicProfile(string $username, ?string $kind="#") {
         $PM=FPersistentManager::getInstance();

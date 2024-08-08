@@ -122,7 +122,9 @@
                      <p> Average Rating: {$student->getAverageRating()}.</p>
                      <div class="col-md-3">
                         <div class="delete_btn"><a href="#" onclick="openReportModal()">Report User</a></div>
+                        {if $leavebleReviews>0}
                         <div class="find_btn"><button id="reviewButton">Review</button></div>
+                        {/if}
                      </div>
                   
                </div>
@@ -430,12 +432,7 @@ function closeReportModal() {
 <script>
         document.addEventListener("DOMContentLoaded", function() {
     var kind = "{$kind|escape:'javascript'}";
-    console.log("kind:", kind); // Log the value to ensure it's correct
     var button = document.getElementById("reviewButton");
-
-    if (kind === "future" || kind === "#") {
-        button.style.display = "none"; // Correct way to hide the button
-    }
 
     // Add event listener to reviewButton if it exists
     if (button) {

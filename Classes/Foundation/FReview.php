@@ -548,6 +548,9 @@ class FReview {
             return 0;
         }
         $result=$stm->fetch(PDO::FETCH_ASSOC);
+        if ((int)$result['RR']<0) {
+            return 0;
+        }
         return (int)$result['RR'];
     }
     
@@ -595,6 +598,89 @@ class FReview {
             return 0;
         }
         $result=$stm->fetch(PDO::FETCH_ASSOC);
+        if ((int)$result['RR']<0) {
+            return 0;
+        }
+        return (int)$result['RR'];
+    }
+    public function remainingReviewOwnerToStudent(int $id1, int $id2):int
+    {
+        $db=FConnection::getInstance()->getConnection();
+        $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+        try
+        {
+            $q="SELECT 
+                (SELECT COUNT(*) 
+                 FROM student s INNER JOIN reservation r ON r.idStudent=s.id
+                 INNER JOIN contract c ON c.idReservation=r.id
+                 INNER JOIN accommodation a ON a.id=r.idAccommodation
+                 WHERE a.idOwner=:id1
+                 AND c.`status`!='future'
+                 AND s.id=:id2)
+                 -
+                (SELECT COUNT(*)
+                 FROM owner o INNER JOIN studentreview str ON o.id=str.authorOwner
+                 WHERE o.id=:id1
+                 AND str.isStudent=:id2) AS RR
+
+                LOCK IN SHARE MODE";
+
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindParam(':id1',$id1,PDO::PARAM_INT);
+            $stm->bindParam('id2',$id2,PDO::PARAM_INT);
+            $stm->execute();
+            $db->commit();
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return 0;
+        }
+        $result=$stm->fetch(PDO::FETCH_ASSOC);
+        if ((int)$result['RR']<0) {
+            return 0;
+        }
+        return (int)$result['RR'];
+    }
+    public function remainingReviewStudentToAccommodation(int $id1, int $id2):int
+    {
+        $db=FConnection::getInstance()->getConnection();
+        $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+        try
+        {
+            $q="SELECT 
+                (SELECT COUNT(*) 
+                 FROM student s INNER JOIN reservation r ON r.idStudent=s.id
+                 INNER JOIN contract c ON c.idReservation=r.id
+                 INNER JOIN accommodation a ON a.id=r.idAccommodation
+                 WHERE a.id=:id2
+                 AND c.`status`!='future'
+                 AND s.id=:id1)
+                 -
+                (SELECT COUNT(*)
+                 FROM student s INNER JOIN accommodationreview ar ON s.id=ar.idAuthor
+                 WHERE s.id=:id1
+                 AND ar.idAccommodation=:id2) AS RR
+
+                LOCK IN SHARE MODE";
+
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindParam(':id1',$id1,PDO::PARAM_INT);
+            $stm->bindParam('id2',$id2,PDO::PARAM_INT);
+            $stm->execute();
+            $db->commit();
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return 0;
+        }
+        $result=$stm->fetch(PDO::FETCH_ASSOC);
+        if ((int)$result['RR']<0) {
+            return 0;
+        }
         return (int)$result['RR'];
     }
     /*

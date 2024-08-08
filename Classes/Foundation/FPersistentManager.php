@@ -724,6 +724,18 @@ class FPersistentManager {
         $result=$FR->remainingReviewStudentToOwner($id1,$id2);
         return $result;
     }
+    public function remainingReviewOwnerToStudent(int $id1, int $id2):int
+    {
+        $FR=FReview::getInstance();
+        $result=$FR->remainingReviewOwnerToStudent($id1,$id2);
+        return $result;
+    }
+    public function remainingReviewStudentToAccommodation(int $id1, int $id2):int
+    {
+        $FR=FReview::getInstance();
+        $result=$FR->remainingReviewStudentToAccommodation($id1,$id2);
+        return $result;
+    }
     
     /**
      * Method getStatistics

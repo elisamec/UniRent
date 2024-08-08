@@ -120,7 +120,7 @@
                      {if (!{$self})}
                      <div class="col-md-3">
                      <div class="delete_btn" id="reportOwn"><a href="#" onclick="openReportModal()">Report User</a></div>
-                     {if ($roomate>0)}
+                     {if ($leavebleReviews>0)}
                         <div class="find_btn"><button id="review">Review</button></div>
                         {/if}
                      </div>

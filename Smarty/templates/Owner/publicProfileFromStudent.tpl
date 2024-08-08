@@ -116,7 +116,9 @@
                      <div class="col-md-3">
                      <div class="find_btn"><a href="/UniRent/Owner/viewOwnerAds/{$owner->getId()}"> View Ads</a></div>
                      <div class="delete_btn" id="reportOwn"><a href="#" onclick="openReportModal()">Report User</a></div>
+                     {if $leavebleReviews>0}
                      <div class="find_btn"><button id="reviewButton">Review</button></div>
+                    {/if}
                      </div>
                </div>
                </div>
@@ -189,16 +191,6 @@
         </form>
     </div>
 </div>
-<script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var kind = "{$kind}";
-            var button = document.getElementById("reviewButton");
-
-            if (kind === "future" || kind === "#") {
-                button.style.display = "none";
-            }
-        });
-    </script>
 <script>
 const button = document.getElementById('reviewButton');
 button.addEventListener('click', (event) => {

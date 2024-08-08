@@ -226,11 +226,12 @@ class CStudent{
         }
     }
     
-    public static function accommodation(int $idAccommodation, string $successVisit='null', string $successReserve='null', bool $disabled=false) {
+    public static function accommodation(int $idAccommodation, string $successVisit='null', string $successReserve='null') {
         $view = new VStudent();
         $PM = FPersistentManager::getInstance();
 
         $accomm = $PM->load('EAccommodation', $idAccommodation);
+        $disabled=!$accomm->getStatus();
         $photos_acc=$accomm->getPhoto();
         $photo_acc_64=EPhoto::toBase64($photos_acc);
         $accomm->setPhoto($photo_acc_64);
@@ -675,8 +676,8 @@ class CStudent{
                 'userPicture' => $profilePic,
             ];
         }
-        $roomate=1;
-        $view->publicProfileFromStudent($student, $reviewsData, $kind, $self, $roomate, $modalSuccess);
+        $leavebleReviews=$PM->remainingReviewStudentToStudent($session::getSessionElement('id'), $student->getId());
+        $view->publicProfileFromStudent($student, $reviewsData, $kind, $self, $leavebleReviews, $modalSuccess);
     }
     public static function publicProfileFromOwner(string $username, ?string $kind="#", ?string $modalSuccess=null)
     {
@@ -732,7 +733,9 @@ class CStudent{
                 'userPicture' => $profilePic,
             ];
         }
-        $view->publicProfileFromOwner($student, $reviewsData, $kind, $modalSuccess);
+        $session=USession::getInstance();
+        $leavebleReviews=$PM->remainingReviewOwnerToStudent($session->getSessionElement('id'), $student->getId());
+        $view->publicProfileFromOwner($student, $reviewsData, $kind, $modalSuccess, $leavebleReviews);
     }
       
     public static function paymentMethods(?string $modalSuccess=null)
