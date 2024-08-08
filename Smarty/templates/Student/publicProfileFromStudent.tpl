@@ -350,16 +350,6 @@ function closeReportModal() {
     </div>
 </div>
 <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var kind = "{$kind}";
-            var button = document.getElementById("reviewButton");
-
-            if (kind === "future" || kind === "#") {
-                button.style.display = "none";
-            }
-        });
-    </script>
-<script>
 const button = document.getElementById('review');
 button.addEventListener('click', (event) => {
                             document.getElementById('revModal').style.display = 'grid';
