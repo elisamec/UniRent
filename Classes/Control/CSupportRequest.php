@@ -135,14 +135,12 @@ class CSupportRequest
             }
             if ($userType == 'Student') {
                 $view = new VStudent();
-                $view->supportReplies($replies);
             } else if ($userType == 'Owner') {
                 $view = new VOwner();
-                $view->supportReplies($replies);
             } else {
                 $view = new VError();
                 $view->error(403);
             }
-            
+            $view->supportReplies($replies, $count);
     }
 }

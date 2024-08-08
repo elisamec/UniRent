@@ -331,5 +331,13 @@ dropdownMenu.innerHTML = `
 if (modalMessage !== '') {
     $('#confirmationModal').modal('show');
 }
+var closeConfirm = document.getElementById('closeConfirm');
+var confirmClose = document.getElementById('confirmClose');
+closeConfirm.addEventListener('click', function() {
+    window.location.href = currentPage;
+});
+confirmClose.addEventListener('click', function() {
+    window.location.href = currentPage;
+});
     
 });

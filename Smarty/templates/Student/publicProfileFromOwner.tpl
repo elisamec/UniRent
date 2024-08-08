@@ -603,6 +603,7 @@ window.onclick = (event) => {
     </div>
 </div>
 <!-- End of Success Modal -->
+<script src="/UniRent/Smarty/js/supportReplyDropdown.js"></script>
 <script>
 var modalSuccess= '{$modalSuccess}';
 var successModal = document.getElementById("successModal");
@@ -613,21 +614,21 @@ if (modalSuccess !== '') {
 } else {
     successModal.style.display = "none";
 }
-
 successClose.onclick = function() {
     successModal.style.display = "none";
+    window.location.href = currentPage;
 }
 
 closeSuccess.onclick = function() {
     successModal.style.display = "none";
+    window.location.href = currentPage;
 }
 
 window.onclick = function(event) {
     if (event.target == successModal) {
         successModal.style.display = "none";
+        window.location.href = currentPage;
     }
 }
 </script>
-
-<script src="/UniRent/Smarty/js/supportReplyDropdown.js"></script>
 </body>

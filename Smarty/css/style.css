@@ -3091,6 +3091,9 @@ a.badge-danger.focus,a.badge-danger:focus{
 .fa-envelope {
     color: #ffffff;
 }
+.fa-envelope.active {
+    color: #000000;
+}
 #messagesDropdown {
     position: relative;
     display: inline-block;
@@ -3137,3 +3140,20 @@ a.badge-danger.focus,a.badge-danger:focus{
 .moreMargin {
     margin-top: 10px;
 }
+.marginSides {
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom:30px;
+}
+.text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .smallMessages {
+    font-size: 80%;
+    font-weight: 400;
+  }
+  .text-gray-500 {
+    color: #b7b9cc !important;
+  }

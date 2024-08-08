@@ -208,18 +208,20 @@ if (modalSuccess !== '') {
 } else {
     successModal.style.display = "none";
 }
-
 successClose.onclick = function() {
     successModal.style.display = "none";
+    window.location.href = currentPage;
 }
 
 closeSuccess.onclick = function() {
     successModal.style.display = "none";
+    window.location.href = currentPage;
 }
 
 window.onclick = function(event) {
     if (event.target == successModal) {
         successModal.style.display = "none";
+        window.location.href = currentPage;
     }
 }
 </script>

@@ -88,4 +88,63 @@ document.addEventListener('DOMContentLoaded', function () {
             replyModal.style.display = 'none';
         }
     });
+    
+    function populateReplyList(data) {
+        var container = document.querySelector('.reply-list');
+        container.innerHTML = '';
+        if (data.length === 0) {
+            var noReplies = document.createElement('p');
+            noReplies.innerHTML = 'No replies found.';
+            container.appendChild(noReplies);
+            return;
+        }
+        var anchor = document.createElement('a');
+        anchor.className = 'dropdown-item d-flex align-items-center';
+        anchor.href = '#';
+        data.forEach(function(item) {
+            var requestItem = document.createElement('div');
+            requestItem.className = 'requestItem';
+            requestItem.setAttribute('data-request', item.message);
+            requestItem.setAttribute('data-topic', item.topic);
+            requestItem.setAttribute('data-id', item.id);
+            requestItem.setAttribute('data-reply', item.supportReply);
+
+            if (item.statusRead === 0 || item.statusRead === false) {
+                requestItem.classList.add('font-weight-bold');
+            }
+            requestItem.innerHTML = `
+                <div class="text-truncate">${item.supportReply}</div>
+                <div class="smallMessages text-gray-500"> ${item.topic}</div>
+            `;
+            anchor.appendChild(requestItem);
+        });
+        container.appendChild(anchor);
+    }
+    if (document.querySelector('.nextBtn') && document.querySelector('.prevBtn') && typeof supportReplies !== 'undefined') {
+        if (supportReplies.length === 0) {
+            populateReplyList([]);
+            return;
+        }
+
+        var nextBtn = document.querySelector('.nextBtn');
+        var prevBtn = document.querySelector('.prevBtn');
+        nextBtn.addEventListener('click', function() {
+            var currentPageNumber = parseInt(document.querySelector('.activeBtn').textContent);
+            if (supportReplies[currentPageNumber]) {
+                populateReplyList(supportReplies[currentPageNumber]);
+            }
+        });
+        prevBtn.addEventListener('click', function() {
+            var currentPageNumber = parseInt(document.querySelector('.activeBtn').textContent);
+            if (supportReplies[currentPageNumber]) {
+                populateReplyList(supportReplies[currentPageNumber]);
+            }
+        });
+        // Initialize with the content of the first page
+        var firstPage = Object.keys(supportReplies)[0];
+        if (firstPage) {
+            populateReplyList(supportReplies[firstPage]);
+        }
+    }
+    
 });

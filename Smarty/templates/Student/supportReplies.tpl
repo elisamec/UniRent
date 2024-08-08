@@ -1,5 +1,7 @@
-<head>
-  <!-- basic -->
+<!DOCTYPE html>
+<html>
+   <head>
+      <!-- basic -->
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,6 +10,7 @@
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
       <title>UniRent</title>
+      <link rel="icon" href="/UniRent/Smarty/images/favicon.png" type="image/png">
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -18,7 +21,7 @@
       <!-- Responsive-->
       <link rel="stylesheet" href="/UniRent/Smarty/css/responsive.css">
       <!-- fevicon -->
-      <link rel="icon" href="/UniRent/Smarty/images/favicon.png" type="image/gif">
+      <link rel="icon" href="/UniRent/Smarty/images/fevicon.png" type="image/gif" />
       <!-- font css -->
       <link href="https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap" rel="stylesheet">
       <!-- Scrollbar Custom CSS -->
@@ -27,83 +30,113 @@
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css">
       <!-- Include Font Awesome -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-      <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/login.css">
+      <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/home.css">
       <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/cookie.css">
-
-</head>
-<body onload="on()">
-         <div class="container-fluid">
+      <link rel="stylesheet" type="text/css" href="/UniRent/Smarty/css/pagination.css">
+   </head>
+   <body onload="on()">
+      <div class="header_section">
+        <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-               <a class="navbar-brand"href="/UniRent/User/home"><img src="/UniRent/Smarty/images/logo.png"></a>
+               <a class="navbar-brand"href="/UniRent/Student/home"><img src="/UniRent/Smarty/images/logo.png"></a>
                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
                </button>
                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav ml-auto">
                      <li class="nav-item">
-                        <a class="nav-link" href="/UniRent/User/home">Home</a>
+                        <a class="nav-link" href="/UniRent/Student/home">Home</a>
+                     </li>
+                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reservations</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                           <a class="dropdown-item" href="/UniRent/Reservation/showStudent/accepted">Accepted</a>
+                           <a class="dropdown-item" href="/UniRent/Reservation/showStudent/pending">Pending</a>
+                        </div>
+                     </li>
+                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contracts</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                           <a class="dropdown-item" href="/UniRent/Contract/showStudent/onGoing">Ongoing</a>
+                           <a class="dropdown-item" href="/UniRent/Contract/showStudent/finished">Past</a>
+                           <a class="dropdown-item" href="/UniRent/Contract/showStudent/future">Future</a>
+                        </div>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="/UniRent/User/about">About Us</a>
+                        <a class="nav-link" href="/UniRent/Student/postedReview">Posted Reviews</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="/UniRent/User/contact">Contact Us</a>
+                        <a class="nav-link" href = "/UniRent/Visit/visits">Visits</a>
                      </li>
                   </ul>
+                  <!-- Nav Item - Messages -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-envelope fa-fw active"></i>
+                                <!-- Counter - Messages -->
+                                <span class="badge badge-danger badge-counter" id="messageCount"></span>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdownWidth dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="messagesDropdown">
+                                <h6 class="dropdown-header">
+                                    Admin Replies
+                                </h6>
+                                <div id="messageList"></div>
+                                
+                                <a class="dropdown-item text-center smallMessages text-gray-500" href="/UniRent/SupportRequest/readMoreSupportReplies">Read More Replies</a>
+                            </div>
+                        </li>
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
                   <form class="form-inline my-2 my-lg-0">
                      <div class="login_bt">
                         <ul>
-                           <li><a href="/UniRent/User/login"><span class="user_icon"><i class="fa fa-user" aria-hidden="true"></i></span>Login</a></li>
+                           <li><a href="/UniRent/Student/profile"><span class="user_icon"><i class="fa fa-user" aria-hidden="true"></i></span>Profile</a></li>
                         </ul>
                      </div>
                   </form>
                </div>
             </nav>
          </div>
-      <!-- banner section start --> 
-      <div class="layout_padding">
-        <div class="container screenSize">
-          <div class="Logcontainer">
-            <div class="heading">Student Sign Up</div>
-            <form action="/UniRent/Student/studentRegistration" class="form" method="post">
-              <input required="" class="input" type="number" name="courseDuration" id="courseDuration" placeholder="Course Duration (years)" min="1" max="6">
-              <input required="" class="input" type="number" name="immatricolationYear" id="immatricolationYear" placeholder="Immatricolation Year" min="2018" max="2099">
-              <input required="" class="input" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="birthDate" id="birthDate" placeholder="Date of Birth">
-              <legend class="customlabel">Enter your sex:</legend>
-              <div class="row">
-              <div class="col-sm-6">
-            <input required="" class="radio" type="radio" name="sex" id="sex" value="F" checked="checked">
-              <label class="customlabel" for="F">Female</label>
-              </div>
-               <div class="col-sm-6">
-              <input required="" class="radio" type="radio" name="sex" id="sex" value="M">
-              <label class="customlabel" for="Male">Male</label>
-              </div>
-               </div>
-               <legend class="customlabel">Personal Information*:</legend>
-              <div class="row">
-              <div class="col-sm-6">
-              <input class="checkbox" type="checkbox" name="smoker" id="smoker">
-              <input type="hidden" id="hiddenSmoker" name="smoker" value="false">
-              <label class="customlabel">smoker</label>
-              </div>
-               <div class="col-sm-6">
-              <input class="checkbox" type="checkbox" name="animals" id="animals">
-              <input type="hidden" id="hiddenAnimals" name="animals" value="false">
-              <label class="customlabel">animals</label>
-              </div>
-               </div> 
-              <input class="login-button" type="submit" onclick="location.href='/UniRent/Student/studentRegistration'" value="Sign Up">
-            </form>
-            <div class="notes-container">
-            <span class="title">*These informations are used to determine your accommodation matches, therefore they will not be shown.</span>
-          </div>
-        </div>
       </div>
-<br></br>
-
-      <!-- banner section end -->
-<div class="footer_section">
+      <div class="path">
+        <p id="breadcrumb"></p>
+    </div>
+      <!-- header section end -->
+      <div class="container-fluid marginSides screenSize">
+                    <h1 class="h3 mb-2 text-gray-800">Here there are all of the Admin's replies</h1>
+                    <ul class="reply-list">
+                    </ul>
+                </div>
+<div class="containerPagination">
+        <div class="paginate">
+            <button class="prevBtn">
+              <span class="prevBtn-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="24px" height="24px">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                </svg></span><span class="prevBtn-text">Prev</span>
+            </button>
+            <div class="containerBtns">
+                <div class="leftContainer"></div>
+                <button class="activeBtn"></button>
+                <div class="rightContainer"></div>
+            </div>
+            <button class="nextBtn">
+              <span class="nextBtn-text">Next</span>
+              <span class="nextBtn-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="24px" height="24px">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                </svg>
+              </span>
+          </button>
+        </div>
+        
+        <div class="paginate-details"><span>-<span> <span class="count">1477 pages</span> <span>-<span></div>
+    </div>
+    
+            <!-- footer section start -->
+      <div class="footer_section">
          <div class="container">
             <div class="row">
                <div class="col-md-4">
@@ -118,17 +151,19 @@
                   <h3 class="footer_text">Useful Links</h3>
                   <div class="footer_menu">
                      <ul>
-                        <li><a href="/UniRent/User/home">Home</a></li>
-                        <li><a href="/UniRent/User/about">About Us</a></li>
-                        <li><a href="/UniRent/User/contact">Contact Us</a></li>
+                        <li><a href="/UniRent/Student/home">Home</a></li>
+                        <li><a href="/UniRent/Student/about">About Us</a></li>
+                        <li><a href="/UniRent/Student/contact">Contact Us</a></li>
                      </ul>
                   </div>
                </div>
             </div>
          </div>
       </div>
+      </div>
       <!-- footer section end -->
-<script src="/UniRent/Smarty/js/jquery.min.js"></script>
+      <!-- Javascript files-->
+      <script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>
       <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
       <script src="/UniRent/Smarty/js/jquery-3.0.0.min.js"></script>
@@ -136,27 +171,13 @@
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
-      <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Assicurati che gli ID corrispondano ai tuoi elementi HTML
-    var smokerCheckbox = document.getElementById('smoker');
-    var animalsCheckbox = document.getElementById('animals');
-    var hiddenSmoker = document.getElementById('hiddenSmoker');
-    var hiddenAnimals = document.getElementById('hiddenAnimals');
 
-    if(smokerCheckbox && hiddenSmoker) {
-        smokerCheckbox.onclick = function() {
-            hiddenSmoker.value = this.checked ? 'true' : 'false';
-        };
-    }
-
-    if(animalsCheckbox && hiddenAnimals) {
-        animalsCheckbox.onclick = function() {
-            hiddenAnimals.value = this.checked ? 'true' : 'false';
-        };
-    }
-});
-</script>
+    
+    <script>
+    const countPage = {$count};
+    </script>
+<script src="/UniRent/Smarty/js/pagination.js"></script>
+<script src="/UniRent/Smarty/js/cookie.js"></script>
 <div class="modal" id="myModal">
       <div class"container-fluid">
       <div class="card">
@@ -166,7 +187,8 @@ document.addEventListener('DOMContentLoaded', function() {
          </div> 
       </div>
       </div>
-    <script>
+      </div>
+      <script>
             function on() {
             if (!navigator.cookieEnabled) {
                document.getElementById("myModal").style.display = "flex";
@@ -176,8 +198,12 @@ document.addEventListener('DOMContentLoaded', function() {
                document.getElementById("myModal").style.display = "none";
                }
          </script>
-  <script src="/UniRent/Smarty/js/cookie.js"></script>
-   <!-- Request Detail Modal -->
+<script>
+// Assuming Smarty JSON data is available as a JavaScript variable
+var supportReplies = {$replies};
+</script>
+<script src="/UniRent/Smarty/js/supportReplyDropdown.js"></script>
+<!-- Request Detail Modal -->
 <div class="resModal" id="replyModal">
       <div class="resModal-content">
          <div class="row">
@@ -230,7 +256,6 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 </div>
 <!-- End of Success Modal -->
-<script src="/UniRent/Smarty/js/supportReplyDropdown.js"></script>
 <script>
 var modalSuccess= '{$modalSuccess}';
 var successModal = document.getElementById("successModal");
@@ -258,5 +283,8 @@ window.onclick = function(event) {
     }
 }
 </script>
+
+         
 </body>
-  
+
+</html>
