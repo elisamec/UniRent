@@ -310,7 +310,6 @@
   const data = {/literal}{$tenants}{literal};
   const accommodationTitles = {/literal}{$accommodationTitles}{literal};
   console.log(accommodationTitles);
-  const kind = {/literal}"{$kind}"{literal};
 
    function populateTenantsContainer(data) {
         const tenantsContainer = document.getElementById("tenantsContainer");
@@ -356,7 +355,7 @@
                     userIconDiv.classList.add("userIcon");
 
                     const userLink = document.createElement("a");
-                    userLink.href = `/UniRent/Owner/publicProfile/${tenant.username}/${kind}`;
+                    userLink.href = `/UniRent/Owner/publicProfile/${tenant.username}`;
                     if (tenant.status === 'banned') {
                         userLink.classList.add("disabled");
                     }
@@ -412,7 +411,7 @@
                 userIconDiv.classList.add("userIcon");
 
                 const userLink = document.createElement("a");
-                userLink.href = `/UniRent/Owner/publicProfile/${tenant.username}/${kind}`;
+                userLink.href = `/UniRent/Owner/publicProfile/${tenant.username}`;
                 if (tenant.status === 'banned') {
                         userLink.classList.add("disabled");
                     }

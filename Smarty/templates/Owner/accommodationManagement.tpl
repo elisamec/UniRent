@@ -714,9 +714,9 @@ $(document).ready(function() {
             <div class="col-md-4">
                 <div class="userSection">
                     <div class="userIcon">
-                        <a href="/UniRent/Owner/publicProfile/${username}/current" ${style}><img src="${profilePic}" alt="User Profile Picture" onerror="this.onerror=null;this.src='/UniRent/Smarty/images/defaultProfilePic.png';"></a>
+                        <a href="/UniRent/Owner/publicProfile/${username}" ${style}><img src="${profilePic}" alt="User Profile Picture" onerror="this.onerror=null;this.src='/UniRent/Smarty/images/defaultProfilePic.png';"></a>
                     </div>
-                    <div class="username"><a href="/UniRent/Owner/publicProfile/${username}/current" ${style}>${username}</a></div>
+                    <div class="username"><a href="/UniRent/Owner/publicProfile/${username}" ${style}>${username}</a></div>
                     <div class="username">Expiry Date: ${expiryDate}</div>
                 </div>
             </div>

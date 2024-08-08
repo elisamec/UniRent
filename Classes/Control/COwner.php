@@ -608,7 +608,7 @@ class COwner
         $result ? header('Location:/UniRent/Owner/home/success') : header('Location:/UniRent/Owner/home/error');
 
     }
-    public static function publicProfileFromOwner(string $username, ?string $kind="#", ?string $modalSuccess=null)
+    public static function publicProfileFromOwner(string $username, ?string $modalSuccess=null)
     {
         $session=USession::getInstance();
         if ($session::getSessionElement('username') === $username) {
@@ -633,9 +633,9 @@ class COwner
         }
         $reviewsData = self::reviewsDataByrecipient($owner->getId(), TType::OWNER);
         
-        $view->publicProfileFromOwner($owner, $reviewsData, $kind, $self, $modalSuccess);
+        $view->publicProfileFromOwner($owner, $reviewsData, $self, $modalSuccess);
     }
-    public static function publicProfileFromStudent(string $username, ?string $kind= '#', ?string $modalSuccess=null)
+    public static function publicProfileFromStudent(string $username, ?string $modalSuccess=null)
     {
         $view = new VOwner();
         $PM=FPersistentManager::getInstance();
@@ -656,15 +656,15 @@ class COwner
         $reviewsData = self::reviewsDataByrecipient($owner->getId(), TType::OWNER);
         $session=USession::getInstance();
         $leavebleReviews=$PM->remainingReviewStudentToOwner($session::getSessionElement('id'), $owner->getId());
-        $view->publicProfileFromStudent($owner, $reviewsData, $kind, $modalSuccess, $leavebleReviews);
+        $view->publicProfileFromStudent($owner, $reviewsData, $modalSuccess, $leavebleReviews);
     }
-    public static function publicProfile(string $username, ?string $kind="#") {
+    public static function publicProfile(string $username) {
         $PM=FPersistentManager::getInstance();
         $user=$PM->verifyUserUsername($username);
         if ($user['type'] === 'Student') {
-            CStudent::publicProfileFromOwner($username, $kind);
+            CStudent::publicProfileFromOwner($username);
         } else {
-            self::publicProfileFromOwner($username, $kind);
+            self::publicProfileFromOwner($username);
         }
     }
     public static function postedReview(?string $modalSuccess=null) {

@@ -98,18 +98,16 @@ class VOwner {
     {
         $this->smarty->display('Owner/addAccommodation.tpl');
     }
-    public function publicProfileFromOwner(EOwner $owner, array $reviewsData, ?string $kind="#", bool $self, ?string $modalSuccess){
+    public function publicProfileFromOwner(EOwner $owner, array $reviewsData, bool $self, ?string $modalSuccess){
         $this->smarty->assign('owner', $owner);
         $this->smarty->assign('reviewsData', $reviewsData);
-        $this->smarty->assign('kind', $kind);
         $this->smarty->assign('self', $self);
         $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('Owner/publicProfileFromOwner.tpl');
     }
-    public function publicProfileFromStudent(EOwner $owner, array $reviewsData, ?string $kind="#", ?string $modalSuccess, int $leavebleReviews){
+    public function publicProfileFromStudent(EOwner $owner, array $reviewsData, ?string $modalSuccess, int $leavebleReviews){
         $this->smarty->assign('owner', $owner);
         $this->smarty->assign('reviewsData', $reviewsData);
-        $this->smarty->assign('kind', $kind);
         $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->assign('leavebleReviews', $leavebleReviews);
         $this->smarty->display('Owner/publicProfileFromStudent.tpl');

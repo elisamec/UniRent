@@ -606,17 +606,17 @@ class CStudent{
     }
 
 
-    public static function publicProfile(string $username, ?string $kind="#") {
+    public static function publicProfile(string $username) {
         $PM=FPersistentManager::getInstance();
         $user=$PM->verifyUserUsername($username);
         if ($user['type']==='Student') {
-            self::publicProfileFromStudent($username, $kind);
+            self::publicProfileFromStudent($username);
         } else {
-            COwner::publicProfileFromStudent($username, $kind);
+            COwner::publicProfileFromStudent($username);
         }
     }
         
-    public static function publicProfileFromStudent(string $username, ?string $kind="#", ?string $modalSuccess=null)
+    public static function publicProfileFromStudent(string $username, ?string $modalSuccess=null)
     {
         $session=USession::getInstance();
         if ($session::getSessionElement('username') === $username) {
@@ -677,9 +677,9 @@ class CStudent{
             ];
         }
         $leavebleReviews=$PM->remainingReviewStudentToStudent($session::getSessionElement('id'), $student->getId());
-        $view->publicProfileFromStudent($student, $reviewsData, $kind, $self, $leavebleReviews, $modalSuccess);
+        $view->publicProfileFromStudent($student, $reviewsData, $self, $leavebleReviews, $modalSuccess);
     }
-    public static function publicProfileFromOwner(string $username, ?string $kind="#", ?string $modalSuccess=null)
+    public static function publicProfileFromOwner(string $username, ?string $modalSuccess=null)
     {
         $view = new VStudent();
         $PM=FPersistentManager::getInstance();
@@ -735,7 +735,7 @@ class CStudent{
         }
         $session=USession::getInstance();
         $leavebleReviews=$PM->remainingReviewOwnerToStudent($session->getSessionElement('id'), $student->getId());
-        $view->publicProfileFromOwner($student, $reviewsData, $kind, $modalSuccess, $leavebleReviews);
+        $view->publicProfileFromOwner($student, $reviewsData, $modalSuccess, $leavebleReviews);
     }
       
     public static function paymentMethods(?string $modalSuccess=null)
