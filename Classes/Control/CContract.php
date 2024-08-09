@@ -21,6 +21,7 @@ require __DIR__.'/../../vendor/autoload.php';
 class CContract
 {
     public static function pay(int $idReservation) {
+        self::checkIfStudent();
         $session = USession::getInstance();
         $idStudent = $session->getSessionElement('id');
         $PM = FPersistentManager::getInstance();
@@ -28,6 +29,12 @@ class CContract
         $creditCardNumber = USuperGlobalAccess::getPost('creditCardNumber') ?? USuperGlobalAccess::getPost('creditNewCardNumber');
         $futureDate= $reservation->getFromDate() > new DateTime('today');
         if ($PM->existsTheCard($creditCardNumber)) {
+            $card=$PM->loadCreditCard($creditCardNumber);
+            if ($idStudent !== $card->getStudentID()) {
+                $viewError= new VError();
+                $viewError->error(403);
+            exit();
+            }
             if ($futureDate) {
                 $status=TStatusContract::FUTURE;
             } else {
@@ -59,6 +66,7 @@ class CContract
 
     }
     public static function showStudent(string $kind, ?string $modalSuccess=null):void {
+        self::checkIfStudent();
         $session=USession::getInstance();
         $id=$session->getSessionElement('id');
         $PM= FPersistentManager::getInstance();
@@ -99,6 +107,7 @@ class CContract
     }
     
     public static function showOwner(string $kind, ?string $modalSuccess=null):void {
+        self::checkIfOwner();
         $session=USession::getInstance();
         $id=$session::getSessionElement('id');
         $PM=FPersistentManager::getInstance();
@@ -156,6 +165,11 @@ class CContract
     public static function contractDetails(int $idContract, ?string $modalSuccess=null):void {
         $session = USession::getInstance();
         $userType = $session->getSessionElement('userType');
+        if ($userType===null) {
+            $viewError= new VError();
+            $viewError->error(403);
+            exit();
+        }
         $PM=FPersistentManager::getInstance();
         $contract = $PM->load('EContract', $idContract);
         if ($userType==='Student') {
@@ -279,8 +293,17 @@ class CContract
      * @return void
      */
     public static function viewOngoing(int $id, ?string $modalSuccess=null):void
-    {
+    {   
+        self::checkIfOwner();
         $PM=FPersistentManager::getInstance();
+        $session = USession::getInstance();
+        $accommodationOwner = $PM->load('EAccommodation', $id)->getIdOwner();
+        $ownerId = $session->getSessionElement('id');
+        if ($accommodationOwner !== $ownerId) {
+            $viewError= new VError();
+            $viewError->error(403);
+            exit();
+        }
         $result=$PM->getOnGoingContractsByAccommodationId($id);
         $view = new VOwner();
         $contractsData=[];
@@ -331,5 +354,21 @@ class CContract
             ];
         }
         $view->showContracts($contractsData, 'onGoing', $modalSuccess);
+    }
+    private static function checkIfOwner() {
+        $session = USession::getInstance();
+        if ($session::getSessionElement('userType') !== 'Owner') {
+            $view= new VError();
+            $view->error(403);
+            exit();
+        }
+    }
+    private static function checkIfStudent() {
+        $session = USession::getInstance();
+        if ($session::getSessionElement('userType') !== 'Student') {
+            $view= new VError();
+            $view->error(403);
+            exit();
+        }
     }
 }

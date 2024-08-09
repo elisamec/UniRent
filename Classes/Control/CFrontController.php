@@ -36,7 +36,7 @@ class CFrontController{
                 $session::destroySession();
                 setcookie('PHPSESSID','',time()-3600,'/','',isset($_SERVER["HTTPS"]),true);
                 $viewError = new VError();
-                $viewError->error(600);
+                $viewError->error(600, $user->getUsername(), 'null', $PM->getLastBanReport($user->getUsername())->getDescription());
                 return;
             }
         }

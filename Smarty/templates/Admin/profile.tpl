@@ -91,7 +91,7 @@
 
                     <!-- Page Heading -->
                     <div class="path">
-        <p id="breadcrumb"></p>
+        <p id="breadcrumb" data-user-name="{$user->getUsername()}"></p>
     </div>
                     <div class="profile">
                         <div class="containerProf">
@@ -392,7 +392,7 @@
     <!-- Custom scripts for all pages-->
     <script src="/UniRent/Smarty/js/sb-admin-2.min.js"></script>
 
-<script src="/UniRent/Smarty/js/cookie.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
 <div class="modal" id="myModal">
       <div class"container-fluid">
       <div class="card">
@@ -485,7 +485,7 @@
     displayReviews(reviews);
     {/if}
 </script>
-<script src = "/UniRent/Smarty/js/adminDropdowns.js"></script>
+<script src = "/UniRent/Smarty/js/UniRentOriginal/adminDropdowns.js"></script>
 </body>
 
 </html>

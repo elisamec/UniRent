@@ -303,7 +303,7 @@
          </div> 
       </div>
       </div>
-      <script src="/UniRent/Smarty/js/cookie.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
     <script>
             function on() {
             if (!navigator.cookieEnabled) {
@@ -472,5 +472,5 @@
 </div>
 <!-- End of Request Detail Modal -->
 
-<script src="/UniRent/Smarty/js/supportReplyDropdown.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
 </body>

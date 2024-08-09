@@ -22,6 +22,7 @@ class COwner
 {
     public static function home(?string $modalSuccess=null)
     {
+        self::checkIfOwner();
         $view = new VOwner();
         $PM=FPersistentManager::getInstance();
         $ownerId=USession::getInstance()::getSessionElement('id');
@@ -64,10 +65,17 @@ class COwner
 
 
     public static function accommodationManagement(int $idAccommodation, ?string $modalSuccess=null) {
+        self::checkIfOwner();
         $view = new VOwner();
         $PM = FPersistentManager::getInstance();
-       
+        $session=USession::getInstance();
         $accomm = $PM->load('EAccommodation', $idAccommodation);
+        if($session::getSessionElement('id') != $accomm->getIdOwner())
+        {
+            $viewError= new VError();
+            $viewError->error(403);
+            exit();
+        }
         #print_r($accomm);
         $photos_acc=$accomm->getPhoto();
         $photo_acc_64=EPhoto::toBase64($photos_acc);
@@ -235,6 +243,7 @@ class COwner
      * @return void
      */
     public static function profile(?string $modalSuccess=null): void {
+        self::checkIfOwner();
         $view = new VOwner();
         $session=USession::getInstance();
         //$user = $session->getSessionElement('username');
@@ -248,6 +257,7 @@ class COwner
             $session->setSessionElement('photo', $ph);
             $viewError= new VError();
             $viewError->error(500);
+            exit();
         } else {
 
             $ph = $owner->getPhoto();
@@ -268,6 +278,7 @@ class COwner
 
     public static function editProfile(?string $modalSuccess=null)
     {
+        self::checkIfOwner();
         $view = new VOwner();
         $session=USession::getInstance();
         $user = $session->getSessionElement('username');
@@ -279,6 +290,7 @@ class COwner
 
             $viewError= new VError();
             $viewError->error(500);
+            exit();
         } else {
 
             $photo = USession::getInstance()::getSessionElement('photo');
@@ -299,6 +311,7 @@ class COwner
      */
     public static function deleteProfile()
     {
+        self::checkIfOwner();
         $PM=FPersistentManager::getInstance();
         $user=USession::getInstance()::getSessionElement('username');
         $result=$PM->deleteOwner($user);
@@ -318,6 +331,7 @@ class COwner
 
     public static function modifyOwnerProfile()
     {
+        self::checkIfOwner();
 
         $view = new VOwner();
         $session=USession::getInstance();
@@ -347,6 +361,7 @@ class COwner
         {
             $viewError= new VError();
             $viewError->error(403);
+            exit();
         }
         else
         {
@@ -490,7 +505,7 @@ class COwner
     }
 
     public static function deletePhoto(){
-
+        self::checkIfOwner();
         $PM=FPersistentManager::getInstance();
         $session=USession::getInstance();
         $ownerId=$session::getSessionElement('id');
@@ -501,6 +516,7 @@ class COwner
             $result = 0;
             $viewError= new VError();
             $viewError->error(500);
+            exit();
 
         } else {
             $photoID = $photo->getId();
@@ -518,18 +534,31 @@ class COwner
     }
 
     public static function contact(?string $modalSuccess=null)
-    {
+    {   $session = USession::getInstance();
+        $type = $session::getSessionElement('userType');
+        if ($type === null) {
+            header('Location:/UniRent/User/contact');
+        } else if ($type ==='Student') {
+            header('Location:/UniRent/Student/contact');
+        }
         $view = new VOwner();
         
         $view->contact($modalSuccess);
     }
     public static function about()
-    {
+    {   $session = USession::getInstance();
+        $type = $session::getSessionElement('userType');
+        if ($type === null) {
+            header('Location:/UniRent/User/about');
+        } else if ($type ==='Student') {
+            header('Location:/UniRent/Student/about');
+        }
         $view = new VOwner();
         
         $view->about();
     }
      public static function reviews(?string $modalSuccess=null) {
+        self::checkIfOwner();
         $view = new VOwner();
         $session=USession::getInstance();
         $id=$session::getSessionElement('id');
@@ -537,14 +566,9 @@ class COwner
         
         $view->reviews($reviewsData, $modalSuccess);
     }
-/*
-    public static function changePicture()
-    {
-        
-    }*/
 
     public static function addAccommodation()
-    {
+    {   self::checkIfOwner();
         $view=new VOwner();
         
         $view->addAccommodation();
@@ -609,7 +633,7 @@ class COwner
 
     }
     public static function publicProfileFromOwner(string $username, ?string $modalSuccess=null)
-    {
+    {   self::checkIfOwner();
         $session=USession::getInstance();
         if ($session::getSessionElement('username') === $username) {
             $self = true;
@@ -622,6 +646,7 @@ class COwner
         if ($owner->getStatus() === TStatusUser::BANNED) {
             $viewError=new VError();
             $viewError->error(403);
+            exit();
         }
         $owner_photo=$owner->getPhoto();
         if(is_null($owner_photo)){}
@@ -636,13 +661,14 @@ class COwner
         $view->publicProfileFromOwner($owner, $reviewsData, $self, $modalSuccess);
     }
     public static function publicProfileFromStudent(string $username, ?string $modalSuccess=null)
-    {
+    {   self::checkIfStudent();
         $view = new VOwner();
         $PM=FPersistentManager::getInstance();
         $owner=$PM->getOwnerByUsername($username);
         if ($owner->getStatus() === TStatusUser::BANNED) {
             $viewError=new VError();
             $viewError->error(403);
+            exit();
         }
         $owner_photo=$owner->getPhoto();
         if(is_null($owner_photo)){}
@@ -659,6 +685,7 @@ class COwner
         $view->publicProfileFromStudent($owner, $reviewsData, $modalSuccess, $leavebleReviews);
     }
     public static function publicProfile(string $username) {
+        self::checkIfOwner();
         $PM=FPersistentManager::getInstance();
         $user=$PM->verifyUserUsername($username);
         if ($user['type'] === 'Student') {
@@ -668,6 +695,7 @@ class COwner
         }
     }
     public static function postedReview(?string $modalSuccess=null) {
+        self::checkIfOwner();
         $view = new VOwner();
         $session=USession::getInstance();
         $ownerId=$session::getSessionElement('id');
@@ -710,6 +738,7 @@ class COwner
         $view->postedReview($reviewsData, $modalSuccess);
     }
     public static function viewOwnerAds(int $id) {
+        self::checkIfStudent();
         $view = new VOwner();
         $PM=FPersistentManager::getInstance();
         $accommodationEntities=$PM->loadAccommodationsByOwner($id);
@@ -743,9 +772,16 @@ class COwner
 
 
     public static function editAccommodation(string $id) {
+        self::checkIfOwner();
+        $session = USession::getInstance();
         $view = new VOwner();
         $PM=FPersistentManager::getInstance();
         $accommodation = $PM->load('EAccommodation', (int)$id);
+        if ($accommodation->getIdOwner() !== $session::getSessionElement('id')) {
+            $viewError= new VError();
+            $viewError->error(403);
+            exit();
+        }
         $photos_acc=$accommodation->getPhoto();
         $uploadedPhotos=EPhoto::toBase64($photos_acc);
 
@@ -793,18 +829,16 @@ class COwner
     
     public static function editAccommodationOperations(int $id)
     {
-        
+        self::checkIfOwner();
         $pictures=USuperGlobalAccess::getPost('uploadedImagesData');
         $myarray=json_decode($pictures,true);
         $array_photos=EPhoto::fromJsonToPhotos($myarray);
-
         $title=USuperGlobalAccess::getPost('title');
         $price=USuperGlobalAccess::getPost('price');
         $deposit=(float)USuperGlobalAccess::getPost('deposit');
         $startDate=(int) USuperGlobalAccess::getPost('startDate');
         $month=USuperGlobalAccess::getPost('month');
         $visits=USuperGlobalAccess::getPost('visitAvailabilityData');  #json in arrivo dal post
-        print_r($visits);
         $places=(int)USuperGlobalAccess::getPost('places');
         $duration=EAccommodation::DurationOfVisit($visits);
         
@@ -864,6 +898,7 @@ class COwner
 
 
     public static function tenants(string $kind) {
+        self::checkIfOwner();
         $session=USession::getInstance();
         $ownerId=$session::getSessionElement('id');
         $PM=FPersistentManager::getInstance();
@@ -922,7 +957,7 @@ class COwner
     }
 
     public static function filterTenants(string $type)
-    {
+    {   self::checkIfOwner();
         $session=USession::getInstance();
         $ownerId=$session::getSessionElement('id');
         $PM=FPersistentManager::getInstance();
@@ -990,5 +1025,21 @@ class COwner
         }
         
         $view->tenants($tenants, $type, $accommodationTitles, $rateT);
+    }
+    private static function checkIfOwner() {
+        $session = USession::getInstance();
+        if ($session::getSessionElement('userType') !== 'Owner') {
+            $view= new VError();
+            $view->error(403);
+            exit();
+        }
+    }
+    private static function checkIfStudent() {
+        $session = USession::getInstance();
+        if ($session::getSessionElement('userType') !== 'Student') {
+            $view= new VError();
+            $view->error(403);
+            exit();
+        }
     }
 }

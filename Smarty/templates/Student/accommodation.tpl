@@ -691,7 +691,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
-      <script src="/UniRent/Smarty/js/cookie.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
 
 
       <div class="modal" id="myModal">
@@ -1119,5 +1119,5 @@ $(document).ready(function() {
 
 
 
-<script src="/UniRent/Smarty/js/supportReplyDropdown.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
 </body>

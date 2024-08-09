@@ -325,7 +325,7 @@
     }
 </script>
 {/literal}
-<script src="/UniRent/Smarty/js/cookie.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
    <!-- Request Detail Modal -->
 <div class="resModal" id="replyModal">
       <div class="resModal-content">
@@ -380,7 +380,7 @@
 </div>
 <!-- End of Success Modal -->
 
-<script src="/UniRent/Smarty/js/supportReplyDropdown.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
 
 
    </body>

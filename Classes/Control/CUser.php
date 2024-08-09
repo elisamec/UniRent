@@ -25,30 +25,12 @@ class CUser
         if($type==='Student')
         {
             $student=$PM->load('EStudent', $id);
-            if($student->getStatus()==TStatusUser::BANNED)
-            {
-                $v=new VError();
-                $v->error(600, $student->getUsername(), 'null', $PM->getLastBanReport($student->getUsername())->getDescription());
-                return;
-            }
-            else
-            {
-                header('Location: /UniRent/Student/home');
-            }
+            header('Location: /UniRent/Student/home');
         }
         elseif($type==='Owner')
         {
             $owner=$PM->load('EOwner',$id);
-            if($owner->getStatus()==TStatusUser::BANNED)
-            {
-                $v=new VError();
-                $v->error(600, $owner->getUsername(), 'null', $PM->getLastBanReport($owner->getUsername())->getDescription());
-                return;
-            }
-            else
-            {
-                header('Location: /UniRent/Owner/home');
-            }
+            header('Location: /UniRent/Owner/home');
         }
         else{
         $view = new VUser();
@@ -69,9 +51,6 @@ class CUser
                 $session = USession::getInstance();
             }
         }
-        /*if($session::isSetSessionElement('userType')){
-            header('Location: /Agora/Student/home');
-        }*/
         $view = new VUser();
         $view->login();
     }
@@ -111,14 +90,6 @@ class CUser
         }
         $PM=FPersistentManager::getInstance();
         $searchResult=$PM->findAccommodationsUser($city,$date,$rateA,$rateO,$minPrice,$maxPrice);
-        /*$searchResult= [
-            0 => [
-                'title' => 'Appartamento in centro',
-                'price' => '500',
-                'photo' => null,
-                'address' => 'Via Roma 1, Milano',
-            ]
-        ];*/
         $view->findAccommodation($city,$university,$searchResult,$date, $rateO, $rateA, $minPrice, $maxPrice);
     }
 

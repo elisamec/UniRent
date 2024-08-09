@@ -17,6 +17,7 @@ require __DIR__.'/../../vendor/autoload.php';
 class CReservation
 {
     public static function showStudent(string $kind, ?string $modalSuccess=null): void {
+        self::checkIfStudent();
         $session=USession::getInstance();
         $id=$session->getSessionElement('id');
         $PM= FPersistentManager::getInstance();
@@ -46,6 +47,7 @@ class CReservation
 
     }
     public static function showOwner(?string $modalSuccess=null):void {
+        self::checkIfOwner();
         $session=USession::getInstance();
         $id=$session::getSessionElement('id');
         $PM=FPersistentManager::getInstance();
@@ -103,9 +105,19 @@ class CReservation
     public static function reservationDetails(int $idReservation, ?string $modalSuccess=null): void {
         $session = USession::getInstance();
         $userType = $session->getSessionElement('userType');
+        if (!$userType) {
+            $view= new VError();
+            $view->error(403);
+            exit();
+        }
         $PM=FPersistentManager::getInstance();
         $reservation = $PM->load('EReservation', $idReservation);
         if ($userType==='Student') {
+            if ($reservation->getIdStudent() !== $session->getSessionElement('id')) {
+                $view= new VError();
+                $view->error(403);
+                exit();
+            }
             $accommodation = $PM->load('EAccommodation', $reservation->getAccomodationId());
             $photos_acc=$accommodation->getPhoto();
             $photo_acc_64=EPhoto::toBase64($photos_acc);
@@ -183,6 +195,12 @@ class CReservation
             $view->reservationDetails($reservation, $accommodation, $owner, self::formatDate($reservation->getMade()->setTime(0,0,0)), $picture, $reviewsData, $creditCardData, $modalSuccess);
         }
         else {
+            $accommodationOwner =$PM->load('EAccommodation', $reservation->getAccomodationId())->getIdOwner();
+            if ($accommodationOwner !== $session->getSessionElement('id')) {
+                $view= new VError();
+                $view->error(403);
+                exit();
+            }
             $student = $PM->load('EStudent', $reservation->getIdStudent());
             $student_photo=$student->getPhoto();
             $studentStatus = $student->getStatus();
@@ -245,8 +263,15 @@ class CReservation
                 return $formatted;
     }
     public static function accept(int $id) {
+        self::checkIfOwner();
         $PM = FPersistentManager::getInstance();
         $reservation = $PM->load('EReservation', $id);
+        $accommodationOwner = $PM->load('EAccommodation', $reservation->getAccomodationId())->getIdOwner();
+        if ($accommodationOwner !== USession::getSessionElement('id')) {
+            $view= new VError();
+            $view->error(403);
+            exit();
+        }
         $reservation->setStatus(true);
         $reservation->setMade(new DateTime('now'));
         $res = $PM->update($reservation);
@@ -257,12 +282,36 @@ class CReservation
         }
     }
     public static function deny(int $id) {
+        self::checkIfOwner();
         $PM = FPersistentManager::getInstance();
+        $reservation = $PM->load('EReservation', $id);
+        $accommodationOwner = $PM->load('EAccommodation', $reservation->getAccomodationId())->getIdOwner();
+        if ($accommodationOwner !== USession::getSessionElement('id')) {
+            $view= new VError();
+            $view->error(403);
+            exit();
+        }
         $res = $PM->delete('EReservation', $id); 
         if ($res) {
             header('Location:/UniRent/Reservation/showOwner/success');
         } else {
             header('Location:/UniRent/Reservation/showOwner/error');
+        }
+    }
+    private static function checkIfOwner() {
+        $session = USession::getInstance();
+        if ($session::getSessionElement('userType') !== 'Owner') {
+            $view= new VError();
+            $view->error(403);
+            exit();
+        }
+    }
+    private static function checkIfStudent() {
+        $session = USession::getInstance();
+        if ($session::getSessionElement('userType') !== 'Student') {
+            $view= new VError();
+            $view->error(403);
+            exit();
         }
     }
 }

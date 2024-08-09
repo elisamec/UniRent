@@ -34,6 +34,7 @@ class CStudent{
      * 
      */
     public static function home(?string $modalSuccess=null){
+        self::checkIfStudent();
         $view = new VStudent();
         $PM=FPersistentManager::getInstance();
         $session=USession::getInstance();
@@ -44,11 +45,19 @@ class CStudent{
         $view->home($accommodations, $modalSuccess);
     }
     public static function contact(?string $modalSuccess=null){
+        $session = USession::getInstance();
+        $type = $session::getSessionElement('userType');
+        if ($type === null) {
+            header('Location:/UniRent/User/contact');
+        } else if ($type ==='Owner') {
+            header('Location:/UniRent/Owner/contact');
+        }
         $view = new VStudent();
         $view->contact($modalSuccess);
     }
     public static function findAccommodation()
     {
+        self::checkIfStudent();
         $view = new VStudent();
         $session=USession::getInstance();
         $PM=FPersistentManager::getInstance();
@@ -85,6 +94,13 @@ class CStudent{
 
 
     public static function about(){
+        $session = USession::getInstance();
+        $type = $session::getSessionElement('userType');
+        if ($type === null) {
+            header('Location:/UniRent/User/about');
+        } else if ($type ==='Owner') {
+            header('Location:/UniRent/Owner/about');
+        }
         $view = new VStudent();
         $view->about();
     }
@@ -97,7 +113,7 @@ class CStudent{
      * @return void
      */
     public static function profile(?string $modalSuccess=null): void{
-
+        self::checkIfStudent();
         $view = new VStudent();
         $session=USession::getInstance();
 
@@ -130,13 +146,16 @@ class CStudent{
     }
     
     public static function editProfile(?string $modalSuccess=null){
+        self::checkIfStudent();
         $view = new VStudent();
         $PM = FPersistentManager::getInstance();
         $student = $PM->getStudentByUsername(USession::getInstance()::getSessionElement('username'));
         $photo = USession::getInstance()::getSessionElement('photo');
 
         if(is_null($student)) {
-            print '<b>500 : SERVER ERROR </b>';
+            $viewError=new VError();
+            $viewError->error(500);
+            exit();
         }else{
             $base64 = base64_encode($photo);
             $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
@@ -147,7 +166,7 @@ class CStudent{
     }
 
     public static function deleteProfile()
-    {
+    {   self::checkIfStudent();
         $PM=FPersistentManager::getInstance();
         $user=USession::getInstance()::getSessionElement('username');
         $result=$PM->d($user);
@@ -223,14 +242,34 @@ class CStudent{
         else{
             $viewError=new VError();
             $viewError->error(500);
+            exit();
         }
     }
     
     public static function accommodation(int $idAccommodation, string $successVisit='null', string $successReserve='null') {
+        self::checkIfStudent();
         $view = new VStudent();
         $PM = FPersistentManager::getInstance();
 
         $accomm = $PM->load('EAccommodation', $idAccommodation);
+        $student = $PM->load('EStudent', USession::getInstance()->getSessionElement('id'));
+        if (strtoupper($student->getSex())==='F' && $accomm->getWoman() === false) {
+            $viewError=new VError();
+            $viewError->error(403);
+            exit();
+        } else if (strtoupper($student->getSex())==='M' && $accomm->getMan() === false) {
+            $viewError=new VError();
+            $viewError->error(403);
+            exit();
+        } else if ($student->getSmoker() && $accomm->getSmokers() === false) {
+            $viewError=new VError();
+            $viewError->error(403);
+            exit();
+        } else if ($student->getAnimals() && $accomm->getPets() === false) {
+            $viewError=new VError();
+            $viewError->error(403);
+            exit();
+        }
         $disabled=!$accomm->getStatus();
         $photos_acc=$accomm->getPhoto();
         $photo_acc_64=EPhoto::toBase64($photos_acc);
@@ -267,7 +306,7 @@ class CStudent{
         $reviewsData = [];
         
         foreach ($reviews as $review) {
-            $author=$PM->load( 'EStudent', $review->getIdAuthor());
+            $author=$PM->load('EStudent', $review->getIdAuthor());
             if ($review->isBanned()) {
                 continue;
             }
@@ -375,6 +414,7 @@ class CStudent{
 
     //DA AGGIUSTARE PER LA SESSIONE
     public static function reviews(?string $modalSuccess=null) {
+        self::checkIfStudent();
         $view = new VStudent();
         $session=USession::getInstance();
         $studentUsername=$session::getSessionElement('username');
@@ -548,7 +588,6 @@ class CStudent{
 
         if(!is_null($oldPhoto)){
 
-            print "La vecchia foto non è null<br>";
                     
             $photoId=$oldStudent->getPhoto()->getId();
 
@@ -557,7 +596,6 @@ class CStudent{
 
         } else {
 
-            print "La vecchia foto è null";
 
             if(is_null($picture)) {
 
@@ -578,7 +616,7 @@ class CStudent{
     }
 
     public static function deletePhoto(){
-
+        self::checkIfStudent();
         $PM=FPersistentManager::getInstance();
         $session=USession::getInstance();
         $username=$session::getSessionElement('username');
@@ -586,9 +624,9 @@ class CStudent{
         $photo = $PM -> load('EStudent', $studentID) -> getPhoto();
 
         if(is_null($photo)){
-
-            print "Non hai nessuna foto da eliminare";
-            $result = 0;
+            $viewError=new VError();
+            $viewError->error(500);
+            exit();
 
         } else {
             $photoID = $photo->getId();
@@ -607,6 +645,7 @@ class CStudent{
 
 
     public static function publicProfile(string $username) {
+        self::checkIfStudent();
         $PM=FPersistentManager::getInstance();
         $user=$PM->verifyUserUsername($username);
         if ($user['type']==='Student') {
@@ -617,7 +656,7 @@ class CStudent{
     }
         
     public static function publicProfileFromStudent(string $username, ?string $modalSuccess=null)
-    {
+    {   self::checkIfStudent();
         $session=USession::getInstance();
         if ($session::getSessionElement('username') === $username) {
             $self = true;
@@ -630,6 +669,7 @@ class CStudent{
         if ($student->getStatus() === TStatusUser::BANNED) {
             $viewError=new VError();
             $viewError->error(403);
+            exit();
         }
         $reviews = $PM->loadByRecipient($student->getId(), TType::STUDENT); //va fatto il metodo nel PM
         $reviewsData = [];
@@ -680,13 +720,14 @@ class CStudent{
         $view->publicProfileFromStudent($student, $reviewsData, $self, $leavebleReviews, $modalSuccess);
     }
     public static function publicProfileFromOwner(string $username, ?string $modalSuccess=null)
-    {
+    {   self::checkIfOwner();
         $view = new VStudent();
         $PM=FPersistentManager::getInstance();
         $student=$PM->getStudentByUsername($username);
         if ($student->getStatus() === TStatusUser::BANNED) {
             $viewError=new VError();
             $viewError->error(403);
+            exit();
         }
         $reviews = $PM->loadByRecipient($student->getId(), TType::STUDENT); //va fatto il metodo nel PM
         $reviewsData = [];
@@ -739,7 +780,7 @@ class CStudent{
     }
       
     public static function paymentMethods(?string $modalSuccess=null)
-    {
+    {   self::checkIfStudent();
         $view = new VStudent();
         $session=USession::getInstance();
         $username=$session::getSessionElement('username');
@@ -747,33 +788,6 @@ class CStudent{
         $studentId=$PM->getStudentIdByUsername($username);
         $cards =$PM->loadStudentCards($studentId);
         $cardsData = [];
-           /* [
-                'title' => 'Card 1',
-                'number' => '1234 4321 1234 1234',
-                'expiryDate' => '12/25',
-                'cvv' => '122',
-                'name' => 'John',
-                'surname' => 'Doe',
-                'isMain' => true,
-            ],
-            [
-                'title' => 'Card 2',
-                'number' => '1234 1234 4321 1234',
-                'expiryDate' => '12/25',
-                'cvv' => '122',
-                'name' => 'John',
-                'surname' => 'Doe',
-                'isMain' => false,
-            ],
-            ['title' => 'Card 13',
-                'number' => '1234 1234 1234 1234',
-                'expiryDate' => '12/25',
-                'cvv' => '122',
-                'name' => 'John',
-                'surname' => 'Doe',
-                'isMain' => false,
-            ]
-        ];*/
         
         foreach ($cards as $card) {
             $cardsData[] = [
@@ -786,7 +800,6 @@ class CStudent{
                 'isMain' => $card->getMain(),
             ];
         }
-        #print_r($cardsData);
         $view->paymentMethods($cardsData, $modalSuccess);
     }
 
@@ -836,9 +849,16 @@ class CStudent{
     }
 
     public static function deleteCreditCard(string $creditCard)
-    {
+    {   self::checkIfStudent();
         $number=urldecode($creditCard);  #siccome usuamo url autodescrittive il php non decodifica i parametri automaticamente ma bisogna farlo a mano
         $PM=FPersistentManager::getInstance();
+        $session=USession::getInstance();
+        $card=$PM->loadCreditCard($number);
+        if ($card->getStudentID() !== $session::getSessionElement('id')) {
+            $view=new VError();
+            $view->error(403);
+            exit();
+        }
         $result=$PM->deleteCreditCard($number);
         if($result)
         {
@@ -891,13 +911,18 @@ class CStudent{
     }
 
     public static function makeMainCreditCard(string $number)
-    {
+    {   self::checkIfStudent();
         $n=urldecode($number);
         $session=USession::getInstance();
         $username=$session::getSessionElement('username');
         $PM=FPersistentManager::getInstance();
         $studentId=$PM->getStudentIdByUsername($username);
         $actualcard=$PM->loadCreditCard($n);
+        if ($actualcard->getStudentID() !== $studentId) {
+            $view=new VError();
+            $view->error(403);
+            exit();
+        }
         $actualMain=$PM->getStudentMainCard($studentId);
         if(is_null($actualMain))
         {
@@ -936,6 +961,7 @@ class CStudent{
         }
     }
     public static function postedReview(?string $modalSuccess=null) {
+        self::checkIfStudent();
         $view = new VStudent();
         $session=USession::getInstance();
         $studentId=$session::getSessionElement('id');
@@ -1000,7 +1026,7 @@ class CStudent{
     }
 
     public static function reserveAccommodation(int $idAccommodation)
-    {
+    {   self::checkIfStudent();
         // get student's id
         $session=USession::getInstance();
         $PM=FPersistentManager::getInstance();
@@ -1032,6 +1058,22 @@ class CStudent{
         else
         {
             header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/full');
+        }
+    }
+    private static function checkIfOwner() {
+        $session = USession::getInstance();
+        if ($session::getSessionElement('userType') !== 'Owner') {
+            $view= new VError();
+            $view->error(403);
+            exit();
+        }
+    }
+    private static function checkIfStudent() {
+        $session = USession::getInstance();
+        if ($session::getSessionElement('userType') !== 'Student') {
+            $view= new VError();
+            $view->error(403);
+            exit();
         }
     }
 }

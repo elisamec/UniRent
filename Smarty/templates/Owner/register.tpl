@@ -77,7 +77,7 @@
             {/literal}
             {else}
             {literal}
-               <input required="required" data-inputmask="'mask': '999 9999999'" class="input" type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number: 1234567890" value="{$phone}" pattern="^((00|\+)39[\. ]??)??3\d{2}[\. ]??\d{6,7}$" title="Please enter an italian phone number">
+               <input required="required" data-inputmask="'mask': '999 9999999'" class="input" type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number: 1234567890" value={/literal}"{$phone}"{literal} pattern="^((00|\+)39[\. ]??)??3\d{2}[\. ]??\d{6,7}$" title="Please enter an italian phone number">
             {/literal}
             {/if}
             {/if}
@@ -162,12 +162,13 @@
                document.getElementById("myModal").style.display = "none";
                }
          </script>
-  <script src="/UniRent/Smarty/js/cookie.js"></script>
+  <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+   <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
    <!-- Request Detail Modal -->
 <div class="resModal" id="replyModal">
       <div class="resModal-content">
          <div class="row">
-            <span class="resClose" id="replyClose">&times;</span>
+            <span class="resClose">&times;</span>
             <h2 class="resModal-head">Support Reply Details</h2>
          </div>
          <div class="container cont-padding">
@@ -193,7 +194,7 @@
 <div class="resModal" id="successModal">
       <div class="resModal-content">
          <div class="row">
-            <span class="resClose" id="successClose">&times;</span>
+            <span class="resClose">&times;</span>
             <h2 class="resModal-head">
             {if $modalSuccess == 'success'}
             Success
@@ -216,33 +217,32 @@
     </div>
 </div>
 <!-- End of Success Modal -->
-<script src="/UniRent/Smarty/js/supportReplyDropdown.js"></script>
 <script>
 var modalSuccess= '{$modalSuccess}';
 var successModal = document.getElementById("successModal");
-var successClose = document.getElementById("successClose");
+var successClose = document.querySelector(".resClose");
 var closeSuccess = document.getElementById("closeSuccess");
 if (modalSuccess !== '') {
     successModal.style.display = "block";
 } else {
     successModal.style.display = "none";
 }
+
 successClose.onclick = function() {
     successModal.style.display = "none";
-    window.location.href = currentPage;
 }
 
 closeSuccess.onclick = function() {
     successModal.style.display = "none";
-    window.location.href = currentPage;
 }
 
 window.onclick = function(event) {
     if (event.target == successModal) {
         successModal.style.display = "none";
-        window.location.href = currentPage;
     }
 }
 </script>
+
+<script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
 </body>
   

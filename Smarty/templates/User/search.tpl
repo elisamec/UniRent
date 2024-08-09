@@ -599,7 +599,7 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 });
 </script>
-<script src="/UniRent/Smarty/js/cookie.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
       
    </body>
 </html>

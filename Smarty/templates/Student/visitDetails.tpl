@@ -262,7 +262,7 @@
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
-<script src="/UniRent/Smarty/js/cookie.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
 
       <div class="modal" id="myModal">
       <div class"container-fluid">
@@ -468,7 +468,7 @@
     </div>
 </div>
 <!-- End of Success Modal -->
-<script src="/UniRent/Smarty/js/supportReplyDropdown.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
 <script>
 var modalSuccess= '{$modalSuccess}';
 var successModal = document.getElementById("successModal");

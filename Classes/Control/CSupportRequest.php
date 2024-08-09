@@ -78,6 +78,13 @@ class CSupportRequest
     }
     public static function readSupportReply(int |string $id)
     {
+        $session = USession::getInstance();
+        $userType = $session::getSessionElement('userType');
+        if ($userType === null) {
+            $viewError = new VError();
+            $viewError->error(403);
+            exit();
+        }
         $PM=FPersistentManager::getInstance();
         $result=$PM->readSupportReply((int)$id);
         $location=$_COOKIE['current_page'];
@@ -95,6 +102,11 @@ class CSupportRequest
         $PM = FPersistentManager::getInstance();
             $session = USession::getInstance();
             $userType = $session::getSessionElement('userType');
+            if ($userType === null) {
+                $view = new VError();
+                $view->error(403);
+                exit();
+            }
             // Fetch replies
             $result = $PM->getSupportReply($session::getSessionElement('id'), $userType);
             

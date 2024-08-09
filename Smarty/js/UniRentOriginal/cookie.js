@@ -112,8 +112,8 @@ const customNamesPatterns = {
     '/UniRent/Owner/tenants/current': 'Current Tenants',
     '/UniRent/Owner/tenants/past': 'Past Tenants',
     '/UniRent/Owner/tenants/future': 'Future Tenants',
-    '/UniRent/Student/viewsOwnerAds': username + "'s Ads",
-    '/UniRent/Visit/viewVisits': username + "'s Visits",
+    '/UniRent/Owner/viewOwnerAds/*': username + "'s Ads",
+    '/UniRent/Visit/viewVisit/*': username + "'s Visits",
     '/UniRent/Visit/visits': 'Visits',
     '/UniRent/Student/paymentMethods': 'Payment Methods',
     '/UniRent/Reservation/showStudent/accepted': 'Accepted Reservations',
@@ -131,7 +131,8 @@ const customNamesPatterns = {
     '/UniRent/Contract/contractDetails/*': 'Contract Details',
     '/UniRent/Admin/profile/*': username + '\'s Profile',
     '/UniRent/Admin/readMoreSupportRequest': 'Support Requests',
-    '/UniRent/SupportRequest/readMoreSupportReplies': 'Support Replies'
+    '/UniRent/SupportRequest/readMoreSupportReplies': 'Support Replies',
+    'UniRent/contract/viewOngoing/*': 'OnGoing Contracts for ' + accommodationName,
 };
 
 // Initialize or retrieve `urlDisplayNames` from sessionStorage

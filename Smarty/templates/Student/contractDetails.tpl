@@ -615,7 +615,7 @@ function closeReportModal() {
 }
 </script>
 
-   <script src="/UniRent/Smarty/js/cookie.js"></script>
+   <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
    <!-- Request Detail Modal -->
 <div class="resModal" id="replyModal">
       <div class="resModal-content">
@@ -669,7 +669,7 @@ function closeReportModal() {
     </div>
 </div>
 <!-- End of Success Modal -->
-<script src="/UniRent/Smarty/js/supportReplyDropdown.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
 <script>
 var modalSuccess= '{$modalSuccess}';
 var successModal = document.getElementById("successModal");

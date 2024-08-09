@@ -23,6 +23,7 @@ use Classes\Tools\TStatusSupport;
 class CAdmin
 {
     public static function home(?string $modalMessage = null){
+        self::checkIfAdmin();
         $PM=FPersistentManager::getInstance();
         $stats=$PM->getStatistics();
         $banned=$PM->getBannedList();
@@ -280,6 +281,7 @@ class CAdmin
     }
         public static function profile(string $username, ?int $reportId = null, ?string $modalMessage = null)
     {
+        self::checkIfAdmin();
         $PM=FPersistentManager::getInstance();
         $user=$PM->verifyUserUsername($username);
         $userType=$user['type'];
@@ -456,6 +458,7 @@ class CAdmin
     }
     public static function readMoreSupportRequest(?string $modalMessage = null)
     {   
+        self::checkIfAdmin();
         $PM=FPersistentManager::getInstance();
         $requests=[];
         $count=1;
@@ -547,6 +550,7 @@ class CAdmin
         }
     }
     public static function readMoreReports(?string $modalMessage = null) {
+        self::checkIfAdmin();
         $PM=FPersistentManager::getInstance();
         $reports=[];
         $count=1;
@@ -583,5 +587,12 @@ class CAdmin
             }
         $view=new VAdmin();
         $view->readMoreReports($reports, $count, $modalMessage);
+    }
+    private static function checkIfAdmin() {
+        $session = USession::getInstance();
+        if ($session::getSessionElement('userType') !== 'Admin') {
+            $view= new VError();
+            $view->error(403);
+        }
     }
 }

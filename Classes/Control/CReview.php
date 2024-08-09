@@ -18,7 +18,24 @@ use Classes\View\VError;
 class CReview {
 
     public static function delete(int $id) {
+        $session = USession::getInstance();
+        $userType=$session::getSessionElement('userType');
+        if ( $userType === null) {
+            $view= new VError();
+            $view->error(403);
+            exit();
+        }
         $PM=FPersistentManager::getInstance();
+        $review=$PM->load('EReview', $id);
+        if ($review->getAuthorType() !== $userType) {
+            $view= new VError();
+            $view->error(403);
+            exit();
+        } else if ($review->getAuthorId() !== $session->getSessionElement('id')) {
+            $view= new VError();
+            $view->error(403);
+            exit();
+        }
         $res=$PM->delete('EReview', $id);
         if ($res) {
             header('Location:' . $_COOKIE['current_page'].'/success');
@@ -28,8 +45,18 @@ class CReview {
     }
 
     public static function edit(int $id) {
+        $session = USession::getInstance();
         $PM=FPersistentManager::getInstance();
         $review=$PM->load('EReview', $id);
+        if ($review->getAuthorType() !== $session->getSessionElement('userType')) {
+            $view= new VError();
+            $view->error(403);
+            exit();
+        } else if ($review->getAuthorId() !== $session->getSessionElement('id')) {
+            $view= new VError();
+            $view->error(403);
+            exit();
+        }
         $review->setTitle(USuperGlobalAccess::getPost('title'));
         $review->setDescription(USuperGlobalAccess::getPost('content'));
         $review->setValutation(USuperGlobalAccess::getPost('rate'));
@@ -41,6 +68,12 @@ class CReview {
         }
     }
     public static function addReviewStudent(int $idStudent) {
+        $session = USession::getInstance();
+        if ($session->getSessionElement('userType') === null) {
+            $view= new VError();
+            $view->error(403);
+            exit();
+        }
         $idAuthor=USession::getInstance()->getSessionElement('id');
         $PM=FPersistentManager::getInstance();
         $authorType = $PM->getUserType($idAuthor);
@@ -58,6 +91,7 @@ class CReview {
         }
     }
     public static function addReviewOwner(int $idOwner) {
+        self::checkIfStudent();
         $author=USession::getInstance()->getSessionElement('username');
         $PM=FPersistentManager::getInstance();
         $idAuthor = $PM->getStudentIdByUsername($author);
@@ -76,6 +110,7 @@ class CReview {
         }
     }
     public static function addReviewAccommodation(int $idAccommodation) {
+        self::checkIfStudent();
         $PM=FPersistentManager::getInstance();
         $session=USession::getInstance();
         $idAuthor = $session->getSessionElement('id');
@@ -91,6 +126,14 @@ class CReview {
             header('Location:' . $_COOKIE['current_page'].'/success');
         } else {
             header('Location:' . $_COOKIE['current_page'].'/error');
+        }
+    }
+    private static function checkIfStudent() {
+        $session = USession::getInstance();
+        if ($session::getSessionElement('userType') !== 'Student') {
+            $view= new VError();
+            $view->error(403);
+            exit();
         }
     }
 

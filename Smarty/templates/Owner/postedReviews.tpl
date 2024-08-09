@@ -210,14 +210,9 @@
                 }
 
                 let userStyle;
-                let hrefLink;
-                if (review.type === 'Accommodation') {
-                    userStyle = 'class="accomm"';
-                    hrefLink = '/UniRent/Student/accommodation/' + review.idRecipient;
-                } else {
+                let hrefLinkOwner
                     userStyle = 'class="userIcon"';
-                    hrefLink = '/UniRent/Student/publicProfile/' + review.username;
-                }
+                    hrefLink = '/UniRent/Owner/publicProfile/' + review.username;Owner
 
                 // Apply opacity and warning if reported
                 let reportedStyle = '';
@@ -400,7 +395,7 @@
                document.getElementById("myModal").style.display = "none";
                }
          </script>
-   <script src="/UniRent/Smarty/js/cookie.js"></script>
+   <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
    <!-- Request Detail Modal -->
 <div class="resModal" id="replyModal">
       <div class="resModal-content">
@@ -454,7 +449,7 @@
     </div>
 </div>
 <!-- End of Success Modal -->
-<script src="/UniRent/Smarty/js/supportReplyDropdown.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
 <script>
 var modalSuccess= '{$modalSuccess}';
 var successModal = document.getElementById("successModal");

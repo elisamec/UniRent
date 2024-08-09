@@ -423,6 +423,6 @@ window.onclick = function(event) {
     }
 }
 </script>
-<script src="/UniRent/Smarty/js/cookie.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
    </body>
 </html>

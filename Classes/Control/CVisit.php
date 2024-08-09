@@ -19,6 +19,11 @@ class CVisit
 {
    public static function studentRequest(int $idAccommodation) {
     $session = USession::getInstance();
+    if ($session::getSessionElement('userType') !== 'Student') {
+        $view= new VError();
+        $view->error(403);
+        exit();
+    }
     $idStudent=$session->getSessionElement('id');
     $day=USuperGlobalAccess::getPost('day');
     $time=USuperGlobalAccess::getPost('time');
@@ -42,20 +47,15 @@ class CVisit
     $id=$session->getSessionElement('id');
     $PM= FPersistentManager::getInstance();
     $userType=$session::getSessionElement('userType');
-    if($userType=='Student'){$userType=TType::STUDENT;}
-    elseif($userType=='Owner'){$userType=TType::OWNER;}
-    else{$userType='undefined';}
-    
-    #$userType=$PM->getUserType($id);
-    if ($userType===TType::STUDENT) {
-        $view= new VStudent();
-    } elseif ($userType===TType::OWNER) {
-        $view= new VOwner();
-    } else {
+    if ($userType === null) {
         $viewError= new VError();
-            $viewError->error(403);
+        $viewError->error(403);
         exit();
+    } else {
+        $userType == TType::tryFrom($userType);
     }
+    
+    $view = $userType === TType::STUDENT ? new VStudent() : new VOwner();
     $visits=$PM->loadVisitSchedule($id, $userType);
     $visitsData = [];
 
@@ -168,10 +168,26 @@ class CVisit
 
    
    public static function delete(int $id) {
-    $PM= FPersistentManager::getInstance();
     $session=USession::getInstance();
-    $res=$PM->delete('EVisit', $id);
     $userType=$session::getSessionElement('userType');
+    if ($userType === null) {
+        $viewError= new VError();
+        $viewError->error(403);
+        exit();
+    }
+    $PM= FPersistentManager::getInstance();
+    $visit=$PM->load('EVisit', $id);
+    if ($userType=='Student') {
+        $idUser=$visit->getIdStudent();
+    } elseif ($userType=='Owner') {
+        $idUser=$PM->load('EAccommodation',$visit->getIdAccommodation())->getIdOwner();
+    }
+    if ($idUser!==$session->getSessionElement('id')) {
+        $viewError= new VError();
+        $viewError->error(403);
+        exit();
+    }
+    $res=$PM->delete('EVisit', $id);
     if ($res) {
         header('Location:/UniRent/' . $userType. '/home');
     } else {
@@ -179,6 +195,13 @@ class CVisit
     }
    }
    public static function edit(int $id) {
+    $session=USession::getInstance();
+    $userType=$session::getSessionElement('userType');
+    if ($userType === null) {
+        $viewError= new VError();
+        $viewError->error(403);
+        exit();
+    }
     $day=USuperGlobalAccess::getPost('day');
     $time=USuperGlobalAccess::getPost('time');
     $time=explode(":", $time);
@@ -189,6 +212,16 @@ class CVisit
     $date->setTime($hour, $minutes);
     $PM= FPersistentManager::getInstance();
     $visit=$PM->load('EVisit', $id);
+    if ($userType=='Student') {
+        $idUser=$visit->getIdStudent();
+    } elseif ($userType=='Owner') {
+        $idUser=$PM->load('EAccommodation',$visit->getIdAccommodation())->getIdOwner();
+    }
+    if ($idUser!==$session->getSessionElement('id')) {
+        $viewError= new VError();
+        $viewError->error(403);
+        exit();
+    }
     $visit->setDate($date);
     $res=$PM->update($visit);
     if ($res) {

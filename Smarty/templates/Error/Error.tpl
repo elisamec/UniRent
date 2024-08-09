@@ -141,7 +141,7 @@
     <!-- Custom scripts for all pages-->
     <script src="/UniRent/Smarty/js/sb-admin-2.min.js"></script>
 
-    <script src="/UniRent/Smarty/js/cookie.js"></script>
+    <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
     <script>
 
     var modal = document.getElementById("successRequestModal");

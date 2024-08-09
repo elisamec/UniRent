@@ -180,7 +180,7 @@
     const countPage = {$count};
     </script>
 <script src="/UniRent/Smarty/js/pagination.js"></script>
-<script src="/UniRent/Smarty/js/cookie.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
 <div class="modal" id="myModal">
       <div class"container-fluid">
       <div class="card">
@@ -205,7 +205,7 @@
 // Assuming Smarty JSON data is available as a JavaScript variable
 var supportReplies = {$replies};
 </script>
-<script src="/UniRent/Smarty/js/supportReplyDropdown.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
 <!-- Request Detail Modal -->
 <div class="resModal" id="replyModal">
       <div class="resModal-content">
