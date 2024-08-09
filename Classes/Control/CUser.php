@@ -24,12 +24,10 @@ class CUser
         $PM=FPersistentManager::getInstance();
         if($type==='Student')
         {
-            $student=$PM->load('EStudent', $id);
             header('Location: /UniRent/Student/home');
         }
         elseif($type==='Owner')
         {
-            $owner=$PM->load('EOwner',$id);
             header('Location: /UniRent/Owner/home');
         }
         else{
