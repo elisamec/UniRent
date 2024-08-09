@@ -20,7 +20,6 @@ class CUser
     public static function home(?string $modalSuccess=null){
         $session=USession::getInstance();
         $type=$session->getSessionElement('userType');
-        $id=$session->getSessionElement('id');
         $PM=FPersistentManager::getInstance();
         if($type==='Student')
         {
