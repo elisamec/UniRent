@@ -235,7 +235,8 @@ class CContract
             $cardNumber='**** **** **** ' . substr($creditCard->getNumber(), -4);
             $cardHolder = $creditCard->getName() . " ". $creditCard->getSurname();
             $view= new VStudent();
-            $view->contractDetails($contract, $accommodation, $owner, $cardNumber, $cardHolder, $picture, $reviewsData, $modalSuccess);
+            $leavebleReviews=$PM->remainingReviewStudentToAccommodation($session->getSessionElement('id'), $accommodation->getId());
+            $view->contractDetails($contract, $accommodation, $owner, $cardNumber, $cardHolder, $picture, $reviewsData, $modalSuccess, $leavebleReviews);
         }
         else {
             $student = $PM->load('EStudent', $contract->getIdStudent());
@@ -280,8 +281,9 @@ class CContract
                     'userPicture' => $profilePic,
                 ];
             }
+            $leavebleReviews=$PM->remainingReviewOwnerToStudent($session->getSessionElement('id'), $student->getId());
             $view = new VOwner();
-            $view->contractDetails($contract, $student, $reviewsData, $modalSuccess);
+            $view->contractDetails($contract, $student, $reviewsData, $modalSuccess, $leavebleReviews);
         }
     }
     

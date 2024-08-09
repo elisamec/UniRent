@@ -394,20 +394,8 @@ class CStudent{
                 ];
             }
         }
-        $contracts=count($PM->getContractsByStudent(USession::getInstance()->getSessionElement('id'),$idAccommodation));
-        $postedReviews=$PM->loadReviewsByAuthor(USession::getInstance()->getSessionElement('id'), TType::STUDENT);
-        $countRev=0;
-        foreach ($postedReviews as $review) {
-            if ($review->getRecipientType()===TType::ACCOMMODATION) {
-                if ($review->getIdRecipient()==$idAccommodation) {
-                    $countRev++;
-                }
-            }
-        }
-        $leavebleReviews=$contracts-$countRev;
-        if ($leavebleReviews<0) {
-            $leavebleReviews=0;
-        }
+        $session=USession::getInstance();
+        $leavebleReviews=$PM->remainingReviewStudentToAccommodation($session->getSessionElement('id'), $accomm->getId());
         $view->accommodation($accomm, $owner, $reviewsData, $period, $picture, $visits, $visitDuration, $tenants, $num_places, $studBooked, $dayOfBooking, $timeOfBooking, $disabled, $successReserve, $successVisit, $leavebleReviews);
     }
 

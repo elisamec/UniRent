@@ -132,7 +132,7 @@
                      <p> Average Rating: {$student->getAverageRating()}.</p>
                      <div class="col-md-3">
                         <div class="delete_btn"><a href="#" onclick="openReportModal()">Report User</a></div>
-                        {if $contract->getStatus()->value != "future"}
+                        {if $leaveble>0}
                         <div class="find_btn"><button id="reviewButton">Review</button></div>
                         {/if}
                      </div>
@@ -471,13 +471,7 @@ function closeReportModal() {
 </div>
 <script>
         document.addEventListener("DOMContentLoaded", function() {
-    var kind = "{$kind|escape:'javascript'}";
-    console.log("kind:", kind); // Log the value to ensure it's correct
     var button = document.getElementById("reviewButton");
-
-    if (kind === "future" || kind === "#") {
-        button.style.display = "none"; // Correct way to hide the button
-    }
 
     // Add event listener to reviewButton if it exists
     if (button) {
@@ -519,32 +513,7 @@ window.onclick = (event) => {
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
-         <script>
-      $(document).ready(function() {
-
       
-      var readURL = function(input) {
-         if (input.files && input.files[0]) {
-               var reader = new FileReader();
-
-               reader.onload = function (e) {
-                  $('.imageIcon').attr('src', e.target.result);
-               }
-      
-               reader.readAsDataURL(input.files[0]);
-         }
-      }
-      
-
-      $(".file-upload").on('change', function(){
-         readURL(this);
-      });
-      
-      $(".label-button").on('click', function() {
-         $(".file-upload").click();
-      });
-   });
-      </script>
       <div class="modal" id="myModal">
       <div class"container-fluid">
       <div class="card">
@@ -554,16 +523,7 @@ window.onclick = (event) => {
          </div> 
       </div>
       </div>
-    <script>
-            function on() {
-            if (!navigator.cookieEnabled) {
-               document.getElementById("myModal").style.display = "flex";
-            }
-            }
-            function off() {
-               document.getElementById("myModal").style.display = "none";
-               }
-         </script>
+    <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
    <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
    <!-- Request Detail Modal -->
 <div class="resModal" id="replyModal">

@@ -67,16 +67,7 @@
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
-      <script>
-            function on() {
-            if (!navigator.cookieEnabled) {
-               document.getElementById("myModal").style.display = "flex";
-            }
-            }
-            function off() {
-               document.getElementById("myModal").style.display = "none";
-               }
-         </script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
   <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
 <div class="modal" id="myModal">
       <div class"container-fluid">
@@ -88,15 +79,6 @@
       </div>
       </div>
       </div>
-      <script>
-            function on() {
-            if (!navigator.cookieEnabled) {
-               document.getElementById("myModal").style.display = "flex";
-            }
-            }
-            function off() {
-               document.getElementById("myModal").style.display = "none";
-               }
-         </script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
 </body>
   

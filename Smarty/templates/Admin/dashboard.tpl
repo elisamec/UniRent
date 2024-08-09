@@ -333,7 +333,8 @@
             </div>
         </div>
     </div>
-
+    <!-- End of Logout Modal -->
+<!-- Remove Ban Modal -->
     <div class="modal fade" id="removeBanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -352,6 +353,7 @@
             </div>
         </div>
     </div>
+    <!-- End of Remove Ban Modal -->
    <!-- Request Detail Modal -->
 <div class="modal fade centerSupport" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="requestModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -461,7 +463,7 @@
                 </div>
                 <div class="modal-body">S
                 {if $modalMessage === 'success'}
-                    The opration has been successfully completed.
+                    The operation has been successfully completed.
                     {else}
                     There was an error while processing. Please try again later.
                     {/if}
@@ -479,12 +481,7 @@
 
 
 
-    <script>
-        function removeBanModal(userId, type) {
-            document.getElementById('removeBanButton').href = '/UniRent/Admin/active/' + type + '/' + userId;
-            $('#removeBanModal').modal('show');
-        }
-    </script>
+    <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
         
 
    <!-- jQuery library -->
@@ -538,16 +535,6 @@
       </div>
       </div>
       </div>
-      <script>
-            function on() {
-            if (!navigator.cookieEnabled) {
-               document.getElementById("myModal").style.display = "flex";
-            }
-            }
-            function off() {
-               document.getElementById("myModal").style.display = "none";
-               }
-         </script>
          <script src="/UniRent/Smarty/js/UniRentOriginal/adminDropdowns.js"></script>
 
 </body>

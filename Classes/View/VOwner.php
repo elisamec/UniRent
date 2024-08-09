@@ -176,12 +176,13 @@ class VOwner {
         $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('Owner/contracts.tpl');
     }
-    public function contractDetails(EContract $contract, EStudent $student, array $reviewsData, ?string $modalSuccess):void {
+    public function contractDetails(EContract $contract, EStudent $student, array $reviewsData, ?string $modalSuccess, int $leaveble):void {
         
         $this->smarty->assign('contract', $contract);
         $this->smarty->assign('student', $student);
         $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->assign('reviewsData', $reviewsData);
+        $this->smarty->assign('leaveble', $leaveble);
         $this->smarty->display('Owner/contractDetails.tpl');
     }
     public function supportReplies(array $replies, int $count):void {

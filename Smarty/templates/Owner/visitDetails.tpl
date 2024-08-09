@@ -304,16 +304,7 @@
       </div>
       </div>
       <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
-    <script>
-            function on() {
-            if (!navigator.cookieEnabled) {
-               document.getElementById("myModal").style.display = "flex";
-            }
-            }
-            function off() {
-               document.getElementById("myModal").style.display = "none";
-               }
-         </script>
+    <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
          <script>
          function openEditModal() {
         document.getElementById("visitModal").style.display = "block";

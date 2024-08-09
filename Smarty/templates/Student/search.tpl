@@ -334,16 +334,7 @@
          </div> 
       </div>
       </div>
-    <script>
-            function on() {
-            if (!navigator.cookieEnabled) {
-               document.getElementById("myModal").style.display = "flex";
-            }
-            }
-            function off() {
-               document.getElementById("myModal").style.display = "none";
-               }
-         </script>
+    <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
          {literal}
 <script>
     const results = {/literal}{$searchResult}{literal};
