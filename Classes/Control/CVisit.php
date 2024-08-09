@@ -19,7 +19,7 @@ class CVisit
 {
    public static function studentRequest(int $idAccommodation) {
     $session = USession::getInstance();
-    if ($session::getSessionElement('userType') !== 'Student') {
+    if ($session->getSessionElement('userType') !== 'Student') {
         $view= new VError();
         $view->error(403);
         exit();
@@ -46,7 +46,7 @@ class CVisit
     $session = USession::getInstance();
     $id=$session->getSessionElement('id');
     $PM= FPersistentManager::getInstance();
-    $userType=$session::getSessionElement('userType');
+    $userType=$session->getSessionElement('userType');
     if ($userType === null) {
         $viewError= new VError();
         $viewError->error(403);
@@ -126,7 +126,7 @@ class CVisit
 
    public static function viewVisit(int $id, string $successEdit="null", string $successDelete="null") {
     $session = USession::getInstance();
-    $userType=$session::getSessionElement('userType');
+    $userType=$session->getSessionElement('userType');
     $PM= FPersistentManager::getInstance();
     $visit=$PM->load('EVisit', $id);
     $accommodation = $PM->load('EAccommodation', $visit->getIdAccommodation());
@@ -169,7 +169,7 @@ class CVisit
    
    public static function delete(int $id) {
     $session=USession::getInstance();
-    $userType=$session::getSessionElement('userType');
+    $userType=$session->getSessionElement('userType');
     if ($userType === null) {
         $viewError= new VError();
         $viewError->error(403);
@@ -196,7 +196,7 @@ class CVisit
    }
    public static function edit(int $id) {
     $session=USession::getInstance();
-    $userType=$session::getSessionElement('userType');
+    $userType=$session->getSessionElement('userType');
     if ($userType === null) {
         $viewError= new VError();
         $viewError->error(403);

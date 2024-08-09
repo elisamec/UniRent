@@ -109,7 +109,7 @@ class CContract
     public static function showOwner(string $kind, ?string $modalSuccess=null):void {
         self::checkIfOwner();
         $session=USession::getInstance();
-        $id=$session::getSessionElement('id');
+        $id=$session->getSessionElement('id');
         $PM=FPersistentManager::getInstance();
         $contractsArray=$PM->getContractsByOwner($id, $kind);
         $view = new VOwner();
@@ -357,7 +357,7 @@ class CContract
     }
     private static function checkIfOwner() {
         $session = USession::getInstance();
-        if ($session::getSessionElement('userType') !== 'Owner') {
+        if ($session->getSessionElement('userType') !== 'Owner') {
             $view= new VError();
             $view->error(403);
             exit();
@@ -365,7 +365,7 @@ class CContract
     }
     private static function checkIfStudent() {
         $session = USession::getInstance();
-        if ($session::getSessionElement('userType') !== 'Student') {
+        if ($session->getSessionElement('userType') !== 'Student') {
             $view= new VError();
             $view->error(403);
             exit();

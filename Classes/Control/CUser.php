@@ -19,8 +19,8 @@ class CUser
     
     public static function home(?string $modalSuccess=null){
         $session=USession::getInstance();
-        $type=$session::getSessionElement('userType');
-        $id=$session::getSessionElement('id');
+        $type=$session->getSessionElement('userType');
+        $id=$session->getSessionElement('id');
         $PM=FPersistentManager::getInstance();
         if($type==='Student')
         {
@@ -121,19 +121,19 @@ class CUser
         {
             http_response_code(500);
             $session=USession::getInstance();
-            $session::setSessionElement('email', $mail);
-            $session::setSessionElement('username', $username);
+            $session->setSessionElement('email', $mail);
+            $session->setSessionElement('username', $username);
             if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()])[A-Za-z\d@$!%*?&()]{8,}$/' , $password)) {
                 $view->registrationError(false, false, false, true, $username, $mail, $name, $surname, $type);
             }
-            $session::setSessionElement('password',USuperGlobalAccess::getPost('password'));
-            $session::setSessionElement('name',$name);
-            $session::setSessionElement('surname',$surname);
-            $session::setSessionElement('picture',$picture);
-            $session::setSessionElement('userType',$type);
+            $session->setSessionElement('password',USuperGlobalAccess::getPost('password'));
+            $session->setSessionElement('name',$name);
+            $session->setSessionElement('surname',$surname);
+            $session->setSessionElement('picture',$picture);
+            $session->setSessionElement('userType',$type);
 
             if($type==='Student'){
-                if($PM->verifyStudentEmail($session::getSessionElement('email'))==true){
+                if($PM->verifyStudentEmail($session->getSessionElement('email'))==true){
 
                     $viewStudent->showStudentRegistration();
 
@@ -181,10 +181,10 @@ class CUser
                 if(password_verify($passwordIn, $user->getPassword())){
                    
                     $session = USession::getInstance();
-                    $session::setSessionElement("id", $result_username_array['id']);
-                    $session::setSessionElement("userType", $type);
-                    $session::setSessionElement('username', $username);
-                    $session::setSessionElement('password', $passwordIn);
+                    $session->setSessionElement("id", $result_username_array['id']);
+                    $session->setSessionElement("userType", $type);
+                    $session->setSessionElement('username', $username);
+                    $session->setSessionElement('password', $passwordIn);
     
                     $type === 'Student' ? header('Location:/UniRent/Student/home') : header('Location:/UniRent/Owner/home');
   
@@ -211,8 +211,8 @@ class CUser
     public static function logout()
     {
         $session=USession::getInstance();
-        $session::unsetSession();
-        $session::destroySession();
+        $session->unsetSession();
+        $session->destroySession();
         setcookie('PHPSESSID','',time()-3600,'/','',isset($_SERVER["HTTPS"]),true);
         header('Location: /UniRent/User/home');
     }

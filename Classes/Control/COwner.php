@@ -25,7 +25,7 @@ class COwner
         self::checkIfOwner();
         $view = new VOwner();
         $PM=FPersistentManager::getInstance();
-        $ownerId=USession::getInstance()::getSessionElement('id');
+        $ownerId=USession::getInstance()->getSessionElement('id');
         $accommodationEntities=$PM->loadAccommodationsByOwner($ownerId);
         $accommodationsActive=[];
         $accommodationsInactive=[];
@@ -70,7 +70,7 @@ class COwner
         $PM = FPersistentManager::getInstance();
         $session=USession::getInstance();
         $accomm = $PM->load('EAccommodation', $idAccommodation);
-        if($session::getSessionElement('id') != $accomm->getIdOwner())
+        if($session->getSessionElement('id') != $accomm->getIdOwner())
         {
             $viewError= new VError();
             $viewError->error(403);
@@ -293,7 +293,7 @@ class COwner
             exit();
         } else {
 
-            $photo = USession::getInstance()::getSessionElement('photo');
+            $photo = USession::getInstance()->getSessionElement('photo');
 
             $base64 = base64_encode($photo);
             $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
@@ -313,13 +313,13 @@ class COwner
     {
         self::checkIfOwner();
         $PM=FPersistentManager::getInstance();
-        $user=USession::getInstance()::getSessionElement('username');
+        $user=USession::getInstance()->getSessionElement('username');
         $result=$PM->deleteOwner($user);
         if($result)
         {
             $session=USession::getInstance();
-            $session::unsetSession();
-            $session::destroySession();
+            $session->unsetSession();
+            $session->destroySession();
             setcookie('PHPSESSID','',time()-3600);
             header('Location:/UniRent/User/home');
         }
@@ -348,12 +348,12 @@ class COwner
         $newPassword=USuperGlobalAccess::getPost('password');
         $newPhoneNumber=EOwner::formatPhoneNumber(USuperGlobalAccess::getPost('phoneNumber'));
         $newIBAN=USuperGlobalAccess::getPost('iban');
-        $oldUsername=$session::getSessionElement('username');
+        $oldUsername=$session->getSessionElement('username');
 
-        $ownerId=$session::getSessionElement('id');
+        $ownerId=$session->getSessionElement('id');
         $oldPassword=USuperGlobalAccess::getPost('oldPassword');
 
-        $oldPhoto = $session::getSessionElement('photo');
+        $oldPhoto = $session->getSessionElement('photo');
         $base64 = base64_encode($oldPhoto);
         $photoError = "data:" . 'image/jpeg' . ";base64," . $base64;
 
@@ -397,9 +397,9 @@ class COwner
                             {   
                                 $ph = $photo->getPhoto();
                                 if (is_null($ph)) $ph = null;
-                                $session::setSessionElement('username', $newUsername);
+                                $session->setSessionElement('username', $newUsername);
                                 $password = $owner->getPassword();
-                                $session::setSessionElement('password',$newPassword);
+                                $session->setSessionElement('password',$newPassword);
                                 $session->setSessionElement('photo',$ph);
                                 header("Location:/UniRent/Owner/profile");
                             }
@@ -480,14 +480,14 @@ class COwner
 
         if($newPassword===''){
             //If i don't have any new password, i'll use the old one
-            $password=$session::getSessionElement('password');
+            $password=$session->getSessionElement('password');
         } else {
             
-            if($oldPassword===$session::getSessionElement('password')){
+            if($oldPassword===$session->getSessionElement('password')){
                 if(!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()])[A-Za-z\d@$!%*?&()]{8,}$/' , $newPassword)){
 
                     $error = 1;
-                    $password=$session::getSessionElement('password');
+                    $password=$session->getSessionElement('password');
                     print "La password non rispetta i requisiti minimi<br>";
                     //$view->editProfile($oldStudent, $photoError, true, false, false, false);
 
@@ -497,7 +497,7 @@ class COwner
                 $error = 1;
                 print "La vecchia password non corrisponde<br>";
                 //$view->editProfile($oldStudent, $photoError, false, false, false, true);
-                $password=$session::getSessionElement('password');
+                $password=$session->getSessionElement('password');
             }
         }
 
@@ -508,7 +508,7 @@ class COwner
         self::checkIfOwner();
         $PM=FPersistentManager::getInstance();
         $session=USession::getInstance();
-        $ownerId=$session::getSessionElement('id');
+        $ownerId=$session->getSessionElement('id');
         $photo = $PM -> load('EOwner', $ownerId) -> getPhoto();
 
         if(is_null($photo)){
@@ -535,7 +535,7 @@ class COwner
 
     public static function contact(?string $modalSuccess=null)
     {   $session = USession::getInstance();
-        $type = $session::getSessionElement('userType');
+        $type = $session->getSessionElement('userType');
         if ($type === null) {
             header('Location:/UniRent/User/contact');
         } else if ($type ==='Student') {
@@ -547,7 +547,7 @@ class COwner
     }
     public static function about()
     {   $session = USession::getInstance();
-        $type = $session::getSessionElement('userType');
+        $type = $session->getSessionElement('userType');
         if ($type === null) {
             header('Location:/UniRent/User/about');
         } else if ($type ==='Student') {
@@ -561,7 +561,7 @@ class COwner
         self::checkIfOwner();
         $view = new VOwner();
         $session=USession::getInstance();
-        $id=$session::getSessionElement('id');
+        $id=$session->getSessionElement('id');
         $reviewsData = self::reviewsDataByrecipient($id, TType::OWNER);
         
         $view->reviews($reviewsData, $modalSuccess);
@@ -612,10 +612,10 @@ class COwner
         $city=USuperGlobalAccess::getPost('city');
         $postalCode=USuperGlobalAccess::getPost('postalCode');
         $description=USuperGlobalAccess::getPost('description');
-        $men=USession::booleanSolver(USuperGlobalAccess::getPost('men'));
-        $women=USession::booleanSolver(USuperGlobalAccess::getPost('women'));
-        $smokers=USession::booleanSolver(USuperGlobalAccess::getPost('smokers'));
-        $animals=USession::booleanSolver(USuperGlobalAccess::getPost('animals'));
+        $men=USession::getInstance()->booleanSolver(USuperGlobalAccess::getPost('men'));
+        $women=USession::getInstance()->booleanSolver(USuperGlobalAccess::getPost('women'));
+        $smokers=USession::getInstance()->booleanSolver(USuperGlobalAccess::getPost('smokers'));
+        $animals=USession::getInstance()->booleanSolver(USuperGlobalAccess::getPost('animals'));
 
         $date= new DateTime('now');
         $year=(int)$date->format('Y');
@@ -623,7 +623,7 @@ class COwner
 
         $PM=FPersistentManager::getInstance();
         
-        $idOwner=$PM->getOwnerIdByUsername(USession::getInstance()::getSessionElement('username'));
+        $idOwner=$PM->getOwnerIdByUsername(USession::getInstance()->getSessionElement('username'));
         $addressObj= new Address();
         $addressObj=$addressObj->withAddressLine1($address)->withPostalcode($postalCode)->withLocality($city);
         #print $addressObj->getAddressLine1().' '.$addressObj->getPostalCode().' '.$addressObj->getLocality();
@@ -635,7 +635,7 @@ class COwner
     public static function publicProfileFromOwner(string $username, ?string $modalSuccess=null)
     {   self::checkIfOwner();
         $session=USession::getInstance();
-        if ($session::getSessionElement('username') === $username) {
+        if ($session->getSessionElement('username') === $username) {
             $self = true;
         } else {
             $self = false;
@@ -681,7 +681,7 @@ class COwner
 
         $reviewsData = self::reviewsDataByrecipient($owner->getId(), TType::OWNER);
         $session=USession::getInstance();
-        $leavebleReviews=$PM->remainingReviewStudentToOwner($session::getSessionElement('id'), $owner->getId());
+        $leavebleReviews=$PM->remainingReviewStudentToOwner($session->getSessionElement('id'), $owner->getId());
         $view->publicProfileFromStudent($owner, $reviewsData, $modalSuccess, $leavebleReviews);
     }
     public static function publicProfile(string $username) {
@@ -698,7 +698,7 @@ class COwner
         self::checkIfOwner();
         $view = new VOwner();
         $session=USession::getInstance();
-        $ownerId=$session::getSessionElement('id');
+        $ownerId=$session->getSessionElement('id');
         $PM=FPersistentManager::getInstance();
         $reviews = $PM->loadReviewsByAuthor($ownerId, TType::OWNER);
         $reviewsData = [];
@@ -777,7 +777,7 @@ class COwner
         $view = new VOwner();
         $PM=FPersistentManager::getInstance();
         $accommodation = $PM->load('EAccommodation', (int)$id);
-        if ($accommodation->getIdOwner() !== $session::getSessionElement('id')) {
+        if ($accommodation->getIdOwner() !== $session->getSessionElement('id')) {
             $viewError= new VError();
             $viewError->error(403);
             exit();
@@ -866,10 +866,10 @@ class COwner
         $city=USuperGlobalAccess::getPost('city');
         $postalCode=USuperGlobalAccess::getPost('postalCode');
         $description=USuperGlobalAccess::getPost('description');
-        $men=USession::booleanSolver(USuperGlobalAccess::getPost('men'));
-        $women=USession::booleanSolver(USuperGlobalAccess::getPost('women'));
-        $smokers=USession::booleanSolver(USuperGlobalAccess::getPost('smokers'));
-        $animals=USession::booleanSolver(USuperGlobalAccess::getPost('animals'));
+        $men=USession::getInstance()->booleanSolver(USuperGlobalAccess::getPost('men'));
+        $women=USession::getInstance()->booleanSolver(USuperGlobalAccess::getPost('women'));
+        $smokers=USession::getInstance()->booleanSolver(USuperGlobalAccess::getPost('smokers'));
+        $animals=USession::getInstance()->booleanSolver(USuperGlobalAccess::getPost('animals'));
 
         $date= new DateTime('now');
         $year=(int)$date->format('Y');
@@ -879,7 +879,7 @@ class COwner
 
         $status=$PM->load('EAccommodation',$id)->getStatus();
         
-        $idOwner=$PM->getOwnerIdByUsername(USession::getInstance()::getSessionElement('username'));
+        $idOwner=$PM->getOwnerIdByUsername(USession::getInstance()->getSessionElement('username'));
         $addressId = $PM->load('EAccommodation', $id)->getAddress()->getSortingCode();
         $addressObj= new Address();
         $addressObj=$addressObj->withAddressLine1($address)->withPostalcode($postalCode)->withLocality($city)->withSortingCode($addressId);
@@ -900,7 +900,7 @@ class COwner
     public static function tenants(string $kind) {
         self::checkIfOwner();
         $session=USession::getInstance();
-        $ownerId=$session::getSessionElement('id');
+        $ownerId=$session->getSessionElement('id');
         $PM=FPersistentManager::getInstance();
         $view = new VOwner();
         $tenantsArray = $PM->getTenants($kind,$ownerId);
@@ -959,7 +959,7 @@ class COwner
     public static function filterTenants(string $type)
     {   self::checkIfOwner();
         $session=USession::getInstance();
-        $ownerId=$session::getSessionElement('id');
+        $ownerId=$session->getSessionElement('id');
         $PM=FPersistentManager::getInstance();
         $view = new VOwner();
 
@@ -1028,7 +1028,7 @@ class COwner
     }
     private static function checkIfOwner() {
         $session = USession::getInstance();
-        if ($session::getSessionElement('userType') !== 'Owner') {
+        if ($session->getSessionElement('userType') !== 'Owner') {
             $view= new VError();
             $view->error(403);
             exit();
@@ -1036,7 +1036,7 @@ class COwner
     }
     private static function checkIfStudent() {
         $session = USession::getInstance();
-        if ($session::getSessionElement('userType') !== 'Student') {
+        if ($session->getSessionElement('userType') !== 'Student') {
             $view= new VError();
             $view->error(403);
             exit();

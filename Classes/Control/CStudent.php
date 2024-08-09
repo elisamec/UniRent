@@ -46,7 +46,7 @@ class CStudent{
     }
     public static function contact(?string $modalSuccess=null){
         $session = USession::getInstance();
-        $type = $session::getSessionElement('userType');
+        $type = $session->getSessionElement('userType');
         if ($type === null) {
             header('Location:/UniRent/User/contact');
         } else if ($type ==='Owner') {
@@ -64,7 +64,7 @@ class CStudent{
         $city=USuperGlobalAccess::getPost('city');
         $date=USuperGlobalAccess::getPost('date');
         $university=USuperGlobalAccess::getPost('university');
-        $student_username=$session::getSessionElement('username');
+        $student_username=$session->getSessionElement('username');
         $student=$PM->getStudentByUsername($student_username);
     
         if (USuperGlobalAccess::getPost('rateA')!== null) {
@@ -95,7 +95,7 @@ class CStudent{
 
     public static function about(){
         $session = USession::getInstance();
-        $type = $session::getSessionElement('userType');
+        $type = $session->getSessionElement('userType');
         if ($type === null) {
             header('Location:/UniRent/User/about');
         } else if ($type ==='Owner') {
@@ -149,8 +149,8 @@ class CStudent{
         self::checkIfStudent();
         $view = new VStudent();
         $PM = FPersistentManager::getInstance();
-        $student = $PM->getStudentByUsername(USession::getInstance()::getSessionElement('username'));
-        $photo = USession::getInstance()::getSessionElement('photo');
+        $student = $PM->getStudentByUsername(USession::getInstance()->getSessionElement('username'));
+        $photo = USession::getInstance()->getSessionElement('photo');
 
         if(is_null($student)) {
             $viewError=new VError();
@@ -168,13 +168,13 @@ class CStudent{
     public static function deleteProfile()
     {   self::checkIfStudent();
         $PM=FPersistentManager::getInstance();
-        $user=USession::getInstance()::getSessionElement('username');
+        $user=USession::getInstance()->getSessionElement('username');
         $result=$PM->d($user);
         if($result)
         {
             $session=USession::getInstance();
-            $session::unsetSession();
-            $session::destroySession();
+            $session->unsetSession();
+            $session->destroySession();
             setcookie('PHPSESSID','',time()-3600);
             header('Location:/UniRent/User/home/success');
         }
@@ -417,7 +417,7 @@ class CStudent{
         self::checkIfStudent();
         $view = new VStudent();
         $session=USession::getInstance();
-        $studentUsername=$session::getSessionElement('username');
+        $studentUsername=$session->getSessionElement('username');
         $PM=FPersistentManager::getInstance();
         $studentId=$PM->getStudentIdByUsername($studentUsername);
         $reviews=$PM->loadByRecipient($studentId, TType::STUDENT);
@@ -477,10 +477,10 @@ class CStudent{
         $courseDuration=USuperGlobalAccess::getPost('courseDuration');
         $immatricolationYear=USuperGlobalAccess::getPost('immatricolationYear');
         $birthDate= new DateTime(USuperGlobalAccess::getPost('birthDate'));
-        $smoker=$session::booleanSolver(USuperGlobalAccess::getPost('smoker'));
-        $animals=$session::booleanSolver(USuperGlobalAccess::getPost('animals'));
+        $smoker=$session->booleanSolver(USuperGlobalAccess::getPost('smoker'));
+        $animals=$session->booleanSolver(USuperGlobalAccess::getPost('animals'));
 
-        $oldUsername=$session::getSessionElement('username');
+        $oldUsername=$session->getSessionElement('username');
         $PM=FPersistentManager::getInstance();
 
         $studentID=$PM->getStudentIdByUsername($oldUsername);
@@ -560,14 +560,14 @@ class CStudent{
 
         if($newPassword===''){
             //If i don't have any new password, i'll use the old one
-            $password=$session::getSessionElement('password');
+            $password=$session->getSessionElement('password');
         } else {
             
-            if($oldPassword===$session::getSessionElement('password')){
+            if($oldPassword===$session->getSessionElement('password')){
                 if(!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()])[A-Za-z\d@$!%*?&()]{8,}$/' , $newPassword)){
 
                     $error = 1;
-                    $password=$session::getSessionElement('password');
+                    $password=$session->getSessionElement('password');
                     $view->editProfile($oldStudent, $photoError, true, false, false, false, null);
 
                 } else $password=$newPassword;
@@ -575,7 +575,7 @@ class CStudent{
             } else {
                 $error = 1;
                 $view->editProfile($oldStudent, $photoError, false, false, false, true, null);
-                $password=$session::getSessionElement('password');
+                $password=$session->getSessionElement('password');
             }
         }
 
@@ -619,7 +619,7 @@ class CStudent{
         self::checkIfStudent();
         $PM=FPersistentManager::getInstance();
         $session=USession::getInstance();
-        $username=$session::getSessionElement('username');
+        $username=$session->getSessionElement('username');
         $studentID=$PM->getStudentIdByUsername($username);
         $photo = $PM -> load('EStudent', $studentID) -> getPhoto();
 
@@ -658,7 +658,7 @@ class CStudent{
     public static function publicProfileFromStudent(string $username, ?string $modalSuccess=null)
     {   self::checkIfStudent();
         $session=USession::getInstance();
-        if ($session::getSessionElement('username') === $username) {
+        if ($session->getSessionElement('username') === $username) {
             $self = true;
         } else {
             $self = false;
@@ -716,7 +716,7 @@ class CStudent{
                 'userPicture' => $profilePic,
             ];
         }
-        $leavebleReviews=$PM->remainingReviewStudentToStudent($session::getSessionElement('id'), $student->getId());
+        $leavebleReviews=$PM->remainingReviewStudentToStudent($session->getSessionElement('id'), $student->getId());
         $view->publicProfileFromStudent($student, $reviewsData, $self, $leavebleReviews, $modalSuccess);
     }
     public static function publicProfileFromOwner(string $username, ?string $modalSuccess=null)
@@ -783,7 +783,7 @@ class CStudent{
     {   self::checkIfStudent();
         $view = new VStudent();
         $session=USession::getInstance();
-        $username=$session::getSessionElement('username');
+        $username=$session->getSessionElement('username');
         $PM=FPersistentManager::getInstance();
         $studentId=$PM->getStudentIdByUsername($username);
         $cards =$PM->loadStudentCards($studentId);
@@ -811,7 +811,7 @@ class CStudent{
         $cvv=USuperGlobalAccess::getPost('cvv');
         $name=USuperGlobalAccess::getPost('name');
         $surname=USuperGlobalAccess::getPost('surname');
-        $username=USession::getInstance()::getSessionElement('username');
+        $username=USession::getInstance()->getSessionElement('username');
         $studentId=FPersistentManager::getInstance()->getStudentIdByUsername($username);
         if(FPersistentManager::getInstance()->existsTheCard($number))
         {
@@ -854,7 +854,7 @@ class CStudent{
         $PM=FPersistentManager::getInstance();
         $session=USession::getInstance();
         $card=$PM->loadCreditCard($number);
-        if ($card->getStudentID() !== $session::getSessionElement('id')) {
+        if ($card->getStudentID() !== $session->getSessionElement('id')) {
             $view=new VError();
             $view->error(403);
             exit();
@@ -878,7 +878,7 @@ class CStudent{
         $cvv=USuperGlobalAccess::getPost('cvv1');
         $name=USuperGlobalAccess::getPost('name1');
         $surname=USuperGlobalAccess::getPost('surname1');
-        $username=USession::getInstance()::getSessionElement('username');
+        $username=USession::getInstance()->getSessionElement('username');
         $studentId=FPersistentManager::getInstance()->getStudentIdByUsername($username);
         #print $title.' '.$number.' '.$expiry.' '.$cvv.' '.$name.' '.$surname.' '.$oldNumber;
         $PM=FPersistentManager::getInstance();
@@ -914,7 +914,7 @@ class CStudent{
     {   self::checkIfStudent();
         $n=urldecode($number);
         $session=USession::getInstance();
-        $username=$session::getSessionElement('username');
+        $username=$session->getSessionElement('username');
         $PM=FPersistentManager::getInstance();
         $studentId=$PM->getStudentIdByUsername($username);
         $actualcard=$PM->loadCreditCard($n);
@@ -964,7 +964,7 @@ class CStudent{
         self::checkIfStudent();
         $view = new VStudent();
         $session=USession::getInstance();
-        $studentId=$session::getSessionElement('id');
+        $studentId=$session->getSessionElement('id');
         $PM=FPersistentManager::getInstance();
         $reviews = $PM->loadReviewsByAuthor($studentId, TType::STUDENT);
         $reviewsData = [];
@@ -1030,7 +1030,7 @@ class CStudent{
         // get student's id
         $session=USession::getInstance();
         $PM=FPersistentManager::getInstance();
-        $student_username=$session::getSessionElement('username');
+        $student_username=$session->getSessionElement('username');
         $student_id=$PM->getStudentIdByUsername($student_username);
 
         //get post informations
@@ -1062,7 +1062,7 @@ class CStudent{
     }
     private static function checkIfOwner() {
         $session = USession::getInstance();
-        if ($session::getSessionElement('userType') !== 'Owner') {
+        if ($session->getSessionElement('userType') !== 'Owner') {
             $view= new VError();
             $view->error(403);
             exit();
@@ -1070,7 +1070,7 @@ class CStudent{
     }
     private static function checkIfStudent() {
         $session = USession::getInstance();
-        if ($session::getSessionElement('userType') !== 'Student') {
+        if ($session->getSessionElement('userType') !== 'Student') {
             $view= new VError();
             $view->error(403);
             exit();

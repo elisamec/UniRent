@@ -50,8 +50,8 @@ class CAdmin
                 {
                    
                     $session = USession::getInstance();
-                    $session::setSessionElement("userType", 'Admin');
-                    $session::setSessionElement('password',$passwordIn);
+                    $session->setSessionElement("userType", 'Admin');
+                    $session->setSessionElement('password',$passwordIn);
                     header('Location:/UniRent/Admin/home'); 
                 }
                 else  #password is not correct
@@ -62,14 +62,14 @@ class CAdmin
     public static function logout()
     {
         $session = USession::getInstance();
-        $session::destroySession();
+        $session->destroySession();
         header('Location:/UniRent/User/home');
     }
     public static function report(int $id, string $type)
     {
         $PM = FPersistentManager::getInstance();
         $session = USession::getInstance();
-        $userType  = $session::getSessionElement('userType');
+        $userType  = $session->getSessionElement('userType');
         $reportReason=USuperGlobalAccess::getPost('reportReason');
         
         if ($type == 'Student')
@@ -123,7 +123,7 @@ class CAdmin
     public static function supportRequest()
     {
         $session=USession::getInstance();
-        if (!$session::isSetSessionElement('id'))
+        if (!$session->isSetSessionElement('id'))
         {
             $topic=TRequestType::BUG;
             $message=USuperGlobalAccess::getPost('Message');
@@ -139,8 +139,8 @@ class CAdmin
                 header('Location:/UniRent/User/contact/fail');
             }
         } else {
-            $idUser=$session::getSessionElement('id');
-            $type=$session::getSessionElement('userType');
+            $idUser=$session->getSessionElement('id');
+            $type=$session->getSessionElement('userType');
             if ($type=='Student')
             {
                 $type=TType::STUDENT;
@@ -590,7 +590,7 @@ class CAdmin
     }
     private static function checkIfAdmin() {
         $session = USession::getInstance();
-        if ($session::getSessionElement('userType') !== 'Admin') {
+        if ($session->getSessionElement('userType') !== 'Admin') {
             $view= new VError();
             $view->error(403);
         }

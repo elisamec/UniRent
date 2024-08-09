@@ -49,7 +49,7 @@ class CReservation
     public static function showOwner(?string $modalSuccess=null):void {
         self::checkIfOwner();
         $session=USession::getInstance();
-        $id=$session::getSessionElement('id');
+        $id=$session->getSessionElement('id');
         $PM=FPersistentManager::getInstance();
         $reservationsArray=$PM->getWaitingReservations($id);
         $view = new VOwner();
@@ -300,7 +300,7 @@ class CReservation
     }
     private static function checkIfOwner() {
         $session = USession::getInstance();
-        if ($session::getSessionElement('userType') !== 'Owner') {
+        if ($session->getSessionElement('userType') !== 'Owner') {
             $view= new VError();
             $view->error(403);
             exit();
@@ -308,7 +308,7 @@ class CReservation
     }
     private static function checkIfStudent() {
         $session = USession::getInstance();
-        if ($session::getSessionElement('userType') !== 'Student') {
+        if ($session->getSessionElement('userType') !== 'Student') {
             $view= new VError();
             $view->error(403);
             exit();

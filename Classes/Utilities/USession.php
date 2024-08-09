@@ -37,7 +37,7 @@ class USession
     /**
      * return session status. If you want to check if the session is staretd you can use this
      */
-    public static function getSessionStatus()
+    public function getSessionStatus()
     {
         return session_status();
     }
@@ -45,7 +45,7 @@ class USession
     /**
      * unset all the elements in the _SESSION superglobal
      */
-    public static function unsetSession()
+    public function unsetSession()
     {
         session_unset();
     }
@@ -53,7 +53,7 @@ class USession
     /**
      * unset of an element of _SESSION superglobal
      */
-    public static function unsetSessionElement($id)
+    public function unsetSessionElement($id)
     {
         unset($_SESSION[$id]);
     }
@@ -61,7 +61,7 @@ class USession
     /**
      * destroy the session
      */
-    public static function destroySession()
+    public function destroySession()
     {
         session_destroy();
     }
@@ -69,7 +69,7 @@ class USession
     /**
      * get element in the _SESSION superglobal
      */
-    public static function getSessionElement($id)
+    public function getSessionElement($id)
     {
         if(isset($_SESSION[$id]))
         {
@@ -84,7 +84,7 @@ class USession
     /**
      * set an element in _SESSION superglobal
      */
-    public static function setSessionElement($id, $value)
+    public function setSessionElement($id, $value)
     {
         $_SESSION[$id] = $value;
     }
@@ -93,7 +93,7 @@ class USession
      * check if an element is set or not
      * @return boolean
      */
-    public static function isSetSessionElement($id)
+    public function isSetSessionElement($id)
     {
         if(isset($_SESSION[$id]))
         {
@@ -105,7 +105,7 @@ class USession
         }
     }
 
-    public static function booleanSolver($value)
+    public function booleanSolver($value)
     {
         if($value===1 || $value===true || $value==='true')
         {

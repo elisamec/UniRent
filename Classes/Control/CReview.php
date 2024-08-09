@@ -19,7 +19,7 @@ class CReview {
 
     public static function delete(int $id) {
         $session = USession::getInstance();
-        $userType=$session::getSessionElement('userType');
+        $userType=$session->getSessionElement('userType');
         if ( $userType === null) {
             $view= new VError();
             $view->error(403);
@@ -130,7 +130,7 @@ class CReview {
     }
     private static function checkIfStudent() {
         $session = USession::getInstance();
-        if ($session::getSessionElement('userType') !== 'Student') {
+        if ($session->getSessionElement('userType') !== 'Student') {
             $view= new VError();
             $view->error(403);
             exit();

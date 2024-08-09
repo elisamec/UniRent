@@ -28,7 +28,7 @@ class CSupportRequest
             $PM = FPersistentManager::getInstance();
             $session = USession::getInstance();
             // Fetch replies
-            $result = $PM->getSupportReply($session::getSessionElement('id'), $session::getSessionElement('userType'));
+            $result = $PM->getSupportReply($session->getSessionElement('id'), $session->getSessionElement('userType'));
             
             // Prepare response data
             $countReply = 0;
@@ -79,7 +79,7 @@ class CSupportRequest
     public static function readSupportReply(int |string $id)
     {
         $session = USession::getInstance();
-        $userType = $session::getSessionElement('userType');
+        $userType = $session->getSessionElement('userType');
         if ($userType === null) {
             $viewError = new VError();
             $viewError->error(403);
@@ -101,14 +101,14 @@ class CSupportRequest
     public static function readMoreSupportReplies() {
         $PM = FPersistentManager::getInstance();
             $session = USession::getInstance();
-            $userType = $session::getSessionElement('userType');
+            $userType = $session->getSessionElement('userType');
             if ($userType === null) {
                 $view = new VError();
                 $view->error(403);
                 exit();
             }
             // Fetch replies
-            $result = $PM->getSupportReply($session::getSessionElement('id'), $userType);
+            $result = $PM->getSupportReply($session->getSessionElement('id'), $userType);
             
             // Prepare response data
             $count = 1;

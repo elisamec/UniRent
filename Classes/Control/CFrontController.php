@@ -27,13 +27,13 @@ class CFrontController{
         $requestUri = trim($requestUri, '/');
         $uriParts = explode('/', $requestUri);
         $session = USession::getInstance();
-        if ($session::getSessionElement('id') != null && $session::getSessionElement('userType') != 'Admin') {
+        if ($session->getSessionElement('id') != null && $session->getSessionElement('userType') != 'Admin') {
             $PM = FPersistentManager::getInstance();
-            $userType = $session::getSessionElement('userType');
-            $user = $PM->load('E' . $userType, $session::getSessionElement('id'));
+            $userType = $session->getSessionElement('userType');
+            $user = $PM->load('E' . $userType, $session->getSessionElement('id'));
             if ($user->getStatus() == TStatusUser::BANNED) {
-                $session::unsetSession();
-                $session::destroySession();
+                $session->unsetSession();
+                $session->destroySession();
                 setcookie('PHPSESSID','',time()-3600,'/','',isset($_SERVER["HTTPS"]),true);
                 $viewError = new VError();
                 $viewError->error(600, $user->getUsername(), 'null', $PM->getLastBanReport($user->getUsername())->getDescription());
