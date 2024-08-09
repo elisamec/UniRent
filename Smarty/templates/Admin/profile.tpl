@@ -45,29 +45,29 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                        <!-- Nav Item - Alerts -->
+                        <!-- Nav Item - Reports -->
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-bell fa-fw"></i>
-                                <!-- Counter - Alerts -->
+                                <!-- Counter - Reports -->
                                 <span class="badge badge-danger badge-counter" id="alertCount"></span>
                             </a>
-                            <!-- Dropdown - Alerts -->
+                            <!-- Dropdown - Reports -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
                             </div>
                         </li>
 
-                        <!-- Nav Item - Messages -->
+                        <!-- Nav Item - Support Requests -->
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-envelope fa-fw"></i>
-                                <!-- Counter - Messages -->
+                                <!-- Counter - Support Requests -->
                                 <span class="badge badge-danger badge-counter" id="messageCount"></span>
                             </a>
-                            <!-- Dropdown - Messages -->
+                            <!-- Dropdown - Support Requests -->
                             <div class="dropdownWidth dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="messagesDropdown">
                             </div>

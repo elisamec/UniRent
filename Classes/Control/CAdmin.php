@@ -22,7 +22,14 @@ use Classes\Tools\TStatusSupport;
 
 class CAdmin
 {
-    public static function home(?string $modalMessage = null){
+    /**
+     * Method home
+     * 
+     * Shows Admin's dashboard
+     * @param ?string $modalMessage
+     * @return void
+     */
+    public static function home(?string $modalMessage = null):void{
         self::checkIfAdmin();
         $PM=FPersistentManager::getInstance();
         $stats=$PM->getStatistics();
@@ -30,8 +37,13 @@ class CAdmin
         $view = new VAdmin();
         $view->home($stats, $banned, $modalMessage);
     }
-
-    public static function login(){
+    /**
+     * Method login
+     * 
+     * Shows Admin's login page
+     * @return void
+     */
+    public static function login():void{
         if(UCookie::isSet('PHPSESSID'))
         {
             setcookie('PHPSESSID','',time()-3600);
@@ -40,7 +52,11 @@ class CAdmin
         $view = new VAdmin();
         $view->login();
     }
-    public static function checkLogin()
+    /**
+     * Checks if the login is correct for the admin
+     * @return void
+     */
+    public static function checkLogin():void
     {
 
         $view = new VAdmin();
@@ -59,13 +75,29 @@ class CAdmin
                     $view->loginError();
                 }
     }
-    public static function logout()
+    /**
+     * Method logout
+     * 
+     * Logs out the admin
+     * @return void
+     */
+    public static function logout():void
     {
         $session = USession::getInstance();
         $session->destroySession();
         header('Location:/UniRent/User/home');
     }
-    public static function report(int $id, string $type)
+    /**
+     * Method report
+     * 
+     * this method permits the users to report a Review, a Student or an Owner
+     *
+     * @param int $id [Student/Owner/Review id]
+     * @param string $type [Student/Owner/Review]
+     *
+     * @return void
+     */
+    public static function report(int $id, string $type):void
     {
         $PM = FPersistentManager::getInstance();
         $session = USession::getInstance();
@@ -119,8 +151,14 @@ class CAdmin
             }
         }
     }
-
-    public static function supportRequest()
+    /**
+     * Method supportRequest
+     * 
+     * this method permits the users to send a support request
+     *
+     * @return void
+     */
+    public static function supportRequest():void
     {
         $session=USession::getInstance();
         if (!$session->isSetSessionElement('id'))
@@ -164,7 +202,18 @@ class CAdmin
             }
         }
     }
-    public static function ban(int $id, string $type, int $reportId)
+    /**
+     * Method ban
+     * 
+     * this method permits the administrator to ban a Student, an Owner or a Review
+     *
+     * @param int $id [Student/Owner/Review id]
+     * @param string $type [Student/Owner/Review]
+     * @param int $reportId [Report id]
+     *
+     * @return void
+     */
+    public static function ban(int $id, string $type, int $reportId):void
     {
         $PM = FPersistentManager::getInstance();
         $user=$PM->load('E'.ucfirst($type), $id);
@@ -197,7 +246,15 @@ class CAdmin
             header('Location:'.$_COOKIE['current_page'].'/error');
         }
     }
-    public static function studentEmailIssue() {
+    /**
+     * Method studentEmailIssue
+     * 
+     * this method permits the administrator to fix the registration problem of a student caused by the absence of the email in the JSON file
+     *
+     *
+     * @return void
+     */
+    public static function studentEmailIssue():void {
         $mail = USuperGlobalAccess::getPost('emailIssue');
         $university = USuperGlobalAccess::getPost('university');
         $city = USuperGlobalAccess::getPost('city');
@@ -213,7 +270,16 @@ class CAdmin
             header('Location:/UniRent/User/showRegistration/error');
         }
     }
-    public static function removeBanRequest(string $username) {
+    /**
+     * Method removeBanRequest
+     * 
+     * this method permits the Student to send a request to the administrator to remove the ban
+     *
+     * @param string $username [Student/Owner username]
+     *
+     * @return void
+     */
+    public static function removeBanRequest(string $username):void {
         $PM=FPersistentManager::getInstance();
         $topic=TRequestType::REMOVEBAN;
         $user= $PM->verifyUserUsername($username);
@@ -243,7 +309,7 @@ class CAdmin
      *
      * @return void
      */
-    public static function active(string $type, int $id)
+    public static function active(string $type, int $id):void
     {
         $PM = FPersistentManager::getInstance();
         $user = $PM->load('E'.ucfirst($type), $id);
@@ -279,7 +345,17 @@ class CAdmin
         $AUF->addElement($domain, $uniName, $city);  
 
     }
-        public static function profile(string $username, ?int $reportId = null, ?string $modalMessage = null)
+        /**
+         * Method profile
+         * 
+         * this method permits the administrator to see the profile of a Student or an Owner
+         * 
+         * @param string $username
+         * @param mixed $reportId (needed to mark the curresponding report as solved)
+         * @param mixed $modalMessage
+         * @return void
+         */
+        public static function profile(string $username, ?int $reportId = null, ?string $modalMessage = null):void
     {
         self::checkIfAdmin();
         $PM=FPersistentManager::getInstance();
@@ -339,10 +415,11 @@ class CAdmin
     /**
      * Method get_Request_and_Report
      *
-     * this method is used to get Reports and SupportRequests by the administrator. It is called by the jaascript therefore it prints a json
+     * this method is used to get Reports and SupportRequests by the administrator. It is called by the javascript therefore it prints a json
      * 
+     * @return void
      */
-    public static function get_Request_and_Report()
+    public static function get_Request_and_Report():void
     {
         header('Content-Type: application/json');
         $PM=FPersistentManager::getInstance();
@@ -448,7 +525,7 @@ class CAdmin
      *
      * @return void
      */
-    public function supportReply(int $id)
+    public function supportReply(int $id):void
     {
         $answare=USuperGlobalAccess::getPost('answare');
         $PM=FPersistentManager::getInstance();
@@ -456,7 +533,15 @@ class CAdmin
         if ($result){header('Location:'.$_COOKIE['current_page'].'/success');}
         else {header('Location:'.$_COOKIE['current_page'].'/error');}
     }
-    public static function readMoreSupportRequest(?string $modalMessage = null)
+    /**
+     * Method readMoreSupportRequest
+     * 
+     * this method permits the administrator to see the page with all the support requests
+     * 
+     * @param ?string $modalMessage
+     * @return void
+     */
+    public static function readMoreSupportRequest(?string $modalMessage = null):void
     {   
         self::checkIfAdmin();
         $PM=FPersistentManager::getInstance();
@@ -503,7 +588,14 @@ class CAdmin
         $view=new VAdmin();
         $view->readMoreSupportRequest($requests, $count, $modalMessage);
     }
-    public static function addToJson() {
+    /**
+     * Method addToJson
+     * 
+     * this method permits the administrator to add an email to the JSON file used for mail verification
+     * 
+     * @return void
+     */
+    public static function addToJson():void {
         $email = USuperGlobalAccess::getPost('email');
         $uniName = USuperGlobalAccess::getPost('university');
         $city = USuperGlobalAccess::getPost('city');
@@ -523,7 +615,16 @@ class CAdmin
             header('Location:'.$_COOKIE['current_page'].'/error');
         }
     }
-    public static function deleteSupportRequest(int $id)
+    /**
+     * Method deleteSupportRequest
+     * 
+     * this method permits the administrator to delete a support request. It can be called only for email verification requests
+     * 
+     * @param int $id [supportRequest ID]
+     * 
+     * @return void
+     */
+    public static function deleteSupportRequest(int $id):void
     {
         $PM=FPersistentManager::getInstance();
         $res=$PM->delete('ESupportRequest', $id);
@@ -536,7 +637,16 @@ class CAdmin
             header('Location:'.$_COOKIE['current_page'].'/error');
         }
     }
-    public static function deleteReport(int $id)
+    /**
+     * Method deleteReport
+     * 
+     * this method permits the administrator to delete a report in case a ban is not considered necessary
+     * 
+     * @param int $id [report ID]
+     * 
+     * @return void
+     */
+    public static function deleteReport(int $id):void
     {
         $PM=FPersistentManager::getInstance();
         $res=$PM->delete('EReport', $id);
@@ -549,7 +659,15 @@ class CAdmin
             header('Location:'.$_COOKIE['current_page'].'/error');
         }
     }
-    public static function readMoreReports(?string $modalMessage = null) {
+    /**
+     * Method readMoreReports
+     * 
+     * this method permits the administrator to see the page with all the reports
+     * 
+     * @param ?string $modalMessage
+     * @return void
+     */
+    public static function readMoreReports(?string $modalMessage = null):void {
         self::checkIfAdmin();
         $PM=FPersistentManager::getInstance();
         $reports=[];
@@ -588,7 +706,14 @@ class CAdmin
         $view=new VAdmin();
         $view->readMoreReports($reports, $count, $modalMessage);
     }
-    private static function checkIfAdmin() {
+    /**
+     * Method checkIfAdmin
+     * 
+     * this method checks if the user is an admin. If not, it shows an error page
+     * 
+     * @return void
+     */
+    private static function checkIfAdmin():void {
         $session = USession::getInstance();
         if ($session->getSessionElement('userType') !== 'Admin') {
             $view= new VError();

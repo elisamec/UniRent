@@ -72,20 +72,20 @@
                         <a class="nav-link" href = "/UniRent/Visit/visits">Visits</a>
                      </li>
                   </ul>
-                  <!-- Nav Item - Messages -->
+                  <!-- Nav Item - Support Replies -->
                         <li class="nav-item dropdown no-arrow mx-1">
                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               <i class="fa fa-envelope fa-fw"></i>
-                              <!-- Counter - Messages -->
+                              <!-- Counter - Support Replies -->
                               <span id="messageCount" class="badge badge-danger badge-counter"></span>
                            </a>
-                           <!-- Dropdown - Messages -->
+                           <!-- Dropdown - Support Replies -->
                            <div id="dropdownMenu" class="dropdownWidth dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
                               <h6 class="dropdown-header">Admin Replies</h6>
                               <div id="messageList">
                                     <!-- Dynamic content will be loaded here -->
                               </div>
-                              <a class="dropdown-item text-center smallMessages text-gray-500" href="/UniRent/SupportRequest/readMoreSupportReplies">Read More Replies</a>
+                              <a class="dropdown-item text-center smallSupport Replies text-gray-500" href="/UniRent/SupportRequest/readMoreSupportReplies">Read More Replies</a>
                            </div>
                         </li>
 

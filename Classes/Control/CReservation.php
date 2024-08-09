@@ -267,7 +267,7 @@ class CReservation
         $PM = FPersistentManager::getInstance();
         $reservation = $PM->load('EReservation', $id);
         $accommodationOwner = $PM->load('EAccommodation', $reservation->getAccomodationId())->getIdOwner();
-        if ($accommodationOwner !== USession::getSessionElement('id')) {
+        if ($accommodationOwner !== USession::getInstance()->getSessionElement('id')) {
             $view= new VError();
             $view->error(403);
             exit();
@@ -286,7 +286,7 @@ class CReservation
         $PM = FPersistentManager::getInstance();
         $reservation = $PM->load('EReservation', $id);
         $accommodationOwner = $PM->load('EAccommodation', $reservation->getAccomodationId())->getIdOwner();
-        if ($accommodationOwner !== USession::getSessionElement('id')) {
+        if ($accommodationOwner !== USession::getInstance()->getSessionElement('id')) {
             $view= new VError();
             $view->error(403);
             exit();

@@ -424,5 +424,7 @@ window.onclick = function(event) {
 }
 </script>
 <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/selectKeyboardAccessibility.js"></script>
+
    </body>
 </html>

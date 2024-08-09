@@ -108,7 +108,8 @@ class UAccessUniversityFile
             {
                 return $università[$key][8];
             }
-        }  
+        }
+        return '';
     }
 
     public function getCities()
