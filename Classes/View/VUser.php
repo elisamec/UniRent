@@ -45,7 +45,7 @@ class VUser{
         $this->smarty->display('User/search.tpl');
     }
 
-    public function register(){
+    public function register(?string $modalSuccess){
         $this->smarty->assign('userDuplicateError', false);
         $this->smarty->assign('studentMailError', false);
         $this->smarty->assign('passwordFormatError', false);
@@ -55,12 +55,13 @@ class VUser{
         $this->smarty->assign('name', '');
         $this->smarty->assign('surname', '');
         $this->smarty->assign('type', '');
+        $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('User/register.tpl');
     }
 
     //Deve rimandare alla home dicendo che c'è stato un errore
     //L'errore potrebbe essere dovuto a username o email già presenti nel database
-    public function registrationError(bool $mailDuplicateError, bool $userDuplicateError, bool $studentMailError, bool $passwordFormatError, string $username, string $email, string $name, string $surname, string $type){
+    public function registrationError(bool $mailDuplicateError, bool $userDuplicateError, bool $studentMailError, bool $passwordFormatError, string $username, string $email, string $name, string $surname, string $type, ?string $modalSuccess){
         $this->smarty->assign('userDuplicateError', $userDuplicateError);
         $this->smarty->assign('studentMailError', $studentMailError);
         $this->smarty->assign('passwordFormatError', $passwordFormatError);
@@ -70,6 +71,7 @@ class VUser{
         $this->smarty->assign('name', $name);
         $this->smarty->assign('surname', $surname);
         $this->smarty->assign('type', $type);
+        $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('User/register.tpl');
     }
 

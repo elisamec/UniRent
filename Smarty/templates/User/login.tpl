@@ -145,7 +145,7 @@
          </div>
       </div>
       <!-- footer section end -->
-<script src="/UniRent/Smarty/js/jquery.min.js"></script>
+      <script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>
       <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
       <script src="/UniRent/Smarty/js/jquery-3.0.0.min.js"></script>
@@ -153,7 +153,7 @@
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
-         <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
-<script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
   </body>
   

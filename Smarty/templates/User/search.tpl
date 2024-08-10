@@ -80,7 +80,7 @@
       <div class="path">
         <p id="breadcrumb"></p>
     </div>
-   <form action="/UniRent/User/search" method="post" class="yourFormId">
+   <form action="/UniRent/User/search" method="post">
       <div class="container-fluid">
          <div class="search_box_section padding-reserve">
             <div class="search_box_main">
@@ -227,7 +227,7 @@
                <div class="row">
                <div class="Findcontainer">
                   <div class="select-outline">
-                     <div class="find_btn"><button type="submit" class="yourLinkId">Find Now</button></div>
+                     <div class="find_btn"><button type="submit">Find Now</button></div>
                   </div>
                </div>
                </div>
@@ -294,8 +294,15 @@
          </div>
       </div>
       <!-- footer section end -->
+      <!-- JavaScript variables -->
+      <script>
+         const defaultCity = {$selectedCity};
+         const defaultUniversity = {$selectedUni};
+         const defaultPeriod = {$selectedDate};
+         const results = {$searchResult};
+         var user = 'User';
+      </script>
       <!-- Javascript files-->
-      
       <script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>
       <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
@@ -315,91 +322,6 @@
          });
          });
       </script>
-         <script>
-      document.getElementById("yourLinkId").onclick = function() {
-    document.getElementById("yourFormId").submit();
-}
-      </script>
-      <script>
-    // Get the modal
-    var modal = document.getElementById("loginModal");
-    // Get the <span> element that closes the modal
-    var span = document.getElementById("loginClose");
-
-
-    // When the user clicks the button, open the modal 
-    function showModal(event) {
-        event.preventDefault();
-        modal.style.display = "block";
-    }
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>
-{literal}
-<script>
-    const results = {/literal}{$searchResult}{literal};
-
-    // Function to create and append reviews to the container
-    function displayResults(results) {
-        const container = document.getElementById('resultContainer');
-
-        if (container) {
-            if (results.length === 0) {
-                container.innerHTML = '<div class="container"><h1 class="noRev">The search gave no result!</h1></div>';
-            } else {
-                results.forEach(result => {
-                    if (result.photo == null) {
-                        result.photo = "/UniRent/Smarty/images/noPic.png";
-                    }
-                    const resultElement = document.createElement('div');
-                    resultElement.className = 'col-lg-4 col-md-6col-lg-4 col-md-6';
-
-                    // Insert the names of the elements of the result array
-                    resultElement.innerHTML = `
-                        <div class="blog_img">
-                            <div class="container_main">
-                                <img src="${result.photo}" alt="">
-                                <div class="overlay">
-                                    <div class="text">
-                                        <div class="some_text"><a href="#" onclick="showModal(event)">See More</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="image_box">
-                            <div class="left_box">
-                                <h1 class="road_text">${result.title}</h1>
-                                <p>${result.address}</p>
-                            </div>
-                            <div class="right_box">
-                                <div class="rate_text">${result.price} €</div>
-                            </div>
-                        </div>
-                    `;
-
-                    // Append the created element to the container
-                    container.appendChild(resultElement); // Corrected: resultElement instead of reviewElement
-                });
-            }
-        } else {
-            console.error("Container not found!"); // Debugging: Error if container is not found
-        }
-    }
-
-    // Call the function to display reviews
-    displayResults(results);
-</script>
-{/literal}
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     const rangeInput = document.querySelectorAll(".range-input input"),
@@ -465,9 +387,7 @@
     $('select').niceSelect();
 
     // Get the default values from Smarty and properly escape them
-    const defaultCity = {$selectedCity|json_encode};
-    const defaultUniversity = {$selectedUni|json_encode};
-    const defaultPeriod = {$selectedDate|json_encode};
+    
 
     fetch("/UniRent/User/getCities")
     .then(response => {

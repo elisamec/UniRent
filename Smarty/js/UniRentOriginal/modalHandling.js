@@ -234,6 +234,29 @@ function off() {
         deleteConfirmModal.style.display = "none";
     }
 
+    // Get the modal
+    var loginModal = document.getElementById("loginModal");
+    // Get the <span> element that closes the modal
+    var loginClose = document.getElementById("loginClose");
+
+
+    // When the user clicks the button, open the modal 
+    function showModal(event) {
+        event.preventDefault();
+        loginModal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    loginClose.onclick = function() {
+        loginModal.style.display = "none";
+    }
+    function emailFormOpen() {
+        document.getElementById("emailForm").style.display = "block";
+     }
+     document.getElementById('emailForm').addEventListener('submit', function(event) {
+          document.getElementById('emailForm').style.display = 'none';
+      });
+
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
         if (event.target == modal) {
@@ -254,5 +277,8 @@ function off() {
         if (event.target == successModal) {
             successModal.style.display = "none";
             window.location.href = currentPage;
+        }
+        if (event.target == loginModal) {
+            loginModal.style.display = "none";
         }
     }
