@@ -12,7 +12,7 @@ function generateStars(stars) {
 }
 
 // Function to create and append reviews to the container
-function displayReviews(reviews) {
+function displayReviews(reviews, user) {
     const container = document.getElementById('reviewsContainer');
 
     if (container) {
@@ -22,28 +22,40 @@ function displayReviews(reviews) {
             reviews.forEach(review => {
                 const reviewElement = document.createElement('div');
                 reviewElement.className = 'review';
-                /*
-                let style;
-                if (review.statusReported === 1 || review.statusReported === true) {
-                    style = 'style="background-color: #ffcccc;"';
-                } else if (review.statusBanned === 1 || review.statusBanned === true) {
-                    style = 'style="background-color: #ff9999;"';
+                let style = '';
+                let styleUser = '';
+                let href = '';
+                let reportButton = '';
+                if (user==='Admin') {
+                    href='/UniRent/Admin/profile/' + review.username;
+                    if (review.statusReported === 1 || review.statusReported === true) {
+                        style = 'style="background-color: #ffcccc;"';
+                    } else if (review.statusBanned === 1 || review.statusBanned === true) {
+                        style = 'style="background-color: #ff9999;"';
+                    }
+                    reviewElement.attributes = style;
+                    reportButton = '';
                 } else {
-                    style = '';
+                    if (review.userStatus ==='banned') {
+                        styleUser = 'class="disabled"';
+                    } else {
+                        styleUser = '';
+                    }
+                href = '/UniRent/'+ user +'/publicProfile/' + review.username;
+                reportButton = '<div class="btn-cont2"><button class="delete_button" data-review-id="` + review.id + `">Report</button></div>';
                 }
-                reviewElement.attributes = style;
-                */
                 // Insert the names of the elements of the review array
                 reviewElement.innerHTML = `
                 <div class="row">
                     <h1 class="ReviewTitle">` + review.title + `</h1> <!-- Title of the review -->
+                    `+ reportButton +`
                 </div>
                 <div class="row">
                         <div class="userSection">
                             <div class="userIcon">
-                            <a href="/UniRent/Admin/profile/` + review.username + `"><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
+                            <a href="` + href + `" `+ styleUser +`><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
                         </div>
-                        <div class="username"><a href="/UniRent/Admin/profile/` + review.username + `">` + review.username + `</a></div> <!-- Username of the reviewer -->
+                        <div class="username"><a href="` + href + `" `+ styleUser +`>` + review.username + `</a></div> <!-- Username of the reviewer -->
                     </div>
                         <div class="col-md-11">
                             <div class="stars">
@@ -63,4 +75,4 @@ function displayReviews(reviews) {
 }
 
 // Call the function to display reviews
-displayReviews(reviews);
+displayReviews(reviews, user);

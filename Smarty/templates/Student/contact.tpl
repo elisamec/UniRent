@@ -196,13 +196,13 @@
          });
          });
       </script>
-      <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
          <script>
       document.getElementById("yourLinkId").onclick = function() {
     document.getElementById("yourFormId").submit();
 }
       </script>
    <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
    <!-- Request Detail Modal -->
 <div class="resModal" id="replyModal">
       <div class="resModal-content">

@@ -304,7 +304,7 @@
       </div>
       </div>
       <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
-    <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
          <script>
          function openEditModal() {
         document.getElementById("visitModal").style.display = "block";

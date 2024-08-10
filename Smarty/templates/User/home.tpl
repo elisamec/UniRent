@@ -227,7 +227,6 @@
          });
          });
       </script>
-    <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
       
 <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -415,6 +414,7 @@ window.onclick = function(event) {
 }
 </script>
 <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
 <script src="/UniRent/Smarty/js/UniRentOriginal/selectKeyboardAccessibility.js"></script>
 
    </body>

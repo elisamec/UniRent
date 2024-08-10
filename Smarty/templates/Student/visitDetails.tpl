@@ -263,6 +263,7 @@
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
 <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
 
       <div class="modal" id="myModal">
       <div class"container-fluid">
@@ -273,7 +274,6 @@
          </div> 
       </div>
       </div>
-    <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
          <script>
          function openEditModal() {
         document.getElementById("visitModal").style.display = "block";

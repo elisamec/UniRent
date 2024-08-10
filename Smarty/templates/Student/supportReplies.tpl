@@ -178,6 +178,7 @@
     </script>
 <script src="/UniRent/Smarty/js/pagination.js"></script>
 <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
 <div class="modal" id="myModal">
       <div class"container-fluid">
       <div class="card">
@@ -188,7 +189,6 @@
       </div>
       </div>
       </div>
-      <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
 <script>
 // Assuming Smarty JSON data is available as a JavaScript variable
 var supportReplies = {$replies};

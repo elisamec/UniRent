@@ -143,21 +143,17 @@
       </div>
    </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="/UniRent/Smarty/js/sb-admin-2.min.js"></script>
-
-    <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
-    <script>
+<!-- JavaScript variables -->
+<script>
     var requestSuccess = '{$requestSuccess}';
 </script>
-    <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
+<!-- JavaScript files -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="/UniRent/Smarty/js/sb-admin-2.min.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
     
 </body>
 

@@ -315,7 +315,6 @@
          });
          });
       </script>
-      <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
          <script>
       document.getElementById("yourLinkId").onclick = function() {
     document.getElementById("yourFormId").submit();
@@ -591,6 +590,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
 <script src="/UniRent/Smarty/js/UniRentOriginal/selectKeyboardAccessibility.js"></script>
       
    </body>

@@ -692,6 +692,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
 
 
       <div class="modal" id="myModal">
@@ -703,7 +704,6 @@ document.addEventListener('DOMContentLoaded', function() {
          </div> 
       </div>
       </div>
-    <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
          <script>
         // Assign the JSON data to a JavaScript variable
         const images = {$imagesJson};

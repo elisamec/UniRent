@@ -209,7 +209,6 @@
          </div> 
       </div>
       </div>
-    <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
 {literal}
 <script>
 const calendar = document.querySelector(".calendar"),
@@ -492,6 +491,7 @@ function convertTime(time) {
 </script>
 {/literal}
    <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
    <!-- Request Detail Modal -->
 <div class="resModal" id="replyModal">
       <div class="resModal-content">
