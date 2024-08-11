@@ -226,9 +226,9 @@
             <a class="next">&#10095;</a>
         </div>
     </div>
-<div id="confirmModal" class="resModal">
+<div id="deleteConfirmModal" class="resModal">
    <div class="resModal-content">
-      <span class="resClose" id="confirmClose">&times;</span>
+      <span class="resClose" id="deleteConfirmClose">&times;</span>
       <h2 class="resModal-head">Are you sure you want to delete this accommodation ad?</h2>
       <p>This action is permanent.</p>
       <div class="btn-cont">

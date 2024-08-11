@@ -220,7 +220,7 @@
 <div id="contactModal" class="resModal">
   <div class="resModal-content">
   <div class="row">
-    <span class="resClose">&times;</span>
+    <span class="resClose" id="contactClose">&times;</span>
     <h2 class="resModal-head">Owner Contacts</h2>
     </div>
     <p>Phone: {$owner->getPhoneNumber()}</p>
@@ -384,7 +384,7 @@
       <p>You already have one booked for {$day} at {$time} of the duration of {$duration} minutes.</p>
     </div>
     <div class="btn-cont">
-      <button id="confirmBooking" class="cancelClass" class="confirmClass" type="button">Continue</button>
+      <button id="confirmBooking" class="confirmClass" type="button">Continue</button>
       <button id="cancelBooking" class="cancelClass" type="button">Cancel</button>
     </div>
   </div>

@@ -224,7 +224,7 @@
 <div id="contactModal" class="resModal">
   <div class="resModal-content">
   <div class="row">
-    <span class="resClose">&times;</span>
+    <span class="resClose" id="contactClose">&times;</span>
     <h2 class="resModal-head">Owner Contacts</h2>
     </div>
     <p>Phone: {$owner->getPhoneNumber()}</p>

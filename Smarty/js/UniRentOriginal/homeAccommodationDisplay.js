@@ -2,17 +2,17 @@
 function displayAccommodations(accommodations, user) {
     const container = document.getElementById('accommodationContainer');
     let href = '';
-    if (user === 'User') {
-        href='"#" onclick="showModal(event)"';
-    } else if (user === 'Student') {
-        href='"/UniRent/Student/accommodation/${accommodation.id}"';
-    }
 
     if (container) {
         if (accommodations.length === 0) {
             container.innerHTML = '<div class="container"><h1 class="noRev">You have no ads yet!</h1></div>';
         } else {
             accommodations.forEach(accommodation => {
+                if (user === 'User') {
+                    href='"#" onclick="showModal(event)"';
+                } else if (user === 'Student') {
+                    href='"/UniRent/Student/accommodation/' + accommodation.id + '"';
+                }
                 if (accommodation.photo == null) {
                     accommodation.photo = "/UniRent/Smarty/images/noPic.png";
                 }

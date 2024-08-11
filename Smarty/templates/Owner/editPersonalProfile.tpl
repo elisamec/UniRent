@@ -230,9 +230,9 @@
          </div>
       </div>
 
-      <div id="confirmModal" class="resModal">
+      <div id="deleteConfirmModal" class="resModal">
    <div class="resModal-content">
-      <span class="resClose">&times;</span>
+      <span class="resClose" id="deleteConfirmClose">&times;</span>
       <p>Are you sure you want to delete your profile?</p>
       <div class="btn-cont">
       <button id="confirmDelete" class="confirmClass">Yes</button>

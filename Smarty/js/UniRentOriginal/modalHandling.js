@@ -39,8 +39,9 @@ function off() {
     var closeSpan = document.getElementById("closeSpan");
     var closeButton = document.getElementById("closeButton");
     
-    if (successRequestModal) {
-        if (requestSuccess !== 'null') {
+    if ( successRequestModal ) {
+        console.log(successRequestModal);
+        if ( requestSuccess !== 'null') {
             successRequestModal.style.display = "block";
         } else {
             successRequestModal.style.display = "none";
@@ -60,15 +61,15 @@ function off() {
      * This is used to display the contact modal when the contact button is clicked
     */
     var contactModal = document.getElementById("contactModal");
-    var btn = document.getElementById("contactBtn");
-    var span = document.getElementById("contactClose");
-    if (contactModal) {
-        btn.onclick = function(event) {
+    var contactBtn = document.getElementById("contactBtn");
+    var contactClose = document.getElementById("contactClose");
+    if ( contactModal ) {
+        contactBtn.onclick = function(event) {
             event.preventDefault();
             contactModal.style.display = "block";
         }
 
-        span.onclick = function() {
+        contactClose.onclick = function() {
             contactModal.style.display = "none";
         }
 
@@ -79,7 +80,7 @@ function off() {
     var successModal = document.getElementById("successModal");
     var successClose = document.getElementById("successClose");
     var closeSuccess = document.getElementById("closeSuccess");
-    if (successModal) {
+    if ( successModal ) {
         if (modalSuccess !== '') {
             successModal.style.display = "block";
         } else {
@@ -101,11 +102,11 @@ function off() {
     const reportButtons = document.querySelectorAll('button.delete_button');
     const reportModal = document.getElementById("reportModal");
     const reportSpan = document.querySelector(".resClose");
-    const cancelReport = document.getElementById("cancelReport");
+    const cancelReportBtn = document.getElementById("cancelReport");
     const reportForm = document.getElementById("reportForm");
     const reportReason = document.getElementById("reportReason");
         
-    if (reportModal) {
+    if ( reportModal ) {
         reportButtons.forEach(button => {
             button.addEventListener('click', (event) => {
                 event.preventDefault();
@@ -121,7 +122,7 @@ function off() {
         };
         
         // When the user clicks on the cancel button, close the modal
-        cancelReport.onclick = function() {
+        cancelReportBtn.onclick = function() {
             cancelReport();
         };
         
@@ -176,62 +177,60 @@ function off() {
     var deactivateBtn = document.getElementById("deactivateLink");
     var deactivateModal = document.getElementById("deactivateModal");
 
-
-    deactivateBtn.onclick = function(event) {
-        event.preventDefault(); // Prevent the default action (navigation)
-        deactivateModal.style.display = "block";
-    }
-    deactivateClose.onclick = function() {
-        deactivateModal.style.display = "none";
-    }
-    cancelDeactivate.onclick = function() {
-        deactivateModal.style.display = "none";
+    if ( deactivateModal ) {
+        deactivateBtn.onclick = function(event) {
+            event.preventDefault(); // Prevent the default action (navigation)
+            deactivateModal.style.display = "block";
+        }
+        deactivateClose.onclick = function() {
+            deactivateModal.style.display = "none";
+        }
+        cancelDeactivate.onclick = function() {
+            deactivateModal.style.display = "none";
+        }
     }
 
     /**
      * This is used to display the confirm delete modal when the delete button is clicked and proceed to delete
      */
-    var deleteConfirmModal = document.getElementById("confirmModal");
+    var deleteConfirmModal = document.getElementById("deleteConfirmModal");
     var confirmDeleteBtn = document.getElementById("confirmDelete");
     var cancelDeleteBtn = document.getElementById("cancelDelete");
     var deleteModalOpen = document.getElementById("deleteLink");
-    var deleteConfirmSpan = document.getElementById("confirmClose");
+    var deleteConfirmSpan = document.getElementById("deleteConfirmClose");
     var notDeletableModal = document.getElementById("notDeletableModal");
     var notDeletableClose = document.getElementById("notDeletableClose");
     var understoodBtn = document.getElementById("understood");
 
-    notDeletableClose.onclick = function() {
-        notDeletableModal.style.display = "none";
-    }
-
-    // When the user clicks on the understood button, close the modal
-    understoodBtn.onclick = function() {
-        notDeletableModal.style.display = "none";
-    }
-
-    deleteModalOpen.onclick = function(event) {
-        event.preventDefault(); // Prevent the default action (navigation)
-        if (deletable) {
-            deleteConfirmModal.style.display = "block";
-        } else {
-            notDeletableModal.style.display = "block";
+    if (deleteConfirmModal) {
+        confirmDeleteBtn.onclick = function() {
+            window.location.href = "/UniRent/Accommodation/delete/{$accommodation->getIdAccommodation()}";
+            deleteConfirmModal.style.display = "none";
         }
-    }
+        cancelDeleteBtn.onclick = function() {
+            deleteConfirmModal.style.display = "none";
+        }
+        deleteConfirmSpan.onclick = function() {
+            deleteConfirmModal.style.display = "none";
+        }
+        deleteModalOpen.onclick = function(event) {
+            event.preventDefault(); // Prevent the default action (navigation)
+            if (typeof deletable !== 'undefined' && !deletable) {
+                notDeletableModal.style.display = "block";
+            } else {
+                deleteConfirmModal.style.display = "block";
+            }
+        }
+        if (notDeletableModal) {
+            notDeletableClose.onclick = function() {
+                notDeletableModal.style.display = "none";
+            }
 
-    // When the user clicks on <span> (x), close the modal
-    deleteConfirmSpan.onclick = function() {
-        deleteConfirmModal.style.display = "none";
-    }
-
-    // When the user clicks on the confirm button, proceed to delete
-    confirmDeleteBtn.onclick = function() {
-        window.location.href = "/UniRent/Accommodation/delete/{$accommodation->getIdAccommodation()}";
-        deleteConfirmModal.style.display = "none";
-    }
-
-    // When the user clicks on the cancel button, close the modal
-    cancelDeleteBtn.onclick = function() {
-        deleteConfirmModal.style.display = "none";
+            // When the user clicks on the understood button, close the modal
+            understoodBtn.onclick = function() {
+                notDeletableModal.style.display = "none";
+            }
+        }
     }
 
     // Get the modal
@@ -239,27 +238,29 @@ function off() {
     // Get the <span> element that closes the modal
     var loginClose = document.getElementById("loginClose");
 
+    if ( loginModal ) {
+        // When the user clicks the button, open the modal 
+        function showModal(event) {
+            event.preventDefault();
+            loginModal.style.display = "block";
+        }
 
-    // When the user clicks the button, open the modal 
-    function showModal(event) {
-        event.preventDefault();
-        loginModal.style.display = "block";
+        // When the user clicks on <span> (x), close the modal
+        loginClose.onclick = function() {
+            loginModal.style.display = "none";
+        }
     }
-
-    // When the user clicks on <span> (x), close the modal
-    loginClose.onclick = function() {
-        loginModal.style.display = "none";
+    if ( document.getElementById("emailForm") ) {ß
+        function emailFormOpen() {
+            document.getElementById("emailForm").style.display = "block";
+        }
+        document.getElementById('emailForm').addEventListener('submit', function(event) {
+            document.getElementById('emailForm').style.display = 'none';
+        });
     }
-    function emailFormOpen() {
-        document.getElementById("emailForm").style.display = "block";
-     }
-     document.getElementById('emailForm').addEventListener('submit', function(event) {
-          document.getElementById('emailForm').style.display = 'none';
-      });
-
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
-        if (event.target == modal) {
+        if (event.target == deleteConfirmModal) {
             deleteConfirmModal.style.display = "none";
         }
         if (event.target == notDeletableModal) {

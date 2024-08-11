@@ -108,11 +108,11 @@
          <h1 class="Properties_taital">What you think of others:</h1>
          <hr class="border_main">
          </div>
-    <div id="reviewsContainer screenSize"></div>
+    <div id="reviewsContainer" class="screenSize"></div>
 
-    <div id="confirmModal" class="resModal">
+    <div id="deleteConfirmModal" class="resModal">
    <div class="resModal-content">
-      <span class="resClose">&times;</span>
+      <span class="resClose" id="deleteConfirmClose">&times;</span>
       <p>Are you sure you want to delete this review??</p>
       <div class="btn-cont">
       <button id="confirmDelete" class="confirmClass">Yes</button>

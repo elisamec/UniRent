@@ -395,7 +395,7 @@ class CStudent{
             }
         }
         $session=USession::getInstance();
-        $leavebleReviews=$PM->remainingReviewStudentToAccommodation($session->getSessionElement('id'), $accomm->getId());
+        $leavebleReviews=$PM->remainingReviewStudentToAccommodation($session->getSessionElement('id'), $accomm->getIdAccommodation());
         $view->accommodation($accomm, $owner, $reviewsData, $period, $picture, $visits, $visitDuration, $tenants, $num_places, $studBooked, $dayOfBooking, $timeOfBooking, $disabled, $successReserve, $successVisit, $leavebleReviews);
     }
 

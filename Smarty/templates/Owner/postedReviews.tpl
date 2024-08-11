@@ -113,10 +113,10 @@
          <hr class="border_main">
          </div>
     <div class="screenSize" id="reviewsContainer"></div>
-      <div id="confirmModal" class="resModal">
+      <div id="deleteConfirmModal" class="resModal">
    <div class="resModal-content">
-      <span class="resClose">&times;</span>
-      <p>Are you sure you want to delete this review??</p>
+      <span class="resClose" id="deleteConfirmClose">&times;</span>
+      <p>Are you sure you want to delete this review?</p>
       <div class="btn-cont">
       <button id="confirmDelete" class="confirmClass">Yes</button>
       <button id="cancelDelete" class="cancelClass">Cancel</button>

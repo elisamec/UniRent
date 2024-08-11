@@ -22,16 +22,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Update nice-select after adding options
         $('select').niceSelect('update');
-
-        if (defaultCity && subjectObject[defaultCity]) {
-            citySelect.value = defaultCity;
-            subjectObject[defaultCity].forEach(uniName => {
-                let option = new Option(uniName, uniName);
-                uniSelect.add(option);
-            });
-            $('select').niceSelect('update');
-            if (defaultUniversity && subjectObject[defaultCity].includes(defaultUniversity)) {
-                uniSelect.value = defaultUniversity;
+        if (typeof defaultCity != 'undefined') {
+            if (subjectObject[defaultCity]) {
+                citySelect.value = defaultCity;
+                subjectObject[defaultCity].forEach(uniName => {
+                    let option = new Option(uniName, uniName);
+                    uniSelect.add(option);
+                });
+                $('select').niceSelect('update');
+                if (defaultUniversity && subjectObject[defaultCity].includes(defaultUniversity)) {
+                    uniSelect.value = defaultUniversity;
+                }
             }
         }
 
@@ -51,10 +52,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 // Update nice-select after adding options
                 $('select').niceSelect('update');
-                if (defaultUniversity && subjectObject[selectedCity].includes(defaultUniversity)) {
-                    uniSelect.value = defaultUniversity;
+                if (typeof defaultUniversity != 'undefined') {
+                    if (subjectObject[selectedCity].includes(defaultUniversity)) {
+                        uniSelect.value = defaultUniversity;
+                    }
                 }
-                if (defaultPeriod) {
+                if (typeof defaultPeriod != 'undefined') {
 
                     periodSelect.value = defaultPeriod;
 
