@@ -371,7 +371,7 @@
                         <li><a href="/UniRent/Owner/home">Home</a></li>
                         <li><a href="/UniRent/Owner/about">About Us</a></li>
                         <li><a href="/UniRent/Owner/contact">Contact Us</a></li>
-                        <li><a href="/UniRent/Owner/guidelines">App Guidelines</a></li>
+                        <li><a href="/UniRent/Owner/guidelines">Guidelines</a></li>
                      </ul>
                   </div>
                </div>
