@@ -2649,6 +2649,7 @@ button.delete_button:hover{
     color: #ffffff;
     border: none;
     border-radius: 1rem;
+    transition: ease-in-out 0.3s;
 }
 .login-required a{
     padding: 10px 20px;
