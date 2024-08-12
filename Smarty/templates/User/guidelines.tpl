@@ -70,11 +70,73 @@
             <p id="breadcrumb"></p>
       </div>
       <div class="about screenSize">
-      <h2 class="search_text">Our Guidelines</h2>
-      <p class="lorem_text">UniRent is a platform that connects students with landlords.
+      <h1 class="search_text">Our Guidelines</h1>
+      <h1>UniRent is a platform that connects students with landlords.
       We aim to provide a seamless rental experience for students.
       To ensure that all users have a positive experience, we have established a set of guidelines that all users must adhere to.
-      These guidelines are as follows:</p>
+      These guidelines are as follows:</h1>
+      <h2>Eligibility Criteria</h2>
+    <h3>Age</h3>
+    <p>Applicants must be at least 18 years old.</p>
+    <h3>Student Mail</h3>
+    <p>To register as a student you need to have a university email.</p>
+    <h3>Owner</h3>
+    <p>To register as an owner, you are required to have an Italian IBAN.</p>
+
+    <h2>Rental Terms and Conditions</h2>
+    <h3>Lease Agreement</h3>
+    <p>A lease agreement will be signed outlining the duration of the tenancy, rent amount, and other terms.</p>
+    <h3>Rent Payment</h3>
+    <p>Rent must be paid monthly in advance. Payment methods accepted include bank transfer, credit/debit card, or other approved methods.</p>
+    <h3>Security Deposit</h3>
+    <p>A security deposit is required. This will be refunded at the end of the lease, subject to any deductions for damages or unpaid rent.</p>
+
+    <h2>Maintenance and Repairs</h2>
+    <h3>Responsibility</h3>
+    <p>Tenants are responsible for maintaining the cleanliness of their accommodations and reporting any maintenance issues promptly.</p>
+    <h3>Repairs</h3>
+    <p>Landlords will address repairs within a reasonable time frame. Emergency repairs will be handled as a priority.</p>
+
+    <h2>House Rules</h2>
+    <h3>Quiet Hours</h3>
+    <p>Observe quiet hours between 10 PM and 8 AM to ensure a conducive environment for studying and resting.</p>
+    <h3>Guests</h3>
+    <p>Overnight guests are allowed with prior notice to the landlord. Extended stays may require additional approval.</p>
+    <h3>Parties</h3>
+    <p>Parties or large gatherings are not permitted without prior consent from the landlord.</p>
+
+    <h2>Termination of Lease</h2>
+    <h3>Move-Out Inspection</h3>
+    <p>An inspection will be conducted at the end of the lease to assess the condition of the accommodation. Any damage beyond normal wear and tear may result in deductions from the security deposit.</p>
+
+    <h2>Non-Discrimination Policy</h2>
+    <h3>Policy</h3>
+    <p>We are committed to providing equal housing opportunities. All applications will be considered without regard to race, color, religion, sex, national origin, disability, or familial status.</p>
+
+    <h2>Privacy Policy</h2>
+    <h3>Data Protection</h3>
+    <p>Personal information provided in the application will be kept confidential and used solely for the purpose of processing the rental application and managing the lease.</p>
+
+    <h2>Reasons for Ban</h2>
+    <h3>Fraudulent Information</h3>
+    <p>Providing false or misleading information during the registration process or in accommodation ads.</p>
+    <h3>Failure to Pay Fees</h3>
+    <p>Not paying application fees, rent, or any other required charges.</p>
+    <h3>Violation of Lease Terms</h3>
+    <p>Breaching the terms and conditions of the lease agreement, including but not limited to, non-payment of rent, property damage, or violation of house rules.</p>
+    <h3>Harassment or Abuse</h3>
+    <p>Engaging in harassment, abuse, or discriminatory behavior towards landlords, other tenants, or staff members.</p>
+    <h3>Illegal Activities</h3>
+    <p>Using the accommodation for illegal activities or any behavior that violates local, state, or federal laws.</p>
+
+    <h2>Appeal Procedure</h2>
+    <h3>Submission</h3>
+    <p>You need to fill in the form provided on the error page when you are trying to login or use the app as a banned user.</p>
+    <h3>Review</h3>
+    <p>The admin will review the case.</p>
+    <h3>Decision</h3>
+    <p>If the administrator decides to accept your appeal, your account will be restored within 5 days from the submission.</p>
+
       </div>
 <!-- cookie modal -->
       <div class="modal" id="myModal">
