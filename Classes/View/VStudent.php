@@ -186,4 +186,7 @@ class VStudent{
         $this->smarty->assign('count', $count);
         $this->smarty->display('Student/supportReplies.tpl');
     }
+    public function guidelines():void {
+        $this->smarty->display('Student/guidelines.tpl');
+    }
 }

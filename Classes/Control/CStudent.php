@@ -104,6 +104,17 @@ class CStudent{
         $view = new VStudent();
         $view->about();
     }
+    public static function guidelines(){
+        $session = USession::getInstance();
+        $type = $session->getSessionElement('userType');
+        if ($type === null) {
+            header('Location:/UniRent/User/guidelines');
+        } else if ($type ==='Owner') {
+            header('Location:/UniRent/Owner/guidelines');
+        }
+        $view = new VStudent();
+        $view->guidelines();
+    }
     
     
     /**

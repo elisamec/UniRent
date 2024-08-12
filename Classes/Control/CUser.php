@@ -39,6 +39,10 @@ class CUser
         $view = new VUser();
         $view->about();
     }
+    public static function guidelines(){
+        $view = new VUser();
+        $view->guidelines();
+    }
 
     public static function login(){
         if(UCookie::isSet('PHPSESSID'))

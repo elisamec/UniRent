@@ -190,4 +190,7 @@ class VOwner {
         $this->smarty->assign('count', $count);
         $this->smarty->display('Owner/supportReplies.tpl');
     }
+    public function guidelines(){
+        $this->smarty->display('Owner/guidelines.tpl');
+    }
 }

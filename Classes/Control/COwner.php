@@ -557,6 +557,18 @@ class COwner
         
         $view->about();
     }
+    public static function guidelines()
+    {   $session = USession::getInstance();
+        $type = $session->getSessionElement('userType');
+        if ($type === null) {
+            header('Location:/UniRent/User/guidelines');
+        } else if ($type ==='Student') {
+            header('Location:/UniRent/Student/guidelines');
+        }
+        $view = new VOwner();
+        
+        $view->guidelines();
+    }
      public static function reviews(?string $modalSuccess=null) {
         self::checkIfOwner();
         $view = new VOwner();
@@ -936,22 +948,6 @@ class COwner
                 'tenants' => $tenantList
             ];
         }
-        /*
-        $tenants[]=[
-            'accommodation' => 'Tutti',
-            'tenants' =>[ [
-                'username' => 'Tutti',
-                'image' => '/UniRent/Smarty/images/ImageIcon.png',
-                'expiryDate' => '01-11-2024'
-            ], 
-            [
-                'username' => 'Another',
-                'image' => '/UniRent/Smarty/images/ImageIcon.png',
-                'expiryDate' => '01-11-2025'
-            ]
-            ]
-        ];
-        */
         
         $view->tenants($tenants, $kind, $accommodationTitles,0);
     }

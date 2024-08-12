@@ -7,6 +7,7 @@ use Classes\Utilities\USession;
 use Classes\View\VError;
 use Classes\View\VOwner;
 use Classes\View\VStudent;
+use Classes\Utilities\USuperGlobalAccess;
 use Exception;
 
 class CSupportRequest
