@@ -235,7 +235,7 @@ class CContract
             $cardNumber='**** **** **** ' . substr($creditCard->getNumber(), -4);
             $cardHolder = $creditCard->getName() . " ". $creditCard->getSurname();
             $view= new VStudent();
-            $leavebleReviews=$PM->remainingReviewStudentToAccommodation($session->getSessionElement('id'), $accommodation->getId());
+            $leavebleReviews=$PM->remainingReviewStudentToAccommodation($session->getSessionElement('id'), $accommodation->getIdAccommodation());
             $view->contractDetails($contract, $accommodation, $owner, $cardNumber, $cardHolder, $picture, $reviewsData, $modalSuccess, $leavebleReviews);
         }
         else {
