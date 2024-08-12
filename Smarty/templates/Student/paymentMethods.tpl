@@ -615,14 +615,13 @@ function updatePaymentMethod() {
                         <li><a href="/UniRent/Student/home">Home</a></li>
                         <li><a href="/UniRent/Student/about">About Us</a></li>
                         <li><a href="/UniRent/Student/contact">Contact Us</a></li>
+                        <li><a href="/UniRent/Student/guidelines">App Guidelines</a></li>
                      </ul>
                   </div>
                </div>
             </div>
          </div>
       </div>
-      </div>
-
       <!-- footer section end -->
 <script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>

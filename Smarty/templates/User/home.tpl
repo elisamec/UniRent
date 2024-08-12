@@ -205,7 +205,7 @@
     </div>
 </div>
 <!-- End of Success Modal -->
-      <!-- footer section start -->
+     <!-- footer section start -->
       <div class="footer_section">
          <div class="container">
             <div class="row">
@@ -224,6 +224,7 @@
                         <li class="active"><a href="/UniRent/User/home">Home</a></li>
                         <li><a href="/UniRent/User/about">About Us</a></li>
                         <li><a href="/UniRent/User/contact">Contact Us</a></li>
+                        <li><a href="/UniRent/User/guidelines">App Guidelines</a></li>
                      </ul>
                   </div>
                </div>

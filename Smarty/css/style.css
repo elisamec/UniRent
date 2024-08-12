@@ -2450,7 +2450,7 @@ textarea#comment::placeholder {
 .accom_img {
     width: auto;
     height: 100%;
-    max-width: 80%;
+    max-width: 70%;
     object-fit: cover;
     border-radius: 10px;
     margin: 10px 10px 10px 10px;

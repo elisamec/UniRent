@@ -150,7 +150,7 @@
       <hr>
       <h4>Thank you for visiting UniRent. We hope our platform helps you find the perfect accommodation or connect you with the right student tenants. If you have any questions or feedback, feel free to reach out!</h4></div>
       
-      <!-- footer section start -->
+     <!-- footer section start -->
       <div class="footer_section">
          <div class="container">
             <div class="row">
@@ -169,6 +169,7 @@
                         <li><a href="/UniRent/Student/home">Home</a></li>
                         <li class="active"><a href="/UniRent/Student/about">About Us</a></li>
                         <li><a href="/UniRent/Student/contact">Contact Us</a></li>
+                        <li><a href="/UniRent/Student/guidelines">App Guidelines</a></li>
                      </ul>
                   </div>
                </div>

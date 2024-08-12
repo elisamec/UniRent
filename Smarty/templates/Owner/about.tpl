@@ -210,6 +210,7 @@
                         <li><a href="/UniRent/Owner/home">Home</a></li>
                         <li class="active"><a href="/UniRent/Owner/about">About Us</a></li>
                         <li><a href="/UniRent/Owner/contact">Contact Us</a></li>
+                        <li><a href="/UniRent/Owner/guidelines">App Guidelines</a></li>
                      </ul>
                   </div>
                </div>
