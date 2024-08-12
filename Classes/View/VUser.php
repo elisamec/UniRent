@@ -90,4 +90,7 @@ class VUser{
         $this->smarty->assign('type', $type);
         $this->smarty->display('User/login.tpl');
     }
+    public function guidelines(){
+        $this->smarty->display('User/guidelines.tpl');
+    }
 }

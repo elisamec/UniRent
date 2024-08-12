@@ -3,6 +3,7 @@
 namespace Classes\Control;
 
 use Classes\Foundation\FPersistentManager;
+use Classes\Utilities\USuperGlobalAccess;
 
 require __DIR__.'/../../vendor/autoload.php';
 
