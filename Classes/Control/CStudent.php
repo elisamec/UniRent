@@ -264,15 +264,18 @@ class CStudent{
 
         $accomm = $PM->load('EAccommodation', $idAccommodation);
         $student = $PM->load('EStudent', USession::getInstance()->getSessionElement('id'));
-        if (strtoupper($student->getSex())==='F' && $accomm->getWoman() === false) {
-            $viewError=new VError();
-            $viewError->error(403);
-            exit();
-        } else if (strtoupper($student->getSex())==='M' && $accomm->getMan() === false) {
-            $viewError=new VError();
-            $viewError->error(403);
-            exit();
-        } else if ($student->getSmoker() && $accomm->getSmokers() === false) {
+        if ($accomm->getWoman() && $accomm->getMan()) {
+            if (strtoupper($student->getSex())==='F' && $accomm->getWoman() === false) {
+                $viewError=new VError();
+                $viewError->error(403);
+                exit();
+            } else if (strtoupper($student->getSex())==='M' && $accomm->getMan() === false) {
+                $viewError=new VError();
+                $viewError->error(403);
+                exit();
+            }
+        }
+        if ($student->getSmoker() && $accomm->getSmokers() === false) {
             $viewError=new VError();
             $viewError->error(403);
             exit();
