@@ -121,7 +121,7 @@
         {if $requestSuccess == 'success'}
         <h3 class="resModal-head">Request Sent Successfully</h3>
         </div>
-        <p>Your request has been sent successfully. Please wait for the administrator to examine your request. If the administrator thinks your ban can be removed, your account will be reactivated in 5 days. Thank you for you patience.</p>
+        <p>Your request has been sent successfully. Please wait for the administrator to examine your request. If the administrator thinks your ban can be removed, your account will be reactivated within 5 days from the request sumbission. Thank you for you patience.</p>
         {else if $requestSuccess == 'error'}
         <h3 class="resModal-head">Error</h3>
         </div>
