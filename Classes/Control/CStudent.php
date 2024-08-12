@@ -180,7 +180,7 @@ class CStudent{
         }
         else
         {
-            header('Location:/UniRent/'.$_COOKIE['current_page'].'/error');
+            header('Location:/UniRent/'.USuperGlobalAccess::getCookie('current_page').'/error');
         }
     }
 

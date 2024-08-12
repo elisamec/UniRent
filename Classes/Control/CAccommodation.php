@@ -20,10 +20,10 @@ class CAccommodation
         $res=$PM->update($accommodation);
         if ($res) {
             
-                header('Location:'.$_COOKIE['current_page'].'/success');
+                header('Location:'.USuperGlobalAccess::getCookie('current_page').'/success');
         } else {
             
-                header('Location:'.$_COOKIE['current_page'].'/error');
+                header('Location:'.USuperGlobalAccess::getCookie('current_page').'/error');
         }
     }
     /**
@@ -37,11 +37,11 @@ class CAccommodation
         $accommodation->setStatus(true);
         $res=$PM->update($accommodation);
         if ($res) {
-                header('Location:'.$_COOKIE['current_page'].'/success');
+                header('Location:'.USuperGlobalAccess::getCookie('current_page').'/success');
             
         } else {
             
-                header('Location:'.$_COOKIE['current_page'].'/error');
+                header('Location:'.USuperGlobalAccess::getCookie('current_page').'/error');
         }
     }
     /**

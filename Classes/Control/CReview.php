@@ -38,9 +38,9 @@ class CReview {
         }
         $res=$PM->delete('EReview', $id);
         if ($res) {
-            header('Location:' . $_COOKIE['current_page'].'/success');
+            header('Location:' . USuperGlobalAccess::getCookie('current_page').'/success');
         } else {
-            header('Location:' . $_COOKIE['current_page'].'/error');
+            header('Location:' . USuperGlobalAccess::getCookie('current_page').'/error');
         }
     }
 
@@ -62,9 +62,9 @@ class CReview {
         $review->setValutation(USuperGlobalAccess::getPost('rate'));
         $res=$PM->update($review);
         if ($res) {
-            header('Location:' . $_COOKIE['current_page'].'/success');
+            header('Location:' . USuperGlobalAccess::getCookie('current_page').'/success');
         } else {
-            header('Location:' . $_COOKIE['current_page'].'/error');
+            header('Location:' . USuperGlobalAccess::getCookie('current_page').'/error');
         }
     }
     public static function addReviewStudent(int $idStudent) {
@@ -85,9 +85,9 @@ class CReview {
         $review=new EReview(null, $title, $valutation, $description, $type, $date, $authorType, $idAuthor, $idStudent);
         $res=$PM->store($review);
         if ($res) {
-            header('Location:' . $_COOKIE['current_page'].'/success');
+            header('Location:' . USuperGlobalAccess::getCookie('current_page').'/success');
         } else {
-            header('Location:' . $_COOKIE['current_page'].'/error');
+            header('Location:' . USuperGlobalAccess::getCookie('current_page').'/error');
         }
     }
     public static function addReviewOwner(int $idOwner) {
@@ -104,9 +104,9 @@ class CReview {
         $review=new EReview(null, $title, $valutation, $description, $type, $date, $authorType, $idAuthor, $idOwner);
         $res=$PM->store($review);
         if ($res) {
-            header('Location:' . $_COOKIE['current_page'].'/success');
+            header('Location:' . USuperGlobalAccess::getCookie('current_page').'/success');
         } else {
-            header('Location:' . $_COOKIE['current_page'].'/error');
+            header('Location:' . USuperGlobalAccess::getCookie('current_page').'/error');
         }
     }
     public static function addReviewAccommodation(int $idAccommodation) {
@@ -123,9 +123,9 @@ class CReview {
         $review=new EReview(null, $title, $valutation, $description, $type, $date, $authorType, $idAuthor, $idAccommodation);
         $res=$PM->store($review);
         if ($res) {
-            header('Location:' . $_COOKIE['current_page'].'/success');
+            header('Location:' . USuperGlobalAccess::getCookie('current_page').'/success');
         } else {
-            header('Location:' . $_COOKIE['current_page'].'/error');
+            header('Location:' . USuperGlobalAccess::getCookie('current_page').'/error');
         }
     }
     private static function checkIfStudent() {

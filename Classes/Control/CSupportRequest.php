@@ -87,7 +87,7 @@ class CSupportRequest
         }
         $PM=FPersistentManager::getInstance();
         $result=$PM->readSupportReply((int)$id);
-        $location=$_COOKIE['current_page'];
+        $location=USuperGlobalAccess::getCookie('current_page');
         if($result)
         {
             header('Location:'.$location);
