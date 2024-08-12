@@ -821,7 +821,7 @@ class COwner
             ];
         }
         }
-        print_r($accommodation->getVisit());
+        #print_r($accommodation->getVisit());
         
         $view->editAccommodation($accommodationData, $img , $visitAvailabilityData, $id);
         
