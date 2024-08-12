@@ -324,6 +324,7 @@ progress {
 
 textarea {
   overflow: auto;
+  width: 100%;
 }
 
 /**
