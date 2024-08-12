@@ -56,7 +56,7 @@ class FVisit
             {
                 $db->beginTransaction();
             }   
-            $q="SELECT * FROM visit WHERE id=:id";
+            $q="SELECT * FROM visit WHERE id=:id LOCK IN SHARE MODE";
             $stm=$db->prepare($q);
             $stm->bindParam(':id',$visitId,PDO::PARAM_INT);
             $stm->execute();
