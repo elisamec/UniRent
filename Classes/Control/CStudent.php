@@ -55,7 +55,7 @@ class CStudent{
         $view = new VStudent();
         $view->contact($modalSuccess);
     }
-    public static function findAccommodation()
+    public static function search()
     {
         self::checkIfStudent();
         $view = new VStudent();
