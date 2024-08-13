@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function fetchData() {
         try {
-            const response = await fetch('/UniRent/Admin/get_Request_and_Report');
+            const response = await fetch('/UniRent/Admin/getRequestAndReport');
             if (!response.ok) throw new Error('Network response was not ok');
             return await response.json();
         } catch (error) {

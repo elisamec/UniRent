@@ -423,17 +423,17 @@ class CAdmin
     }
 
     /**
-     * Method get_Request_and_Report
+     * Method getRequestAndReport
      *
      * this method is used to get Reports and SupportRequests by the administrator. It is called by the javascript therefore it prints a json
      * 
      * @return void
      */
-    public static function get_Request_and_Report():void
+    public static function getRequestAndReport():void
     {
         header('Content-Type: application/json');
         $PM=FPersistentManager::getInstance();
-        $result=$PM->get_Request_and_Report();
+        $result=$PM->getRequestAndReport();
         $reportsArray=$result['Report'];
         $countReports=0;
         $reports=[];
@@ -558,7 +558,7 @@ class CAdmin
         $PM=FPersistentManager::getInstance();
         $requests=[];
         $count=1;
-        $requestArray=$PM->get_Request_and_Report()['Request'];
+        $requestArray=$PM->getRequestAndReport()['Request'];
         foreach ($requestArray as $request) {
             if ($request->getAuthorID() != null) {
                 $author = $PM->getUsernameById($request->getAuthorID(), $request->getAuthorType());
@@ -650,6 +650,7 @@ class CAdmin
             header('Location:'.USuperGlobalAccess::getCookie('current_page').'/error');
         }
     }
+
     /**
      * Method deleteReport
      * 
@@ -672,6 +673,7 @@ class CAdmin
             header('Location:'.USuperGlobalAccess::getCookie('current_page').'/error');
         }
     }
+
     /**
      * Method readMoreReports
      * 
@@ -685,7 +687,7 @@ class CAdmin
         $PM=FPersistentManager::getInstance();
         $reports=[];
         $count=1;
-        $reportArray=$PM->get_Request_and_Report()['Report'];
+        $reportArray=$PM->getRequestAndReport()['Report'];
         foreach ($reportArray as $report) {
                 if (array_key_exists($count, $reports)) {
                     if (count($reports[$count])==10) {
@@ -719,6 +721,7 @@ class CAdmin
         $view=new VAdmin();
         $view->readMoreReports($reports, $count, $modalMessage);
     }
+    
     /**
      * Method checkIfAdmin
      * 
