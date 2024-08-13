@@ -30,15 +30,17 @@ class CUser
             header('Location: /UniRent/Owner/home');
         }
         else{
-        $view = new VUser();
-        $accommodations = $PM->lastAccommodationsUser();
-        $view->home($accommodations, $modalSuccess);
+            $view = new VUser();
+            $accommodations = $PM->lastAccommodationsUser();
+            $view->home($accommodations, $modalSuccess);
+        }
     }
-    }
+    
     public static function about(){
         $view = new VUser();
         $view->about();
     }
+
     public static function guidelines(){
         $view = new VUser();
         $view->guidelines();
@@ -60,10 +62,12 @@ class CUser
         $view = new VUser();
         $view->register($modalSuccess);
     }
+
     public static function contact(?string $modalSuccess=null){
         $view = new VUser();
         $view->contact($modalSuccess);
     }
+
     public static function search(){
         $view = new VUser();
         $city=USuperGlobalAccess::getPost('city');

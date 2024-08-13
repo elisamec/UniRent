@@ -42,6 +42,7 @@ class CVisit
             header('Location:' . $_SERVER['HTTP_REFERER']. '/false');
         }
    }
+
    public static function visits() {
     $session = USession::getInstance();
     $id=$session->getSessionElement('id');
@@ -194,6 +195,7 @@ class CVisit
         header('Location:' . $_SERVER['HTTP_REFERER']. '/null/false');
     }
    }
+   
    public static function edit(int $id) {
     $session=USession::getInstance();
     $userType=$session->getSessionElement('userType');
