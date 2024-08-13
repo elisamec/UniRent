@@ -37,6 +37,7 @@ class CAdmin
         $view = new VAdmin();
         $view->home($stats, $banned, $modalMessage);
     }
+
     /**
      * Method login
      * 
@@ -52,6 +53,7 @@ class CAdmin
         $view = new VAdmin();
         $view->login();
     }
+
     /**
      * Checks if the login is correct for the admin
      * @return void
@@ -74,6 +76,7 @@ class CAdmin
                     $view->loginError();
                 }
     }
+
     /**
      * Method logout
      * 
@@ -86,6 +89,7 @@ class CAdmin
         $session->destroySession();
         header('Location:/UniRent/User/home');
     }
+
     /**
      * Method report
      * 
@@ -150,6 +154,7 @@ class CAdmin
             }
         }
     }
+
     /**
      * Method supportRequest
      * 
@@ -201,6 +206,7 @@ class CAdmin
             }
         }
     }
+
     /**
      * Method ban
      * 
@@ -245,6 +251,7 @@ class CAdmin
             header('Location:'.USuperGlobalAccess::getCookie('current_page').'/error');
         }
     }
+
     /**
      * Method studentEmailIssue
      * 
@@ -254,6 +261,7 @@ class CAdmin
      * @return void
      */
     public static function studentEmailIssue():void {
+
         $mail = USuperGlobalAccess::getPost('emailIssue');
         $university = USuperGlobalAccess::getPost('university');
         $city = USuperGlobalAccess::getPost('city');
@@ -269,6 +277,7 @@ class CAdmin
             header('Location:/UniRent/User/showRegistration/error');
         }
     }
+
     /**
      * Method removeBanRequest
      * 
@@ -279,6 +288,7 @@ class CAdmin
      * @return void
      */
     public static function removeBanRequest(string $username):void {
+
         $PM=FPersistentManager::getInstance();
         $topic=TRequestType::REMOVEBAN;
         $user= $PM->verifyUserUsername($username);
@@ -301,7 +311,7 @@ class CAdmin
     /**
      * Method active
      * 
-     * this method permits the administrator to make active a Owner or a Student
+     * this method permits the administrator to remove a ban of a Owner or a Student
      *
      * @param string $type [Owner/Student]
      * @param int $id [Owner/Student id]
@@ -344,17 +354,18 @@ class CAdmin
         $AUF->addElement($domain, $uniName, $city);  
 
     }
-        /**
-         * Method profile
-         * 
-         * this method permits the administrator to see the profile of a Student or an Owner
-         * 
-         * @param string $username
-         * @param mixed $reportId (needed to mark the curresponding report as solved)
-         * @param mixed $modalMessage
-         * @return void
-         */
-        public static function profile(string $username, ?int $reportId = null, ?string $modalMessage = null):void
+
+    /**
+     * Method profile
+     * 
+     * this method permits the administrator to see the profile of a Student or an Owner
+     * 
+     * @param string $username
+     * @param mixed $reportId (needed to mark the curresponding report as solved)
+     * @param mixed $modalMessage
+     * @return void
+     */
+    public static function profile(string $username, ?int $reportId = null, ?string $modalMessage = null):void
     {
         self::checkIfAdmin();
         $PM=FPersistentManager::getInstance();
@@ -459,61 +470,61 @@ class CAdmin
         $res=[];
         $countRequests=0;
         $requestsArray = $result['Request'];
-    $requests = [];
-    $countRequests = 0;
+        $requests = [];
+        $countRequests = 0;
 
-    // Process requests
-    foreach ($requestsArray as $request) {
-        if ($request->getAuthorID() != null) {
-            $author = $PM->getUsernameById($request->getAuthorID(), $request->getAuthorType());
-        } else {
-            $author = 'User';
+        // Process requests
+        foreach ($requestsArray as $request) {
+            if ($request->getAuthorID() != null) {
+                $author = $PM->getUsernameById($request->getAuthorID(), $request->getAuthorType());
+            } else {
+                $author = 'User';
+            }
+
+            switch ($request->getTopic()) {
+                case TRequestType::REGISTRATION:
+                    $topic = 'Registration';
+                    break;
+                case TRequestType::USAGE:
+                    $topic = 'App Usage';
+                    break;
+                case TRequestType::BUG:
+                    $topic = 'Bug';
+                    break;
+                case TRequestType::REMOVEBAN:
+                    $topic = 'Remove Ban Request';
+                    break;
+                default:
+                    $topic = 'Other';
+                    break;
+            }
+
+            // Create a single request entry
+            $requests[] = [
+                'Request' => [
+                    [
+                        'id' => $request->getId(),
+                        'message' => $request->getMessage(),
+                        'topic' => $topic,
+                        'status' => $request->getStatus()->value,
+                        'reply' => $request->getSupportReply()
+                    ]
+                ],
+                'author' => $author
+            ];
+
+            if ($request->getStatus()->value === 0) {
+                $countRequests++;
+            }
         }
 
-        switch ($request->getTopic()) {
-            case TRequestType::REGISTRATION:
-                $topic = 'Registration';
-                break;
-            case TRequestType::USAGE:
-                $topic = 'App Usage';
-                break;
-            case TRequestType::BUG:
-                $topic = 'Bug';
-                break;
-            case TRequestType::REMOVEBAN:
-                $topic = 'Remove Ban Request';
-                break;
-            default:
-                $topic = 'Other';
-                break;
-        }
-
-        // Create a single request entry
-        $requests[] = [
-            'Request' => [
-                [
-                    'id' => $request->getId(),
-                    'message' => $request->getMessage(),
-                    'topic' => $topic,
-                    'status' => $request->getStatus()->value,
-                    'reply' => $request->getSupportReply()
-                ]
-            ],
-            'author' => $author
+        $response = [
+            'Reports' => $reports,
+            'Requests' => $requests,
+            'countReports' => $countReports,
+            'countRequests' => $countRequests
         ];
-
-        if ($request->getStatus()->value === 0) {
-            $countRequests++;
-        }
-    }
-
-    $response = [
-        'Reports' => $reports,
-        'Requests' => $requests,
-        'countReports' => $countReports,
-        'countRequests' => $countRequests
-    ];
-    echo json_encode($response);
+        echo json_encode($response);
     }
     
     /**
@@ -532,6 +543,7 @@ class CAdmin
         if ($result){header('Location:'.USuperGlobalAccess::getCookie('current_page').'/success');}
         else {header('Location:'.USuperGlobalAccess::getCookie('current_page').'/error');}
     }
+
     /**
      * Method readMoreSupportRequest
      * 
@@ -587,6 +599,7 @@ class CAdmin
         $view=new VAdmin();
         $view->readMoreSupportRequest($requests, $count, $modalMessage);
     }
+
     /**
      * Method addToJson
      * 
@@ -614,6 +627,7 @@ class CAdmin
             header('Location:'.USuperGlobalAccess::getCookie('current_page').'/error');
         }
     }
+    
     /**
      * Method deleteSupportRequest
      * 

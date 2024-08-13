@@ -27,6 +27,7 @@ class CAccommodation
                 header('Location:'.USuperGlobalAccess::getCookie('current_page').'/error');
         }
     }
+    
     /**
      * Activate Accommodation
      * @param int $idAccommodation
@@ -45,6 +46,7 @@ class CAccommodation
                 header('Location:'.USuperGlobalAccess::getCookie('current_page').'/error');
         }
     }
+
     /**
      * Deletes the accommodation
      * @param int $id of the accommodation
