@@ -80,6 +80,31 @@ class USession
             return null;
         }  
     }
+    
+    /**
+     * Method getAllSessionElementReqested
+     * 
+     * this method get all the session element request in one time
+     *
+     * @param array $a [array of requests]
+     *
+     * @return array
+     */    public function getAllSessionElementReqested(array $a):array
+    {
+       $result=array();
+       foreach($a as $element)
+       {
+        if(isset($_SESSION[$element]))
+        {
+            $result[$element]=$_SESSION[$element];
+        }
+        else
+        {
+            $result[$element]=$_SESSION[$element];
+        }
+       } 
+       return $result;
+    }
 
     /**
      * set an element in _SESSION superglobal

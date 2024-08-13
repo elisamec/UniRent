@@ -51,6 +51,31 @@ class USuperGlobalAccess {
             return null;
         }
     }
+    
+    /**
+     * Method getAllPost
+     *
+     * this method get all the elements of a http post request in one time
+     * @param array $a [array of requests from POST]
+     *
+     * @return array
+     */
+    public static function getAllPost(array $a):array
+    {
+        $result=array();
+        foreach($a as $element)
+        {
+            if(isset($_POST[$element]))
+            {
+                $result[$element]= $_POST[$element];
+            }
+            else
+            {
+                $result[$element]=null;
+            }
+        }
+        return $result;
+    }
 
      /**
       *Get a value from the $_SERVER superglobal array.
