@@ -68,6 +68,7 @@ class CUser
         $view = new VUser();
         $city=USuperGlobalAccess::getPost('city');
         $date=USuperGlobalAccess::getPost('date');
+        $year=USuperGlobalAccess::getPost('year');
         $university=USuperGlobalAccess::getPost('university');
         if (USuperGlobalAccess::getPost('rateA')!== null) {
             $rateA=USuperGlobalAccess::getPost('rateA');
@@ -90,8 +91,8 @@ class CUser
             $maxPrice=1000;
         }
         $PM=FPersistentManager::getInstance();
-        $searchResult=$PM->findAccommodationsUser($city,$date,$rateA,$rateO,$minPrice,$maxPrice);
-        $view->findAccommodation($city,$university,$searchResult,$date, $rateO, $rateA, $minPrice, $maxPrice);
+        $searchResult=$PM->findAccommodationsUser($city,$date,$rateA,$rateO,$minPrice,$maxPrice,$year);
+        $view->findAccommodation($city,$university,$searchResult,$date, $rateO, $rateA, $minPrice, $maxPrice,$year);
     }
 
     public static function getCities()

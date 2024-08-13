@@ -7,8 +7,8 @@
     use Classes\Foundation\FPhoto;
     use Classes\Entity\EAccommodation;
     use Classes\Entity\EPhoto;
-use Classes\Entity\EStudent;
-use PDO;
+    use Classes\Entity\EStudent;
+    use PDO;
     use DateTime;
     use PDOException;
 
@@ -811,7 +811,7 @@ use PDO;
          *
          * @return array
          */
-        public function findAccommodationsUser($city, $date,$rateA,$rateO,$minPrice,$maxPrice):array
+        public function findAccommodationsUser($city, $date,$rateA,$rateO,$minPrice,$maxPrice,$year):array
         {
             $result=array();
             $db=FConnection::getInstance()->getConnection();
@@ -844,29 +844,34 @@ use PDO;
             
             foreach($rows as $row)
             {
-                $r=$this->load($row['id']);
-                $rating=$r->getRating();
-                if(($rating['owner']>=$rateO) and ($rating['accommodation']>=$rateA) or($rateO=0 and $rateA=0)or($rateO=0 and $rating['accommodation']>=$rateO)or($rateA=0 and $rating['owner']>=$rateO))
+                $controll_year_places=$this->areThereFreePlaces($row['id'],$year);
+                if($controll_year_places)
                 {
-                    $ap=array();
-                    $ap['title'] = $r->getTitle();
-                    $ap['id'] = $r->getIdAccommodation();
-                    $ap['price'] = $r->getPrice();
-                    $ap['address'] = $r->getAddress()->getAddressLine1().' , '.$r->getAddress()->getLocality();
-                    if(count($r->getPhoto())==0)
+                    $r=$this->load($row['id']);
+                    $rating=$r->getRating();
+                    if(($rating['owner']>=$rateO) and ($rating['accommodation']>=$rateA) or($rateO=0 and $rateA=0)or($rateO=0 and $rating['accommodation']>=$rateO)or($rateA=0 and $rating['owner']>=$rateO))
                     {
-                        $ap['photo']=null;
+                        $ap=array();
+                        $ap['title'] = $r->getTitle();
+                        $ap['id'] = $r->getIdAccommodation();
+                        $ap['price'] = $r->getPrice();
+                        $ap['address'] = $r->getAddress()->getAddressLine1().' , '.$r->getAddress()->getLocality();
+                        if(count($r->getPhoto())==0)
+                        {
+                            $ap['photo']=null;
+                        }
+                        else
+                        {
+                            $ap['photo']=(($r->getPhoto())[0])->getPhoto();
+                            $base64 = base64_encode($ap['photo']);
+                            $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
+                            $ap['photo'] = $photo;
+                        }
+                        $result[]=$ap;
                     }
-                    else
-                    {
-                        $ap['photo']=(($r->getPhoto())[0])->getPhoto();
-                        $base64 = base64_encode($ap['photo']);
-                        $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
-                        $ap['photo'] = $photo;
-                    }
-                    $result[]=$ap;
+                    else{}
                 }
-                else{}
+                else {}
             }
             return $result;
         }
@@ -882,11 +887,11 @@ use PDO;
          * @param $rateO $rateO [Owner's rating]
          * @param $minPrice $minPrice [min Pirice]
          * @param $maxPrice $maxPrice [max Price]
-         * @param $student $student [object EStudent]
+         * @param EStudent $student $student [object EStudent]
          *
          * @return array
          */
-        public function findAccommodationsStudent($city,$date,$rateA,$rateO,$minPrice,$maxPrice,$student):array
+        public function findAccommodationsStudent($city,$date,$rateA,$rateO,$minPrice,$maxPrice,EStudent $student,$year):array
         {
             $result=array();
             $db=FConnection::getInstance()->getConnection();
@@ -943,27 +948,32 @@ use PDO;
 
             foreach($rows as $row)
             {
-                $r=$this->load($row['id']);
-                $rating=$r->getRating();
-                if(($rating['owner']>=$rateO) and ($rating['accommodation']>=$rateA) or($rateO=0 and $rateA=0)or($rateO=0 and $rating['accommodation']>=$rateO)or($rateA=0 and $rating['owner']>=$rateO))
+                $controll_year_places=$this->areThereFreePlaces($row['id'],$year);
+                if($controll_year_places)
                 {
-                    $ap=array();
-                    $ap['title'] = $r->getTitle();
-                    $ap['id'] = $r->getIdAccommodation();
-                    $ap['price'] = $r->getPrice();
-                    $ap['address'] = $r->getAddress()->getAddressLine1().' , '.$r->getAddress()->getLocality();
-                    if(count($r->getPhoto())==0)
+                    $r=$this->load($row['id']);
+                    $rating=$r->getRating();
+                    if(($rating['owner']>=$rateO) and ($rating['accommodation']>=$rateA) or($rateO=0 and $rateA=0)or($rateO=0 and $rating['accommodation']>=$rateO)or($rateA=0 and $rating['owner']>=$rateO))
                     {
-                        $ap['photo']=null;
+                        $ap=array();
+                        $ap['title'] = $r->getTitle();
+                        $ap['id'] = $r->getIdAccommodation();
+                        $ap['price'] = $r->getPrice();
+                        $ap['address'] = $r->getAddress()->getAddressLine1().' , '.$r->getAddress()->getLocality();
+                        if(count($r->getPhoto())==0)
+                        {
+                            $ap['photo']=null;
+                        }
+                        else
+                        {
+                            $ap['photo']=(($r->getPhoto())[0])->getPhoto();
+                            $base64 = base64_encode($ap['photo']);
+                            $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
+                            $ap['photo'] = $photo;
+                        }
+                        $result[]=$ap;
                     }
-                    else
-                    {
-                        $ap['photo']=(($r->getPhoto())[0])->getPhoto();
-                        $base64 = base64_encode($ap['photo']);
-                        $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
-                        $ap['photo'] = $photo;
-                    }
-                    $result[]=$ap;
+                    else{}
                 }
                 else{}
             }

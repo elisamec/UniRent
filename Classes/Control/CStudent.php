@@ -64,6 +64,7 @@ class CStudent{
         $city=USuperGlobalAccess::getPost('city');
         $date=USuperGlobalAccess::getPost('date');
         $university=USuperGlobalAccess::getPost('university');
+        $year=USuperGlobalAccess::getPost('year');
         $student_username=$session->getSessionElement('username');
         $student=$PM->getStudentByUsername($student_username);
     
@@ -88,8 +89,8 @@ class CStudent{
             $maxPrice=1000;
         }
         $PM=FPersistentManager::getInstance();
-        $searchResult=$PM->findAccommodationsStudent($city,$date,$rateA,$rateO,$minPrice,$maxPrice,$student);
-        $view->findAccommodation($city,$university,$searchResult,$date, $rateO, $rateA, $minPrice, $maxPrice);
+        $searchResult=$PM->findAccommodationsStudent($city,$date,$rateA,$rateO,$minPrice,$maxPrice,$student,$year);
+        $view->findAccommodation($city,$university,$searchResult,$date, $rateO, $rateA, $minPrice, $maxPrice,$year);
     }
 
 
