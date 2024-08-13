@@ -91,7 +91,7 @@ class CReview {
         }
     }
     public static function addReviewOwner(int $idOwner) {
-        self::checkIfStudent();
+        CStudent::checkIfStudent();
         $author=USession::getInstance()->getSessionElement('username');
         $PM=FPersistentManager::getInstance();
         $idAuthor = $PM->getStudentIdByUsername($author);
@@ -110,7 +110,7 @@ class CReview {
         }
     }
     public static function addReviewAccommodation(int $idAccommodation) {
-        self::checkIfStudent();
+        CStudent::checkIfStudent();
         $PM=FPersistentManager::getInstance();
         $session=USession::getInstance();
         $idAuthor = $session->getSessionElement('id');
@@ -128,13 +128,6 @@ class CReview {
             header('Location:' . USuperGlobalAccess::getCookie('current_page').'/error');
         }
     }
-    private static function checkIfStudent() {
-        $session = USession::getInstance();
-        if ($session->getSessionElement('userType') !== 'Student') {
-            $view= new VError();
-            $view->error(403);
-            exit();
-        }
-    }
+
 
 }

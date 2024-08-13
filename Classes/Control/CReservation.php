@@ -16,8 +16,9 @@ require __DIR__.'/../../vendor/autoload.php';
 
 class CReservation
 {
+    //Forse si può accorciare?
     public static function showStudent(string $kind, ?string $modalSuccess=null): void {
-        self::checkIfStudent();
+        CStudent::checkIfStudent();
         $session=USession::getInstance();
         $id=$session->getSessionElement('id');
         $PM= FPersistentManager::getInstance();
@@ -46,8 +47,10 @@ class CReservation
         $view->showReservations($reservationsData, $kind, $modalSuccess);
 
     }
+
+    //Da accorciare
     public static function showOwner(?string $modalSuccess=null):void {
-        self::checkIfOwner();
+        COwner::checkIfOwner();
         $session=USession::getInstance();
         $id=$session->getSessionElement('id');
         $PM=FPersistentManager::getInstance();
@@ -102,6 +105,8 @@ class CReservation
         }
         $view->showReservations($reservationData, $modalSuccess);
     }
+
+    /** */
     public static function reservationDetails(int $idReservation, ?string $modalSuccess=null): void {
         $session = USession::getInstance();
         $userType = $session->getSessionElement('userType');
@@ -247,6 +252,8 @@ class CReservation
             $view->reservationDetails($reservation, $student, self::formatDate($reservation->getMade()->setTime(0,0,0)), $reviewsData, $modalSuccess);
         }
     }
+
+
     private static function formatDate(DateTime $date): string {
         $today = new DateTime('today');
                 // Calculate the difference
@@ -262,8 +269,8 @@ class CReservation
                 }
                 return $formatted;
     }
-    public static function accept(int $id) {
-        self::checkIfOwner();
+    public static function accept(int $id) :void {
+        COwner::checkIfOwner();
         $PM = FPersistentManager::getInstance();
         $reservation = $PM->load('EReservation', $id);
         $accommodationOwner = $PM->load('EAccommodation', $reservation->getAccomodationId())->getIdOwner();
@@ -281,8 +288,9 @@ class CReservation
             header('Location:/UniRent/Reservation/showOwner/error');
         }
     }
-    public static function deny(int $id) {
-        self::checkIfOwner();
+
+    public static function deny(int $id) :void{
+        COwner::checkIfOwner();
         $PM = FPersistentManager::getInstance();
         $reservation = $PM->load('EReservation', $id);
         $accommodationOwner = $PM->load('EAccommodation', $reservation->getAccomodationId())->getIdOwner();
@@ -298,20 +306,5 @@ class CReservation
             header('Location:/UniRent/Reservation/showOwner/error');
         }
     }
-    private static function checkIfOwner() {
-        $session = USession::getInstance();
-        if ($session->getSessionElement('userType') !== 'Owner') {
-            $view= new VError();
-            $view->error(403);
-            exit();
-        }
-    }
-    private static function checkIfStudent() {
-        $session = USession::getInstance();
-        if ($session->getSessionElement('userType') !== 'Student') {
-            $view= new VError();
-            $view->error(403);
-            exit();
-        }
-    }
+
 }
