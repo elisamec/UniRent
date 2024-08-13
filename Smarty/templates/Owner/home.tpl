@@ -123,54 +123,7 @@
             </div>
          </div>
       </div>
-      
-      <!-- footer section start -->
-      <div class="footer_section">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-4">
-                  <h3 class="footer_text">About Us</h3>
-                  <p class="lorem_text">Created in 2024, UniRent has revolutionized the way students find their home away from home. Connecting students with trusted landlords, UniRent ensures a seamless rental experience.</p>
-               </div>
-               <hr></hr>
-               <div class="col-md-4">
-                  <span class="lorem_text">Copyright &copy; UniRent 2024</span>
-               </div>
-               <div class="col-md-4">
-                  <h3 class="footer_text">Useful Links</h3>
-                  <div class="footer_menu">
-                     <ul>
-                        <li class="active"><a href="/UniRent/Owner/home">Home</a></li>
-                        <li><a href="/UniRent/Owner/about">About Us</a></li>
-                        <li><a href="/UniRent/Owner/contact">Contact Us</a></li>
-                     </ul>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- footer section end -->
-      
-      <!-- Javascript files-->
-      <script src="/UniRent/Smarty/js/jquery.min.js"></script>
-      <script src="/UniRent/Smarty/js/popper.min.js"></script>
-      <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
-      <script src="/UniRent/Smarty/js/jquery-3.0.0.min.js"></script>
-      <script src="/UniRent/Smarty/js/plugin.js"></script>
-      <!-- sidebar -->
-      <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
-      <script src="/UniRent/Smarty/js/custom.js"></script>
-      <!-- javascript --> 
-      <script>
-         // Material Select Initialization
-         $(document).ready(function() {
-         $('.mdb-select').materialSelect();
-         $('.select-wrapper.md-form.md-outline input.select-dropdown').bind('focus blur', function () {
-         $(this).closest('.select-outline').find('label').toggleClass('active');
-         $(this).closest('.select-outline').find('.caret').toggleClass('active');
-         });
-         });
-      </script>
+      <!-- Cookie Modal -->
       <div class="modal" id="myModal">
       <div class"container-fluid">
       <div class="card">
@@ -180,92 +133,8 @@
          </div> 
       </div>
       </div>
-    <script>
-            function on() {
-            if (!navigator.cookieEnabled) {
-               document.getElementById("myModal").style.display = "flex";
-            }
-            }
-            function off() {
-               document.getElementById("myModal").style.display = "none";
-               }
-         </script>
-{literal}
-         <script>
-    const accommodationsActive = {/literal}{$accommodationsActive}{literal};
-const accommodationsInactive = {/literal}{$accommodationsInactive}{literal};
-let classDisplay = "";
-let imageClass = "";
-
-// Function to create and append accommodations to the container
-function displayAccommodations(accommodationsActive, accommodationsInactive) {
-    const container = document.getElementById('accommodationContainer');
-
-    if (container) {
-        console.log(accommodationsActive);
-        console.log(Array.isArray(accommodationsActive));
-
-        // Combine both active and inactive accommodations
-        const allAccommodations = [...accommodationsActive, ...accommodationsInactive];
-
-        if (allAccommodations.length === 0) {
-            container.innerHTML = '<div class="container"><h1 class="noRev">You have no ads yet!</h1></div>';
-        } else {
-            allAccommodations.forEach(accommodation => {
-                if (accommodation.photo == null) {
-                    accommodation.photo = "/UniRent/Smarty/images/noPic.png";
-                }
-
-                if (accommodationsActive.includes(accommodation)) {
-                        classDisplay = "image_box";
-                        imageClass = "blog_img";
-                } else {
-                        classDisplay = "image_box grey";
-                        imageClass = "blog_img grey";
-                }
-
-                // Create HTML for each accommodation
-                const accommodationElement = document.createElement('div');
-                accommodationElement.className = 'col-lg-4 col-md-6';
-
-                accommodationElement.innerHTML = `
-                    <div class="${imageClass}">
-                        <div class="container_main">
-                            <img src="${accommodation.photo}" alt="">
-                            <div class="overlay">
-                                <div class="text">
-                                    <div class="some_text"><a href="/UniRent/Owner/accommodationManagement/${accommodation.id}">See More</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="${classDisplay}">
-                        <div class="left_box">
-                            <h1 class="road_text">${accommodation.title}</h1>
-                            <p>${accommodation.address}</p>
-                        </div>
-                        <div class="right_box">
-                            <div class="rate_text">${accommodation.price} €</div>
-                        </div>
-                    </div>
-                `;
-
-                // Append the created element to the container
-                container.appendChild(accommodationElement);
-            });
-        }
-    } else {
-        console.error("Container not found!");
-    }
-}
-
-// Call the function to display accommodations
-displayAccommodations(accommodationsActive, accommodationsInactive);
-
-</script>
-{/literal}
-<script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
-   <!-- Request Detail Modal -->
+      <!-- End of Cookie Modal -->
+       <!-- Request Detail Modal -->
 <div class="resModal" id="replyModal">
       <div class="resModal-content">
          <div class="row">
@@ -318,33 +187,65 @@ displayAccommodations(accommodationsActive, accommodationsInactive);
     </div>
 </div>
 <!-- End of Success Modal -->
-<script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
-<script>
-var modalSuccess= '{$modalSuccess}';
-var successModal = document.getElementById("successModal");
-var successClose = document.getElementById("successClose");
-var closeSuccess = document.getElementById("closeSuccess");
-if (modalSuccess !== '') {
-    successModal.style.display = "block";
-} else {
-    successModal.style.display = "none";
-}
-successClose.onclick = function() {
-    successModal.style.display = "none";
-    window.location.href = currentPage;
-}
-
-closeSuccess.onclick = function() {
-    successModal.style.display = "none";
-    window.location.href = currentPage;
-}
-
-window.onclick = function(event) {
-    if (event.target == successModal) {
-        successModal.style.display = "none";
-        window.location.href = currentPage;
-    }
-}
-</script>
+      
+      <!-- footer section start -->
+      <div class="footer_section">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-4">
+                  <h3 class="footer_text">About Us</h3>
+                  <p class="lorem_text">Created in 2024, UniRent has revolutionized the way students find their home away from home. Connecting students with trusted landlords, UniRent ensures a seamless rental experience.</p>
+               </div>
+               <hr></hr>
+               <div class="col-md-4">
+                  <span class="lorem_text">Copyright &copy; UniRent 2024</span>
+               </div>
+               <div class="col-md-4">
+                  <h3 class="footer_text">Useful Links</h3>
+                  <div class="footer_menu">
+                     <ul>
+                        <li class="active"><a href="/UniRent/Owner/home">Home</a></li>
+                        <li><a href="/UniRent/Owner/about">About Us</a></li>
+                        <li><a href="/UniRent/Owner/contact">Contact Us</a></li>
+                        <li><a href="/UniRent/Owner/guidelines">Guidelines</a></li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- footer section end -->
+      <!-- JavaScript variables -->
+      <script>
+      const accommodationsActive = {$accommodationsActive};
+      const accommodationsInactive = {$accommodationsInactive};
+      var user='Owner';
+      const modalSuccess= '{$modalSuccess}';
+      </script>
+      
+      <!-- Javascript files-->
+      <script src="/UniRent/Smarty/js/jquery.min.js"></script>
+      <script src="/UniRent/Smarty/js/popper.min.js"></script>
+      <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
+      <script src="/UniRent/Smarty/js/jquery-3.0.0.min.js"></script>
+      <script src="/UniRent/Smarty/js/plugin.js"></script>
+      <!-- sidebar -->
+      <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="/UniRent/Smarty/js/custom.js"></script>
+      <!-- javascript --> 
+      <script>
+         // Material Select Initialization
+         $(document).ready(function() {
+         $('.mdb-select').materialSelect();
+         $('.select-wrapper.md-form.md-outline input.select-dropdown').bind('focus blur', function () {
+         $(this).closest('.select-outline').find('label').toggleClass('active');
+         $(this).closest('.select-outline').find('.caret').toggleClass('active');
+         });
+         });
+      </script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/homeAccommodationDisplay.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
    </body>
 </html>

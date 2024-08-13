@@ -7,6 +7,7 @@ use Classes\Utilities\USession;
 use Classes\View\VError;
 use Classes\View\VOwner;
 use Classes\View\VStudent;
+use Classes\Utilities\USuperGlobalAccess;
 use Exception;
 
 class CSupportRequest
@@ -87,7 +88,7 @@ class CSupportRequest
         }
         $PM=FPersistentManager::getInstance();
         $result=$PM->readSupportReply((int)$id);
-        $location=$_COOKIE['current_page'];
+        $location=USuperGlobalAccess::getCookie('current_page');
         if($result)
         {
             header('Location:'.$location);

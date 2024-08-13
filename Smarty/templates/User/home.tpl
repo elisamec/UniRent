@@ -178,198 +178,7 @@
       
       </div>
       <!-- Properties section end -->
-      
-      <!-- footer section start -->
-      <div class="footer_section">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-4">
-                  <h3 class="footer_text">About Us</h3>
-                  <p class="lorem_text">Created in 2024, UniRent has revolutionized the way students find their home away from home. Connecting students with trusted landlords, UniRent ensures a seamless rental experience.</p>
-               </div>
-               <hr></hr>
-               <div class="col-md-4">
-                  <span class="lorem_text">Copyright &copy; UniRent 2024</span>
-               </div>
-               <div class="col-md-4">
-                  <h3 class="footer_text">Useful Links</h3>
-                  <div class="footer_menu">
-                     <ul>
-                        <li class="active"><a href="/UniRent/User/home">Home</a></li>
-                        <li><a href="/UniRent/User/about">About Us</a></li>
-                        <li><a href="/UniRent/User/contact">Contact Us</a></li>
-                     </ul>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- footer section end -->
-      
-      <!-- Javascript files-->
-      
-      <script src="/UniRent/Smarty/js/jquery.min.js"></script>
-      <script src="/UniRent/Smarty/js/popper.min.js"></script>
-      <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
-      <script src="/UniRent/Smarty/js/jquery-3.0.0.min.js"></script>
-      <script src="/UniRent/Smarty/js/plugin.js"></script>
-      <!-- sidebar -->
-      <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
-      <script src="/UniRent/Smarty/js/custom.js"></script>
-      <!-- javascript --> 
-      <script>
-         // Material Select Initialization
-         $(document).ready(function() {
-         $('.mdb-select').materialSelect();
-         $('.select-wrapper.md-form.md-outline input.select-dropdown').bind('focus blur', function () {
-         $(this).closest('.select-outline').find('label').toggleClass('active');
-         $(this).closest('.select-outline').find('.caret').toggleClass('active');
-         });
-         });
-      </script>
-    <script>
-            function on() {
-            if (!navigator.cookieEnabled) {
-               document.getElementById("myModal").style.display = "flex";
-            }
-            }
-            function off() {
-               document.getElementById("myModal").style.display = "none";
-               }
-         </script>
-      
-<script>
-        document.addEventListener("DOMContentLoaded", function() {
-        const citySelect = document.getElementById("citySelect");
-        const uniSelect = document.getElementById("universitySelect");
-
-        // Initialize nice-select on page load
-        $('select').niceSelect();
-
-        fetch("/UniRent/User/getCities")
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(subjectObject => {
-            // Populate city dropdown
-            for (let city in subjectObject) {
-                let option = new Option(city, city);
-                citySelect.add(option);
-            }
-
-            // Update nice-select after adding options
-            $('select').niceSelect('update');
-
-            // Add event listener for city dropdown change
-            citySelect.onchange = function() {
-                const selectedCity = citySelect.value;
-
-                // Clear the university dropdown
-                uniSelect.length = 1;
-
-                if (selectedCity && subjectObject[selectedCity]) {
-                    // Populate university dropdown
-                    subjectObject[selectedCity].forEach(uniName => {
-                        let option = new Option(uniName, uniName);
-                        uniSelect.add(option);
-                    });
-
-                    // Update nice-select after adding options
-                    $('select').niceSelect('update');
-                }
-            }
-        })
-        .catch(error => console.error('Error:', error));
-    });
-    
-
-    </script>
-
-    {literal}
-         <script>
-    const accommodations = {/literal}{$accommodations}{literal};
-
-    // Function to create and append reviews to the container
-    function displayAccommodations(accommodations) {
-        const container = document.getElementById('accommodationContainer');
-
-        if (container) {
-            if (accommodations.length === 0) {
-                container.innerHTML = '<div class="container"><h1 class="noRev">You have no ads yet!</h1></div>';
-            } else {
-                accommodations.forEach(accommodation => {
-                    if (accommodation.photo == null) {
-                        accommodation.photo = "/UniRent/Smarty/images/noPic.png";
-                    }
-                    const accommodationElement = document.createElement('div');
-                    accommodationElement.className = 'col-lg-4 col-md-6col-lg-4 col-md-6';
-
-                    // Insert the names of the elements of the accommodation array
-                    accommodationElement.innerHTML = `
-                        <div class="blog_img">
-                            <div class="container_main">
-                                <img src="${accommodation.photo}" alt="">
-                                <div class="overlay">
-                                    <div class="text">
-                                        <div class="some_text"><a href="#" onclick="showModal(event)">See More</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="image_box">
-                            <div class="left_box">
-                                <h1 class="road_text">${accommodation.title}</h1>
-                                <p>${accommodation.address}</p>
-                            </div>
-                            <div class="right_box">
-                                <div class="rate_text">${accommodation.price} €</div>
-                            </div>
-                        </div>
-                    `;
-
-                    // Append the created element to the container
-                    container.appendChild(accommodationElement); // Corrected: accommodationElement instead of reviewElement
-                });
-            }
-        } else {
-            console.error("Container not found!"); // Debugging: Error if container is not found
-        }
-    }
-
-    // Call the function to display reviews
-    displayAccommodations(accommodations);
-</script>
-{/literal}
-<script>
-    // Get the modal
-    var modal = document.getElementById("loginModal");
-    // Get the <span> element that closes the modal
-    var span = document.getElementById("loginClose");
-
-
-    // When the user clicks the button, open the modal 
-    function showModal(event) {
-        event.preventDefault();
-        modal.style.display = "block";
-    }
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>
-
-<!-- Success Modal -->
+      <!-- Success Modal -->
 <div class="resModal" id="successModal">
       <div class="resModal-content">
          <div class="row">
@@ -396,35 +205,66 @@
     </div>
 </div>
 <!-- End of Success Modal -->
-<script>
-var modalSuccess= '{$modalSuccess}';
-var successModal = document.getElementById("successModal");
-var successClose = document.getElementById("successClose");
-var closeSuccess = document.getElementById("closeSuccess");
-if (modalSuccess !== '') {
-    successModal.style.display = "block";
-} else {
-    successModal.style.display = "none";
-}
-successClose.onclick = function() {
-    successModal.style.display = "none";
-    window.location.href = currentPage;
-}
+     <!-- footer section start -->
+      <div class="footer_section">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-4">
+                  <h3 class="footer_text">About Us</h3>
+                  <p class="lorem_text">Created in 2024, UniRent has revolutionized the way students find their home away from home. Connecting students with trusted landlords, UniRent ensures a seamless rental experience.</p>
+               </div>
+               <hr></hr>
+               <div class="col-md-4">
+                  <span class="lorem_text">Copyright &copy; UniRent 2024</span>
+               </div>
+               <div class="col-md-4">
+                  <h3 class="footer_text">Useful Links</h3>
+                  <div class="footer_menu">
+                     <ul>
+                        <li class="active"><a href="/UniRent/User/home">Home</a></li>
+                        <li><a href="/UniRent/User/about">About Us</a></li>
+                        <li><a href="/UniRent/User/contact">Contact Us</a></li>
+                        <li><a href="/UniRent/User/guidelines">Guidelines</a></li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- footer section end -->
+      <!-- Javascript variables -->
+      <script>
+         const accommodations = {$accommodations};
+         var modalSuccess= '{$modalSuccess}';
+         var user = 'User';
+      </script>
 
-closeSuccess.onclick = function() {
-    successModal.style.display = "none";
-    window.location.href = currentPage;
-}
-
-window.onclick = function(event) {
-    if (event.target == successModal) {
-        successModal.style.display = "none";
-        window.location.href = currentPage;
-    }
-}
-</script>
-<script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
-<script src="/UniRent/Smarty/js/UniRentOriginal/selectKeyboardAccessibility.js"></script>
+      <!-- Javascript files-->
+      
+      <script src="/UniRent/Smarty/js/jquery.min.js"></script>
+      <script src="/UniRent/Smarty/js/popper.min.js"></script>
+      <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
+      <script src="/UniRent/Smarty/js/jquery-3.0.0.min.js"></script>
+      <script src="/UniRent/Smarty/js/plugin.js"></script>
+      <!-- sidebar -->
+      <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="/UniRent/Smarty/js/custom.js"></script>
+      <!-- javascript --> 
+      <script>
+         // Material Select Initialization
+         $(document).ready(function() {
+         $('.mdb-select').materialSelect();
+         $('.select-wrapper.md-form.md-outline input.select-dropdown').bind('focus blur', function () {
+         $(this).closest('.select-outline').find('label').toggleClass('active');
+         $(this).closest('.select-outline').find('.caret').toggleClass('active');
+         });
+         });
+      </script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/dropdownFill.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/homeAccommodationDisplay.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/selectKeyboardAccessibility.js"></script>
 
    </body>
 </html>

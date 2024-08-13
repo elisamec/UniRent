@@ -49,15 +49,31 @@ class FVisit
     */
     public function exist(int $visitId):bool 
     {
-        $q="SELECT * FROM visit WHERE id=:id";
         $db=FConnection::getInstance()->getConnection();
-        $db->beginTransaction();
-        $stm=$db->prepare($q);
-        $stm->bindParam(':id',$visitId,PDO::PARAM_INT);
-        $stm->execute();
-        $db->commit();
+        try
+        {
+            if(!$db->inTransaction())
+            {
+                $db->beginTransaction();
+            }   
+            $q="SELECT * FROM visit WHERE id=:id LOCK IN SHARE MODE";
+            $stm=$db->prepare($q);
+            $stm->bindParam(':id',$visitId,PDO::PARAM_INT);
+            $stm->execute();
+            if(!$db->inTransaction())
+            {
+                $db->commit();
+            }
+        }
+        catch(PDOException $e)
+        {
+            if(!$db->inTransaction())
+            {
+                $db->rollBack();
+            }
+            return false;
+        }
         $result=$stm->rowCount();
-
         if ($result >0) return true;
         return false;
     }

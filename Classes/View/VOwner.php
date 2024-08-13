@@ -69,7 +69,7 @@ class VOwner {
         $this->smarty->display('Owner/personalProfile.tpl');
     }
 
-    public function editProfile(EOwner $owner, ?string $photo, bool $usernameDuplicate, bool $emailDuplicate, bool $phoneError, bool $ibanError, bool $oldPasswordError, bool $passwordError, ?string $modalSuccess):void {
+    public function editProfile(EOwner $owner, ?string $photo, bool $usernameDuplicate, bool $emailDuplicate, bool $phoneError, bool $ibanError, bool $oldPasswordError, bool $passwordError):void {
         $this->smarty->assign('photo', $photo);
         $this->smarty->assign('owner', $owner);
         $this->smarty->assign('usernameDuplicate', $usernameDuplicate);
@@ -78,7 +78,6 @@ class VOwner {
         $this->smarty->assign('ibanError', $ibanError);
         $this->smarty->assign('oldPasswordError', $oldPasswordError);
         $this->smarty->assign('passwordError', $passwordError);
-        $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('Owner/editPersonalProfile.tpl');
     }
     public function contact(?string $modalSuccess){
@@ -176,17 +175,21 @@ class VOwner {
         $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('Owner/contracts.tpl');
     }
-    public function contractDetails(EContract $contract, EStudent $student, array $reviewsData, ?string $modalSuccess):void {
+    public function contractDetails(EContract $contract, EStudent $student, array $reviewsData, ?string $modalSuccess, int $leaveble):void {
         
         $this->smarty->assign('contract', $contract);
         $this->smarty->assign('student', $student);
         $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->assign('reviewsData', $reviewsData);
+        $this->smarty->assign('leaveble', $leaveble);
         $this->smarty->display('Owner/contractDetails.tpl');
     }
     public function supportReplies(array $replies, int $count):void {
         $this->smarty->assign('replies', json_encode($replies));
         $this->smarty->assign('count', $count);
         $this->smarty->display('Owner/supportReplies.tpl');
+    }
+    public function guidelines(){
+        $this->smarty->display('Owner/guidelines.tpl');
     }
 }

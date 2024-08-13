@@ -135,9 +135,10 @@
                   <h3 class="footer_text">Useful Links</h3>
                   <div class="footer_menu">
                      <ul>
-                        <li class="active"><a href="/UniRent/User/home">Home</a></li>
+                        <li><a href="/UniRent/User/home">Home</a></li>
                         <li><a href="/UniRent/User/about">About Us</a></li>
                         <li><a href="/UniRent/User/contact">Contact Us</a></li>
+                        <li><a href="/UniRent/User/guidelines">Guidelines</a></li>
                      </ul>
                   </div>
                </div>
@@ -145,7 +146,7 @@
          </div>
       </div>
       <!-- footer section end -->
-<script src="/UniRent/Smarty/js/jquery.min.js"></script>
+      <script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>
       <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
       <script src="/UniRent/Smarty/js/jquery-3.0.0.min.js"></script>
@@ -153,16 +154,7 @@
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
-      <script>
-            function on() {
-            if (!navigator.cookieEnabled) {
-               document.getElementById("myModal").style.display = "flex";
-            }
-            }
-            function off() {
-               document.getElementById("myModal").style.display = "none";
-               }
-         </script>
-         <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
   </body>
   

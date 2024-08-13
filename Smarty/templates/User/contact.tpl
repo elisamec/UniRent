@@ -108,70 +108,7 @@
          </div>
       </div>
       <!-- contact section end -->
-      
-      <!-- footer section start -->
-      <div class="footer_section">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-4">
-                  <h3 class="footer_text">About Us</h3>
-                  <p class="lorem_text">Created in 2024, UniRent has revolutionized the way students find their home away from home. Connecting students with trusted landlords, UniRent ensures a seamless rental experience.</p>
-               </div>
-               <hr></hr>
-               <div class="col-md-4">
-                  <span class="lorem_text">Copyright &copy; UniRent 2024</span>
-               </div>
-               <div class="col-md-4">
-                  <h3 class="footer_text">Useful Links</h3>
-                  <div class="footer_menu">
-                     <ul>
-                        <li class="active"><a href="/UniRent/User/home">Home</a></li>
-                        <li><a href="/UniRent/User/about">About Us</a></li>
-                        <li><a href="/UniRent/User/contact">Contact Us</a></li>
-                     </ul>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- footer section end -->
-      <!-- Javascript files-->
-      <script src="/UniRent/Smarty/js/jquery.min.js"></script>
-      <script src="/UniRent/Smarty/js/popper.min.js"></script>
-      <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
-      <script src="/UniRent/Smarty/js/jquery-3.0.0.min.js"></script>
-      <script src="/UniRent/Smarty/js/plugin.js"></script>
-      <!-- sidebar -->
-      <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
-      <script src="/UniRent/Smarty/js/custom.js"></script>
-      <!-- javascript --> 
-      <script>
-         // Material Select Initialization
-         $(document).ready(function() {
-         $('.mdb-select').materialSelect();
-         $('.select-wrapper.md-form.md-outline input.select-dropdown').bind('focus blur', function () {
-         $(this).closest('.select-outline').find('label').toggleClass('active');
-         $(this).closest('.select-outline').find('.caret').toggleClass('active');
-         });
-         });
-      </script>
-      <script>
-            function on() {
-            if (!navigator.cookieEnabled) {
-               document.getElementById("myModal").style.display = "flex";
-            }
-            }
-            function off() {
-               document.getElementById("myModal").style.display = "none";
-               }
-         </script>
-         <script>
-      document.getElementById("yourLinkId").onclick = function() {
-    document.getElementById("yourFormId").submit();
-}
-      </script>
-
-<!-- Success Modal -->
+      <!-- Success Modal -->
 <div class="resModal" id="successModal">
       <div class="resModal-content">
          <div class="row">
@@ -198,33 +135,59 @@
     </div>
 </div>
 <!-- End of Success Modal -->
-<script>
-var modalSuccess= '{$modalSuccess}';
-var successModal = document.getElementById("successModal");
-var successClose = document.getElementById("successClose");
-var closeSuccess = document.getElementById("closeSuccess");
-if (modalSuccess !== '') {
-    successModal.style.display = "block";
-} else {
-    successModal.style.display = "none";
-}
-successClose.onclick = function() {
-    successModal.style.display = "none";
-    window.location.href = currentPage;
-}
-
-closeSuccess.onclick = function() {
-    successModal.style.display = "none";
-    window.location.href = currentPage;
-}
-
-window.onclick = function(event) {
-    if (event.target == successModal) {
-        successModal.style.display = "none";
-        window.location.href = currentPage;
-    }
-}
-</script>
+      
+     <!-- footer section start -->
+      <div class="footer_section">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-4">
+                  <h3 class="footer_text">About Us</h3>
+                  <p class="lorem_text">Created in 2024, UniRent has revolutionized the way students find their home away from home. Connecting students with trusted landlords, UniRent ensures a seamless rental experience.</p>
+               </div>
+               <hr></hr>
+               <div class="col-md-4">
+                  <span class="lorem_text">Copyright &copy; UniRent 2024</span>
+               </div>
+               <div class="col-md-4">
+                  <h3 class="footer_text">Useful Links</h3>
+                  <div class="footer_menu">
+                     <ul>
+                        <li><a href="/UniRent/User/home">Home</a></li>
+                        <li><a href="/UniRent/User/about">About Us</a></li>
+                        <li class="active"><a href="/UniRent/User/contact">Contact Us</a></li>
+                        <li><a href="/UniRent/User/guidelines">Guidelines</a></li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- footer section end -->
+      <!-- Javascript variables -->
+      <script>
+         var modalSuccess= '{$modalSuccess}';
+      </script>
+      <!-- Javascript files-->
+      <script src="/UniRent/Smarty/js/jquery.min.js"></script>
+      <script src="/UniRent/Smarty/js/popper.min.js"></script>
+      <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
+      <script src="/UniRent/Smarty/js/jquery-3.0.0.min.js"></script>
+      <script src="/UniRent/Smarty/js/plugin.js"></script>
+      <!-- sidebar -->
+      <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="/UniRent/Smarty/js/custom.js"></script>
+      <!-- javascript --> 
+      <script>
+         // Material Select Initialization
+         $(document).ready(function() {
+         $('.mdb-select').materialSelect();
+         $('.select-wrapper.md-form.md-outline input.select-dropdown').bind('focus blur', function () {
+         $(this).closest('.select-outline').find('label').toggleClass('active');
+         $(this).closest('.select-outline').find('.caret').toggleClass('active');
+         });
+         });
+      </script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
    </body>
 </html>

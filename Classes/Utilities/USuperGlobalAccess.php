@@ -111,46 +111,25 @@ class USuperGlobalAccess {
             }
         } else return null;
     }
-    
     /**
-     * Method getPhoto
+     * Method getCookie
      * 
-     * this method allow to get the photo from $_FILES
-     *
-     * @param $key 
-     *
-     * @return ?array
+     * Get a value from the $_COOKIE superglobal array.
+     * @param string $key
+     * @return string
      */
-    /*public static function getPhoto($key):?array
+    public static function getCookie(string $key):string
     {
-        $max_size=300000;
-        $result=false;
-        $result=is_uploaded_file($_FILES[$key]['tmp_name']);
-
-        if(!$result)# no photos uploded
+        if (isset($_COOKIE[$key])) 
+        {
+            return $_COOKIE[$key];
+        } 
+        else 
         {
             return null;
         }
-        else
-        {
-            $size=$_FILES[$key]['size'];
-            if($size>$max_size)  #too big photo
-            {
-                return null;
-            }
-            else
-            {
-                $type = $_FILES[$key]['type'];
-                $name = $_FILES[$key]['name'];
-                $immagine = file_get_contents($_FILES[$key]['tmp_name']);
-                $immagine = addslashes ($immagine);
-                $result=array();
-                $result['type']=$type;
-                $result['name']=$name;
-                $result['img']=$immagine;
-                return $result;
-            }
-        }
-    }*/
+    }
+    
+    
 
 }

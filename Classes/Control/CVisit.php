@@ -52,7 +52,7 @@ class CVisit
         $viewError->error(403);
         exit();
     } else {
-        $userType == TType::tryFrom($userType);
+        $userType = TType::tryFrom(strtolower($userType));
     }
     
     $view = $userType === TType::STUDENT ? new VStudent() : new VOwner();

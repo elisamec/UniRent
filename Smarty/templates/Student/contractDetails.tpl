@@ -127,7 +127,7 @@
                                     </div>
                                  </div>
                               </div>
-                        {if $contract->getStatus()->value != "future"}
+                        {if leaveble>0}
                         <button class="edit_button" id="reviewButton">Review</button>
                         {/if}
                       <div class="ownerSect">
@@ -224,7 +224,7 @@
 <div id="contactModal" class="resModal">
   <div class="resModal-content">
   <div class="row">
-    <span class="resClose">&times;</span>
+    <span class="resClose" id="contactClose">&times;</span>
     <h2 class="resModal-head">Owner Contacts</h2>
     </div>
     <p>Phone: {$owner->getPhoneNumber()}</p>
@@ -310,13 +310,7 @@
 </div>
 <script>
         document.addEventListener("DOMContentLoaded", function() {
-    var kind = "{$kind|escape:'javascript'}";
-    console.log("kind:", kind); // Log the value to ensure it's correct
     var button = document.getElementById("reviewButton");
-
-    if (kind === "future" || kind === "#") {
-        button.style.display = "none"; // Correct way to hide the button
-    }
 
     // Add event listener to reviewButton if it exists
     if (button) {
@@ -371,6 +365,7 @@ window.onclick = (event) => {
                         <li><a href="/UniRent/Student/home">Home</a></li>
                         <li><a href="/UniRent/Student/about">About Us</a></li>
                         <li><a href="/UniRent/Student/contact">Contact Us</a></li>
+                        <li><a href="/UniRent/Student/guidelines">Guidelines</a></li>
                      </ul>
                   </div>
                </div>
@@ -397,16 +392,6 @@ window.onclick = (event) => {
          </div> 
       </div>
       </div>
-    <script>
-            function on() {
-            if (!navigator.cookieEnabled) {
-               document.getElementById("myModal").style.display = "flex";
-            }
-            }
-            function off() {
-               document.getElementById("myModal").style.display = "none";
-               }
-         </script>
          <script>
         // Assign the JSON data to a JavaScript variable
         const images = {$imagesJson};
@@ -616,6 +601,7 @@ function closeReportModal() {
 </script>
 
    <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
    <!-- Request Detail Modal -->
 <div class="resModal" id="replyModal">
       <div class="resModal-content">

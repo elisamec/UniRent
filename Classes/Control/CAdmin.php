@@ -142,11 +142,11 @@ class CAdmin
             $res2=$PM->store($report);
             if ($res && $res2)
             {
-                header('Location:/UniRent/' .$_COOKIE['current_page'].'/success');
+                header('Location:/UniRent/' .USuperGlobalAccess::getCookie('current_page').'/success');
             }
             else
             {
-                header('Location:/UniRent/' . $_COOKIE['current_page'] .'/error');
+                header('Location:/UniRent/' . USuperGlobalAccess::getCookie('current_page') .'/error');
             }
         }
     }
@@ -238,11 +238,11 @@ class CAdmin
         $res=$PM->update($user);
         if ($res)
         {
-            header('Location:'.$_COOKIE['current_page'].'/success');
+            header('Location:'.USuperGlobalAccess::getCookie('current_page').'/success');
         }
         else
         {
-            header('Location:'.$_COOKIE['current_page'].'/error');
+            header('Location:'.USuperGlobalAccess::getCookie('current_page').'/error');
         }
     }
     /**
@@ -316,11 +316,11 @@ class CAdmin
         $res = $PM->update($user);
         if ($res)
         {
-            header('Location:'.$_COOKIE['current_page'].'/success');
+            header('Location:'.USuperGlobalAccess::getCookie('current_page').'/success');
         }
         else
         {
-            header('Location:'.$_COOKIE['current_page'].'/error');
+            header('Location:'.USuperGlobalAccess::getCookie('current_page').'/error');
         }
     }
 
@@ -529,8 +529,8 @@ class CAdmin
         $answare=USuperGlobalAccess::getPost('answare');
         $PM=FPersistentManager::getInstance();
         $result=$PM->SupportReply($id,$answare);
-        if ($result){header('Location:'.$_COOKIE['current_page'].'/success');}
-        else {header('Location:'.$_COOKIE['current_page'].'/error');}
+        if ($result){header('Location:'.USuperGlobalAccess::getCookie('current_page').'/success');}
+        else {header('Location:'.USuperGlobalAccess::getCookie('current_page').'/error');}
     }
     /**
      * Method readMoreSupportRequest
@@ -607,11 +607,11 @@ class CAdmin
         $res=$PM->update($request);
         if ($res)
         {
-            header('Location:'.$_COOKIE['current_page'].'/success');
+            header('Location:'.USuperGlobalAccess::getCookie('current_page').'/success');
         }
         else
         {
-            header('Location:'.$_COOKIE['current_page'].'/error');
+            header('Location:'.USuperGlobalAccess::getCookie('current_page').'/error');
         }
     }
     /**
@@ -629,11 +629,11 @@ class CAdmin
         $res=$PM->delete('ESupportRequest', $id);
         if ($res)
         {
-            header('Location:'.$_COOKIE['current_page'].'/success');
+            header('Location:'.USuperGlobalAccess::getCookie('current_page').'/success');
         }
         else
         {
-            header('Location:'.$_COOKIE['current_page'].'/error');
+            header('Location:'.USuperGlobalAccess::getCookie('current_page').'/error');
         }
     }
     /**
@@ -651,11 +651,11 @@ class CAdmin
         $res=$PM->delete('EReport', $id);
         if ($res)
         {
-            header('Location:'.$_COOKIE['current_page'].'/success');
+            header('Location:'.USuperGlobalAccess::getCookie('current_page').'/success');
         }
         else
         {
-            header('Location:'.$_COOKIE['current_page'].'/error');
+            header('Location:'.USuperGlobalAccess::getCookie('current_page').'/error');
         }
     }
     /**

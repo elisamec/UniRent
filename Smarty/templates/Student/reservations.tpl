@@ -146,6 +146,7 @@
                         <li><a href="/UniRent/Student/home">Home</a></li>
                         <li><a href="/UniRent/Student/about">About Us</a></li>
                         <li><a href="/UniRent/Student/contact">Contact Us</a></li>
+                        <li><a href="/UniRent/Student/guidelines">Guidelines</a></li>
                      </ul>
                   </div>
                </div>
@@ -183,16 +184,6 @@
          </div> 
       </div>
       </div>
-    <script>
-            function on() {
-            if (!navigator.cookieEnabled) {
-               document.getElementById("myModal").style.display = "flex";
-            }
-            }
-            function off() {
-               document.getElementById("myModal").style.display = "none";
-               }
-         </script>
 {literal}
          <script>
     const accommodations = {/literal}{$reservations}{literal};
@@ -258,6 +249,7 @@
 </script>
 {/literal}
    <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
    <!-- Request Detail Modal -->
 <div class="resModal" id="replyModal">
       <div class="resModal-content">

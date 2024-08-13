@@ -230,9 +230,9 @@
          </div>
       </div>
 
-      <div id="confirmModal" class="resModal">
+      <div id="deleteConfirmModal" class="resModal">
    <div class="resModal-content">
-      <span class="resClose">&times;</span>
+      <span class="resClose" id="deleteConfirmClose">&times;</span>
       <p>Are you sure you want to delete your profile?</p>
       <div class="btn-cont">
       <button id="confirmDelete" class="confirmClass">Yes</button>
@@ -261,6 +261,7 @@
                         <li><a href="/UniRent/Owner/home">Home</a></li>
                         <li><a href="/UniRent/Owner/about">About Us</a></li>
                         <li><a href="/UniRent/Owner/contact">Contact Us</a></li>
+                        <li><a href="/UniRent/Owner/guidelines">Guidelines</a></li>
                      </ul>
                   </div>
                </div>
@@ -293,16 +294,6 @@
          </div> 
       </div>
       </div>
-    <script>
-            function on() {
-            if (!navigator.cookieEnabled) {
-               document.getElementById("myModal").style.display = "flex";
-            }
-            }
-            function off() {
-               document.getElementById("myModal").style.display = "none";
-               }
-         </script>
 
                <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -397,6 +388,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       </script>
    <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
    <!-- Request Detail Modal -->
 <div class="resModal" id="replyModal">
       <div class="resModal-content">

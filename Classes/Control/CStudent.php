@@ -55,7 +55,7 @@ class CStudent{
         $view = new VStudent();
         $view->contact($modalSuccess);
     }
-    public static function findAccommodation()
+    public static function search()
     {
         self::checkIfStudent();
         $view = new VStudent();
@@ -104,6 +104,17 @@ class CStudent{
         $view = new VStudent();
         $view->about();
     }
+    public static function guidelines(){
+        $session = USession::getInstance();
+        $type = $session->getSessionElement('userType');
+        if ($type === null) {
+            header('Location:/UniRent/User/guidelines');
+        } else if ($type ==='Owner') {
+            header('Location:/UniRent/Owner/guidelines');
+        }
+        $view = new VStudent();
+        $view->guidelines();
+    }
     
     
     /**
@@ -125,7 +136,9 @@ class CStudent{
         if(is_null($student)){
 
             $session->setSessionElement('photo', $ph);
-            http_response_code(500);
+            $viewError=new VError();
+            $viewError->error(403);
+            exit();
 
         } else {   
 
@@ -180,7 +193,7 @@ class CStudent{
         }
         else
         {
-            header('Location:/UniRent/'.$_COOKIE['current_page'].'/error');
+            header('Location:/UniRent/'.USuperGlobalAccess::getCookie('current_page').'/error');
         }
     }
 
@@ -253,15 +266,18 @@ class CStudent{
 
         $accomm = $PM->load('EAccommodation', $idAccommodation);
         $student = $PM->load('EStudent', USession::getInstance()->getSessionElement('id'));
-        if (strtoupper($student->getSex())==='F' && $accomm->getWoman() === false) {
-            $viewError=new VError();
-            $viewError->error(403);
-            exit();
-        } else if (strtoupper($student->getSex())==='M' && $accomm->getMan() === false) {
-            $viewError=new VError();
-            $viewError->error(403);
-            exit();
-        } else if ($student->getSmoker() && $accomm->getSmokers() === false) {
+        if ($accomm->getWoman() && $accomm->getMan()) {
+            if (strtoupper($student->getSex())==='F' && $accomm->getWoman() === false) {
+                $viewError=new VError();
+                $viewError->error(403);
+                exit();
+            } else if (strtoupper($student->getSex())==='M' && $accomm->getMan() === false) {
+                $viewError=new VError();
+                $viewError->error(403);
+                exit();
+            }
+        }
+        if ($student->getSmoker() && $accomm->getSmokers() === false) {
             $viewError=new VError();
             $viewError->error(403);
             exit();
@@ -394,20 +410,8 @@ class CStudent{
                 ];
             }
         }
-        $contracts=count($PM->getContractsByStudent(USession::getInstance()->getSessionElement('id'),$idAccommodation));
-        $postedReviews=$PM->loadReviewsByAuthor(USession::getInstance()->getSessionElement('id'), TType::STUDENT);
-        $countRev=0;
-        foreach ($postedReviews as $review) {
-            if ($review->getRecipientType()===TType::ACCOMMODATION) {
-                if ($review->getIdRecipient()==$idAccommodation) {
-                    $countRev++;
-                }
-            }
-        }
-        $leavebleReviews=$contracts-$countRev;
-        if ($leavebleReviews<0) {
-            $leavebleReviews=0;
-        }
+        $session=USession::getInstance();
+        $leavebleReviews=$PM->remainingReviewStudentToAccommodation($session->getSessionElement('id'), $accomm->getIdAccommodation());
         $view->accommodation($accomm, $owner, $reviewsData, $period, $picture, $visits, $visitDuration, $tenants, $num_places, $studBooked, $dayOfBooking, $timeOfBooking, $disabled, $successReserve, $successVisit, $leavebleReviews);
     }
 

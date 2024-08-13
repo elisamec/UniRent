@@ -154,12 +154,12 @@
                         <li><a href="/UniRent/Student/home">Home</a></li>
                         <li><a href="/UniRent/Student/about">About Us</a></li>
                         <li><a href="/UniRent/Student/contact">Contact Us</a></li>
+                        <li><a href="/UniRent/Student/guidelines">Guidelines</a></li>
                      </ul>
                   </div>
                </div>
             </div>
          </div>
-      </div>
       </div>
       <!-- footer section end -->
       <!-- Javascript files-->
@@ -178,6 +178,7 @@
     </script>
 <script src="/UniRent/Smarty/js/pagination.js"></script>
 <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
 <div class="modal" id="myModal">
       <div class"container-fluid">
       <div class="card">
@@ -188,16 +189,6 @@
       </div>
       </div>
       </div>
-      <script>
-            function on() {
-            if (!navigator.cookieEnabled) {
-               document.getElementById("myModal").style.display = "flex";
-            }
-            }
-            function off() {
-               document.getElementById("myModal").style.display = "none";
-               }
-         </script>
 <script>
 // Assuming Smarty JSON data is available as a JavaScript variable
 var supportReplies = {$replies};

@@ -220,7 +220,7 @@
 <div id="contactModal" class="resModal">
   <div class="resModal-content">
   <div class="row">
-    <span class="resClose">&times;</span>
+    <span class="resClose" id="contactClose">&times;</span>
     <h2 class="resModal-head">Owner Contacts</h2>
     </div>
     <p>Phone: {$owner->getPhoneNumber()}</p>
@@ -384,7 +384,7 @@
       <p>You already have one booked for {$day} at {$time} of the duration of {$duration} minutes.</p>
     </div>
     <div class="btn-cont">
-      <button id="confirmBooking" class="cancelClass" class="confirmClass" type="button">Continue</button>
+      <button id="confirmBooking" class="confirmClass" type="button">Continue</button>
       <button id="cancelBooking" class="cancelClass" type="button">Cancel</button>
     </div>
   </div>
@@ -676,6 +676,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <li><a href="/UniRent/Student/home">Home</a></li>
                         <li><a href="/UniRent/Student/about">About Us</a></li>
                         <li><a href="/UniRent/Student/contact">Contact Us</a></li>
+                        <li><a href="/UniRent/Student/guidelines">Guidelines</a></li>
                      </ul>
                   </div>
                </div>
@@ -692,6 +693,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
 
 
       <div class="modal" id="myModal">
@@ -703,16 +705,6 @@ document.addEventListener('DOMContentLoaded', function() {
          </div> 
       </div>
       </div>
-    <script>
-            function on() {
-            if (!navigator.cookieEnabled) {
-               document.getElementById("myModal").style.display = "flex";
-            }
-            }
-            function off() {
-               document.getElementById("myModal").style.display = "none";
-               }
-         </script>
          <script>
         // Assign the JSON data to a JavaScript variable
         const images = {$imagesJson};

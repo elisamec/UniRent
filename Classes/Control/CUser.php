@@ -20,16 +20,13 @@ class CUser
     public static function home(?string $modalSuccess=null){
         $session=USession::getInstance();
         $type=$session->getSessionElement('userType');
-        $id=$session->getSessionElement('id');
         $PM=FPersistentManager::getInstance();
         if($type==='Student')
         {
-            $student=$PM->load('EStudent', $id);
             header('Location: /UniRent/Student/home');
         }
         elseif($type==='Owner')
         {
-            $owner=$PM->load('EOwner',$id);
             header('Location: /UniRent/Owner/home');
         }
         else{
@@ -41,6 +38,10 @@ class CUser
     public static function about(){
         $view = new VUser();
         $view->about();
+    }
+    public static function guidelines(){
+        $view = new VUser();
+        $view->guidelines();
     }
 
     public static function login(){
@@ -55,9 +56,9 @@ class CUser
         $view->login();
     }
 
-    public static function register(){
+    public static function register(?string $modalSuccess=null){
         $view = new VUser();
-        $view->register();
+        $view->register($modalSuccess);
     }
     public static function contact(?string $modalSuccess=null){
         $view = new VUser();
@@ -102,7 +103,7 @@ class CUser
     }
 
 
-    public static function showRegistration()
+    public static function showRegistration(?string $modalSuccess=null)
     {
         $view= new VUser();
         $viewStudent = new VStudent();
@@ -119,12 +120,11 @@ class CUser
 
         if($PM->verifyUserEmail($mail)==false && $PM->verifyUserUsername(USuperGlobalAccess::getPost('username'))==false)
         {
-            http_response_code(500);
             $session=USession::getInstance();
             $session->setSessionElement('email', $mail);
             $session->setSessionElement('username', $username);
             if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()])[A-Za-z\d@$!%*?&()]{8,}$/' , $password)) {
-                $view->registrationError(false, false, false, true, $username, $mail, $name, $surname, $type);
+                $view->registrationError(false, false, false, true, $username, $mail, $name, $surname, $type, $modalSuccess);
             }
             $session->setSessionElement('password',USuperGlobalAccess::getPost('password'));
             $session->setSessionElement('name',$name);
@@ -138,19 +138,19 @@ class CUser
                     $viewStudent->showStudentRegistration();
 
                 }else{
-                    $view->registrationError(false, false, true, false, $username, "", $name, $surname, $type);
+                    $view->registrationError(false, false, true, false, $username, "", $name, $surname, $type, $modalSuccess);
                 }
             }else{  
  
                 $viewOwner->showOwnerRegistration();
             }
         } elseif ($PM->verifyUserUsername(USuperGlobalAccess::getPost('username'))==true && $PM->verifyUserEmail($mail)==true) {
-            $view->registrationError(true, true, false, false, "", "", $name, $surname, $type);
+            $view->registrationError(true, true, false, false, "", "", $name, $surname, $type, $modalSuccess);
         }
         elseif ($PM->verifyUserEmail($mail)==true) {
-            $view->registrationError(true, false, false, false, $username, "", $name, $surname, $type);
+            $view->registrationError(true, false, false, false, $username, "", $name, $surname, $type, $modalSuccess);
         }  else {
-            $view->registrationError(false, true, false, false, "", $mail, $name, $surname, $type);
+            $view->registrationError(false, true, false, false, "", $mail, $name, $surname, $type, $modalSuccess);
         }
     }
 

@@ -102,8 +102,8 @@
       </div>
 <br></br>
 
-      <!-- banner section end -->
-<div class="footer_section">
+     <!-- footer section start -->
+      <div class="footer_section">
          <div class="container">
             <div class="row">
                <div class="col-md-4">
@@ -121,6 +121,7 @@
                         <li><a href="/UniRent/User/home">Home</a></li>
                         <li><a href="/UniRent/User/about">About Us</a></li>
                         <li><a href="/UniRent/User/contact">Contact Us</a></li>
+                        <li><a href="/UniRent/User/guidelines">Guidelines</a></li>
                      </ul>
                   </div>
                </div>
@@ -166,17 +167,8 @@ document.addEventListener('DOMContentLoaded', function() {
          </div> 
       </div>
       </div>
-    <script>
-            function on() {
-            if (!navigator.cookieEnabled) {
-               document.getElementById("myModal").style.display = "flex";
-            }
-            }
-            function off() {
-               document.getElementById("myModal").style.display = "none";
-               }
-         </script>
   <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
    <!-- Request Detail Modal -->
 <div class="resModal" id="replyModal">
       <div class="resModal-content">

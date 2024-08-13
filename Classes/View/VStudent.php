@@ -169,7 +169,7 @@ class VStudent{
         $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('Student/contracts.tpl');
     }
-    public function contractDetails(EContract $contract, EAccommodation $accommodation, EOwner $owner, string $cardNumber, string $cardHolder, array $pictures, array $reviewsData, ?string $modalSuccess):void {
+    public function contractDetails(EContract $contract, EAccommodation $accommodation, EOwner $owner, string $cardNumber, string $cardHolder, array $pictures, array $reviewsData, ?string $modalSuccess, int $leaveble):void {
         $this->smarty->assign('accommodation', $accommodation);
         $this->smarty->assign('contract', $contract);
         $this->smarty->assign('owner', $owner);
@@ -178,11 +178,15 @@ class VStudent{
         $this->smarty->assign('imagesJson', json_encode($pictures));
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->assign('modalSuccess', $modalSuccess);
+        $this->smarty->assign('leaveble', $leaveble);
         $this->smarty->display('Student/contractDetails.tpl');
     }
     public function supportReplies(array $replies, int $count):void {
         $this->smarty->assign('replies', json_encode($replies));
         $this->smarty->assign('count', $count);
         $this->smarty->display('Student/supportReplies.tpl');
+    }
+    public function guidelines():void {
+        $this->smarty->display('Student/guidelines.tpl');
     }
 }

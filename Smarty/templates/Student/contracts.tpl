@@ -148,6 +148,7 @@
                         <li><a href="/UniRent/Student/home">Home</a></li>
                         <li><a href="/UniRent/Student/about">About Us</a></li>
                         <li><a href="/UniRent/Student/contact">Contact Us</a></li>
+                        <li><a href="/UniRent/Student/guidelines">Guidelines</a></li>
                      </ul>
                   </div>
                </div>
@@ -185,73 +186,12 @@
          </div> 
       </div>
       </div>
-    <script>
-            function on() {
-            if (!navigator.cookieEnabled) {
-               document.getElementById("myModal").style.display = "flex";
-            }
-            }
-            function off() {
-               document.getElementById("myModal").style.display = "none";
-               }
-         </script>
-{literal}
          <script>
-    const accommodations = {/literal}{$contracts}{literal};
-
-    // Function to create and append reviews to the container
-    function displayAccommodations(accommodations) {
-        const container = document.getElementById('accommodationContainer');
-
-        if (container) {
-            if (accommodations.length === 0) {
-                container.innerHTML = '<div class="container"><h1 class="noRev">You have no contracts yet!</h1></div>';
-            } else {
-                accommodations.forEach(accommodation => {
-                    if (accommodation.photo == null) {
-                        accommodation.photo = "/UniRent/Smarty/images/noPic.png";
-                    }
-                    const accommodationElement = document.createElement('div');
-                    accommodationElement.className = 'col-lg-4 col-md-6col-lg-4 col-md-6';
-
-                    // Insert the names of the elements of the accommodation array
-                    accommodationElement.innerHTML = `
-                        <div class="blog_img">
-                            <div class="container_main">
-                                <img src="${accommodation.photo}" alt="">
-                                <div class="overlay">
-                                    <div class="text">
-                                        <div class="some_text"><a href="/UniRent/Contract/contractDetails/${accommodation.idContract}">See More</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="image_box">
-                            <div class="left_box">
-                                <h1 class="road_text">${accommodation.title}</h1>
-                                <p>${accommodation.address}</p>
-                                <p>${accommodation.period}</p>
-                            </div>
-                            <div class="right_box">
-                                <div class="rate_text">${accommodation.price} €</div>
-                            </div>
-                        </div>
-                    `;
-
-                    // Append the created element to the container
-                    container.appendChild(accommodationElement); // Corrected: accommodationElement instead of reviewElement
-                });
-            }
-        } else {
-            console.error("Container not found!"); // Debugging: Error if container is not found
-        }
-    }
-
-    // Call the function to display reviews
-    displayAccommodations(accommodations);
+    const accommodations = {$contracts};
 </script>
-{/literal}
+<script src="/UniRent/Smarty/js/UniRentOriginal/contractsPopulateStudent.js"></script>
    <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
    <!-- Request Detail Modal -->
 <div class="resModal" id="replyModal">
       <div class="resModal-content">
@@ -277,61 +217,6 @@
     </div>
 </div>
 <!-- End of Request Detail Modal -->
-
-<!-- Success Modal -->
-<div class="resModal" id="successModal">
-      <div class="resModal-content">
-         <div class="row">
-            <span class="resClose" id="successClose">&times;</span>
-            <h2 class="resModal-head">
-            {if $modalSuccess == 'success'}
-            Success
-            {else}
-            Error
-            {/if}
-            </h2>
-         </div>
-         <div class="container cont-padding">
-         {if $modalSuccess == 'success'}
-            <h4>Operation completed successfully.</h4>
-         {else}
-            <h4>There was an error while processing. Please try again later.</h4>
-         {/if}
-                </div>
-            <div class="btn-cont">
-                <button type="button" class="edit_btn" id="closeSuccess">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End of Success Modal -->
 <script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
-<script>
-var modalSuccess= '{$modalSuccess}';
-var successModal = document.getElementById("successModal");
-var successClose = document.getElementById("successClose");
-var closeSuccess = document.getElementById("closeSuccess");
-if (modalSuccess !== '') {
-    successModal.style.display = "block";
-} else {
-    successModal.style.display = "none";
-}
-successClose.onclick = function() {
-    successModal.style.display = "none";
-    window.location.href = currentPage;
-}
-
-closeSuccess.onclick = function() {
-    successModal.style.display = "none";
-    window.location.href = currentPage;
-}
-
-window.onclick = function(event) {
-    if (event.target == successModal) {
-        successModal.style.display = "none";
-        window.location.href = currentPage;
-    }
-}
-</script>
 </body>
 </html>

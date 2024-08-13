@@ -118,7 +118,6 @@
                      <p> The visit will last for {$accommodation->getVisitDuration()} minutes.</p>
                      <p> The student who requested the visit is <a href="/UniRent/Owner/publicProfile/{$student->getUsername()}">@{$student->getUsername()}</a>.</p>
                      <div class="col-md-3">
-                     <div class="find_btn"><a href="#" onclick="openEditModal()"> Edit</a></div>
                      <div class="delete_btn" id="reportOwn"><a href="#" onclick="openDeleteModal()">Delete</a></div>
                      </div>
                </div>
@@ -135,48 +134,6 @@
          </div>
       </div>
       </div>
-      <div class="resModal" id="visitModal">
-  <div class="resModal-content">
-    <div class="row">
-      <span class="resClose" id="visitClose">&times;</span>
-      <h2 class="resModal-head">Visit this accommodation</h2>
-      <p> Each visit is scheduled for {$duration} minutes. Please select a day and time for your visit. If you'd like to change that please do so in the accommodation edit page.</p>
-    </div>
-    <form action="/UniRent/Visit/edit/{$visit->getIdVisit()}" class="formVisit" method="POST" enctype="multipart/form-data">
-      <div class="grid-container">
-      <div class="row padding-reserve">
-        <p>Day of the week (next week):</p>
-        </div>
-      <div class="row padding-reserve">
-          <select name="day" id="day" class="selectVisit" required>
-          <option value="" selected disabled>Select a day</option>
-            <option value="Monday">Monday</option>
-            <option value="Tuesday">Tuesday</option>
-            <option value="Wednesday">Wednesday</option>
-            <option value="Thursday">Thursday</option>
-            <option value="Friday">Friday</option>
-            <option value="Saturday">Saturday</option>
-            <option value="Sunday">Sunday</option>
-          </select>
-      </div>
-      <div class="row padding-reserve">
-        <p>Time:</p>
-        </div>
-        <div class="row padding-reserve">
-          <select name="time" id="time"class="selectVisit" required>
-            <option value="" selected disabled>Select the time</option>
-            <!-- Time options will be populated here -->
-          </select>
-          
-      </div>
-        </div>
-      <div class="btn-cont">
-        <button id="visit" class="cancelClass" type="submit">Edit</button>
-        <button id="cancelVisit" class="cancelClass" type="button">Cancel</button>
-      </div>
-    </form>
-  </div>
-</div>
 <div id="deleteModal" class="resModal">
 
     <!-- Modal content -->
@@ -210,27 +167,6 @@
         </div>
     </div>
 </div>
-<div id="successEditModal" class="resModal">
-    <div class="resModal-content">
-        <div class="row">
-            <span class="resClose" id="successEditClose">&times;</span>
-            {if $successEdit === "true"}
-            <h2 class="resModal-head">Edit Complete</h2>
-            <div class="col-md-12">
-            <p>Your changes were successfully sent.</p>
-            </div>
-            {else}
-            <h2 class="resModal-head">Edit Failed</h2>
-            <div class="col-md-12">
-              <p>Your changes could not be sent. Please try again later.</p>
-            </div>
-            {/if}
-        </div>
-        <div class="btn-cont">
-            <button id="closesuccessEditModal" class="cancelClass" type="button">Close</button>
-        </div>
-    </div>
-</div>
       
 
 <!-- footer section start -->
@@ -252,6 +188,7 @@
                         <li><a href="/UniRent/Owner/home">Home</a></li>
                         <li><a href="/UniRent/Owner/about">About Us</a></li>
                         <li><a href="/UniRent/Owner/contact">Contact Us</a></li>
+                        <li><a href="/UniRent/Owner/guidelines">Guidelines</a></li>
                      </ul>
                   </div>
                </div>
@@ -304,21 +241,8 @@
       </div>
       </div>
       <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
-    <script>
-            function on() {
-            if (!navigator.cookieEnabled) {
-               document.getElementById("myModal").style.display = "flex";
-            }
-            }
-            function off() {
-               document.getElementById("myModal").style.display = "none";
-               }
-         </script>
-         <script>
-         function openEditModal() {
-        document.getElementById("visitModal").style.display = "block";
-        selectPreselectedValues();
-    }
+<script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
+<script>
     const timeSlots = {$timeSlots}; // Ensure this variable is properly initialized
     let preselectedDay = '{$visit->getDate()->format('w')}'; // Placeholder for preselected day
     const preselectedTime = '{$visit->getDate()->format('H:i')}'; // Placeholder for preselected time
@@ -412,15 +336,7 @@
             var successDeleteModal = document.getElementById("successDeleteModal");
             var successDeleteClose = document.getElementById("successDeleteClose");
             var closesuccessDeleteModal = document.getElementById("closesuccessDeleteModal");
-            var successEditModal = document.getElementById("successEditModal");
-            var successEditClose = document.getElementById("successEditClose");
-            var closesuccessEditModal = document.getElementById("closesuccessEditModal");
 
-            function showsuccessEditModal() {
-               if ('{$successEdit}' != 'null') {
-                     successEditModal.style.display = "block";
-               }
-            }
             function showsuccessDeleteModal() {
                if ('{$successDelete}' != 'null') {
                      successDeleteModal.style.display = "block";
@@ -434,16 +350,7 @@
                successDeleteModal.style.display = "none";
                window.location.href = currentPage;
             }
-            successEditClose.onclick = function() {
-               successEditModal.style.display = "none";
-               window.location.href = currentPage;
-            }
-            closesuccessEditModal.onclick = function() {
-               successEditModal.style.display = "none";
-               window.location.href = currentPage;
-            }
             showsuccessDeleteModal();
-            showsuccessEditModal();
             </script>
    
    <!-- Request Detail Modal -->

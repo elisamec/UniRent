@@ -279,9 +279,9 @@ function updatePaymentMethod() {
 }
 </script>
 
-<div id="confirmModal" class="resModal">
+<div id="deleteConfirmModal" class="resModal">
     <div class="resModal-content">
-        <span class="resClose" onclick="closeConfirmModal()">&times;</span>
+        <span class="resClose" id="deleteConfirmClose">&times;</span>
         <p>Are you sure you want to delete this card?</p>
         <div class="btn-cont">
         <button id="confirmDelete" class="confirmClass" type="button">Yes</button>
@@ -615,14 +615,13 @@ function updatePaymentMethod() {
                         <li><a href="/UniRent/Student/home">Home</a></li>
                         <li><a href="/UniRent/Student/about">About Us</a></li>
                         <li><a href="/UniRent/Student/contact">Contact Us</a></li>
+                        <li><a href="/UniRent/Student/guidelines">Guidelines</a></li>
                      </ul>
                   </div>
                </div>
             </div>
          </div>
       </div>
-      </div>
-
       <!-- footer section end -->
 <script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>
@@ -666,17 +665,8 @@ function updatePaymentMethod() {
          </div> 
       </div>
       </div>
-    <script>
-            function on() {
-            if (!navigator.cookieEnabled) {
-               document.getElementById("myModal").style.display = "flex";
-            }
-            }
-            function off() {
-               document.getElementById("myModal").style.display = "none";
-               }
-         </script>
    <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
    <!-- Request Detail Modal -->
 <div class="resModal" id="replyModal">
       <div class="resModal-content">
