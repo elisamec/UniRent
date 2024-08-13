@@ -20,7 +20,14 @@ use Classes\Tools\TRequestType;
 
 class COwner 
 {
-    public static function home(?string $modalSuccess=null)
+    /**
+     * Method home
+     * Show the owner's home page
+     * 
+     * @param string|null $modalSuccess
+     * @return void
+     */
+    public static function home(?string $modalSuccess=null) :void
     {
         self::checkIfOwner();
         $view = new VOwner();
@@ -39,32 +46,27 @@ class COwner
                    $base64 = base64_encode((($accom->getPhoto())[0])->getPhoto());
                    $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
                 }
-            if ($accom->getStatus() == true) {
-                    $accommodationsActive[] = [
-                        'id' => $accom->getIdAccommodation(),
-                        'photo' => $photo,
-                        'title' => $accom->getTitle(),
-                        'address' => $accom->getAddress()->getAddressLine1() . ", " . $accom->getAddress()->getLocality(),
-                        'price' => $accom->getPrice(),
-                    ];
+
+                $acc[] = [
+                    'id' => $accom->getIdAccommodation(),
+                    'photo' => $photo,
+                    'title' => $accom->getTitle(),
+                    'address' => $accom->getAddress()->getAddressLine1() . ", " . $accom->getAddress()->getLocality(),
+                    'price' => $accom->getPrice(),
+                ];
+
+                if ($accom->getStatus() == true) {
+                    $accommodationsActive[] = $acc;
                 } else {
-                    $accommodationsInactive[] = [
-                        'id' => $accom->getIdAccommodation(),
-                        'photo' => $photo,
-                        'title' => $accom->getTitle(),
-                        'address' => $accom->getAddress()->getAddressLine1() . ", " . $accom->getAddress()->getLocality(),
-                        'price' => $accom->getPrice(),
-                    ];
+                    $accommodationsInactive[] = $acc;
                 }
             }
-                
-        #print_r($accommodations);
         
         $view->home($accommodationsActive, $accommodationsInactive, $modalSuccess);
     }
 
-
-    public static function accommodationManagement(int $idAccommodation, ?string $modalSuccess=null) {
+    
+    public static function accommodationManagement(int $idAccommodation, ?string $modalSuccess=null):void {
         self::checkIfOwner();
         $view = new VOwner();
         $PM = FPersistentManager::getInstance();
@@ -141,6 +143,8 @@ class COwner
         
         $view->accommodationManagement($accomm, $owner, $reviewsData, $picture, $tenants, $num_places, $disabled, $deletable, $modalSuccess);
     }
+
+    /** */
     private static function reviewsDataByrecipient(int $idRecipient, TType $typeRecipient): array {
         $reviewsData = [];
         $PM = FPersistentManager::getInstance();
@@ -238,17 +242,17 @@ class COwner
     }
     
     /**
+     * Method profile
      * This method shows the owner's profile
      * 
+     * @param string|null $modalSuccess
      * @return void
      */
     public static function profile(?string $modalSuccess=null): void {
         self::checkIfOwner();
         $view = new VOwner();
         $session=USession::getInstance();
-        //$user = $session->getSessionElement('username');
         $PM=FPersistentManager::getInstance();
-        //$owner=$PM->getOwnerByUsername($user);
         $id = $session->getSessionElement('id');
         $owner=$PM->load("EOwner", $id);
         $ph = null;
@@ -276,12 +280,19 @@ class COwner
         }
     }
 
-    public static function editProfile(?string $modalSuccess=null)
+    /**
+     * Method editProfile
+     * This method shows the owner's profile edit page
+     * 
+     * @param string|null $modalSuccess
+     * @return void
+     */
+    public static function editProfile(?string $modalSuccess=null) :void
     {
         self::checkIfOwner();
         $view = new VOwner();
         $session=USession::getInstance();
-        $user = $session->getSessionElement('username');
+        $session->getSessionElement('username');
         
         $PM=FPersistentManager::getInstance();
         $id = $session->getSessionElement('id');
@@ -309,7 +320,7 @@ class COwner
      * this method deletes the owner profile
      * @return void
      */
-    public static function deleteProfile()
+    public static function deleteProfile() :void
     {
         self::checkIfOwner();
         $PM=FPersistentManager::getInstance();
@@ -329,7 +340,7 @@ class COwner
         }
     }
 
-    public static function modifyOwnerProfile()
+    public static function modifyOwnerProfile() :void
     {
         self::checkIfOwner();
 
@@ -439,8 +450,6 @@ class COwner
         $PM=FPersistentManager::getInstance();
 
         if(!is_null($oldPhoto)){
-
-            print "La vecchia foto non è null<br>";
                     
             $photoId=$oldOwner->getPhoto()->getId();
 
@@ -449,16 +458,11 @@ class COwner
 
         } else {
 
-            print "La vecchia foto è null";
-
             if(is_null($picture)) {
-
-                print "La nuova foto è null<br>";
                 $photo = null;
 
             } else {
 
-                print "La nuova foto non è null<br>";
                 $photo = new EPhoto(null, $picture['img'], 'other', null);
                 $risultato = $PM->storeAvatar($photo);
 
@@ -501,7 +505,8 @@ class COwner
         return [$password, $error];
     }
 
-    public static function deletePhoto(){
+    /** */
+    public static function deletePhoto() :void {
         self::checkIfOwner();
         $PM=FPersistentManager::getInstance();
         $session=USession::getInstance();
@@ -520,8 +525,6 @@ class COwner
             $result = $PM->delete('EPhoto', $photoID);
         }
 
-        
-
         if ($result > 0) {
             $photo = null;
             $session->setSessionElement('photo',$photo);
@@ -530,8 +533,16 @@ class COwner
 
     }
 
-    public static function contact(?string $modalSuccess=null)
-    {   $session = USession::getInstance();
+    /**
+     * Method contact
+     * This method shows the contact page
+     * 
+     * @param string|null $modalSuccess
+     * @return void
+     */
+    public static function contact(?string $modalSuccess=null) :void
+    {   
+        $session = USession::getInstance();
         $type = $session->getSessionElement('userType');
         if ($type === null) {
             header('Location:/UniRent/User/contact');
@@ -542,8 +553,16 @@ class COwner
         
         $view->contact($modalSuccess);
     }
-    public static function about()
-    {   $session = USession::getInstance();
+
+    /**
+     * Method about
+     * This method shows the about page
+     * 
+     * @return void
+     */
+    public static function about() :void
+    {   
+        $session = USession::getInstance();
         $type = $session->getSessionElement('userType');
         if ($type === null) {
             header('Location:/UniRent/User/about');
@@ -554,7 +573,14 @@ class COwner
         
         $view->about();
     }
-    public static function guidelines()
+
+    /**
+     * Method guidelines
+     * This method shows the guidelines page
+     * 
+     * @return void
+     */
+    public static function guidelines() :void
     {   $session = USession::getInstance();
         $type = $session->getSessionElement('userType');
         if ($type === null) {
@@ -566,7 +592,9 @@ class COwner
         
         $view->guidelines();
     }
-     public static function reviews(?string $modalSuccess=null) {
+
+    //Da spostare in CReview
+    public static function reviews(?string $modalSuccess=null) :void {
         self::checkIfOwner();
         $view = new VOwner();
         $session=USession::getInstance();
@@ -576,13 +604,22 @@ class COwner
         $view->reviews($reviewsData, $modalSuccess);
     }
 
-    public static function addAccommodation()
-    {   self::checkIfOwner();
+    //Da spostare in Accommodation
+    /**
+     * Method addAccommodation
+     * This method shows the add accommodation page
+     * 
+     * @return void
+     */
+    public static function addAccommodation() :void
+    {   
+        self::checkIfOwner();
         $view=new VOwner();
         
         $view->addAccommodation();
     }
 
+    //Da spostare in accommodation
     public static function addAccommodationOperations()
     {
         $pictures=USuperGlobalAccess::getPost('uploadedImagesData');
@@ -635,13 +672,21 @@ class COwner
         $idOwner=$PM->getOwnerIdByUsername(USession::getInstance()->getSessionElement('username'));
         $addressObj= new Address();
         $addressObj=$addressObj->withAddressLine1($address)->withPostalcode($postalCode)->withLocality($city);
-        #print $addressObj->getAddressLine1().' '.$addressObj->getPostalCode().' '.$addressObj->getLocality();
         $accomodation = new EAccommodation(null,$array_photos,$title,$addressObj,$price,$date,$description,$places,$deposit,$array_visit,$duration,$men,$women,$animals,$smokers, true,$idOwner);
         $result=$PM->store($accomodation);
         $result ? header('Location:/UniRent/Owner/home/success') : header('Location:/UniRent/Owner/home/error');
 
     }
-    public static function publicProfileFromOwner(string $username, ?string $modalSuccess=null)
+
+    /**
+     * Method publicProfileFromOwner
+     * This method shows the public profile of an owner
+     * 
+     * @param string $username
+     * @param string|null $modalSuccess
+     * @return void
+     */
+    public static function publicProfileFromOwner(string $username, ?string $modalSuccess=null) :void
     {   self::checkIfOwner();
         $session=USession::getInstance();
         if ($session->getSessionElement('username') === $username) {
@@ -663,13 +708,21 @@ class COwner
         {
             $owner_photo_64=EPhoto::toBase64(array($owner_photo));
             $owner->setPhoto($owner_photo_64[0]);
-            #print_r($owner);
         }
         $reviewsData = self::reviewsDataByrecipient($owner->getId(), TType::OWNER);
         
         $view->publicProfileFromOwner($owner, $reviewsData, $self, $modalSuccess);
     }
-    public static function publicProfileFromStudent(string $username, ?string $modalSuccess=null)
+
+    /**
+     * Method publicProfileFromStudent
+     * This method shows the public profile of an owner from a student
+     * 
+     * @param string $username
+     * @param string|null $modalSuccess
+     * @return void
+     */
+    public static function publicProfileFromStudent(string $username, ?string $modalSuccess=null) :void
     {   CStudent::checkIfStudent();
         $view = new VOwner();
         $PM=FPersistentManager::getInstance();
@@ -693,7 +746,15 @@ class COwner
         $leavebleReviews=$PM->remainingReviewStudentToOwner($session->getSessionElement('id'), $owner->getId());
         $view->publicProfileFromStudent($owner, $reviewsData, $modalSuccess, $leavebleReviews);
     }
-    public static function publicProfile(string $username) {
+
+    /**
+     * Method publicProfile
+     * This method shows the public profile of an owner
+     * 
+     * @param string $username
+     * @return void
+     */
+    public static function publicProfile(string $username) :void{
         self::checkIfOwner();
         $PM=FPersistentManager::getInstance();
         $user=$PM->verifyUserUsername($username);
@@ -703,6 +764,8 @@ class COwner
             self::publicProfileFromOwner($username);
         }
     }
+
+    //Da spostare in review e accorciare
     public static function postedReview(?string $modalSuccess=null) {
         self::checkIfOwner();
         $view = new VOwner();
@@ -746,6 +809,8 @@ class COwner
         
         $view->postedReview($reviewsData, $modalSuccess);
     }
+
+    //Da spostare in CAccommodation
     public static function viewOwnerAds(int $id) {
         CStudent::checkIfStudent();
         $view = new VOwner();
@@ -774,12 +839,11 @@ class COwner
             ];
         }
         }
-        #print_r($accommodations);
         
         $view->viewOwnerAds($accommodations, $username);
     }
 
-
+    //Da spostare in CAccommodation e accorciare
     public static function editAccommodation(string $id) {
         self::checkIfOwner();
         $session = USession::getInstance();
@@ -836,7 +900,8 @@ class COwner
         
     }
     
-    public static function editAccommodationOperations(int $id)
+    //Da spostare in CAccommodation e accorciare
+    public static function editAccommodationOperations(int $id) :void
     {
         self::checkIfOwner();
         $pictures=USuperGlobalAccess::getPost('uploadedImagesData');
@@ -905,8 +970,14 @@ class COwner
         }
     }
 
-
-    public static function tenants(string $kind) {
+    /**
+     * Method tenants
+     * This method shows the tenants of an owner
+     * 
+     * @param string $kind
+     * @return void
+     */
+    public static function tenants(string $kind):void {
         self::checkIfOwner();
         $session=USession::getInstance();
         $ownerId=$session->getSessionElement('id');
@@ -949,6 +1020,14 @@ class COwner
         $view->tenants($tenants, $kind, $accommodationTitles,0);
     }
 
+    //Da accorciare
+    /**
+     * Method filterTenants
+     * This method filters the tenants of an owner
+     * 
+     * @param string $type
+     * @return void
+     */
     public static function filterTenants(string $type)
     {   self::checkIfOwner();
         $session=USession::getInstance();
@@ -979,8 +1058,6 @@ class COwner
         {
             $women=true;
         }
-
-        #print var_dump($rateT);
     
         $tenantsArray=$PM->getFilterTenants($type,$accommodation_name,$t_username,$t_age,$rateT,$date,$men,$women,$ownerId);
 
@@ -1019,7 +1096,14 @@ class COwner
         
         $view->tenants($tenants, $type, $accommodationTitles, $rateT);
     }
-    public static function checkIfOwner() {
+
+    /**
+     * Method checkIfOwner
+     * This method checks if the user is an owner
+     * 
+     * @return void
+     */
+    public static function checkIfOwner() :void {
         $session = USession::getInstance();
         if ($session->getSessionElement('userType') !== 'Owner') {
             $view= new VError();
