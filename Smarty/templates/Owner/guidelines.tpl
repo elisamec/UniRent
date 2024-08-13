@@ -122,68 +122,110 @@
       We aim to provide a seamless rental experience for students.
       To ensure that all users have a positive experience, we have established a set of guidelines that all users must adhere to.
       These guidelines are as follows:</h1>
-      <h2>Eligibility Criteria</h2>
-    <h3>Age</h3>
-    <p>Applicants must be at least 18 years old.</p>
-    <h3>Student Mail</h3>
-    <p>To register as a student you need to have a university email.</p>
-    <h3>Owner</h3>
-    <p>To register as an owner, you are required to have an Italian IBAN.</p>
+      <div class="row">
+    <h3 class="guidelines">Age</h3>
+    <p class="guidelines">Applicants must be at least 18 years old.</p>
+</div>
+<div class="row">
+    <h3 class="guidelines">Student Mail</h3>
+    <p class="guidelines">To register as a student you need to have a university email.</p>
+</div>
+<div class="row">
+    <h3 class="guidelines">Owner</h3>
+    <p class="guidelines">To register as an owner, you are required to have an Italian IBAN.</p>
+</div>
 
-    <h2>Rental Terms and Conditions</h2>
-    <h3>Lease Agreement</h3>
-    <p>A lease agreement will be signed outlining the duration of the tenancy, rent amount, and other terms.</p>
-    <h3>Rent Payment</h3>
-    <p>Rent must be paid monthly in advance. Payment methods accepted include bank transfer, credit/debit card, or other approved methods.</p>
-    <h3>Security Deposit</h3>
-    <p>A security deposit is required. This will be refunded at the end of the lease, subject to any deductions for damages or unpaid rent.</p>
+<h2>Rental Terms and Conditions</h2>
+<div class="row">
+    <h3 class="guidelines">Lease Agreement</h3>
+    <p class="guidelines">A lease agreement will be signed outlining the duration of the tenancy, rent amount, and other terms.</p>
+</div>
+<div class="row">
+    <h3 class="guidelines">Rent Payment</h3>
+    <p class="guidelines">Rent must be paid monthly in advance. Payment methods accepted include bank transfer, credit/debit card, or other approved methods.</p>
+</div>
+<div class="row">
+    <h3 class="guidelines">Security Deposit</h3>
+    <p class="guidelines">A security deposit is required. This will be refunded at the end of the lease, subject to any deductions for damages or unpaid rent.</p>
+</div>
 
-    <h2>Maintenance and Repairs</h2>
-    <h3>Responsibility</h3>
-    <p>Tenants are responsible for maintaining the cleanliness of their accommodations and reporting any maintenance issues promptly.</p>
-    <h3>Repairs</h3>
-    <p>Landlords will address repairs within a reasonable time frame. Emergency repairs will be handled as a priority.</p>
+<h2>Maintenance and Repairs</h2>
+<div class="row">
+    <h3 class="guidelines">Responsibility</h3>
+    <p class="guidelines">Tenants are responsible for maintaining the cleanliness of their accommodations and reporting any maintenance issues promptly.</p>
+</div>
+<div class="row">
+    <h3 class="guidelines">Repairs</h3>
+    <p class="guidelines">Landlords will address repairs within a reasonable time frame. Emergency repairs will be handled as a priority.</p>
+</div>
 
-    <h2>House Rules</h2>
-    <h3>Quiet Hours</h3>
-    <p>Observe quiet hours between 10 PM and 8 AM to ensure a conducive environment for studying and resting.</p>
-    <h3>Guests</h3>
-    <p>Overnight guests are allowed with prior notice to the landlord. Extended stays may require additional approval.</p>
-    <h3>Parties</h3>
-    <p>Parties or large gatherings are not permitted without prior consent from the landlord.</p>
+<h2>House Rules</h2>
+<div class="row">
+    <h3 class="guidelines">Quiet Hours</h3>
+    <p class="guidelines">Observe quiet hours between 10 PM and 8 AM to ensure a conducive environment for studying and resting.</p>
+</div>
+<div class="row">
+    <h3 class="guidelines">Guests</h3>
+    <p class="guidelines">Overnight guests are allowed with prior notice to the landlord. Extended stays may require additional approval.</p>
+</div>
+<div class="row">
+    <h3 class="guidelines">Parties</h3>
+    <p class="guidelines">Parties or large gatherings are not permitted without prior consent from the landlord.</p>
+</div>
 
-    <h2>Termination of Lease</h2>
-    <h3>Move-Out Inspection</h3>
-    <p>An inspection will be conducted at the end of the lease to assess the condition of the accommodation. Any damage beyond normal wear and tear may result in deductions from the security deposit.</p>
+<h2>Termination of Lease</h2>
+<div class="row">
+    <h3 class="guidelines">Move-Out Inspection</h3>
+    <p class="guidelines">An inspection will be conducted at the end of the lease to assess the condition of the accommodation. Any damage beyond normal wear and tear may result in deductions from the security deposit.</p>
+</div>
 
-    <h2>Non-Discrimination Policy</h2>
-    <h3>Policy</h3>
-    <p>We are committed to providing equal housing opportunities. All applications will be considered without regard to race, color, religion, sex, national origin, disability, or familial status.</p>
+<h2>Non-Discrimination Policy</h2>
+<div class="row">
+    <h3 class="guidelines">Policy</h3>
+    <p class="guidelines">We are committed to providing equal housing opportunities. All applications will be considered without regard to race, color, religion, sex, national origin, disability, or familial status.</p>
+</div>
 
-    <h2>Privacy Policy</h2>
-    <h3>Data Protection</h3>
-    <p>Personal information provided in the application will be kept confidential and used solely for the purpose of processing the rental application and managing the lease.</p>
+<h2>Privacy Policy</h2>
+<div class="row">
+    <h3 class="guidelines">Data Protection</h3>
+    <p class="guidelines">Personal information provided in the application will be kept confidential and used solely for the purpose of processing the rental application and managing the lease.</p>
+</div>
 
-    <h2>Reasons for Ban</h2>
-    <h3>Fraudulent Information</h3>
-    <p>Providing false or misleading information during the registration process or in accommodation ads.</p>
-    <h3>Failure to Pay Fees</h3>
-    <p>Not paying application fees, rent, or any other required charges.</p>
-    <h3>Violation of Lease Terms</h3>
-    <p>Breaching the terms and conditions of the lease agreement, including but not limited to, non-payment of rent, property damage, or violation of house rules.</p>
-    <h3>Harassment or Abuse</h3>
-    <p>Engaging in harassment, abuse, or discriminatory behavior towards landlords, other tenants, or staff members.</p>
-    <h3>Illegal Activities</h3>
-    <p>Using the accommodation for illegal activities or any behavior that violates local, state, or federal laws.</p>
+<h2>Reasons for Ban</h2>
+<div class="row">
+    <h3 class="guidelines">Fraudulent Information</h3>
+    <p class="guidelines">Providing false or misleading information during the registration process or in accommodation ads.</p>
+</div>
+<div class="row">
+    <h3 class="guidelines">Failure to Pay Fees</h3>
+    <p class="guidelines">Not paying application fees, rent, or any other required charges.</p>
+</div>
+<div class="row">
+    <h3 class="guidelines">Violation of Lease Terms</h3>
+    <p class="guidelines">Breaching the terms and conditions of the lease agreement, including but not limited to, non-payment of rent, property damage, or violation of house rules.</p>
+</div>
+<div class="row">
+    <h3 class="guidelines">Harassment or Abuse</h3>
+    <p class="guidelines">Engaging in harassment, abuse, or discriminatory behavior towards landlords, other tenants, or staff members.</p>
+</div>
+<div class="row">
+    <h3 class="guidelines">Illegal Activities</h3>
+    <p class="guidelines">Using the accommodation for illegal activities or any behavior that violates local, state, or federal laws.</p>
+</div>
 
-    <h2>Appeal Procedure</h2>
-    <h3>Submission</h3>
-    <p>You need to fill in the form provided on the error page when you are trying to login or use the app as a banned user.</p>
-    <h3>Review</h3>
-    <p>The admin will review the case.</p>
-    <h3>Decision</h3>
-    <p>If the administrator decides to accept your appeal, your account will be restored within 5 days from the submission.</p>
-
+<h2>Appeal Procedure</h2>
+<div class="row">
+    <h3 class="guidelines">Submission</h3>
+    <p class="guidelines">You need to fill in the form provided on the error page when you are trying to login or use the app as a banned user.</p>
+</div>
+<div class="row">
+    <h3 class="guidelines">Review</h3>
+    <p class="guidelines">The admin will review the case.</p>
+</div>
+<div class="row">
+    <h3 class="guidelines">Decision</h3>
+    <p class="guidelines">If the administrator decides to accept your appeal, your account will be restored within 5 days from the submission.</p>
+</div>
       </div>
       <!-- Cookie Modal -->
       <div class="modal" id="myModal">

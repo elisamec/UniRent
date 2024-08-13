@@ -3168,3 +3168,10 @@ a.badge-danger.focus,a.badge-danger:focus{
   .text-gray-500 {
     color: #b7b9cc !important;
   }
+  .guidelines {
+    padding:0;
+    padding-top:10px;
+    margin: 0;
+    margin-left:20px;
+    margin-bottom:10px;
+  }
