@@ -121,7 +121,7 @@
       </div>
       <div class="accImg">
       <div class="row">
-      <div class="col-lg-4 col-md-6col-lg-4 col-md-6">
+      <div class="col-lg-2 col-md-4 col-lg-2 col-md-4">
                      <div class="accom_img">
                      <div class="container_main">
                                  <img src="/UniRent/Smarty/images/img-4.png" id="mainImage"alt="">
@@ -163,7 +163,7 @@
                         <div class="reserve_btn" id="contactBtn"><a href="#" >Owner Contacts</a></div>
                      </div>
                     </div>
-                     <div class="col-lg-8 col-md-10 col-lg-8 col-md-10">
+                     <div class="col-lg-10 col-md-12 col-lg-10 col-md-12">
                      <div class="Accomcontainer">
                         <h1 class="title">Accommodation Details</h1>
                         <div class="row">
@@ -200,7 +200,7 @@
                         <div class="row" id="tenantCont">
                         </div>
                         <div class="row">
-                        <h1 class="title"> Reviews</h1>
+                        <h1 class="title1"> Reviews</h1>
                         <p>Average Rating: {$accommodation->getAverageRating()}</p>
                         </div>
                          <div id="reviewsContainer">
