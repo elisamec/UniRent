@@ -382,7 +382,6 @@ class COwner
                             
                             $photo = COwner::changePhoto($oldPhoto, $picture, $owner);
 
-
                             $owner->setName($name);
                             $owner->setSurname($surname);
                             $owner->setPhoto($photo);
@@ -399,7 +398,7 @@ class COwner
                                 if (is_null($ph)) $ph = null;
                                 $session->setSessionElement('username', $newUsername);
                                 $password = $owner->getPassword();
-                                $session->setSessionElement('password',$newPassword);
+                                $session->setSessionElement('password',$password);
                                 $session->setSessionElement('photo',$ph);
                                 header("Location:/UniRent/Owner/profile");
                             }
@@ -472,7 +471,7 @@ class COwner
         return $photo;
     }
 
-    private static function changePassword($oldPassword, $newPassword, $oldStudent, $photoError):array{
+    private static function changePassword($oldPassword, $newPassword, $owner, $photoError):array{
 
         $session=USession::getInstance();
         $view = new VOwner();
@@ -488,16 +487,14 @@ class COwner
 
                     $error = 1;
                     $password=$session->getSessionElement('password');
-                    print "La password non rispetta i requisiti minimi<br>";
-                    //$view->editProfile($oldStudent, $photoError, true, false, false, false);
+                    $view->editProfile($owner, $photoError, false, false, false, false, false, true, null);
 
                 } else $password=$newPassword;
                 
             } else {
                 $error = 1;
-                print "La vecchia password non corrisponde<br>";
-                //$view->editProfile($oldStudent, $photoError, false, false, false, true);
-                $password=$session->getSessionElement('password');
+                $view->editProfile($owner, $photoError, false, false, false, false, true, false, null);
+
             }
         }
 

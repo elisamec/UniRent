@@ -6,9 +6,28 @@ document.addEventListener("DOMContentLoaded", function() {
             hiddenInput.value = this.checked ? 'true' : 'false';
         });
     }
-
+    if (file='addAccommodation') {
     updateHiddenInput('men', 'hiddenMen');
     updateHiddenInput('women', 'hiddenWomen');
     updateHiddenInput('animals', 'hiddenAnimals');
     updateHiddenInput('smokers', 'hiddenSmokers');
+    } else if (file='registerStudent') {
+        // Assicurati che gli ID corrispondano ai tuoi elementi HTML
+        var smokerCheckbox = document.getElementById('smoker');
+        var animalsCheckbox = document.getElementById('animals');
+        var hiddenSmoker = document.getElementById('hiddenSmoker');
+        var hiddenAnimals = document.getElementById('hiddenAnimals');
+
+        if(smokerCheckbox && hiddenSmoker) {
+            smokerCheckbox.onclick = function() {
+                hiddenSmoker.value = this.checked ? 'true' : 'false';
+            };
+        }
+
+        if(animalsCheckbox && hiddenAnimals) {
+            animalsCheckbox.onclick = function() {
+                hiddenAnimals.value = this.checked ? 'true' : 'false';
+            };
+        }
+    }
 });

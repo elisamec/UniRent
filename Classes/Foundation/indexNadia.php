@@ -70,7 +70,7 @@
 
     $a = new CAdmin();
 
-    $a -> verifyEmail("nadia@student.univaq.com", "Univaq", "L'Aquila");
+    //$a -> verifyEmail("nadia@student.univaq.com", "Univaq", "L'Aquila");
 
 
 

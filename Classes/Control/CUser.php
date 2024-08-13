@@ -121,7 +121,6 @@ class CUser
 
         if($PM->verifyUserEmail($mail)==false && $PM->verifyUserUsername(USuperGlobalAccess::getPost('username'))==false)
         {
-            http_response_code(500);
             $session=USession::getInstance();
             $session->setSessionElement('email', $mail);
             $session->setSessionElement('username', $username);

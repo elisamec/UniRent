@@ -711,6 +711,11 @@ hr.border_main {
 
 .container_main {
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+    height: 350px;
 }
 
 .container_main:hover .overlay {

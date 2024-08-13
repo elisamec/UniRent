@@ -154,7 +154,7 @@
                         <li><a href="/UniRent/Student/home">Home</a></li>
                         <li><a href="/UniRent/Student/about">About Us</a></li>
                         <li><a href="/UniRent/Student/contact">Contact Us</a></li>
-                        <li><a href="/UniRent/Student/guidelines">App Guidelines</a></li>
+                        <li><a href="/UniRent/Student/guidelines">Guidelines</a></li>
                      </ul>
                   </div>
                </div>

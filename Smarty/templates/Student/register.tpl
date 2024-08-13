@@ -85,12 +85,12 @@
               <div class="col-sm-6">
               <input class="checkbox" type="checkbox" name="smoker" id="smoker">
               <input type="hidden" id="hiddenSmoker" name="smoker" value="false">
-              <label class="customlabel">smoker</label>
+              <label class="customlabel">Smoker</label>
               </div>
                <div class="col-sm-6">
               <input class="checkbox" type="checkbox" name="animals" id="animals">
               <input type="hidden" id="hiddenAnimals" name="animals" value="false">
-              <label class="customlabel">animals</label>
+              <label class="customlabel">Animals</label>
               </div>
                </div> 
               <input class="login-button" type="submit" onclick="location.href='/UniRent/Student/studentRegistration'" value="Sign Up">
@@ -102,62 +102,6 @@
       </div>
 <br></br>
 
-     <!-- footer section start -->
-      <div class="footer_section">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-4">
-                  <h3 class="footer_text">About Us</h3>
-                  <p class="lorem_text">Created in 2024, UniRent has revolutionized the way students find their home away from home. Connecting students with trusted landlords, UniRent ensures a seamless rental experience.</p>
-               </div>
-               <hr></hr>
-               <div class="col-md-4">
-                  <span class="lorem_text">Copyright &copy; UniRent 2024</span>
-               </div>
-               <div class="col-md-4">
-                  <h3 class="footer_text">Useful Links</h3>
-                  <div class="footer_menu">
-                     <ul>
-                        <li><a href="/UniRent/User/home">Home</a></li>
-                        <li><a href="/UniRent/User/about">About Us</a></li>
-                        <li><a href="/UniRent/User/contact">Contact Us</a></li>
-                        <li><a href="/UniRent/User/guidelines">App Guidelines</a></li>
-                     </ul>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- footer section end -->
-<script src="/UniRent/Smarty/js/jquery.min.js"></script>
-      <script src="/UniRent/Smarty/js/popper.min.js"></script>
-      <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
-      <script src="/UniRent/Smarty/js/jquery-3.0.0.min.js"></script>
-      <script src="/UniRent/Smarty/js/plugin.js"></script>
-      <!-- sidebar -->
-      <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
-      <script src="/UniRent/Smarty/js/custom.js"></script>
-      <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Assicurati che gli ID corrispondano ai tuoi elementi HTML
-    var smokerCheckbox = document.getElementById('smoker');
-    var animalsCheckbox = document.getElementById('animals');
-    var hiddenSmoker = document.getElementById('hiddenSmoker');
-    var hiddenAnimals = document.getElementById('hiddenAnimals');
-
-    if(smokerCheckbox && hiddenSmoker) {
-        smokerCheckbox.onclick = function() {
-            hiddenSmoker.value = this.checked ? 'true' : 'false';
-        };
-    }
-
-    if(animalsCheckbox && hiddenAnimals) {
-        animalsCheckbox.onclick = function() {
-            hiddenAnimals.value = this.checked ? 'true' : 'false';
-        };
-    }
-});
-</script>
 <div class="modal" id="myModal">
       <div class"container-fluid">
       <div class="card">
@@ -167,9 +111,8 @@ document.addEventListener('DOMContentLoaded', function() {
          </div> 
       </div>
       </div>
-  <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
-<script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
-   <!-- Request Detail Modal -->
+
+      <!-- Request Detail Modal -->
 <div class="resModal" id="replyModal">
       <div class="resModal-content">
          <div class="row">
@@ -222,33 +165,50 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 </div>
 <!-- End of Success Modal -->
-<script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
-<script>
-var modalSuccess= '{$modalSuccess}';
-var successModal = document.getElementById("successModal");
-var successClose = document.getElementById("successClose");
-var closeSuccess = document.getElementById("closeSuccess");
-if (modalSuccess !== '') {
-    successModal.style.display = "block";
-} else {
-    successModal.style.display = "none";
-}
-successClose.onclick = function() {
-    successModal.style.display = "none";
-    window.location.href = currentPage;
-}
 
-closeSuccess.onclick = function() {
-    successModal.style.display = "none";
-    window.location.href = currentPage;
-}
-
-window.onclick = function(event) {
-    if (event.target == successModal) {
-        successModal.style.display = "none";
-        window.location.href = currentPage;
-    }
-}
-</script>
+     <!-- footer section start -->
+      <div class="footer_section">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-4">
+                  <h3 class="footer_text">About Us</h3>
+                  <p class="lorem_text">Created in 2024, UniRent has revolutionized the way students find their home away from home. Connecting students with trusted landlords, UniRent ensures a seamless rental experience.</p>
+               </div>
+               <hr></hr>
+               <div class="col-md-4">
+                  <span class="lorem_text">Copyright &copy; UniRent 2024</span>
+               </div>
+               <div class="col-md-4">
+                  <h3 class="footer_text">Useful Links</h3>
+                  <div class="footer_menu">
+                     <ul>
+                        <li><a href="/UniRent/User/home">Home</a></li>
+                        <li><a href="/UniRent/User/about">About Us</a></li>
+                        <li><a href="/UniRent/User/contact">Contact Us</a></li>
+                        <li><a href="/UniRent/User/guidelines">Guidelines</a></li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- footer section end -->
+      <!-- Javascript variables-->
+      <script>
+      var modalSuccess= '{$modalSuccess}';
+      var file='registerStudent';
+      </script>
+      <script src="/UniRent/Smarty/js/jquery.min.js"></script>
+      <script src="/UniRent/Smarty/js/popper.min.js"></script>
+      <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
+      <script src="/UniRent/Smarty/js/jquery-3.0.0.min.js"></script>
+      <script src="/UniRent/Smarty/js/plugin.js"></script>
+      <!-- sidebar -->
+      <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="/UniRent/Smarty/js/custom.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/hiddenInputHandling.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
 </body>
   

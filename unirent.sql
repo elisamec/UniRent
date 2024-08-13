@@ -33,7 +33,7 @@ CREATE TABLE `accommodation` (
   `address` int(11) NOT NULL,
   `price` double NOT NULL,
   `start` date NOT NULL,
-  `description` varchar(500) NOT NULL,
+  `description` varchar(1000) NOT NULL,
   `places` int(11) NOT NULL,
   `deposit` double DEFAULT NULL,
   `visitDuration` int(11) NOT NULL COMMENT 'minutes',
