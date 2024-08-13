@@ -179,8 +179,7 @@
         <span class="resClose" onclick="closeDeleteModal()">&times;</span>
         <h2>Delete Visit</h2>
         <form id="reportForm" action="/UniRent/Visit/delete/{$visit->getIdVisit()}" class="form" method="POST" enctype="multipart/form-data">
-            <label for="deleteReason">Reason for deletition (optional):</label><br>
-            <textarea id="deleteReason" name="deleteReason" rows="4" cols="50"></textarea><br><br>
+            <label for="deleteReason">Are you sure you want to delete this visit?</label><br>
             <div class="btn-cont">
             <button type="submit" id="confirmDelete" class="confirmClass" onclick="closeDeleteModal()">Delete</button>
             <button type="button" id="cancelDelete" class="cancelClass" onclick="closeDeleteModal()">Cancel</button>
@@ -366,6 +365,8 @@
             }
 
             function closeDeleteModal() {
+               visitId= //use data id for handling this inside the visit chosen, see request
+               window.loction.href = "/UniRent/Visit/delete/" + visitId;
                 document.getElementById("deleteModal").style.display = "none";
             }
             </script>
@@ -432,60 +433,4 @@
     </div>
 </div>
 <!-- End of Request Detail Modal -->
-
-<!-- Success Modal -->
-<div class="resModal" id="successModal">
-      <div class="resModal-content">
-         <div class="row">
-            <span class="resClose" id="successClose">&times;</span>
-            <h2 class="resModal-head">
-            {if $modalSuccess == 'success'}
-            Success
-            {else}
-            Error
-            {/if}
-            </h2>
-         </div>
-         <div class="container cont-padding">
-         {if $modalSuccess == 'success'}
-            <h4>Operation completed successfully.</h4>
-         {else}
-            <h4>There was an error while processing. Please try again later.</h4>
-         {/if}
-                </div>
-            <div class="btn-cont">
-                <button type="button" class="edit_btn" id="closeSuccess">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End of Success Modal -->
-<script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
-<script>
-var modalSuccess= '{$modalSuccess}';
-var successModal = document.getElementById("successModal");
-var successClose = document.getElementById("successClose");
-var closeSuccess = document.getElementById("closeSuccess");
-if (modalSuccess !== '') {
-    successModal.style.display = "block";
-} else {
-    successModal.style.display = "none";
-}
-successClose.onclick = function() {
-    successModal.style.display = "none";
-    window.location.href = currentPage;
-}
-
-closeSuccess.onclick = function() {
-    successModal.style.display = "none";
-    window.location.href = currentPage;
-}
-
-window.onclick = function(event) {
-    if (event.target == successModal) {
-        successModal.style.display = "none";
-        window.location.href = currentPage;
-    }
-}
-</script>
 </body>
