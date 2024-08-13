@@ -487,17 +487,14 @@ class COwner
 
                     $error = 1;
                     $password=$session->getSessionElement('password');
-                    //print "La password non rispetta i requisiti minimi<br>";
                     $view->editProfile($owner, $photoError, false, false, false, false, false, true, null);
 
                 } else $password=$newPassword;
                 
             } else {
                 $error = 1;
-                print "La vecchia password non corrisponde<br>";
                 $view->editProfile($owner, $photoError, false, false, false, false, true, false, null);
-                //$view->editProfile($owner, $photoError, false, false, false, true);
-                //$password=$session->getSessionElement('password');
+
             }
         }
 

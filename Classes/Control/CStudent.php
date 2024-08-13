@@ -524,20 +524,14 @@ class CStudent{
                 
                 if($result && !$error){
                     
-                    if(!is_null($photo))
-                    {
-                        $ph = $photo->getPhoto();
-                    }
-                    else
-                    {
-                        $ph=null;
-                    }
+                    !is_null($photo) ? $ph = $photo->getPhoto() : $ph=null;
+                    
                     $session->setSessionElement('username',$username);
                     $password = $student->getPassword();
                     $session->setSessionElement('password',$password);
                     $session->setSessionElement('photo',$ph);
                     header('Location:/UniRent/Student/profile/success');
-                    
+
                 } elseif (!$result) {
                     
                     header('Location:/UniRent/Student/profile/error');
