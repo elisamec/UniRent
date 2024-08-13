@@ -69,7 +69,7 @@ class VOwner {
         $this->smarty->display('Owner/personalProfile.tpl');
     }
 
-    public function editProfile(EOwner $owner, ?string $photo, bool $usernameDuplicate, bool $emailDuplicate, bool $phoneError, bool $ibanError, bool $oldPasswordError, bool $passwordError, ?string $modalSuccess):void {
+    public function editProfile(EOwner $owner, ?string $photo, bool $usernameDuplicate, bool $emailDuplicate, bool $phoneError, bool $ibanError, bool $oldPasswordError, bool $passwordError):void {
         $this->smarty->assign('photo', $photo);
         $this->smarty->assign('owner', $owner);
         $this->smarty->assign('usernameDuplicate', $usernameDuplicate);
@@ -78,7 +78,6 @@ class VOwner {
         $this->smarty->assign('ibanError', $ibanError);
         $this->smarty->assign('oldPasswordError', $oldPasswordError);
         $this->smarty->assign('passwordError', $passwordError);
-        $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('Owner/editPersonalProfile.tpl');
     }
     public function contact(?string $modalSuccess){
