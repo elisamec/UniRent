@@ -631,4 +631,58 @@ class EAccommodation
         $result['accommodation']=$PM->getAccommodationRating($this->idAccommodation);
         return $result;
     }
+    
+    /**
+     * Method getData
+     * 
+     * this method is used to return this object as an array
+     *
+     * @return array
+     */
+    public function getData():array
+    {
+        $accommodationData = [
+            'title' => $this->getTitle(),
+            'price' => $this->getPrice(),
+            'deposit' =>$this->getDeposit(),
+            'date' => $this->getStart(),
+            'startDate' => $this->getStart()->format('d'),
+            'month' => $this->getStart()->format('M') == 9 ? 'september' : 'october',
+            'address' => $this->getAddress()->getAddressLine1(),
+            'city' => $this->getAddress()->getLocality(),
+            'postalCode' => $this->getAddress()->getPostalCode(),
+            'description' => $this->getDescription(),
+            'men' => $this->getMan(),
+            'women' => $this->getWoman(),
+            'animals' => $this->getPets(),
+            'smokers' => $this->getSmokers(),
+            'places' => $this->getPlaces()
+        ];
+        return $accommodationData;
+    }
+    
+    /**
+     * Method getVisitAvailabilityData
+     *
+     * this method return an arrya of accommodation'visit availabilities
+     * @return array
+     */
+    public function getVisitAvailabilityData():array
+    {
+        $visitAvailabilityData=array();
+        foreach ($this->getVisit() as $day =>$times) 
+        {
+            if ($times !== []) 
+            {
+                $endTime= new DateTime($times[count($times)-1]);
+                $endTime->modify('+' . $this->getVisitDuration() . ' minutes');
+                $visitAvailabilityData[$day] = [
+                    'start' => $times[0],
+                    'end' => $endTime->format('H:i'),
+                    'duration' => $this->getVisitDuration()
+                ];
+            }
+        }
+        return $visitAvailabilityData;
+    }
 }
