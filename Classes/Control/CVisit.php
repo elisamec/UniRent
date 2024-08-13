@@ -197,7 +197,7 @@ class CVisit
    public static function edit(int $id) {
     $session=USession::getInstance();
     $userType=$session->getSessionElement('userType');
-    if ($userType === null) {
+    if ($userType !== 'Student') {
         $viewError= new VError();
         $viewError->error(403);
         exit();

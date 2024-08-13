@@ -265,7 +265,7 @@ INSERT INTO `photo` (`id`, `photo`, `relativeTo`, `idAccommodation`) VALUES
 
 CREATE TABLE `report` (
   `id` int(11) NOT NULL,
-  `description` varchar(500) NOT NULL,
+  `description` varchar(1000) NOT NULL,
   `made` timestamp NOT NULL DEFAULT current_timestamp(),
   `banDate` date DEFAULT NULL,
   `idStudent` int(11) DEFAULT NULL,
@@ -315,7 +315,7 @@ CREATE TABLE `review` (
   `id` int(11) NOT NULL,
   `title` varchar(40) NOT NULL,
   `valutation` int(1) NOT NULL,
-  `description` varchar(500) DEFAULT NULL,
+  `description` varchar(1000) DEFAULT NULL,
   `type` enum('student','accommodation','owner') NOT NULL,
   `creationDate` timestamp NOT NULL DEFAULT current_timestamp(),
   `reported` tinyint(1) NOT NULL DEFAULT 0,
@@ -410,7 +410,7 @@ CREATE TABLE `supportrequest` (
   `idStudent` int(11) DEFAULT NULL,
   `idOwner` int(11) DEFAULT NULL,
   `status` tinyint(1) NOT NULL,
-  `supportReply` varchar(500) DEFAULT NULL,
+  `supportReply` varchar(1000) DEFAULT NULL,
   `statusRead` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

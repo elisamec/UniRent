@@ -33,7 +33,7 @@ class VUser{
         $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('User/contact.tpl');
     }
-    public function findAccommodation(string $selectedCity, string $selectedUni, array $searchResult, string $date, int $ratingOwner, int $ratingAccommodation, int $minPrice, int $maxPrice):void{
+    public function findAccommodation(string $selectedCity, string $selectedUni, array $searchResult, string $date, int $ratingOwner, int $ratingAccommodation, int $minPrice, int $maxPrice, int $year):void{
         $this->smarty->assign('selectedCity', $selectedCity);
         $this->smarty->assign('selectedUni', $selectedUni);
         $this->smarty->assign('selectedDate', $date);
@@ -42,6 +42,7 @@ class VUser{
         $this->smarty->assign('ratingAccommodation', $ratingAccommodation);
         $this->smarty->assign('minPrice', $minPrice);
         $this->smarty->assign('maxPrice', $maxPrice);
+        $this->smarty->assign('year',$year);
         $this->smarty->display('User/search.tpl');
     }
 

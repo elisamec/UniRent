@@ -2449,13 +2449,12 @@ textarea#comment::placeholder {
 .Accomcontainer {
     float: left;
     width: 100%;
-    padding-left: 0px;
+    padding-left: 20px;
 
 }
 .accom_img {
-    width: auto;
+    width: 350px;
     height: 100%;
-    max-width: 70%;
     object-fit: cover;
     border-radius: 10px;
     margin: 10px 10px 10px 10px;
@@ -2466,6 +2465,12 @@ textarea#comment::placeholder {
 }
 .title {
     padding-top: 10px;
+    font-size: 30px;
+    font-weight: bold;
+}
+.title1 {
+    padding-top: 10px;
+    padding-left:20px;
     font-size: 30px;
     font-weight: bold;
 }
@@ -3162,4 +3167,11 @@ a.badge-danger.focus,a.badge-danger:focus{
   }
   .text-gray-500 {
     color: #b7b9cc !important;
+  }
+  .guidelines {
+    padding:0;
+    padding-top:10px;
+    margin: 0;
+    margin-left:20px;
+    margin-bottom:10px;
   }
