@@ -711,6 +711,9 @@ hr.border_main {
 
 .container_main {
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .container_main:hover .overlay {

@@ -338,6 +338,9 @@
          </div>
       </div>
       <!-- footer section end -->
+      <!-- Javascript variables-->
+      <script>
+         var file = 'addAccommodation';
 <!-- Javascript files -->
 <script src="/UniRent/Smarty/js/UniRentOriginal/visitAvailability.js"></script>
 <script src="/UniRent/Smarty/js/UniRentOriginal/addImages.js"></script>
