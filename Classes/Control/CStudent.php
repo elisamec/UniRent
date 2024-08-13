@@ -136,7 +136,9 @@ class CStudent{
         if(is_null($student)){
 
             $session->setSessionElement('photo', $ph);
-            http_response_code(500);
+            $viewError=new VError();
+            $viewError->error(403);
+            exit();
 
         } else {   
 
