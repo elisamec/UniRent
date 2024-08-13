@@ -720,7 +720,7 @@ class CStudent{
         $view->publicProfileFromStudent($student, $reviewsData, $self, $leavebleReviews, $modalSuccess);
     }
     public static function publicProfileFromOwner(string $username, ?string $modalSuccess=null)
-    {   self::checkIfOwner();
+    {   COwner::checkIfOwner();
         $view = new VStudent();
         $PM=FPersistentManager::getInstance();
         $student=$PM->getStudentByUsername($username);
@@ -1060,15 +1060,8 @@ class CStudent{
             header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/full');
         }
     }
-    private static function checkIfOwner() {
-        $session = USession::getInstance();
-        if ($session->getSessionElement('userType') !== 'Owner') {
-            $view= new VError();
-            $view->error(403);
-            exit();
-        }
-    }
-    private static function checkIfStudent() {
+
+    public static function checkIfStudent() {
         $session = USession::getInstance();
         if ($session->getSessionElement('userType') !== 'Student') {
             $view= new VError();

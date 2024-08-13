@@ -20,8 +20,16 @@ require __DIR__.'/../../vendor/autoload.php';
 
 class CContract
 {
-    public static function pay(int $idReservation) {
-        self::checkIfStudent();
+    /**
+     * Method pay
+     * 
+     * this method is used to pay a reservation
+     * 
+     * @param int $idReservation
+     * @return void
+     */
+    public static function pay(int $idReservation): void {
+        CStudent::checkIfStudent();
         $session = USession::getInstance();
         $idStudent = $session->getSessionElement('id');
         $PM = FPersistentManager::getInstance();
@@ -65,13 +73,22 @@ class CContract
         }
 
     }
+
+    /**
+     * Method showStudent
+     * 
+     * This method shows the contract list to a student
+     * 
+     * @param string $kind
+     * @param string|null $modalSuccess
+     * @return void
+     */
     public static function showStudent(string $kind, ?string $modalSuccess=null):void {
-        self::checkIfStudent();
+        CStudent::checkIfStudent();
         $session=USession::getInstance();
         $id=$session->getSessionElement('id');
         $PM= FPersistentManager::getInstance();
         $contracts=$PM->getContractsByStudent($id, null, $kind);
-        #print_r($contracts);
         
         usort($contracts, function($a, $b) {
             $today = new DateTime();
@@ -106,8 +123,17 @@ class CContract
 
     }
     
+    /**
+     * Method showOwner
+     * 
+     * This method shows the contract list to an owner
+     * 
+     * @param string $kind
+     * @param string|null $modalSuccess
+     * @return void
+     */
     public static function showOwner(string $kind, ?string $modalSuccess=null):void {
-        self::checkIfOwner();
+        COwner::checkIfOwner();
         $session=USession::getInstance();
         $id=$session->getSessionElement('id');
         $PM=FPersistentManager::getInstance();
@@ -162,6 +188,16 @@ class CContract
         }
         $view->showContracts($contractsData, $kind, $modalSuccess);
     }
+
+    /**
+     * Method contractDetails
+     * 
+     * This method shows the details of a contract
+     * 
+     * @param int $idContract
+     * @param string|null $modalSuccess
+     * @return void
+     */
     public static function contractDetails(int $idContract, ?string $modalSuccess=null):void {
         $session = USession::getInstance();
         $userType = $session->getSessionElement('userType');
@@ -296,7 +332,7 @@ class CContract
      */
     public static function viewOngoing(int $id, ?string $modalSuccess=null):void
     {   
-        self::checkIfOwner();
+        COwner::checkIfOwner();
         $PM=FPersistentManager::getInstance();
         $session = USession::getInstance();
         $accommodationOwner = $PM->load('EAccommodation', $id)->getIdOwner();
@@ -357,20 +393,7 @@ class CContract
         }
         $view->showContracts($contractsData, 'onGoing', $modalSuccess);
     }
-    private static function checkIfOwner() {
-        $session = USession::getInstance();
-        if ($session->getSessionElement('userType') !== 'Owner') {
-            $view= new VError();
-            $view->error(403);
-            exit();
-        }
-    }
-    private static function checkIfStudent() {
-        $session = USession::getInstance();
-        if ($session->getSessionElement('userType') !== 'Student') {
-            $view= new VError();
-            $view->error(403);
-            exit();
-        }
-    }
+
+    
+    
 }

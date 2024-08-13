@@ -670,7 +670,7 @@ class COwner
         $view->publicProfileFromOwner($owner, $reviewsData, $self, $modalSuccess);
     }
     public static function publicProfileFromStudent(string $username, ?string $modalSuccess=null)
-    {   self::checkIfStudent();
+    {   CStudent::checkIfStudent();
         $view = new VOwner();
         $PM=FPersistentManager::getInstance();
         $owner=$PM->getOwnerByUsername($username);
@@ -747,7 +747,7 @@ class COwner
         $view->postedReview($reviewsData, $modalSuccess);
     }
     public static function viewOwnerAds(int $id) {
-        self::checkIfStudent();
+        CStudent::checkIfStudent();
         $view = new VOwner();
         $PM=FPersistentManager::getInstance();
         $accommodationEntities=$PM->loadAccommodationsByOwner($id);
@@ -1019,7 +1019,7 @@ class COwner
         
         $view->tenants($tenants, $type, $accommodationTitles, $rateT);
     }
-    private static function checkIfOwner() {
+    public static function checkIfOwner() {
         $session = USession::getInstance();
         if ($session->getSessionElement('userType') !== 'Owner') {
             $view= new VError();
@@ -1027,12 +1027,5 @@ class COwner
             exit();
         }
     }
-    private static function checkIfStudent() {
-        $session = USession::getInstance();
-        if ($session->getSessionElement('userType') !== 'Student') {
-            $view= new VError();
-            $view->error(403);
-            exit();
-        }
-    }
+
 }
