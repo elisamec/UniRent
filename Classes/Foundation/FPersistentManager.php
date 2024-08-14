@@ -457,6 +457,20 @@ class FPersistentManager {
         return $result;
     }
 
+    /**
+     * Method findAccommodationsStudent
+     * 
+     * this method call the omonim method in FAccommodation to find the accommodations for the student
+     * @param mixed $city
+     * @param mixed $date
+     * @param mixed $rateA
+     * @param mixed $rateO
+     * @param mixed $minPrice
+     * @param mixed $maxPrice
+     * @param mixed $student
+     * @param mixed $year
+     * @return array
+     */
     public function findAccommodationsStudent($city,$date,$rateA,$rateO,$minPrice,$maxPrice,$student,$year)
     {
         $FA=FAccommodation::getInstance();
