@@ -100,7 +100,7 @@ const customNamesPatterns = {
     '/UniRent/Owner/contact': 'Contact Us',
     '/UniRent/User/contact': 'Contact Us',
     '/UniRent/Student/contact': 'Contact Us',
-    '/UniRent/Owner/editAccommodation/*': 'Edit Accommodation',
+    '/UniRent/Accommodation/editAccommodation/*': 'Edit Accommodation',
     '/UniRent/Owner/editProfile': 'Edit Profile',
     '/UniRent/Student/editProfile': 'Edit Profile',
     '/UniRent/Owner/profile': 'Profile',

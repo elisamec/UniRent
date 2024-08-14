@@ -132,7 +132,7 @@
                                  </div>
                               </div>
 
-                     <div class="reserve_btn"><a href="/UniRent/Owner/editAccommodation/{$accommodation->getIdAccommodation()}" >Edit</a></div>
+                     <div class="reserve_btn"><a href="/UniRent/Accommodation/editAccommodation/{$accommodation->getIdAccommodation()}" >Edit</a></div>
                      {if $disabled == true}
                         <div class="delete_button" id="deactivateLink">
                             <a href="#">Deactivate</a>

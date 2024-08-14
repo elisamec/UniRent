@@ -123,7 +123,7 @@
                    Regarding the start date you need to insert the day of the month and the month (Sep/Oct) for the start 
                    of the rental relationship. The end date is calculated based on the start date, giving always a 10 month rental period.
                    </p>
-                    <form action="/UniRent/Owner/addAccommodationOperations" class="form" method="post" id="yourFormId">
+                    <form action="/UniRent/Accommodation/addAccommodationOperations" class="form" method="post" id="yourFormId">
                         <div id="cssportal-grid">
                            <div id="div1">
                               <div class="pictures">

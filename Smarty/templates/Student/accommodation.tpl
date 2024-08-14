@@ -861,7 +861,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         button.addEventListener('click', (event) => {
             event.preventDefault();
             const reviewId = button.getAttribute('data-review-id'); // Get the owner ID from the button
-            form.action = "/UniRent/Admin/report/" + reviewId + "/Review"; // Dynamically set the form action
+            form.action = "/UniRent/Report/makeReport/" + reviewId + "/Review"; // Dynamically set the form action
             modal.style.display = "block";
         });
     });

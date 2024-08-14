@@ -90,70 +90,7 @@ class CAdmin
         header('Location:/UniRent/User/home');
     }
 
-    /**
-     * Method report
-     * 
-     * this method permits the users to report a Review, a Student or an Owner
-     *
-     * @param int $id [Student/Owner/Review id]
-     * @param string $type [Student/Owner/Review]
-     *
-     * @return void
-     */
-    public static function report(int $id, string $type):void
-    {
-        $PM = FPersistentManager::getInstance();
-        $session = USession::getInstance();
-        $userType  = $session->getSessionElement('userType');
-        $reportReason=USuperGlobalAccess::getPost('reportReason');
-        
-        if ($type == 'Student')
-        {
-            $student = $PM->load('EStudent', $id);
-            $student->setStatus('reported');
-            $res=$PM->update($student);
-            $report= new EReport(null, $reportReason, new DateTime('today'), null, $id, TType::STUDENT);
-            $res2=$PM->store($report);
-            if ($res && $res2)
-            {
-                header('Location:/UniRent/' . ucfirst($userType) . '/publicProfile/' . $student->getUsername() . '/success');
-            }
-            else
-            {
-                header('Location:/UniRent/' . ucfirst($userType) . '/publicProfile/' . $student->getUsername() . '/error');
-            }
-        }
-        else if ($type == 'Owner')
-        {
-            $owner = $PM->load('EOwner', $id);
-            $owner->setStatus('reported');
-            $res=$PM->update($owner);
-            $report= new EReport(null, $reportReason, new DateTime('today'), null, $id, TType::OWNER);
-            $res2=$PM->store($report);
-            if ($res && $res2)
-            {
-                header('Location:/UniRent/' . ucfirst($userType) . '/publicProfile/' . $owner->getUsername() . '/success');
-            }
-            else
-            {
-                header('Location:/UniRent/' . ucfirst($userType) . '/publicProfile/' . $owner->getUsername() . '/error');
-            }
-        } else if ($type == 'Review') {
-            $review = $PM->load('EReview', $id);
-            $review->report();
-            $res=$PM->update($review);
-            $report= new EReport(null, $reportReason, new DateTime('today'), null, $id, TType::REVIEW);
-            $res2=$PM->store($report);
-            if ($res && $res2)
-            {
-                header('Location:/UniRent/' .USuperGlobalAccess::getCookie('current_page').'/success');
-            }
-            else
-            {
-                header('Location:/UniRent/' . USuperGlobalAccess::getCookie('current_page') .'/error');
-            }
-        }
-    }
+    
 
     /**
      * Method supportRequest

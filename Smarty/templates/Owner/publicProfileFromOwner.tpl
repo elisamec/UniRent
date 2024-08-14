@@ -216,7 +216,7 @@
     <div class="resModal-content">
         <span class="resClose" onclick="closeReportModal()">&times;</span>
         <h2>Report User</h2>
-        <form id="reportForm" action="/UniRent/Admin/report/{$owner->getId()}/Owner" class="form" method="POST" enctype="multipart/form-data">
+        <form id="reportForm" action="/UniRent/Report/makeReport/{$owner->getId()}/Owner" class="form" method="POST" enctype="multipart/form-data">
             <label for="reportReason">Reason for report:</label><br>
             <textarea id="reportReason" name="reportReason" rows="4" cols="50" oninput="checkInput()"></textarea><br><br>
             <div class="btn-cont">
@@ -321,7 +321,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         button.addEventListener('click', (event) => {
             event.preventDefault();
             const reviewId = button.getAttribute('data-review-id'); // Get the owner ID from the button
-            form.action = "/UniRent/Admin/report/" + reviewId + "/Review"; // Dynamically set the form action
+            form.action = "/UniRent/Report/makeReport/" + reviewId + "/Review"; // Dynamically set the form action
             reviewModal.style.display = "block";
         });
     });
