@@ -90,60 +90,6 @@ class CAdmin
         header('Location:/UniRent/User/home');
     }
 
-    
-
-    /**
-     * Method supportRequest
-     * 
-     * this method permits the users to send a support request
-     *
-     * @return void
-     */
-    public static function supportRequest():void
-    {
-        $session=USession::getInstance();
-        if (!$session->isSetSessionElement('id'))
-        {
-            $topic=TRequestType::BUG;
-            $message=USuperGlobalAccess::getPost('Message');
-            $supportRequest=new ESupportRequest(0,$message,$topic,null,null);
-            $PM=FPersistentManager::getInstance();
-            $res=$PM->store($supportRequest);
-            if ($res)
-            {
-                header('Location:/UniRent/User/contact/sent');
-            }
-            else
-            {
-                header('Location:/UniRent/User/contact/fail');
-            }
-        } else {
-            $idUser=$session->getSessionElement('id');
-            $type=$session->getSessionElement('userType');
-            if ($type=='Student')
-            {
-                $type=TType::STUDENT;
-            }
-            else
-            {
-                $type=TType::OWNER;
-            }
-            $topic=USuperGlobalAccess::getPost('Subject');
-            $message=USuperGlobalAccess::getPost('Message');
-            $supportRequest=new ESupportRequest(0,$message,$topic,$idUser,$type);
-            $PM=FPersistentManager::getInstance();
-            $res=$PM->store($supportRequest);
-            if ($res)
-            {
-                header('Location:/UniRent/'.ucfirst($type->value).'/contact/sent');
-            }
-            else
-            {
-                header('Location:/UniRent/'.ucfirst($type->value).'/contact/fail');
-            }
-        }
-    }
-
     /**
      * Method ban
      * 
@@ -162,31 +108,22 @@ class CAdmin
         $report=$PM->load('EReport', $reportId);
         $report->setBanDate(new DateTime('today'));
         $res=$PM->update($report);
-        if (ucfirst($type)==='Student')
-        {
-            $user->setStatus(TStatusUser::BANNED);
-
-        }
-        else if (ucfirst($type)==='Owner')
-        {
-            $user->setStatus(TStatusUser::BANNED);
-            $accommodationArray=$PM->loadAccommodationsByOwner($id);
-            foreach ($accommodationArray as $accommodation) {
-                $accommodation->setStatus(false);
-                $PM->update($accommodation);
-            }
-        } else if (ucfirst($type)==='Review') {
+        if (ucfirst($type)==='Review') {
             $user->ban();
+        } else {
+            $user->setStatus(TStatusUser::BANNED);
+            if (ucfirst($type)==='Owner')
+            {
+                $accommodationArray=$PM->loadAccommodationsByOwner($id);
+                foreach ($accommodationArray as $accommodation) {
+                    $accommodation->setStatus(false);
+                    $PM->update($accommodation);
+                }
+            }
         }
         $res=$PM->update($user);
-        if ($res)
-        {
-            header('Location:'.USuperGlobalAccess::getCookie('current_page').'/success');
-        }
-        else
-        {
-            header('Location:'.USuperGlobalAccess::getCookie('current_page').'/error');
-        }
+        $modalSuccess = $res ? 'success' : 'error';
+        header('Location:'.USuperGlobalAccess::getCookie('current_page').'/'.$modalSuccess);
     }
 
     /**
@@ -205,48 +142,13 @@ class CAdmin
         $supportRequest= new ESupportRequest(null, 'A student is trying to register with the following email, which is not accepted by the system: '. $mail. '. This is the university: '. $university. ' of this city: '.$city, TRequestType::REGISTRATION, null, null);
         $PM=FPersistentManager::getInstance();
         $res=$PM->store($supportRequest);
-        if ($res)
-        {
-            header('Location:/UniRent/User/showRegistration/success');
-        }
-        else
-        {
-            header('Location:/UniRent/User/showRegistration/error');
-        }
+        $res ? header('Location:/UniRent/User/showRegistration/success') : header('Location:/UniRent/User/showRegistration/error');
     }
 
-    /**
-     * Method removeBanRequest
-     * 
-     * this method permits the Student to send a request to the administrator to remove the ban
-     *
-     * @param string $username [Student/Owner username]
-     *
-     * @return void
-     */
-    public static function removeBanRequest(string $username):void {
-
-        $PM=FPersistentManager::getInstance();
-        $topic=TRequestType::REMOVEBAN;
-        $user= $PM->verifyUserUsername($username);
-        $message=USuperGlobalAccess::getPost('Message');
-        $supportRequest=new ESupportRequest(null,$message, $topic, $user['id'], $user['type']);
-        $res=$PM->store($supportRequest);
-        $res=true;
-        if ($res)
-        {
-            $view=new VError();
-            $view->error(600, $username, 'success');
-        }
-        else
-        {
-            $view=new VError();
-            $view->error(600, $username, 'error');
-        }
-    }
+    
     
     /**
-     * Method active
+     * Method activate
      * 
      * this method permits the administrator to remove a ban of a Owner or a Student
      *
@@ -255,24 +157,18 @@ class CAdmin
      *
      * @return void
      */
-    public static function active(string $type, int $id):void
+    public static function activate(string $type, int $id):void
     {
         $PM = FPersistentManager::getInstance();
         $user = $PM->load('E'.ucfirst($type), $id);
         $user->setStatus(TStatusUser::ACTIVE);
         $res = $PM->update($user);
-        if ($res)
-        {
-            header('Location:'.USuperGlobalAccess::getCookie('current_page').'/success');
-        }
-        else
-        {
-            header('Location:'.USuperGlobalAccess::getCookie('current_page').'/error');
-        }
+        $modalSuccess = $res ? 'success' : 'error';
+        header('Location:'.USuperGlobalAccess::getCookie('current_page').'/'.$modalSuccess);
     }
 
     /**
-     * Method verifyEmail
+     * Method addToJSON
      * If an email isn't in the list of the universities, it will be added by admin
      * 
      * @param string $email [email to verify]
@@ -281,15 +177,14 @@ class CAdmin
      * 
      * @return void
      */
-    private static function verifyEmail(string $email, string $uniName, string $city):void{
+    private static function addToJSON(string $email, string $uniName, string $city):void{
 
         $email = explode(".", str_replace("@", ".", $email));
         $domain = array_slice($email, -2);
         $domain = "www." . $domain[0] . "." . $domain[1];
 
         $AUF=UAccessUniversityFile::getInstance();
-        $AUF->addElement($domain, $uniName, $city);  
-
+        $AUF->addElement($domain, $uniName, $city);
     }
 
     /**
@@ -538,31 +433,25 @@ class CAdmin
     }
 
     /**
-     * Method addToJson
+     * Method verifyEmail
      * 
      * this method permits the administrator to add an email to the JSON file used for mail verification
      * 
      * @return void
      */
-    public static function addToJson():void {
+    public static function verifyEmail():void {
         $email = USuperGlobalAccess::getPost('email');
         $uniName = USuperGlobalAccess::getPost('university');
         $city = USuperGlobalAccess::getPost('city');
-        self::verifyEmail($email, $uniName, $city);
+        self::addToJSON($email, $uniName, $city);
         $id=USuperGlobalAccess::getPost('requestId');
         $PM=FPersistentManager::getInstance();
         $request=$PM->load('ESupportRequest', $id);
         $request->setStatus(TStatusSupport::RESOLVED);
         $request->setSupportReply('The email has been added to the list of the universities');
         $res=$PM->update($request);
-        if ($res)
-        {
-            header('Location:'.USuperGlobalAccess::getCookie('current_page').'/success');
-        }
-        else
-        {
-            header('Location:'.USuperGlobalAccess::getCookie('current_page').'/error');
-        }
+        $modalSuccess = $res ? 'success' : 'error';
+        header('Location:'.USuperGlobalAccess::getCookie('current_page').'/'.$modalSuccess);
     }
     
     /**
@@ -578,14 +467,8 @@ class CAdmin
     {
         $PM=FPersistentManager::getInstance();
         $res=$PM->delete('ESupportRequest', $id);
-        if ($res)
-        {
-            header('Location:'.USuperGlobalAccess::getCookie('current_page').'/success');
-        }
-        else
-        {
-            header('Location:'.USuperGlobalAccess::getCookie('current_page').'/error');
-        }
+        $modalSuccess = $res ? 'success' : 'error';
+        header('Location:'.USuperGlobalAccess::getCookie('current_page').'/'.$modalSuccess);
     }
 
     /**
@@ -601,14 +484,8 @@ class CAdmin
     {
         $PM=FPersistentManager::getInstance();
         $res=$PM->delete('EReport', $id);
-        if ($res)
-        {
-            header('Location:'.USuperGlobalAccess::getCookie('current_page').'/success');
-        }
-        else
-        {
-            header('Location:'.USuperGlobalAccess::getCookie('current_page').'/error');
-        }
+        $modalSuccess = $res ? 'success' : 'error';
+        header('Location:'.USuperGlobalAccess::getCookie('current_page').'/'.$modalSuccess);
     }
 
     /**
@@ -633,11 +510,7 @@ class CAdmin
                 }
                 if ($report->getSubjectType()==TType::REVIEW) {
                     $subject=$PM->load('EReview', $report->getIdSubject());
-                    $review = [
-                        'id' => $subject->getId(),
-                        'title' => $subject->getTitle(),
-                        'description' => $subject->getDescription(),
-                    ];
+                    $review = $subject->reportFormat();
                     $usernameSubject=$PM->getUsernameById($subject->getIdAuthor(), $subject->getAuthorType());
                 }
                 else
@@ -645,15 +518,7 @@ class CAdmin
                     $review=null;
                     $usernameSubject=$PM->getUsernameById($report->getIdSubject(), $report->getSubjectType());
                 }
-                $reports[$count][]=[
-                    'id'=>$report->getId(),
-                    'description'=>$report->getDescription(),
-                    'made'=>$report->getMade()->format('Y-m-d'),
-                    'banDate'=>$report->getBanDate()? $report->getBanDate()->format('Y-m-d') : null,
-                    'type' => $report->getSubjectType()->value,
-                    'usernameSubject' =>$usernameSubject,
-                    'review' => $review
-                ];
+                $reports[$count][]=$report->formatAdmin($review, $usernameSubject);
             }
         $view=new VAdmin();
         $view->readMoreReports($reports, $count, $modalMessage);

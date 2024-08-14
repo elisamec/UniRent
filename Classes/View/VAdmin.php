@@ -24,7 +24,6 @@ class VAdmin
     }
 
     public function login(){
-        $this->smarty->assign('usernameError', false);
         $this->smarty->assign('passwordError', false);
         $this->smarty->display('Admin/login.tpl');
     }

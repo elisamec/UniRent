@@ -200,7 +200,7 @@
 
                 <!-- Additional Fields for 'Registration' Topic (conditionally displayed) -->
                 <div class="form-group" id="additionalFieldsContainer" style="display: none;">
-                    <form id="additionalFieldsForm">
+                    <form id="additionalFieldsForm" action="/UniRent/Admin/verifyEmail">
                         <label for="email">Email:</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
                         <label for="university">University:</label>
@@ -209,7 +209,7 @@
                         <input type="text" class="form-control" id="city" name="city" placeholder="Enter city" required>
                         <input type="hidden" name="requestId" value="">
                         <input type="hidden" name="answare" value="The mail was added to the json">
-                        <button type="button" class="btn btn-primary" id="addToJson">Add to JSON</button>
+                        <button type="submit" class="btn btn-primary" id="verifyEmail">Verify Email</button>
                         <button type="button" class="btn btn-secondary" id="deleteRequest">Delete Request</button>
                     </form>
                 </div>

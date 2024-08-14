@@ -63,4 +63,15 @@ class EReport {
     public function setSubjectType(TType | string $typeSubject): void {
         $this->typeSubject = $typeSubject instanceof TType ? $typeSubject : TType::from($typeSubject);
     }
+    public function formatAdmin(?array $review, string $usernameSubject):array {
+        return [
+            'id'=>$this->getId(),
+            'description'=>$this->getDescription(),
+            'made'=>$this->getMade()->format('Y-m-d'),
+            'banDate'=>$this->getBanDate()? $this->getBanDate()->format('Y-m-d') : null,
+            'type' => $this->getSubjectType()->value,
+            'usernameSubject' =>$usernameSubject,
+            'review' => $review
+        ];
+    }
 }

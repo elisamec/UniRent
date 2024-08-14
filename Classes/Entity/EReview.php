@@ -211,4 +211,18 @@ class EReview
         $result=FPersistentManager::getInstance()->remainingReviewStudentToOwner($id1,$id2);
         return $result;
     }
+    /**
+     * Method reportFormat
+     * 
+     * this method formats the review as intended for the report
+     * @param EReview $review
+     * @return array
+     */
+    public function reportFormat():array {
+        return [
+            'id'=> $this->idReview,
+            'title'=> $this->title,
+            'description'=> $this->description,
+        ];
+    }
 }

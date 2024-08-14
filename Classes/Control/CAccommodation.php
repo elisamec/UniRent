@@ -93,13 +93,8 @@ class CAccommodation
         $accommodation=$PM->load('EAccommodation', $idAccommodation);
         $accommodation->setStatus(false);
         $res=$PM->update($accommodation);
-        if ($res) {
-            
-                header('Location:'.USuperGlobalAccess::getCookie('current_page').'/success');
-        } else {
-            
-                header('Location:'.USuperGlobalAccess::getCookie('current_page').'/error');
-        }
+        $modalSuccess = $res ? 'success' : 'error';
+        header('Location:'.USuperGlobalAccess::getCookie('current_page').'/'.$modalSuccess);
     }
     
     /**
@@ -112,13 +107,8 @@ class CAccommodation
         $accommodation=$PM->load('EAccommodation', $idAccommodation);
         $accommodation->setStatus(true);
         $res=$PM->update($accommodation);
-        if ($res) {
-                header('Location:'.USuperGlobalAccess::getCookie('current_page').'/success');
-            
-        } else {
-            
-                header('Location:'.USuperGlobalAccess::getCookie('current_page').'/error');
-        }
+        $modalSuccess = $res ? 'success' : 'error';
+        header('Location:'.USuperGlobalAccess::getCookie('current_page').'/'.$modalSuccess);
     }
 
     /**
@@ -129,14 +119,7 @@ class CAccommodation
     public static function delete(int $id):void {
         $PM=FPersistentManager::getInstance();
         $result=$PM->delete('EAccommodation', $id);
-        if($result)
-        {
-            header('Location:/UniRent/Owner/home/success');
-        }
-        else
-        {
-            header('Location:/UniRent/Owner/home/error');
-        }
+        $result? header('Location:/UniRent/Owner/home/success') : header('Location:/UniRent/Owner/home/error');
     }
 
           
@@ -227,11 +210,7 @@ class CAccommodation
             $result=FPersistentManager::getInstance()->update($accomodation);
             $id = $accomodation->getIdAccommodation();
             
-            if ($result) {
-                header('Location:/UniRent/Owner/accommodationManagement/'.$id.'/success');
-            } else {
-                header('Location:/UniRent/Owner/accommodationManagement/'.$id.'/error');
-            }
+            $result ? header('Location:/UniRent/Owner/accommodationManagement/'.$id.'/success') : header('Location:/UniRent/Owner/accommodationManagement/'.$id.'/error');
     }
     
 }

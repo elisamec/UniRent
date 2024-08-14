@@ -6,7 +6,7 @@
  * @param {string} type 
  */
 function removeBanModal(userId, type) {
-    document.getElementById('removeBanButton').href = '/UniRent/Admin/active/' + type + '/' + userId;
+    document.getElementById('removeBanButton').href = '/UniRent/Admin/activate/' + type + '/' + userId;
     $('#removeBanModal').modal('show');
 }
 /**

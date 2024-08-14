@@ -46,7 +46,7 @@
                         <p> The report that was sent to the administrator and therefore caused your profile to be banned (only after a thorough investigation had been conducted) is as follows:</p>
                         <p>{$banReason}</p>
                         <p class="text-gray-500 mb-0">Please contact the administrator for more information</p>
-                        <form class="flex-form" action="/UniRent/Admin/removeBanRequest/{$username}" method="post">
+                        <form class="flex-form" action="/UniRent/SupportRequest/removeBan/{$username}" method="post">
                             <textarea placeholder="Message" rows="5" id="comment" name="Message" required></textarea>
                             <button type="submit" class="btn btn-primary btn-user send_btn">Send</button>
                         </form>

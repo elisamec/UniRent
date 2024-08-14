@@ -8,6 +8,8 @@ use Classes\View\VError;
 use Classes\View\VOwner;
 use Classes\View\VStudent;
 use Classes\Utilities\USuperGlobalAccess;
+use Classes\Entity\ESupportRequest;
+use Classes\Tools\TType;
 use Exception;
 
 class CSupportRequest
@@ -39,30 +41,7 @@ class CSupportRequest
                 if ($reply->getStatusRead() === false) {
                     $countReply++;
                 }
-                switch ($reply->getTopic()) {
-                    case TRequestType::REGISTRATION:
-                        $topic = 'Registration';
-                        break;
-                    case TRequestType::USAGE:
-                        $topic = 'App Usage';
-                        break;
-                    case TRequestType::BUG:
-                        $topic = 'Bug';
-                        break;
-                    case TRequestType::REMOVEBAN:
-                        $topic = 'Remove Ban Request';
-                        break;
-                    default:
-                        $topic = 'Other';
-                        break;
-                }
-                $replies[] = [
-                    'id' => $reply->getId(),
-                    'message' => $reply->getMessage(),
-                    'supportReply' => $reply->getSupportReply(),
-                    'topic' => $topic,
-                    'statusRead' => $reply->getStatusRead()
-                ];
+                $replies[]=self::formatReply($reply);
             }
             
             // Prepare and output the JSON response
@@ -76,6 +55,33 @@ class CSupportRequest
             // Handle errors and output a JSON error message
             echo json_encode(['error' => 'An error occurred while fetching support replies.']);
         }
+    }
+    private static function formatReply(ESupportRequest $reply): array {
+        switch ($reply->getTopic()) {
+            case TRequestType::REGISTRATION:
+                $topic = 'Registration';
+                break;
+            case TRequestType::USAGE:
+                $topic = 'App Usage';
+                break;
+            case TRequestType::BUG:
+                $topic = 'Bug';
+                break;
+            case TRequestType::REMOVEBAN:
+                $topic = 'Remove Ban Request';
+                break;
+            default:
+                $topic = 'Other';
+                break;
+        }
+        $reply = [
+            'id' => $reply->getId(),
+            'message' => $reply->getMessage(),
+            'supportReply' => $reply->getSupportReply(),
+            'topic' => $topic,
+            'statusRead' => $reply->getStatusRead()
+        ];
+        return $reply;
     }
     public static function readSupportReply(int |string $id)
     {
@@ -121,30 +127,7 @@ class CSupportRequest
                         $count++;
                     }
                 }
-                switch ($reply->getTopic()) {
-                    case TRequestType::REGISTRATION:
-                        $topic = 'Registration';
-                        break;
-                    case TRequestType::USAGE:
-                        $topic = 'App Usage';
-                        break;
-                    case TRequestType::BUG:
-                        $topic = 'Bug';
-                        break;
-                    case TRequestType::REMOVEBAN:
-                        $topic = 'Remove Ban Request';
-                        break;
-                    default:
-                        $topic = 'Other';
-                        break;
-                }
-                $replies[$count][] = [
-                    'id' => $reply->getId(),
-                    'message' => $reply->getMessage(),
-                    'supportReply' => $reply->getSupportReply(),
-                    'topic' => $topic,
-                    'statusRead' => $reply->getStatusRead()
-                ];
+                $replies[$count][] = self::formatReply($reply);
             }
             if ($userType == 'Student') {
                 $view = new VStudent();
@@ -155,5 +138,54 @@ class CSupportRequest
                 $view->error(403);
             }
             $view->supportReplies($replies, $count);
+    }
+    /**
+     * Method supportRequest
+     * 
+     * this method permits the users to send a support request
+     *
+     * @return void
+     */
+    public static function supportRequest():void
+    {
+        $session=USession::getInstance();
+        if (!$session->isSetSessionElement('id'))
+        {
+            $topic=TRequestType::BUG;
+            $idUser=null;
+            $type=null;
+            $location="/User/contact";
+        } else {
+            $topic=USuperGlobalAccess::getPost('Subject');
+            $idUser=$session->getSessionElement('id');
+            $type=TType::tryFrom(strtolower($session->getSessionElement('userType')));
+            $location="/".ucfirst($type->value)."/contact";
+        }
+        $message=USuperGlobalAccess::getPost('Message');
+        $supportRequest=new ESupportRequest(null,$message,$topic,$idUser,$type);
+        $PM=FPersistentManager::getInstance();
+        $res=$PM->store($supportRequest);
+        $res ? header('Location:'.$location.'/sent') : header('Location:'.$location.'/fail');
+    }
+    /**
+     * Method removeBan
+     * 
+     * this method permits the Student to send a request to the administrator to remove the ban
+     *
+     * @param string $username [Student/Owner username]
+     *
+     * @return void
+     */
+    public static function removeBan(string $username):void {
+
+        $PM=FPersistentManager::getInstance();
+        $topic=TRequestType::REMOVEBAN;
+        $user= $PM->verifyUserUsername($username);
+        $message=USuperGlobalAccess::getPost('Message');
+        $supportRequest=new ESupportRequest(null,$message, $topic, $user['id'], $user['type']);
+        $res=$PM->store($supportRequest);
+        $modalSuccess = $res ? 'success' : 'error';
+        $view=new VError();
+        $view->error(600, $username, $modalSuccess);
     }
 }

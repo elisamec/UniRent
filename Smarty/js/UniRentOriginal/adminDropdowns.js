@@ -141,22 +141,6 @@ dropdownMenu.innerHTML = `
         }
     });
 
-    // Handle the 'Add to JSON' button click event
-    $('#addToJson').on('click', function() {
-        var email = $('#email').val();
-        var university = $('#university').val();
-        var city = $('#city').val();
-
-        // Example function to handle the collected data
-        console.log({
-            email: email,
-            university: university,
-            city: city
-        });
-
-        // Optionally, you can send this data to your server or process it further
-    });
-
     // Handle deletion of requests
     $('#deleteRequest').on('click', function() {
         var requestId = $('input[name="requestId"]').val();
