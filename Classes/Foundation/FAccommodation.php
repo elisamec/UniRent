@@ -888,10 +888,11 @@
          * @param $minPrice $minPrice [min Pirice]
          * @param $maxPrice $maxPrice [max Price]
          * @param EStudent $student $student [object EStudent]
+         * @param int $year $year [year]
          *
          * @return array
          */
-        public function findAccommodationsStudent($city,$date,$rateA,$rateO,$minPrice,$maxPrice,EStudent $student,$year):array
+        public function findAccommodationsStudent($city,$date,$rateA,$rateO,$minPrice,$maxPrice,EStudent $student,int $year):array
         {
             $result=array();
             $db=FConnection::getInstance()->getConnection();

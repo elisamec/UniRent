@@ -287,7 +287,7 @@ class COwner
      * @param string|null $modalSuccess
      * @return void
      */
-    public static function editProfile(?string $modalSuccess=null) :void
+    public static function editProfile() :void
     {
         self::checkIfOwner();
         $view = new VOwner();
@@ -309,7 +309,7 @@ class COwner
             $base64 = base64_encode($photo);
             $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
             
-            $view->editProfile($owner, $photo, false, false, false, false, false, false, $modalSuccess);
+            $view->editProfile($owner, $photo, false, false, false, false, false, false);
 
         }
     }
@@ -421,25 +421,25 @@ class COwner
                         }
                         else
                         {
-                            $view->editProfile($owner, $picture, false, false, false, true, false, false, null); //Iban already in use
+                            $view->editProfile($owner, $picture, false, false, false, true, false, false); //Iban already in use
                             #header('Location:/UniRent/Owner/profile');
                         }
                     }
                     else
                     {
-                        $view->editProfile($owner, $picture, false, false, true, false, false, false, null); //phone already in use
+                        $view->editProfile($owner, $picture, false, false, true, false, false, false); //phone already in use
                         #header('Location:/UniRent/Owner/profile');
                     }
                 }
                 else
                 {   
-                    $view->editProfile($owner, $picture, true, false, false, false, false, false, null); //Username already in use
+                    $view->editProfile($owner, $picture, true, false, false, false, false, false); //Username already in use
                     #header('Location:/UniRent/Owner/profile');
                 }
             }
             else
             {   
-                $view->editProfile($owner, $picture, false, true, false, false, false, false, null); //Email already in use
+                $view->editProfile($owner, $picture, false, true, false, false, false, false); //Email already in use
                 #header('Location:/UniRent/Owner/profile');
             }
         }
@@ -491,13 +491,13 @@ class COwner
 
                     $error = 1;
                     $password=$session->getSessionElement('password');
-                    $view->editProfile($owner, $photoError, false, false, false, false, false, true, null);
+                    $view->editProfile($owner, $photoError, false, false, false, false, false, true);
 
                 } else $password=$newPassword;
                 
             } else {
                 $error = 1;
-                $view->editProfile($owner, $photoError, false, false, false, false, true, false, null);
+                $view->editProfile($owner, $photoError, false, false, false, false, true, false);
 
             }
         }
