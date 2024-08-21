@@ -17,6 +17,7 @@ use CommerceGuys\Addressing\Address;
 use DateTime;
 use Classes\View\VError;
 use Classes\Tools\TRequestType;
+use Classes\Utilities\UFormat;
 
 class COwner 
 {
@@ -156,15 +157,7 @@ class COwner
                 continue;
             }
             $profilePic = $author->getPhoto();
-            if ($author->getStatus() === TStatusUser::BANNED) {
-                $profilePic = "/UniRent/Smarty/images/BannedUser.png";
-            } else if ($profilePic === null) {
-                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
-            }
-            else
-            {
-                $profilePic=(EPhoto::toBase64(array($profilePic)))[0];
-            }
+            $profilePic = UFormat::photoFormatReview($profilePic, $author->getStatus());
             if ($review->getDescription()===null) {
                 $content='No additional details were provided by the author.';
             }
@@ -704,15 +697,7 @@ class COwner
         foreach ($reviews as $review) {
             $recipient = $PM->load( 'E' . $review->getRecipientType()->value, $review->getIdRecipient());
             $profilePic = $recipient->getPhoto();
-            if ($recipient->getStatus() === TStatusUser::BANNED) {
-                $profilePic = "/UniRent/Smarty/images/BannedUser.png";
-            } else if ($profilePic === null) {
-                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
-            }
-            else
-            {
-                $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
-            }
+            $profilePic = UFormat::photoFormatReview($profilePic, $recipient->getStatus());
             if ($review->getDescription()===null) {
                 $content='No additional details were provided by the author.';
             }

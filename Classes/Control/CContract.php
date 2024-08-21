@@ -9,6 +9,7 @@ use Classes\Foundation\FPersistentManager;
 use Classes\Tools\TStatusContract;
 use Classes\Tools\TStatusUser;
 use Classes\Tools\TType;
+use Classes\Utilities\UFormat;
 use Classes\Utilities\USession;
 use Classes\Utilities\USuperGlobalAccess;
 use Classes\View\VOwner;
@@ -156,22 +157,7 @@ class CContract
                     return $diffA - $diffB;
                 });
                 $student=$PM->load('EStudent', $contract->getIdStudent());
-                $student_photo=$student->getPhoto();
-                $studentStatus = $student->getStatus();
-                if($studentStatus === TStatusUser::BANNED){
-                
-                    $path = __DIR__ . "/../../Smarty/images/BannedUser.png";
-                    $student_photo = new EPhoto(null, file_get_contents($path), 'other', null);
-                    $student_photo_64=EPhoto::toBase64(array($student_photo));
-                    $student->setPhoto($student_photo_64[0]);
-                }
-                else if(is_null($student_photo)){}
-                else
-                {
-                    $student_photo_64=EPhoto::toBase64(array($student_photo));
-                    $student->setPhoto($student_photo_64[0]);
-                    #print_r($owner);
-                }
+                UFormat::photoFormatUser($student);
                 $profilePic = $student->getPhoto() === null ? "/UniRent/Smarty/images/ImageIcon.png" : $student->getPhoto()->getPhoto();
                 $studentList[] = [
                     'idContract' => $contract->getID(),
@@ -249,15 +235,7 @@ class CContract
                     continue;
                 }
                 $profilePic = $author->getPhoto();
-                if ($author->getStatus() === TStatusUser::BANNED) {
-                    $profilePic = "/UniRent/Smarty/images/BannedUser.png";
-                } else if ($profilePic === null) {
-                    $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
-                }
-                else
-                {
-                    $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
-                }
+                $profilePic = UFormat::photoFormatReview($profilePic, $author->getStatus());
                 $reviewsData[] = [
                     'title' => $review->getTitle(),
                     'username' => $author->getUsername(),
@@ -299,15 +277,7 @@ class CContract
                     continue;
                 }
                 $profilePic = $author->getPhoto();
-                if ($author->getStatus() === TStatusUser::BANNED) {
-                    $profilePic = "/UniRent/Smarty/images/BannedUser.png";
-                } else if ($profilePic === null) {
-                    $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
-                }
-                else
-                {
-                    $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
-                }
+                $profilePic = UFormat::photoFormatReview($profilePic, $author->getStatus());
                 $reviewsData[] = [
                     'title' => $review->getTitle(),
                     'username' => $author->getUsername(),
