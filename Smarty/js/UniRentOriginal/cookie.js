@@ -132,8 +132,11 @@ const customNamesPatterns = {
     '/UniRent/Admin/profile/*': username + '\'s Profile',
     '/UniRent/Admin/readMoreSupportRequest': 'Support Requests',
     '/UniRent/SupportRequest/readMoreSupportReplies': 'Support Replies',
-    'UniRent/contract/viewOngoing/*': 'OnGoing Contracts',
+    '/UniRent/contract/viewOngoing/*': 'OnGoing Contracts',
     '/UniRent/Admin/readMoreReports': 'Reports',
+    '/UniRent/Student/guidelines': 'Guidelines',
+    '/UniRent/User/guidelines': 'Guidelines',
+    '/UniRent/Owner/guidelines': 'Guidelines',
 };
 
 // Initialize or retrieve `urlDisplayNames` from sessionStorage

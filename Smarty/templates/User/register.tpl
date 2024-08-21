@@ -188,7 +188,7 @@
             <h3>Contact Administrator</h3>
          </div>
          <div class="card-body">
-            <form action="/UniRent/Admin/studentEmailIssue" class="form" method="post">
+            <form action="/UniRent/SupportRequest/studentEmailIssue" class="form" method="post">
                <div class="form-group">
                   <input required="" class="input" type="email" name="emailIssue" id="emailIssue" placeholder="E-mail">
                   <input required="" class="input" type="text" name="university" id="university" placeholder="University Name">

@@ -131,7 +131,7 @@
                <div class="row">
                   <div class="col-md-6">
                      <div class="mail_section map_form_container">
-                         <form action="/UniRent/Admin/supportRequest" method="post" class="yourFormId">
+                         <form action="/UniRent/SupportRequest/supportRequest" method="post" class="yourFormId">
                         <select class="select-bt" name="Subject" required>
                            <option value="" disabled selected>What's the reason of your request?</option>
                            <option value="appUse">App Usage</option>

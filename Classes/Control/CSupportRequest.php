@@ -11,6 +11,7 @@ use Classes\Utilities\USuperGlobalAccess;
 use Classes\Entity\ESupportRequest;
 use Classes\Tools\TType;
 use Exception;
+use Classes\Utilities\UFormat;
 
 class CSupportRequest
 {
@@ -41,7 +42,7 @@ class CSupportRequest
                 if ($reply->getStatusRead() === false) {
                     $countReply++;
                 }
-                $replies[]=self::formatReply($reply);
+                $replies[]=UFormat::formatReply($reply);
             }
             
             // Prepare and output the JSON response
@@ -55,33 +56,6 @@ class CSupportRequest
             // Handle errors and output a JSON error message
             echo json_encode(['error' => 'An error occurred while fetching support replies.']);
         }
-    }
-    private static function formatReply(ESupportRequest $reply): array {
-        switch ($reply->getTopic()) {
-            case TRequestType::REGISTRATION:
-                $topic = 'Registration';
-                break;
-            case TRequestType::USAGE:
-                $topic = 'App Usage';
-                break;
-            case TRequestType::BUG:
-                $topic = 'Bug';
-                break;
-            case TRequestType::REMOVEBAN:
-                $topic = 'Remove Ban Request';
-                break;
-            default:
-                $topic = 'Other';
-                break;
-        }
-        $reply = [
-            'id' => $reply->getId(),
-            'message' => $reply->getMessage(),
-            'supportReply' => $reply->getSupportReply(),
-            'topic' => $topic,
-            'statusRead' => $reply->getStatusRead()
-        ];
-        return $reply;
     }
     public static function readSupportReply(int |string $id)
     {
@@ -127,7 +101,7 @@ class CSupportRequest
                         $count++;
                     }
                 }
-                $replies[$count][] = self::formatReply($reply);
+                $replies[$count][] = UFormat::formatReply($reply);
             }
             if ($userType == 'Student') {
                 $view = new VStudent();

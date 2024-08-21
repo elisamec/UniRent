@@ -200,4 +200,21 @@ class UFormat
         return $format;
 
     }
+    /**
+     * Method formatReply
+     * 
+     * This method is used to format the replies in the admin view of the support requests in the correct way
+     * @param \Classes\Entity\ESupportRequest $reply
+     * @return array
+     */
+    public static function formatReply(ESupportRequest $reply): array {
+        $reply = [
+            'id' => $reply->getId(),
+            'message' => $reply->getMessage(),
+            'supportReply' => $reply->getSupportReply(),
+            'topic' => self::formatTopic($reply->getTopic()),
+            'statusRead' => $reply->getStatusRead()
+        ];
+        return $reply;
+    }
 }
