@@ -163,6 +163,15 @@ class UFormat
         }
         return $topic;
     }
+    /**
+     * Method formatRequests
+     * 
+     * This method is used to format the requests in the admin view of the support requests in the correct way
+     * @param \Classes\Entity\ESupportRequest $request
+     * @param string $author
+     * @param bool $page
+     * @return array
+     */
     public static function formatRequests(ESupportRequest $request, string $author, bool $page = false):array {
         if (!$page) {
             $format = [

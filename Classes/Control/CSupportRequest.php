@@ -168,6 +168,24 @@ class CSupportRequest
         $res ? header('Location:'.$location.'/sent') : header('Location:'.$location.'/fail');
     }
     /**
+     * Method studentEmailIssue
+     * 
+     * this method permits the administrator to fix the registration problem of a student caused by the absence of the email in the JSON file
+     *
+     *
+     * @return void
+     */
+    public static function studentEmailIssue():void {
+
+        $mail = USuperGlobalAccess::getPost('emailIssue');
+        $university = USuperGlobalAccess::getPost('university');
+        $city = USuperGlobalAccess::getPost('city');
+        $supportRequest= new ESupportRequest(null, 'A student is trying to register with the following email, which is not accepted by the system: '. $mail. '. This is the university: '. $university. ' of this city: '.$city, TRequestType::REGISTRATION, null, null);
+        $PM=FPersistentManager::getInstance();
+        $res=$PM->store($supportRequest);
+        $res ? header('Location:/UniRent/User/showRegistration/success') : header('Location:/UniRent/User/showRegistration/error');
+    }
+    /**
      * Method removeBan
      * 
      * this method permits the Student to send a request to the administrator to remove the ban
