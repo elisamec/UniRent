@@ -3,8 +3,6 @@
 namespace Classes\Control;
 require __DIR__.'/../../vendor/autoload.php';
 
-use Classes\Entity\EReport;
-use Classes\Entity\EStudent;
 use Classes\Entity\ESupportRequest;
 use Classes\Foundation\FPersistentManager;
 use Classes\Tools\TRequestType;
@@ -17,7 +15,6 @@ use Classes\Utilities\UCookie;
 use Classes\View\VError;
 use Classes\Utilities\UAccessUniversityFile;
 use DateTime;
-use Classes\Entity\EPhoto;
 use Classes\Tools\TStatusSupport;
 use Classes\Utilities\UFormat;
 
@@ -206,12 +203,7 @@ class CAdmin
         $userType=$user['type'];
         $user=$PM->load('E'.ucfirst($userType), $user['id']);
         UFormat::photoFormatUser($user);
-        $reviews = $PM->loadByRecipient($user->getId(), TType::tryFrom(strtolower($userType)));
-        $reviewsData = [];
-        foreach ($reviews as $review) {
-            $author = $PM->load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
-            $reviewsData[] = UFormat::reviewsFormatAdmin($author, $review);
-        }
+        $reviewsData = CReview::getProfileReviews($user->getId(), $userType);
         $view=new VAdmin();
         $view->profile($user, $userType, $reviewsData, $reportId, $modalMessage);
     }
@@ -235,89 +227,22 @@ class CAdmin
             if ($report->getBanDate()===null) {
                 $countReports++;
             }
-            if ($report->getSubjectType()==TType::REVIEW) {
-                $subject=$PM->load('EReview', $report->getIdSubject());
-                $review = [
-                    'id' => $subject->getId(),
-                    'title' => $subject->getTitle(),
-                    'description' => $subject->getDescription(),
-                ];
-                $usernameSubject=$PM->getUsernameById($subject->getIdAuthor(), $subject->getAuthorType());
-            }
-            else
-            { 
-                $review=null;
-                $usernameSubject=$PM->getUsernameById($report->getIdSubject(), $report->getSubjectType());
-            }
-            $reports[]=[
-                'id'=>$report->getId(),
-                'description'=>$report->getDescription(),
-                'made'=>$report->getMade()->format('Y-m-d'),
-                'banDate'=>$report->getBanDate()? $report->getBanDate()->format('Y-m-d') : null,
-                'type' => $report->getSubjectType()->value,
-                'usernameSubject' =>$usernameSubject,
-                'review' => $review
-            ];
+            $isReview = $report->getSubjectType()==TType::REVIEW;
+            $subject = $isReview ? $PM->load('EReview', $report->getIdSubject()) : $report;
+            $usernameSubject=$PM->getUsernameById($subject->getIdAuthor(), $subject->getAuthorType());
+            $reports[]= UFormat::formatReports($report, $usernameSubject, $isReview ? $subject : null);
         }
-        $requestsArray=$result['Request'];
-        $requests=[];
-        $res=[];
-        $countRequests=0;
         $requestsArray = $result['Request'];
         $requests = [];
         $countRequests = 0;
-
-        // Process requests
         foreach ($requestsArray as $request) {
-            if ($request->getAuthorID() != null) {
-                $author = $PM->getUsernameById($request->getAuthorID(), $request->getAuthorType());
-            } else {
-                $author = 'User';
-            }
-
-            switch ($request->getTopic()) {
-                case TRequestType::REGISTRATION:
-                    $topic = 'Registration';
-                    break;
-                case TRequestType::USAGE:
-                    $topic = 'App Usage';
-                    break;
-                case TRequestType::BUG:
-                    $topic = 'Bug';
-                    break;
-                case TRequestType::REMOVEBAN:
-                    $topic = 'Remove Ban Request';
-                    break;
-                default:
-                    $topic = 'Other';
-                    break;
-            }
-
-            // Create a single request entry
-            $requests[] = [
-                'Request' => [
-                    [
-                        'id' => $request->getId(),
-                        'message' => $request->getMessage(),
-                        'topic' => $topic,
-                        'status' => $request->getStatus()->value,
-                        'reply' => $request->getSupportReply()
-                    ]
-                ],
-                'author' => $author
-            ];
-
+            $author = $request->getAuthorID() != null ? $PM->getUsernameById($request->getAuthorID(), $request->getAuthorType()) : 'User';
+            $requests[] = UFormat::formatRequests($request, $author);
             if ($request->getStatus()->value === 0) {
                 $countRequests++;
             }
         }
-
-        $response = [
-            'Reports' => $reports,
-            'Requests' => $requests,
-            'countReports' => $countReports,
-            'countRequests' => $countRequests
-        ];
+        $response = ['Reports' => $reports, 'Requests' => $requests, 'countReports' => $countReports, 'countRequests' => $countRequests];
         echo json_encode($response);
     }
     
@@ -354,41 +279,13 @@ class CAdmin
         $count=1;
         $requestArray=$PM->getRequestAndReport()['Request'];
         foreach ($requestArray as $request) {
-            if ($request->getAuthorID() != null) {
-                $author = $PM->getUsernameById($request->getAuthorID(), $request->getAuthorType());
-            } else {
-                $author = 'User';
-            }
-            switch ($request->getTopic()) {
-                case TRequestType::REGISTRATION:
-                    $topic = 'Registration';
-                    break;
-                case TRequestType::USAGE:
-                    $topic = 'App Usage';
-                    break;
-                case TRequestType::BUG:
-                    $topic = 'Bug';
-                    break;
-                case TRequestType::REMOVEBAN:
-                    $topic = 'Remove Ban Request';
-                    break;
-                default:
-                    $topic = 'Other';
-                    break;
-            }
+            $author = $request->getAuthorID() != null ? $PM->getUsernameById($request->getAuthorID(), $request->getAuthorType()) : 'User';
             if (array_key_exists($count, $requests)) {
                 if (count($requests[$count])==10) {
                     $count++;
                 }
             }
-            $requests[$count][]=[
-                'id'=>$request->getId(),
-                'message'=>$request->getMessage(),
-                'topic'=>$topic,
-                'author'=>$author,
-                'status'=>$request->getStatus()->value,
-                'reply'=>$request->getSupportReply()
-            ];
+            $requests[$count][]=UFormat::formatRequests($request, $author, true);
         }
         $view=new VAdmin();
         $view->readMoreSupportRequest($requests, $count, $modalMessage);
@@ -470,17 +367,11 @@ class CAdmin
                         $count++;
                     }
                 }
-                if ($report->getSubjectType()==TType::REVIEW) {
-                    $subject=$PM->load('EReview', $report->getIdSubject());
-                    $review = $subject->reportFormat();
-                    $usernameSubject=$PM->getUsernameById($subject->getIdAuthor(), $subject->getAuthorType());
-                }
-                else
-                { 
-                    $review=null;
-                    $usernameSubject=$PM->getUsernameById($report->getIdSubject(), $report->getSubjectType());
-                }
-                $reports[$count][]=$report->formatAdmin($review, $usernameSubject);
+                $isReview = $report->getSubjectType()==TType::REVIEW;
+                $subject =  $isReview ? $PM->load('EReview', $report->getIdSubject()) : $report;
+                $review = $isReview ? $subject : null;
+                $usernameSubject=$PM->getUsernameById($subject->getIdAuthor(), $subject->getAuthorType());
+                $reports[$count][]=UFormat::formatReports($report, $usernameSubject, $review);
             }
         $view=new VAdmin();
         $view->readMoreReports($reports, $count, $modalMessage);
@@ -493,7 +384,7 @@ class CAdmin
      * 
      * @return void
      */
-    private static function checkIfAdmin():void {
+    public static function checkIfAdmin():void {
         $session = USession::getInstance();
         if ($session->getSessionElement('userType') !== 'Admin') {
             $view= new VError();

@@ -111,7 +111,7 @@ class COwner
             #print_r($owner);
         }
         
-        $reviewsData = self::reviewsDataByrecipient($accomm->getIdAccommodation(), TType::ACCOMMODATION);
+        $reviewsData = CReview::getProfileReviews($accomm->getIdAccommodation(), TType::ACCOMMODATION);
         $num_places=$accomm->getPlaces();
         $tenantOwner= $PM->getTenants('current',$accomm->getIdOwner());
         if (!array_key_exists($idAccommodation, $tenantOwner)) {
@@ -143,39 +143,6 @@ class COwner
         $deletable=false;
         
         $view->accommodationManagement($accomm, $owner, $reviewsData, $picture, $tenants, $num_places, $disabled, $deletable, $modalSuccess);
-    }
-
-    /** */
-    private static function reviewsDataByrecipient(int $idRecipient, TType $typeRecipient): array {
-        $reviewsData = [];
-        $PM = FPersistentManager::getInstance();
-        $reviews = $PM->loadByRecipient($idRecipient, $typeRecipient);
-        
-        foreach ($reviews as $review) {
-            $author = $PM->load('EStudent', $review->getIdAuthor());
-            if ($review->isBanned()) {
-                continue;
-            }
-            $profilePic = $author->getPhoto();
-            $profilePic = UFormat::photoFormatReview($profilePic, $author->getStatus());
-            if ($review->getDescription()===null) {
-                $content='No additional details were provided by the author.';
-            }
-            else
-            {
-                $content=$review->getDescription();
-            }
-            $reviewsData[] = [
-                'id' => $review->getId(),
-                'title' => $review->getTitle(),
-                'username' => $author->getUsername(),
-                'userStatus' => $author->getStatus()->value,
-                'stars' => $review->getValutation(),
-                'content' => $content,
-                'userPicture' => $profilePic,
-            ];
-        }
-        return $reviewsData;
     }
 
     public static function ownerRegistration(){
@@ -592,7 +559,7 @@ class COwner
         $view = new VOwner();
         $session=USession::getInstance();
         $id=$session->getSessionElement('id');
-        $reviewsData = self::reviewsDataByrecipient($id, TType::OWNER);
+        $reviewsData = CReview::getProfileReviews($id, TType::OWNER);
         
         $view->reviews($reviewsData, $modalSuccess);
     }
@@ -628,7 +595,7 @@ class COwner
             $owner_photo_64=EPhoto::toBase64(array($owner_photo));
             $owner->setPhoto($owner_photo_64[0]);
         }
-        $reviewsData = self::reviewsDataByrecipient($owner->getId(), TType::OWNER);
+        $reviewsData = CReview::getProfileReviews($owner->getId(), TType::OWNER);
         
         $view->publicProfileFromOwner($owner, $reviewsData, $self, $modalSuccess);
     }
@@ -660,7 +627,7 @@ class COwner
             #print_r($owner);
         }
 
-        $reviewsData = self::reviewsDataByrecipient($owner->getId(), TType::OWNER);
+        $reviewsData = CReview::getProfileReviews($owner->getId(), TType::OWNER);
         $session=USession::getInstance();
         $leavebleReviews=$PM->remainingReviewStudentToOwner($session->getSessionElement('id'), $owner->getId());
         $view->publicProfileFromStudent($owner, $reviewsData, $modalSuccess, $leavebleReviews);

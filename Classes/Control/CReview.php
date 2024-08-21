@@ -2,18 +2,18 @@
 namespace Classes\Control;
 require __DIR__.'/../../vendor/autoload.php';
 
-use Classes\Entity\ECreditCard;
-use Classes\Entity\EPhoto;
 use Classes\Foundation\FPersistentManager;
 use Classes\Entity\EReview;
 use Classes\Tools\TType;
 use Classes\Utilities\USession;
 use Classes\Utilities\USuperGlobalAccess;
-use Classes\View\VStudent; 
-use Classes\Control;
 use DateTime;
-use FCreditCard;
 use Classes\View\VError;
+use Classes\Utilities\UFormat;
+use Classes\Control\CStudent;
+use Classes\Entity\EAccommodation;
+use Classes\Entity\EOwner;
+use Classes\Entity\EStudent;
 
 class CReview {
 
@@ -127,6 +127,30 @@ class CReview {
         } else {
             header('Location:' . USuperGlobalAccess::getCookie('current_page').'/error');
         }
+    }
+    /**
+     * Method getProfileReviews
+     * 
+     * This method is used to get the reviews of a user
+     * @param int $userId
+     * @param \Classes\Tools\TType|string $userType
+     * @return array[]
+     */
+    public static function getProfileReviews(int $userId, TType | string $userType) {
+        $PM=FPersistentManager::getInstance();
+        $session = USession::getInstance();
+        $userType = is_string($userType) ? TType::tryFrom(strtolower($userType)) : $userType;
+        $reviews = $PM->loadByRecipient($userId, $userType);
+        $reviewsData = [];
+        foreach ($reviews as $review) {
+            $author = $PM->load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
+            $isAdmin = $session->getSessionElement('userType') === 'Admin';
+            if ($review->isBanned() &&  !$isAdmin) {
+                continue;
+            }
+            $reviewsData[] = $isAdmin ? UFormat::reviewsFormatAdmin($author, $review) : UFormat::reviewsFormatUser($author, $review);
+        }
+        return $reviewsData;
     }
 
 
