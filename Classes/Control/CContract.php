@@ -11,6 +11,7 @@ use Classes\Tools\TStatusUser;
 use Classes\Tools\TType;
 use Classes\Utilities\UFormat;
 use Classes\Utilities\USession;
+use Classes\Utilities\USort;
 use Classes\Utilities\USuperGlobalAccess;
 use Classes\View\VOwner;
 use Classes\View\VStudent;
@@ -91,16 +92,7 @@ class CContract
         $PM= FPersistentManager::getInstance();
         $contracts=$PM->getContractsByStudent($id, null, $kind);
         
-        usort($contracts, function($a, $b) {
-            $today = new DateTime();
-            $fromDateA = $a->getFromDate();
-            $fromDateB = $b->getFromDate();
-        
-            $diffA = $today->diff($fromDateA)->days;
-            $diffB = $today->diff($fromDateB)->days;
-        
-            return $diffA - $diffB;
-        });
+        $contracts = USort::sortArray($contracts, 'contract');
         $contractsData = [];
         foreach ($contracts as $contract) {
             $accommodation=$PM->load('EAccommodation', $contract->getAccomodationId());
@@ -144,18 +136,9 @@ class CContract
         foreach ($contractsArray as $idAccommodation => $contracts) {
             $accommodationTitle = $PM->getTitleAccommodationById($idAccommodation);
             $studentList = [];
+            $contracts = USort::sortArray($contracts, 'contract');
 
             foreach ($contracts as $contract) {
-                usort($contracts, function($a, $b) {
-                    $today = new DateTime();
-                    $fromDateA = $a->getFromDate();
-                    $fromDateB = $b->getFromDate();
-                
-                    $diffA = $today->diff($fromDateA)->days;
-                    $diffB = $today->diff($fromDateB)->days;
-                
-                    return $diffA - $diffB;
-                });
                 $student=$PM->load('EStudent', $contract->getIdStudent());
                 UFormat::photoFormatUser($student);
                 $profilePic = $student->getPhoto() === null ? "/UniRent/Smarty/images/ImageIcon.png" : $student->getPhoto()->getPhoto();
@@ -318,18 +301,9 @@ class CContract
         foreach ($result as $idAccommodation => $contracts) {
             $accommodationTitle = $PM->getTitleAccommodationById($idAccommodation);
             $studentList = [];
+            $contracts = USort::sortArray($contracts, 'contract');
 
             foreach ($contracts as $contract) {
-                usort($contracts, function($a, $b) {
-                    $today = new DateTime();
-                    $fromDateA = $a->getFromDate();
-                    $fromDateB = $b->getFromDate();
-                
-                    $diffA = $today->diff($fromDateA)->days;
-                    $diffB = $today->diff($fromDateB)->days;
-                
-                    return $diffA - $diffB;
-                });
                 $student=$PM->load('EStudent', $contract->getIdStudent());
                 $student_photo=$student->getPhoto();
                 $studentStatus = $student->getStatus();

@@ -7,6 +7,7 @@ use Classes\Foundation\FPersistentManager;
 use Classes\Tools\TStatusUser;
 use Classes\Tools\TType;
 use Classes\Utilities\USession;
+use Classes\Utilities\USort;
 use Classes\View\VOwner;
 use Classes\View\VStudent;
 use Classes\View\VError;
@@ -58,13 +59,7 @@ class CReservation
         $view = new VOwner();
         $reservationData=[];
         foreach ($reservationsArray as $idAccommodation => $reservations) {
-            usort($reservations, function($a, $b) {
-                $dateA = $a->getMade();
-                $dateB = $b->getMade();
-                
-                // Compare DateTime objects directly
-                return $dateA <=> $dateB;
-            });
+            $reservations = USort::sortArray($reservations, 'reservation');
             $accommodationTitle = $PM->getTitleAccommodationById($idAccommodation);
             $studentList = [];
 

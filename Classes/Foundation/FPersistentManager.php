@@ -15,6 +15,7 @@ use Classes\Foundation\FUpdater;
 use Classes\View\VError;
 use Classes\Foundation\FReport;
 use Classes\Tools\TStatusSupport;
+use Classes\Utilities\USort;
 use DateTime;
 
 
@@ -787,13 +788,7 @@ class FPersistentManager {
                 $result[]= ['User'=> $owner,'Type' =>'Owner', 'Report'=>$report];
             }
         }
-        usort($result, function($a, $b) {
-            $ad = new DateTime($a['Report']->getBanDate());
-            $bd = new DateTime($b['Report']->getBanDate());
-        
-            // Compare dates: newest first
-            return $bd <=> $ad; // Use spaceship operator for clean comparison
-        });
+        $result = USort::sortArray($result, 'report');
         
         return $result;
     }

@@ -7,6 +7,7 @@ use Classes\Entity\EVisit;
 use Classes\Foundation\FPersistentManager;
 use Classes\Tools\TType;
 use Classes\Utilities\USession;
+use Classes\Utilities\USort;
 use Classes\Utilities\USuperGlobalAccess;
 use Classes\View\VOwner;
 use Classes\View\VStudent;
@@ -107,20 +108,12 @@ class CVisit
     
     // Sort the events within each date by start time
     foreach ($visitsData as &$data) {
-        usort($data['events'], function($a, $b) {
-            $startTimeA = substr($a['time'], 0, 5); // Extract the start time (HH:MM)
-            $startTimeB = substr($b['time'], 0, 5); // Extract the start time (HH:MM)
-            return strcmp($startTimeA, $startTimeB);
-        });
+        $data['events'] = USort::sortArray($data['events'], 'visitByStartTime');
     }
     unset($data); // Break the reference
     
     // Sort the data by date
-    usort($visitsData, function($a, $b) {
-        $dateA = sprintf('%04d-%02d-%02d', $a['year'], $a['month'], $a['day']);
-        $dateB = sprintf('%04d-%02d-%02d', $b['year'], $b['month'], $b['day']);
-        return strcmp($dateA, $dateB);
-    });
+    $visitsData = USort::sortArray($visitsData, 'visitByDate');
     
     $view->visits($visitsData);
    }
