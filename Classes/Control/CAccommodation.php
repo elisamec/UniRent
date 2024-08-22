@@ -27,61 +27,43 @@ class CAccommodation
     {   
         COwner::checkIfOwner();
         $view=new VOwner();
-        
         $view->addAccommodation();
     }
         
-        /**
-         * Method addAccommodationOperations
-         *
-         * this method is used to add the accommodation to database
-         * @return void
-         */
-        public static function addAccommodationOperations()
-        {
-            $afs=USuperGlobalAccess::getAllPost(['title','price','deposit','startDate','month','visitAvaliabilityData','places',
-                                                 'address','city','postalCode','description','man','women','smokers','animals',
-                                                'uploadedImagesData']);
-
-            $myarray=json_decode($afs['uploadedImagesData'],true);
-            $array_photos=EPhoto::fromJsonToPhotos($myarray);
-
-            $duration=EAccommodation::DurationOfVisit($afs['visitAvailabilityData']);
-            if(!is_null($duration) and $duration>0)  #se la durata delle visite è zero non ci saranno visite
-            {
-                $array_visit=EAccommodation::fromJsonToArrayOfVisit($afs['visitAvailabilityData']);
-            }
-            else
-            {
-                $array_visit=array();
-                $duration=0;
-            }
-            if($afs['month']=='Sep')
-            {
-                $afs['month']=8;
-            }
-            else
-            {
-                $afs['month']=9;
-            }
-            $men=USession::getInstance()->booleanSolver($afs['men']);
-            $women=USession::getInstance()->booleanSolver($afs['women']);
-            $smokers=USession::getInstance()->booleanSolver($afs['smokers']);
-            $animals=USession::getInstance()->booleanSolver($afs['animals']);
-
-            $date= new DateTime('now');
-            $year=(int)$date->format('Y');
-            $date=$date->setDate($year,$afs['month'],(int)$afs['startDate']);
-
-            $idOwner=USession::getInstance()->getSessionElement('id');
-
-            $addressObj= new Address();
-            $addressObj=$addressObj->withAddressLine1($afs['address'])->withPostalcode($afs['postalCode'])->withLocality($afs['city']);
-
-            $accomodation = new EAccommodation(null,$array_photos,$afs['title'],$addressObj,$afs['price'],$date,$afs['description'],(int)$afs['places'],(float)$afs['deposit'],$array_visit,$duration,$men,$women,$animals,$smokers, true,$idOwner);
-            $result=FPersistentManager::getInstance()->store($accomodation);
-            $result ? header('Location:/UniRent/Owner/home/success') : header('Location:/UniRent/Owner/home/error');
+    /**
+     * Method addAccommodationOperations
+     *
+     * This method is used to add the accommodation to the database
+     * 
+     * @return void
+     */
+    public static function addAccommodationOperations()
+    {
+        $afs = USuperGlobalAccess::getAllPost(['title', 'price', 'deposit', 'startDate', 'month', 'visitAvaliabilityData', 'places',
+            'address', 'city', 'postalCode', 'description', 'man', 'women', 'smokers', 'animals', 'uploadedImagesData']);
+        $myarray = json_decode($afs['uploadedImagesData'], true);
+        $array_photos = EPhoto::fromJsonToPhotos($myarray);
+        $duration = EAccommodation::DurationOfVisit($afs['visitAvailabilityData']);
+        if (!is_null($duration) && $duration > 0) {
+            $array_visit = EAccommodation::fromJsonToArrayOfVisit($afs['visitAvailabilityData']);
+        } else {
+            $array_visit = array();
+            $duration = 0;
         }
+        $afs['month'] = $afs['month'] == 'Sep' ? 8 : 9;
+        $men = USession::getInstance()->booleanSolver($afs['men']);
+        $women = USession::getInstance()->booleanSolver($afs['women']);
+        $smokers = USession::getInstance()->booleanSolver($afs['smokers']);
+        $animals = USession::getInstance()->booleanSolver($afs['animals']);
+        $date = new DateTime('now');
+        $date = $date->setDate((int)$date->format('Y'), $afs['month'], (int)$afs['startDate']);
+        $idOwner = USession::getInstance()->getSessionElement('id');
+        $addressObj = new Address();
+        $addressObj = $addressObj->withAddressLine1($afs['address'])->withPostalcode($afs['postalCode'])->withLocality($afs['city']);
+        $accomodation = new EAccommodation(null, $array_photos, $afs['title'], $addressObj, $afs['price'], $date, $afs['description'], (int)$afs['places'], (float)$afs['deposit'], $array_visit, $duration, $men, $women, $animals, $smokers, true, $idOwner);
+        $result = FPersistentManager::getInstance()->store($accomodation);
+        $result ? header('Location:/UniRent/Owner/home/success') : header('Location:/UniRent/Owner/home/error');
+    }
 
     /**
      * Deactivate Accommodation
@@ -173,7 +155,6 @@ class CAccommodation
             $myarray=json_decode($afs['uploadedImageData'],true);
             $array_photos=EPhoto::fromJsonToPhotos($myarray);
             $duration=EAccommodation::DurationOfVisit($afs['visitAvailabilityData']);
-            
             if(!is_null($duration) and $duration>0)  #se la durata delle visite è zero non ci saranno visite
             {
                 $array_visit=EAccommodation::fromJsonToArrayOfVisit($afs['visitAvailabilityData']);
@@ -183,25 +164,15 @@ class CAccommodation
                 $array_visit=array();
                 $duration=0;
             }
-            if($afs['month']=='september')
-            {
-                $afs['month']=9;
-            }
-            else
-            {
-                $afs['month']=10;
-            }
+            $afs['month'] = $afs['month']=='september' ? 8 : 9;
             $men=USession::getInstance()->booleanSolver($afs['men']);
             $women=USession::getInstance()->booleanSolver($afs['women']);
             $smokers=USession::getInstance()->booleanSolver($afs['smokers']);
             $animals=USession::getInstance()->booleanSolver($afs['animals']);
-    
             $date= new DateTime('now');
             $year=(int)$date->format('Y');
             $date=$date->setDate($year,$afs['month'],(int)$afs['startDate']);
-    
             $status=FPersistentManager::getInstance()->load('EAccommodation',$id)->getStatus();
-            
             $idOwner=USession::getInstance()->getSessionElement('id');
             $addressId = FPersistentManager::getInstance()->load('EAccommodation', $id)->getAddress()->getSortingCode();
             $addressObj= new Address();
@@ -209,7 +180,6 @@ class CAccommodation
             $accomodation = new EAccommodation($id,$array_photos,$afs['title'],$addressObj,(float)$afs['price'],$date,$afs['description'],(int)$afs['places'],(float)$afs['deposit'],$array_visit,$duration,$men,$women,$animals,$smokers,$status,$idOwner);
             $result=FPersistentManager::getInstance()->update($accomodation);
             $id = $accomodation->getIdAccommodation();
-            
             $result ? header('Location:/UniRent/Owner/accommodationManagement/'.$id.'/success') : header('Location:/UniRent/Owner/accommodationManagement/'.$id.'/error');
     }
     

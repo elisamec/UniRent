@@ -4,7 +4,6 @@ namespace Classes\Control;
 
 require __DIR__.'../../../vendor/autoload.php';
 
-use Classes\Entity\EAccommodation;
 use Classes\Utilities\USession;
 use Classes\Utilities\USuperGlobalAccess;
 use Classes\View\VOwner;
@@ -13,10 +12,7 @@ use Classes\Entity\EOwner;
 use Classes\Entity\EPhoto;
 use Classes\Tools\TStatusUser;
 use Classes\Tools\TType;
-use CommerceGuys\Addressing\Address;
-use DateTime;
 use Classes\View\VError;
-use Classes\Tools\TRequestType;
 use Classes\Utilities\UFormat;
 
 class COwner 
