@@ -783,33 +783,12 @@ class COwner
         $ownerId=$session->getSessionElement('id');
         $PM=FPersistentManager::getInstance();
         $view = new VOwner();
-
-        $accommodation_name=USuperGlobalAccess::getPost('accommodation');
-        $t_username=USuperGlobalAccess::getPost('username');
-        $rateT=(int)USuperGlobalAccess::getPost('rateT');
-        $date=USuperGlobalAccess::getPost('date');
-        $t_age=(int)USuperGlobalAccess::getPost('age');
+        $afs=USuperGlobalAccess::getAllPost(['accommodation','username','rateT','date','age','men','women','year']);
         $men=USuperGlobalAccess::getPost('men');
         $women=USuperGlobalAccess::getPost('women');
-        if($men==='false')
-        {
-            $men=false;
-        }
-        else
-        {
-            $men=true;
-        }
-        if($women==='false')
-        {
-            $women=false;
-        }
-        else
-        {
-            $women=true;
-        }
-    
-        $tenantsArray=$PM->getFilterTenants($type,$accommodation_name,$t_username,$t_age,$rateT,$date,$men,$women,$ownerId);
-
+        $men==='false'? $men=false : $men=true;
+        $women==='false'? $women=false : $women=true;
+        $tenantsArray=$PM->getFilterTenants($type,$afs['accommodation'],$afs['username'],(int)$afs['age'],(int)$afs['rateT'],$afs['date'],$men,$women,$ownerId,$afs['year']);
         $tenants=[];
         foreach ($tenantsArray as $idAccommodation => $students) {
             $accommodationTitle = $PM->getTitleAccommodationById($idAccommodation);
@@ -839,11 +818,11 @@ class COwner
             ];
         }
         $accommodations=$PM->loadAccommodationsByOwner($ownerId);
-        foreach ($accommodations as $accom) {
+        foreach ($accommodations as $accom) 
+        {
             $accommodationTitles[$accom->getIdAccommodation()]=$accom->getTitle();
         }
-        
-        $view->tenants($tenants, $type, $accommodationTitles, $rateT);
+        $view->tenants($tenants, $type, $accommodationTitles,(int)$afs['rateT']);
     }
 
     /**

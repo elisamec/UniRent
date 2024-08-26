@@ -623,10 +623,11 @@ use PDOException;
      * @param $men 
      * @param $women
      * @param $idOwner
+     * @param $year 
      *
      * @return array
      */
-    public function getFilterTenants($type,$accommodation_name,$t_username,$t_age,$rateT,$date,$men,$women,$idOwner):array
+    public function getFilterTenants($type,$accommodation_name,$t_username,$t_age,$rateT,$date,$men,$women,$idOwner,$year):array
     {
 
         $result=array();
@@ -641,9 +642,8 @@ use PDOException;
             $type='onGoing';
         } else if ($type=='past')
         {
-            $type='finshed';
+            $type='finished';
         }
-
         try
         {
             $q="SELECT a.id AS idAccommodation , s.id AS idStudent, r.toDate AS expiryDate
@@ -656,16 +656,17 @@ use PDOException;
             $params=array();
             $params[':type']=$type;
             $params[':id']=$idOwner;
-            if($t_age!=0)
+            if($t_age!=0 and !is_null($t_age))
             {
                 $q.=" AND TIMESTAMPDIFF(YEAR,s.birthDate,CURDATE())= :age";
                 $params[':age']=$t_age;
             }
+            /*
             if(!is_null($date))
             {
                 $q.=" AND MONTH(a.`start`)= :date";
                 $params[':date']=$date;
-            }
+            }*/
             if(!is_null($accommodation_name))
             {
                 $q.=" AND a.title= :accommodation_name";
@@ -676,16 +677,16 @@ use PDOException;
                 $q.=" AND s.username= :t_username";
                 $params[':t_username']=$t_username;
             }
+            if(!is_null($year))
+            {
+                $q.=" AND YEAR(c.paymentDate)= :year";
+                $params[':year']=$year;
+            }
 
-                
-            
             if($men==true and $women==true){}
             elseif($men==false and $women==true){$q.=" AND s.sex='F'";}
             elseif($men==true and $women==false){$q.=" AND s.sex='M'";}
             else{}
-            #print $q;
-           /* print $type;
-            print $idOwner;*/
             FPersistentManager::getInstance()->updateDataBase();
             $db->exec('LOCK TABLES accommodation READ, reservation READ, contract READ, owner READ, student READ');
             $db->beginTransaction();
@@ -699,9 +700,7 @@ use PDOException;
             $db->rollBack();
             return $result;
         }
-        
         $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
-        
         foreach($rows as $row)
         {
             $student=FPersistentManager::getInstance()->load('EStudent',$row['idStudent']);
@@ -714,8 +713,6 @@ use PDOException;
                     $p_student=(EPhoto::toBase64(array($p_student)))[0];
                     $student->setPhoto($p_student);
                 }
-            
-            
                 if(in_array($row['idAccommodation'],array_keys($result)))
                 {
                     $result[$row['idAccommodation']][]=[$student, $row['expiryDate']];

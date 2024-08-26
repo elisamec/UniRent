@@ -550,10 +550,21 @@ class FPersistentManager {
         }
     }
 
-    public function getFilterTenants(string $type, ?string $accommodation_name, string $t_username, int $t_age, int $rateT, ?string $date, ?bool $men, ?bool $women, int $idOwner):array
+    public function getFilterTenants(string $type, ?int $accommodation_name, ?string $t_username, ?int $t_age, int $rateT, ?string $date, ?bool $men, ?bool $women, int $idOwner,$year):array
     {
         $FO=FOwner::getInstance();
-        $result=$FO->getFilterTenants($type,$accommodation_name,$t_username,$t_age,$rateT,$date,$men,$women,$idOwner);
+        if(!is_null($accommodation_name))
+        {
+            $accommodation_name=FPersistentManager::getInstance()->load('EAccommodation',$accommodation_name)->getTitle();
+        }
+        if(is_null($year))
+        {
+            $result=$FO->getFilterTenants($type,$accommodation_name,$t_username,$t_age,$rateT,$date,$men,$women,$idOwner,null);
+        }
+        else 
+        {
+            $result=$FO->getFilterTenants($type,$accommodation_name,$t_username,$t_age,$rateT,$date,$men,$women,$idOwner,(int)$year);
+        }
         return $result;
     }
     public function loadVisitsByWeek():array
