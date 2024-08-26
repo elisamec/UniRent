@@ -56,21 +56,29 @@ function displayAccommodationsOwner(accommodationsActive, accommodationsInactive
     const containerOwner = document.getElementById('accommodationContainer');
     let classDisplay = "";
     let imageClass = "";
-
+    
     if (containerOwner) {
 
         // Combine both active and inactive accommodations
         const allAccommodations = [...accommodationsActive, ...accommodationsInactive];
-
+        console.log('allAccommodations:',allAccommodations);
         if (allAccommodations.length === 0) {
             containerOwner.innerHTML = '<div class="container"><h1 class="noRev">You have no ads yet!</h1></div>';
         } else {
-            allAccommodations.forEach(accomodationOwner => {
-                if (accomodationOwner.photo == null) {
-                    accomodationOwner.photo = "/UniRent/Smarty/images/noPic.png";
+            allAccommodations.forEach(accomodationArray => {
+               
+                let accommodationOwner = {
+                    id: accomodationArray.id,
+                    title: accomodationArray.title,
+                    address: accomodationArray.address,
+                    price: accomodationArray.price,
+                    photo: accomodationArray.photo
+                };
+                if(accommodationOwner.photo == null){
+                    accommodationOwner.photo = "/UniRent/Smarty/images/noPic.png";
                 }
-
-                if (accommodationsActive.includes(accomodationOwner)) {
+                console.log('accommodationOwner:',accommodationOwner);
+                if (accommodationsActive.includes(accommodationOwner)) {
                         classDisplay = "image_box";
                         imageClass = "blog_img";
                 } else {
@@ -85,21 +93,21 @@ function displayAccommodationsOwner(accommodationsActive, accommodationsInactive
                 accommodationElementOwner.innerHTML = `
                     <div class="${imageClass}">
                         <div class="container_main">
-                            <img src="${accomodationOwner.photo}" alt="">
+                            <img src="${accommodationOwner.photo}" alt="">
                             <div class="overlay">
                                 <div class="text">
-                                    <div class="some_text"><a href="/UniRent/Owner/accommodationManagement/${accomodationOwner.id}">See More</a></div>
+                                    <div class="some_text"><a href="/UniRent/Owner/accommodationManagement/${accommodationOwner.id}">See More</a></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="${classDisplay}">
                         <div class="left_box">
-                            <h1 class="road_text">${accomodationOwner.title}</h1>
-                            <p>${accomodationOwner.address}</p>
+                            <h1 class="road_text">${accommodationOwner.title}</h1>
+                            <p>${accommodationOwner.address}</p>
                         </div>
                         <div class="right_box">
-                            <div class="rate_text">${accomodationOwner.price} €</div>
+                            <div class="rate_text">${accommodationOwner.price} €</div>
                         </div>
                     </div>
                 `;

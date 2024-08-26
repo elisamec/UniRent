@@ -341,6 +341,7 @@
       <!-- Javascript variables-->
       <script>
          var file = 'addAccommodation';
+      </script>
 <!-- Javascript files -->
 <script src="/UniRent/Smarty/js/UniRentOriginal/visitAvailability.js"></script>
 <script src="/UniRent/Smarty/js/UniRentOriginal/addImages.js"></script>

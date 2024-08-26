@@ -159,8 +159,9 @@ print $totalMinutes;
 $FA=FAccommodation::getInstance();
 $result=$FA->areThereFreePlaces(7,2024);
 
-print var_dump($result) ;*/
+print var_dump($result);
+*/
+$U=UAccessUniversityFile::getInstance();
+$università=$U->getCities();
+print_r($università);
 
-
-$result=FOwner::getInstance()->getSupportReply(5);
-print_r($result);

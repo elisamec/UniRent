@@ -302,6 +302,7 @@
          const defaultPeriod = {$selectedDate};
          const results = {$searchResult};
          var user = 'User';
+
       </script>
       <!-- Javascript files-->
       <script src="/UniRent/Smarty/js/jquery.min.js"></script>

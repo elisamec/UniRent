@@ -31,8 +31,10 @@ class COwner
         $PM=FPersistentManager::getInstance();
         $ownerId=USession::getInstance()->getSessionElement('id');
         $accommodationEntities=$PM->loadAccommodationsByOwner($ownerId);
-        $accommodationsActive=[];
-        $accommodationsInactive=[];
+        
+        $accommodationsActive=array();
+        $accommodationsInactive=array();
+
         foreach($accommodationEntities as $accom) {
             if(count($accom->getPhoto())==0)
                 {
@@ -44,7 +46,7 @@ class COwner
                    $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
                 }
 
-                $acc[] = [
+                $acc = [
                     'id' => $accom->getIdAccommodation(),
                     'photo' => $photo,
                     'title' => $accom->getTitle(),
@@ -58,7 +60,7 @@ class COwner
                     $accommodationsInactive[] = $acc;
                 }
             }
-        
+            
         $view->home($accommodationsActive, $accommodationsInactive, $modalSuccess);
     }
 

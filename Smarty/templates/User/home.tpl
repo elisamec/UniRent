@@ -141,6 +141,11 @@
                      </select>
                   </div>
                   <div class="col-lg-3 select-outline">
+                     <select name="year" id="yearSelect" class="nice-select mdb-select md-form md-outline colorful-select dropdown-primary" required>
+                     <option value="" disabled selected>Select a year</option>
+                     </select>
+                  </div>
+                  <div class="col-lg-3 select-outline">
                      <div class="find_btn"><button type="submit">Find Now</button></div>
                   </div>
                </div>
@@ -265,6 +270,7 @@
       <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/selectKeyboardAccessibility.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/year.js"></script>
 
    </body>
 </html>

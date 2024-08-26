@@ -67,7 +67,13 @@ class CUser
         $view = new VUser();
         $view->contact($modalSuccess);
     }
-
+    
+    /**
+     * Method search
+     *
+     * used by a non logged user to search for an accommodation
+     * @return void
+     */
     public static function search(){
         $view = new VUser();
         $city=USuperGlobalAccess::getPost('city');
@@ -98,7 +104,13 @@ class CUser
         $searchResult=$PM->findAccommodationsUser($city,$date,$rateA,$rateO,$minPrice,$maxPrice,$year);
         $view->findAccommodation($city,$university,$searchResult,$date, $rateO, $rateA, $minPrice, $maxPrice,$year);
     }
-
+    
+    /**
+     * Method getCities
+     *
+     * method used to get an array  with key=city and value=array of universities
+     * @return void
+     */
     public static function getCities()
     {
         $UF=UAccessUniversityFile::getInstance();

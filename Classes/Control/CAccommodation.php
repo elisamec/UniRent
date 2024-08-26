@@ -39,11 +39,12 @@ class CAccommodation
      */
     public static function addAccommodationOperations()
     {
-        $afs = USuperGlobalAccess::getAllPost(['title', 'price', 'deposit', 'startDate', 'month', 'visitAvaliabilityData', 'places',
-            'address', 'city', 'postalCode', 'description', 'man', 'women', 'smokers', 'animals', 'uploadedImagesData']);
+        $afs = USuperGlobalAccess::getAllPost(['title', 'price', 'deposit', 'startDate', 'month', 'visitAvailabilityData', 'places',
+            'address', 'city', 'postalCode', 'description', 'men', 'women', 'smokers', 'animals', 'uploadedImagesData']);
         $myarray = json_decode($afs['uploadedImagesData'], true);
         $array_photos = EPhoto::fromJsonToPhotos($myarray);
-        $duration = EAccommodation::DurationOfVisit($afs['visitAvailabilityData']);
+        $duration = EAccommodation::DurationOfVisit($afs["visitAvailabilityData"]);
+
         if (!is_null($duration) && $duration > 0) {
             $array_visit = EAccommodation::fromJsonToArrayOfVisit($afs['visitAvailabilityData']);
         } else {

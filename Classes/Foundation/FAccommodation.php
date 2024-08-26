@@ -244,12 +244,12 @@
             $FA=FAccommodation::getInstance();
             $db=FConnection::getInstance()->getConnection();
             $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
-            $db->beginTransaction();
+            if(!$db->inTransaction())
+            {
+                $db->beginTransaction();
+            }
             
             try{ 
-                $db->exec('LOCK TABLES accommodation WRITE');
-                
-
                 $q='INSERT INTO accommodation (title, address, price, start, description, places, deposit, visitDuration, man, woman, pets, smokers, status, idOwner)';
                 $q=$q.' VALUES (:title, :address, :price, :start, :description, :places, :deposit, :visitDuration, :man, :woman, :pets, :smokers, :status, :idOwner)';
 
@@ -274,8 +274,10 @@
                 
                 $stm->execute();
                 $id=$db->lastInsertId();
-                $db->commit();
-                $db->exec('UNLOCK TABLES');
+                if($db->inTransaction())
+                {
+                    $db->commit();
+                }
                 $accommodation->setIdAccommodation($id);
 
                 $photos = $accommodation->getPhoto();
@@ -301,7 +303,10 @@
             }      
             catch(PDOException $e)
             {
-                $db->rollBack();
+                if($db->inTransaction())
+                {
+                    $db->rollBack();
+                }
                 return false;
             }
 
@@ -816,6 +821,7 @@
             $result=array();
             $db=FConnection::getInstance()->getConnection();
             $date==='september' ? $date=9 : $date=10 ;
+            if(is_null($year)){$year=date('Y');}
             try
             {
                 $q ="SELECT a.id AS id
@@ -823,21 +829,28 @@
                      WHERE ad.city= :city
                      AND MONTH(a.`start`)= :m
                      AND a.status=TRUE
-                     AND((a.price>= :min)AND(a.price<= :max))";
-                $db->exec('LOCK TABLES accommodation READ , address READ');
-                $db->beginTransaction();
+                     AND((a.price>= :min)AND(a.price<= :max)) LOCK IN SHARE MODE";
+                if(!$db->inTransaction())
+                {
+                    $db->beginTransaction();
+                }
                 $stm=$db->prepare($q);
                 $stm->bindParam(':min',$minPrice,PDO::PARAM_INT);
                 $stm->bindParam('max',$maxPrice,PDO::PARAM_INT);
                 $stm->bindParam(':city',$city,PDO::PARAM_STR);
                 $stm->bindParam(':m',$date,PDO::PARAM_INT);
                 $stm->execute();
-                $db->commit();
-                $db->exec('UNLOCK TABLES');
+                if($db->inTransaction())
+                {
+                    $db->commit();
+                }
             }
             catch(PDOException $e)
             {
-                $db->rollBack();
+                if($db->inTransaction())
+                {
+                    $db->rollBack();
+                }
                 return $result;
             }
             $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
