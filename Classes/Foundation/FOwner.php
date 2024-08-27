@@ -561,7 +561,6 @@ use PDORow;
      */
     public function getTenans(string $type, int $idOwner):array
     {
-        $result=array();
         $db=FConnection::getInstance()->getConnection();
         FPersistentManager::getInstance()->updateDataBase();
         try
@@ -585,29 +584,10 @@ use PDORow;
         catch(PDOException $e)
         {
             $db->rollBack();
-            return $result;
+            return array();
         }
         $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
-        foreach($rows as $row)
-        {
-            $student=FPersistentManager::getInstance()->load('EStudent',$row['idStudent']);
-
-            $p_student=$student->getPhoto();
-            if(!is_null($p_student))
-            {
-                $p_student=(EPhoto::toBase64(array($p_student)))[0];
-                $student->setPhoto($p_student);
-            }
-            if(in_array($row['idAccommodation'],array_keys($result)))
-            {
-                $result[$row['idAccommodation']][]=[$student, $row['expiryDate']];
-            }
-            else
-            {
-                $result[$row['idAccommodation']]=array([$student, $row['expiryDate']]);
-            }  
-        }
-        return $result;
+        return $this->fromRowsToTenantsArrayByRateT($rows,0); #we do not have the rateT yet, so we can ignore it putting it to 0
     }
     
     /**
@@ -707,6 +687,7 @@ use PDORow;
      * Method fromRowsToTenantsArrayByRateT
      * 
      * this method take only student with given rateT (tenants rate) and transforms them in an array to format
+     * if you are not interest to rateT use rateT=0
      * @param $rows result of query
      * @param int $rateT tenants rate
      *
