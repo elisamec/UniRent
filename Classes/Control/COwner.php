@@ -733,39 +733,11 @@ class COwner
         $PM=FPersistentManager::getInstance();
         $view = new VOwner();
         $tenantsArray = $PM->getTenants($kind,$ownerId);
-        $tenants=[];
         $accommodations=$PM->loadAccommodationsByOwner($ownerId);
         foreach ($accommodations as $accom) {
             $accommodationTitles[$accom->getIdAccommodation()]=$accom->getTitle();
         }
-        foreach ($tenantsArray as $idAccommodation => $students) {
-            $accommodationTitle = $PM->getTitleAccommodationById($idAccommodation);
-            $tenantList = [];
-            foreach ($students as $student) {
-                $profilePic = ($student[0])->getPhoto();
-                if ($student[0]->getStatus() === TStatusUser::BANNED) {
-                    $profilePic = "/UniRent/Smarty/images/BannedUser.png";
-                } else if ($profilePic === null) {
-                    $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
-                }
-                else
-                {
-                    $profilePic=$profilePic->getPhoto();
-                }
-                $tenantList[] = [
-                    'username' => ($student[0])->getUsername(),
-                    'image' => $profilePic,
-                    'expiryDate' => $student[1],
-                    'status' => ($student[0])->getStatus()->value
-                ];
-            }
-
-            $tenants[] = [
-                'accommodation' => $accommodationTitle,
-                'tenants' => $tenantList
-            ];
-        }
-        $view->tenants($tenants, $kind, $accommodationTitles,0);
+        $view->tenants($tenantsArray, $kind, $accommodationTitles,0);
     }
 
     /**

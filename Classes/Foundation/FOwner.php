@@ -587,8 +587,10 @@ use PDORow;
             return array();
         }
         $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
-        return $this->fromRowsToTenantsArrayByRateT($rows,0); #we do not have the rateT yet, so we can ignore it putting it to 0
+        $result = $this->fromRowsToTenantsArrayByRateT($rows,0); #we do not have the rateT yet, so we can ignore it putting it to 0
+        return $this->getFilterTenantsFormatArray($result,$idOwner);
     }
+
     
     /**
      * Method getFilterTenants
