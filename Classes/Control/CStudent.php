@@ -16,6 +16,7 @@ use Classes\Foundation\FCreditCard;
 use Classes\Control;
 use Classes\Tools\TStatusUser;
 use Classes\View\VError;
+use Classes\Entity\EReview;
 use DateTime;
 
 
@@ -28,10 +29,13 @@ use DateTime;
  *
  */
 class CStudent{
-
+  
     /**
-     * Display the home page
-     * 
+     * Method home
+     *
+     * @param ?string $modalSuccess [explicite description]
+     *
+     * @return void
      */
     public static function home(?string $modalSuccess=null){
         self::checkIfStudent();
@@ -43,7 +47,15 @@ class CStudent{
         $student = $PM->load('EStudent', $student_id);
         $accommodations = $PM->lastAccommodationsStudent($student);
         $view->home($accommodations, $modalSuccess);
-    }
+    }    
+    /**
+     * Method contact
+     * 
+     * this method shows the contact page
+     * @param ?string $modalSuccess [explicite description]
+     *
+     * @return void
+     */
     public static function contact(?string $modalSuccess=null){
         $session = USession::getInstance();
         $type = $session->getSessionElement('userType');
@@ -54,46 +66,38 @@ class CStudent{
         }
         $view = new VStudent();
         $view->contact($modalSuccess);
-    }
+    }    
+    /**
+     * Method search
+     * 
+     * this method is used by students to search an accommodation
+     * @return void
+     */
     public static function search()
     {
         self::checkIfStudent();
         $view = new VStudent();
         $session=USession::getInstance();
         $PM=FPersistentManager::getInstance();
-        $city=USuperGlobalAccess::getPost('city');
-        $date=USuperGlobalAccess::getPost('date');
-        $university=USuperGlobalAccess::getPost('university');
-        $year=USuperGlobalAccess::getPost('year');
+        $aor=USuperGlobalAccess::getAllPost(['city','date','rateA','rateO','min-price','max-price','university','year']);
+
         $student_username=$session->getSessionElement('username');
         $student=$PM->getStudentByUsername($student_username);
     
-        if (USuperGlobalAccess::getPost('rateA')!== null) {
-            $rateA=USuperGlobalAccess::getPost('rateA');
-        } else {
-            $rateA=0;
-        }
-        if (USuperGlobalAccess::getPost('rateO')!== null) {
-            $rateO=USuperGlobalAccess::getPost('rateO');
-        } else {
-            $rateO=0;
-        }
-        if (USuperGlobalAccess::getPost('min-price')!== null) {
-            $minPrice=USuperGlobalAccess::getPost('min-price');
-        } else {
-            $minPrice=0;
-        }
-        if (USuperGlobalAccess::getPost('max-price')!== null) {
-            $maxPrice=USuperGlobalAccess::getPost('max-price');
-        } else {
-            $maxPrice=1000;
-        }
+        $aor['rateA']!== null ? $aor['rateA'] : $aor['rateA']=0;
+        $aor['rateO']!== null ? $aor['rateO'] : $aor['rateO']=0;
+        $aor['min-price']!== null ? $aor['min-price'] : $aor['min-price']=0;
+        $aor['max-price']!== null ? $aor['max-price'] : $aor['max-price']=1000;
         $PM=FPersistentManager::getInstance();
-        $searchResult=$PM->findAccommodationsStudent($city,$date,$rateA,$rateO,$minPrice,$maxPrice,$student,$year);
-        $view->findAccommodation($city,$university,$searchResult,$date, $rateO, $rateA, $minPrice, $maxPrice,$year);
-    }
-
-
+        $searchResult=$PM->findAccommodationsStudent($aor['city'],$aor['date'],$aor['rateA'],$aor['rateO'],$aor['min-price'],$aor['max-price'],$student,$aor['year']);
+        $view->findAccommodation($aor['city'],$aor['university'],$searchResult,$aor['date'], $aor['rateO'], $aor['rateA'], $aor['min-price'], $aor['max-price'],$aor['year']);
+    } 
+    /**
+     * Method about
+     *
+     * used to show the about us page
+     * @return void
+     */
     public static function about(){
         $session = USession::getInstance();
         $type = $session->getSessionElement('userType');
@@ -104,7 +108,13 @@ class CStudent{
         }
         $view = new VStudent();
         $view->about();
-    }
+    }    
+    /**
+     * Method guidelines
+     *
+     * this method is used to show the guidelines page
+     * @return void
+     */
     public static function guidelines(){
         $session = USession::getInstance();
         $type = $session->getSessionElement('userType');
@@ -116,8 +126,6 @@ class CStudent{
         $view = new VStudent();
         $view->guidelines();
     }
-    
-    
     /**
      * Method profile
      * This method shows the student's profile
@@ -141,24 +149,27 @@ class CStudent{
             $viewError->error(403);
             exit();
 
-        } else {   
+        } else { 
 
             $ph = $student->getPhoto();
-            
             if(!is_null($ph)) {
 
                 $ph=$ph->getPhoto();
-
                 $session->setSessionElement('photo', $ph);
-
                 $base64 = base64_encode($ph);
                 $ph = "data:" . 'image/jpeg' . ";base64," . $base64;
             }
-
             $view->profile($student, $ph, $modalSuccess);
         }
-    }
-    
+    }  
+    /**
+     * Method editProfile
+     *
+     * this method is used to show the student's edit profile page
+     * @param ?string $modalSuccess [explicite description]
+     *
+     * @return void
+     */
     public static function editProfile(?string $modalSuccess=null){
         self::checkIfStudent();
         $view = new VStudent();
@@ -173,12 +184,16 @@ class CStudent{
         }else{
             $base64 = base64_encode($photo);
             $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
-
             $view->editProfile($student, $photo, false, false, false, false, $modalSuccess);
         }
         
     }
-
+    /**
+     * Method deleteProfile
+     *
+     * this method is used to delete student's profile
+     * @return void
+     */
     public static function deleteProfile()
     {   self::checkIfStudent();
         $PM=FPersistentManager::getInstance();
@@ -196,19 +211,18 @@ class CStudent{
         {
             header('Location:/UniRent/'.USuperGlobalAccess::getCookie('current_page').'/error');
         }
-    }
-
+    }   
     /**
-     * Display the student registration page
-     * 
-     * 
+     * Method studentRegistration
+     *
+     * this method is used by the student to complete the registration
+     * @return void
      */
     public static function studentRegistration()
     {   
         $PM=FPersistentManager::getInstance();
         $session=USession::getInstance();
         $picture = $session->getSessionElement('picture');
-        
         if ($picture['img']===null) {
 
             $photo = null;
@@ -217,38 +231,30 @@ class CStudent{
             
             $photo = new EPhoto(null, $picture['img'], 'other', null);
         }   
-
-        $duration = USuperGlobalAccess::getPost('courseDuration');
-        $immatricolation = USuperGlobalAccess::getPost('immatricolationYear');
+        $afp=USuperGlobalAccess::getAllPost(['courseDuration','immatricolationYear','birthDate','sex','animals','smoker']);
         $birthDate= new DateTime(USuperGlobalAccess::getPost('birthDate'));
-        $sex = USuperGlobalAccess::getPost('sex');
-        $animals=USuperGlobalAccess::getPost('animals');
-        $smoker=USuperGlobalAccess::getPost('smoker');
-        $smok=filter_var($smoker,FILTER_VALIDATE_BOOLEAN);
-        $anim=filter_var($animals, FILTER_VALIDATE_BOOLEAN);
-        
-        
+        $smok=filter_var($afp['smoker'],FILTER_VALIDATE_BOOLEAN);
+        $anim=filter_var($afp['animals'], FILTER_VALIDATE_BOOLEAN);
         $student=new EStudent($session->getSessionElement('username'),
                                 $session->getSessionElement('password'),
                                 $session->getSessionElement('name'),
                                 $session->getSessionElement('surname'),
                                 $photo,
                                 $session->getSessionElement('email'),
-                                $duration,
-                                $immatricolation,
+                                $afp['courseDuration'],
+                                $afp['immatricolationYear'],
                                 $birthDate,
-                                $sex,
+                                $afp['sex'],
                                 $smok,
                                 $anim);
-
         $result = $PM->store($student);
-
+        $student->setID(FPersistentManager::getInstance()->getStudentIdByUsername($student->getUsername()));
         if ($result){
             $session->setSessionElement('id', $student->getId());
-            $session->setSessionElement('courseDuration', $duration);
-            $session->setSessionElement('immatricolationYear', $immatricolation);
+            $session->setSessionElement('courseDuration', $afp['courseDuration']);
+            $session->setSessionElement('immatricolationYear', $afp['immatricolationYear']);
             $session->setSessionElement('birthDate', $birthDate);
-            $session->setSessionElement('sex', $sex);
+            $session->setSessionElement('sex', $afp['sex']);
             $session->setSessionElement('smoker', $smok);
             $session->setSessionElement('animal', $anim);
             header('Location:/UniRent/Student/home');
@@ -260,6 +266,7 @@ class CStudent{
         }
     }
     
+    // questa va accorciata di molto
     public static function accommodation(int $idAccommodation, string $successVisit='null', string $successReserve='null') {
         self::checkIfStudent();
         $view = new VStudent();
@@ -415,9 +422,14 @@ class CStudent{
         $leavebleReviews=$PM->remainingReviewStudentToAccommodation($session->getSessionElement('id'), $accomm->getIdAccommodation());
         $view->accommodation($accomm, $owner, $reviewsData, $period, $picture, $visits, $visitDuration, $tenants, $num_places, $studBooked, $dayOfBooking, $timeOfBooking, $disabled, $successReserve, $successVisit, $leavebleReviews);
     }
-
-
-    //DA AGGIUSTARE PER LA SESSIONE
+    /**
+     * Method reviews
+     *
+     * this method is used to show the student's reviews
+     * @param ?string $modalSuccess [explicite description]
+     *
+     * @return void
+     */
     public static function reviews(?string $modalSuccess=null) {
         self::checkIfStudent();
         $view = new VStudent();
@@ -426,40 +438,7 @@ class CStudent{
         $PM=FPersistentManager::getInstance();
         $studentId=$PM->getStudentIdByUsername($studentUsername);
         $reviews=$PM->loadByRecipient($studentId, TType::STUDENT);
-        $reviewsData = [];
-        
-        foreach ($reviews as $review) {
-            $author = $PM->load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
-            if ($review->isBanned()) {
-                continue;
-            }
-            $profilePic = $author->getPhoto();
-            if ($author->getStatus() === TStatusUser::BANNED) {
-                $profilePic = "/UniRent/Smarty/images/BannedUser.png";
-            } else if ($profilePic === null) {
-                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
-            }
-            else
-            {
-                $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
-            }
-            if ($review->getDescription()===null) {
-                $content='No additional details were provided by the author.';
-            }
-            else
-            {
-                $content=$review->getDescription();
-            }
-            $reviewsData[] = [
-                'id' => $review->getId(),
-                'title' => $review->getTitle(),
-                'username' => $author->getUsername(),
-                'userStatus' => $author->getStatus()->value,
-                'stars' => $review->getValutation(),
-                'content' => $content,
-                'userPicture' => $profilePic,
-            ];
-        }
+        $reviewsData = EReview::getStudentReviewFormatArray($reviews);
         $view->reviews($reviewsData, $modalSuccess);
     }
 
@@ -471,13 +450,14 @@ class CStudent{
         $photoError = "";
 
         //reed the data from the form
+        $afp=USuperGlobalAccess::getAllPost(['username','name','surname','oldPassword','newPassword','email','sex',
+                                            'courseDuration','immatricolationYear','birthDate','smoker','animals']);
         $username=USuperGlobalAccess::getPost('username');
         $name=USuperGlobalAccess::getPost('name');
         $surname=USuperGlobalAccess::getPost('surname');
         $picture = USuperGlobalAccess::getPhoto('img');
         $oldPassword=USuperGlobalAccess::getPost('oldPassword');
         $newPassword=USuperGlobalAccess::getPost('newPassword');
-        $email=USuperGlobalAccess::getPost('email');
         $sex=USuperGlobalAccess::getPost('sex');
         $courseDuration=USuperGlobalAccess::getPost('courseDuration');
         $immatricolationYear=USuperGlobalAccess::getPost('immatricolationYear');
@@ -506,7 +486,7 @@ class CStudent{
         }
        
         //if the new email is not already in use and it's a student's email or you haven't changed it
-        if((($PM->verifyUserEmail($email)==false)&&($PM->verifyStudentEmail($email)))||($oldEmail===$email)) { 
+        if((($PM->verifyUserEmail($afp['email'])==false)&&($PM->verifyStudentEmail($afp['email'])))||($oldEmail===$afp['email'])) { 
             
             //if the new username is not already in use or you haven't changed it
             if(($PM->verifyUserUsername($username)==false)||($oldUsername===$username)) { #se il nuovo username non è già in uso o non l'hai modificato
@@ -518,7 +498,7 @@ class CStudent{
 
                 $photo = CStudent::changePhoto($oldPhoto, $picture, $oldStudent);      
                 
-                $student=new EStudent($username,$password,$name,$surname,$photo,$email,$courseDuration,$immatricolationYear,$birthDate,$sex,$smoker,$animals);
+                $student=new EStudent($username,$password,$name,$surname,$photo,$afp['email'],$courseDuration,$immatricolationYear,$birthDate,$sex,$smoker,$animals);
                 $student->setID($studentID);
 
                 $result=$PM->update($student);
@@ -535,8 +515,7 @@ class CStudent{
 
                 } elseif (!$result) {
                     
-                    header('Location:/UniRent/Student/profile/error');
-                    
+                    header('Location:/UniRent/Student/profile/error'); 
                 } 
             }
             else
@@ -551,7 +530,17 @@ class CStudent{
             $view->editProfile($oldStudent, $photoError, false, false, false, true, null);
         }  
     }
-
+    /**
+     * Method changePassword
+     *
+     * this method is used to change the student's password
+     * @param string $oldPassword $oldPassword [oldPassword]
+     * @param string $newPassword $newPassword [newPassword]
+     * @param EStudent $oldStudent $oldStudent 
+     * @param ?string $photoError
+     *
+     * @return array
+     */
     private static function changePassword($oldPassword, $newPassword, $oldStudent, $photoError):array{
 
         $session=USession::getInstance();
@@ -578,29 +567,28 @@ class CStudent{
                 $password=$session->getSessionElement('password');
             }
         }
-
         return [$password, $error];
     }
-
+    /**
+     * Method changePhoto
+     *
+     * this method is used to change the student's photo
+     * @param ?string $oldPhoto [explicite description]
+     * @param ?array $picture [explicite description]
+     * @param EStudent $oldStudent [explicite description]
+     *
+     * @return EPhoto
+     */
     private static function changePhoto(?string $oldPhoto, ?array $picture, EStudent $oldStudent) : ?EPhoto{
-
         $PM=FPersistentManager::getInstance();
-
-        if(!is_null($oldPhoto)){
-
-                    
+        if(!is_null($oldPhoto)){       
             $photoId=$oldStudent->getPhoto()->getId();
-
             is_null($picture) ? $photo = new EPhoto($photoId, $oldPhoto, 'other', null)
                               : $photo = new EPhoto($photoId, $picture['img'], 'other', null);
-
         } else {
-
-
             if(is_null($picture)) {
 
                 $photo = null;
-
             } else {
 
                 $photo = new EPhoto(null, $picture['img'], 'other', null);
@@ -611,10 +599,15 @@ class CStudent{
                 }
             }
         }
-
         return $photo;
     }
-
+    /**
+     * Method deletePhoto
+     * 
+     * this method is used to delete the student's photo
+     *
+     * @return void
+     */
     public static function deletePhoto(){
         self::checkIfStudent();
         $PM=FPersistentManager::getInstance();
@@ -632,18 +625,20 @@ class CStudent{
             $photoID = $photo->getId();
             $result = $PM->delete('EPhoto', $photoID);
         }
-
-        
-
         if ($result > 0) {
             $photo = null;
             $session->setSessionElement('photo',$photo);
             header('Location:/UniRent/Student/profile');
         }  else header('Location:/UniRent/Student/profile/error');
-
     }
-
-
+    /**
+     * Method publicProfile
+     *
+     * this method show the public profile of a student
+     * @param string $username [explicite description]
+     *
+     * @return void
+     */
     public static function publicProfile(string $username) {
         self::checkIfStudent();
         $PM=FPersistentManager::getInstance();
@@ -1048,9 +1043,7 @@ class CStudent{
             $date=10;
             $date_2=7;
         }
-
         $result=$PM->reserve($idAccommodation,$year,$date,$year_2,$date_2,$student_id);
-        
         if($result)
         {
             header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/sent');
@@ -1060,7 +1053,12 @@ class CStudent{
             header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/full');
         }
     }
-
+    /**
+     * Method checkIfStudent
+     *
+     * method used to verify if an user is a student
+     * @return void
+     */
     public static function checkIfStudent() {
         $session = USession::getInstance();
         if ($session->getSessionElement('userType') !== 'Student') {

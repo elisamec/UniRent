@@ -139,6 +139,15 @@
                   </div>
                </div>
                </div>
+               <div class="row">
+               <div class="Findcontainer">
+                  <div class="select-outline">
+                     <select name="year" id="yearSelect" class="nice-select mdb-select md-form md-outline colorful-select dropdown-primary" required>
+                        <option value="" disabled selected>Select a year</option>
+                     </select>
+                  </div>
+               </div>
+               </div>
                <h1 class="find_text padding-reserve">Ratings: </h1>
                
                <div class="Findcontainer">
@@ -594,5 +603,10 @@ document.addEventListener("DOMContentLoaded", function() {
 <!-- End of Success Modal -->
 <script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
 <script src="/UniRent/Smarty/js/UniRentOriginal/selectKeyboardAccessibility.js"></script>
+
+<!--JavaScript files -->
+<script src="/UniRent/Smarty/js/UniRentOriginal/year.js"></script>
+<!--End of JavaScript files -->
+
 </body>
 </html>

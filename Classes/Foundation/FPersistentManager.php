@@ -116,16 +116,15 @@ class FPersistentManager {
      * This method verify if the email is a student email
      * @param string $email
      *
-     * @return bool
+     * 
      */
-    public function verifyStudentEmail(string $email):bool
+    public function verifyStudentEmail(string $email)
     {
         $AUF=UAccessUniversityFile::getInstance();
         
         $email = explode(".", str_replace("@", ".", $email));
         $domain = array_slice($email, -2);
-        $mail_domain = $domain[0] . "." . $domain[1];
-
+        $mail_domain = ".".$domain[0] . "." . $domain[1];
         if(in_array($mail_domain,$AUF->getUniversityEmailList()))
         {
             return true;
@@ -462,14 +461,14 @@ class FPersistentManager {
      * Method findAccommodationsStudent
      * 
      * this method call the omonim method in FAccommodation to find the accommodations for the student
-     * @param mixed $city
-     * @param mixed $date
-     * @param mixed $rateA
-     * @param mixed $rateO
-     * @param mixed $minPrice
-     * @param mixed $maxPrice
-     * @param mixed $student
-     * @param mixed $year
+     * @param  $city
+     * @param  $date
+     * @param  $rateA
+     * @param  $rateO
+     * @param  $minPrice
+     * @param  $maxPrice
+     * @param  $student
+     * @param  $year
      * @return array
      */
     public function findAccommodationsStudent($city,$date,$rateA,$rateO,$minPrice,$maxPrice,$student,$year)

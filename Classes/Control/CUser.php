@@ -151,9 +151,7 @@ class CUser
 
             if($type==='Student'){
                 if($PM->verifyStudentEmail($session->getSessionElement('email'))==true){
-
                     $viewStudent->showStudentRegistration();
-
                 }else{
                     $view->registrationError(false, false, true, false, $username, "", $name, $surname, $type, $modalSuccess);
                 }

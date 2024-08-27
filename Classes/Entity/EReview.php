@@ -4,6 +4,7 @@ require __DIR__ . '../../../vendor/autoload.php';
 
 use Classes\Foundation\FPersistentManager;
 use Classes\Tools\TType;
+use Classes\Tools\TStatusUser;
 use DateTime;
 /**
  * EReview
@@ -211,4 +212,51 @@ class EReview
         $result=FPersistentManager::getInstance()->remainingReviewStudentToOwner($id1,$id2);
         return $result;
     }
+    
+    /**
+     * Method getStudentReviewFormatArray
+     * 
+     * this method is used to transform an array of reviews in a format that can be used by the Smarty template
+     * @param array $reviews $reviews [array of EReview]
+     *
+     * @return array
+     */
+    public static function getStudentReviewFormatArray($reviews):array
+    {
+        $reviewsData = [];
+        foreach ($reviews as $review) {
+            $author = FPersistentManager::getInstance()->load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
+            if ($review->isBanned()) {
+                continue;
+            }
+            $profilePic = $author->getPhoto();
+            if ($author->getStatus() === TStatusUser::BANNED) {
+                $profilePic = "/UniRent/Smarty/images/BannedUser.png";
+            } else if ($profilePic === null) {
+                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+            }
+            else
+            {
+                $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
+            }
+            if ($review->getDescription()===null) {
+                $content='No additional details were provided by the author.';
+            }
+            else
+            {
+                $content=$review->getDescription();
+            }
+            $reviewsData[] = [
+                'id' => $review->getId(),
+                'title' => $review->getTitle(),
+                'username' => $author->getUsername(),
+                'userStatus' => $author->getStatus()->value,
+                'stars' => $review->getValutation(),
+                'content' => $content,
+                'userPicture' => $profilePic,
+            ];
+        }
+        return $reviewsData;
+    }
+        
 }

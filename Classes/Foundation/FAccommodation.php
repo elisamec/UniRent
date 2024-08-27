@@ -956,7 +956,7 @@
             catch(PDOException $e)
             {
                 $db->rollBack();
-                #return $result;
+                return array();
             }
             $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
 

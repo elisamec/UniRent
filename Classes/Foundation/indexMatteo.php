@@ -161,7 +161,5 @@ $result=$FA->areThereFreePlaces(7,2024);
 
 print var_dump($result);
 */
-$U=UAccessUniversityFile::getInstance();
-$università=$U->getCities();
-print_r($università);
+
 
