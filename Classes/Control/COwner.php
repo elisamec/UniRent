@@ -765,11 +765,9 @@ class COwner
                 'tenants' => $tenantList
             ];
         }
-        
         $view->tenants($tenants, $kind, $accommodationTitles,0);
     }
 
-    //Da accorciare
     /**
      * Method filterTenants
      * This method filters the tenants of an owner
@@ -789,40 +787,12 @@ class COwner
         $men==='false'? $men=false : $men=true;
         $women==='false'? $women=false : $women=true;
         $tenantsArray=$PM->getFilterTenants($type,$afs['accommodation'],$afs['username'],(int)$afs['age'],(int)$afs['rateT'],$afs['date'],$men,$women,$ownerId,$afs['year']);
-        $tenants=[];
-        foreach ($tenantsArray as $idAccommodation => $students) {
-            $accommodationTitle = $PM->getTitleAccommodationById($idAccommodation);
-            $tenantList = [];
-            foreach ($students as $student) {
-                $profilePic = $student[0]->getPhoto();
-                if ($student[0]->getStatus() === TStatusUser::BANNED) {
-                    $profilePic = "/UniRent/Smarty/images/BannedUser.png";
-                } else if ($profilePic === null) {
-                    $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
-                }
-                else
-                {
-                    $profilePic=$profilePic->getPhoto();
-                }
-                $tenantList[] = [
-                    'username' => $student[0]->getUsername(),
-                    'image' => $profilePic,
-                    'expiryDate' => $student[1],
-                    'status' => $student[0]->getStatus()->value
-                ];
-            }
-
-            $tenants[] = [
-                'accommodation' => $accommodationTitle,
-                'tenants' => $tenantList
-            ];
-        }
         $accommodations=$PM->loadAccommodationsByOwner($ownerId);
         foreach ($accommodations as $accom) 
         {
             $accommodationTitles[$accom->getIdAccommodation()]=$accom->getTitle();
         }
-        $view->tenants($tenants, $type, $accommodationTitles,(int)$afs['rateT']);
+        $view->tenants($tenantsArray, $type, $accommodationTitles,(int)$afs['rateT']);
     }
 
     /**

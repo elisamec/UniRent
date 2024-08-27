@@ -523,7 +523,17 @@ class FPersistentManager {
         $result=$FS->findStudentRating($id);
         return $result;
     }
-
+    
+    /**
+     * Method getTenants
+     *
+     * this method is used to get the tenants of the owner 
+     * is used in home page by the owner
+     * @param string $type [explicite description]
+     * @param int $idOwner [explicite description]
+     *
+     * @return array
+     */
     public function getTenants(string $type, int $idOwner):array
     {
         $FO=FOwner::getInstance();
@@ -532,7 +542,7 @@ class FPersistentManager {
             $type='onGoing';
         } else if ($type=='past')
         {
-            $type='finshed';
+            $type='finished';
         }
         $result=$FO->getTenans($type,$idOwner);
         return $result;
@@ -549,7 +559,25 @@ class FPersistentManager {
             return TType::STUDENT;
         }
     }
-
+    
+    /**
+     * Method getFilterTenants
+     *
+     * this method is used to get the tenants filtered by the parameters given
+     * used in 'MyTenants' page by the owner
+     * @param string $type [explicite description]
+     * @param ?int $accommodation_name [explicite description]
+     * @param ?string $t_username [explicite description]
+     * @param ?int $t_age [explicite description]
+     * @param int $rateT [explicite description]
+     * @param ?string $date [explicite description]
+     * @param ?bool $men [explicite description]
+     * @param ?bool $women [explicite description]
+     * @param int $idOwner [explicite description]
+     * @param $year $year [explicite description]
+     *
+     * @return array
+     */
     public function getFilterTenants(string $type, ?int $accommodation_name, ?string $t_username, ?int $t_age, int $rateT, ?string $date, ?bool $men, ?bool $women, int $idOwner,$year):array
     {
         $FO=FOwner::getInstance();

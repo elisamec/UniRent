@@ -6,8 +6,10 @@ use Classes\Entity\EOwner;
 use Classes\Entity\EPhoto;
 use Classes\Foundation\FPhoto;
 use Classes\Tools\TError;
+use Classes\Tools\TStatusUser;
 use PDO;
 use PDOException;
+use PDORow;
 /**
  * This class provide to make query to EOwner class
  * @author Matteo Maloni ('UniRent')
@@ -596,8 +598,6 @@ use PDOException;
                 $p_student=(EPhoto::toBase64(array($p_student)))[0];
                 $student->setPhoto($p_student);
             }
-            
-            
             if(in_array($row['idAccommodation'],array_keys($result)))
             {
                 $result[$row['idAccommodation']][]=[$student, $row['expiryDate']];
@@ -629,8 +629,6 @@ use PDOException;
      */
     public function getFilterTenants($type,$accommodation_name,$t_username,$t_age,$rateT,$date,$men,$women,$idOwner,$year):array
     {
-
-        $result=array();
         $db=FConnection::getInstance()->getConnection();
         $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
 
@@ -698,9 +696,25 @@ use PDOException;
         catch(PDOException $e)
         {
             $db->rollBack();
-            return $result;
+            return array();
         }
         $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
+        $result=$this->fromRowsToTenantsArrayByRateT($rows,(int)$rateT);
+        return $this->getFilterTenantsFormatArray($result,$idOwner);   
+    }
+    
+    /**
+     * Method fromRowsToTenantsArrayByRateT
+     * 
+     * this method take only student with given rateT (tenants rate) and transforms them in an array to format
+     * @param $rows result of query
+     * @param int $rateT tenants rate
+     *
+     * @return array
+     */
+    private function fromRowsToTenantsArrayByRateT($rows, int $rateT):array
+    {
+        $result=array();
         foreach($rows as $row)
         {
             $student=FPersistentManager::getInstance()->load('EStudent',$row['idStudent']);
@@ -724,9 +738,49 @@ use PDOException;
             }
             else{}
         }
-        return $result;   
+        return $result;
     }
-
+    
+    /**
+     * Method getFilterTenantsFormatArray
+     *
+     * this method return an array of tenants formatted
+     * @param array $tenantsArray $tenantsArray 
+     * @param int $ownerId $ownerId 
+     *
+     * @return array
+     */
+    private function getFilterTenantsFormatArray(array $tenantsArray,int $ownerId):array
+    {
+        $tenants=[];
+        foreach ($tenantsArray as $idAccommodation => $students) {
+            $accommodationTitle = FPersistentManager::getInstance()->getTitleAccommodationById($idAccommodation);
+            $tenantList = [];
+            foreach ($students as $student) {
+                $profilePic = $student[0]->getPhoto();
+                if ($student[0]->getStatus() === TStatusUser::BANNED) {
+                    $profilePic = "/UniRent/Smarty/images/BannedUser.png";
+                } else if ($profilePic === null) {
+                    $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+                }
+                else
+                {
+                    $profilePic=$profilePic->getPhoto();
+                }
+                $tenantList[] = [
+                    'username' => $student[0]->getUsername(),
+                    'image' => $profilePic,
+                    'expiryDate' => $student[1],
+                    'status' => $student[0]->getStatus()->value
+                ];
+            }
+            $tenants[] = [
+                'accommodation' => $accommodationTitle,
+                'tenants' => $tenantList
+            ];
+        }
+        return $tenants;
+    }
     /**
      * Method getBannedOwners
      *
