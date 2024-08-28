@@ -9,6 +9,6 @@ use Configuration\Installation;
 
 
 Installation::install();
-Updater::getInstance()->run();      #per il momento sospeso , devo finire a scrivere un metodo
+Updater::getInstance()->run();   
 $fc = new CFrontController();
 $fc->run($_SERVER['REQUEST_URI']);

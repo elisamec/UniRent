@@ -338,6 +338,191 @@ class CContract
         $view->showContracts($contractsData, 'onGoing', $modalSuccess);
     }
 
+    /**
+     * Method deleteCreditCard
+     * 
+     * metod used to delete a credit card
+     *
+     * @param string $creditCard [creditcard number]
+     *
+     * @return void
+     */
+    public static function deleteCreditCard(string $creditCard)
+    {  
+        CStudent::checkIfStudent();
+        $number=urldecode($creditCard);  #siccome usuamo url autodescrittive il php non decodifica i parametri automaticamente ma bisogna farlo a mano
+        $PM=FPersistentManager::getInstance();
+        $session=USession::getInstance();
+        $card=$PM->loadCreditCard($number);
+        if ($card->getStudentID() !== $session->getSessionElement('id')) {
+            $view=new VError();
+            $view->error(403);
+            exit();
+        }
+        $result=$PM->deleteCreditCard($number);
+        if(!$result)
+        {
+            header('Location:/UniRent/Student/paymentMethods/success');
+        }
+        else
+        {
+           header('Location:/UniRent/Student/paymentMethods/error');
+        }
+    }
+    /**
+     * Method editCreditCard
+     *
+     * this method is used to edit the credit card
+     * @return void
+     */
+    public static function editCreditCard()
+    {
+        $title=USuperGlobalAccess::getPost('cardTitle1');
+        $number=USuperGlobalAccess::getPost('cardnumber1');
+        $expiry=USuperGlobalAccess::getPost('expirydate1');
+        $cvv=USuperGlobalAccess::getPost('cvv1');
+        $name=USuperGlobalAccess::getPost('name1');
+        $surname=USuperGlobalAccess::getPost('surname1');
+        $username=USession::getInstance()->getSessionElement('username');
+        $studentId=FPersistentManager::getInstance()->getStudentIdByUsername($username);
+
+        $PM=FPersistentManager::getInstance();
+        if($PM->isMainCard($studentId,$number))
+        {
+            $c= new ECreditCard($number,$name,$surname,$expiry,$cvv,$studentId,true,$title);
+            $result=$PM->update($c);
+            if($result)
+            {
+                header('Location:/UniRent/Student/paymentMethods/success');
+            }
+            else
+            {
+                header('Location:/UniRent/Student/paymentMethods/error');
+            }
+        }
+        else
+        {
+            $c= new ECreditCard($number,$name,$surname,$expiry,$cvv,$studentId,false,$title);
+            $result=$PM->update($c);
+            if($result)
+            {
+               header('Location:/UniRent/student/paymentMethods/success');
+            }
+            else
+            {
+                header('Location:/UniRent/Student/paymentMethods/error');
+            }
+        }  
+    }
+    /**
+     * Method makeMainCreditCard
+     *
+     * this method is used to make a credit card the main payment method
+     * @param string $number [card number]
+     *
+     * @return void
+     */
+    public static function makeMainCreditCard(string $number)
+    {   
+        CStudent::checkIfStudent();
+        $n=urldecode($number);
+        $session=USession::getInstance();
+        $username=$session->getSessionElement('username');
+        $PM=FPersistentManager::getInstance();
+        $studentId=$PM->getStudentIdByUsername($username);
+        $actualcard=$PM->loadCreditCard($n);
+        if ($actualcard->getStudentID() !== $studentId) {
+            $view=new VError();
+            $view->error(403);
+            exit();
+        }
+        $actualMain=$PM->getStudentMainCard($studentId);
+        if(is_null($actualMain))
+        {
+            $actualcard->setMain(true);
+            $res=$PM->update($actualcard);
+            if ($res)
+            {
+                header('Location:/UniRent/Student/paymentMethods/success');
+            }
+            else
+            {
+                header('Location:/UniRent/Student/paymentMethods/error');
+            }
+        }
+        else
+        {
+            $actualMain->setMain(false);
+            $res_1=$PM->update($actualMain);
+            if($res_1)
+            {
+                $actualcard->setMain(true);
+                $res_2=$PM->update($actualcard);
+                if($res_2)
+                {
+                    header('Location:/UniRent/Student/paymentMethods/success');
+                }
+                else
+                {
+                    header('Location:/UniRent/Student/paymentMethods/error');
+                }
+            }
+            else
+            {
+                header('Location:/UniRent/Student/paymentMethods/error');
+            }
+        }
+    }
+        /**
+     * Method addCreditCard
+     *
+     * this method is used to add a credit card as a payment method
+     * @return void
+     */
+    public static function addCreditCard()
+    {
+        $title=USuperGlobalAccess::getPost('cardTitle');
+        $number=USuperGlobalAccess::getPost('cardnumber');
+        $expiry=USuperGlobalAccess::getPost('expirydate');
+        $cvv=USuperGlobalAccess::getPost('cvv');
+        $name=USuperGlobalAccess::getPost('name');
+        $surname=USuperGlobalAccess::getPost('surname');
+        $username=USession::getInstance()->getSessionElement('username');
+        $studentId=FPersistentManager::getInstance()->getStudentIdByUsername($username);
+        if(FPersistentManager::getInstance()->existsTheCard($number))
+        {
+            header('Location:/UniRent/Student/paymentMethods/error');
+        }
+        else
+        {
+            if(count(FPersistentManager::getInstance()->loadStudentCards($studentId))>0)
+            {
+                $card = new ECreditCard($number,$name,$surname,$expiry,(int)$cvv,(int)$studentId,false,$title);
+                $result=FPersistentManager::getInstance()->store($card);
+                if($result)
+                {
+                    header('Location:/UniRent/Student/paymentMethods/success');
+                }
+                else
+                {
+                    header('Location:/UniRent/Student/paymentMethods/error');
+                }
+            }
+            else
+            {
+                $card = new ECreditCard($number,$name,$surname,$expiry,(int)$cvv,(int)$studentId,true,$title);
+                $result=FPersistentManager::getInstance()->store($card);
+                if($result)
+                {
+                    header('Location:/UniRent/Student/paymentMethods/success');
+                }
+                else
+                {
+                    header('Location:/UniRent/Student/paymentMethods/error');
+                }
+            }
+        }
+    }
     
     
 }

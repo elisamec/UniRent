@@ -268,4 +268,30 @@ class ECreditCard
     {
         return 'TITLE:'.$this->title.'  NUMBER:'.$this->number.'  NAME:'.$this->name.'  SURNAME:'.$this->surname.'  EXPIRY:'.$this->expiry.'  CVV:'.$this->cvv.'  STUDENT_ID:'.$this->studentID;
     }
+    
+    /**
+     * Method creditCardFormatArray
+     * 
+     * this method is used to trnasform in an array of ECreditCard in an array of array each one rappresents 
+     * a credit card 
+     * @param array $cards [array of ECreditCard]
+     *
+     * @return array
+     */
+    public static function creditCardFormatArray(array $cards):array
+    {
+        $cardsData = [];
+        foreach ($cards as $card) {
+            $cardsData[] = [
+                'title' => $card->getTitle() ,
+                'number' => $card->getNumber(),
+                'expiryDate' => $card->getExpiry(),
+                'cvv' => $card->getCVV(),
+                'name' => $card->getName(),
+                'surname' => $card->getSurname(),
+                'isMain' => $card->getMain(),
+            ];
+        }
+        return $cardsData;
+    }
 }

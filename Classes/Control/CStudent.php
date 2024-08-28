@@ -5,15 +5,12 @@ require __DIR__.'/../../vendor/autoload.php';
 
 use Classes\Entity\ECreditCard;
 use Classes\Entity\EPhoto;
-use Classes\Entity\EReservation;
 use Classes\Foundation\FPersistentManager;
 use Classes\Entity\EStudent;
 use Classes\Tools\TType;
 use Classes\Utilities\USession;
 use Classes\Utilities\USuperGlobalAccess;
 use Classes\View\VStudent; 
-use Classes\Foundation\FCreditCard;
-use Classes\Control;
 use Classes\Tools\TStatusUser;
 use Classes\View\VError;
 use Classes\Entity\EReview;
@@ -185,8 +182,7 @@ class CStudent{
             $base64 = base64_encode($photo);
             $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
             $view->editProfile($student, $photo, false, false, false, false, $modalSuccess);
-        }
-        
+        }   
     }
     /**
      * Method deleteProfile
@@ -265,7 +261,6 @@ class CStudent{
             exit();
         }
     }
-    
     // questa va accorciata di molto
     public static function accommodation(int $idAccommodation, string $successVisit='null', string $successReserve='null') {
         self::checkIfStudent();
@@ -441,7 +436,12 @@ class CStudent{
         $reviewsData = EReview::getStudentReviewFormatArray($reviews);
         $view->reviews($reviewsData, $modalSuccess);
     }
-
+    /**
+     * Method modifyStudentProfile
+     *
+     * this method is used to modify the student profile
+     * @return void
+     */
     public static function modifyStudentProfile(){
 
         $session=USession::getInstance();
@@ -449,21 +449,13 @@ class CStudent{
         $error = 0;
         $photoError = "";
 
-        //reed the data from the form
+        //read the data from the form
         $afp=USuperGlobalAccess::getAllPost(['username','name','surname','oldPassword','newPassword','email','sex',
                                             'courseDuration','immatricolationYear','birthDate','smoker','animals']);
-        $username=USuperGlobalAccess::getPost('username');
-        $name=USuperGlobalAccess::getPost('name');
-        $surname=USuperGlobalAccess::getPost('surname');
         $picture = USuperGlobalAccess::getPhoto('img');
-        $oldPassword=USuperGlobalAccess::getPost('oldPassword');
-        $newPassword=USuperGlobalAccess::getPost('newPassword');
-        $sex=USuperGlobalAccess::getPost('sex');
-        $courseDuration=USuperGlobalAccess::getPost('courseDuration');
-        $immatricolationYear=USuperGlobalAccess::getPost('immatricolationYear');
-        $birthDate= new DateTime(USuperGlobalAccess::getPost('birthDate'));
-        $smoker=$session->booleanSolver(USuperGlobalAccess::getPost('smoker'));
-        $animals=$session->booleanSolver(USuperGlobalAccess::getPost('animals'));
+        $birthDate= new DateTime($afp['birthDate']);
+        $smoker=$session->booleanSolver($afp['smoker']);
+        $animals=$session->booleanSolver($afp['animals']);
 
         $oldUsername=$session->getSessionElement('username');
         $PM=FPersistentManager::getInstance();
@@ -489,16 +481,16 @@ class CStudent{
         if((($PM->verifyUserEmail($afp['email'])==false)&&($PM->verifyStudentEmail($afp['email'])))||($oldEmail===$afp['email'])) { 
             
             //if the new username is not already in use or you haven't changed it
-            if(($PM->verifyUserUsername($username)==false)||($oldUsername===$username)) { #se il nuovo username non è già in uso o non l'hai modificato
+            if(($PM->verifyUserUsername($afp['username'])==false)||($oldUsername===$afp['username'])) { #se il nuovo username non è già in uso o non l'hai modificato
                 
-                $passChange = CStudent::changePassword($oldPassword, $newPassword, $oldStudent, $photoError);
+                $passChange = CStudent::changePassword($afp['oldPassword'], $afp['newPassword'], $oldStudent, $photoError);
 
                 $password = $passChange[0];
                 $error = $passChange[1];
 
                 $photo = CStudent::changePhoto($oldPhoto, $picture, $oldStudent);      
                 
-                $student=new EStudent($username,$password,$name,$surname,$photo,$afp['email'],$courseDuration,$immatricolationYear,$birthDate,$sex,$smoker,$animals);
+                $student=new EStudent($afp['username'],$password,$afp['name'],$afp['surname'],$photo,$afp['email'],$afp['courseDuration'],$afp['immatricolationYear'],$birthDate,$afp['sex'],$smoker,$animals);
                 $student->setID($studentID);
 
                 $result=$PM->update($student);
@@ -507,7 +499,7 @@ class CStudent{
                     
                     !is_null($photo) ? $ph = $photo->getPhoto() : $ph=null;
                     
-                    $session->setSessionElement('username',$username);
+                    $session->setSessionElement('username',$afp['username']);
                     $password = $student->getPassword();
                     $session->setSessionElement('password',$password);
                     $session->setSessionElement('photo',$ph);
@@ -648,8 +640,7 @@ class CStudent{
         } else {
             COwner::publicProfileFromStudent($username);
         }
-    }
-        
+    }   
     public static function publicProfileFromStudent(string $username, ?string $modalSuccess=null)
     {   self::checkIfStudent();
         $session=USession::getInstance();
@@ -772,189 +763,37 @@ class CStudent{
         $session=USession::getInstance();
         $leavebleReviews=$PM->remainingReviewOwnerToStudent($session->getSessionElement('id'), $student->getId());
         $view->publicProfileFromOwner($student, $reviewsData, $modalSuccess, $leavebleReviews);
-    }
-      
+    }   
+    /**
+     * Method paymentMethods
+     * 
+     * metod used to reach the credit cards to show, this method call the omonim method in the view to show the 
+     * payment methods page 
+     *
+     * @param ?string $modalSuccess [explicite description]
+     *
+     * @return void
+     */
     public static function paymentMethods(?string $modalSuccess=null)
-    {   self::checkIfStudent();
+    {  
+        self::checkIfStudent();
         $view = new VStudent();
         $session=USession::getInstance();
         $username=$session->getSessionElement('username');
         $PM=FPersistentManager::getInstance();
         $studentId=$PM->getStudentIdByUsername($username);
         $cards =$PM->loadStudentCards($studentId);
-        $cardsData = [];
-        
-        foreach ($cards as $card) {
-            $cardsData[] = [
-                'title' => $card->getTitle() ,
-                'number' => $card->getNumber(),
-                'expiryDate' => $card->getExpiry(),
-                'cvv' => $card->getCVV(),
-                'name' => $card->getName(),
-                'surname' => $card->getSurname(),
-                'isMain' => $card->getMain(),
-            ];
-        }
+        $cardsData=ECreditCard::creditCardFormatArray($cards);
         $view->paymentMethods($cardsData, $modalSuccess);
-    }
-
-    public static function addCreditCard()
-    {
-        $title=USuperGlobalAccess::getPost('cardTitle');
-        $number=USuperGlobalAccess::getPost('cardnumber');
-        $expiry=USuperGlobalAccess::getPost('expirydate');
-        $cvv=USuperGlobalAccess::getPost('cvv');
-        $name=USuperGlobalAccess::getPost('name');
-        $surname=USuperGlobalAccess::getPost('surname');
-        $username=USession::getInstance()->getSessionElement('username');
-        $studentId=FPersistentManager::getInstance()->getStudentIdByUsername($username);
-        if(FPersistentManager::getInstance()->existsTheCard($number))
-        {
-            header('Location:/UniRent/Student/paymentMethods/error');
-        }
-        else
-        {
-            if(count(FPersistentManager::getInstance()->loadStudentCards($studentId))>0)
-            {
-                $card = new ECreditCard($number,$name,$surname,$expiry,(int)$cvv,(int)$studentId,false,$title);
-                $result=FPersistentManager::getInstance()->store($card);
-                if($result)
-                {
-                    header('Location:/UniRent/Student/paymentMethods/success');
-                }
-                else
-                {
-                    header('Location:/UniRent/Student/paymentMethods/error');
-                }
-            }
-            else
-            {
-                $card = new ECreditCard($number,$name,$surname,$expiry,(int)$cvv,(int)$studentId,true,$title);
-                $result=FPersistentManager::getInstance()->store($card);
-                if($result)
-                {
-                    header('Location:/UniRent/Student/paymentMethods/success');
-                }
-                else
-                {
-                    header('Location:/UniRent/Student/paymentMethods/error');
-                }
-            }
-        }
-    }
-
-    public static function deleteCreditCard(string $creditCard)
-    {   self::checkIfStudent();
-        $number=urldecode($creditCard);  #siccome usuamo url autodescrittive il php non decodifica i parametri automaticamente ma bisogna farlo a mano
-        $PM=FPersistentManager::getInstance();
-        $session=USession::getInstance();
-        $card=$PM->loadCreditCard($number);
-        if ($card->getStudentID() !== $session->getSessionElement('id')) {
-            $view=new VError();
-            $view->error(403);
-            exit();
-        }
-        $result=$PM->deleteCreditCard($number);
-        if($result)
-        {
-            header('Location:/UniRent/Student/paymentMethods/success');
-        }
-        else
-        {
-           header('Location:/UniRent/Student/paymentMethods/error');
-        }
-    }
-
-    public static function editCreditCard()
-    {
-        $title=USuperGlobalAccess::getPost('cardTitle1');
-        $number=USuperGlobalAccess::getPost('cardnumber1');
-        $expiry=USuperGlobalAccess::getPost('expirydate1');
-        $cvv=USuperGlobalAccess::getPost('cvv1');
-        $name=USuperGlobalAccess::getPost('name1');
-        $surname=USuperGlobalAccess::getPost('surname1');
-        $username=USession::getInstance()->getSessionElement('username');
-        $studentId=FPersistentManager::getInstance()->getStudentIdByUsername($username);
-        #print $title.' '.$number.' '.$expiry.' '.$cvv.' '.$name.' '.$surname.' '.$oldNumber;
-        $PM=FPersistentManager::getInstance();
-        if($PM->isMainCard($studentId,$number))
-        {
-            $c= new ECreditCard($number,$name,$surname,$expiry,$cvv,$studentId,true,$title);
-            $result=$PM->update($c);
-            if($result)
-            {
-                header('Location:/UniRent/Student/paymentMethods/success');
-            }
-            else
-            {
-                header('Location:/UniRent/Student/paymentMethods/error');
-            }
-        }
-        else
-        {
-            $c= new ECreditCard($number,$name,$surname,$expiry,$cvv,$studentId,false,$title);
-            $result=$PM->update($c);
-            if($result)
-            {
-               header('Location:/UniRent/student/paymentMethods/success');
-            }
-            else
-            {
-                header('Location:/UniRent/Student/paymentMethods/error');
-            }
-        }  
-    }
-
-    public static function makeMainCreditCard(string $number)
-    {   self::checkIfStudent();
-        $n=urldecode($number);
-        $session=USession::getInstance();
-        $username=$session->getSessionElement('username');
-        $PM=FPersistentManager::getInstance();
-        $studentId=$PM->getStudentIdByUsername($username);
-        $actualcard=$PM->loadCreditCard($n);
-        if ($actualcard->getStudentID() !== $studentId) {
-            $view=new VError();
-            $view->error(403);
-            exit();
-        }
-        $actualMain=$PM->getStudentMainCard($studentId);
-        if(is_null($actualMain))
-        {
-            $actualcard->setMain(true);
-            $res=$PM->update($actualcard);
-            if ($res)
-            {
-                header('Location:/UniRent/Student/paymentMethods/success');
-            }
-            else
-            {
-                header('Location:/UniRent/Student/paymentMethods/error');
-            }
-        }
-        else
-        {
-            $actualMain->setMain(false);
-            $res_1=$PM->update($actualMain);
-            if($res_1)
-            {
-                $actualcard->setMain(true);
-                $res_2=$PM->update($actualcard);
-                if($res_2)
-                {
-                    header('Location:/UniRent/Student/paymentMethods/success');
-                }
-                else
-                {
-                    header('Location:/UniRent/Student/paymentMethods/error');
-                }
-            }
-            else
-            {
-                header('Location:/UniRent/Student/paymentMethods/error');
-            }
-        }
-    }
+    }         
+    /**
+     * Method postedReview
+     *
+     * this method is used to take the reviews written by a student (by his ID)
+     * @param ?string $modalSuccess [explicite description]
+     *
+     * @return void
+     */
     public static function postedReview(?string $modalSuccess=null) {
         self::checkIfStudent();
         $view = new VStudent();
@@ -1019,7 +858,14 @@ class CStudent{
         }
         $view->postedReview($reviewsData, $modalSuccess);
     }
-
+    /**
+     * Method reserveAccommodation
+     *
+     * this method 
+     * @param int $idAccommodation [explicite description]
+     *
+     * @return void
+     */
     public static function reserveAccommodation(int $idAccommodation)
     {   self::checkIfStudent();
         // get student's id

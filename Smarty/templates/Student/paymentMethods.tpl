@@ -149,7 +149,7 @@
     <div class="resModal-content">
         <span class="resClose" onclick="closeModal()">&times;</span>
         <h2 class="resModal-head">Add Payment Method</h2>
-        <form id="paymentForm" action="/UniRent/Student/addCreditCard" class="form" method="POST" enctype="multipart/form-data">
+        <form id="paymentForm" action="/UniRent/Contract/addCreditCard" class="form" method="POST" enctype="multipart/form-data">
     <div class="form-grid">
         <div class="form-row">
             <label for="cardTitle">Card Title:</label>
@@ -188,7 +188,7 @@
             <div class="resModal-content">
                 <span class="resClose" onclick="closeEditModal()">&times;</span>
                 <h2 class="resModal-head">Edit Payment Method</h2>
-                <form id="paymentUpdateForm" action="/UniRent/Student/editCreditCard" class="form" method="POST" enctype="multipart/form-data">
+                <form id="paymentUpdateForm" action="/UniRent/Contract/editCreditCard" class="form" method="POST" enctype="multipart/form-data">
                     <div class="form-grid">
                         <div class="form-row">
                             <label for="cardTitle1">Card Title:</label>
@@ -284,7 +284,7 @@ function updatePaymentMethod() {
         <span class="resClose" id="deleteConfirmClose">&times;</span>
         <p>Are you sure you want to delete this card?</p>
         <div class="btn-cont">
-        <button id="confirmDelete" class="confirmClass" type="button">Yes</button>
+        <button id="confirmDeleteCreditCard" class="confirmClass" type="button">Yes</button>
         <button id="cancelDelete" class="cancelClass" type="button" onclick="closeConfirmModal()">Cancel</button>
         </div>
     </div>
@@ -438,14 +438,14 @@ function updatePaymentMethod() {
 
     // Function to open the confirm deletion modal
     function openConfirmModal(cardNumber) {
-        const confirmYesButton = document.getElementById('confirmDelete');
+        const confirmYesButton = document.getElementById('confirmDeleteCreditCard');
         confirmYesButton.setAttribute('data-card-number', cardNumber);
-        document.getElementById('confirmModal').style.display = "block";
+        document.getElementById('deleteConfirmModal').style.display = "block";
     }
 
     // Function to close the confirm deletion modal
     function closeConfirmModal() {
-        document.getElementById('confirmModal').style.display = "none";
+        document.getElementById('deleteConfirmModal').style.display = "none";
     }
 
     // Function to add a payment method
@@ -491,8 +491,9 @@ function updatePaymentMethod() {
 
     // Function to delete a card
     function deleteCard(cardNumber) {
+        
         // Send a request to the server to delete the card
-        fetch(`/UniRent/Student/deleteCreditCard/${cardNumber}`, {
+        fetch(`/UniRent/Contract/deleteCreditCard/${cardNumber}`, {
             method: 'DELETE'
         })
         .then(response => {
@@ -507,6 +508,7 @@ function updatePaymentMethod() {
             }
         });
     }
+
 
     // Function to make a card the main card   (per il momento non riesco a usarla Eli, mi servirebbe metterci una fetch per attendere la risposta del server, ci ho provato ma non sono riuscito :-(  ))
     // sarebbe bello fare come qui sopra in deleteCard
@@ -541,7 +543,7 @@ function updatePaymentMethod() {
     {
         // mando la richiesta al server
   
-        fetch(`/UniRent/Student/makeMainCreditCard/${cardNumber}`, {
+        fetch(`/UniRent/Contract/makeMainCreditCard/${cardNumber}`, {
             method: "GET"
         })
         .then(response=>{
@@ -569,7 +571,7 @@ function updatePaymentMethod() {
     }
 
     // Event listener for the confirmation button
-    document.getElementById('confirmDelete').addEventListener('click', function() {
+    document.getElementById('confirmDeleteCreditCard').addEventListener('click', function() {
         const cardNumber = this.getAttribute('data-card-number');
         deleteCard(cardNumber);
     });
