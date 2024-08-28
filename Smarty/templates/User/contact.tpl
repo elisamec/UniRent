@@ -96,7 +96,7 @@
                      <div class="mail_section map_form_container">
                         <form action="/UniRent/SupportRequest/supportRequest" method="post" class="yourFormId">
                         <textarea class="message-bt" placeholder="Message" rows="5" id="comment" name="Message"></textarea>
-                        <div class="send_bt"><button type="submit">Send Now</button></div>
+                        <div class="send_bt"><button type="submit" onclick="showLoginRegistrationPopUp(event)">Send Now</button></div>
                         </form>
                      </div>
                   </div>
@@ -107,6 +107,20 @@
             </div>
          </div>
       </div>
+
+// pop up per obligare l'utente a loggarsi o reggistrarsi
+      <div id="loginModal" class="resModal">
+         <div class="resModal-content">
+            <span class="resClose" id="loginClose">&times;</span>
+            <p>Please, login or sign to UniRent to continue: </p>
+            <div class="btn-cont">
+               <div class="login-required"><a href="/UniRent/User/login">Login</a></div>
+               <div class="login-required"> <a href="/UniRent/User/register">Sign Up</a></div>
+            </div>
+         </div>
+      </div>
+
+
       <!-- contact section end -->
       <!-- Success Modal -->
 <div class="resModal" id="successModal">
@@ -189,5 +203,25 @@
       </script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
+      <script>
+         function showLoginRegistrationPopUp(event) {
+            event.preventDefault(); // Previene l'invio del form
+            var modal = document.getElementById("loginModal");
+            modal.style.display = "block";
+         }
+
+         document.getElementById("loginClose").onclick = function() {
+            var modal = document.getElementById("loginModal");
+            modal.style.display = "none";
+         }
+
+      // Chiudi il popup se l'utente clicca fuori dal popup
+         window.onclick = function(event) {
+            var modal = document.getElementById("loginModal");
+            if (event.target == modal) {
+               modal.style.display = "none";
+            }
+         }
+      </script>
    </body>
 </html>

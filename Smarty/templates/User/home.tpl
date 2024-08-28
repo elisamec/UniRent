@@ -154,15 +154,15 @@
          </form>
       </div>
       <div id="loginModal" class="resModal">
-    <div class="resModal-content">
-        <span class="resClose" id="loginClose">&times;</span>
-        <p>Please, login to continue: </p>
-        <div class="btn-cont">
-       <div class="login-required"><a href="/UniRent/User/login">Login</a></div>
-        <div class="login-required"> <a href="/UniRent/User/register">Sign Up</a></div>
-        </div>
-    </div>
-</div>
+         <div class="resModal-content">
+            <span class="resClose" id="loginClose">&times;</span>
+            <p>Please, login to continue: </p>
+            <div class="btn-cont">
+               <div class="login-required"><a href="/UniRent/User/login">Login</a></div>
+               <div class="login-required"> <a href="/UniRent/User/register">Sign Up</a></div>
+            </div>
+         </div>
+      </div>
       <!-- feature section start -->
       <div class="Properties_section layout_padding">
          <div class="container">
