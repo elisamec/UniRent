@@ -15,14 +15,12 @@ require __DIR__.'/../../vendor/autoload.php';
 class FCreditCard
 {
     private static $instance=null;
-    
     /**
      * __construct
      *
      * @return self
      */
     public function __construct(){}
-    
     /**
      * getInstance
      *
@@ -35,11 +33,11 @@ class FCreditCard
             self::$instance= new FCreditCard();
         }
         return self::$instance;
-    }
-    
+    }   
     /**
      * exist
      *
+     * this method verify if a Credit Card exists in the data base
      * @param  int $number
      * @return bool
      */
@@ -74,10 +72,10 @@ class FCreditCard
         return false;
 
     }
-    
     /**
      * load
      *
+     * this method loads a Credit Card from the database 
      * @param  int $number
      * @return ECreditCard
      */
@@ -105,17 +103,16 @@ class FCreditCard
         $result=new ECreditCard($row['number'],$row['name'],$row['surname'],$row['expiry'],$row['cvv'],$row['idStudent'],$row['main'],$row['title']);
         return $result;
     }
-  
   /**
    * store
    *
+   * this method is used t store a Credit Card in the data base
    * @param  ECreditCard $CreditCard
    * @return bool
    */
   public function store(ECreditCard $CreditCard):bool 
   {
     $db=FConnection::getInstance()->getConnection();
-    
     try
     { 
         $db->exec('LOCK TABLES creditcard WRITE');
@@ -141,12 +138,11 @@ class FCreditCard
         $db->rollBack();
         return false;
     }
-
   }
-    
     /**
      * update
-     *
+     * 
+     * this method is used to update the a Credit Card into the data base
      * @param  ECreditCard $CreditCard
      * @return bool
      */
@@ -185,17 +181,16 @@ class FCreditCard
             return false;
         }
     }
-    
     /**
      * delete
-     *
+     * 
+     * method to delete a Credit Card form the data base
      * @param  int $number
      * @return bool
      */
     public function delete(string $number): bool 
     {
         $db=FConnection::getInstance()->getConnection();
-       # $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);  Serve per il debug!
         try
         {  
             $db->exec('LOCK TABLES creditcard WRITE');
@@ -215,7 +210,6 @@ class FCreditCard
             return false;
         }
     }
-    
     /**
      * Method isMain
      *
@@ -253,7 +247,6 @@ class FCreditCard
             return false;
         }
     }
-    
     /**
      * Method loadStudentCards
      *
@@ -292,7 +285,6 @@ class FCreditCard
         return $result;
 
     }
-    
     /**
      * Method getMainCard
      *
