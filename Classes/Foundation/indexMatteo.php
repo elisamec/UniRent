@@ -161,5 +161,7 @@ $result=$FA->areThereFreePlaces(7,2024);
 
 print var_dump($result);
 */
-
+$c=FConnection::getInstance();
+$a=$c->getStatistics();
+print_r($a);
 
