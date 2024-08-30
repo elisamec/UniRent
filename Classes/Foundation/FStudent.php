@@ -12,12 +12,27 @@ use PDOException;
 use Classes\Tools\TError;
 use Classes\Utilities\USession;
 
+/**
+ * FStudent
+ * 
+ */
 class FStudent
 {
     private static $instance=null;
-
+    
+    /**
+     * Method __construct
+     *
+     * @return void
+     */
     private function __construct(){}
-
+    
+    /**
+     * Method getInstance
+     *
+     * used to get the instance of the class
+     * @return FStudent
+     */
     public static function getInstance():FStudent
     {
         if(is_null(self::$instance))
@@ -25,7 +40,14 @@ class FStudent
             self::$instance= new FStudent();
         }
         return self::$instance;
-    }
+    }    
+    /**
+     * Method exist
+     * method used to verify if a student exists
+     * @param int $id [student's id in the data base]
+     *
+     * @return bool
+     */
     public function exist(int $id):bool
     {
         $db=FConnection::getInstance()->getConnection();
@@ -52,7 +74,15 @@ class FStudent
             return true;
         }
         return false;
-    }
+    }    
+    /**
+     * Method load
+     *
+     * method used to load a student from the data base
+     * @param int $id [student ID]
+     *
+     * @return EStudent
+     */
     public function load(int $id):?EStudent
     {
         $db=FConnection::getInstance()->getConnection();
@@ -92,7 +122,15 @@ class FStudent
         {
             return null;
         }
-    }
+    }    
+    /**
+     * Method store
+     *
+     * this method is used to store a EStudent object into the data base
+     * @param EStudent $student [EStudent object]
+     *
+     * @return bool
+     */
     public function store(EStudent $student):bool
     {
         $db=FConnection::getInstance()->getConnection();
@@ -144,15 +182,19 @@ class FStudent
                 }
                 return false;
             }
-    }
+    }    
+    /**
+     * Method update
+     * 
+     * this method is used to update a stuent into the data base
+     * @param EStudent $student [EStudent object]
+     *
+     * @return bool
+     */
     public function update(EStudent $student):bool 
     {      
-        print "Sto in update<br>";
         $db=FConnection::getInstance()->getConnection();
-        $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
-
         if($this->exist($student->getID())){
-
             try
             {
                 $CPhoto=$student->getPhoto();
@@ -187,8 +229,6 @@ class FStudent
                 {
                     $stm->bindValue(':picture', null, PDO::PARAM_NULL);;
                 }
-
-
                 $stm->execute();
                 $db->commit();
                 $db->exec('UNLOCK TABLES');
@@ -197,15 +237,6 @@ class FStudent
             catch(PDOException $e)
             {
                 $db->rollBack();
-                $errorType = TError::getInstance()->handleDuplicateError($e);
-                if ($errorType) 
-                {
-                    echo "Error: " . $errorType . "\n"; //quando faremo view leghiamolo a view
-                } 
-                else 
-                {
-                    echo "An unexpected error occurred: " . $e->getMessage() . "\n";
-                }
                 return false;
             }
         } 
@@ -214,8 +245,16 @@ class FStudent
             return false;
         }
     }
-    
-    private function currentPhoto(int $id): ?int   #restituisce l'ID della foto del profilo dello studente corrente
+        
+    /**
+     * Method currentPhoto
+     *
+     * this method return the id of current photo in data base of student
+     * @param int $id [student ID]
+     *
+     * @return int
+     */
+    private function currentPhoto(int $id): ?int  
     {
         $db=FConnection::getInstance()->getConnection();
         try
@@ -236,7 +275,15 @@ class FStudent
         $photoID=$stm->fetch(PDO::FETCH_ASSOC)['picture'];
         return $photoID;
     }
-
+    
+    /**
+     * Method delete
+     *
+     * this method is used to delete a student from the data base
+     * @param EStudent $student [EStuednt object]
+     *
+     * @return bool
+     */
     public function delete(EStudent $student): bool 
     {
         $db=FConnection::getInstance()->getConnection();
@@ -250,7 +297,6 @@ class FStudent
             $stm->execute();    
             $db->commit();
             $db->exec('UNLOCK TABLES');
-
             return true;
         }
         catch(PDOException $e)
@@ -259,19 +305,25 @@ class FStudent
             return false;
         }
     }
-
+    
+    /**
+     * Method verifyEmail
+     *
+     * this method verify if the email is used by someone in the UniRent data base
+     * @param string $email [email to verify]
+     *
+     * @return bool
+     */
     public function verifyEmail(string $email):bool
     {
-        $q='SELECT * FROM student WHERE universityMail=:email';
+        $q='SELECT * FROM student WHERE universityMail=:email LOCK IN SHARE MODE';
         $connection= FConnection::getInstance();
         $db=$connection->getConnection();
-        $db->exec('LOCK TABLES student READ');
         $db->beginTransaction();
         $stm=$db->prepare($q);
         $stm->bindParam(':email',$email,PDO::PARAM_STR);
         $stm->execute();
         $db->commit();
-        $db->exec('UNLOCK TABLES');
         $result=$stm->rowCount();
         if ($result >0)
         {
@@ -279,7 +331,15 @@ class FStudent
         }
         return false;
     }
-
+    
+    /**
+     * Method verifyUsername
+     *
+     * this method verify if the username is already in use in UniRent data base
+     * @param string $username [username to verify]
+     *
+     * @return bool
+     */
     public function verifyUsername(string $username):bool|int
     {
         $q='SELECT * FROM student WHERE username=:username';
@@ -294,15 +354,22 @@ class FStudent
         $db->exec('UNLOCK TABLES');
         $result=$stm->rowCount();
         $row=$stm->fetch(PDO::FETCH_ASSOC);
-
         if ($result >0)
         {
             return $row['id'];
         }
         return false;
     }
-    
-  
+        
+    /**
+     * Method getStudentByUsername
+     *
+     * this method return the EStudent object from db by his username, or null if the username
+     * is not in the data base
+     * @param $user $user [username]
+     *
+     * @return EStudent
+     */
     public function getStudentByUsername($user):?EStudent
     {
         $db=FConnection::getInstance()->getConnection();
@@ -339,7 +406,6 @@ class FStudent
         } else {
             return null;
         }
-        
         if(is_null($result_array['picture']))
         {
             $photo=null;
@@ -367,13 +433,11 @@ class FStudent
         try
         {
             $q='DELETE FROM student WHERE username = :user';
-            $db->exec('LOCK TABLES student WRITE');
             $db->beginTransaction();
             $stm=$db->prepare($q);
             $stm->bindParam(':user',$user,PDO::PARAM_STR);
             $stm->execute();
             $db->commit();
-            $db->exec('UNLOCK TABLES');
             return true;
         }
         catch(PDOException $e)
@@ -475,25 +539,30 @@ class FStudent
         $result_array=$stm->fetch(PDO::FETCH_ASSOC);        
         return $result_array['picture'];
     }
-
+    
+    /**
+     * Method findStudentRating
+     *
+     * this method return the student rating
+     * @param int $id [Student ID into database]
+     *
+     * @return int
+     */
     public function findStudentRating(int $id):int
     {
-        
         $db=FConnection::getInstance()->getConnection();
         $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
         try
         {
-            $db->exec('LOCK TABLES student READ, studentreview READ, review READ');
             $q='SELECT AVG(r.valutation) AS rateS
                 FROM student s INNER JOIN studentreview sr ON s.id=sr.idStudent
                 INNER JOIN review r ON r.id=sr.idReview
-                WHERE s.id=:id';
+                WHERE s.id=:id LOCK IN SHARE MODE';
             $db->beginTransaction();
             $stm=$db->prepare($q);
             $stm->bindParam(':id',$id,PDO::PARAM_INT);
             $stm->execute();
             $db->commit();
-            $db->exec('UNLOCK TABLES');
         }
         catch(PDOException $e)
         {
@@ -596,7 +665,15 @@ class FStudent
             $result[]=$supportreply;
         }
         return $result;
-    }
+    }    
+    /**
+     * Method getUsernameById
+     *
+     * this method is used to get the student username by student's ID
+     * @param int $id [student ID]
+     *
+     * @return string
+     */
     public function getUsernameById(int $id): string | bool {
         $db=FConnection::getInstance()->getConnection();
         try
