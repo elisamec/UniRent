@@ -186,6 +186,10 @@
          </div>
       </div>
       <!-- footer section end -->
+      <script>
+
+var modalSuccess= '{$modalSuccess}';
+</script>
 <script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>
       <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
@@ -194,38 +198,6 @@
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
-<script>
-document.getElementById("file").onchange = function() {
-    document.getElementById("form").submit();
-};
-</script>
-
-         <script>
-      $(document).ready(function() {
-
-      
-      var readURL = function(input) {
-         if (input.files && input.files[0]) {
-               var reader = new FileReader();
-
-               reader.onload = function (e) {
-                  $('.imageIcon').attr('src', e.target.result);
-               }
-      
-               reader.readAsDataURL(input.files[0]);
-         }
-      }
-      
-
-      $(".file-upload").on('change', function(){
-         readURL(this);
-      });
-      
-      $(".label-button").on('click', function() {
-         $(".file-upload").click();
-      });
-   });
-      </script>
       <div class="modal" id="myModal">
       <div class"container-fluid">
       <div class="card">
@@ -291,31 +263,4 @@ document.getElementById("file").onchange = function() {
 </div>
 <!-- End of Success Modal -->
 <script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
-<script>
-var modalSuccess= '{$modalSuccess}';
-var successModal = document.getElementById("successModal");
-var successClose = document.getElementById("successClose");
-var closeSuccess = document.getElementById("closeSuccess");
-if (modalSuccess !== '') {
-    successModal.style.display = "block";
-} else {
-    successModal.style.display = "none";
-}
-successClose.onclick = function() {
-    successModal.style.display = "none";
-    window.location.href = currentPage;
-}
-
-closeSuccess.onclick = function() {
-    successModal.style.display = "none";
-    window.location.href = currentPage;
-}
-
-window.onclick = function(event) {
-    if (event.target == successModal) {
-        successModal.style.display = "none";
-        window.location.href = currentPage;
-    }
-}
-</script>
 </body>

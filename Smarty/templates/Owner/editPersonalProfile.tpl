@@ -125,7 +125,7 @@
          </div>
             <div class="col-md-6">
                <div class="profile_info">
-                  <form class="form"  action="/UniRent/Owner/modifyOwnerProfile"  method="POST" id="yourFormId" enctype="multipart/form-data">
+                  <form class="form"  action="/UniRent/Owner/modifyOwnerProfile"  method="POST" enctype="multipart/form-data">
                      <div class="parentOW">
                         <div class="div1"><p>Name: </p></div>
                         <div class="div2">
@@ -277,13 +277,8 @@
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/fileUpload.js"></script>
       
-                        </script>
-      <script>
-      document.getElementById("yourLinkId").onclick = function() {
-    document.getElementById("yourFormId").submit();
-}
-      </script>
       
       <div class="modal" id="myModal">
       <div class"container-fluid">
@@ -294,54 +289,6 @@
          </div> 
       </div>
       </div>
-
-               <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Assicurati che gli ID corrispondano ai tuoi elementi HTML
-    var smokerCheckbox = document.getElementById('smoker');
-    var animalsCheckbox = document.getElementById('animals');
-    var hiddenSmoker = document.getElementById('hiddenSmoker');
-    var hiddenAnimals = document.getElementById('hiddenAnimals');
-
-    if(smokerCheckbox && hiddenSmoker) {
-        smokerCheckbox.onclick = function() {
-            hiddenSmoker.value = this.checked ? 'true' : 'false';
-        };
-    }
-
-    if(animalsCheckbox && hiddenAnimals) {
-        animalsCheckbox.onclick = function() {
-            hiddenAnimals.value = this.checked ? 'true' : 'false';
-        };
-    }
-});
-</script>
-<script>
-      $(document).ready(function() {
-
-      
-      var readURL = function(input) {
-         if (input.files && input.files[0]) {
-               var reader = new FileReader();
-
-               reader.onload = function (e) {
-                  $('.small').attr('src', e.target.result);
-               }
-      
-               reader.readAsDataURL(input.files[0]);
-         }
-      }
-      
-
-      $(".file-upload").on('change', function(){
-         readURL(this);
-      });
-      
-      $(".label-button").on('click', function() {
-         $(".file-upload").click();
-      });
-   });
-      </script>
        <script>
       $(document).ready(function() {
    // Get the modal
