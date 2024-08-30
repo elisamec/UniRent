@@ -48,11 +48,6 @@ function addAvailability() {
     // Add event listeners to start and end time inputs
     const startInput = availability.querySelector('.start');
     const endInput = availability.querySelector('.end');
-
-    
-
-
-
     // Ensure new duration input inherits the current duration value
     const durationInput = availability.querySelector('.duration');
     const currentDurationValue = getCurrentDurationValue();
@@ -103,6 +98,10 @@ function updateDurationSynchronization() {
     // Add event listener to each duration input
     durationInputs.forEach(function(input) {
         input.addEventListener('input', function() {
+            // Check if the input value is empty
+            if (input.value.trim() === '') {
+                input.value = 10; // Default to 10 if empty
+            }
             // Update all other duration inputs
             durationInputs.forEach(function(otherInput) {
                 if (otherInput !== input) {
@@ -179,6 +178,76 @@ function setVisitData(data) {
         container.appendChild(availability);
     }
 }
+function setEditVisitData(data) {
+    let container = document.getElementById('availabilityContainer');
+    container.innerHTML = '';
+    // Assuming 'data' is your object with availability details
+    for (let day in data) {
+        if (data.hasOwnProperty(day)) {
+            let availability = document.createElement('div');
+            availability.className = 'availability';
+            availability.innerHTML = `
+                <button type="button" onclick="removeAvailability(this)" class="button-spec little">-</button>
+                <label for="duration">Visit Duration (minutes):</label>
+                <input type="number" class="duration" name="duration" value="${data[day].duration}" min="10">
+                <label for="day">Weekday:</label>
+                <select name="day" class="dayV" required>
+                    <option value="" disabled selected>Select</option>
+                    <option value="Monday" ${day === 'Monday' ? 'selected' : ''}>Monday</option>
+                    <option value="Tuesday" ${day === 'Tuesday' ? 'selected' : ''}>Tuesday</option>
+                    <option value="Wednesday" ${day === 'Wednesday' ? 'selected' : ''}>Wednesday</option>
+                    <option value="Thursday" ${day === 'Thursday' ? 'selected' : ''}>Thursday</option>
+                    <option value="Friday" ${day === 'Friday' ? 'selected' : ''}>Friday</option>
+                    <option value="Saturday" ${day === 'Saturday' ? 'selected' : ''}>Saturday</option>
+                    <option value="Sunday" ${day === 'Sunday' ? 'selected' : ''}>Sunday</option>
+                </select>
+                <label for="start">Availability start:</label>
+                <input type="time" class="start" name="start" value="${data[day].start}">
+                <label for="end">Availability end:</label>
+                <input type="time" class="end" name="end" value="${data[day].end}">
+            `;
+            container.appendChild(availability);
+        
+        // Add event listeners to start and end time inputs
+const startInput = availability.querySelector('.start');
+const endInput = availability.querySelector('.end');
+// Ensure new duration input inherits the current duration value
+const durationInput = availability.querySelector('.duration');
+const currentDurationValue = getCurrentDurationValue();
+if (currentDurationValue !== null) {
+    durationInput.value = currentDurationValue;
+}
+
+// Update duration inputs synchronization
+updateDurationSynchronization();
+
+function adjustEndTime() {
+    let duration = durationInput.value ? parseInt(durationInput.value) : 10;
+    let newEndTime = new Date('1970-01-01T' + startInput.value + ':00');
+    newEndTime.setHours(newEndTime.getHours()+1);
+    newEndTime.setMinutes(newEndTime.getMinutes() + duration);
+    endInput.value = newEndTime.toISOString().slice(11, 16);
+}
+
+startInput.addEventListener('change', function() {
+    if (endInput.value && startInput.value > endInput.value) {
+        adjustEndTime();
+    }
+});
+
+endInput.addEventListener('change', function() {
+    if (startInput.value && endInput.value < startInput.value) {
+        adjustEndTime();
+    }
+});
+
+durationInput.addEventListener('change', adjustEndTime);
+}
+
+// Initial call to ensure synchronization for existing elements
+updateDurationSynchronization();
+        }
+}
 
 // Save visit availability data when the pop-up form is submitted
 let visitForm = document.getElementById('visitAvailabilityForm');
@@ -194,3 +263,32 @@ visitForm.addEventListener('submit', function(event) {
 
     closeModal();
 });
+if (accommodationData) {
+    document.getElementById("title").value = accommodationData.title;
+    document.getElementById("price").value = accommodationData.price;
+    document.getElementById("deposit").value = accommodationData.deposit;
+    document.getElementById("Date").value = accommodationData.startDate;
+    let month = accommodationData.month == 'september' ? document.getElementById("september") : document.getElementById("october");
+    month.checked = true;
+    document.getElementById("date").value = accommodationData.date;
+    document.getElementById("address").value = accommodationData.address;
+    document.getElementById("city").value = accommodationData.city;
+    document.getElementById("postalCode").value = accommodationData.postalCode;
+    document.getElementById("description").value = accommodationData.description;
+    let men = accommodationData.men === true ? true : false;
+    let women = accommodation.women === true ? true : false;
+    let animals = accommodationData.animals === true ? true : false;
+    let smokers = accommodationData.smokers === true ? true : false;
+    document.getElementById("men").checked = men;
+    document.getElementById("hiddenMen").value = men.toString();
+    document.getElementById("women").checked = women;
+    document.getElementById("hiddenWomen").value = women.toString();
+    document.getElementById("animals").checked = animals;
+    document.getElementById("hiddenAnimals").value = animals.toString();
+    document.getElementById("smokers").checked = smokers;
+    document.getElementById("hiddenSmokers").value = smokers.toString();
+    document.getElementById("places").value = accommodationData.places;
+    if (visitData) {
+        setEditVisitData(visitData);
+    }
+}

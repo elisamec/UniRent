@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
             hiddenInput.value = this.checked ? 'true' : 'false';
         });
     }
-    if (file='addAccommodation') {
+    if (file=='addAccommodation' || file=='editAccommodation') {
     updateHiddenInput('men', 'hiddenMen');
     updateHiddenInput('women', 'hiddenWomen');
     updateHiddenInput('animals', 'hiddenAnimals');

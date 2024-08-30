@@ -108,6 +108,7 @@
         <p id="breadcrumb"></p>
     </div>
       <!-- header section end -->
+
       <!-- feature section start -->
       <div class="Properties_section layout_padding screenSize">
          <div class="container">
@@ -125,55 +126,9 @@
             </div>
          </div>
       </div>
-      
-      <!-- footer section start -->
-      <div class="footer_section">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-4">
-                  <h3 class="footer_text">About Us</h3>
-                  <p class="lorem_text">Created in 2024, UniRent has revolutionized the way students find their home away from home. Connecting students with trusted landlords, UniRent ensures a seamless rental experience.</p>
-               </div>
-               <hr></hr>
-               <div class="col-md-4">
-                  <span class="lorem_text">Copyright &copy; UniRent 2024</span>
-               </div>
-               <div class="col-md-4">
-                  <h3 class="footer_text">Useful Links</h3>
-                  <div class="footer_menu">
-                     <ul>
-                        <li><a href="/UniRent/Owner/home">Home</a></li>
-                        <li><a href="/UniRent/Owner/about">About Us</a></li>
-                        <li><a href="/UniRent/Owner/contact">Contact Us</a></li>
-                        <li><a href="/UniRent/Owner/guidelines">Guidelines</a></li>
-                     </ul>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- footer section end -->
-      
-      <!-- Javascript files-->
-      <script src="/UniRent/Smarty/js/jquery.min.js"></script>
-      <script src="/UniRent/Smarty/js/popper.min.js"></script>
-      <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
-      <script src="/UniRent/Smarty/js/jquery-3.0.0.min.js"></script>
-      <script src="/UniRent/Smarty/js/plugin.js"></script>
-      <!-- sidebar -->
-      <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
-      <script src="/UniRent/Smarty/js/custom.js"></script>
-      <!-- javascript --> 
-      <script>
-         // Material Select Initialization
-         $(document).ready(function() {
-         $('.mdb-select').materialSelect();
-         $('.select-wrapper.md-form.md-outline input.select-dropdown').bind('focus blur', function () {
-         $(this).closest('.select-outline').find('label').toggleClass('active');
-         $(this).closest('.select-outline').find('.caret').toggleClass('active');
-         });
-         });
-      </script>
+      <!-- feature section end -->
+
+      <!-- Cookie Modal -->
       <div class="modal" id="myModal">
       <div class"container-fluid">
       <div class="card">
@@ -183,13 +138,8 @@
          </div> 
       </div>
       </div>
-         <script>
-  const data ={$contractsData};
-</script>
-<script src="/UniRent/Smarty/js/UniRentOriginal/contractsPopulateOwner.js"></script>
-<script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
-<script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
-   <!-- Request Detail Modal -->
+      <!-- End of Cookie Modal -->
+      <!-- Request Detail Modal -->
 <div class="resModal" id="replyModal">
       <div class="resModal-content">
          <div class="row">
@@ -242,8 +192,65 @@
     </div>
 </div>
 <!-- End of Success Modal -->
+      
+      <!-- footer section start -->
+      <div class="footer_section">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-4">
+                  <h3 class="footer_text">About Us</h3>
+                  <p class="lorem_text">Created in 2024, UniRent has revolutionized the way students find their home away from home. Connecting students with trusted landlords, UniRent ensures a seamless rental experience.</p>
+               </div>
+               <hr></hr>
+               <div class="col-md-4">
+                  <span class="lorem_text">Copyright &copy; UniRent 2024</span>
+               </div>
+               <div class="col-md-4">
+                  <h3 class="footer_text">Useful Links</h3>
+                  <div class="footer_menu">
+                     <ul>
+                        <li><a href="/UniRent/Owner/home">Home</a></li>
+                        <li><a href="/UniRent/Owner/about">About Us</a></li>
+                        <li><a href="/UniRent/Owner/contact">Contact Us</a></li>
+                        <li><a href="/UniRent/Owner/guidelines">Guidelines</a></li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- footer section end -->
 
-<script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
+      <!-- Javascript Variables-->
+      <script>
+         const data ={$contractsData};
+      </script>
+      <!-- Javascript Variables-->
+      
+      <!-- Javascript files-->
+      <script src="/UniRent/Smarty/js/jquery.min.js"></script>
+      <script src="/UniRent/Smarty/js/popper.min.js"></script>
+      <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
+      <script src="/UniRent/Smarty/js/jquery-3.0.0.min.js"></script>
+      <script src="/UniRent/Smarty/js/plugin.js"></script>
+      <!-- sidebar -->
+      <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="/UniRent/Smarty/js/custom.js"></script>
+      <!-- javascript --> 
+      <script>
+         // Material Select Initialization
+         $(document).ready(function() {
+         $('.mdb-select').materialSelect();
+         $('.select-wrapper.md-form.md-outline input.select-dropdown').bind('focus blur', function () {
+         $(this).closest('.select-outline').find('label').toggleClass('active');
+         $(this).closest('.select-outline').find('.caret').toggleClass('active');
+         });
+         });
+      </script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/contractsPopulateOwner.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
 
 
    </body>

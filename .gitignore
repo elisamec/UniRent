@@ -3,3 +3,4 @@ htaccess
 Smarty/templates_c
 .DS_Store
 Updater/day.php
+settings.json

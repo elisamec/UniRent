@@ -192,10 +192,10 @@
                            </div>
                             <div id="div12"> 
                             <div class="input-group">
-    <textarea  class="textarea-spec" rows="5" id="notes" name="description" required></textarea>
-    <label class="textarea-label" for="notes">Description</label>
-</div>
-</div>
+                              <textarea  class="textarea-spec" rows="5" id="notes" name="description" required></textarea>
+                              <label class="textarea-label" for="notes">Description</label>
+                           </div>
+                           </div>
                             <div id="div13">
                                 <div class="checkbox-container">
                                     <label class="checkbox-label">Tenants preferences:</label>

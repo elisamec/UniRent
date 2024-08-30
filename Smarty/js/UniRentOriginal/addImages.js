@@ -22,7 +22,9 @@ function closeImageModal() {
 // Image upload handling
 let imageInput = document.getElementById('img');
 let imageContainer = document.getElementById('imageContainer');
-let imagesData = [];
+if (!imagesData) {
+    var imagesData = [];
+}
 
 imageInput.addEventListener('change', function(event) {
     let files = event.target.files;
