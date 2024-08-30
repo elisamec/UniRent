@@ -44,7 +44,8 @@ class FContract
     /**
      * Method exist
      *
-     * @param int $reservID [Reservation id]
+     * this method is used to verify if a contract exists
+     * @param int $reservID [Reservarion id]
      *
      * @return bool
      */
@@ -61,18 +62,16 @@ class FContract
         $stm->execute();
         $db->commit();
         $result=$stm->rowCount();
-
         if ($result >0)
         {
             return true;
         }
         return false;
-
     }
-    
     /**
      * Method store
      *
+     * method to store a EContract
      * @param EContract $con [contract]
      *
      * @return bool
@@ -112,6 +111,7 @@ class FContract
     /**
      * Method load
      *
+     * metod used to load a EContract object in the data base
      * @param int $id [reservation/contract id]
      *
      * @return Econtract
@@ -148,11 +148,21 @@ class FContract
         {
             return false;
         }
-    }
-    public function getContractsByStudent(int $id, ?int $idAccommodation=null, ?string $kind=null)#:array|bool
+    }    
+    /**
+     * Method getContractsByStudent
+     * 
+     * this method return an array of all Student'contracts or false
+     *
+     * @param int $id [explicite description]
+     * @param ?int $idAccommodation [explicite description]
+     * @param ?string $kind [explicite description]
+     *
+     * @return array|bool
+     */
+    public function getContractsByStudent(int $id, ?int $idAccommodation=null, ?string $kind=null):array|bool
     {  
         $db=FConnection::getInstance()->getConnection();
-        $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
         FPersistentManager::getInstance()->updateDataBase();
         $contracts=[];
         try
@@ -191,9 +201,6 @@ class FContract
             return false;
         }
         $row=$stm->fetchAll(PDO::FETCH_ASSOC);
-        #print_r($row);
-        #print $q;
-        #print $id.' '.$kind.' '.$idAccommodation;
         foreach ($row as $r)
         {
             $reservationAssociated=FReservation::getInstance()->load($r['idReservation']);
@@ -202,8 +209,17 @@ class FContract
             $contracts[]=$contract;
         }
         return $contracts;
-    }
-    public function getContractsByOwner(int $id, string $kind) {
+    }    
+    /**
+     * Method getContractsByOwner
+     *
+     * this metod is used to return all owner'scontracts or false  
+     * @param int $id [owner's ID]
+     * @param string $kind [status of contract (finished, onGoing or future)]
+     *
+     * @return array|bool
+     */
+    public function getContractsByOwner(int $id, string $kind):array|bool {
         $db = FConnection::getInstance()->getConnection();
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
         FPersistentManager::getInstance()->updateDataBase();
