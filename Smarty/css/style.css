@@ -2448,8 +2448,8 @@ textarea#comment::placeholder {
 }
 .Accomcontainer {
     float: left;
-    width: 100%;
-    padding-left: 20px;
+    width: 69vw;
+    padding-left: 40px;
 
 }
 .accom_img {
@@ -2457,7 +2457,7 @@ textarea#comment::placeholder {
     height: 100%;
     object-fit: cover;
     border-radius: 10px;
-    margin: 10px 10px 10px 10px;
+    margin: 20px;
 }
 .accommodation_text {
     padding: 20px;
