@@ -117,7 +117,6 @@
       </div>
       <div class="accImg">
       <div class="row">
-      <div class="col-lg-2 col-md-4 col-lg-2 col-md-4">
                      <div class="accom_img">
                      <div class="container_main">
                                  <img src="/UniRent/Smarty/images/img-4.png" id="mainImage"alt="">
@@ -155,8 +154,6 @@
                         </div>
                         <div class="reserve_btn" id="contactBtn"><a href="#" >Owner Contacts</a></div>
                      </div>
-                    </div>
-                     <div class="col-lg-10 col-md-12 col-lg-10 col-md-12">
                      <div class="Accomcontainer">
                         <h1 class="title">Accommodation Details</h1>
                         <div class="row">
@@ -198,7 +195,6 @@
                    </div>
                      </div>
                      
-                  </div>
                   </div>
       </div>
 
