@@ -3123,6 +3123,9 @@ a.badge-danger.focus,a.badge-danger:focus{
     display: flex !important;
     height: 80px;
   }
+  .d-flex1 {
+    display: flex !important;
+  }
   .text-truncate {
     overflow: hidden;
     text-overflow: ellipsis;

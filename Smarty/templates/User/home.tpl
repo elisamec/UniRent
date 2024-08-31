@@ -272,7 +272,6 @@
       <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/selectKeyboardAccessibility.js"></script>
-      <script src="/UniRent/Smarty/js/UniRentOriginal/year.js"></script>
 
    </body>
 </html>

@@ -2,6 +2,22 @@ document.addEventListener("DOMContentLoaded", function() {
     const citySelect = document.getElementById("citySelect");
     const uniSelect = document.getElementById("universitySelect");
     const periodSelect = document.getElementById("date");
+    const yearSelect = document.getElementById('yearSelect');
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth() + 1; // Months are zero-indexed in JavaScript
+    const startYear = currentMonth >= 10 ? currentYear + 1 : currentYear;
+    const endYear = startYear + 10;
+
+    // Populate year dropdown
+    for (let year = startYear; year <= endYear; year++) {
+        const option = new Option(year, year);
+        yearSelect.add(option);
+    }
+
+    // Select default year if available
+    if (typeof defaultYear !== 'undefined') {
+        yearSelect.value = defaultYear;
+    }
 
     // Initialize nice-select on page load
     $('select').niceSelect();
@@ -20,27 +36,31 @@ document.addEventListener("DOMContentLoaded", function() {
             citySelect.add(option);
         }
 
-        // Update nice-select after adding options
-        $('select').niceSelect('update');
-        if (typeof defaultCity != 'undefined') {
-            if (subjectObject[defaultCity]) {
-                citySelect.value = defaultCity;
-                subjectObject[defaultCity].forEach(uniName => {
-                    let option = new Option(uniName, uniName);
-                    uniSelect.add(option);
-                });
-                $('select').niceSelect('update');
-                if (defaultUniversity && subjectObject[defaultCity].includes(defaultUniversity)) {
-                    uniSelect.value = defaultUniversity;
-                }
+        // Select default city and populate universities if available
+        if (typeof defaultCity !== 'undefined' && subjectObject[defaultCity]) {
+            citySelect.value = defaultCity;
+            subjectObject[defaultCity].forEach(uniName => {
+                let option = new Option(uniName, uniName);
+                uniSelect.add(option);
+            });
+            
+            if (typeof defaultUniversity !== 'undefined' && subjectObject[defaultCity].includes(defaultUniversity)) {
+                uniSelect.value = defaultUniversity;
+            }
+
+            if (typeof defaultPeriod !== 'undefined') {
+                periodSelect.value = defaultPeriod;
             }
         }
+
+        // Update nice-select after adding options
+        $('select').niceSelect('update');
 
         // Add event listener for city dropdown change
         citySelect.onchange = function() {
             const selectedCity = citySelect.value;
 
-            // Clear the university dropdown
+            // Clear the university dropdown except the first placeholder option
             uniSelect.length = 1;
 
             if (selectedCity && subjectObject[selectedCity]) {
@@ -50,20 +70,18 @@ document.addEventListener("DOMContentLoaded", function() {
                     uniSelect.add(option);
                 });
 
+                if (typeof defaultUniversity !== 'undefined' && subjectObject[selectedCity].includes(defaultUniversity)) {
+                    uniSelect.value = defaultUniversity;
+                }
+
+                if (typeof defaultPeriod !== 'undefined') {
+                    periodSelect.value = defaultPeriod;
+                }
+
                 // Update nice-select after adding options
                 $('select').niceSelect('update');
-                if (typeof defaultUniversity != 'undefined') {
-                    if (subjectObject[selectedCity].includes(defaultUniversity)) {
-                        uniSelect.value = defaultUniversity;
-                    }
-                }
-                if (typeof defaultPeriod != 'undefined') {
-
-                    periodSelect.value = defaultPeriod;
-
-                }$('select').niceSelect('update');
             }
-        }
+        };
     })
     .catch(error => console.error('Error:', error));
 });

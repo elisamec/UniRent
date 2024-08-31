@@ -37,12 +37,12 @@ class VUser{
         $this->smarty->assign('selectedCity', $selectedCity);
         $this->smarty->assign('selectedUni', $selectedUni);
         $this->smarty->assign('selectedDate', $date);
+        $this->smarty->assign('selectedYear', $year);
         $this->smarty->assign('searchResult', json_encode($searchResult));
         $this->smarty->assign('ratingOwner', $ratingOwner);
         $this->smarty->assign('ratingAccommodation', $ratingAccommodation);
         $this->smarty->assign('minPrice', $minPrice);
         $this->smarty->assign('maxPrice', $maxPrice);
-        $this->smarty->assign('year',$year);
         $this->smarty->display('User/search.tpl');
     }
 

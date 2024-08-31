@@ -197,7 +197,7 @@
                <div class="row">
                <div class="Findcontainer">
                <h1 class="find_text">Price Range:</h1>
-               <div class="d-flex">
+               <div class="d-flex1">
                   <div class="wrapper">
                      <header>
                      <p>Use slider or enter min and max price</p>
@@ -300,6 +300,7 @@
          const defaultCity = {$selectedCity};
          const defaultUniversity = {$selectedUni};
          const defaultPeriod = {$selectedDate};
+         const defaultYear = {$selectedYear};
          const results = {$searchResult};
          var user = 'User';
 

@@ -313,25 +313,26 @@
     </div>
 </div>
 <!-- End of Request Detail Modal -->
-<!-- Report Modal -->
-<div id="reportModal" class="resModal">
-    <!-- Modal content -->
+
+<!-- Report Review Modal -->
+<div id="reportModalReview" class="resModal">
     <div class="resModal-content">
     <div class="row">
-        <span class="resClose">&times;</span>
+        <span class="resClose" onclick="cancelReportReview()">&times;</span>
         <h2 class="resModal-head">Report Review</h2>
     </div>
-        <form id="reportForm" action="" class="form" method="POST" enctype="multipart/form-data">
-            <label for="reportReason">Reason for report:</label><br>
-            <textarea id="reportReason" name="reportReason" rows="4" cols="50" oninput="checkInput()"></textarea><br><br>
+        <form id="reportFormReview" action="" class="form" method="POST" enctype="multipart/form-data">
+            <label for="reportReasonReview">Reason for report:</label><br>
+            <textarea id="reportReasonReview" name="reportReasonReview" rows="4" cols="50" oninput="checkInputReview()"></textarea><br><br>
             <div class="btn-cont">
-                <button type="submit" id="confirmReport" class="disabled confirmClass" disabled>Submit</button>
-                <button type="button" id="cancelReport" class="cancelClass" onclick="cancelReport()">Cancel</button>
+                <button type="submit" id="confirmReportReview" class="disabled confirmClass" disabled>Submit</button>
+                <button type="button" onclick="cancelReportReview()" class="cancelClass">Cancel</button>
             </div>
         </form>
     </div>
 </div>
-<!-- End of Report Modal -->
+<!-- End of Report Review Modal -->
+
 <!-- Cookie Modal -->
 <div class="modal" id="myModal">
       <div class"container-fluid">
@@ -377,11 +378,13 @@
       <script>
         const modalSuccess= '{$modalSuccess}';
         const images = {$imagesJson};
-        const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
+        const reviews = {$reviewsData};
         const user = 'Owner';
         const deletable = '{$deletable}';
         const tenants = {$tenantsJson};
         const numPlaces = {$num_places};
+        const deleteVariable = 'Accommodation';
+        var accommodationId = '{$accommodation->getIdAccommodation()}';
     </script>
     
       <!-- Javascript files-->
@@ -397,5 +400,6 @@
     <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
     <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
     <script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
-    <script src="/UniRent/Smarty/js/UniRentOriginal/tenants.js"></script>
+    <script src="/UniRent/Smarty/js/UniRentOriginal/accommodationTenants.js"></script>
    </body>
+</html>

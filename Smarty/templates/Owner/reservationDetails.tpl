@@ -133,8 +133,6 @@
                      {/if}
                      <p>Age: {$student->getAge()}.</p>
                      <p> Average Rating: {$student->getAverageRating()}.</p>
-                     
-                  
                </div>
                </div>
             <div class="col-md-2">
@@ -157,161 +155,27 @@
          </div>
     <div id="reviewsContainer"></div>
 </div>
-       <script>
-    {if isset($reviewsData)}
-    const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
-    console.log(reviews);
-
-    // Function to generate stars based on the rating
-    function generateStars(stars) {
-        let starElements = '';
-        for (let i = 0; i < 5; i++) {
-            if (i < stars) {
-                starElements += '<span class="fa fa-star or"></span>';
-            } else {
-                starElements += '<span class="fa fa-star"></span>';
-            }
-        }
-        return starElements;
-    }
-
-    // Function to create and append reviews to the container
-    function displayReviews(reviews) {
-        const container = document.getElementById('reviewsContainer');
-
-        if (container) {
-            
-            if (reviews.length === 0) {
-                container.innerHTML = '<div class="container"><h1 class="noRev">There are no reviews yet!</h1></div>';
-            } else {
-                reviews.forEach(review => {
-                    const reviewElement = document.createElement('div');
-                    reviewElement.className = 'review';
-                    let style;
-                    if (review.userStatus ==='banned') {
-                        style = 'class="disabled"';
-                    } else {
-                        style = '';
-                    }
     
-
-                    // Insert the names of the elements of the review array
-                    reviewElement.innerHTML = `
-                    <div class="row">
-                        <h1 class="ReviewTitle">` + review.title + `</h1> <!-- Title of the review -->
-                        <div class="btn-cont2">
-                            <button class="delete_button" data-review-id="` + review.id + `">Report</button>
-                        </div>
-                    </div>
-                    <div class="row">
-                            <div class="userSection">
-                                <div class="userIcon">
-                                <a href="/UniRent/Owner/publicProfile/` + review.username + `" ` + style + `><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
-                            </div>
-                            <div class="username"><a href="/UniRent/Owner/publicProfile/` + review.username + `" ` + style + `>` + review.username + `</a></div> <!-- Username of the reviewer -->
-                        </div>
-                            <div class="col-md-11">
-                                <div class="stars">
-                                    ` + generateStars(review.stars) + ` <!-- Star rating -->
-                                </div>
-                                <p>` + review.content + `</p> <!-- Content of the review -->
-                            </div>
-                        </div>
-                    `;
-
-                    container.appendChild(reviewElement);
-                });
-            }
-        } else {
-            console.error("Container not found!"); // Debugging: Error if container is not found
-        }
-    }
-
-    // Call the function to display reviews
-    displayReviews(reviews);
-    {/if}
-</script>
-<!-- HTML for the Modal -->
-<div id="reportModal" class="resModal">
-    <!-- Modal content -->
+<!-- Report Review Modal -->
+<div id="reportModalReview" class="resModal">
     <div class="resModal-content">
     <div class="row">
-        <span class="resClose">&times;</span>
+        <span class="resClose" onclick="cancelReportReview()">&times;</span>
         <h2 class="resModal-head">Report Review</h2>
     </div>
-        <form id="reportForm" action="" class="form" method="POST" enctype="multipart/form-data">
-            <label for="reportReason">Reason for report:</label><br>
-            <textarea id="reportReason" name="reportReason" rows="4" cols="50" oninput="checkInput()"></textarea><br><br>
+        <form id="reportFormReview" action="" class="form" method="POST" enctype="multipart/form-data">
+            <label for="reportReasonReview">Reason for report:</label><br>
+            <textarea id="reportReasonReview" name="reportReasonReview" rows="4" cols="50" oninput="checkInputReview()"></textarea><br><br>
             <div class="btn-cont">
-                <button type="submit" id="confirmReport" class="disabled confirmClass" disabled>Submit</button>
-                <button type="button" id="cancelReport" class="cancelClass" onclick="cancelReport()">Cancel</button>
+                <button type="submit" id="confirmReportReview" class="disabled confirmClass" disabled>Submit</button>
+                <button type="button" onclick="cancelReportReview()" class="cancelClass">Cancel</button>
             </div>
         </form>
     </div>
 </div>
+<!-- End of Report Review Modal -->
 
-<script>
-document.addEventListener('DOMContentLoaded', (event) => {
-    const reportButtons = document.querySelectorAll('.delete_button');
-    const modal = document.getElementById("reportModal");
-    const span = document.querySelector(".resClose");
-    const confirmBtn = document.getElementById("confirmReport");
-    const cancelBtn = document.getElementById("cancelReport");
-    const form = document.getElementById("reportForm");
-    const textarea = document.getElementById("reportReason");
-
-    reportButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            event.preventDefault();
-            const reviewId = button.getAttribute('data-review-id'); // Get the owner ID from the button
-            form.action = "/UniRent/Report/makeReport/" + reviewId + "/Review"; // Dynamically set the form action
-            modal.style.display = "block";
-        });
-    });
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    };
-
-    // When the user clicks on the cancel button, close the modal
-    cancelBtn.onclick = function() {
-        cancelReport();
-    };
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    };
-});
-
-function checkInput() {
-    const submitBtn = document.getElementById("confirmReport");
-    const textarea = document.getElementById("reportReason");
-    if (textarea.value.trim() !== "") {
-        submitBtn.disabled = false;
-        submitBtn.classList.remove("disabled");
-    } else {
-        submitBtn.disabled = true;
-        submitBtn.classList.add("disabled");
-    }
-}
-
-function cancelReport() {
-    const textarea = document.getElementById("reportReason");
-    const submitBtn = document.getElementById("confirmReport");
-    textarea.value = '';
-    submitBtn.disabled = true;
-    submitBtn.classList.add("disabled");
-    closeReportModal();
-}
-
-function closeReportModal() {
-    document.getElementById("reportModal").style.display = "none";
-}
-</script>
+<!-- Accept Reservation Modal -->
 <div id="acceptModal" class="resModal">
     <div class="resModal-content">
     <div class="row">
@@ -326,6 +190,9 @@ function closeReportModal() {
         </div>
     </div>
 </div>
+<!-- End of Accept Reservation Modal -->
+
+<!-- Deny Reservation Modal -->
 <div id="denyModal" class="resModal">
     <div class="resModal-content">
     <div class="row">
@@ -339,90 +206,10 @@ function closeReportModal() {
             <button class="cancelClass" id="cancelDeny">No</button>
         </div>
     </div>
-
 </div>
-
-<script>
-function acceptFunct() {
-      window.location.href = "/UniRent/Reservation/accept/{$reservation->getID()}";
-      acceptModal.style.display = "none";
-   }
-    function denyFunct() {
-        window.location.href = "/UniRent/Reservation/deny/{$reservation->getID()}";
-        denyModal.style.display = "none";
-    }
-        var denyModal = document.getElementById("denyModal");
-        var denyClose = document.getElementById("denyClose");
-        var cancelDeny = document.getElementById("cancelDeny");
-        var denyBtn = document.getElementById("denyButton");
-
-   var acceptClose = document.getElementById("acceptClose");
-   var cancelAccept = document.getElementById("cancelAccept");
-   var acceptBtn = document.getElementById("acceptBtn");
-   var acceptModal = document.getElementById("acceptModal");
-
-   acceptBtn.onclick = function(event) {
-      event.preventDefault(); // Prevent the default action (navigation)
-      acceptModal.style.display = "block";
-   }
-   acceptClose.onclick = function() {
-      acceptModal.style.display = "none";
-   }
-    cancelAccept.onclick = function() {
-        acceptModal.style.display = "none";
-    }
-
-    denyBtn.onclick = function(event) {
-        event.preventDefault(); // Prevent the default action (navigation)
-        denyModal.style.display = "block";
-    }
-    denyClose.onclick = function() {
-        denyModal.style.display = "none";
-    }
-    cancelDeny.onclick = function() {
-        denyModal.style.display = "none";
-    }
-</script>
-
-<!-- footer section start -->
-      <div class="footer_section">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-4">
-                  <h3 class="footer_text">About Us</h3>
-                  <p class="lorem_text">Created in 2024, UniRent has revolutionized the way students find their home away from home. Connecting students with trusted landlords, UniRent ensures a seamless rental experience.</p>
-               </div>
-               <hr></hr>
-               <div class="col-md-4">
-                  <span class="lorem_text">Copyright &copy; UniRent 2024</span>
-               </div>
-               <div class="col-md-4">
-                  <h3 class="footer_text">Useful Links</h3>
-                  <div class="footer_menu">
-                     <ul>
-                        <li><a href="/UniRent/Owner/home">Home</a></li>
-                        <li><a href="/UniRent/Owner/about">About Us</a></li>
-                        <li><a href="/UniRent/Owner/contact">Contact Us</a></li>
-                        <li><a href="/UniRent/Owner/guidelines">Guidelines</a></li>
-                     </ul>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- footer section end -->
-      <script>
-var modalSuccess= '{$modalSuccess}';
-</script>
-<script src="/UniRent/Smarty/js/jquery.min.js"></script>
-      <script src="/UniRent/Smarty/js/popper.min.js"></script>
-      <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
-      <script src="/UniRent/Smarty/js/jquery-3.0.0.min.js"></script>
-      <script src="/UniRent/Smarty/js/plugin.js"></script>
-      <!-- sidebar -->
-      <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
-      <script src="/UniRent/Smarty/js/custom.js"></script>
-         
+<!-- End of Deny Reservation Modal -->
+  
+  <!-- Cookie Modal -->
       <div class="modal" id="myModal">
       <div class"container-fluid">
       <div class="card">
@@ -432,9 +219,9 @@ var modalSuccess= '{$modalSuccess}';
          </div> 
       </div>
       </div>
-   <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
-<script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
-   <!-- Request Detail Modal -->
+<!-- End of Cookie Modal -->
+
+<!-- Request Detail Modal -->
 <div class="resModal" id="replyModal">
       <div class="resModal-content">
          <div class="row">
@@ -487,5 +274,50 @@ var modalSuccess= '{$modalSuccess}';
     </div>
 </div>
 <!-- End of Success Modal -->
+
+<!-- footer section start -->
+      <div class="footer_section">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-4">
+                  <h3 class="footer_text">About Us</h3>
+                  <p class="lorem_text">Created in 2024, UniRent has revolutionized the way students find their home away from home. Connecting students with trusted landlords, UniRent ensures a seamless rental experience.</p>
+               </div>
+               <hr></hr>
+               <div class="col-md-4">
+                  <span class="lorem_text">Copyright &copy; UniRent 2024</span>
+               </div>
+               <div class="col-md-4">
+                  <h3 class="footer_text">Useful Links</h3>
+                  <div class="footer_menu">
+                     <ul>
+                        <li><a href="/UniRent/Owner/home">Home</a></li>
+                        <li><a href="/UniRent/Owner/about">About Us</a></li>
+                        <li><a href="/UniRent/Owner/contact">Contact Us</a></li>
+                        <li><a href="/UniRent/Owner/guidelines">Guidelines</a></li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- footer section end -->
+      <script>
+    var modalSuccess= '{$modalSuccess}';
+    const reviews = {$reviewsData};
+    const reservationId = '{$reservation->getId()}';
+    </script>
+    <script src="/UniRent/Smarty/js/jquery.min.js"></script>
+      <script src="/UniRent/Smarty/js/popper.min.js"></script>
+      <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
+      <script src="/UniRent/Smarty/js/jquery-3.0.0.min.js"></script>
+      <script src="/UniRent/Smarty/js/plugin.js"></script>
+      <!-- sidebar -->
+      <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="/UniRent/Smarty/js/custom.js"></script>
+   <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
+<script src="/UniRent/Smarty/js/UniRentOriginal/reviews.js"></script>
 <script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
 </body>
+</html>

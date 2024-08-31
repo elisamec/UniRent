@@ -231,7 +231,7 @@
                <div class="row">
                <div class="Findcontainer">
                <h1 class="find_text">Price Range:</h1>
-               <div class="d-flex">
+               <div class="d-flex1">
                   <div class="wrapper">
                      <header>
                      <p>Use slider or enter min and max price</p>
@@ -418,6 +418,7 @@
     const defaultCity = {$selectedCity|json_encode};
     const defaultUniversity = {$selectedUni|json_encode};
     const defaultPeriod = {$selectedDate|json_encode};
+    const defaultYear = {$selectedYear|json_encode};
 
     fetch("/UniRent/User/getCities")
     .then(response => {
@@ -604,8 +605,6 @@ document.addEventListener("DOMContentLoaded", function() {
 <script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
 <script src="/UniRent/Smarty/js/UniRentOriginal/selectKeyboardAccessibility.js"></script>
 
-<!--JavaScript files -->
-<script src="/UniRent/Smarty/js/UniRentOriginal/year.js"></script>
 <!--End of JavaScript files -->
 
 </body>

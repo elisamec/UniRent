@@ -164,7 +164,7 @@
 
     </table>
     </body>
-    </html>
+</html>    </html>
 {/capture}
 <script type="text/javascript">
     _smarty_console = window.open("", "console{$targetWindow}", "width=1024,height=600,left={$offset},top={$offset},resizable,scrollbars=yes");

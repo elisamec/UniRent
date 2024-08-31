@@ -385,5 +385,5 @@ const user= 'Admin';
 <script src = "/UniRent/Smarty/js/UniRentOriginal/adminDropdowns.js"></script>
 <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
 </body>
-
+</html>
 </html>

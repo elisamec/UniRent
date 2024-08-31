@@ -264,3 +264,4 @@ var modalSuccess= '{$modalSuccess}';
 <!-- End of Success Modal -->
 <script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
 </body>
+</html>

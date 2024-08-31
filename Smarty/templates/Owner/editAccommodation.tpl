@@ -397,3 +397,4 @@
     <script src="/UniRent/Smarty/js/UniRentOriginal/addImages.js"></script>
     <script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
 </body>
+</html>

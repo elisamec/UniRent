@@ -501,3 +501,4 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- End of Request Detail Modal -->
 
 </body>
+</html>

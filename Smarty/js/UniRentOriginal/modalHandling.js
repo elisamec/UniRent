@@ -99,73 +99,69 @@ function off() {
     /**
      * This is used to display the report modal when the report button is clicked
      */
-    const reportButtons = document.querySelectorAll('button.delete_button');
-    const reportModal = document.getElementById("reportModal");
-    const reportSpan = document.querySelector(".resClose");
-    const cancelReportBtn = document.getElementById("cancelReport");
-    const reportForm = document.getElementById("reportForm");
-    const reportReason = document.getElementById("reportReason");
+    
+    const reportModalUser = document.getElementById("reportModalUser");
+    const reportFormUser = document.getElementById("reportFormUser");
+    const reportReasonUser = document.getElementById("reportReasonUser");
+    const reportConfirmUser = document.getElementById("confirmReportUser");
+
+    const reportButtonsReview = document.querySelectorAll('button.delete_button');
+    const reportModalReview = document.getElementById("reportModalReview");
+    const reportFormReview = document.getElementById("reportFormReview");
+    const reportReasonReview = document.getElementById("reportReasonReview");
+    const reportConfirmReview = document.getElementById("confirmReportReview");
+
         
-    if ( reportModal ) {
-        reportButtons.forEach(button => {
+    if (reportModalReview) {
+        reportButtonsreview.forEach(button => {
             button.addEventListener('click', (event) => {
                 event.preventDefault();
                 const reviewId = button.getAttribute('data-review-id'); // Get the owner ID from the button
-                reportForm.action = "/UniRent/Report/makeReport/" + reviewId + "/Review"; // Dynamically set the form action
-                reportModal.style.display = "block";
+                reportFormReview.action = "/UniRent/Report/makeReport/" + reviewId + "/Review"; // Dynamically set the form action
+                reportModalReview.style.display = "block";
             });
         });
-        
-        // When the user clicks on <span> (x), close the modal
-        reportSpan.onclick = function() {
-            reportModal.style.display = "none";
-        };
-        
-        // When the user clicks on the cancel button, close the modal
-        cancelReportBtn.onclick = function() {
-            cancelReport();
-        };
         
     }
     /**
      * This is used to check that the report reason is not empty before enabling the submit button
      */
-    function checkInput() {
-        const submitBtn = document.getElementById("confirmReport");
-        const reportReason = document.getElementById("reportReason");
+    function checkInputReview() {
+        let reportReason = reportReasonReview ? reportReasonReview : reportReasonUser;
+        let reportConfirm = reportConfirmReview ? reportConfirmReview : reportConfirmUser;
         if (reportReason.value.trim() !== "") {
-            submitBtn.disabled = false;
-            submitBtn.classList.remove("disabled");
+            reportConfirm.disabled = false;
+            reportConfirm.classList.remove("disabled");
         } else {
-            submitBtn.disabled = true;
-            submitBtn.classList.add("disabled");
+            reportConfirm.disabled = true;
+            reportConfirm.classList.add("disabled");
         }
     }
     
     /**
      * This is used to cancel the report and closing the modal by clearing the report reason and disabling the submit button
      */
-    function cancelReport() {
-        const reportReason = document.getElementById("reportReason");
-        const submitBtn = document.getElementById("confirmReport");
+    function cancelReportReview() {
+        let reportModal = reportModalReview ? reportModalReview : reportModalUser;
+        let reportReason = reportReasonReview ? reportReasonReview : reportReasonUser;
+        let reportConfirm = reportConfirmReview ? reportConfirmReview : reportConfirmUser;
         reportReason.value = '';
-        submitBtn.disabled = true;
-        submitBtn.classList.add("disabled");
-        closeReportModal();
+        reportConfirm.disabled = true;
+        reportConfirm.classList.add("disabled");
+        reportModal.style.display = "none";
     }
-    
     /**
-     * This is used to close the report modal
+     * This is used to open the report modal when the report button is clicked
      */
-    function closeReportModal() {
-        document.getElementById("reportModal").style.display = "none";
+    function openReportModalUser() {
+        reportModalUser.style.display = "block";
     }
 
     /**
      * This is used to deactivate the accommodation
      */
     function deactivateFunct() {
-        window.location.href = "/UniRent/Accommodation/deactivate/{$accommodation->getIdAccommodation()}";
+        window.location.href = "/UniRent/Accommodation/deactivate/" + accommodationId;
         deactivateModal.style.display = "none";
     }
 
@@ -203,8 +199,37 @@ function off() {
     var understoodBtn = document.getElementById("understood");
 
     if (deleteConfirmModal) {
+        if (typeof postedReviews !== 'undefined') {
+            var deleteButtons = document.querySelectorAll('.delete_button');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', (event) => {
+                    event.preventDefault(); // Prevent the default action (navigation)
+                    const reviewId = event.target.getAttribute('data-review-id');
+                    deleteConfirmModal.style.display = "block";
+    
+                    // Set the delete action URL with the review ID
+                    confirmDeleteBtn.onclick = function() {
+                        window.location.href = "/UniRent/Review/delete/" + reviewId;
+                    };
+                });
+            });
+        }
         confirmDeleteBtn.onclick = function() {
-            window.location.href = "/UniRent/Accommodation/delete/{$accommodation->getIdAccommodation()}";
+            switch (deleteVariable) {
+                case 'Accommodation':
+                    window.location.href = "/UniRent/Accommodation/delete/" + accommodationId;
+                    break;
+                case 'Owner':
+                    window.location.href = "/UniRent/Owner/deleteProfile";
+                    break;
+                case 'Student':
+                    window.location.href = "/UniRent/Student/deleteProfile";
+                    break;
+                case 'Visit':
+                    window.location.href = "/UniRent/Visit/delete/" + visitId;
+                default:
+                    break;
+            }
             deleteConfirmModal.style.display = "none";
         }
         cancelDeleteBtn.onclick = function() {
@@ -258,7 +283,8 @@ function off() {
             document.getElementById('emailForm').style.display = 'none';
         });
     }
-    if ( document.getElementById("revModal") ) {
+    const modalRev = document.getElementById('revModal');
+    if (modalRev) {
         var reviewButton = document.getElementById("reviewButton");
     
         // Add event listener to reviewButton if it exists
@@ -267,8 +293,6 @@ function off() {
                 document.getElementById('revModal').style.display = 'grid';
             });
         }
-        
-        const modalRev = document.getElementById('revModal');
         const closeModalRev = document.querySelector('#revClose');
         const cancelBut = document.querySelector('#CancelBut');
         
@@ -284,16 +308,124 @@ function off() {
             };
         }
     }
+    const editModal = document.getElementById('editModal');
+    if (typeof postedReviews !== 'undefined') {
+        const editButtons = document.querySelectorAll('.edit_button');
+            editButtons.forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const reviewId = event.target.getAttribute('data-review-id');
+                    const review = reviews.find(r => r.id == reviewId);
+                    if (review) {
+                        // Populate form fields with review data
+                        document.getElementById('editReviewForm').action = '/UniRent/Review/edit/' + review.id;
+                        document.getElementById('editReviewForm').method = 'POST';
+                        document.getElementById('reviewTitle').value = review.title;
+                        document.getElementById('reviewContent').value = review.content;
+                        document.querySelector('input[name="rate"][value="' + review.stars + '"]').checked = true;
 
+                        // Display the modal
+                        document.getElementById('editModal').style.display = 'grid';
+                    }
+                });
+            });
+           
+            const closeEditModal = document.querySelector('#editClose');
+            const cancelEditBut = document.querySelector('#CancelEditBut');
+            cancelEditBut.onclick = () => {
+                editModal.style.display = 'none';
+            }
+
+            closeEditModal.onclick = () => {
+                editModal.style.display = 'none';
+            }
+
+
+    }
+
+    /**
+     * This is used to display the accept modal when the accept button is clicked for the reservations
+     */
+    function acceptFunct() {
+        window.location.href = "/UniRent/Reservation/accept/" + reservationId;
+        acceptModal.style.display = "none";
+     }
+
+    /**
+     * This is used to display the deny modal when the deny button is clicked for the reservations
+     */
+    function denyFunct() {
+          window.location.href = "/UniRent/Reservation/deny/" + reservationId;
+          denyModal.style.display = "none";
+    }
+    var denyModal = document.getElementById("denyModal");
+    if (denyModal) {
+        var denyClose = document.getElementById("denyClose");
+        var cancelDeny = document.getElementById("cancelDeny");
+        var denyBtn = document.getElementById("denyButton");
+
+        denyBtn.onclick = function(event) {
+            event.preventDefault(); // Prevent the default action (navigation)
+            denyModal.style.display = "block";
+        }
+        denyClose.onclick = function() {
+            denyModal.style.display = "none";
+        }
+        cancelDeny.onclick = function() {
+            denyModal.style.display = "none";
+        }
+    }
+
+    var acceptModal = document.getElementById("acceptModal");
+    if (acceptModal) {
+        var acceptClose = document.getElementById("acceptClose");
+        var cancelAccept = document.getElementById("cancelAccept");
+        var acceptBtn = document.getElementById("acceptBtn");
+        acceptBtn.onclick = function(event) {
+            event.preventDefault(); // Prevent the default action (navigation)
+            acceptModal.style.display = "block";
+         }
+         acceptClose.onclick = function() {
+            acceptModal.style.display = "none";
+         }
+          cancelAccept.onclick = function() {
+              acceptModal.style.display = "none";
+          }
+    }
+
+    var successDeleteModal = document.getElementById("successDeleteModal");
+    if (successDeleteModal) {
+            var successDeleteClose = document.getElementById("successDeleteClose");
+            var closesuccessDeleteModal = document.getElementById("closesuccessDeleteModal");
+
+            function showsuccessDeleteModal() {
+               if (successDelete != 'null') {
+                     successDeleteModal.style.display = "block";
+               }
+            }
+            successDeleteClose.onclick = function() {
+               successDeleteModal.style.display = "none";
+               window.location.href = currentPage;
+            }
+            closesuccessDeleteModal.onclick = function() {
+               successDeleteModal.style.display = "none";
+               window.location.href = currentPage;
+            }
+            showsuccessDeleteModal();
+    }
     const modals = [
         deleteConfirmModal,
         notDeletableModal,
-        reportModal,
+        reportModalReview,
+        reportModalUser,
         successRequestModal,
         contactModal,
         successModal,
         loginModal,
-        modalRev
+        modalRev,
+        editModal,
+        acceptModal,
+        denyModal,
+        successDeleteModal
     ];
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
