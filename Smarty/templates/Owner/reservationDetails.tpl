@@ -305,6 +305,7 @@
       <script>
     var modalSuccess= '{$modalSuccess}';
     const reviews = {$reviewsData};
+    const user = 'Owner';
     const reservationId = '{$reservation->getId()}';
     </script>
     <script src="/UniRent/Smarty/js/jquery.min.js"></script>

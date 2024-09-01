@@ -127,7 +127,7 @@
                                  </div>
                               </div>
                     {if $leavebleReviews>0}
-                    <div class="reserve_btn" id="reviewBtn"><a href="#" >Review</a></div>
+                    <div class="reserve_btn" id="reviewButton"><a href="#" >Review</a></div>
                     {/if}
                      <div class="reserve_btn" id="reserveBtn"><a href="#" >Reserve</a></div>
                       <div class="reserve_btn" id="visitBtn"><a href="#" >Visit</a></div>
@@ -210,6 +210,7 @@
         </div>
     </div>
 
+<!-- Modal for contact information -->
 <div id="contactModal" class="resModal">
   <div class="resModal-content">
   <div class="row">
@@ -221,48 +222,21 @@
   </div>
 </div>
 
-<script>
-    // Get the modal
-    var modal = document.getElementById("contactModal");
-
-    // Get the button that opens the modal
-    var btn = document.getElementById("contactBtn");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("resClose")[0];
-
-    // When the user clicks the button, open the modal 
-    btn.onclick = function(event) {
-        event.preventDefault();
-        modal.style.display = "block";
-    }
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>
-
+<!-- Modal for reservation -->
 <div id="reserveModal" class="resModal">
   <div class="resModal-content">
   <div class="row">
     <span class="resClose" id="reserveClose">&times;</span>
     <h2 class="resModal-head">Reserve this accommodation</h2>
     </div>
+    <p> Note: You cannot choose the month you are staying because it is decided by the owner of the accommodation.</p>
     <form action="/UniRent/Student/reserveAccommodation/{$accommodation->getIdAccommodation()}" class="form" method="POST" enctype="multipart/form-data">
     <div class="grid-container">
     <div class="row padding-reserve">
         <p>Period:</p>
         </div>
         <div class="row padding-reserve">
-            <select name="date" id="date" class="selectPeriod">
+            <select name="date" id="date" class="selectPeriod" disabled>
                         {if $period === "september"}
                         <option value="september" selected>September to June</option>
                         <option value="october">October to July</option>
@@ -271,6 +245,7 @@
                         <option value="october" selected>October to July</option>
                         {/if}
             </select>
+        
     </div>
     <div class="row padding-reserve">
         <p>Year:</p>
@@ -289,6 +264,7 @@
   </div>
 </div>
 </div>
+<!-- Modal for not reservable accommodation -->
 <div id="notReservableModal" class="resModal">
     <div class="resModal-content">
         <span class="resClose" id="notReservableClose">&times;</span>
@@ -297,6 +273,7 @@
         <button class="cancelClass" id="understoodReserve">Understood</button>
     </div>
 </div>
+<!-- Modal for not visitable accommodation -->
 <div id="notVisitableModal" class="resModal">
     <div class="resModal-content">
         <span class="resClose" id="notVisitableClose">&times;</span>
@@ -305,7 +282,7 @@
         <button class="cancelClass" id="understoodVisit">Understood</button>
     </div>
 </div>
-
+<!-- Modal for success reservation request -->
 <div id="successReserveModal" class="resModal">
     <div class="resModal-content">
         <div class="row">
@@ -331,8 +308,7 @@
     </div>
 </div>
 
-
-
+<!-- Modal for visit booking -->
 <div class="resModal" id="visitModal">
   <div class="resModal-content">
     <div class="row">
@@ -369,6 +345,8 @@
     </form>
   </div>
 </div>
+
+<!-- Modal for confirmation of booking another visit -->
 <div class="resModal" id="confirmModal" style="display: none;">
   <div class="resModal-content">
     <div class="row">
@@ -382,6 +360,8 @@
     </div>
   </div>
 </div>
+
+<!-- Modal for success visit request -->
 <div id="successVisitModal" class="resModal">
     <div class="resModal-content">
         <div class="row">
@@ -401,7 +381,8 @@
         </div>
     </div>
 </div>
-<!-- Place your modal and script code within your HTML structure -->
+
+<!-- Modal for no possible visit slots -->
 <div id="visitEmptyModal" class="resModal">
     <div class="resModal-content">
         <div class="row">
@@ -415,6 +396,7 @@
     </div>
 </div>
 
+<!-- Modal for review -->
 <div id="revModal" class="resModal">
     <div class="resModal-content">
       <div class="row">
@@ -457,198 +439,69 @@
             <input type="text" name="title" id="reviewTitle" placeholder="Title" value="" required>
             <textarea name="content" rows="5" id="reviewContent" placeholder="Content" required></textarea>
             <div class="btn-cont">
-            <button type="submit" class="edit_btn" id="revSubmit">Submit</button>
+            <button type="submit" class="edit_btn">Submit</button>
             <button type="button" class="edit_btn" id="CancelBut">Cancel</button>
             </div>
       </form>
     </div>
 </div>
 
-<script>
-var reviewBtn = document.getElementById("reviewBtn");
-var revModal = document.getElementById("revModal");
-var revClose = document.getElementById("revClose");
-var CancelBut = document.getElementById("CancelBut");
-var revSubmit = document.getElementById("revSubmit");
+<!-- Cookie Modal -->
+<div class="modal" id="myModal">
+      <div class"container-fluid">
+      <div class="card">
+         <svg xml:space="preserve" viewBox="0 0 122.88 122.25" y="0px" x="0px" id="cookieSvg" version="1.1"><g><path d="M101.77,49.38c2.09,3.1,4.37,5.11,6.86,5.78c2.45,0.66,5.32,0.06,8.7-2.01c1.36-0.84,3.14-0.41,3.97,0.95 c0.28,0.46,0.42,0.96,0.43,1.47c0.13,1.4,0.21,2.82,0.24,4.26c0.03,1.46,0.02,2.91-0.05,4.35h0v0c0,0.13-0.01,0.26-0.03,0.38 c-0.91,16.72-8.47,31.51-20,41.93c-11.55,10.44-27.06,16.49-43.82,15.69v0.01h0c-0.13,0-0.26-0.01-0.38-0.03 c-16.72-0.91-31.51-8.47-41.93-20C5.31,90.61-0.73,75.1,0.07,58.34H0.07v0c0-0.13,0.01-0.26,0.03-0.38 C1,41.22,8.81,26.35,20.57,15.87C32.34,5.37,48.09-0.73,64.85,0.07V0.07h0c1.6,0,2.89,1.29,2.89,2.89c0,0.4-0.08,0.78-0.23,1.12 c-1.17,3.81-1.25,7.34-0.27,10.14c0.89,2.54,2.7,4.51,5.41,5.52c1.44,0.54,2.2,2.1,1.74,3.55l0.01,0 c-1.83,5.89-1.87,11.08-0.52,15.26c0.82,2.53,2.14,4.69,3.88,6.4c1.74,1.72,3.9,3,6.39,3.78c4.04,1.26,8.94,1.18,14.31-0.55 C99.73,47.78,101.08,48.3,101.77,49.38L101.77,49.38z M59.28,57.86c2.77,0,5.01,2.24,5.01,5.01c0,2.77-2.24,5.01-5.01,5.01 c-2.77,0-5.01-2.24-5.01-5.01C54.27,60.1,56.52,57.86,59.28,57.86L59.28,57.86z M37.56,78.49c3.37,0,6.11,2.73,6.11,6.11 s-2.73,6.11-6.11,6.11s-6.11-2.73-6.11-6.11S34.18,78.49,37.56,78.49L37.56,78.49z M50.72,31.75c2.65,0,4.79,2.14,4.79,4.79 c0,2.65-2.14,4.79-4.79,4.79c-2.65,0-4.79-2.14-4.79-4.79C45.93,33.89,48.08,31.75,50.72,31.75L50.72,31.75z M119.3,32.4 c1.98,0,3.58,1.6,3.58,3.58c0,1.98-1.6,3.58-3.58,3.58s-3.58-1.6-3.58-3.58C115.71,34.01,117.32,32.4,119.3,32.4L119.3,32.4z M93.62,22.91c2.98,0,5.39,2.41,5.39,5.39c0,2.98-2.41,5.39-5.39,5.39c-2.98,0-5.39-2.41-5.39-5.39 C88.23,25.33,90.64,22.91,93.62,22.91L93.62,22.91z M97.79,0.59c3.19,0,5.78,2.59,5.78,5.78c0,3.19-2.59,5.78-5.78,5.78 c-3.19,0-5.78-2.59-5.78-5.78C92.02,3.17,94.6,0.59,97.79,0.59L97.79,0.59z M76.73,80.63c4.43,0,8.03,3.59,8.03,8.03 c0,4.43-3.59,8.03-8.03,8.03s-8.03-3.59-8.03-8.03C68.7,84.22,72.29,80.63,76.73,80.63L76.73,80.63z M31.91,46.78 c4.8,0,8.69,3.89,8.69,8.69c0,4.8-3.89,8.69-8.69,8.69s-8.69-3.89-8.69-8.69C23.22,50.68,27.11,46.78,31.91,46.78L31.91,46.78z M107.13,60.74c-3.39-0.91-6.35-3.14-8.95-6.48c-5.78,1.52-11.16,1.41-15.76-0.02c-3.37-1.05-6.32-2.81-8.71-5.18 c-2.39-2.37-4.21-5.32-5.32-8.75c-1.51-4.66-1.69-10.2-0.18-16.32c-3.1-1.8-5.25-4.53-6.42-7.88c-1.06-3.05-1.28-6.59-0.61-10.35 C47.27,5.95,34.3,11.36,24.41,20.18C13.74,29.69,6.66,43.15,5.84,58.29l0,0.05v0h0l-0.01,0.13v0C5.07,73.72,10.55,87.82,20.02,98.3 c9.44,10.44,22.84,17.29,38,18.1l0.05,0h0v0l0.13,0.01h0c15.24,0.77,29.35-4.71,39.83-14.19c10.44-9.44,17.29-22.84,18.1-38l0-0.05 v0h0l0.01-0.13v0c0.07-1.34,0.09-2.64,0.06-3.91C112.98,61.34,109.96,61.51,107.13,60.74L107.13,60.74z M116.15,64.04L116.15,64.04 L116.15,64.04L116.15,64.04z M58.21,116.42L58.21,116.42L58.21,116.42L58.21,116.42z"></path></g></svg>
+         <p class="cookieHeading">We use cookies.</p>
+         <p class="cookieDescription">We use cookies to ensure that we give you the best experience on our website. Please Activate Them.</p>
+         </div> 
+      </div>
+      </div>
+      <!-- End of Cookie Modal -->
 
-reviewBtn.onclick = function(event) {
-    event.preventDefault();
-    revModal.style.display = "block";
-}
-revClose.onclick = function() {
-    revModal.style.display = "none";
-}
-CancelBut.onclick = function() {
-    revModal.style.display = "none";
-}
-revSubmit.onclick = function() {
-    revModal.style.display = "none";
-}
-window.onclick = function(event) {
-    if (event.target == revModal) {
-        revModal.style.display = "none";
-    }
-}
-</script>
+      <!-- Report Review Modal -->
+<div id="reportModalReview" class="resModal">
+    <div class="resModal-content">
+    <div class="row">
+        <span class="resClose" onclick="cancelReportReview()">&times;</span>
+        <h2 class="resModal-head">Report Review</h2>
+    </div>
+        <form id="reportFormReview" action="" class="form" method="POST" enctype="multipart/form-data">
+            <label for="reportReasonReview">Reason for report:</label><br>
+            <textarea id="reportReasonReview" name="reportReasonReview" rows="4" cols="50" oninput="checkInputReview()"></textarea><br><br>
+            <div class="btn-cont">
+                <button type="submit" id="confirmReportReview" class="disabled confirmClass" disabled>Submit</button>
+                <button type="button" onclick="cancelReportReview()" class="cancelClass">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- End of Report Review Modal -->
 
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Get the visit modal and other necessary elements
-    var visitModal = document.getElementById("visitModal");
-    var confirmModal = document.getElementById("confirmModal");
-    var successVisitModal = document.getElementById("successVisitModal");
-    var visitEmptyModal = document.getElementById("visitEmptyModal");
-
-    var visitBtn = document.getElementById("visitBtn");
-    var disabled = '{$disabled}'; // Ensure this variable is properly initialized
-
-    // Event handler for Visit button
-    visitBtn.onclick = function(event) {
-        event.preventDefault();
-
-        if (disabled) {
-            // Show not visitable modal
-            document.getElementById("notVisitableModal").style.display = "block";
-        } else {
-            // Check if timeSlots is undefined or not an object
-            var timeSlots = {$timeSlots};
-            if (!timeSlots || typeof timeSlots !== 'object' || Object.keys(timeSlots).length === 0) {
-                // Show visit empty modal
-                visitEmptyModal.style.display = "block";
-            } else {
-                // Check if already booked
-                if ('{$booked}') {
-                    // Show confirmation modal
-                    confirmModal.style.display = "block";
-                } else {
-                    // Show visit modal
-                    visitModal.style.display = "block";
-                }
-            }
-        }
-    }
-
-    // Close not visitable modal
-    document.getElementById("notVisitableClose").onclick = function() {
-        document.getElementById("notVisitableModal").style.display = "none";
-    }
-
-    document.getElementById("understoodVisit").onclick = function() {
-        document.getElementById("notVisitableModal").style.display = "none";
-    }
-
-    // Close visit modal
-    document.getElementById("visitClose").onclick = function() {
-        visitModal.style.display = "none";
-    }
-
-    // Cancel visit action
-    document.getElementById("cancelVisit").onclick = function() {
-        visitModal.style.display = "none";
-    }
-
-    // Close confirmation modal
-    document.getElementById("confirmClose").onclick = function() {
-        confirmModal.style.display = "none";
-    }
-
-    // Cancel booking action
-    document.getElementById("cancelBooking").onclick = function() {
-        confirmModal.style.display = "none";
-    }
-
-    // Continue booking action
-    document.getElementById("confirmBooking").onclick = function() {
-        confirmModal.style.display = "none";
-        visitModal.style.display = "block"; // Show visit modal after confirmation
-    }
-
-    // Close success visit modal
-    document.getElementById("closeSuccessVisitModal").onclick = function() {
-        successVisitModal.style.display = "none";
-        window.location.href= currentPage;
-    }
-    document.getElementById("successVisitClose").onclick = function() {
-        successVisitModal.style.display = "none";
-        window.location.href= currentPage;
-    }
-
-    // Close visit empty modal
-    document.getElementById("closeVisitEmptyModal").onclick = function() {
-        visitEmptyModal.style.display = "none";
-    }
-    document.getElementById("visitEmptyClose").onclick = function() {
-        visitEmptyModal.style.display = "none";
-    }
-
-    // Function to show success visit modal based on $successVisit value
-    function showSuccessVisitModal() {
-        var successVisit = '{$successVisit}';
-        if (successVisit !== 'null') {
-            successVisitModal.style.display = "block";
-        }
-    }
-
-    // Call the function to check for $successVisit and show modal
-    showSuccessVisitModal();
-
-    // Optional: Populate time slots based on the selected day (if needed)
-    var timeSelect = document.getElementById("time");
-    var daySelect = document.getElementById("day");
-    var timeSlots = {$timeSlots}; // Ensure this variable is properly initialized
-
-    // Function to populate day select options
-    function populateDays() {
-        // Clear previous options
-        daySelect.innerHTML = '<option value="" selected disabled>Select a day</option>';
-
-        // Populate new options from timeSlots keys
-        Object.keys(timeSlots).forEach(function(day) {
-            var option = document.createElement("option");
-            option.value = day;
-            option.textContent = day.charAt(0).toUpperCase() + day.slice(1); // Capitalize the first letter
-            daySelect.appendChild(option);
-        });
-    }
-
-    // Ensure the initial day options are populated when the page loads
-    populateDays();
-
-    // Ensure the initial time slots are populated when the page loads if a day is selected
-    var selectedDay = daySelect.value;
-    populateTimeSlots(selectedDay);
-
-    // Event listener for day change to populate time slots dynamically
-    daySelect.addEventListener("change", function() {
-        var selectedDay = this.value;
-        populateTimeSlots(selectedDay);
-    });
-
-    // Function to populate time slots based on the selected day
-    function populateTimeSlots(selectedDay) {
-        // Clear previous options
-        timeSelect.innerHTML = '<option value="" selected disabled>Select the time</option>';
-
-        // Populate new options if timeSlots for selectedDay exist
-        if (timeSlots[selectedDay] && typeof timeSlots[selectedDay] === 'object') {
-            Object.keys(timeSlots[selectedDay]).forEach(function(key) {
-                var option = document.createElement("option");
-                option.value = timeSlots[selectedDay][key];
-                option.textContent = timeSlots[selectedDay][key];
-                timeSelect.appendChild(option);
-            });
-        }
-    }
-});
-</script>
-
-
-
-
-
-
-
+<!-- Request Detail Modal -->
+<div class="resModal" id="replyModal">
+      <div class="resModal-content">
+         <div class="row">
+            <span class="resClose" id="replyClose">&times;</span>
+            <h2 class="resModal-head">Support Reply Details</h2>
+         </div>
+         <div class="container cont-padding">
+         <h4>Your Request</h4>
+                <p id="requestContent"></p>
+                  <hr>
+                  <h4>Admin Reply</h4>
+                <p id="replyContent"></p>
+                  <hr>
+                  <h4>Topic</h4>
+                <p id="requestTopic"></p>
+                <hr>
+                </div>
+            <div class="btn-cont">
+                <button type="button" class="edit_btn" id="closeReply">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Request Detail Modal -->
 
 <!-- footer section start -->
       <div class="footer_section">
@@ -677,7 +530,19 @@ document.addEventListener('DOMContentLoaded', function() {
          </div>
       </div>
       <!-- footer section end -->
-<script src="/UniRent/Smarty/js/jquery.min.js"></script>
+      <script>
+        var selectedYear = {$selectedYear};
+        var disabled = '{$disabled}';
+        var timeSlots = {$timeSlots};
+        var successVisit = '{$successVisit}';
+        const images = {$imagesJson};
+        const reviews = {$reviewsData};
+        cons user = 'Student';
+        var tenants = {$tenantsJson};
+        var numPlaces = {$num_places};
+        var successReserve = '{$successReserve}';
+      </script>
+      <script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>
       <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
       <script src="/UniRent/Smarty/js/jquery-3.0.0.min.js"></script>
@@ -686,424 +551,10 @@ document.addEventListener('DOMContentLoaded', function() {
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
-<script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
-
-
-      <div class="modal" id="myModal">
-      <div class"container-fluid">
-      <div class="card">
-         <svg xml:space="preserve" viewBox="0 0 122.88 122.25" y="0px" x="0px" id="cookieSvg" version="1.1"><g><path d="M101.77,49.38c2.09,3.1,4.37,5.11,6.86,5.78c2.45,0.66,5.32,0.06,8.7-2.01c1.36-0.84,3.14-0.41,3.97,0.95 c0.28,0.46,0.42,0.96,0.43,1.47c0.13,1.4,0.21,2.82,0.24,4.26c0.03,1.46,0.02,2.91-0.05,4.35h0v0c0,0.13-0.01,0.26-0.03,0.38 c-0.91,16.72-8.47,31.51-20,41.93c-11.55,10.44-27.06,16.49-43.82,15.69v0.01h0c-0.13,0-0.26-0.01-0.38-0.03 c-16.72-0.91-31.51-8.47-41.93-20C5.31,90.61-0.73,75.1,0.07,58.34H0.07v0c0-0.13,0.01-0.26,0.03-0.38 C1,41.22,8.81,26.35,20.57,15.87C32.34,5.37,48.09-0.73,64.85,0.07V0.07h0c1.6,0,2.89,1.29,2.89,2.89c0,0.4-0.08,0.78-0.23,1.12 c-1.17,3.81-1.25,7.34-0.27,10.14c0.89,2.54,2.7,4.51,5.41,5.52c1.44,0.54,2.2,2.1,1.74,3.55l0.01,0 c-1.83,5.89-1.87,11.08-0.52,15.26c0.82,2.53,2.14,4.69,3.88,6.4c1.74,1.72,3.9,3,6.39,3.78c4.04,1.26,8.94,1.18,14.31-0.55 C99.73,47.78,101.08,48.3,101.77,49.38L101.77,49.38z M59.28,57.86c2.77,0,5.01,2.24,5.01,5.01c0,2.77-2.24,5.01-5.01,5.01 c-2.77,0-5.01-2.24-5.01-5.01C54.27,60.1,56.52,57.86,59.28,57.86L59.28,57.86z M37.56,78.49c3.37,0,6.11,2.73,6.11,6.11 s-2.73,6.11-6.11,6.11s-6.11-2.73-6.11-6.11S34.18,78.49,37.56,78.49L37.56,78.49z M50.72,31.75c2.65,0,4.79,2.14,4.79,4.79 c0,2.65-2.14,4.79-4.79,4.79c-2.65,0-4.79-2.14-4.79-4.79C45.93,33.89,48.08,31.75,50.72,31.75L50.72,31.75z M119.3,32.4 c1.98,0,3.58,1.6,3.58,3.58c0,1.98-1.6,3.58-3.58,3.58s-3.58-1.6-3.58-3.58C115.71,34.01,117.32,32.4,119.3,32.4L119.3,32.4z M93.62,22.91c2.98,0,5.39,2.41,5.39,5.39c0,2.98-2.41,5.39-5.39,5.39c-2.98,0-5.39-2.41-5.39-5.39 C88.23,25.33,90.64,22.91,93.62,22.91L93.62,22.91z M97.79,0.59c3.19,0,5.78,2.59,5.78,5.78c0,3.19-2.59,5.78-5.78,5.78 c-3.19,0-5.78-2.59-5.78-5.78C92.02,3.17,94.6,0.59,97.79,0.59L97.79,0.59z M76.73,80.63c4.43,0,8.03,3.59,8.03,8.03 c0,4.43-3.59,8.03-8.03,8.03s-8.03-3.59-8.03-8.03C68.7,84.22,72.29,80.63,76.73,80.63L76.73,80.63z M31.91,46.78 c4.8,0,8.69,3.89,8.69,8.69c0,4.8-3.89,8.69-8.69,8.69s-8.69-3.89-8.69-8.69C23.22,50.68,27.11,46.78,31.91,46.78L31.91,46.78z M107.13,60.74c-3.39-0.91-6.35-3.14-8.95-6.48c-5.78,1.52-11.16,1.41-15.76-0.02c-3.37-1.05-6.32-2.81-8.71-5.18 c-2.39-2.37-4.21-5.32-5.32-8.75c-1.51-4.66-1.69-10.2-0.18-16.32c-3.1-1.8-5.25-4.53-6.42-7.88c-1.06-3.05-1.28-6.59-0.61-10.35 C47.27,5.95,34.3,11.36,24.41,20.18C13.74,29.69,6.66,43.15,5.84,58.29l0,0.05v0h0l-0.01,0.13v0C5.07,73.72,10.55,87.82,20.02,98.3 c9.44,10.44,22.84,17.29,38,18.1l0.05,0h0v0l0.13,0.01h0c15.24,0.77,29.35-4.71,39.83-14.19c10.44-9.44,17.29-22.84,18.1-38l0-0.05 v0h0l0.01-0.13v0c0.07-1.34,0.09-2.64,0.06-3.91C112.98,61.34,109.96,61.51,107.13,60.74L107.13,60.74z M116.15,64.04L116.15,64.04 L116.15,64.04L116.15,64.04z M58.21,116.42L58.21,116.42L58.21,116.42L58.21,116.42z"></path></g></svg>
-         <p class="cookieHeading">We use cookies.</p>
-         <p class="cookieDescription">We use cookies to ensure that we give you the best experience on our website. Please Activate Them.</p>
-         </div> 
-      </div>
-      </div>
-         <script>
-        // Assign the JSON data to a JavaScript variable
-        const images = {$imagesJson};
-    </script>
-    {literal}
-   <script>
-   document.addEventListener('DOMContentLoaded', () => {
-            const openSliderLink = document.getElementById('openSlider');
-            const sliderContainer = document.getElementById('sliderContainer');
-            const closeSliderBtn = document.getElementById('closeSlider');
-            const sliderContent = document.querySelector('.slider-content');
-            const mainImage = document.getElementById('mainImage');
-            const overlay = document.querySelector('.overlay');
-            let currentIndex = 0;
-
-            // Display the first image in the first container if available
-            if (images.length > 0) {
-                mainImage.src = images[0];
-            } else {
-                // Hide the overlay if no images are available
-                overlay.style.display = 'none';
-                // Set the default image
-                mainImage.src = '/UniRent/Smarty/images/noPic.png';
-            }
-
-            openSliderLink.addEventListener('click', (event) => {
-                event.preventDefault();  // Prevent the default anchor behavior
-                if (images.length > 0) {
-                    sliderContainer.classList.remove('hidden');
-                    showImage(currentIndex);
-                }
-            });
-
-            closeSliderBtn.addEventListener('click', () => {
-                sliderContainer.classList.add('hidden');
-            });
-
-            document.querySelector('.prev').addEventListener('click', () => {
-                currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
-                showImage(currentIndex);
-            });
-
-            document.querySelector('.next').addEventListener('click', () => {
-                currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
-                showImage(currentIndex);
-            });
-
-            function showImage(index) {
-                sliderContent.innerHTML = `<img src="${images[index]}" alt="Image ${index + 1}">`;
-            }
-        });
-
-</script>
-{/literal}
- <script>
-    {if isset($reviewsData)}
-    const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
-
-    // Function to generate stars based on the rating
-    function generateStars(stars) {
-        let starElements = '';
-        for (let i = 0; i < 5; i++) {
-            if (i < stars) {
-                starElements += '<span class="fa fa-star or"></span>';
-            } else {
-                starElements += '<span class="fa fa-star"></span>';
-            }
-        }
-        return starElements;
-    }
-
-    // Function to create and append reviews to the container
-    function displayReviews(reviews) {
-        const container = document.getElementById('reviewsContainer');
-
-        if (container) {
-            if (reviews.length === 0) {
-                container.innerHTML = '<div class="container"><h1 class="noRev">There are no reviews yet!</h1></div>';
-            } else {
-                reviews.forEach(review => {
-                    const reviewElement = document.createElement('div');
-                    reviewElement.className = 'review';
-                    let style;
-                    if (review.userStatus ==='banned') {
-                        style = 'class="disabled"';
-                    } else {
-                        style = '';
-                    }
-    
-
-                    // Insert the names of the elements of the review array
-                    reviewElement.innerHTML = `
-                    <div class="row">
-                        <h1 class="ReviewTitle">` + review.title + `</h1> <!-- Title of the review -->
-                        <div class="btn-cont2">
-                            <button class="delete_button" data-review-id="` + review.id + `">Report</button>
-                        </div>
-                    </div>
-                    <div class="row">
-                            <div class="userSection">
-                                <div class="userIcon">
-                                <a href="/UniRent/Student/publicProfile/` + review.username + `" ` + style + `><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
-                            </div>
-                            <div class="username"><a href="/UniRent/Student/publicProfile/` + review.username + `" ` + style + `>` + review.username + `</a></div> <!-- Username of the reviewer -->
-                        </div>
-                            <div class="col-md-11">
-                                <div class="stars">
-                                    ` + generateStars(review.stars) + ` <!-- Star rating -->
-                                </div>
-                                <p>` + review.content + `</p> <!-- Content of the review -->
-                            </div>
-                        </div>
-                    `;
-
-                    container.appendChild(reviewElement);
-                });
-            }
-        } else {
-            console.error("Container not found!"); // Debugging: Error if container is not found
-        }
-    }
-
-    // Call the function to display reviews
-    displayReviews(reviews);
-    {/if}
-</script>
-<!-- HTML for the Modal -->
-<div id="reportModal" class="resModal">
-    <!-- Modal content -->
-    <div class="resModal-content">
-    <div class="row">
-        <span class="resClose">&times;</span>
-        <h2 class="resModal-head">Report Review</h2>
-    </div>
-        <form id="reportForm" action="" class="form" method="POST" enctype="multipart/form-data">
-            <label for="reportReason">Reason for report:</label><br>
-            <textarea id="reportReason" name="reportReason" rows="4" cols="50" oninput="checkInput()"></textarea><br><br>
-            <div class="btn-cont">
-                <button type="submit" id="confirmReport" class="disabled confirmClass" disabled>Submit</button>
-                <button type="button" id="cancelReport" class="cancelClass" onclick="cancelReport()">Cancel</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', (event) => {
-    const reportButtons = document.querySelectorAll('.delete_button');
-    const modal = document.getElementById("reportModal");
-    const span = document.querySelector(".resClose");
-    const confirmBtn = document.getElementById("confirmReport");
-    const cancelBtn = document.getElementById("cancelReport");
-    const form = document.getElementById("reportForm");
-    const textarea = document.getElementById("reportReason");
-
-    reportButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            event.preventDefault();
-            const reviewId = button.getAttribute('data-review-id'); // Get the owner ID from the button
-            form.action = "/UniRent/Report/makeReport/" + reviewId + "/Review"; // Dynamically set the form action
-            modal.style.display = "block";
-        });
-    });
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    };
-
-    // When the user clicks on the cancel button, close the modal
-    cancelBtn.onclick = function() {
-        cancelReport();
-    };
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    };
-});
-
-function checkInput() {
-    const submitBtn = document.getElementById("confirmReport");
-    const textarea = document.getElementById("reportReason");
-    if (textarea.value.trim() !== "") {
-        submitBtn.disabled = false;
-        submitBtn.classList.remove("disabled");
-    } else {
-        submitBtn.disabled = true;
-        submitBtn.classList.add("disabled");
-    }
-}
-
-function cancelReport() {
-    const textarea = document.getElementById("reportReason");
-    const submitBtn = document.getElementById("confirmReport");
-    textarea.value = '';
-    submitBtn.disabled = true;
-    submitBtn.classList.add("disabled");
-    closeReportModal();
-}
-
-function closeReportModal() {
-    document.getElementById("reportModal").style.display = "none";
-}
-</script>
-{literal}
-      <script>
-    // Retrieve Smarty variables (assuming they are passed as JSON strings)
-    var tenants = {/literal}{$tenantsJson}{literal};
-    var numPlaces = {/literal}{$num_places}{literal};
-
-    // Get the container element
-    var tenantContainer = document.getElementById('tenantCont');
-
-    // Function to create tenant section
-    function createTenantSection(username, expiryDate, profilePic, status) {
-        let style
-        if (status === "banned") {
-            style = 'class="disabled"';
-        } else {
-            style = '';
-        }
-        
-        return `
-            <div class="col-md-4">
-                <div class="userSection">
-                    <div class="userIcon">
-                        <a href="/UniRent/Student/publicProfile/${username}" ${style}><img src="${profilePic}" alt="User Profile Picture"></a>
-                    </div>
-                    <div class="username"><a href="/UniRent/Student/publicProfile/${username}" ${style}>${username}</a></div>
-                    <div class="username">Expiry Date: ${expiryDate}</div>
-                </div>
-            </div>
-        `;
-    }
-
-    // Function to create free space section
-    function createFreeSpaceSection() {
-        return `
-            <div class="col-md-4">
-                <div class="userSection">
-                    <div class="userIcon">
-                        <a><img src="/UniRent/Smarty/images/FreeBadge.png" alt="Free Badge"></a>
-                    </div>
-                    <div class="username"></div>
-                </div>
-            </div>
-        `;
-    }
-
-    // Generate tenant sections
-    for (var i = 0; i < tenants.length; i++) {
-        var tenant = tenants[i];
-        tenantContainer.innerHTML += createTenantSection(tenant.username, tenant.expiryDate, tenant.profilePic, tenant.status);
-    }
-
-    // Fill remaining places with free space sections
-    for (var j = tenants.length; j < numPlaces; j++) {
-        tenantContainer.innerHTML += createFreeSpaceSection();
-    }
-</script>
-{/literal}
-<script>
-    // Get the reserve modal and not reservable modal
-    var reserveModal = document.getElementById("reserveModal");
-    var notReservableModal = document.getElementById("notReservableModal");
-    var successReserveModal = document.getElementById("successReserveModal");
-    // JavaScript function to populate the date select dropdown with dynamic year selection
- // JavaScript function to populate the year select dropdown
-    function populateYearSelect() {
-        var select = document.getElementById("year");
-        var currentYear = new Date().getFullYear();
-
-        // Clear existing options
-        select.innerHTML = "";
-
-        // Add options for the next 4 years starting from current year
-        for (var i = 0; i < 5; i++) {
-            var option = document.createElement("option");
-            option.value = currentYear + i;
-            option.text = currentYear + i;
-            select.appendChild(option);
-        }
-    }
-
-    // Call populateYearSelect function on document ready
-    document.addEventListener("DOMContentLoaded", function() {
-        populateYearSelect();
-    });
-
-$(document).ready(function() {
-    // Call populateDateSelect function on document ready
-    populateDateSelect();
-
-    // Event listener to handle change in select option
-    $('#date').on('change', function() {
-        populateDateSelect();
-    });
-});
-
-
-    // Get the button that opens the reserve modal
-    var reserveBtn = document.getElementById("reserveBtn");
-
-    // Get the buttons and elements for closing modals
-    var reserveClose = document.getElementById("reserveClose");
-    var notReservableClose = document.getElementById("notReservableClose");
-    var understoodReserve = document.getElementById("understoodReserve");
-    var cancelReserve = document.getElementById("cancelReserve");
-
-    // Check if reservation is not possible
-    var notReservable = '{$disabled}';
-
-    // When the user clicks the reserve button
-    reserveBtn.onclick = function(event) {
-        event.preventDefault(); // Prevent the default action (navigation)
-        if (!notReservable) {
-            reserveModal.style.display = "block";
-        } else {
-            notReservableModal.style.display = "block";
-        }
-    }
-
-    // When the user clicks on <span> to close the reserve modal
-    reserveClose.onclick = function() {
-        reserveModal.style.display = "none";
-    }
-
-    // When the user clicks on <span> to close the not reservable modal
-    notReservableClose.onclick = function() {
-        notReservableModal.style.display = "none";
-    }
-
-    // When the user clicks on 'Understood' in not reservable modal
-    understoodReserve.onclick = function() {
-        notReservableModal.style.display = "none";
-    }
-
-    // When the user clicks on 'Cancel' in the reserve modal
-    cancelReserve.onclick = function() {
-        reserveModal.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of a modal, close it
-    window.onclick = function(event) {
-        if (event.target == reserveModal) {
-            reserveModal.style.display = "none";
-        }
-        if (event.target == notReservableModal) {
-            notReservableModal.style.display = "none";
-        }
-        if (event.target == successReserveModal) {
-            successReserveModal.style.display = "none";
-            window.location.href= currentPage;
-        }
-    }
-
-    // Function to show success modal if reservation was successful
-    function showsuccessReserveModal() {
-        if ('{$successReserve}' != 'null') {
-            successReserveModal.style.display = "block";
-        }
-    }
-    document.getElementById("successReserveClose").onclick = function() {
-        successReserveModal.style.display = "none";
-        window.location.href= currentPage;
-    }
-    document.getElementById("closesuccessReserveModal").onclick = function() {
-        successReserveModal.style.display = "none";
-        window.location.href= currentPage;
-    }
-
-    // Call the function to check for success and show modal
-    showsuccessReserveModal();
-</script>
-
-   <!-- Request Detail Modal -->
-<div class="resModal" id="replyModal">
-      <div class="resModal-content">
-         <div class="row">
-            <span class="resClose" id="replyClose">&times;</span>
-            <h2 class="resModal-head">Support Reply Details</h2>
-         </div>
-         <div class="container cont-padding">
-         <h4>Your Request</h4>
-                <p id="requestContent"></p>
-                  <hr>
-                  <h4>Admin Reply</h4>
-                <p id="replyContent"></p>
-                  <hr>
-                  <h4>Topic</h4>
-                <p id="requestTopic"></p>
-                <hr>
-                </div>
-            <div class="btn-cont">
-                <button type="button" class="edit_btn" id="closeReply">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End of Request Detail Modal -->
-
-
-
-<script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/imageSlider.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/reviews.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/accommodationTenants.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
 </body>
 </html>

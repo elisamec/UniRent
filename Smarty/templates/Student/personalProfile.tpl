@@ -207,38 +207,6 @@
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
-<script>
-document.getElementById("file").onchange = function() {
-    document.getElementById("form").submit();
-};
-</script>
-
-         <script>
-      $(document).ready(function() {
-
-      
-      var readURL = function(input) {
-         if (input.files && input.files[0]) {
-               var reader = new FileReader();
-
-               reader.onload = function (e) {
-                  $('.imageIcon').attr('src', e.target.result);
-               }
-      
-               reader.readAsDataURL(input.files[0]);
-         }
-      }
-      
-
-      $(".file-upload").on('change', function(){
-         readURL(this);
-      });
-      
-      $(".label-button").on('click', function() {
-         $(".file-upload").click();
-      });
-   });
-      </script>
       <div class="modal" id="myModal">
       <div class"container-fluid">
       <div class="card">

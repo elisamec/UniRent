@@ -3003,6 +3003,7 @@ a.disabled {
     display: grid;
     grid-template-columns: auto 1fr; /* 2 columns: first column auto width for paragraphs, second column takes remaining space for selects */
     gap: 15px; /* gap between rows and columns */
+    padding: 0px 20px;
   }
   select::-ms-expand {
     display: none;
