@@ -151,7 +151,7 @@
                      </label>
                      <input type="radio" id="star0O" name="rateO" value="0" hidden checked/>
                   </div>
-               <button class="button-spec finalLittle"id="clearRatingO" onclick="clearRatingO()">Clear</button>
+               <button class="button-spec finalLittle" onclick="clearRatingO()">Clear</button>
                </div>
                </div>
                
@@ -191,7 +191,7 @@
                      </label>
                      <input type="radio" id="star0A" name="rateA" value="0" hidden checked/>
                   </div>
-               <button class="button-spec finalLittle"id="clearRatingA" onclick="clearRatingA()">Clear</button>
+               <button class="button-spec finalLittle" onclick="clearRatingA()">Clear</button>
                </div>
                </div>
                <div class="row">
@@ -303,7 +303,12 @@
          const defaultYear = {$selectedYear};
          const results = {$searchResult};
          var user = 'User';
-
+         priceInput[0].value = {$minPrice};
+         priceInput[1].value = {$maxPrice};
+         rangeInput[0].value = {$minPrice};
+         rangeInput[1].value = {$maxPrice};
+         const ratingOwner = {$ratingOwner};
+         const ratingAccommodation = {$ratingAccommodation};
       </script>
       <!-- Javascript files-->
       <script src="/UniRent/Smarty/js/jquery.min.js"></script>
@@ -316,196 +321,13 @@
       <script src="/UniRent/Smarty/js/custom.js"></script>
       <!-- javascript --> 
       <script src="UniRent/Smarty/js/materialSelectInit.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const rangeInput = document.querySelectorAll(".range-input input"),
-          priceInput = document.querySelectorAll(".price-input input"),
-          range = document.querySelector(".slider .progress");
-    let priceGap = 1000;
-
-    // Initialize default values from Smarty placeholders
-    priceInput[0].value = {$minPrice};
-    priceInput[1].value = {$maxPrice};
-    rangeInput[0].value = {$minPrice};
-    rangeInput[1].value = {$maxPrice};
-    updateSliderPosition(); // Initial position update
-
-    // Event listeners for range inputs
-    rangeInput.forEach((input) => {
-      input.addEventListener("input", () => {
-        updatePriceInputs();
-        updateSliderPosition();
-      });
-    });
-
-    // Event listeners for price inputs
-    priceInput.forEach((input) => {
-      input.addEventListener("input", () => {
-        updateRangeInputs();
-        updateSliderPosition();
-      });
-    });
-
-    // Function to update price inputs based on range inputs
-    function updatePriceInputs() {
-      let minVal = parseInt(rangeInput[0].value),
-          maxVal = parseInt(rangeInput[1].value);
-      priceInput[0].value = minVal;
-      priceInput[1].value = maxVal;
-    }
-
-    // Function to update range inputs based on price inputs
-    function updateRangeInputs() {
-      let minPrice = parseInt(priceInput[0].value),
-          maxPrice = parseInt(priceInput[1].value);
-      rangeInput[0].value = minPrice;
-      rangeInput[1].value = maxPrice;
-    }
-
-    // Function to update slider position based on range inputs
-    function updateSliderPosition() {
-      let minVal = parseInt(rangeInput[0].value),
-          maxVal = parseInt(rangeInput[1].value);
-      range.style.left = (minVal / rangeInput[0].max) * 100 + "%";
-      range.style.right = 100 - (maxVal / rangeInput[1].max) * 100 + "%";
-    }
-  });
-</script>
-      <script>
-    document.addEventListener("DOMContentLoaded", function() {
-    const citySelect = document.getElementById("citySelect");
-    const uniSelect = document.getElementById("universitySelect");
-    const periodSelect = document.getElementById("date");
-
-    // Initialize nice-select on page load
-    $('select').niceSelect();
-
-    // Get the default values from Smarty and properly escape them
-    
-
-    fetch("/UniRent/User/getCities")
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(subjectObject => {
-        // Populate city dropdown
-        for (let city in subjectObject) {
-            let option = new Option(city, city);
-            citySelect.add(option);
-        }
-
-        // Update nice-select after adding options
-        $('select').niceSelect('update');
-
-        // Set default selected option for city dropdown
-        if (defaultCity && subjectObject[defaultCity]) {
-            citySelect.value = defaultCity;
-
-            // Populate university dropdown based on default city
-            subjectObject[defaultCity].forEach(uniName => {
-                let option = new Option(uniName, uniName);
-                uniSelect.add(option);
-            });
-
-            // Update nice-select after adding options
-            $('select').niceSelect('update');
-
-            // Set default selected option for university dropdown
-            if (defaultUniversity && subjectObject[defaultCity].includes(defaultUniversity)) {
-                uniSelect.value = defaultUniversity;
-            }
-        }
-
-        // Add event listener for city dropdown change
-        citySelect.onchange = function() {
-            const selectedCity = citySelect.value;
-
-            // Clear the university dropdown
-            uniSelect.length = 1;
-
-            if (selectedCity && subjectObject[selectedCity]) {
-                // Populate university dropdown
-                subjectObject[selectedCity].forEach(uniName => {
-                    let option = new Option(uniName, uniName);
-                    uniSelect.add(option);
-                });
-
-                // Update nice-select after adding options
-                $('select').niceSelect('update');
-
-                // Set default selected option for university dropdown if applicable
-                if (defaultUniversity && subjectObject[selectedCity].includes(defaultUniversity)) {
-                    uniSelect.value = defaultUniversity;
-                }
-            }
-        }
-
-        // Set default selected option for period dropdown if applicable
-        if (defaultPeriod) {
-            periodSelect.value = defaultPeriod;
-        }
-
-        // Update nice-select after setting period
-        $('select').niceSelect('update');
-
-    })
-    .catch(error => console.error('Error:', error));
-});
-
-
-</script>
-    <script>
-      function clearRatingO() {
-    document.getElementById('star0O').checked = true;
-}
-function clearRatingA() {
-    document.getElementById('star0A').checked = true;
-}
-
-// Ensure the DOM is fully loaded before attaching the event
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('clearRatingO').addEventListener('click', clearRatingO);
-});
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('clearRatingS').addEventListener('click', clearRatingS);
-});
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('clearRatingA').addEventListener('click', clearRatingA);
-});
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    // Set default rating values from Smarty placeholders
-    const ratingOwner = {$ratingOwner};
-    const ratingAccommodation = {$ratingAccommodation};
-
-    // Set default rating for Owner
-    if (ratingOwner) {
-        document.getElementById('star' + ratingOwner + 'O').checked = true;
-    }
-
-    // Set default rating for Accommodation
-    if (ratingAccommodation) {
-        document.getElementById('star' + ratingAccommodation + 'A').checked = true;
-    }
-
-    // Function to clear Owner rating
-    window.clearRatingO = function() {
-        document.getElementById('star0O').checked = true;
-    };
-
-    // Function to clear Accommodation rating
-    window.clearRatingA = function() {
-        document.getElementById('star0A').checked = true;
-    };
-});
-</script>
-<script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
-<script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
-<script src="/UniRent/Smarty/js/UniRentOriginal/selectKeyboardAccessibility.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/rangeInput.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/dropdownFill.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/searchResult.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/rating.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/selectKeyboardAccessibility.js"></script>
       
    </body>
 </html>

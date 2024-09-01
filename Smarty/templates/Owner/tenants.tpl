@@ -166,7 +166,7 @@
                      </label>
                      <input type="radio" id="star0T" name="rateT" value="0" hidden checked/>
                   </div>
-               <button type="button" class="button-spec finalLittle" onclick="clearRatingA()">Clear</button>
+               <button type="button" class="button-spec finalLittle" onclick="clearRatingT()">Clear</button>
                </div>
                </div>
                <div class="row">

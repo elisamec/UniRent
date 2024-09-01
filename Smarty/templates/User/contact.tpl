@@ -194,25 +194,5 @@
       <script src="UniRent/Smarty/js/materialSelectInit.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
-      <script>
-         function showLoginRegistrationPopUp(event) {
-            event.preventDefault(); // Previene l'invio del form
-            var modal = document.getElementById("loginModal");
-            modal.style.display = "block";
-         }
-
-         document.getElementById("loginClose").onclick = function() {
-            var modal = document.getElementById("loginModal");
-            modal.style.display = "none";
-         }
-
-      // Chiudi il popup se l'utente clicca fuori dal popup
-         window.onclick = function(event) {
-            var modal = document.getElementById("loginModal");
-            if (event.target == modal) {
-               modal.style.display = "none";
-            }
-         }
-      </script>
    </body>
 </html>

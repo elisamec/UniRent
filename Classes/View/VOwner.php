@@ -141,12 +141,11 @@ class VOwner {
         $this->smarty->assign('eventsData', json_encode($visitsData));
         $this->smarty->display('Owner/visits.tpl');
     }
-    public function viewVisit(EVisit $visit, EStudent $student, EAccommodation $accommodation, string $accommodationPhoto, array $timeSlots, string $successEdit, string $successDelete) {
+    public function viewVisitOwner(EVisit $visit, EStudent $student, EAccommodation $accommodation, string $accommodationPhoto, string $successEdit, string $successDelete) {
         
         $this->smarty->assign('visit', $visit);
         $this->smarty->assign('student', $student);
         $this->smarty->assign('accommodation', $accommodation);
-        $this->smarty->assign('timeSlots', json_encode($timeSlots));
         $this->smarty->assign('accommodationImage', $accommodationPhoto);
         $this->smarty->assign('successEdit', $successEdit);
         $this->smarty->assign('successDelete', $successDelete);

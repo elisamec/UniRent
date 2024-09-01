@@ -157,7 +157,11 @@ class CVisit
                 }
             }
         }
-    $view->viewVisit($visit, $user, $accommodation, $accommodationPhoto, $visits, $successEdit, $successDelete);
+    if ($userType=='Student') {
+        $view->viewVisit($visit, $user, $accommodation, $accommodationPhoto, $visits, $successEdit, $successDelete);
+    } else if ($userType=='Owner') {
+        $view->viewVisitOwner($visit, $user, $accommodation, $accommodationPhoto, $successEdit, $successDelete);
+    }
    }
 
    

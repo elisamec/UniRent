@@ -781,7 +781,37 @@ if (reserveModal && notReservableModal && successReserveModal) {
             });
         }
     }
-    
+    function showLoginRegistrationPopUp(event) {
+        event.preventDefault(); // Previene l'invio del form
+        var modal = document.getElementById("loginModal");
+        modal.style.display = "block";
+     }
+     var loginModal = document.getElementById("loginModal");
+     if (loginModal) {
+        document.getElementById("loginClose").onclick = function() {
+            modal.style.display = "none";
+         }
+     }
+     var successEditModal = document.getElementById("successEditModal");
+     if (successEditModal) {
+            var successEditClose = document.getElementById("successEditClose");
+            var closesuccessEditModal = document.getElementById("closesuccessEditModal");
+
+            function showsuccessEditModal() {
+               if ('{$successEdit}' != 'null') {
+                     successEditModal.style.display = "block";
+               }
+            }
+            successEditClose.onclick = function() {
+               successEditModal.style.display = "none";
+               window.location.href = currentPage;
+            }
+            closesuccessEditModal.onclick = function() {
+               successEditModal.style.display = "none";
+               window.location.href = currentPage;
+            }
+            showsuccessEditModal();
+     }
 
 const modals = [
   deleteConfirmModal,
@@ -805,13 +835,15 @@ const modals = [
   notReservableModal,
   successReserveModal,
   payModal,
+  loginModal,
+  successEditModal
 ];
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
   modals.forEach((modal) => {
     if (event.target == modal) {
       modal.style.display = "none";
-      if (modal == successModal || modal == successRequestModal || modal == successDeleteModal || modal == successVisitModal || modal == successReserveModal) {
+      if (modal == successModal || modal == successRequestModal || modal == successDeleteModal || modal == successVisitModal || modal == successReserveModal || modal == successEditModal) {
         window.location.href = currentPage;
       }
     }
