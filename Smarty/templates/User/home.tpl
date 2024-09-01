@@ -168,7 +168,7 @@
       <!-- feature section start -->
       <div class="Properties_section layout_padding">
          <div class="container">
-            <div class="row">
+            <div class="row ">
                <div class="col-sm-12">
                   <div class="Properties_taital_main">
                      <h1 class="Properties_taital">New Properties</h1>
@@ -177,7 +177,7 @@
                </div>
             </div>
            <div class="Properties_section_2">
-            <div class="row" id="accommodationContainer">
+            <div class="row centered" id="accommodationContainer">
             </div>
             </div>
          </div>
@@ -256,8 +256,7 @@
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
-      <!-- javascript --> 
-      <script src="UniRent/Smarty/js/materialSelectInit.js"></script>
+      <!-- javascript -->
       <script src="/UniRent/Smarty/js/UniRentOriginal/dropdownFill.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/homeAccommodationDisplay.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>

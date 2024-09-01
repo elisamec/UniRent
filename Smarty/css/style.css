@@ -714,8 +714,8 @@ hr.border_main {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 350px;
-    height: 350px;
+    width: 290px;
+    height: 290px;
 }
 
 .container_main:hover .overlay {
@@ -832,8 +832,8 @@ hr.border_main {
 }
 .Searchcontainer {
     float: right;
-    width: 60%;
-    margin-right: 50px;
+    width: 65%;
+    margin-right: 20px;
     min-height: 900.18px;
     height: auto;
 }
@@ -847,10 +847,10 @@ hr.border_main {
 }
 
 .image_box{
-    width: 100%;
+    width: 290px;
     float: left;
     background-color: #ffffff;
-    height: auto;
+    height: 160px;
     padding: 20px 10px;
     margin-bottom:20px;
     box-shadow: 0px 9px 9px 0px #eaeaea !important;
@@ -905,7 +905,7 @@ hr.border_main {
     color: #202020;
     text-transform: uppercase;
     font-weight: bold;
-    margin-left: 20px;
+    padding-left: 20px;
 }
 
 .area_main{
@@ -3184,4 +3184,10 @@ a.badge-danger.focus,a.badge-danger:focus{
     justify-content: center;
     align-items: center;
     margin-top: 30px
+  }
+  .margin10 {
+    margin: 10px;
+  }
+  .margin40 {
+    margin: 40px;
   }

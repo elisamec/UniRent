@@ -30,15 +30,15 @@
                     console.error('Star rating element not found for rating:', rating);
                 }
         }
-        if (rating) {
+        if (typeof rating !== 'undefined') {
             setRating(rating);
         }
         // Set default rating for Owner
-        if (ratingOwner) {
+        if (typeof ratingOwner !== 'undefined') {
             document.getElementById('star' + ratingOwner + 'O').checked = true;
         }
 
         // Set default rating for Accommodation
-        if (ratingAccommodation) {
+        if (typeof ratingAccommodation !== 'undefined') {
             document.getElementById('star' + ratingAccommodation + 'A').checked = true;
         }

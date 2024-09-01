@@ -17,7 +17,7 @@ function displayAccommodations(accommodations, user) {
                     accommodation.photo = "/UniRent/Smarty/images/noPic.png";
                 }
                 const accommodationElement = document.createElement('div');
-                accommodationElement.className = 'col-lg-4 col-md-6col-lg-4 col-md-6';
+                accommodationElement.className = 'margin40';
 
                 // Insert the names of the elements of the accommodation array
                 accommodationElement.innerHTML = `

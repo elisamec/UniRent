@@ -1,11 +1,6 @@
 function displayResults(results, user) {
     const container = document.getElementById('resultContainer');
-    let href = '';
-    if (user ==='User') {
-        href='"#" onclick="showModal(event)"';
-    } else if (user === 'Student') {
-        href='"/UniRent/Student/accommodation/${result.id}"';
-    }
+    
 
     if (container) {
         if (results.length === 0) {
@@ -16,7 +11,13 @@ function displayResults(results, user) {
                     result.photo = "/UniRent/Smarty/images/noPic.png";
                 }
                 const resultElement = document.createElement('div');
-                resultElement.className = 'col-lg-4 col-md-6col-lg-4 col-md-6';
+                resultElement.className = 'margin10';
+                let href = '';
+                if (user ==='User') {
+                    href='"#" onclick="showModal(event)"';
+                } else if (user === 'Student') {
+                    href='"/UniRent/Student/accommodation/' + result.id + '"';
+                }
 
                 // Insert the names of the elements of the result array
                 resultElement.innerHTML = `

@@ -197,12 +197,17 @@ function updateEvents(date) {
       event.events.forEach((event) => {
          console.log(event);
          console.log(event.username);
+         if (user === 'Student') {
+          var eventIcon = `<i class="fa fa-circle"></i>`;
+         } else if (user === 'Owner') {
+           var eventIcon = `<div class="userIcon">
+              <img src="${event.photo}" alt="Event photo">
+            </div>`;
+         }
         // Generate HTML with an id attribute set to the event idVisit
         events += `<div class="event" id="event-${event.idVisit}">
             <div class="title">
-            <div class="userIcon">
-              <img src="${event.photo}" alt="Event photo">
-            </div>
+            ` + eventIcon + `
             <div class="event-details">
               <h3 class="event-title">@${event.username}</h3>
               <p>${event.accommodationTitle}</p>

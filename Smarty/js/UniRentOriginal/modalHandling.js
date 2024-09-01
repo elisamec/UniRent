@@ -786,12 +786,6 @@ if (reserveModal && notReservableModal && successReserveModal) {
         var modal = document.getElementById("loginModal");
         modal.style.display = "block";
      }
-     var loginModal = document.getElementById("loginModal");
-     if (loginModal) {
-        document.getElementById("loginClose").onclick = function() {
-            modal.style.display = "none";
-         }
-     }
      var successEditModal = document.getElementById("successEditModal");
      if (successEditModal) {
             var successEditClose = document.getElementById("successEditClose");

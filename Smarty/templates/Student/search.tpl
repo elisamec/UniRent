@@ -385,14 +385,16 @@
          const results = {$searchResult};
          var modalSuccess= '{$modalSuccess}';
          const user = 'Student';
+         const rangeInput = document.querySelectorAll(".range-input input");
+         const priceInput = document.querySelectorAll(".price-input input");
          priceInput[0].value = {$minPrice};
          priceInput[1].value = {$maxPrice};
          rangeInput[0].value = {$minPrice};
          rangeInput[1].value = {$maxPrice};
-         const defaultCity = {$selectedCity};
-         const defaultUniversity = {$selectedUni};
-         const defaultPeriod = {$selectedDate};
-         const defaultYear = {$selectedYear};
+         const defaultCity = "{$selectedCity}";
+         const defaultUniversity = "{$selectedUni}";
+         const defaultPeriod = "{$selectedDate}";
+         const defaultYear = "{$selectedYear}";
          const ratingOwner = {$ratingOwner};
          const ratingAccommodation = {$ratingAccommodation};
       </script>
@@ -407,7 +409,7 @@
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
       <!-- javascript --> 
-      <script src="UniRent/Smarty/js/materialSelectInit.js"></script>
+      
       <script src="/UniRent/Smarty/js/UniRentOriginal/searchResult.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/rangeInput.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/rating.js"></script>
@@ -415,6 +417,7 @@
       <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/selectKeyboardAccessibility.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/dropdownFill.js"></script>
 
 </body>
 </html>

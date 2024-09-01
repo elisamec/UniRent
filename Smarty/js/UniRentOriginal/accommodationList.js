@@ -3,12 +3,9 @@ function displayAccommodations(accommodations) {
   const container = document.getElementById("accommodationContainer");
   if (file == "OwnerAds") {
     var emptyContainer = "no ads";
-    var href = 'href="/UniRent/Student/accommodation/${accommodation.id}"';
     var expireHTML = "";
   } else if (file == "studentReservations") {
     var emptyContainer = "no reservations";
-    var href = (href =
-      "/UniRent/Reservation/reservationDetails/${accommodation.idReservation}");
     var expire = "";
 
     if (kind == "accepted") {
@@ -31,6 +28,11 @@ function displayAccommodations(accommodations) {
         " yet!</h1></div>";
     } else {
       accommodations.forEach((accommodation) => {
+        if(file == "studentReservations") {
+          var href = 'href ="/UniRent/Reservation/reservationDetails/' + accommodation.idReservation + '"';
+          } else if (file == "OwnerAds") {
+            var href = 'href="/UniRent/OwnerAds/accommodation/'+ accommodation.id + '"'; 
+          }
         if (accommodation.photo == null) {
           accommodation.photo = "/UniRent/Smarty/images/noPic.png";
         }

@@ -237,7 +237,7 @@
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
       <!-- javascript --> 
-      <script src="UniRent/Smarty/js/materialSelectInit.js"></script>
+      
       <script src="/UniRent/Smarty/js/UniRentOriginal/contractsPopulateOwner.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>

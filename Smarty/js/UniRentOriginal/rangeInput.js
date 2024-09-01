@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const rangeInput = document.querySelectorAll(".range-input input"),
-          priceInput = document.querySelectorAll(".price-input input"),
-          range = document.querySelector(".slider .progress");
+    const range = document.querySelector(".slider .progress");
     let priceGap = 1000;
     updateSliderPosition(); // Initial position update
 

@@ -189,7 +189,7 @@
                </div>
             </div>
            <div class="Properties_section_2">
-               <div class="row" id="accommodationContainer">
+               <div class="row centered" id="accommodationContainer">
                </div>
             </div>
          </div>

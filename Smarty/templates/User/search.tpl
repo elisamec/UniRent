@@ -114,6 +114,15 @@
                      </div>
                   </div>
                </div>
+               <div class="row">
+               <div class="Findcontainer">
+                  <div class="select-outline">
+                     <select name="year" id="yearSelect" class="nice-select mdb-select md-form md-outline colorful-select dropdown-primary" required>
+                        <option value="" disabled selected>Select a year</option>
+                     </select>
+                  </div>
+               </div>
+               </div>
                <h1 class="find_text padding-reserve">Ratings: </h1>
               <div class="Findcontainer">
                <div class="row">
@@ -297,12 +306,14 @@
       <!-- footer section end -->
       <!-- JavaScript variables -->
       <script>
-         const defaultCity = {$selectedCity};
-         const defaultUniversity = {$selectedUni};
-         const defaultPeriod = {$selectedDate};
-         const defaultYear = {$selectedYear};
+         const defaultCity = "{$selectedCity}";
+         const defaultUniversity = "{$selectedUni}";
+         const defaultPeriod = "{$selectedDate}";
+         const defaultYear = "{$selectedYear}";
          const results = {$searchResult};
          var user = 'User';
+         const rangeInput = document.querySelectorAll(".range-input input");
+         const priceInput = document.querySelectorAll(".price-input input");
          priceInput[0].value = {$minPrice};
          priceInput[1].value = {$maxPrice};
          rangeInput[0].value = {$minPrice};
@@ -320,7 +331,7 @@
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
       <!-- javascript --> 
-      <script src="UniRent/Smarty/js/materialSelectInit.js"></script>
+      
       <script src="/UniRent/Smarty/js/UniRentOriginal/rangeInput.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/dropdownFill.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/searchResult.js"></script>
@@ -328,6 +339,7 @@
       <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/selectKeyboardAccessibility.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/dropdownFill.js"></script>
       
    </body>
 </html>
