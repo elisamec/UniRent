@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
     updateHiddenInput('women', 'hiddenWomen');
     updateHiddenInput('animals', 'hiddenAnimals');
     updateHiddenInput('smokers', 'hiddenSmokers');
-    } else if (file='registerStudent') {
+    } else if (file='registerStudent' || file=='editProfileStudent') {
         // Assicurati che gli ID corrispondano ai tuoi elementi HTML
         var smokerCheckbox = document.getElementById('smoker');
         var animalsCheckbox = document.getElementById('animals');

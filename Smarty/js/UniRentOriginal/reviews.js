@@ -41,7 +41,7 @@ function displayReviews(reviews, user) {
                         styleUser = 'class="disabled"';
                     }
                     href = '/UniRent/'+ user +'/publicProfile/' + review.username;
-                    if (postedReviews) {
+                    if (typeof postedReviews !== 'undefined' && postedReviews) {
                         if (review.reported) {
                             reportedStyle = 'style="opacity: 0.5;"';
                             reportedWarning = '<h1 class="reported-warning" style="color: red; font-weight: bold; margin-left: 10px;">Reported</h1>';

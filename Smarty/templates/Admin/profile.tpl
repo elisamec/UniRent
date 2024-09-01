@@ -386,4 +386,3 @@ const user= 'Admin';
 <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
 </body>
 </html>
-</html>

@@ -193,6 +193,10 @@
          </div>
       </div>
       <!-- footer section end -->
+
+      <script>
+    const accommodations = {$contracts};
+</script>
       
       <!-- Javascript files-->
       <script src="/UniRent/Smarty/js/jquery.min.js"></script>
@@ -204,20 +208,9 @@
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
       <!-- javascript --> 
-      <script>
-         // Material Select Initialization
-         $(document).ready(function() {
-         $('.mdb-select').materialSelect();
-         $('.select-wrapper.md-form.md-outline input.select-dropdown').bind('focus blur', function () {
-         $(this).closest('.select-outline').find('label').toggleClass('active');
-         $(this).closest('.select-outline').find('.caret').toggleClass('active');
-         });
-         });
-      </script>
+      <script src="UniRent/Smarty/js/materialSelectInit.js"></script>
       
-         <script>
-    const accommodations = {$contracts};
-</script>
+         
 <script src="/UniRent/Smarty/js/UniRentOriginal/contractsPopulateStudent.js"></script>
    <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
 <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>

@@ -204,6 +204,11 @@ var understoodBtn = document.getElementById("understood");
 if (deleteConfirmModal) {
   if (typeof postedReviews !== "undefined") {
     var deleteButtons = document.querySelectorAll(".delete_button");
+    document.querySelectorAll('a.disabled').forEach(function(link) {
+        link.addEventListener('click', function(event) {
+          event.preventDefault();
+        });
+      });
     deleteButtons.forEach((button) => {
       button.addEventListener("click", (event) => {
         event.preventDefault(); // Prevent the default action (navigation)
@@ -678,6 +683,106 @@ if (reserveModal && notReservableModal && successReserveModal) {
     showsuccessReserveModal();
     }
 
+    var payModal = document.getElementById("payModal");
+
+    if (payModal) {
+        document.addEventListener("DOMContentLoaded", function() {
+            if (typeof Inputmask !== 'undefined') {
+                Inputmask().mask(document.querySelectorAll("input[data-inputmask]"));
+            }
+        });
+    
+        var payOpenBtn = document.getElementById("payOpenBtn");
+    
+        // Get the button that opens the modal
+        var payBtn = document.getElementById("payBtn");
+    
+        // Get the <span> element that closes the modal
+        var payClose = document.getElementById("payClose");
+    
+        var cancelPayBtn = document.getElementById("cancelPayBtn");
+    
+        // When the user clicks the button, open the modal 
+        payOpenBtn.onclick = function(event) {
+            event.preventDefault();
+            payModal.style.display = "block";
+        }
+    
+        // When the user clicks on <span> (x), close the modal
+        payClose.onclick = function() {
+            payModal.style.display = "none";
+        }
+        payBtn.onclick = function() {
+            payModal.style.display = "none";
+        }
+        cancelPayBtn.onclick = function() {
+            payModal.style.display = "none";
+        }
+        function createCreditCardRadioButtons(creditCardData) {
+            var container = document.getElementById('creditCardContainer');
+            container.innerHTML = ''; // Clear existing content
+            creditCardData.forEach(function(card, index) {
+                var radioBtn = document.createElement('input');
+                radioBtn.type = 'radio';
+                radioBtn.name = 'creditCardNumber';
+                radioBtn.value = card.cardNumber;
+                radioBtn.id = 'card' + index;
+                if (card.main) {
+                    radioBtn.checked = true;
+                }
+    
+                var label = document.createElement('label');
+                label.htmlFor = 'card' + index;
+                label.textContent = card.cardName + ' (' + card.cardNumberHidden + ')';
+    
+                container.appendChild(radioBtn);
+                container.appendChild(label);
+                container.appendChild(document.createElement('br'));
+    
+                // Add event listener to hide new card form if this button is clicked
+                radioBtn.addEventListener('click', function() {
+                    document.getElementById('newCardContainer').style.display = 'none';
+                    toggleRequired(false);
+                });
+            });
+    
+            // Add option for inserting a new card
+            var newCardRadioBtn = document.createElement('input');
+            newCardRadioBtn.type = 'radio';
+            newCardRadioBtn.name = 'creditCard';
+            newCardRadioBtn.value = 'newCard';
+            newCardRadioBtn.id = 'newCard';
+            newCardRadioBtn.onclick = function() {
+                document.getElementById('newCardContainer').style.display = 'block';
+                toggleRequired(true);
+            };
+    
+            var newCardLabel = document.createElement('label');
+            newCardLabel.htmlFor = 'newCard';
+            newCardLabel.textContent = 'Insert a new card';
+    
+            container.appendChild(newCardRadioBtn);
+            container.appendChild(newCardLabel);
+            container.appendChild(document.createElement('br'));
+        }
+    
+        // Call the function to create radio buttons
+        createCreditCardRadioButtons(creditCardData);
+    
+        // Function to toggle the required attribute of the new card input fields
+        function toggleRequired(isRequired) {
+            var newCardFields = document.querySelectorAll('#newCardContainer input');
+            newCardFields.forEach(function(field) {
+                if (isRequired) {
+                    field.setAttribute('required', 'required');
+                } else {
+                    field.removeAttribute('required');
+                }
+            });
+        }
+    }
+    
+
 const modals = [
   deleteConfirmModal,
   notDeletableModal,
@@ -699,6 +804,7 @@ const modals = [
   reserveModal,
   notReservableModal,
   successReserveModal,
+  payModal,
 ];
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {

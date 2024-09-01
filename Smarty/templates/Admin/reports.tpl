@@ -322,4 +322,3 @@ const countPage = {$count};
 <script src="/UniRent/Smarty/js/UniRentOriginal/adminDropdowns.js"></script> 
 </body>
 </html>
-</html>

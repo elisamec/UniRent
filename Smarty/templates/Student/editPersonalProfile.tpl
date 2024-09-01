@@ -322,6 +322,33 @@
       </div>
       </div>
       <!-- End of Cookie Modal -->
+
+      <!-- Request Detail Modal -->
+<div class="resModal" id="replyModal">
+      <div class="resModal-content">
+         <div class="row">
+            <span class="resClose" id="replyClose">&times;</span>
+            <h2 class="resModal-head">Support Reply Details</h2>
+         </div>
+         <div class="container cont-padding">
+         <h4>Your Request</h4>
+                <p id="requestContent"></p>
+                  <hr>
+                  <h4>Admin Reply</h4>
+                <p id="replyContent"></p>
+                  <hr>
+                  <h4>Topic</h4>
+                <p id="requestTopic"></p>
+                <hr>
+                </div>
+            <div class="btn-cont">
+                <button type="button" class="edit_btn" id="closeReply">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Request Detail Modal -->
+
 <!-- footer section start -->
       <div class="footer_section">
          <div class="container">
@@ -349,7 +376,12 @@
          </div>
       </div>
       <!-- footer section end -->
-<script src="/UniRent/Smarty/js/jquery.min.js"></script>
+      <script>
+         var birthDateString = '{$student->getBirthDateString()}';
+         var file = 'editProfileStudent';
+         var deleteVariable = 'Student';
+      </script>
+      <script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>
       <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
       <script src="/UniRent/Smarty/js/jquery-3.0.0.min.js"></script>
@@ -357,144 +389,11 @@
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
-      <script>
-                           var birthDateString = '{$student->getBirthDateString()}';
-                           
-                           if (birthDateString) {
-                              var parts = birthDateString.split('/');
-                              if (parts.length === 3) {
-                                    var formattedDate = parts[2] + '-' + parts[0].padStart(2, '0') + '-' + parts[1].padStart(2, '0');
-                                    document.getElementById('birthDate').value = formattedDate;
-                              }
-                           }
-                        </script>
-
- 
-</script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/dateHandling.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/hiddenInputHandling.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/fileUpload.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
       
-
-               <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Assicurati che gli ID corrispondano ai tuoi elementi HTML
-    var smokerCheckbox = document.getElementById('smoker');
-    var animalsCheckbox = document.getElementById('animals');
-    var hiddenSmoker = document.getElementById('hiddenSmoker');
-    var hiddenAnimals = document.getElementById('hiddenAnimals');
-
-       
-    if(smokerCheckbox && hiddenSmoker) 
-   {
-      smokerCheckbox.onclick = function() 
-      {
-         hiddenSmoker.value = this.checked ? 'true' : 'false';
-      };
-   }
-
-    if(animalsCheckbox && hiddenAnimals) {
-        animalsCheckbox.onclick = function() {
-            hiddenAnimals.value = this.checked ? 'true' : 'false';
-        };
-    }
-});
-</script>
-<script>
-      $(document).ready(function() {
-
-      
-      var readURL = function(input) {
-         if (input.files && input.files[0]) {
-               var reader = new FileReader();
-
-               reader.onload = function (e) {
-                  $('.small').attr('src', e.target.result);
-               }
-      
-               reader.readAsDataURL(input.files[0]);
-         }
-      }
-      
-
-      $(".file-upload").on('change', function(){
-         readURL(this);
-      });
-      
-      $(".label-button").on('click', function() {
-         $(".file-upload").click();
-      });
-   });
-      </script>
-      <script>
-      $(document).ready(function() {
-   // Get the modal
-   var modal = document.getElementById("confirmModal");
-
-   // Get the button that opens the modal
-   var btn = document.getElementById("deleteLink");
-
-   // Get the <span> element that closes the modal
-   var span = document.getElementsByClassName("resClose")[0];
-
-   // Get the confirm and cancel buttons
-   var confirmBtn = document.getElementById("confirmDelete");
-   var cancelBtn = document.getElementById("cancelDelete");
-
-   // When the user clicks the button, open the modal 
-   btn.onclick = function(event) {
-      event.preventDefault(); // Prevent the default action (navigation)
-      modal.style.display = "block";
-   }
-
-   // When the user clicks on <span> (x), close the modal
-   span.onclick = function() {
-      modal.style.display = "none";
-   }
-
-   // When the user clicks on the confirm button, proceed to delete
-   confirmBtn.onclick = function() {
-      window.location.href = "/UniRent/Student/deleteProfile";
-   }
-
-   // When the user clicks on the cancel button, close the modal
-   cancelBtn.onclick = function() {
-      modal.style.display = "none";
-   }
-
-   // When the user clicks anywhere outside of the modal, close it
-   window.onclick = function(event) {
-      if (event.target == modal) {
-         modal.style.display = "none";
-      }
-   }
-});
-
-      </script>
-   <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
-<script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
-   <!-- Request Detail Modal -->
-<div class="resModal" id="replyModal">
-      <div class="resModal-content">
-         <div class="row">
-            <span class="resClose" id="replyClose">&times;</span>
-            <h2 class="resModal-head">Support Reply Details</h2>
-         </div>
-         <div class="container cont-padding">
-         <h4>Your Request</h4>
-                <p id="requestContent"></p>
-                  <hr>
-                  <h4>Admin Reply</h4>
-                <p id="replyContent"></p>
-                  <hr>
-                  <h4>Topic</h4>
-                <p id="requestTopic"></p>
-                <hr>
-                </div>
-            <div class="btn-cont">
-                <button type="button" class="edit_btn" id="closeReply">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End of Request Detail Modal -->
-
 </body>
 </html>
