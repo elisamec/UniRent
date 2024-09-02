@@ -41,7 +41,6 @@ var closeSpan = document.getElementById("closeSpan");
 var closeButton = document.getElementById("closeButton");
 
 if (successRequestModal) {
-  console.log(successRequestModal);
   if (requestSuccess !== "null") {
     successRequestModal.style.display = "block";
   } else {
@@ -780,11 +779,6 @@ if (reserveModal && notReservableModal && successReserveModal) {
             });
         }
     }
-    function showLoginRegistrationPopUp(event) {
-        event.preventDefault(); // Previene l'invio del form
-        var modal = document.getElementById("loginModal");
-        modal.style.display = "block";
-     }
      var successEditModal = document.getElementById("successEditModal");
      if (successEditModal) {
             var successEditClose = document.getElementById("successEditClose");

@@ -20,7 +20,6 @@ function getCookie(name) {
             return c.substring(nameEQ.length, c.length); // Return cookie value
         }
     }
-    console.log(`Cookie with name "${name}" not found`); // Debugging line
     return null;
 }
 
@@ -31,7 +30,6 @@ function eraseCookie(name) {
 
 // Get the current page URL
 let currentPage = window.location.pathname;
-console.log("Current Page:", currentPage);
 
 
 // Normalize the current page URL
@@ -71,7 +69,6 @@ setCookie('current_page', currentPage, 1); // Expires in 1 day
 
 // Get the normalized current page URL from the cookie
 currentPage = getCookie("current_page");
-console.log("Current Page in cookie:", currentPage);
 
 // Get custom names from the data attribute or session storage
 const breadcrumbElement = document.getElementById('breadcrumb');
@@ -169,20 +166,15 @@ function getCustomName(url) {
 if (currentPage) {
     const resetPages = ['/UniRent/Owner/home', '/UniRent/User/home', '/UniRent/Student/home', '/UniRent/Admin/home'];
     if (resetPages.includes(currentPage)) {
-        console.log("Current page matches reset criteria. Clearing visitedPages and urlDisplayNames.");
         sessionStorage.setItem("visitedPages", JSON.stringify({0: currentPage}));
         sessionStorage.setItem("urlDisplayNames", JSON.stringify({}));
-        console.log("Visited Pages: {0: " + currentPage + "}");
-        console.log("urlDisplayNames: {}");
     } else {
         let visitedPages = JSON.parse(sessionStorage.getItem("visitedPages")) || {};
-        console.log("Visited Pages from sessionStorage:", visitedPages);
         
         if (String(window.performance.getEntriesByType("navigation")[0].type) === "back_forward") {
             let lastPage = visitedPages[Object.keys(visitedPages).length - 1];
             for (let key in visitedPages) {
                 if (visitedPages[key] === lastPage) {
-                    console.log("Removing last occurrence of current page URL back_forward");
                     delete visitedPages[key];
                     break;
                 }
@@ -191,7 +183,6 @@ if (currentPage) {
 
         for (let key in visitedPages) {
             if (visitedPages[key] === currentPage) {
-                console.log("Removing old occurrence of current page URL");
                 delete visitedPages[key];
             }
         }
@@ -205,7 +196,6 @@ if (currentPage) {
 
         newVisitedPages[index] = currentPage;
         sessionStorage.setItem("visitedPages", JSON.stringify(newVisitedPages));
-        console.log("Visited Pages:", newVisitedPages);
 
         // Update urlDisplayNames for the current page
         const displayName = getCustomName(currentPage);
@@ -222,7 +212,6 @@ function displayBreadcrumb(visitedPages) {
 
     const breadcrumbContainer = document.getElementById('breadcrumb');
     if (!breadcrumbContainer) {
-        console.log("Breadcrumb element not found. Skipping breadcrumb display.");
         return;
     }
 

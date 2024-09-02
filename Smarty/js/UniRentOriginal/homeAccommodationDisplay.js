@@ -61,7 +61,6 @@ function displayAccommodationsOwner(accommodationsActive, accommodationsInactive
 
         // Combine both active and inactive accommodations
         const allAccommodations = [...accommodationsActive, ...accommodationsInactive];
-        console.log('allAccommodations:',allAccommodations);
         if (allAccommodations.length === 0) {
             containerOwner.innerHTML = '<div class="container"><h1 class="noRev">You have no ads yet!</h1></div>';
         } else {
@@ -77,7 +76,6 @@ function displayAccommodationsOwner(accommodationsActive, accommodationsInactive
                 if(accommodationOwner.photo == null){
                     accommodationOwner.photo = "/UniRent/Smarty/images/noPic.png";
                 }
-                console.log('accommodationOwner:',accommodationOwner);
                 if (accommodationsActive.includes(accommodationOwner)) {
                         classDisplay = "image_box";
                         imageClass = "blog_img";

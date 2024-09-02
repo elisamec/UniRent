@@ -96,7 +96,7 @@
                      <div class="mail_section map_form_container">
                         <form action="/UniRent/SupportRequest/supportRequest" method="post" class="yourFormId">
                         <textarea class="message-bt" placeholder="Message" rows="5" id="comment" name="Message"></textarea>
-                        <div class="send_bt"><button type="submit" onclick="showLoginRegistrationPopUp(event)">Send Now</button></div>
+                        <div class="send_bt"><button type="submit">Send Now</button></div>
                         </form>
                      </div>
                   </div>
@@ -104,18 +104,6 @@
                      <div class="contact_img"><img src="/UniRent/Smarty/images/contact-img.png"></div>
                   </div>
                </div>
-            </div>
-         </div>
-      </div>
-
-// pop up per obligare l'utente a loggarsi o reggistrarsi
-      <div id="loginModal" class="resModal">
-         <div class="resModal-content">
-            <span class="resClose" id="loginClose">&times;</span>
-            <p>Please, login or sign to UniRent to continue: </p>
-            <div class="btn-cont">
-               <div class="login-required"><a href="/UniRent/User/login">Login</a></div>
-               <div class="login-required"> <a href="/UniRent/User/register">Sign Up</a></div>
             </div>
          </div>
       </div>

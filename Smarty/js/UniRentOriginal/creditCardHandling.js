@@ -115,7 +115,7 @@ let cards = [];
                     if (isExpired) {
                         buttonHTML = `<button class="button-spec" disabled style="opacity: 0.5; cursor: not-allowed;"> Make Main </button>`;
                     } else {
-                        buttonHTML = `<button class="button-spec" onclick="fallaMain('${card.number}')"> Make Main </button>`;
+                        buttonHTML = `<button class="button-spec" onclick="fetchCard('${card.number}')"> Make Main </button>`;
                     }
                 }
 
@@ -296,7 +296,7 @@ let cards = [];
                 displayCards(cards);      
     }
 
-    function fallaMain(cardNumber)
+    function fetchCard(cardNumber)
     {
         // mando la richiesta al server
   
@@ -307,22 +307,6 @@ let cards = [];
             if(response.ok)
             {
                 makeMain(cardNumber);
-            }
-            if (response.status >= 100 && response.status < 200) 
-            {
-                console.log("Informazioni per il client");
-            }
-            if (response.status >= 300 && response.status < 399) 
-            {
-                console.log("Redirezione");
-            }
-            if (response.status >= 400 && response.status < 499) 
-            {
-                console.log("Richiesta errata");
-            }
-            if (response.status >= 500 && response.status < 599) 
-            {
-              console.log("Errore sul server");
             }
         })
     }

@@ -195,8 +195,6 @@ function updateEvents(date) {
       year === event.year
     ) {
       event.events.forEach((event) => {
-         console.log(event);
-         console.log(event.username);
          if (user === 'Student') {
           var eventIcon = `<i class="fa fa-circle"></i>`;
          } else if (user === 'Owner') {

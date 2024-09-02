@@ -37,7 +37,6 @@
         }
 
         selectedDate.setDate(day);
-        console.log(selectedDate);
         let currentDate = new Date();
         currentDate.setHours(0, 0, 0, 0);
 
