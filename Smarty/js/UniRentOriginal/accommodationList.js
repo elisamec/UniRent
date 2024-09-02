@@ -3,21 +3,9 @@ function displayAccommodations(accommodations) {
   const container = document.getElementById("accommodationContainer");
   if (file == "OwnerAds") {
     var emptyContainer = "no ads";
-    var expireHTML = "";
+    
   } else if (file == "studentReservations") {
     var emptyContainer = "no reservations";
-    var expire = "";
-
-    if (kind == "accepted") {
-      var expire = "You have " + accommodation.expires + " left to pay";
-    } else {
-      var expire =
-        "The owner has " +
-        accommodation.expires +
-        " before it gets automatically accepted";
-    }
-    var expireHTML = `<p>${accommodation.period}</p>
-                      <p>${expire}</p>`;
   }
 
   if (container) {
@@ -29,8 +17,20 @@ function displayAccommodations(accommodations) {
     } else {
       accommodations.forEach((accommodation) => {
         if(file == "studentReservations") {
+          var expire = "";
+          if (kind == "accepted") {
+            var expire = "You have " + accommodation.expires + " left to pay";
+          } else {
+            var expire =
+              "The owner has " +
+              accommodation.expires +
+              " before it gets automatically accepted";
+          }
+          var expireHTML = `<p>${accommodation.period}</p>
+                            <p>${expire}</p>`;
           var href = 'href ="/UniRent/Reservation/reservationDetails/' + accommodation.idReservation + '"';
           } else if (file == "OwnerAds") {
+            var expireHTML = "";
             var href = 'href="/UniRent/OwnerAds/accommodation/'+ accommodation.id + '"'; 
           }
         if (accommodation.photo == null) {

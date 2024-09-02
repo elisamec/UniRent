@@ -241,5 +241,6 @@
       <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/accommodationList.js"></script>
 </body>
 </html>
