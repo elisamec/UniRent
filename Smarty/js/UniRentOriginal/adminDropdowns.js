@@ -317,11 +317,15 @@ if (modalMessage !== '') {
 }
 var closeConfirm = document.getElementById('closeConfirm');
 var confirmClose = document.getElementById('confirmClose');
+if (closeConfirm) {
 closeConfirm.addEventListener('click', function() {
     window.location.href = currentPage;
 });
+}
+if (confirmClose) {
 confirmClose.addEventListener('click', function() {
     window.location.href = currentPage;
 });
+}
     
 });
