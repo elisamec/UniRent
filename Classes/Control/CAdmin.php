@@ -383,6 +383,7 @@ class CAdmin
         if ($session->getSessionElement('userType') !== 'Admin') {
             $view= new VError();
             $view->error(403);
+            exit();
         }
     }
 }
