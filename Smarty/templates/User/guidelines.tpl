@@ -48,7 +48,7 @@
                         <a class="nav-link" href="/UniRent/User/home">Home</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link active" href="/UniRent/User/about">About Us</a>
+                        <a class="nav-link" href="/UniRent/User/about">About Us</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="/UniRent/User/contact">Contact Us</a>
