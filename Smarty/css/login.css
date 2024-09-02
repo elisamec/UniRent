@@ -36,7 +36,7 @@ html, body {
   box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 30px 30px -20px;
   margin: 20px;
   position: relative;
-  transform: translate(50%, 50%)
+  transform: translate(50%, 25%)
 }
 .button-container {
     display: flex;
