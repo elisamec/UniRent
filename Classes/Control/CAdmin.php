@@ -214,7 +214,9 @@ class CAdmin
 
             $isReview = $report->getSubjectType()==TType::REVIEW;
             $subject = $isReview ? $PM->load('EReview', $report->getIdSubject()) : $report;
-            $usernameSubject=$PM->getUsernameById($subject->getIdAuthor(), $subject->getAuthorType());
+            $idSubject = $isReview ? $subject->getIdAuthor() : $report->getIdSubject();
+            $subjectType = $isReview ? $subject->getAuthorType() : $report->getSubjectType();
+            $usernameSubject=$PM->getUsernameById($idSubject, $subjectType);
             $reports[]= UFormat::formatReports($report, $usernameSubject, $isReview ? $subject : null);
         }
 
