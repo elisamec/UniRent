@@ -141,7 +141,9 @@ class CUser
             $session->setSessionElement('email', $mail);
             $session->setSessionElement('username', $username);
             if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()])[A-Za-z\d@$!%*?&()]{8,}$/' , $password)) {
+                
                 $view->registrationError(false, false, false, true, $username, $mail, $name, $surname, $type, $modalSuccess);
+                exit();
             }
             $session->setSessionElement('password',USuperGlobalAccess::getPost('password'));
             $session->setSessionElement('name',$name);
@@ -152,12 +154,15 @@ class CUser
             if($type==='Student'){
                 if($PM->verifyStudentEmail($session->getSessionElement('email'))==true){
                     $viewStudent->showStudentRegistration();
+                    exit();
                 }else{
                     $view->registrationError(false, false, true, false, $username, "", $name, $surname, $type, $modalSuccess);
+                    exit();
                 }
             }else{  
  
                 $viewOwner->showOwnerRegistration();
+                exit();
             }
         } elseif ($PM->verifyUserUsername(USuperGlobalAccess::getPost('username'))==true && $PM->verifyUserEmail($mail)==true) {
             $view->registrationError(true, true, false, false, "", "", $name, $surname, $type, $modalSuccess);
