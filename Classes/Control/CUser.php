@@ -135,7 +135,10 @@ class CUser
         $surname = USuperGlobalAccess::getPost('surname');
         $picture = USuperGlobalAccess::getPhoto('img');
 
-        if($PM->verifyUserEmail($mail)==false && $PM->verifyUserUsername(USuperGlobalAccess::getPost('username'))==false)
+        if (!is_null($mail) && (!is_null($username))) $verify = true;
+        else $verify = false;
+
+        if($verify && $PM->verifyUserEmail($mail)==false && $PM->verifyUserUsername(USuperGlobalAccess::getPost('username'))==false)
         {
             $session=USession::getInstance();
             $session->setSessionElement('email', $mail);
