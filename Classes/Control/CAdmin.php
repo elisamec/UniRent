@@ -200,29 +200,38 @@ class CAdmin
     {
         header('Content-Type: application/json');
         $PM=FPersistentManager::getInstance();
+
         $result=$PM->getRequestAndReport();
         $reportsArray=$result['Report'];
         $countReports=0;
         $reports=[];
+
         foreach ($reportsArray as $report) {
+
             if ($report->getBanDate()===null) {
                 $countReports++;
             }
+
             $isReview = $report->getSubjectType()==TType::REVIEW;
             $subject = $isReview ? $PM->load('EReview', $report->getIdSubject()) : $report;
             $usernameSubject=$PM->getUsernameById($subject->getIdAuthor(), $subject->getAuthorType());
             $reports[]= UFormat::formatReports($report, $usernameSubject, $isReview ? $subject : null);
         }
+
         $requestsArray = $result['Request'];
         $requests = [];
         $countRequests = 0;
+
         foreach ($requestsArray as $request) {
+
             $author = $request->getAuthorID() != null ? $PM->getUsernameById($request->getAuthorID(), $request->getAuthorType()) : 'User';
             $requests[] = UFormat::formatRequests($request, $author);
+
             if ($request->getStatus()->value === 0) {
                 $countRequests++;
             }
         }
+
         $response = ['Reports' => $reports, 'Requests' => $requests, 'countReports' => $countReports, 'countRequests' => $countRequests];
         echo json_encode($response);
     }
@@ -256,10 +265,13 @@ class CAdmin
     {   
         self::checkIfAdmin();
         $PM=FPersistentManager::getInstance();
+
         $requests=[];
         $count=1;
         $requestArray=$PM->getRequestAndReport()['Request'];
+
         foreach ($requestArray as $request) {
+            
             $author = $request->getAuthorID() != null ? $PM->getUsernameById($request->getAuthorID(), $request->getAuthorType()) : 'User';
             if (array_key_exists($count, $requests)) {
                 if (count($requests[$count])==10) {
@@ -268,6 +280,7 @@ class CAdmin
             }
             $requests[$count][]=UFormat::formatRequests($request, $author, true);
         }
+
         $view=new VAdmin();
         $view->readMoreSupportRequest($requests, $count, $modalMessage);
     }

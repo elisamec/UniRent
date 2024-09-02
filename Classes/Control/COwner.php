@@ -85,9 +85,8 @@ class COwner
         $picture=array();
         foreach($accomm->getPhoto() as $p)
         {
-            if(is_null($p)){}
-            else
-            {
+            if(!is_null($p)){
+                
                 $picture[]=$p->getPhoto();
             }
         }
