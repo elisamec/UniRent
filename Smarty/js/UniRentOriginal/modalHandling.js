@@ -285,7 +285,6 @@ if (loginModal) {
   };
 }
 if (document.getElementById("emailForm")) {
-  ß;
   function emailFormOpen() {
     document.getElementById("emailForm").style.display = "block";
   }
