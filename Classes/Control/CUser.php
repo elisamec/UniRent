@@ -138,6 +138,8 @@ class CUser
         if($PM->verifyUserEmail($mail)==false && $PM->verifyUserUsername(USuperGlobalAccess::getPost('username'))==false)
         {
             $session=USession::getInstance();
+            $session->setSessionElement('email', $mail);
+            $session->setSessionElement('username', $username);
 
             if($type==='Student'){
                 if($PM->verifyStudentEmail($session->getSessionElement('email'))==true){
@@ -153,8 +155,7 @@ class CUser
                 exit();
             }
 
-            $session->setSessionElement('email', $mail);
-            $session->setSessionElement('username', $username);
+            
 
             if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()])[A-Za-z\d@$!%*?&()]{8,}$/' , $password)) {
                 
