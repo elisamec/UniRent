@@ -365,14 +365,14 @@ button {
     width: 100%;
     float: left;
     position: relative;
-    margin-bottom: 100px;
+    margin-bottom: 200px;
 }
 
 .select_box_main {
     width: 100%;
     background-color: #ffffff;
     height: auto;
-    padding: 40px 20px;
+    padding: 40px;
     border-radius: 20px;
     box-shadow: 0px 9px 9px 0px #eaeaea !important;
     position: absolute;
@@ -714,8 +714,8 @@ hr.border_main {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 350px;
-    height: 350px;
+    width: 290px;
+    height: 290px;
 }
 
 .container_main:hover .overlay {
@@ -832,8 +832,8 @@ hr.border_main {
 }
 .Searchcontainer {
     float: right;
-    width: 60%;
-    margin-right: 50px;
+    width: 65%;
+    margin-right: 20px;
     min-height: 900.18px;
     height: auto;
 }
@@ -847,10 +847,10 @@ hr.border_main {
 }
 
 .image_box{
-    width: 100%;
+    width: 290px;
     float: left;
     background-color: #ffffff;
-    height: auto;
+    height: 160px;
     padding: 20px 10px;
     margin-bottom:20px;
     box-shadow: 0px 9px 9px 0px #eaeaea !important;
@@ -905,7 +905,7 @@ hr.border_main {
     color: #202020;
     text-transform: uppercase;
     font-weight: bold;
-    margin-left: 20px;
+    padding-left: 20px;
 }
 
 .area_main{
@@ -2448,8 +2448,8 @@ textarea#comment::placeholder {
 }
 .Accomcontainer {
     float: left;
-    width: 100%;
-    padding-left: 20px;
+    width: 69vw;
+    padding-left: 40px;
 
 }
 .accom_img {
@@ -2457,7 +2457,7 @@ textarea#comment::placeholder {
     height: 100%;
     object-fit: cover;
     border-radius: 10px;
-    margin: 10px 10px 10px 10px;
+    margin: 20px;
 }
 .accommodation_text {
     padding: 20px;
@@ -3003,6 +3003,7 @@ a.disabled {
     display: grid;
     grid-template-columns: auto 1fr; /* 2 columns: first column auto width for paragraphs, second column takes remaining space for selects */
     gap: 15px; /* gap between rows and columns */
+    padding: 0px 20px;
   }
   select::-ms-expand {
     display: none;
@@ -3123,6 +3124,9 @@ a.badge-danger.focus,a.badge-danger:focus{
     display: flex !important;
     height: 80px;
   }
+  .d-flex1 {
+    display: flex !important;
+  }
   .text-truncate {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -3174,4 +3178,16 @@ a.badge-danger.focus,a.badge-danger:focus{
     margin: 0;
     margin-left:20px;
     margin-bottom:10px;
+  }
+  .centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px
+  }
+  .margin10 {
+    margin: 10px;
+  }
+  .margin40 {
+    margin: 40px;
   }

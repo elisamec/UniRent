@@ -144,7 +144,7 @@
          <div class="select_box_section">
             <div class="select_box_main">
                <h1 class="find_text">Find an Accommodation</h1>
-               <div class="row">
+               <div class="row centered">
                   <div class="col-lg-3 select-outline">
                      <select name="city" id="citySelect" class="nice-select mdb-select md-form md-outline colorful-select dropdown-primary" required>
                         <option value="" disabled selected>Select a city</option>
@@ -167,9 +167,11 @@
                         <option value="" disabled selected>Select a year</option>
                      </select>
                   </div>
-                  <div class="col-lg-3 select-outline">
+               </div>
+               <div class="centered">
+               <div class="col-lg-3 select-outline">
                      <div class="find_btn"><button type="submit">Find Now</button></div>
-                  </div>
+               </div>
                </div>
             </div>
          </div>
@@ -187,7 +189,7 @@
                </div>
             </div>
            <div class="Properties_section_2">
-               <div class="row" id="accommodationContainer">
+               <div class="row centered" id="accommodationContainer">
                </div>
             </div>
          </div>
@@ -308,6 +310,5 @@
       <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/selectKeyboardAccessibility.js"></script>
-      <script src="/UniRent/Smarty/js/UniRentOriginal/year.js"></script>
 </body>
 </html>

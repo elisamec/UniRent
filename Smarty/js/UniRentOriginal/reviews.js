@@ -25,7 +25,9 @@ function displayReviews(reviews, user) {
                 let style = '';
                 let styleUser = '';
                 let href = '';
-                let reportButton = '';
+                let reportedStyle = '';
+                let reportedWarning = '';
+                let additionalButtons = '';
                 if (user==='Admin') {
                     href='/UniRent/Admin/profile/' + review.username;
                     if (review.statusReported === 1 || review.statusReported === true) {
@@ -34,28 +36,44 @@ function displayReviews(reviews, user) {
                         style = 'style="background-color: #ff9999;"';
                     }
                     reviewElement.attributes = style;
-                    reportButton = '';
                 } else {
                     if (review.userStatus ==='banned') {
                         styleUser = 'class="disabled"';
-                    } else {
-                        styleUser = '';
                     }
-                href = '/UniRent/'+ user +'/publicProfile/' + review.username;
-                reportButton = '<div class="btn-cont2"><button class="delete_button" data-review-id="` + review.id + `">Report</button></div>';
+                    href = '/UniRent/'+ user +'/publicProfile/' + review.username;
+                    if (typeof postedReviews !== 'undefined' && postedReviews) {
+                        if (review.reported) {
+                            reportedStyle = 'style="opacity: 0.5;"';
+                            reportedWarning = '<h1 class="reported-warning" style="color: red; font-weight: bold; margin-left: 10px;">Reported</h1>';
+                        }
+                        additionalButtons = '<div class="btn-cont2"><button class="delete_button" data-review-id="` + review.id + `">Delete</button><button class="edit_button" data-review-id="` + review.id + `">Edit</button></div>';
+                        userSectionHTML = `
+                            <p> To: </p>
+                            <div ` + userStyle + `>
+                                <a href=` + hrefLink + style + `><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
+                            </div>
+                            <div class="username"><a href=` + hrefLink + style + `>` + review.username + `</a></div> <!-- Username of the reviewer -->
+                            <p class="reviewRecipType">` + review.type + `</p>
+                        `;
+                    } else {
+                        additionalButtons = '<div class="btn-cont2"><button class="delete_button" data-review-id="` + review.id + `">Report</button></div>';
+                        userSectionHTML = `
+                        <div class="userIcon">
+                            <a href="` + href + `" `+ styleUser +`><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
+                        </div>
+                        <div class="username"><a href="` + href + `" `+ styleUser +`>` + review.username + `</a></div> <!-- Username of the reviewer --`;
+                    }
                 }
                 // Insert the names of the elements of the review array
                 reviewElement.innerHTML = `
-                <div class="row">
+                <div class="row"` + reportedStyle + `>
                     <h1 class="ReviewTitle">` + review.title + `</h1> <!-- Title of the review -->
-                    `+ reportButton +`
+                    `+ reportedWarning + `
+                    ` + additionalButtons +`
                 </div>
                 <div class="row">
                         <div class="userSection">
-                            <div class="userIcon">
-                            <a href="` + href + `" `+ styleUser +`><img src=` + review.userPicture + ` alt="User Profile Picture"></a>
-                        </div>
-                        <div class="username"><a href="` + href + `" `+ styleUser +`>` + review.username + `</a></div> <!-- Username of the reviewer -->
+                            ` + userSectionHTML + `
                     </div>
                         <div class="col-md-11">
                             <div class="stars">

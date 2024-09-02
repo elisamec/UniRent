@@ -211,4 +211,4 @@
       <script src="/UniRent/Smarty/js/UniRentOriginal/hiddenInputHandling.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
 </body>
-  
+</html>  

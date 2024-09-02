@@ -360,3 +360,4 @@
 <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
 <script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
 </body>
+</html>

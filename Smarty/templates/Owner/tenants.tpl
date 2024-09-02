@@ -166,7 +166,7 @@
                      </label>
                      <input type="radio" id="star0T" name="rateT" value="0" hidden checked/>
                   </div>
-               <button type="button" class="button-spec finalLittle" onclick="clearRatingA()">Clear</button>
+               <button type="button" class="button-spec finalLittle" onclick="clearRatingT()">Clear</button>
                </div>
                </div>
                <div class="row">
@@ -238,55 +238,7 @@
             </div>
          </div>
       </div>
-      
-      <!-- footer section start -->
-      <div class="footer_section">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-4">
-                  <h3 class="footer_text">About Us</h3>
-                  <p class="lorem_text">Created in 2024, UniRent has revolutionized the way students find their home away from home. Connecting students with trusted landlords, UniRent ensures a seamless rental experience.</p>
-               </div>
-               <hr></hr>
-               <div class="col-md-4">
-                  <span class="lorem_text">Copyright &copy; UniRent 2024</span>
-               </div>
-               <div class="col-md-4">
-                  <h3 class="footer_text">Useful Links</h3>
-                  <div class="footer_menu">
-                     <ul>
-                        <li><a href="/UniRent/Owner/home">Home</a></li>
-                        <li><a href="/UniRent/Owner/about">About Us</a></li>
-                        <li><a href="/UniRent/Owner/contact">Contact Us</a></li>
-                        <li><a href="/UniRent/Owner/guidelines">Guidelines</a></li>
-                     </ul>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- footer section end -->
-      
-      <!-- Javascript files-->
-      <script src="/UniRent/Smarty/js/jquery.min.js"></script>
-      <script src="/UniRent/Smarty/js/popper.min.js"></script>
-      <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
-      <script src="/UniRent/Smarty/js/jquery-3.0.0.min.js"></script>
-      <script src="/UniRent/Smarty/js/plugin.js"></script>
-      <!-- sidebar -->
-      <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
-      <script src="/UniRent/Smarty/js/custom.js"></script>
-      <!-- javascript --> 
-      <script>
-         // Material Select Initialization
-         $(document).ready(function() {
-         $('.mdb-select').materialSelect();
-         $('.select-wrapper.md-form.md-outline input.select-dropdown').bind('focus blur', function () {
-         $(this).closest('.select-outline').find('label').toggleClass('active');
-         $(this).closest('.select-outline').find('.caret').toggleClass('active');
-         });
-         });
-      </script>
+      <!-- Cookie Modal -->
       <div class="modal" id="myModal">
       <div class"container-fluid">
       <div class="card">
@@ -296,236 +248,9 @@
          </div> 
       </div>
       </div>
-{literal}
-         <script>
-  const data = {/literal}{$tenants}{literal};
-  const accommodationTitles = {/literal}{$accommodationTitles}{literal};
-  console.log(accommodationTitles);
+      <!-- End of Cookie Modal -->
 
-   function populateTenantsContainer(data) {
-        const tenantsContainer = document.getElementById("tenantsContainer");
-        const yearSelect = document.getElementById("year");
-
-        // Clear existing options in year select
-        yearSelect.innerHTML = '<option value="" disabled selected>Select a year</option>';
-
-            if (data.length === 0) {
-                const noTenantsDiv = document.createElement("div");
-                noTenantsDiv.classList.add("container");
-                noTenantsDiv.textContent = "No tenants found.";
-                tenantsContainer.appendChild(noTenantsDiv);
-            } else if (Object.keys(data).length === 0) {
-                const noTenantsDiv = document.createElement("div");
-                noTenantsDiv.classList.add("container");
-                noTenantsDiv.textContent = "No tenants found.";
-                tenantsContainer.appendChild(noTenantsDiv);
-            }
-
-        data.forEach(item => {
-            const accommodationDiv = document.createElement("div");
-            accommodationDiv.classList.add("accommodation");
-            console.log(item);
-            const title = document.createElement("h1");
-            title.classList.add("titleAccomm");
-            title.textContent = item.accommodation;
-            accommodationDiv.appendChild(title);
-
-            const rowDiv = document.createElement("div");
-            rowDiv.classList.add("row");
-            
-            // Check if item.tenants is an array
-            if (Array.isArray(item.tenants)) {
-                item.tenants.forEach(tenant => {
-                    const colDiv = document.createElement("div");
-                    colDiv.classList.add("col-md-3");
-
-                    const userSectionDiv = document.createElement("div");
-                    userSectionDiv.classList.add("userSection");
-
-                    const userIconDiv = document.createElement("div");
-                    userIconDiv.classList.add("userIcon");
-
-                    const userLink = document.createElement("a");
-                    userLink.href = `/UniRent/Owner/publicProfile/${tenant.username}`;
-                    if (tenant.status === 'banned') {
-                        userLink.classList.add("disabled");
-                    }
-
-                    const userImage = document.createElement("img");
-                    userImage.src = tenant.image;
-
-                    userLink.appendChild(userImage);
-                    userIconDiv.appendChild(userLink);
-                    userSectionDiv.appendChild(userIconDiv);
-
-                    const usernameDiv = document.createElement("div");
-                    usernameDiv.classList.add("username");
-
-                    const usernameLink = document.createElement("a");
-                    usernameLink.href = `/UniRent/Owner/publicProfile/${tenant.username}`;
-                    if (tenant.status === 'banned') {
-                        usernameLink.classList.add("disabled");
-                    }
-                    usernameLink.textContent = tenant.username;
-                    usernameDiv.appendChild(usernameLink);
-
-                    // Display expiry date under username
-                    const expiryDateDiv = document.createElement("div");
-                    expiryDateDiv.textContent = `Expiry Date: ${tenant.expiryDate}`;
-                    usernameDiv.appendChild(expiryDateDiv);
-
-                    userSectionDiv.appendChild(usernameDiv);
-
-                    colDiv.appendChild(userSectionDiv);
-                    rowDiv.appendChild(colDiv);
-
-                    // Extract year from expiryDate and add to yearSelect if unique
-                    const year = new Date(tenant.expiryDate).getFullYear();
-                    if (!yearSelect.querySelector(`option[value="${year}"]`)) {
-                        const option = document.createElement("option");
-                        option.value = year;
-                        option.textContent = year;
-                        yearSelect.appendChild(option);
-                    }
-                });
-            } else if (typeof item.tenants === 'object') {
-                // Handle case where tenants is an object (not an array)
-                const tenant = item.tenants;
-
-                const colDiv = document.createElement("div");
-                colDiv.classList.add("col-md-3");
-
-                const userSectionDiv = document.createElement("div");
-                userSectionDiv.classList.add("userSection");
-
-                const userIconDiv = document.createElement("div");
-                userIconDiv.classList.add("userIcon");
-
-                const userLink = document.createElement("a");
-                userLink.href = `/UniRent/Owner/publicProfile/${tenant.username}`;
-                if (tenant.status === 'banned') {
-                        userLink.classList.add("disabled");
-                    }
-
-                const userImage = document.createElement("img");
-                userImage.src = tenant.image;
-
-                userLink.appendChild(userImage);
-                userIconDiv.appendChild(userLink);
-                userSectionDiv.appendChild(userIconDiv);
-
-                const usernameDiv = document.createElement("div");
-                usernameDiv.classList.add("username");
-
-                const usernameLink = document.createElement("a");
-                usernameLink.href = `/UniRent/Owner/publicProfile/${tenant.username}`;
-                usernameLink.textContent = tenant.username;
-                if (tenant.status === 'banned') {
-                        usernameLink.classList.add("disabled");
-                    }
-                usernameDiv.appendChild(usernameLink);
-
-                // Display expiry date under username
-                const expiryDateDiv = document.createElement("div");
-                expiryDateDiv.textContent = `Expiry Date: ${tenant.expiryDate}`;
-                usernameDiv.appendChild(expiryDateDiv);
-
-                userSectionDiv.appendChild(usernameDiv);
-
-                colDiv.appendChild(userSectionDiv);
-                rowDiv.appendChild(colDiv);
-
-                // Extract year from expiryDate and add to yearSelect if unique
-                const year = new Date(tenant.expiryDate).getFullYear();
-                if (!yearSelect.querySelector(`option[value="${year}"]`)) {
-                    const option = document.createElement("option");
-                    option.value = year;
-                    option.textContent = year;
-                    yearSelect.appendChild(option);
-                }
-            } else {
-                console.error("Unexpected format for item.tenants:", item.tenants);
-            }
-
-            accommodationDiv.appendChild(rowDiv);
-            tenantsContainer.appendChild(accommodationDiv);
-        });
-    }
-
-    // Populate the select element with accommodation titles and year options when the page loads
-    document.addEventListener("DOMContentLoaded", function() {
-        const accommodationSelect = document.getElementById("accommodationSelect");
-        console.log(typeof accommodationTitles);
-        if (Array.isArray(accommodationTitles)) {
-                accommodationTitles.forEach(item => {
-                    console.log(item); // Log the item to verify its content
-                    const option = document.createElement("option");
-                    option.value = item.accommodation;
-                    option.textContent = item.accommodation;
-                    accommodationSelect.appendChild(option);
-                });
-            } else if (typeof accommodationTitles === 'object') {
-                Object.keys(accommodationTitles).forEach(key => {
-                    console.log(key, accommodationTitles[key]); // Log the key and its corresponding value
-                    const option = document.createElement("option");
-                    option.value = key;
-                    option.textContent = accommodationTitles[key];
-                    accommodationSelect.appendChild(option);
-                });
-            } else {
-                console.error("Unexpected format for accommodationTitles:", accommodationTitles, "typeof:", typeof accommodationTitles);
-            }
-        // Call the function to populate tenantsContainer and year select
-        populateTenantsContainer(data);
-    });
-</script>
-
-{/literal}
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    function updateHiddenInput(checkboxId, hiddenInputId) {
-        var checkbox = document.getElementById(checkboxId);
-        var hiddenInput = document.getElementById(hiddenInputId);
-        checkbox.addEventListener('change', function() {
-            hiddenInput.value = this.checked ? 'true' : 'false';
-        });
-    }
-
-    updateHiddenInput('men', 'hiddenMen');
-    updateHiddenInput('women', 'hiddenWomen');
-});
-</script>
-<script>
-
-        // Function to clear the rating
-function clearRatingA() {
-    // Get all star rating inputs
-   document.getElementById('star0T').checked = true;
-    // Uncheck all star rating inputs
-    
-}
-
-// Function to set the rating based on the dynamic value
-function setRating(rating) {
-    if (rating) {
-        const starRating = document.getElementById('star' + rating + 'T');
-        if (starRating) {
-            starRating.checked = true;
-        } else {
-            console.error('Star rating element not found for rating:', rating);
-        }
-    }
-}
-
-// Set default rating for Owner (Assuming Smarty placeholder is replaced with actual value)
-const rating = {$rating}; // Set this to your dynamic value, e.g., {$rating};
-setRating(rating);
-
-</script>
-
-   <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
-<script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
-   <!-- Request Detail Modal -->
+      <!-- Request Detail Modal -->
 <div class="resModal" id="replyModal">
       <div class="resModal-content">
          <div class="row">
@@ -578,33 +303,59 @@ setRating(rating);
     </div>
 </div>
 <!-- End of Success Modal -->
-<script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
-<script>
-var modalSuccess= '{$modalSuccess}';
-var successModal = document.getElementById("successModal");
-var successClose = document.getElementById("successClose");
-var closeSuccess = document.getElementById("closeSuccess");
-if (modalSuccess !== '') {
-    successModal.style.display = "block";
-} else {
-    successModal.style.display = "none";
-}
-successClose.onclick = function() {
-    successModal.style.display = "none";
-    window.location.href = currentPage;
-}
-
-closeSuccess.onclick = function() {
-    successModal.style.display = "none";
-    window.location.href = currentPage;
-}
-
-window.onclick = function(event) {
-    if (event.target == successModal) {
-        successModal.style.display = "none";
-        window.location.href = currentPage;
-    }
-}
-</script>
+      
+      <!-- footer section start -->
+      <div class="footer_section">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-4">
+                  <h3 class="footer_text">About Us</h3>
+                  <p class="lorem_text">Created in 2024, UniRent has revolutionized the way students find their home away from home. Connecting students with trusted landlords, UniRent ensures a seamless rental experience.</p>
+               </div>
+               <hr></hr>
+               <div class="col-md-4">
+                  <span class="lorem_text">Copyright &copy; UniRent 2024</span>
+               </div>
+               <div class="col-md-4">
+                  <h3 class="footer_text">Useful Links</h3>
+                  <div class="footer_menu">
+                     <ul>
+                        <li><a href="/UniRent/Owner/home">Home</a></li>
+                        <li><a href="/UniRent/Owner/about">About Us</a></li>
+                        <li><a href="/UniRent/Owner/contact">Contact Us</a></li>
+                        <li><a href="/UniRent/Owner/guidelines">Guidelines</a></li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- footer section end -->
+      <!-- JavaScript variables -->
+      <script>
+         var modalSuccess= '{$modalSuccess}';
+         const tenants = {$tenants};
+         const accommodationTitles = {$accommodationTitles};
+         var file = 'tenants';
+         const rating = {$rating};
+      </script>
+      
+      <!-- Javascript files-->
+      <script src="/UniRent/Smarty/js/jquery.min.js"></script>
+      <script src="/UniRent/Smarty/js/popper.min.js"></script>
+      <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
+      <script src="/UniRent/Smarty/js/jquery-3.0.0.min.js"></script>
+      <script src="/UniRent/Smarty/js/plugin.js"></script>
+      <!-- sidebar -->
+      <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="/UniRent/Smarty/js/custom.js"></script>
+      <!-- javascript --> 
+      
+      <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/tenants.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/rating.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/hiddenInputHandling.js"></script>
 </body>
 </html>

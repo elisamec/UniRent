@@ -517,5 +517,4 @@
 <script src="/UniRent/Smarty/js/UniRentOriginal/adminDropdowns.js"></script>
 
 </body>
-
 </html>

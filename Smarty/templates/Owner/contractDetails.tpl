@@ -131,7 +131,7 @@
                      <p>Age: {$student->getAge()}.</p>
                      <p> Average Rating: {$student->getAverageRating()}.</p>
                      <div class="col-md-3">
-                        <div class="delete_btn"><a href="#" onclick="openReportModal()">Report User</a></div>
+                        <div class="delete_btn"><a href="#" onclick="openReportModalUser()">Report User</a></div>
                         {if $leaveble>0}
                         <div class="find_btn"><button id="reviewButton">Review</button></div>
                         {/if}
@@ -161,18 +161,18 @@
     </div>
 
 <!-- Report Review Modal -->
-<div id="reportModal" class="resModal">
+<div id="reportModalReview" class="resModal">
     <div class="resModal-content">
     <div class="row">
-        <span class="resClose">&times;</span>
+        <span class="resClose" onclick="cancelReportReview()">&times;</span>
         <h2 class="resModal-head">Report Review</h2>
     </div>
-        <form id="reportForm" action="" class="form" method="POST" enctype="multipart/form-data">
-            <label for="reportReason">Reason for report:</label><br>
-            <textarea id="reportReason" name="reportReason" rows="4" cols="50" oninput="checkInput()"></textarea><br><br>
+        <form id="reportFormReview" action="" class="form" method="POST" enctype="multipart/form-data">
+            <label for="reportReasonReview">Reason for report:</label><br>
+            <textarea id="reportReasonReview" name="reportReasonReview" rows="4" cols="50" oninput="checkInputReview()"></textarea><br><br>
             <div class="btn-cont">
-                <button type="submit" id="confirmReport" class="disabled confirmClass" disabled>Submit</button>
-                <button type="button" id="cancelReport" class="cancelClass">Cancel</button>
+                <button type="submit" id="confirmReportReview" class="disabled confirmClass" disabled>Submit</button>
+                <button type="button" onclick="cancelReportReview()" class="cancelClass">Cancel</button>
             </div>
         </form>
     </div>
@@ -180,16 +180,16 @@
 <!-- End of Report Review Modal -->
 
 <!-- Report User Modal -->
-<div id="reportModal" class="resModal">
+<div id="reportModalUser" class="resModal">
     <div class="resModal-content">
-        <span class="resClose" onclick="closeReportModal()">&times;</span>
+        <span class="resClose" onclick="cancelReportUser()">&times;</span>
         <h2>Report User</h2>
-        <form id="reportForm" action="/UniRent/Report/makeReport/{$student->getId()}/Student" class="form" method="POST" enctype="multipart/form-data">
-            <label for="reportReason">Reason for report:</label><br>
-            <textarea id="reportReason" name="reportReason" rows="4" cols="50" oninput="checkInput()"></textarea><br><br>
+        <form id="reportFormUser" action="/UniRent/Report/makeReport/{$student->getId()}/Student" class="form" method="POST" enctype="multipart/form-data">
+            <label for="reportReasonUser">Reason for report:</label><br>
+            <textarea id="reportReasonUser" name="reportReasonUser" rows="4" cols="50" oninput="checkInput()"></textarea><br><br>
             <div class="btn-cont">
             <button type="submit" id="confirmReportUser" class="disabled confirmClass" disabled>Submit</button>
-            <button type="button" id="cancelReportUser" class="cancelClass">Cancel</button>
+            <button type="button" onclick="cancelReportUser()" class="cancelClass">Cancel</button>
             </div>
          </form>
     </div>
@@ -339,69 +339,6 @@
          </div>
       </div>
       <!-- footer section end -->
-      
-
-<script>
-    // Get the modal
-    var modal = document.getElementById("reportModal");
-
-    // Get the button that opens the modal
-    var btn = document.querySelector(".delete_btn a");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("resClose")[0];
-
-    // Get the textarea and submit button
-    var textarea = document.getElementById("reportReason");
-    var submitBtn = document.getElementById("confirmDelete");
-
-    // Open the modal
-    function openReportModal() {
-        modal.style.display = "block";
-    }
-
-    // Close the modal
-    function closeReportModal() {
-        modal.style.display = "none";
-    }
-
-    // Check input and enable/disable submit button
-    function checkInput() {
-        if (textarea.value.trim() !== "") {
-            submitBtn.disabled = false;
-            submitBtn.classList.remove("disabled");
-        } else {
-            submitBtn.disabled = true;
-            submitBtn.classList.add("disabled");
-        }
-    }
-
-    // Submit the report
-    function submitReport() {
-        if (textarea.value.trim() !== "") {
-            // Implement your submit logic here
-            alert("Report submitted: " + textarea.value.trim());
-            // Close the modal after submission
-            closeReportModal();
-        }
-    }
-    function cancelReport() {
-        // Clear the textarea
-        textarea.value = '';
-        // Disable the submit button
-        submitBtn.disabled = true;
-        submitBtn.classList.add("disabled");
-        // Close the modal
-        closeReportModal();
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>
 
     <!-- JavaScript Variables -->
     <script>
@@ -423,3 +360,4 @@
     <script src="/UniRent/Smarty/js/UniRentOriginal/review.js"></script>    
     <script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
 </body>
+</html>
