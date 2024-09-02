@@ -3,7 +3,6 @@
 namespace Configuration;
 use PDO;
 use PDOException;
-//use const UniRent\{DB_HOST, DB_NAME, DB_PASS, DB_USER, SQL_FILE_PATH};
 
 use Configuration\Config;
 
