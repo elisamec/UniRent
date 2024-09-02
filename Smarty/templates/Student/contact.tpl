@@ -106,9 +106,9 @@
 
 
       <div class="contact_section layout_padding screenSize">
-         <div class="container">
-            <div class="row">
-               <div class="col-sm-12">
+         <div class="container-fluid">
+            <div class="row centered">
+               <div class="col-sm-11">
                   <div class="contact_taital_main">
                      <h1 class="contact_taital">What's Bothering You?</h1>
                      <hr class="contact_border_main">
@@ -133,7 +133,7 @@
                      </div>
                   </div>
                   <div class="col-md-6">
-                     <div class="contact_img"><img src="/UniRent/Smarty/images/contact-img.png"></div>
+                     <div class="contact_img registeredUser-img"><img src="/UniRent/Smarty/images/contact-img.png"></div>
                   </div>
                </div>
             </div>

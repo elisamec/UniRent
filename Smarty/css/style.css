@@ -1269,12 +1269,12 @@ input.mail_text::placeholder {
     height: auto;
     font-size: 16px;
     color: #7c7c7d;
-    border-bottom: 1px solid #7c7c7d !important;
+    border: 1px solid #7c7c7d !important;
     background-color: transparent;
-    padding: 10px 15px 10px 0px;
+    padding: 10px 15px 10px 10px;
     margin-bottom: 10px;
     border: 0px;
-    border-radius: 0px;
+    border-radius: 20px;
 }
 textarea#comment::placeholder {
     color: #7c7c7d;
@@ -3190,4 +3190,9 @@ a.badge-danger.focus,a.badge-danger:focus{
   }
   .margin40 {
     margin: 40px;
+  }
+  .registeredUser-img {
+    margin-top: 25px;
+    height: 360px;
+    overflow: hidden;
   }

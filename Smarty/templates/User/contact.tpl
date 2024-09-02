@@ -78,9 +78,9 @@
         <p id="breadcrumb"></p>
     </div>
       <div class="contact_section layout_padding">
-         <div class="container">
-            <div class="row">
-               <div class="col-sm-12">
+         <div class="container-fluid">
+            <div class="row centered">
+               <div class="col-sm-11">
                   <div class="contact_taital_main">
                      <h1 class="contact_taital">App Issues</h1>
                      <hr class="contact_border_main">
