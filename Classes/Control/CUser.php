@@ -138,18 +138,6 @@ class CUser
         if($PM->verifyUserEmail($mail)==false && $PM->verifyUserUsername(USuperGlobalAccess::getPost('username'))==false)
         {
             $session=USession::getInstance();
-            $session->setSessionElement('email', $mail);
-            $session->setSessionElement('username', $username);
-            if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()])[A-Za-z\d@$!%*?&()]{8,}$/' , $password)) {
-                
-                $view->registrationError(false, false, false, true, $username, $mail, $name, $surname, $type, $modalSuccess);
-                exit();
-            }
-            $session->setSessionElement('password',USuperGlobalAccess::getPost('password'));
-            $session->setSessionElement('name',$name);
-            $session->setSessionElement('surname',$surname);
-            $session->setSessionElement('picture',$picture);
-            $session->setSessionElement('userType',$type);
 
             if($type==='Student'){
                 if($PM->verifyStudentEmail($session->getSessionElement('email'))==true){
@@ -164,6 +152,22 @@ class CUser
                 $viewOwner->showOwnerRegistration();
                 exit();
             }
+
+            $session->setSessionElement('email', $mail);
+            $session->setSessionElement('username', $username);
+
+            if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()])[A-Za-z\d@$!%*?&()]{8,}$/' , $password)) {
+                
+                $view->registrationError(false, false, false, true, $username, $mail, $name, $surname, $type, $modalSuccess);
+                exit();
+            }
+            $session->setSessionElement('password',USuperGlobalAccess::getPost('password'));
+            $session->setSessionElement('name',$name);
+            $session->setSessionElement('surname',$surname);
+            $session->setSessionElement('picture',$picture);
+            $session->setSessionElement('userType',$type);
+
+            
         } elseif ($PM->verifyUserUsername(USuperGlobalAccess::getPost('username'))==true && $PM->verifyUserEmail($mail)==true) {
             $view->registrationError(true, true, false, false, "", "", $name, $surname, $type, $modalSuccess);
         }
