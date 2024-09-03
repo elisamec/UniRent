@@ -26,8 +26,10 @@ function displayAccommodations(accommodations) {
               accommodation.expires +
               " before it gets automatically accepted";
           }
-          var expireHTML = `<p>${accommodation.period}</p>
-                            <p>${expire}</p>`;
+          var expireHTML = `<div class="image_box_reservation">
+                            <div class="rate_text">${expire}</div>
+                            </div>`;
+          var periodHTML = `<p>${accommodation.period}</p>`;
           var href = 'href ="/UniRent/Reservation/reservationDetails/' + accommodation.idReservation + '"';
           } else if (file == "OwnerAds") {
             var expireHTML = "";
@@ -51,16 +53,17 @@ function displayAccommodations(accommodations) {
                                 </div>
                             </div>
                         </div>
-                        <div class="image_box">
+                        <div class="image_box noMargin">
                             <div class="left_box">
                                 <h1 class="road_text">${accommodation.title}</h1>
                                 <p>${accommodation.address}</p>
-                                ` + expireHTML + `
+                                ` + periodHTML + `
                             </div>
                             <div class="right_box">
                                 <div class="rate_text">${accommodation.price} €</div>
                             </div>
                         </div>
+                        ` + expireHTML + `
                     `;
 
         // Append the created element to the container
