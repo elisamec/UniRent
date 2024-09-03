@@ -12,9 +12,9 @@ var tenantContainer = document.getElementById('tenantCont');
             <div class="col-md-4">
                 <div class="userSection">
                     <div class="userIcon">
-                        <a href="/UniRent/Owner/publicProfile/${username}" ${style}><img src="${profilePic}" alt="User Profile Picture" onerror="this.onerror=null;this.src='/UniRent/Smarty/images/defaultProfilePic.png';"></a>
+                        <a href="/UniRent/`+ user +`/publicProfile/${username}" ${style}><img src="${profilePic}" alt="User Profile Picture"></a>
                     </div>
-                    <div class="username"><a href="/UniRent/Owner/publicProfile/${username}" ${style}>${username}</a></div>
+                    <div class="username"><a href="/UniRent/` + user + `/publicProfile/${username}" ${style}>${username}</a></div>
                     <div class="username">Expiry Date: ${expiryDate}</div>
                 </div>
             </div>
@@ -36,9 +36,10 @@ var tenantContainer = document.getElementById('tenantCont');
     }
 
     // Generate tenant sections
+    console.log(tenants);
     for (var i = 0; i < tenants.length; i++) {
         var tenant = tenants[i];
-        tenantContainer.innerHTML += createTenantSection(tenant.username, tenant.expiryDate, tenant.profilePic, tenant.status);
+        tenantContainer.innerHTML += createTenantSection(tenant.username, tenant.expiryDate, tenant.image, tenant.status);
     }
 
     // Fill remaining places with free space sections

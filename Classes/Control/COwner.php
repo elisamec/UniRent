@@ -110,32 +110,7 @@ class COwner
         
         $reviewsData = CReview::getProfileReviews($accomm->getIdAccommodation(), TType::ACCOMMODATION);
         $num_places=$accomm->getPlaces();
-        $tenantOwner= $PM->getTenants('current',$accomm->getIdOwner());
-        if (!array_key_exists($idAccommodation, $tenantOwner)) {
-            $tenants=[];
-        }
-        else
-        {
-            $tenants=[];
-            foreach ($tenantOwner[$idAccommodation] as $i) {
-                $profilePic = $i[0]->getPhoto();
-                if ($i[0]->getStatus() === TStatusUser::BANNED) {
-                    $profilePic = "/UniRent/Smarty/images/BannedUser.png";
-                } else if ($profilePic === null) {
-                    $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
-                }
-                else
-                {
-                    $profilePic=$profilePic->getPhoto();
-                }
-                $tenants[]= [
-                    'username' => $i[0]->getUsername(),
-                    'expiryDate' => $i[1],
-                    'profilePic' => $profilePic,
-                    'status' => $i[0]->getStatus()->value,
-                ];
-            }
-        }
+        $tenants= $PM->getTenants('current',$accomm->getIdOwner(), 'Owner');
         $disabled=$accomm->getStatus();
         $deletable=false;
         
@@ -731,7 +706,7 @@ class COwner
         $ownerId=$session->getSessionElement('id');
         $PM=FPersistentManager::getInstance();
         $view = new VOwner();
-        $tenantsArray = $PM->getTenants($kind,$ownerId);
+        $tenantsArray = $PM->getTenants($kind,$ownerId, 'Owner');
         $accommodations=$PM->loadAccommodationsByOwner($ownerId);
         foreach ($accommodations as $accom) {
             $accommodationTitles[$accom->getIdAccommodation()]=$accom->getTitle();

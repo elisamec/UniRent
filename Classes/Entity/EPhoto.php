@@ -128,7 +128,7 @@ class EPhoto {
      *
      * @return array
      */
-    public static function fromJsonToPhotos($array):array
+    public static function fromJsonToPhotos(array $array):array
     {
         $result=array();
         foreach($array as $p)

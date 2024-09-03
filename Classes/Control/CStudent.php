@@ -386,34 +386,7 @@ class CStudent{
         }
         $visitDuration=$accomm->getVisitDuration();
         $num_places=$accomm->getPlaces();
-        $tenantOwner= $PM->getTenants('current',$accomm->getIdOwner());
-        if (!array_key_exists($idAccommodation, $tenantOwner)) {
-            $tenants=[];
-        }
-        else
-        {
-            $tenants=[];
-            foreach ($tenantOwner[$idAccommodation] as $i) {
-                $status = $i[0]->getStatus();
-                $profilePic = $i[0]->getPhoto();
-                if($status === TStatusUser::BANNED){
-                    $profilePic = "/UniRent/Smarty/images/BannedUser.png";
-                }
-                elseif ($profilePic === null) {
-                    $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
-                }
-                else
-                {
-                    $profilePic=$profilePic->getPhoto();
-                }
-                $tenants[]= [
-                    'username' => $i[0]->getUsername(),
-                    'expiryDate' => $i[1],
-                    'profilePic' => $profilePic,
-                    'status' => $status
-                ];
-            }
-        }
+        $tenants= $PM->getTenants('current',$accomm->getIdOwner(), 'Student');
         $session=USession::getInstance();
         $year=$session->getSessionElement('selectedAccommYear');
         if($year==null)

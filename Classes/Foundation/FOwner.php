@@ -559,7 +559,7 @@ use PDORow;
      *
      * @return array
      */
-    public function getTenans(string $type, int $idOwner):array
+    public function getTenans(string $type, int $idOwner, string $format):array
     {
         $db=FConnection::getInstance()->getConnection();
         FPersistentManager::getInstance()->updateDataBase();
@@ -588,7 +588,7 @@ use PDORow;
         }
         $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
         $result = $this->fromRowsToTenantsArrayByRateT($rows,0); #we do not have the rateT yet, so we can ignore it putting it to 0
-        return $this->getFilterTenantsFormatArray($result,$idOwner);
+        return $this->getFilterTenantsFormatArray($result, $format);
     }
 
     
@@ -733,7 +733,7 @@ use PDORow;
      *
      * @return array
      */
-    private function getFilterTenantsFormatArray(array $tenantsArray,int $ownerId):array
+    private function getFilterTenantsFormatArray(array $tenantsArray,string $format):array
     {
         $tenants=[];
         foreach ($tenantsArray as $idAccommodation => $students) {
@@ -757,10 +757,15 @@ use PDORow;
                     'status' => $student[0]->getStatus()->value
                 ];
             }
-            $tenants[] = [
-                'accommodation' => $accommodationTitle,
-                'tenants' => $tenantList
-            ];
+            if ($format === 'Owner') {
+                $tenants[] = [
+                    'accommodation' => $accommodationTitle,
+                    'tenants' => $tenantList
+                ];
+            }
+            else {
+                $tenants=$tenantList;
+            }
         }
         return $tenants;
     }

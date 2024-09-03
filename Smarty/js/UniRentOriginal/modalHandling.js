@@ -240,6 +240,8 @@ if (deleteConfirmModal) {
         break;
       case "Visit":
         window.location.href = "/UniRent/Visit/delete/" + visitId;
+        case "Reservation":
+          window.location.href = "/UniRent/Reservation/delete/" + reservationId;
       default:
         break;
     }
@@ -704,7 +706,7 @@ if (reserveModal && notReservableModal && successReserveModal) {
         var payClose = document.getElementById("payClose");
     
         var cancelPayBtn = document.getElementById("cancelPayBtn");
-    
+    if (payOpenBtn) {
         // When the user clicks the button, open the modal 
         payOpenBtn.onclick = function(event) {
             event.preventDefault();
@@ -721,6 +723,7 @@ if (reserveModal && notReservableModal && successReserveModal) {
         cancelPayBtn.onclick = function() {
             payModal.style.display = "none";
         }
+        
         function createCreditCardRadioButtons(creditCardData) {
             var container = document.getElementById('creditCardContainer');
             container.innerHTML = ''; // Clear existing content
@@ -783,6 +786,7 @@ if (reserveModal && notReservableModal && successReserveModal) {
                 }
             });
         }
+      }
     }
      var successEditModal = document.getElementById("successEditModal");
      if (successEditModal) {

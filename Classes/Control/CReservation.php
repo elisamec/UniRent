@@ -6,8 +6,10 @@ use Classes\Entity\EPhoto;
 use Classes\Foundation\FPersistentManager;
 use Classes\Tools\TStatusUser;
 use Classes\Tools\TType;
+use Classes\Utilities\UCookie;
 use Classes\Utilities\USession;
 use Classes\Utilities\USort;
+use Classes\Utilities\USuperGlobalAccess;
 use Classes\View\VOwner;
 use Classes\View\VStudent;
 use Classes\View\VError;
@@ -299,6 +301,31 @@ class CReservation
             header('Location:/UniRent/Reservation/showOwner/success');
         } else {
             header('Location:/UniRent/Reservation/showOwner/error');
+        }
+    }
+
+    /**
+     * Method delete
+     * 
+     * This function is used to delete a reservation
+     * @param int $id
+     * @return void
+     */
+    public static function delete(int $id) :void {
+        CStudent::checkIfStudent();
+        $PM = FPersistentManager::getInstance();
+        $reservation = $PM->load('EReservation', $id);
+        $student = $PM->load('EStudent', $reservation->getIdStudent());
+        if ($student->getId() !== USession::getInstance()->getSessionElement('id')) {
+            $view= new VError();
+            $view->error(403);
+            exit();
+        }
+        $res = $PM->delete('EReservation', $id);
+        if ($res) {
+            header('Location:'+ USuperGlobalAccess::getCookie('current_page')+'success');
+        } else {
+            header('Location:'+ USuperGlobalAccess::getCookie('current_page')+'/error');
         }
     }
 

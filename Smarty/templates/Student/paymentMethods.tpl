@@ -338,6 +338,7 @@
         <script src="/UniRent/Smarty/js/bootstrap.bundle.min.js"></script>
         <script src="/UniRent/Smarty/js/jquery-3.0.0.min.js"></script>
         <script src="/UniRent/Smarty/js/plugin.js"></script>
+        
         <!-- sidebar -->
         <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
         <script src="/UniRent/Smarty/js/custom.js"></script>
