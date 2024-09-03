@@ -72,11 +72,11 @@
               <legend class="customlabel">Enter your sex:</legend>
               <div class="row">
               <div class="col-sm-6">
-            <input required="" class="radio" type="radio" name="sex" id="sex" value="F" checked="checked">
+            <input required="" class="radio" type="radio" name="sex" id="sexF" value="F" checked="checked">
               <label class="customlabel" for="F">Female</label>
               </div>
                <div class="col-sm-6">
-              <input required="" class="radio" type="radio" name="sex" id="sex" value="M">
+              <input required="" class="radio" type="radio" name="sex" id="sexM" value="M">
               <label class="customlabel" for="Male">Male</label>
               </div>
                </div>

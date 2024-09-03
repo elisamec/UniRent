@@ -156,20 +156,20 @@
                         <div class="div10">
                         {if $student->getSex() === "F"}
                         <div class="col-sm-6">
-                           <input required class="radio" type="radio" name="sex" id="sex" value="F" checked="checked">
+                           <input required class="radio" type="radio" name="sex" id="sexF" value="F" checked="checked">
                            <label class="customlabel" for="F">Female</label>
                         </div>
                         <div class="col-sm-6">
-                        <input required="" class="radio" type="radio" name="sex" id="sex" value="M">
+                        <input required="" class="radio" type="radio" name="sex" id="sexM" value="M">
                         <label class="customlabel" for="M">Male</label>
                         </div>
                         {else}
                         <div class="col-sm-6">
-                           <input required class="radio" type="radio" name="sex" id="sex" value="F">
+                           <input required class="radio" type="radio" name="sex" id="sexF" value="F">
                            <label class="customlabel" for="F">Female</label>
                         </div>
                         <div class="col-sm-6">
-                        <input required="" class="radio" type="radio" name="sex" id="sex" value="M" checked="checked">
+                        <input required="" class="radio" type="radio" name="sex" id="sexM" value="M" checked="checked">
                         <label class="customlabel" for="M">Male</label>
                         </div>
                         {/if}
