@@ -3,7 +3,7 @@
 
     # Enable rewriting
     RewriteEngine on
-    #RewriteBase /UniRent
+    RewriteBase /UniRent
 
     # the rewrite rule at line 9 is subject to the following condition:
     #rewrite if the file does not exist
