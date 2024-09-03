@@ -16,7 +16,13 @@ use Classes\Tools\TStatusUser;
 
 class CUser
 {
-    
+    /**
+     * Method home
+     * 
+     * this method is used to redirect the user to the correct home page
+     * @param mixed $modalSuccess
+     * @return void
+     */
     public static function home(?string $modalSuccess=null){
         $session=USession::getInstance();
         $type=$session->getSessionElement('userType');
@@ -36,16 +42,34 @@ class CUser
         }
     }
     
+    /**
+     * Method about
+     *
+     * this method is used to show the about page
+     * @return void
+     */
     public static function about(){
         $view = new VUser();
         $view->about();
     }
 
+    /**
+     * Method guidelines
+     *
+     * this method is used to show the guidelines page
+     * @return void
+     */
     public static function guidelines(){
         $view = new VUser();
         $view->guidelines();
     }
 
+    /**
+     * Method login
+     *
+     * this method is used to show the login page
+     * @return void
+     */
     public static function login(){
         if(UCookie::isSet('PHPSESSID'))
         {
@@ -58,11 +82,25 @@ class CUser
         $view->login();
     }
 
+    /**
+     * Method register
+     *
+     * this method is used to show the registration page
+     * @param mixed $modalSuccess
+     * @return void
+     */
     public static function register(?string $modalSuccess=null){
         $view = new VUser();
         $view->register($modalSuccess);
     }
 
+    /**
+     * Method contact
+     *
+     * this method is used to show the contact page
+     * @param mixed $modalSuccess
+     * @return void
+     */
     public static function contact(?string $modalSuccess=null){
         $view = new VUser();
         $view->contact($modalSuccess);
@@ -76,30 +114,11 @@ class CUser
      */
     public static function search(){
         $view = new VUser();
-        $city=USuperGlobalAccess::getPost('city');
-        $date=USuperGlobalAccess::getPost('date');
-        $year=USuperGlobalAccess::getPost('year');
-        $university=USuperGlobalAccess::getPost('university');
-        if (USuperGlobalAccess::getPost('rateA')!== null) {
-            $rateA=USuperGlobalAccess::getPost('rateA');
-        } else {
-            $rateA=0;
-        }
-        if (USuperGlobalAccess::getPost('rateO')!== null) {
-            $rateO=USuperGlobalAccess::getPost('rateO');
-        } else {
-            $rateO=0;
-        }
-        if (USuperGlobalAccess::getPost('min-price')!== null) {
-            $minPrice=USuperGlobalAccess::getPost('min-price');
-        } else {
-            $minPrice=0;
-        }
-        if (USuperGlobalAccess::getPost('max-price')!== null) {
-            $maxPrice=USuperGlobalAccess::getPost('max-price');
-        } else {
-            $maxPrice=1000;
-        }
+        [$city, $date, $year, $university, $rateA, $rateO, $minPrice, $maxPrice] = USuperGlobalAccess::getAllPost(['city', 'date', 'year', 'university', 'rateA', 'rateO', 'min-price', 'max-price']);
+        $rateA = $rateA ?? 0;
+        $rateO = $rateO ?? 0;
+        $minPrice = $minPrice ?? 0;
+        $maxPrice = $maxPrice ?? 1000;
         $PM=FPersistentManager::getInstance();
         $searchResult=$PM->findAccommodationsUser($city,$date,$rateA,$rateO,$minPrice,$maxPrice,$year);
         $view->findAccommodation($city,$university,$searchResult,$date, $rateO, $rateA, $minPrice, $maxPrice,$year);
@@ -119,35 +138,28 @@ class CUser
         echo json_encode($result);
     }
 
-
+    /**
+     * Method showRegistration
+     *
+     * method used to show the specific registration page, or show an error if something is wrong
+     * @return void
+     */
     public static function showRegistration(?string $modalSuccess=null)
     {
         $view= new VUser();
         $viewStudent = new VStudent();
         $viewOwner = new VOwner();
         $PM=FPersistentManager::getInstance();
-        $type = USuperGlobalAccess::getPost('userType');
-        $password = USuperGlobalAccess::getPost('password');
-        $mail = USuperGlobalAccess::getPost('email');
-        
-        $username = USuperGlobalAccess::getPost('username');
-        $name = USuperGlobalAccess::getPost('name');
-        $surname = USuperGlobalAccess::getPost('surname');
+        [$username, $mail, $name, $surname, $type, $password] = USuperGlobalAccess::getAllPost(['username', 'email', 'name', 'surname', 'userType', 'password']);
         $picture = USuperGlobalAccess::getPhoto('img');
-
-        if (!is_null($mail) && (!is_null($username))) $verify = true;
-        else $verify = false;
+        $verify = !is_null($mail) && (!is_null($username));
 
         if($verify && $PM->verifyUserEmail($mail)==false && $PM->verifyUserUsername(USuperGlobalAccess::getPost('username'))==false)
         {
             $session=USession::getInstance();
             $session->setSessionElement('email', $mail);
             $session->setSessionElement('username', $username);
-
-            
-
             if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()])[A-Za-z\d@$!%*?&()]{8,}$/' , $password)) {
-                
                 $view->registrationError(false, false, false, true, $username, $mail, $name, $surname, $type, $modalSuccess);
                 exit();
             }
@@ -156,21 +168,16 @@ class CUser
             $session->setSessionElement('surname',$surname);
             $session->setSessionElement('picture',$picture);
             $session->setSessionElement('userType',$type);
-
             if($type==='Student'){
                 if($PM->verifyStudentEmail($session->getSessionElement('email'))==true){
                     $viewStudent->showStudentRegistration();
-
                 }else{
                     $view->registrationError(false, false, true, false, $username, "", $name, $surname, $type, $modalSuccess);
                     exit();
                 }
             }else{  
- 
                 $viewOwner->showOwnerRegistration();
             }
-
-            
         } elseif ($PM->verifyUserUsername(USuperGlobalAccess::getPost('username'))==true && $PM->verifyUserEmail($mail)==true) {
             $view->registrationError(true, true, false, false, "", "", $name, $surname, $type, $modalSuccess);
         }
@@ -181,24 +188,23 @@ class CUser
         }
     }
 
+    /**
+     * Method checkLogin
+     *
+     * method used to log the user in, if the user is banned, show an error
+     * @return void
+     */
     public static function checkLogin()
     {
-
         $view = new VUser();
-        $username=USuperGlobalAccess::getPost('username');
-        $type = USuperGlobalAccess::getPost('userType');
+        [$username, $type] = USuperGlobalAccess::getAllPost(['username', 'userType']);
         $PM = FPersistentManager::getInstance();
-
         $result_username_array = $PM->verifyUserUsername($username);
-        
         //If user exist, get the user and check the password
         if($result_username_array != false){
-
             if($result_username_array['type']==$type) { //if exist an username for that type
-            
                 $user = $PM->load("E$type", $result_username_array['id']);
-                if($user->getStatus()==TStatusUser::BANNED)
-                {
+                if($user->getStatus()==TStatusUser::BANNED){
                     $banReason=$PM->getLastBanReport($username)->getDescription();
                     $v=new VError();
                     $v->error(600, $username, 'null', $banReason);
@@ -206,32 +212,26 @@ class CUser
                 }
                 $passwordIn=USuperGlobalAccess::getPost('password');
                 if(password_verify($passwordIn, $user->getPassword())){
-                   
                     $session = USession::getInstance();
                     $session->setSessionElement("id", $result_username_array['id']);
                     $session->setSessionElement("userType", $type);
                     $session->setSessionElement('username', $username);
                     $session->setSessionElement('password', $passwordIn);
-    
                     $type === 'Student' ? header('Location:/UniRent/Student/home') : header('Location:/UniRent/Owner/home');
-  
                 } else { //password is not correct
-                
                     $view->loginError(true, false, $username, $type);
                 }
-                
             } else  { //doesn't exist an username for that type
-               
                 $view->loginError(false, true, $username, $type);
             }
-
         } else {#user dose not exist
-        
            $view->loginUsernameError(false, true, $type);
         }
     }
 
     /**
+     * Method logout
+     * 
      * this method can logout the User, unsetting all the session element and destroing the session. Return the user to the Login Page
      * @return void
      */

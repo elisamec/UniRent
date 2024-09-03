@@ -18,16 +18,20 @@ require __DIR__.'/../../vendor/autoload.php';
 
 class CVisit
 {
+    /**
+     * Method studentRequest
+     * 
+     * This method is used to create a visit request
+     *
+     * @param int $idAccommodation
+     *
+     * @return void
+     */
    public static function studentRequest(int $idAccommodation) {
     $session = USession::getInstance();
-    if ($session->getSessionElement('userType') !== 'Student') {
-        $view= new VError();
-        $view->error(403);
-        exit();
-    }
+    CStudent::checkIfStudent();
     $idStudent=$session->getSessionElement('id');
-    $day=USuperGlobalAccess::getPost('day');
-    $time=USuperGlobalAccess::getPost('time');
+    [$day, $time] = USuperGlobalAccess::getAllPost(['day', 'time']);
     $time=explode(":", $time);
     $hour=$time[0];
     $minutes=$time[1];
@@ -37,13 +41,17 @@ class CVisit
     $visit= new EVisit(null, $date, $idStudent, $idAccommodation);
     $PM= FPersistentManager::getInstance();
     $res=$PM->store($visit);
-    if ($res) {
-        header('Location:' . $_SERVER['HTTP_REFERER']. '/sent');
-        } else {
-            header('Location:' . $_SERVER['HTTP_REFERER']. '/false');
-        }
+    $success = $res ?  '/true':'/false';
+    header('Location:' . USuperGlobalAccess::getCookie('current_page'). $success);
    }
-
+   
+    /**
+     * Method visits
+     * 
+     * This method is used to show the visits of the user
+     *
+     * @return void
+     */
    public static function visits() {
     $session = USession::getInstance();
     $id=$session->getSessionElement('id');

@@ -615,7 +615,17 @@ class CStudent{
         } else {
             COwner::publicProfileFromStudent($username);
         }
-    }   
+    }  
+
+    /**
+     * Method publicProfileFromStudent
+     *
+     * this method show the public profile of a student to another student
+     * @param string $username [explicite description]
+     * @param ?string $modalSuccess [explicite description]
+     *
+     * @return void
+     */
     public static function publicProfileFromStudent(string $username, ?string $modalSuccess=null)
     {   self::checkIfStudent();
         $session=USession::getInstance();

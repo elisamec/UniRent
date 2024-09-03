@@ -17,6 +17,13 @@ use Classes\Entity\EStudent;
 
 class CReview {
 
+    /**
+     * Method delete
+     * 
+     * This method is used to delete a review
+     * @param int $id
+     * @return void
+     */
     public static function delete(int $id) {
         $session = USession::getInstance();
         $userType=$session->getSessionElement('userType');
@@ -44,6 +51,13 @@ class CReview {
         }
     }
 
+    /**
+     * Method edit
+     * 
+     * This method is used to edit a review
+     * @param int $id
+     * @return void
+     */
     public static function edit(int $id) {
         $session = USession::getInstance();
         $PM=FPersistentManager::getInstance();
@@ -67,6 +81,14 @@ class CReview {
             header('Location:' . USuperGlobalAccess::getCookie('current_page').'/error');
         }
     }
+
+    /**
+     * Method addReviewStudent
+     * 
+     * This method is used to add a review to a student
+     * @param int $idStudent
+     * @return void
+     */
     public static function addReviewStudent(int $idStudent) {
         $session = USession::getInstance();
         if ($session->getSessionElement('userType') === null) {
@@ -90,6 +112,14 @@ class CReview {
             header('Location:' . USuperGlobalAccess::getCookie('current_page').'/error');
         }
     }
+
+    /**
+     * Method addReviewOwner
+     * 
+     * This method is used to add a review to an owner
+     * @param int $idOwner
+     * @return void
+     */
     public static function addReviewOwner(int $idOwner) {
         CStudent::checkIfStudent();
         $author=USession::getInstance()->getSessionElement('username');
@@ -109,6 +139,14 @@ class CReview {
             header('Location:' . USuperGlobalAccess::getCookie('current_page').'/error');
         }
     }
+
+    /**
+     * Method addReviewAccommodation
+     * 
+     * This method is used to add a review to an accommodation
+     * @param int $idAccommodation
+     * @return void
+     */
     public static function addReviewAccommodation(int $idAccommodation) {
         CStudent::checkIfStudent();
         $PM=FPersistentManager::getInstance();

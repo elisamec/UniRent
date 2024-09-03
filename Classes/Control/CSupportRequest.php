@@ -57,6 +57,16 @@ class CSupportRequest
             echo json_encode(['error' => 'An error occurred while fetching support replies.']);
         }
     }
+
+    /**
+     * Method readSupportReply
+     * 
+     * This method marks a support reply as read
+     *
+     * @param int|string $id [Support reply ID]
+     *
+     * @return void
+     */
     public static function readSupportReply(int |string $id)
     {
         $session = USession::getInstance();
@@ -79,6 +89,14 @@ class CSupportRequest
             $view->error(500);
         }
     }
+
+    /**
+     * Method readMoreSupportReplies
+     * 
+     * This method returns the support replies of the administrator
+     *
+     * @return void
+     */
     public static function readMoreSupportReplies() {
         $PM = FPersistentManager::getInstance();
             $session = USession::getInstance();
@@ -113,6 +131,7 @@ class CSupportRequest
             }
             $view->supportReplies($replies, $count);
     }
+
     /**
      * Method supportRequest
      * 
@@ -141,6 +160,7 @@ class CSupportRequest
         $res=$PM->store($supportRequest);
         $res ? header('Location:'.$location.'/sent') : header('Location:'.$location.'/fail');
     }
+
     /**
      * Method studentEmailIssue
      * 
@@ -159,6 +179,7 @@ class CSupportRequest
         $res=$PM->store($supportRequest);
         $res ? header('Location:/UniRent/User/showRegistration/success') : header('Location:/UniRent/User/showRegistration/error');
     }
+    
     /**
      * Method removeBan
      * 
