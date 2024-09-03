@@ -161,13 +161,13 @@
                         <h2> You have {$timeLeft} left to sign and pay the contract</h2>
                         <div class="btn-cont">
                         <button class="edit_button" id="payOpenBtn">Pay</button>
-                        <button class="delete_button" id="deleteBtn">Delete</button>
+                        <button class="delete_button1" id="deleteLink">Delete</button>
                         </div>
                         {else}
                         <h1 class="title">Status: Pending</h1>
                         <h2> The owner has {$timeLeft} left to accept your reservation</h2>
                         <div class="btn-cont">
-                        <button class="delete_button" id="deleteBtn">Delete</button>
+                        <button class="delete_button1" id="deleteLink">Delete</button>
                         </div>
                         {/if}
                         </div>
@@ -284,7 +284,7 @@
             </div>
             <div class="btn-cont">
                 <button type="submit" class="edit_button" id="payBtn">Pay</button>
-                <button type="button" class="delete_button" id="cancelPayBtn">Cancel</button>
+                <button type="button" class="delete_button1" id="cancelPayBtn">Cancel</button>
             </div>
         </form>
     </div>
@@ -348,6 +348,19 @@
 </div>
 <!-- End of Request Detail Modal -->
 
+<!-- Confirmation Modal -->
+<div id="deleteConfirmModal" class="resModal">
+   <div class="resModal-content">
+      <span class="resClose" id="deleteConfirmClose">&times;</span>
+      <p>Are you sure you want to delete your profile?</p>
+      <div class="btn-cont">
+      <button id="confirmDelete" class="confirmClass">Yes</button>
+      <button id="cancelDelete" class="cancelClass">Cancel</button>
+      </div>
+   </div>
+</div>
+<!-- End of Confirmation Modal -->
+
 <!-- Success Modal -->
 <div class="resModal" id="successModal">
       <div class="resModal-content">
@@ -410,6 +423,7 @@
             const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
             const user = 'Student';
             var modalSuccess= '{$modalSuccess}';
+            var deleteVariable = 'Reservation';
         </script>
         <script src="/UniRent/Smarty/js/jquery.min.js"></script>
         <script src="/UniRent/Smarty/js/popper.min.js"></script>

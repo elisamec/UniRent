@@ -112,7 +112,7 @@
                         <h2> You have {$timeLeft} left to accept this reservation</h2>
                         <div class="btn-cont">
                         <button class="edit_button" id="acceptBtn">Accept</button>
-                        <button class="delete_button" id="denyButton">Deny</button>
+                        <button class="delete_button1" id="denyButton">Deny</button>
                      </div>
                         </div>
                         </div>
