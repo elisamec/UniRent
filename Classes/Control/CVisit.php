@@ -31,7 +31,8 @@ class CVisit
     $session = USession::getInstance();
     CStudent::checkIfStudent();
     $idStudent=$session->getSessionElement('id');
-    [$day, $time] = USuperGlobalAccess::getAllPost(['day', 'time']);
+    $day=USuperGlobalAccess::getPost('day');
+    $time=USuperGlobalAccess::getPost('time');
     $time=explode(":", $time);
     $hour=$time[0];
     $minutes=$time[1];
@@ -44,14 +45,6 @@ class CVisit
     $success = $res ?  '/true':'/false';
     header('Location:' . USuperGlobalAccess::getCookie('current_page'). $success);
    }
-   
-    /**
-     * Method visits
-     * 
-     * This method is used to show the visits of the user
-     *
-     * @return void
-     */
    public static function visits() {
     $session = USession::getInstance();
     $id=$session->getSessionElement('id');

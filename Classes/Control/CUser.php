@@ -114,11 +114,14 @@ class CUser
      */
     public static function search(){
         $view = new VUser();
-        [$city, $date, $year, $university, $rateA, $rateO, $minPrice, $maxPrice] = USuperGlobalAccess::getAllPost(['city', 'date', 'year', 'university', 'rateA', 'rateO', 'min-price', 'max-price']);
-        $rateA = $rateA ?? 0;
-        $rateO = $rateO ?? 0;
-        $minPrice = $minPrice ?? 0;
-        $maxPrice = $maxPrice ?? 1000;
+        $city = USuperGlobalAccess::getPost('city');
+        $date = USuperGlobalAccess::getPost('date');
+        $year = USuperGlobalAccess::getPost('year');
+        $university = USuperGlobalAccess::getPost('university');
+        $rateA = USuperGlobalAccess::getPost('rateA') ?? 0;
+        $rateO = USuperGlobalAccess::getPost('rateO') ?? 0;
+        $minPrice = USuperGlobalAccess::getPost('min-price') ?? 0;
+        $maxPrice = USuperGlobalAccess::getPost('max-price') ?? 1000;
         $PM=FPersistentManager::getInstance();
         $searchResult=$PM->findAccommodationsUser($city,$date,$rateA,$rateO,$minPrice,$maxPrice,$year);
         $view->findAccommodation($city,$university,$searchResult,$date, $rateO, $rateA, $minPrice, $maxPrice,$year);
@@ -150,7 +153,12 @@ class CUser
         $viewStudent = new VStudent();
         $viewOwner = new VOwner();
         $PM=FPersistentManager::getInstance();
-        [$username, $mail, $name, $surname, $type, $password] = USuperGlobalAccess::getAllPost(['username', 'email', 'name', 'surname', 'userType', 'password']);
+        $username=USuperGlobalAccess::getPost('username');
+        $mail=USuperGlobalAccess::getPost('email');
+        $name=USuperGlobalAccess::getPost('name');
+        $surname=USuperGlobalAccess::getPost('surname');
+        $type=USuperGlobalAccess::getPost('userType');
+        $password=USuperGlobalAccess::getPost('password');
         $picture = USuperGlobalAccess::getPhoto('img');
         $verify = !is_null($mail) && (!is_null($username));
 
@@ -197,7 +205,8 @@ class CUser
     public static function checkLogin()
     {
         $view = new VUser();
-        [$username, $type] = USuperGlobalAccess::getAllPost(['username', 'userType']);
+        $username=USuperGlobalAccess::getPost('username');
+        $type=USuperGlobalAccess::getPost('userType');
         $PM = FPersistentManager::getInstance();
         $result_username_array = $PM->verifyUserUsername($username);
         //If user exist, get the user and check the password
