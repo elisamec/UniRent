@@ -62,7 +62,7 @@ function displayAccommodationsOwner(accommodationsActive, accommodationsInactive
         // Combine both active and inactive accommodations
         const allAccommodations = [...accommodationsActive, ...accommodationsInactive];
         if (allAccommodations.length === 0) {
-            containerOwner.innerHTML = '<div class="container"><h1 class="noRev">You have no ads yet!</h1></div>';
+            containerOwner.innerHTML = '<div class="container"><h1 class="noRev">There are no new proprieties for you yet!</h1></div>';
         } else {
             allAccommodations.forEach(accomodationArray => {
                

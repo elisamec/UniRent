@@ -270,7 +270,7 @@
                      {/if}
                      >Delete Photo</a></div>
                   </div>
-                     </form>
+                     
                      <div class="div24">
    <p>Delete Profile: </p>
 </div>
@@ -292,6 +292,7 @@
                      </div>
                   </div>
                </div>
+               </form>
                </div>
                
             </div>

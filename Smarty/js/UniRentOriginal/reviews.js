@@ -43,11 +43,22 @@ function displayReviews(reviews, user) {
                     }
                     href = '/UniRent/'+ user +'/publicProfile/' + review.username;
                     if (typeof postedReviews !== 'undefined' && postedReviews) {
+                        var userStyle='';
+                        var hrefLink='';
+                        if(user === 'Student') {
+                        if (review.type === 'Accommodation') {
+                            userStyle = 'class="accomm"';
+                            hrefLink = '/UniRent/Student/accommodation/' + review.idRecipient;
+                        } else {
+                            userStyle = 'class="userIcon"';
+                            hrefLink = '/UniRent/Student/publicProfile/' + review.username;
+                        }
+                    }
                         if (review.reported) {
                             reportedStyle = 'style="opacity: 0.5;"';
                             reportedWarning = '<h1 class="reported-warning" style="color: red; font-weight: bold; margin-left: 10px;">Reported</h1>';
                         }
-                        additionalButtons = '<div class="btn-cont2"><button class="delete_button" data-review-id="` + review.id + `">Delete</button><button class="edit_button" data-review-id="` + review.id + `">Edit</button></div>';
+                        additionalButtons = '<div class="btn-cont2"><button class="delete_button" id="deleteLink" data-review-id="` + review.id + `">Delete</button><button class="edit_button" data-review-id="` + review.id + `">Edit</button></div>';
                         userSectionHTML = `
                             <p> To: </p>
                             <div ` + userStyle + `>
@@ -67,8 +78,8 @@ function displayReviews(reviews, user) {
                 }
                 // Insert the names of the elements of the review array
                 reviewElement.innerHTML = `
-                <div class="row"` + reportedStyle + `>
-                    <h1 class="ReviewTitle">` + review.title + `</h1> <!-- Title of the review -->
+                <div class="row">
+                    <h1 class="ReviewTitle"` + reportedStyle + `>` + review.title + `</h1> <!-- Title of the review -->
                     `+ reportedWarning + `
                     ` + additionalButtons +`
                 </div>
@@ -76,7 +87,7 @@ function displayReviews(reviews, user) {
                         <div class="userSection">
                             ` + userSectionHTML + `
                     </div>
-                        <div class="col-md-11">
+                        <div class="col-md-9">
                             <div class="stars">
                                 ` + generateStars(review.stars) + ` <!-- Star rating -->
                             </div>

@@ -304,6 +304,7 @@
       const timeSlots = {$timeSlots}; // Ensure this variable is properly initialized
       let preselectedDay = '{$visit->getDate()->format('w')}'; // Placeholder for preselected day
       const preselectedTime = '{$visit->getDate()->format('H:i')}'; // Placeholder for preselected time
+      var successEdit = '{$successEdit}';
       </script>
       <script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>

@@ -125,16 +125,21 @@ if (reportModalReview) {
  * This is used to check that the report reason is not empty before enabling the submit button
  */
 function checkInputReview() {
-  let reportReason = reportReasonReview ? reportReasonReview : reportReasonUser;
-  let reportConfirm = reportConfirmReview
-    ? reportConfirmReview
-    : reportConfirmUser;
-  if (reportReason.value.trim() !== "") {
-    reportConfirm.disabled = false;
-    reportConfirm.classList.remove("disabled");
+  if (reportReasonReview.value.trim() !== "") {
+    reportConfirmReview.disabled = false;
+    reportConfirmReview.classList.remove("disabled");
   } else {
-    reportConfirm.disabled = true;
-    reportConfirm.classList.add("disabled");
+    reportConfirmReview.disabled = true;
+    reportConfirmReview.classList.add("disabled");
+  }
+}
+function checkInput() {
+  if (reportReasonUser.value.trim() !== "") {
+    reportConfirmUser.disabled = false;
+    reportConfirmUser.classList.remove("disabled");
+  } else {
+    reportConfirmUser.disabled = true;
+    reportConfirmUser.classList.add("disabled");
   }
 }
 
@@ -142,15 +147,16 @@ function checkInputReview() {
  * This is used to cancel the report and closing the modal by clearing the report reason and disabling the submit button
  */
 function cancelReportReview() {
-  let reportModal = reportModalReview ? reportModalReview : reportModalUser;
-  let reportReason = reportReasonReview ? reportReasonReview : reportReasonUser;
-  let reportConfirm = reportConfirmReview
-    ? reportConfirmReview
-    : reportConfirmUser;
-  reportReason.value = "";
-  reportConfirm.disabled = true;
-  reportConfirm.classList.add("disabled");
-  reportModal.style.display = "none";
+    reportReasonReview.value = "";
+    reportConfirmReview.disabled = true;
+  reportConfirmReview.classList.add("disabled");
+  reportModalReview.style.display = "none";
+}
+function cancelReportUser() {
+  reportReasonUser.value = "";
+  reportConfirmUser.disabled = true;
+  reportConfirmUser.classList.add("disabled");
+  reportModalUser.style.display = "none";
 }
 /**
  * This is used to open the report modal when the report button is clicked
@@ -158,7 +164,6 @@ function cancelReportReview() {
 function openReportModalUser() {
   reportModalUser.style.display = "block";
 }
-
 /**
  * This is used to deactivate the accommodation
  */
@@ -194,7 +199,6 @@ if (deactivateModal) {
 var deleteConfirmModal = document.getElementById("deleteConfirmModal");
 var confirmDeleteBtn = document.getElementById("confirmDelete");
 var cancelDeleteBtn = document.getElementById("cancelDelete");
-var deleteModalOpen = document.getElementById("deleteLink");
 var deleteConfirmSpan = document.getElementById("deleteConfirmClose");
 var notDeletableModal = document.getElementById("notDeletableModal");
 var notDeletableClose = document.getElementById("notDeletableClose");
@@ -221,6 +225,7 @@ if (deleteConfirmModal) {
       });
     });
   }
+  var deleteModalOpen = document.getElementById("deleteLink");
   confirmDeleteBtn.onclick = function () {
     switch (deleteVariable) {
       case "Accommodation":
@@ -450,7 +455,7 @@ if (visitModal && confirmModal && successVisitModal && visitEmptyModal) {
         visitEmptyModal.style.display = "block";
       } else {
         // Check if already booked
-        if ("{$booked}") {
+        if (booked) {
           // Show confirmation modal
           confirmModal.style.display = "block";
         } else {
@@ -631,7 +636,7 @@ if (reserveModal && notReservableModal && successReserveModal) {
         var cancelReserve = document.getElementById("cancelReserve");
     
         // Check if reservation is not possible
-        var notReservable = '{$disabled}';
+        
     
         // When the user clicks the reserve button
         reserveBtn.onclick = function(event) {
@@ -785,7 +790,7 @@ if (reserveModal && notReservableModal && successReserveModal) {
             var closesuccessEditModal = document.getElementById("closesuccessEditModal");
 
             function showsuccessEditModal() {
-               if ('{$successEdit}' != 'null') {
+               if (successEdit != 'null') {
                      successEditModal.style.display = "block";
                }
             }

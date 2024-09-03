@@ -119,7 +119,7 @@
                      <p> Average Rating: {$student->getAverageRating()}.</p>
                      {if (!{$self})}
                      <div class="col-md-3">
-                     <div class="delete_btn" id="reportOwn"><a href="#" onclick="openReportModal()">Report User</a></div>
+                     <div class="delete_btn" id="reportOwn"><a href="#" onclick="openReportModalUser()">Report User</a></div>
                      {if ($leavebleReviews>0)}
                         <div class="find_btn"><button id="review">Review</button></div>
                         {/if}
@@ -170,8 +170,10 @@
 <!-- Report User Modal -->
 <div id="reportModalUser" class="resModal">
     <div class="resModal-content">
-        <span class="resClose" onclick="cancelReportUser()">&times;</span>
-        <h2>Report User</h2>
+        <div class="row">
+          <span class="resClose" onclick="cancelReportUser()">&times;</span>
+          <h2 class="resModal-head">Report User</h2>
+      </div>
         <form id="reportFormUser" action="/UniRent/Report/makeReport/{$student->getId()}/Student" class="form" method="POST" enctype="multipart/form-data">
             <label for="reportReasonUser">Reason for report:</label><br>
             <textarea id="reportReasonUser" name="reportReasonUser" rows="4" cols="50" oninput="checkInput()"></textarea><br><br>
@@ -342,8 +344,8 @@
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+        <script src="/UniRent/Smarty/js/UniRentOriginal/reviews.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
-        <script src="/UniRent/Smarty/js/UniRentOriginal/reviews.js"></script>
 </body>
 </html>

@@ -186,7 +186,7 @@
 </div>
 <!-- End of Success Modal -->
 
-<!-- Modal for deleting reviews -->
+<!-- Modal for editing reviews -->
 <div id="editModal" class="resModal">
     <div class="resModal-content">
     <div class="row">
@@ -230,7 +230,7 @@
             <textarea name="content" rows="5" id="reviewContent" placeholder="Content" required></textarea>
             <div class="btn-cont">
             <button type="submit" class="edit_btn">Edit</button>
-            <button type="button" class="edit_btn" id="CancelBut">Cancel</button>
+            <button type="button" class="edit_btn" id="CancelEditBut">Cancel</button>
             </div>
         </form>
     </div>
@@ -278,8 +278,9 @@
         <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
         <script src="/UniRent/Smarty/js/custom.js"></script>
         <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+        <script src="/UniRent/Smarty/js/UniRentOriginal/reviews.js"></script>
         <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
         <script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
-        <script src="/UniRent/Smarty/js/UniRentOriginal/reviews.js"></script>
+        
 </body>
 </html>

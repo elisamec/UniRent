@@ -541,6 +541,8 @@
         var tenants = {$tenantsJson};
         var numPlaces = {$num_places};
         var successReserve = '{$successReserve}';
+        var booked = '{$booked}';
+        var notReservable = '{$disabled}';
       </script>
       <script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>
@@ -551,9 +553,9 @@
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/reviews.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/imagesSlider.js"></script>
-      <script src="/UniRent/Smarty/js/UniRentOriginal/reviews.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/accommodationTenants.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
 </body>

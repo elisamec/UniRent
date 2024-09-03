@@ -4,14 +4,22 @@ $(document).ready(function() {
     var readURL = function(input) {
        if (input.files && input.files[0]) {
              var reader = new FileReader();
-
-             reader.onload = function (e) {
+             console.log(file);
+             if (file==='editProfileStudent' || file==='editProfileOwner') {
+               reader.onload = function (e) {
+               $('.small').attr('src', e.target.result);
+               }
+               } else {
+                  reader.onload = function (e) {
                 $('.imageIcon').attr('src', e.target.result);
-             }
+                  }
+               }
     
              reader.readAsDataURL(input.files[0]);
        }
     }
+   
+
     
 
     $(".file-upload").on('change', function(){

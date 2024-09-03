@@ -121,7 +121,7 @@
                      <p>Age: {$student->getAge()}.</p>
                      <p> Average Rating: {$student->getAverageRating()}.</p>
                      <div class="col-md-3">
-                        <div class="delete_btn"><a href="#" onclick="openReportModal()">Report User</a></div>
+                        <div class="delete_btn"><a href="#" onclick="openReportModalUser()">Report User</a></div>
                         {if $leavebleReviews>0}
                         <div class="find_btn"><button id="reviewButton">Review</button></div>
                         {/if}
@@ -172,8 +172,10 @@
 <!-- Report User Modal -->
 <div id="reportModalUser" class="resModal">
     <div class="resModal-content">
-        <span class="resClose" onclick="cancelReportUser()">&times;</span>
-        <h2>Report User</h2>
+        <div class="row">
+          <span class="resClose" onclick="cancelReportUser()">&times;</span>
+          <h2 class="resModal-head">Report User</h2>
+      </div>
         <form id="reportFormUser" action="/UniRent/Report/makeReport/{$student->getId()}/Student" class="form" method="POST" enctype="multipart/form-data">
             <label for="reportReasonUser">Reason for report:</label><br>
             <textarea id="reportReasonUser" name="reportReasonUser" rows="4" cols="50" oninput="checkInput()"></textarea><br><br>

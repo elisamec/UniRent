@@ -251,6 +251,7 @@
       <script>
          const eventsArr = {$eventsData};
          var modalSuccess = '{$modalSuccess}';
+         var user= 'Student';
       </script>
       <script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>

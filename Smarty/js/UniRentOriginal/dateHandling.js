@@ -1,4 +1,4 @@
-
+    if (file=='addAccommodation' || file=='editAccommodation') {
     // Elements
     const dayInput = document.getElementById("Date");
     const monthInputs = document.querySelectorAll("input[name='month']");
@@ -64,8 +64,7 @@
     updateMaxDays();
     calculateNearestFutureDate();
     }
-
-if (birthDateString) {
+    } else if (birthDateString) {
     var parts = birthDateString.split('/');
     if (parts.length === 3) {
           var formattedDate = parts[2] + '-' + parts[0].padStart(2, '0') + '-' + parts[1].padStart(2, '0');

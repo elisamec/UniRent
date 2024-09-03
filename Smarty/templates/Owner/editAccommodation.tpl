@@ -111,9 +111,9 @@
     </div>
       
       <div class="addAccom">
-      <div class="containerscreenSize">
+      <div class="container screenSize">
       <div class="Properties_taital_main">
-                     <h1 class="Properties_taital">Add Accommodation</h1>
+                     <h1 class="Properties_taital">Edit Accommodation</h1>
                      <hr class="border_main">
                   </div>
                   <p>Fill in the form below to add a new accommodation to your list. You can upload pictures,
@@ -376,8 +376,8 @@
       var imagesData = {$uploadedImagesData};
       var modalSuccess= '{$modalSuccess}';
       var file='editAccommodation';
-      var visitData = {/literal}{$visitAvailabilityData}{literal};
-      var accommodationData = {/literal}{$accommodationData}{literal};
+      var visitData = `{$visitAvailabilityData}`;
+      var accommodationData = `{$accommodationData}`;
       </script>
       <!-- Javascript files -->
       <script src="/UniRent/Smarty/js/jquery.min.js"></script>
