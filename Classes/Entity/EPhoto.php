@@ -124,11 +124,11 @@ class EPhoto {
      *
      * this method is used by the owner to add an accommodation. JS send a JSON file where are presents
      * the photos, create an array of EPhoto  class and retrive it.
-     * @param $array $array [explicite description]
+     * @param array $array $array [explicite description]
      *
      * @return array
      */
-    public static function fromJsonToPhotos($array):array
+    public static function fromJsonToPhotos(array $array):array
     {
         $result=array();
         foreach($array as $p)

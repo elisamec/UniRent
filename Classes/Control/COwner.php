@@ -110,7 +110,7 @@ class COwner
         
         $reviewsData = CReview::getProfileReviews($accomm->getIdAccommodation(), TType::ACCOMMODATION);
         $num_places=$accomm->getPlaces();
-        $tenantOwner= $PM->getTenants('current',$accomm->getIdOwner());
+        $tenantOwner= $PM->getTenants('current',$accomm->getIdOwner(), 'Owner');
         if (!array_key_exists($idAccommodation, $tenantOwner)) {
             $tenants=[];
         }
@@ -731,7 +731,7 @@ class COwner
         $ownerId=$session->getSessionElement('id');
         $PM=FPersistentManager::getInstance();
         $view = new VOwner();
-        $tenantsArray = $PM->getTenants($kind,$ownerId);
+        $tenantsArray = $PM->getTenants($kind,$ownerId, 'Owner');
         $accommodations=$PM->loadAccommodationsByOwner($ownerId);
         foreach ($accommodations as $accom) {
             $accommodationTitles[$accom->getIdAccommodation()]=$accom->getTitle();
