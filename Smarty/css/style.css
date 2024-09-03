@@ -3239,3 +3239,7 @@ a.badge-danger.focus,a.badge-danger:focus{
   .noMargin {
     margin: 0;
   }
+  .visitDay {
+    height: 35px;
+    padding: 8px;
+  }

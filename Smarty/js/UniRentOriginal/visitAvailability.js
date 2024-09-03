@@ -28,7 +28,7 @@ function addAvailability() {
         <label for="duration">Visit Duration (minutes):</label>
         <input type="number" class="duration" name="duration" title="Please enter a number" min="10" value="10">
         <label for="day">Weekday:</label>
-            <select id="day" name="day">
+            <select class="visitDay" id="day" name="day">
                 <option value="" disabled selected>Select</option>
                 <option value="Monday">Monday</option>
                 <option value="Tuesday">Tuesday</option>
@@ -160,7 +160,7 @@ function setVisitData(data) {
             <label for="duration">Visit Duration (minutes):</label>
             <input type="number" id="duration" name="duration" title="Please enter a number" value="${data[i].duration}" min="10">
             <label for="day">Weekday:</label>
-            <select id="day" name="day">
+            <select class="visitDay" id="day" name="day">
                 <option value="" disabled>Select a weekday</option>
                 <option value="Monday" ${data[i].day === 'Monday' ? 'selected' : ''}>Monday</option>
                 <option value="Tuesday" ${data[i].day === 'Tuesday' ? 'selected' : ''}>Tuesday</option>
