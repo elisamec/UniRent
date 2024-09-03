@@ -319,11 +319,13 @@ class FStudent
         $q='SELECT * FROM student WHERE universityMail=:email LOCK IN SHARE MODE';
         $connection= FConnection::getInstance();
         $db=$connection->getConnection();
+        $db->exec('LOCK TABLES student READ');
         $db->beginTransaction();
         $stm=$db->prepare($q);
         $stm->bindParam(':email',$email,PDO::PARAM_STR);
         $stm->execute();
         $db->commit();
+        $db->exec('UNLOCK TABLES');
         $result=$stm->rowCount();
         if ($result >0)
         {
