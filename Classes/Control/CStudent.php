@@ -477,17 +477,6 @@ class CStudent{
         $oldStudent = $PM->load('EStudent', $studentID);
         $oldEmail = $oldStudent->getUniversityMail();
         $oldPhoto=$oldStudent->getPhoto();
-
-        if(!is_null($oldPhoto))
-        {
-            $base64 = base64_encode($oldPhoto->getPhoto());
-            $photoError = "data:" . 'image/jpeg' . ";base64," . $base64;
-            $oldPhoto=$photoError;
-        }
-        else
-        {
-            $oldPhoto=null;
-        }
        
         //if the new email is not already in use and it's a student's email or you haven't changed it
         if((($PM->verifyUserEmail($afp['email'])==false)&&($PM->verifyStudentEmail($afp['email'])))||($oldEmail===$afp['email'])) { 
@@ -500,7 +489,7 @@ class CStudent{
                 $password = $passChange[0];
                 $error = $passChange[1];
 
-                $photo = CStudent::changePhoto($oldPhoto, $picture, $oldStudent);      
+                $photo = CStudent::changePhoto($oldPhoto, $picture);      
                 
                 $student=new EStudent($afp['username'],$password,$afp['name'],$afp['surname'],$photo,$afp['email'],$afp['courseDuration'],$afp['immatricolationYear'],$birthDate,$afp['sex'],$smoker,$animals);
                 $student->setID($studentID);
@@ -577,18 +566,19 @@ class CStudent{
      * Method changePhoto
      *
      * this method is used to change the student's photo
-     * @param ?string $oldPhoto [explicite description]
-     * @param ?array $picture [explicite description]
-     * @param EStudent $oldStudent [explicite description]
+     * @param ?EPhoto $oldPhoto 
+     * @param ?array $picture 
+     * @param EStudent $oldStudent 
      *
      * @return EPhoto
      */
-    private static function changePhoto(?string $oldPhoto, ?array $picture, EStudent $oldStudent) : ?EPhoto{
+    private static function changePhoto(?EPhoto $oldPhoto, ?array $picture) : ?EPhoto{
         $PM=FPersistentManager::getInstance();
         if(!is_null($oldPhoto)){       
-            $photoId=$oldStudent->getPhoto()->getId();
-            is_null($picture) ? $photo = new EPhoto($photoId, $oldPhoto, 'other', null)
+            $photoId=$oldPhoto->getId();
+            is_null($picture) ? $photo = $oldPhoto
                               : $photo = new EPhoto($photoId, $picture['img'], 'other', null);
+
         } else {
             if(is_null($picture)) {
 

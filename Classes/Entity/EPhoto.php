@@ -115,8 +115,8 @@ class EPhoto {
      * @return string
      */
     public function __toString():string{
-        $photo = "photo";
-        return "Id: $this->id, $photo, Relative To: $this->relativeTo, Id Accommodation: $this->idAccommodation";
+        //$photo = "photo";
+        return "Id: $this->id, *** $this->photo ***, Relative To: $this->relativeTo, Id Accommodation: $this->idAccommodation";
     }
     
     /**
@@ -124,7 +124,7 @@ class EPhoto {
      *
      * this method is used by the owner to add an accommodation. JS send a JSON file where are presents
      * the photos, create an array of EPhoto  class and retrive it.
-     * @param $array $array [explicite description]
+     * @param array $array [explicite description]
      *
      * @return array
      */

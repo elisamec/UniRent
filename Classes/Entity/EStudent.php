@@ -210,9 +210,11 @@ class EStudent
     {
         return $this->picture;
     }
+
     public function getShowPhoto():?string {
         return $this->picture->getPhoto();
     }
+    
     public function getAverageRating() {
         $PM = FPersistentManager::getInstance();
         return $PM->getStudentRating($this->id);
