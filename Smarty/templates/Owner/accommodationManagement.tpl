@@ -378,7 +378,7 @@
       <script>
         const modalSuccess= '{$modalSuccess}';
         const images = {$imagesJson};
-        const reviews = {$reviewsData};
+        const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
         const user = 'Owner';
         const deletable = '{$deletable}';
         const tenants = {$tenantsJson};

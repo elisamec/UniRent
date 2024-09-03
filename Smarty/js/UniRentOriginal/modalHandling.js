@@ -111,7 +111,7 @@ const reportReasonReview = document.getElementById("reportReasonReview");
 const reportConfirmReview = document.getElementById("confirmReportReview");
 
 if (reportModalReview) {
-  reportButtonsreview.forEach((button) => {
+  reportButtonsReview.forEach((button) => {
     button.addEventListener("click", (event) => {
       event.preventDefault();
       const reviewId = button.getAttribute("data-review-id"); // Get the owner ID from the button
@@ -664,7 +664,7 @@ if (reserveModal && notReservableModal && successReserveModal) {
         }
         // Function to show success modal if reservation was successful
     function showsuccessReserveModal() {
-        if (successReserve != 'null') {
+        if (typeof successReserve != 'undefined' && successReserve != 'null') {
             successReserveModal.style.display = "block";
         }
     }

@@ -246,7 +246,7 @@
       <script>
         var modalSuccess= '{$modalSuccess}';
         const user ='Owner';
-        const reviews = {$reviewsData};
+        const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
     </script>
       <script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>

@@ -273,7 +273,7 @@
       <!-- footer section end -->
       <script>
       var modalSuccess= '{$modalSuccess}';
-      const reviews = {$reviewsData};
+      const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
       const user = 'Owner';
       const postedReviews = true;
       </script>

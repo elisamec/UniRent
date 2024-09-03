@@ -85,6 +85,7 @@ class CStudent{
         $aor['rateO']!== null ? $aor['rateO'] : $aor['rateO']=0;
         $aor['min-price']!== null ? $aor['min-price'] : $aor['min-price']=0;
         $aor['max-price']!== null ? $aor['max-price'] : $aor['max-price']=1000;
+        $session->setSessionElement('selectedAccommYear', $aor['year']);
         $PM=FPersistentManager::getInstance();
         $searchResult=$PM->findAccommodationsStudent($aor['city'],$aor['date'],$aor['rateA'],$aor['rateO'],$aor['min-price'],$aor['max-price'],$student,$aor['year']);
         $view->findAccommodation($aor['city'],$aor['university'],$searchResult,$aor['date'], $aor['rateO'], $aor['rateA'], $aor['min-price'], $aor['max-price'],$aor['year']);
@@ -414,8 +415,19 @@ class CStudent{
             }
         }
         $session=USession::getInstance();
+        $year=$session->getSessionElement('selectedAccommYear');
+        if($year==null)
+        {
+            if (date('m')>10) {
+                $year=date('Y')+1;
+            }
+            else
+            {
+            $year=date('Y');
+            }
+        }
         $leavebleReviews=$PM->remainingReviewStudentToAccommodation($session->getSessionElement('id'), $accomm->getIdAccommodation());
-        $view->accommodation($accomm, $owner, $reviewsData, $period, $picture, $visits, $visitDuration, $tenants, $num_places, $studBooked, $dayOfBooking, $timeOfBooking, $disabled, $successReserve, $successVisit, $leavebleReviews);
+        $view->accommodation($accomm, $owner, $reviewsData, $period, $picture, $visits, $visitDuration, $tenants, $num_places, $studBooked, $dayOfBooking, $timeOfBooking, $disabled, $successReserve, $successVisit, $leavebleReviews, $year);
     }
     /**
      * Method reviews

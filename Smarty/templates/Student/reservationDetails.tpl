@@ -407,7 +407,7 @@
         <script>
             var creditCardData = {$creditCardData};
             const images = {$imagesJson};
-            const reviews = {$reviewsData};
+            const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
             const user = 'Student';
             var modalSuccess= '{$modalSuccess}';
         </script>
@@ -420,7 +420,7 @@
         <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
         <script src="/UniRent/Smarty/js/custom.js"></script>
         <script src="/UniRent/Smarty/js/UniRentOriginal/mask.js"></script>
-        <script src="/UniRent/Smarty/js/UniRentOriginal/imageSlider.js"></script>
+        <script src="/UniRent/Smarty/js/UniRentOriginal/imagesSlider.js"></script>
         <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
         <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
         <script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>

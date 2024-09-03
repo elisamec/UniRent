@@ -330,7 +330,7 @@
       </div>
       <!-- footer section end -->
       <script>
-      const reviews = {$reviewsData};
+      const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
       const user = 'Student';
       var modalSuccess= '{$modalSuccess}';
       </script>

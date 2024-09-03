@@ -342,7 +342,7 @@
 
     <!-- JavaScript Variables -->
     <script>
-    const reviews = {$reviewsData};
+    const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
     const user = 'Owner';
     var modalSuccess= '{$modalSuccess}';
     </script>

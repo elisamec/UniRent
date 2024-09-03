@@ -265,7 +265,7 @@
       <!-- footer section end -->
       <script>
       const postedReviews = true;
-      const reviews = {$reviewsData};
+      const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
       var modalSuccess= '{$modalSuccess}';
       var user = 'Student';
       </script>

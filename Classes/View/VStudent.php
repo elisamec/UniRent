@@ -83,7 +83,7 @@ class VStudent{
         $this->smarty->assign('selectedYear',$year);
         $this->smarty->display('Student/search.tpl');
     }
-    public function accommodation(EAccommodation $accomm, EOwner $owner, array $reviewsData, string $period, array $pictures, array $timeSlots, int $duration, array $tenantsJson, int $num_places, bool $booked, string $day, string $time, bool $disabled, string $successReserve, string $successVisit, int $leavebleReviews):void{
+    public function accommodation(EAccommodation $accomm, EOwner $owner, array $reviewsData, string $period, array $pictures, array $timeSlots, int $duration, array $tenantsJson, int $num_places, bool $booked, string $day, string $time, bool $disabled, string $successReserve, string $successVisit, int $leavebleReviews, int $year):void{
         $photos=json_encode($pictures);
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->assign('imagesJson', $photos);
@@ -101,6 +101,7 @@ class VStudent{
         $this->smarty->assign('successReserve', $successReserve);
         $this->smarty->assign('successVisit', $successVisit);
         $this->smarty->assign('leavebleReviews', $leavebleReviews);
+        $this->smarty->assign('selectedYear',$year);
         $this->smarty->display('Student/accommodation.tpl');
     }
     public function reviews(array $reviewsData, ?string $modalSuccess):void{

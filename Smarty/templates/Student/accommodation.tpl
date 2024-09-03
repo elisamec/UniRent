@@ -536,8 +536,8 @@
         var timeSlots = {$timeSlots};
         var successVisit = '{$successVisit}';
         const images = {$imagesJson};
-        const reviews = {$reviewsData};
-        cons user = 'Student';
+        const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
+        const user = 'Student';
         var tenants = {$tenantsJson};
         var numPlaces = {$num_places};
         var successReserve = '{$successReserve}';
@@ -552,7 +552,7 @@
       <script src="/UniRent/Smarty/js/custom.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
-      <script src="/UniRent/Smarty/js/UniRentOriginal/imageSlider.js"></script>
+      <script src="/UniRent/Smarty/js/UniRentOriginal/imagesSlider.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/reviews.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/accommodationTenants.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
