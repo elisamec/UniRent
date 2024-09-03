@@ -27,29 +27,25 @@ class CReport
     public static function makeReport(int $id, string $type):void
     {
         $PM = FPersistentManager::getInstance();
-        $session = USession::getInstance();
-        $userType  = $session->getSessionElement('userType');
         $reportReason=USuperGlobalAccess::getPost('reportReason');
         $subject = $PM->load('E' . $type, $id);
         
         if ($type == 'Student' | $type == 'Owner')
         {
             $subject->setStatus('reported');
-            $location = ucfirst($userType) . '/publicProfile/' . $subject->getUsername();
         } else if ($type == 'Review') {
             $subject->report();
-            $location = USuperGlobalAccess::getCookie('current_page');
         }
             $res=$PM->update($subject);
             $report= new EReport(null, $reportReason, new DateTime('today'), null, $id, TType::tryFrom(strtolower($type)));
             $res2=$PM->store($report);
             if ($res && $res2)
             {
-                header('Location:/UniRent/' . $location . '/success');
+                header('Location:/UniRent/' . USuperGlobalAccess::getCookie('current_page') . '/success');
             }
             else
             {
-                header('Location:/UniRent/' . $location . '/error');
+                header('Location:/UniRent/' . USuperGlobalAccess::getCookie('current_page') . '/error');
             }
     }
 }
