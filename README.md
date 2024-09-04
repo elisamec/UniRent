@@ -37,9 +37,24 @@ During the stay of a student, the owner can leave a review to the tenant (one pe
   - phpMyAdmin 5.2.1 or higher;
 - composer 2.7.4 or higher;
 # How To Install
-The first thing to do is unzip the folder file inside the XAMPP directory "htdocs".
+The first thing to do is unzip the folder file inside the XAMPP directory `htdocs`.
 
-In order to make the application work with your current database setup, you will need to open the file "/xampp/htdocs/UniRent/Configuration/Config.php" and change the credentials listed to the right ones for your need. Note that if you have no password for your database, we advice to set one up.
+In order to make the application work with your current database setup, you will need to open the file `/xampp/htdocs/UniRent/Configuration/Config.php` and change the credentials listed to the right ones for your need. Note that if you have no password for your database, we advice to set one up.
+
+To ensure that you don't have any problems with some sample elements already present inside the application, you will need to change some settings on your XAMPP configuration.
+
+**If you are working from a Windows machine**
+
+- Go to the file: `C:/xampp/mysql/bin/my.ini`;
+
+**If you are working from a MacOS machine**
+
+- Go to the file: `~/XAMPP/xamppfiles/etc/my.cnf`;
+
+**In both cases continue as follows:**
+
+- Search for the element `max_allowed_packet` (It should appear a total of 2 times);
+- Change whatever value is associated with that variable to 1024M;
 
 To make sure the application works well, we need you to run the following command into the UniRent folder:
 
