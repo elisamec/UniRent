@@ -10,6 +10,10 @@ use Configuration\Config;
  * class for checking if the db exist and if not create it
  */
 class Installation{
+    /**
+     * check if the db exist and if not create it
+     * @return bool
+     */
     public static function install(){
         try{
             $conn =  new PDO("mysql:host=".Config::DB_HOST."; charset=utf8;", Config::DB_USER, Config::DB_PASS);

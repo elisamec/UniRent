@@ -99,90 +99,178 @@ class EReview
     {
         return $this->title;
     }
-
+    /**
+     * getValutation()
+     *
+     * @return integer
+     */
     public function getValutation():int
     {
         return $this->valutation;
     }
-
+    /**
+     * getDescription()
+     *
+     * @return string|null
+     */
     public function getDescription():string | null
     {
         return $this->description;
     }
+    /**
+     * getRecipientType()
+     *
+     * @return TType
+     */
     public function getRecipientType():TType
     {
         return $this->recipientType;
     }
+    /**
+     * getAuthorType()
+     *
+     * @return TType
+     */
     public function getAuthorType():TType {
         return $this->authorType;
     }
+    /**
+     * getIDAuthor()
+     *
+     * @return integer
+     */
     public function getIDAuthor():int {
         return $this->idAuthor;
     }
+    /**
+     * getIDRecipient()
+     *
+     * @return integer
+     */
     public function getIDRecipient():int {
         return $this->idRecipient;
     }
-
+    /**
+     * getCreationDate()
+     *
+     * @return DateTime
+     */
     public function getCreationDate():DateTime
     {
         return $this->creationDate;
     }
+    /**
+     * isReported()
+     *
+     * @return boolean
+     */
     public function isReported():bool
     {
         return $this->reported;
     }
+    /**
+     * isBanned()
+     *
+     * @return boolean
+     */
     public function isBanned():bool
     {
         return $this->banned;
     }
+    /**
+     * setTitle()
+     *
+     * @param string $newTitle
+     * @return void
+     */
     public function setTitle(string $newTitle):void
     {
         $this->title=$newTitle;
     }
+    /**
+     * setValutation()
+     *
+     * @param integer $valutation
+     * @return void
+     */
     public function setValutation(int $valutation):void
     {
         $this->valutation = $valutation;
     }
+    /**
+     * setDescription()
+     *
+     * @param string $newDesc
+     * @return void
+     */
     public function setDescription(string $newDesc):void
     {
         $this->description=$newDesc;
     }
+    /**
+     * setRecipientType()
+     *
+     * @param TType $type
+     * @return void
+     */
     public function setId(int $id):void {
         if ($this->idReview===null) {
             $this->idReview=$id;
         }
     }
+    /**
+     * setRecipientType()
+     *
+     * @param TType $type
+     * @return void
+     */
    public function report():void
     {
         $this->reported=true;
     }
+    /**
+     * setRecipientType()
+     *
+     * @param TType $type
+     * @return void
+     */
     public function ban():void
     {
         $this->banned=true;
     }
+    /**
+     * setRecipientType()
+     *
+     * @param TType $type
+     * @return void
+     */
     public function unban():void
     {
         $this->banned=false;
     }
+    /**
+     * setRecipientType()
+     *
+     * @param TType $type
+     * @return void
+     */
     public function unreport():void
     {
         $this->reported=false;
     }
+    /**
+     * setRecipientType()
+     *
+     * @param TType $type
+     * @return void
+     */
     public function __toString():string
     {
         $description = ($this->description !== null) ? $this->description : 'No additional details were provided by the author. set';
         return 'ID: '. $this->idReview. ', Title: '. $this->title. ', Valutation: '. $this->valutation. ', Description: '. $description. ', RecipientType: '. $this->recipientType->value. ', AuthorType: '.$this->authorType->value.', IDAuthor: '. $this->idAuthor. ', IDRecipient: '.$this->idRecipient;
     }
     
-    /**
-     * Method remainingReviewStudentToStudent
-     *
-     * this method return the number of review that a Student can make about another Student
-     * @param int $id1 [student 1, the one who makes the reviews]
-     * @param int $id2 [student 2]
-     *
-     * @return int
-     */    
+      
     /**
      * Method remainingReviewStudentToStudent
      *
@@ -213,50 +301,6 @@ class EReview
         return $result;
     }
     
-    /**
-     * Method getStudentReviewFormatArray
-     * 
-     * this method is used to transform an array of reviews in a format that can be used by the Smarty template
-     * @param array $reviews $reviews [array of EReview]
-     *
-     * @return array
-     */
-    public static function getStudentReviewFormatArray($reviews):array
-    {
-        $reviewsData = [];
-        foreach ($reviews as $review) {
-            $author = FPersistentManager::getInstance()->load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
-            if ($review->isBanned()) {
-                continue;
-            }
-            $profilePic = $author->getPhoto();
-            if ($author->getStatus() === TStatusUser::BANNED) {
-                $profilePic = "/UniRent/Smarty/images/BannedUser.png";
-            } else if ($profilePic === null) {
-                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
-            }
-            else
-            {
-                $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
-            }
-            if ($review->getDescription()===null) {
-                $content='No additional details were provided by the author.';
-            }
-            else
-            {
-                $content=$review->getDescription();
-            }
-            $reviewsData[] = [
-                'id' => $review->getId(),
-                'title' => $review->getTitle(),
-                'username' => $author->getUsername(),
-                'userStatus' => $author->getStatus()->value,
-                'stars' => $review->getValutation(),
-                'content' => $content,
-                'userPicture' => $profilePic,
-            ];
-        }
-        return $reviewsData;
-    }
+    
         
 }

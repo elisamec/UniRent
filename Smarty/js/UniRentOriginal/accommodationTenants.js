@@ -36,7 +36,6 @@ var tenantContainer = document.getElementById('tenantCont');
     }
 
     // Generate tenant sections
-    console.log(tenants);
     for (var i = 0; i < tenants.length; i++) {
         var tenant = tenants[i];
         tenantContainer.innerHTML += createTenantSection(tenant.username, tenant.expiryDate, tenant.image, tenant.status);

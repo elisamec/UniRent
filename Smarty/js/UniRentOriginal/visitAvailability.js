@@ -276,7 +276,7 @@ if (accommodationData) {
     document.getElementById("postalCode").value = accommodationData.postalCode;
     document.getElementById("description").value = accommodationData.description;
     let men = accommodationData.men === true ? true : false;
-    let women = accommodation.women === true ? true : false;
+    let women = accommodationData.women === true ? true : false;
     let animals = accommodationData.animals === true ? true : false;
     let smokers = accommodationData.smokers === true ? true : false;
     document.getElementById("men").checked = men;

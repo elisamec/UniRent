@@ -217,4 +217,76 @@ class UFormat
         ];
         return $reply;
     }
+    /**
+     * Method creditCardFormatArray
+     * 
+     * this method is used to trnasform in an array of ECreditCard in an array of array each one rappresents 
+     * a credit card 
+     * @param array $cards [array of ECreditCard]
+     *
+     * @return array
+     */
+    public static function creditCardFormatArray(array $cards):array
+    {
+        $cardsData = [];
+        foreach ($cards as $card) {
+            $cardsData[] = [
+                'title' => $card->getTitle() ,
+                'number' => $card->getNumber(),
+                'expiryDate' => $card->getExpiry(),
+                'cvv' => $card->getCVV(),
+                'name' => $card->getName(),
+                'surname' => $card->getSurname(),
+                'isMain' => $card->getMain(),
+            ];
+        }
+        return $cardsData;
+    }
+    /**
+     * Method getFilterTenantsFormatArray
+     *
+     * this method return an array of tenants formatted
+     * @param array $students
+     * @param int $idAccommodation
+     * @param string $accommodationTitle
+     * @param string $format
+     *
+     * @return array
+     */
+    public static function getFilterTenantsFormatArray(array $students,int $idAccommodation, string $accommodationTitle, string $format):array
+    {
+            foreach ($students as $student) {
+                $profilePic = $student[0]->getPhoto();
+                if ($student[0]->getStatus() === TStatusUser::BANNED) {
+                    $profilePic = "/UniRent/Smarty/images/BannedUser.png";
+                } else if ($profilePic === null) {
+                    $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+                }
+                else
+                {
+                    $profilePic=$profilePic->getPhoto();
+                }
+                $tenantList[] = [
+                    'username' => $student[0]->getUsername(),
+                    'image' => $profilePic,
+                    'expiryDate' => $student[1],
+                    'status' => $student[0]->getStatus()->value
+                ];
+            }
+            if ($format === 'OwnerManagement') {
+                $tenants[$idAccommodation] = [
+                    'accommodation' => $accommodationTitle,
+                    'tenants' => $tenantList
+                ];
+            } else if ($format === 'Owner') {
+                $tenants[] = [
+                    'accommodation' => $accommodationTitle,
+                    'tenants' => $tenantList
+                ];
+            }
+            else {
+                $tenants=$tenantList;
+            }
+        return $tenants;
+    }
 }

@@ -201,6 +201,11 @@ class EAccommodation
         return $this->visit;
     }
 
+    /**
+     * getAverageRating
+     * Returns the average rating of the accommodation
+     * @return float
+     */
     public function getAverageRating() {
         $PM = FPersistentManager::getInstance();
         return $PM->getAccommodationRating($this->idAccommodation);
@@ -447,70 +452,87 @@ class EAccommodation
      * @return string
      */
     public function __toString():string{
-        
         $address = $this->address->getSortingCode() . ", " . $this->address->getAddressLine1() . ", " . $this->address->getLocality() . ", " . $this->address->getPostalCode();
         $start = $this->start->format('Y-m-d');
-
         $str = "ID: $this->idAccommodation  \n" . "Photos: \n";
-
         foreach($this->photo as $photo){
             $str = $str . "$photo  \n";
         }
-
         $str = $str . "Title: $this->title  \n".
-                "Address: $address  \n".
-                "Price: $this->price  \n".
-                "Start: $start  \n".
-                "Description: $this->description  \n".
-                "Places: $this->places  \n".
-                "Deposit: $this->deposit  \n" .
-                "Visit:  ";
-
-
+            "Address: $address  \n".
+            "Price: $this->price  \n".
+            "Start: $start  \n".
+            "Description: $this->description  \n".
+            "Places: $this->places  \n".
+            "Deposit: $this->deposit  \n" .
+            "Visit:  ";
         $visit = $this->visit;
         $days = array_keys($visit);
-
         foreach($days as $day){
-
             $str = $str . "\n    $day:  ";
-
             foreach ($visit[$day] as $time){
-                $str = $str . " $time  ";
+            $str = $str . " $time  ";
             }
         }
-
         $str = $str . "\nVisit Duration: $this->visitDuration  \n".
-                "Man: $this->man \n".
-                "Woman: $this->woman \n".
-                "Pets: $this->pets \n".
-                "Smokers: $this->smokers \n".
-                "Status: $this->status \n".
-                "ID Owner: $this->idOwner \n";
-
+            "Man: $this->man \n".
+            "Woman: $this->woman \n".
+            "Pets: $this->pets \n".
+            "Smokers: $this->smokers \n".
+            "Status: $this->status \n".
+            "ID Owner: $this->idOwner \n";
         return $str;
     }
     
     /**
      * Method fromJsonToArrayOfVisit
-     *
+     * 
+     * return an array of visit from JSON file created by JS in visitAvailabilities
      * @param $json
      *
      * @return array
      */
     public static function fromJsonToArrayOfVisit($json):array
     {
-        $result=array();
         $myarray=json_decode($json,true);
-        #print_r($myarray);
+        $result=self::resultOne($myarray);
+        $result_2=self::resultTwo($result);
+        $final_result=array();
+        foreach($result_2 as $key=>$value)
+        {
+            if(in_array($value['day'],array_keys($final_result)))
+            {
+                foreach($value['times'] as $time)
+                {
+                    if(in_array($time,$final_result[$value['day']])){}
+                    else
+                    {
+                        $final_result[$value['day']][]=$time;
+                    }
+                }
+            }
+            else
+            {
+                $final_result[$value['day']]=$value['times'];
+            }
+        }
+        return $final_result;
+    }
+
+    /**
+     * Method resultOne
+     * 
+     * return the result of the first part of the method fromJsonToArrayOfVisit
+     * @param array $myarray
+     *
+     * @return array
+     */
+    private static function resultOne(array $myarray):array {
         $result=array();
         foreach($myarray as $key=>$value)
         {
-            //controllo dell'orario
-            $start=$value['start'];
-            $end=$value['end'];
-            $start=EAccommodation::stringInMinutes($start);
-            $end=EAccommodation::stringInMinutes($end);
-
+            $start=EAccommodation::stringInMinutes($value['start']);
+            $end=EAccommodation::stringInMinutes($value['end']);
             if($start>=$end) #in questo modo non prenderò in considerazione intervalli negativi di tempo!
             {
                 $value['diff']=-1;
@@ -521,7 +543,6 @@ class EAccommodation
                 $totalMinutes = $difference->h * 60 + $difference->i;
                 $value['diff']=(int)$totalMinutes;
             }
-            
             if($value['diff']<=0){continue;}
             else
             {
@@ -536,8 +557,17 @@ class EAccommodation
                 }
             }  
         }
-        
-        #print_r($result);
+        return $result;
+    }
+    /**
+     * Method resultTwo
+     * 
+     * return the result of the second part of the method fromJsonToArrayOfVisit
+     * @param array $result
+     * @return array
+     */
+    private static function resultTwo(array $result):array
+    {
         $result_2=array();
         foreach($result as $key=>$value)
         {
@@ -557,28 +587,7 @@ class EAccommodation
                 $result_2[$key]=$app; #ancora necessario perchè potrei inserire due o più periodi per la visita in un solo giorno
             }    
         }
-        
-        $final_result=array();
-        foreach($result_2 as $key=>$value)
-        {
-            #print $value['day'];
-            if(in_array($value['day'],array_keys($final_result)))
-            {
-                foreach($value['times'] as $time)
-                {
-                    if(in_array($time,$final_result[$value['day']])){}
-                    else
-                    {
-                        $final_result[$value['day']][]=$time;
-                    }
-                }
-            }
-            else
-            {
-                $final_result[$value['day']]=$value['times'];
-            }
-        }
-        return $final_result;
+        return $result_2;
     }
     
     /**
@@ -607,7 +616,13 @@ class EAccommodation
             return null;
         }
     }
-
+    /**
+     * Method stringInMinutes
+     * 
+     * trasforms a string in minutes
+     * @param string $s
+     * @return int
+     */
     private static function stringInMinutes(string $s):int
     {
         list($hour,$minute)=explode(":",$s);
@@ -615,6 +630,13 @@ class EAccommodation
         return (int)$tot_minutes;
     }
 
+    /**
+     * Method mitutesToString
+     * 
+     * trasforms minutes in string
+     * @param int $min
+     * @return string
+     */
     private static function mitutesToString(int $min):string
     {
         $hours = intdiv($min, 60); // Ottiene le ore
@@ -623,6 +645,13 @@ class EAccommodation
         return sprintf("%02d:%02d", $hours, $minutes);
     }
 
+    /**
+     * Method getRating
+     * 
+     * this method is used to return the rating of the owner and the accommodation
+     *
+     * @return array
+     */
     public function getRating():array
     {
         $PM=FPersistentManager::getInstance();

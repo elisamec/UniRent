@@ -255,6 +255,7 @@
       <script>
         var modalSuccess= '{$modalSuccess}';
         const eventsArr = {$eventsData};
+        var user = 'Owner';
       </script>
       
       <!-- Javascript files-->

@@ -3,7 +3,9 @@ function populateTenantsContainer(tenants) {
     const yearSelect = document.getElementById("year");
 
     // Clear existing options in year select
-    yearSelect.innerHTML = '<option value="" disabled selected>Select a year</option>';
+    if(yearSelect) {
+        yearSelect.innerHTML = '<option value="" disabled selected>Select a year</option>';
+    }
     tenantsContainer.innerHTML = '';
 
     if (!tenants || tenants.length === 0 || Object.keys(tenants).length === 0) {
@@ -73,8 +75,9 @@ function populateTenantsContainer(tenants) {
                 colDiv.appendChild(userSectionDiv);
                 rowDiv.appendChild(colDiv);
 
-                const year = new Date(tenant.expiryDate).getFullYear();
-                uniqueYears.add(year);
+                const year2 = new Date(tenant.expiryDate).getFullYear();
+                const year1 = new Date(tenant.expiryDate).getFullYear()-1;
+                uniqueYears.add(year1 + "-" + year2);
             } else {
                 console.error("Unexpected format for item.tenants:", tenant);
             }
@@ -83,13 +86,17 @@ function populateTenantsContainer(tenants) {
         accommodationDiv.appendChild(rowDiv);
         tenantsContainer.appendChild(accommodationDiv);
     });
-
-    uniqueYears.forEach(year => {
-        const option = document.createElement("option");
-        option.value = year;
-        option.textContent = year;
-        yearSelect.appendChild(option);
-    });
+    if(yearSelect) {
+        uniqueYears.forEach(year => {
+            const option = document.createElement("option");
+            if (year === selectedYear) {
+                option.selected = true;
+            }
+            option.value = year;
+            option.textContent = year;
+            yearSelect.appendChild(option);
+        });
+    }
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -99,6 +106,9 @@ document.addEventListener("DOMContentLoaded", function () {
         accommodationTitles.forEach(item => {
             const option = document.createElement("option");
             option.value = item.accommodation;
+            if (item.accommodation === selectedAccommodation) {
+                option.selected = true;
+            }
             option.textContent = item.accommodation;
             accommodationSelect.appendChild(option);
         });
@@ -106,6 +116,9 @@ document.addEventListener("DOMContentLoaded", function () {
         Object.keys(accommodationTitles).forEach(key => {
             const option = document.createElement("option");
             option.value = key;
+            if (key === selectedAccommodation) {
+                option.selected = true;
+            }
             option.textContent = accommodationTitles[key];
             accommodationSelect.appendChild(option);
         });

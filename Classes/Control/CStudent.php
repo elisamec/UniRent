@@ -14,6 +14,7 @@ use Classes\View\VStudent;
 use Classes\Tools\TStatusUser;
 use Classes\View\VError;
 use Classes\Entity\EReview;
+use Classes\Utilities\UFormat;
 use DateTime;
 
 
@@ -68,7 +69,7 @@ class CStudent{
      * Method search
      * 
      * this method is used by students to search an accommodation
-     * @return void
+     * 
      */
     public static function search()
     {
@@ -80,11 +81,11 @@ class CStudent{
 
         $student_username=$session->getSessionElement('username');
         $student=$PM->getStudentByUsername($student_username);
-    
-        $aor['rateA']!== null ? $aor['rateA'] : $aor['rateA']=0;
-        $aor['rateO']!== null ? $aor['rateO'] : $aor['rateO']=0;
-        $aor['min-price']!== null ? $aor['min-price'] : $aor['min-price']=0;
-        $aor['max-price']!== null ? $aor['max-price'] : $aor['max-price']=1000;
+        
+        $aor['rateA'] = $aor['rateA'] ?? 0;
+        $aor['rateO'] = $aor['rateO'] ?? 0;
+        $aor['min-price'] = $aor['min-price'] ?? 0;
+        $aor['max-price'] = $aor['max-price'] ?? 1000;
         $session->setSessionElement('selectedAccommYear', (int)$aor['year']);
         $PM=FPersistentManager::getInstance();
         $searchResult=$PM->findAccommodationsStudent($aor['city'],$aor['date'],$aor['rateA'],$aor['rateO'],$aor['min-price'],$aor['max-price'],$student,(int)$aor['year']);
@@ -195,7 +196,7 @@ class CStudent{
     {   self::checkIfStudent();
         $PM=FPersistentManager::getInstance();
         $user=USession::getInstance()->getSessionElement('username');
-        $result=$PM->d($user);
+        $result=$PM->deleteStudentByUsername($user);
         if($result)
         {
             $session=USession::getInstance();
@@ -386,9 +387,15 @@ class CStudent{
         }
         $visitDuration=$accomm->getVisitDuration();
         $num_places=$accomm->getPlaces();
-        $tenants= $PM->getTenants('current',$accomm->getIdOwner(), 'Student');
+        $tenantsArray= $PM->getTenants('current',$accomm->getIdOwner());
+        $tenants=array();
+        foreach ($tenantsArray as $idAccommodation => $students) {
+            $accommodationTitle = FPersistentManager::getInstance()->getTitleAccommodationById($idAccommodation);
+            $tenants=UFormat::getFilterTenantsFormatArray($students, $idAccommodation, $accommodationTitle, 'Student');
+        }
         $session=USession::getInstance();
-        $year=$session->getSessionElement('selectedAccommYear');
+        
+        $year=$session->getSessionElement('SAY');
         if($year==null)
         {
             if (date('m')>10) {
@@ -414,11 +421,7 @@ class CStudent{
         self::checkIfStudent();
         $view = new VStudent();
         $session=USession::getInstance();
-        $studentUsername=$session->getSessionElement('username');
-        $PM=FPersistentManager::getInstance();
-        $studentId=$PM->getStudentIdByUsername($studentUsername);
-        $reviews=$PM->loadByRecipient($studentId, TType::STUDENT);
-        $reviewsData = EReview::getStudentReviewFormatArray($reviews);
+        $reviewsData = CReview::getProfileReviews($session->getSessionElement('id'), TType::STUDENT);
         $view->reviews($reviewsData, $modalSuccess);
     }
     /**
@@ -778,7 +781,7 @@ class CStudent{
         $PM=FPersistentManager::getInstance();
         $studentId=$PM->getStudentIdByUsername($username);
         $cards =$PM->loadStudentCards($studentId);
-        $cardsData=ECreditCard::creditCardFormatArray($cards);
+        $cardsData=UFormat::creditCardFormatArray($cards);
         $view->paymentMethods($cardsData, $modalSuccess);
     }         
     /**
@@ -885,14 +888,7 @@ class CStudent{
             $date_2=7;
         }
         $result=$PM->reserve($idAccommodation,$year,$date,$year_2,$date_2,$student_id);
-        if($result)
-        {
-            header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/sent');
-        }
-        else
-        {
-            header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/full');
-        }
+        $result ? header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/sent') : header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/full');
     }
     /**
      * Method checkIfStudent

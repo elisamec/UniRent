@@ -559,7 +559,7 @@ use PDORow;
      *
      * @return array
      */
-    public function getTenans(string $type, int $idOwner, string $format):array
+    public function getTenans(string $type, int $idOwner):array
     {
         $db=FConnection::getInstance()->getConnection();
         FPersistentManager::getInstance()->updateDataBase();
@@ -588,7 +588,7 @@ use PDORow;
         }
         $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
         $result = $this->fromRowsToTenantsArrayByRateT($rows,0); #we do not have the rateT yet, so we can ignore it putting it to 0
-        return $this->getFilterTenantsFormatArray($result, $format);
+        return $result;
     }
 
     
@@ -612,16 +612,10 @@ use PDORow;
     public function getFilterTenants($type,$accommodation_name,$t_username,$t_age,$rateT,$date,$men,$women,$idOwner,$year):array
     {
         $db=FConnection::getInstance()->getConnection();
-        $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
-
-        if($date=='september'){$date=9;}
-        elseif($date=='october'){$date=10;}
-
-        if ($type=='current')
-        {
+        $date = $date=='september'? 9:10;
+        if ($type=='current'){
             $type='onGoing';
-        } else if ($type=='past')
-        {
+        } else if ($type=='past') {
             $type='finished';
         }
         try
@@ -636,33 +630,18 @@ use PDORow;
             $params=array();
             $params[':type']=$type;
             $params[':id']=$idOwner;
-            if($t_age!=0 and !is_null($t_age))
-            {
+            if($t_age!=0 and !is_null($t_age)){
                 $q.=" AND TIMESTAMPDIFF(YEAR,s.birthDate,CURDATE())= :age";
-                $params[':age']=$t_age;
-            }
-            /*
-            if(!is_null($date))
-            {
-                $q.=" AND MONTH(a.`start`)= :date";
-                $params[':date']=$date;
-            }*/
-            if(!is_null($accommodation_name))
-            {
+                $params[':age']=$t_age;}
+            if(!is_null($accommodation_name)){
                 $q.=" AND a.title= :accommodation_name";
-                $params[':accommodation_name']=$accommodation_name;
-            }
-            if($t_username!='')
-            {
+                $params[':accommodation_name']=$accommodation_name;}
+            if($t_username!=''){
                 $q.=" AND s.username= :t_username";
-                $params[':t_username']=$t_username;
-            }
-            if(!is_null($year))
-            {
+                $params[':t_username']=$t_username;}
+            if(!is_null($year)){
                 $q.=" AND YEAR(c.paymentDate)= :year";
-                $params[':year']=$year;
-            }
-
+                $params[':year']=$year;}
             if($men==true and $women==true){}
             elseif($men==false and $women==true){$q.=" AND s.sex='F'";}
             elseif($men==true and $women==false){$q.=" AND s.sex='M'";}
@@ -682,7 +661,7 @@ use PDORow;
         }
         $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
         $result=$this->fromRowsToTenantsArrayByRateT($rows,(int)$rateT);
-        return $this->getFilterTenantsFormatArray($result,$idOwner);   
+        return $result;   
     }
     
     /**
@@ -724,51 +703,7 @@ use PDORow;
         return $result;
     }
     
-    /**
-     * Method getFilterTenantsFormatArray
-     *
-     * this method return an array of tenants formatted
-     * @param array $tenantsArray $tenantsArray 
-     * @param int $ownerId $ownerId 
-     *
-     * @return array
-     */
-    private function getFilterTenantsFormatArray(array $tenantsArray,string $format):array
-    {
-        $tenants=[];
-        foreach ($tenantsArray as $idAccommodation => $students) {
-            $accommodationTitle = FPersistentManager::getInstance()->getTitleAccommodationById($idAccommodation);
-            $tenantList = [];
-            foreach ($students as $student) {
-                $profilePic = $student[0]->getPhoto();
-                if ($student[0]->getStatus() === TStatusUser::BANNED) {
-                    $profilePic = "/UniRent/Smarty/images/BannedUser.png";
-                } else if ($profilePic === null) {
-                    $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
-                }
-                else
-                {
-                    $profilePic=$profilePic->getPhoto();
-                }
-                $tenantList[] = [
-                    'username' => $student[0]->getUsername(),
-                    'image' => $profilePic,
-                    'expiryDate' => $student[1],
-                    'status' => $student[0]->getStatus()->value
-                ];
-            }
-            if ($format === 'Owner') {
-                $tenants[] = [
-                    'accommodation' => $accommodationTitle,
-                    'tenants' => $tenantList
-                ];
-            }
-            else {
-                $tenants=$tenantList;
-            }
-        }
-        return $tenants;
-    }
+    
     /**
      * Method getBannedOwners
      *

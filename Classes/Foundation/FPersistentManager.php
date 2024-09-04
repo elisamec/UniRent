@@ -198,7 +198,7 @@ class FPersistentManager {
         return $owner;
     }
 
-    public function d($user):bool
+    public function deleteStudentByUsername($user):bool
     {
         $FS=FStudent::getInstance();
         $result=$FS->deleteStudentByUsername($user);
@@ -471,7 +471,7 @@ class FPersistentManager {
      * @param  $year
      * @return array
      */
-    public function findAccommodationsStudent($city,$date,$rateA,$rateO,$minPrice,$maxPrice,$student,$year)
+    public function findAccommodationsStudent($city,$date,$rateA,$rateO,$minPrice,$maxPrice,$student,$year):array
     {
         $FA=FAccommodation::getInstance();
         $result=$FA->findAccommodationsStudent($city,$date,$rateA,$rateO,$minPrice,$maxPrice,$student,$year);
@@ -533,7 +533,7 @@ class FPersistentManager {
      *
      * @return array
      */
-    public function getTenants(string $type, int $idOwner, string $format):array
+    public function getTenants(string $type, int $idOwner):array
     {
         $FO=FOwner::getInstance();
         if ($type=='current')
@@ -543,7 +543,7 @@ class FPersistentManager {
         {
             $type='finished';
         }
-        $result=$FO->getTenans($type,$idOwner, $format);
+        $result=$FO->getTenans($type,$idOwner);
         return $result;
     }
     public function getUserType($id):TType
@@ -601,6 +601,18 @@ class FPersistentManager {
         return $result;
     }
 
+    /**
+     * Method reserve
+     * 
+     * this method is used to reserve an accommodation
+     * @param int $idAccommodation
+     * @param int $year
+     * @param int $date
+     * @param int $year_2
+     * @param int $date_2
+     * @param int $student_id
+     * @return bool
+     */
     public function reserve(int $idAccommodation, int $year, int $date, int $year_2, int $date_2, int $student_id)
     {
         $now = new DateTime('now');

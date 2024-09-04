@@ -5,7 +5,7 @@ function displayAccommodations(accommodations, user) {
 
     if (container) {
         if (accommodations.length === 0) {
-            container.innerHTML = '<div class="container"><h1 class="noRev">You have no ads yet!</h1></div>';
+            container.innerHTML = '<div class="container"><h1 class="noRev">There are no new proprieties for you yet!</h1></div>';
         } else {
             accommodations.forEach(accommodation => {
                 if (user === 'User') {
@@ -62,27 +62,34 @@ function displayAccommodationsOwner(accommodationsActive, accommodationsInactive
         // Combine both active and inactive accommodations
         const allAccommodations = [...accommodationsActive, ...accommodationsInactive];
         if (allAccommodations.length === 0) {
-            containerOwner.innerHTML = '<div class="container"><h1 class="noRev">There are no new proprieties for you yet!</h1></div>';
+            containerOwner.innerHTML = '<div class="container"><h1 class="noRev">You have no ads yet!</h1></div>';
         } else {
             allAccommodations.forEach(accomodationArray => {
                
                 let accommodationOwner = {
                     id: accomodationArray.id,
+                    photo: accomodationArray.photo,
                     title: accomodationArray.title,
                     address: accomodationArray.address,
                     price: accomodationArray.price,
-                    photo: accomodationArray.photo
                 };
                 if(accommodationOwner.photo == null){
                     accommodationOwner.photo = "/UniRent/Smarty/images/noPic.png";
                 }
-                if (accommodationsActive.includes(accommodationOwner)) {
-                        classDisplay = "image_box";
-                        imageClass = "blog_img";
+                var exists = false;
+                accommodationsActive.forEach(accommodation => {
+                    if (accommodation.id === accommodationOwner.id) {
+                        exists = true;
+                    }
+                });
+                if (exists) {
+                    classDisplay = "image_box";
+                    imageClass = "blog_img";
                 } else {
                         classDisplay = "image_box grey";
                         imageClass = "blog_img grey";
                 }
+                
 
                 // Create HTML for each accommodation
                 const accommodationElementOwner = document.createElement('div');

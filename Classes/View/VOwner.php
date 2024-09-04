@@ -12,13 +12,28 @@ use Classes\Entity\EVisit;
 use StartSmarty;
 
 class VOwner {
+    /**
+     * @var Smarty $smarty
+     */
     private $smarty;
 
+    /**
+     * __construct
+     * 
+     * This method is used to initialize the smarty object
+     */
     public function __construct() {
         $this->smarty = StartSmarty::configuration();
     }
 
-    //Mostra la home del proprietario
+    /**
+     * home
+     * 
+     * This method is used to show the owner's dashboard
+     * @param array $accommodationsActive
+     * @param array $accommodationsInactive
+     * @param ?string $modalSuccess
+     */
     public function home(array $accommodationsActive, array $accommodationsInactive, ?string $modalSuccess):void {
         $this->smarty->assign('accommodationsActive', json_encode($accommodationsActive));
         $this->smarty->assign('modalSuccess', $modalSuccess);
@@ -129,11 +144,18 @@ class VOwner {
         $this->smarty->assign('visitAvailabilityData', json_encode($visitAvailabilityData));
         $this->smarty->display('Owner/editAccommodation.tpl');
     }
-    public function tenants(array $tenants, string $kind, array $accommodations, int $rating=0) {
+    public function tenants(array $tenants, string $kind, array $accommodations, int $rating=0, ?string $accommodation=null, ?string $username=null, ?string $period=null, ?string $age=null, ?bool $men=null, ?bool $women=null, ?string $year=null) {
         $this->smarty->assign('tenants', json_encode($tenants));
         $this->smarty->assign('kind', $kind);
         $this->smarty->assign('accommodationTitles', json_encode($accommodations));
         $this->smarty->assign('rating', $rating);
+        $this->smarty->assign('accommodation', $accommodation);
+        $this->smarty->assign('username', $username);
+        $this->smarty->assign('period', $period);
+        $this->smarty->assign('age', $age);
+        $this->smarty->assign('men', $men);
+        $this->smarty->assign('women', $women);
+        $this->smarty->assign('year', $year);
         $this->smarty->display('Owner/tenants.tpl');
     }
     public function visits(array $visitsData) {

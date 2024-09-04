@@ -313,34 +313,6 @@
 </div>
 <!-- End of Request Detail Modal -->
 
-<!-- Success Modal -->
-<div class="resModal" id="successModal">
-      <div class="resModal-content">
-         <div class="row">
-            <span class="resClose" id="successClose">&times;</span>
-            <h2 class="resModal-head">
-            {if $modalSuccess == 'success'}
-            Success
-            {else}
-            Error
-            {/if}
-            </h2>
-         </div>
-         <div class="container cont-padding">
-         {if $modalSuccess == 'success'}
-            <h4>Operation completed successfully.</h4>
-         {else}
-            <h4>There was an error while processing. Please try again later.</h4>
-         {/if}
-                </div>
-            <div class="btn-cont">
-                <button type="button" class="edit_btn" id="closeSuccess">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End of Success Modal -->
-
 <!-- Cookie Modal -->
 <div class="modal" id="myModal">
       <div class"container-fluid">
@@ -383,7 +355,6 @@
       <!-- Javascript variables-->
       <script>
          const results = {$searchResult};
-         var modalSuccess= '{$modalSuccess}';
          const user = 'Student';
          const rangeInput = document.querySelectorAll(".range-input input");
          const priceInput = document.querySelectorAll(".price-input input");
@@ -408,8 +379,7 @@
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
-      <!-- javascript --> 
-      
+      <!-- javascript -->
       <script src="/UniRent/Smarty/js/UniRentOriginal/searchResult.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/rangeInput.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/rating.js"></script>

@@ -80,7 +80,7 @@ var successModal = document.getElementById("successModal");
 var successClose = document.getElementById("successClose");
 var closeSuccess = document.getElementById("closeSuccess");
 if (successModal) {
-  if (modalSuccess !== "") {
+  if (modalSuccess !== "undefined" && modalSuccess !== "") {
     successModal.style.display = "block";
   } else {
     successModal.style.display = "none";
@@ -253,14 +253,16 @@ if (deleteConfirmModal) {
   deleteConfirmSpan.onclick = function () {
     deleteConfirmModal.style.display = "none";
   };
-  deleteModalOpen.onclick = function (event) {
-    event.preventDefault(); // Prevent the default action (navigation)
-    if (typeof deletable !== "undefined" && !deletable) {
-      notDeletableModal.style.display = "block";
-    } else {
-      deleteConfirmModal.style.display = "block";
-    }
-  };
+  if (deleteModalOpen) {
+    deleteModalOpen.onclick = function (event) {
+      event.preventDefault(); // Prevent the default action (navigation)
+      if (typeof deletable !== "undefined" && !deletable) {
+        notDeletableModal.style.display = "block";
+      } else {
+        deleteConfirmModal.style.display = "block";
+      }
+    };
+  }
   if (notDeletableModal) {
     notDeletableClose.onclick = function () {
       notDeletableModal.style.display = "none";
@@ -418,7 +420,7 @@ if (successDeleteModal) {
   );
 
   function showsuccessDeleteModal() {
-    if (successDelete != "null") {
+    if (successDelete != "undefined" && successDelete != "null") {
       successDeleteModal.style.display = "block";
     }
   }
@@ -439,6 +441,23 @@ var successVisitModal = document.getElementById("successVisitModal");
 var visitEmptyModal = document.getElementById("visitEmptyModal");
 if (visitModal && confirmModal && successVisitModal && visitEmptyModal) {
   var visitBtn = document.getElementById("visitBtn");
+  function showSuccessVisitModal() {
+    if (successVisit!="undefined" && successVisit !== "null") {
+      successVisitModal.style.display = "block";
+    }
+  }
+
+  // Call the function to check for $successVisit and show modal
+  showSuccessVisitModal();
+  // Close success visit modal
+    document.getElementById("closeSuccessVisitModal").onclick = function () {
+      successVisitModal.style.display = "none";
+      window.location.href = currentPage;
+    };
+    document.getElementById("successVisitClose").onclick = function () {
+      successVisitModal.style.display = "none";
+      window.location.href = currentPage;
+    };
 
   // Event handler for Visit button
   visitBtn.onclick = function (event) {
@@ -501,15 +520,7 @@ if (visitModal && confirmModal && successVisitModal && visitEmptyModal) {
       visitModal.style.display = "block"; // Show visit modal after confirmation
     };
 
-    // Close success visit modal
-    document.getElementById("closeSuccessVisitModal").onclick = function () {
-      successVisitModal.style.display = "none";
-      window.location.href = currentPage;
-    };
-    document.getElementById("successVisitClose").onclick = function () {
-      successVisitModal.style.display = "none";
-      window.location.href = currentPage;
-    };
+    
 
     // Close visit empty modal
     document.getElementById("closeVisitEmptyModal").onclick = function () {
@@ -518,16 +529,6 @@ if (visitModal && confirmModal && successVisitModal && visitEmptyModal) {
     document.getElementById("visitEmptyClose").onclick = function () {
       visitEmptyModal.style.display = "none";
     };
-
-    // Function to show success visit modal based on $successVisit value
-    function showSuccessVisitModal() {
-      if (successVisit !== "null") {
-        successVisitModal.style.display = "block";
-      }
-    }
-
-    // Call the function to check for $successVisit and show modal
-    showSuccessVisitModal();
 
     // Optional: Populate time slots based on the selected day (if needed)
     var timeSelect = document.getElementById("time");
@@ -588,7 +589,7 @@ var successReserveModal = document.getElementById("successReserveModal");
 
 if (reserveModal && notReservableModal && successReserveModal) {
     // JavaScript function to populate the date select dropdown with dynamic year selection
-    function populateYearSelect(selectedYear) {
+    function populateYearSelect(defaultYear) {
         const select = document.getElementById("year");
         const currentYear = new Date().getFullYear();
     
@@ -602,8 +603,8 @@ if (reserveModal && notReservableModal && successReserveModal) {
             option.value = year;
             option.text = year;
     
-            // Check if this year matches the selectedYear
-            if (year === selectedYear) {
+            // Check if this year matches the defaultYear
+            if (year === defaultYear) {
                 option.selected = true;
             }
     
@@ -614,7 +615,7 @@ if (reserveModal && notReservableModal && successReserveModal) {
     
         // Call populateYearSelect function on document ready
         document.addEventListener("DOMContentLoaded", function() {
-            populateYearSelect(selectedYear);
+            populateYearSelect(defaultYear);
         });
     
     $(document).ready(function() {

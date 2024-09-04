@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     const limit = Math.min(replies.length, 4); // Show up to 4 replies
                     messageList.innerHTML = ''; // Clear previous messages
                     for (let i = 0; i < limit; i++) {
-                        const reply = replie[1][i];
+                        const reply = replies[i];
                         const isUnread = reply.statusRead === 0 || reply.statusRead === false;
                         const itemClass = isUnread ? 'font-weight-bold requestItem' : 'requestItem';
                         

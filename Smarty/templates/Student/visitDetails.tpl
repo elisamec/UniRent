@@ -147,13 +147,6 @@
       <div class="row padding-reserve">
           <select name="day" id="day" class="selectVisit" required>
           <option value="" selected disabled>Select a day</option>
-            <option value="Monday">Monday</option>
-            <option value="Tuesday">Tuesday</option>
-            <option value="Wednesday">Wednesday</option>
-            <option value="Thursday">Thursday</option>
-            <option value="Friday">Friday</option>
-            <option value="Saturday">Saturday</option>
-            <option value="Sunday">Sunday</option>
           </select>
       </div>
       <div class="row padding-reserve">
@@ -305,6 +298,8 @@
       let preselectedDay = '{$visit->getDate()->format('w')}'; // Placeholder for preselected day
       const preselectedTime = '{$visit->getDate()->format('H:i')}'; // Placeholder for preselected time
       var successEdit = '{$successEdit}';
+      const deleteVariable = "Visit";
+      const successDelete = "{$successDelete}";
       </script>
       <script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>

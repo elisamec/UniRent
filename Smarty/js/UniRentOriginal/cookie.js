@@ -36,7 +36,7 @@ let currentPage = window.location.pathname;
 function normalizeUrl(url) {
     const endingsToStrip = [
         '/success', '/error', '/sent', '/fail', '/null/sent', '/null/full',
-        '/false', '/null/false', '/true'
+        '/false', '/null/false', '/true', '/null'
     ];
     
     endingsToStrip.forEach(ending => {
@@ -136,7 +136,7 @@ const customNamesPatterns = {
     '/UniRent/Owner/guidelines': 'Guidelines',
     '/UniRent/' : 'Home',
     '/UniRent/Owner/filterTenants/*': 'Filter Tenants',
-    'UniRent/Contract/onGoing/*': 'OnGoing Contracts',
+    '/UniRent/Contract/viewOngoing/*': 'OnGoing Contracts',
 };
 
 // Initialize or retrieve `urlDisplayNames` from sessionStorage

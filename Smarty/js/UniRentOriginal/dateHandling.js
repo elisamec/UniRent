@@ -68,7 +68,6 @@
     var parts = birthDateString.split('/');
     if (parts.length === 3) {
           var formattedDate = parts[2] + '-' + parts[1].padStart(2, '0') + '-' + parts[0].padStart(2, '0');
-          console.log(formattedDate);
           document.getElementById('birthDate').value = formattedDate;
     }
  }

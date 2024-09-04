@@ -129,8 +129,16 @@ class USession
             return false;
         }
     }
-
-    public function booleanSolver($value)
+    /**
+     * Method booleanSolver
+     * 
+     * this method solve the boolean value
+     *
+     * @param mixed $value
+     *
+     * @return bool
+     */
+    public function booleanSolver($value):?bool
     {
         if($value===1 || $value===true || $value==='true')
         {

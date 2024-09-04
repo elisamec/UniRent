@@ -127,7 +127,11 @@
                </div>
                <div class="row">
                <div class="Findcontainer">
+               {if $username !== null}
+               <input name="username" id="tenantName" type="text" placeholder="Username of the tenant" value="{$username}">
+               {else}
                      <input name="username" id="tenantName" type="text" placeholder="Username of the tenant">
+               {/if}
                </div>
                </div>
                <div class="Findcontainer">
@@ -173,13 +177,25 @@
                <div class="Findcontainer">
                   <div class="select-outline">
                      <select name="date" id="expiryDateT" class="mdb-select md-form md-outline colorful-select dropdown-primary">
+                        {if $period === 'september'}
+                        <option value="" disabled>Select a period</option>
+                        <option value="september" selected>September to June</option>
+                        <option value="october">October to July</option>
+                        {else if $period === 'october'}
+                        <option value="" disabled>Select a period</option>
+                        <option value="september">September to June</option>
+                        <option value="october" selected>October to July</option>
+                        {else}
                         <option value="" disabled selected>Select a period</option>
                         <option value="september">September to June</option>
                         <option value="october">October to July</option>
+                        {/if}
                      </select>
                   </div>
                </div>
-               </div><div class="row">
+               </div>
+               {if $kind !== 'current'}
+               <div class="row">
                <div class="Findcontainer">
                   <div class="select-outline">
                      <select name="year" id="year" class="selectFilter mdb-select md-form md-outline colorful-select dropdown-primary">
@@ -188,9 +204,14 @@
                   </div>
                </div>
                </div>
+               {/if}
                <div class="row">
                <div class="Findcontainer">
+               {if $age !== null}
+                     <input type="number" name="age" id="age" placeholder="Age of the tenant" min="18" max="110" value="{$age}">
+               {else}
                      <input type="number" name="age" id="age" placeholder="Age of the tenant" min="18" max="110">
+               {/if}
                </div>
                </div>
                <div class="row">
@@ -199,12 +220,22 @@
                                     <label class="checkbox-label">Sex:</label>
                                     <div class="row">
                                     <label>
-                                        <input type="checkbox" name="men" id="men"> Men
+                                    {if $men === true}
+                                        <input type="checkbox" name="men" id="men" checked> Men
+                                        <input type="hidden" id="hiddenMen" name="men" value="true">
+                                    {else}
+                                          <input type="checkbox" name="men" id="men"> Men
                                         <input type="hidden" id="hiddenMen" name="men" value="false">
+                                    {/if}
                                     </label>
                                     <label>
+                                    {if $women === true}
+                                          <input type="checkbox" name="women" id="women" checked> Women
+                                        <input type="hidden" id="hiddenWomen" name="women" value="true">
+                                    {else}
                                         <input type="checkbox" name="women" id="women"> Women
                                         <input type="hidden" id="hiddenWomen" name="women" value="false">
+                                    {/if}
                                     </label>
                                     </div>
                                 </div>
@@ -275,34 +306,6 @@
     </div>
 </div>
 <!-- End of Request Detail Modal -->
-
-<!-- Success Modal -->
-<div class="resModal" id="successModal">
-      <div class="resModal-content">
-         <div class="row">
-            <span class="resClose" id="successClose">&times;</span>
-            <h2 class="resModal-head">
-            {if $modalSuccess == 'success'}
-            Success
-            {else}
-            Error
-            {/if}
-            </h2>
-         </div>
-         <div class="container cont-padding">
-         {if $modalSuccess == 'success'}
-            <h4>Operation completed successfully.</h4>
-         {else}
-            <h4>There was an error while processing. Please try again later.</h4>
-         {/if}
-                </div>
-            <div class="btn-cont">
-                <button type="button" class="edit_btn" id="closeSuccess">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End of Success Modal -->
       
       <!-- footer section start -->
       <div class="footer_section">
@@ -333,11 +336,12 @@
       <!-- footer section end -->
       <!-- JavaScript variables -->
       <script>
-         var modalSuccess= '{$modalSuccess}';
          const tenants = {$tenants};
          const accommodationTitles = {$accommodationTitles};
          var file = 'tenants';
          const rating = {$rating};
+         var selectedAccommodation = '{$accommodation}';
+         var selectedYear = '{$year}';
       </script>
       
       <!-- Javascript files-->
