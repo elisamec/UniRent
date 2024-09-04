@@ -6,5 +6,5 @@ class Config {
     public const DB_NAME = 'unirent';
     public const DB_USER = 'root';
     public const DB_PASS = 'pippo';
-    public const SQL_FILE_PATH = '/UniRent/unirent.sql';
+    public const SQL_FILE_PATH = __DIR__ . '/../unirent.sql';
 }
