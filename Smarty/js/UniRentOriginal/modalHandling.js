@@ -80,7 +80,7 @@ var successModal = document.getElementById("successModal");
 var successClose = document.getElementById("successClose");
 var closeSuccess = document.getElementById("closeSuccess");
 if (successModal) {
-  if (modalSuccess !== "") {
+  if (modalSuccess !== "undefined" && modalSuccess !== "") {
     successModal.style.display = "block";
   } else {
     successModal.style.display = "none";
