@@ -253,14 +253,16 @@ if (deleteConfirmModal) {
   deleteConfirmSpan.onclick = function () {
     deleteConfirmModal.style.display = "none";
   };
-  deleteModalOpen.onclick = function (event) {
-    event.preventDefault(); // Prevent the default action (navigation)
-    if (typeof deletable !== "undefined" && !deletable) {
-      notDeletableModal.style.display = "block";
-    } else {
-      deleteConfirmModal.style.display = "block";
-    }
-  };
+  if (deleteModalOpen) {
+    deleteModalOpen.onclick = function (event) {
+      event.preventDefault(); // Prevent the default action (navigation)
+      if (typeof deletable !== "undefined" && !deletable) {
+        notDeletableModal.style.display = "block";
+      } else {
+        deleteConfirmModal.style.display = "block";
+      }
+    };
+  }
   if (notDeletableModal) {
     notDeletableClose.onclick = function () {
       notDeletableModal.style.display = "none";
