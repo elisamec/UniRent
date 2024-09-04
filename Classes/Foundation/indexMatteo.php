@@ -17,6 +17,7 @@ use Classes\Foundation\FReview;
 use Classes\Utilities\UAccessUniversityFile;
 use Updater\Updater;
 use Classes\Control\CAdmin;
+use Configuration\Installation;
 
 # PARTE MATTEO cancellato materiale precedente 22/06/2024
 /*
@@ -161,7 +162,9 @@ $result=$FA->areThereFreePlaces(7,2024);
 
 print var_dump($result);
 */
+/*
 $c=FConnection::getInstance();
 $a=$c->getStatistics();
-print_r($a);
+print_r($a);*/
 
+Installation::install();
