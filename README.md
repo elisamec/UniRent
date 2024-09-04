@@ -54,7 +54,7 @@ To ensure that you don't have any problems with some sample elements already pre
 **In both cases continue as follows:**
 
 - Search for the element `max_allowed_packet` (It should appear a total of 2 times);
-- Change whatever value is associated with that variable to 1024M;
+- Ensure that the values associated with that varable is at least 1024M in both of the declarations.
 
 To make sure the application works well, we need you to run the following command into the UniRent folder:
 
