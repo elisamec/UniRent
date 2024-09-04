@@ -3,7 +3,9 @@ function populateTenantsContainer(tenants) {
     const yearSelect = document.getElementById("year");
 
     // Clear existing options in year select
-    yearSelect.innerHTML = '<option value="" disabled selected>Select a year</option>';
+    if(yearSelect) {
+        yearSelect.innerHTML = '<option value="" disabled selected>Select a year</option>';
+    }
     tenantsContainer.innerHTML = '';
 
     if (!tenants || tenants.length === 0 || Object.keys(tenants).length === 0) {
@@ -84,13 +86,14 @@ function populateTenantsContainer(tenants) {
         accommodationDiv.appendChild(rowDiv);
         tenantsContainer.appendChild(accommodationDiv);
     });
-
-    uniqueYears.forEach(year => {
-        const option = document.createElement("option");
-        option.value = year;
-        option.textContent = year;
-        yearSelect.appendChild(option);
-    });
+    if(yearSelect) {
+        uniqueYears.forEach(year => {
+            const option = document.createElement("option");
+            option.value = year;
+            option.textContent = year;
+            yearSelect.appendChild(option);
+        });
+    }
 }
 
 document.addEventListener("DOMContentLoaded", function () {

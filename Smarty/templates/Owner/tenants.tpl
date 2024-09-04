@@ -179,7 +179,9 @@
                      </select>
                   </div>
                </div>
-               </div><div class="row">
+               </div>
+               {if $kind !== 'current'}
+               <div class="row">
                <div class="Findcontainer">
                   <div class="select-outline">
                      <select name="year" id="year" class="selectFilter mdb-select md-form md-outline colorful-select dropdown-primary">
@@ -188,6 +190,7 @@
                   </div>
                </div>
                </div>
+               {/if}
                <div class="row">
                <div class="Findcontainer">
                      <input type="number" name="age" id="age" placeholder="Age of the tenant" min="18" max="110">
