@@ -432,7 +432,6 @@ class CStudent{
         $session=USession::getInstance();
         $view = new VStudent();
         $error = 0;
-        $photoError = "";
 
         //read the data from the form
         $afp=USuperGlobalAccess::getAllPost(['username','name','surname','oldPassword','newPassword','email','sex',
@@ -449,7 +448,12 @@ class CStudent{
 
         $oldStudent = $PM->load('EStudent', $studentID);
         $oldEmail = $oldStudent->getUniversityMail();
-        $oldPhoto=$oldStudent->getPhoto();
+        $oldPhoto=$oldStudent->getPhoto(); //It's a EPhoto object
+
+        if(!is_null($oldPhoto)){
+            $photoError = $oldPhoto->getPhoto();
+            $photoError = "data:" . 'image/jpeg' . ";base64," . base64_encode($photoError);
+        } else $photoError = null;
        
         //if the new email is not already in use and it's a student's email or you haven't changed it
         if((($PM->verifyUserEmail($afp['email'])==false)&&($PM->verifyStudentEmail($afp['email'])))||($oldEmail===$afp['email'])) { 
@@ -457,12 +461,11 @@ class CStudent{
             //if the new username is not already in use or you haven't changed it
             if(($PM->verifyUserUsername($afp['username'])==false)||($oldUsername===$afp['username'])) { #se il nuovo username non è già in uso o non l'hai modificato
                 
-                $passChange = CStudent::changePassword($afp['oldPassword'], $afp['newPassword'], $oldStudent, $photoError);
+                $photo = CStudent::changePhoto($oldPhoto, $picture);  
 
+                $passChange = CStudent::changePassword($afp['oldPassword'], $afp['newPassword'], $oldStudent, $photoError);
                 $password = $passChange[0];
                 $error = $passChange[1];
-
-                $photo = CStudent::changePhoto($oldPhoto, $picture);      
                 
                 $student=new EStudent($afp['username'],$password,$afp['name'],$afp['surname'],$photo,$afp['email'],$afp['courseDuration'],$afp['immatricolationYear'],$birthDate,$afp['sex'],$smoker,$animals);
                 $student->setID($studentID);
@@ -500,37 +503,42 @@ class CStudent{
      * Method changePassword
      *
      * this method is used to change the student's password
-     * @param string $oldPassword $oldPassword [oldPassword]
-     * @param string $newPassword $newPassword [newPassword]
-     * @param EStudent $oldStudent $oldStudent 
+     * @param string $oldPassword old password insered by user
+     * @param string $newPassword new password insered by user
+     * @param EStudent $oldStudent 
      * @param ?string $photoError
      *
      * @return array
      */
-    private static function changePassword($oldPassword, $newPassword, $oldStudent, $photoError):array{
+    private static function changePassword($formOldPassword, $newPassword, $oldStudent, $photoError):array{
 
-        $session=USession::getInstance();
         $view = new VStudent();
         $error = 0;
 
+        $oldPassword = $oldStudent->getPassword();
+
         if($newPassword===''){
             //If i don't have any new password, i'll use the old one
-            $password=$session->getSessionElement('password');
+            $password=$oldPassword;
         } else {
             
-            if($oldPassword===$session->getSessionElement('password')){
+            //If the old password is correct
+            if(password_verify($formOldPassword, $oldPassword)){
+
+                //If the new password is not valid
                 if(!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()])[A-Za-z\d@$!%*?&()]{8,}$/' , $newPassword)){
 
                     $error = 1;
-                    $password=$session->getSessionElement('password');
+                    $password=$oldPassword;
                     $view->editProfile($oldStudent, $photoError, true, false, false, false, null);
 
                 } else $password=$newPassword;
-                
+            
+            //If the old password (typed by user) is incorrect
             } else {
                 $error = 1;
                 $view->editProfile($oldStudent, $photoError, false, false, false, true, null);
-                $password=$session->getSessionElement('password');
+                $password=$oldPassword;
             }
         }
         return [$password, $error];
@@ -547,7 +555,9 @@ class CStudent{
      */
     private static function changePhoto(?EPhoto $oldPhoto, ?array $picture) : ?EPhoto{
         $PM=FPersistentManager::getInstance();
+
         if(!is_null($oldPhoto)){       
+
             $photoId=$oldPhoto->getId();
             is_null($picture) ? $photo = $oldPhoto
                               : $photo = new EPhoto($photoId, $picture['img'], 'other', null);

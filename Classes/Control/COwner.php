@@ -296,9 +296,7 @@ class COwner
         $ownerId=$session->getSessionElement('id');
         $oldPassword=USuperGlobalAccess::getPost('oldPassword');
 
-        $oldPhoto = $session->getSessionElement('photo');
-        $base64 = base64_encode($oldPhoto);
-        $photoError = "data:" . 'image/jpeg' . ";base64," . $base64;
+        
 
         if($ownerId===null)
         {
@@ -308,7 +306,14 @@ class COwner
         }
         else
         {
-            $owner=$PM->load("EOwner", $ownerId);    
+            $owner=$PM->load("EOwner", $ownerId);   
+            
+            $oldPhoto = $owner->getPhoto();
+
+            if(!is_null($oldPhoto)){
+                $photoError = $oldPhoto->getPhoto();
+                $photoError = "data:" . 'image/jpeg' . ";base64," . base64_encode($photoError);
+            } else $photoError = null;
             
             if(($newemail===$owner->getMail())||($PM->verifyUserEmail($newemail)===false))
             {
@@ -319,11 +324,10 @@ class COwner
                         if(($newIBAN===$owner->getIban())||($PM->verifyIBAN($newIBAN)===false))
                         {   
                             $passChange = COwner::changePassword($oldPassword, $newPassword, $owner, $photoError);
-
                             $newPassword = $passChange[0];
                             $error = $passChange[1];
                             
-                            $photo = COwner::changePhoto($oldPhoto, $picture, $owner);
+                            $photo = COwner::changePhoto($oldPhoto, $picture);
 
                             $owner->setName($name);
                             $owner->setSurname($surname);
@@ -377,15 +381,15 @@ class COwner
         }
     }
 
-    private static function changePhoto(?string $oldPhoto, ?array $picture, EOwner $oldOwner) : ?EPhoto{
+    private static function changePhoto(?EPhoto $oldPhoto, ?array $picture) : ?EPhoto{
 
         $PM=FPersistentManager::getInstance();
 
         if(!is_null($oldPhoto)){
                     
-            $photoId=$oldOwner->getPhoto()->getId();
+            $photoId=$oldPhoto->getId();
 
-            is_null($picture) ? $photo = new EPhoto($photoId, $oldPhoto, 'other', null)
+            is_null($picture) ? $photo = $oldPhoto
                               : $photo = new EPhoto($photoId, $picture['img'], 'other', null);
 
         } else {
@@ -407,22 +411,23 @@ class COwner
         return $photo;
     }
 
-    private static function changePassword($oldPassword, $newPassword, $owner, $photoError):array{
+    private static function changePassword($formOldPassword, $newPassword, $owner, $photoError):array{
 
-        $session=USession::getInstance();
         $view = new VOwner();
         $error = 0;
 
-        if($newPassword===''){
+        $oldPassword = $owner->getPassword();
+
+        if($newPassword === ''){
             //If i don't have any new password, i'll use the old one
-            $password=$session->getSessionElement('password');
+            $password = $oldPassword;
         } else {
             
-            if($oldPassword===$session->getSessionElement('password')){
+            if(password_verify($formOldPassword, $oldPassword)){
                 if(!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()])[A-Za-z\d@$!%*?&()]{8,}$/' , $newPassword)){
 
                     $error = 1;
-                    $password=$session->getSessionElement('password');
+                    $password = $oldPassword;
                     $view->editProfile($owner, $photoError, false, false, false, false, false, true);
 
                 } else $password=$newPassword;
@@ -430,7 +435,7 @@ class COwner
             } else {
                 $error = 1;
                 $view->editProfile($owner, $photoError, false, false, false, false, true, false);
-
+                $password=$oldPassword;
             }
         }
 

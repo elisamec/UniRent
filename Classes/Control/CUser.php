@@ -171,7 +171,8 @@ class CUser
                 $view->registrationError(false, false, false, true, $username, $mail, $name, $surname, $type, $modalSuccess);
                 exit();
             }
-            $session->setSessionElement('password',USuperGlobalAccess::getPost('password'));
+            $password = password_hash($password, PASSWORD_DEFAULT);
+            $session->setSessionElement('password',$password);
             $session->setSessionElement('name',$name);
             $session->setSessionElement('surname',$surname);
             $session->setSessionElement('picture',$picture);
@@ -225,6 +226,7 @@ class CUser
                     $session->setSessionElement("id", $result_username_array['id']);
                     $session->setSessionElement("userType", $type);
                     $session->setSessionElement('username', $username);
+                    $passwordIn = password_hash($passwordIn, PASSWORD_DEFAULT);
                     $session->setSessionElement('password', $passwordIn);
                     $type === 'Student' ? header('Location:/UniRent/Student/home') : header('Location:/UniRent/Owner/home');
                 } else { //password is not correct
