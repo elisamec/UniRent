@@ -181,7 +181,7 @@ class CReview {
         $reviews = $PM->loadByRecipient($userId, $userType);
         $reviewsData = [];
         foreach ($reviews as $review) {
-            $author = $PM->load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
+            $author = $PM->load( 'E' . ucfirst($review->getAuthorType()->value), $review->getIdAuthor());
             $isAdmin = $session->getSessionElement('userType') === 'Admin';
             if ($review->isBanned() &&  !$isAdmin) {
                 continue;
