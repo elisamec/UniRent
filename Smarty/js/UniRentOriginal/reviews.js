@@ -52,6 +52,9 @@ function displayReviews(reviews, user) {
                             userStyle = 'class="userIcon"';
                             hrefLink = '/UniRent/Student/publicProfile/' + review.username;
                         }
+                    } else {
+                        userStyle = 'class="userIcon"';
+                        hrefLink = '/UniRent/Student/publicProfile/' + review.username;
                     }
                         if (review.reported) {
                             reportedStyle = 'style="opacity: 0.5;"';
