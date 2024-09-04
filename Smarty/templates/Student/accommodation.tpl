@@ -531,7 +531,7 @@
       </div>
       <!-- footer section end -->
       <script>
-        var selectedYear = {$selectedYear};
+        var defaultYear = {$selectedYear};
         var disabled = '{$disabled}';
         var timeSlots = {$timeSlots};
         var successVisit = '{$successVisit}';
