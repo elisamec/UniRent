@@ -201,6 +201,11 @@ class EAccommodation
         return $this->visit;
     }
 
+    /**
+     * getAverageRating
+     * Returns the average rating of the accommodation
+     * @return float
+     */
     public function getAverageRating() {
         $PM = FPersistentManager::getInstance();
         return $PM->getAccommodationRating($this->idAccommodation);
@@ -447,46 +452,35 @@ class EAccommodation
      * @return string
      */
     public function __toString():string{
-        
         $address = $this->address->getSortingCode() . ", " . $this->address->getAddressLine1() . ", " . $this->address->getLocality() . ", " . $this->address->getPostalCode();
         $start = $this->start->format('Y-m-d');
-
         $str = "ID: $this->idAccommodation  \n" . "Photos: \n";
-
         foreach($this->photo as $photo){
             $str = $str . "$photo  \n";
         }
-
         $str = $str . "Title: $this->title  \n".
-                "Address: $address  \n".
-                "Price: $this->price  \n".
-                "Start: $start  \n".
-                "Description: $this->description  \n".
-                "Places: $this->places  \n".
-                "Deposit: $this->deposit  \n" .
-                "Visit:  ";
-
-
+            "Address: $address  \n".
+            "Price: $this->price  \n".
+            "Start: $start  \n".
+            "Description: $this->description  \n".
+            "Places: $this->places  \n".
+            "Deposit: $this->deposit  \n" .
+            "Visit:  ";
         $visit = $this->visit;
         $days = array_keys($visit);
-
         foreach($days as $day){
-
             $str = $str . "\n    $day:  ";
-
             foreach ($visit[$day] as $time){
-                $str = $str . " $time  ";
+            $str = $str . " $time  ";
             }
         }
-
         $str = $str . "\nVisit Duration: $this->visitDuration  \n".
-                "Man: $this->man \n".
-                "Woman: $this->woman \n".
-                "Pets: $this->pets \n".
-                "Smokers: $this->smokers \n".
-                "Status: $this->status \n".
-                "ID Owner: $this->idOwner \n";
-
+            "Man: $this->man \n".
+            "Woman: $this->woman \n".
+            "Pets: $this->pets \n".
+            "Smokers: $this->smokers \n".
+            "Status: $this->status \n".
+            "ID Owner: $this->idOwner \n";
         return $str;
     }
     
@@ -501,7 +495,6 @@ class EAccommodation
     {
         $result=array();
         $myarray=json_decode($json,true);
-        #print_r($myarray);
         $result=array();
         foreach($myarray as $key=>$value)
         {
@@ -510,7 +503,6 @@ class EAccommodation
             $end=$value['end'];
             $start=EAccommodation::stringInMinutes($start);
             $end=EAccommodation::stringInMinutes($end);
-
             if($start>=$end) #in questo modo non prenderò in considerazione intervalli negativi di tempo!
             {
                 $value['diff']=-1;
@@ -521,7 +513,6 @@ class EAccommodation
                 $totalMinutes = $difference->h * 60 + $difference->i;
                 $value['diff']=(int)$totalMinutes;
             }
-            
             if($value['diff']<=0){continue;}
             else
             {
@@ -536,8 +527,6 @@ class EAccommodation
                 }
             }  
         }
-        
-        #print_r($result);
         $result_2=array();
         foreach($result as $key=>$value)
         {
@@ -557,11 +546,9 @@ class EAccommodation
                 $result_2[$key]=$app; #ancora necessario perchè potrei inserire due o più periodi per la visita in un solo giorno
             }    
         }
-        
         $final_result=array();
         foreach($result_2 as $key=>$value)
         {
-            #print $value['day'];
             if(in_array($value['day'],array_keys($final_result)))
             {
                 foreach($value['times'] as $time)
