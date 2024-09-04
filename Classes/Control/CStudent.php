@@ -14,6 +14,7 @@ use Classes\View\VStudent;
 use Classes\Tools\TStatusUser;
 use Classes\View\VError;
 use Classes\Entity\EReview;
+use Classes\Utilities\UFormat;
 use DateTime;
 
 
@@ -769,7 +770,7 @@ class CStudent{
         $PM=FPersistentManager::getInstance();
         $studentId=$PM->getStudentIdByUsername($username);
         $cards =$PM->loadStudentCards($studentId);
-        $cardsData=ECreditCard::creditCardFormatArray($cards);
+        $cardsData=UFormat::creditCardFormatArray($cards);
         $view->paymentMethods($cardsData, $modalSuccess);
     }         
     /**
