@@ -7,6 +7,20 @@ use Classes\Tools\TStatusUser;
 
 class EOwner
 {
+    /**
+     * 
+     * @var ?int $id The unique identifier of the owner.
+     * @var string $username The username of the owner.
+     * @var string $password The password of the owner.
+     * @var string $name The name of the owner.
+     * @var string $surname The surname of the owner.
+     * @var ?EPhoto $photo The photo of the owner.
+     * @var string $email The email of the owner.
+     * @var string $phoneNumber The phone number of the owner.
+     * @var string $iban The IBAN of the owner.
+     * @var TStatusUser $status The status of the owner.
+     * @var string $entity The entity of the owner.
+     */
     private ?int $id;
     private string $username;
     private string $password;
