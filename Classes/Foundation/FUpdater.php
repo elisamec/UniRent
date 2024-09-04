@@ -9,9 +9,18 @@ use PDO;
 
 class FUpdater
 {
+    /**
+     * Instance of the class
+     */
     private static $instance;
+    /**
+     * Constructor
+     */
     private function __construct(){}
-
+    /**
+     * Get the instance of the class
+     * @return FUpdater
+     */
     public static function getInstance()
     {
         if (!self::$instance) 
@@ -20,7 +29,9 @@ class FUpdater
         }
         return self::$instance;
     }
-
+    /**
+     * Update the database
+     */
     public function updateDB()
     {
         $db=FConnection::getInstance()->getConnection();

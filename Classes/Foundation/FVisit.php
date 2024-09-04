@@ -113,6 +113,12 @@ class FVisit
         }
     }
 
+    /**
+     * loadByWeek
+     * Return all the visits of the week
+     * 
+     * @return array
+     */
     public function loadByWeek(): array{
 
         $db=FConnection::getInstance()->getConnection();
@@ -364,6 +370,13 @@ class FVisit
         } else return false;
         
     }
+    /**
+     * loadVisitScheduleStudent
+     * Return all the visits of a student
+     * 
+     * @param  int $id
+     * @return array
+     */
     public function loadVisitScheduleStudent(int $id):array {
         $db=FConnection::getInstance()->getConnection();
         $result=array();
@@ -388,6 +401,13 @@ class FVisit
             }
             return $result;
     }
+    /**
+     * loadVisitScheduleOwner
+     * Return all the visits of an accommodation
+     * 
+     * @param  array $accommodation
+     * @return array
+     */
     public function loadVisitScheduleOwner(array $accommodation):array {
         $db=FConnection::getInstance()->getConnection();
         $result=[];

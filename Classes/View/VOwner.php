@@ -12,13 +12,28 @@ use Classes\Entity\EVisit;
 use StartSmarty;
 
 class VOwner {
+    /**
+     * @var Smarty $smarty
+     */
     private $smarty;
 
+    /**
+     * __construct
+     * 
+     * This method is used to initialize the smarty object
+     */
     public function __construct() {
         $this->smarty = StartSmarty::configuration();
     }
 
-    //Mostra la home del proprietario
+    /**
+     * home
+     * 
+     * This method is used to show the owner's dashboard
+     * @param array $accommodationsActive
+     * @param array $accommodationsInactive
+     * @param ?string $modalSuccess
+     */
     public function home(array $accommodationsActive, array $accommodationsInactive, ?string $modalSuccess):void {
         $this->smarty->assign('accommodationsActive', json_encode($accommodationsActive));
         $this->smarty->assign('modalSuccess', $modalSuccess);

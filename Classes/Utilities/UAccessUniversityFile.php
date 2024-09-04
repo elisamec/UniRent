@@ -4,10 +4,30 @@ namespace Classes\Utilities;
 
 class UAccessUniversityFile
 {
+    /**
+     * $path
+     *
+     * @var string
+     */
     public static $path = __DIR__ . '/UniIta.json';
+    /**
+     * $instance
+     *
+     * @var UAccessUniversityFile
+     */
     public static $instance= null;
+    /**
+     * $list
+     *
+     * @var array
+     */
     private static $list=array();
 
+    /**
+     * __construct
+     *
+     * @return void
+     */
     private function __construct()
     {
         $path=__DIR__.'/UniIta.json';
@@ -25,7 +45,11 @@ class UAccessUniversityFile
         }
         self::$list=$indirizzi_web;
     }
-
+    /**
+     * getInstance
+     *
+     * @return UAccessUniversityFile
+     */
     public static function getInstance():UAccessUniversityFile
     {
         if(is_null(self::$instance))
@@ -34,12 +58,21 @@ class UAccessUniversityFile
         }
         return self::$instance;
     }
-
+    /**
+     * getUniversityEmailList
+     *
+     * @return array
+     */
     public function getUniversityEmailList():array
     {
         $result=self::$list;
         return $result;
     }
+    /**
+     * close
+     *
+     * @return void
+     */
     public function close():void
     {
         self::$instance=null;
@@ -112,6 +145,13 @@ class UAccessUniversityFile
         return '';
     }
 
+    /**
+     * Method getCities
+     *
+     * this method retrive the cities
+     *
+     * @return array
+     */
     public function getCities()
     {
         $result=array();

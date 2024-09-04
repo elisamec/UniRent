@@ -3,6 +3,12 @@ require(__DIR__ . '/../Smarty/Smarty.class.php');
 
 
 class StartSmarty{
+    /**
+     * configuration
+     * 
+     * This method is used to configure the smarty object
+     * @return Smarty
+     */
     static function configuration(){
         $smarty=new Smarty();
         $smarty->template_dir= __DIR__ . '/../Smarty/templates/';

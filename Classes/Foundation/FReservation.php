@@ -392,7 +392,16 @@ class FReservation
         }
     }
 
-    public function loadReservationsByStudent(int $id, string $kind) {
+    /**
+     * Method loadReservationsByStudent
+     *
+     * This method return a EReservation array of waiting reservations
+     * @param int $id [Student id]
+     * @param string $kind [accepted|pending]
+     *
+     * @return ?array
+     */
+    public function loadReservationsByStudent(int $id, string $kind):?array {
         $db=FConnection::getInstance()->getConnection();
         $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
         FPersistentManager::getInstance()->updateDataBase();

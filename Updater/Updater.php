@@ -77,7 +77,13 @@ class Updater
         fwrite($file, $content);
         fclose($file);
     }
-
+    /**
+     * Method updateDataBase
+     * 
+     * this method is used to update the database
+     *
+     * @return void
+     */
     private function updateDataBase()
     {
         $PM=FPersistentManager::getInstance();
