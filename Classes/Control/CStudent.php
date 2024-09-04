@@ -390,7 +390,7 @@ class CStudent{
         $tenantsArray= $PM->getTenants('current',$accomm->getIdOwner());
         foreach ($tenantsArray as $idAccommodation => $students) {
             $accommodationTitle = FPersistentManager::getInstance()->getTitleAccommodationById($idAccommodation);
-            $tenants=UFormat::getFilterTenantsFormatArray($students, $idAccommodation, $accommodationTitle, 'Student');
+            $tenants=UFormat::getFilterTenantsFormatArray($students, $idAccommodation, $accommodationTitle, 'Student') ?? [];
         }
         $session=USession::getInstance();
         

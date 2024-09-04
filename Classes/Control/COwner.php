@@ -113,7 +113,7 @@ class COwner
         $tenantsArray= $PM->getTenants('current',$accomm->getIdOwner());
         foreach ($tenantsArray as $idAccommodation => $students) {
             $accommodationTitle = FPersistentManager::getInstance()->getTitleAccommodationById($idAccommodation);
-            $tenants=UFormat::getFilterTenantsFormatArray($students, $idAccommodation, $accommodationTitle, 'OwnerManagement')[$idAccommodation]['tenants'];
+            $tenants=UFormat::getFilterTenantsFormatArray($students, $idAccommodation, $accommodationTitle, 'OwnerManagement')[$idAccommodation]['tenants'] ?? [];
         }
         $disabled=$accomm->getStatus();
         $deletable=false;
@@ -713,7 +713,7 @@ class COwner
         $tenantsArray= $PM->getTenants($kind, $ownerId);
         foreach ($tenantsArray as $idAccommodation => $students) {
             $accommodationTitle = FPersistentManager::getInstance()->getTitleAccommodationById($idAccommodation);
-            $tenants=UFormat::getFilterTenantsFormatArray($students, $idAccommodation, $accommodationTitle, 'Owner');
+            $tenants=UFormat::getFilterTenantsFormatArray($students, $idAccommodation, $accommodationTitle, 'Owner') ?? [];
         }
         $accommodations=$PM->loadAccommodationsByOwner($ownerId);
         foreach ($accommodations as $accom) {
@@ -743,7 +743,7 @@ class COwner
         $tenantsArray=$PM->getFilterTenants($type,$afs['accommodation'],$afs['username'],(int)$afs['age'],(int)$afs['rateT'],$afs['date'],$men,$women,$ownerId,$afs['year']);
         foreach ($tenantsArray as $idAccommodation => $students) {
             $accommodationTitle = FPersistentManager::getInstance()->getTitleAccommodationById($idAccommodation);
-            $tenants=UFormat::getFilterTenantsFormatArray($students, $idAccommodation, $accommodationTitle, 'Owner');
+            $tenants=UFormat::getFilterTenantsFormatArray($students, $idAccommodation, $accommodationTitle, 'Owner') ?? [];
         }
         $accommodations=$PM->loadAccommodationsByOwner($ownerId);
         foreach ($accommodations as $accom) 
