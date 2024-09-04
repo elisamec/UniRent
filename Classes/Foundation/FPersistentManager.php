@@ -198,7 +198,7 @@ class FPersistentManager {
         return $owner;
     }
 
-    public function d($user):bool
+    public function deleteStudentByUsername($user):bool
     {
         $FS=FStudent::getInstance();
         $result=$FS->deleteStudentByUsername($user);

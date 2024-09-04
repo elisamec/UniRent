@@ -195,7 +195,7 @@ class CStudent{
     {   self::checkIfStudent();
         $PM=FPersistentManager::getInstance();
         $user=USession::getInstance()->getSessionElement('username');
-        $result=$PM->d($user);
+        $result=$PM->deleteStudentByUsername($user);
         if($result)
         {
             $session=USession::getInstance();
