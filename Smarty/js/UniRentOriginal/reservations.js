@@ -73,3 +73,5 @@ function populateReservationsContainer(reservationData) {
         reservationsContainer.appendChild(accommodationDiv);
     });
 }
+
+populateReservationsContainer(reservationData)
