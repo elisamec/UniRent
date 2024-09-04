@@ -57,7 +57,7 @@ class ESupportRequest {
     {
         return $this->idAuthor;
     }
-    public function getAuthorType(): TType
+    public function getAuthorType(): ?TType
     {
         return $this->authorType;
     }
