@@ -221,7 +221,7 @@
                                     <div class="row">
                                     <label>
                                     {if $men === true}
-                                        <input type="checkbox" name="men" id="men" selected> Men
+                                        <input type="checkbox" name="men" id="men" checked> Men
                                         <input type="hidden" id="hiddenMen" name="men" value="true">
                                     {else}
                                           <input type="checkbox" name="men" id="men"> Men
@@ -230,7 +230,7 @@
                                     </label>
                                     <label>
                                     {if $women === true}
-                                          <input type="checkbox" name="women" id="women" selected> Women
+                                          <input type="checkbox" name="women" id="women" checked> Women
                                         <input type="hidden" id="hiddenWomen" name="women" value="true">
                                     {else}
                                         <input type="checkbox" name="women" id="women"> Women
