@@ -51,6 +51,10 @@ To ensure that you don't have any problems with some sample elements already pre
 
 - Go to the file: `~/XAMPP/xamppfiles/etc/my.cnf`;
 
+**If you are working from a Linux machine**
+
+- Got to the file: `~/opt/lampp/etc/my.cnf`;
+
 **In both cases continue as follows:**
 
 - Search for the element `max_allowed_packet` (It should appear a total of 2 times);
