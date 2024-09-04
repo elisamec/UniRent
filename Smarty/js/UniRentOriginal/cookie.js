@@ -134,6 +134,9 @@ const customNamesPatterns = {
     '/UniRent/Student/guidelines': 'Guidelines',
     '/UniRent/User/guidelines': 'Guidelines',
     '/UniRent/Owner/guidelines': 'Guidelines',
+    '/UniRent/' : 'Home',
+    '/UniRent/Owner/filterTenants/*': 'Filter Tenants',
+    'UniRent/Contract/onGoing/*': 'OnGoing Contracts',
 };
 
 // Initialize or retrieve `urlDisplayNames` from sessionStorage

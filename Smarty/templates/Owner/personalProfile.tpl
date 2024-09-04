@@ -136,7 +136,7 @@
                      <p>Your Username: {$owner->getUsername()}</p>
                      <p>Your Email: {$owner->getMail()}</p>
                      <p>Your phone number is {$owner->getPhoneNumber()} and your IBAN is {$owner->getIBAN()}.</p>
-                     <p> You published n <!--$owner->getNumberOfAccom()--> accommodation advertisements.</p>
+                     <p> You published {$owner->getNumberOfAds()} accommodation advertisements.</p>
                      <div class="col-md-4">
                      <div  class="find_btn" ><a href="/UniRent/Owner/editProfile">Edit Profile</a></div>
                      </div>
