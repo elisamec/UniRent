@@ -366,7 +366,7 @@
     <div class="resModal-content">
         <div class="row">
             <span class="resClose" id="successVisitClose">&times;</span>
-            {if $successVisit === "sent"}
+            {if $successVisit === "true"}
             <div class="col-md-12">
             <h2 class="resModal-head">Visit Request Sent</h2>
             </div>
