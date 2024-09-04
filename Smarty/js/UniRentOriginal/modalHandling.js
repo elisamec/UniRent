@@ -590,7 +590,7 @@ var successReserveModal = document.getElementById("successReserveModal");
 
 if (reserveModal && notReservableModal && successReserveModal) {
     // JavaScript function to populate the date select dropdown with dynamic year selection
-    function populateYearSelect(selectedYear) {
+    function populateYearSelect(defaultYear) {
         const select = document.getElementById("year");
         const currentYear = new Date().getFullYear();
     
@@ -604,8 +604,8 @@ if (reserveModal && notReservableModal && successReserveModal) {
             option.value = year;
             option.text = year;
     
-            // Check if this year matches the selectedYear
-            if (year === selectedYear) {
+            // Check if this year matches the defaultYear
+            if (year === defaultYear) {
                 option.selected = true;
             }
     
@@ -616,7 +616,7 @@ if (reserveModal && notReservableModal && successReserveModal) {
     
         // Call populateYearSelect function on document ready
         document.addEventListener("DOMContentLoaded", function() {
-            populateYearSelect(selectedYear);
+            populateYearSelect(defaultYear);
         });
     
     $(document).ready(function() {
