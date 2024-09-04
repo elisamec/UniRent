@@ -4,7 +4,6 @@ $(document).ready(function() {
     var readURL = function(input) {
        if (input.files && input.files[0]) {
              var reader = new FileReader();
-             console.log(file);
              if (file==='editProfileStudent' || file==='editProfileOwner') {
                reader.onload = function (e) {
                $('.small').attr('src', e.target.result);

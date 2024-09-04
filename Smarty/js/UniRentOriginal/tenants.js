@@ -15,7 +15,7 @@ function populateTenantsContainer(tenants) {
     }
 
     const uniqueYears = new Set();
-
+    
     tenants.forEach(item => {
         const accommodationDiv = document.createElement("div");
         accommodationDiv.classList.add("accommodation");

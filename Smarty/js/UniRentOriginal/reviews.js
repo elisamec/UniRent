@@ -19,7 +19,6 @@ function displayReviews(reviews, user) {
         if (reviews.length === 0) {
             container.innerHTML = '<h4 class="noRev">There are no reviews yet!</h4>';
         } else {
-            console.log(typeof reviews);
             reviews.forEach(review => {
                 const reviewElement = document.createElement('div');
                 reviewElement.className = 'review';

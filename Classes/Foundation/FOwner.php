@@ -757,7 +757,12 @@ use PDORow;
                     'status' => $student[0]->getStatus()->value
                 ];
             }
-            if ($format === 'Owner') {
+            if ($format === 'OwnerManagement') {
+                $tenants[$idAccommodation] = [
+                    'accommodation' => $accommodationTitle,
+                    'tenants' => $tenantList
+                ];
+            } else if ($format === 'Owner') {
                 $tenants[] = [
                     'accommodation' => $accommodationTitle,
                     'tenants' => $tenantList

@@ -110,7 +110,7 @@ class COwner
         
         $reviewsData = CReview::getProfileReviews($accomm->getIdAccommodation(), TType::ACCOMMODATION);
         $num_places=$accomm->getPlaces();
-        $tenants= $PM->getTenants('current',$accomm->getIdOwner(), 'Owner');
+        $tenants= $PM->getTenants('current',$accomm->getIdOwner(), 'OwnerManagement')[$idAccommodation]['tenants'];
         $disabled=$accomm->getStatus();
         $deletable=false;
         
