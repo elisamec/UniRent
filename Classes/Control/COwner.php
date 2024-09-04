@@ -110,7 +110,11 @@ class COwner
         
         $reviewsData = CReview::getProfileReviews($accomm->getIdAccommodation(), TType::ACCOMMODATION);
         $num_places=$accomm->getPlaces();
-        $tenants= $PM->getTenants('current',$accomm->getIdOwner(), 'OwnerManagement')[$idAccommodation]['tenants'];
+        $tenantsArray= $PM->getTenants('current',$accomm->getIdOwner());
+        foreach ($tenantsArray as $idAccommodation => $students) {
+            $accommodationTitle = FPersistentManager::getInstance()->getTitleAccommodationById($idAccommodation);
+            $tenants=UFormat::getFilterTenantsFormatArray($students, $idAccommodation, $accommodationTitle, 'OwnerManagement')[$idAccommodation]['tenants'];
+        }
         $disabled=$accomm->getStatus();
         $deletable=false;
         
@@ -706,12 +710,16 @@ class COwner
         $ownerId=$session->getSessionElement('id');
         $PM=FPersistentManager::getInstance();
         $view = new VOwner();
-        $tenantsArray = $PM->getTenants($kind,$ownerId, 'Owner');
+        $tenantsArray= $PM->getTenants($kind, $ownerId);
+        foreach ($tenantsArray as $idAccommodation => $students) {
+            $accommodationTitle = FPersistentManager::getInstance()->getTitleAccommodationById($idAccommodation);
+            $tenants=UFormat::getFilterTenantsFormatArray($students, $idAccommodation, $accommodationTitle, 'Owner');
+        }
         $accommodations=$PM->loadAccommodationsByOwner($ownerId);
         foreach ($accommodations as $accom) {
             $accommodationTitles[$accom->getIdAccommodation()]=$accom->getTitle();
         }
-        $view->tenants($tenantsArray, $kind, $accommodationTitles,0);
+        $view->tenants($tenants, $kind, $accommodationTitles,0);
     }
 
     /**
@@ -733,12 +741,16 @@ class COwner
         $men==='false'? $men=false : $men=true;
         $women==='false'? $women=false : $women=true;
         $tenantsArray=$PM->getFilterTenants($type,$afs['accommodation'],$afs['username'],(int)$afs['age'],(int)$afs['rateT'],$afs['date'],$men,$women,$ownerId,$afs['year']);
+        foreach ($tenantsArray as $idAccommodation => $students) {
+            $accommodationTitle = FPersistentManager::getInstance()->getTitleAccommodationById($idAccommodation);
+            $tenants=UFormat::getFilterTenantsFormatArray($students, $idAccommodation, $accommodationTitle, 'Owner')[$idAccommodation]['tenants'];
+        }
         $accommodations=$PM->loadAccommodationsByOwner($ownerId);
         foreach ($accommodations as $accom) 
         {
             $accommodationTitles[$accom->getIdAccommodation()]=$accom->getTitle();
         }
-        $view->tenants($tenantsArray, $type, $accommodationTitles,(int)$afs['rateT'], $afs['accommodation'], $afs['username'], $afs['date'], $afs['age'], $men, $women, $afs['year']);
+        $view->tenants($tenants, $type, $accommodationTitles,(int)$afs['rateT'], $afs['accommodation'], $afs['username'], $afs['date'], $afs['age'], $men, $women, $afs['year']);
     }
 
     /**

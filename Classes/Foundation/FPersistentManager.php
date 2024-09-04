@@ -533,7 +533,7 @@ class FPersistentManager {
      *
      * @return array
      */
-    public function getTenants(string $type, int $idOwner, string $format):array
+    public function getTenants(string $type, int $idOwner):array
     {
         $FO=FOwner::getInstance();
         if ($type=='current')
@@ -543,7 +543,7 @@ class FPersistentManager {
         {
             $type='finished';
         }
-        $result=$FO->getTenans($type,$idOwner, $format);
+        $result=$FO->getTenans($type,$idOwner);
         return $result;
     }
     public function getUserType($id):TType
