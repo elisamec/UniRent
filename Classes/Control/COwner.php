@@ -738,7 +738,7 @@ class COwner
         {
             $accommodationTitles[$accom->getIdAccommodation()]=$accom->getTitle();
         }
-        $view->tenants($tenantsArray, $type, $accommodationTitles,(int)$afs['rateT']);
+        $view->tenants($tenantsArray, $type, $accommodationTitles,(int)$afs['rateT'], $afs['accommodation'], $afs['username'], $afs['date'], $afs['age'], $men, $women, $afs['year']);
     }
 
     /**

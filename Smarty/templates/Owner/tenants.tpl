@@ -127,7 +127,11 @@
                </div>
                <div class="row">
                <div class="Findcontainer">
+               {if $username !== null}
+               <input name="username" id="tenantName" type="text" placeholder="Username of the tenant" value="{$username}">
+               {else}
                      <input name="username" id="tenantName" type="text" placeholder="Username of the tenant">
+               {/if}
                </div>
                </div>
                <div class="Findcontainer">
@@ -173,9 +177,19 @@
                <div class="Findcontainer">
                   <div class="select-outline">
                      <select name="date" id="expiryDateT" class="mdb-select md-form md-outline colorful-select dropdown-primary">
+                        {if $period === 'september'}
+                        <option value="" disabled>Select a period</option>
+                        <option value="september" selected>September to June</option>
+                        <option value="october">October to July</option>
+                        {else if $period === 'october'}
+                        <option value="" disabled>Select a period</option>
+                        <option value="september">September to June</option>
+                        <option value="october" selected>October to July</option>
+                        {else}
                         <option value="" disabled selected>Select a period</option>
                         <option value="september">September to June</option>
                         <option value="october">October to July</option>
+                        {/if}
                      </select>
                   </div>
                </div>
@@ -193,7 +207,11 @@
                {/if}
                <div class="row">
                <div class="Findcontainer">
+               {if $age !== null}
+                     <input type="number" name="age" id="age" placeholder="Age of the tenant" min="18" max="110" value="{$age}">
+               {else}
                      <input type="number" name="age" id="age" placeholder="Age of the tenant" min="18" max="110">
+               {/if}
                </div>
                </div>
                <div class="row">
@@ -202,12 +220,22 @@
                                     <label class="checkbox-label">Sex:</label>
                                     <div class="row">
                                     <label>
-                                        <input type="checkbox" name="men" id="men"> Men
+                                    {if $men === true}
+                                        <input type="checkbox" name="men" id="men" selected> Men
+                                        <input type="hidden" id="hiddenMen" name="men" value="true">
+                                    {else}
+                                          <input type="checkbox" name="men" id="men"> Men
                                         <input type="hidden" id="hiddenMen" name="men" value="false">
+                                    {/if}
                                     </label>
                                     <label>
+                                    {if $women === true}
+                                          <input type="checkbox" name="women" id="women" selected> Women
+                                        <input type="hidden" id="hiddenWomen" name="women" value="true">
+                                    {else}
                                         <input type="checkbox" name="women" id="women"> Women
                                         <input type="hidden" id="hiddenWomen" name="women" value="false">
+                                    {/if}
                                     </label>
                                     </div>
                                 </div>
@@ -312,6 +340,8 @@
          const accommodationTitles = {$accommodationTitles};
          var file = 'tenants';
          const rating = {$rating};
+         var selectedAccommodation = '{$accommodation}';
+         var selectedYear = '{$year}';
       </script>
       
       <!-- Javascript files-->

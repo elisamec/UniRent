@@ -89,6 +89,9 @@ function populateTenantsContainer(tenants) {
     if(yearSelect) {
         uniqueYears.forEach(year => {
             const option = document.createElement("option");
+            if (year === selectedYear) {
+                option.selected = true;
+            }
             option.value = year;
             option.textContent = year;
             yearSelect.appendChild(option);
@@ -103,6 +106,9 @@ document.addEventListener("DOMContentLoaded", function () {
         accommodationTitles.forEach(item => {
             const option = document.createElement("option");
             option.value = item.accommodation;
+            if (item.accommodation === selectedAccommodation) {
+                option.selected = true;
+            }
             option.textContent = item.accommodation;
             accommodationSelect.appendChild(option);
         });
@@ -110,6 +116,9 @@ document.addEventListener("DOMContentLoaded", function () {
         Object.keys(accommodationTitles).forEach(key => {
             const option = document.createElement("option");
             option.value = key;
+            if (key === selectedAccommodation) {
+                option.selected = true;
+            }
             option.textContent = accommodationTitles[key];
             accommodationSelect.appendChild(option);
         });
