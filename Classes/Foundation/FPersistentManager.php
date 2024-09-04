@@ -601,6 +601,18 @@ class FPersistentManager {
         return $result;
     }
 
+    /**
+     * Method reserve
+     * 
+     * this method is used to reserve an accommodation
+     * @param int $idAccommodation
+     * @param int $year
+     * @param int $date
+     * @param int $year_2
+     * @param int $date_2
+     * @param int $student_id
+     * @return bool
+     */
     public function reserve(int $idAccommodation, int $year, int $date, int $year_2, int $date_2, int $student_id)
     {
         $now = new DateTime('now');

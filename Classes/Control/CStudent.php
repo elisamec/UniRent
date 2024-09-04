@@ -876,14 +876,7 @@ class CStudent{
             $date_2=7;
         }
         $result=$PM->reserve($idAccommodation,$year,$date,$year_2,$date_2,$student_id);
-        if($result)
-        {
-            header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/sent');
-        }
-        else
-        {
-            header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/full');
-        }
+        $result ? header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/sent') : header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/full');
     }
     /**
      * Method checkIfStudent
