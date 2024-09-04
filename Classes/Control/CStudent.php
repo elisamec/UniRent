@@ -388,7 +388,8 @@ class CStudent{
         $num_places=$accomm->getPlaces();
         $tenants= $PM->getTenants('current',$accomm->getIdOwner(), 'Student');
         $session=USession::getInstance();
-        $year=$session->getSessionElement('selectedAccommYear');
+        
+        $year=$session->getSessionElement('SAY');
         if($year==null)
         {
             if (date('m')>10) {
