@@ -276,7 +276,7 @@
                                             <td>{$user['Type']}</td>
                                             <td>{$user['Report']->getDescription()}</td>
                                             <td>{$user['Report']->getBanDate()->format('Y-m-d')}</td>
-                                            <td><a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" onclick="removeBanModal({$user['User']->getId()}, {$user['Type']})"> Remove Ban</a></td>
+                                            <td><a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" onclick="removeBanModal({$user['User']->getId()}, '{$user['Type']}')"> Remove Ban</a></td>
                                         </tr>
                                         {/foreach}
                                         
