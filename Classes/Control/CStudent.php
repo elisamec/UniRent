@@ -68,7 +68,7 @@ class CStudent{
      * Method search
      * 
      * this method is used by students to search an accommodation
-     * @return void
+     * 
      */
     public static function search()
     {

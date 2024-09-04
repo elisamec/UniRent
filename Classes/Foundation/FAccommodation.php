@@ -903,9 +903,9 @@
          * @param EStudent $student $student [object EStudent]
          * @param int $year $year [year]
          *
-         * @return array
+         * 
          */
-        public function findAccommodationsStudent($city,$date,$rateA,$rateO,$minPrice,$maxPrice,EStudent $student,int $year):array
+        public function findAccommodationsStudent($city,$date,$rateA,$rateO,$minPrice,$maxPrice,EStudent $student,int $year)
         {
             $result=array();
             $db=FConnection::getInstance()->getConnection();
@@ -943,8 +943,10 @@
                 {
                     $q.="AND ((a.man=TRUE AND a.woman=TRUE)OR(a.man=FALSE AND a.woman=FALSE)OR(a.man=FALSE AND a.woman=TRUE))";
                 }
-                
-                $db->beginTransaction();
+                if(!$db->inTransaction())
+                {
+                    $db->beginTransaction();
+                }
                 $stm=$db->prepare($q);
                 $stm->bindParam(':city',$city,PDO::PARAM_STR);
                 $stm->bindParam(':mon',$date,PDO::PARAM_INT);
@@ -959,7 +961,7 @@
                 return array();
             }
             $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
-
+            
             foreach($rows as $row)
             {
                 $controll_year_places=$this->areThereFreePlaces($row['id'],$year);

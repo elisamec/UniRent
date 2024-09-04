@@ -471,7 +471,7 @@ class FPersistentManager {
      * @param  $year
      * @return array
      */
-    public function findAccommodationsStudent($city,$date,$rateA,$rateO,$minPrice,$maxPrice,$student,$year)
+    public function findAccommodationsStudent($city,$date,$rateA,$rateO,$minPrice,$maxPrice,$student,$year):array
     {
         $FA=FAccommodation::getInstance();
         $result=$FA->findAccommodationsStudent($city,$date,$rateA,$rateO,$minPrice,$maxPrice,$student,$year);
