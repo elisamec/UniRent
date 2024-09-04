@@ -80,16 +80,15 @@ class CStudent{
 
         $student_username=$session->getSessionElement('username');
         $student=$PM->getStudentByUsername($student_username);
-    
-        $aor['rateA']!== null ? $aor['rateA'] : $aor['rateA']=0;
-        $aor['rateO']!== null ? $aor['rateO'] : $aor['rateO']=0;
-        $aor['min-price']!== null ? $aor['min-price'] : $aor['min-price']=0;
-        $aor['max-price']!== null ? $aor['max-price'] : $aor['max-price']=1000;
+        
+        $aor['rateA'] = $aor['rateA'] ?? 0;
+        $aor['rateO'] = $aor['rateO'] ?? 0;
+        $aor['min-price'] = $aor['min-price'] ?? 0;
+        $aor['max-price'] = $aor['max-price'] ?? 1000;
         $session->setSessionElement('selectedAccommYear', (int)$aor['year']);
         $PM=FPersistentManager::getInstance();
         $searchResult=$PM->findAccommodationsStudent($aor['city'],$aor['date'],$aor['rateA'],$aor['rateO'],$aor['min-price'],$aor['max-price'],$student,(int)$aor['year']);
-        print_r($searchResult);
-        //$view->findAccommodation($aor['city'],$aor['university'],$searchResult,$aor['date'], $aor['rateO'], $aor['rateA'], $aor['min-price'], $aor['max-price'],(int)$aor['year']);
+        $view->findAccommodation($aor['city'],$aor['university'],$searchResult,$aor['date'], $aor['rateO'], $aor['rateA'], $aor['min-price'], $aor['max-price'],(int)$aor['year']);
     } 
     /**
      * Method about
