@@ -41,7 +41,6 @@ function selectPreselectedValues() {
           option.textContent = day.charAt(0).toUpperCase() + day.slice(1); // Capitalize the first letter
           daySelect.appendChild(option);
         });
-        console.log(preselectedDay);
     if (preselectedDay) {
         const options = daySelect.options;
         for (let i = 0; i < options.length; i++) {

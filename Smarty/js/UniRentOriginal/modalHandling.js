@@ -420,7 +420,7 @@ if (successDeleteModal) {
   );
 
   function showsuccessDeleteModal() {
-    if (successDelete != "null") {
+    if (successDelete != "undefined" && successDelete != "null") {
       successDeleteModal.style.display = "block";
     }
   }
