@@ -139,6 +139,12 @@ class EStudent
             $this->status=$statusStr;
         }
     }
+    /**
+     * isPasswordHashed
+     *
+     * @param  string $password
+     * @return bool
+     */
     private static function isPasswordHashed($password) {
         // The cost parameter of bcrypt is stored in the first 7 characters of the hash
         $isHashed = substr($password, 0, 7) == '$2y$10$';
@@ -211,10 +217,19 @@ class EStudent
         return $this->picture;
     }
 
+    /**
+     * getShowPhoto
+     *
+     * @return string|null
+     */
     public function getShowPhoto():?string {
         return $this->picture->getPhoto();
     }
-    
+    /**
+     * getAverageRating
+     *
+     * @return int
+     */
     public function getAverageRating() {
         $PM = FPersistentManager::getInstance();
         return $PM->getStudentRating($this->id);
@@ -255,10 +270,21 @@ class EStudent
     {
         return $this->birthDate;
     }
+
+    /**
+     * getBirthDateString
+     *
+     * @return string
+     */
     public function getBirthDateString():string
     {
         return $this->birthDate->format('d/m/Y');
     }
+    /**
+     * getAge
+     *
+     * @return int
+     */
     public function getAge():int
     {
         return $this->birthDate->diff(new DateTime('today'))->y;
@@ -300,10 +326,21 @@ class EStudent
     public function getStatus():TStatusUser{
         return $this->status;
     }
+
+    /**
+     * getStatusString
+     *
+     * @return string
+     */
     public function getStatusString():string {
         return $this->status->value;
     }
 
+    /**
+     * getRating
+     *
+     * @return int
+     */
     public function getRating():int
     {
         $PM=FPersistentManager::getInstance();

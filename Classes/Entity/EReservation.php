@@ -208,7 +208,11 @@ private ?int $id;
     {
         $this->idStudent=$id;
     }
-
+    /**
+     * __toString
+     *
+     * @return string
+     */
     public function __toString():string
     {
         return 'ID:'.$this->id.' FROM:'.$this->fromDate->format('Y-m-d H:i:s').' TO:'.$this->toDate->format('Y-m-d H:i:s').' MADE:'.$this->made->format('Y-m-d H:i:s').' STATUS:'.$this->statusAccept.' ACCOMODATION_ID:'.$this->accomodationId.'STUDENT_ID:'.$this->idStudent;

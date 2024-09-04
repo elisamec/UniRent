@@ -416,11 +416,7 @@ class CStudent{
         self::checkIfStudent();
         $view = new VStudent();
         $session=USession::getInstance();
-        $studentUsername=$session->getSessionElement('username');
-        $PM=FPersistentManager::getInstance();
-        $studentId=$PM->getStudentIdByUsername($studentUsername);
-        $reviews=$PM->loadByRecipient($studentId, TType::STUDENT);
-        $reviewsData = EReview::getStudentReviewFormatArray($reviews);
+        $reviewsData = CReview::getProfileReviews($session->getSessionElement('id'), TType::STUDENT);
         $view->reviews($reviewsData, $modalSuccess);
     }
     /**
