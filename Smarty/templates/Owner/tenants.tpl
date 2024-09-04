@@ -275,34 +275,6 @@
     </div>
 </div>
 <!-- End of Request Detail Modal -->
-
-<!-- Success Modal -->
-<div class="resModal" id="successModal">
-      <div class="resModal-content">
-         <div class="row">
-            <span class="resClose" id="successClose">&times;</span>
-            <h2 class="resModal-head">
-            {if $modalSuccess == 'success'}
-            Success
-            {else}
-            Error
-            {/if}
-            </h2>
-         </div>
-         <div class="container cont-padding">
-         {if $modalSuccess == 'success'}
-            <h4>Operation completed successfully.</h4>
-         {else}
-            <h4>There was an error while processing. Please try again later.</h4>
-         {/if}
-                </div>
-            <div class="btn-cont">
-                <button type="button" class="edit_btn" id="closeSuccess">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End of Success Modal -->
       
       <!-- footer section start -->
       <div class="footer_section">
@@ -333,7 +305,6 @@
       <!-- footer section end -->
       <!-- JavaScript variables -->
       <script>
-         var modalSuccess= '{$modalSuccess}';
          const tenants = {$tenants};
          const accommodationTitles = {$accommodationTitles};
          var file = 'tenants';
