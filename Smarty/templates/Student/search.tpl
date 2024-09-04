@@ -379,8 +379,7 @@
       <!-- sidebar -->
       <script src="/UniRent/Smarty/js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="/UniRent/Smarty/js/custom.js"></script>
-      <!-- javascript --> 
-      
+      <!-- javascript -->
       <script src="/UniRent/Smarty/js/UniRentOriginal/searchResult.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/rangeInput.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/rating.js"></script>
