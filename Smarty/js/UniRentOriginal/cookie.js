@@ -36,7 +36,7 @@ let currentPage = window.location.pathname;
 function normalizeUrl(url) {
     const endingsToStrip = [
         '/success', '/error', '/sent', '/fail', '/null/sent', '/null/full',
-        '/false', '/null/false', '/true'
+        '/false', '/null/false', '/true', '/null'
     ];
     
     endingsToStrip.forEach(ending => {
