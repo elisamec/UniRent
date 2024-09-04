@@ -15,7 +15,7 @@ function populateTenantsContainer(tenants) {
     }
 
     const uniqueYears = new Set();
-    
+
     tenants.forEach(item => {
         const accommodationDiv = document.createElement("div");
         accommodationDiv.classList.add("accommodation");
@@ -73,8 +73,9 @@ function populateTenantsContainer(tenants) {
                 colDiv.appendChild(userSectionDiv);
                 rowDiv.appendChild(colDiv);
 
-                const year = new Date(tenant.expiryDate).getFullYear();
-                uniqueYears.add(year);
+                const year2 = new Date(tenant.expiryDate).getFullYear();
+                const year1 = new Date(tenant.expiryDate).getFullYear()-1;
+                uniqueYears.add(year1 + "-" + year2);
             } else {
                 console.error("Unexpected format for item.tenants:", tenant);
             }
