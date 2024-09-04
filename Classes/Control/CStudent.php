@@ -89,7 +89,7 @@ class CStudent{
         $PM=FPersistentManager::getInstance();
         $searchResult=$PM->findAccommodationsStudent($aor['city'],$aor['date'],$aor['rateA'],$aor['rateO'],$aor['min-price'],$aor['max-price'],$student,(int)$aor['year']);
         print_r($searchResult);
-        //$view->findAccommodation($aor['city'],$aor['university'],$searchResult,$aor['date'], $aor['rateO'], $aor['rateA'], $aor['min-price'], $aor['max-price'],(int)$aor['year']);
+        #$view->findAccommodation($aor['city'],$aor['university'],$searchResult,$aor['date'], $aor['rateO'], $aor['rateA'], $aor['min-price'], $aor['max-price'],(int)$aor['year']);
     } 
     /**
      * Method about
