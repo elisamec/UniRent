@@ -388,9 +388,10 @@ class CStudent{
         $visitDuration=$accomm->getVisitDuration();
         $num_places=$accomm->getPlaces();
         $tenantsArray= $PM->getTenants('current',$accomm->getIdOwner());
+        $tenants=array();
         foreach ($tenantsArray as $idAccommodation => $students) {
             $accommodationTitle = FPersistentManager::getInstance()->getTitleAccommodationById($idAccommodation);
-            $tenants=UFormat::getFilterTenantsFormatArray($students, $idAccommodation, $accommodationTitle, 'Student') ?? [];
+            $tenants=UFormat::getFilterTenantsFormatArray($students, $idAccommodation, $accommodationTitle, 'Student');
         }
         $session=USession::getInstance();
         
