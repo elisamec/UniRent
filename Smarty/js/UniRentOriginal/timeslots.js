@@ -25,14 +25,22 @@ switch (preselectedDay) {
         preselectedDay = 'Saturday';
         break;
      default:
-        preselectedDay = '';
+        preselectedDay = null;
         break;
 }
 
 function selectPreselectedValues() {
     const daySelect = document.getElementById("day");
-    const timeSelect = document.getElementById("time");
-
+        daySelect.innerHTML =
+          '<option value="" selected disabled>Select a day</option>';
+  
+        // Populate new options from timeSlots keys
+        Object.keys(timeSlots).forEach(function (day) {
+          var option = document.createElement("option");
+          option.value = day;
+          option.textContent = day.charAt(0).toUpperCase() + day.slice(1); // Capitalize the first letter
+          daySelect.appendChild(option);
+        });
     if (preselectedDay) {
         const options = daySelect.options;
         for (let i = 0; i < options.length; i++) {

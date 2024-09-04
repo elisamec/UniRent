@@ -16,6 +16,8 @@ function displayAccommodations(accommodations) {
         " yet!</h1></div>";
     } else {
       accommodations.forEach((accommodation) => {
+        var periodHTML = "";
+        var noMargin = "";
         if(file == "studentReservations") {
           var expire = "";
           if (kind == "accepted") {
@@ -29,7 +31,8 @@ function displayAccommodations(accommodations) {
           var expireHTML = `<div class="image_box_reservation">
                             <div class="rate_text">${expire}</div>
                             </div>`;
-          var periodHTML = `<p>${accommodation.period}</p>`;
+          periodHTML = `<p>${accommodation.period}</p>`;
+          noMargin = " noMargin";
           var href = 'href ="/UniRent/Reservation/reservationDetails/' + accommodation.idReservation + '"';
           } else if (file == "OwnerAds") {
             var expireHTML = "";
@@ -53,7 +56,7 @@ function displayAccommodations(accommodations) {
                                 </div>
                             </div>
                         </div>
-                        <div class="image_box noMargin">
+                        <div class="image_box` + noMargin + `">
                             <div class="left_box">
                                 <h1 class="road_text">${accommodation.title}</h1>
                                 <p>${accommodation.address}</p>

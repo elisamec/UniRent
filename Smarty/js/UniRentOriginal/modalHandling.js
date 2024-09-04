@@ -420,7 +420,7 @@ if (successDeleteModal) {
   );
 
   function showsuccessDeleteModal() {
-    if (successDelete != "null") {
+    if (successDelete != "undefined" && successDelete != "null") {
       successDeleteModal.style.display = "block";
     }
   }
@@ -441,6 +441,23 @@ var successVisitModal = document.getElementById("successVisitModal");
 var visitEmptyModal = document.getElementById("visitEmptyModal");
 if (visitModal && confirmModal && successVisitModal && visitEmptyModal) {
   var visitBtn = document.getElementById("visitBtn");
+  function showSuccessVisitModal() {
+    if (successVisit!="undefined" && successVisit !== "null") {
+      successVisitModal.style.display = "block";
+    }
+  }
+
+  // Call the function to check for $successVisit and show modal
+  showSuccessVisitModal();
+  // Close success visit modal
+    document.getElementById("closeSuccessVisitModal").onclick = function () {
+      successVisitModal.style.display = "none";
+      window.location.href = currentPage;
+    };
+    document.getElementById("successVisitClose").onclick = function () {
+      successVisitModal.style.display = "none";
+      window.location.href = currentPage;
+    };
 
   // Event handler for Visit button
   visitBtn.onclick = function (event) {
@@ -503,15 +520,7 @@ if (visitModal && confirmModal && successVisitModal && visitEmptyModal) {
       visitModal.style.display = "block"; // Show visit modal after confirmation
     };
 
-    // Close success visit modal
-    document.getElementById("closeSuccessVisitModal").onclick = function () {
-      successVisitModal.style.display = "none";
-      window.location.href = currentPage;
-    };
-    document.getElementById("successVisitClose").onclick = function () {
-      successVisitModal.style.display = "none";
-      window.location.href = currentPage;
-    };
+    
 
     // Close visit empty modal
     document.getElementById("closeVisitEmptyModal").onclick = function () {
@@ -520,16 +529,6 @@ if (visitModal && confirmModal && successVisitModal && visitEmptyModal) {
     document.getElementById("visitEmptyClose").onclick = function () {
       visitEmptyModal.style.display = "none";
     };
-
-    // Function to show success visit modal based on $successVisit value
-    function showSuccessVisitModal() {
-      if (successVisit !== "null") {
-        successVisitModal.style.display = "block";
-      }
-    }
-
-    // Call the function to check for $successVisit and show modal
-    showSuccessVisitModal();
 
     // Optional: Populate time slots based on the selected day (if needed)
     var timeSelect = document.getElementById("time");

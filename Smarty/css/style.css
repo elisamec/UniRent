@@ -891,9 +891,9 @@ hr.border_main {
 }
 .left_box p{
     margin: 0;
-    margin-left: 20px;
+    margin-left: 10px;
     margin-bottom: 10px;
-    margin-right: 30px;
+    margin-right: 11px;
 }
 .right_box{
     width: 30%;
@@ -901,7 +901,7 @@ hr.border_main {
 }
 
 .rate_text {
-    width: 90%;
+    width: 100%;
     font-size: 16px;
     color: #ffffff;
     text-align: center;
@@ -917,7 +917,8 @@ hr.border_main {
     color: #202020;
     text-transform: uppercase;
     font-weight: bold;
-    padding-left: 20px;
+    padding-left: 10px;
+    padding-top: 15px;
 }
 
 .area_main{

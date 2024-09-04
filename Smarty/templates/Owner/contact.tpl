@@ -126,7 +126,7 @@
                </div>
             </div>
          </div>
-         <div class="container">
+         <div class="container-fluid">
             <div class="contact_section_2">
                <div class="row">
                   <div class="col-md-6">
@@ -137,6 +137,7 @@
                            <option value="appUse">App Usage</option>
                            <option value="bug">Bug in the App</option>
                            <option value="other">Other</option>
+                           </select>
                         <textarea class="message-bt" placeholder="Message" rows="10" id="comment" name="Message" required></textarea>
                            <div class="reserve_btn"><button type="submit">Send Now</button></div>
                         </form>

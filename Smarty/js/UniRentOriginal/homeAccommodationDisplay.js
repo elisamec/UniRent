@@ -76,7 +76,13 @@ function displayAccommodationsOwner(accommodationsActive, accommodationsInactive
                 if(accommodationOwner.photo == null){
                     accommodationOwner.photo = "/UniRent/Smarty/images/noPic.png";
                 }
-                if (accommodationsActive.includes(accommodationOwner)) {
+                var exists = false;
+                accommodationsActive.forEach(accommodation => {
+                    if (accommodation.id === accommodationOwner.id) {
+                        exists = true;
+                    }
+                });
+                if (exists) {
                     classDisplay = "image_box";
                     imageClass = "blog_img";
                 } else {

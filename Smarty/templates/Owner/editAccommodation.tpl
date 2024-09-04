@@ -376,8 +376,8 @@
       var imagesData = {$uploadedImagesData};
       var modalSuccess= '{$modalSuccess}';
       var file='editAccommodation';
-      var visitData = `{$visitAvailabilityData}`;
-      var accommodationData = `{$accommodationData}`;
+      var visitData = {$visitAvailabilityData};
+      var accommodationData = {$accommodationData};
       </script>
       <!-- Javascript files -->
       <script src="/UniRent/Smarty/js/jquery.min.js"></script>
