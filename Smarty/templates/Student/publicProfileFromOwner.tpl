@@ -59,9 +59,9 @@
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contracts</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="dropdown-item" href="/UniRent/Contract/showStudent/onGoing">Ongoing</a>
-                           <a class="dropdown-item" href="/UniRent/Contract/showStudent/finished">Past</a>
-                           <a class="dropdown-item" href="/UniRent/Contract/showStudent/future">Future</a>
+                           <a class="dropdown-item" href="/UniRent/Contract/showOwner/onGoing">Ongoing</a>
+                           <a class="dropdown-item" href="/UniRent/Contract/showOwner/finished">Past</a>
+                           <a class="dropdown-item" href="/UniRent/Contract/showOwner/future">Future</a>
                         </div>
                      </li>
                      <li class="nav-item">
