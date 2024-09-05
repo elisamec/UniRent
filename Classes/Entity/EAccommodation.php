@@ -533,7 +533,7 @@ class EAccommodation
         {
             $start=EAccommodation::stringInMinutes($value['start']);
             $end=EAccommodation::stringInMinutes($value['end']);
-            if($start>=$end) #in questo modo non prenderò in considerazione intervalli negativi di tempo!
+            if($start>=$end) //i will not consider negative period
             {
                 $value['diff']=-1;
             }
@@ -548,7 +548,7 @@ class EAccommodation
             {
                 if(empty($value['duration']) || !is_numeric($value['duration']) || (int)$value['duration'] <= 0)
                 {
-                    continue; // Salta questa iterazione se duration non è valido
+                    continue; // Go to the next iteration if duration is not valid
                 }
                 else
                 {
@@ -571,20 +571,20 @@ class EAccommodation
         $result_2=array();
         foreach($result as $key=>$value)
         {
-            if($value['number_of_visits']<=0){}   //se il numero delle visite è 0 (o hai sbagliato a mettere gli orari o la durata della visita)
+            if($value['number_of_visits']<=0){}   //if the visit's number is 0 (Or if time or duration is wrong)
             else
             {
-                $start_in_minutes=EAccommodation::stringInMinutes($value['start']); #trasforma l'orario in minuti dalla mezzanotte
+                $start_in_minutes=EAccommodation::stringInMinutes($value['start']); //Change time in minutes until midnight
                 $ap=array(); #array di appoggio
                 for($i=0;$i<$value['number_of_visits'];$i++)
                 {
-                    $y=$start_in_minutes+ $i*$value['duration']; #somma gli intervalli delle visite 
-                    $ap[]=EAccommodation::mitutesToString($y); #trasforma i minuti in stringhe e mettile nell'array di appoggio
+                    $y=$start_in_minutes+ $i*$value['duration']; //add the visits intervals
+                    $ap[]=EAccommodation::mitutesToString($y); #
                 }
-                $app=array(); #ulteriore array di appoggio
+                $app=array(); 
                 $app['day']=$value['day']; 
                 $app['times']=$ap;
-                $result_2[$key]=$app; #ancora necessario perchè potrei inserire due o più periodi per la visita in un solo giorno
+                $result_2[$key]=$app; 
             }    
         }
         return $result_2;
@@ -616,6 +616,7 @@ class EAccommodation
             return null;
         }
     }
+    
     /**
      * Method stringInMinutes
      * 

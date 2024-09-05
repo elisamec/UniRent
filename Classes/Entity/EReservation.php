@@ -128,6 +128,7 @@ private ?int $id;
     {
         return $this->accomodationId;
     }    
+    
     /**
      * getIdStudent
      *

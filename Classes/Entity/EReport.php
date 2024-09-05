@@ -5,6 +5,13 @@ require __DIR__.'../../../vendor/autoload.php';
 use Classes\Tools\TType;
 use DateTime;
 
+/**
+ * EReport
+ * 
+ * This class represents a report
+ * 
+ * @package Classes\Entity
+ */
 class EReport {
     /**
      * 
