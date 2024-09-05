@@ -321,6 +321,12 @@
   .events .event .title .event-details {
     display: flex;
     flex-direction: column; /* Stack h3 and p vertically */
+    max-width: 400px;
+  }
+  .events .event .title .event-details p{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .events .event .title p {
     color: #fff; /* Adjust color as needed */

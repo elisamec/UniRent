@@ -93,7 +93,7 @@ const customNamesPatterns = {
     '/UniRent/Owner/publicProfile/*': username,
     '/UniRent/Owner/about': 'About Us',
     '/UniRent/User/about': 'About Us',
-    '/UniRent/Owner/addAccommodation': 'Add Accommodation',
+    '/UniRent/Accommodation/addAccommodation': 'Add Accommodation',
     '/UniRent/Owner/contact': 'Contact Us',
     '/UniRent/User/contact': 'Contact Us',
     '/UniRent/Student/contact': 'Contact Us',
@@ -193,10 +193,13 @@ if (currentPage) {
         let newVisitedPages = {};
         let index = 0;
         for (let key in visitedPages) {
+            if (visitedPages[key].match(/^\/UniRent\/Accommodation\/editAccommodation\/.*$/) || visitedPages[key].match(/^\/UniRent\/Accommodation\/addAccommodation\/.*$/)) {
+                continue;
+            }
             newVisitedPages[index] = visitedPages[key];
             index++;
         }
-
+        
         newVisitedPages[index] = currentPage;
         sessionStorage.setItem("visitedPages", JSON.stringify(newVisitedPages));
 

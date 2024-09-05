@@ -919,6 +919,9 @@ hr.border_main {
     font-weight: bold;
     padding-left: 10px;
     padding-top: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .area_main{
