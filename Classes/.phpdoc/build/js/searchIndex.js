@@ -1,60 +1,620 @@
 Search.appendIndex(
     [
                 {
-            "fqsen": "\\CInsertAccommodation",
-            "name": "CInsertAccommodation",
-            "summary": "",
-            "url": "classes/CInsertAccommodation.html"
+            "fqsen": "\\Classes\\Control\\CAccommodation",
+            "name": "CAccommodation",
+            "summary": "\u002A\nThis\u0020class\u0020is\u0020responsible\u0020for\u0020managing\u0020accommodations.",
+            "url": "classes/Classes-Control-CAccommodation.html"
         },                {
-            "fqsen": "\\CInsertAccommodation\u003A\u003AstartAddingAccommodatio\u0028\u0029",
-            "name": "startAddingAccommodatio",
-            "summary": "",
-            "url": "classes/CInsertAccommodation.html#method_startAddingAccommodatio"
-        },                {
-            "fqsen": "\\CInsertAccommodation\u003A\u003AnewAccommodation\u0028\u0029",
-            "name": "newAccommodation",
-            "summary": "",
-            "url": "classes/CInsertAccommodation.html#method_newAccommodation"
-        },                {
-            "fqsen": "\\CInsertAccommodation\u003A\u003AaddAccommodation\u0028\u0029",
+            "fqsen": "\\Classes\\Control\\CAccommodation\u003A\u003AaddAccommodation\u0028\u0029",
             "name": "addAccommodation",
-            "summary": "",
-            "url": "classes/CInsertAccommodation.html#method_addAccommodation"
+            "summary": "Method\u0020addAccommodation\nThis\u0020method\u0020shows\u0020the\u0020add\u0020accommodation\u0020page",
+            "url": "classes/Classes-Control-CAccommodation.html#method_addAccommodation"
         },                {
-            "fqsen": "\\COwner",
+            "fqsen": "\\Classes\\Control\\CAccommodation\u003A\u003AaddAccommodationOperations\u0028\u0029",
+            "name": "addAccommodationOperations",
+            "summary": "Method\u0020addAccommodationOperations",
+            "url": "classes/Classes-Control-CAccommodation.html#method_addAccommodationOperations"
+        },                {
+            "fqsen": "\\Classes\\Control\\CAccommodation\u003A\u003Adeactivate\u0028\u0029",
+            "name": "deactivate",
+            "summary": "Deactivate\u0020Accommodation",
+            "url": "classes/Classes-Control-CAccommodation.html#method_deactivate"
+        },                {
+            "fqsen": "\\Classes\\Control\\CAccommodation\u003A\u003Aactivate\u0028\u0029",
+            "name": "activate",
+            "summary": "Activate\u0020Accommodation",
+            "url": "classes/Classes-Control-CAccommodation.html#method_activate"
+        },                {
+            "fqsen": "\\Classes\\Control\\CAccommodation\u003A\u003Adelete\u0028\u0029",
+            "name": "delete",
+            "summary": "Deletes\u0020the\u0020accommodation",
+            "url": "classes/Classes-Control-CAccommodation.html#method_delete"
+        },                {
+            "fqsen": "\\Classes\\Control\\CAccommodation\u003A\u003AeditAccommodation\u0028\u0029",
+            "name": "editAccommodation",
+            "summary": "Method\u0020editAccommodation",
+            "url": "classes/Classes-Control-CAccommodation.html#method_editAccommodation"
+        },                {
+            "fqsen": "\\Classes\\Control\\CAccommodation\u003A\u003AeditAccommodationOperations\u0028\u0029",
+            "name": "editAccommodationOperations",
+            "summary": "Method\u0020editAccommodationOperations",
+            "url": "classes/Classes-Control-CAccommodation.html#method_editAccommodationOperations"
+        },                {
+            "fqsen": "\\Classes\\Control\\CAccommodation\u003A\u003AviewOwnerAds\u0028\u0029",
+            "name": "viewOwnerAds",
+            "summary": "Method\u0020viewOwnerAds\nThis\u0020method\u0020is\u0020used\u0020to\u0020show\u0020the\u0020owner\u0027s\u0020ads",
+            "url": "classes/Classes-Control-CAccommodation.html#method_viewOwnerAds"
+        },                {
+            "fqsen": "\\Classes\\Control\\CAdmin",
+            "name": "CAdmin",
+            "summary": "Class\u0020CAdmin",
+            "url": "classes/Classes-Control-CAdmin.html"
+        },                {
+            "fqsen": "\\Classes\\Control\\CAdmin\u003A\u003Ahome\u0028\u0029",
+            "name": "home",
+            "summary": "Method\u0020home",
+            "url": "classes/Classes-Control-CAdmin.html#method_home"
+        },                {
+            "fqsen": "\\Classes\\Control\\CAdmin\u003A\u003Alogin\u0028\u0029",
+            "name": "login",
+            "summary": "Method\u0020login",
+            "url": "classes/Classes-Control-CAdmin.html#method_login"
+        },                {
+            "fqsen": "\\Classes\\Control\\CAdmin\u003A\u003AcheckLogin\u0028\u0029",
+            "name": "checkLogin",
+            "summary": "Checks\u0020if\u0020the\u0020login\u0020is\u0020correct\u0020for\u0020the\u0020admin",
+            "url": "classes/Classes-Control-CAdmin.html#method_checkLogin"
+        },                {
+            "fqsen": "\\Classes\\Control\\CAdmin\u003A\u003Alogout\u0028\u0029",
+            "name": "logout",
+            "summary": "Method\u0020logout",
+            "url": "classes/Classes-Control-CAdmin.html#method_logout"
+        },                {
+            "fqsen": "\\Classes\\Control\\CAdmin\u003A\u003Aban\u0028\u0029",
+            "name": "ban",
+            "summary": "Method\u0020ban",
+            "url": "classes/Classes-Control-CAdmin.html#method_ban"
+        },                {
+            "fqsen": "\\Classes\\Control\\CAdmin\u003A\u003Aactivate\u0028\u0029",
+            "name": "activate",
+            "summary": "Method\u0020activate",
+            "url": "classes/Classes-Control-CAdmin.html#method_activate"
+        },                {
+            "fqsen": "\\Classes\\Control\\CAdmin\u003A\u003AaddToJSON\u0028\u0029",
+            "name": "addToJSON",
+            "summary": "Method\u0020addToJSON\nIf\u0020an\u0020email\u0020isn\u0027t\u0020in\u0020the\u0020list\u0020of\u0020the\u0020universities,\u0020it\u0020will\u0020be\u0020added\u0020by\u0020admin",
+            "url": "classes/Classes-Control-CAdmin.html#method_addToJSON"
+        },                {
+            "fqsen": "\\Classes\\Control\\CAdmin\u003A\u003Aprofile\u0028\u0029",
+            "name": "profile",
+            "summary": "Method\u0020profile",
+            "url": "classes/Classes-Control-CAdmin.html#method_profile"
+        },                {
+            "fqsen": "\\Classes\\Control\\CAdmin\u003A\u003AgetRequestAndReport\u0028\u0029",
+            "name": "getRequestAndReport",
+            "summary": "Method\u0020getRequestAndReport",
+            "url": "classes/Classes-Control-CAdmin.html#method_getRequestAndReport"
+        },                {
+            "fqsen": "\\Classes\\Control\\CAdmin\u003A\u003AsupportReply\u0028\u0029",
+            "name": "supportReply",
+            "summary": "Method\u0020supportReply",
+            "url": "classes/Classes-Control-CAdmin.html#method_supportReply"
+        },                {
+            "fqsen": "\\Classes\\Control\\CAdmin\u003A\u003AreadMoreSupportRequest\u0028\u0029",
+            "name": "readMoreSupportRequest",
+            "summary": "Method\u0020readMoreSupportRequest",
+            "url": "classes/Classes-Control-CAdmin.html#method_readMoreSupportRequest"
+        },                {
+            "fqsen": "\\Classes\\Control\\CAdmin\u003A\u003AverifyEmail\u0028\u0029",
+            "name": "verifyEmail",
+            "summary": "Method\u0020verifyEmail",
+            "url": "classes/Classes-Control-CAdmin.html#method_verifyEmail"
+        },                {
+            "fqsen": "\\Classes\\Control\\CAdmin\u003A\u003AdeleteSupportRequest\u0028\u0029",
+            "name": "deleteSupportRequest",
+            "summary": "Method\u0020deleteSupportRequest",
+            "url": "classes/Classes-Control-CAdmin.html#method_deleteSupportRequest"
+        },                {
+            "fqsen": "\\Classes\\Control\\CAdmin\u003A\u003AdeleteReport\u0028\u0029",
+            "name": "deleteReport",
+            "summary": "Method\u0020deleteReport",
+            "url": "classes/Classes-Control-CAdmin.html#method_deleteReport"
+        },                {
+            "fqsen": "\\Classes\\Control\\CAdmin\u003A\u003AreadMoreReports\u0028\u0029",
+            "name": "readMoreReports",
+            "summary": "Method\u0020readMoreReports",
+            "url": "classes/Classes-Control-CAdmin.html#method_readMoreReports"
+        },                {
+            "fqsen": "\\Classes\\Control\\CAdmin\u003A\u003AcheckIfAdmin\u0028\u0029",
+            "name": "checkIfAdmin",
+            "summary": "Method\u0020checkIfAdmin",
+            "url": "classes/Classes-Control-CAdmin.html#method_checkIfAdmin"
+        },                {
+            "fqsen": "\\Classes\\Control\\CContract",
+            "name": "CContract",
+            "summary": "Class\u0020CContract",
+            "url": "classes/Classes-Control-CContract.html"
+        },                {
+            "fqsen": "\\Classes\\Control\\CContract\u003A\u003Apay\u0028\u0029",
+            "name": "pay",
+            "summary": "Method\u0020pay",
+            "url": "classes/Classes-Control-CContract.html#method_pay"
+        },                {
+            "fqsen": "\\Classes\\Control\\CContract\u003A\u003AshowStudent\u0028\u0029",
+            "name": "showStudent",
+            "summary": "Method\u0020showStudent",
+            "url": "classes/Classes-Control-CContract.html#method_showStudent"
+        },                {
+            "fqsen": "\\Classes\\Control\\CContract\u003A\u003AshowOwner\u0028\u0029",
+            "name": "showOwner",
+            "summary": "Method\u0020showOwner",
+            "url": "classes/Classes-Control-CContract.html#method_showOwner"
+        },                {
+            "fqsen": "\\Classes\\Control\\CContract\u003A\u003AcontractDetails\u0028\u0029",
+            "name": "contractDetails",
+            "summary": "Method\u0020contractDetails",
+            "url": "classes/Classes-Control-CContract.html#method_contractDetails"
+        },                {
+            "fqsen": "\\Classes\\Control\\CContract\u003A\u003AviewOngoing\u0028\u0029",
+            "name": "viewOngoing",
+            "summary": "Method\u0020viewOngoing\nthe\u0020method\u0020return\u0020to\u0020the\u0020view\u0020all\u0020onGoing\u0020contracts\u0020for\u0020the\u0020accommodation\u0020with\u0020given\u0020ID",
+            "url": "classes/Classes-Control-CContract.html#method_viewOngoing"
+        },                {
+            "fqsen": "\\Classes\\Control\\CContract\u003A\u003AdeleteCreditCard\u0028\u0029",
+            "name": "deleteCreditCard",
+            "summary": "Method\u0020deleteCreditCard",
+            "url": "classes/Classes-Control-CContract.html#method_deleteCreditCard"
+        },                {
+            "fqsen": "\\Classes\\Control\\CContract\u003A\u003AeditCreditCard\u0028\u0029",
+            "name": "editCreditCard",
+            "summary": "Method\u0020editCreditCard",
+            "url": "classes/Classes-Control-CContract.html#method_editCreditCard"
+        },                {
+            "fqsen": "\\Classes\\Control\\CContract\u003A\u003AmakeMainCreditCard\u0028\u0029",
+            "name": "makeMainCreditCard",
+            "summary": "Method\u0020makeMainCreditCard",
+            "url": "classes/Classes-Control-CContract.html#method_makeMainCreditCard"
+        },                {
+            "fqsen": "\\Classes\\Control\\CContract\u003A\u003AaddCreditCard\u0028\u0029",
+            "name": "addCreditCard",
+            "summary": "Method\u0020addCreditCard",
+            "url": "classes/Classes-Control-CContract.html#method_addCreditCard"
+        },                {
+            "fqsen": "\\Classes\\Control\\CFrontController",
+            "name": "CFrontController",
+            "summary": "Front\u0020controller\u0020class",
+            "url": "classes/Classes-Control-CFrontController.html"
+        },                {
+            "fqsen": "\\Classes\\Control\\CFrontController\u003A\u003Arun\u0028\u0029",
+            "name": "run",
+            "summary": "Run\u0020the\u0020front\u0020controller",
+            "url": "classes/Classes-Control-CFrontController.html#method_run"
+        },                {
+            "fqsen": "\\Classes\\Control\\COwner",
             "name": "COwner",
-            "summary": "",
-            "url": "classes/COwner.html"
+            "summary": "This\u0020class\u0020is\u0020responsible\u0020for\u0020managing\u0020owners.",
+            "url": "classes/Classes-Control-COwner.html"
         },                {
-            "fqsen": "\\COwner\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/COwner.html#method___construct"
+            "fqsen": "\\Classes\\Control\\COwner\u003A\u003Ahome\u0028\u0029",
+            "name": "home",
+            "summary": "Method\u0020home\nShow\u0020the\u0020owner\u0027s\u0020home\u0020page",
+            "url": "classes/Classes-Control-COwner.html#method_home"
         },                {
-            "fqsen": "\\COwner\u003A\u003AgetInstance\u0028\u0029",
-            "name": "getInstance",
-            "summary": "",
-            "url": "classes/COwner.html#method_getInstance"
+            "fqsen": "\\Classes\\Control\\COwner\u003A\u003AaccommodationManagement\u0028\u0029",
+            "name": "accommodationManagement",
+            "summary": "accommodationManagement",
+            "url": "classes/Classes-Control-COwner.html#method_accommodationManagement"
         },                {
-            "fqsen": "\\COwner\u003A\u003Aregistration\u0028\u0029",
-            "name": "registration",
-            "summary": "",
-            "url": "classes/COwner.html#method_registration"
+            "fqsen": "\\Classes\\Control\\COwner\u003A\u003Aprofile\u0028\u0029",
+            "name": "profile",
+            "summary": "Handles\u0020the\u0020management\u0020of\u0020an\u0020accommodation.",
+            "url": "classes/Classes-Control-COwner.html#method_profile"
         },                {
-            "fqsen": "\\COwner\u003A\u003AValidateMail\u0028\u0029",
-            "name": "ValidateMail",
-            "summary": "",
-            "url": "classes/COwner.html#method_ValidateMail"
+            "fqsen": "\\Classes\\Control\\COwner\u003A\u003AeditProfile\u0028\u0029",
+            "name": "editProfile",
+            "summary": "Method\u0020editProfile\nThis\u0020method\u0020shows\u0020the\u0020owner\u0027s\u0020profile\u0020edit\u0020page",
+            "url": "classes/Classes-Control-COwner.html#method_editProfile"
         },                {
-            "fqsen": "\\COwner\u003A\u003AValidateIban\u0028\u0029",
-            "name": "ValidateIban",
-            "summary": "",
-            "url": "classes/COwner.html#method_ValidateIban"
+            "fqsen": "\\Classes\\Control\\COwner\u003A\u003AdeleteProfile\u0028\u0029",
+            "name": "deleteProfile",
+            "summary": "Method\u0020deleteProfile",
+            "url": "classes/Classes-Control-COwner.html#method_deleteProfile"
         },                {
-            "fqsen": "\\COwner\u003A\u003A\u0024instance",
-            "name": "instance",
+            "fqsen": "\\Classes\\Control\\COwner\u003A\u003AmodifyOwnerProfile\u0028\u0029",
+            "name": "modifyOwnerProfile",
+            "summary": "Method\u0020modifyOwnerProfile\nThis\u0020method\u0020modifies\u0020the\u0020owner\u0027s\u0020profile",
+            "url": "classes/Classes-Control-COwner.html#method_modifyOwnerProfile"
+        },                {
+            "fqsen": "\\Classes\\Control\\COwner\u003A\u003AchangePhoto\u0028\u0029",
+            "name": "changePhoto",
+            "summary": "Change\u0020the\u0020photo\u0020of\u0020the\u0020owner.",
+            "url": "classes/Classes-Control-COwner.html#method_changePhoto"
+        },                {
+            "fqsen": "\\Classes\\Control\\COwner\u003A\u003AchangePassword\u0028\u0029",
+            "name": "changePassword",
+            "summary": "Change\u0020the\u0020password\u0020for\u0020the\u0020owner.",
+            "url": "classes/Classes-Control-COwner.html#method_changePassword"
+        },                {
+            "fqsen": "\\Classes\\Control\\COwner\u003A\u003AdeletePhoto\u0028\u0029",
+            "name": "deletePhoto",
+            "summary": "Method\u0020deletePhoto\nThis\u0020method\u0020deletes\u0020owner\u0027s\u0020photo",
+            "url": "classes/Classes-Control-COwner.html#method_deletePhoto"
+        },                {
+            "fqsen": "\\Classes\\Control\\COwner\u003A\u003Acontact\u0028\u0029",
+            "name": "contact",
+            "summary": "Method\u0020contact\nThis\u0020method\u0020shows\u0020the\u0020contact\u0020page",
+            "url": "classes/Classes-Control-COwner.html#method_contact"
+        },                {
+            "fqsen": "\\Classes\\Control\\COwner\u003A\u003Aabout\u0028\u0029",
+            "name": "about",
+            "summary": "Method\u0020about\nThis\u0020method\u0020shows\u0020the\u0020about\u0020page",
+            "url": "classes/Classes-Control-COwner.html#method_about"
+        },                {
+            "fqsen": "\\Classes\\Control\\COwner\u003A\u003Aguidelines\u0028\u0029",
+            "name": "guidelines",
+            "summary": "Method\u0020guidelines\nThis\u0020method\u0020shows\u0020the\u0020guidelines\u0020page",
+            "url": "classes/Classes-Control-COwner.html#method_guidelines"
+        },                {
+            "fqsen": "\\Classes\\Control\\COwner\u003A\u003ApublicProfileFromOwner\u0028\u0029",
+            "name": "publicProfileFromOwner",
+            "summary": "Method\u0020publicProfileFromOwner\nThis\u0020method\u0020shows\u0020the\u0020public\u0020profile\u0020of\u0020an\u0020owner",
+            "url": "classes/Classes-Control-COwner.html#method_publicProfileFromOwner"
+        },                {
+            "fqsen": "\\Classes\\Control\\COwner\u003A\u003ApublicProfileFromStudent\u0028\u0029",
+            "name": "publicProfileFromStudent",
+            "summary": "Method\u0020publicProfileFromStudent\nThis\u0020method\u0020shows\u0020the\u0020public\u0020profile\u0020of\u0020an\u0020owner\u0020from\u0020a\u0020student",
+            "url": "classes/Classes-Control-COwner.html#method_publicProfileFromStudent"
+        },                {
+            "fqsen": "\\Classes\\Control\\COwner\u003A\u003ApublicProfile\u0028\u0029",
+            "name": "publicProfile",
+            "summary": "Method\u0020publicProfile\nThis\u0020method\u0020shows\u0020the\u0020public\u0020profile\u0020of\u0020an\u0020owner",
+            "url": "classes/Classes-Control-COwner.html#method_publicProfile"
+        },                {
+            "fqsen": "\\Classes\\Control\\COwner\u003A\u003Atenants\u0028\u0029",
+            "name": "tenants",
+            "summary": "Method\u0020tenants\nThis\u0020method\u0020shows\u0020the\u0020tenants\u0020of\u0020an\u0020owner",
+            "url": "classes/Classes-Control-COwner.html#method_tenants"
+        },                {
+            "fqsen": "\\Classes\\Control\\COwner\u003A\u003AfilterTenants\u0028\u0029",
+            "name": "filterTenants",
+            "summary": "Method\u0020filterTenants\nThis\u0020method\u0020filters\u0020the\u0020tenants\u0020of\u0020an\u0020owner",
+            "url": "classes/Classes-Control-COwner.html#method_filterTenants"
+        },                {
+            "fqsen": "\\Classes\\Control\\COwner\u003A\u003AcheckIfOwner\u0028\u0029",
+            "name": "checkIfOwner",
+            "summary": "Method\u0020checkIfOwner\nThis\u0020method\u0020checks\u0020if\u0020the\u0020user\u0020is\u0020an\u0020owner",
+            "url": "classes/Classes-Control-COwner.html#method_checkIfOwner"
+        },                {
+            "fqsen": "\\Classes\\Control\\CReport",
+            "name": "CReport",
             "summary": "",
-            "url": "classes/COwner.html#property_instance"
+            "url": "classes/Classes-Control-CReport.html"
+        },                {
+            "fqsen": "\\Classes\\Control\\CReport\u003A\u003AmakeReport\u0028\u0029",
+            "name": "makeReport",
+            "summary": "Method\u0020report",
+            "url": "classes/Classes-Control-CReport.html#method_makeReport"
+        },                {
+            "fqsen": "\\Classes\\Control\\CReservation",
+            "name": "CReservation",
+            "summary": "This\u0020class\u0020is\u0020responsible\u0020for\u0020managing\u0020reservations.",
+            "url": "classes/Classes-Control-CReservation.html"
+        },                {
+            "fqsen": "\\Classes\\Control\\CReservation\u003A\u003AshowStudent\u0028\u0029",
+            "name": "showStudent",
+            "summary": "Method\u0020showStudent",
+            "url": "classes/Classes-Control-CReservation.html#method_showStudent"
+        },                {
+            "fqsen": "\\Classes\\Control\\CReservation\u003A\u003AshowOwner\u0028\u0029",
+            "name": "showOwner",
+            "summary": "Method\u0020showOwner",
+            "url": "classes/Classes-Control-CReservation.html#method_showOwner"
+        },                {
+            "fqsen": "\\Classes\\Control\\CReservation\u003A\u003AreservationDetails\u0028\u0029",
+            "name": "reservationDetails",
+            "summary": "Method\u0020reservationDetails",
+            "url": "classes/Classes-Control-CReservation.html#method_reservationDetails"
+        },                {
+            "fqsen": "\\Classes\\Control\\CReservation\u003A\u003Aaccept\u0028\u0029",
+            "name": "accept",
+            "summary": "Method\u0020accept",
+            "url": "classes/Classes-Control-CReservation.html#method_accept"
+        },                {
+            "fqsen": "\\Classes\\Control\\CReservation\u003A\u003Adeny\u0028\u0029",
+            "name": "deny",
+            "summary": "Method\u0020deny",
+            "url": "classes/Classes-Control-CReservation.html#method_deny"
+        },                {
+            "fqsen": "\\Classes\\Control\\CReservation\u003A\u003Adelete\u0028\u0029",
+            "name": "delete",
+            "summary": "Method\u0020delete",
+            "url": "classes/Classes-Control-CReservation.html#method_delete"
+        },                {
+            "fqsen": "\\Classes\\Control\\CReview",
+            "name": "CReview",
+            "summary": "This\u0020class\u0020is\u0020responsible\u0020for\u0020managing\u0020reviews.",
+            "url": "classes/Classes-Control-CReview.html"
+        },                {
+            "fqsen": "\\Classes\\Control\\CReview\u003A\u003Adelete\u0028\u0029",
+            "name": "delete",
+            "summary": "Method\u0020delete",
+            "url": "classes/Classes-Control-CReview.html#method_delete"
+        },                {
+            "fqsen": "\\Classes\\Control\\CReview\u003A\u003Aedit\u0028\u0029",
+            "name": "edit",
+            "summary": "Method\u0020edit",
+            "url": "classes/Classes-Control-CReview.html#method_edit"
+        },                {
+            "fqsen": "\\Classes\\Control\\CReview\u003A\u003AaddReviewStudent\u0028\u0029",
+            "name": "addReviewStudent",
+            "summary": "Method\u0020addReviewStudent",
+            "url": "classes/Classes-Control-CReview.html#method_addReviewStudent"
+        },                {
+            "fqsen": "\\Classes\\Control\\CReview\u003A\u003AaddReviewOwner\u0028\u0029",
+            "name": "addReviewOwner",
+            "summary": "Method\u0020addReviewOwner",
+            "url": "classes/Classes-Control-CReview.html#method_addReviewOwner"
+        },                {
+            "fqsen": "\\Classes\\Control\\CReview\u003A\u003AaddReviewAccommodation\u0028\u0029",
+            "name": "addReviewAccommodation",
+            "summary": "Method\u0020addReviewAccommodation",
+            "url": "classes/Classes-Control-CReview.html#method_addReviewAccommodation"
+        },                {
+            "fqsen": "\\Classes\\Control\\CReview\u003A\u003AgetProfileReviews\u0028\u0029",
+            "name": "getProfileReviews",
+            "summary": "Method\u0020getProfileReviews",
+            "url": "classes/Classes-Control-CReview.html#method_getProfileReviews"
+        },                {
+            "fqsen": "\\Classes\\Control\\CReview\u003A\u003Areviews\u0028\u0029",
+            "name": "reviews",
+            "summary": "Method\u0020reviews",
+            "url": "classes/Classes-Control-CReview.html#method_reviews"
+        },                {
+            "fqsen": "\\Classes\\Control\\CReview\u003A\u003ApostedReview\u0028\u0029",
+            "name": "postedReview",
+            "summary": "",
+            "url": "classes/Classes-Control-CReview.html#method_postedReview"
+        },                {
+            "fqsen": "\\Classes\\Control\\CStudent",
+            "name": "CStudent",
+            "summary": "Student\u0020controller\u0020class",
+            "url": "classes/Classes-Control-CStudent.html"
+        },                {
+            "fqsen": "\\Classes\\Control\\CStudent\u003A\u003Ahome\u0028\u0029",
+            "name": "home",
+            "summary": "Method\u0020home",
+            "url": "classes/Classes-Control-CStudent.html#method_home"
+        },                {
+            "fqsen": "\\Classes\\Control\\CStudent\u003A\u003Acontact\u0028\u0029",
+            "name": "contact",
+            "summary": "Method\u0020contact",
+            "url": "classes/Classes-Control-CStudent.html#method_contact"
+        },                {
+            "fqsen": "\\Classes\\Control\\CStudent\u003A\u003Asearch\u0028\u0029",
+            "name": "search",
+            "summary": "Method\u0020search",
+            "url": "classes/Classes-Control-CStudent.html#method_search"
+        },                {
+            "fqsen": "\\Classes\\Control\\CStudent\u003A\u003Aabout\u0028\u0029",
+            "name": "about",
+            "summary": "Method\u0020about",
+            "url": "classes/Classes-Control-CStudent.html#method_about"
+        },                {
+            "fqsen": "\\Classes\\Control\\CStudent\u003A\u003Aguidelines\u0028\u0029",
+            "name": "guidelines",
+            "summary": "Method\u0020guidelines",
+            "url": "classes/Classes-Control-CStudent.html#method_guidelines"
+        },                {
+            "fqsen": "\\Classes\\Control\\CStudent\u003A\u003Aprofile\u0028\u0029",
+            "name": "profile",
+            "summary": "Method\u0020profile\nThis\u0020method\u0020shows\u0020the\u0020student\u0027s\u0020profile",
+            "url": "classes/Classes-Control-CStudent.html#method_profile"
+        },                {
+            "fqsen": "\\Classes\\Control\\CStudent\u003A\u003AeditProfile\u0028\u0029",
+            "name": "editProfile",
+            "summary": "Method\u0020editProfile",
+            "url": "classes/Classes-Control-CStudent.html#method_editProfile"
+        },                {
+            "fqsen": "\\Classes\\Control\\CStudent\u003A\u003AdeleteProfile\u0028\u0029",
+            "name": "deleteProfile",
+            "summary": "Method\u0020deleteProfile",
+            "url": "classes/Classes-Control-CStudent.html#method_deleteProfile"
+        },                {
+            "fqsen": "\\Classes\\Control\\CStudent\u003A\u003AstudentRegistration\u0028\u0029",
+            "name": "studentRegistration",
+            "summary": "Method\u0020studentRegistration",
+            "url": "classes/Classes-Control-CStudent.html#method_studentRegistration"
+        },                {
+            "fqsen": "\\Classes\\Control\\CStudent\u003A\u003Aaccommodation\u0028\u0029",
+            "name": "accommodation",
+            "summary": "Method\u0020accommodation",
+            "url": "classes/Classes-Control-CStudent.html#method_accommodation"
+        },                {
+            "fqsen": "\\Classes\\Control\\CStudent\u003A\u003AvisitTimeSlots\u0028\u0029",
+            "name": "visitTimeSlots",
+            "summary": "Method\u0020visitTimeSlots",
+            "url": "classes/Classes-Control-CStudent.html#method_visitTimeSlots"
+        },                {
+            "fqsen": "\\Classes\\Control\\CStudent\u003A\u003AcheckPermission\u0028\u0029",
+            "name": "checkPermission",
+            "summary": "checkPermission",
+            "url": "classes/Classes-Control-CStudent.html#method_checkPermission"
+        },                {
+            "fqsen": "\\Classes\\Control\\CStudent\u003A\u003AmodifyStudentProfile\u0028\u0029",
+            "name": "modifyStudentProfile",
+            "summary": "Method\u0020modifyStudentProfile",
+            "url": "classes/Classes-Control-CStudent.html#method_modifyStudentProfile"
+        },                {
+            "fqsen": "\\Classes\\Control\\CStudent\u003A\u003AchangePassword\u0028\u0029",
+            "name": "changePassword",
+            "summary": "Method\u0020changePassword",
+            "url": "classes/Classes-Control-CStudent.html#method_changePassword"
+        },                {
+            "fqsen": "\\Classes\\Control\\CStudent\u003A\u003AchangePhoto\u0028\u0029",
+            "name": "changePhoto",
+            "summary": "Method\u0020changePhoto",
+            "url": "classes/Classes-Control-CStudent.html#method_changePhoto"
+        },                {
+            "fqsen": "\\Classes\\Control\\CStudent\u003A\u003AdeletePhoto\u0028\u0029",
+            "name": "deletePhoto",
+            "summary": "Method\u0020deletePhoto",
+            "url": "classes/Classes-Control-CStudent.html#method_deletePhoto"
+        },                {
+            "fqsen": "\\Classes\\Control\\CStudent\u003A\u003ApublicProfile\u0028\u0029",
+            "name": "publicProfile",
+            "summary": "Method\u0020publicProfile",
+            "url": "classes/Classes-Control-CStudent.html#method_publicProfile"
+        },                {
+            "fqsen": "\\Classes\\Control\\CStudent\u003A\u003ApublicProfileFromStudent\u0028\u0029",
+            "name": "publicProfileFromStudent",
+            "summary": "Method\u0020publicProfileFromStudent",
+            "url": "classes/Classes-Control-CStudent.html#method_publicProfileFromStudent"
+        },                {
+            "fqsen": "\\Classes\\Control\\CStudent\u003A\u003ApublicProfileFromOwner\u0028\u0029",
+            "name": "publicProfileFromOwner",
+            "summary": "Method\u0020publicProfileFromOwner",
+            "url": "classes/Classes-Control-CStudent.html#method_publicProfileFromOwner"
+        },                {
+            "fqsen": "\\Classes\\Control\\CStudent\u003A\u003ApaymentMethods\u0028\u0029",
+            "name": "paymentMethods",
+            "summary": "Method\u0020paymentMethods",
+            "url": "classes/Classes-Control-CStudent.html#method_paymentMethods"
+        },                {
+            "fqsen": "\\Classes\\Control\\CStudent\u003A\u003AreserveAccommodation\u0028\u0029",
+            "name": "reserveAccommodation",
+            "summary": "Method\u0020reserveAccommodation",
+            "url": "classes/Classes-Control-CStudent.html#method_reserveAccommodation"
+        },                {
+            "fqsen": "\\Classes\\Control\\CStudent\u003A\u003AcheckIfStudent\u0028\u0029",
+            "name": "checkIfStudent",
+            "summary": "Method\u0020checkIfStudent",
+            "url": "classes/Classes-Control-CStudent.html#method_checkIfStudent"
+        },                {
+            "fqsen": "\\Classes\\Control\\CSupportRequest",
+            "name": "CSupportRequest",
+            "summary": "This\u0020class\u0020is\u0020responsible\u0020for\u0020managing\u0020support\u0020requests.",
+            "url": "classes/Classes-Control-CSupportRequest.html"
+        },                {
+            "fqsen": "\\Classes\\Control\\CSupportRequest\u003A\u003AgetSupportReply\u0028\u0029",
+            "name": "getSupportReply",
+            "summary": "Method\u0020getSupportReply",
+            "url": "classes/Classes-Control-CSupportRequest.html#method_getSupportReply"
+        },                {
+            "fqsen": "\\Classes\\Control\\CSupportRequest\u003A\u003AreadSupportReply\u0028\u0029",
+            "name": "readSupportReply",
+            "summary": "Method\u0020readSupportReply",
+            "url": "classes/Classes-Control-CSupportRequest.html#method_readSupportReply"
+        },                {
+            "fqsen": "\\Classes\\Control\\CSupportRequest\u003A\u003AreadMoreSupportReplies\u0028\u0029",
+            "name": "readMoreSupportReplies",
+            "summary": "Method\u0020readMoreSupportReplies",
+            "url": "classes/Classes-Control-CSupportRequest.html#method_readMoreSupportReplies"
+        },                {
+            "fqsen": "\\Classes\\Control\\CSupportRequest\u003A\u003AsupportRequest\u0028\u0029",
+            "name": "supportRequest",
+            "summary": "Method\u0020supportRequest",
+            "url": "classes/Classes-Control-CSupportRequest.html#method_supportRequest"
+        },                {
+            "fqsen": "\\Classes\\Control\\CSupportRequest\u003A\u003AstudentEmailIssue\u0028\u0029",
+            "name": "studentEmailIssue",
+            "summary": "Method\u0020studentEmailIssue",
+            "url": "classes/Classes-Control-CSupportRequest.html#method_studentEmailIssue"
+        },                {
+            "fqsen": "\\Classes\\Control\\CSupportRequest\u003A\u003AremoveBan\u0028\u0029",
+            "name": "removeBan",
+            "summary": "Method\u0020removeBan",
+            "url": "classes/Classes-Control-CSupportRequest.html#method_removeBan"
+        },                {
+            "fqsen": "\\Classes\\Control\\CUser",
+            "name": "CUser",
+            "summary": "This\u0020class\u0020is\u0020responsible\u0020for\u0020managing\u0020users.",
+            "url": "classes/Classes-Control-CUser.html"
+        },                {
+            "fqsen": "\\Classes\\Control\\CUser\u003A\u003Ahome\u0028\u0029",
+            "name": "home",
+            "summary": "Method\u0020home",
+            "url": "classes/Classes-Control-CUser.html#method_home"
+        },                {
+            "fqsen": "\\Classes\\Control\\CUser\u003A\u003Aabout\u0028\u0029",
+            "name": "about",
+            "summary": "Method\u0020about",
+            "url": "classes/Classes-Control-CUser.html#method_about"
+        },                {
+            "fqsen": "\\Classes\\Control\\CUser\u003A\u003Aguidelines\u0028\u0029",
+            "name": "guidelines",
+            "summary": "Method\u0020guidelines",
+            "url": "classes/Classes-Control-CUser.html#method_guidelines"
+        },                {
+            "fqsen": "\\Classes\\Control\\CUser\u003A\u003Alogin\u0028\u0029",
+            "name": "login",
+            "summary": "Method\u0020login",
+            "url": "classes/Classes-Control-CUser.html#method_login"
+        },                {
+            "fqsen": "\\Classes\\Control\\CUser\u003A\u003Aregister\u0028\u0029",
+            "name": "register",
+            "summary": "Method\u0020register",
+            "url": "classes/Classes-Control-CUser.html#method_register"
+        },                {
+            "fqsen": "\\Classes\\Control\\CUser\u003A\u003Acontact\u0028\u0029",
+            "name": "contact",
+            "summary": "Method\u0020contact",
+            "url": "classes/Classes-Control-CUser.html#method_contact"
+        },                {
+            "fqsen": "\\Classes\\Control\\CUser\u003A\u003Asearch\u0028\u0029",
+            "name": "search",
+            "summary": "Method\u0020search",
+            "url": "classes/Classes-Control-CUser.html#method_search"
+        },                {
+            "fqsen": "\\Classes\\Control\\CUser\u003A\u003AgetCities\u0028\u0029",
+            "name": "getCities",
+            "summary": "Method\u0020getCities",
+            "url": "classes/Classes-Control-CUser.html#method_getCities"
+        },                {
+            "fqsen": "\\Classes\\Control\\CUser\u003A\u003AshowRegistration\u0028\u0029",
+            "name": "showRegistration",
+            "summary": "Method\u0020showRegistration",
+            "url": "classes/Classes-Control-CUser.html#method_showRegistration"
+        },                {
+            "fqsen": "\\Classes\\Control\\CUser\u003A\u003AcheckLogin\u0028\u0029",
+            "name": "checkLogin",
+            "summary": "Method\u0020checkLogin",
+            "url": "classes/Classes-Control-CUser.html#method_checkLogin"
+        },                {
+            "fqsen": "\\Classes\\Control\\CUser\u003A\u003Alogout\u0028\u0029",
+            "name": "logout",
+            "summary": "Method\u0020logout",
+            "url": "classes/Classes-Control-CUser.html#method_logout"
+        },                {
+            "fqsen": "\\Classes\\Control\\CVisit",
+            "name": "CVisit",
+            "summary": "This\u0020class\u0020is\u0020responsible\u0020for\u0020managing\u0020visits.",
+            "url": "classes/Classes-Control-CVisit.html"
+        },                {
+            "fqsen": "\\Classes\\Control\\CVisit\u003A\u003AstudentRequest\u0028\u0029",
+            "name": "studentRequest",
+            "summary": "Method\u0020studentRequest",
+            "url": "classes/Classes-Control-CVisit.html#method_studentRequest"
+        },                {
+            "fqsen": "\\Classes\\Control\\CVisit\u003A\u003Avisits\u0028\u0029",
+            "name": "visits",
+            "summary": "Retrieves\u0020the\u0020visits.",
+            "url": "classes/Classes-Control-CVisit.html#method_visits"
+        },                {
+            "fqsen": "\\Classes\\Control\\CVisit\u003A\u003AviewVisit\u0028\u0029",
+            "name": "viewVisit",
+            "summary": "Method\u0020viewVisit",
+            "url": "classes/Classes-Control-CVisit.html#method_viewVisit"
+        },                {
+            "fqsen": "\\Classes\\Control\\CVisit\u003A\u003Adelete\u0028\u0029",
+            "name": "delete",
+            "summary": "Deletes\u0020a\u0020visit\u0020record\u0020from\u0020the\u0020database.",
+            "url": "classes/Classes-Control-CVisit.html#method_delete"
+        },                {
+            "fqsen": "\\Classes\\Control\\CVisit\u003A\u003Aedit\u0028\u0029",
+            "name": "edit",
+            "summary": "Method\u0020edit",
+            "url": "classes/Classes-Control-CVisit.html#method_edit"
         },                {
             "fqsen": "\\Classes\\Entity\\EAccommodation",
             "name": "EAccommodation",
@@ -106,6 +666,11 @@ Search.appendIndex(
             "summary": "getDescription\nReturns\u0020the\u0020description\u0020of\u0020the\u0020accommodation",
             "url": "classes/Classes-Entity-EAccommodation.html#method_getDescription"
         },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AgetPlaces\u0028\u0029",
+            "name": "getPlaces",
+            "summary": "getPlaces\nReturns\u0020the\u0020number\u0020of\u0020places\u0020of\u0020the\u0020accommodation",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_getPlaces"
+        },                {
             "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AgetDeposit\u0028\u0029",
             "name": "getDeposit",
             "summary": "getDeposit\nReturns\u0020the\u0020deposit\u0020of\u0020the\u0020accommodation",
@@ -115,6 +680,11 @@ Search.appendIndex(
             "name": "getVisit",
             "summary": "getVisit\nReturns\u0020the\u0020availability\u0020for\u0020visit",
             "url": "classes/Classes-Entity-EAccommodation.html#method_getVisit"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AgetAverageRating\u0028\u0029",
+            "name": "getAverageRating",
+            "summary": "getAverageRating\nReturns\u0020the\u0020average\u0020rating\u0020of\u0020the\u0020accommodation",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_getAverageRating"
         },                {
             "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AgetVisitDuration\u0028\u0029",
             "name": "getVisitDuration",
@@ -140,6 +710,11 @@ Search.appendIndex(
             "name": "getSmokers",
             "summary": "getSmokers\nReturns\u0020true\u0020if\u0020smokers\u0020are\u0020allowed",
             "url": "classes/Classes-Entity-EAccommodation.html#method_getSmokers"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AgetStatus\u0028\u0029",
+            "name": "getStatus",
+            "summary": "getStatus\nReturns\u0020true\u0020if\u0020accommodation\u0020is\u0020active,\u0020else\u0020if\u0020it\u0027s\u0020disabilited\u0020the\u0020function\u0020returns\u0020false",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_getStatus"
         },                {
             "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AgetIdOwner\u0028\u0029",
             "name": "getIdOwner",
@@ -181,6 +756,11 @@ Search.appendIndex(
             "summary": "setDescription\nSets\u0020the\u0020description\u0020of\u0020the\u0020accommodation",
             "url": "classes/Classes-Entity-EAccommodation.html#method_setDescription"
         },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AsetPlaces\u0028\u0029",
+            "name": "setPlaces",
+            "summary": "setPlaces\nSets\u0020the\u0020number\u0020of\u0020places\u0020of\u0020the\u0020accommodation",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_setPlaces"
+        },                {
             "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AsetDeposit\u0028\u0029",
             "name": "setDeposit",
             "summary": "setDeposit\nSets\u0020the\u0020deposit\u0020of\u0020the\u0020accommodation",
@@ -216,6 +796,11 @@ Search.appendIndex(
             "summary": "setSmokers\nSets\u0020true\u0020if\u0020smokers\u0020are\u0020allowed",
             "url": "classes/Classes-Entity-EAccommodation.html#method_setSmokers"
         },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AsetStatus\u0028\u0029",
+            "name": "setStatus",
+            "summary": "setStatus\nSets\u0020true\u0020if\u0020accommodation\u0020is\u0020active,\u0020else\u0020if\u0020it\u0027s\u0020disabilited\u0020the\u0020function\u0020sets\u0020false",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_setStatus"
+        },                {
             "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AsetIdOwner\u0028\u0029",
             "name": "setIdOwner",
             "summary": "setIdOwner\nSets\u0020the\u0020id\u0020of\u0020the\u0020owner\u0020of\u0020the\u0020accommodation",
@@ -225,6 +810,51 @@ Search.appendIndex(
             "name": "__toString",
             "summary": "__toString\nReturns\u0020a\u0020string\u0020that\u0020represents\u0020the\u0020accommodation",
             "url": "classes/Classes-Entity-EAccommodation.html#method___toString"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AfromJsonToArrayOfVisit\u0028\u0029",
+            "name": "fromJsonToArrayOfVisit",
+            "summary": "Method\u0020fromJsonToArrayOfVisit",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_fromJsonToArrayOfVisit"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AresultOne\u0028\u0029",
+            "name": "resultOne",
+            "summary": "Method\u0020resultOne",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_resultOne"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AresultTwo\u0028\u0029",
+            "name": "resultTwo",
+            "summary": "Method\u0020resultTwo",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_resultTwo"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003ADurationOfVisit\u0028\u0029",
+            "name": "DurationOfVisit",
+            "summary": "Method\u0020DurationOfVisit",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_DurationOfVisit"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AstringInMinutes\u0028\u0029",
+            "name": "stringInMinutes",
+            "summary": "Method\u0020stringInMinutes",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_stringInMinutes"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AmitutesToString\u0028\u0029",
+            "name": "mitutesToString",
+            "summary": "Method\u0020mitutesToString",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_mitutesToString"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AgetRating\u0028\u0029",
+            "name": "getRating",
+            "summary": "Method\u0020getRating",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_getRating"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AgetData\u0028\u0029",
+            "name": "getData",
+            "summary": "Method\u0020getData",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_getData"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003AgetVisitAvailabilityData\u0028\u0029",
+            "name": "getVisitAvailabilityData",
+            "summary": "Method\u0020getVisitAvailabilityData",
+            "url": "classes/Classes-Entity-EAccommodation.html#method_getVisitAvailabilityData"
         },                {
             "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003A\u0024idAccommodation",
             "name": "idAccommodation",
@@ -261,6 +891,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Classes-Entity-EAccommodation.html#property_description"
         },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003A\u0024places",
+            "name": "places",
+            "summary": "",
+            "url": "classes/Classes-Entity-EAccommodation.html#property_places"
+        },                {
             "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003A\u0024deposit",
             "name": "deposit",
             "summary": "",
@@ -296,6 +931,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Classes-Entity-EAccommodation.html#property_smokers"
         },                {
+            "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003A\u0024status",
+            "name": "status",
+            "summary": "",
+            "url": "classes/Classes-Entity-EAccommodation.html#property_status"
+        },                {
             "fqsen": "\\Classes\\Entity\\EAccommodation\u003A\u003A\u0024idOwner",
             "name": "idOwner",
             "summary": "",
@@ -305,81 +945,6 @@ Search.appendIndex(
             "name": "entity",
             "summary": "",
             "url": "classes/Classes-Entity-EAccommodation.html#property_entity"
-        },                {
-            "fqsen": "\\Classes\\Entity\\EAdministrator",
-            "name": "EAdministrator",
-            "summary": "EAdministrator",
-            "url": "classes/Classes-Entity-EAdministrator.html"
-        },                {
-            "fqsen": "\\Classes\\Entity\\EAdministrator\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "__construct",
-            "url": "classes/Classes-Entity-EAdministrator.html#method___construct"
-        },                {
-            "fqsen": "\\Classes\\Entity\\EAdministrator\u003A\u003AgetID\u0028\u0029",
-            "name": "getID",
-            "summary": "getID",
-            "url": "classes/Classes-Entity-EAdministrator.html#method_getID"
-        },                {
-            "fqsen": "\\Classes\\Entity\\EAdministrator\u003A\u003AgetUsername\u0028\u0029",
-            "name": "getUsername",
-            "summary": "getUsername",
-            "url": "classes/Classes-Entity-EAdministrator.html#method_getUsername"
-        },                {
-            "fqsen": "\\Classes\\Entity\\EAdministrator\u003A\u003AgetEmail\u0028\u0029",
-            "name": "getEmail",
-            "summary": "getEmail",
-            "url": "classes/Classes-Entity-EAdministrator.html#method_getEmail"
-        },                {
-            "fqsen": "\\Classes\\Entity\\EAdministrator\u003A\u003AgetPassword\u0028\u0029",
-            "name": "getPassword",
-            "summary": "getPassword",
-            "url": "classes/Classes-Entity-EAdministrator.html#method_getPassword"
-        },                {
-            "fqsen": "\\Classes\\Entity\\EAdministrator\u003A\u003AsetID\u0028\u0029",
-            "name": "setID",
-            "summary": "setID",
-            "url": "classes/Classes-Entity-EAdministrator.html#method_setID"
-        },                {
-            "fqsen": "\\Classes\\Entity\\EAdministrator\u003A\u003AsetPassword\u0028\u0029",
-            "name": "setPassword",
-            "summary": "setPassword",
-            "url": "classes/Classes-Entity-EAdministrator.html#method_setPassword"
-        },                {
-            "fqsen": "\\Classes\\Entity\\EAdministrator\u003A\u003AsetUsername\u0028\u0029",
-            "name": "setUsername",
-            "summary": "setUsername",
-            "url": "classes/Classes-Entity-EAdministrator.html#method_setUsername"
-        },                {
-            "fqsen": "\\Classes\\Entity\\EAdministrator\u003A\u003AsetEmail\u0028\u0029",
-            "name": "setEmail",
-            "summary": "setEmail",
-            "url": "classes/Classes-Entity-EAdministrator.html#method_setEmail"
-        },                {
-            "fqsen": "\\Classes\\Entity\\EAdministrator\u003A\u003A__toString\u0028\u0029",
-            "name": "__toString",
-            "summary": "",
-            "url": "classes/Classes-Entity-EAdministrator.html#method___toString"
-        },                {
-            "fqsen": "\\Classes\\Entity\\EAdministrator\u003A\u003A\u0024id",
-            "name": "id",
-            "summary": "",
-            "url": "classes/Classes-Entity-EAdministrator.html#property_id"
-        },                {
-            "fqsen": "\\Classes\\Entity\\EAdministrator\u003A\u003A\u0024username",
-            "name": "username",
-            "summary": "",
-            "url": "classes/Classes-Entity-EAdministrator.html#property_username"
-        },                {
-            "fqsen": "\\Classes\\Entity\\EAdministrator\u003A\u003A\u0024password",
-            "name": "password",
-            "summary": "",
-            "url": "classes/Classes-Entity-EAdministrator.html#property_password"
-        },                {
-            "fqsen": "\\Classes\\Entity\\EAdministrator\u003A\u003A\u0024email",
-            "name": "email",
-            "summary": "",
-            "url": "classes/Classes-Entity-EAdministrator.html#property_email"
         },                {
             "fqsen": "\\Classes\\Entity\\EContract",
             "name": "EContract",
@@ -476,6 +1041,16 @@ Search.appendIndex(
             "summary": "getStudentID",
             "url": "classes/Classes-Entity-ECreditCard.html#method_getStudentID"
         },                {
+            "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003AgetMain\u0028\u0029",
+            "name": "getMain",
+            "summary": "Method\u0020getMain",
+            "url": "classes/Classes-Entity-ECreditCard.html#method_getMain"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003AgetTitle\u0028\u0029",
+            "name": "getTitle",
+            "summary": "Method\u0020getTitle",
+            "url": "classes/Classes-Entity-ECreditCard.html#method_getTitle"
+        },                {
             "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003AsetNumber\u0028\u0029",
             "name": "setNumber",
             "summary": "setNumber",
@@ -505,6 +1080,16 @@ Search.appendIndex(
             "name": "setStudentID",
             "summary": "setStudentID",
             "url": "classes/Classes-Entity-ECreditCard.html#method_setStudentID"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003AsetMain\u0028\u0029",
+            "name": "setMain",
+            "summary": "Method\u0020setMain",
+            "url": "classes/Classes-Entity-ECreditCard.html#method_setMain"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003AsetTitle\u0028\u0029",
+            "name": "setTitle",
+            "summary": "Method\u0020setTitle",
+            "url": "classes/Classes-Entity-ECreditCard.html#method_setTitle"
         },                {
             "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003A__toString\u0028\u0029",
             "name": "__toString",
@@ -541,6 +1126,16 @@ Search.appendIndex(
             "summary": "studentID",
             "url": "classes/Classes-Entity-ECreditCard.html#property_studentID"
         },                {
+            "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003A\u0024main",
+            "name": "main",
+            "summary": "main",
+            "url": "classes/Classes-Entity-ECreditCard.html#property_main"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003A\u0024title",
+            "name": "title",
+            "summary": "title",
+            "url": "classes/Classes-Entity-ECreditCard.html#property_title"
+        },                {
             "fqsen": "\\Classes\\Entity\\ECreditCard\u003A\u003A\u0024entity",
             "name": "entity",
             "summary": "",
@@ -553,107 +1148,147 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AgetEntity\u0028\u0029",
             "name": "getEntity",
-            "summary": "",
+            "summary": "Undocumented\u0020function",
             "url": "classes/Classes-Entity-EOwner.html#method_getEntity"
         },                {
             "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "Undocumented\u0020function",
             "url": "classes/Classes-Entity-EOwner.html#method___construct"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AisPasswordHashed\u0028\u0029",
+            "name": "isPasswordHashed",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#method_isPasswordHashed"
         },                {
             "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AgetId\u0028\u0029",
             "name": "getId",
-            "summary": "",
+            "summary": "Undocumented\u0020function",
             "url": "classes/Classes-Entity-EOwner.html#method_getId"
         },                {
             "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AgetUsername\u0028\u0029",
             "name": "getUsername",
-            "summary": "",
+            "summary": "Undocumented\u0020function",
             "url": "classes/Classes-Entity-EOwner.html#method_getUsername"
         },                {
             "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AgetPassword\u0028\u0029",
             "name": "getPassword",
-            "summary": "",
+            "summary": "Undocumented\u0020function",
             "url": "classes/Classes-Entity-EOwner.html#method_getPassword"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AgetNumberOfAds\u0028\u0029",
+            "name": "getNumberOfAds",
+            "summary": "Retrieves\u0020the\u0020number\u0020of\u0020ads\u0020for\u0020the\u0020owner.",
+            "url": "classes/Classes-Entity-EOwner.html#method_getNumberOfAds"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AgetAverageRating\u0028\u0029",
+            "name": "getAverageRating",
+            "summary": "Retrieves\u0020the\u0020average\u0020rating\u0020of\u0020the\u0020owner.",
+            "url": "classes/Classes-Entity-EOwner.html#method_getAverageRating"
         },                {
             "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AgetName\u0028\u0029",
             "name": "getName",
-            "summary": "",
+            "summary": "Retrieves\u0020the\u0020name\u0020of\u0020the\u0020owner.",
             "url": "classes/Classes-Entity-EOwner.html#method_getName"
         },                {
             "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AgetSurname\u0028\u0029",
             "name": "getSurname",
-            "summary": "",
+            "summary": "Retrieves\u0020the\u0020surname\u0020of\u0020the\u0020owner.",
             "url": "classes/Classes-Entity-EOwner.html#method_getSurname"
         },                {
             "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AgetPhoto\u0028\u0029",
             "name": "getPhoto",
-            "summary": "",
+            "summary": "Retrieves\u0020the\u0020photo\u0020of\u0020the\u0020owner.",
             "url": "classes/Classes-Entity-EOwner.html#method_getPhoto"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AgetShowPhoto\u0028\u0029",
+            "name": "getShowPhoto",
+            "summary": "Retrieves\u0020the\u0020photo\u0020of\u0020the\u0020owner.",
+            "url": "classes/Classes-Entity-EOwner.html#method_getShowPhoto"
         },                {
             "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AgetMail\u0028\u0029",
             "name": "getMail",
-            "summary": "",
+            "summary": "Retrieves\u0020the\u0020email\u0020of\u0020the\u0020owner.",
             "url": "classes/Classes-Entity-EOwner.html#method_getMail"
         },                {
             "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AgetPhoneNumber\u0028\u0029",
             "name": "getPhoneNumber",
-            "summary": "",
+            "summary": "Retrieves\u0020the\u0020phone\u0020number\u0020of\u0020the\u0020owner.",
             "url": "classes/Classes-Entity-EOwner.html#method_getPhoneNumber"
         },                {
             "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AgetIBAN\u0028\u0029",
             "name": "getIBAN",
-            "summary": "",
+            "summary": "Retrieves\u0020the\u0020IBAN\u0020of\u0020the\u0020owner.",
             "url": "classes/Classes-Entity-EOwner.html#method_getIBAN"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AgetStatus\u0028\u0029",
+            "name": "getStatus",
+            "summary": "Retrieves\u0020the\u0020status\u0020of\u0020the\u0020owner.",
+            "url": "classes/Classes-Entity-EOwner.html#method_getStatus"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AgetStatusString\u0028\u0029",
+            "name": "getStatusString",
+            "summary": "Retrieves\u0020the\u0020status\u0020of\u0020the\u0020owner.",
+            "url": "classes/Classes-Entity-EOwner.html#method_getStatusString"
         },                {
             "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AsetId\u0028\u0029",
             "name": "setId",
-            "summary": "",
+            "summary": "Retrieves\u0020the\u0020status\u0020of\u0020the\u0020owner.",
             "url": "classes/Classes-Entity-EOwner.html#method_setId"
         },                {
             "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AsetUsername\u0028\u0029",
             "name": "setUsername",
-            "summary": "",
+            "summary": "Set\u0020the\u0020username\u0020for\u0020the\u0020owner.",
             "url": "classes/Classes-Entity-EOwner.html#method_setUsername"
         },                {
             "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AsetPassword\u0028\u0029",
             "name": "setPassword",
-            "summary": "",
+            "summary": "Set\u0020the\u0020password\u0020for\u0020the\u0020owner.",
             "url": "classes/Classes-Entity-EOwner.html#method_setPassword"
         },                {
             "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AsetName\u0028\u0029",
             "name": "setName",
-            "summary": "",
+            "summary": "Set\u0020the\u0020name\u0020for\u0020the\u0020owner.",
             "url": "classes/Classes-Entity-EOwner.html#method_setName"
         },                {
             "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AsetSurname\u0028\u0029",
             "name": "setSurname",
-            "summary": "",
+            "summary": "Set\u0020the\u0020surname\u0020for\u0020the\u0020owner.",
             "url": "classes/Classes-Entity-EOwner.html#method_setSurname"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AsetPhoto\u0028\u0029",
+            "name": "setPhoto",
+            "summary": "Set\u0020the\u0020photo\u0020for\u0020the\u0020owner.",
+            "url": "classes/Classes-Entity-EOwner.html#method_setPhoto"
         },                {
             "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AuploadPhoto\u0028\u0029",
             "name": "uploadPhoto",
-            "summary": "",
+            "summary": "Uploads\u0020a\u0020photo\u0020for\u0020the\u0020owner.",
             "url": "classes/Classes-Entity-EOwner.html#method_uploadPhoto"
         },                {
             "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AsetMail\u0028\u0029",
             "name": "setMail",
-            "summary": "",
+            "summary": "Set\u0020the\u0020email\u0020for\u0020the\u0020owner.",
             "url": "classes/Classes-Entity-EOwner.html#method_setMail"
         },                {
             "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AsetPhoneNumber\u0028\u0029",
             "name": "setPhoneNumber",
-            "summary": "",
+            "summary": "Set\u0020the\u0020phone\u0020number\u0020for\u0020the\u0020owner.",
             "url": "classes/Classes-Entity-EOwner.html#method_setPhoneNumber"
         },                {
             "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AsetIBAN\u0028\u0029",
             "name": "setIBAN",
-            "summary": "",
+            "summary": "Set\u0020the\u0020IBAN\u0020for\u0020the\u0020owner.",
             "url": "classes/Classes-Entity-EOwner.html#method_setIBAN"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003AsetStatus\u0028\u0029",
+            "name": "setStatus",
+            "summary": "Set\u0020the\u0020status\u0020for\u0020the\u0020owner.",
+            "url": "classes/Classes-Entity-EOwner.html#method_setStatus"
         },                {
             "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003A__toString\u0028\u0029",
             "name": "__toString",
-            "summary": "",
+            "summary": "Returns\u0020a\u0020string\u0020representation\u0020of\u0020the\u0020EOwner\u0020object.",
             "url": "classes/Classes-Entity-EOwner.html#method___toString"
         },                {
             "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003A\u0024id",
@@ -701,6 +1336,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Classes-Entity-EOwner.html#property_iban"
         },                {
+            "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003A\u0024status",
+            "name": "status",
+            "summary": "",
+            "url": "classes/Classes-Entity-EOwner.html#property_status"
+        },                {
             "fqsen": "\\Classes\\Entity\\EOwner\u003A\u003A\u0024entity",
             "name": "entity",
             "summary": "",
@@ -736,11 +1376,6 @@ Search.appendIndex(
             "summary": "getIdAccommodation\nReturns\u0020the\u0020id\u0020of\u0020the\u0020accommodation\u0020to\u0020which\u0020the\u0020photo\u0020is\u0020related",
             "url": "classes/Classes-Entity-EPhoto.html#method_getIdAccommodation"
         },                {
-            "fqsen": "\\Classes\\Entity\\EPhoto\u003A\u003AgetIdReview\u0028\u0029",
-            "name": "getIdReview",
-            "summary": "getIdReview\nReturns\u0020the\u0020id\u0020of\u0020the\u0020review\u0020to\u0020which\u0020the\u0020photo\u0020is\u0020related",
-            "url": "classes/Classes-Entity-EPhoto.html#method_getIdReview"
-        },                {
             "fqsen": "\\Classes\\Entity\\EPhoto\u003A\u003AsetId\u0028\u0029",
             "name": "setId",
             "summary": "setId\nSets\u0020the\u0020id\u0020of\u0020the\u0020photo",
@@ -761,15 +1396,20 @@ Search.appendIndex(
             "summary": "setIdAccommodation\nSets\u0020the\u0020id\u0020of\u0020the\u0020accommodation\u0020to\u0020which\u0020the\u0020photo\u0020is\u0020related",
             "url": "classes/Classes-Entity-EPhoto.html#method_setIdAccommodation"
         },                {
-            "fqsen": "\\Classes\\Entity\\EPhoto\u003A\u003AsetIdReview\u0028\u0029",
-            "name": "setIdReview",
-            "summary": "setIdReview\nSets\u0020the\u0020id\u0020of\u0020the\u0020review\u0020to\u0020which\u0020the\u0020photo\u0020is\u0020related",
-            "url": "classes/Classes-Entity-EPhoto.html#method_setIdReview"
-        },                {
             "fqsen": "\\Classes\\Entity\\EPhoto\u003A\u003A__toString\u0028\u0029",
             "name": "__toString",
             "summary": "__toString\nConverts\u0020the\u0020object\u0020to\u0020string",
             "url": "classes/Classes-Entity-EPhoto.html#method___toString"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EPhoto\u003A\u003AfromJsonToPhotos\u0028\u0029",
+            "name": "fromJsonToPhotos",
+            "summary": "Method\u0020fromJsonToPhotos",
+            "url": "classes/Classes-Entity-EPhoto.html#method_fromJsonToPhotos"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EPhoto\u003A\u003AtoBase64\u0028\u0029",
+            "name": "toBase64",
+            "summary": "Method\u0020toBase64",
+            "url": "classes/Classes-Entity-EPhoto.html#method_toBase64"
         },                {
             "fqsen": "\\Classes\\Entity\\EPhoto\u003A\u003A\u0024id",
             "name": "id",
@@ -791,10 +1431,100 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Classes-Entity-EPhoto.html#property_idAccommodation"
         },                {
-            "fqsen": "\\Classes\\Entity\\EPhoto\u003A\u003A\u0024idReview",
-            "name": "idReview",
+            "fqsen": "\\Classes\\Entity\\EReport",
+            "name": "EReport",
+            "summary": "EReport",
+            "url": "classes/Classes-Entity-EReport.html"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReport\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Constructor",
+            "url": "classes/Classes-Entity-EReport.html#method___construct"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReport\u003A\u003AgetId\u0028\u0029",
+            "name": "getId",
+            "summary": "getId",
+            "url": "classes/Classes-Entity-EReport.html#method_getId"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReport\u003A\u003AsetId\u0028\u0029",
+            "name": "setId",
+            "summary": "setId",
+            "url": "classes/Classes-Entity-EReport.html#method_setId"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReport\u003A\u003AgetDescription\u0028\u0029",
+            "name": "getDescription",
+            "summary": "getDescription",
+            "url": "classes/Classes-Entity-EReport.html#method_getDescription"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReport\u003A\u003AsetDescription\u0028\u0029",
+            "name": "setDescription",
+            "summary": "setDescription",
+            "url": "classes/Classes-Entity-EReport.html#method_setDescription"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReport\u003A\u003AgetMade\u0028\u0029",
+            "name": "getMade",
+            "summary": "getMade",
+            "url": "classes/Classes-Entity-EReport.html#method_getMade"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReport\u003A\u003AgetBanDate\u0028\u0029",
+            "name": "getBanDate",
+            "summary": "setMade",
+            "url": "classes/Classes-Entity-EReport.html#method_getBanDate"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReport\u003A\u003AsetBanDate\u0028\u0029",
+            "name": "setBanDate",
+            "summary": "setBanDate",
+            "url": "classes/Classes-Entity-EReport.html#method_setBanDate"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReport\u003A\u003AgetIdSubject\u0028\u0029",
+            "name": "getIdSubject",
+            "summary": "getIdSubject",
+            "url": "classes/Classes-Entity-EReport.html#method_getIdSubject"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReport\u003A\u003AsetIdSubject\u0028\u0029",
+            "name": "setIdSubject",
+            "summary": "setIdSubject",
+            "url": "classes/Classes-Entity-EReport.html#method_setIdSubject"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReport\u003A\u003AgetSubjectType\u0028\u0029",
+            "name": "getSubjectType",
+            "summary": "getSubjectType",
+            "url": "classes/Classes-Entity-EReport.html#method_getSubjectType"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReport\u003A\u003AsetSubjectType\u0028\u0029",
+            "name": "setSubjectType",
+            "summary": "setSubjectType",
+            "url": "classes/Classes-Entity-EReport.html#method_setSubjectType"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReport\u003A\u003A\u0024id",
+            "name": "id",
             "summary": "",
-            "url": "classes/Classes-Entity-EPhoto.html#property_idReview"
+            "url": "classes/Classes-Entity-EReport.html#property_id"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReport\u003A\u003A\u0024description",
+            "name": "description",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReport.html#property_description"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReport\u003A\u003A\u0024made",
+            "name": "made",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReport.html#property_made"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReport\u003A\u003A\u0024banDate",
+            "name": "banDate",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReport.html#property_banDate"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReport\u003A\u003A\u0024idSubject",
+            "name": "idSubject",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReport.html#property_idSubject"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReport\u003A\u003A\u0024typeSubject",
+            "name": "typeSubject",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReport.html#property_typeSubject"
         },                {
             "fqsen": "\\Classes\\Entity\\EReservation",
             "name": "EReservation",
@@ -878,7 +1608,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Classes\\Entity\\EReservation\u003A\u003A__toString\u0028\u0029",
             "name": "__toString",
-            "summary": "",
+            "summary": "__toString",
             "url": "classes/Classes-Entity-EReservation.html#method___toString"
         },                {
             "fqsen": "\\Classes\\Entity\\EReservation\u003A\u003A\u0024id",
@@ -943,73 +1673,103 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AgetValutation\u0028\u0029",
             "name": "getValutation",
-            "summary": "",
+            "summary": "getValutation\u0028\u0029",
             "url": "classes/Classes-Entity-EReview.html#method_getValutation"
         },                {
             "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AgetDescription\u0028\u0029",
             "name": "getDescription",
-            "summary": "",
+            "summary": "getDescription\u0028\u0029",
             "url": "classes/Classes-Entity-EReview.html#method_getDescription"
         },                {
             "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AgetRecipientType\u0028\u0029",
             "name": "getRecipientType",
-            "summary": "",
+            "summary": "getRecipientType\u0028\u0029",
             "url": "classes/Classes-Entity-EReview.html#method_getRecipientType"
         },                {
             "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AgetAuthorType\u0028\u0029",
             "name": "getAuthorType",
-            "summary": "",
+            "summary": "getAuthorType\u0028\u0029",
             "url": "classes/Classes-Entity-EReview.html#method_getAuthorType"
         },                {
             "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AgetIDAuthor\u0028\u0029",
             "name": "getIDAuthor",
-            "summary": "",
+            "summary": "getIDAuthor\u0028\u0029",
             "url": "classes/Classes-Entity-EReview.html#method_getIDAuthor"
         },                {
             "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AgetIDRecipient\u0028\u0029",
             "name": "getIDRecipient",
-            "summary": "",
+            "summary": "getIDRecipient\u0028\u0029",
             "url": "classes/Classes-Entity-EReview.html#method_getIDRecipient"
         },                {
             "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AgetCreationDate\u0028\u0029",
             "name": "getCreationDate",
-            "summary": "",
+            "summary": "getCreationDate\u0028\u0029",
             "url": "classes/Classes-Entity-EReview.html#method_getCreationDate"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AisReported\u0028\u0029",
+            "name": "isReported",
+            "summary": "isReported\u0028\u0029",
+            "url": "classes/Classes-Entity-EReview.html#method_isReported"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AisBanned\u0028\u0029",
+            "name": "isBanned",
+            "summary": "isBanned\u0028\u0029",
+            "url": "classes/Classes-Entity-EReview.html#method_isBanned"
         },                {
             "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AsetTitle\u0028\u0029",
             "name": "setTitle",
-            "summary": "",
+            "summary": "setTitle\u0028\u0029",
             "url": "classes/Classes-Entity-EReview.html#method_setTitle"
         },                {
             "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AsetValutation\u0028\u0029",
             "name": "setValutation",
-            "summary": "",
+            "summary": "setValutation\u0028\u0029",
             "url": "classes/Classes-Entity-EReview.html#method_setValutation"
         },                {
             "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AsetDescription\u0028\u0029",
             "name": "setDescription",
-            "summary": "",
+            "summary": "setDescription\u0028\u0029",
             "url": "classes/Classes-Entity-EReview.html#method_setDescription"
         },                {
             "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AsetId\u0028\u0029",
             "name": "setId",
-            "summary": "",
+            "summary": "setRecipientType\u0028\u0029",
             "url": "classes/Classes-Entity-EReview.html#method_setId"
         },                {
-            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AuploadPhoto\u0028\u0029",
-            "name": "uploadPhoto",
-            "summary": "",
-            "url": "classes/Classes-Entity-EReview.html#method_uploadPhoto"
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003Areport\u0028\u0029",
+            "name": "report",
+            "summary": "setRecipientType\u0028\u0029",
+            "url": "classes/Classes-Entity-EReview.html#method_report"
         },                {
-            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AgetPhotos\u0028\u0029",
-            "name": "getPhotos",
-            "summary": "",
-            "url": "classes/Classes-Entity-EReview.html#method_getPhotos"
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003Aban\u0028\u0029",
+            "name": "ban",
+            "summary": "setRecipientType\u0028\u0029",
+            "url": "classes/Classes-Entity-EReview.html#method_ban"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003Aunban\u0028\u0029",
+            "name": "unban",
+            "summary": "setRecipientType\u0028\u0029",
+            "url": "classes/Classes-Entity-EReview.html#method_unban"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003Aunreport\u0028\u0029",
+            "name": "unreport",
+            "summary": "setRecipientType\u0028\u0029",
+            "url": "classes/Classes-Entity-EReview.html#method_unreport"
         },                {
             "fqsen": "\\Classes\\Entity\\EReview\u003A\u003A__toString\u0028\u0029",
             "name": "__toString",
-            "summary": "",
+            "summary": "setRecipientType\u0028\u0029",
             "url": "classes/Classes-Entity-EReview.html#method___toString"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AremainingReviewStudentToStudent\u0028\u0029",
+            "name": "remainingReviewStudentToStudent",
+            "summary": "Method\u0020remainingReviewStudentToStudent",
+            "url": "classes/Classes-Entity-EReview.html#method_remainingReviewStudentToStudent"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003AremainingReviewStudentToOwner\u0028\u0029",
+            "name": "remainingReviewStudentToOwner",
+            "summary": "Method\u0020remainingReviewStudentToOwner",
+            "url": "classes/Classes-Entity-EReview.html#method_remainingReviewStudentToOwner"
         },                {
             "fqsen": "\\Classes\\Entity\\EReview\u003A\u003A\u0024idReview",
             "name": "idReview",
@@ -1030,11 +1790,6 @@ Search.appendIndex(
             "name": "description",
             "summary": "",
             "url": "classes/Classes-Entity-EReview.html#property_description"
-        },                {
-            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003A\u0024photo",
-            "name": "photo",
-            "summary": "",
-            "url": "classes/Classes-Entity-EReview.html#property_photo"
         },                {
             "fqsen": "\\Classes\\Entity\\EReview\u003A\u003A\u0024recipientType",
             "name": "recipientType",
@@ -1061,6 +1816,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Classes-Entity-EReview.html#property_idRecipient"
         },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003A\u0024reported",
+            "name": "reported",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReview.html#property_reported"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EReview\u003A\u003A\u0024banned",
+            "name": "banned",
+            "summary": "",
+            "url": "classes/Classes-Entity-EReview.html#property_banned"
+        },                {
             "fqsen": "\\Classes\\Entity\\EReview\u003A\u003A\u0024entity",
             "name": "entity",
             "summary": "",
@@ -1073,73 +1838,93 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003AgetEntity\u0028\u0029",
             "name": "getEntity",
-            "summary": "",
+            "summary": "getEntity",
             "url": "classes/Classes-Entity-ESupportRequest.html#method_getEntity"
         },                {
             "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "__construct",
             "url": "classes/Classes-Entity-ESupportRequest.html#method___construct"
         },                {
             "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003AgetId\u0028\u0029",
             "name": "getId",
-            "summary": "",
+            "summary": "getId",
             "url": "classes/Classes-Entity-ESupportRequest.html#method_getId"
         },                {
             "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003AgetMessage\u0028\u0029",
             "name": "getMessage",
-            "summary": "",
+            "summary": "getMessage",
             "url": "classes/Classes-Entity-ESupportRequest.html#method_getMessage"
         },                {
             "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003AgetTopic\u0028\u0029",
             "name": "getTopic",
-            "summary": "",
+            "summary": "getTopic",
             "url": "classes/Classes-Entity-ESupportRequest.html#method_getTopic"
         },                {
             "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003AgetAuthorID\u0028\u0029",
             "name": "getAuthorID",
-            "summary": "",
+            "summary": "getAuthorID",
             "url": "classes/Classes-Entity-ESupportRequest.html#method_getAuthorID"
         },                {
             "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003AgetAuthorType\u0028\u0029",
             "name": "getAuthorType",
-            "summary": "",
+            "summary": "getAuthorType",
             "url": "classes/Classes-Entity-ESupportRequest.html#method_getAuthorType"
         },                {
             "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003AgetStatus\u0028\u0029",
             "name": "getStatus",
-            "summary": "",
+            "summary": "getStatus",
             "url": "classes/Classes-Entity-ESupportRequest.html#method_getStatus"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003AgetSupportReply\u0028\u0029",
+            "name": "getSupportReply",
+            "summary": "getSupportReply",
+            "url": "classes/Classes-Entity-ESupportRequest.html#method_getSupportReply"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003AgetStatusRead\u0028\u0029",
+            "name": "getStatusRead",
+            "summary": "getStatusRead",
+            "url": "classes/Classes-Entity-ESupportRequest.html#method_getStatusRead"
         },                {
             "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003AsetId\u0028\u0029",
             "name": "setId",
-            "summary": "",
+            "summary": "setId",
             "url": "classes/Classes-Entity-ESupportRequest.html#method_setId"
         },                {
             "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003AsetMessage\u0028\u0029",
             "name": "setMessage",
-            "summary": "",
+            "summary": "setMessage",
             "url": "classes/Classes-Entity-ESupportRequest.html#method_setMessage"
         },                {
             "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003AsetTopic\u0028\u0029",
             "name": "setTopic",
-            "summary": "",
+            "summary": "setTopic",
             "url": "classes/Classes-Entity-ESupportRequest.html#method_setTopic"
         },                {
             "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003AsetAuthorID\u0028\u0029",
             "name": "setAuthorID",
-            "summary": "",
+            "summary": "setAuthorID",
             "url": "classes/Classes-Entity-ESupportRequest.html#method_setAuthorID"
         },                {
             "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003AsetAuthorType\u0028\u0029",
             "name": "setAuthorType",
-            "summary": "",
+            "summary": "setAuthorType",
             "url": "classes/Classes-Entity-ESupportRequest.html#method_setAuthorType"
         },                {
             "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003AsetStatus\u0028\u0029",
             "name": "setStatus",
-            "summary": "",
+            "summary": "setStatus",
             "url": "classes/Classes-Entity-ESupportRequest.html#method_setStatus"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003AsetSupportReply\u0028\u0029",
+            "name": "setSupportReply",
+            "summary": "setSupportReply",
+            "url": "classes/Classes-Entity-ESupportRequest.html#method_setSupportReply"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003AsetStatusRead\u0028\u0029",
+            "name": "setStatusRead",
+            "summary": "setStatusRead",
+            "url": "classes/Classes-Entity-ESupportRequest.html#method_setStatusRead"
         },                {
             "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003A\u0024id",
             "name": "id",
@@ -1165,6 +1950,16 @@ Search.appendIndex(
             "name": "authorType",
             "summary": "",
             "url": "classes/Classes-Entity-ESupportRequest.html#property_authorType"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003A\u0024supportReply",
+            "name": "supportReply",
+            "summary": "",
+            "url": "classes/Classes-Entity-ESupportRequest.html#property_supportReply"
+        },                {
+            "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003A\u0024statusRead",
+            "name": "statusRead",
+            "summary": "",
+            "url": "classes/Classes-Entity-ESupportRequest.html#property_statusRead"
         },                {
             "fqsen": "\\Classes\\Entity\\ESupportRequest\u003A\u003A\u0024status",
             "name": "status",
@@ -1200,6 +1995,11 @@ Search.appendIndex(
             "name": "getDate",
             "summary": "getDate\nReturns\u0020the\u0020date\u0020of\u0020the\u0020visit",
             "url": "classes/Classes-Entity-EVisit.html#method_getDate"
+        },                {
+            "fqsen": "\\Classes\\Entity\\EVisit\u003A\u003AgetDayOfWeek\u0028\u0029",
+            "name": "getDayOfWeek",
+            "summary": "getDayOfWeek\nReturns\u0020the\u0020day\u0020of\u0020the\u0020week\u0020of\u0020the\u0020visit",
+            "url": "classes/Classes-Entity-EVisit.html#method_getDayOfWeek"
         },                {
             "fqsen": "\\Classes\\Entity\\EVisit\u003A\u003AgetIdStudent\u0028\u0029",
             "name": "getIdStudent",
@@ -1331,59 +2131,94 @@ Search.appendIndex(
             "summary": "updateAddress\nprivate\u0020class\u0020that\u0020updates\u0020the\u0020address\u0020of\u0020an\u0020accommodation\u0020in\u0020db",
             "url": "classes/Classes-Foundation-FAccommodation.html#method_updateAddress"
         },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003AupdateDay\u0028\u0029",
+            "name": "updateDay",
+            "summary": "updateDay\nprivate\u0020class\u0020that\u0020updates\u0020the\u0020days\u0020and\u0020times\u0020of\u0020visit\u0020of\u0020an\u0020accommodation\u0020in\u0020db",
+            "url": "classes/Classes-Foundation-FAccommodation.html#method_updateDay"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003AupdatePhoto\u0028\u0029",
+            "name": "updatePhoto",
+            "summary": "update\u0020photo\nprivate\u0020class\u0020that\u0020updates\u0020photos\u0020of\u0020an\u0020accommodation",
+            "url": "classes/Classes-Foundation-FAccommodation.html#method_updatePhoto"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003AretriveDayId\u0028\u0029",
+            "name": "retriveDayId",
+            "summary": "retriveDayId\nprivate\u0020class\u0020that\u0020retrives\u0020the\u0020days\u0020of\u0020visit\u0020of\u0020an\u0020accommodation\u0020from\u0020db",
+            "url": "classes/Classes-Foundation-FAccommodation.html#method_retriveDayId"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003AretriveAddressId\u0028\u0029",
+            "name": "retriveAddressId",
+            "summary": "retriveAddressId",
+            "url": "classes/Classes-Foundation-FAccommodation.html#method_retriveAddressId"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003Adelete\u0028\u0029",
+            "name": "delete",
+            "summary": "delete",
+            "url": "classes/Classes-Foundation-FAccommodation.html#method_delete"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003AdeleteAddress\u0028\u0029",
+            "name": "deleteAddress",
+            "summary": "deleteAddress\nprivate\u0020class\u0020that\u0020deletes\u0020the\u0020address\u0020of\u0020an\u0020accommodation\u0020in\u0020db",
+            "url": "classes/Classes-Foundation-FAccommodation.html#method_deleteAddress"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003AdeleteDay\u0028\u0029",
+            "name": "deleteDay",
+            "summary": "deleteDay\nprivate\u0020class\u0020that\u0020deletes\u0020the\u0020days\u0020of\u0020visit\u0020of\u0020an\u0020accommodation\u0020in\u0020db",
+            "url": "classes/Classes-Foundation-FAccommodation.html#method_deleteDay"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003AdeleteTime\u0028\u0029",
+            "name": "deleteTime",
+            "summary": "deleteTime\nprivate\u0020class\u0020that\u0020deletes\u0020the\u0020times\u0020of\u0020visit\u0020of\u0020an\u0020accommodation\u0020in\u0020db",
+            "url": "classes/Classes-Foundation-FAccommodation.html#method_deleteTime"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003AfindAccommodationsUser\u0028\u0029",
+            "name": "findAccommodationsUser",
+            "summary": "Method\u0020findAccommodationsUser",
+            "url": "classes/Classes-Foundation-FAccommodation.html#method_findAccommodationsUser"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003AfindAccommodationsStudent\u0028\u0029",
+            "name": "findAccommodationsStudent",
+            "summary": "Method\u0020findAccommodationsStudent",
+            "url": "classes/Classes-Foundation-FAccommodation.html#method_findAccommodationsStudent"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003AlastAccommodationsUser\u0028\u0029",
+            "name": "lastAccommodationsUser",
+            "summary": "Method\u0020lastAccommodationUser",
+            "url": "classes/Classes-Foundation-FAccommodation.html#method_lastAccommodationsUser"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003AlastAccommodationsStudent\u0028\u0029",
+            "name": "lastAccommodationsStudent",
+            "summary": "Method\u0020lastAccommodationsStudent",
+            "url": "classes/Classes-Foundation-FAccommodation.html#method_lastAccommodationsStudent"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003AloadByOwner\u0028\u0029",
+            "name": "loadByOwner",
+            "summary": "Method\u0020loadByOwner",
+            "url": "classes/Classes-Foundation-FAccommodation.html#method_loadByOwner"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003AfindAccommodationRating\u0028\u0029",
+            "name": "findAccommodationRating",
+            "summary": "Method\u0020findAccommodationRating",
+            "url": "classes/Classes-Foundation-FAccommodation.html#method_findAccommodationRating"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003AareThereFreePlaces\u0028\u0029",
+            "name": "areThereFreePlaces",
+            "summary": "Method\u0020areThereFreePlaces",
+            "url": "classes/Classes-Foundation-FAccommodation.html#method_areThereFreePlaces"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003AgetTitleById\u0028\u0029",
+            "name": "getTitleById",
+            "summary": "Method\u0020getTitleById",
+            "url": "classes/Classes-Foundation-FAccommodation.html#method_getTitleById"
+        },                {
             "fqsen": "\\Classes\\Foundation\\FAccommodation\u003A\u003A\u0024instance",
             "name": "instance",
             "summary": "",
             "url": "classes/Classes-Foundation-FAccommodation.html#property_instance"
         },                {
-            "fqsen": "\\FAdministrator",
-            "name": "FAdministrator",
-            "summary": "",
-            "url": "classes/FAdministrator.html"
-        },                {
-            "fqsen": "\\FAdministrator\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/FAdministrator.html#method___construct"
-        },                {
-            "fqsen": "\\FAdministrator\u003A\u003AgetInstance\u0028\u0029",
-            "name": "getInstance",
-            "summary": "",
-            "url": "classes/FAdministrator.html#method_getInstance"
-        },                {
-            "fqsen": "\\FAdministrator\u003A\u003Aexist\u0028\u0029",
-            "name": "exist",
-            "summary": "",
-            "url": "classes/FAdministrator.html#method_exist"
-        },                {
-            "fqsen": "\\FAdministrator\u003A\u003Aload\u0028\u0029",
-            "name": "load",
-            "summary": "",
-            "url": "classes/FAdministrator.html#method_load"
-        },                {
-            "fqsen": "\\FAdministrator\u003A\u003Astore\u0028\u0029",
-            "name": "store",
-            "summary": "",
-            "url": "classes/FAdministrator.html#method_store"
-        },                {
-            "fqsen": "\\FAdministrator\u003A\u003Aupdate\u0028\u0029",
-            "name": "update",
-            "summary": "",
-            "url": "classes/FAdministrator.html#method_update"
-        },                {
-            "fqsen": "\\FAdministrator\u003A\u003Adelete\u0028\u0029",
-            "name": "delete",
-            "summary": "",
-            "url": "classes/FAdministrator.html#method_delete"
-        },                {
-            "fqsen": "\\FAdministrator\u003A\u003A\u0024instance",
-            "name": "instance",
-            "summary": "",
-            "url": "classes/FAdministrator.html#property_instance"
-        },                {
             "fqsen": "\\Classes\\Foundation\\FConnection",
             "name": "FConnection",
-            "summary": "FConnection",
+            "summary": "The\u0020class\u0020FConnection\u0020provide\u0020to\u0020connect\u0020to\u0020database.",
             "url": "classes/Classes-Foundation-FConnection.html"
         },                {
             "fqsen": "\\Classes\\Foundation\\FConnection\u003A\u003A__construct\u0028\u0029",
@@ -1403,7 +2238,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Classes\\Foundation\\FConnection\u003A\u003Aclose\u0028\u0029",
             "name": "close",
-            "summary": "",
+            "summary": "Method\u0020close",
             "url": "classes/Classes-Foundation-FConnection.html#method_close"
         },                {
             "fqsen": "\\Classes\\Foundation\\FConnection\u003A\u003A__clone\u0028\u0029",
@@ -1415,6 +2250,51 @@ Search.appendIndex(
             "name": "__wakeup",
             "summary": "avoid\u0020to\u0020deserialize\u0020the\u0020istance",
             "url": "classes/Classes-Foundation-FConnection.html#method___wakeup"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FConnection\u003A\u003AgetStatistics\u0028\u0029",
+            "name": "getStatistics",
+            "summary": "Method\u0020getStatistics",
+            "url": "classes/Classes-Foundation-FConnection.html#method_getStatistics"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FConnection\u003A\u003AnumberOfStudents\u0028\u0029",
+            "name": "numberOfStudents",
+            "summary": "Method\u0020numberOfStudents",
+            "url": "classes/Classes-Foundation-FConnection.html#method_numberOfStudents"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FConnection\u003A\u003AnumberOfOwners\u0028\u0029",
+            "name": "numberOfOwners",
+            "summary": "Method\u0020numberOfOwners",
+            "url": "classes/Classes-Foundation-FConnection.html#method_numberOfOwners"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FConnection\u003A\u003AnumberOfAccommodations\u0028\u0029",
+            "name": "numberOfAccommodations",
+            "summary": "Method\u0020numberOfAccommodation",
+            "url": "classes/Classes-Foundation-FConnection.html#method_numberOfAccommodations"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FConnection\u003A\u003AavgStudentAge\u0028\u0029",
+            "name": "avgStudentAge",
+            "summary": "Method\u0020avgStudentAge",
+            "url": "classes/Classes-Foundation-FConnection.html#method_avgStudentAge"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FConnection\u003A\u003ACityList\u0028\u0029",
+            "name": "CityList",
+            "summary": "Method\u0020CityList",
+            "url": "classes/Classes-Foundation-FConnection.html#method_CityList"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FConnection\u003A\u003AthisMonthNumberOfContracts\u0028\u0029",
+            "name": "thisMonthNumberOfContracts",
+            "summary": "Method\u0020thisMonthNumberOfContracts",
+            "url": "classes/Classes-Foundation-FConnection.html#method_thisMonthNumberOfContracts"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FConnection\u003A\u003AcontractsPerDayThisMonth\u0028\u0029",
+            "name": "contractsPerDayThisMonth",
+            "summary": "Method\u0020contractsParDayThisMonth",
+            "url": "classes/Classes-Foundation-FConnection.html#method_contractsPerDayThisMonth"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FConnection\u003A\u003AavgContractsPerDay\u0028\u0029",
+            "name": "avgContractsPerDay",
+            "summary": "Method\u0020avgContractsPerDay",
+            "url": "classes/Classes-Foundation-FConnection.html#method_avgContractsPerDay"
         },                {
             "fqsen": "\\Classes\\Foundation\\FConnection\u003A\u003A\u0024db",
             "name": "db",
@@ -1476,55 +2356,85 @@ Search.appendIndex(
             "summary": "Method\u0020load",
             "url": "classes/Classes-Foundation-FContract.html#method_load"
         },                {
+            "fqsen": "\\Classes\\Foundation\\FContract\u003A\u003AgetContractsByStudent\u0028\u0029",
+            "name": "getContractsByStudent",
+            "summary": "Method\u0020getContractsByStudent",
+            "url": "classes/Classes-Foundation-FContract.html#method_getContractsByStudent"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FContract\u003A\u003AgetContractsByOwner\u0028\u0029",
+            "name": "getContractsByOwner",
+            "summary": "Method\u0020getContractsByOwner",
+            "url": "classes/Classes-Foundation-FContract.html#method_getContractsByOwner"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FContract\u003A\u003AgetOnGoingContractsByAccommodationId\u0028\u0029",
+            "name": "getOnGoingContractsByAccommodationId",
+            "summary": "Method\u0020getOnGoingContractsByAccommodationId",
+            "url": "classes/Classes-Foundation-FContract.html#method_getOnGoingContractsByAccommodationId"
+        },                {
             "fqsen": "\\Classes\\Foundation\\FContract\u003A\u003A\u0024instance",
             "name": "instance",
             "summary": "instance",
             "url": "classes/Classes-Foundation-FContract.html#property_instance"
         },                {
-            "fqsen": "\\FCreditCard",
+            "fqsen": "\\Classes\\Foundation\\FCreditCard",
             "name": "FCreditCard",
             "summary": "FCreditCard",
-            "url": "classes/FCreditCard.html"
+            "url": "classes/Classes-Foundation-FCreditCard.html"
         },                {
-            "fqsen": "\\FCreditCard\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FCreditCard\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "__construct",
-            "url": "classes/FCreditCard.html#method___construct"
+            "url": "classes/Classes-Foundation-FCreditCard.html#method___construct"
         },                {
-            "fqsen": "\\FCreditCard\u003A\u003AgetInstance\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FCreditCard\u003A\u003AgetInstance\u0028\u0029",
             "name": "getInstance",
             "summary": "getInstance",
-            "url": "classes/FCreditCard.html#method_getInstance"
+            "url": "classes/Classes-Foundation-FCreditCard.html#method_getInstance"
         },                {
-            "fqsen": "\\FCreditCard\u003A\u003Aexist\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FCreditCard\u003A\u003Aexist\u0028\u0029",
             "name": "exist",
             "summary": "exist",
-            "url": "classes/FCreditCard.html#method_exist"
+            "url": "classes/Classes-Foundation-FCreditCard.html#method_exist"
         },                {
-            "fqsen": "\\FCreditCard\u003A\u003Aload\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FCreditCard\u003A\u003Aload\u0028\u0029",
             "name": "load",
             "summary": "load",
-            "url": "classes/FCreditCard.html#method_load"
+            "url": "classes/Classes-Foundation-FCreditCard.html#method_load"
         },                {
-            "fqsen": "\\FCreditCard\u003A\u003Astore\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FCreditCard\u003A\u003Astore\u0028\u0029",
             "name": "store",
             "summary": "store",
-            "url": "classes/FCreditCard.html#method_store"
+            "url": "classes/Classes-Foundation-FCreditCard.html#method_store"
         },                {
-            "fqsen": "\\FCreditCard\u003A\u003Aupdate\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FCreditCard\u003A\u003Aupdate\u0028\u0029",
             "name": "update",
             "summary": "update",
-            "url": "classes/FCreditCard.html#method_update"
+            "url": "classes/Classes-Foundation-FCreditCard.html#method_update"
         },                {
-            "fqsen": "\\FCreditCard\u003A\u003Adelete\u0028\u0029",
+            "fqsen": "\\Classes\\Foundation\\FCreditCard\u003A\u003Adelete\u0028\u0029",
             "name": "delete",
             "summary": "delete",
-            "url": "classes/FCreditCard.html#method_delete"
+            "url": "classes/Classes-Foundation-FCreditCard.html#method_delete"
         },                {
-            "fqsen": "\\FCreditCard\u003A\u003A\u0024instance",
+            "fqsen": "\\Classes\\Foundation\\FCreditCard\u003A\u003AisMain\u0028\u0029",
+            "name": "isMain",
+            "summary": "Method\u0020isMain",
+            "url": "classes/Classes-Foundation-FCreditCard.html#method_isMain"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FCreditCard\u003A\u003AloadStudentCards\u0028\u0029",
+            "name": "loadStudentCards",
+            "summary": "Method\u0020loadStudentCards",
+            "url": "classes/Classes-Foundation-FCreditCard.html#method_loadStudentCards"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FCreditCard\u003A\u003AgetMainCard\u0028\u0029",
+            "name": "getMainCard",
+            "summary": "Method\u0020getMainCard",
+            "url": "classes/Classes-Foundation-FCreditCard.html#method_getMainCard"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FCreditCard\u003A\u003A\u0024instance",
             "name": "instance",
             "summary": "",
-            "url": "classes/FCreditCard.html#property_instance"
+            "url": "classes/Classes-Foundation-FCreditCard.html#property_instance"
         },                {
             "fqsen": "\\Classes\\Foundation\\FOwner",
             "name": "FOwner",
@@ -1543,33 +2453,113 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003Aexist\u0028\u0029",
             "name": "exist",
-            "summary": "",
+            "summary": "Check\u0020if\u0020a\u0020specific\u0020owner\u0020exists.",
             "url": "classes/Classes-Foundation-FOwner.html#method_exist"
         },                {
             "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003Aload\u0028\u0029",
             "name": "load",
-            "summary": "",
+            "summary": "Loads\u0020an\u0020owner\u0020by\u0020their\u0020ID.",
             "url": "classes/Classes-Foundation-FOwner.html#method_load"
         },                {
             "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003Astore\u0028\u0029",
             "name": "store",
-            "summary": "",
+            "summary": "Store\u0020the\u0020given\u0020owner\u0020object.",
             "url": "classes/Classes-Foundation-FOwner.html#method_store"
         },                {
             "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003Aupdate\u0028\u0029",
             "name": "update",
-            "summary": "",
+            "summary": "Updates\u0020an\u0020owner\u0020in\u0020the\u0020database.",
             "url": "classes/Classes-Foundation-FOwner.html#method_update"
         },                {
             "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003AcurrentPhoto\u0028\u0029",
             "name": "currentPhoto",
-            "summary": "",
+            "summary": "Retrieves\u0020the\u0020current\u0020photo\u0020ID\u0020for\u0020a\u0020given\u0020owner\u0020ID.",
             "url": "classes/Classes-Foundation-FOwner.html#method_currentPhoto"
         },                {
             "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003Adelete\u0028\u0029",
             "name": "delete",
-            "summary": "",
+            "summary": "Deletes\u0020an\u0020owner\u0020from\u0020the\u0020database.",
             "url": "classes/Classes-Foundation-FOwner.html#method_delete"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003AverifyEmail\u0028\u0029",
+            "name": "verifyEmail",
+            "summary": "Verifies\u0020the\u0020given\u0020email.",
+            "url": "classes/Classes-Foundation-FOwner.html#method_verifyEmail"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003AverifyUsername\u0028\u0029",
+            "name": "verifyUsername",
+            "summary": "Verifies\u0020the\u0020given\u0020username.",
+            "url": "classes/Classes-Foundation-FOwner.html#method_verifyUsername"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003AgetOwnerByUsername\u0028\u0029",
+            "name": "getOwnerByUsername",
+            "summary": "Method\u0020getOwnerByUsername\nThis\u0020method\u0020return\u0020the\u0020EOwner\u0020class\u0020from\u0020the\u0020db\u0020by\u0020the\u0020username",
+            "url": "classes/Classes-Foundation-FOwner.html#method_getOwnerByUsername"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003AdeleteOwnerByUsername\u0028\u0029",
+            "name": "deleteOwnerByUsername",
+            "summary": "Method\u0020deleteOwnerByUsername",
+            "url": "classes/Classes-Foundation-FOwner.html#method_deleteOwnerByUsername"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003AgetOwnerIdByUsername\u0028\u0029",
+            "name": "getOwnerIdByUsername",
+            "summary": "Method\u0020getOwnerIdByUsername",
+            "url": "classes/Classes-Foundation-FOwner.html#method_getOwnerIdByUsername"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003AgetUsernameByOwnerId\u0028\u0029",
+            "name": "getUsernameByOwnerId",
+            "summary": "Retrieves\u0020the\u0020username\u0020associated\u0020with\u0020the\u0020given\u0020owner\u0020ID.",
+            "url": "classes/Classes-Foundation-FOwner.html#method_getUsernameByOwnerId"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003AverifyPhoneNumber\u0028\u0029",
+            "name": "verifyPhoneNumber",
+            "summary": "Method\u0020verifyPhoneNumber",
+            "url": "classes/Classes-Foundation-FOwner.html#method_verifyPhoneNumber"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003AverifyIBAN\u0028\u0029",
+            "name": "verifyIBAN",
+            "summary": "Method\u0020verifyIBAN",
+            "url": "classes/Classes-Foundation-FOwner.html#method_verifyIBAN"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003AgetPhotoIdByUsername\u0028\u0029",
+            "name": "getPhotoIdByUsername",
+            "summary": "Method\u0020getPhotolByUsername",
+            "url": "classes/Classes-Foundation-FOwner.html#method_getPhotoIdByUsername"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003AfindOwnerRating\u0028\u0029",
+            "name": "findOwnerRating",
+            "summary": "Method\u0020findOwnerRating",
+            "url": "classes/Classes-Foundation-FOwner.html#method_findOwnerRating"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003AgetTenans\u0028\u0029",
+            "name": "getTenans",
+            "summary": "Method\u0020getTenans",
+            "url": "classes/Classes-Foundation-FOwner.html#method_getTenans"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003AgetFilterTenants\u0028\u0029",
+            "name": "getFilterTenants",
+            "summary": "Retrieves\u0020filtered\u0020tenants\u0020based\u0020on\u0020specified\u0020criteria.",
+            "url": "classes/Classes-Foundation-FOwner.html#method_getFilterTenants"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003AfromRowsToTenantsArrayByRateT\u0028\u0029",
+            "name": "fromRowsToTenantsArrayByRateT",
+            "summary": "Method\u0020fromRowsToTenantsArrayByRateT",
+            "url": "classes/Classes-Foundation-FOwner.html#method_fromRowsToTenantsArrayByRateT"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003AgetBannedOwners\u0028\u0029",
+            "name": "getBannedOwners",
+            "summary": "Method\u0020getBannedOwners",
+            "url": "classes/Classes-Foundation-FOwner.html#method_getBannedOwners"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003AgetSupportReply\u0028\u0029",
+            "name": "getSupportReply",
+            "summary": "Method\u0020getSupportReply",
+            "url": "classes/Classes-Foundation-FOwner.html#method_getSupportReply"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003AgetUsernameById\u0028\u0029",
+            "name": "getUsernameById",
+            "summary": "Retrieves\u0020the\u0020username\u0020by\u0020the\u0020given\u0020ID.",
+            "url": "classes/Classes-Foundation-FOwner.html#method_getUsernameById"
         },                {
             "fqsen": "\\Classes\\Foundation\\FOwner\u003A\u003A\u0024instance",
             "name": "instance",
@@ -1578,7 +2568,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Classes\\Foundation\\FPersistentManager",
             "name": "FPersistentManager",
-            "summary": "",
+            "summary": "Class\u0020FPersistentManager",
             "url": "classes/Classes-Foundation-FPersistentManager.html"
         },                {
             "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003A__construct\u0028\u0029",
@@ -1613,13 +2603,303 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetWaitingReservations\u0028\u0029",
             "name": "getWaitingReservations",
-            "summary": "",
+            "summary": "Retrieves\u0020an\u0020array\u0020of\u0020waiting\u0020reservations\u0020for\u0020a\u0020given\u0020proprietor.",
             "url": "classes/Classes-Foundation-FPersistentManager.html#method_getWaitingReservations"
         },                {
-            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetAcceptedReservations\u0028\u0029",
-            "name": "getAcceptedReservations",
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AverifyStudentEmail\u0028\u0029",
+            "name": "verifyStudentEmail",
+            "summary": "Method\u0020verifyStudentEmail",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_verifyStudentEmail"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AverifyUserEmail\u0028\u0029",
+            "name": "verifyUserEmail",
+            "summary": "Verifies\u0020the\u0020user\u0027s\u0020email.",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_verifyUserEmail"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AverifyUserUsername\u0028\u0029",
+            "name": "verifyUserUsername",
+            "summary": "Method\u0020verifyUserUsername",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_verifyUserUsername"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetStudentByUsername\u0028\u0029",
+            "name": "getStudentByUsername",
+            "summary": "Retrieves\u0020a\u0020student\u0020by\u0020their\u0020username.",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getStudentByUsername"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetOwnerByUsername\u0028\u0029",
+            "name": "getOwnerByUsername",
+            "summary": "Retrieves\u0020the\u0020owner\u0020by\u0020their\u0020username.",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getOwnerByUsername"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AdeleteStudentByUsername\u0028\u0029",
+            "name": "deleteStudentByUsername",
+            "summary": "Deletes\u0020a\u0020student\u0020from\u0020the\u0020database\u0020by\u0020their\u0020username.",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_deleteStudentByUsername"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetStudentIdByUsername\u0028\u0029",
+            "name": "getStudentIdByUsername",
+            "summary": "Method\u0020getStudentIdByUsername",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getStudentIdByUsername"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetUsernameById\u0028\u0029",
+            "name": "getUsernameById",
             "summary": "",
-            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getAcceptedReservations"
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getUsernameById"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetStudentPhotoById\u0028\u0029",
+            "name": "getStudentPhotoById",
+            "summary": "Retrieves\u0020the\u0020student\u0020photo\u0020by\u0020the\u0020given\u0020ID.",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getStudentPhotoById"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetStudentEmailByUsername\u0028\u0029",
+            "name": "getStudentEmailByUsername",
+            "summary": "Method\u0020getStudentEmailByUsername",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getStudentEmailByUsername"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetStudentPhotoId\u0028\u0029",
+            "name": "getStudentPhotoId",
+            "summary": "Method\u0020getStudentPhotoId",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getStudentPhotoId"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetOwnerPhotoId\u0028\u0029",
+            "name": "getOwnerPhotoId",
+            "summary": "Method\u0020getStudentPhotoId",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getOwnerPhotoId"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AdeleteOwner\u0028\u0029",
+            "name": "deleteOwner",
+            "summary": "Method\u0020deleteOwner",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_deleteOwner"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetOwnerIdByUsername\u0028\u0029",
+            "name": "getOwnerIdByUsername",
+            "summary": "Method\u0020getOwnerIdByUsername",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getOwnerIdByUsername"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetUsernameByOwnerId\u0028\u0029",
+            "name": "getUsernameByOwnerId",
+            "summary": "Method\u0020getUsernameByOwnerId",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getUsernameByOwnerId"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AverifyPhoneNumber\u0028\u0029",
+            "name": "verifyPhoneNumber",
+            "summary": "Method\u0020verifyPhoneNumber",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_verifyPhoneNumber"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AverifyIBAN\u0028\u0029",
+            "name": "verifyIBAN",
+            "summary": "Method\u0020verifyIBAN",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_verifyIBAN"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AstoreAvatar\u0028\u0029",
+            "name": "storeAvatar",
+            "summary": "Stores\u0020the\u0020avatar\u0020photo.",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_storeAvatar"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AloadByRecipient\u0028\u0029",
+            "name": "loadByRecipient",
+            "summary": "Loads\u0020data\u0020by\u0020recipient.",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_loadByRecipient"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AloadStudentCards\u0028\u0029",
+            "name": "loadStudentCards",
+            "summary": "Method\u0020loadStudentCards",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_loadStudentCards"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AexistsTheCard\u0028\u0029",
+            "name": "existsTheCard",
+            "summary": "Method\u0020existsTheCard",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_existsTheCard"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AdeleteCreditCard\u0028\u0029",
+            "name": "deleteCreditCard",
+            "summary": "Deletes\u0020a\u0020credit\u0020card\u0020from\u0020the\u0020persistent\u0020storage.",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_deleteCreditCard"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AisMainCard\u0028\u0029",
+            "name": "isMainCard",
+            "summary": "Checks\u0020if\u0020a\u0020given\u0020card\u0020number\u0020is\u0020the\u0020main\u0020card\u0020for\u0020a\u0020student.",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_isMainCard"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AloadCreditCard\u0028\u0029",
+            "name": "loadCreditCard",
+            "summary": "Method\u0020loadCreditCard",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_loadCreditCard"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetStudentMainCard\u0028\u0029",
+            "name": "getStudentMainCard",
+            "summary": "Method\u0020getStudentMainCard",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getStudentMainCard"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AfindAccommodationsUser\u0028\u0029",
+            "name": "findAccommodationsUser",
+            "summary": "Method\u0020findAccommodations",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_findAccommodationsUser"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AfindAccommodationsStudent\u0028\u0029",
+            "name": "findAccommodationsStudent",
+            "summary": "Method\u0020findAccommodationsStudent",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_findAccommodationsStudent"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AlastAccommodationsUser\u0028\u0029",
+            "name": "lastAccommodationsUser",
+            "summary": "Retrieves\u0020the\u0020last\u0020accommodations\u0020for\u0020a\u0020user.",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_lastAccommodationsUser"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AlastAccommodationsStudent\u0028\u0029",
+            "name": "lastAccommodationsStudent",
+            "summary": "Retrieves\u0020the\u0020last\u0020accommodations\u0020of\u0020a\u0020student.",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_lastAccommodationsStudent"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AloadReviewsByAuthor\u0028\u0029",
+            "name": "loadReviewsByAuthor",
+            "summary": "Loads\u0020reviews\u0020by\u0020author.",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_loadReviewsByAuthor"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AloadAccommodationsByOwner\u0028\u0029",
+            "name": "loadAccommodationsByOwner",
+            "summary": "Loads\u0020accommodations\u0020by\u0020owner.",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_loadAccommodationsByOwner"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetOwnerRating\u0028\u0029",
+            "name": "getOwnerRating",
+            "summary": "Retrieves\u0020the\u0020owner\u0020rating\u0020for\u0020a\u0020given\u0020ID.",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getOwnerRating"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetAccommodationRating\u0028\u0029",
+            "name": "getAccommodationRating",
+            "summary": "Retrieves\u0020the\u0020rating\u0020of\u0020an\u0020accommodation.",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getAccommodationRating"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetStudentRating\u0028\u0029",
+            "name": "getStudentRating",
+            "summary": "Retrieves\u0020the\u0020rating\u0020of\u0020a\u0020student.",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getStudentRating"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetTenants\u0028\u0029",
+            "name": "getTenants",
+            "summary": "Method\u0020getTenants",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getTenants"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetUserType\u0028\u0029",
+            "name": "getUserType",
+            "summary": "Retrieves\u0020the\u0020user\u0020type\u0020for\u0020a\u0020given\u0020ID.",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getUserType"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetFilterTenants\u0028\u0029",
+            "name": "getFilterTenants",
+            "summary": "Method\u0020getFilterTenants",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getFilterTenants"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AloadVisitsByWeek\u0028\u0029",
+            "name": "loadVisitsByWeek",
+            "summary": "Loads\u0020visits\u0020by\u0020week.",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_loadVisitsByWeek"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003Areserve\u0028\u0029",
+            "name": "reserve",
+            "summary": "Method\u0020reserve",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_reserve"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AareThereFreePlaces\u0028\u0029",
+            "name": "areThereFreePlaces",
+            "summary": "Method\u0020areThereFreePlaces",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_areThereFreePlaces"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AloadVisitSchedule\u0028\u0029",
+            "name": "loadVisitSchedule",
+            "summary": "",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_loadVisitSchedule"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AloadReservationsByStudent\u0028\u0029",
+            "name": "loadReservationsByStudent",
+            "summary": "Loads\u0020reservations\u0020by\u0020student.",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_loadReservationsByStudent"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetTitleAccommodationById\u0028\u0029",
+            "name": "getTitleAccommodationById",
+            "summary": "Retrieves\u0020the\u0020title\u0020of\u0020an\u0020accommodation\u0020by\u0020its\u0020ID.",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getTitleAccommodationById"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AupdateDataBase\u0028\u0029",
+            "name": "updateDataBase",
+            "summary": "Updates\u0020the\u0020database.",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_updateDataBase"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetContractsByStudent\u0028\u0029",
+            "name": "getContractsByStudent",
+            "summary": "Retrieves\u0020contracts\u0020by\u0020student.",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getContractsByStudent"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetContractsByOwner\u0028\u0029",
+            "name": "getContractsByOwner",
+            "summary": "Retrieves\u0020contracts\u0020by\u0020owner.",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getContractsByOwner"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetOnGoingContractsByAccommodationId\u0028\u0029",
+            "name": "getOnGoingContractsByAccommodationId",
+            "summary": "Method\u0020getOnGoingContractsByAccommodationId",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getOnGoingContractsByAccommodationId"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AremainingReviewStudentToStudent\u0028\u0029",
+            "name": "remainingReviewStudentToStudent",
+            "summary": "Method\u0020remainingReviewStudentToStudent",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_remainingReviewStudentToStudent"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AremainingReviewStudentToOwner\u0028\u0029",
+            "name": "remainingReviewStudentToOwner",
+            "summary": "Method\u0020remainingReviewStudentToOwner",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_remainingReviewStudentToOwner"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AremainingReviewOwnerToStudent\u0028\u0029",
+            "name": "remainingReviewOwnerToStudent",
+            "summary": "Calculates\u0020the\u0020remaining\u0020review\u0020owner\u0020to\u0020student.",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_remainingReviewOwnerToStudent"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AremainingReviewStudentToAccommodation\u0028\u0029",
+            "name": "remainingReviewStudentToAccommodation",
+            "summary": "Calculates\u0020the\u0020remaining\u0020number\u0020of\u0020reviews\u0020for\u0020a\u0020student\u0020to\u0020an\u0020accommodation.",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_remainingReviewStudentToAccommodation"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetStatistics\u0028\u0029",
+            "name": "getStatistics",
+            "summary": "Method\u0020getStatistics",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getStatistics"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetBannedList\u0028\u0029",
+            "name": "getBannedList",
+            "summary": "Method\u0020getBannedList",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getBannedList"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetLastBanReport\u0028\u0029",
+            "name": "getLastBanReport",
+            "summary": "Method\u0020getLastBanReport",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getLastBanReport"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetSupportReply\u0028\u0029",
+            "name": "getSupportReply",
+            "summary": "Method\u0020getSupportReply",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getSupportReply"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetRequestAndReport\u0028\u0029",
+            "name": "getRequestAndReport",
+            "summary": "Method\u0020getRequestAndReport",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getRequestAndReport"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AsupportReply\u0028\u0029",
+            "name": "supportReply",
+            "summary": "Supports\u0020a\u0020reply\u0020for\u0020a\u0020specific\u0020ID.",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_supportReply"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AreadSupportReply\u0028\u0029",
+            "name": "readSupportReply",
+            "summary": "Reads\u0020a\u0020support\u0020reply\u0020from\u0020the\u0020persistent\u0020manager.",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_readSupportReply"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003AgetMate\u0028\u0029",
+            "name": "getMate",
+            "summary": "Method\u0020getMate",
+            "url": "classes/Classes-Foundation-FPersistentManager.html#method_getMate"
         },                {
             "fqsen": "\\Classes\\Foundation\\FPersistentManager\u003A\u003A\u0024instance",
             "name": "instance",
@@ -1628,7 +2908,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Classes\\Foundation\\FPhoto",
             "name": "FPhoto",
-            "summary": "",
+            "summary": "This\u0020class\u0020is\u0020a\u0020foundation\u0020class\u0020and\u0020is\u0020used\u0020to\u0020manage\u0020the\u0020photos\u0020of\u0020the\u0020accommodations",
             "url": "classes/Classes-Foundation-FPhoto.html"
         },                {
             "fqsen": "\\Classes\\Foundation\\FPhoto\u003A\u003A__construct\u0028\u0029",
@@ -1646,20 +2926,10 @@ Search.appendIndex(
             "summary": "exist",
             "url": "classes/Classes-Foundation-FPhoto.html#method_exist"
         },                {
-            "fqsen": "\\Classes\\Foundation\\FPhoto\u003A\u003AexistReview\u0028\u0029",
-            "name": "existReview",
-            "summary": "exist\u0020photo\u0020refered\u0020to\u0020review",
-            "url": "classes/Classes-Foundation-FPhoto.html#method_existReview"
-        },                {
             "fqsen": "\\Classes\\Foundation\\FPhoto\u003A\u003AexistAccommodation\u0028\u0029",
             "name": "existAccommodation",
             "summary": "exist\u0020photo\u0020refered\u0020to\u0020accommodation",
             "url": "classes/Classes-Foundation-FPhoto.html#method_existAccommodation"
-        },                {
-            "fqsen": "\\Classes\\Foundation\\FPhoto\u003A\u003AloadReview\u0028\u0029",
-            "name": "loadReview",
-            "summary": "This\u0020method\u0020loads\u0020the\u0020photos\u0020of\u0020a\u0020review",
-            "url": "classes/Classes-Foundation-FPhoto.html#method_loadReview"
         },                {
             "fqsen": "\\Classes\\Foundation\\FPhoto\u003A\u003AloadAccommodation\u0028\u0029",
             "name": "loadAccommodation",
@@ -1678,7 +2948,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Classes\\Foundation\\FPhoto\u003A\u003Astore\u0028\u0029",
             "name": "store",
-            "summary": "store\nStore\u0020accommodation\u0027s\u0020or\u0020review\u0027s\u0020photos",
+            "summary": "store\nStore\u0020accommodation\u0027s\u0020photos",
             "url": "classes/Classes-Foundation-FPhoto.html#method_store"
         },                {
             "fqsen": "\\Classes\\Foundation\\FPhoto\u003A\u003Aupdate\u0028\u0029",
@@ -1691,10 +2961,70 @@ Search.appendIndex(
             "summary": "delete",
             "url": "classes/Classes-Foundation-FPhoto.html#method_delete"
         },                {
+            "fqsen": "\\Classes\\Foundation\\FPhoto\u003A\u003AdeleteAccommodation\u0028\u0029",
+            "name": "deleteAccommodation",
+            "summary": "delete\u0020all\u0020photos\u0020of\u0020an\u0020accomodation",
+            "url": "classes/Classes-Foundation-FPhoto.html#method_deleteAccommodation"
+        },                {
             "fqsen": "\\Classes\\Foundation\\FPhoto\u003A\u003A\u0024instance",
             "name": "instance",
             "summary": "",
             "url": "classes/Classes-Foundation-FPhoto.html#property_instance"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReport",
+            "name": "FReport",
+            "summary": "This\u0020class\u0020provides\u0020all\u0020the\u0020methods\u0020to\u0020interact\u0020with\u0020the\u0020database\u0020about\u0020the\u0020reports",
+            "url": "classes/Classes-Foundation-FReport.html"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReport\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Classes-Foundation-FReport.html#method___construct"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReport\u003A\u003AgetInstance\u0028\u0029",
+            "name": "getInstance",
+            "summary": "",
+            "url": "classes/Classes-Foundation-FReport.html#method_getInstance"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReport\u003A\u003Aexist\u0028\u0029",
+            "name": "exist",
+            "summary": "Check\u0020if\u0020a\u0020report\u0020exists.",
+            "url": "classes/Classes-Foundation-FReport.html#method_exist"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReport\u003A\u003Aload\u0028\u0029",
+            "name": "load",
+            "summary": "Loads\u0020a\u0020report\u0020by\u0020its\u0020ID.",
+            "url": "classes/Classes-Foundation-FReport.html#method_load"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReport\u003A\u003Astore\u0028\u0029",
+            "name": "store",
+            "summary": "Stores\u0020a\u0020report.",
+            "url": "classes/Classes-Foundation-FReport.html#method_store"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReport\u003A\u003Aupdate\u0028\u0029",
+            "name": "update",
+            "summary": "Updates\u0020a\u0020report.",
+            "url": "classes/Classes-Foundation-FReport.html#method_update"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReport\u003A\u003Adelete\u0028\u0029",
+            "name": "delete",
+            "summary": "Deletes\u0020a\u0020report.",
+            "url": "classes/Classes-Foundation-FReport.html#method_delete"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReport\u003A\u003AgetLastBanReportBySubject\u0028\u0029",
+            "name": "getLastBanReportBySubject",
+            "summary": "Retrieves\u0020the\u0020last\u0020ban\u0020report\u0020by\u0020subject.",
+            "url": "classes/Classes-Foundation-FReport.html#method_getLastBanReportBySubject"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReport\u003A\u003AgetAllReport\u0028\u0029",
+            "name": "getAllReport",
+            "summary": "Method\u0020getAllReport",
+            "url": "classes/Classes-Foundation-FReport.html#method_getAllReport"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReport\u003A\u003A\u0024instance",
+            "name": "instance",
+            "summary": "",
+            "url": "classes/Classes-Foundation-FReport.html#property_instance"
         },                {
             "fqsen": "\\Classes\\Foundation\\FReservation",
             "name": "FReservation",
@@ -1751,10 +3081,10 @@ Search.appendIndex(
             "summary": "Method\u0020getWaitingReservations",
             "url": "classes/Classes-Foundation-FReservation.html#method_getWaitingReservations"
         },                {
-            "fqsen": "\\Classes\\Foundation\\FReservation\u003A\u003AgetAcceptedReservations\u0028\u0029",
-            "name": "getAcceptedReservations",
-            "summary": "Method\u0020getAcceptedReservations",
-            "url": "classes/Classes-Foundation-FReservation.html#method_getAcceptedReservations"
+            "fqsen": "\\Classes\\Foundation\\FReservation\u003A\u003AloadReservationsByStudent\u0028\u0029",
+            "name": "loadReservationsByStudent",
+            "summary": "Method\u0020loadReservationsByStudent",
+            "url": "classes/Classes-Foundation-FReservation.html#method_loadReservationsByStudent"
         },                {
             "fqsen": "\\Classes\\Foundation\\FReservation\u003A\u003A\u0024instance",
             "name": "instance",
@@ -1786,6 +3116,16 @@ Search.appendIndex(
             "summary": "load",
             "url": "classes/Classes-Foundation-FReview.html#method_load"
         },                {
+            "fqsen": "\\Classes\\Foundation\\FReview\u003A\u003AloadByRecipient\u0028\u0029",
+            "name": "loadByRecipient",
+            "summary": "Loads\u0020reviews\u0020by\u0020recipient.",
+            "url": "classes/Classes-Foundation-FReview.html#method_loadByRecipient"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReview\u003A\u003AloadSpecificReviewByRec\u0028\u0029",
+            "name": "loadSpecificReviewByRec",
+            "summary": "Loads\u0020a\u0020specific\u0020review\u0020by\u0020recipient\u0020ID\u0020and\u0020recipient\u0020type.",
+            "url": "classes/Classes-Foundation-FReview.html#method_loadSpecificReviewByRec"
+        },                {
             "fqsen": "\\Classes\\Foundation\\FReview\u003A\u003AloadReview\u0028\u0029",
             "name": "loadReview",
             "summary": "loadReview",
@@ -1813,23 +3153,53 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Classes\\Foundation\\FReview\u003A\u003Aupdate\u0028\u0029",
             "name": "update",
-            "summary": "update",
-            "url": "classes/Classes-Foundation-FReview.html#method_update"
-        },                {
-            "fqsen": "\\Classes\\Foundation\\FReview\u003A\u003AupdatePhotos\u0028\u0029",
-            "name": "updatePhotos",
-            "summary": "updatePhotos",
-            "url": "classes/Classes-Foundation-FReview.html#method_updatePhotos"
-        },                {
-            "fqsen": "\\Classes\\Foundation\\FReview\u003A\u003AupdateReview\u0028\u0029",
-            "name": "updateReview",
             "summary": "updateReview",
-            "url": "classes/Classes-Foundation-FReview.html#method_updateReview"
+            "url": "classes/Classes-Foundation-FReview.html#method_update"
         },                {
             "fqsen": "\\Classes\\Foundation\\FReview\u003A\u003Adelete\u0028\u0029",
             "name": "delete",
             "summary": "delete",
             "url": "classes/Classes-Foundation-FReview.html#method_delete"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReview\u003A\u003AloadByAuthor\u0028\u0029",
+            "name": "loadByAuthor",
+            "summary": "Loads\u0020reviews\u0020by\u0020author.",
+            "url": "classes/Classes-Foundation-FReview.html#method_loadByAuthor"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReview\u003A\u003AloadStudentReviewByAuth\u0028\u0029",
+            "name": "loadStudentReviewByAuth",
+            "summary": "Loads\u0020student\u0020reviews\u0020by\u0020author\u0027s\u0020ID\u0020and\u0020author\u0020type.",
+            "url": "classes/Classes-Foundation-FReview.html#method_loadStudentReviewByAuth"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReview\u003A\u003AloadOwnerReviewByAuth\u0028\u0029",
+            "name": "loadOwnerReviewByAuth",
+            "summary": "Loads\u0020owner\u0020review\u0020by\u0020author\u0027s\u0020ID.",
+            "url": "classes/Classes-Foundation-FReview.html#method_loadOwnerReviewByAuth"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReview\u003A\u003AloadAccommodationReviewByAuth\u0028\u0029",
+            "name": "loadAccommodationReviewByAuth",
+            "summary": "Loads\u0020accommodation\u0020review\u0020by\u0020author\u0027s\u0020ID.",
+            "url": "classes/Classes-Foundation-FReview.html#method_loadAccommodationReviewByAuth"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReview\u003A\u003AremainingReviewStudentToStudent\u0028\u0029",
+            "name": "remainingReviewStudentToStudent",
+            "summary": "Method\u0020remainingReviewStudentToStudent",
+            "url": "classes/Classes-Foundation-FReview.html#method_remainingReviewStudentToStudent"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReview\u003A\u003AremainingReviewStudentToOwner\u0028\u0029",
+            "name": "remainingReviewStudentToOwner",
+            "summary": "Method\u0020remainingReviewStudentToOwner",
+            "url": "classes/Classes-Foundation-FReview.html#method_remainingReviewStudentToOwner"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReview\u003A\u003AremainingReviewOwnerToStudent\u0028\u0029",
+            "name": "remainingReviewOwnerToStudent",
+            "summary": "Calculates\u0020the\u0020remaining\u0020review\u0020count\u0020from\u0020the\u0020owner\u0020to\u0020the\u0020student.",
+            "url": "classes/Classes-Foundation-FReview.html#method_remainingReviewOwnerToStudent"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FReview\u003A\u003AremainingReviewStudentToAccommodation\u0028\u0029",
+            "name": "remainingReviewStudentToAccommodation",
+            "summary": "Calculates\u0020the\u0020remaining\u0020number\u0020of\u0020reviews\u0020for\u0020a\u0020student\u0020to\u0020an\u0020accommodation.",
+            "url": "classes/Classes-Foundation-FReview.html#method_remainingReviewStudentToAccommodation"
         },                {
             "fqsen": "\\Classes\\Foundation\\FReview\u003A\u003A\u0024instance",
             "name": "instance",
@@ -1838,48 +3208,108 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Classes\\Foundation\\FStudent",
             "name": "FStudent",
-            "summary": "",
+            "summary": "FStudent",
             "url": "classes/Classes-Foundation-FStudent.html"
         },                {
             "fqsen": "\\Classes\\Foundation\\FStudent\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "Method\u0020__construct",
             "url": "classes/Classes-Foundation-FStudent.html#method___construct"
         },                {
             "fqsen": "\\Classes\\Foundation\\FStudent\u003A\u003AgetInstance\u0028\u0029",
             "name": "getInstance",
-            "summary": "",
+            "summary": "Method\u0020getInstance",
             "url": "classes/Classes-Foundation-FStudent.html#method_getInstance"
         },                {
             "fqsen": "\\Classes\\Foundation\\FStudent\u003A\u003Aexist\u0028\u0029",
             "name": "exist",
-            "summary": "",
+            "summary": "Method\u0020exist\nmethod\u0020used\u0020to\u0020verify\u0020if\u0020a\u0020student\u0020exists",
             "url": "classes/Classes-Foundation-FStudent.html#method_exist"
         },                {
             "fqsen": "\\Classes\\Foundation\\FStudent\u003A\u003Aload\u0028\u0029",
             "name": "load",
-            "summary": "",
+            "summary": "Method\u0020load",
             "url": "classes/Classes-Foundation-FStudent.html#method_load"
         },                {
             "fqsen": "\\Classes\\Foundation\\FStudent\u003A\u003Astore\u0028\u0029",
             "name": "store",
-            "summary": "",
+            "summary": "Method\u0020store",
             "url": "classes/Classes-Foundation-FStudent.html#method_store"
         },                {
             "fqsen": "\\Classes\\Foundation\\FStudent\u003A\u003Aupdate\u0028\u0029",
             "name": "update",
-            "summary": "",
+            "summary": "Method\u0020update",
             "url": "classes/Classes-Foundation-FStudent.html#method_update"
         },                {
             "fqsen": "\\Classes\\Foundation\\FStudent\u003A\u003AcurrentPhoto\u0028\u0029",
             "name": "currentPhoto",
-            "summary": "",
+            "summary": "Method\u0020currentPhoto",
             "url": "classes/Classes-Foundation-FStudent.html#method_currentPhoto"
         },                {
             "fqsen": "\\Classes\\Foundation\\FStudent\u003A\u003Adelete\u0028\u0029",
             "name": "delete",
-            "summary": "",
+            "summary": "Method\u0020delete",
             "url": "classes/Classes-Foundation-FStudent.html#method_delete"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FStudent\u003A\u003AverifyEmail\u0028\u0029",
+            "name": "verifyEmail",
+            "summary": "Method\u0020verifyEmail",
+            "url": "classes/Classes-Foundation-FStudent.html#method_verifyEmail"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FStudent\u003A\u003AverifyUsername\u0028\u0029",
+            "name": "verifyUsername",
+            "summary": "Method\u0020verifyUsername",
+            "url": "classes/Classes-Foundation-FStudent.html#method_verifyUsername"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FStudent\u003A\u003AgetStudentByUsername\u0028\u0029",
+            "name": "getStudentByUsername",
+            "summary": "Method\u0020getStudentByUsername",
+            "url": "classes/Classes-Foundation-FStudent.html#method_getStudentByUsername"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FStudent\u003A\u003AdeleteStudentByUsername\u0028\u0029",
+            "name": "deleteStudentByUsername",
+            "summary": "Method\u0020deleteStudentByUsername",
+            "url": "classes/Classes-Foundation-FStudent.html#method_deleteStudentByUsername"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FStudent\u003A\u003AgetIdByUsername\u0028\u0029",
+            "name": "getIdByUsername",
+            "summary": "Method\u0020getIdByUsername",
+            "url": "classes/Classes-Foundation-FStudent.html#method_getIdByUsername"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FStudent\u003A\u003AgetEmailByUsername\u0028\u0029",
+            "name": "getEmailByUsername",
+            "summary": "Method\u0020getEmailByUsername",
+            "url": "classes/Classes-Foundation-FStudent.html#method_getEmailByUsername"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FStudent\u003A\u003AgetPhotoIdByUsername\u0028\u0029",
+            "name": "getPhotoIdByUsername",
+            "summary": "Method\u0020getPhotoByUsername",
+            "url": "classes/Classes-Foundation-FStudent.html#method_getPhotoIdByUsername"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FStudent\u003A\u003AfindStudentRating\u0028\u0029",
+            "name": "findStudentRating",
+            "summary": "Method\u0020findStudentRating",
+            "url": "classes/Classes-Foundation-FStudent.html#method_findStudentRating"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FStudent\u003A\u003AgetBannedStudents\u0028\u0029",
+            "name": "getBannedStudents",
+            "summary": "Method\u0020getBannedStudents",
+            "url": "classes/Classes-Foundation-FStudent.html#method_getBannedStudents"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FStudent\u003A\u003AgetSupportReply\u0028\u0029",
+            "name": "getSupportReply",
+            "summary": "Method\u0020getSupportReply",
+            "url": "classes/Classes-Foundation-FStudent.html#method_getSupportReply"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FStudent\u003A\u003AgetUsernameById\u0028\u0029",
+            "name": "getUsernameById",
+            "summary": "Method\u0020getUsernameById",
+            "url": "classes/Classes-Foundation-FStudent.html#method_getUsernameById"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FStudent\u003A\u003AgetMate\u0028\u0029",
+            "name": "getMate",
+            "summary": "Method\u0020getMate",
+            "url": "classes/Classes-Foundation-FStudent.html#method_getMate"
         },                {
             "fqsen": "\\Classes\\Foundation\\FStudent\u003A\u003A\u0024instance",
             "name": "instance",
@@ -1888,7 +3318,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Classes\\Foundation\\FSupportRequest",
             "name": "FSupportRequest",
-            "summary": "",
+            "summary": "This\u0020class\u0020provides\u0020all\u0020the\u0020methods\u0020to\u0020interact\u0020with\u0020the\u0020database\u0020regarding\u0020the\u0020support\u0020request",
             "url": "classes/Classes-Foundation-FSupportRequest.html"
         },                {
             "fqsen": "\\Classes\\Foundation\\FSupportRequest\u003A\u003A__construct\u0028\u0029",
@@ -1903,33 +3333,63 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Classes\\Foundation\\FSupportRequest\u003A\u003Aexist\u0028\u0029",
             "name": "exist",
-            "summary": "",
+            "summary": "Method\u0020exist",
             "url": "classes/Classes-Foundation-FSupportRequest.html#method_exist"
         },                {
             "fqsen": "\\Classes\\Foundation\\FSupportRequest\u003A\u003Aload\u0028\u0029",
             "name": "load",
-            "summary": "",
+            "summary": "Method\u0020load",
             "url": "classes/Classes-Foundation-FSupportRequest.html#method_load"
         },                {
             "fqsen": "\\Classes\\Foundation\\FSupportRequest\u003A\u003Astore\u0028\u0029",
             "name": "store",
-            "summary": "",
+            "summary": "Method\u0020store",
             "url": "classes/Classes-Foundation-FSupportRequest.html#method_store"
         },                {
             "fqsen": "\\Classes\\Foundation\\FSupportRequest\u003A\u003Aupdate\u0028\u0029",
             "name": "update",
-            "summary": "",
+            "summary": "Method\u0020update",
             "url": "classes/Classes-Foundation-FSupportRequest.html#method_update"
         },                {
             "fqsen": "\\Classes\\Foundation\\FSupportRequest\u003A\u003Adelete\u0028\u0029",
             "name": "delete",
-            "summary": "",
+            "summary": "Method\u0020delete",
             "url": "classes/Classes-Foundation-FSupportRequest.html#method_delete"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FSupportRequest\u003A\u003AgetAllRequest\u0028\u0029",
+            "name": "getAllRequest",
+            "summary": "Method\u0020getAllRequest",
+            "url": "classes/Classes-Foundation-FSupportRequest.html#method_getAllRequest"
         },                {
             "fqsen": "\\Classes\\Foundation\\FSupportRequest\u003A\u003A\u0024instance",
             "name": "instance",
             "summary": "",
             "url": "classes/Classes-Foundation-FSupportRequest.html#property_instance"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FUpdater",
+            "name": "FUpdater",
+            "summary": "",
+            "url": "classes/Classes-Foundation-FUpdater.html"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FUpdater\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Constructor",
+            "url": "classes/Classes-Foundation-FUpdater.html#method___construct"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FUpdater\u003A\u003AgetInstance\u0028\u0029",
+            "name": "getInstance",
+            "summary": "Get\u0020the\u0020instance\u0020of\u0020the\u0020class",
+            "url": "classes/Classes-Foundation-FUpdater.html#method_getInstance"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FUpdater\u003A\u003AupdateDB\u0028\u0029",
+            "name": "updateDB",
+            "summary": "Update\u0020the\u0020database",
+            "url": "classes/Classes-Foundation-FUpdater.html#method_updateDB"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FUpdater\u003A\u003A\u0024instance",
+            "name": "instance",
+            "summary": "Instance\u0020of\u0020the\u0020class",
+            "url": "classes/Classes-Foundation-FUpdater.html#property_instance"
         },                {
             "fqsen": "\\Classes\\Foundation\\FVisit",
             "name": "FVisit",
@@ -1956,6 +3416,21 @@ Search.appendIndex(
             "summary": "load",
             "url": "classes/Classes-Foundation-FVisit.html#method_load"
         },                {
+            "fqsen": "\\Classes\\Foundation\\FVisit\u003A\u003AloadByWeek\u0028\u0029",
+            "name": "loadByWeek",
+            "summary": "loadByWeek\nReturn\u0020all\u0020the\u0020visits\u0020of\u0020the\u0020week",
+            "url": "classes/Classes-Foundation-FVisit.html#method_loadByWeek"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FVisit\u003A\u003AloadFutreById\u0028\u0029",
+            "name": "loadFutreById",
+            "summary": "loadFutreById\nReturn\u0020all\u0020the\u0020future\u0020visits\u0020of\u0020a\u0020student\u0020or\u0020accommodation",
+            "url": "classes/Classes-Foundation-FVisit.html#method_loadFutreById"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FVisit\u003A\u003AloadPassedById\u0028\u0029",
+            "name": "loadPassedById",
+            "summary": "loadPassedById\nReturn\u0020all\u0020the\u0020passed\u0020visits\u0020of\u0020a\u0020student\u0020or\u0020accommodation",
+            "url": "classes/Classes-Foundation-FVisit.html#method_loadPassedById"
+        },                {
             "fqsen": "\\Classes\\Foundation\\FVisit\u003A\u003Astore\u0028\u0029",
             "name": "store",
             "summary": "store",
@@ -1971,20 +3446,20 @@ Search.appendIndex(
             "summary": "delete",
             "url": "classes/Classes-Foundation-FVisit.html#method_delete"
         },                {
+            "fqsen": "\\Classes\\Foundation\\FVisit\u003A\u003AloadVisitScheduleStudent\u0028\u0029",
+            "name": "loadVisitScheduleStudent",
+            "summary": "loadVisitScheduleStudent\nReturn\u0020all\u0020the\u0020visits\u0020of\u0020a\u0020student",
+            "url": "classes/Classes-Foundation-FVisit.html#method_loadVisitScheduleStudent"
+        },                {
+            "fqsen": "\\Classes\\Foundation\\FVisit\u003A\u003AloadVisitScheduleOwner\u0028\u0029",
+            "name": "loadVisitScheduleOwner",
+            "summary": "loadVisitScheduleOwner\nReturn\u0020all\u0020the\u0020visits\u0020of\u0020an\u0020accommodation",
+            "url": "classes/Classes-Foundation-FVisit.html#method_loadVisitScheduleOwner"
+        },                {
             "fqsen": "\\Classes\\Foundation\\FVisit\u003A\u003A\u0024instance",
             "name": "instance",
             "summary": "",
             "url": "classes/Classes-Foundation-FVisit.html#property_instance"
-        },                {
-            "fqsen": "\\StartSmarty",
-            "name": "StartSmarty",
-            "summary": "",
-            "url": "classes/StartSmarty.html"
-        },                {
-            "fqsen": "\\StartSmarty\u003A\u003Aconfiguration\u0028\u0029",
-            "name": "configuration",
-            "summary": "",
-            "url": "classes/StartSmarty.html#method_configuration"
         },                {
             "fqsen": "\\Classes\\Tools\\TError",
             "name": "TError",
@@ -2003,27 +3478,27 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Classes\\Tools\\TError\u003A\u003AhandleDuplicateError\u0028\u0029",
             "name": "handleDuplicateError",
-            "summary": "",
+            "summary": "This\u0020method\u0020handles\u0020the\u0020duplicate\u0020error",
             "url": "classes/Classes-Tools-TError.html#method_handleDuplicateError"
         },                {
             "fqsen": "\\Classes\\Tools\\TError\u003A\u003AmodificationReservationHendler\u0028\u0029",
             "name": "modificationReservationHendler",
-            "summary": "",
+            "summary": "This\u0020method\u0020handles\u0020the\u0020error\u0020when\u0020the\u0020user\u0020tries\u0020to\u0020modify\u0020a\u0020reservation\u0020that\u0020has\u0020a\u0020contract",
             "url": "classes/Classes-Tools-TError.html#method_modificationReservationHendler"
         },                {
             "fqsen": "\\Classes\\Tools\\TError\u003A\u003AdeleteReservationHendler\u0028\u0029",
             "name": "deleteReservationHendler",
-            "summary": "",
+            "summary": "This\u0020method\u0020handles\u0020the\u0020error\u0020when\u0020the\u0020user\u0020tries\u0020to\u0020delete\u0020a\u0020reservation\u0020that\u0020has\u0020a\u0020contract",
             "url": "classes/Classes-Tools-TError.html#method_deleteReservationHendler"
         },                {
             "fqsen": "\\Classes\\Tools\\TError\u003A\u003AmodificationAfterAccept\u0028\u0029",
             "name": "modificationAfterAccept",
-            "summary": "",
+            "summary": "This\u0020method\u0020handles\u0020the\u0020error\u0020when\u0020the\u0020user\u0020tries\u0020to\u0020modify\u0020a\u0020reservation\u0020that\u0020has\u0020been\u0020accepted",
             "url": "classes/Classes-Tools-TError.html#method_modificationAfterAccept"
         },                {
             "fqsen": "\\Classes\\Tools\\TError\u003A\u003AerrorGettingReservations\u0028\u0029",
             "name": "errorGettingReservations",
-            "summary": "",
+            "summary": "This\u0020method\u0020handles\u0020the\u0020error\u0020when\u0020the\u0020user\u0020tries\u0020to\u0020delete\u0020a\u0020reservation\u0020that\u0020has\u0020been\u0020accepted",
             "url": "classes/Classes-Tools-TError.html#method_errorGettingReservations"
         },                {
             "fqsen": "\\Classes\\Tools\\TError\u003A\u003A\u0024instance",
@@ -2086,10 +3561,20 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Classes-Tools-TRequestType.html#enumcase_BUG"
         },                {
-            "fqsen": "\\Classes\\Tools\\StatusEnum",
-            "name": "StatusEnum",
+            "fqsen": "\\Classes\\Tools\\TRequestType\u003A\u003AOTHER",
+            "name": "OTHER",
             "summary": "",
-            "url": "classes/Classes-Tools-StatusEnum.html"
+            "url": "classes/Classes-Tools-TRequestType.html#enumcase_OTHER"
+        },                {
+            "fqsen": "\\Classes\\Tools\\TRequestType\u003A\u003AREMOVEBAN",
+            "name": "REMOVEBAN",
+            "summary": "",
+            "url": "classes/Classes-Tools-TRequestType.html#enumcase_REMOVEBAN"
+        },                {
+            "fqsen": "\\Classes\\Tools\\StatusContractEnum",
+            "name": "StatusContractEnum",
+            "summary": "",
+            "url": "classes/Classes-Tools-StatusContractEnum.html"
         },                {
             "fqsen": "\\Classes\\Tools\\TStatusContract",
             "name": "TStatusContract",
@@ -2111,6 +3596,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Classes-Tools-TStatusContract.html#enumcase_FINISHED"
         },                {
+            "fqsen": "\\Classes\\Tools\\StatusSupportEnum",
+            "name": "StatusSupportEnum",
+            "summary": "",
+            "url": "classes/Classes-Tools-StatusSupportEnum.html"
+        },                {
             "fqsen": "\\Classes\\Tools\\TStatusSupport",
             "name": "TStatusSupport",
             "summary": "",
@@ -2125,6 +3615,31 @@ Search.appendIndex(
             "name": "RESOLVED",
             "summary": "",
             "url": "classes/Classes-Tools-TStatusSupport.html#enumcase_RESOLVED"
+        },                {
+            "fqsen": "\\Classes\\Tools\\StatusUserEnum",
+            "name": "StatusUserEnum",
+            "summary": "",
+            "url": "classes/Classes-Tools-StatusUserEnum.html"
+        },                {
+            "fqsen": "\\Classes\\Tools\\TStatusUser",
+            "name": "TStatusUser",
+            "summary": "",
+            "url": "classes/Classes-Tools-TStatusUser.html"
+        },                {
+            "fqsen": "\\Classes\\Tools\\TStatusUser\u003A\u003AACTIVE",
+            "name": "ACTIVE",
+            "summary": "",
+            "url": "classes/Classes-Tools-TStatusUser.html#enumcase_ACTIVE"
+        },                {
+            "fqsen": "\\Classes\\Tools\\TStatusUser\u003A\u003ABANNED",
+            "name": "BANNED",
+            "summary": "",
+            "url": "classes/Classes-Tools-TStatusUser.html#enumcase_BANNED"
+        },                {
+            "fqsen": "\\Classes\\Tools\\TStatusUser\u003A\u003AREPORTED",
+            "name": "REPORTED",
+            "summary": "",
+            "url": "classes/Classes-Tools-TStatusUser.html#enumcase_REPORTED"
         },                {
             "fqsen": "\\Classes\\Tools\\TypeEnum",
             "name": "TypeEnum",
@@ -2151,35 +3666,725 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Classes-Tools-TType.html#enumcase_OWNER"
         },                {
-            "fqsen": "\\VOwner",
-            "name": "VOwner",
+            "fqsen": "\\Classes\\Tools\\TType\u003A\u003AREVIEW",
+            "name": "REVIEW",
             "summary": "",
-            "url": "classes/VOwner.html"
+            "url": "classes/Classes-Tools-TType.html#enumcase_REVIEW"
         },                {
-            "fqsen": "\\VOwner\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Classes\\Utilities\\UAccessUniversityFile",
+            "name": "UAccessUniversityFile",
+            "summary": "UAccessUniversityFile\u0020class.",
+            "url": "classes/Classes-Utilities-UAccessUniversityFile.html"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UAccessUniversityFile\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "__construct",
+            "url": "classes/Classes-Utilities-UAccessUniversityFile.html#method___construct"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UAccessUniversityFile\u003A\u003AgetInstance\u0028\u0029",
+            "name": "getInstance",
+            "summary": "getInstance",
+            "url": "classes/Classes-Utilities-UAccessUniversityFile.html#method_getInstance"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UAccessUniversityFile\u003A\u003AgetUniversityEmailList\u0028\u0029",
+            "name": "getUniversityEmailList",
+            "summary": "getUniversityEmailList",
+            "url": "classes/Classes-Utilities-UAccessUniversityFile.html#method_getUniversityEmailList"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UAccessUniversityFile\u003A\u003Aclose\u0028\u0029",
+            "name": "close",
+            "summary": "close",
+            "url": "classes/Classes-Utilities-UAccessUniversityFile.html#method_close"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UAccessUniversityFile\u003A\u003AaddElement\u0028\u0029",
+            "name": "addElement",
+            "summary": "Method\u0020addElement\nthis\u0020method\u0020add\u0020an\u0020element\u0020to\u0020the\u0020json\u0020file",
+            "url": "classes/Classes-Utilities-UAccessUniversityFile.html#method_addElement"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UAccessUniversityFile\u003A\u003AgetUniversityByCity\u0028\u0029",
+            "name": "getUniversityByCity",
+            "summary": "Method\u0020getUniversityByCity",
+            "url": "classes/Classes-Utilities-UAccessUniversityFile.html#method_getUniversityByCity"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UAccessUniversityFile\u003A\u003AgetCityByUniversityName\u0028\u0029",
+            "name": "getCityByUniversityName",
+            "summary": "Method\u0020getCitybyUniversityName",
+            "url": "classes/Classes-Utilities-UAccessUniversityFile.html#method_getCityByUniversityName"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UAccessUniversityFile\u003A\u003AgetCities\u0028\u0029",
+            "name": "getCities",
+            "summary": "Method\u0020getCities",
+            "url": "classes/Classes-Utilities-UAccessUniversityFile.html#method_getCities"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UAccessUniversityFile\u003A\u003A\u0024path",
+            "name": "path",
+            "summary": "\u0024path",
+            "url": "classes/Classes-Utilities-UAccessUniversityFile.html#property_path"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UAccessUniversityFile\u003A\u003A\u0024instance",
+            "name": "instance",
+            "summary": "\u0024instance",
+            "url": "classes/Classes-Utilities-UAccessUniversityFile.html#property_instance"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UAccessUniversityFile\u003A\u003A\u0024list",
+            "name": "list",
+            "summary": "\u0024list",
+            "url": "classes/Classes-Utilities-UAccessUniversityFile.html#property_list"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UCookie",
+            "name": "UCookie",
+            "summary": "class\u0020to\u0020access\u0020to\u0020\u0024_COOKIE\u0020superglobal\u0020array,\u0020You\u0020must\u0020use\u0020this\u0020class\u0020and\u0020not\u0020directly\u0020the\u0020_COOKIE\u0020array",
+            "url": "classes/Classes-Utilities-UCookie.html"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UCookie\u003A\u003AisSet\u0028\u0029",
+            "name": "isSet",
+            "summary": "check\u0020if\u0020is\u0020set\u0020the\u0020specific\u0020id\u0020in\u0020the\u0020COOKIE",
+            "url": "classes/Classes-Utilities-UCookie.html#method_isSet"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UFormat",
+            "name": "UFormat",
+            "summary": "class\u0020to\u0020format\u0020inputs\u0020into\u0020the\u0020one\u0020requested\u0020from\u0020the\u0020specific\u0020JavaScript\u0020function",
+            "url": "classes/Classes-Utilities-UFormat.html"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UFormat\u003A\u003AphotoFormatReview\u0028\u0029",
+            "name": "photoFormatReview",
+            "summary": "Method\u0020photoFormatReview",
+            "url": "classes/Classes-Utilities-UFormat.html#method_photoFormatReview"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UFormat\u003A\u003AphotoFormatUser\u0028\u0029",
+            "name": "photoFormatUser",
+            "summary": "Methof\u0020photoFormatUser",
+            "url": "classes/Classes-Utilities-UFormat.html#method_photoFormatUser"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UFormat\u003A\u003AreviewsFormatAdmin\u0028\u0029",
+            "name": "reviewsFormatAdmin",
+            "summary": "Method\u0020reviewsFormatAdmin",
+            "url": "classes/Classes-Utilities-UFormat.html#method_reviewsFormatAdmin"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UFormat\u003A\u003AreviewsFormatUser\u0028\u0029",
+            "name": "reviewsFormatUser",
+            "summary": "Method\u0020reviewsFormatUser",
+            "url": "classes/Classes-Utilities-UFormat.html#method_reviewsFormatUser"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UFormat\u003A\u003AreviewsFormatUserPosted\u0028\u0029",
+            "name": "reviewsFormatUserPosted",
+            "summary": "Method\u0020reviewsFormatUserPosted",
+            "url": "classes/Classes-Utilities-UFormat.html#method_reviewsFormatUserPosted"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UFormat\u003A\u003AformatReports\u0028\u0029",
+            "name": "formatReports",
+            "summary": "Method\u0020formatReports",
+            "url": "classes/Classes-Utilities-UFormat.html#method_formatReports"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UFormat\u003A\u003AformatTopic\u0028\u0029",
+            "name": "formatTopic",
+            "summary": "Method\u0020formatTopic",
+            "url": "classes/Classes-Utilities-UFormat.html#method_formatTopic"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UFormat\u003A\u003AformatRequests\u0028\u0029",
+            "name": "formatRequests",
+            "summary": "Method\u0020formatRequests",
+            "url": "classes/Classes-Utilities-UFormat.html#method_formatRequests"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UFormat\u003A\u003AformatReply\u0028\u0029",
+            "name": "formatReply",
+            "summary": "Method\u0020formatReply",
+            "url": "classes/Classes-Utilities-UFormat.html#method_formatReply"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UFormat\u003A\u003AcreditCardFormatArray\u0028\u0029",
+            "name": "creditCardFormatArray",
+            "summary": "Method\u0020creditCardFormatArray",
+            "url": "classes/Classes-Utilities-UFormat.html#method_creditCardFormatArray"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UFormat\u003A\u003AgetFilterTenantsFormatArray\u0028\u0029",
+            "name": "getFilterTenantsFormatArray",
+            "summary": "Method\u0020getFilterTenantsFormatArray",
+            "url": "classes/Classes-Utilities-UFormat.html#method_getFilterTenantsFormatArray"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UFormat\u003A\u003AContractTenantsFormatArray\u0028\u0029",
+            "name": "ContractTenantsFormatArray",
+            "summary": "Method\u0020ContractTenantsFormatArray",
+            "url": "classes/Classes-Utilities-UFormat.html#method_ContractTenantsFormatArray"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UFormat\u003A\u003AformatAccommodationAds\u0028\u0029",
+            "name": "formatAccommodationAds",
+            "summary": "Method\u0020formatAccommodationAds",
+            "url": "classes/Classes-Utilities-UFormat.html#method_formatAccommodationAds"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UFormat\u003A\u003AformatContractsStudent\u0028\u0029",
+            "name": "formatContractsStudent",
+            "summary": "Method\u0020formatContracts",
+            "url": "classes/Classes-Utilities-UFormat.html#method_formatContractsStudent"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UFormat\u003A\u003AformatContractsOwner\u0028\u0029",
+            "name": "formatContractsOwner",
+            "summary": "Method\u0020formatContractsOwner",
+            "url": "classes/Classes-Utilities-UFormat.html#method_formatContractsOwner"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UFormat\u003A\u003AformatReservationsStudent\u0028\u0029",
+            "name": "formatReservationsStudent",
+            "summary": "Method\u0020formatReservations",
+            "url": "classes/Classes-Utilities-UFormat.html#method_formatReservationsStudent"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UFormat\u003A\u003AformatReservationsOwner\u0028\u0029",
+            "name": "formatReservationsOwner",
+            "summary": "",
+            "url": "classes/Classes-Utilities-UFormat.html#method_formatReservationsOwner"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UFormat\u003A\u003AformatCreditCardReserve\u0028\u0029",
+            "name": "formatCreditCardReserve",
+            "summary": "Method\u0020formatCreditCardReserve",
+            "url": "classes/Classes-Utilities-UFormat.html#method_formatCreditCardReserve"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UFormat\u003A\u003AformatDate\u0028\u0029",
+            "name": "formatDate",
+            "summary": "Method\u0020formatDate",
+            "url": "classes/Classes-Utilities-UFormat.html#method_formatDate"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\UFormat\u003A\u003AformatPhoneNumber\u0028\u0029",
+            "name": "formatPhoneNumber",
+            "summary": "Method\u0020formatPhoneNumber",
+            "url": "classes/Classes-Utilities-UFormat.html#method_formatPhoneNumber"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\USession",
+            "name": "USession",
+            "summary": "class\u0020to\u0020access\u0020to\u0020the\u0020\u0024_SESSION\u0020superglobal\u0020array,\u0020you\u0020Must\u0020use\u0020this\u0020class\u0020instead\u0020of\u0020using\u0020directly\u0020the\u0020array",
+            "url": "classes/Classes-Utilities-USession.html"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\USession\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/VOwner.html#method___construct"
+            "url": "classes/Classes-Utilities-USession.html#method___construct"
         },                {
-            "fqsen": "\\VOwner\u003A\u003A\u0024smarty",
+            "fqsen": "\\Classes\\Utilities\\USession\u003A\u003AgetInstance\u0028\u0029",
+            "name": "getInstance",
+            "summary": "",
+            "url": "classes/Classes-Utilities-USession.html#method_getInstance"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\USession\u003A\u003AgetSessionStatus\u0028\u0029",
+            "name": "getSessionStatus",
+            "summary": "return\u0020session\u0020status.\u0020If\u0020you\u0020want\u0020to\u0020check\u0020if\u0020the\u0020session\u0020is\u0020staretd\u0020you\u0020can\u0020use\u0020this",
+            "url": "classes/Classes-Utilities-USession.html#method_getSessionStatus"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\USession\u003A\u003AunsetSession\u0028\u0029",
+            "name": "unsetSession",
+            "summary": "unset\u0020all\u0020the\u0020elements\u0020in\u0020the\u0020_SESSION\u0020superglobal",
+            "url": "classes/Classes-Utilities-USession.html#method_unsetSession"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\USession\u003A\u003AunsetSessionElement\u0028\u0029",
+            "name": "unsetSessionElement",
+            "summary": "unset\u0020of\u0020an\u0020element\u0020of\u0020_SESSION\u0020superglobal",
+            "url": "classes/Classes-Utilities-USession.html#method_unsetSessionElement"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\USession\u003A\u003AdestroySession\u0028\u0029",
+            "name": "destroySession",
+            "summary": "destroy\u0020the\u0020session",
+            "url": "classes/Classes-Utilities-USession.html#method_destroySession"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\USession\u003A\u003AgetSessionElement\u0028\u0029",
+            "name": "getSessionElement",
+            "summary": "get\u0020element\u0020in\u0020the\u0020_SESSION\u0020superglobal",
+            "url": "classes/Classes-Utilities-USession.html#method_getSessionElement"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\USession\u003A\u003AgetAllSessionElementReqested\u0028\u0029",
+            "name": "getAllSessionElementReqested",
+            "summary": "Method\u0020getAllSessionElementReqested",
+            "url": "classes/Classes-Utilities-USession.html#method_getAllSessionElementReqested"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\USession\u003A\u003AsetSessionElement\u0028\u0029",
+            "name": "setSessionElement",
+            "summary": "set\u0020an\u0020element\u0020in\u0020_SESSION\u0020superglobal",
+            "url": "classes/Classes-Utilities-USession.html#method_setSessionElement"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\USession\u003A\u003AisSetSessionElement\u0028\u0029",
+            "name": "isSetSessionElement",
+            "summary": "check\u0020if\u0020an\u0020element\u0020is\u0020set\u0020or\u0020not",
+            "url": "classes/Classes-Utilities-USession.html#method_isSetSessionElement"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\USession\u003A\u003AbooleanSolver\u0028\u0029",
+            "name": "booleanSolver",
+            "summary": "Method\u0020booleanSolver",
+            "url": "classes/Classes-Utilities-USession.html#method_booleanSolver"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\USession\u003A\u003A\u0024instance",
+            "name": "instance",
+            "summary": "singleton\u0020class\nclass\u0020for\u0020the\u0020session,\u0020if\u0020you\u0020want\u0020to\u0020manipulate\u0020the\u0020_SESSION\u0020superglobal\u0020ypu\u0020need\u0020to\u0020use\u0020this\u0020class",
+            "url": "classes/Classes-Utilities-USession.html#property_instance"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\USort",
+            "name": "USort",
+            "summary": "",
+            "url": "classes/Classes-Utilities-USort.html"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\USort\u003A\u003AsortArray\u0028\u0029",
+            "name": "sortArray",
+            "summary": "Method\u0020to\u0020sort\u0020an\u0020array\u0020of\u0020objects",
+            "url": "classes/Classes-Utilities-USort.html#method_sortArray"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\USort\u003A\u003AcompareContracts\u0028\u0029",
+            "name": "compareContracts",
+            "summary": "Method\u0020to\u0020sort\u0020contracts\u0020by\u0020the\u0020number\u0020of\u0020days\u0020from\u0020today",
+            "url": "classes/Classes-Utilities-USort.html#method_compareContracts"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\USort\u003A\u003AcompareReservations\u0028\u0029",
+            "name": "compareReservations",
+            "summary": "Method\u0020to\u0020sort\u0020reservations\u0020by\u0020the\u0020date\u0020they\u0020were\u0020made",
+            "url": "classes/Classes-Utilities-USort.html#method_compareReservations"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\USort\u003A\u003AcompareVisitsByStartTime\u0028\u0029",
+            "name": "compareVisitsByStartTime",
+            "summary": "Method\u0020to\u0020sort\u0020visits\u0020by\u0020the\u0020start\u0020time",
+            "url": "classes/Classes-Utilities-USort.html#method_compareVisitsByStartTime"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\USort\u003A\u003AcompareVisitsByDate\u0028\u0029",
+            "name": "compareVisitsByDate",
+            "summary": "Method\u0020to\u0020sort\u0020visits\u0020by\u0020the\u0020date",
+            "url": "classes/Classes-Utilities-USort.html#method_compareVisitsByDate"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\USort\u003A\u003AcompareReports\u0028\u0029",
+            "name": "compareReports",
+            "summary": "Method\u0020to\u0020sort\u0020reports\u0020by\u0020the\u0020date\u0020they\u0020were\u0020made",
+            "url": "classes/Classes-Utilities-USort.html#method_compareReports"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\USuperGlobalAccess",
+            "name": "USuperGlobalAccess",
+            "summary": "The\u0020\u0060USuperGlobalAccess\u0060\u0020class\u0020provides\u0020a\u0020convenient\u0020way\u0020to\u0020access\u0020superglobal\u0020variables\u0020in\u0020PHP.",
+            "url": "classes/Classes-Utilities-USuperGlobalAccess.html"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\USuperGlobalAccess\u003A\u003Aget\u0028\u0029",
+            "name": "get",
+            "summary": "Get\u0020a\u0020value\u0020from\u0020the\u0020\u0024_GET\u0020superglobal\u0020array.",
+            "url": "classes/Classes-Utilities-USuperGlobalAccess.html#method_get"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\USuperGlobalAccess\u003A\u003AgetPost\u0028\u0029",
+            "name": "getPost",
+            "summary": "Get\u0020a\u0020value\u0020from\u0020the\u0020\u0024_POST\u0020superglobal\u0020array.",
+            "url": "classes/Classes-Utilities-USuperGlobalAccess.html#method_getPost"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\USuperGlobalAccess\u003A\u003AgetAllPost\u0028\u0029",
+            "name": "getAllPost",
+            "summary": "Method\u0020getAllPost",
+            "url": "classes/Classes-Utilities-USuperGlobalAccess.html#method_getAllPost"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\USuperGlobalAccess\u003A\u003AgetServer\u0028\u0029",
+            "name": "getServer",
+            "summary": "Get\u0020a\u0020value\u0020from\u0020the\u0020\u0024_SERVER\u0020superglobal\u0020array.",
+            "url": "classes/Classes-Utilities-USuperGlobalAccess.html#method_getServer"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\USuperGlobalAccess\u003A\u003AgetPhoto\u0028\u0029",
+            "name": "getPhoto",
+            "summary": "Get\u0020a\u0020value\u0020from\u0020the\u0020\u0024_FILES\u0020superglobal\u0020array.",
+            "url": "classes/Classes-Utilities-USuperGlobalAccess.html#method_getPhoto"
+        },                {
+            "fqsen": "\\Classes\\Utilities\\USuperGlobalAccess\u003A\u003AgetCookie\u0028\u0029",
+            "name": "getCookie",
+            "summary": "Method\u0020getCookie",
+            "url": "classes/Classes-Utilities-USuperGlobalAccess.html#method_getCookie"
+        },                {
+            "fqsen": "\\Classes\\View\\VAdmin",
+            "name": "VAdmin",
+            "summary": "",
+            "url": "classes/Classes-View-VAdmin.html"
+        },                {
+            "fqsen": "\\Classes\\View\\VAdmin\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "__construct",
+            "url": "classes/Classes-View-VAdmin.html#method___construct"
+        },                {
+            "fqsen": "\\Classes\\View\\VAdmin\u003A\u003Ahome\u0028\u0029",
+            "name": "home",
+            "summary": "home",
+            "url": "classes/Classes-View-VAdmin.html#method_home"
+        },                {
+            "fqsen": "\\Classes\\View\\VAdmin\u003A\u003Alogin\u0028\u0029",
+            "name": "login",
+            "summary": "login",
+            "url": "classes/Classes-View-VAdmin.html#method_login"
+        },                {
+            "fqsen": "\\Classes\\View\\VAdmin\u003A\u003AloginError\u0028\u0029",
+            "name": "loginError",
+            "summary": "loginError",
+            "url": "classes/Classes-View-VAdmin.html#method_loginError"
+        },                {
+            "fqsen": "\\Classes\\View\\VAdmin\u003A\u003Aprofile\u0028\u0029",
+            "name": "profile",
+            "summary": "profile",
+            "url": "classes/Classes-View-VAdmin.html#method_profile"
+        },                {
+            "fqsen": "\\Classes\\View\\VAdmin\u003A\u003AreadMoreSupportRequest\u0028\u0029",
+            "name": "readMoreSupportRequest",
+            "summary": "readMoreSuppoeRequest",
+            "url": "classes/Classes-View-VAdmin.html#method_readMoreSupportRequest"
+        },                {
+            "fqsen": "\\Classes\\View\\VAdmin\u003A\u003AreadMoreReports\u0028\u0029",
+            "name": "readMoreReports",
+            "summary": "readMoreReports",
+            "url": "classes/Classes-View-VAdmin.html#method_readMoreReports"
+        },                {
+            "fqsen": "\\Classes\\View\\VAdmin\u003A\u003A\u0024smarty",
             "name": "smarty",
             "summary": "",
-            "url": "classes/VOwner.html#property_smarty"
+            "url": "classes/Classes-View-VAdmin.html#property_smarty"
+        },                {
+            "fqsen": "\\Classes\\View\\VError",
+            "name": "VError",
+            "summary": "",
+            "url": "classes/Classes-View-VError.html"
+        },                {
+            "fqsen": "\\Classes\\View\\VError\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "__construct",
+            "url": "classes/Classes-View-VError.html#method___construct"
+        },                {
+            "fqsen": "\\Classes\\View\\VError\u003A\u003Aerror\u0028\u0029",
+            "name": "error",
+            "summary": "error",
+            "url": "classes/Classes-View-VError.html#method_error"
+        },                {
+            "fqsen": "\\Classes\\View\\VError\u003A\u003A\u0024smarty",
+            "name": "smarty",
+            "summary": "",
+            "url": "classes/Classes-View-VError.html#property_smarty"
+        },                {
+            "fqsen": "\\Classes\\View\\VOwner",
+            "name": "VOwner",
+            "summary": "",
+            "url": "classes/Classes-View-VOwner.html"
+        },                {
+            "fqsen": "\\Classes\\View\\VOwner\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "__construct",
+            "url": "classes/Classes-View-VOwner.html#method___construct"
+        },                {
+            "fqsen": "\\Classes\\View\\VOwner\u003A\u003Ahome\u0028\u0029",
+            "name": "home",
+            "summary": "home",
+            "url": "classes/Classes-View-VOwner.html#method_home"
+        },                {
+            "fqsen": "\\Classes\\View\\VOwner\u003A\u003AaccommodationManagement\u0028\u0029",
+            "name": "accommodationManagement",
+            "summary": "Manages\u0020the\u0020accommodation\u0020for\u0020a\u0020specific\u0020owner.",
+            "url": "classes/Classes-View-VOwner.html#method_accommodationManagement"
+        },                {
+            "fqsen": "\\Classes\\View\\VOwner\u003A\u003AshowOwnerRegistration\u0028\u0029",
+            "name": "showOwnerRegistration",
+            "summary": "Displays\u0020the\u0020owner\u0020registration\u0020form.",
+            "url": "classes/Classes-View-VOwner.html#method_showOwnerRegistration"
+        },                {
+            "fqsen": "\\Classes\\View\\VOwner\u003A\u003AregistrationError\u0028\u0029",
+            "name": "registrationError",
+            "summary": "Displays\u0020the\u0020owner\u0020registration\u0020form\u0020with\u0020errors.",
+            "url": "classes/Classes-View-VOwner.html#method_registrationError"
+        },                {
+            "fqsen": "\\Classes\\View\\VOwner\u003A\u003Aprofile\u0028\u0029",
+            "name": "profile",
+            "summary": "Show\u0020the\u0020owner\u0027s\u0020profile",
+            "url": "classes/Classes-View-VOwner.html#method_profile"
+        },                {
+            "fqsen": "\\Classes\\View\\VOwner\u003A\u003AeditProfile\u0028\u0029",
+            "name": "editProfile",
+            "summary": "Edit\u0020the\u0020profile\u0020of\u0020an\u0020owner.",
+            "url": "classes/Classes-View-VOwner.html#method_editProfile"
+        },                {
+            "fqsen": "\\Classes\\View\\VOwner\u003A\u003Acontact\u0028\u0029",
+            "name": "contact",
+            "summary": "Contact\u0020the\u0020owner.",
+            "url": "classes/Classes-View-VOwner.html#method_contact"
+        },                {
+            "fqsen": "\\Classes\\View\\VOwner\u003A\u003Aabout\u0028\u0029",
+            "name": "about",
+            "summary": "Represents\u0020a\u0020method\u0020to\u0020retrieve\u0020information\u0020about\u0020the\u0020owner.",
+            "url": "classes/Classes-View-VOwner.html#method_about"
+        },                {
+            "fqsen": "\\Classes\\View\\VOwner\u003A\u003Areviews\u0028\u0029",
+            "name": "reviews",
+            "summary": "Method\u0020to\u0020handle\u0020reviews\u0020for\u0020the\u0020VOwner\u0020class.",
+            "url": "classes/Classes-View-VOwner.html#method_reviews"
+        },                {
+            "fqsen": "\\Classes\\View\\VOwner\u003A\u003AaddAccommodation\u0028\u0029",
+            "name": "addAccommodation",
+            "summary": "Method\u0020to\u0020handle\u0020the\u0020addition\u0020of\u0020an\u0020accommodation.",
+            "url": "classes/Classes-View-VOwner.html#method_addAccommodation"
+        },                {
+            "fqsen": "\\Classes\\View\\VOwner\u003A\u003ApublicProfileFromOwner\u0028\u0029",
+            "name": "publicProfileFromOwner",
+            "summary": "Generates\u0020the\u0020public\u0020profile\u0020of\u0020an\u0020owner.",
+            "url": "classes/Classes-View-VOwner.html#method_publicProfileFromOwner"
+        },                {
+            "fqsen": "\\Classes\\View\\VOwner\u003A\u003ApublicProfileFromStudent\u0028\u0029",
+            "name": "publicProfileFromStudent",
+            "summary": "Generates\u0020the\u0020public\u0020profile\u0020of\u0020a\u0020student.",
+            "url": "classes/Classes-View-VOwner.html#method_publicProfileFromStudent"
+        },                {
+            "fqsen": "\\Classes\\View\\VOwner\u003A\u003ApostedReview\u0028\u0029",
+            "name": "postedReview",
+            "summary": "Show\u0020a\u0020posted\u0020review.",
+            "url": "classes/Classes-View-VOwner.html#method_postedReview"
+        },                {
+            "fqsen": "\\Classes\\View\\VOwner\u003A\u003AviewOwnerAds\u0028\u0029",
+            "name": "viewOwnerAds",
+            "summary": "Show\u0020the\u0020owner\u0027s\u0020ads.",
+            "url": "classes/Classes-View-VOwner.html#method_viewOwnerAds"
+        },                {
+            "fqsen": "\\Classes\\View\\VOwner\u003A\u003AeditAccommodation\u0028\u0029",
+            "name": "editAccommodation",
+            "summary": "Edit\u0020an\u0020accommodation.",
+            "url": "classes/Classes-View-VOwner.html#method_editAccommodation"
+        },                {
+            "fqsen": "\\Classes\\View\\VOwner\u003A\u003Atenants\u0028\u0029",
+            "name": "tenants",
+            "summary": "Show\u0020the\u0020owner\u0027s\u0020tenants.",
+            "url": "classes/Classes-View-VOwner.html#method_tenants"
+        },                {
+            "fqsen": "\\Classes\\View\\VOwner\u003A\u003Avisits\u0028\u0029",
+            "name": "visits",
+            "summary": "Show\u0020the\u0020owner\u0027s\u0020visits.",
+            "url": "classes/Classes-View-VOwner.html#method_visits"
+        },                {
+            "fqsen": "\\Classes\\View\\VOwner\u003A\u003AviewVisitOwner\u0028\u0029",
+            "name": "viewVisitOwner",
+            "summary": "View\u0020the\u0020owner\u0020of\u0020a\u0020visit.",
+            "url": "classes/Classes-View-VOwner.html#method_viewVisitOwner"
+        },                {
+            "fqsen": "\\Classes\\View\\VOwner\u003A\u003AshowReservations\u0028\u0029",
+            "name": "showReservations",
+            "summary": "Displays\u0020the\u0020reservations\u0020for\u0020the\u0020owner.",
+            "url": "classes/Classes-View-VOwner.html#method_showReservations"
+        },                {
+            "fqsen": "\\Classes\\View\\VOwner\u003A\u003AreservationDetails\u0028\u0029",
+            "name": "reservationDetails",
+            "summary": "Displays\u0020the\u0020reservation\u0020details\u0020for\u0020a\u0020specific\u0020owner.",
+            "url": "classes/Classes-View-VOwner.html#method_reservationDetails"
+        },                {
+            "fqsen": "\\Classes\\View\\VOwner\u003A\u003AshowContracts\u0028\u0029",
+            "name": "showContracts",
+            "summary": "Displays\u0020the\u0020contracts\u0020for\u0020the\u0020owner.",
+            "url": "classes/Classes-View-VOwner.html#method_showContracts"
+        },                {
+            "fqsen": "\\Classes\\View\\VOwner\u003A\u003AcontractDetails\u0028\u0029",
+            "name": "contractDetails",
+            "summary": "Retrieves\u0020the\u0020contract\u0020details\u0020for\u0020a\u0020given\u0020contract,\u0020student,\u0020reviews\u0020data,\u0020modal\u0020success\u0020message,\u0020and\u0020leaveble\u0020value.",
+            "url": "classes/Classes-View-VOwner.html#method_contractDetails"
+        },                {
+            "fqsen": "\\Classes\\View\\VOwner\u003A\u003AsupportReplies\u0028\u0029",
+            "name": "supportReplies",
+            "summary": "Method\u0020to\u0020handle\u0020support\u0020replies.",
+            "url": "classes/Classes-View-VOwner.html#method_supportReplies"
+        },                {
+            "fqsen": "\\Classes\\View\\VOwner\u003A\u003Aguidelines\u0028\u0029",
+            "name": "guidelines",
+            "summary": "This\u0020method\u0020is\u0020used\u0020to\u0020retrieve\u0020the\u0020guidelines\u0020for\u0020the\u0020owner\u0020view.",
+            "url": "classes/Classes-View-VOwner.html#method_guidelines"
+        },                {
+            "fqsen": "\\Classes\\View\\VOwner\u003A\u003A\u0024smarty",
+            "name": "smarty",
+            "summary": "",
+            "url": "classes/Classes-View-VOwner.html#property_smarty"
+        },                {
+            "fqsen": "\\Classes\\View\\VStudent",
+            "name": "VStudent",
+            "summary": "Class\u0020VStudent",
+            "url": "classes/Classes-View-VStudent.html"
+        },                {
+            "fqsen": "\\Classes\\View\\VStudent\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "VStudent\u0020constructor.",
+            "url": "classes/Classes-View-VStudent.html#method___construct"
+        },                {
+            "fqsen": "\\Classes\\View\\VStudent\u003A\u003Ahome\u0028\u0029",
+            "name": "home",
+            "summary": "Show\u0020the\u0020student\u0027s\u0020home\u0020page",
+            "url": "classes/Classes-View-VStudent.html#method_home"
+        },                {
+            "fqsen": "\\Classes\\View\\VStudent\u003A\u003Aprofile\u0028\u0029",
+            "name": "profile",
+            "summary": "Show\u0020the\u0020student\u0027s\u0020profile",
+            "url": "classes/Classes-View-VStudent.html#method_profile"
+        },                {
+            "fqsen": "\\Classes\\View\\VStudent\u003A\u003AeditProfile\u0028\u0029",
+            "name": "editProfile",
+            "summary": "Show\u0020form\u0020for\u0020editing\u0020the\u0020student\u0027s\u0020profile",
+            "url": "classes/Classes-View-VStudent.html#method_editProfile"
+        },                {
+            "fqsen": "\\Classes\\View\\VStudent\u003A\u003AshowStudentRegistration\u0028\u0029",
+            "name": "showStudentRegistration",
+            "summary": "Displays\u0020the\u0020student\u0020registration\u0020form.",
+            "url": "classes/Classes-View-VStudent.html#method_showStudentRegistration"
+        },                {
+            "fqsen": "\\Classes\\View\\VStudent\u003A\u003Acontact\u0028\u0029",
+            "name": "contact",
+            "summary": "Method\u0020to\u0020handle\u0020the\u0020contact\u0020functionality\u0020in\u0020the\u0020VStudent\u0020class.",
+            "url": "classes/Classes-View-VStudent.html#method_contact"
+        },                {
+            "fqsen": "\\Classes\\View\\VStudent\u003A\u003Aabout\u0028\u0029",
+            "name": "about",
+            "summary": "Displays\u0020information\u0020about\u0020the\u0020student.",
+            "url": "classes/Classes-View-VStudent.html#method_about"
+        },                {
+            "fqsen": "\\Classes\\View\\VStudent\u003A\u003AfindAccommodation\u0028\u0029",
+            "name": "findAccommodation",
+            "summary": "Display\u0020finded\u0020accommodation\u0020based\u0020on\u0020search\u0020criteria.",
+            "url": "classes/Classes-View-VStudent.html#method_findAccommodation"
+        },                {
+            "fqsen": "\\Classes\\View\\VStudent\u003A\u003Aaccommodation\u0028\u0029",
+            "name": "accommodation",
+            "summary": "Renders\u0020the\u0020accommodation\u0020view\u0020for\u0020a\u0020student.",
+            "url": "classes/Classes-View-VStudent.html#method_accommodation"
+        },                {
+            "fqsen": "\\Classes\\View\\VStudent\u003A\u003Areviews\u0028\u0029",
+            "name": "reviews",
+            "summary": "Renders\u0020the\u0020reviews\u0020section\u0020of\u0020the\u0020student\u0020view.",
+            "url": "classes/Classes-View-VStudent.html#method_reviews"
+        },                {
+            "fqsen": "\\Classes\\View\\VStudent\u003A\u003ApublicProfileFromStudent\u0028\u0029",
+            "name": "publicProfileFromStudent",
+            "summary": "Renders\u0020the\u0020public\u0020profile\u0020of\u0020a\u0020student.",
+            "url": "classes/Classes-View-VStudent.html#method_publicProfileFromStudent"
+        },                {
+            "fqsen": "\\Classes\\View\\VStudent\u003A\u003ApublicProfileFromOwner\u0028\u0029",
+            "name": "publicProfileFromOwner",
+            "summary": "Renders\u0020the\u0020public\u0020profile\u0020of\u0020a\u0020student\u0020from\u0020the\u0020owner\u0027s\u0020perspective.",
+            "url": "classes/Classes-View-VStudent.html#method_publicProfileFromOwner"
+        },                {
+            "fqsen": "\\Classes\\View\\VStudent\u003A\u003ApaymentMethods\u0028\u0029",
+            "name": "paymentMethods",
+            "summary": "Displays\u0020the\u0020payment\u0020methods\u0020for\u0020a\u0020student.",
+            "url": "classes/Classes-View-VStudent.html#method_paymentMethods"
+        },                {
+            "fqsen": "\\Classes\\View\\VStudent\u003A\u003ApostedReview\u0028\u0029",
+            "name": "postedReview",
+            "summary": "Assigns\u0020the\u0020given\u0020reviews\u0020data\u0020to\u0020the\u0020\u0027reviewsData\u0027\u0020variable\u0020in\u0020the\u0020Smarty\u0020template.",
+            "url": "classes/Classes-View-VStudent.html#method_postedReview"
+        },                {
+            "fqsen": "\\Classes\\View\\VStudent\u003A\u003Avisits\u0028\u0029",
+            "name": "visits",
+            "summary": "Displays\u0020the\u0020visits\u0020for\u0020a\u0020student.",
+            "url": "classes/Classes-View-VStudent.html#method_visits"
+        },                {
+            "fqsen": "\\Classes\\View\\VStudent\u003A\u003AviewVisit\u0028\u0029",
+            "name": "viewVisit",
+            "summary": "Displays\u0020the\u0020visit\u0020details\u0020for\u0020a\u0020student.",
+            "url": "classes/Classes-View-VStudent.html#method_viewVisit"
+        },                {
+            "fqsen": "\\Classes\\View\\VStudent\u003A\u003AshowReservations\u0028\u0029",
+            "name": "showReservations",
+            "summary": "Displays\u0020the\u0020reservations\u0020for\u0020a\u0020student.",
+            "url": "classes/Classes-View-VStudent.html#method_showReservations"
+        },                {
+            "fqsen": "\\Classes\\View\\VStudent\u003A\u003AreservationDetails\u0028\u0029",
+            "name": "reservationDetails",
+            "summary": "Displays\u0020the\u0020reservation\u0020details\u0020for\u0020a\u0020student.",
+            "url": "classes/Classes-View-VStudent.html#method_reservationDetails"
+        },                {
+            "fqsen": "\\Classes\\View\\VStudent\u003A\u003AshowContracts\u0028\u0029",
+            "name": "showContracts",
+            "summary": "Displays\u0020the\u0020contracts\u0020for\u0020a\u0020student.",
+            "url": "classes/Classes-View-VStudent.html#method_showContracts"
+        },                {
+            "fqsen": "\\Classes\\View\\VStudent\u003A\u003AcontractDetails\u0028\u0029",
+            "name": "contractDetails",
+            "summary": "Displays\u0020the\u0020contract\u0020details\u0020for\u0020a\u0020student.",
+            "url": "classes/Classes-View-VStudent.html#method_contractDetails"
+        },                {
+            "fqsen": "\\Classes\\View\\VStudent\u003A\u003AsupportReplies\u0028\u0029",
+            "name": "supportReplies",
+            "summary": "Displays\u0020the\u0020support\u0020form\u0020for\u0020a\u0020student.",
+            "url": "classes/Classes-View-VStudent.html#method_supportReplies"
+        },                {
+            "fqsen": "\\Classes\\View\\VStudent\u003A\u003Aguidelines\u0028\u0029",
+            "name": "guidelines",
+            "summary": "This\u0020method\u0020is\u0020responsible\u0020for\u0020displaying\u0020the\u0020guidelines\u0020for\u0020students.",
+            "url": "classes/Classes-View-VStudent.html#method_guidelines"
+        },                {
+            "fqsen": "\\Classes\\View\\VStudent\u003A\u003A\u0024smarty",
+            "name": "smarty",
+            "summary": "",
+            "url": "classes/Classes-View-VStudent.html#property_smarty"
+        },                {
+            "fqsen": "\\Classes\\View\\VUser",
+            "name": "VUser",
+            "summary": "Class\u0020VUser",
+            "url": "classes/Classes-View-VUser.html"
+        },                {
+            "fqsen": "\\Classes\\View\\VUser\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "VUser\u0020constructor.",
+            "url": "classes/Classes-View-VUser.html#method___construct"
+        },                {
+            "fqsen": "\\Classes\\View\\VUser\u003A\u003Ahome\u0028\u0029",
+            "name": "home",
+            "summary": "Renders\u0020the\u0020home\u0020view.",
+            "url": "classes/Classes-View-VUser.html#method_home"
+        },                {
+            "fqsen": "\\Classes\\View\\VUser\u003A\u003Alogin\u0028\u0029",
+            "name": "login",
+            "summary": "Renders\u0020the\u0020login\u0020view.",
+            "url": "classes/Classes-View-VUser.html#method_login"
+        },                {
+            "fqsen": "\\Classes\\View\\VUser\u003A\u003Aabout\u0028\u0029",
+            "name": "about",
+            "summary": "Renders\u0020the\u0020about\u0020view.",
+            "url": "classes/Classes-View-VUser.html#method_about"
+        },                {
+            "fqsen": "\\Classes\\View\\VUser\u003A\u003Acontact\u0028\u0029",
+            "name": "contact",
+            "summary": "Renders\u0020the\u0020contact\u0020view.",
+            "url": "classes/Classes-View-VUser.html#method_contact"
+        },                {
+            "fqsen": "\\Classes\\View\\VUser\u003A\u003AfindAccommodation\u0028\u0029",
+            "name": "findAccommodation",
+            "summary": "Renders\u0020the\u0020accommodation\u0020view.",
+            "url": "classes/Classes-View-VUser.html#method_findAccommodation"
+        },                {
+            "fqsen": "\\Classes\\View\\VUser\u003A\u003Aregister\u0028\u0029",
+            "name": "register",
+            "summary": "Registers\u0020a\u0020user.",
+            "url": "classes/Classes-View-VUser.html#method_register"
+        },                {
+            "fqsen": "\\Classes\\View\\VUser\u003A\u003AregistrationError\u0028\u0029",
+            "name": "registrationError",
+            "summary": "Registers\u0020a\u0020user\u0020and\u0020handles\u0020any\u0020registration\u0020errors.",
+            "url": "classes/Classes-View-VUser.html#method_registrationError"
+        },                {
+            "fqsen": "\\Classes\\View\\VUser\u003A\u003AloginError\u0028\u0029",
+            "name": "loginError",
+            "summary": "Display\u0020the\u0020login\u0020error\u0020page.",
+            "url": "classes/Classes-View-VUser.html#method_loginError"
+        },                {
+            "fqsen": "\\Classes\\View\\VUser\u003A\u003AloginUsernameError\u0028\u0029",
+            "name": "loginUsernameError",
+            "summary": "Display\u0020the\u0020login\u0020error\u0020page.",
+            "url": "classes/Classes-View-VUser.html#method_loginUsernameError"
+        },                {
+            "fqsen": "\\Classes\\View\\VUser\u003A\u003Aguidelines\u0028\u0029",
+            "name": "guidelines",
+            "summary": "Method\u003A\u0020guidelines\nDescription\u003A\u0020This\u0020method\u0020is\u0020responsible\u0020for\u0020displaying\u0020the\u0020guidelines\u0020for\u0020the\u0020user.",
+            "url": "classes/Classes-View-VUser.html#method_guidelines"
+        },                {
+            "fqsen": "\\Classes\\View\\VUser\u003A\u003A\u0024smarty",
+            "name": "smarty",
+            "summary": "",
+            "url": "classes/Classes-View-VUser.html#property_smarty"
         },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
             "url": "namespaces/default.html"
         },                {
-            "fqsen": "\\Classes\\Entity",
-            "name": "Entity",
+            "fqsen": "\\Classes\\Control",
+            "name": "Control",
             "summary": "",
-            "url": "namespaces/classes-entity.html"
+            "url": "namespaces/classes-control.html"
         },                {
             "fqsen": "\\Classes",
             "name": "Classes",
             "summary": "",
             "url": "namespaces/classes.html"
+        },                {
+            "fqsen": "\\Classes\\Entity",
+            "name": "Entity",
+            "summary": "",
+            "url": "namespaces/classes-entity.html"
         },                {
             "fqsen": "\\Classes\\Foundation",
             "name": "Foundation",
@@ -2190,5 +4395,15 @@ Search.appendIndex(
             "name": "Tools",
             "summary": "",
             "url": "namespaces/classes-tools.html"
+        },                {
+            "fqsen": "\\Classes\\Utilities",
+            "name": "Utilities",
+            "summary": "",
+            "url": "namespaces/classes-utilities.html"
+        },                {
+            "fqsen": "\\Classes\\View",
+            "name": "View",
+            "summary": "",
+            "url": "namespaces/classes-view.html"
         }            ]
 );

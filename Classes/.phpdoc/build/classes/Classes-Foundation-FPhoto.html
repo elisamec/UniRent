@@ -61,6 +61,10 @@
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
+                <a href="namespaces/classes-control.html" class="">Control</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/classes-entity.html" class="">Entity</a>
                 
             </li>
@@ -70,6 +74,14 @@
             </li>
                     <li>
                 <a href="namespaces/classes-tools.html" class="">Tools</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/classes-utilities.html" class="">Utilities</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/classes-view.html" class="">View</a>
                 
             </li>
             </ul>
@@ -82,11 +94,37 @@
 </h4>
 
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Classes.html" class="">Classes</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="packages/Classes-Control.html" class="">Control</a>
+                
+            </li>
+                    <li>
+                <a href="packages/Classes-Entity.html" class="">Entity</a>
+                
+            </li>
+                    <li>
+                <a href="packages/Classes-Foundation.html" class="">Foundation</a>
+                
+            </li>
+                    <li>
+                <a href="packages/Classes-View.html" class="">View</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/Entity.html" class="">Entity</a>
 </h4>
 
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/Foundation.html" class="">Foundation</a>
+</h4>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Utilities.html" class="">Utilities</a>
 </h4>
 
                         </section>
@@ -134,11 +172,12 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FPhoto.php"><a href="files/foundation-fphoto.html"><abbr title="Foundation/FPhoto.php">FPhoto.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">9</span>
+    <span class="phpdocumentor-element-found-in__line">14</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">This class is a foundation class and is used to manage the photos of the accommodations</p>
+
 
 
 
@@ -188,6 +227,13 @@
 <dd>delete</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Classes-Foundation-FPhoto.html#method_deleteAccommodation">deleteAccommodation()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>delete all photos of an accomodation</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Foundation-FPhoto.html#method_exist">exist()</a>
     <span>
                                 &nbsp;: bool    </span>
@@ -200,13 +246,6 @@
                                 &nbsp;: bool    </span>
 </dt>
 <dd>exist photo refered to accommodation</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Classes-Foundation-FPhoto.html#method_existReview">existReview()</a>
-    <span>
-                                &nbsp;: bool    </span>
-</dt>
-<dd>exist photo refered to review</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Foundation-FPhoto.html#method_getInstance">getInstance()</a>
@@ -229,19 +268,12 @@
 <dd>This method loads the photos of an owner or student</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Classes-Foundation-FPhoto.html#method_loadReview">loadReview()</a>
-    <span>
-                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
-</dt>
-<dd>This method loads the photos of a review</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Foundation-FPhoto.html#method_store">store()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
 <dd>store
-Store accommodation&#039;s or review&#039;s photos</dd>
+Store accommodation&#039;s photos</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Foundation-FPhoto.html#method_storeAvatar">storeAvatar()</a>
@@ -294,7 +326,7 @@ store user&#039;s or owner&#039;s avatar</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FPhoto.php"><a href="files/foundation-fphoto.html"><abbr title="Foundation/FPhoto.php">FPhoto.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">15</span>
 
     </aside>
 
@@ -334,7 +366,7 @@ store user&#039;s or owner&#039;s avatar</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FPhoto.php"><a href="files/foundation-fphoto.html"><abbr title="Foundation/FPhoto.php">FPhoto.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">354</span>
+    <span class="phpdocumentor-element-found-in__line">307</span>
 
     </aside>
 
@@ -374,6 +406,54 @@ store user&#039;s or owner&#039;s avatar</dd>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_deleteAccommodation">
+        deleteAccommodation()
+        <a href="classes/Classes-Foundation-FPhoto.html#method_deleteAccommodation" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FPhoto.php"><a href="files/foundation-fphoto.html"><abbr title="Foundation/FPhoto.php">FPhoto.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">341</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">delete all photos of an accomodation</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">deleteAccommodation</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$idAccommodation</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$idAccommodation</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_exist">
         exist()
         <a href="classes/Classes-Foundation-FPhoto.html#method_exist" class="headerlink"><i class="fas fa-link"></i></a>
@@ -382,7 +462,7 @@ store user&#039;s or owner&#039;s avatar</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FPhoto.php"><a href="files/foundation-fphoto.html"><abbr title="Foundation/FPhoto.php">FPhoto.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">33</span>
+    <span class="phpdocumentor-element-found-in__line">38</span>
 
     </aside>
 
@@ -430,7 +510,7 @@ store user&#039;s or owner&#039;s avatar</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FPhoto.php"><a href="files/foundation-fphoto.html"><abbr title="Foundation/FPhoto.php">FPhoto.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">73</span>
+    <span class="phpdocumentor-element-found-in__line">76</span>
 
     </aside>
 
@@ -468,54 +548,6 @@ store user&#039;s or owner&#039;s avatar</dd>
         class="phpdocumentor-element
             -method
             -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_existReview">
-        existReview()
-        <a href="classes/Classes-Foundation-FPhoto.html#method_existReview" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FPhoto.php"><a href="files/foundation-fphoto.html"><abbr title="Foundation/FPhoto.php">FPhoto.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">53</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">exist photo refered to review</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">existReview</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$idReview</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$idReview</span>
-                : <span class="phpdocumentor-signature__argument__return-type">int</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-    
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">bool</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
                                     -static                    "
 >
     <h4 class="phpdocumentor-element__name" id="method_getInstance">
@@ -526,7 +558,7 @@ store user&#039;s or owner&#039;s avatar</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FPhoto.php"><a href="files/foundation-fphoto.html"><abbr title="Foundation/FPhoto.php">FPhoto.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">23</span>
 
     </aside>
 
@@ -559,7 +591,7 @@ store user&#039;s or owner&#039;s avatar</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FPhoto.php"><a href="files/foundation-fphoto.html"><abbr title="Foundation/FPhoto.php">FPhoto.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">134</span>
+    <span class="phpdocumentor-element-found-in__line">96</span>
 
     </aside>
 
@@ -607,7 +639,7 @@ store user&#039;s or owner&#039;s avatar</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FPhoto.php"><a href="files/foundation-fphoto.html"><abbr title="Foundation/FPhoto.php">FPhoto.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">176</span>
+    <span class="phpdocumentor-element-found-in__line">138</span>
 
     </aside>
 
@@ -647,54 +679,6 @@ store user&#039;s or owner&#039;s avatar</dd>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_loadReview">
-        loadReview()
-        <a href="classes/Classes-Foundation-FPhoto.html#method_loadReview" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FPhoto.php"><a href="files/foundation-fphoto.html"><abbr title="Foundation/FPhoto.php">FPhoto.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">93</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">This method loads the photos of a review</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">loadReview</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$idReview</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$idReview</span>
-                : <span class="phpdocumentor-signature__argument__return-type">int</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-    
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_store">
         store()
         <a href="classes/Classes-Foundation-FPhoto.html#method_store" class="headerlink"><i class="fas fa-link"></i></a>
@@ -703,12 +687,12 @@ store user&#039;s or owner&#039;s avatar</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FPhoto.php"><a href="files/foundation-fphoto.html"><abbr title="Foundation/FPhoto.php">FPhoto.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">257</span>
+    <span class="phpdocumentor-element-found-in__line">220</span>
 
     </aside>
 
         <p class="phpdocumentor-summary">store
-Store accommodation&#039;s or review&#039;s photos</p>
+Store accommodation&#039;s photos</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -752,7 +736,7 @@ Store accommodation&#039;s or review&#039;s photos</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FPhoto.php"><a href="files/foundation-fphoto.html"><abbr title="Foundation/FPhoto.php">FPhoto.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">213</span>
+    <span class="phpdocumentor-element-found-in__line">179</span>
 
     </aside>
 
@@ -801,7 +785,7 @@ store user&#039;s or owner&#039;s avatar</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FPhoto.php"><a href="files/foundation-fphoto.html"><abbr title="Foundation/FPhoto.php">FPhoto.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">314</span>
+    <span class="phpdocumentor-element-found-in__line">268</span>
 
     </aside>
 
@@ -849,7 +833,7 @@ store user&#039;s or owner&#039;s avatar</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FPhoto.php"><a href="files/foundation-fphoto.html"><abbr title="Foundation/FPhoto.php">FPhoto.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">18</span>
 
     </aside>
 
@@ -989,13 +973,12 @@ store user&#039;s or owner&#039;s avatar</p>
             <li>
                 <ul class="phpdocumentor-list -clean">
                                             <li><a href="classes/Classes-Foundation-FPhoto.html#method_delete">delete()</a></li>
+                                            <li><a href="classes/Classes-Foundation-FPhoto.html#method_deleteAccommodation">deleteAccommodation()</a></li>
                                             <li><a href="classes/Classes-Foundation-FPhoto.html#method_exist">exist()</a></li>
                                             <li><a href="classes/Classes-Foundation-FPhoto.html#method_existAccommodation">existAccommodation()</a></li>
-                                            <li><a href="classes/Classes-Foundation-FPhoto.html#method_existReview">existReview()</a></li>
                                             <li><a href="classes/Classes-Foundation-FPhoto.html#method_getInstance">getInstance()</a></li>
                                             <li><a href="classes/Classes-Foundation-FPhoto.html#method_loadAccommodation">loadAccommodation()</a></li>
                                             <li><a href="classes/Classes-Foundation-FPhoto.html#method_loadAvatar">loadAvatar()</a></li>
-                                            <li><a href="classes/Classes-Foundation-FPhoto.html#method_loadReview">loadReview()</a></li>
                                             <li><a href="classes/Classes-Foundation-FPhoto.html#method_store">store()</a></li>
                                             <li><a href="classes/Classes-Foundation-FPhoto.html#method_storeAvatar">storeAvatar()</a></li>
                                             <li><a href="classes/Classes-Foundation-FPhoto.html#method_update">update()</a></li>

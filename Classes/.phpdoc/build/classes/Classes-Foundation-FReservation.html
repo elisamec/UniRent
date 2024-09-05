@@ -61,6 +61,10 @@
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
+                <a href="namespaces/classes-control.html" class="">Control</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/classes-entity.html" class="">Entity</a>
                 
             </li>
@@ -70,6 +74,14 @@
             </li>
                     <li>
                 <a href="namespaces/classes-tools.html" class="">Tools</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/classes-utilities.html" class="">Utilities</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/classes-view.html" class="">View</a>
                 
             </li>
             </ul>
@@ -82,11 +94,37 @@
 </h4>
 
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Classes.html" class="">Classes</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="packages/Classes-Control.html" class="">Control</a>
+                
+            </li>
+                    <li>
+                <a href="packages/Classes-Entity.html" class="">Entity</a>
+                
+            </li>
+                    <li>
+                <a href="packages/Classes-Foundation.html" class="">Foundation</a>
+                
+            </li>
+                    <li>
+                <a href="packages/Classes-View.html" class="">View</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/Entity.html" class="">Entity</a>
 </h4>
 
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/Foundation.html" class="">Foundation</a>
+</h4>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Utilities.html" class="">Utilities</a>
 </h4>
 
                         </section>
@@ -213,13 +251,6 @@
 <dd>Method exist</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Classes-Foundation-FReservation.html#method_getAcceptedReservations">getAcceptedReservations()</a>
-    <span>
-                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
-</dt>
-<dd>Method getAcceptedReservations</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Foundation-FReservation.html#method_getInstance">getInstance()</a>
     <span>
                                 &nbsp;: <a href="classes/Classes-Foundation-FReservation.html"><abbr title="\Classes\Foundation\FReservation">FReservation</abbr></a>    </span>
@@ -239,6 +270,13 @@
                                 &nbsp;: <a href="classes/Classes-Entity-EReservation.html"><abbr title="\Classes\Entity\EReservation">EReservation</abbr></a>    </span>
 </dt>
 <dd>Method load</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Classes-Foundation-FReservation.html#method_loadReservationsByStudent">loadReservationsByStudent()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;|null    </span>
+</dt>
+<dd>Method loadReservationsByStudent</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Foundation-FReservation.html#method_store">store()</a>
@@ -346,7 +384,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FReservation.php"><a href="files/foundation-freservation.html"><abbr title="Foundation/FReservation.php">FReservation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">297</span>
+    <span class="phpdocumentor-element-found-in__line">302</span>
 
     </aside>
 
@@ -436,58 +474,6 @@
         class="phpdocumentor-element
             -method
             -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getAcceptedReservations">
-        getAcceptedReservations()
-        <a href="classes/Classes-Foundation-FReservation.html#method_getAcceptedReservations" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FReservation.php"><a href="files/foundation-freservation.html"><abbr title="Foundation/FReservation.php">FReservation.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">397</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Method getAcceptedReservations</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getAcceptedReservations</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-        <section class="phpdocumentor-description"><p>This method return a EReservation array of resercations that have been accepted by the owner but not still paied by the student</p>
-</section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$id</span>
-                : <span class="phpdocumentor-signature__argument__return-type">int</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>[Reservation id]</p>
-</section>
-
-            </dd>
-            </dl>
-
-    
-
-    
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
                                     -static                    "
 >
     <h4 class="phpdocumentor-element__name" id="method_getInstance">
@@ -536,7 +522,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FReservation.php"><a href="files/foundation-freservation.html"><abbr title="Foundation/FReservation.php">FReservation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">342</span>
+    <span class="phpdocumentor-element-found-in__line">347</span>
 
     </aside>
 
@@ -588,7 +574,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FReservation.php"><a href="files/foundation-freservation.html"><abbr title="Foundation/FReservation.php">FReservation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">92</span>
+    <span class="phpdocumentor-element-found-in__line">93</span>
 
     </aside>
 
@@ -630,6 +616,67 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_loadReservationsByStudent">
+        loadReservationsByStudent()
+        <a href="classes/Classes-Foundation-FReservation.html#method_loadReservationsByStudent" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FReservation.php"><a href="files/foundation-freservation.html"><abbr title="Foundation/FReservation.php">FReservation.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">404</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Method loadReservationsByStudent</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">loadReservationsByStudent</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$kind</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>This method return a EReservation array of waiting reservations</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$id</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>[Student id]</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$kind</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>[accepted|pending]</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_store">
         store()
         <a href="classes/Classes-Foundation-FReservation.html#method_store" class="headerlink"><i class="fas fa-link"></i></a>
@@ -638,7 +685,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FReservation.php"><a href="files/foundation-freservation.html"><abbr title="Foundation/FReservation.php">FReservation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">134</span>
+    <span class="phpdocumentor-element-found-in__line">135</span>
 
     </aside>
 
@@ -688,7 +735,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FReservation.php"><a href="files/foundation-freservation.html"><abbr title="Foundation/FReservation.php">FReservation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">170</span>
+    <span class="phpdocumentor-element-found-in__line">172</span>
 
     </aside>
 
@@ -738,7 +785,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FReservation.php"><a href="files/foundation-freservation.html"><abbr title="Foundation/FReservation.php">FReservation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">252</span>
+    <span class="phpdocumentor-element-found-in__line">257</span>
 
     </aside>
 
@@ -826,7 +873,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FReservation.php"><a href="files/foundation-freservation.html"><abbr title="Foundation/FReservation.php">FReservation.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">223</span>
+    <span class="phpdocumentor-element-found-in__line">228</span>
 
     </aside>
 
@@ -984,10 +1031,10 @@
                 <ul class="phpdocumentor-list -clean">
                                             <li><a href="classes/Classes-Foundation-FReservation.html#method_delete">delete()</a></li>
                                             <li><a href="classes/Classes-Foundation-FReservation.html#method_exist">exist()</a></li>
-                                            <li><a href="classes/Classes-Foundation-FReservation.html#method_getAcceptedReservations">getAcceptedReservations()</a></li>
                                             <li><a href="classes/Classes-Foundation-FReservation.html#method_getInstance">getInstance()</a></li>
                                             <li><a href="classes/Classes-Foundation-FReservation.html#method_getWaitingReservations">getWaitingReservations()</a></li>
                                             <li><a href="classes/Classes-Foundation-FReservation.html#method_load">load()</a></li>
+                                            <li><a href="classes/Classes-Foundation-FReservation.html#method_loadReservationsByStudent">loadReservationsByStudent()</a></li>
                                             <li><a href="classes/Classes-Foundation-FReservation.html#method_store">store()</a></li>
                                             <li><a href="classes/Classes-Foundation-FReservation.html#method_update">update()</a></li>
                                             <li><a href="classes/Classes-Foundation-FReservation.html#method_updateOwner">updateOwner()</a></li>

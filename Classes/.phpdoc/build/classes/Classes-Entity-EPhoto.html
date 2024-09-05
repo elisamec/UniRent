@@ -61,6 +61,10 @@
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
+                <a href="namespaces/classes-control.html" class="">Control</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/classes-entity.html" class="">Entity</a>
                 
             </li>
@@ -70,6 +74,14 @@
             </li>
                     <li>
                 <a href="namespaces/classes-tools.html" class="">Tools</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/classes-utilities.html" class="">Utilities</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/classes-view.html" class="">View</a>
                 
             </li>
             </ul>
@@ -82,11 +94,37 @@
 </h4>
 
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Classes.html" class="">Classes</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="packages/Classes-Control.html" class="">Control</a>
+                
+            </li>
+                    <li>
+                <a href="packages/Classes-Entity.html" class="">Entity</a>
+                
+            </li>
+                    <li>
+                <a href="packages/Classes-Foundation.html" class="">Foundation</a>
+                
+            </li>
+                    <li>
+                <a href="packages/Classes-View.html" class="">View</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/Entity.html" class="">Entity</a>
 </h4>
 
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/Foundation.html" class="">Foundation</a>
+</h4>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Utilities.html" class="">Utilities</a>
 </h4>
 
                         </section>
@@ -182,12 +220,6 @@
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/Classes-Entity-EPhoto.html#property_idReview">$idReview</a>
-    <span>
-                        &nbsp;: int|null            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Classes-Entity-EPhoto.html#property_photo">$photo</a>
     <span>
                         &nbsp;: mixed            </span>
@@ -224,6 +256,13 @@ Constructor for the EPhoto class</dd>
 Converts the object to string</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Classes-Entity-EPhoto.html#method_fromJsonToPhotos">fromJsonToPhotos()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd>Method fromJsonToPhotos</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Entity-EPhoto.html#method_getId">getId()</a>
     <span>
                                 &nbsp;: int    </span>
@@ -238,14 +277,6 @@ Returns the id of the photo</dd>
 </dt>
 <dd>getIdAccommodation
 Returns the id of the accommodation to which the photo is related</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Classes-Entity-EPhoto.html#method_getIdReview">getIdReview()</a>
-    <span>
-                                &nbsp;: int    </span>
-</dt>
-<dd>getIdReview
-Returns the id of the review to which the photo is related</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Entity-EPhoto.html#method_getPhoto">getPhoto()</a>
@@ -280,14 +311,6 @@ Sets the id of the photo</dd>
 Sets the id of the accommodation to which the photo is related</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Classes-Entity-EPhoto.html#method_setIdReview">setIdReview()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-<dd>setIdReview
-Sets the id of the review to which the photo is related</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Entity-EPhoto.html#method_setPhoto">setPhoto()</a>
     <span>
                                 &nbsp;: void    </span>
@@ -302,6 +325,13 @@ Sets the photo itself</dd>
 </dt>
 <dd>setRelativeTo
 Sets the entity to which the photo is related</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Classes-Entity-EPhoto.html#method_toBase64">toBase64()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd>Method toBase64</dd>
 
     </dl>
 
@@ -333,7 +363,7 @@ Sets the entity to which the photo is related</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EPhoto.php"><a href="files/entity-ephoto.html"><abbr title="Entity/EPhoto.php">EPhoto.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">16</span>
 
     </aside>
 
@@ -370,7 +400,7 @@ Sets the entity to which the photo is related</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EPhoto.php"><a href="files/entity-ephoto.html"><abbr title="Entity/EPhoto.php">EPhoto.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
     </aside>
 
@@ -379,41 +409,6 @@ Sets the entity to which the photo is related</dd>
     <span class="phpdocumentor-signature__visibility">private</span>
         <span class="phpdocumentor-signature__type">int|null</span>
     <span class="phpdocumentor-signature__name">$idAccommodation</span>
-    </code>
-
-    
-    
-    
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -private
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_idReview">
-        $idReview
-        <a href="classes/Classes-Entity-EPhoto.html#property_idReview" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Entity/EPhoto.php"><a href="files/entity-ephoto.html"><abbr title="Entity/EPhoto.php">EPhoto.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">21</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">int|null</span>
-    <span class="phpdocumentor-signature__name">$idReview</span>
     </code>
 
     
@@ -440,7 +435,7 @@ Sets the entity to which the photo is related</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EPhoto.php"><a href="files/entity-ephoto.html"><abbr title="Entity/EPhoto.php">EPhoto.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">17</span>
 
     </aside>
 
@@ -475,7 +470,7 @@ Sets the entity to which the photo is related</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EPhoto.php"><a href="files/entity-ephoto.html"><abbr title="Entity/EPhoto.php">EPhoto.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">18</span>
 
     </aside>
 
@@ -515,7 +510,7 @@ Sets the entity to which the photo is related</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EPhoto.php"><a href="files/entity-ephoto.html"><abbr title="Entity/EPhoto.php">EPhoto.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">32</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 
     </aside>
 
@@ -524,7 +519,7 @@ Constructor for the EPhoto class</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$photo</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$relativeTo</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$idAccommodation</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$idReview</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$photo</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$relativeTo</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$idAccommodation</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -567,15 +562,6 @@ Constructor for the EPhoto class</p>
 </section>
 
             </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$idReview</span>
-                : <span class="phpdocumentor-signature__argument__return-type">int</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The identifier of the review to which the photo is related.</p>
-</section>
-
-            </dd>
             </dl>
 
     
@@ -598,7 +584,7 @@ Constructor for the EPhoto class</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EPhoto.php"><a href="files/entity-ephoto.html"><abbr title="Entity/EPhoto.php">EPhoto.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">140</span>
+    <span class="phpdocumentor-element-found-in__line">117</span>
 
     </aside>
 
@@ -627,6 +613,59 @@ Converts the object to string</p>
         class="phpdocumentor-element
             -method
             -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_fromJsonToPhotos">
+        fromJsonToPhotos()
+        <a href="classes/Classes-Entity-EPhoto.html#method_fromJsonToPhotos" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Entity/EPhoto.php"><a href="files/entity-ephoto.html"><abbr title="Entity/EPhoto.php">EPhoto.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">131</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Method fromJsonToPhotos</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">fromJsonToPhotos</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$array</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>this method is used by the owner to add an accommodation. JS send a JSON file where are presents
+the photos, create an array of EPhoto  class and retrive it.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$array</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>[explicite description]</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
                                                         "
 >
     <h4 class="phpdocumentor-element__name" id="method_getId">
@@ -637,7 +676,7 @@ Converts the object to string</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EPhoto.php"><a href="files/entity-ephoto.html"><abbr title="Entity/EPhoto.php">EPhoto.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">45</span>
+    <span class="phpdocumentor-element-found-in__line">41</span>
 
     </aside>
 
@@ -676,7 +715,7 @@ Returns the id of the photo</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EPhoto.php"><a href="files/entity-ephoto.html"><abbr title="Entity/EPhoto.php">EPhoto.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">72</span>
+    <span class="phpdocumentor-element-found-in__line">68</span>
 
     </aside>
 
@@ -707,45 +746,6 @@ Returns the id of the accommodation to which the photo is related</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getIdReview">
-        getIdReview()
-        <a href="classes/Classes-Entity-EPhoto.html#method_getIdReview" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Entity/EPhoto.php"><a href="files/entity-ephoto.html"><abbr title="Entity/EPhoto.php">EPhoto.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">81</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">getIdReview
-Returns the id of the review to which the photo is related</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getIdReview</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-
-    
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">int</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_getPhoto">
         getPhoto()
         <a href="classes/Classes-Entity-EPhoto.html#method_getPhoto" class="headerlink"><i class="fas fa-link"></i></a>
@@ -754,7 +754,7 @@ Returns the id of the review to which the photo is related</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EPhoto.php"><a href="files/entity-ephoto.html"><abbr title="Entity/EPhoto.php">EPhoto.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">54</span>
+    <span class="phpdocumentor-element-found-in__line">50</span>
 
     </aside>
 
@@ -793,7 +793,7 @@ Returns the photo itself</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EPhoto.php"><a href="files/entity-ephoto.html"><abbr title="Entity/EPhoto.php">EPhoto.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">63</span>
+    <span class="phpdocumentor-element-found-in__line">59</span>
 
     </aside>
 
@@ -832,7 +832,7 @@ Returns the entity to which the photo is related</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EPhoto.php"><a href="files/entity-ephoto.html"><abbr title="Entity/EPhoto.php">EPhoto.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">91</span>
+    <span class="phpdocumentor-element-found-in__line">78</span>
 
     </aside>
 
@@ -879,7 +879,7 @@ Sets the id of the photo</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EPhoto.php"><a href="files/entity-ephoto.html"><abbr title="Entity/EPhoto.php">EPhoto.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">121</span>
+    <span class="phpdocumentor-element-found-in__line">108</span>
 
     </aside>
 
@@ -918,53 +918,6 @@ Sets the id of the accommodation to which the photo is related</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_setIdReview">
-        setIdReview()
-        <a href="classes/Classes-Entity-EPhoto.html#method_setIdReview" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Entity/EPhoto.php"><a href="files/entity-ephoto.html"><abbr title="Entity/EPhoto.php">EPhoto.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">131</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">setIdReview
-Sets the id of the review to which the photo is related</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setIdReview</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$idReview</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$idReview</span>
-                : <span class="phpdocumentor-signature__argument__return-type">int</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The identifier of the review to which the photo is related.</p>
-</section>
-
-            </dd>
-            </dl>
-
-    
-
-    
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_setPhoto">
         setPhoto()
         <a href="classes/Classes-Entity-EPhoto.html#method_setPhoto" class="headerlink"><i class="fas fa-link"></i></a>
@@ -973,7 +926,7 @@ Sets the id of the review to which the photo is related</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EPhoto.php"><a href="files/entity-ephoto.html"><abbr title="Entity/EPhoto.php">EPhoto.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">101</span>
+    <span class="phpdocumentor-element-found-in__line">88</span>
 
     </aside>
 
@@ -1020,7 +973,7 @@ Sets the photo itself</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EPhoto.php"><a href="files/entity-ephoto.html"><abbr title="Entity/EPhoto.php">EPhoto.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">111</span>
+    <span class="phpdocumentor-element-found-in__line">98</span>
 
     </aside>
 
@@ -1052,6 +1005,58 @@ Sets the entity to which the photo is related</p>
     
 
     
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_toBase64">
+        toBase64()
+        <a href="classes/Classes-Entity-EPhoto.html#method_toBase64" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Entity/EPhoto.php"><a href="files/entity-ephoto.html"><abbr title="Entity/EPhoto.php">EPhoto.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">155</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Method toBase64</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">toBase64</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$a</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>this method convert an array of EPhoto object with a binary image in an array of EPhoto with images encoded in base 64</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$a</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>[array of EPhoto]</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+            </section>
+
 </article>
             </section>
 
@@ -1168,7 +1173,6 @@ Sets the entity to which the photo is related</p>
                     <ul class="phpdocumentor-list -clean">
                                                     <li><a href="classes/Classes-Entity-EPhoto.html#property_id">$id<a href="classes/Classes-Entity-EPhoto.html"></li>
                                                     <li><a href="classes/Classes-Entity-EPhoto.html#property_idAccommodation">$idAccommodation<a href="classes/Classes-Entity-EPhoto.html"></li>
-                                                    <li><a href="classes/Classes-Entity-EPhoto.html#property_idReview">$idReview<a href="classes/Classes-Entity-EPhoto.html"></li>
                                                     <li><a href="classes/Classes-Entity-EPhoto.html#property_photo">$photo<a href="classes/Classes-Entity-EPhoto.html"></li>
                                                     <li><a href="classes/Classes-Entity-EPhoto.html#property_relativeTo">$relativeTo<a href="classes/Classes-Entity-EPhoto.html"></li>
                                             </ul>
@@ -1179,16 +1183,16 @@ Sets the entity to which the photo is related</p>
                 <ul class="phpdocumentor-list -clean">
                                             <li><a href="classes/Classes-Entity-EPhoto.html#method___construct">__construct()</a></li>
                                             <li><a href="classes/Classes-Entity-EPhoto.html#method___toString">__toString()</a></li>
+                                            <li><a href="classes/Classes-Entity-EPhoto.html#method_fromJsonToPhotos">fromJsonToPhotos()</a></li>
                                             <li><a href="classes/Classes-Entity-EPhoto.html#method_getId">getId()</a></li>
                                             <li><a href="classes/Classes-Entity-EPhoto.html#method_getIdAccommodation">getIdAccommodation()</a></li>
-                                            <li><a href="classes/Classes-Entity-EPhoto.html#method_getIdReview">getIdReview()</a></li>
                                             <li><a href="classes/Classes-Entity-EPhoto.html#method_getPhoto">getPhoto()</a></li>
                                             <li><a href="classes/Classes-Entity-EPhoto.html#method_getRelativeTo">getRelativeTo()</a></li>
                                             <li><a href="classes/Classes-Entity-EPhoto.html#method_setId">setId()</a></li>
                                             <li><a href="classes/Classes-Entity-EPhoto.html#method_setIdAccommodation">setIdAccommodation()</a></li>
-                                            <li><a href="classes/Classes-Entity-EPhoto.html#method_setIdReview">setIdReview()</a></li>
                                             <li><a href="classes/Classes-Entity-EPhoto.html#method_setPhoto">setPhoto()</a></li>
                                             <li><a href="classes/Classes-Entity-EPhoto.html#method_setRelativeTo">setRelativeTo()</a></li>
+                                            <li><a href="classes/Classes-Entity-EPhoto.html#method_toBase64">toBase64()</a></li>
                                     </ul>
             </li>
                     </ul>

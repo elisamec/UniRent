@@ -61,6 +61,10 @@
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
+                <a href="namespaces/classes-control.html" class="">Control</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/classes-entity.html" class="">Entity</a>
                 
             </li>
@@ -70,6 +74,14 @@
             </li>
                     <li>
                 <a href="namespaces/classes-tools.html" class="">Tools</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/classes-utilities.html" class="">Utilities</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/classes-view.html" class="">View</a>
                 
             </li>
             </ul>
@@ -82,11 +94,37 @@
 </h4>
 
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Classes.html" class="">Classes</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="packages/Classes-Control.html" class="">Control</a>
+                
+            </li>
+                    <li>
+                <a href="packages/Classes-Entity.html" class="">Entity</a>
+                
+            </li>
+                    <li>
+                <a href="packages/Classes-Foundation.html" class="">Foundation</a>
+                
+            </li>
+                    <li>
+                <a href="packages/Classes-View.html" class="">View</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/Entity.html" class="">Entity</a>
 </h4>
 
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/Foundation.html" class="">Foundation</a>
+</h4>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Utilities.html" class="">Utilities</a>
 </h4>
 
                         </section>
@@ -134,7 +172,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">15</span>
+    <span class="phpdocumentor-element-found-in__line">17</span>
 
     </aside>
 
@@ -192,6 +230,12 @@
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a href="classes/Classes-Entity-EReview.html#property_banned">$banned</a>
+    <span>
+                        &nbsp;: bool            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Classes-Entity-EReview.html#property_creationDate">$creationDate</a>
     <span>
                         &nbsp;: <abbr title="\DateTime">DateTime</abbr>            </span>
@@ -228,15 +272,15 @@
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/Classes-Entity-EReview.html#property_photo">$photo</a>
-    <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Classes-Entity-EReview.html#property_recipientType">$recipientType</a>
     <span>
                         &nbsp;: <a href="classes/Classes-Tools-TType.html"><abbr title="\Classes\Tools\TType">TType</abbr></a>            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a href="classes/Classes-Entity-EReview.html#property_reported">$reported</a>
+    <span>
+                        &nbsp;: bool            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
@@ -269,26 +313,37 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Entity-EReview.html#method___toString">__toString()</a>
     <span>
-                                &nbsp;: string    </span>
+                                &nbsp;: void    </span>
 </dt>
+<dd>setRecipientType()</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Classes-Entity-EReview.html#method_ban">ban()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>setRecipientType()</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Entity-EReview.html#method_getAuthorType">getAuthorType()</a>
     <span>
                                 &nbsp;: <a href="classes/Classes-Tools-TType.html"><abbr title="\Classes\Tools\TType">TType</abbr></a>    </span>
 </dt>
+<dd>getAuthorType()</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Entity-EReview.html#method_getCreationDate">getCreationDate()</a>
     <span>
                                 &nbsp;: <abbr title="\DateTime">DateTime</abbr>    </span>
 </dt>
+<dd>getCreationDate()</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Entity-EReview.html#method_getDescription">getDescription()</a>
     <span>
                                 &nbsp;: string|null    </span>
 </dt>
+<dd>getDescription()</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Entity-EReview.html#method_getEntity">getEntity()</a>
@@ -309,24 +364,21 @@
     <span>
                                 &nbsp;: int    </span>
 </dt>
+<dd>getIDAuthor()</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Entity-EReview.html#method_getIDRecipient">getIDRecipient()</a>
     <span>
                                 &nbsp;: int    </span>
 </dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Classes-Entity-EReview.html#method_getPhotos">getPhotos()</a>
-    <span>
-                                &nbsp;: array&lt;string|int, mixed&gt;|null    </span>
-</dt>
+<dd>getIDRecipient()</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Entity-EReview.html#method_getRecipientType">getRecipientType()</a>
     <span>
                                 &nbsp;: <a href="classes/Classes-Tools-TType.html"><abbr title="\Classes\Tools\TType">TType</abbr></a>    </span>
 </dt>
+<dd>getRecipientType()</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Entity-EReview.html#method_getTitle">getTitle()</a>
@@ -340,36 +392,84 @@
     <span>
                                 &nbsp;: int    </span>
 </dt>
+<dd>getValutation()</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Classes-Entity-EReview.html#method_isBanned">isBanned()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>isBanned()</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Classes-Entity-EReview.html#method_isReported">isReported()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>isReported()</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Classes-Entity-EReview.html#method_remainingReviewStudentToOwner">remainingReviewStudentToOwner()</a>
+    <span>
+                                &nbsp;: int    </span>
+</dt>
+<dd>Method remainingReviewStudentToOwner</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Classes-Entity-EReview.html#method_remainingReviewStudentToStudent">remainingReviewStudentToStudent()</a>
+    <span>
+                                &nbsp;: int    </span>
+</dt>
+<dd>Method remainingReviewStudentToStudent</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Classes-Entity-EReview.html#method_report">report()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>setRecipientType()</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Entity-EReview.html#method_setDescription">setDescription()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
+<dd>setDescription()</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Entity-EReview.html#method_setId">setId()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
+<dd>setRecipientType()</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Entity-EReview.html#method_setTitle">setTitle()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
+<dd>setTitle()</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Entity-EReview.html#method_setValutation">setValutation()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
+<dd>setValutation()</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Classes-Entity-EReview.html#method_uploadPhoto">uploadPhoto()</a>
+    <a href="classes/Classes-Entity-EReview.html#method_unban">unban()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
+<dd>setRecipientType()</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Classes-Entity-EReview.html#method_unreport">unreport()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>setRecipientType()</dd>
 
     </dl>
 
@@ -401,7 +501,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">40</span>
+    <span class="phpdocumentor-element-found-in__line">39</span>
 
     </aside>
 
@@ -410,6 +510,41 @@
     <span class="phpdocumentor-signature__visibility">private</span>
         <span class="phpdocumentor-signature__type"><a href="classes/Classes-Tools-TType.html"><abbr title="\Classes\Tools\TType">TType</abbr></a></span>
     <span class="phpdocumentor-signature__name">$authorType</span>
+    </code>
+
+    
+    
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_banned">
+        $banned
+        <a href="classes/Classes-Entity-EReview.html#property_banned" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">43</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+        <span class="phpdocumentor-signature__type">bool</span>
+    <span class="phpdocumentor-signature__name">$banned</span>
     </code>
 
     
@@ -436,7 +571,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">39</span>
+    <span class="phpdocumentor-element-found-in__line">38</span>
 
     </aside>
 
@@ -506,7 +641,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">43</span>
+    <span class="phpdocumentor-element-found-in__line">44</span>
 
     </aside>
 
@@ -541,7 +676,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">41</span>
+    <span class="phpdocumentor-element-found-in__line">40</span>
 
     </aside>
 
@@ -576,7 +711,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">42</span>
+    <span class="phpdocumentor-element-found-in__line">41</span>
 
     </aside>
 
@@ -655,9 +790,9 @@ It is given by the DB when stored.</p>
             -private
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_photo">
-        $photo
-        <a href="classes/Classes-Entity-EReview.html#property_photo" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_recipientType">
+        $recipientType
+        <a href="classes/Classes-Entity-EReview.html#property_recipientType" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                 </span>
@@ -672,8 +807,8 @@ It is given by the DB when stored.</p>
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
-    <span class="phpdocumentor-signature__name">$photo</span>
+        <span class="phpdocumentor-signature__type"><a href="classes/Classes-Tools-TType.html"><abbr title="\Classes\Tools\TType">TType</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$recipientType</span>
     </code>
 
     
@@ -690,9 +825,9 @@ It is given by the DB when stored.</p>
             -private
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_recipientType">
-        $recipientType
-        <a href="classes/Classes-Entity-EReview.html#property_recipientType" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_reported">
+        $reported
+        <a href="classes/Classes-Entity-EReview.html#property_reported" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                 </span>
@@ -700,15 +835,15 @@ It is given by the DB when stored.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">38</span>
+    <span class="phpdocumentor-element-found-in__line">42</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type"><a href="classes/Classes-Tools-TType.html"><abbr title="\Classes\Tools\TType">TType</abbr></a></span>
-    <span class="phpdocumentor-signature__name">$recipientType</span>
+        <span class="phpdocumentor-signature__type">bool</span>
+    <span class="phpdocumentor-signature__name">$reported</span>
     </code>
 
     
@@ -810,7 +945,7 @@ It is given by the DB when stored.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">59</span>
+    <span class="phpdocumentor-element-found-in__line">61</span>
 
     </aside>
 
@@ -818,7 +953,7 @@ It is given by the DB when stored.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$idReview</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$title</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$valutation</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$description</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$photo</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Classes-Tools-TType.html"><abbr title="\Classes\Tools\TType">TType</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$type</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$creationDate</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Classes-Tools-TType.html"><abbr title="\Classes\Tools\TType">TType</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$authorType</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$idAuthor</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$idRecipient</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$idReview</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$title</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$valutation</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$description</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Classes-Tools-TType.html"><abbr title="\Classes\Tools\TType">TType</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$type</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\DateTime">DateTime</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$creationDate</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Classes-Tools-TType.html"><abbr title="\Classes\Tools\TType">TType</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$authorType</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$idAuthor</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$idRecipient</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$reported</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">false</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$banned</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">false</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -849,13 +984,6 @@ It is given by the DB when stored.</p>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$description</span>
                 : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$photo</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -895,6 +1023,20 @@ It is given by the DB when stored.</p>
             <dd class="phpdocumentor-argument-list__definition">
                 
             </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$reported</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">false</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$banned</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">false</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
             </dl>
 
     
@@ -917,14 +1059,15 @@ It is given by the DB when stored.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">158</span>
+    <span class="phpdocumentor-element-found-in__line">267</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">setRecipientType()</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__toString</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                    <span class="phpdocumentor-signature__name">__toString</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -934,11 +1077,41 @@ It is given by the DB when stored.</p>
 
     
 
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">string</span>
-            </section>
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_ban">
+        ban()
+        <a href="classes/Classes-Entity-EReview.html#method_ban" class="headerlink"><i class="fas fa-link"></i></a>
 
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">237</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">setRecipientType()</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">ban</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -954,11 +1127,12 @@ It is given by the DB when stored.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">113</span>
+    <span class="phpdocumentor-element-found-in__line">134</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">getAuthorType()</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getAuthorType</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Classes-Tools-TType.html"><abbr title="\Classes\Tools\TType">TType</abbr></a></span></code>
@@ -991,11 +1165,12 @@ It is given by the DB when stored.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">123</span>
+    <span class="phpdocumentor-element-found-in__line">158</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">getCreationDate()</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getCreationDate</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\DateTime">DateTime</abbr></span></code>
@@ -1028,11 +1203,12 @@ It is given by the DB when stored.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">105</span>
+    <span class="phpdocumentor-element-found-in__line">116</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">getDescription()</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getDescription</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
@@ -1065,7 +1241,7 @@ It is given by the DB when stored.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">77</span>
+    <span class="phpdocumentor-element-found-in__line">80</span>
 
     </aside>
 
@@ -1103,7 +1279,7 @@ It is given by the DB when stored.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">85</span>
+    <span class="phpdocumentor-element-found-in__line">88</span>
 
     </aside>
 
@@ -1141,11 +1317,12 @@ It is given by the DB when stored.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">116</span>
+    <span class="phpdocumentor-element-found-in__line">142</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">getIDAuthor()</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getIDAuthor</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
@@ -1178,11 +1355,12 @@ It is given by the DB when stored.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">119</span>
+    <span class="phpdocumentor-element-found-in__line">150</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">getIDRecipient()</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getIDRecipient</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
@@ -1207,43 +1385,6 @@ It is given by the DB when stored.</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getPhotos">
-        getPhotos()
-        <a href="classes/Classes-Entity-EReview.html#method_getPhotos" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">148</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getPhotos</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;|null</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-
-    
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;|null</span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_getRecipientType">
         getRecipientType()
         <a href="classes/Classes-Entity-EReview.html#method_getRecipientType" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1252,11 +1393,12 @@ It is given by the DB when stored.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">109</span>
+    <span class="phpdocumentor-element-found-in__line">125</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">getRecipientType()</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getRecipientType</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Classes-Tools-TType.html"><abbr title="\Classes\Tools\TType">TType</abbr></a></span></code>
@@ -1289,7 +1431,7 @@ It is given by the DB when stored.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">95</span>
+    <span class="phpdocumentor-element-found-in__line">98</span>
 
     </aside>
 
@@ -1327,11 +1469,12 @@ It is given by the DB when stored.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">100</span>
+    <span class="phpdocumentor-element-found-in__line">107</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">getValutation()</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getValutation</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
@@ -1356,6 +1499,238 @@ It is given by the DB when stored.</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_isBanned">
+        isBanned()
+        <a href="classes/Classes-Entity-EReview.html#method_isBanned" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">176</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">isBanned()</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">isBanned</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_isReported">
+        isReported()
+        <a href="classes/Classes-Entity-EReview.html#method_isReported" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">167</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">isReported()</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">isReported</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_remainingReviewStudentToOwner">
+        remainingReviewStudentToOwner()
+        <a href="classes/Classes-Entity-EReview.html#method_remainingReviewStudentToOwner" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">298</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Method remainingReviewStudentToOwner</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">remainingReviewStudentToOwner</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id1</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id2</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>this method return the number of review that a Student can make about an Owner</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$id1</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>[student , the one who makes the reviews]</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$id2</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>[owner]</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">int</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_remainingReviewStudentToStudent">
+        remainingReviewStudentToStudent()
+        <a href="classes/Classes-Entity-EReview.html#method_remainingReviewStudentToStudent" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">283</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Method remainingReviewStudentToStudent</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">remainingReviewStudentToStudent</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id1</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id2</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>this method return the number of review that a Student can make about another Student</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$id1</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>[student 1 who makes the reviews]</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$id2</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>[student 2]</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">int</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_report">
+        report()
+        <a href="classes/Classes-Entity-EReview.html#method_report" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">227</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">setRecipientType()</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">report</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_setDescription">
         setDescription()
         <a href="classes/Classes-Entity-EReview.html#method_setDescription" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1364,11 +1739,12 @@ It is given by the DB when stored.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">135</span>
+    <span class="phpdocumentor-element-found-in__line">206</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">setDescription()</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setDescription</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$newDesc</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
@@ -1407,11 +1783,12 @@ It is given by the DB when stored.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">139</span>
+    <span class="phpdocumentor-element-found-in__line">216</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">setRecipientType()</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
@@ -1450,11 +1827,12 @@ It is given by the DB when stored.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">127</span>
+    <span class="phpdocumentor-element-found-in__line">186</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">setTitle()</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setTitle</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$newTitle</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
@@ -1493,11 +1871,12 @@ It is given by the DB when stored.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">131</span>
+    <span class="phpdocumentor-element-found-in__line">196</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">setValutation()</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setValutation</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$valutation</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
@@ -1528,37 +1907,62 @@ It is given by the DB when stored.</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_uploadPhoto">
-        uploadPhoto()
-        <a href="classes/Classes-Entity-EReview.html#method_uploadPhoto" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_unban">
+        unban()
+        <a href="classes/Classes-Entity-EReview.html#method_unban" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">145</span>
+    <span class="phpdocumentor-element-found-in__line">247</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">setRecipientType()</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">uploadPhoto</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Classes-Entity-EPhoto.html"><abbr title="\Classes\Entity\EPhoto">EPhoto</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$photo</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">unban</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$photo</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Classes-Entity-EPhoto.html"><abbr title="\Classes\Entity\EPhoto">EPhoto</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
+    
+    
 
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_unreport">
+        unreport()
+        <a href="classes/Classes-Entity-EReview.html#method_unreport" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Entity/EReview.php"><a href="files/entity-ereview.html"><abbr title="Entity/EReview.php">EReview.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">257</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">setRecipientType()</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">unreport</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
     
 
     
@@ -1679,14 +2083,15 @@ It is given by the DB when stored.</p>
                 <li>
                     <ul class="phpdocumentor-list -clean">
                                                     <li><a href="classes/Classes-Entity-EReview.html#property_authorType">$authorType<a href="classes/Classes-Entity-EReview.html"></li>
+                                                    <li><a href="classes/Classes-Entity-EReview.html#property_banned">$banned<a href="classes/Classes-Entity-EReview.html"></li>
                                                     <li><a href="classes/Classes-Entity-EReview.html#property_creationDate">$creationDate<a href="classes/Classes-Entity-EReview.html"></li>
                                                     <li><a href="classes/Classes-Entity-EReview.html#property_description">$description<a href="classes/Classes-Entity-EReview.html"></li>
                                                     <li><a href="classes/Classes-Entity-EReview.html#property_entity">$entity<a href="classes/Classes-Entity-EReview.html"></li>
                                                     <li><a href="classes/Classes-Entity-EReview.html#property_idAuthor">$idAuthor<a href="classes/Classes-Entity-EReview.html"></li>
                                                     <li><a href="classes/Classes-Entity-EReview.html#property_idRecipient">$idRecipient<a href="classes/Classes-Entity-EReview.html"></li>
                                                     <li><a href="classes/Classes-Entity-EReview.html#property_idReview">$idReview<a href="classes/Classes-Entity-EReview.html"></li>
-                                                    <li><a href="classes/Classes-Entity-EReview.html#property_photo">$photo<a href="classes/Classes-Entity-EReview.html"></li>
                                                     <li><a href="classes/Classes-Entity-EReview.html#property_recipientType">$recipientType<a href="classes/Classes-Entity-EReview.html"></li>
+                                                    <li><a href="classes/Classes-Entity-EReview.html#property_reported">$reported<a href="classes/Classes-Entity-EReview.html"></li>
                                                     <li><a href="classes/Classes-Entity-EReview.html#property_title">$title<a href="classes/Classes-Entity-EReview.html"></li>
                                                     <li><a href="classes/Classes-Entity-EReview.html#property_valutation">$valutation<a href="classes/Classes-Entity-EReview.html"></li>
                                             </ul>
@@ -1697,6 +2102,7 @@ It is given by the DB when stored.</p>
                 <ul class="phpdocumentor-list -clean">
                                             <li><a href="classes/Classes-Entity-EReview.html#method___construct">__construct()</a></li>
                                             <li><a href="classes/Classes-Entity-EReview.html#method___toString">__toString()</a></li>
+                                            <li><a href="classes/Classes-Entity-EReview.html#method_ban">ban()</a></li>
                                             <li><a href="classes/Classes-Entity-EReview.html#method_getAuthorType">getAuthorType()</a></li>
                                             <li><a href="classes/Classes-Entity-EReview.html#method_getCreationDate">getCreationDate()</a></li>
                                             <li><a href="classes/Classes-Entity-EReview.html#method_getDescription">getDescription()</a></li>
@@ -1704,15 +2110,20 @@ It is given by the DB when stored.</p>
                                             <li><a href="classes/Classes-Entity-EReview.html#method_getId">getId()</a></li>
                                             <li><a href="classes/Classes-Entity-EReview.html#method_getIDAuthor">getIDAuthor()</a></li>
                                             <li><a href="classes/Classes-Entity-EReview.html#method_getIDRecipient">getIDRecipient()</a></li>
-                                            <li><a href="classes/Classes-Entity-EReview.html#method_getPhotos">getPhotos()</a></li>
                                             <li><a href="classes/Classes-Entity-EReview.html#method_getRecipientType">getRecipientType()</a></li>
                                             <li><a href="classes/Classes-Entity-EReview.html#method_getTitle">getTitle()</a></li>
                                             <li><a href="classes/Classes-Entity-EReview.html#method_getValutation">getValutation()</a></li>
+                                            <li><a href="classes/Classes-Entity-EReview.html#method_isBanned">isBanned()</a></li>
+                                            <li><a href="classes/Classes-Entity-EReview.html#method_isReported">isReported()</a></li>
+                                            <li><a href="classes/Classes-Entity-EReview.html#method_remainingReviewStudentToOwner">remainingReviewStudentToOwner()</a></li>
+                                            <li><a href="classes/Classes-Entity-EReview.html#method_remainingReviewStudentToStudent">remainingReviewStudentToStudent()</a></li>
+                                            <li><a href="classes/Classes-Entity-EReview.html#method_report">report()</a></li>
                                             <li><a href="classes/Classes-Entity-EReview.html#method_setDescription">setDescription()</a></li>
                                             <li><a href="classes/Classes-Entity-EReview.html#method_setId">setId()</a></li>
                                             <li><a href="classes/Classes-Entity-EReview.html#method_setTitle">setTitle()</a></li>
                                             <li><a href="classes/Classes-Entity-EReview.html#method_setValutation">setValutation()</a></li>
-                                            <li><a href="classes/Classes-Entity-EReview.html#method_uploadPhoto">uploadPhoto()</a></li>
+                                            <li><a href="classes/Classes-Entity-EReview.html#method_unban">unban()</a></li>
+                                            <li><a href="classes/Classes-Entity-EReview.html#method_unreport">unreport()</a></li>
                                     </ul>
             </li>
                     </ul>

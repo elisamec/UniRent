@@ -61,6 +61,10 @@
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
+                <a href="namespaces/classes-control.html" class="">Control</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/classes-entity.html" class="">Entity</a>
                 
             </li>
@@ -70,6 +74,14 @@
             </li>
                     <li>
                 <a href="namespaces/classes-tools.html" class="">Tools</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/classes-utilities.html" class="">Utilities</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/classes-view.html" class="">View</a>
                 
             </li>
             </ul>
@@ -82,11 +94,37 @@
 </h4>
 
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Classes.html" class="">Classes</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="packages/Classes-Control.html" class="">Control</a>
+                
+            </li>
+                    <li>
+                <a href="packages/Classes-Entity.html" class="">Entity</a>
+                
+            </li>
+                    <li>
+                <a href="packages/Classes-Foundation.html" class="">Foundation</a>
+                
+            </li>
+                    <li>
+                <a href="packages/Classes-View.html" class="">View</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/Entity.html" class="">Entity</a>
 </h4>
 
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/Foundation.html" class="">Foundation</a>
+</h4>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Utilities.html" class="">Utilities</a>
 </h4>
 
                         </section>
@@ -134,7 +172,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FOwner.php"><a href="files/foundation-fowner.html"><abbr title="Foundation/FOwner.php">FOwner.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">16</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
     </aside>
 
@@ -202,12 +240,42 @@
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+<dd>Deletes an owner from the database.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Classes-Foundation-FOwner.html#method_deleteOwnerByUsername">deleteOwnerByUsername()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Method deleteOwnerByUsername</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Foundation-FOwner.html#method_exist">exist()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+<dd>Check if a specific owner exists.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Classes-Foundation-FOwner.html#method_findOwnerRating">findOwnerRating()</a>
+    <span>
+                                &nbsp;: int    </span>
+</dt>
+<dd>Method findOwnerRating</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Classes-Foundation-FOwner.html#method_getBannedOwners">getBannedOwners()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd>Method getBannedOwners</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Classes-Foundation-FOwner.html#method_getFilterTenants">getFilterTenants()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd>Retrieves filtered tenants based on specified criteria.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Foundation-FOwner.html#method_getInstance">getInstance()</a>
@@ -216,22 +284,103 @@
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Classes-Foundation-FOwner.html#method_getOwnerByUsername">getOwnerByUsername()</a>
+    <span>
+                                &nbsp;: <a href="classes/Classes-Entity-EOwner.html"><abbr title="\Classes\Entity\EOwner">EOwner</abbr></a>|null    </span>
+</dt>
+<dd>Method getOwnerByUsername
+This method return the EOwner class from the db by the username</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Classes-Foundation-FOwner.html#method_getOwnerIdByUsername">getOwnerIdByUsername()</a>
+    <span>
+                                &nbsp;: int    </span>
+</dt>
+<dd>Method getOwnerIdByUsername</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Classes-Foundation-FOwner.html#method_getPhotoIdByUsername">getPhotoIdByUsername()</a>
+    <span>
+                                &nbsp;: int|bool|null    </span>
+</dt>
+<dd>Method getPhotolByUsername</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Classes-Foundation-FOwner.html#method_getSupportReply">getSupportReply()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd>Method getSupportReply</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Classes-Foundation-FOwner.html#method_getTenans">getTenans()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd>Method getTenans</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Classes-Foundation-FOwner.html#method_getUsernameById">getUsernameById()</a>
+    <span>
+                                &nbsp;: string|bool    </span>
+</dt>
+<dd>Retrieves the username by the given ID.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Classes-Foundation-FOwner.html#method_getUsernameByOwnerId">getUsernameByOwnerId()</a>
+    <span>
+                                &nbsp;: string|null    </span>
+</dt>
+<dd>Retrieves the username associated with the given owner ID.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Foundation-FOwner.html#method_load">load()</a>
     <span>
                                 &nbsp;: <a href="classes/Classes-Entity-EOwner.html"><abbr title="\Classes\Entity\EOwner">EOwner</abbr></a>    </span>
 </dt>
+<dd>Loads an owner by their ID.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Foundation-FOwner.html#method_store">store()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+<dd>Store the given owner object.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Foundation-FOwner.html#method_update">update()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
+<dd>Updates an owner in the database.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Classes-Foundation-FOwner.html#method_verifyEmail">verifyEmail()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Verifies the given email.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Classes-Foundation-FOwner.html#method_verifyIBAN">verifyIBAN()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Method verifyIBAN</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Classes-Foundation-FOwner.html#method_verifyPhoneNumber">verifyPhoneNumber()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Method verifyPhoneNumber</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Classes-Foundation-FOwner.html#method_verifyUsername">verifyUsername()</a>
+    <span>
+                                &nbsp;: bool|int    </span>
+</dt>
+<dd>Verifies the given username.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/Classes-Foundation-FOwner.html#method___construct">__construct()</a>
@@ -244,6 +393,14 @@
     <span>
                                 &nbsp;: int|null    </span>
 </dt>
+<dd>Retrieves the current photo ID for a given owner ID.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/Classes-Foundation-FOwner.html#method_fromRowsToTenantsArrayByRateT">fromRowsToTenantsArrayByRateT()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd>Method fromRowsToTenantsArrayByRateT</dd>
 
     </dl>
 
@@ -275,7 +432,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FOwner.php"><a href="files/foundation-fowner.html"><abbr title="Foundation/FOwner.php">FOwner.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">22</span>
 
     </aside>
 
@@ -315,11 +472,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FOwner.php"><a href="files/foundation-fowner.html"><abbr title="Foundation/FOwner.php">FOwner.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">195</span>
+    <span class="phpdocumentor-element-found-in__line">243</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Deletes an owner from the database.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">delete</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Classes-Entity-EOwner.html"><abbr title="\Classes\Entity\EOwner">EOwner</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$owner</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
@@ -334,7 +492,65 @@
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Classes-Entity-EOwner.html"><abbr title="\Classes\Entity\EOwner">EOwner</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>The owner object to be deleted.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Returns true if the owner was successfully deleted, false otherwise.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_deleteOwnerByUsername">
+        deleteOwnerByUsername()
+        <a href="classes/Classes-Foundation-FOwner.html#method_deleteOwnerByUsername" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FOwner.php"><a href="files/foundation-fowner.html"><abbr title="Foundation/FOwner.php">FOwner.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">375</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Method deleteOwnerByUsername</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">deleteOwnerByUsername</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$user</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>this method delete from db an owner using given username</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$user</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>$user [owner's username]</p>
+</section>
+
             </dd>
             </dl>
 
@@ -362,11 +578,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FOwner.php"><a href="files/foundation-fowner.html"><abbr title="Foundation/FOwner.php">FOwner.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">35</span>
+    <span class="phpdocumentor-element-found-in__line">44</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Check if a specific owner exists.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">exist</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
@@ -381,7 +598,9 @@
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>The ID of the owner to check.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -392,6 +611,237 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Returns true if the owner exists, false otherwise.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_findOwnerRating">
+        findOwnerRating()
+        <a href="classes/Classes-Foundation-FOwner.html#method_findOwnerRating" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FOwner.php"><a href="files/foundation-fowner.html"><abbr title="Foundation/FOwner.php">FOwner.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">562</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Method findOwnerRating</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">findOwnerRating</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>this method return the owner's reating</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$id</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>owner'sID</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">int</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getBannedOwners">
+        getBannedOwners()
+        <a href="classes/Classes-Foundation-FOwner.html#method_getBannedOwners" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FOwner.php"><a href="files/foundation-fowner.html"><abbr title="Foundation/FOwner.php">FOwner.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">753</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Method getBannedOwners</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getBannedOwners</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>this method return an array of banned owners from Data Base</p>
+</section>
+
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getFilterTenants">
+        getFilterTenants()
+        <a href="classes/Classes-Foundation-FOwner.html#method_getFilterTenants" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FOwner.php"><a href="files/foundation-fowner.html"><abbr title="Foundation/FOwner.php">FOwner.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">652</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Retrieves filtered tenants based on specified criteria.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getFilterTenants</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$type</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$accommodation_name</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$t_username</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$t_age</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$rateT</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$date</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$men</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$women</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$idOwner</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$year</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$type</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The type of accommodation.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$accommodation_name</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The name of the accommodation.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$t_username</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The username of the tenant.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$t_age</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The age of the tenant.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$rateT</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The rental rate.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$date</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The date of the rental.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$men</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The number of male tenants.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$women</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The number of female tenants.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$idOwner</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The ID of the owner.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$year</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The year of the rental.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>An array of filtered tenants.</p>
+</section>
+
             </section>
 
 </article>
@@ -409,7 +859,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FOwner.php"><a href="files/foundation-fowner.html"><abbr title="Foundation/FOwner.php">FOwner.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">26</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 
     </aside>
 
@@ -434,26 +884,184 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_load">
-        load()
-        <a href="classes/Classes-Foundation-FOwner.html#method_load" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getOwnerByUsername">
+        getOwnerByUsername()
+        <a href="classes/Classes-Foundation-FOwner.html#method_getOwnerByUsername" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FOwner.php"><a href="files/foundation-fowner.html"><abbr title="Foundation/FOwner.php">FOwner.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">55</span>
+    <span class="phpdocumentor-element-found-in__line">328</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Method getOwnerByUsername
+This method return the EOwner class from the db by the username</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">load</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Classes-Entity-EOwner.html"><abbr title="\Classes\Entity\EOwner">EOwner</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">getOwnerByUsername</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$user</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Classes-Entity-EOwner.html"><abbr title="\Classes\Entity\EOwner">EOwner</abbr></a>|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$user</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>$user [owner's username]</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Classes-Entity-EOwner.html"><abbr title="\Classes\Entity\EOwner">EOwner</abbr></a>|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getOwnerIdByUsername">
+        getOwnerIdByUsername()
+        <a href="classes/Classes-Foundation-FOwner.html#method_getOwnerIdByUsername" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FOwner.php"><a href="files/foundation-fowner.html"><abbr title="Foundation/FOwner.php">FOwner.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">404</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Method getOwnerIdByUsername</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getOwnerIdByUsername</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$user</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>this method return the owner's id in the db ,if present, using the owner's username</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$user</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>$user [owner's username]</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">int</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getPhotoIdByUsername">
+        getPhotoIdByUsername()
+        <a href="classes/Classes-Foundation-FOwner.html#method_getPhotoIdByUsername" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FOwner.php"><a href="files/foundation-fowner.html"><abbr title="Foundation/FOwner.php">FOwner.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">532</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Method getPhotolByUsername</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getPhotoIdByUsername</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$user</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int|bool|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>This method return the owners's photo</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$user</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>username</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">int|bool|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getSupportReply">
+        getSupportReply()
+        <a href="classes/Classes-Foundation-FOwner.html#method_getSupportReply" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FOwner.php"><a href="files/foundation-fowner.html"><abbr title="Foundation/FOwner.php">FOwner.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">790</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Method getSupportReply</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getSupportReply</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>this method return the owner's support replies</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -471,7 +1079,226 @@
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getTenans">
+        getTenans()
+        <a href="classes/Classes-Foundation-FOwner.html#method_getTenans" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FOwner.php"><a href="files/foundation-fowner.html"><abbr title="Foundation/FOwner.php">FOwner.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">603</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Method getTenans</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getTenans</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$type</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$idOwner</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>this method return an array of EStudent who are tenants of an Owner</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$type</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$idOwner</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getUsernameById">
+        getUsernameById()
+        <a href="classes/Classes-Foundation-FOwner.html#method_getUsernameById" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FOwner.php"><a href="files/foundation-fowner.html"><abbr title="Foundation/FOwner.php">FOwner.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">843</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Retrieves the username by the given ID.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getUsernameById</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$id</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The ID of the user.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string|bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The username associated with the ID, or false if not found.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getUsernameByOwnerId">
+        getUsernameByOwnerId()
+        <a href="classes/Classes-Foundation-FOwner.html#method_getUsernameByOwnerId" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FOwner.php"><a href="files/foundation-fowner.html"><abbr title="Foundation/FOwner.php">FOwner.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">431</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Retrieves the username associated with the given owner ID.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getUsernameByOwnerId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$id</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The ID of the owner.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The username associated with the owner ID, or null if not found.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_load">
+        load()
+        <a href="classes/Classes-Foundation-FOwner.html#method_load" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FOwner.php"><a href="files/foundation-fowner.html"><abbr title="Foundation/FOwner.php">FOwner.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">79</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Loads an owner by their ID.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">load</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Classes-Entity-EOwner.html"><abbr title="\Classes\Entity\EOwner">EOwner</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$id</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The ID of the owner to load.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><a href="classes/Classes-Entity-EOwner.html"><abbr title="\Classes\Entity\EOwner">EOwner</abbr></a></span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The loaded owner object.</p>
+</section>
+
             </section>
 
 </article>
@@ -489,11 +1316,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FOwner.php"><a href="files/foundation-fowner.html"><abbr title="Foundation/FOwner.php">FOwner.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">79</span>
+    <span class="phpdocumentor-element-found-in__line">109</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Store the given owner object.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">store</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Classes-Entity-EOwner.html"><abbr title="\Classes\Entity\EOwner">EOwner</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$owner</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
@@ -508,7 +1336,9 @@
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Classes-Entity-EOwner.html"><abbr title="\Classes\Entity\EOwner">EOwner</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>The owner object to be stored.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -519,6 +1349,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Returns true if the owner object was successfully stored, false otherwise.</p>
+</section>
+
             </section>
 
 </article>
@@ -536,11 +1370,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FOwner.php"><a href="files/foundation-fowner.html"><abbr title="Foundation/FOwner.php">FOwner.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">125</span>
+    <span class="phpdocumentor-element-found-in__line">157</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Updates an owner in the database.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">update</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Classes-Entity-EOwner.html"><abbr title="\Classes\Entity\EOwner">EOwner</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$owner</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
@@ -555,7 +1390,9 @@
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Classes-Entity-EOwner.html"><abbr title="\Classes\Entity\EOwner">EOwner</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>The owner object to update.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -566,6 +1403,222 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Returns true if the owner was successfully updated, false otherwise.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_verifyEmail">
+        verifyEmail()
+        <a href="classes/Classes-Foundation-FOwner.html#method_verifyEmail" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FOwner.php"><a href="files/foundation-fowner.html"><abbr title="Foundation/FOwner.php">FOwner.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">272</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Verifies the given email.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">verifyEmail</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$email</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$email</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The email to be verified.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Returns true if the email is valid, false otherwise.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_verifyIBAN">
+        verifyIBAN()
+        <a href="classes/Classes-Foundation-FOwner.html#method_verifyIBAN" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FOwner.php"><a href="files/foundation-fowner.html"><abbr title="Foundation/FOwner.php">FOwner.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">496</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Method verifyIBAN</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">verifyIBAN</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$iban</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>this method verify if the iban is already in use</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$iban</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>owner's iban</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_verifyPhoneNumber">
+        verifyPhoneNumber()
+        <a href="classes/Classes-Foundation-FOwner.html#method_verifyPhoneNumber" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FOwner.php"><a href="files/foundation-fowner.html"><abbr title="Foundation/FOwner.php">FOwner.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">460</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Method verifyPhoneNumber</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">verifyPhoneNumber</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$phone</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>this method return true if the given phone number is already in use, false viceversa</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$phone</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>$phone [owner's phone number]</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_verifyUsername">
+        verifyUsername()
+        <a href="classes/Classes-Foundation-FOwner.html#method_verifyUsername" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FOwner.php"><a href="files/foundation-fowner.html"><abbr title="Foundation/FOwner.php">FOwner.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">299</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Verifies the given username.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">verifyUsername</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$username</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$username</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The username to be verified.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool|int</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Returns true if the username is valid, otherwise returns false.</p>
+</section>
+
             </section>
 
 </article>
@@ -583,7 +1636,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FOwner.php"><a href="files/foundation-fowner.html"><abbr title="Foundation/FOwner.php">FOwner.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">21</span>
+    <span class="phpdocumentor-element-found-in__line">24</span>
 
     </aside>
 
@@ -616,11 +1669,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FOwner.php"><a href="files/foundation-fowner.html"><abbr title="Foundation/FOwner.php">FOwner.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">175</span>
+    <span class="phpdocumentor-element-found-in__line">215</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Retrieves the current photo ID for a given owner ID.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
             <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">currentPhoto</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int|null</span></code>
@@ -635,7 +1689,9 @@
                 : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>The owner ID.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -646,6 +1702,72 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">int|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The current photo ID, or null if not found.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_fromRowsToTenantsArrayByRateT">
+        fromRowsToTenantsArrayByRateT()
+        <a href="classes/Classes-Foundation-FOwner.html#method_fromRowsToTenantsArrayByRateT" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Foundation/FOwner.php"><a href="files/foundation-fowner.html"><abbr title="Foundation/FOwner.php">FOwner.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">717</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Method fromRowsToTenantsArrayByRateT</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">fromRowsToTenantsArrayByRateT</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$rows</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$rateT</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>this method take only student with given rateT (tenants rate) and transforms them in an array to format
+if you are not interest to rateT use rateT=0</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$rows</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>result of query</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$rateT</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>tenants rate</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
             </section>
 
 </article>
@@ -770,13 +1892,29 @@
             <li>
                 <ul class="phpdocumentor-list -clean">
                                             <li><a href="classes/Classes-Foundation-FOwner.html#method_delete">delete()</a></li>
+                                            <li><a href="classes/Classes-Foundation-FOwner.html#method_deleteOwnerByUsername">deleteOwnerByUsername()</a></li>
                                             <li><a href="classes/Classes-Foundation-FOwner.html#method_exist">exist()</a></li>
+                                            <li><a href="classes/Classes-Foundation-FOwner.html#method_findOwnerRating">findOwnerRating()</a></li>
+                                            <li><a href="classes/Classes-Foundation-FOwner.html#method_getBannedOwners">getBannedOwners()</a></li>
+                                            <li><a href="classes/Classes-Foundation-FOwner.html#method_getFilterTenants">getFilterTenants()</a></li>
                                             <li><a href="classes/Classes-Foundation-FOwner.html#method_getInstance">getInstance()</a></li>
+                                            <li><a href="classes/Classes-Foundation-FOwner.html#method_getOwnerByUsername">getOwnerByUsername()</a></li>
+                                            <li><a href="classes/Classes-Foundation-FOwner.html#method_getOwnerIdByUsername">getOwnerIdByUsername()</a></li>
+                                            <li><a href="classes/Classes-Foundation-FOwner.html#method_getPhotoIdByUsername">getPhotoIdByUsername()</a></li>
+                                            <li><a href="classes/Classes-Foundation-FOwner.html#method_getSupportReply">getSupportReply()</a></li>
+                                            <li><a href="classes/Classes-Foundation-FOwner.html#method_getTenans">getTenans()</a></li>
+                                            <li><a href="classes/Classes-Foundation-FOwner.html#method_getUsernameById">getUsernameById()</a></li>
+                                            <li><a href="classes/Classes-Foundation-FOwner.html#method_getUsernameByOwnerId">getUsernameByOwnerId()</a></li>
                                             <li><a href="classes/Classes-Foundation-FOwner.html#method_load">load()</a></li>
                                             <li><a href="classes/Classes-Foundation-FOwner.html#method_store">store()</a></li>
                                             <li><a href="classes/Classes-Foundation-FOwner.html#method_update">update()</a></li>
+                                            <li><a href="classes/Classes-Foundation-FOwner.html#method_verifyEmail">verifyEmail()</a></li>
+                                            <li><a href="classes/Classes-Foundation-FOwner.html#method_verifyIBAN">verifyIBAN()</a></li>
+                                            <li><a href="classes/Classes-Foundation-FOwner.html#method_verifyPhoneNumber">verifyPhoneNumber()</a></li>
+                                            <li><a href="classes/Classes-Foundation-FOwner.html#method_verifyUsername">verifyUsername()</a></li>
                                             <li><a href="classes/Classes-Foundation-FOwner.html#method___construct">__construct()</a></li>
                                             <li><a href="classes/Classes-Foundation-FOwner.html#method_currentPhoto">currentPhoto()</a></li>
+                                            <li><a href="classes/Classes-Foundation-FOwner.html#method_fromRowsToTenantsArrayByRateT">fromRowsToTenantsArrayByRateT()</a></li>
                                     </ul>
             </li>
                     </ul>
