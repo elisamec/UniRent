@@ -349,8 +349,6 @@ class COwner
                                 $ph = $photo->getPhoto();
                                 if (is_null($ph)) $ph = null;
                                 $session->setSessionElement('username', $newUsername);
-                                $password = $owner->getPassword();
-                                $session->setSessionElement('password',$password);
                                 $session->setSessionElement('photo',$ph);
                                 header("Location:/UniRent/Owner/profile");
                             }

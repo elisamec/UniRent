@@ -143,7 +143,6 @@ class CStudent{
 
         if(is_null($student)){
 
-            $session->setSessionElement('photo', $ph);
             $viewError=new VError();
             $viewError->error(403);
             exit();
@@ -154,7 +153,6 @@ class CStudent{
             if(!is_null($ph)) {
 
                 $ph=$ph->getPhoto();
-                $session->setSessionElement('photo', $ph);
                 $base64 = base64_encode($ph);
                 $ph = "data:" . 'image/jpeg' . ";base64," . $base64;
             }
@@ -174,7 +172,7 @@ class CStudent{
         $view = new VStudent();
         $PM = FPersistentManager::getInstance();
         $student = $PM->getStudentByUsername(USession::getInstance()->getSessionElement('username'));
-        $photo = USession::getInstance()->getSessionElement('photo');
+        $photo = $student->getPhoto()->getPhoto();
 
         if(is_null($student)) {
             $viewError=new VError();
@@ -480,9 +478,6 @@ class CStudent{
                     !is_null($photo) ? $ph = $photo->getPhoto() : $ph=null;
                     
                     $session->setSessionElement('username',$afp['username']);
-                    $password = $student->getPassword();
-                    $session->setSessionElement('password',$password);
-                    $session->setSessionElement('photo',$ph);
                     header('Location:/UniRent/Student/profile/success');
 
                 } elseif (!$result) {
@@ -607,7 +602,6 @@ class CStudent{
         }
         if ($result > 0) {
             $photo = null;
-            $session->setSessionElement('photo',$photo);
             header('Location:/UniRent/Student/profile');
         }  else header('Location:/UniRent/Student/profile/error');
     }

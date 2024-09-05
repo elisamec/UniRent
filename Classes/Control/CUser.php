@@ -226,8 +226,6 @@ class CUser
                     $session->setSessionElement("id", $result_username_array['id']);
                     $session->setSessionElement("userType", $type);
                     $session->setSessionElement('username', $username);
-                    $passwordIn = password_hash($passwordIn, PASSWORD_DEFAULT);
-                    $session->setSessionElement('password', $passwordIn);
                     $type === 'Student' ? header('Location:/UniRent/Student/home') : header('Location:/UniRent/Owner/home');
                 } else { //password is not correct
                     $view->loginError(true, false, $username, $type);
