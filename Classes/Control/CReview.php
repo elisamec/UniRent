@@ -11,10 +11,12 @@ use DateTime;
 use Classes\View\VError;
 use Classes\Utilities\UFormat;
 use Classes\Control\CStudent;
-use Classes\Entity\EAccommodation;
-use Classes\Entity\EOwner;
-use Classes\Entity\EStudent;
 
+/**
+ * This class is responsible for managing reviews.
+ * 
+ * @package Classes\Control
+ */
 class CReview {
 
     /**

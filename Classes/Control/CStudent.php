@@ -261,7 +261,16 @@ class CStudent{
             exit();
         }
     }
-    // questa va accorciata di molto
+    
+    /**
+     * Method accommodation
+     * 
+     * @param int $idAccommodation
+     * @param string $successVisit
+     * @param string $successReserve
+     *  
+     * @return void
+     */
     public static function accommodation(int $idAccommodation, string $successVisit='null', string $successReserve='null') {
         self::checkIfStudent();
         $view = new VStudent();
@@ -695,6 +704,16 @@ class CStudent{
         $leavebleReviews=$PM->remainingReviewStudentToStudent($session->getSessionElement('id'), $student->getId());
         $view->publicProfileFromStudent($student, $reviewsData, $self, $leavebleReviews, $modalSuccess);
     }
+
+    /**
+     * Method publicProfileFromOwner
+     *
+     * this method show the public profile of a student to an owner
+     * @param string $username 
+     * @param ?string $modalSuccess 
+     *
+     * @return void
+     */
     public static function publicProfileFromOwner(string $username, ?string $modalSuccess=null)
     {   COwner::checkIfOwner();
         $view = new VStudent();
