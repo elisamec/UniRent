@@ -534,8 +534,9 @@ class FReview {
                  AND sr.idStudent=:id2) AS RR
 
                 LOCK IN SHARE MODE";
-
-            $db->beginTransaction();
+            if (!$db->inTransaction()) {
+                $db->beginTransaction();
+            }
             $stm=$db->prepare($q);
             $stm->bindParam(':id1',$id1,PDO::PARAM_INT);
             $stm->bindParam('id2',$id2,PDO::PARAM_INT);
@@ -621,11 +622,13 @@ class FReview {
                 (SELECT COUNT(*)
                  FROM owner o INNER JOIN studentreview str ON o.id=str.authorOwner
                  WHERE o.id=:id1
-                 AND str.isStudent=:id2) AS RR
+                 AND str.idStudent=:id2) AS RR
 
                 LOCK IN SHARE MODE";
-
-            $db->beginTransaction();
+            if(!$db->inTransaction())
+            {
+                $db->beginTransaction();
+            }
             $stm=$db->prepare($q);
             $stm->bindParam(':id1',$id1,PDO::PARAM_INT);
             $stm->bindParam('id2',$id2,PDO::PARAM_INT);

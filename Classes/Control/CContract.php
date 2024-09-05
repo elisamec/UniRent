@@ -255,7 +255,7 @@ class CContract
             $reviewsData = [];
             
             foreach ($reviews as $review) {
-                $author = $PM->load('EStudent', $review->getIdAuthor());
+                $author = $PM->load('E'.ucfirst($review->getAuthorType()->value), $review->getIdAuthor());
                 if ($review->isBanned()) {
                     continue;
                 }
