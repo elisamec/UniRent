@@ -62,7 +62,7 @@ class CAdmin
         $view = new VAdmin();
                 $passwordIn=USuperGlobalAccess::getPost('password');
 
-                if(password_verify($passwordIn, '$2y$10$oqDyOSQOyj8bBbbeq1UFfe5B.zB/HGenmr9IRQnzGSBI5eRrHRF5i'))
+                if(password_verify($passwordIn, '$2y$10$3IYgn49gFuemo9DpgzKzpePRlfQeURNP8sIPgaXL5u1YXJ/UQtlAe'))
                 {
                    
                     $session = USession::getInstance();
