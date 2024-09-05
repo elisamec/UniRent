@@ -657,7 +657,7 @@ use PDORow;
      * @param int $men The number of male tenants.
      * @param int $women The number of female tenants.
      * @param int $idOwner The ID of the owner.
-     * @param int $year The year of the rental.
+     * @param ?int $year The year of the rental.
      * @return array An array of filtered tenants.
      */
     public function getFilterTenants($type,$accommodation_name,$t_username,$t_age,$rateT,$date,$men,$women,$idOwner,$year):array

@@ -203,7 +203,7 @@ class FPersistentManager {
      * Retrieves a student by their username.
      *
      * @param string $user The username of the student.
-     * @return Student|null The student object if found, null otherwise.
+     * @return EStudent|null The student object if found, null otherwise.
      */
     public function getStudentByUsername($user) : ?EStudent
     {
@@ -216,7 +216,7 @@ class FPersistentManager {
      * Retrieves the owner by their username.
      *
      * @param string $user The username of the owner.
-     * @return Owner|null The owner object if found, null otherwise.
+     * @return EOwner|null The owner object if found, null otherwise.
      */
     public function getOwnerByUsername($user) : ?EOwner
     {
@@ -694,7 +694,7 @@ class FPersistentManager {
      *
      * @return array
      */
-    public function getFilterTenants(string $type, ?int $accommodation_name, ?string $t_username, ?int $t_age, int $rateT, ?string $date, ?bool $men, ?bool $women, int $idOwner,$year):array
+    public function getFilterTenants(string $type, ?int $accommodation_name, ?string $t_username, ?int $t_age, int $rateT, ?string $date, ?bool $men, ?bool $women, int $idOwner,?int $year):array
     {
         $FO=FOwner::getInstance();
         if(!is_null($accommodation_name))
