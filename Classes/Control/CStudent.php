@@ -879,13 +879,13 @@ class CStudent{
         $date_2=null;
         if($date=='September' or $date=='september')
         {
-            $date=9;
-            $date_2=6;
+            $date=8;
+            $date_2=5;
         }
         else
         {
-            $date=10;
-            $date_2=7;
+            $date=9;
+            $date_2=6;
         }
         $result=$PM->reserve($idAccommodation,$year,$date,$year_2,$date_2,$student_id);
         $result ? header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/sent') : header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/full');
