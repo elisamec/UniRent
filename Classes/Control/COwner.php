@@ -253,7 +253,7 @@ class COwner
         $newemail=USuperGlobalAccess::getPost('email');
         $newUsername=USuperGlobalAccess::getPost('username');
         $newPassword=USuperGlobalAccess::getPost('password');
-        $newPhoneNumber=EOwner::formatPhoneNumber(USuperGlobalAccess::getPost('phoneNumber'));
+        $newPhoneNumber=UFormat::formatPhoneNumber(USuperGlobalAccess::getPost('phoneNumber'));
         $newIBAN=USuperGlobalAccess::getPost('iban');
         $oldUsername=$session->getSessionElement('username');
 
