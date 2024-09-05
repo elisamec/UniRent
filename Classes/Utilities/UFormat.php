@@ -2,6 +2,7 @@
 namespace Classes\Utilities;
 
 use Classes\Entity\EAccommodation;
+use Classes\Entity\EContract;
 use Classes\Entity\EOwner;
 use Classes\Entity\EPhoto;
 use Classes\Entity\EReport;
@@ -352,5 +353,47 @@ class UFormat
             'address'=>$accom->getAddress()->getAddressLine1() .", ". $accom->getAddress()->getLocality(),
             'price'=>$accom->getPrice()
         ];
+    }
+    /**
+     * Method formatContracts
+     * 
+     * This method is used to format the contracts in the owner view of the user profile in the correct way
+     * @param \Classes\Entity\EContract $contract
+     * @param \Classes\Entity\EAccommodation $accommodation
+     * @return array
+     */
+    public static function formatContractsStudent(EContract $contract, EAccommodation $accommodation):array {
+            $period = $contract->getFromDate()->format('d/m/Y') . ' - ' . $contract->getToDate()->format('d/m/Y');
+            if ($accommodation->getPhoto() === []) {
+                $accommodationPhoto = "/UniRent/Smarty/images/NoPic.png";
+            } else {
+                $accommodationPhoto = (EPhoto::toBase64($accommodation->getPhoto()))[0]->getPhoto();
+            }
+            return [
+                'idContract' => $contract->getId(),
+                'title' => $accommodation->getTitle(),
+                'photo' => $accommodationPhoto,
+                'period' => $period,
+                'price' => $accommodation->getPrice(),
+                'address' => $accommodation->getAddress()->getAddressLine1() . ', ' . $accommodation->getAddress()->getLocality(),
+            ];
+    }
+    /**
+     * Method formatContractsOwner
+     * 
+     * This method is used to format the contracts in the owner view of the user profile in the correct way
+     * @param \Classes\Entity\EContract $contract
+     * @param \Classes\Entity\EStudent $student
+     * @return array
+     */
+    public static function formatContractsOwner(EStudent $student, EContract $contract):array {
+        self::photoFormatUser($student);
+        $profilePic = $student->getPhoto() === null ? "/UniRent/Smarty/images/ImageIcon.png" : $student->getPhoto()->getPhoto();
+        return [
+                    'idContract' => $contract->getID(),
+                    'username' => $student->getUsername(),
+                    'image' => $profilePic,
+                    'period' => 'from '. $contract->getFromDate()->format('d/m/Y') . ' to ' . $contract->getToDate()->format('d/m/Y')
+                ];
     }
 }
