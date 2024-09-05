@@ -87,7 +87,6 @@ class COwner
         $ph = null;
 
         if(is_null($owner)){
-            $session->setSessionElement('photo', $ph);
             $viewError= new VError();
             $viewError->error(500);
             exit();
@@ -98,8 +97,6 @@ class COwner
             if(!is_null($ph)) {
 
                 $ph=$ph->getPhoto();
-
-                $session->setSessionElement('photo', $ph);
 
                 $base64 = base64_encode($ph);
                 $ph = "data:" . 'image/jpeg' . ";base64," . $base64;
@@ -133,7 +130,7 @@ class COwner
             exit();
         } else {
 
-            $photo = USession::getInstance()->getSessionElement('photo');
+            $photo = $owner->getPhoto()->getPhoto();
 
             $base64 = base64_encode($photo);
             $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
@@ -247,7 +244,6 @@ class COwner
                                 $ph = $photo->getPhoto();
                                 if (is_null($ph)) $ph = null;
                                 $session->setSessionElement('username', $newUsername);
-                                $session->setSessionElement('photo',$ph);
                                 header("Location:/UniRent/Owner/profile");
                             }
                             elseif (!$result) {
@@ -387,7 +383,6 @@ class COwner
 
         if ($result > 0) {
             $photo = null;
-            $session->setSessionElement('photo',$photo);
             header('Location:/UniRent/Owner/profile/success');
         }  else header('Location:/UniRent/Owner/profile/error');
 
