@@ -10,7 +10,7 @@ use Classes\Tools\TStatusUser;
  * EStudent
  * @author Matteo Maloni (UniRent) <matteo.maloni.00@gmail.com>
  * @package Foundation
- * @
+ * 
  */
 class EStudent
 {    
