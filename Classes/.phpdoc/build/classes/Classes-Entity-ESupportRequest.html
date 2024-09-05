@@ -61,6 +61,10 @@
 </h4>
     <ul class="phpdocumentor-list">
                     <li>
+                <a href="namespaces/classes-control.html" class="">Control</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/classes-entity.html" class="">Entity</a>
                 
             </li>
@@ -70,6 +74,14 @@
             </li>
                     <li>
                 <a href="namespaces/classes-tools.html" class="">Tools</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/classes-utilities.html" class="">Utilities</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/classes-view.html" class="">View</a>
                 
             </li>
             </ul>
@@ -82,11 +94,37 @@
 </h4>
 
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Classes.html" class="">Classes</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="packages/Classes-Control.html" class="">Control</a>
+                
+            </li>
+                    <li>
+                <a href="packages/Classes-Entity.html" class="">Entity</a>
+                
+            </li>
+                    <li>
+                <a href="packages/Classes-Foundation.html" class="">Foundation</a>
+                
+            </li>
+                    <li>
+                <a href="packages/Classes-View.html" class="">View</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/Entity.html" class="">Entity</a>
 </h4>
 
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/Foundation.html" class="">Foundation</a>
+</h4>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Utilities.html" class="">Utilities</a>
 </h4>
 
                         </section>
@@ -172,7 +210,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Classes-Entity-ESupportRequest.html#property_authorType">$authorType</a>
     <span>
-                        &nbsp;: <a href="classes/Classes-Tools-TType.html"><abbr title="\Classes\Tools\TType">TType</abbr></a>            </span>
+                        &nbsp;: <a href="classes/Classes-Tools-TType.html"><abbr title="\Classes\Tools\TType">TType</abbr></a>|null            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
@@ -190,7 +228,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/Classes-Entity-ESupportRequest.html#property_idAuthor">$idAuthor</a>
     <span>
-                        &nbsp;: int            </span>
+                        &nbsp;: int|null            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
@@ -203,6 +241,18 @@
     <a href="classes/Classes-Entity-ESupportRequest.html#property_status">$status</a>
     <span>
                         &nbsp;: <a href="classes/Classes-Tools-TStatusSupport.html"><abbr title="\Classes\Tools\TStatusSupport">TStatusSupport</abbr></a>            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a href="classes/Classes-Entity-ESupportRequest.html#property_statusRead">$statusRead</a>
+    <span>
+                        &nbsp;: bool            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a href="classes/Classes-Entity-ESupportRequest.html#property_supportReply">$supportReply</a>
+    <span>
+                        &nbsp;: string|null            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
@@ -224,84 +274,126 @@
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
+<dd>__construct</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Entity-ESupportRequest.html#method_getAuthorID">getAuthorID()</a>
     <span>
                                 &nbsp;: int    </span>
 </dt>
+<dd>getAuthorID</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Entity-ESupportRequest.html#method_getAuthorType">getAuthorType()</a>
     <span>
                                 &nbsp;: <a href="classes/Classes-Tools-TType.html"><abbr title="\Classes\Tools\TType">TType</abbr></a>    </span>
 </dt>
+<dd>getAuthorType</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Entity-ESupportRequest.html#method_getEntity">getEntity()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
+<dd>getEntity</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Entity-ESupportRequest.html#method_getId">getId()</a>
     <span>
                                 &nbsp;: int    </span>
 </dt>
+<dd>getId</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Entity-ESupportRequest.html#method_getMessage">getMessage()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
+<dd>getMessage</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Entity-ESupportRequest.html#method_getStatus">getStatus()</a>
     <span>
                                 &nbsp;: <a href="classes/Classes-Tools-TStatusSupport.html"><abbr title="\Classes\Tools\TStatusSupport">TStatusSupport</abbr></a>    </span>
 </dt>
+<dd>getStatus</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Classes-Entity-ESupportRequest.html#method_getStatusRead">getStatusRead()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>getStatusRead</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Classes-Entity-ESupportRequest.html#method_getSupportReply">getSupportReply()</a>
+    <span>
+                                &nbsp;: string|null    </span>
+</dt>
+<dd>getSupportReply</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Entity-ESupportRequest.html#method_getTopic">getTopic()</a>
     <span>
                                 &nbsp;: <a href="classes/Classes-Tools-TRequestType.html"><abbr title="\Classes\Tools\TRequestType">TRequestType</abbr></a>    </span>
 </dt>
+<dd>getTopic</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Entity-ESupportRequest.html#method_setAuthorID">setAuthorID()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
+<dd>setAuthorID</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Entity-ESupportRequest.html#method_setAuthorType">setAuthorType()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
+<dd>setAuthorType</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Entity-ESupportRequest.html#method_setId">setId()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
+<dd>setId</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Entity-ESupportRequest.html#method_setMessage">setMessage()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
+<dd>setMessage</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Entity-ESupportRequest.html#method_setStatus">setStatus()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
+<dd>setStatus</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Classes-Entity-ESupportRequest.html#method_setStatusRead">setStatusRead()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>setStatusRead</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Classes-Entity-ESupportRequest.html#method_setSupportReply">setSupportReply()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>setSupportReply</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Classes-Entity-ESupportRequest.html#method_setTopic">setTopic()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
+<dd>setTopic</dd>
 
     </dl>
 
@@ -333,14 +425,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/ESupportRequest.php"><a href="files/entity-esupportrequest.html"><abbr title="Entity/ESupportRequest.php">ESupportRequest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">21</span>
+    <span class="phpdocumentor-element-found-in__line">33</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type"><a href="classes/Classes-Tools-TType.html"><abbr title="\Classes\Tools\TType">TType</abbr></a></span>
+        <span class="phpdocumentor-signature__type"><a href="classes/Classes-Tools-TType.html"><abbr title="\Classes\Tools\TType">TType</abbr></a>|null</span>
     <span class="phpdocumentor-signature__name">$authorType</span>
     </code>
 
@@ -368,7 +460,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/ESupportRequest.php"><a href="files/entity-esupportrequest.html"><abbr title="Entity/ESupportRequest.php">ESupportRequest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">23</span>
+    <span class="phpdocumentor-element-found-in__line">37</span>
 
     </aside>
 
@@ -403,7 +495,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/ESupportRequest.php"><a href="files/entity-esupportrequest.html"><abbr title="Entity/ESupportRequest.php">ESupportRequest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 
     </aside>
 
@@ -415,8 +507,26 @@
     </code>
 
     
+        <section class="phpdocumentor-description"><p>the id of the support request</p>
+</section>
+
     
-    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Classes-Entity-ESupportRequest.html#property_id#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">@var</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>$entity the class</p>
+</section>
+
+                                    </dd>
+                                            </dl>
 
     
 
@@ -438,14 +548,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/ESupportRequest.php"><a href="files/entity-esupportrequest.html"><abbr title="Entity/ESupportRequest.php">ESupportRequest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">32</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">int</span>
+        <span class="phpdocumentor-signature__type">int|null</span>
     <span class="phpdocumentor-signature__name">$idAuthor</span>
     </code>
 
@@ -473,7 +583,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/ESupportRequest.php"><a href="files/entity-esupportrequest.html"><abbr title="Entity/ESupportRequest.php">ESupportRequest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">30</span>
 
     </aside>
 
@@ -508,7 +618,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/ESupportRequest.php"><a href="files/entity-esupportrequest.html"><abbr title="Entity/ESupportRequest.php">ESupportRequest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">36</span>
 
     </aside>
 
@@ -518,6 +628,76 @@
         <span class="phpdocumentor-signature__type"><a href="classes/Classes-Tools-TStatusSupport.html"><abbr title="\Classes\Tools\TStatusSupport">TStatusSupport</abbr></a></span>
     <span class="phpdocumentor-signature__name">$status</span>
      = <span class="phpdocumentor-signature__default-value">\Classes\Tools\TStatusSupport::WAITING</span></code>
+
+    
+    
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_statusRead">
+        $statusRead
+        <a href="classes/Classes-Entity-ESupportRequest.html#property_statusRead" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Entity/ESupportRequest.php"><a href="files/entity-esupportrequest.html"><abbr title="Entity/ESupportRequest.php">ESupportRequest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">35</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+        <span class="phpdocumentor-signature__type">bool</span>
+    <span class="phpdocumentor-signature__name">$statusRead</span>
+     = <span class="phpdocumentor-signature__default-value">false</span></code>
+
+    
+    
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_supportReply">
+        $supportReply
+        <a href="classes/Classes-Entity-ESupportRequest.html#property_supportReply" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Entity/ESupportRequest.php"><a href="files/entity-esupportrequest.html"><abbr title="Entity/ESupportRequest.php">ESupportRequest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">34</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+        <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$supportReply</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
 
     
     
@@ -543,7 +723,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/ESupportRequest.php"><a href="files/entity-esupportrequest.html"><abbr title="Entity/ESupportRequest.php">ESupportRequest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">31</span>
 
     </aside>
 
@@ -583,14 +763,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/ESupportRequest.php"><a href="files/entity-esupportrequest.html"><abbr title="Entity/ESupportRequest.php">ESupportRequest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">57</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">__construct</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$message</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Classes-Tools-TRequestType.html"><abbr title="\Classes\Tools\TRequestType">TRequestType</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$topic</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$idAuthor</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Classes-Tools-TType.html"><abbr title="\Classes\Tools\TType">TType</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$authorType</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$message</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Classes-Tools-TRequestType.html"><abbr title="\Classes\Tools\TRequestType">TRequestType</abbr></a>|string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$topic</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$idAuthor</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null|<a href="classes/Classes-Tools-TType.html"><abbr title="\Classes\Tools\TType">TType</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$authorType</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -613,21 +794,21 @@
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$topic</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Classes-Tools-TRequestType.html"><abbr title="\Classes\Tools\TRequestType">TRequestType</abbr></a></span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Classes-Tools-TRequestType.html"><abbr title="\Classes\Tools\TRequestType">TRequestType</abbr></a>|string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$idAuthor</span>
-                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$authorType</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Classes-Tools-TType.html"><abbr title="\Classes\Tools\TType">TType</abbr></a></span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null|<a href="classes/Classes-Tools-TType.html"><abbr title="\Classes\Tools\TType">TType</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -654,18 +835,21 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/ESupportRequest.php"><a href="files/entity-esupportrequest.html"><abbr title="Entity/ESupportRequest.php">ESupportRequest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">48</span>
+    <span class="phpdocumentor-element-found-in__line">106</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">getAuthorID</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getAuthorID</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
-    
+        <section class="phpdocumentor-description"><p>This method is used to get the id of the author of the support request</p>
+</section>
+
     
     
 
@@ -691,18 +875,21 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/ESupportRequest.php"><a href="files/entity-esupportrequest.html"><abbr title="Entity/ESupportRequest.php">ESupportRequest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">52</span>
+    <span class="phpdocumentor-element-found-in__line">116</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">getAuthorType</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getAuthorType</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Classes-Tools-TType.html"><abbr title="\Classes\Tools\TType">TType</abbr></a></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
-    
+        <section class="phpdocumentor-description"><p>This method is used to get the type of the author of the support request</p>
+</section>
+
     
     
 
@@ -728,18 +915,21 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/ESupportRequest.php"><a href="files/entity-esupportrequest.html"><abbr title="Entity/ESupportRequest.php">ESupportRequest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">45</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">getEntity</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getEntity</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
-    
+        <section class="phpdocumentor-description"><p>This method is used to get the entity of the support request</p>
+</section>
+
     
     
 
@@ -765,18 +955,21 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/ESupportRequest.php"><a href="files/entity-esupportrequest.html"><abbr title="Entity/ESupportRequest.php">ESupportRequest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">37</span>
+    <span class="phpdocumentor-element-found-in__line">77</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">getId</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getId</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
-    
+        <section class="phpdocumentor-description"><p>This method is used to get the id of the support request</p>
+</section>
+
     
     
 
@@ -802,18 +995,21 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/ESupportRequest.php"><a href="files/entity-esupportrequest.html"><abbr title="Entity/ESupportRequest.php">ESupportRequest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">40</span>
+    <span class="phpdocumentor-element-found-in__line">86</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">getMessage</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getMessage</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
-    
+        <section class="phpdocumentor-description"><p>This method is used to get the message of the support request</p>
+</section>
+
     
     
 
@@ -839,18 +1035,21 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/ESupportRequest.php"><a href="files/entity-esupportrequest.html"><abbr title="Entity/ESupportRequest.php">ESupportRequest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">56</span>
+    <span class="phpdocumentor-element-found-in__line">126</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">getStatus</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getStatus</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Classes-Tools-TStatusSupport.html"><abbr title="\Classes\Tools\TStatusSupport">TStatusSupport</abbr></a></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
-    
+        <section class="phpdocumentor-description"><p>This method is used to get the status of the support request</p>
+</section>
+
     
     
 
@@ -868,6 +1067,86 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getStatusRead">
+        getStatusRead()
+        <a href="classes/Classes-Entity-ESupportRequest.html#method_getStatusRead" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Entity/ESupportRequest.php"><a href="files/entity-esupportrequest.html"><abbr title="Entity/ESupportRequest.php">ESupportRequest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">146</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">getStatusRead</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getStatusRead</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>This method is used to get if the support request has been read</p>
+</section>
+
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getSupportReply">
+        getSupportReply()
+        <a href="classes/Classes-Entity-ESupportRequest.html#method_getSupportReply" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Entity/ESupportRequest.php"><a href="files/entity-esupportrequest.html"><abbr title="Entity/ESupportRequest.php">ESupportRequest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">136</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">getSupportReply</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getSupportReply</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>This method is used to get the reply of the support request</p>
+</section>
+
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getTopic">
         getTopic()
         <a href="classes/Classes-Entity-ESupportRequest.html#method_getTopic" class="headerlink"><i class="fas fa-link"></i></a>
@@ -876,18 +1155,21 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/ESupportRequest.php"><a href="files/entity-esupportrequest.html"><abbr title="Entity/ESupportRequest.php">ESupportRequest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">44</span>
+    <span class="phpdocumentor-element-found-in__line">96</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">getTopic</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getTopic</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Classes-Tools-TRequestType.html"><abbr title="\Classes\Tools\TRequestType">TRequestType</abbr></a></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
-    
+        <section class="phpdocumentor-description"><p>This method is used to get the topic of the support request</p>
+</section>
+
     
     
 
@@ -913,18 +1195,21 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/ESupportRequest.php"><a href="files/entity-esupportrequest.html"><abbr title="Entity/ESupportRequest.php">ESupportRequest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">71</span>
+    <span class="phpdocumentor-element-found-in__line">185</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">setAuthorID</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setAuthorID</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$idAuthor</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
-    
+        <section class="phpdocumentor-description"><p>This method is used to set the id of the author of the support request</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -956,18 +1241,21 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/ESupportRequest.php"><a href="files/entity-esupportrequest.html"><abbr title="Entity/ESupportRequest.php">ESupportRequest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">75</span>
+    <span class="phpdocumentor-element-found-in__line">195</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">setAuthorType</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setAuthorType</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Classes-Tools-TType.html"><abbr title="\Classes\Tools\TType">TType</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$authorType</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
-    
+        <section class="phpdocumentor-description"><p>This method is used to set the type of the author of the support request</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -999,18 +1287,21 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/ESupportRequest.php"><a href="files/entity-esupportrequest.html"><abbr title="Entity/ESupportRequest.php">ESupportRequest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">60</span>
+    <span class="phpdocumentor-element-found-in__line">156</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">setId</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
-    
+        <section class="phpdocumentor-description"><p>This method is used to set the id of the support request</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1042,18 +1333,21 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/ESupportRequest.php"><a href="files/entity-esupportrequest.html"><abbr title="Entity/ESupportRequest.php">ESupportRequest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">63</span>
+    <span class="phpdocumentor-element-found-in__line">165</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">setMessage</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setMessage</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$message</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
-    
+        <section class="phpdocumentor-description"><p>This method is used to set the message of the support request</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1085,23 +1379,118 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/ESupportRequest.php"><a href="files/entity-esupportrequest.html"><abbr title="Entity/ESupportRequest.php">ESupportRequest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">79</span>
+    <span class="phpdocumentor-element-found-in__line">205</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">setStatus</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setStatus</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Classes-Tools-TStatusSupport.html"><abbr title="\Classes\Tools\TStatusSupport">TStatusSupport</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$status</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
-    
+        <section class="phpdocumentor-description"><p>This method is used to set the status of the support request</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$status</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Classes-Tools-TStatusSupport.html"><abbr title="\Classes\Tools\TStatusSupport">TStatusSupport</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setStatusRead">
+        setStatusRead()
+        <a href="classes/Classes-Entity-ESupportRequest.html#method_setStatusRead" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Entity/ESupportRequest.php"><a href="files/entity-esupportrequest.html"><abbr title="Entity/ESupportRequest.php">ESupportRequest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">225</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">setStatusRead</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setStatusRead</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$statusRead</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>This method is used to set if the support request has been read</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$statusRead</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setSupportReply">
+        setSupportReply()
+        <a href="classes/Classes-Entity-ESupportRequest.html#method_setSupportReply" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Entity/ESupportRequest.php"><a href="files/entity-esupportrequest.html"><abbr title="Entity/ESupportRequest.php">ESupportRequest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">215</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">setSupportReply</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setSupportReply</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$supportReply</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+        <section class="phpdocumentor-description"><p>This method is used to set the reply of the support request</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$supportReply</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -1128,18 +1517,21 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Entity/ESupportRequest.php"><a href="files/entity-esupportrequest.html"><abbr title="Entity/ESupportRequest.php">ESupportRequest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">67</span>
+    <span class="phpdocumentor-element-found-in__line">175</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">setTopic</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setTopic</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Classes-Tools-TRequestType.html"><abbr title="\Classes\Tools\TRequestType">TRequestType</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$topic</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
-    
+        <section class="phpdocumentor-description"><p>This method is used to set the topic of the support request</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1276,6 +1668,8 @@
                                                     <li><a href="classes/Classes-Entity-ESupportRequest.html#property_idAuthor">$idAuthor<a href="classes/Classes-Entity-ESupportRequest.html"></li>
                                                     <li><a href="classes/Classes-Entity-ESupportRequest.html#property_message">$message<a href="classes/Classes-Entity-ESupportRequest.html"></li>
                                                     <li><a href="classes/Classes-Entity-ESupportRequest.html#property_status">$status<a href="classes/Classes-Entity-ESupportRequest.html"></li>
+                                                    <li><a href="classes/Classes-Entity-ESupportRequest.html#property_statusRead">$statusRead<a href="classes/Classes-Entity-ESupportRequest.html"></li>
+                                                    <li><a href="classes/Classes-Entity-ESupportRequest.html#property_supportReply">$supportReply<a href="classes/Classes-Entity-ESupportRequest.html"></li>
                                                     <li><a href="classes/Classes-Entity-ESupportRequest.html#property_topic">$topic<a href="classes/Classes-Entity-ESupportRequest.html"></li>
                                             </ul>
                 </li>
@@ -1290,12 +1684,16 @@
                                             <li><a href="classes/Classes-Entity-ESupportRequest.html#method_getId">getId()</a></li>
                                             <li><a href="classes/Classes-Entity-ESupportRequest.html#method_getMessage">getMessage()</a></li>
                                             <li><a href="classes/Classes-Entity-ESupportRequest.html#method_getStatus">getStatus()</a></li>
+                                            <li><a href="classes/Classes-Entity-ESupportRequest.html#method_getStatusRead">getStatusRead()</a></li>
+                                            <li><a href="classes/Classes-Entity-ESupportRequest.html#method_getSupportReply">getSupportReply()</a></li>
                                             <li><a href="classes/Classes-Entity-ESupportRequest.html#method_getTopic">getTopic()</a></li>
                                             <li><a href="classes/Classes-Entity-ESupportRequest.html#method_setAuthorID">setAuthorID()</a></li>
                                             <li><a href="classes/Classes-Entity-ESupportRequest.html#method_setAuthorType">setAuthorType()</a></li>
                                             <li><a href="classes/Classes-Entity-ESupportRequest.html#method_setId">setId()</a></li>
                                             <li><a href="classes/Classes-Entity-ESupportRequest.html#method_setMessage">setMessage()</a></li>
                                             <li><a href="classes/Classes-Entity-ESupportRequest.html#method_setStatus">setStatus()</a></li>
+                                            <li><a href="classes/Classes-Entity-ESupportRequest.html#method_setStatusRead">setStatusRead()</a></li>
+                                            <li><a href="classes/Classes-Entity-ESupportRequest.html#method_setSupportReply">setSupportReply()</a></li>
                                             <li><a href="classes/Classes-Entity-ESupportRequest.html#method_setTopic">setTopic()</a></li>
                                     </ul>
             </li>
