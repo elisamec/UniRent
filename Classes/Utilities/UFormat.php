@@ -453,19 +453,8 @@ class UFormat
      * @param \Classes\Entity\EAccommodation $accommodation
      * @return array
      */
-    public static function formatReservations(EReservation $reservation, EAccommodation $accommodation):array {
-        $today = new DateTime('today');
-        // Calculate the difference
-        $interval = $today->diff($$reservation->getMade()->setTime(0,0,0)->modify('+2 days'));
-
-        // Extract the components of the difference
-        $days = $interval->days;
-        // Add days to the array if greater than 0
-        if ($days > 0) {
-            $formatted = $days . ' ' . ($days > 1 ? 'days' : 'day');
-        } else {
-            $formatted = 'no days';
-        }
+    public static function formatReservationsStudent(EReservation $reservation, EAccommodation $accommodation):array {
+        $formatted=self::formatDate($reservation->getMade()->setTime(0,0,0));
         $period = $reservation->getFromDate()->format('d/m/Y') . ' - ' . $reservation->getToDate()->format('d/m/Y');
             if ($accommodation->getPhoto() === []) {
                 $accommodationPhoto = "/UniRent/Smarty/images/NoPic.png";
@@ -481,5 +470,60 @@ class UFormat
             'address' => $accommodation->getAddress()->getAddressLine1() . ', ' . $accommodation->getAddress()->getLocality(),
             'expires' => $formatted,
         ];
+    }
+    public static function formatReservationsOwner(EStudent $student, EReservation $reservation):array {
+       $formatted=self::formatDate($reservation->getMade()->setTime(0,0,0));
+        $profilePic = $student->getPhoto() === null ? "/UniRent/Smarty/images/ImageIcon.png" : $student->getPhoto()->getPhoto();
+                return [
+                    'idReservation' => $reservation->getID(),
+                    'username' => $student->getUsername(),
+                    'image' => $profilePic,
+                    'period' => 'from '. $reservation->getFromDate()->format('d/m/Y') . ' to ' . $reservation->getToDate()->format('d/m/Y'),
+                    'expires' => $formatted,
+                    'status' => $student->getStatus()->value
+                ];
+    }
+    /**
+     * Method formatCreditCardReserve
+     * 
+     * This method is used to format the credit card in the reservation view of the user profile in the correct way
+     * @param array $creditCardDataArray
+     * @return array
+     */
+    public static function formatCreditCardReserve(array $creditCardDataArray):array {
+        $creditCardData = [];
+            foreach ($creditCardDataArray as $card) {
+                $cardNumberHidden='**** **** **** ' . substr($card->getNumber(), -4);
+                $creditCardData[] = [
+                    'cardNumberHidden' => $cardNumberHidden,
+                    'cardNumber' => $card->getNumber(),
+                    'cardName' => $card->getName(). ' ' . $card->getSurname(),
+                    'main' => $card->getMain()
+                ];
+            }
+            return $creditCardData;
+    }
+    /**
+     * Method formatDate
+     * 
+     * This function is used to format the date
+     * 
+     * @param DateTime $date
+     * @return string
+     */
+    public static function formatDate(DateTime $date): string {
+        $today = new DateTime('today');
+                // Calculate the difference
+                $interval = $today->diff($date->modify('+2 days'));
+
+                // Extract the components of the difference
+                $days = $interval->days;
+                // Add days to the array if greater than 0
+                if ($days > 0) {
+                    $formatted = $days . ' ' . ($days > 1 ? 'days' : 'day');
+                } else {
+                    $formatted = 'no days';
+                }
+                return $formatted;
     }
 }

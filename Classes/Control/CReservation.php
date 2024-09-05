@@ -43,7 +43,7 @@ class CReservation
         $reservationsData = [];
         foreach ($reservations as $reservation) {
             $accommodation=$PM->load('EAccommodation', $reservation->getAccomodationId());
-            $reservationsData[] = UFormat::formatReservations($reservation, $accommodation);
+            $reservationsData[] = UFormat::formatReservationsStudent($reservation, $accommodation);
         }
         $view= new VStudent();
         $view->showReservations($reservationsData, $kind, $modalSuccess);
@@ -72,33 +72,9 @@ class CReservation
             $studentList = [];
 
             foreach ($reservations as $reservation) {
-                $formatted = self::formatDate($reservation->getMade()->setTime(0,0,0));
                 $student=$PM->load('EStudent', $reservation->getIdStudent());
-                $student_photo=$student->getPhoto();
-                $studentStatus = $student->getStatus();
-                if($studentStatus === TStatusUser::BANNED){
-                
-                    $path = __DIR__ . "/../../Smarty/images/BannedUser.png";
-                    $student_photo = new EPhoto(null, file_get_contents($path), 'other', null);
-                    $student_photo_64=EPhoto::toBase64(array($student_photo));
-                    $student->setPhoto($student_photo_64[0]);
-                }
-                else if(is_null($student_photo)){}
-                else
-                {
-                    $student_photo_64=EPhoto::toBase64(array($student_photo));
-                    $student->setPhoto($student_photo_64[0]);
-
-                }
-                $profilePic = $student->getPhoto() === null ? "/UniRent/Smarty/images/ImageIcon.png" : $student->getPhoto()->getPhoto();
-                $studentList[] = [
-                    'idReservation' => $reservation->getID(),
-                    'username' => $student->getUsername(),
-                    'image' => $profilePic,
-                    'period' => 'from '. $reservation->getFromDate()->format('d/m/Y') . ' to ' . $reservation->getToDate()->format('d/m/Y'),
-                    'expires' => $formatted,
-                    'status' => $studentStatus->value
-                ];
+                UFormat::photoFormatUser($student);
+                $studentList[] = UFormat::formatReservationsOwner($reservation, $student);
             }
 
             $reservationData[] = [
@@ -138,7 +114,6 @@ class CReservation
             $photos_acc=$accommodation->getPhoto();
             $photo_acc_64=EPhoto::toBase64($photos_acc);
             $accommodation->setPhoto($photo_acc_64);
-
             $picture=array();
             foreach($accommodation->getPhoto() as $p)
             {
@@ -148,67 +123,18 @@ class CReservation
                     $picture[]=$p->getPhoto();
                 }
             }
-            
             $owner = $PM->load('EOwner', $accommodation->getIdOwner());
-            $owner_photo=$owner->getPhoto();
-            $ownerStatus = $owner->getStatus();
-            if($ownerStatus === TStatusUser::BANNED){
-                
-                $path = __DIR__ . "/../../Smarty/images/BannedUser.png";
-                $owner_photo = new EPhoto(null, file_get_contents($path), 'other', null);
-                $owner_photo_64=EPhoto::toBase64(array($owner_photo));
-                $owner->setPhoto($owner_photo_64[0]);
-            }
-            elseif(!is_null($owner_photo))
-            {
-                $owner_photo_64=EPhoto::toBase64(array($owner_photo));
-                $owner->setPhoto($owner_photo_64[0]);
-                #print_r($owner);
-            } else if (is_null($owner_photo)) {
-                $photo = new EPhoto(null, file_get_contents(__DIR__ . "/../../Smarty/images/ImageIcon.png"), 'other', null);
-                $owner_photo_64=EPhoto::toBase64(array($photo));
-                $owner->setPhoto($owner_photo_64[0]);
-            }
+            UFormat::photoFormatUser($owner);
             $reviews = $PM->loadByRecipient($accommodation->getIdAccommodation(), TType::ACCOMMODATION);
             $reviewsData = [];
-            
             foreach ($reviews as $review) {
                 $author = $PM->load('EStudent', $review->getIdAuthor());
-                if ($review->isBanned()) {
-                    continue;
-                }
-                $profilePic = $author->getPhoto();
-                if ($author->getStatus() === TStatusUser::BANNED) {
-                    $profilePic = "/UniRent/Smarty/images/BannedUser.png";
-                } else if ($profilePic === null) {
-                    $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
-                }
-                else
-                {
-                    $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
-                }
-                $reviewsData[] = [
-                    'title' => $review->getTitle(),
-                    'username' => $author->getUsername(),
-                    'userStatus' => $author->getStatus()->value,
-                    'stars' => $review->getValutation(),
-                    'content' => $review->getDescription(),
-                    'userPicture' => $profilePic,
-                ];
+                $reviewsData[] = UFormat::reviewsFormatUser($author, $review);
             }
             $creditCardDataArray = $PM->loadStudentCards($reservation->getIdStudent());
-            $creditCardData = [];
-            foreach ($creditCardDataArray as $card) {
-                $cardNumberHidden='**** **** **** ' . substr($card->getNumber(), -4);
-                $creditCardData[] = [
-                    'cardNumberHidden' => $cardNumberHidden,
-                    'cardNumber' => $card->getNumber(),
-                    'cardName' => $card->getName(). ' ' . $card->getSurname(),
-                    'main' => $card->getMain()
-                ];
-            }
+            $creditCardData = UFormat::formatCreditCardReserve($creditCardDataArray);
             $view= new VStudent();
-            $view->reservationDetails($reservation, $accommodation, $owner, self::formatDate($reservation->getMade()->setTime(0,0,0)), $picture, $reviewsData, $creditCardData, $modalSuccess);
+            $view->reservationDetails($reservation, $accommodation, $owner, UFormat::formatDate($reservation->getMade()->setTime(0,0,0)), $picture, $reviewsData, $creditCardData, $modalSuccess);
         }
         else {
             $accommodationOwner =$PM->load('EAccommodation', $reservation->getAccomodationId())->getIdOwner();
@@ -218,74 +144,16 @@ class CReservation
                 exit();
             }
             $student = $PM->load('EStudent', $reservation->getIdStudent());
-            $student_photo=$student->getPhoto();
-            $studentStatus = $student->getStatus();
-            if($studentStatus === TStatusUser::BANNED){
-                
-                $path = __DIR__ . "/../../Smarty/images/BannedUser.png";
-                $student_photo = new EPhoto(null, file_get_contents($path), 'other', null);
-                $student_photo_64=EPhoto::toBase64(array($student_photo));
-                $student->setPhoto($student_photo_64[0]);
-            }
-            elseif(!is_null($student_photo))
-            {
-                $student_photo_64=EPhoto::toBase64(array($student_photo));
-                $student->setPhoto($student_photo_64[0]);
-            }
+            UFormat::photoFormatUser($student);
             $reviews = $PM->loadByRecipient($student->getId(), TType::STUDENT);
             $reviewsData = [];
-            
             foreach ($reviews as $review) {
                 $author = $PM->load('EStudent', $review->getIdAuthor());
-                if ($review->isBanned()) {
-                    continue;
-                }
-                $profilePic = $author->getPhoto();
-                if ($author->getStatus() === TStatusUser::BANNED) {
-                    $profilePic = "/UniRent/Smarty/images/BannedUser.png";
-                } else if ($profilePic === null) {
-                    $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
-                }
-                else
-                {
-                    $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
-                }
-                $reviewsData[] = [
-                    'title' => $review->getTitle(),
-                    'username' => $author->getUsername(),
-                    'userStatus' => $author->getStatus()->value,
-                    'stars' => $review->getValutation(),
-                    'content' => $review->getDescription(),
-                    'userPicture' => $profilePic,
-                ];
+                $reviewsData[] = UFormat::reviewsFormatUser($author, $review);
             }
             $view = new VOwner();
-            $view->reservationDetails($reservation, $student, self::formatDate($reservation->getMade()->setTime(0,0,0)), $reviewsData, $modalSuccess);
+            $view->reservationDetails($reservation, $student, UFormat::formatDate($reservation->getMade()->setTime(0,0,0)), $reviewsData, $modalSuccess);
         }
-    }
-
-    /**
-     * Method formatDate
-     * 
-     * This function is used to format the date
-     * 
-     * @param DateTime $date
-     * @return string
-     */
-    private static function formatDate(DateTime $date): string {
-        $today = new DateTime('today');
-                // Calculate the difference
-                $interval = $today->diff($date->modify('+2 days'));
-
-                // Extract the components of the difference
-                $days = $interval->days;
-                // Add days to the array if greater than 0
-                if ($days > 0) {
-                    $formatted = $days . ' ' . ($days > 1 ? 'days' : 'day');
-                } else {
-                    $formatted = 'no days';
-                }
-                return $formatted;
     }
 
     /**
