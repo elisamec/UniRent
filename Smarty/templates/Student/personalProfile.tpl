@@ -111,7 +111,7 @@
             <div class="sidebar_but active"><a href="/UniRent/Student/profile">Profile</a></div>
             </div>
             <div class="col-md-3">
-            <div class="sidebar_but"><a href="/UniRent/Student/reviews">Reviews</a></div>
+            <div class="sidebar_but"><a href="/UniRent/Review/reviews">Reviews</a></div>
             </div>
             <div class="col-md-3">
             <div class="sidebar_but"><a href="/UniRent/Student/paymentMethods">Payment Methods</a></div>

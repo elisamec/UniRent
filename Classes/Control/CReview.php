@@ -11,9 +11,8 @@ use DateTime;
 use Classes\View\VError;
 use Classes\Utilities\UFormat;
 use Classes\Control\CStudent;
-use Classes\Entity\EAccommodation;
-use Classes\Entity\EOwner;
-use Classes\Entity\EStudent;
+use Classes\View\VOwner;
+use Classes\View\VStudent;
 
 class CReview {
 
@@ -189,6 +188,30 @@ class CReview {
             $reviewsData[] = $isAdmin ? UFormat::reviewsFormatAdmin($author, $review) : UFormat::reviewsFormatUser($author, $review);
         }
         return $reviewsData;
+    }
+     /**
+      * Method reviews
+        *
+        * This method is used to show the reviews of the user
+      * @param mixed $modalSuccess
+      * @return void
+      */
+     public static function reviews(?string $modalSuccess=null) :void {
+        $session = USession::getInstance();
+        if($session->getSessionElement('userType') === 'owner') {
+           $view = new VOwner();
+           $type = TType::OWNER;
+        } else if ($session->getSessionElement('userType') === 'student') {
+            $view = new VStudent();
+            $type = TType::STUDENT;
+        } else {
+            $view = new VError();
+            $view->error(403);
+            exit();
+        }
+        $id=$session->getSessionElement('id');
+        $reviewsData = CReview::getProfileReviews($id, $type);
+        $view->reviews($reviewsData, $modalSuccess);
     }
 
 

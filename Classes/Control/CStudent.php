@@ -407,21 +407,6 @@ class CStudent{
         $view->accommodation($accomm, $owner, $reviewsData, $period, $picture, $visits, $visitDuration, $tenants, $num_places, $studBooked, $dayOfBooking, $timeOfBooking, $disabled, $successReserve, $successVisit, $leavebleReviews, $year);
     }
     /**
-     * Method reviews
-     *
-     * this method is used to show the student's reviews
-     * @param ?string $modalSuccess [explicite description]
-     *
-     * @return void
-     */
-    public static function reviews(?string $modalSuccess=null) {
-        self::checkIfStudent();
-        $view = new VStudent();
-        $session=USession::getInstance();
-        $reviewsData = CReview::getProfileReviews($session->getSessionElement('id'), TType::STUDENT);
-        $view->reviews($reviewsData, $modalSuccess);
-    }
-    /**
      * Method modifyStudentProfile
      *
      * this method is used to modify the student profile
