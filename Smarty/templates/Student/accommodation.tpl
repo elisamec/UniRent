@@ -138,7 +138,7 @@
                                 <div class="userIcon">
                                     {if $owner->getStatusString() === "banned"}
                                         <a href="/UniRent/Student/publicProfile/{$owner->getUsername()}" class="disabled"><img src="/UniRent/Smarty/images/BannedUser.png" class="imageIcon"></a>
-                                        {else if $owner->getPhoto() === null}
+                                    {else if $owner->getPhoto() === null}
                                         <a href="/UniRent/Student/publicProfile/{$owner->getUsername()}"><img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon"></a>
                                     {else}
                                     <a href="/UniRent/Student/publicProfile/{$owner->getUsername()}"><img src="{$owner->getPhoto()->getPhoto()}"></a>
@@ -543,8 +543,7 @@
         var successReserve = '{$successReserve}';
         var booked = '{$booked}';
         var notReservable = '{$disabled}';
-        var notVisitable = '{$notVisitable}';
-        var accommodationPeriod = {$period} === "september" ? 8 : 9;
+        var accommodationPeriod = '{$period}' === "september" ? 8 : 9;
       </script>
       <script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>

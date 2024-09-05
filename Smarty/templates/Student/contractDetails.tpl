@@ -134,8 +134,10 @@
                       <h1 class="titleOwn">Owner:</h1>
                         <div class="userSection">
                                 <div class="userIcon">
-                                    {if $owner->getStatus()->value === 'banned'}
-                                        <a href="/UniRent/Student/publicProfile/{$owner->getUsername()}" class="disabled"><img src="{$owner->getPhoto()->getPhoto()}" class="imageIcon"></a>
+                                    {if $owner->getStatusString() === "banned"}
+                                        <a href="/UniRent/Student/publicProfile/{$owner->getUsername()}" class="disabled"><img src="/UniRent/Smarty/images/BannedUser.png" class="imageIcon"></a>
+                                    {else if $owner->getPhoto() === null}
+                                        <a href="/UniRent/Student/publicProfile/{$owner->getUsername()}"><img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon"></a>
                                     {else}
                                     <a href="/UniRent/Student/publicProfile/{$owner->getUsername()}"><img src="{$owner->getPhoto()->getPhoto()}"></a>
                                     {/if}
