@@ -41,7 +41,7 @@ class CAccommodation
     {
         $afs = USuperGlobalAccess::getAllPost(['title', 'price', 'deposit', 'startDate', 'month', 'visitAvailabilityData', 'places',
             'address', 'city', 'postalCode', 'description', 'men', 'women', 'smokers', 'animals', 'uploadedImagesData']);
-        $myarray = json_decode($afs['uploadedImagesData'], true);
+        $myarray = json_decode($afs['uploadedImagesData'], true) ?? [];
         $array_photos = EPhoto::fromJsonToPhotos($myarray);
         $duration = EAccommodation::DurationOfVisit($afs["visitAvailabilityData"]);
 
