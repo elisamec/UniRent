@@ -69,9 +69,9 @@ class CContract
             $res=$PM->store($contract);
         }
         if ($res) {
-            header('Location:/Contract/contractDetails/'.$idReservation.'/success'); //redirect to contract page of the one you jest payed
+            header('Location:/UniRent/Contract/contractDetails/'.$idReservation.'/success'); //redirect to contract page of the one you jest payed
         } else {
-            header('Location:/Contract/contractDetails/'.$idReservation.'/error');
+            header('Location:/UniRent/Contract/contractDetails/'.$idReservation.'/error');
         }
 
     }
