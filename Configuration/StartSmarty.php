@@ -2,7 +2,15 @@
 require(__DIR__ . '/../Smarty/Smarty.class.php');
 
 
+/**
+ * Class StartSmarty
+ *
+ * This class is responsible for initializing the Smarty template engine.
+ * It is used to configure and start the Smarty engine for the UniRent application.
+ *
+ */
 class StartSmarty{
+
     /**
      * configuration
      * 

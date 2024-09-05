@@ -2,6 +2,12 @@
 
 namespace Classes\Utilities;
 
+
+/**
+ * UAccessUniversityFile class.
+ *
+ * This class is responsible for accessing university files.
+ */
 class UAccessUniversityFile
 {
     /**
@@ -45,6 +51,7 @@ class UAccessUniversityFile
         }
         self::$list=$indirizzi_web;
     }
+
     /**
      * getInstance
      *
@@ -58,6 +65,7 @@ class UAccessUniversityFile
         }
         return self::$instance;
     }
+
     /**
      * getUniversityEmailList
      *
@@ -68,6 +76,7 @@ class UAccessUniversityFile
         $result=self::$list;
         return $result;
     }
+
     /**
      * close
      *
@@ -152,7 +161,7 @@ class UAccessUniversityFile
      *
      * @return array
      */
-    public function getCities()
+    public function getCities() :array
     {
         $result=array();
         $json=file_get_contents(self::$path);

@@ -10,7 +10,6 @@ use DateTime;
  * 
  * this class is used to update the whole DataBase after the first https message of the day
  * 
- * @author Matteo Maloni (UniRent) <matteo.maloni@student.univaq.it>
  * @package Updater
  */
 class Updater

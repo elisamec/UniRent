@@ -13,7 +13,6 @@ namespace Classes\Utilities;
  * $value = $superGlobalAccess->get('key');
  * 
  * @package Utilities  
- * @author Matteo Maloni (UniRent) <matteo.maloni@student.univaq.it>
  */
 class USuperGlobalAccess {
     /**

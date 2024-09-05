@@ -36,6 +36,7 @@ class UFormat
         }
         return $profilePic;
     }
+
     /**
      * Methof photoFormatUser
      * 
@@ -58,6 +59,7 @@ class UFormat
             $user->setPhoto($user_photo_64[0]);
         }
     }
+
     /**
      * Method reviewsFormatAdmin
      * 
@@ -83,6 +85,7 @@ class UFormat
             'statusReported' => $review->isReported()
         ];
     }
+
     /**
      * Method reviewsFormatUser
      * 
@@ -106,6 +109,7 @@ class UFormat
             'userPicture' => $profilePic,
         ];
     }
+
     /**
      * Method formatReports
      * 
@@ -136,6 +140,7 @@ class UFormat
             'review' => $reviewFormat
         ];
     }
+
     /**
      * Method formatTopic
      * 
@@ -163,6 +168,7 @@ class UFormat
         }
         return $topic;
     }
+
     /**
      * Method formatRequests
      * 
@@ -200,6 +206,7 @@ class UFormat
         return $format;
 
     }
+
     /**
      * Method formatReply
      * 
@@ -217,6 +224,7 @@ class UFormat
         ];
         return $reply;
     }
+    
     /**
      * Method creditCardFormatArray
      * 
