@@ -5,6 +5,9 @@ document.addEventListener("DOMContentLoaded", function() {
     const yearSelect = document.getElementById('yearSelect');
     const currentYear = new Date().getFullYear();
     const currentMonth = new Date().getMonth() + 1; // Months are zero-indexed in JavaScript
+    if (typeof accommodationPeriod === 'undefined') {
+        var accommodationPeriod = 10; // Default accommodation period is 9 months
+    }
     const startYear = currentMonth >= accommodationPeriod ? currentYear + 1 : currentYear;
     const endYear = startYear + 10;
 
