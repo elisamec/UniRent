@@ -6,6 +6,7 @@ use Classes\Entity\EPhoto;
 use Classes\Entity\EVisit;
 use Classes\Foundation\FPersistentManager;
 use Classes\Tools\TType;
+use Classes\Utilities\UFormat;
 use Classes\Utilities\USession;
 use Classes\Utilities\USort;
 use Classes\Utilities\USuperGlobalAccess;
@@ -69,28 +70,19 @@ class CVisit
         } else {
             $userType = TType::tryFrom(strtolower($userType));
         }
-        
         $view = $userType === TType::STUDENT ? new VStudent() : new VOwner();
         $visits=$PM->loadVisitSchedule($id, $userType);
         $visitsData = [];
-
         foreach ($visits as $visit) {
             $student = $PM->load('EStudent', $visit->getIdStudent());
             $accommodation = $PM->load('EAccommodation', $visit->getIdAccommodation());
+            UFormat::photoFormatUser($student);
             $profilePic = $student->getPhoto();
-        
-            if ($profilePic === null) {
-                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
-            } else {
-                $profilePic = (EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
-            }
-        
             $date = $visit->getDate();
             $day = (int) $date->format('d');
             $month = (int) $date->format('m');
             $year = (int) $date->format('Y');
             $time = $date->format('H:i') . '-' . $date->modify('+' . $accommodation->getVisitDuration() . ' minutes')->format('H:i');
-            
             // Create the event array
             $event = [
                 'photo' => $profilePic,
@@ -99,12 +91,10 @@ class CVisit
                 'time' => $time,
                 'idVisit' => $visit->getIdVisit()
             ];
-            
             // Find the index of the existing date entry, if it exists
             $key = array_search(true, array_map(function($item) use ($day, $month, $year) {
                 return $item['day'] === $day && $item['month'] === $month && $item['year'] === $year;
             }, $visitsData));
-            
             // If an entry for the date exists, add the event to the existing entry
             if ($key !== false) {
                 $visitsData[$key]['events'][] = $event;
