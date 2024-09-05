@@ -3,6 +3,7 @@ namespace Classes\Foundation;
 require __DIR__.'../../../vendor/autoload.php';
 use Classes\Foundation\FReservation;
 use Classes\Entity\EContract;
+use Classes\Tools\TStatusContract;
 use DateTime;
 use PDO;
 use PDOException;
@@ -114,40 +115,45 @@ class FContract
      * metod used to load a EContract object in the data base
      * @param int $id [reservation/contract id]
      *
-     * @return Econtract
+     * @return ?EContract
      */
-    public function load(int $id):Econtract |bool
+    public function load(int $id):?EContract
     {
         $db=FConnection::getInstance()->getConnection();
-        if($this->exist($id))
+        FPersistentManager::getInstance()->updateDataBase();
+        try
         {
-            FPersistentManager::getInstance()->updateDataBase();
-            try
-            {
-                $q='SELECT * FROM contract WHERE idReservation=:id';
-                $db->exec('LOCK TABLES contract READ');
-                $db->beginTransaction();
-                $stm=$db->prepare($q);
-                $stm->bindParam(':id',$id,PDO::PARAM_INT);
-                $stm->execute();
-                $db->commit();
-                $db->exec('UNLOCK TABLES');
-            }
-            catch(PDOException $e)
-            {
-                $db->rollBack();
-                return false;
-            }
-            $reservationAssociated=FReservation::getInstance()->load($id);
-            $row=$stm->fetch(PDO::FETCH_ASSOC);
-            $date= new DateTime($row['paymentDate']);
-            $result= new EContract($row['status'],$row['cardNumber'],$reservationAssociated, $date);
-            return $result;
+            $q='SELECT * FROM contract WHERE idReservation=:id';
+            $db->exec('LOCK TABLES contract READ');
+            $db->beginTransaction();
+            $stm=$db->prepare($q);
+            $stm->bindParam(':id',$id,PDO::PARAM_INT);
+            $stm->execute();
+            $db->commit();
+            $db->exec('UNLOCK TABLES');
+        }
+        catch(PDOException $e)
+        {
+            $db->rollBack();
+            return null;
+        }
+        $row=$stm->fetch(PDO::FETCH_ASSOC);
+        if($row['status']=='finished')
+        {
+            $row['status']=TStatusContract::FINISHED;
+        }
+        elseif($row['status']=='onGoing')
+        {
+            $row['status']=TStatusContract::ONGOING;
         }
         else
         {
-            return false;
+            $row['status']=TStatusContract::FUTURE;
         }
+        $reservationAssociated=FReservation::getInstance()->load($id);
+        $date= new DateTime($row['paymentDate']);
+        $result= new EContract($row['status'],$row['cardNumber'],$reservationAssociated, $date);
+        return $result;
     }    
     /**
      * Method getContractsByStudent
