@@ -141,7 +141,7 @@
                                         {else if $owner->getPhoto() === null}
                                         <a href="/UniRent/Student/publicProfile/{$owner->getUsername()}"><img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon"></a>
                                     {else}
-                                    {if $owner->getPhoto()->getPhoto() === null}
+                                    {if $owner->getPhoto() === null}
                                     <a href="/UniRent/Student/publicProfile/{$owner->getUsername()}"><img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon"></a>
                                     {else}
                                     <a href="/UniRent/Student/publicProfile/{$owner->getUsername()}"><img src="{$owner->getPhoto()->getPhoto()}"></a>
