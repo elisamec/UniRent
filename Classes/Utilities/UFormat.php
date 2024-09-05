@@ -336,4 +336,21 @@ class UFormat
             }
         return $tenants;
     }
+    /**
+     * Method formatAccommodationAds
+     * 
+     * This method is used to format the accommodation ads in the owner view of the user profile in the correct way
+     * @param \Classes\Entity\EAccommodation $accom
+     * @param string|null $photo
+     * @return array
+     */
+    public static function formatAccommodationAds(EAccommodation $accom, ?string $photo):array {
+        return [
+            'id'=>$accom->getIdAccommodation(),
+            'photo'=>$photo,
+            'title'=>$accom->getTitle(),
+            'address'=>$accom->getAddress()->getAddressLine1() .", ". $accom->getAddress()->getLocality(),
+            'price'=>$accom->getPrice()
+        ];
+    }
 }
