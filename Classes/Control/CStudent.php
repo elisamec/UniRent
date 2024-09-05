@@ -3,6 +3,7 @@
 namespace Classes\Control;
 require __DIR__.'/../../vendor/autoload.php';
 
+use Classes\Entity\EAccommodation;
 use Classes\Entity\ECreditCard;
 use Classes\Entity\EPhoto;
 use Classes\Foundation\FPersistentManager;
@@ -275,9 +276,90 @@ class CStudent{
         self::checkIfStudent();
         $view = new VStudent();
         $PM = FPersistentManager::getInstance();
-
         $accomm = $PM->load('EAccommodation', $idAccommodation);
         $student = $PM->load('EStudent', USession::getInstance()->getSessionElement('id'));
+        self::checkPermission($accomm, $student);
+        $disabled=!$accomm->getStatus();
+        $photos_acc=$accomm->getPhoto();
+        $photo_acc_64=EPhoto::toBase64($photos_acc);
+        $accomm->setPhoto($photo_acc_64);
+        $picture=array();
+        foreach($accomm->getPhoto() as $p)
+        {
+            if(!is_null($p)){$picture[]=$p->getPhoto();}
+        }
+        $owner = $PM->load('EOwner', $accomm->getIdOwner());
+        UFormat::photoFormatUser($owner);
+        $reviews = $PM->loadByRecipient($accomm->getIdAccommodation(), TType::ACCOMMODATION);
+        $reviewsData = [];
+        foreach ($reviews as $review) {
+            $author=$PM->load('EStudent', $review->getIdAuthor());
+            $reviewsData[] = UFormat::reviewsFormatUser($author, $review);
+        }
+        $data=$accomm->getStart()->format('m');
+        $period=$data=='09' ? 'september':'october';
+        [$visits, $studBooked, $dayOfBooking, $timeOfBooking]=self::visitTimeSlots($accomm);
+        $visitDuration=$accomm->getVisitDuration();
+        $num_places=$accomm->getPlaces();
+        $tenantsArray= $PM->getTenants('current',$accomm->getIdOwner());
+        $tenants=array();
+        foreach ($tenantsArray as $idAccommodation => $students) {
+            $accommodationTitle = FPersistentManager::getInstance()->getTitleAccommodationById($idAccommodation);
+            $tenants=UFormat::getFilterTenantsFormatArray($students, $idAccommodation, $accommodationTitle, 'Student');
+        }
+        $session=USession::getInstance();
+        $periodNumber= $period==='september' ? 8 : 9;
+        $year=$session->getSessionElement('SAY');
+        if($year==null){
+            $year=date('m')>$periodNumber? date('Y')+1 : date('Y');
+        }
+        $leavebleReviews=$PM->remainingReviewStudentToAccommodation($session->getSessionElement('id'), $accomm->getIdAccommodation());
+        $view->accommodation($accomm, $owner, $reviewsData, $period, $picture, $visits, $visitDuration, $tenants, $num_places, $studBooked, $dayOfBooking, $timeOfBooking, $disabled, $successReserve, $successVisit, $leavebleReviews, $year);
+    }
+    /**
+     * Method visitTimeSlots
+     *
+     * this method is used to delete the time slots occupied from the visit timeslots
+     * @param EAccommodation $accomm
+     *
+     * @return array
+     */
+    private static function visitTimeSlots(EAccommodation $accomm) {
+        $PM=FPersistentManager::getInstance();
+        $visits=$accomm->getVisit();
+        $booked=$PM->loadVisitsByWeek();
+        $studBooked=false;
+        $dayOfBooking='';
+        $timeOfBooking='';
+        foreach ($visits as $day=>$time) {
+            foreach ($time as $key=>$t) {
+                foreach ($booked as $b) {
+                    if ($b->getIdStudent()===USession::getInstance()->getSessionElement('id') && $b->getIdAccommodation()==$accomm->getIdAccommodation())
+                    {
+                        $studBooked=true;
+                        $dayOfBooking=$b->getDate()->format('d-m-Y');
+                        $dayOfBooking=$b->getDayOfweek().' '.$dayOfBooking;
+                        $timeOfBooking=$b->getDate()->format('H:i');
+                    }
+                    if($b->getDayOfWeek()==$day && $b->getDate()->format('H:i')==$t)
+                    {
+                        unset($visits[$day][$key]);
+                    }
+                }
+            }
+        }
+        return [$visits, $studBooked, $dayOfBooking, $timeOfBooking];
+    }
+    /**
+     * 
+     * checkPermission
+     * 
+     * this method is used to check if the student has the permission to see the accommodation
+     * @param \Classes\Entity\EAccommodation $accomm
+     * @param \Classes\Entity\EStudent $student
+     * @return void
+     */
+    private static function checkPermission(EAccommodation $accomm, EStudent $student):void {
         if ($accomm->getWoman() && $accomm->getMan()) {
             if (strtoupper($student->getSex())==='F' && $accomm->getWoman() === false) {
                 $viewError=new VError();
@@ -298,122 +380,6 @@ class CStudent{
             $viewError->error(403);
             exit();
         }
-        $disabled=!$accomm->getStatus();
-        $photos_acc=$accomm->getPhoto();
-        $photo_acc_64=EPhoto::toBase64($photos_acc);
-        $accomm->setPhoto($photo_acc_64);
-
-        $picture=array();
-        foreach($accomm->getPhoto() as $p)
-        {
-            if(is_null($p)){}
-            else
-            {
-                $picture[]=$p->getPhoto();
-            }
-        }
-        
-        $owner = $PM->load('EOwner', $accomm->getIdOwner());
-        $owner_photo=$owner->getPhoto();
-        $ownerStatus = $owner->getStatus();
-        if($ownerStatus === TStatusUser::BANNED){
-            
-            $path = __DIR__ . "/../../Smarty/images/BannedUser.png";
-            $owner_photo = new EPhoto(null, file_get_contents($path), 'other', null);
-            $owner_photo_64=EPhoto::toBase64(array($owner_photo));
-            $owner->setPhoto($owner_photo_64[0]);
-        }
-        elseif(!is_null($owner_photo))
-        {
-            $owner_photo_64=EPhoto::toBase64(array($owner_photo));
-            $owner->setPhoto($owner_photo_64[0]);
-        }
-        
-        $reviews = $PM->loadByRecipient($accomm->getIdAccommodation(), TType::ACCOMMODATION);
-        $reviewsData = [];
-        
-        foreach ($reviews as $review) {
-            $author=$PM->load('EStudent', $review->getIdAuthor());
-            if ($review->isBanned()) {
-                continue;
-            }
-            $authorStatus = $author->getStatus();
-            $profilePic = $author->getPhoto();
-            if($authorStatus === TStatusUser::BANNED){
-                $profilePic = "/UniRent/Smarty/images/BannedUser.png";
-            }
-            elseif ($profilePic === null) {
-                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
-            }
-            else
-            {
-                $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
-            }
-            if ($review->getDescription()===null) {
-                $content='No additional details were provided by the author.';
-            }
-            else
-            {
-                $content=$review->getDescription();
-            }
-            $reviewsData[] = [
-                'id' => $review->getId(),
-                'title' => $review->getTitle(),
-                'username' => $author->getUsername(),
-                'userStatus' => $author->getStatus()->value,
-                'stars' => $review->getValutation(),
-                'content' => $content,
-                'userPicture' => $profilePic,
-            ];
-        }
-        $data=$accomm->getStart()->format('m');
-        if($data=='09'){$period='september';}
-        else{$period='october';}
-        $visits=$accomm->getVisit();
-        $booked=$PM->loadVisitsByWeek();
-        $studBooked=false;
-        $dayOfBooking='';
-        $timeOfBooking='';
-        foreach ($visits as $day=>$time) {
-            foreach ($time as $key=>$t) {
-                foreach ($booked as $b) {
-                    if ($b->getIdStudent()===USession::getInstance()->getSessionElement('id') && $b->getIdAccommodation()==$idAccommodation)
-                    {
-                        $studBooked=true;
-                        $dayOfBooking=$b->getDate()->format('d-m-Y');
-                        $dayOfBooking=$b->getDayOfweek().' '.$dayOfBooking;
-                        $timeOfBooking=$b->getDate()->format('H:i');
-                    }
-                    if($b->getDayOfWeek()==$day && $b->getDate()->format('H:i')==$t)
-                    {
-                        unset($visits[$day][$key]);
-                    }
-                }
-            }
-        }
-        $visitDuration=$accomm->getVisitDuration();
-        $num_places=$accomm->getPlaces();
-        $tenantsArray= $PM->getTenants('current',$accomm->getIdOwner());
-        $tenants=array();
-        foreach ($tenantsArray as $idAccommodation => $students) {
-            $accommodationTitle = FPersistentManager::getInstance()->getTitleAccommodationById($idAccommodation);
-            $tenants=UFormat::getFilterTenantsFormatArray($students, $idAccommodation, $accommodationTitle, 'Student');
-        }
-        $session=USession::getInstance();
-        $periodNumber= $period==='september' ? 8 : 9;
-        $year=$session->getSessionElement('SAY');
-        if($year==null)
-        {
-            if (date('m')>$periodNumber) {
-                $year=date('Y')+1;
-            }
-            else
-            {
-            $year=date('Y');
-            }
-        }
-        $leavebleReviews=$PM->remainingReviewStudentToAccommodation($session->getSessionElement('id'), $accomm->getIdAccommodation());
-        $view->accommodation($accomm, $owner, $reviewsData, $period, $picture, $visits, $visitDuration, $tenants, $num_places, $studBooked, $dayOfBooking, $timeOfBooking, $disabled, $successReserve, $successVisit, $leavebleReviews, $year);
     }
     /**
      * Method modifyStudentProfile
@@ -422,57 +388,41 @@ class CStudent{
      * @return void
      */
     public static function modifyStudentProfile(){
-
         $session=USession::getInstance();
         $view = new VStudent();
         $error = 0;
-
         //read the data from the form
-        $afp=USuperGlobalAccess::getAllPost(['username','name','surname','oldPassword','newPassword','email','sex',
-                                            'courseDuration','immatricolationYear','birthDate','smoker','animals']);
+        $afp=USuperGlobalAccess::getAllPost(['username','name','surname','oldPassword','newPassword','email','sex','courseDuration','immatricolationYear','birthDate','smoker','animals']);
         $picture = USuperGlobalAccess::getPhoto('img');
         $birthDate= new DateTime($afp['birthDate']);
         $smoker=$session->booleanSolver($afp['smoker']);
         $animals=$session->booleanSolver($afp['animals']);
-
         $oldUsername=$session->getSessionElement('username');
         $PM=FPersistentManager::getInstance();
-
         $studentID=$PM->getStudentIdByUsername($oldUsername);
-
         $oldStudent = $PM->load('EStudent', $studentID);
         $oldEmail = $oldStudent->getUniversityMail();
         $oldPhoto=$oldStudent->getPhoto(); //It's a EPhoto object
-
         if(!is_null($oldPhoto)){
             $photoError = $oldPhoto->getPhoto();
             $photoError = "data:" . 'image/jpeg' . ";base64," . base64_encode($photoError);
         } else $photoError = null;
-       
         //if the new email is not already in use and it's a student's email or you haven't changed it
-        if((($PM->verifyUserEmail($afp['email'])==false)&&($PM->verifyStudentEmail($afp['email'])))||($oldEmail===$afp['email'])) { 
-            
+        if((($PM->verifyUserEmail($afp['email'])==false)&&($PM->verifyStudentEmail($afp['email'])))||($oldEmail===$afp['email'])) {
             //if the new username is not already in use or you haven't changed it
             if(($PM->verifyUserUsername($afp['username'])==false)||($oldUsername===$afp['username'])) { #se il nuovo username non è già in uso o non l'hai modificato
-                
                 $photo = CStudent::changePhoto($oldPhoto, $picture);  
-
                 $passChange = CStudent::changePassword($afp['oldPassword'], $afp['newPassword'], $oldStudent, $photoError);
                 $password = $passChange[0];
                 $error = $passChange[1];
-                
                 $student=new EStudent($afp['username'],$password,$afp['name'],$afp['surname'],$photo,$afp['email'],$afp['courseDuration'],$afp['immatricolationYear'],$birthDate,$afp['sex'],$smoker,$animals);
                 $student->setID($studentID);
-
                 $result=$PM->update($student);
-                
                 if($result && !$error){
                     
                     $session->setSessionElement('username',$afp['username']);
                     header('Location:/UniRent/Student/profile/success');
-
                 } elseif (!$result) {
-                    
                     header('Location:/UniRent/Student/profile/error'); 
                 } 
             }
@@ -500,29 +450,21 @@ class CStudent{
      * @return array
      */
     private static function changePassword($formOldPassword, $newPassword, $oldStudent, $photoError):array{
-
         $view = new VStudent();
         $error = 0;
-
         $oldPassword = $oldStudent->getPassword();
-
         if($newPassword===''){
             //If i don't have any new password, i'll use the old one
             $password=$oldPassword;
         } else {
-            
             //If the old password is correct
             if(password_verify($formOldPassword, $oldPassword)){
-
                 //If the new password is not valid
                 if(!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()])[A-Za-z\d@$!%*?&()]{8,}$/' , $newPassword)){
-
                     $error = 1;
                     $password=$oldPassword;
                     $view->editProfile($oldStudent, $photoError, true, false, false, false, null);
-
                 } else $password=$newPassword;
-            
             //If the old password (typed by user) is incorrect
             } else {
                 $error = 1;
@@ -642,47 +584,11 @@ class CStudent{
         }
         $reviews = $PM->loadByRecipient($student->getId(), TType::STUDENT); //va fatto il metodo nel PM
         $reviewsData = [];
-        $student_photo=$student->getPhoto();
-        if(is_null($student_photo)){}
-        else
-        {
-            $student_photo_64=EPhoto::toBase64(array($student_photo));
-            $student->setPhoto($student_photo_64[0]);
-        }
-        
+        UFormat::photoFormatUser($student);
         foreach ($reviews as $review) {
             $author = $PM->load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
-            if ($review->isBanned()) {
-                continue;
-            }
-            $status = $author->getStatus();
-            $profilePic = $author->getPhoto();
-            if($status === TStatusUser::BANNED){
-                $profilePic = "/UniRent/Smarty/images/BannedUser.png";
-            }
-            elseif ($profilePic === null) {
-                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
-            }
-            else
-            {
-                $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
-            }
-            if ($review->getDescription()===null) {
-                $content='No additional details were provided by the author.';
-            }
-            else
-            {
-                $content=$review->getDescription();
-            }
-            $reviewsData[] = [
-                'id' => $review->getId(),
-                'title' => $review->getTitle(),
-                'username' => $author->getUsername(),
-                'userStatus' => $author->getStatus()->value,
-                'stars' => $review->getValutation(),
-                'content' => $content,
-                'userPicture' => $profilePic,
-            ];
+         
+            $reviewsData[] = UFormat::reviewsFormatUser($author, $review);
         }
         $leavebleReviews=$PM->remainingReviewStudentToStudent($session->getSessionElement('id'), $student->getId());
         $view->publicProfileFromStudent($student, $reviewsData, $self, $leavebleReviews, $modalSuccess);
@@ -709,47 +615,12 @@ class CStudent{
         }
         $reviews = $PM->loadByRecipient($student->getId(), TType::STUDENT); //va fatto il metodo nel PM
         $reviewsData = [];
-        $student_photo=$student->getPhoto();
-        if(is_null($student_photo)){}
-        else
-        {
-            $student_photo_64=EPhoto::toBase64(array($student_photo));
-            $student->setPhoto($student_photo_64[0]);
-        }
+        UFormat::photoFormatUser($student);
         
         foreach ($reviews as $review) {
             $author = $PM->load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
-            if ($review->isBanned()) {
-                continue;
-            }
-            $status = $author->getStatus();
-            $profilePic = $author->getPhoto();
-            if($status === TStatusUser::BANNED){
-                $profilePic = "/UniRent/Smarty/images/BannedUser.png";
-            }
-            elseif ($profilePic === null) {
-                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
-            }
-            else
-            {
-                $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
-            }
-            if ($review->getDescription()===null) {
-                $content='No additional details were provided by the author.';
-            }
-            else
-            {
-                $content=$review->getDescription();
-            }
-            $reviewsData[] = [
-                'id' => $review->getId(),
-                'title' => $review->getTitle(),
-                'username' => $author->getUsername(),
-                'userStatus' => $author->getStatus()->value,
-                'stars' => $review->getValutation(),
-                'content' => $content,
-                'userPicture' => $profilePic,
-            ];
+            
+            $reviewsData[] = UFormat::reviewsFormatUser($author, $review);
         }
         $session=USession::getInstance();
         $leavebleReviews=$PM->remainingReviewOwnerToStudent($session->getSessionElement('id'), $student->getId());
@@ -798,17 +669,13 @@ class CStudent{
         $date=USuperGlobalAccess::getPost('date');
         $year_2=$year+1;
         $date_2=null;
-        if($date=='September' or $date=='september')
-        {
-            $date=9;
-            $date_2=6;
-        }
-        else
-        {
-            $date=10;
-            $date_2=7;
-        }
+        $date= $date=='September' or $date=='september'? 9 : 10;
+        $date_2=$date-3;
         $result=$PM->reserve($idAccommodation,$year,$date,$year_2,$date_2,$student_id);
+        if (!$result) {
+            $viewError=new VError();
+            $viewError->error(500);
+        }
         $result ? header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/sent') : header('Location:/UniRent/Student/accommodation/'.$idAccommodation.'/null/full');
     }
     /**

@@ -65,39 +65,6 @@ class EOwner
     }
     
     /**
-     * Method formatPhoneNumber
-     * 
-     * this method return the phone number as an int
-     * @param string $phone [explicite description]
-     *
-     * @return int
-     */
-    public static function formatPhoneNumber(string $phone):int
-    {     
-        $result_39=strncmp($phone,'+39',3);
-        $result_0039=strncmp($phone,'0039',4);
-        
-        if($result_39===0)   #se inizia con +39
-        {
-            $phone=substr($phone,3);
-            $phone=str_replace(' ','',$phone);
-        }
-        else
-        {
-            if($result_0039===0) #se inizia con 0039
-            {
-                $phone=substr($phone,4);
-                $phone=str_replace(' ','',$phone);
-            }
-            else # altrimenti è senza prefisso
-            {
-                $phone=str_replace(' ','',$phone);
-            }    
-        }
-        return (int)$phone;
-    }
-    
-    /**
      * Undocumented function
      *
      * @return integer

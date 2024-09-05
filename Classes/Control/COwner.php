@@ -68,6 +68,70 @@ class COwner
             
         $view->home($accommodationsActive, $accommodationsInactive, $modalSuccess);
     }
+    /**
+     * accommodationManagement
+     * 
+     * This method shows the accommodation management page
+     * @param int $idAccommodation
+     * @param mixed $modalSuccess
+     * @return void
+     */
+    public static function accommodationManagement(int $idAccommodation, ?string $modalSuccess=null):void {
+        self::checkIfOwner();
+        $view = new VOwner();
+        $PM = FPersistentManager::getInstance();
+        $session=USession::getInstance();
+        $accomm = $PM->load('EAccommodation', $idAccommodation);
+        if($session->getSessionElement('id') != $accomm->getIdOwner())
+        {
+            $viewError= new VError();
+            $viewError->error(403);
+            exit();
+        }
+        #print_r($accomm);
+        $photos_acc=$accomm->getPhoto();
+        $photo_acc_64=EPhoto::toBase64($photos_acc);
+        $accomm->setPhoto($photo_acc_64);
+
+        $picture=array();
+        foreach($accomm->getPhoto() as $p)
+        {
+            if(!is_null($p)){
+                
+                $picture[]=$p->getPhoto();
+            }
+        }
+
+        $owner = $PM->load('EOwner', $accomm->getIdOwner());
+        $owner_photo=$owner->getPhoto();
+        $ownerStatus = $owner->getStatus();
+        if($ownerStatus === TStatusUser::BANNED){
+            
+            $path = __DIR__ . "/../../Smarty/images/BannedUser.png";
+            $owner_photo = new EPhoto(null, file_get_contents($path), 'other', null);
+            $owner_photo_64=EPhoto::toBase64(array($owner_photo));
+            $owner->setPhoto($owner_photo_64[0]);
+        }
+        elseif(!is_null($owner_photo))
+        {
+            $owner_photo_64=EPhoto::toBase64(array($owner_photo));
+            $owner->setPhoto($owner_photo_64[0]);
+            #print_r($owner);
+        }
+        
+        $reviewsData = CReview::getProfileReviews($accomm->getIdAccommodation(), TType::ACCOMMODATION);
+        $num_places=$accomm->getPlaces();
+        $tenantsArray= $PM->getTenants('current',$accomm->getIdOwner());
+        $tenants=[];
+        foreach ($tenantsArray as $idAccommodation => $students) {
+            $accommodationTitle = FPersistentManager::getInstance()->getTitleAccommodationById($idAccommodation);
+            $tenants=UFormat::getFilterTenantsFormatArray($students, $idAccommodation, $accommodationTitle, 'OwnerManagement')[$idAccommodation]['tenants'];
+        }
+        $disabled=$accomm->getStatus();
+        $deletable=false;
+        
+        $view->accommodationManagement($accomm, $owner, $reviewsData, $picture, $tenants, $num_places, $disabled, $deletable, $modalSuccess);
+    }
 
     
     /**
@@ -189,7 +253,7 @@ class COwner
         $newUsername=USuperGlobalAccess::getPost('username');
         $oldPassword=USuperGlobalAccess::getPost('oldPassword');
         $newPassword=USuperGlobalAccess::getPost('password');
-        $newPhoneNumber=EOwner::formatPhoneNumber(USuperGlobalAccess::getPost('phoneNumber'));
+        $newPhoneNumber=UFormat::formatPhoneNumber(USuperGlobalAccess::getPost('phoneNumber'));
         $newIBAN=USuperGlobalAccess::getPost('iban');
 
         $ownerId=$session->getSessionElement('id');

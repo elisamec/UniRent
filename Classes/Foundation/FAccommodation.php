@@ -482,7 +482,6 @@
             }
             catch(PDOException $e){
                 $db->rollBack();
-                print "Error: " . $e->getMessage() . "\n"; // Add this line to see the error message
                 return false;
             }
             
@@ -1233,7 +1232,7 @@
             catch(PDOException $e)
             {
                 $db->rollBack();
-                print $e->getMessage();
+                return false;
             }
             $row=$stm->fetch(PDO::FETCH_ASSOC);
 
