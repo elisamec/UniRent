@@ -45,7 +45,7 @@ class CAdmin
     public static function login():void{
         if(UCookie::isSet('PHPSESSID'))
         {
-            setcookie('PHPSESSID','',time()-3600);
+            setcookie('PHPSESSID','',time()-2592000);
             $session = USession::getInstance();
         }
         $view = new VAdmin();

@@ -268,7 +268,7 @@ class COwner
             $session=USession::getInstance();
             $session->unsetSession();
             $session->destroySession();
-            setcookie('PHPSESSID','',time()-3600);
+            setcookie('PHPSESSID','',time()-2592000);
             header('Location:/UniRent/User/home');
         }
         else

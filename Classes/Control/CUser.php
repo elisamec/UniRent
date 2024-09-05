@@ -251,7 +251,7 @@ class CUser
         $session=USession::getInstance();
         $session->unsetSession();
         $session->destroySession();
-        setcookie('PHPSESSID','',time()-3600,'/','',isset($_SERVER["HTTPS"]),true);
+        setcookie('PHPSESSID','',time()-2592000,'/','',isset($_SERVER["HTTPS"]),true);
         header('Location: /UniRent/User/home');
     }
 
