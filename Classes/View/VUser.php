@@ -19,10 +19,11 @@ class VUser{
         $this->smarty->display('User/home.tpl');
     }
 
-    public function login(){
+    public function login($modalSuccess){
         $this->smarty->assign('usernameError', false);
         $this->smarty->assign('passwordError', false);
         $this->smarty->assign('usernameRight', '');
+        $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('User/login.tpl');
     }
     public function about(){
@@ -46,7 +47,7 @@ class VUser{
         $this->smarty->display('User/search.tpl');
     }
 
-    public function register(?string $modalSuccess){
+    public function register(){
         $this->smarty->assign('userDuplicateError', false);
         $this->smarty->assign('studentMailError', false);
         $this->smarty->assign('passwordFormatError', false);
@@ -56,7 +57,6 @@ class VUser{
         $this->smarty->assign('name', '');
         $this->smarty->assign('surname', '');
         $this->smarty->assign('type', '');
-        $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->display('User/register.tpl');
     }
 

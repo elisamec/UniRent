@@ -200,7 +200,7 @@
 
                 <!-- Additional Fields for 'Registration' Topic (conditionally displayed) -->
                 <div class="form-group" id="additionalFieldsContainer" style="display: none;">
-                    <form id="additionalFieldsForm" action="/UniRent/Admin/verifyEmail">
+                    <form id="additionalFieldsForm" action="/UniRent/Admin/verifyEmail" method="POST" enctype="multipart/form-data">
                         <label for="email">Email:</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
                         <label for="university">University:</label>
@@ -274,7 +274,7 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">S
+                <div class="modal-body">
                 {if $modalMessage === 'success'}
                     The opration has been successfully completed.
                     {else}

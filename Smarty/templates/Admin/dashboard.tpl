@@ -376,6 +376,7 @@
                         <label for="adminReply">Your Reply:</label>
                         <textarea class="form-control" id="adminReply" name="answare" rows="5" placeholder="Type your reply here..." required></textarea>
                         <input type="hidden" name="requestId" value="">
+                        <button type="submit" class="btn btn-primary" id="submitReply" form="replyForm">Send Reply</button>
                     </form>
                 </div>
 
@@ -387,7 +388,7 @@
 
                 <!-- Additional Fields for 'Registration' Topic (conditionally displayed) -->
                 <div class="form-group" id="additionalFieldsContainer" style="display: none;">
-                    <form id="additionalFieldsForm" action="/UniRent/Admin/verifyEmail">
+                    <form id="additionalFieldsForm" action="/UniRent/Admin/verifyEmail" method="POST" enctype="multipart/form-data">
                         <label for="email">Email:</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
                         <label for="university">University:</label>
@@ -403,7 +404,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" id="submitReply" form="replyForm" style="display: none;">Send Reply</button>
+                
             </div>
         </div>
     </div>
@@ -461,7 +462,7 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">S
+                <div class="modal-body">
                 {if $modalMessage === 'success'}
                     The operation has been successfully completed.
                     {else}

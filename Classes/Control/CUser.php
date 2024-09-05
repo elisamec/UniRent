@@ -70,7 +70,7 @@ class CUser
      * this method is used to show the login page
      * @return void
      */
-    public static function login(){
+    public static function login(?string $modalSuccess=null){
         if(UCookie::isSet('PHPSESSID'))
         {
             if(session_status() == PHP_SESSION_NONE)
@@ -79,7 +79,7 @@ class CUser
             }
         }
         $view = new VUser();
-        $view->login();
+        $view->login($modalSuccess);
     }
 
     /**
@@ -89,9 +89,9 @@ class CUser
      * @param mixed $modalSuccess
      * @return void
      */
-    public static function register(?string $modalSuccess=null){
+    public static function register(){
         $view = new VUser();
-        $view->register($modalSuccess);
+        $view->register();
     }
 
     /**

@@ -207,6 +207,7 @@ class FReport {
     public function getAllReport():array
     {
         $db=FConnection::getInstance()->getConnection();
+        $reports=[];
         try
         {
             $q="SELECT id

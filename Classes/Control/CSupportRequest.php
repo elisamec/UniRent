@@ -177,7 +177,7 @@ class CSupportRequest
         $supportRequest= new ESupportRequest(null, 'A student is trying to register with the following email, which is not accepted by the system: '. $mail. '. This is the university: '. $university. ' of this city: '.$city, TRequestType::REGISTRATION, null, null);
         $PM=FPersistentManager::getInstance();
         $res=$PM->store($supportRequest);
-        $res ? header('Location:/UniRent/User/showRegistration/success') : header('Location:/UniRent/User/showRegistration/error');
+        $res ? header('Location:/UniRent/User/login/success') : header('Location:/UniRent/User/login/error');
     }
     
     /**

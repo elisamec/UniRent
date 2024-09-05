@@ -203,7 +203,6 @@
       </div>
    </div>
 </div>
-
 <!-- JavaScript variables -->
 <script>
    var file = 'register';
