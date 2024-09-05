@@ -254,7 +254,7 @@ class EOwner
      * @return void
      */
     public function setPassword(string $password):void {
-        $this->password=password_hash($password, PASSWORD_DEFAULT);
+        $this->password=EOwner::isPasswordHashed($password) ? $password : password_hash($password, PASSWORD_DEFAULT);
     }
 
     /**
@@ -353,6 +353,6 @@ class EOwner
      */
     public function __toString():string
     {
-        return 'ID: '. $this->id. ', Username: '. $this->username. ', Password: '. $this->password. ', Name: '. $this->name. ', Surname: '. $this->surname. ', E-Mail: '.$this->email.', Phone Number: '. $this->phoneNumber. ', IBAN: '.$this->iban . ', Status: '.$this->status;
+        return 'ID: '. $this->id. ', Username: '. $this->username. ', Password: '. $this->password. ', Name: '. $this->name. ', Surname: '. $this->surname. ', E-Mail: '.$this->email.', Phone Number: '. $this->phoneNumber. ', IBAN: '.$this->iban . ', Status: '.$this->status->value;
     }
 }

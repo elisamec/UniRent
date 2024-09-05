@@ -380,7 +380,7 @@ class EStudent
      */
     public function setPassword(string $password)
     {
-        $this->password=password_hash($password, PASSWORD_DEFAULT);
+        $this->password=EStudent::isPasswordHashed($password) ? $password : password_hash($password, PASSWORD_DEFAULT);
     }    
     /**
      * setName

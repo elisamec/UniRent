@@ -180,7 +180,6 @@ class COwner
         $session=USession::getInstance();
         $error = 0;
         $PM=FPersistentManager::getInstance();
-        
 
         //Reed the data from the form
         $name=USuperGlobalAccess::getPost('name');
@@ -188,14 +187,12 @@ class COwner
         $picture = USuperGlobalAccess::getPhoto('img');
         $newemail=USuperGlobalAccess::getPost('email');
         $newUsername=USuperGlobalAccess::getPost('username');
+        $oldPassword=USuperGlobalAccess::getPost('oldPassword');
         $newPassword=USuperGlobalAccess::getPost('password');
         $newPhoneNumber=EOwner::formatPhoneNumber(USuperGlobalAccess::getPost('phoneNumber'));
         $newIBAN=USuperGlobalAccess::getPost('iban');
-        $oldUsername=$session->getSessionElement('username');
 
         $ownerId=$session->getSessionElement('id');
-        $oldPassword=USuperGlobalAccess::getPost('oldPassword');
-
         
 
         if($ownerId===null)
@@ -206,27 +203,30 @@ class COwner
         }
         else
         {
-            $owner=$PM->load("EOwner", $ownerId);   
-            
+
+            $owner=$PM->load("EOwner", $ownerId);
+
             $oldPhoto = $owner->getPhoto();
 
             if(!is_null($oldPhoto)){
                 $photoError = $oldPhoto->getPhoto();
                 $photoError = "data:" . 'image/jpeg' . ";base64," . base64_encode($photoError);
-            } else $photoError = null;
+            } else $photoError = null;   
             
             if(($newemail===$owner->getMail())||($PM->verifyUserEmail($newemail)===false))
             {
                 if(($newUsername===$owner->getUsername())||($PM->verifyUserUsername($newUsername)===false))
                 {
                     if(($newPhoneNumber==$owner->getPhoneNumber())||($PM->verifyPhoneNumber($newPhoneNumber)===false))
-                    {
+                    {   
+                        
                         if(($newIBAN===$owner->getIban())||($PM->verifyIBAN($newIBAN)===false))
-                        {   
+                        {                               
+
                             $passChange = COwner::changePassword($oldPassword, $newPassword, $owner, $photoError);
-                            $newPassword = $passChange[0];
+                            $password = $passChange[0];
                             $error = $passChange[1];
-                            
+
                             $photo = COwner::changePhoto($oldPhoto, $picture);
 
                             $owner->setName($name);
@@ -234,15 +234,15 @@ class COwner
                             $owner->setPhoto($photo);
                             $owner->setMail($newemail);
                             $owner->setUsername($newUsername);
-                            $owner->setPassword($newPassword);
+                            $owner->setPassword($password);
                             $owner->setPhoneNumber($newPhoneNumber);
                             $owner->setIban($newIBAN);
-                            #$owner = new EOwner($ownerId, $newUsername, $newPassword, $name, $surname, $photo, $newemail, $newPhoneNumber, $newIBAN);
+
                             $result=$PM->update($owner);
+
                             if($result  && !$error)
                             {   
-                                $ph = $photo->getPhoto();
-                                if (is_null($ph)) $ph = null;
+
                                 $session->setSessionElement('username', $newUsername);
                                 header("Location:/UniRent/Owner/profile");
                             }
@@ -255,25 +255,21 @@ class COwner
                         else
                         {
                             $view->editProfile($owner, $picture, false, false, false, true, false, false); //Iban already in use
-                            #header('Location:/UniRent/Owner/profile');
                         }
                     }
                     else
                     {
                         $view->editProfile($owner, $picture, false, false, true, false, false, false); //phone already in use
-                        #header('Location:/UniRent/Owner/profile');
                     }
                 }
                 else
                 {   
                     $view->editProfile($owner, $picture, true, false, false, false, false, false); //Username already in use
-                    #header('Location:/UniRent/Owner/profile');
                 }
             }
             else
             {   
                 $view->editProfile($owner, $picture, false, true, false, false, false, false); //Email already in use
-                #header('Location:/UniRent/Owner/profile');
             }
         }
     }
@@ -322,15 +318,16 @@ class COwner
      * @param string $formOldPassword The old password entered in the form.
      * @param string $newPassword The new password to be set.
      * @param object $owner The owner object.
-     * @param string $photoError The error message related to the photo upload.
+     * @param string $photoError The error photo related to the photo upload.
      * @return array The updated owner details.
      */
     private static function changePassword($formOldPassword, $newPassword, $owner, $photoError):array{
 
+
         $view = new VOwner();
         $error = 0;
 
-        $oldPassword = $owner->getPassword();
+        $oldPassword = $owner->getPassword(); //From db
 
         if($newPassword === ''){
             //If i don't have any new password, i'll use the old one
@@ -348,11 +345,13 @@ class COwner
                 
             } else {
                 $error = 1;
-                $view->editProfile($owner, $photoError, false, false, false, false, true, false);
                 $password=$oldPassword;
+                $view->editProfile($owner, $photoError, false, false, false, false, true, false);
+                
             }
         }
-
+        
+        var_dump($password);
         return [$password, $error];
     }
 
@@ -510,7 +509,6 @@ class COwner
         {
             $owner_photo_64=EPhoto::toBase64(array($owner_photo));
             $owner->setPhoto($owner_photo_64[0]);
-            #print_r($owner);
         }
 
         $reviewsData = CReview::getProfileReviews($owner->getId(), TType::OWNER);

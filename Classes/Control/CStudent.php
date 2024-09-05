@@ -468,8 +468,6 @@ class CStudent{
                 
                 if($result && !$error){
                     
-                    !is_null($photo) ? $ph = $photo->getPhoto() : $ph=null;
-                    
                     $session->setSessionElement('username',$afp['username']);
                     header('Location:/UniRent/Student/profile/success');
 
