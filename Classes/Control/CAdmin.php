@@ -18,6 +18,13 @@ use DateTime;
 use Classes\Tools\TStatusSupport;
 use Classes\Utilities\UFormat;
 
+/**
+ * Class CAdmin
+ * 
+ * This class is responsible for managing the admin's actions
+ * 
+ * @package Classes\Control
+ */
 class CAdmin
 {
     /**

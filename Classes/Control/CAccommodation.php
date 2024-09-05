@@ -14,8 +14,12 @@ use DateTime;
 
 require __DIR__.'/../../vendor/autoload.php';
 
-class CAccommodation
-{
+/** * 
+ * This class is responsible for managing accommodations.
+ * 
+ * @package Classes\Control
+ */
+class CAccommodation {
 
     /**
      * Method addAccommodation

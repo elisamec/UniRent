@@ -20,6 +20,13 @@ use DateTime;
 
 require __DIR__.'/../../vendor/autoload.php';
 
+/**
+ * Class CContract
+ * 
+ * This class is responsible for managing contracts
+ * 
+ * @package Classes\Control
+ */
 class CContract
 {
     /**
@@ -233,7 +240,7 @@ class CContract
             $cardHolder = $creditCard->getName() . " ". $creditCard->getSurname();
             $view= new VStudent();
             $leavebleReviews=$PM->remainingReviewStudentToAccommodation($session->getSessionElement('id'), $accommodation->getIdAccommodation());
-            $tenantsArray= $PM->getTenants('current',$accomm->getIdOwner());
+            $tenantsArray= $PM->getTenants('current',$accommodation->getIdOwner());
             $tenants=array();
             foreach ($tenantsArray as $idAccommodation => $students) {
                 $accommodationTitle = FPersistentManager::getInstance()->getTitleAccommodationById($idAccommodation);
