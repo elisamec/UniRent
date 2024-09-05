@@ -453,16 +453,7 @@ class COwner
         $view->guidelines();
     }
 
-    //Da spostare in CReview
-    public static function reviews(?string $modalSuccess=null) :void {
-        self::checkIfOwner();
-        $view = new VOwner();
-        $session=USession::getInstance();
-        $id=$session->getSessionElement('id');
-        $reviewsData = CReview::getProfileReviews($id, TType::OWNER);
-        
-        $view->reviews($reviewsData, $modalSuccess);
-    }
+   
 
     /**
      * Method publicProfileFromOwner
