@@ -275,7 +275,6 @@ class CStudent{
         self::checkIfStudent();
         $view = new VStudent();
         $PM = FPersistentManager::getInstance();
-
         $accomm = $PM->load('EAccommodation', $idAccommodation);
         $student = $PM->load('EStudent', USession::getInstance()->getSessionElement('id'));
         if ($accomm->getWoman() && $accomm->getMan()) {
@@ -314,61 +313,16 @@ class CStudent{
         }
         
         $owner = $PM->load('EOwner', $accomm->getIdOwner());
-        $owner_photo=$owner->getPhoto();
-        $ownerStatus = $owner->getStatus();
-        if($ownerStatus === TStatusUser::BANNED){
-            
-            $path = __DIR__ . "/../../Smarty/images/BannedUser.png";
-            $owner_photo = new EPhoto(null, file_get_contents($path), 'other', null);
-            $owner_photo_64=EPhoto::toBase64(array($owner_photo));
-            $owner->setPhoto($owner_photo_64[0]);
-        }
-        elseif(!is_null($owner_photo))
-        {
-            $owner_photo_64=EPhoto::toBase64(array($owner_photo));
-            $owner->setPhoto($owner_photo_64[0]);
-        }
-        
+        UFormat::photoFormatUser($owner);
         $reviews = $PM->loadByRecipient($accomm->getIdAccommodation(), TType::ACCOMMODATION);
         $reviewsData = [];
         
         foreach ($reviews as $review) {
             $author=$PM->load('EStudent', $review->getIdAuthor());
-            if ($review->isBanned()) {
-                continue;
-            }
-            $authorStatus = $author->getStatus();
-            $profilePic = $author->getPhoto();
-            if($authorStatus === TStatusUser::BANNED){
-                $profilePic = "/UniRent/Smarty/images/BannedUser.png";
-            }
-            elseif ($profilePic === null) {
-                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
-            }
-            else
-            {
-                $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
-            }
-            if ($review->getDescription()===null) {
-                $content='No additional details were provided by the author.';
-            }
-            else
-            {
-                $content=$review->getDescription();
-            }
-            $reviewsData[] = [
-                'id' => $review->getId(),
-                'title' => $review->getTitle(),
-                'username' => $author->getUsername(),
-                'userStatus' => $author->getStatus()->value,
-                'stars' => $review->getValutation(),
-                'content' => $content,
-                'userPicture' => $profilePic,
-            ];
+            $reviewsData[] = UFormat::reviewsFormatUser($author, $review);
         }
         $data=$accomm->getStart()->format('m');
-        if($data=='09'){$period='september';}
-        else{$period='october';}
+        $period=$data=='09' ? 'september':'october';
         $visits=$accomm->getVisit();
         $booked=$PM->loadVisitsByWeek();
         $studBooked=false;
@@ -502,29 +456,21 @@ class CStudent{
      * @return array
      */
     private static function changePassword($formOldPassword, $newPassword, $oldStudent, $photoError):array{
-
         $view = new VStudent();
         $error = 0;
-
         $oldPassword = $oldStudent->getPassword();
-
         if($newPassword===''){
             //If i don't have any new password, i'll use the old one
             $password=$oldPassword;
         } else {
-            
             //If the old password is correct
             if(password_verify($formOldPassword, $oldPassword)){
-
                 //If the new password is not valid
                 if(!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()])[A-Za-z\d@$!%*?&()]{8,}$/' , $newPassword)){
-
                     $error = 1;
                     $password=$oldPassword;
                     $view->editProfile($oldStudent, $photoError, true, false, false, false, null);
-
                 } else $password=$newPassword;
-            
             //If the old password (typed by user) is incorrect
             } else {
                 $error = 1;
@@ -729,16 +675,8 @@ class CStudent{
         $date=USuperGlobalAccess::getPost('date');
         $year_2=$year+1;
         $date_2=null;
-        if($date=='September' or $date=='september')
-        {
-            $date=9;
-            $date_2=6;
-        }
-        else
-        {
-            $date=10;
-            $date_2=7;
-        }
+        $date= $date=='September' or $date=='september'? 9 : 10;
+        $date_2=$date-3;
         $result=$PM->reserve($idAccommodation,$year,$date,$year_2,$date_2,$student_id);
         if (!$result) {
             $viewError=new VError();
