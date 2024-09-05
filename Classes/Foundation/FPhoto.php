@@ -6,6 +6,11 @@ use Classes\Entity\EPhoto;
 use PDO;
 use PDOException;
 
+/**
+ * This class is a foundation class and is used to manage the photos of the accommodations
+ * 
+ * 
+ */
 class FPhoto {
     private static $instance=null;
 
@@ -194,8 +199,6 @@ class FPhoto {
             
             $stm->execute();
             $id=$db->lastInsertId();
-            //$db->commit();
-            //$db->exec('UNLOCK TABLES');
             $EPhoto->setId($id);
             return true;
         }      
@@ -228,7 +231,6 @@ class FPhoto {
 
                 $photo = $ph->getPhoto();
                 $relative = $ph->getRelativeTo();
-                //$id = $ph->getIdAccommodation();
 
                 $q='INSERT INTO photo (photo, relativeTo, idAccommodation) ';
                 $q=$q.' VALUES (:photo, :relativeTo, :idAccommodation)';
@@ -349,7 +351,6 @@ class FPhoto {
             $stm->bindValue(':idAccommodation',$idAccommodation, PDO::PARAM_INT);
             $stm->bindValue(':relativeTo','accommodation', PDO::PARAM_STR);
             $stm->execute();    
-            //$db->commit();
             $db->exec('UNLOCK TABLES');
 
             return true;

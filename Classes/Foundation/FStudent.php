@@ -170,12 +170,11 @@ class FStudent
             }
             catch(PDOException $e)
             {
-                print ' commit ha lanciato la exception!';
                 $db->rollBack();
                 $errorType = TError::getInstance()->handleDuplicateError($e);
                 if ($errorType) 
                 {
-                    echo "Error: " . $errorType . "\n"; //quando faremo view leghiamolo a view
+                    echo "Error: " . $errorType . "\n"; 
                 } else 
                 {
                     echo "An unexpected error occurred: " . $e->getMessage() . "\n";

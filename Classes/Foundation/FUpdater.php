@@ -184,7 +184,6 @@ class FUpdater
                 if($result)
                 {
                     Updater::getInstance()->updateDayFile($d,1);
-                    #print 'ok';
                 }
                 $db->exec('UNLOCK TABLES');
                 return;

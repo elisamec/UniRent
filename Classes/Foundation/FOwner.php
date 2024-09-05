@@ -175,11 +175,7 @@ use PDORow;
             $stm->bindValue(':phone', $owner->getPhoneNumber(), PDO::PARAM_STR);
             $stm->bindValue(':iban', $owner->getIBAN(), PDO::PARAM_STR);
             $stm->bindValue(':status', $owner->getStatus()->value, PDO::PARAM_STR);
-            print 'prima di execute';
             $stm->execute();
-            print 'dopo execute';
-            //$db->commit();
-            print 'dopo commit';
             $db->exec('UNLOCK TABLES');
             return true;
             

@@ -96,8 +96,6 @@
 
             $photos = $FP->loadAccommodation($idAccommodation);
             $row=$stm->fetch(PDO::FETCH_ASSOC);
-            //print "Ho recuperato le seguenti info per l'accomodation con id $idAccommodation <br>";
-            //var_dump($row); //row è false per qualche motivo
             $address = new Address();
             $address = $FA->loadAddress($row['address']);
             $start = new DateTime($row['start']);
@@ -293,8 +291,7 @@
                     $tmp = $FA -> storeDay($id, $day);
 
                     foreach ($visit[$day] as $time){
-                       $result = $FA -> storeTime($tmp, $time);
-                       print $time;
+                       $FA -> storeTime($tmp, $time);
                     }
                 }
 
@@ -437,19 +434,6 @@
         * @param  EAccommodation $accommodation
         * @return bool
         */
-        /*public function update(EAccommodation $accommodation):bool {
-
-            $FA=FAccommodation::getInstance();
-
-            $idAccommodation = $accommodation->getIdAccommodation();
-
-            $delete = $FA->delete($idAccommodation);
-
-            $delete ? $store = $FA->store($accommodation) : $store = false;
-
-            return $store;
-        }*/
-
         public function update(EAccommodation $accommodation):bool {
            
             $FA=FAccommodation::getInstance();
@@ -807,12 +791,12 @@
          * 
          * this method return an array of EAccommodations with give specifics
          *
-         * @param $city $city [city]
-         * @param $date $date [month's of start]
-         * @param $rateA $rateA [accommodation's rating]
-         * @param $rateO $rateO [owner's rating]
-         * @param $minPrice $minPrice [min Price]
-         * @param $maxPrice $maxPrice [max Price]
+         * @param $city city 
+         * @param $date date 
+         * @param $rateA rateA 
+         * @param $rateO rateO 
+         * @param $minPrice minimum Price 
+         * @param $maxPrice maximum Price 
          *
          * @return array
          */
@@ -894,18 +878,18 @@
          * 
          * this method return an array of EAccommodation with the given specifics
          *
-         * @param $city $city [city]
-         * @param $date $date [month's of start]
-         * @param $rateA $rateA [Accommodation's rating]
-         * @param $rateO $rateO [Owner's rating]
-         * @param $minPrice $minPrice [min Pirice]
-         * @param $maxPrice $maxPrice [max Price]
-         * @param EStudent $student $student [object EStudent]
-         * @param int $year $year [year]
+         * @param $city accommodation's city
+         * @param $date date
+         * @param $rateA rateA
+         * @param $rateO rateO
+         * @param $minPrice minimum Price
+         * @param $maxPrice maximum Price
+         * @param EStudent $student student
+         * @param int $year year
          *
-         * 
+         * @return array
          */
-        public function findAccommodationsStudent($city,$date,$rateA,$rateO,$minPrice,$maxPrice,EStudent $student,int $year)
+        public function findAccommodationsStudent($city,$date,$rateA,$rateO,$minPrice,$maxPrice,EStudent $student,int $year) :array
         {
             $result=array();
             $db=FConnection::getInstance()->getConnection();
@@ -996,6 +980,11 @@
             return $result;
         }
 
+        /**
+         * Method lastAccommodationUser
+         * 
+         * @return array
+         */
         public function lastAccommodationsUser():array
         {
             $result=array();
@@ -1044,6 +1033,13 @@
             return $result;
         }
 
+        /**
+         * Method lastAccommodationsStudent
+         * 
+         * @param EStudent $student student
+         * 
+         * @return array
+         */
         public function lastAccommodationsStudent(EStudent $student):array
         {
             $result=array();
@@ -1120,7 +1116,15 @@
 
         }
 
-
+        /**
+         * Method loadByOwner
+         * 
+         * this method return an array of EAccommodations with the given owner
+         * 
+         * @param int $idOwner owner's id
+         * 
+         * @return array|null
+         */
         public function loadByOwner(int $idOwner): ?array
         {
             $result=array();
@@ -1151,7 +1155,16 @@
             return $result;
         }
 
-        public function findAccommodationRating($id):int
+        /**
+         * Method findAccommodationRating
+         * 
+         * this method return the average rating of an accommodation
+         * 
+         * @param int $id accommodation's id
+         * 
+         * @return int
+         */
+        public function findAccommodationRating(int $id):int
         {
             $db=FConnection::getInstance()->getConnection();
             try
@@ -1189,8 +1202,8 @@
          * 
          * this method return true if there are free places in the accommodation
          *
-         * @param int $idAccommodation [accommodation's id]
-         * @param int $year [year]
+         * @param int $idAccommodation accommodation's id]
+         * @param int $year year
          *
          * @return bool
          */
@@ -1239,7 +1252,17 @@
                 }
             }
         }
-        public function getTitleById(int $id) {
+
+        /**
+         * Method getTitleById
+         * 
+         * this method return the title of an accommodation
+         * 
+         * @param int $id accommodation's id
+         * 
+         * @return string
+         */
+        public function getTitleById(int $id):string {
             $db=FConnection::getInstance()->getConnection();
             try
             {

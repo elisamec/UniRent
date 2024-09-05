@@ -79,7 +79,6 @@ class FContract
      */
     public function store(EContract $con):bool
     {   
-        print $con->getID();
         if(FReservation::getInstance()->exist($con->getID())===false)  //if dose not exist the reservation
         {
             return false;  //return store and not store the contract

@@ -318,7 +318,6 @@ class CStudent{
         {
             $owner_photo_64=EPhoto::toBase64(array($owner_photo));
             $owner->setPhoto($owner_photo_64[0]);
-            #print_r($owner);
         }
         
         $reviews = $PM->loadByRecipient($accomm->getIdAccommodation(), TType::ACCOMMODATION);
@@ -657,7 +656,6 @@ class CStudent{
         {
             $student_photo_64=EPhoto::toBase64(array($student_photo));
             $student->setPhoto($student_photo_64[0]);
-            #print_r($owner);
         }
         
         foreach ($reviews as $review) {
@@ -715,7 +713,6 @@ class CStudent{
         {
             $student_photo_64=EPhoto::toBase64(array($student_photo));
             $student->setPhoto($student_photo_64[0]);
-            #print_r($owner);
         }
         
         foreach ($reviews as $review) {
