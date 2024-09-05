@@ -547,7 +547,7 @@
         var successReserve = '{$successReserve}';
         var booked = '{$booked}';
         var notReservable = '{$disabled}';
-        var accommodationPeriod = {$period} === "september" ? 8 : 9;
+        var accommodationPeriod = '{$period}' === "september" ? 8 : 9;
       </script>
       <script src="/UniRent/Smarty/js/jquery.min.js"></script>
       <script src="/UniRent/Smarty/js/popper.min.js"></script>
