@@ -189,7 +189,9 @@
                         {if $accommodation->getDeposit() !== null}
                         <h2>Deposit: {$accommodation->getDeposit()} €</h2>
                         {/if}
-                        
+                        <h1 class="title">Current Tenants</h1>
+                        <div class="row" id="tenantCont">
+                        </div>
 
                         <div class="row">
                         <h1 class="title"> Reviews</h1>
@@ -391,6 +393,7 @@
         const images = {$imagesJson};
         var modalSuccess= '{$modalSuccess}';
         const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
+        var tenants = {$tenantsJson};
         const user ='Student';
     </script>
       <script src="/UniRent/Smarty/js/jquery.min.js"></script>
@@ -406,5 +409,6 @@
       <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
+        <script src="/UniRent/Smarty/js/UniRentOriginal/tenants.js"></script>
 </body>
 </html>
