@@ -726,55 +726,70 @@ if (reserveModal && notReservableModal && successReserveModal) {
         }
         
         function createCreditCardRadioButtons(creditCardData) {
-            var container = document.getElementById('creditCardContainer');
-            container.innerHTML = ''; // Clear existing content
-            creditCardData.forEach(function(card, index) {
-                var radioBtn = document.createElement('input');
-                radioBtn.type = 'radio';
-                radioBtn.name = 'creditCardNumber';
-                radioBtn.value = card.cardNumber;
-                radioBtn.id = 'card' + index;
-                if (card.main) {
-                    radioBtn.checked = true;
-                }
-    
-                var label = document.createElement('label');
-                label.htmlFor = 'card' + index;
-                label.textContent = card.cardName + ' (' + card.cardNumberHidden + ')';
-    
-                container.appendChild(radioBtn);
-                container.appendChild(label);
-                container.appendChild(document.createElement('br'));
-    
-                // Add event listener to hide new card form if this button is clicked
-                radioBtn.addEventListener('click', function() {
-                    document.getElementById('newCardContainer').style.display = 'none';
-                    toggleRequired(false);
-                });
-            });
-    
-            // Add option for inserting a new card
-            var newCardRadioBtn = document.createElement('input');
-            newCardRadioBtn.type = 'radio';
-            newCardRadioBtn.name = 'creditCard';
-            newCardRadioBtn.value = 'newCard';
-            newCardRadioBtn.id = 'newCard';
-            newCardRadioBtn.onclick = function() {
-                document.getElementById('newCardContainer').style.display = 'block';
-                toggleRequired(true);
-            };
-    
-            var newCardLabel = document.createElement('label');
-            newCardLabel.htmlFor = 'newCard';
-            newCardLabel.textContent = 'Insert a new card';
-    
-            container.appendChild(newCardRadioBtn);
-            container.appendChild(newCardLabel);
-            container.appendChild(document.createElement('br'));
-        }
-    
-        // Call the function to create radio buttons
-        createCreditCardRadioButtons(creditCardData);
+          var container = document.getElementById('creditCardContainer');
+          container.innerHTML = ''; // Clear existing content
+          
+          // Track if any cards are available and if one was selected
+          var cardSelected = false;
+          
+          creditCardData.forEach(function(card, index) {
+              var radioBtn = document.createElement('input');
+              radioBtn.type = 'radio';
+              radioBtn.name = 'creditCardNumber'; // Ensure same name for all radio buttons
+              radioBtn.value = card.cardNumber;
+              radioBtn.id = 'card' + index;
+      
+              if (card.main) {
+                  radioBtn.checked = true;
+                  cardSelected = true; // Mark that a card has been selected
+              }
+      
+              var label = document.createElement('label');
+              label.htmlFor = 'card' + index;
+              label.textContent = card.cardName + ' (' + card.cardNumberHidden + ')';
+      
+              container.appendChild(radioBtn);
+              container.appendChild(label);
+              container.appendChild(document.createElement('br'));
+      
+              // Add event listener to hide new card form if this button is clicked
+              radioBtn.addEventListener('click', function() {
+                  document.getElementById('newCardContainer').style.display = 'none';
+                  toggleRequired(false);
+              });
+          });
+      
+          // Add option for inserting a new card
+          var newCardRadioBtn = document.createElement('input');
+          newCardRadioBtn.type = 'radio';
+          newCardRadioBtn.name = 'creditCardNumber'; // Ensure same name for new card option
+          newCardRadioBtn.value = 'newCard';
+          newCardRadioBtn.id = 'newCard';
+          
+          // Auto-select new card option if no other card is selected
+          if (!cardSelected) {
+              newCardRadioBtn.checked = true;
+              document.getElementById('newCardContainer').style.display = 'block';
+              toggleRequired(true);
+          }
+      
+          newCardRadioBtn.onclick = function() {
+              document.getElementById('newCardContainer').style.display = 'block';
+              toggleRequired(true);
+          };
+      
+          var newCardLabel = document.createElement('label');
+          newCardLabel.htmlFor = 'newCard';
+          newCardLabel.textContent = 'Insert a new card';
+      
+          container.appendChild(newCardRadioBtn);
+          container.appendChild(newCardLabel);
+          container.appendChild(document.createElement('br'));
+      }
+      
+      // Call the function to create radio buttons
+      createCreditCardRadioButtons(creditCardData);
+      
     
         // Function to toggle the required attribute of the new card input fields
         function toggleRequired(isRequired) {

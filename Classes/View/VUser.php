@@ -46,10 +46,10 @@ class VUser{
     /**
      * Renders the login view.
      *
-     * @param string $modalSuccess The success message for the modal .
+     * @param ?string $modalSuccess The success message for the modal .
      * @return void
      */
-    public function login(string $modalSuccess):void {
+    public function login(?string $modalSuccess):void {
         $this->smarty->assign('usernameError', false);
         $this->smarty->assign('passwordError', false);
         $this->smarty->assign('usernameRight', '');

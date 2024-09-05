@@ -11,11 +11,16 @@ use Classes\Utilities\USession;
 use CommerceGuys\Addressing\Address;
 use Classes\View\VError;
 use DateTime;
+use Classes\Utilities\UFormat;
 
 require __DIR__.'/../../vendor/autoload.php';
 
-class CAccommodation
-{
+/** * 
+ * This class is responsible for managing accommodations.
+ * 
+ * @package Classes\Control
+ */
+class CAccommodation {
 
     /**
      * Method addAccommodation
@@ -182,6 +187,27 @@ class CAccommodation
             $result=FPersistentManager::getInstance()->update($accomodation);
             $id = $accomodation->getIdAccommodation();
             $result ? header('Location:/UniRent/Owner/accommodationManagement/'.$id.'/success') : header('Location:/UniRent/Owner/accommodationManagement/'.$id.'/error');
+    }
+    /**
+     * Method viewOwnerAds
+     * This method is used to show the owner's ads
+     * @param int $id [owner ID]
+     * @return void
+     */
+    public static function viewOwnerAds(int $id) {
+        CStudent::checkIfStudent();
+        $view = new VOwner();
+        $PM=FPersistentManager::getInstance();
+        $accommodationEntities=$PM->loadAccommodationsByOwner($id);
+        $username=$PM->getUsernameByOwnerId($id);
+        $accommodations=[];
+        foreach($accommodationEntities as $accom) {
+            $photo=count($accom->getPhoto())==0?null:"data:".'image/jpeg'.";base64,".base64_encode((($accom->getPhoto())[0])->getPhoto());
+            if ($accom->getStatus() == true) {
+                $accommodations[]=UFormat::formatAccommodationAds($accom, $photo);
+        }
+        }
+        $view->viewOwnerAds($accommodations, $username);
     }
     
 }

@@ -8,12 +8,8 @@ use PDOException;
 use Configuration\Config;
 /**
  * The class FConnection provide to connect to database.
- * @author Matteo Maloni ('UniRent')
+ * 
  * @package Foundation
- */
-
-/**
- * FConnection
  */
 class FConnection
 {

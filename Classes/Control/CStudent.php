@@ -261,7 +261,16 @@ class CStudent{
             exit();
         }
     }
-    // questa va accorciata di molto
+    
+    /**
+     * Method accommodation
+     * 
+     * @param int $idAccommodation
+     * @param string $successVisit
+     * @param string $successReserve
+     *  
+     * @return void
+     */
     public static function accommodation(int $idAccommodation, string $successVisit='null', string $successReserve='null') {
         self::checkIfStudent();
         $view = new VStudent();
@@ -405,21 +414,6 @@ class CStudent{
         }
         $leavebleReviews=$PM->remainingReviewStudentToAccommodation($session->getSessionElement('id'), $accomm->getIdAccommodation());
         $view->accommodation($accomm, $owner, $reviewsData, $period, $picture, $visits, $visitDuration, $tenants, $num_places, $studBooked, $dayOfBooking, $timeOfBooking, $disabled, $successReserve, $successVisit, $leavebleReviews, $year);
-    }
-    /**
-     * Method reviews
-     *
-     * this method is used to show the student's reviews
-     * @param ?string $modalSuccess [explicite description]
-     *
-     * @return void
-     */
-    public static function reviews(?string $modalSuccess=null) {
-        self::checkIfStudent();
-        $view = new VStudent();
-        $session=USession::getInstance();
-        $reviewsData = CReview::getProfileReviews($session->getSessionElement('id'), TType::STUDENT);
-        $view->reviews($reviewsData, $modalSuccess);
     }
     /**
      * Method modifyStudentProfile
@@ -695,6 +689,16 @@ class CStudent{
         $leavebleReviews=$PM->remainingReviewStudentToStudent($session->getSessionElement('id'), $student->getId());
         $view->publicProfileFromStudent($student, $reviewsData, $self, $leavebleReviews, $modalSuccess);
     }
+
+    /**
+     * Method publicProfileFromOwner
+     *
+     * this method show the public profile of a student to an owner
+     * @param string $username 
+     * @param ?string $modalSuccess 
+     *
+     * @return void
+     */
     public static function publicProfileFromOwner(string $username, ?string $modalSuccess=null)
     {   COwner::checkIfOwner();
         $view = new VStudent();
@@ -774,78 +778,6 @@ class CStudent{
         $cards =$PM->loadStudentCards($studentId);
         $cardsData=UFormat::creditCardFormatArray($cards);
         $view->paymentMethods($cardsData, $modalSuccess);
-    }         
-    /**
-     * Method postedReview
-     *
-     * this method is used to take the reviews written by a student (by his ID)
-     * @param ?string $modalSuccess [explicite description]
-     *
-     * @return void
-     */
-    public static function postedReview(?string $modalSuccess=null) {
-        self::checkIfStudent();
-        $view = new VStudent();
-        $session=USession::getInstance();
-        $studentId=$session->getSessionElement('id');
-        $PM=FPersistentManager::getInstance();
-        $reviews = $PM->loadReviewsByAuthor($studentId, TType::STUDENT);
-        $reviewsData = [];
-
-        foreach ($reviews as $review) {
-            $recipient = $PM->load( 'E' . ucfirst($review->getRecipientType()->value), $review->getIdRecipient());
-            if ($review->isBanned()) {
-                continue;
-            }
-            $profilePic = $recipient->getPhoto();
-            if ($recipient->getStatus() === TStatusUser::BANNED) {
-                $profilePic = "/UniRent/Smarty/images/BannedUser.png";
-            } else if ($profilePic === null) {
-                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
-            } else if (gettype($profilePic) === 'array') {
-
-                if(count($profilePic)==0) #if the accommodation has no photos
-                {
-                    $profilePic = "/UniRent/Smarty/images/noPic.png";
-                }
-                else
-                {
-                    $profilePic = $profilePic[0];
-                    $profilePic=(EPhoto::toBase64(array($profilePic))[0])->getPhoto();
-                }
-            }
-            else
-            {
-                $profilePic=(EPhoto::toBase64(array($profilePic))[0])->getPhoto();
-            }
-            if ($review->getRecipientType()->value === 'accommodation') {
-                $username = $recipient->getTitle();
-                $status = $recipient->getStatus();
-            } else {
-                $username = $recipient->getUsername();
-                $status = $recipient->getStatus()->value;
-            }
-            if ($review->getDescription()===null) {
-                $content='No additional details were provided by the author.';
-            }
-            else
-            {
-                $content=$review->getDescription();
-            }
-            $reviewsData[] = [
-                'title' => $review->getTitle(),
-                'username' => $username,
-                'userStatus' => $status,
-                'stars' => $review->getValutation(),
-                'content' => $content,
-                'userPicture' => $profilePic,
-                'id'=> $review->getId(),
-                'type' => ucfirst($review->getRecipientType()->value),
-                'idRecipient' => $review->getIdRecipient(),
-                'reported' => $review->isReported()
-            ];
-        }
-        $view->postedReview($reviewsData, $modalSuccess);
     }
     /**
      * Method reserveAccommodation

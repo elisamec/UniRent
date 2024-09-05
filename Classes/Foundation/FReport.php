@@ -8,6 +8,11 @@ use DateTime;
 use PDO;
 use PDOException;
 
+/**
+ * This class provides all the methods to interact with the database about the reports
+ * 
+ * @package Classes\Foundation
+ */
 class FReport {
     private static $instance=null;
 
@@ -26,6 +31,12 @@ class FReport {
         return self::$instance;
     }
 
+    /**
+     * Check if a report exists.
+     *
+     * @param int $idReport The ID of the report to check.
+     * @return bool Returns true if the report exists, false otherwise.
+     */
     public function exist(int $idReport):bool 
     {
         $q="SELECT * FROM report WHERE id=:idReport";
@@ -40,6 +51,13 @@ class FReport {
         if ($result >0) return true;
         return false;
     }
+
+    /**
+     * Loads a report by its ID.
+     *
+     * @param int $idReport The ID of the report to load.
+     * @return EReport|bool The loaded report if found, or false if not found.
+     */
     public function load(int $idReport):EReport | bool {
         if ($this->exist($idReport))
         {
@@ -79,6 +97,13 @@ class FReport {
             return false;
         }
     }
+
+    /**
+     * Stores a report.
+     *
+     * @param EReport $report The report to be stored.
+     * @return bool Returns true if the report was successfully stored, false otherwise.
+     */
     public function store(EReport $report):bool {
         try {
             $q="INSERT INTO report (description,banDate,idStudent,idOwner,idReview) VALUES (:description,:banDate,:idStudent,:idOwner,:idReview)";
@@ -118,6 +143,13 @@ class FReport {
             return false;
         }
     }
+
+    /**
+     * Updates a report.
+     *
+     * @param EReport $report The report object to be updated.
+     * @return bool Returns true if the report was successfully updated, false otherwise.
+     */
     public function update(EReport $report):bool {
         try {
             $q="UPDATE report SET description=:description,banDate=:banDate WHERE id=:idReport";
@@ -140,6 +172,13 @@ class FReport {
             return false;
         }
     }
+
+    /**
+     * Deletes a report.
+     *
+     * @param EReport $report The report to be deleted.
+     * @return bool True if the report was successfully deleted, false otherwise.
+     */
     public function delete(EReport $report):bool {
         try {
             $q="DELETE FROM report WHERE id=:idReport";
@@ -158,6 +197,14 @@ class FReport {
             return false;
         }
     }
+
+    /**
+     * Retrieves the last ban report by subject.
+     *
+     * @param int $subjectId The ID of the subject.
+     * @param TType|string $type The type of the report.
+     * @return EReport|bool The last ban report if found, otherwise false.
+     */
     public function getLastBanReportBySubject(int $subjectId, TType | string $type):EReport | bool {
         if (!is_string($type)) {
             $type=$type->value;

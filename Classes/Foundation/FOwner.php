@@ -35,6 +35,12 @@ use PDORow;
         return self::$instance;
     }
 
+    /**
+     * Check if a specific owner exists.
+     *
+     * @param int $id The ID of the owner to check.
+     * @return bool Returns true if the owner exists, false otherwise.
+     */
     public function exist(int $id):bool 
     {
         $db=FConnection::getInstance()->getConnection();
@@ -64,6 +70,12 @@ use PDORow;
 
     }
     
+    /**
+     * Loads an owner by their ID.
+     *
+     * @param int $id The ID of the owner to load.
+     * @return EOwner The loaded owner object.
+     */
     public function load(int $id): EOwner {
         $db=FConnection::getInstance()->getConnection();
         try
@@ -88,6 +100,12 @@ use PDORow;
         return $result;
     }
 
+    /**
+     * Store the given owner object.
+     *
+     * @param EOwner $owner The owner object to be stored.
+     * @return bool Returns true if the owner object was successfully stored, false otherwise.
+     */
     public function store(EOwner $owner):bool {
         $db=FConnection::getInstance()->getConnection();
         try
@@ -135,6 +153,12 @@ use PDORow;
             return false;
         }
     }
+    /**
+     * Updates an owner in the database.
+     *
+     * @param EOwner $owner The owner object to update.
+     * @return bool Returns true if the owner was successfully updated, false otherwise.
+     */
     public static function update(EOwner $owner):bool {
         $db=FConnection::getInstance()->getConnection();
         //if (FOwner::getInstance()->exist($owner->getId())) {
@@ -158,7 +182,6 @@ use PDORow;
                 return false;
             }
             $db->exec('LOCK TABLES owner WRITE');
-            //$db->beginTransaction();
             $q='UPDATE owner SET username = :user, password = :pass, name = :name, surname = :surname, picture = :picture, email = :email, phonenumber = :phone, iban = :iban, status = :status WHERE id = :id';
             $stm = $db->prepare($q);
             $stm->bindValue(':id', $owner->getId(), PDO::PARAM_INT);
@@ -191,8 +214,15 @@ use PDORow;
             }
             return false;
         }
-    //} else return false;
     }
+
+
+    /**
+     * Retrieves the current photo ID for a given owner ID.
+     *
+     * @param int $id The owner ID.
+     * @return int|null The current photo ID, or null if not found.
+     */
     private static function currentPhoto(int $id): ?int {
         $db=FConnection::getInstance()->getConnection();
         try
@@ -213,9 +243,17 @@ use PDORow;
         $photoID=$stm->fetch(PDO::FETCH_ASSOC)['picture'];
         return $photoID;
     }
+
+
+    /**
+     * Deletes an owner from the database.
+     *
+     * @param EOwner $owner The owner object to be deleted.
+     * @return bool Returns true if the owner was successfully deleted, false otherwise.
+     */
     public function delete(EOwner $owner): bool {
         $db=FConnection::getInstance()->getConnection();
-        //$db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+
         try
         {   
             $db->exec('LOCK TABLES owner WRITE');
@@ -236,6 +274,12 @@ use PDORow;
         }
     }
 
+    /**
+     * Verifies the given email.
+     *
+     * @param string $email The email to be verified.
+     * @return bool Returns true if the email is valid, false otherwise.
+     */
     public function verifyEmail(string $email):bool
     {
         $q='SELECT * FROM owner WHERE email=:email';
@@ -257,6 +301,12 @@ use PDORow;
         return false;
     } 
 
+    /**
+     * Verifies the given username.
+     *
+     * @param string $username The username to be verified.
+     * @return bool|int Returns true if the username is valid, otherwise returns false.
+     */
     public function verifyUsername(string $username):bool|int
     {
         $q='SELECT * FROM owner WHERE username=:username';
@@ -383,6 +433,12 @@ use PDORow;
         return $result_array['id'];
     }
 
+    /**
+     * Retrieves the username associated with the given owner ID.
+     *
+     * @param int $id The ID of the owner.
+     * @return string|null The username associated with the owner ID, or null if not found.
+     */
     public function getUsernameByOwnerId(int $id):?string
     {
         $db=FConnection::getInstance()->getConnection();
@@ -444,7 +500,7 @@ use PDORow;
      * Method verifyIBAN
      *
      * this method verify if the iban is already in use
-     * @param $iban $iban [owner's iban]
+     * @param $iban owner's iban 
      *
      * @return bool
      */
@@ -482,7 +538,7 @@ use PDORow;
      * This method return the owners's photo
      * @param $user username
      *
-     * @return int|bool
+     * @return int|bool|null
      */
     public function getPhotoIdByUsername($user):int|bool|null
     {
@@ -510,11 +566,11 @@ use PDORow;
      * Method findOwnerRating
      *
      * this method return the owner's reating
-     * @param $id $id [owner'sID]
+     * @param int $id owner'sID
      *
      * @return int
      */
-    public static function findOwnerRating($id):int
+    public static function findOwnerRating(int $id):int
     {
         $db=FConnection::getInstance()->getConnection();
         try
@@ -550,8 +606,8 @@ use PDORow;
      * Method getTenans
      *
      * this method return an array of EStudent who are tenants of an Owner
-     * @param string $type [past, present or future tenants]
-     * @param int $idOwner [Owner id]
+     * @param string $type 
+     * @param int $idOwner 
      *
      * @return array
      */
@@ -588,22 +644,21 @@ use PDORow;
     }
 
     
+    
     /**
-     * Method getFilterTenants
+     * Retrieves filtered tenants based on specified criteria.
      *
-     * this method return an array which contains the accommodation id as key an as value an array of EStudent as first element and the expiry date as second element
-     * @param $type $type [current/future/past contract]
-     * @param $accommodation_name $accommodation_name [accommodation title]
-     * @param $t_username $t_username [student's username]
-     * @param $t_age $t_age [student'age]
-     * @param $rateT $rateT [student'rating]
-     * @param $date $date [september/october]
-     * @param $men 
-     * @param $women
-     * @param $idOwner
-     * @param $year 
-     *
-     * @return array
+     * @param string $type The type of accommodation.
+     * @param string $accommodation_name The name of the accommodation.
+     * @param string $t_username The username of the tenant.
+     * @param int $t_age The age of the tenant.
+     * @param float $rateT The rental rate.
+     * @param string $date The date of the rental.
+     * @param int $men The number of male tenants.
+     * @param int $women The number of female tenants.
+     * @param int $idOwner The ID of the owner.
+     * @param int $year The year of the rental.
+     * @return array An array of filtered tenants.
      */
     public function getFilterTenants($type,$accommodation_name,$t_username,$t_age,$rateT,$date,$men,$women,$idOwner,$year):array
     {
@@ -739,7 +794,7 @@ use PDORow;
      * 
      * this method return the owner's support replies
      *
-     * @param int $id [explicite description]
+     * @param int $id 
      *
      * @return array
      */
@@ -759,7 +814,6 @@ use PDORow;
                 AND s.idOwner=:id
                 AND s.supportReply IS NOT NULL
                 LOCK IN SHARE MODE";
-            #$db->exec('LOCK TABLES supportrequest READ');
             
             $stm=$db->prepare($q);
             $stm->bindParam(':id',$id,PDO::PARAM_INT);
@@ -768,7 +822,7 @@ use PDORow;
             {
                 $db->commit();
             }
-            #$db->exec('UNLOCK TABLES');
+
         }
         catch(PDOException $e)
         {
@@ -789,6 +843,14 @@ use PDORow;
         }
         return $result;
     }
+
+
+    /**
+     * Retrieves the username by the given ID.
+     *
+     * @param int $id The ID of the user.
+     * @return string|bool The username associated with the ID, or false if not found.
+     */
     public function getUsernameById(int $id): string | bool {
         $db=FConnection::getInstance()->getConnection();
         try

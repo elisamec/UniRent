@@ -66,7 +66,7 @@
                         </div>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="/UniRent/Owner/postedReview">Posted Reviews</a>
+                        <a class="nav-link" href="/UniRent/Review/postedReview">Posted Reviews</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href = "/UniRent/Visit/visits">Visits</a>
@@ -115,7 +115,7 @@
             <div class="sidebar_but"><a href="/UniRent/Owner/profile">Profile</a></div>
             </div>
             <div class="col-md-3">
-            <div class="sidebar_but active"><a href="/UniRent/Owner/reviews">Reviews</a></div>
+            <div class="sidebar_but active"><a href="/UniRent/Review/reviews">Reviews</a></div>
             </div>
             <div class="col-md-3">
             <div class="sidebar_but log"><a href="/UniRent/User/logout">Logout</a></div>

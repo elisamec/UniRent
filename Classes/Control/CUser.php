@@ -14,6 +14,11 @@ use Classes\Utilities\UCookie;
 use Classes\View\VError;
 use Classes\Tools\TStatusUser;
 
+/**
+ * This class is responsible for managing users.
+ * 
+ * @package Classes\Control
+ */
 class CUser
 {
     /**

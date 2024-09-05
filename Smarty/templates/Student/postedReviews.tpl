@@ -62,7 +62,7 @@
                         </div>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link active" href="/UniRent/Student/postedReview">Posted Reviews</a>
+                        <a class="nav-link active" href="/UniRent/Review/postedReview">Posted Reviews</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href = "/UniRent/Visit/visits">Visits</a>

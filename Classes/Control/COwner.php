@@ -15,6 +15,11 @@ use Classes\Tools\TType;
 use Classes\View\VError;
 use Classes\Utilities\UFormat;
 
+/**
+ * This class is responsible for managing owners.
+ * 
+ * @package Classes\Control
+ */
 class COwner 
 {
     /**
@@ -65,124 +70,11 @@ class COwner
     }
 
     
-    public static function accommodationManagement(int $idAccommodation, ?string $modalSuccess=null):void {
-        self::checkIfOwner();
-        $view = new VOwner();
-        $PM = FPersistentManager::getInstance();
-        $session=USession::getInstance();
-        $accomm = $PM->load('EAccommodation', $idAccommodation);
-        if($session->getSessionElement('id') != $accomm->getIdOwner())
-        {
-            $viewError= new VError();
-            $viewError->error(403);
-            exit();
-        }
-        #print_r($accomm);
-        $photos_acc=$accomm->getPhoto();
-        $photo_acc_64=EPhoto::toBase64($photos_acc);
-        $accomm->setPhoto($photo_acc_64);
-
-        $picture=array();
-        foreach($accomm->getPhoto() as $p)
-        {
-            if(!is_null($p)){
-                
-                $picture[]=$p->getPhoto();
-            }
-        }
-
-        $owner = $PM->load('EOwner', $accomm->getIdOwner());
-        $owner_photo=$owner->getPhoto();
-        $ownerStatus = $owner->getStatus();
-        if($ownerStatus === TStatusUser::BANNED){
-            
-            $path = __DIR__ . "/../../Smarty/images/BannedUser.png";
-            $owner_photo = new EPhoto(null, file_get_contents($path), 'other', null);
-            $owner_photo_64=EPhoto::toBase64(array($owner_photo));
-            $owner->setPhoto($owner_photo_64[0]);
-        }
-        elseif(!is_null($owner_photo))
-        {
-            $owner_photo_64=EPhoto::toBase64(array($owner_photo));
-            $owner->setPhoto($owner_photo_64[0]);
-            #print_r($owner);
-        }
-        
-        $reviewsData = CReview::getProfileReviews($accomm->getIdAccommodation(), TType::ACCOMMODATION);
-        $num_places=$accomm->getPlaces();
-        $tenantsArray= $PM->getTenants('current',$accomm->getIdOwner());
-        $tenants=[];
-        foreach ($tenantsArray as $idAccommodation => $students) {
-            $accommodationTitle = FPersistentManager::getInstance()->getTitleAccommodationById($idAccommodation);
-            $tenants=UFormat::getFilterTenantsFormatArray($students, $idAccommodation, $accommodationTitle, 'OwnerManagement')[$idAccommodation]['tenants'];
-        }
-        $disabled=$accomm->getStatus();
-        $deletable=false;
-        
-        $view->accommodationManagement($accomm, $owner, $reviewsData, $picture, $tenants, $num_places, $disabled, $deletable, $modalSuccess);
-    }
-
-    public static function ownerRegistration(){
-
-        $view = new VOwner();
-        $PM = FPersistentManager::getInstance();
-        $session = USession::getInstance();
-        $picture = $session->getSessionElement('picture');
-        
-        if ($picture['img']===null) {
-
-            $photo = null;
-
-        } else {
-            
-            $photo = new EPhoto(null, $picture['img'], 'other', null);
-        }
-
-        $phone = EOwner::formatPhoneNumber(USuperGlobalAccess::getPost('phoneNumber'));
-        $iban = USuperGlobalAccess::getPost('iban');
-        $verifyIBAN=$PM->verifyIBAN($iban);   #da true se l'iban è presente
-        $verifyPhoneNumber=$PM->verifyPhoneNumber($phone); #da true se il numero di telefono è presente
-        #print 'phone prima:'.$phone;
-        #print '  phone dopo:'.EOwner::formatPhoneNumber($phone);
-        
-        if ($verifyIBAN && $verifyPhoneNumber) {    # c'è già un utente con lo stesso iban e lo stesso numero di telefono
-            $view->registrationError(true, true, "", "");
-        } elseif ($verifyIBAN) {  # se solo l'iban è già presente
-            $view->registrationError(false, true, $phone, "");
-        } elseif ($verifyPhoneNumber) {  # se solo il numero di telefono è già presente
-            $view->registrationError(true, false, "", $iban);
-        }
-        // in alternativa tutto è valido quindi creo il nuovo owner per fare store
-        $owner = new EOwner(null,
-                            $session->getSessionElement('username'),
-                            $session->getSessionElement('password'),
-                            $session->getSessionElement('name'),
-                            $session->getSessionElement('surname'),
-                            $photo,
-                            $session->getSessionElement('email'),
-                            $phone,
-                            $iban);
-        $result=$PM->store($owner);
-        $ownerId = $owner->getId();
-        if($result){
-            $session->setSessionElement('id', $ownerId);
-            $session->setSessionElement('phoneNumber', $phone);
-            $session->setSessionElement('iban', $iban);
-            
-            header('Location:/UniRent/Owner/home');
-
-        }else{
-
-            header('Location:/UniRent/User/home/error');
-        }
-        
-    }
-    
     /**
-     * Method profile
-     * This method shows the owner's profile
-     * 
-     * @param string|null $modalSuccess
+     * Handles the management of an accommodation.
+     *
+     * @param int $idAccommodation The ID of the accommodation.
+     * @param string|null $modalSuccess (optional) The success message to display in a modal.
      * @return void
      */
     public static function profile(?string $modalSuccess=null): void {
@@ -277,6 +169,12 @@ class COwner
         }
     }
 
+    /**
+     * Method modifyOwnerProfile
+     * This method modifies the owner's profile
+     * 
+     * @return void
+     */
     public static function modifyOwnerProfile() :void
     {
         self::checkIfOwner();
@@ -384,6 +282,14 @@ class COwner
         }
     }
 
+
+    /**
+     * Change the photo of the owner.
+     *
+     * @param EPhoto|null $oldPhoto The old photo of the owner.
+     * @param array|null $picture The new photo to be set.
+     * @return EPhoto|null The updated photo of the owner.
+     */
     private static function changePhoto(?EPhoto $oldPhoto, ?array $picture) : ?EPhoto{
 
         $PM=FPersistentManager::getInstance();
@@ -414,6 +320,15 @@ class COwner
         return $photo;
     }
 
+    /**
+     * Change the password for the owner.
+     *
+     * @param string $formOldPassword The old password entered in the form.
+     * @param string $newPassword The new password to be set.
+     * @param object $owner The owner object.
+     * @param string $photoError The error message related to the photo upload.
+     * @return array The updated owner details.
+     */
     private static function changePassword($formOldPassword, $newPassword, $owner, $photoError):array{
 
         $view = new VOwner();
@@ -445,7 +360,12 @@ class COwner
         return [$password, $error];
     }
 
-    /** */
+    /**
+     * Method deletePhoto
+     * This method deletes owner's photo
+     * 
+     * @return void
+     */
     public static function deletePhoto() :void {
         self::checkIfOwner();
         $PM=FPersistentManager::getInstance();
@@ -533,16 +453,7 @@ class COwner
         $view->guidelines();
     }
 
-    //Da spostare in CReview
-    public static function reviews(?string $modalSuccess=null) :void {
-        self::checkIfOwner();
-        $view = new VOwner();
-        $session=USession::getInstance();
-        $id=$session->getSessionElement('id');
-        $reviewsData = CReview::getProfileReviews($id, TType::OWNER);
-        
-        $view->reviews($reviewsData, $modalSuccess);
-    }
+   
 
     /**
      * Method publicProfileFromOwner
@@ -630,76 +541,7 @@ class COwner
             self::publicProfileFromOwner($username);
         }
     }
-
-    //Da spostare in review e accorciare
-    public static function postedReview(?string $modalSuccess=null) {
-        self::checkIfOwner();
-        $view = new VOwner();
-        $session=USession::getInstance();
-        $ownerId=$session->getSessionElement('id');
-        $PM=FPersistentManager::getInstance();
-        $reviews = $PM->loadReviewsByAuthor($ownerId, TType::OWNER);
-        $reviewsData = [];
-
-        foreach ($reviews as $review) {
-            $recipient = $PM->load( 'E' . $review->getRecipientType()->value, $review->getIdRecipient());
-            $profilePic = $recipient->getPhoto();
-            $profilePic = UFormat::photoFormatReview($profilePic, $recipient->getStatus());
-            if ($review->getDescription()===null) {
-                $content='No additional details were provided by the author.';
-            }
-            else
-            {
-                $content=$review->getDescription();
-            }
-            $reviewsData[] = [
-                'title' => $review->getTitle(),
-                'username' => $recipient->getUsername(),
-                'userStatus' => $recipient->getStatus()->value,
-                'stars' => $review->getValutation(),
-                'content' => $content,
-                'userPicture' => $profilePic,
-                'id'=> $review->getId(),
-                'type' => ucfirst($review->getRecipientType()->value),
-                'reported' => $review->isReported()
-            ];
-        }
-        
-        $view->postedReview($reviewsData, $modalSuccess);
-    }
-
-    //Da spostare in CAccommodation
-    public static function viewOwnerAds(int $id) {
-        CStudent::checkIfStudent();
-        $view = new VOwner();
-        $PM=FPersistentManager::getInstance();
-        $accommodationEntities=$PM->loadAccommodationsByOwner($id);
-        $username=$PM->getUsernameByOwnerId($id);
-        $accommodations=[];
-        foreach($accommodationEntities as $accom) {
-            if(count($accom->getPhoto())==0)
-                {
-                    $photo=null;
-                }
-                else
-                {
-                   $base64 = base64_encode((($accom->getPhoto())[0])->getPhoto());
-                   $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
-                }
-            if ($accom->getStatus() == true) {
-                
-            $accommodations[]=[
-                'id'=>$accom->getIdAccommodation(),
-                'photo'=>$photo,
-                'title'=>$accom->getTitle(),
-                'address'=>$accom->getAddress()->getAddressLine1() .", ". $accom->getAddress()->getLocality(),
-                'price'=>$accom->getPrice()
-            ];
-        }
-        }
-        
-        $view->viewOwnerAds($accommodations, $username);
-    }
+    
 
     /**
      * Method tenants

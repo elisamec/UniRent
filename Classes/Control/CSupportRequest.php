@@ -13,6 +13,11 @@ use Classes\Tools\TType;
 use Exception;
 use Classes\Utilities\UFormat;
 
+/**
+ * This class is responsible for managing support requests.
+ * 
+ * @package Classes\Control
+ */
 class CSupportRequest
 {
     /**

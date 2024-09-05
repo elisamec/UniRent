@@ -17,9 +17,22 @@ use DateTime;
 
 require __DIR__.'/../../vendor/autoload.php';
 
+/**
+ * This class is responsible for managing reservations.
+ * 
+ * @package Classes\Control
+ */
 class CReservation
 {
-    //Forse si può accorciare?
+    /**
+     * Method showStudent
+     * 
+     * This function is used to show the reservations of a student
+     * 
+     * @param string $kind
+     * @param string|null $modalSuccess
+     * @return void
+     */
     public static function showStudent(string $kind, ?string $modalSuccess=null): void {
         CStudent::checkIfStudent();
         $session=USession::getInstance();
@@ -51,7 +64,14 @@ class CReservation
 
     }
 
-    //Da accorciare
+    /**
+     * Method showOwner
+     * 
+     * This function is used to show the reservations of an owner
+     * 
+     * @param string|null $modalSuccess
+     * @return void
+     */
     public static function showOwner(?string $modalSuccess=null):void {
         COwner::checkIfOwner();
         $session=USession::getInstance();
@@ -82,7 +102,7 @@ class CReservation
                 {
                     $student_photo_64=EPhoto::toBase64(array($student_photo));
                     $student->setPhoto($student_photo_64[0]);
-                    #print_r($owner);
+
                 }
                 $profilePic = $student->getPhoto() === null ? "/UniRent/Smarty/images/ImageIcon.png" : $student->getPhoto()->getPhoto();
                 $studentList[] = [
@@ -103,7 +123,15 @@ class CReservation
         $view->showReservations($reservationData, $modalSuccess);
     }
 
-    /** */
+    /**
+     * Method reservationDetails
+     * 
+     * This function is used to show the details of a reservation
+     * 
+     * @param int $idReservation
+     * @param string|null $modalSuccess 
+     * @return void
+     */
     public static function reservationDetails(int $idReservation, ?string $modalSuccess=null): void {
         $session = USession::getInstance();
         $userType = $session->getSessionElement('userType');
@@ -250,7 +278,14 @@ class CReservation
         }
     }
 
-
+    /**
+     * Method formatDate
+     * 
+     * This function is used to format the date
+     * 
+     * @param DateTime $date
+     * @return string
+     */
     private static function formatDate(DateTime $date): string {
         $today = new DateTime('today');
                 // Calculate the difference
@@ -266,6 +301,15 @@ class CReservation
                 }
                 return $formatted;
     }
+
+    /**
+     * Method accept
+     * 
+     * This function is used to accept a reservation
+     * 
+     * @param int $id
+     * @return void
+     */
     public static function accept(int $id) :void {
         COwner::checkIfOwner();
         $PM = FPersistentManager::getInstance();
@@ -286,6 +330,14 @@ class CReservation
         }
     }
 
+    /**
+     * Method deny
+     * 
+     * This function is used to deny a reservation
+     * 
+     * @param int $id
+     * @return void
+     */
     public static function deny(int $id) :void{
         COwner::checkIfOwner();
         $PM = FPersistentManager::getInstance();

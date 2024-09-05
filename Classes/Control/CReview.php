@@ -11,10 +11,14 @@ use DateTime;
 use Classes\View\VError;
 use Classes\Utilities\UFormat;
 use Classes\Control\CStudent;
-use Classes\Entity\EAccommodation;
-use Classes\Entity\EOwner;
-use Classes\Entity\EStudent;
+use Classes\View\VOwner;
+use Classes\View\VStudent;
 
+/**
+ * This class is responsible for managing reviews.
+ * 
+ * @package Classes\Control
+ */
 class CReview {
 
     /**
@@ -190,6 +194,55 @@ class CReview {
         }
         return $reviewsData;
     }
+     /**
+      * Method reviews
+        *
+        * This method is used to show the reviews of the user
+      * @param mixed $modalSuccess
+      * @return void
+      */
+     public static function reviews(?string $modalSuccess=null) :void {
+        $session = USession::getInstance();
+        if($session->getSessionElement('userType') === 'Owner') {
+           $view = new VOwner();
+           $type = TType::OWNER;
+        } else if ($session->getSessionElement('userType') === 'Student') {
+            $view = new VStudent();
+            $type = TType::STUDENT;
+        } else {
+            $view = new VError();
+            $view->error(403);
+            exit();
+        }
+        $id=$session->getSessionElement('id');
+        $reviewsData = CReview::getProfileReviews($id, $type);
+        $view->reviews($reviewsData, $modalSuccess);
+    }
 
-
+    public static function postedReview(?string $modalSuccess=null) {
+        $session = USession::getInstance();
+        if($session->getSessionElement('userType') === 'Owner') {
+           $view = new VOwner();
+           $type = TType::OWNER;
+        } else if ($session->getSessionElement('userType') === 'Student') {
+            $view = new VStudent();
+            $type = TType::STUDENT;
+        } else {
+            $view = new VError();
+            $view->error(403);
+            exit();
+        }
+        $authorId=$session->getSessionElement('id');
+        $PM=FPersistentManager::getInstance();
+        $reviews = $PM->loadReviewsByAuthor($authorId, $type);
+        $reviewsData = [];
+        foreach ($reviews as $review) {
+            $recipient = $PM->load( 'E' . ucfirst($review->getRecipientType()->value), $review->getIdRecipient());
+            if ($review->isBanned()) {
+                continue;
+            }
+            $reviewsData[] = UFormat::reviewsFormatUserPosted($recipient, $review);
+        }
+        $view->postedReview($reviewsData, $modalSuccess);
+    }
 }

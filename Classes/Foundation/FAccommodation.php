@@ -17,6 +17,7 @@
     /**
      * FAccommodation
      * 
+     * @package Classes\Foundation
      */
     class FAccommodation{
 

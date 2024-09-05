@@ -8,10 +8,14 @@ use Configuration\Config;
 
 /**
  * class for checking if the db exist and if not create it
+ * 
+ * @package Configuration
  */
 class Installation{
+    
     /**
      * check if the db exist and if not create it
+     * 
      * @return bool
      */
     public static function install(){

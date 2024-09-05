@@ -20,6 +20,13 @@ use DateTime;
 
 require __DIR__.'/../../vendor/autoload.php';
 
+/**
+ * Class CContract
+ * 
+ * This class is responsible for managing contracts
+ * 
+ * @package Classes\Control
+ */
 class CContract
 {
     /**
