@@ -138,14 +138,10 @@
                                 <div class="userIcon">
                                     {if $owner->getStatusString() === "banned"}
                                         <a href="/UniRent/Student/publicProfile/{$owner->getUsername()}" class="disabled"><img src="/UniRent/Smarty/images/BannedUser.png" class="imageIcon"></a>
-                                        {else if $owner->getPhoto() === null}
+                                    {else if $owner->getPhoto() === null}
                                         <a href="/UniRent/Student/publicProfile/{$owner->getUsername()}"><img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon"></a>
                                     {else}
-                                    {if $owner->getPhoto() === null}
-                                    <a href="/UniRent/Student/publicProfile/{$owner->getUsername()}"><img src="/UniRent/Smarty/images/ImageIcon.png" class="imageIcon"></a>
-                                    {else}
                                     <a href="/UniRent/Student/publicProfile/{$owner->getUsername()}"><img src="{$owner->getPhoto()->getPhoto()}"></a>
-                                    {/if}
                                     {/if}
                                 </div>
                                 {if $owner->getStatusString() === "banned"}
