@@ -542,43 +542,6 @@ class COwner
         }
     }
 
-    //Da spostare in review e accorciare
-    public static function postedReview(?string $modalSuccess=null) {
-        self::checkIfOwner();
-        $view = new VOwner();
-        $session=USession::getInstance();
-        $ownerId=$session->getSessionElement('id');
-        $PM=FPersistentManager::getInstance();
-        $reviews = $PM->loadReviewsByAuthor($ownerId, TType::OWNER);
-        $reviewsData = [];
-
-        foreach ($reviews as $review) {
-            $recipient = $PM->load( 'E' . $review->getRecipientType()->value, $review->getIdRecipient());
-            $profilePic = $recipient->getPhoto();
-            $profilePic = UFormat::photoFormatReview($profilePic, $recipient->getStatus());
-            if ($review->getDescription()===null) {
-                $content='No additional details were provided by the author.';
-            }
-            else
-            {
-                $content=$review->getDescription();
-            }
-            $reviewsData[] = [
-                'title' => $review->getTitle(),
-                'username' => $recipient->getUsername(),
-                'userStatus' => $recipient->getStatus()->value,
-                'stars' => $review->getValutation(),
-                'content' => $content,
-                'userPicture' => $profilePic,
-                'id'=> $review->getId(),
-                'type' => ucfirst($review->getRecipientType()->value),
-                'reported' => $review->isReported()
-            ];
-        }
-        
-        $view->postedReview($reviewsData, $modalSuccess);
-    }
-
     //Da spostare in CAccommodation
     public static function viewOwnerAds(int $id) {
         CStudent::checkIfStudent();
