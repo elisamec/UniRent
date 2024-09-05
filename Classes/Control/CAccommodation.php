@@ -151,9 +151,9 @@ class CAccommodation
     public static function editAccommodationOperations(int $id) :void
     {
             COwner::checkIfOwner();
-            $afs=USuperGlobalAccess::getAllPost(['uploadedImageData','title','price','deposit','startDate','month','visitAvailabilityData',
+            $afs=USuperGlobalAccess::getAllPost(['uploadedImagesData','title','price','deposit','startDate','month','visitAvailabilityData',
                                                  'places','address','city','postalCode','description','men','women','smokers','animals']);
-            $myarray=json_decode($afs['uploadedImageData'],true);
+            $myarray=json_decode($afs['uploadedImagesData'],true) ?? [];
             $array_photos=EPhoto::fromJsonToPhotos($myarray);
             $duration=EAccommodation::DurationOfVisit($afs['visitAvailabilityData']);
             if(!is_null($duration) and $duration>0)  #se la durata delle visite è zero non ci saranno visite
