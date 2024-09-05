@@ -19,6 +19,12 @@ use Classes\Utilities\USort;
 use DateTime;
 
 
+/**
+ * Class FPersistentManager
+ *
+ * This class is responsible for managing the persistence of objects.
+ * It provides methods for storing and retrieving objects from a data source.
+ */
 class FPersistentManager {
     private static $instance;
     private function __construct(){}
@@ -99,9 +105,13 @@ class FPersistentManager {
         
     }
 
-    //public function findAccommodation(DateTime $date,DateTime $fromDate, string $place), chiede query a FAccommodation, @return array
 
-
+    /**
+     * Retrieves an array of waiting reservations for a given proprietor.
+     *
+     * @param int $idProprietario The ID of the proprietor.
+     * @return array An array of waiting reservations.
+     */
     public  function getWaitingReservations(int $idProprietario):array
     {
         $FR= Foundation\FReservation::getInstance();
@@ -134,6 +144,12 @@ class FPersistentManager {
         }
     }
 
+    /**
+     * Verifies the user's email.
+     *
+     * @param string $email The email to be verified.
+     * @return bool Returns true if the email is verified, false otherwise.
+     */
     public function verifyUserEmail(string $email):bool
     {
         $FO=Foundation\FOwner::getInstance();
@@ -183,20 +199,38 @@ class FPersistentManager {
         }
     }
     
-    public function getStudentByUsername($user)
+    /**
+     * Retrieves a student by their username.
+     *
+     * @param string $user The username of the student.
+     * @return Student|null The student object if found, null otherwise.
+     */
+    public function getStudentByUsername($user) : ?EStudent
     {
         $FS=FStudent::getInstance();
         $student=$FS->getStudentByUsername($user);
         return $student;
     }
 
-    public function getOwnerByUsername($user)
+    /**
+     * Retrieves the owner by their username.
+     *
+     * @param string $user The username of the owner.
+     * @return Owner|null The owner object if found, null otherwise.
+     */
+    public function getOwnerByUsername($user) : ?EOwner
     {
         $FO=FOwner::getInstance();
         $owner=$FO->getOwnerByUsername($user);
         return $owner;
     }
 
+    /**
+     * Deletes a student from the database by their username.
+     *
+     * @param string $user The username of the student to be deleted.
+     * @return bool Returns true if the student was successfully deleted, false otherwise.
+     */
     public function deleteStudentByUsername($user):bool
     {
         $FS=FStudent::getInstance();
@@ -235,6 +269,12 @@ class FPersistentManager {
         }
     }
 
+    /**
+     * Retrieves the student photo by the given ID.
+     *
+     * @param int $id The ID of the student.
+     * @return EPhoto|null The student photo object, or null if not found.
+     */
     public function getStudentPhotoById(int $id):?EPhoto
     {
         $FP=FPhoto::getInstance();
@@ -355,12 +395,25 @@ class FPersistentManager {
         return $result;
     }
 
+    /**
+     * Stores the avatar photo.
+     *
+     * @param EPhoto $photo The photo object to be stored.
+     * @return bool Returns true if the avatar photo is successfully stored, false otherwise.
+     */
     public function storeAvatar(EPhoto $photo) :bool {
         $FP=FPhoto::getInstance();
         $result=$FP->storeAvatar($photo);
         return $result;
     }
 
+    /**
+     * Loads data by recipient.
+     *
+     * @param int $id The ID of the recipient.
+     * @param mixed $type The type of the recipient.
+     * @return array The loaded data.
+     */
     public function loadByRecipient(int $id , $type):array
     {
         $FR=FReview::getInstance();
@@ -398,6 +451,12 @@ class FPersistentManager {
         return $result;
     }
 
+    /**
+     * Deletes a credit card from the persistent storage.
+     *
+     * @param string $number The credit card number to delete.
+     * @return bool Returns true if the credit card was successfully deleted, false otherwise.
+     */
     public function deleteCreditCard(string $number):bool
     {
         $FC=FCreditCard::getInstance();
@@ -405,6 +464,13 @@ class FPersistentManager {
         return $result;
     }
 
+    /**
+     * Checks if a given card number is the main card for a student.
+     *
+     * @param int $studentId The ID of the student.
+     * @param string $number The card number to check.
+     * @return bool Returns true if the card number is the main card for the student, false otherwise.
+     */
     public function isMainCard(int $studentId, string $number):bool
     {
         $FC=FCreditCard::getInstance();
@@ -430,7 +496,7 @@ class FPersistentManager {
     /**
      * Method getStudentMainCard
      *
-     * @param int $studentId [explicite description]
+     * @param int $studentId 
      *
      * @return ECreditCard
      */
@@ -444,8 +510,8 @@ class FPersistentManager {
     /**
      * Method findAccommodations
      *
-     * @param string $city [explicite description]
-     * @param string $date [explicite description]
+     * @param string $city 
+     * @param string $date 
      *
      * @return array
      */
@@ -477,6 +543,12 @@ class FPersistentManager {
         return $result;
     }
 
+
+    /**
+     * Retrieves the last accommodations for a user.
+     *
+     * @return array An array containing the last accommodations for a user.
+     */
     public function lastAccommodationsUser():array
     {
         $FA=FAccommodation::getInstance();
@@ -484,6 +556,12 @@ class FPersistentManager {
         return $result;
     }
 
+    /**
+     * Retrieves the last accommodations of a student.
+     *
+     * @param EStudent $student The student object.
+     * @return array An array of last accommodations.
+     */
     public function lastAccommodationsStudent(EStudent $student):array
     {
         $FA=FAccommodation::getInstance();
@@ -491,31 +569,63 @@ class FPersistentManager {
         return $result;
     }
 
+    /**
+     * Loads reviews by author.
+     *
+     * @param int $idAuthor The ID of the author.
+     * @param TType $type The type of reviews to load.
+     * @return array The array of loaded reviews.
+     */
     public function loadReviewsByAuthor(int $idAuthor, TType $type): array {
         $FReview = FReview::getInstance();
         $reviews = $FReview->loadByAuthor($idAuthor, $type);
         return $reviews;
     }
+
+    /**
+     * Loads accommodations by owner.
+     *
+     * @param int $idOwner The ID of the owner.
+     * @return array|null An array of accommodations or null if no accommodations found.
+     */
     public function loadAccommodationsByOwner(int $idOwner): ?array {
         $FA = FAccommodation::getInstance();
         $accommodations = $FA->loadByOwner($idOwner);
         return $accommodations;
     }
 
+    /**
+     * Retrieves the owner rating for a given ID.
+     *
+     * @param int $id The ID of the owner.
+     * @return int The owner rating.
+     */
     public function getOwnerRating($id):int
     {
         $result=FOwner::findOwnerRating($id);
         return $result;
     }
 
-    public function getAccommodationRating($id):int
+    /**
+     * Retrieves the rating of an accommodation.
+     *
+     * @param int $id The ID of the accommodation.
+     * @return int The rating of the accommodation.
+     */
+    public function getAccommodationRating(int $id):int
     {
         $FA=FAccommodation::getInstance();
         $result=$FA->findAccommodationRating($id);
         return $result;
     }
 
-    public function getStudentRating($id):int
+    /**
+     * Retrieves the rating of a student.
+     *
+     * @param int $id The ID of the student.
+     * @return int The rating of the student.
+     */
+    public function getStudentRating(int $id):int
     {
         $FS=FStudent::getInstance();
         $result=$FS->findStudentRating($id);
@@ -545,6 +655,14 @@ class FPersistentManager {
         $result=$FO->getTenans($type,$idOwner);
         return $result;
     }
+
+
+    /**
+     * Retrieves the user type for a given ID.
+     *
+     * @param int $id The ID of the user.
+     * @return TType The user type.
+     */
     public function getUserType($id):TType
     {
         $FO=FOwner::getInstance();
@@ -593,6 +711,13 @@ class FPersistentManager {
         }
         return $result;
     }
+
+
+    /**
+     * Loads visits by week.
+     *
+     * @return array An array containing the loaded visits.
+     */
     public function loadVisitsByWeek():array
     {
         $FV=FVisit::getInstance();
@@ -710,12 +835,29 @@ class FPersistentManager {
             return $result;
        }
     }
+
+
+    /**
+     * Loads reservations by student.
+     *
+     * @param int $id The ID of the student.
+     * @param string $kind The kind of reservations to load.
+     * @return array The array of reservations.
+     */
     public function loadReservationsByStudent(int $id, string $kind):array
     {
         $FR=FReservation::getInstance();
         $result=$FR->loadReservationsByStudent($id,$kind);
         return $result;
     }
+
+
+    /**
+     * Retrieves the title of an accommodation by its ID.
+     *
+     * @param int $id The ID of the accommodation.
+     * @return string The title of the accommodation.
+     */
     public function getTitleAccommodationById(int $id):string
     {
         $FA=FAccommodation::getInstance();
@@ -723,17 +865,40 @@ class FPersistentManager {
         return $result;
     }
     
-    public function updateDataBase()
+    /**
+     * Updates the database.
+     * 
+     * @return void
+     */
+    public function updateDataBase() : void
     {
         $FU=FUpdater::getInstance();
         $FU->updateDB();
     }
+
+
+    /**
+     * Retrieves contracts by student.
+     *
+     * @param int $id The ID of the student.
+     * @param int|null $idAccommodation The ID of the accommodation (optional).
+     * @param string|null $kind The kind of contract (optional).
+     * @return array|bool An array of contracts or false if no contracts found.
+     */
     public function getContractsByStudent(int $id, ?int $idAccommodation=null, ?string $kind=null):array|bool
     {
         $FC=FContract::getInstance();
         $result=$FC->getContractsByStudent($id, $idAccommodation,$kind);
         return $result;
     }
+
+    /**
+     * Retrieves contracts by owner.
+     *
+     * @param int $id The owner's ID.
+     * @param string $kind The kind of contracts to retrieve.
+     * @return array|bool An array of contracts if found, otherwise false.
+     */
     public function getContractsByOwner(int $id, string $kind):array|bool
     {
         $FC=FContract::getInstance();
@@ -788,12 +953,29 @@ class FPersistentManager {
         $result=$FR->remainingReviewStudentToOwner($id1,$id2);
         return $result;
     }
+
+
+    /**
+     * Calculates the remaining review owner to student.
+     *
+     * @param int $id1 The ID of the owner.
+     * @param int $id2 The ID of the student.
+     * @return int The remaining review owner to student.
+     */
     public function remainingReviewOwnerToStudent(int $id1, int $id2):int
     {
         $FR=FReview::getInstance();
         $result=$FR->remainingReviewOwnerToStudent($id1,$id2);
         return $result;
     }
+
+    /**
+     * Calculates the remaining number of reviews for a student to an accommodation.
+     *
+     * @param int $id1 The ID of the student.
+     * @param int $id2 The ID of the accommodation.
+     * @return int The remaining number of reviews for the student to the accommodation.
+     */
     public function remainingReviewStudentToAccommodation(int $id1, int $id2):int
     {
         $FR=FReview::getInstance();
@@ -813,6 +995,11 @@ class FPersistentManager {
         return $result;
     }
 
+    /**
+     * Retrieves the banned list.
+     *
+     * @return array The array containing the banned list.
+     */
     public function getBannedList():array
     {
         $result=array();
@@ -841,6 +1028,14 @@ class FPersistentManager {
         
         return $result;
     }
+
+
+    /**
+     * Retrieves the last ban report for a given username.
+     *
+     * @param string $username The username for which to retrieve the last ban report.
+     * @return EReport|bool The last ban report for the given username, or false if no ban report is found.
+     */
     public function getLastBanReport(string $username):EReport |bool {
         $FRe=FReport::getInstance();
         $FS=FStudent::getInstance();
@@ -905,6 +1100,13 @@ class FPersistentManager {
         return $result;
     }
 
+    /**
+     * Supports a reply for a specific ID.
+     *
+     * @param int $id The ID of the reply.
+     * @param string $ans The reply message.
+     * @return bool Returns true if the reply is supported successfully, false otherwise.
+     */
     public function supportReply(int $id, string $ans ):bool
     {
         $FSP=FSupportRequest::getInstance();
@@ -921,6 +1123,12 @@ class FPersistentManager {
             return false;
         }
     }
+    /**
+     * Reads a support reply from the persistent manager.
+     *
+     * @param int $id The ID of the support reply to read.
+     * @return bool Returns true if the support reply was successfully read, false otherwise.
+     */
     public function readSupportReply(int $id):bool
     {
         $FSP=FSupportRequest::getInstance();

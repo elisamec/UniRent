@@ -10,6 +10,11 @@ use Classes\Tools\TRequestType;
 use Classes\Tools\TStatus;
 use Classes\Tools\TStatusSupport;
 
+/**
+ * This class provides all the methods to interact with the database regarding the support request
+ * 
+ * @package Foundation
+ */
 class FSupportRequest {
     private static $instance=null;
     /**Constructor */
@@ -26,6 +31,14 @@ class FSupportRequest {
         }
         return self::$instance;
     }
+
+    /**
+     * Method exist
+     *
+     * this method check if the support request exist
+     * @param int $id
+     * @return bool
+     */
     public function exist(int $id):bool 
     {
         $q='SELECT * FROM supportrequest WHERE id=:id';
@@ -46,6 +59,13 @@ class FSupportRequest {
 
     }
     
+    /**
+     * Method load
+     *
+     * this method load the support request from the database
+     * @param int $id
+     * @return ESupportRequest
+     */
     public function load(int $id): ESupportRequest {
         $db=FConnection::getInstance()->getConnection();
         try
@@ -80,6 +100,13 @@ class FSupportRequest {
         return $result;
     }
 
+    /**
+     * Method store
+     *
+     * this method store the support request in the database
+     * @param ESupportRequest $supportrequest
+     * @return bool
+     */
     public function store(ESupportRequest $supportrequest):bool {
         $db=FConnection::getInstance()->getConnection();
         $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
@@ -126,6 +153,14 @@ class FSupportRequest {
             return false;
         }
     }
+
+    /**
+     * Method update
+     *
+     * this method update the support request in the database
+     * @param ESupportRequest $supportrequest
+     * @return bool
+     */
     public static function update(ESupportRequest $supportrequest):bool {
         $db=FConnection::getInstance()->getConnection();
         $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
@@ -155,9 +190,16 @@ class FSupportRequest {
             return false;
         }
     }
+
+    /**
+     * Method delete
+     *
+     * this method delete the support request from the database
+     * @param int $id
+     * @return bool
+     */
     public function delete(int $id): bool {
         $db=FConnection::getInstance()->getConnection();
-        //$db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
         try
         {   
             $db->exec('LOCK TABLES supportrequest WRITE');

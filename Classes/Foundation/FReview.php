@@ -75,8 +75,15 @@ class FReview {
         $result=new EReview($rowRev['id'],$rowRev['title'],$rowRev['valutation'],$rowRev['description'], TType::tryFrom($rowRev['type']),$date, $authType, $author, $recipient, $rowRev['reported'], $rowRev['banned']);
         return $result;
     }
-    //DA SISTEMARE
+
     
+    /**
+     * Loads reviews by recipient.
+     *
+     * @param int $idRec The ID of the recipient.
+     * @param TType $recipientType The type of the recipient.
+     * @return array An array of reviews.
+     */
     public function loadByRecipient(int $idRec, TType $recipientType): array
     {
         
@@ -110,6 +117,15 @@ class FReview {
         }
         return $result;
     }
+
+
+    /**
+     * Loads a specific review by recipient ID and recipient type.
+     *
+     * @param int $idRec The ID of the recipient.
+     * @param TType $recipientType The type of the recipient.
+     * @return array An array containing the loaded review.
+     */
     private function loadSpecificReviewByRec(int $idRec, TType $recipientType):array
     {
         $db=FConnection::getInstance()->getConnection();
@@ -285,7 +301,6 @@ class FReview {
      */
     private function storeSpecificReview(EReview $Review): bool {
         $db = FConnection::getInstance()->getConnection();
-        //$db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
         try
         {
             $recipientType = $Review->getRecipientType()->value;
@@ -378,7 +393,6 @@ class FReview {
     public function delete(int $id): bool 
     {
         $db=FConnection::getInstance()->getConnection();
-        //$db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
         try
         {   
             $db->exec('LOCK TABLES review WRITE');
@@ -399,6 +413,13 @@ class FReview {
         }
     }
 
+    /**
+     * Loads reviews by author.
+     *
+     * @param int $idAuth The ID of the author.
+     * @param TType $authorType The type of the author.
+     * @return array An array of reviews.
+     */
     public function loadByAuthor(int $idAuth, TType $authorType): array
     {   
         $result=[];
@@ -427,6 +448,14 @@ class FReview {
         }
         return $result;
     }
+
+    /**
+     * Loads student reviews by author's ID and author type.
+     *
+     * @param int $idAuth The author's ID.
+     * @param TType $authorType The author type.
+     * @return array The array of student reviews.
+     */
     private static function loadStudentReviewByAuth(int $idAuth, TType $authorType):array
     {
         $db=FConnection::getInstance()->getConnection();
@@ -451,6 +480,14 @@ class FReview {
         $row=$stm->fetchall(PDO::FETCH_ASSOC);
         return $row;
     }
+
+
+    /**
+     * Loads owner review by author's ID.
+     *
+     * @param int $idAuth The author's ID.
+     * @return array The owner review.
+     */
     private static function loadOwnerReviewByAuth(int $idAuth):array
     {
         $db=FConnection::getInstance()->getConnection();
@@ -475,6 +512,13 @@ class FReview {
         $row=$stm->fetchall(PDO::FETCH_ASSOC);
         return $row;
     }
+
+    /**
+     * Loads accommodation review by author's ID.
+     *
+     * @param int $idAuth The author's ID.
+     * @return array The accommodation review.
+     */
     private static function loadAccommodationReviewByAuth(int $idAuth):array
     {
         $db=FConnection::getInstance()->getConnection();
@@ -504,8 +548,8 @@ class FReview {
      * Method remainingReviewStudentToStudent
      *
      * this method get the number of remaining review that student 1 can make about a student 2
-     * @param int $id1 [student 1]
-     * @param int $id2 [student 2]
+     * @param int $id1 
+     * @param int $id2 
      *
      * @param int  
      */
@@ -604,6 +648,15 @@ class FReview {
         }
         return (int)$result['RR'];
     }
+
+
+    /**
+     * Calculates the remaining review count from the owner to the student.
+     *
+     * @param int $id1 The ID of the owner.
+     * @param int $id2 The ID of the student.
+     * @return int The remaining review count from the owner to the student.
+     */
     public function remainingReviewOwnerToStudent(int $id1, int $id2):int
     {
         $db=FConnection::getInstance()->getConnection();
@@ -646,6 +699,15 @@ class FReview {
         }
         return (int)$result['RR'];
     }
+
+
+    /**
+     * Calculates the remaining number of reviews for a student to an accommodation.
+     *
+     * @param int $id1 The ID of the student.
+     * @param int $id2 The ID of the accommodation.
+     * @return int The remaining number of reviews for the student to the accommodation.
+     */
     public function remainingReviewStudentToAccommodation(int $id1, int $id2):int
     {
         $db=FConnection::getInstance()->getConnection();
@@ -686,12 +748,5 @@ class FReview {
         }
         return (int)$result['RR'];
     }
-    /*
-    public function getReportedReviews():array
-    {
-        //da fare
-    }
-        */
-
 
 }
