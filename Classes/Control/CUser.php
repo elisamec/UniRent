@@ -248,10 +248,17 @@ class CUser
      */
     public static function logout()
     {
-        $session=USession::getInstance();
+        $session = USession::getInstance();
         $session->unsetSession();
         $session->destroySession();
-        setcookie('PHPSESSID','',time()-2592000,'/','',isset($_SERVER["HTTPS"]),true);
+        if (ini_get("session.use_cookies")) #return the value of the configuration option
+        {
+            $params = session_get_cookie_params();
+            setcookie(session_name(), '', $params['lifetime'] - 66666642000,
+                $params["path"], $params["domain"],
+                $params["secure"], $params["httponly"]
+            );
+        }
         header('Location: /UniRent/User/home');
     }
 
