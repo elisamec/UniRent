@@ -356,6 +356,14 @@ class FPersistentManager {
         $owner=$FO->getOwnerIdByUsername($user);
         return $owner;
     }
+    /**
+     * Method getUsernameByOwnerId
+     *
+     * this method return the owner's username from the db using the given id
+     * @param int $id [owner's id]
+     *
+     * @return ?string
+     */
     public function getUsernameByOwnerId(int $id):?string
     {
         $FO=FOwner::getInstance();
@@ -735,9 +743,9 @@ class FPersistentManager {
      * @param int $year_2
      * @param int $date_2
      * @param int $student_id
-     * @return bool
+     * @return ?bool
      */
-    public function reserve(int $idAccommodation, int $year, int $date, int $year_2, int $date_2, int $student_id)
+    public function reserve(int $idAccommodation, int $year, int $date, int $year_2, int $date_2, int $student_id):?bool
     {
         $now = new DateTime('now');
         $start_accommodation=self::load('EAccommodation',$idAccommodation)->getStart();
@@ -792,8 +800,7 @@ class FPersistentManager {
                 }
                 else
                 {
-                    $viewError= new VError();
-                    $viewError->error(500); #altrimenti ci sono problemi con il server
+                    return null;
                 }
             }
             else #non ci sono posti liberi per l' anno selezionato
@@ -1151,13 +1158,12 @@ class FPersistentManager {
      *
      * this method call the omonim method in FStudent to get the mate of the student by contract
      * @param int $contractID [contract ID]
-     * @param int $studentID [student ID]
      * @return array
      */
-    public function getMate(int $contractID, int $studentID):array
+    public function getMate(int $contractID):array
     {
         $FStudent=FStudent::getInstance();
-        $result=$FStudent->getMate($contractID,$studentID);
+        $result=$FStudent->getMate($contractID);
         return $result;
     }
 }

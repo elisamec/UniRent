@@ -7,6 +7,7 @@ use Classes\Foundation\FPersistentManager;
 use Classes\Tools\TStatusUser;
 use Classes\Tools\TType;
 use Classes\Utilities\UCookie;
+use Classes\Utilities\UFormat;
 use Classes\Utilities\USession;
 use Classes\Utilities\USort;
 use Classes\Utilities\USuperGlobalAccess;
@@ -41,23 +42,8 @@ class CReservation
         $reservations=$PM->loadReservationsByStudent($id, $kind);
         $reservationsData = [];
         foreach ($reservations as $reservation) {
-            $formatted = self::formatDate($reservation->getMade()->setTime(0,0,0));
             $accommodation=$PM->load('EAccommodation', $reservation->getAccomodationId());
-            $period = $reservation->getFromDate()->format('d/m/Y') . ' - ' . $reservation->getToDate()->format('d/m/Y');
-            if ($accommodation->getPhoto() === []) {
-                $accommodationPhoto = "/UniRent/Smarty/images/NoPic.png";
-            } else {
-                $accommodationPhoto = (EPhoto::toBase64($accommodation->getPhoto()))[0]->getPhoto();
-            }
-            $reservationsData[] = [
-                'idReservation' => $reservation->getId(),
-                'title' => $accommodation->getTitle(),
-                'photo' => $accommodationPhoto,
-                'period' => $period,
-                'price' => $accommodation->getPrice(),
-                'address' => $accommodation->getAddress()->getAddressLine1() . ', ' . $accommodation->getAddress()->getLocality(),
-                'expires' => $formatted,
-            ];
+            $reservationsData[] = UFormat::formatReservations($reservation, $accommodation);
         }
         $view= new VStudent();
         $view->showReservations($reservationsData, $kind, $modalSuccess);

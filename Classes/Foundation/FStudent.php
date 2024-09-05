@@ -703,10 +703,9 @@ class FStudent
      *
      * this method return the student's mate by contract ID
      * @param int $contractID [contract ID]
-     * @param int $studentID [student ID]
      * @return array
      */
-    public function getMate(int $contractID, int $studentID):array
+    public function getMate(int $contractID):array
     {
         $result=array();
         $db=FConnection::getInstance()->getConnection();
@@ -717,20 +716,18 @@ class FStudent
                                              FROM student s INNER JOIN reservation r ON r.idStudent=s.id
                                              INNER JOIN contract c ON c.idReservation=r.id)
 
-                SELECT sc1.studentID AS ID, sc1.accommodationID AS accommodationID
+                SELECT sc2.studentID AS ID
                 FROM studenti_contratto sc1 INNER JOIN studenti_contratto sc2 ON sc1.studentID!=sc2.studentID
                 WHERE sc1.year=sc2.year
-                AND sc1.contractID=sc2.contractID
-                AND sc1.contractID=:contractID
-                AND sc1.studentID!=:studentID";
+                AND sc1.accommodationID=sc2.accommodationID
+                AND sc1.contractID=:contractID";
+                $db->exec('LOCK TABLES student READ, reservation READ, contract READ');
                 if(!$db->inTransaction())
                 {
                     $db->beginTransaction();
                 }
-                $db->exec('LOCK TABLES student READ, reservation READ, contract READ');
                 $stm=$db->prepare($q);
                 $stm->bindParam(':contractID',$contractID,PDO::PARAM_INT);
-                $stm->bindParam(':studentID',$studentID,PDO::PARAM_INT);
                 $stm->execute();
                 if($db->inTransaction())
                 {
@@ -750,11 +747,9 @@ class FStudent
         $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
         foreach($rows as $row)
         {
-            $n=$row['accommodationID'];
             $student=$this->load($row['ID']);
-            $r[]=$student;
+            $result[]=$student;
         }
-        $result[$n]=$r;
         return $result;
     }
 }

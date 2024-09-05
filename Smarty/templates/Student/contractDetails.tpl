@@ -394,6 +394,7 @@
         var modalSuccess= '{$modalSuccess}';
         const reviews = JSON.parse('{$reviewsData|json_encode|escape:"javascript"}');
         var tenants = {$tenantsJson};
+        var numPlaces = {$num_places};
         const user ='Student';
     </script>
       <script src="/UniRent/Smarty/js/jquery.min.js"></script>
@@ -409,6 +410,6 @@
       <script src="/UniRent/Smarty/js/UniRentOriginal/cookie.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/modalHandling.js"></script>
       <script src="/UniRent/Smarty/js/UniRentOriginal/supportReplyDropdown.js"></script>
-        <script src="/UniRent/Smarty/js/UniRentOriginal/tenants.js"></script>
+        <script src="/UniRent/Smarty/js/UniRentOriginal/accommodationTenants.js"></script>
 </body>
 </html>
