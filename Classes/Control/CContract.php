@@ -233,7 +233,13 @@ class CContract
             $cardHolder = $creditCard->getName() . " ". $creditCard->getSurname();
             $view= new VStudent();
             $leavebleReviews=$PM->remainingReviewStudentToAccommodation($session->getSessionElement('id'), $accommodation->getIdAccommodation());
-            $view->contractDetails($contract, $accommodation, $owner, $cardNumber, $cardHolder, $picture, $reviewsData, $modalSuccess, $leavebleReviews);
+            $tenantsArray= $PM->getTenants('current',$accomm->getIdOwner());
+            $tenants=array();
+            foreach ($tenantsArray as $idAccommodation => $students) {
+                $accommodationTitle = FPersistentManager::getInstance()->getTitleAccommodationById($idAccommodation);
+                $tenants=UFormat::getFilterTenantsFormatArray($students, $idAccommodation, $accommodationTitle, 'Student');
+            }
+            $view->contractDetails($contract, $accommodation, $owner, $cardNumber, $cardHolder, $picture, $reviewsData, $modalSuccess, $leavebleReviews, $tenants);
         }
         else {
             $student = $PM->load('EStudent', $contract->getIdStudent());

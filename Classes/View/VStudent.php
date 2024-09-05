@@ -363,9 +363,10 @@ class VStudent{
      * @param array $reviewsData The array containing the review data.
      * @param string|null $modalSuccess The success message for the modal.
      * @param int $leaveble The number of leaveble reviews.
+     * @param array $tenants The array containing the tenants.
      * @return void
      */
-    public function contractDetails(EContract $contract, EAccommodation $accommodation, EOwner $owner, string $cardNumber, string $cardHolder, array $pictures, array $reviewsData, ?string $modalSuccess, int $leaveble):void {
+    public function contractDetails(EContract $contract, EAccommodation $accommodation, EOwner $owner, string $cardNumber, string $cardHolder, array $pictures, array $reviewsData, ?string $modalSuccess, int $leaveble, array $tenants):void {
         $this->smarty->assign('accommodation', $accommodation);
         $this->smarty->assign('contract', $contract);
         $this->smarty->assign('owner', $owner);
@@ -375,6 +376,7 @@ class VStudent{
         $this->smarty->assign('reviewsData', $reviewsData);
         $this->smarty->assign('modalSuccess', $modalSuccess);
         $this->smarty->assign('leaveble', $leaveble);
+        $this->smarty->assign('tenantsJson', json_encode($tenants));
         $this->smarty->display('Student/contractDetails.tpl');
     }
 
