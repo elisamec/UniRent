@@ -644,47 +644,11 @@ class CStudent{
         }
         $reviews = $PM->loadByRecipient($student->getId(), TType::STUDENT); //va fatto il metodo nel PM
         $reviewsData = [];
-        $student_photo=$student->getPhoto();
-        if(is_null($student_photo)){}
-        else
-        {
-            $student_photo_64=EPhoto::toBase64(array($student_photo));
-            $student->setPhoto($student_photo_64[0]);
-        }
-        
+        UFormat::photoFormatUser($student);
         foreach ($reviews as $review) {
             $author = $PM->load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
-            if ($review->isBanned()) {
-                continue;
-            }
-            $status = $author->getStatus();
-            $profilePic = $author->getPhoto();
-            if($status === TStatusUser::BANNED){
-                $profilePic = "/UniRent/Smarty/images/BannedUser.png";
-            }
-            elseif ($profilePic === null) {
-                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
-            }
-            else
-            {
-                $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
-            }
-            if ($review->getDescription()===null) {
-                $content='No additional details were provided by the author.';
-            }
-            else
-            {
-                $content=$review->getDescription();
-            }
-            $reviewsData[] = [
-                'id' => $review->getId(),
-                'title' => $review->getTitle(),
-                'username' => $author->getUsername(),
-                'userStatus' => $author->getStatus()->value,
-                'stars' => $review->getValutation(),
-                'content' => $content,
-                'userPicture' => $profilePic,
-            ];
+         
+            $reviewsData[] = UFormat::reviewsFormatUser($author, $review);
         }
         $leavebleReviews=$PM->remainingReviewStudentToStudent($session->getSessionElement('id'), $student->getId());
         $view->publicProfileFromStudent($student, $reviewsData, $self, $leavebleReviews, $modalSuccess);
@@ -711,47 +675,12 @@ class CStudent{
         }
         $reviews = $PM->loadByRecipient($student->getId(), TType::STUDENT); //va fatto il metodo nel PM
         $reviewsData = [];
-        $student_photo=$student->getPhoto();
-        if(is_null($student_photo)){}
-        else
-        {
-            $student_photo_64=EPhoto::toBase64(array($student_photo));
-            $student->setPhoto($student_photo_64[0]);
-        }
+        UFormat::photoFormatUser($student);
         
         foreach ($reviews as $review) {
             $author = $PM->load( 'E' . $review->getAuthorType()->value, $review->getIdAuthor());
-            if ($review->isBanned()) {
-                continue;
-            }
-            $status = $author->getStatus();
-            $profilePic = $author->getPhoto();
-            if($status === TStatusUser::BANNED){
-                $profilePic = "/UniRent/Smarty/images/BannedUser.png";
-            }
-            elseif ($profilePic === null) {
-                $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
-            }
-            else
-            {
-                $profilePic=(EPhoto::toBase64(array($profilePic)))[0]->getPhoto();
-            }
-            if ($review->getDescription()===null) {
-                $content='No additional details were provided by the author.';
-            }
-            else
-            {
-                $content=$review->getDescription();
-            }
-            $reviewsData[] = [
-                'id' => $review->getId(),
-                'title' => $review->getTitle(),
-                'username' => $author->getUsername(),
-                'userStatus' => $author->getStatus()->value,
-                'stars' => $review->getValutation(),
-                'content' => $content,
-                'userPicture' => $profilePic,
-            ];
+            
+            $reviewsData[] = UFormat::reviewsFormatUser($author, $review);
         }
         $session=USession::getInstance();
         $leavebleReviews=$PM->remainingReviewOwnerToStudent($session->getSessionElement('id'), $student->getId());
