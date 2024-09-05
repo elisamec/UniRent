@@ -812,7 +812,13 @@ class FPersistentManager {
         $result = FConnection::getInstance()->getStatistics();
         return $result;
     }
-
+    
+    /**
+     * Method getBannedList
+     * 
+     * this method return the list of banned students and owners
+     * @return array
+     */
     public function getBannedList():array
     {
         $result=array();
@@ -840,7 +846,15 @@ class FPersistentManager {
         $result = USort::sortArray($result, 'report');
         
         return $result;
-    }
+    }    
+    /**
+     * Method getLastBanReport
+     *
+     * this method return the last ban report of the student/owner
+     * @param string $username [student/owner username]
+     *
+     * @return EReport|bool
+     */
     public function getLastBanReport(string $username):EReport |bool {
         $FRe=FReport::getInstance();
         $FS=FStudent::getInstance();
@@ -935,6 +949,21 @@ class FPersistentManager {
         {
             return false;
         }
+    }
+    
+    /**
+     * Method getMate
+     *
+     * this method call the omonim method in FStudent to get the mate of the student by contract
+     * @param int $contractID [contract ID]
+     * @param int $studentID [student ID]
+     * @return array
+     */
+    public function getMate(int $contractID, int $studentID):array
+    {
+        $FStudent=FStudent::getInstance();
+        $result=$FStudent->getMate($contractID,$studentID);
+        return $result;
     }
 }
 

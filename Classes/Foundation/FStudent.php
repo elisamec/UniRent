@@ -696,6 +696,67 @@ class FStudent
         $row=$stm->fetch(PDO::FETCH_ASSOC);
         return $row['username'];
     }
+    
+    
+    /**
+     * Method getMate
+     *
+     * this method return the student's mate by contract ID
+     * @param int $contractID [contract ID]
+     * @param int $studentID [student ID]
+     * @return array
+     */
+    public function getMate(int $contractID, int $studentID):array
+    {
+        $result=array();
+        $db=FConnection::getInstance()->getConnection();
+        FPersistentManager::getInstance()->updateDataBase();
+        try
+        {
+            $q="WITH  studenti_contratto AS (SELECT s.id AS studentID, c.idReservation AS contractID, r.idAccommodation AS accommodationID, YEAR(r.fromDate) AS year
+                                             FROM student s INNER JOIN reservation r ON r.idStudent=s.id
+                                             INNER JOIN contract c ON c.idReservation=r.id)
+
+                SELECT sc1.studentID AS ID, sc1.accommodationID AS accommodationID
+                FROM studenti_contratto sc1 INNER JOIN studenti_contratto sc2 ON sc1.studentID!=sc2.studentID
+                WHERE sc1.year=sc2.year
+                AND sc1.contractID=sc2.contractID
+                AND sc1.contractID=:contractID
+                AND sc1.studentID!=:studentID";
+                if(!$db->inTransaction())
+                {
+                    $db->beginTransaction();
+                }
+                $db->exec('LOCK TABLES student READ, reservation READ, contract READ');
+                $stm=$db->prepare($q);
+                $stm->bindParam(':contractID',$contractID,PDO::PARAM_INT);
+                $stm->bindParam(':studentID',$studentID,PDO::PARAM_INT);
+                $stm->execute();
+                if($db->inTransaction())
+                {
+                    $db->commit();
+                }
+        }
+        catch(PDOException $e)
+        {
+            if($db->inTransaction())
+            {
+                $db->rollBack();
+            }
+            $db->exec('UNLOCK TABLES');
+            return $result;
+        }
+        $db->exec('UNLOCK TABLES');
+        $rows=$stm->fetchAll(PDO::FETCH_ASSOC);
+        foreach($rows as $row)
+        {
+            $n=$row['accommodationID'];
+            $student=$this->load($row['ID']);
+            $r[]=$student;
+        }
+        $result[$n]=$r;
+        return $result;
+    }
 }
   
 
