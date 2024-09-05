@@ -541,76 +541,7 @@ class COwner
             self::publicProfileFromOwner($username);
         }
     }
-
-    //Da spostare in review e accorciare
-    public static function postedReview(?string $modalSuccess=null) {
-        self::checkIfOwner();
-        $view = new VOwner();
-        $session=USession::getInstance();
-        $ownerId=$session->getSessionElement('id');
-        $PM=FPersistentManager::getInstance();
-        $reviews = $PM->loadReviewsByAuthor($ownerId, TType::OWNER);
-        $reviewsData = [];
-
-        foreach ($reviews as $review) {
-            $recipient = $PM->load( 'E' . $review->getRecipientType()->value, $review->getIdRecipient());
-            $profilePic = $recipient->getPhoto();
-            $profilePic = UFormat::photoFormatReview($profilePic, $recipient->getStatus());
-            if ($review->getDescription()===null) {
-                $content='No additional details were provided by the author.';
-            }
-            else
-            {
-                $content=$review->getDescription();
-            }
-            $reviewsData[] = [
-                'title' => $review->getTitle(),
-                'username' => $recipient->getUsername(),
-                'userStatus' => $recipient->getStatus()->value,
-                'stars' => $review->getValutation(),
-                'content' => $content,
-                'userPicture' => $profilePic,
-                'id'=> $review->getId(),
-                'type' => ucfirst($review->getRecipientType()->value),
-                'reported' => $review->isReported()
-            ];
-        }
-        
-        $view->postedReview($reviewsData, $modalSuccess);
-    }
-
-    //Da spostare in CAccommodation
-    public static function viewOwnerAds(int $id) {
-        CStudent::checkIfStudent();
-        $view = new VOwner();
-        $PM=FPersistentManager::getInstance();
-        $accommodationEntities=$PM->loadAccommodationsByOwner($id);
-        $username=$PM->getUsernameByOwnerId($id);
-        $accommodations=[];
-        foreach($accommodationEntities as $accom) {
-            if(count($accom->getPhoto())==0)
-                {
-                    $photo=null;
-                }
-                else
-                {
-                   $base64 = base64_encode((($accom->getPhoto())[0])->getPhoto());
-                   $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
-                }
-            if ($accom->getStatus() == true) {
-                
-            $accommodations[]=[
-                'id'=>$accom->getIdAccommodation(),
-                'photo'=>$photo,
-                'title'=>$accom->getTitle(),
-                'address'=>$accom->getAddress()->getAddressLine1() .", ". $accom->getAddress()->getLocality(),
-                'price'=>$accom->getPrice()
-            ];
-        }
-        }
-        
-        $view->viewOwnerAds($accommodations, $username);
-    }
+    
 
     /**
      * Method tenants

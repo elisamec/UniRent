@@ -1,6 +1,7 @@
 <?php
 namespace Classes\Utilities;
 
+use Classes\Entity\EAccommodation;
 use Classes\Entity\EOwner;
 use Classes\Entity\EPhoto;
 use Classes\Entity\EReport;
@@ -19,16 +20,26 @@ class UFormat
      * Method photoFormatReview
      * 
      * This method is used to format the profile picture of the user in the review display in the correct way
-     * @param \Classes\Entity\EPhoto|null  $photo
+     * @param \Classes\Entity\EPhoto|null|array  $photo
      * @param \Classes\Tools\TStatusUser $status
      * @return string
      */
-    public static function photoFormatReview(?EPhoto $photo, TStatusUser $status):string {
+    public static function photoFormatReview(EPhoto|array|null $photo, TStatusUser $status):string {
         if($status === TStatusUser::BANNED){
             $profilePic = "/UniRent/Smarty/images/BannedUser.png";
         }
         elseif (!$photo) {
             $profilePic = "/UniRent/Smarty/images/ImageIcon.png";
+        }else if (gettype($photo) === 'array') {
+            if(count($photo)==0) #if the accommodation has no photos
+            {
+                $profilePic = "/UniRent/Smarty/images/noPic.png";
+            }
+            else
+            {
+                $profilePic = $photo[0];
+                $profilePic=(EPhoto::toBase64(array($profilePic))[0])->getPhoto();
+            }
         }
         else
         {
@@ -99,6 +110,7 @@ class UFormat
         $profilePic = $author->getPhoto();
         $profilePic = self::photoFormatReview($profilePic, $status);
         $content = $review->getDescription() === null ? 'No additional details were provided by the author.' : $review->getDescription();
+        
         return [
             'id' => $review->getId(),
             'title' => $review->getTitle(),
@@ -107,6 +119,33 @@ class UFormat
             'stars' => $review->getValutation(),
             'content' => $content,
             'userPicture' => $profilePic,
+        ];
+    }
+    /**
+     * Method reviewsFormatUserPosted
+     * 
+     * This method is used to format the reviews in the user view of the user profile in the correct way
+     * @param \Classes\Entity\EStudent|\Classes\Entity\EOwner|\Classes\Entity\EAccommodation $recipient
+     * @param \Classes\Entity\EReview $review
+     * @return array
+     */
+    public static function reviewsFormatUserPosted(EStudent | EOwner | EAccommodation $recipient, EReview $review):array {
+        $status = $recipient->getStatus();
+        $profilePic = $recipient->getPhoto();
+        $profilePic = self::photoFormatReview($profilePic, $status);
+        $content = $review->getDescription() === null ? 'No additional details were provided by the author.' : $review->getDescription();
+        
+        return [
+                'title' => $review->getTitle(),
+                'username' => $review->getRecipientType()==='accommodation' ? $recipient->getTitle() : $recipient->getUsername(),
+                'userStatus' => $review->getRecipientType()==='accommodation' ? $status : $status->value,
+                'stars' => $review->getValutation(),
+                'content' => $content,
+                'userPicture' => $profilePic,
+                'id'=> $review->getId(),
+                'type' => ucfirst($review->getRecipientType()->value),
+                'idRecipient' => $review->getIdRecipient(),
+                'reported' => $review->isReported()
         ];
     }
 
@@ -296,5 +335,22 @@ class UFormat
                 $tenants=$tenantList;
             }
         return $tenants;
+    }
+    /**
+     * Method formatAccommodationAds
+     * 
+     * This method is used to format the accommodation ads in the owner view of the user profile in the correct way
+     * @param \Classes\Entity\EAccommodation $accom
+     * @param string|null $photo
+     * @return array
+     */
+    public static function formatAccommodationAds(EAccommodation $accom, ?string $photo):array {
+        return [
+            'id'=>$accom->getIdAccommodation(),
+            'photo'=>$photo,
+            'title'=>$accom->getTitle(),
+            'address'=>$accom->getAddress()->getAddressLine1() .", ". $accom->getAddress()->getLocality(),
+            'price'=>$accom->getPrice()
+        ];
     }
 }

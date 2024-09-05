@@ -203,10 +203,10 @@ class CReview {
       */
      public static function reviews(?string $modalSuccess=null) :void {
         $session = USession::getInstance();
-        if($session->getSessionElement('userType') === 'owner') {
+        if($session->getSessionElement('userType') === 'Owner') {
            $view = new VOwner();
            $type = TType::OWNER;
-        } else if ($session->getSessionElement('userType') === 'student') {
+        } else if ($session->getSessionElement('userType') === 'Student') {
             $view = new VStudent();
             $type = TType::STUDENT;
         } else {
@@ -219,5 +219,30 @@ class CReview {
         $view->reviews($reviewsData, $modalSuccess);
     }
 
-
+    public static function postedReview(?string $modalSuccess=null) {
+        $session = USession::getInstance();
+        if($session->getSessionElement('userType') === 'Owner') {
+           $view = new VOwner();
+           $type = TType::OWNER;
+        } else if ($session->getSessionElement('userType') === 'Student') {
+            $view = new VStudent();
+            $type = TType::STUDENT;
+        } else {
+            $view = new VError();
+            $view->error(403);
+            exit();
+        }
+        $authorId=$session->getSessionElement('id');
+        $PM=FPersistentManager::getInstance();
+        $reviews = $PM->loadReviewsByAuthor($authorId, $type);
+        $reviewsData = [];
+        foreach ($reviews as $review) {
+            $recipient = $PM->load( 'E' . ucfirst($review->getRecipientType()->value), $review->getIdRecipient());
+            if ($review->isBanned()) {
+                continue;
+            }
+            $reviewsData[] = UFormat::reviewsFormatUserPosted($recipient, $review);
+        }
+        $view->postedReview($reviewsData, $modalSuccess);
+    }
 }
