@@ -145,11 +145,6 @@ use PDORow;
         catch (PDOException $e) {
             $db->rollBack();
             $errorType = TError::getInstance()->handleDuplicateError($e);
-            if ($errorType) {
-                echo "Error: " . $errorType . "\n"; //quando faremo view leghiamolo a view
-            } else {
-                echo "An unexpected error occurred: " . $e->getMessage() . "\n";
-            }
             return false;
         }
     }
@@ -206,12 +201,6 @@ use PDORow;
         catch (PDOException $e) {
             $db->rollBack();
             $errorType = TError::getInstance()->handleDuplicateError($e);
-            if ($errorType) {
-                echo "Error: " . $errorType . "\n";
-                 //quando faremo view leghiamolo a view
-            } else {
-                echo "An unexpected error occurred: " . $e->getMessage() . "\n";
-            }
             return false;
         }
     }

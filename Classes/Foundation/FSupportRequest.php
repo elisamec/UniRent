@@ -186,7 +186,6 @@ class FSupportRequest {
         }
         catch (PDOException $e) {
             $db->rollBack();
-            print $e->getMessage();
             return false;
         }
     }

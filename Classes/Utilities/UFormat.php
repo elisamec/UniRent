@@ -352,6 +352,7 @@ class UFormat
      */
     public static function ContractTenantsFormatArray(array $students,int $idAccommodation, string $accommodationTitle, string $format):array
     {
+        $tenantList=array();
             foreach ($students as $student) {
                 $profilePic = $student->getPhoto();
                 if ($student->getStatus() === TStatusUser::BANNED) {

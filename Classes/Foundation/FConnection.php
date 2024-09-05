@@ -44,7 +44,6 @@ class FConnection
         }
         catch ( PDOException $e) 
         {
-            print $e->getMessage() . "\n";
             exit;
         } 
 	}
