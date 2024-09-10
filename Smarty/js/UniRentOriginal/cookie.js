@@ -108,7 +108,7 @@ const customNamesPatterns = {
     '/UniRent/Owner/tenants/current': 'Current Tenants',
     '/UniRent/Owner/tenants/past': 'Past Tenants',
     '/UniRent/Owner/tenants/future': 'Future Tenants',
-    '/UniRent/Owner/viewOwnerAds/*': username + "'s Ads",
+    '/UniRent/Accommodation/viewOwnerAds/*': username + "'s Ads",
     '/UniRent/Visit/viewVisit/*': username + "'s Visits",
     '/UniRent/Visit/visits': 'Visits',
     '/UniRent/Student/paymentMethods': 'Payment Methods',

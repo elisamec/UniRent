@@ -74,7 +74,7 @@ class CReservation
             foreach ($reservations as $reservation) {
                 $student=$PM->load('EStudent', $reservation->getIdStudent());
                 UFormat::photoFormatUser($student);
-                $studentList[] = UFormat::formatReservationsOwner($reservation, $student);
+                $studentList[] = UFormat::formatReservationsOwner($student, $reservation);
             }
 
             $reservationData[] = [
