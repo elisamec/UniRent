@@ -173,15 +173,30 @@ class CStudent{
         $view = new VStudent();
         $PM = FPersistentManager::getInstance();
         $student = $PM->getStudentByUsername(USession::getInstance()->getSessionElement('username'));
-        $photo = $student->getPhoto()->getPhoto();
+        if(is_null($student->getPhoto()))
+        {
+            $photo = file_get_contents(__DIR__.'/../../Smarty/images/ImageIcon.png');
+            $controllo = false;
+        } else {
+            $photo = $student->getPhoto()->getPhoto();
+            $controllo = true;
+        }
+
 
         if(is_null($student)) {
             $viewError=new VError();
             $viewError->error(500);
             exit();
         }else{
-            $base64 = base64_encode($photo);
-            $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
+            if($controllo)
+            {
+                $base64 = base64_encode($photo);
+                $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
+            }
+            else
+            {
+                $photo = "data:" . 'image/jpeg' . ";base64," . $photo;
+            }
             $view->editProfile($student, $photo, false, false, false, false, $modalSuccess);
         }   
     }
