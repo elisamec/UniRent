@@ -194,10 +194,27 @@ class COwner
             exit();
         } else {
 
-            $photo = $owner->getPhoto()->getPhoto();
+            $photo = $owner->getPhoto();
+            if(is_null($photo))
+            {
+                $photo = file_get_contents(__DIR__.'/../../Smarty/images/ImageIcon.png');
+                $controllo = false;
+            }
+            else
+            {
+                $photo=$photo->getPhoto();
+                $controllo=true;
+            }
 
-            $base64 = base64_encode($photo);
-            $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
+            if($controllo)
+            {
+                $base64 = base64_encode($photo);
+                $photo = "data:" . 'image/jpeg' . ";base64," . $base64;
+            }
+            else
+            {
+                $photo = "data:" . 'image/jpeg' . ";base64," . $photo;
+            }
             
             $view->editProfile($owner, $photo, false, false, false, false, false, false);
 
