@@ -117,7 +117,7 @@ class CContract
 
             foreach ($contracts as $contract) {
                 $student=$PM->load('EStudent', $contract->getIdStudent());
-                $studentList[] = UFormat::formatContractsOwner($contract, $student);
+                $studentList[] = UFormat::formatContractsOwner($student, $contract);
             }
 
             $contractsData[] = [
