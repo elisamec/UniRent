@@ -250,7 +250,9 @@
       <!-- Javascript files-->
       <script>
          const eventsArr = {$eventsData};
+         {if isset($modalSuccess)}
          var modalSuccess = '{$modalSuccess}';
+         {/if}
          var user= 'Student';
       </script>
       <script src="/UniRent/Smarty/js/jquery.min.js"></script>
