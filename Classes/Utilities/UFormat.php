@@ -134,13 +134,14 @@ class UFormat
      */
     public static function reviewsFormatUserPosted(EStudent | EOwner | EAccommodation $recipient, EReview $review):array {
         $status = $recipient->getStatus();
+        if(gettype($status)=='boolean'){$status=TStatusUser::ACTIVE;}
         $profilePic = $recipient->getPhoto();
         $profilePic = self::photoFormatReview($profilePic, $status);
         $content = $review->getDescription() === null ? 'No additional details were provided by the author.' : $review->getDescription();
         
         return [
                 'title' => $review->getTitle(),
-                'username' => $review->getRecipientType()==='accommodation' ? $recipient->getTitle() : $recipient->getUsername(),
+                'username' => $review->getRecipientType()==='accommodation' ? $recipient->getUsername() : $recipient->getTitle(),
                 'userStatus' => $review->getRecipientType()==='accommodation' ? $status : $status->value,
                 'stars' => $review->getValutation(),
                 'content' => $content,

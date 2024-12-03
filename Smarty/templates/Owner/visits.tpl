@@ -253,7 +253,10 @@
       <!-- footer section end -->
       <!-- JavaScript variables -->
       <script>
+      {if isset($modalSuccess)}
         var modalSuccess= '{$modalSuccess}';
+      {/if}
+
         const eventsArr = {$eventsData};
         var user = 'Owner';
       </script>
